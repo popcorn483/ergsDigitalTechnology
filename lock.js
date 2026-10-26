@@ -49,7 +49,7 @@
   function showForm(msg) {
     var box = document.getElementById("lock");
     box.innerHTML = '<form class="lock-card" id="lockform" autocomplete="off"><span class="chip-logo" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 22 22"><rect x="5" y="5" width="12" height="12" rx="2" fill="#11503e"/><g stroke="#a95a24" stroke-width="2"><path d="M8 1v4M14 1v4M8 17v4M14 17v4M1 8h4M1 14h4M17 8h4M17 14h4"/></g></svg></span>' +
-      '<h1>Digital Technology Hub</h1><p>Enter the passcode from your teacher.</p>' +
+      '<h1>' + document.title.replace(/</g, '') + '</h1><p>Enter the passcode from your teacher.</p>' +
       '<label for="lockpass" class="sr">Passcode</label><input id="lockpass" type="password" placeholder="Passcode" required autocapitalize="off" spellcheck="false">' +
       '<label class="lock-rem"><input type="checkbox" id="lockrem"> Remember on this device</label>' +
       '<button type="submit" id="lockgo">Unlock</button><p class="lock-err" id="lockerr" role="alert">' + (msg || "") + "</p></form>";
@@ -71,7 +71,7 @@
   }
 
   function start() {
-    if (!window.crypto || !crypto.subtle) { document.getElementById("lock").innerHTML = '<div class="lock-card"><h1>Digital Technology Hub</h1><p>Open this page over https (or from a local web server) to unlock it.</p></div>'; return; }
+    if (!window.crypto || !crypto.subtle) { document.getElementById("lock").innerHTML = '<div class="lock-card"><h1>' + document.title.replace(/</g, '') + '</h1><p>Open this page over https (or from a local web server) to unlock it.</p></div>'; return; }
     realFetch("enc/meta.json", { cache: "no-cache" }).then(function (r) { return r.json(); }).then(function (m) {
       META = m;
       var saved = getKeyStore(STORE);
