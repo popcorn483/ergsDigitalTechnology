@@ -1,25 +1,31 @@
-# Digital Technology Hub: CCEA GCSE Digital Technology
+# C# Academy
 
-A complete teaching and revision hub for **CCEA GCSE Digital Technology, Route B: Programming**. It covers Unit 1 (Digital Technology) and Unit 4 (Digital Development Concepts), with C# for programming.
+A pupil-facing course that teaches programming in C#, from a first `Console.WriteLine` to an object-oriented quiz with a hashed-password login. Built for CCEA GCSE Digital Technology (Route B: Programming).
 
-## Opening the hub
+Pupils read a short lesson, write C# in the editor, press **Run** to try it (with real keyboard input in the console) and **Check** to have it marked. Each module ends with a checkpoint quiz. Progress and code save in the pupil's browser; there are no accounts.
 
-- **Pupils:** open the site and enter the pupil passcode from your teacher.
-- **Teachers:** after entering the pupil passcode, use **Teacher login** with the teacher code. This unlocks lesson plans, slide notes, mark schemes, answer workbooks, PowerPoint downloads and the Forms export.
+## How C# runs
 
-## How the content is protected
+There is no .NET in the browser, so `js/csharp.js` is a C# interpreter written in JavaScript. It supports the GCSE subset: data types, selection, loops, arrays, lists, strings, methods with `ref`/`out`, validation and exceptions, files (stored in the browser), classes, properties, inheritance, abstract classes, interfaces and SHA-256 hashing. Code that works here should also work in a Visual Studio console app.
 
-| Folder | Contents | Protected by |
-| --- | --- | --- |
-| `enc/` | Lessons, activities, videos and podcasts (audio), fact files, diagrams, workbooks | Pupil passcode (AES-256-GCM, PBKDF2-SHA-256 with 600,000 iterations) |
-| `teacher/` | Plans, slide notes, mark schemes, answer workbooks | Teacher code (same method, separate key) |
+## Layout
 
-Neither code is stored in this repository. A short code can be guessed by someone with the files and time, so treat this as keeping pupils and casual visitors out, not as high security.
+| Path | What it is |
+| --- | --- |
+| `index.html`, `css/`, `js/app.js` | The site |
+| `js/csharp.js` | The C# interpreter |
+| `js/checker.js` | Marks pupil code against a lesson's tests |
+| `js/course/mNN.js` | One file per module: lessons, exercises, tests, quizzes |
+| `js/glossary.js` | Key terms page |
+| `tools/verify.js` | `node tools/verify.js` proves every lesson's solution passes its tests |
+| `tools/test-interpreter.js` | Interpreter test suite |
+
+## Editing a lesson
+
+Open the module file in `js/course/`, change the lesson, then run `node tools/verify.js` to make sure its solution still passes. The lesson format is described in `SPEC.md`.
 
 ## Hosting
 
-Go to Settings → Pages, choose *Deploy from a branch*, then `main` and `/ (root)`.
+Settings → Pages → *Deploy from a branch* → `main`, `/ (root)`. To try it locally, run `python3 -m http.server` in this folder and open http://localhost:8000.
 
-## Running locally
-
-Run a web server in this folder, for example `python3 -m http.server`. Opening the file by double-clicking won't work.
+The previous Digital Technology Hub (GCSE and GCE, passcode-protected) is kept on the `hub-backup-2026-10-27` branch.
