@@ -403,6 +403,51 @@ input[type="search"], input[type="text"], select { border: 1px solid var(--line)
 pre.code-out { background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 12px; max-height: 300px; overflow: auto; font: .76rem/1.45 var(--f-mono); white-space: pre; margin: 0; }
 ol.steps { margin: 0; padding-left: 1.3em; display: grid; gap: 6px; }
 
+/* ---- interactive, animated slides ---- */
+.slidebox { touch-action: pan-y; -webkit-tap-highlight-color: transparent; user-select: none; }
+.slidebox .code, .slidebox textarea { user-select: text; }
+.sprog { height: 4px; background: var(--line); border-radius: 2px; overflow: hidden; }
+.sprog i { display: block; height: 100%; width: 0; background: var(--copper); transition: width .3s ease; }
+@keyframes sIn { from { opacity: 0; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+@keyframes sBack { from { opacity: 0; transform: translateX(-28px); } to { opacity: 1; transform: none; } }
+@keyframes stepIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+@keyframes popIn { 0% { transform: scale(.96); } 60% { transform: scale(1.03); } 100% { transform: none; } }
+.slide.in { animation: sIn .35s ease both; }
+.slide.in-back { animation: sBack .35s ease both; }
+.slide .sh h2 { animation: stepIn .45s ease both; }
+.slide .step.hid { visibility: hidden; opacity: 0; }
+.slide .step.shown { animation: stepIn .4s ease both; }
+.slide.title-slide .sb li { animation: stepIn .5s ease both; }
+.slide.title-slide .sb li:nth-child(2) { animation-delay: .15s; } .slide.title-slide .sb li:nth-child(3) { animation-delay: .3s; } .slide.title-slide .sb li:nth-child(4) { animation-delay: .45s; }
+.ichk { border: 1px solid var(--line); border-radius: 10px; padding: .6em .8em; display: grid; gap: .45em; }
+.ichk p { margin: 0; }
+.iopts { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .45em; }
+.iopt { display: flex; gap: .55em; align-items: center; text-align: left; font: inherit; font-size: .95em; padding: .55em .75em; min-height: 44px; border-radius: 8px; border: 1.5px solid var(--line); background: var(--soft); color: var(--ink); cursor: pointer; }
+.iopt span { font: 700 .8em var(--f-mono); color: var(--copper); }
+.iopt:hover { border-color: var(--copper); }
+.iopt.right { background: var(--ok-soft, #e1f1e7); border-color: var(--ok, #2c7a4b); animation: popIn .35s ease; }
+.iopt.wrong { background: var(--bad-soft, #f9e3e1); border-color: var(--bad, #b0352d); animation: popIn .35s ease; }
+.ifb { font-weight: 700; min-height: 1.2em; } .ifb.ok { color: var(--ok, #2c7a4b); } .ifb.no { color: var(--bad, #b0352d); }
+.iwhy { font-size: .9em; color: var(--muted); }
+.flips { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); gap: .6em; }
+.flip { position: relative; min-height: 6.5em; border: 0; padding: 0; background: none; cursor: pointer; perspective: 800px; font: inherit; color: var(--ink); }
+.flip .ff, .flip .fb { position: absolute; inset: 0; display: grid; place-items: center; padding: .6em .8em; border-radius: 10px; backface-visibility: hidden; transition: transform .45s ease; text-align: center; }
+.flip .ff { background: var(--pcb); color: var(--pcb-ink); font-weight: 700; font-size: 1.05em; }
+.flip .fb { background: var(--soft); border: 1.5px solid var(--line); transform: rotateY(180deg); font-size: .85em; line-height: 1.35; }
+.flip.on .ff { transform: rotateY(-180deg); } .flip.on .fb { transform: rotateY(0); }
+@media (prefers-reduced-motion: reduce) { .slide, .slide *, .flip .ff, .flip .fb { animation: none !important; transition: none !important; } }
+/* phones: slides grow to fit their content and text stays readable */
+@media (max-width: 700px) {
+  .slide { aspect-ratio: auto; min-height: 62vh; }
+  .slide .sb { font-size: 1rem; overflow: visible; }
+  .slide .sh { padding: 10px 14px; } .slide .sh h2 { font-size: 1.15rem; }
+  .slide .sf { padding: 6px 14px; }
+  .slide.title-slide .sb h2 { font-size: 1.5rem; }
+  .iopts { grid-template-columns: minmax(0, 1fr); }
+  .deck-ctrl .btn { flex: 1 1 auto; min-height: 44px; }
+  .deck:fullscreen { padding: 8px; overflow: auto; }
+  .deck:fullscreen .slide { max-height: none; }
+}
 [data-teacher="no"] .teacher-only { display: none !important; }
 .toast { position: fixed; bottom: calc(18px + env(safe-area-inset-bottom, 0px)); left: 50%; transform: translateX(-50%); background: var(--ink); color: var(--paper); padding: 10px 18px; border-radius: 8px; z-index: 50; font-size: .92rem; max-width: calc(100% - 32px); }
 
