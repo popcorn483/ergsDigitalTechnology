@@ -6,7 +6,8 @@ const [SRC, OUT] = process.argv.slice(2);
 const PASS = process.env.HUB_PASSCODE;
 if (!SRC || !OUT || !PASS) { console.error("usage: HUB_PASSCODE=... node tools/encrypt.js <src> <out>"); process.exit(1); }
 const ITER = 600000;
-const SCRIPTS = ["course.js", "forms.js", "print.js", "deckcore.js", "animate.js", "csharp.js", "links.js", "acts.js", "diagrams.js", "scripts.js", "app.js"];
+// the scripts are exactly those index.html loads, in order
+const SCRIPTS = [...fs.readFileSync(path.join(SRC, "index.html"), "utf8").matchAll(/<script src="([^"]+)"><\/script>/g)].map(m => m[1]);
 const MIME = { ".pdf": "application/pdf", ".png": "image/png", ".mp3": "audio/mpeg", ".json": "application/json" };
 const FILE_DIRS = ["icons", "diagrams", "pdf", "factfiles", "audio"];
 

@@ -3,7 +3,7 @@
 (function () {
   "use strict";
   var KEY = null, META = null, realFetch = window.fetch.bind(window);
-  var STORE = "dth.key";
+  var STORE = "dth.key" + (/\/gce\//.test(location.pathname) ? ".gce" : "");
 
   function b64ToBytes(s) { var bin = atob(s), out = new Uint8Array(bin.length); for (var i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i); return out; }
   function bytesToB64(b) { var s = ""; b = new Uint8Array(b); for (var i = 0; i < b.length; i++) s += String.fromCharCode(b[i]); return btoa(s); }
