@@ -522,11 +522,125 @@ mark{background:var(--mark);color:var(--mark-ink);border-radius:2px;padding:0 1p
 /* table reveal */
 .cellbtn{border:1.5px dashed var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:2px 12px;font-weight:700;min-width:44px}
 td.shown{animation:rise .3s ease;background:var(--good-soft)}
+/* ---------- labelled bar buttons: back to all topics, glossary ---------- */
+.lb{flex:none;display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px 0 9px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);font-family:var(--sans);font-weight:700;font-size:13.5px;line-height:1;text-decoration:none;white-space:nowrap}
+.lb svg{width:17px;height:17px;flex:none}
+.lb:hover{border-color:var(--accent);color:var(--accent)}
+.lb.bk{color:var(--accent);margin-right:2px}
+.lb[aria-expanded="true"]{background:var(--accent-soft);border-color:var(--accent);color:var(--accent)}
+@media (max-width:560px){
+  .bt{display:none}
+  .pager{margin-left:auto}
+  .lb{flex-direction:column;justify-content:center;gap:2px;height:44px;padding:2px 5px;border-color:transparent;background:transparent;font-size:10.5px;letter-spacing:.01em;border-radius:8px}
+  .lb svg{width:19px;height:19px}
+  .lb[aria-expanded="true"]{border-color:transparent}
+}
+@media (max-width:374px){ .pn{min-width:38px} .lb{padding:2px 3px} }
+/* ---------- past papers: the official mark scheme is the answer ---------- */
+.ex-note{margin:-2px 0 12px;font-family:var(--sans);font-size:13.5px;color:var(--ink-2);display:flex;gap:8px;align-items:flex-start}
+.ex-note svg{flex:none;width:16px;height:16px;margin-top:2px;color:var(--accent)}
+.exq .btns .btn.pri{display:inline-flex;align-items:center;gap:6px;text-decoration:none;font-weight:700}
+.exq .btns .btn.pri svg{width:13px;height:13px}
+.exq .btns a.btn:not(.pri){text-decoration:none}
+/* ---------- key terms: per page, per topic ---------- */
+.kt{margin-top:28px;border:1.5px solid var(--accent);border-radius:8px;background:var(--paper);font-family:var(--sans)}
+.kt > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:7px}
+.kt > summary::-webkit-details-marker{display:none}
+.kt > summary b{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.kt > summary span{font-size:13px;color:var(--ink-3)}
+.kt > summary i{margin-left:auto;font-style:normal;font-size:12.5px;font-weight:700;color:var(--accent);white-space:nowrap}
+.kt > summary i::after{content:"Hide"}
+.kt:not([open]) > summary i::after{content:"Show"}
+.kt[open] > summary{border-bottom:1px solid var(--line-2);border-radius:7px 7px 0 0;background:var(--accent-soft)}
+.kt-l{margin:0;padding:4px 14px 8px;display:flex;flex-direction:column}
+.kt-l > div{padding:8px 0;border-bottom:1px solid var(--line-2);display:grid;grid-template-columns:minmax(0,11em) minmax(0,1fr);gap:2px 16px}
+.kt-l > div:last-child{border-bottom:0}
+.kt-l dt{font-weight:700;font-size:14.5px;line-height:1.4}
+.kt-l dd{margin:0;font-family:var(--serif);font-size:15px;line-height:1.55;color:var(--ink-2)}
+.kt-l dd a{font-family:var(--sans);font-size:12.5px;font-weight:700;text-decoration:none;white-space:nowrap;margin-left:4px}
+.kt-foot{display:flex;flex-wrap:wrap;gap:8px;padding:0 14px 12px}
+@media (max-width:560px){ .kt-l > div{grid-template-columns:minmax(0,1fr)} }
+.kt-ch{margin-top:16px;border-color:var(--ink)}
+.kt-ch > summary b{color:var(--ink)}
+.kt-ch[open] > summary{background:var(--paper-2)}
+.kt-l dd .muted{font-size:12.5px;margin-left:4px}
+.r-ch h2 .r-kt{margin-left:auto;flex:none;font-family:var(--sans);font-size:11.5px;letter-spacing:.02em;text-transform:none;font-weight:700;color:var(--accent);text-decoration:none;white-space:nowrap;align-self:center}
+.r-ch h2 .r-kt:hover{text-decoration:underline}
+.ktopic{margin:14px 0 0;border:1px solid var(--line);border-radius:8px;padding:12px 16px 14px;font-family:var(--sans);display:flex;flex-direction:column;gap:10px;background:var(--paper-2)}
+.ktopic-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 10px}
+.ktopic-h b{font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent)}
+.ktopic-h span{font-size:13px;color:var(--ink-3)}
+.ktopic .chips{gap:6px}
+.ktopic .chip{background:var(--paper);font-size:13.5px;padding:4px 11px}
+.ktopic .chips.clamp{max-height:5.4em;overflow:hidden;-webkit-mask-image:linear-gradient(#000 60%,transparent);mask-image:linear-gradient(#000 60%,transparent)}
+.ktopic .btns .btn{font-weight:700}
+.ktopic .more{border:0;background:none;padding:0;font-size:13px;font-weight:700;color:var(--accent);align-self:flex-start}
+/* ---------- glossary: full-screen view with A–Z, flashcards and quiz ---------- */
+.gview{left:0;width:auto;--gpad:max(16px,calc((100% - 860px) / 2))}
+.gview .dr-h{padding:8px max(10px,calc(var(--gpad) - 8px)) 8px var(--gpad)}
+.gv-t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.2}
+.gv-t h2{margin:0;font-family:var(--serif);font-size:20px}
+.gv-t span{font-size:12.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gv-in{padding:12px var(--gpad) 10px;border-bottom:1px solid var(--line-2);display:flex;flex-direction:column;gap:10px;font-family:var(--sans)}
+.gv-modes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px;padding:4px;border-radius:10px;background:var(--paper-2);border:1px solid var(--line);max-width:460px}
+.gv-modes button{border:0;background:none;border-radius:7px;padding:7px 6px;font-weight:700;font-size:14px;color:var(--ink-2);display:inline-flex;align-items:center;justify-content:center;gap:6px;min-width:0}
+.gv-modes button svg{width:15px;height:15px;flex:none}
+.gv-modes button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.gv-ctl{display:flex;flex-wrap:wrap;gap:8px}
+.gv-ctl .field{flex:1 1 220px;min-width:0}
+.gv-ctl select.field{flex:1 1 200px;padding:8px 10px;cursor:pointer}
+.gv-count{font-size:12.5px;color:var(--ink-3)}
+.gview .dr-b{padding:4px var(--gpad) 40px}
+.gview .az{gap:1px}
+.gl-e{display:grid;grid-template-columns:minmax(0,1fr);gap:0}
+.gl-e .gl-m{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;margin-top:6px;font-family:var(--sans)}
+.gl-e .gl-m small{font-size:12px;color:var(--ink-3);font-weight:700}
+.gl-e .rel{font-family:var(--sans);font-size:13px;color:var(--ink-3);margin-top:4px}
+.gl-e .rel button{border:0;background:none;padding:0;color:var(--accent);font-weight:700;font-size:13px}
+/* flashcards */
+.fc-wrap{display:flex;flex-direction:column;gap:12px;padding-top:14px;font-family:var(--sans)}
+.fc-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px;font-size:13px;color:var(--ink-2);align-items:center}
+.fc-top b{color:var(--ink);font-variant-numeric:tabular-nums}
+.fc-meter{height:5px;border-radius:5px;background:var(--line-2);overflow:hidden}
+.fc-meter i{display:block;height:100%;background:var(--accent);transition:width .25s}
+.fc{perspective:1400px;border:0;padding:0;background:none;width:100%;text-align:center;cursor:pointer}
+.fc-in{display:grid;transition:transform .45s cubic-bezier(.3,.7,.3,1);transform-style:preserve-3d;min-height:230px}
+.fc.flipped .fc-in{transform:rotateY(180deg)}
+.fc-face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1.5px solid var(--line);border-radius:12px;background:var(--paper);box-shadow:var(--shadow);padding:22px 24px 18px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-width:0}
+.fc-face.back{transform:rotateY(180deg);border-color:var(--accent);background:var(--accent-soft)}
+.fc-face small{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--ink-3)}
+.fc-face .fc-term{font-family:var(--serif);font-size:clamp(22px,5vw,30px);font-weight:700;line-height:1.25;color:var(--ink);text-wrap:balance;overflow-wrap:anywhere}
+.fc-face .fc-def{font-family:var(--serif);font-size:17px;line-height:1.6;color:var(--ink);max-width:60ch;overflow-wrap:break-word}
+.fc-face em.hint{font-style:normal;font-size:12.5px;color:var(--ink-3)}
+.fc-nav{display:grid;grid-template-columns:1fr 1.3fr 1fr;gap:8px}
+.fc-nav .btn{padding:9px 8px;font-weight:700;min-width:0}
+.fc-judge{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.fc-judge .btn{padding:9px 8px;font-weight:700}
+.fc-judge .ok{border-color:var(--good);color:var(--good)}
+.fc-judge .no{border-color:var(--warn);color:var(--warn)}
+.fc-opts{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;font-size:13.5px;color:var(--ink-2)}
+.fc-opts .btn{font-size:13.5px}
+.fc-done{border:1.5px solid var(--good);border-radius:12px;padding:20px;text-align:center;display:flex;flex-direction:column;gap:10px;align-items:center}
+.fc-done h3{margin:0;font-family:var(--serif);font-size:22px}
+.fc-done .btns{justify-content:center}
+/* quiz */
+.qz{display:flex;flex-direction:column;gap:12px;padding-top:14px;font-family:var(--sans)}
+.qz-q{border:1.5px solid var(--line);border-radius:12px;padding:16px 18px;background:var(--paper-2)}
+.qz-q small{display:block;font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;font-weight:700;color:var(--ink-3);margin-bottom:6px}
+.qz-q p{margin:0;font-family:var(--serif);font-size:17px;line-height:1.6}
+.qz .opts{gap:8px}
+.qz .opt{font-size:15px;font-weight:700}
+.qz-fb{border-radius:8px;padding:10px 14px;background:var(--paper-2);font-size:14.5px;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.qz-fb b.ok{color:var(--good)}.qz-fb b.no{color:var(--bad)}
+.qz-fb .btn{margin-left:auto}
+.tm{font-weight:700}
+@media (max-width:560px){ .fc-in{min-height:250px} .fc-face{padding:18px 16px 14px} .fc-face .fc-def{font-size:16px} .gv-modes{max-width:none} }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 
 <header class="bar" id="bar">
   <div class="bar-in">
+    <a class="lb bk" id="b-back" href="#" title="Back to all topics on the front page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>All topics</span></a>
     <button class="ib" id="b-menu" aria-label="Contents" aria-controls="rail" aria-expanded="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></button>
     <div class="bt"><b id="t-book">Notes</b><span id="t-ch"></span></div>
     <div class="pager">
@@ -536,7 +650,7 @@ td.shown{animation:rise .3s ease;background:var(--good-soft)}
     </div>
     <span class="sep"></span>
     <button class="ib" id="b-search" aria-label="Search (press /)" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>
-    <button class="ib" id="b-gloss" aria-label="Glossary" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h10.5"/><path d="M9 8h5"/></svg></button>
+    <button class="lb" id="b-gloss" aria-expanded="false" aria-controls="d-gloss" title="Glossary, flashcards and key-term quiz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h10.5"/><path d="M9 8h5"/></svg><span>Glossary</span></button>
     <div class="libwrap"><button class="ib" id="b-lib" aria-label="Other notebooks and the lesson hub" aria-expanded="false" aria-controls="libmenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg></button>
       <div class="libmenu" id="libmenu" hidden></div></div>
   </div>
@@ -552,9 +666,17 @@ td.shown{animation:rise .3s ease;background:var(--good-soft)}
   <div class="dr-s"><input class="field" id="q" type="search" placeholder="Search notes and glossary" autocomplete="off" aria-label="Search notes and glossary"></div>
   <div class="dr-b" id="q-res" aria-live="polite"></div>
 </aside>
-<aside class="drawer" id="d-gloss" role="dialog" aria-modal="true" aria-labelledby="dg-h" hidden>
-  <div class="dr-h"><h2 id="dg-h">Glossary</h2><button class="ib" data-close aria-label="Close glossary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
-  <div class="dr-s"><input class="field" id="gf" type="search" placeholder="Filter terms" autocomplete="off" aria-label="Filter glossary terms"><div class="az" id="az"></div></div>
+<aside class="drawer gview" id="d-gloss" role="dialog" aria-modal="true" aria-labelledby="dg-h" hidden>
+  <div class="dr-h"><div class="gv-t"><h2 id="dg-h">Glossary</h2><span id="dg-sub"></span></div><button class="ib" data-close aria-label="Close glossary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>
+  <div class="gv-in">
+    <div class="gv-modes" role="group" aria-label="Glossary mode">
+      <button type="button" data-gm="list" aria-pressed="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M9 6h11M9 12h11M9 18h11M4 6h.01M4 12h.01M4 18h.01"/></svg>A–Z</button>
+      <button type="button" data-gm="cards" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="7" width="14" height="12" rx="2"/><path d="M7 4h12a2 2 0 012 2v10"/></svg>Flashcards</button>
+      <button type="button" data-gm="quiz" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.5a2.5 2.5 0 114.2 1.8c-.8.6-1.8 1-1.8 2.3M12 16.5v.3"/></svg>Quiz</button>
+    </div>
+    <div class="gv-ctl"><input class="field" id="gf" type="search" placeholder="Search terms and definitions" autocomplete="off" aria-label="Search glossary terms"><select class="field" id="gch" aria-label="Chapter"></select></div>
+    <div class="az" id="az"></div>
+  </div>
   <div class="dr-b" id="gl"></div>
 </aside>
 <div class="pop" id="pop" role="dialog" aria-labelledby="pop-h" hidden></div>
@@ -622,7 +744,7 @@ const safeUrl = u => { u = String(u || ''); if (!/^https?:\/\//i.test(u)) return
 const ICON_EXT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h4v4M13 3L7 9M11 9.5V13H3V5h3.5"/></svg>';
 /* where are we served from? GitHub Pages (or any web host) unlocks relative files; claude.ai does not */
 const ON_WEB = /^https?:$/.test(location.protocol) && !/(^|\.)claude\.ai$|claudeusercontent/i.test(location.hostname);
-const HUB_TABS = [['video', 'Video'], ['podcast', 'Podcast'], ['slides', 'Slides'], ['notes', 'Fact file'], ['worksheet', 'Worksheet + mark scheme'], ['quiz', 'Quiz'], ['activities', 'Activities']];
+const HUB_TABS = [['video', 'Video'], ['podcast', 'Podcast'], ['slides', 'Slides'], ['notes', 'Fact file'], ['worksheet', 'Worksheet + mark scheme'], ['quiz', 'Quiz'], ['activities', 'Activities'], ['terms', 'Key terms']];
 const ICON_TICK = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>';
 
 /* inline markup: **bold**, *italic*, `code`, [[Term]] / [[shown|Term]]; everything else escaped */
@@ -664,6 +786,19 @@ function findTerm(t) {
   const k = String(t || '').toLowerCase().trim();
   return GMAP.get(k) || GMAP.get(k.replace(/es$/, '')) || GMAP.get(k.replace(/s$/, '')) || null;
 }
+/* which course this book belongs to (front-page section), and CCEA's past-papers page for it */
+const COURSE = /GCE/.test(BK.qual || '') || /^(AS|A2)/.test(BK.id || '') ? 'gce' : 'gcse';
+const PP_PAGE = COURSE === 'gce' ? 'https://ccea.org.uk/post-16/gce/subjects/gce-digital-technology-2016/past-papers-mark-schemes' : 'https://ccea.org.uk/key-stage-4/gcse/subjects/gcse-digital-technology-2017/past-papers-mark-schemes';
+/* glossary by chapter: a chapter's key terms are the glossary entries whose page is in that chapter (A–Z) */
+B.chapters.forEach((ch, ci) => { if (!ch.id) ch.id = 'c' + String(ci + 1).padStart(2, '0'); });
+const CH_BY_ID = new Map(B.chapters.map(ch => [ch.id, ch]));
+const PAGE_CH = new Map(); B.chapters.forEach(ch => (ch.pages || []).forEach(p => PAGE_CH.set(p.id, ch)));
+const CH_TERMS = new Map(B.chapters.map(ch => [ch.id, []]));
+GLOSS.forEach(g => { const ch = PAGE_CH.get(g.page); if (ch) CH_TERMS.get(ch.id).push(g); });
+/* whole-book study order: chapter by chapter, then any entry without a page */
+const BOOK_ORDER = (() => { const s = new Set(); CH_TERMS.forEach(l => l.forEach(g => s.add(g))); GLOSS.forEach(g => s.add(g)); return [...s]; })();
+/* definition text without nested term buttons (for flashcards and quiz) */
+const inlineFlat = s => inline(s).replace(/<button type="button" class="term" data-term="[^"]*">([\s\S]*?)<\/button>/g, '<span class="tm">$1</span>');
 const KEY = 'notes-reader:' + (BK.id || BK.title || 'book');
 let state = {};
 try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { state = {}; }
@@ -674,6 +809,13 @@ let cur = 0;
 
 /* ================= chrome: bar, rail ================= */
 $('#t-book').textContent = BK.title || 'Notes';
+/* back to the front page, at this course's section (on claude.ai, the GitHub Pages front page in a new tab) */
+(function () {
+  const a = $('#b-back');
+  a.href = (ON_WEB ? '../index.html' : FRONT_WEB) + '#' + COURSE;
+  if (!ON_WEB) { a.target = '_blank'; a.rel = 'noopener'; }
+  a.setAttribute('aria-label', `All topics: back to the ${COURSE === 'gce' ? 'A level' : 'GCSE'} topic list`);
+})();
 const narrowMQ = window.matchMedia('(max-width: 999px)');
 const isNarrow = () => narrowMQ.matches;
 if (state.railOff) document.body.classList.add('rail-off');
@@ -685,7 +827,8 @@ function buildRail() {
   <div class="meter" role="progressbar" aria-label="Pages marked done" aria-valuemin="0" aria-valuemax="${PAGES.length}" id="r-meter"><i id="r-meter-i"></i></div>
   <div class="r-prog"><span id="r-done"></span><span id="r-pct"></span></div></div>`);
   B.chapters.forEach(ch => {
-    h.push(`<section class="r-ch"><h2>${esc(ch.n)}<span>${esc(ch.title)}</span></h2>`);
+    const nk = (CH_TERMS.get(ch.id) || []).length;
+    h.push(`<section class="r-ch"><h2>${esc(ch.n)}<span>${esc(ch.title)}</span>${nk ? `<a class="r-kt" href="#keyterms-${esc(ch.id)}" aria-label="Key terms for chapter ${esc(ch.n)} (${nk})">Key terms</a>` : ''}</h2>`);
     let prevSpec = null;
     (ch.pages || []).forEach(p => {
       const cont = prevSpec === p.spec; prevSpec = p.spec;
@@ -726,7 +869,11 @@ $('#b-menu').addEventListener('click', () => {
   if (open && isNarrow()) { const a = rail.querySelector('[aria-current="page"]') || rail.querySelector('a'); if (a) a.focus(); }
 });
 narrowMQ.addEventListener && narrowMQ.addEventListener('change', () => { document.body.classList.remove('rail-open'); scrim.hidden = !anyDrawer(); syncMenuBtn(); });
-rail.addEventListener('click', e => { if (e.target.closest('.r-pg') && isNarrow()) setRailOpen(false); });
+rail.addEventListener('click', e => {
+  const k = e.target.closest('.r-kt');
+  if (k) { e.preventDefault(); if (isNarrow()) setRailOpen(false); const r = GROUTE.exec(k.getAttribute('href').slice(1)); runRoute({ kind: 'keyterms', ch: r[2] }); return; }
+  if (e.target.closest('.r-pg') && isNarrow()) setRailOpen(false);
+});
 
 /* ================= code highlighting ================= */
 const KW = {
@@ -902,8 +1049,8 @@ const EMBED_ON = () => ON_WEB && !!hubBase();
 const ICON_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 const LP_TABS = [['video', 'Video', 'M8 5.5v13l10-6.5z'], ['podcast', 'Podcast', 'M5 14v-2a7 7 0 0114 0v2M5 14h3v5H5zM16 14h3v5h-3z'], ['slides', 'Slides', 'M4 5h16v11H4zM12 16v4M8 20h8'],
   ['notes', 'Fact file', 'M7 3.5h7l4 4V20.5H7zM14 3.5v4h4M10 12h5M10 15.5h5'], ['quiz', 'Quiz', 'M9.2 9a3 3 0 115 2.2c-.9.6-2.2 1.2-2.2 2.8M12 17.5v.5'],
-  ['worksheet', 'Worksheet', 'M6 4h12v16H6zM9 9h6M9 12.5h6M9 16h3'], ['activities', 'Activities', 'M5 5h6v6H5zM13 5h6v6h-6zM5 13h6v6H5zM13 13h6v6h-6z']];
-const LP_TITLE = { video: 'Narrated video', podcast: 'Revision podcast', slides: 'Lesson slides', notes: 'Fact file', quiz: 'Quiz', worksheet: 'Worksheet with mark schemes', activities: 'Activities' };
+  ['worksheet', 'Worksheet', 'M6 4h12v16H6zM9 9h6M9 12.5h6M9 16h3'], ['activities', 'Activities', 'M5 5h6v6H5zM13 5h6v6h-6zM5 13h6v6H5zM13 13h6v6h-6z'], ['terms', 'Key terms', 'M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3zM5 17a3 3 0 013-3h10.5M9 8h5']];
+const LP_TITLE = { video: 'Narrated video', podcast: 'Revision podcast', slides: 'Lesson slides', notes: 'Fact file', quiz: 'Quiz', worksheet: 'Worksheet with mark schemes', activities: 'Activities', terms: 'Key terms for this lesson' };
 const lpIcon = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
 function embedUrl(route, extra) { const b = hubBase(); return b ? `${b}?embed=1${extra || ''}#${route}` : null; }
 /* one frame per slot; switching routes on the same hub URL only changes the hash, so the hub doesn't reload */
@@ -991,6 +1138,27 @@ function wireChapterList(ch, pid) {
   }).catch(() => { });
 }
 
+/* ---------- key terms: a box on every page, a full A–Z glossary at the start of each chapter ---------- */
+let pendingScroll = null;
+function termRow(g, here) {
+  const P = BYID.get(g.page);
+  const where = P ? (P.i === here ? ' <span class="muted">(this page)</span>' : ` <a href="#${esc(P.p.id)}" aria-label="Go to page ${P.i + 1}, where ${esc(g.term)} is explained">Go to page ${P.i + 1} →</a>`) : '';
+  return `<div><dt>${esc(g.term)}</dt><dd>${g.def ? inline(g.def) : '<span class="muted">Not in the glossary yet.</span>'}${g.alt ? ` <span class="muted">Also credited: ${inline(g.alt)}</span>` : ''}${where}</dd></div>`;
+}
+function keyTermsHTML(p) {
+  const seen = new Set(), gs = [];
+  (p.terms || []).forEach(t => { const g = findTerm(t) || { term: String(t), def: '' }; const k = g.term.toLowerCase(); if (!seen.has(k)) { seen.add(k); gs.push(g); } });
+  if (!gs.length) return '';
+  return `<details class="kt" id="kt"${state.ktShut ? '' : ' open'}><summary><b>Key terms</b><span>${gs.length} on this page</span><i aria-hidden="true"></i></summary><dl class="kt-l">${gs.map(g => termRow(g, cur)).join('')}</dl></details>`;
+}
+function chapterGlossHTML(ch) {
+  const gs = CH_TERMS.get(ch.id) || [];
+  if (!gs.length) return '';
+  const id = esc(ch.id);
+  return `<details class="kt kt-ch" id="ch-gloss" open><summary><b>Key terms for this topic</b><span>${gs.length} term${gs.length === 1 ? '' : 's'} in chapter ${esc(ch.n)}, A–Z</span><i aria-hidden="true"></i></summary>
+    <dl class="kt-l">${gs.map(g => termRow(g, cur)).join('')}</dl>
+    <div class="kt-foot"><button type="button" class="btn pri" data-gopen="cards" data-gch="${id}">Flashcards</button><button type="button" class="btn" data-gopen="quiz" data-gch="${id}">Quiz me</button><button type="button" class="btn" data-gopen="list" data-gch="${id}">Search the glossary</button></div></details>`;
+}
 function renderPage(i, focus) {
   cleanups.forEach(f => { try { f(); } catch (e) { } }); cleanups = [];
   closePop();
@@ -1000,12 +1168,13 @@ function renderPage(i, focus) {
   const h = [];
   h.push(`<article class="sheet" aria-labelledby="ph">`);
   h.push(`<div class="strip"><span>Chapter ${esc(ch.n)} · ${esc(ch.title)}</span><span>${cur + 1} / ${N}</span></div>`);
-  if (P.pi === 0) h.push(chapterCardHTML(ch));
+  if (P.pi === 0) { h.push(chapterCardHTML(ch)); h.push(chapterGlossHTML(ch)); }
   h.push(`<h1 id="ph" tabindex="-1">${inline(p.spec)}${P.cont ? ' <span class="cont">(continued)</span>' : ''}</h1>`);
   if (p.summary) h.push(`<p class="lede">${inline(p.summary)}</p>`);
   if (!EMBED_ON()) h.push(learnHTML(p));
   h.push(`<div class="notes">${(p.blocks || []).map(blockHTML).join('')}</div>`);
   h.push(`<div id="dg-slot"></div>`);
+  h.push(keyTermsHTML(p));
   if (p.check && p.check.length) {
     h.push(`<section class="sec" aria-labelledby="s-chk"><h2 id="s-chk">Check yourself <small>${p.check.length} quick questions</small></h2><div class="mcq">`);
     p.check.forEach((q, qi) => {
@@ -1014,16 +1183,27 @@ function renderPage(i, focus) {
     h.push(`</div></section>`);
   }
   if (p.exam && p.exam.length) {
-    h.push(`<section class="sec" aria-labelledby="s-ex"><h2 id="s-ex">From past papers <small>CCEA questions on this point</small></h2><ul class="exq">`);
+    h.push(`<section class="sec" aria-labelledby="s-ex"><h2 id="s-ex">From past papers <small>CCEA questions on this point</small></h2>
+      <p class="ex-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.5v.5"/></svg><span>Answers are in CCEA’s official mark schemes: each question links to its mark scheme (or examiner report) on the CCEA website.</span></p><ul class="exq">`);
     p.exam.forEach((e, ei) => {
       const u = safeUrl(e.url), ms = safeUrl(e.ms), rep = safeUrl(e.report);
       const ser = String(e.series || '');
+      const pdf = !!u && /\.pdf([?#]|$)/i.test(u), spec = /specimen/i.test(ser);
+      const ans = ms ? [ms, 'Mark scheme (CCEA)'] : rep ? [rep, 'Examiner report (CCEA)'] : [pdf || !u ? PP_PAGE : u, 'CCEA past papers and mark schemes'];
+      const more = [];
+      if (u && pdf) more.push([u, spec ? 'Specimen paper' : 'Question paper']);
+      else if (u && u !== ans[0]) more.push([u, 'CCEA past papers']);
+      if (ms && rep) more.push([rep, 'Examiner report']);
+      const qref = [spec ? 'Specimen' : (e.year || ser), e.paper, e.q ? 'Q' + String(e.q).replace(/^Q/i, '') : ''].filter(Boolean).join(' ');
+      const btns = `<a class="btn pri" href="${esc(ans[0])}" target="_blank" rel="noopener" title="${esc(ans[1] + ' for ' + qref + ' (opens the CCEA website)')}">${esc(ans[1])} ${ICON_EXT}</a>`
+        + (e.tip ? `<button type="button" class="btn" data-tip="${ei}" aria-expanded="false" aria-controls="tip-${ei}">Examiner tip</button>` : '')
+        + more.map(([href, lab]) => `<a class="lk" href="${esc(href)}" target="_blank" rel="noopener">${esc(lab)} ${ICON_EXT}</a>`).join('');
       const when = /specimen/i.test(ser) ? 'Specimen' : (e.year != null && e.year !== '' ? String(e.year) : ser);
       const mk = (e.marks == null || e.marks === '') ? 'marks not stated' : marksTxt(e.marks);
       const meta = [`<b>${esc(when)}</b>`, e.paper ? esc(e.paper) : '', e.q ? 'Q' + esc(String(e.q).replace(/^Q/i, '')) : '', mk].filter(Boolean).join(' · ');
       h.push(`<li><div class="meta">${meta}</div><div class="sum">${inline(e.summary)}</div>
-        <div class="btns">${e.tip ? `<button type="button" class="btn" data-tip="${ei}" aria-expanded="false" aria-controls="tip-${ei}">Show answer</button>` : ''}${u ? `<a class="lk" href="${esc(u)}" target="_blank" rel="noopener">${/specimen/i.test(ser) ? 'Specimen paper' : 'CCEA paper'} ${ICON_EXT}</a>` : ''}${ms ? `<a class="lk" href="${esc(ms)}" target="_blank" rel="noopener">Mark scheme ${ICON_EXT}</a>` : ''}${rep ? `<a class="lk" href="${esc(rep)}" target="_blank" rel="noopener">Examiner report ${ICON_EXT}</a>` : ''}</div>
-        ${e.tip ? `<div class="tipbox" id="tip-${ei}" hidden><b>What earned the marks</b>${inline(e.tip)}</div>` : ''}</li>`);
+        <div class="btns">${btns}</div>
+        ${e.tip ? `<div class="tipbox" id="tip-${ei}" hidden><b>Examiner tip · our summary of what earned the marks</b>${inline(e.tip)}</div>` : ''}</li>`);
     });
     h.push(`</ul></section>`);
   }
@@ -1038,9 +1218,6 @@ function renderPage(i, focus) {
     h.push(`<section class="sec" aria-labelledby="s-vd"><h2 id="s-vd">Watch <small>opens in a new tab</small></h2><div class="vids">`);
     vids.forEach(v => h.push(`<a class="vid" href="${esc(safeUrl(v.url) || '#')}" target="_blank" rel="noopener"><span class="src"><span class="${srcClass(v.source)}">${esc(v.source || 'Link')}</span>${v.mins ? `<span>${esc(v.mins)} min</span>` : ''}</span><span class="t">${esc(v.title)}</span><span class="go">Open ${ICON_EXT}</span></a>`));
     h.push(`</div></section>`);
-  }
-  if (p.terms && p.terms.length) {
-    h.push(`<section class="sec" aria-labelledby="s-kt"><h2 id="s-kt">Key terms <small>tap for the definition</small></h2><div class="chips">${p.terms.map(t => `<button type="button" class="chip term-chip" data-term="${esc(t)}">${esc(t)}</button>`).join('')}</div></section>`);
   }
   const prevP = PAGES[cur - 1], nextP = PAGES[cur + 1];
   h.push(`<div class="foot"><div class="done-row"><button type="button" class="donebtn" id="donebtn" aria-pressed="${!!state.done[p.id]}">${ICON_TICK}<span>${state.done[p.id] ? 'Done – tap to undo' : 'Mark this page as done'}</span></button></div>
@@ -1064,8 +1241,12 @@ function renderPage(i, focus) {
   main.querySelectorAll('[data-tip],[data-ans]').forEach(btn => btn.addEventListener('click', () => {
     const box = $(btn.dataset.tip != null ? '#tip-' + btn.dataset.tip : '#ans-' + btn.dataset.ans, main);
     box.hidden = !box.hidden; btn.setAttribute('aria-expanded', String(!box.hidden));
-    btn.textContent = box.hidden ? 'Show answer' : 'Hide answer';
+    btn.textContent = btn.dataset.tip != null ? (box.hidden ? 'Examiner tip' : 'Hide tip') : (box.hidden ? 'Show answer' : 'Hide answer');
   }));
+  main.querySelectorAll('[data-gopen]').forEach(b => b.addEventListener('click', () => openGloss({ mode: b.dataset.gopen, ch: b.dataset.gch || '' })));
+  const kt = $('#kt', main);
+  if (kt) kt.addEventListener('toggle', () => { state.ktShut = !kt.open; save(); });
+  if (pendingScroll) { const t = $('#' + pendingScroll, main); pendingScroll = null; if (t) setTimeout(() => { const top = $('#bar').getBoundingClientRect().bottom; window.scrollTo(0, t.getBoundingClientRect().top + window.scrollY - top - 10); }, 0); }
   $('#donebtn').addEventListener('click', () => {
     if (state.done[p.id]) delete state.done[p.id]; else state.done[p.id] = 1;
     save(); const d = !!state.done[p.id];
@@ -1094,7 +1275,30 @@ function go(i) {
   if (location.hash.slice(1) !== id) { try { location.hash = id; } catch (e) { renderPage(i, true); } }
   else renderPage(i, true);
 }
-window.addEventListener('hashchange', () => { const id = idFromHash(); if (id) { closeDrawers(); renderPage(BYID.get(id).i, true); } });
+/* extra routes: #glossary / #flashcards / #quiz (optionally -cNN) open the glossary view; #keyterms-cNN shows a chapter's key terms */
+const GROUTE = /^(glossary|flashcards|quiz|keyterms)(?:-([\w-]+))?$/i;
+function hashRoute() {
+  const m = GROUTE.exec(decodeURIComponent((location.hash || '').slice(1)));
+  if (!m) return null;
+  const ch = m[2] && CH_BY_ID.has(m[2]) ? m[2] : '';
+  return { kind: m[1].toLowerCase(), mode: { glossary: 'list', flashcards: 'cards', quiz: 'quiz' }[m[1].toLowerCase()], ch };
+}
+function settleHash() { try { history.replaceState(null, '', '#' + PAGES[cur].p.id); } catch (e) { /* sandboxed */ } }
+function runRoute(r) {
+  if (r.kind === 'keyterms') {
+    const ch = CH_BY_ID.get(r.ch) || B.chapters[0], first = ch && (ch.pages || [])[0];
+    closeDrawers();
+    if (first) { pendingScroll = CH_TERMS.get(ch.id).length ? 'ch-gloss' : null; renderPage(BYID.get(first.id).i, false); }
+    settleHash();
+    return;
+  }
+  openGloss({ mode: r.mode, ch: r.ch });
+}
+window.addEventListener('hashchange', () => {
+  const id = idFromHash();
+  if (id) { closeDrawers(); renderPage(BYID.get(id).i, true); return; }
+  const r = hashRoute(); if (r) runRoute(r);
+});
 $('#b-prev').addEventListener('click', () => go(cur - 1));
 $('#b-next').addEventListener('click', () => go(cur + 1));
 
@@ -1114,7 +1318,7 @@ function openPop(anchor, name) {
   let top = r.bottom + 8; if (top + ph > vh - 8 && r.top - ph - 8 > 8) top = r.top - ph - 8;
   pop.style.left = left + 'px'; pop.style.top = Math.max(8, top) + 'px';
   pop.querySelector('.x').addEventListener('click', () => closePop(true));
-  pop.querySelector('[data-allg]').addEventListener('click', () => { closePop(); openDrawer('gloss', g ? g.term : name); });
+  pop.querySelector('[data-allg]').addEventListener('click', () => { closePop(); openGloss({ filter: g ? g.term : name }); });
   pop.querySelector('.x').focus({ preventScroll: true });
 }
 function closePop(refocus) { if (pop.hidden) return; pop.hidden = true; if (refocus && popAnchor && document.contains(popAnchor)) popAnchor.focus({ preventScroll: true }); popAnchor = null; }
@@ -1135,18 +1339,19 @@ function openDrawer(k, filter) {
   for (const o in DR) { DR[o].hidden = o !== k; DRB[o].setAttribute('aria-expanded', String(o === k)); }
   if (isNarrow()) document.body.classList.remove('rail-open');
   scrim.hidden = false; drawerReturn = document.activeElement;
-  if (k === 'gloss') { const f = $('#gf'); if (filter != null) f.value = filter; renderGloss(); setTimeout(() => f.focus(), 0); }
+  if (k === 'gloss') { renderGloss(); setTimeout(() => { if (G.mode === 'list' && !isNarrow()) $('#gf').focus(); else $('#dg-h').focus({ preventScroll: true }); }, 0); }
   else { setTimeout(() => { $('#q').focus(); $('#q').select(); }, 0); runSearch(); }
   syncMenuBtn();
 }
 function closeDrawers(refocus) {
   const was = anyDrawer();
   for (const o in DR) { DR[o].hidden = true; DRB[o].setAttribute('aria-expanded', 'false'); }
+  const r = hashRoute(); if (r && r.kind !== 'keyterms') settleHash();
   scrim.hidden = !(isNarrow() && document.body.classList.contains('rail-open'));
   if (was && refocus && drawerReturn && document.contains(drawerReturn)) drawerReturn.focus();
 }
 DRB.search.addEventListener('click', () => DR.search.hidden ? openDrawer('search') : closeDrawers(true));
-DRB.gloss.addEventListener('click', () => DR.gloss.hidden ? openDrawer('gloss') : closeDrawers(true));
+DRB.gloss.addEventListener('click', () => DR.gloss.hidden ? openGloss({}) : closeDrawers(true));
 document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => closeDrawers(true)));
 scrim.addEventListener('click', () => { closeDrawers(); if (isNarrow()) setRailOpen(false); });
 
@@ -1198,26 +1403,145 @@ function runSearch() {
 }
 $('#q-res').addEventListener('click', e => { const a = e.target.closest('a'); if (!a) return; if (a.getAttribute('href') === '#' + PAGES[cur].p.id) { e.preventDefault(); closeDrawers(); } });
 
-// glossary
+// glossary view: A–Z list, flashcards and a quick quiz, for the whole book or one chapter
+const G = { mode: 'list', ch: '', fc: null, qz: null };
+const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+$('#dg-h').setAttribute('tabindex', '-1');
+$('#gch').innerHTML = `<option value="">All chapters · ${GLOSS.length} terms</option>` + B.chapters.filter(ch => (CH_TERMS.get(ch.id) || []).length).map(ch => `<option value="${esc(ch.id)}">${esc(ch.n)}. ${esc(ch.title)} · ${CH_TERMS.get(ch.id).length}</option>`).join('');
+function openGloss(o) {
+  o = o || {};
+  if (o.filter != null) { $('#gf').value = o.filter; G.mode = 'list'; G.ch = ''; }
+  else if (o.ch !== undefined || o.mode) { if (o.ch !== undefined) G.ch = CH_BY_ID.has(o.ch) ? o.ch : ''; $('#gf').value = ''; }
+  if (o.mode) G.mode = o.mode;
+  if (DR.gloss.hidden) openDrawer('gloss'); else renderGloss();
+}
+const scopeList = () => G.ch ? (CH_TERMS.get(G.ch) || []) : GLOSS;          // A–Z
+const scopeStudy = () => G.ch ? (CH_TERMS.get(G.ch) || []) : BOOK_ORDER;    // book order for study
+function chLabel(g) { const P = BYID.get(g.page); return P ? `Chapter ${P.ch.n}` : ''; }
+function goLink(g) { const P = BYID.get(g.page); return P ? `<a href="#${esc(P.p.id)}">Go to page ${P.i + 1} →</a>` : ''; }
 function renderGloss() {
-  const f = $('#gf').value.trim().toLowerCase();
-  const list = GLOSS.filter(g => !f || g.term.toLowerCase().includes(f) || plain(g.def).toLowerCase().includes(f));
-  const letters = new Set(list.map(g => g.term[0].toUpperCase()));
-  $('#az').innerHTML = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').map(L => `<button type="button" data-l="${L}" ${letters.has(L) ? '' : 'disabled'} aria-label="Jump to ${L}">${L}</button>`).join('');
-  const h = []; let last = '';
-  if (!list.length) h.push(`<p class="muted" style="padding:12px 0">No terms match “${esc(f)}”.</p>`);
+  const ch = CH_BY_ID.get(G.ch), n = scopeList().length;
+  $('#dg-sub').textContent = `${BK.title || 'Glossary'} · ${ch ? 'Chapter ' + ch.n + ': ' + ch.title : 'whole book'} · ${n} term${n === 1 ? '' : 's'}`;
+  $('#gch').value = G.ch;
+  DR.gloss.querySelectorAll('[data-gm]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.gm === G.mode)));
+  $('#gf').hidden = G.mode !== 'list'; $('#az').hidden = G.mode !== 'list';
+  $('#gl').scrollTop = 0;
+  if (G.mode === 'cards') renderCards(); else if (G.mode === 'quiz') renderQuiz(); else renderList();
+}
+function renderList() {
+  const f = $('#gf').value.trim().toLowerCase(), all = scopeList();
+  const list = all.filter(g => !f || g.term.toLowerCase().includes(f) || plain(g.def).toLowerCase().includes(f) || plain(g.alt || '').toLowerCase().includes(f));
+  const letter = g => { const c = (g.term[0] || '#').toUpperCase(); return /[A-Z]/.test(c) ? c : '#'; };
+  const letters = new Set(list.map(letter));
+  $('#az').innerHTML = '#ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').filter(L => L !== '#' || letters.has('#')).map(L => `<button type="button" data-l="${L}" ${letters.has(L) ? '' : 'disabled'} aria-label="Jump to ${L}">${L}</button>`).join('');
+  const h = [`<p class="gv-count">${f ? `${list.length} of ${all.length} terms match “${esc(f)}”` : `${all.length} terms`}${G.ch ? ' in this chapter' : ''}</p>`]; let last = '';
+  if (!list.length) h.push(`<p class="muted" style="padding:12px 0">No terms match “${esc(f)}”.${G.ch ? ' <button type="button" class="btn" data-gall>Search all chapters</button>' : ''}</p>`);
   list.forEach(g => {
-    const L = g.term[0].toUpperCase();
-    if (L !== last) { if (last) h.push('</dl>'); h.push(`<div class="gl-l" id="gl-${L}">${esc(L)}</div><dl style="margin:0">`); last = L; }
+    const L = letter(g);
+    if (L !== last) { if (last) h.push('</dl>'); h.push(`<div class="gl-l" id="gl-${L === '#' ? 'num' : L}">${esc(L)}</div><dl style="margin:0">`); last = L; }
     const P = BYID.get(g.page);
-    h.push(`<div class="gl-e"><dt>${esc(g.term)}</dt><dd>${inline(g.def)}${g.alt ? `<div class="alt">Also credited: ${inline(g.alt)}</div>` : ''}${P ? `<div><a href="#${esc(P.p.id)}">Page ${P.i + 1}: ${esc(plain(P.p.spec))} →</a></div>` : ''}</dd></div>`);
+    const rel = Array.isArray(g.related) && g.related.length ? `<div class="rel">See also: ${g.related.map(t => `<button type="button" data-gterm="${esc(t)}">${esc(t)}</button>`).join(', ')}</div>` : '';
+    h.push(`<div class="gl-e"><dt>${esc(g.term)}</dt><dd>${inline(g.def)}${g.alt ? `<div class="alt">Also credited: ${inline(g.alt)}</div>` : ''}${rel}<div class="gl-m">${P ? `<a href="#${esc(P.p.id)}">Go to page ${P.i + 1} →</a><small>Chapter ${esc(P.ch.n)} · ${esc(plain(P.p.spec))}</small>` : ''}</div></dd></div>`);
   });
   if (last) h.push('</dl>');
   $('#gl').innerHTML = h.join('');
 }
-$('#gf').addEventListener('input', renderGloss);
-$('#az').addEventListener('click', e => { const b = e.target.closest('button[data-l]'); if (!b) return; const t = $('#gl-' + b.dataset.l); if (t) $('#gl').scrollTop = t.offsetTop - $('#gl').offsetTop; });
-$('#gl').addEventListener('click', e => { const a = e.target.closest('a'); if (a && a.getAttribute('href') === '#' + PAGES[cur].p.id) { e.preventDefault(); closeDrawers(); } });
+/* flashcards */
+function deck() {
+  const key = G.ch || '*', n = scopeStudy().length;
+  if (!G.fc || G.fc.key !== key) G.fc = { key, order: [...Array(n).keys()], i: 0, flip: false, rev: !!state.fcRev, known: new Set(), notYet: new Set() };
+  return G.fc;
+}
+function renderCards() {
+  const S = scopeStudy(), d = deck(), box = $('#gl');
+  if (!S.length) { box.innerHTML = '<p class="muted" style="padding:16px 0">No glossary terms in this chapter.</p>'; return; }
+  const top = `<div class="fc-top"><span>Card <b>${Math.min(d.i + 1, d.order.length)}</b> of ${d.order.length}</span><span>Knew it <b>${d.known.size}</b> · Not yet <b>${d.notYet.size}</b></span></div><div class="fc-meter"><i style="width:${Math.round(d.i / d.order.length * 100)}%"></i></div>`;
+  if (d.i >= d.order.length) {
+    box.innerHTML = `<div class="fc-wrap">${top}<div class="fc-done"><h3>Deck finished</h3><p style="margin:0">You knew <b>${d.known.size}</b> of ${d.order.length}.${d.notYet.size ? ` ${d.notYet.size} to go over again.` : ' Well done.'}</p>
+      <div class="btns">${d.notYet.size ? `<button type="button" class="btn pri" data-fc="again">Again with the ${d.notYet.size} not yet</button>` : ''}<button type="button" class="btn${d.notYet.size ? '' : ' pri'}" data-fc="shuffle">Shuffle and restart</button><button type="button" class="btn" data-fc="quiz">Quiz me on these</button></div></div></div>`;
+    return;
+  }
+  const g = S[d.order[d.i]];
+  const tFace = `<small>Term</small><span class="fc-term">${esc(g.term)}</span>`, dFace = `<small>Definition</small><span class="fc-def">${inlineFlat(g.def)}</span>`;
+  box.innerHTML = `<div class="fc-wrap">${top}
+    <button type="button" class="fc${d.flip ? ' flipped' : ''}" id="fc" data-fc="flip" aria-label="Flashcard. Activate to flip."><span class="fc-in">
+      <span class="fc-face front" aria-hidden="${d.flip}">${d.rev ? dFace : tFace}<em class="hint">Tap to flip</em></span>
+      <span class="fc-face back" aria-hidden="${!d.flip}">${d.rev ? tFace : dFace}<em class="hint">${esc(chLabel(g))}</em></span></span></button>
+    <div class="fc-judge" ${d.flip ? '' : 'hidden'}><button type="button" class="btn no" data-fc="no">Not yet</button><button type="button" class="btn ok" data-fc="ok">I knew it</button></div>
+    <div class="fc-nav"><button type="button" class="btn" data-fc="prev" ${d.i ? '' : 'disabled'}>← Back</button><button type="button" class="btn pri" data-fc="flip">Flip</button><button type="button" class="btn" data-fc="next">Next →</button></div>
+    <div class="fc-opts"><button type="button" class="btn" data-fc="shuffle">Shuffle</button><button type="button" class="btn" data-fc="reset">Start again</button><label class="chk"><input type="checkbox" data-fc="rev" ${d.rev ? 'checked' : ''}> Definition first</label>${goLink(g)}</div></div>`;
+}
+function fcAct(a, el) {
+  const d = deck(), S = scopeStudy();
+  if (a === 'flip') { d.flip = !d.flip; const c = $('#fc'); if (c) { c.classList.toggle('flipped', d.flip); c.querySelector('.front').setAttribute('aria-hidden', String(d.flip)); c.querySelector('.back').setAttribute('aria-hidden', String(!d.flip)); $('.fc-judge', DR.gloss).hidden = !d.flip; } return; }
+  if (a === 'ok' || a === 'no') { const k = d.order[d.i]; (a === 'ok' ? d.known : d.notYet).add(k); (a === 'ok' ? d.notYet : d.known).delete(k); d.i++; d.flip = false; }
+  else if (a === 'next') { d.i = Math.min(d.i + 1, d.order.length); d.flip = false; }
+  else if (a === 'prev') { d.i = Math.max(0, d.i - 1); d.flip = false; }
+  else if (a === 'shuffle') { G.fc = Object.assign(deck(), { order: shuffle([...Array(S.length).keys()]), i: 0, flip: false, known: new Set(), notYet: new Set() }); }
+  else if (a === 'reset') { G.fc = null; }
+  else if (a === 'again') { Object.assign(d, { order: shuffle([...d.notYet]), i: 0, flip: false, known: new Set(), notYet: new Set() }); }
+  else if (a === 'rev') { d.rev = !!el.checked; state.fcRev = d.rev; save(); d.flip = false; }
+  else if (a === 'quiz') { G.mode = 'quiz'; G.qz = null; renderGloss(); return; }
+  renderCards();
+  const f = a === 'ok' || a === 'no' || a === 'next' || a === 'prev' ? $('#fc') : null; if (f) f.focus({ preventScroll: true });
+}
+/* quiz: which term matches this definition? rounds of up to 10 */
+function maskTerm(def, term) {
+  let s = plain(def); const words = new Set([term, term.replace(/\s*\([^)]*\)\s*/g, ' ').trim()]);
+  (term.match(/\(([^)]+)\)/g) || []).forEach(x => words.add(x.slice(1, -1)));
+  [...words].filter(w => w.length >= 2).sort((a, b) => b.length - a.length).forEach(w => { s = s.replace(new RegExp('(^|[^\\w])' + reEsc(w) + '(?:e?s)?(?![\\w])', 'gi'), '$1_____'); });
+  return s;
+}
+function newQuiz() {
+  const S = scopeStudy(), pool = S.length >= 4 ? S : GLOSS;
+  const qs = shuffle([...S.keys()]).slice(0, Math.min(10, S.length)).map(k => {
+    const g = S[k], wrong = shuffle(pool.filter(x => x !== g && x.term.toLowerCase() !== g.term.toLowerCase())).slice(0, 3);
+    const opts = shuffle([g, ...wrong]);
+    return { k, g, opts, a: opts.indexOf(g), pick: null };
+  });
+  G.qz = { key: G.ch || '*', qs, i: 0, score: 0 };
+}
+function renderQuiz() {
+  const S = scopeStudy(), box = $('#gl');
+  if (S.length < 2 || GLOSS.length < 2) { box.innerHTML = '<p class="muted" style="padding:16px 0">Not enough glossary terms here for a quiz. Try all chapters.</p>'; return; }
+  if (!G.qz || G.qz.key !== (G.ch || '*')) newQuiz();
+  const z = G.qz, N = z.qs.length;
+  const top = `<div class="fc-top"><span>Question <b>${Math.min(z.i + 1, N)}</b> of ${N}</span><span>Score <b>${z.score}</b></span></div><div class="fc-meter"><i style="width:${Math.round(z.i / N * 100)}%"></i></div>`;
+  if (z.i >= N) {
+    const missed = z.qs.filter(q => q.pick !== q.a);
+    box.innerHTML = `<div class="qz">${top}<div class="fc-done"><h3>${z.score} out of ${N}</h3><p style="margin:0">${z.score === N ? 'Full marks.' : `Terms to revisit: ${missed.map(q => `<button type="button" class="chip" data-gterm="${esc(q.g.term)}">${esc(q.g.term)}</button>`).join(' ')}`}</p>
+      <div class="btns"><button type="button" class="btn pri" data-qz="new">New round</button>${missed.length ? `<button type="button" class="btn" data-qz="cards">Flashcards for the ${missed.length} I missed</button>` : ''}</div></div></div>`;
+    return;
+  }
+  const q = z.qs[z.i], done = q.pick != null;
+  box.innerHTML = `<div class="qz">${top}<div class="qz-q"><small>Which term matches this definition?</small><p>${esc(maskTerm(q.g.def, q.g.term))}</p></div>
+    <div class="opts" role="group" aria-label="Answers">${q.opts.map((g, oi) => `<button type="button" class="opt${done && oi === q.a ? ' right' : ''}${done && oi === q.pick && oi !== q.a ? ' wrong' : ''}" data-qz="pick" data-o="${oi}" ${done ? 'disabled' : ''}><i>${'ABCD'[oi]}</i><span>${esc(g.term)}</span></button>`).join('')}</div>
+    <div class="qz-fb" ${done ? '' : 'hidden'}>${done ? `<b class="${q.pick === q.a ? 'ok' : 'no'}">${q.pick === q.a ? 'Correct.' : 'Not quite: it is ' + esc(q.g.term) + '.'}</b>${goLink(q.g)}<button type="button" class="btn pri" data-qz="next">${z.i + 1 < N ? 'Next question →' : 'See score'}</button>` : ''}</div></div>`;
+}
+function qzAct(a, el) {
+  const z = G.qz;
+  if (a === 'pick' && z) { const q = z.qs[z.i]; if (q.pick != null) return; q.pick = +el.dataset.o; if (q.pick === q.a) z.score++; renderQuiz(); const n = $('[data-qz="next"]', DR.gloss); n && n.focus({ preventScroll: true }); return; }
+  if (a === 'next' && z) { z.i++; renderQuiz(); const o = $('.qz .opt', DR.gloss) || $('[data-qz]', DR.gloss); o && o.focus({ preventScroll: true }); return; }
+  if (a === 'new') { newQuiz(); renderQuiz(); return; }
+  if (a === 'cards' && z) { const ks = z.qs.filter(q => q.pick !== q.a).map(q => q.k); G.fc = { key: G.ch || '*', order: ks, i: 0, flip: false, rev: !!state.fcRev, known: new Set(), notYet: new Set() }; G.mode = 'cards'; renderGloss(); }
+}
+$('#gf').addEventListener('input', renderList);
+$('#gch').addEventListener('change', () => { G.ch = $('#gch').value; renderGloss(); });
+DR.gloss.querySelectorAll('[data-gm]').forEach(b => b.addEventListener('click', () => { G.mode = b.dataset.gm; renderGloss(); }));
+$('#az').addEventListener('click', e => { const b = e.target.closest('button[data-l]'); if (!b) return; const t = $('#gl-' + (b.dataset.l === '#' ? 'num' : b.dataset.l)); if (t) $('#gl').scrollTop = t.offsetTop - $('#gl').offsetTop; });
+$('#gl').addEventListener('click', e => {
+  const f = e.target.closest('[data-fc]'); if (f && f.tagName !== 'INPUT') { fcAct(f.dataset.fc, f); return; }
+  const q = e.target.closest('[data-qz]'); if (q) { qzAct(q.dataset.qz, q); return; }
+  if (e.target.closest('[data-gall]')) { G.ch = ''; renderGloss(); return; }
+  const a = e.target.closest('a'); if (a && a.getAttribute('href') === '#' + PAGES[cur].p.id) { e.preventDefault(); closeDrawers(); }
+});
+$('#gl').addEventListener('change', e => { const f = e.target.closest('input[data-fc]'); if (f) fcAct(f.dataset.fc, f); });
+DR.gloss.addEventListener('keydown', e => {
+  if (G.mode !== 'cards' || e.altKey || e.ctrlKey || e.metaKey || e.target.closest('input, select, textarea')) return;
+  if (e.key === 'ArrowRight') { e.preventDefault(); fcAct('next'); }
+  else if (e.key === 'ArrowLeft') { e.preventDefault(); fcAct('prev'); }
+  else if ((e.key === ' ' || e.key === 'f') && !e.target.closest('button, a')) { e.preventDefault(); fcAct('flip'); }
+});
 
 /* ================= keyboard ================= */
 document.addEventListener('keydown', e => {
@@ -2163,10 +2487,12 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape' && !libMenu.h
 
 /* ================= boot ================= */
 buildRail(); updateProgress(); syncMenuBtn();
+const route0 = hashRoute();
 const start = idFromHash() || (state.last && BYID.has(state.last) ? state.last : PAGES[0] && PAGES[0].p.id);
 if (start) {
   renderPage(BYID.get(start).i, false);
   if (!idFromHash()) { try { history.replaceState(null, '', '#' + start); } catch (e) { /* sandboxed */ } }
+  if (route0) runRoute(route0);
 }
 })();
 </script>

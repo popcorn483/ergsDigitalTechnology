@@ -306,7 +306,7 @@
     var u = unitOf(l);
     if (unit !== u) { unit = u; store.set("unit", u); applyChrome(); }
     Speech.stop();
-    var tabs = [["video", "Video"], ["podcast", "Podcast"], ["slides", "Slides"], ["notes", "Fact file"], ["activities", "Activities"], ["worksheet", "Worksheet"], ["quiz", "Quiz"], ["papers", "Past papers"]];
+    var tabs = [["video", "Video"], ["podcast", "Podcast"], ["slides", "Slides"], ["notes", "Fact file"], ["activities", "Activities"], ["worksheet", "Worksheet"], ["quiz", "Quiz"], ["papers", "Past papers"], ["terms", "Key terms"]];
     if (!tabs.some(function (t) { return t[0] === tab; })) tab = null;
     tab = tab || "slides";
     var ls = lessonsOf(u), idx = ls.indexOf(l), prev = ls[idx - 1], next = ls[idx + 1];
@@ -317,7 +317,7 @@
     var lt = (C.tutorials || []).filter(function (x) { return x.l === l.id; });
     if (lt.length) h += '<div class="panel row tstrip"><b class="small">Step-by-step tutorials for this lesson:</b>' + lt.map(function (x) { var p = Tutorials.progress({ store: store }, x); return '<a class="btn sm" href="#tut-' + x.id + '">' + esc(x.title) + (p.done === p.total ? " ✓" : "") + "</a>"; }).join("") + "</div>";
     h += '<div class="tabs lv-tabs" role="tablist">' + tabs.map(function (t) { return '<button role="tab" aria-selected="' + (t[0] === tab) + '" data-tab="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
-    h += '<div id="tabbody" class="stack">' + ({ activities: lessonActsHTML, video: videoHTML, podcast: podcastHTML, slides: slidesHTML, notes: notesHTML, worksheet: wsHTML, quiz: quizHTML, papers: lessonPapersHTML })[tab](l) + "</div>";
+    h += '<div id="tabbody" class="stack">' + ({ activities: lessonActsHTML, video: videoHTML, podcast: podcastHTML, slides: slidesHTML, notes: notesHTML, worksheet: wsHTML, quiz: quizHTML, papers: lessonPapersHTML, terms: lessonTermsHTML })[tab](l) + "</div>";
     h += '<div class="row lv-nav" style="justify-content:space-between;border-top:1px solid var(--line);padding-top:16px">' +
       (prev ? '<a class="btn" href="#' + prev.id + '">← ' + esc(prev.title) + "</a>" : "<span></span>") +
       (next ? '<a class="btn" href="#' + next.id + '">' + esc(next.title) + " →</a>" : '<a class="btn primary" href="#assess">Tests →</a>') + "</div></div></div>";
@@ -330,6 +330,7 @@
     if (tab === "activities") wireActs(app);
     if (tab === "video") wireVideo(l);
     if (tab === "podcast") wirePodcast(l);
+    if (tab === "terms") { var tf = document.getElementById("toflash2"); if (tf) tf.onclick = function () { flashFilter = { lesson: l.id }; location.hash = "glossary"; }; }
     if (tab === "notes") {
       wireCode(app); var fb = document.getElementById("toflash"); if (fb) fb.onclick = function () { flashFilter = { lesson: l.id }; location.hash = "glossary"; };
       var dl = document.getElementById("dlff"); if (dl) dl.onclick = function () { saveFile("factfiles/" + l.id + ".pdf", l.id + "-fact-file.pdf", dl); };
@@ -1058,6 +1059,19 @@
     app.querySelectorAll(".rag button").forEach(function (b) { b.onclick = function () { var id = b.parentNode.dataset.lo; rag[id] = rag[id] === b.dataset.v ? null : b.dataset.v; store.set("rag", rag); var y = window.scrollY; tracker(); window.scrollTo(0, y); }; });
   }
 
+  // ---------- KEY TERMS: one lesson (lesson tab, also in ?embed=1) or a whole topic ----------
+  function byTerm(a, b) { return a[0].localeCompare(b[0], "en", { sensitivity: "base" }); }
+  function termCards(list, showLesson) {
+    return '<div class="gl">' + list.map(function (g) { var gl = lesson(g[2]); return "<div><b>" + esc(g[0]) + '</b><p class="small">' + esc(g[1]) + "</p>" + (g[3] ? '<span class="src">Credited: ' + esc(g[3]) + "</span>" : "") + (showLesson && gl ? '<a class="small" href="#' + g[2] + '-terms">' + g[2] + " " + esc(gl.title) + "</a>" : "") + "</div>"; }).join("") + "</div>";
+  }
+  function lessonTermsHTML(l) {
+    var list = glossTerms(null, l.id).slice().sort(byTerm);
+    return '<section class="panel stack lesson-terms"><div class="row" style="justify-content:space-between"><h2>Key terms for this lesson (' + list.length + ")</h2>" + (list.length && !EMBED ? '<button class="btn sm" id="toflash2">Flashcards for these terms</button>' : "") + "</div>" +
+      (list.length ? '<p class="small muted">A–Z. Learn these definitions: mark schemes credit the exact term.</p>' + termCards(list, false) : '<p class="muted">No key terms are listed for this lesson.</p>') +
+      '<p class="small"><a href="#' + l.t + '-glossary">Glossary for the whole topic →</a></p></section>';
+  }
+  function topicTerms(t) { var ids = {}; topicLessons(t).forEach(function (l) { ids[l.id] = 1; }); return C.gloss.filter(function (g) { return ids[g[2]]; }).sort(byTerm); }
+
   // ---------- GLOSSARY ----------
   var flashFilter = null, fcI = 0, fcFlip = false;
   function glossTerms(u, lessonId, q) {
@@ -1229,8 +1243,8 @@
     if (sub === "deck") return topicDeckPage(t);
     var ls = topicLessons(t), acts = Acts.forTopic(t.id), sp = specPoints(t), conf = store.get("conf", {});
     var h = '<div class="stack" style="gap:22px"><div class="stack" style="gap:8px"><a class="muted small crumb" href="#unit">← ' + USHORT[t.u] + ' topics</a><span class="eyebrow">' + USHORT[t.u] + " · Topic " + topicNum(t) + "</span><h1>" + esc(t.name) + '</h1><p class="lead">' + esc(t.spec) + ". " + ls.length + " lesson" + (ls.length > 1 ? "s" : "") + ", " + acts.length + " interactive activities.</p>" +
-      '<div class="row"><a class="btn primary" href="#' + t.id + '-present">▶ Present the whole topic</a><a class="btn" href="#quiz-' + t.id + '">End-of-topic quiz</a><a class="btn" href="#practice-' + t.id + '">All activities</a><button class="btn" id="rdeck" title="Animated revision slides: key facts, key terms, predict the output, true or false, quizzes and gap fills">Revision PowerPoint</button><button class="btn" id="tdeck">Download topic PowerPoint</button></div></div>';
-    h += '<nav class="toc row small"><a href="#' + t.id + '" data-jump="t-flow">Lesson flow</a><a href="#' + t.id + '" data-jump="t-spec">Specification checklist</a><a href="#' + t.id + '" data-jump="t-map">Mind map</a><a href="#' + t.id + '" data-jump="t-acts">Activities</a><a href="#' + t.id + '" data-jump="t-pp">Past papers</a><a href="#' + t.id + '" data-jump="t-links">Websites</a></nav>';
+      '<div class="row"><a class="btn primary" href="#' + t.id + '-present">▶ Present the whole topic</a><a class="btn" href="#quiz-' + t.id + '">End-of-topic quiz</a><a class="btn" href="#practice-' + t.id + '">All activities</a><button class="btn" id="rdeck" title="Animated revision slides: key facts, key terms, predict the output, true or false, quizzes and gap fills">Revision PowerPoint</button><button class="btn" id="tdeck">Download topic PowerPoint</button><a class="btn" href="#' + t.id + '-glossary">Glossary for this topic</a></div></div>';
+    h += '<nav class="toc row small"><a href="#' + t.id + '" data-jump="t-flow">Lesson flow</a><a href="#' + t.id + '" data-jump="t-spec">Specification checklist</a><a href="#' + t.id + '" data-jump="t-map">Mind map</a><a href="#' + t.id + '" data-jump="t-acts">Activities</a><a href="#' + t.id + '" data-jump="t-pp">Past papers</a><a href="#' + t.id + '" data-jump="t-links">Websites</a><a href="#' + t.id + '" data-jump="t-gloss">Glossary</a></nav>';
     // flow
     h += '<section class="stack" id="t-flow"><h2>Lesson flow</h2><ol class="flow">' + ls.map(function (l, i) {
       return '<li class="panel flow-step"><div class="flow-n">' + (i + 1) + '</div><div class="stack" style="gap:6px"><div class="row" style="justify-content:space-between"><a href="#' + l.id + '"><b>' + l.id + " · " + esc(l.title) + '</b></a><span class="muted small">' + C.media.videoMinutes(l) + " min video · " + Acts.forLesson(l.id).length + ' activities</span></div><p class="small muted">' + esc(l.obj.join(" · ")) + '</p><div class="row flow-links"><a class="btn sm" href="#' + l.id + '-video">▶ Video</a><a class="btn sm" href="#' + l.id + '-slides">Slides</a><a class="btn sm" href="#' + l.id + '-notes">Fact file</a><a class="btn sm" href="#' + l.id + '-activities">Activities</a><a class="btn sm" href="#' + l.id + '-worksheet">Worksheet</a><a class="btn sm" href="#' + l.id + '-quiz">Quiz</a><a class="btn sm" href="#' + l.id + '-podcast">🎧 Podcast</a></div></div></li>';
@@ -1246,7 +1260,9 @@
     h += '<section class="panel stack" id="t-pp"><h2>Past-paper questions on this topic (' + pp.length + ')</h2>' + (pp.length ? '<div class="tbl-wrap"><table><thead><tr><th>Paper</th><th>Q</th><th>Marks</th><th>What it tested</th></tr></thead><tbody>' + pp.sort(function (a, b) { return b.p.y - a.p.y; }).map(function (x) { return '<tr><td class="num">' + USHORT[x.p.u] + " " + x.p.y + '</td><td class="num mono">' + esc(x.q[0]) + '</td><td class="num">' + x.q[1] + "</td><td>" + esc(x.q[2]) + "</td></tr>"; }).join("") + "</tbody></table></div>" : '<p class="muted">None yet.</p>') + "</section>";
     var tt = (C.tutorials || []).filter(function (x) { return x.t === t.id; });
     if (tt.length) h += '<section class="panel stack" id="t-tuts"><h2>Step-by-step tutorials (' + tt.length + ')</h2><div class="row">' + tt.map(function (x) { return '<a class="btn sm" href="#tut-' + x.id + '">' + esc(x.title) + "</a>"; }).join("") + "</div></section>";
-    h += '<section class="panel stack" id="t-links"><h2>Useful websites</h2>' + linksHTML(C.links.filter(function (k) { return k.t === t.id; })) + '<p class="small"><a href="#links">All websites →</a></p></section></div>';
+    h += '<section class="panel stack" id="t-links"><h2>Useful websites</h2>' + linksHTML(C.links.filter(function (k) { return k.t === t.id; })) + '<p class="small"><a href="#links">All websites →</a></p></section>';
+    var tg = topicTerms(t);
+    h += '<section class="panel stack" id="t-gloss"><h2>Glossary for this topic (' + tg.length + ')</h2>' + (tg.length ? '<p class="small muted">Every key term from this topic\'s ' + ls.length + ' lesson' + (ls.length > 1 ? 's' : '') + ', A–Z, with the lesson that teaches it.</p>' + termCards(tg, true) : '<p class="muted">No key terms yet.</p>') + '</section></div>';
     app.innerHTML = h;
     app.querySelectorAll("[data-jump]").forEach(function (a) { a.onclick = function (e) { e.preventDefault(); document.getElementById(a.dataset.jump).scrollIntoView({ behavior: "smooth" }); }; });
     wireActs(app);
@@ -1259,6 +1275,7 @@
       var sel = ls.filter(function (l) { return want[l.id]; }); if (!sel.length) { toast("Tick at least one specification point"); return; }
       saveTopicDeck(t, sel, ts);
     };
+    if (sub === "glossary") { var gs = document.getElementById("t-gloss"); if (gs) setTimeout(function () { gs.scrollIntoView(); }, 0); }
   }
   // #<topic>-deck: just the two topic PowerPoint downloads (the front door and the workbook embed this; ?auto=1 starts the topic deck)
   function topicDeckPage(t) {
