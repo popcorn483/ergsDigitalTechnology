@@ -23,7 +23,11 @@
   HUB.prog = HUB.prog || "U4"; HUB.store = HUB.store || "dth.";
   // link to the sister hub: a relative folder on GitHub Pages, otherwise the published page
   HUB.other = HUB.other || { label: "A level (GCE) hub", github: "gce/", web: "https://claude.ai/artifact/4QJmiYYmf3Xpupq3QHDeeP" };
-  function otherHref() { var o = HUB.other; if (!o) return ""; return /github\.io$/.test(location.hostname) ? o.github : o.web; }
+  function otherHref() { var o = HUB.other; if (!o) return ""; return /github\.io$/.test(location.hostname) ? (/\/$/.test(o.github) ? o.github + "hub.html" : o.github) : o.web; }
+  // ?embed=1: the hub sits inside a revision workbook page. Only the routed content shows (no header, nav, rail or notebook buttons);
+  // the page reports its height to the parent with postMessage({type: "dth-embed", h}) so the workbook can size the frame.
+  var EMBED = /[?&]embed=1(&|$)/.test(location.search);
+  if (EMBED) document.documentElement.classList.add("embed");
   var UIDS = HUB.units.map(function (x) { return x.id; }), UNAME = {}, USHORT = {}, UINFO = {}, UKIND = {};
   HUB.units.forEach(function (x) { UNAME[x.id] = x.name; USHORT[x.id] = x.short; UINFO[x.id] = x.info; UKIND[x.id] = x.kind; });
   var UALL = USHORT[UIDS[0]] + (UIDS.length > 2 ? " to " : " and ") + USHORT[UIDS[UIDS.length - 1]];
@@ -308,13 +312,13 @@
     var ls = lessonsOf(u), idx = ls.indexOf(l), prev = ls[idx - 1], next = ls[idx + 1];
     codeStore = [];
     var h = '<div class="cols">' + rail(u, l.id) + '<div class="stack">';
-    h += '<div class="stack" style="gap:8px"><span class="eyebrow">' + USHORT[u] + " · Lesson " + (idx + 1) + " of " + ls.length + " · " + esc(topic(l.t).name) + "</span><h1>" + esc(l.title) + "</h1>" + (nbLesson(l) ? '<a class="btn primary nb-read" href="' + esc(nbLesson(l)) + '" target="_blank" rel="noopener">Read the notes for this lesson →</a>' : "") +
+    h += '<div class="stack lv-head" style="gap:8px"><span class="eyebrow">' + USHORT[u] + " · Lesson " + (idx + 1) + " of " + ls.length + " · " + esc(topic(l.t).name) + "</span><h1>" + esc(l.title) + "</h1>" + (nbLesson(l) ? '<a class="btn primary nb-read" href="' + esc(nbLesson(l)) + '" target="_blank" rel="noopener">Read the notes for this lesson →</a>' : "") +
       '<select class="mob-jump" id="mj" aria-label="Jump to lesson">' + ls.map(function (x) { return '<option value="' + x.id + '"' + (x.id === l.id ? " selected" : "") + ">" + x.id + " " + esc(x.title) + "</option>"; }).join("") + "</select></div>";
     var lt = (C.tutorials || []).filter(function (x) { return x.l === l.id; });
     if (lt.length) h += '<div class="panel row tstrip"><b class="small">Step-by-step tutorials for this lesson:</b>' + lt.map(function (x) { var p = Tutorials.progress({ store: store }, x); return '<a class="btn sm" href="#tut-' + x.id + '">' + esc(x.title) + (p.done === p.total ? " ✓" : "") + "</a>"; }).join("") + "</div>";
-    h += '<div class="tabs" role="tablist">' + tabs.map(function (t) { return '<button role="tab" aria-selected="' + (t[0] === tab) + '" data-tab="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
+    h += '<div class="tabs lv-tabs" role="tablist">' + tabs.map(function (t) { return '<button role="tab" aria-selected="' + (t[0] === tab) + '" data-tab="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
     h += '<div id="tabbody" class="stack">' + ({ activities: lessonActsHTML, video: videoHTML, podcast: podcastHTML, slides: slidesHTML, notes: notesHTML, worksheet: wsHTML, quiz: quizHTML, papers: lessonPapersHTML })[tab](l) + "</div>";
-    h += '<div class="row" style="justify-content:space-between;border-top:1px solid var(--line);padding-top:16px">' +
+    h += '<div class="row lv-nav" style="justify-content:space-between;border-top:1px solid var(--line);padding-top:16px">' +
       (prev ? '<a class="btn" href="#' + prev.id + '">← ' + esc(prev.title) + "</a>" : "<span></span>") +
       (next ? '<a class="btn" href="#' + next.id + '">' + esc(next.title) + " →</a>" : '<a class="btn primary" href="#assess">Tests →</a>') + "</div></div></div>";
     app.innerHTML = h;
@@ -985,14 +989,14 @@
   function testView(t) {
     if (unit !== t.u) { unit = t.u; store.set("unit", unit); applyChrome(); }
     var tot = t.items.reduce(function (a, b) { return a + b.m; }, 0);
-    var h = '<div class="stack"><a href="#assess" class="muted">← Tests</a><span class="eyebrow">' + esc(t.title.split(":")[0]) + "</span><h1>" + esc(t.title.split(": ").slice(1).join(": ")) + '</h1><div class="panel stack"><div class="row" style="justify-content:space-between"><p>' + t.items.length + " questions · " + tot + " marks · " + t.mins + " minutes</p>" + timerHTML(t.mins) + '</div><p class="muted" id="mcqscore"></p><div class="row"><button class="btn" id="msall">Show all mark schemes</button></div></div><div class="panel">';
+    var h = '<div class="stack"><a href="#assess" class="muted crumb">← Tests</a><span class="eyebrow">' + esc(t.title.split(":")[0]) + "</span><h1>" + esc(t.title.split(": ").slice(1).join(": ")) + '</h1><div class="panel stack"><div class="row" style="justify-content:space-between"><p>' + t.items.length + " questions · " + tot + " marks · " + t.mins + " minutes</p>" + timerHTML(t.mins) + '</div><p class="muted" id="mcqscore"></p><div class="row"><button class="btn" id="msall">Show all mark schemes</button></div></div><div class="panel">';
     t.items.forEach(function (it, i) { h += it.o ? mcqQ(i + 1, it.q, it.m, it.o, it.c, t.id + "." + i, it.a) : writtenQ(i + 1, it.q, it.m, it.a, t.id + "." + i); });
     app.innerHTML = h + '</div><div class="row"><button class="btn" id="clrans">Clear my answers</button></div></div>'; wireAssessment(t.id); wireTimer(t.mins);
   }
   function paperView(p) {
     if (unit !== p.u) { unit = p.u; store.set("unit", unit); applyChrome(); }
     var tot = p.qs.reduce(function (s, q) { return s + q.parts.reduce(function (a, b) { return a + b.m; }, 0); }, 0);
-    var h = '<div class="stack"><a href="#assess" class="muted">← Tests</a><span class="eyebrow">' + esc(HUB.qual) + " · " + USHORT[p.u] + ' style</span><h1>' + esc(p.title) + '</h1><div class="panel stack"><div class="row" style="justify-content:space-between"><p><b>Time:</b> ' + minsText(p.mins) + " · <b>Total:</b> " + tot + " marks · Answer all questions.</p>" + timerHTML(p.mins) + '</div><p class="muted">' + esc(p.note) + '</p><p class="muted" id="mcqscore"></p><div class="row"><button class="btn" id="msall">Show all mark schemes</button></div></div>';
+    var h = '<div class="stack"><a href="#assess" class="muted crumb">← Tests</a><span class="eyebrow">' + esc(HUB.qual) + " · " + USHORT[p.u] + ' style</span><h1>' + esc(p.title) + '</h1><div class="panel stack"><div class="row" style="justify-content:space-between"><p><b>Time:</b> ' + minsText(p.mins) + " · <b>Total:</b> " + tot + " marks · Answer all questions.</p>" + timerHTML(p.mins) + '</div><p class="muted">' + esc(p.note) + '</p><p class="muted" id="mcqscore"></p><div class="row"><button class="btn" id="msall">Show all mark schemes</button></div></div>';
     p.qs.forEach(function (q) {
       var qt = q.parts.reduce(function (a, b) { return a + b.m; }, 0);
       h += '<section class="panel"><div class="row" style="justify-content:space-between"><h3>Question ' + q.n + (q.parts[0].qwc ? ' <span class="tag t">QWC</span>' : "") + '</h3><span class="marks">' + qt + ' marks</span></div><p class="stem" style="margin-top:8px">' + esc(q.stem) + "</p>";
@@ -1222,8 +1226,9 @@
   function topicPage(t, sub) {
     if (unit !== t.u) { unit = t.u; store.set("unit", unit); applyChrome(); }
     if (sub === "present") return topicPresent(t);
+    if (sub === "deck") return topicDeckPage(t);
     var ls = topicLessons(t), acts = Acts.forTopic(t.id), sp = specPoints(t), conf = store.get("conf", {});
-    var h = '<div class="stack" style="gap:22px"><div class="stack" style="gap:8px"><a class="muted small" href="#unit">← ' + USHORT[t.u] + ' topics</a><span class="eyebrow">' + USHORT[t.u] + " · Topic " + topicNum(t) + "</span><h1>" + esc(t.name) + '</h1><p class="lead">' + esc(t.spec) + ". " + ls.length + " lesson" + (ls.length > 1 ? "s" : "") + ", " + acts.length + " interactive activities.</p>" +
+    var h = '<div class="stack" style="gap:22px"><div class="stack" style="gap:8px"><a class="muted small crumb" href="#unit">← ' + USHORT[t.u] + ' topics</a><span class="eyebrow">' + USHORT[t.u] + " · Topic " + topicNum(t) + "</span><h1>" + esc(t.name) + '</h1><p class="lead">' + esc(t.spec) + ". " + ls.length + " lesson" + (ls.length > 1 ? "s" : "") + ", " + acts.length + " interactive activities.</p>" +
       '<div class="row"><a class="btn primary" href="#' + t.id + '-present">▶ Present the whole topic</a><a class="btn" href="#quiz-' + t.id + '">End-of-topic quiz</a><a class="btn" href="#practice-' + t.id + '">All activities</a><button class="btn" id="rdeck" title="Animated revision slides: key facts, key terms, predict the output, true or false, quizzes and gap fills">Revision PowerPoint</button><button class="btn" id="tdeck">Download topic PowerPoint</button></div></div>';
     h += '<nav class="toc row small"><a href="#' + t.id + '" data-jump="t-flow">Lesson flow</a><a href="#' + t.id + '" data-jump="t-spec">Specification checklist</a><a href="#' + t.id + '" data-jump="t-map">Mind map</a><a href="#' + t.id + '" data-jump="t-acts">Activities</a><a href="#' + t.id + '" data-jump="t-pp">Past papers</a><a href="#' + t.id + '" data-jump="t-links">Websites</a></nav>';
     // flow
@@ -1255,6 +1260,15 @@
       saveTopicDeck(t, sel, ts);
     };
   }
+  // #<topic>-deck: just the two topic PowerPoint downloads (the front door and the workbook embed this; ?auto=1 starts the topic deck)
+  function topicDeckPage(t) {
+    var ls = topicLessons(t);
+    app.innerHTML = '<div class="panel stack deck-only" style="gap:8px"><span class="eyebrow">' + esc(USHORT[t.u]) + " · Topic " + topicNum(t) + "</span><h3>" + esc(t.name) + '</h3><p class="small muted">The whole-topic PowerPoint (' + ls.length + " lesson" + (ls.length > 1 ? "s" : "") + ') is built on your device from the hub slides, so it takes a few seconds.</p><div class="row"><button class="btn primary sm" id="tdeck">Download topic PowerPoint</button><button class="btn sm" id="rdeck" title="Animated revision slides: key facts, key terms, quizzes and gap fills">Revision PowerPoint</button>' + (EMBED ? "" : '<a class="btn sm" href="#' + t.id + '">Topic page</a>') + "</div></div>";
+    var td = document.getElementById("tdeck"), rd = document.getElementById("rdeck");
+    td.onclick = function () { saveTopicDeck(t, ls, td); };
+    rd.onclick = function () { saveRevisionDeck(t, rd); };
+    if (EMBED && /[?&]auto=1(&|$)/.test(location.search) && !topicDeckPage.done) { topicDeckPage.done = 1; td.click(); }
+  }
   function actDone(a) { var r = store.get("act." + a.t + "." + a.id, null); return r ? ' <span class="act-done">' + (r.n ? Math.round(100 * r.s / r.n) + "%" : "✓") + "</span>" : ""; }
   function wireActs(root) {
     root.querySelectorAll("details.act-card").forEach(function (d) {
@@ -1267,7 +1281,7 @@
     var ls = topicLessons(t), seq = [], steps = null, back = false;
     ls.forEach(function (l) { for (var i = 0; i < slideCount(l); i++) seq.push([l, i]); });
     var idx = Math.min(store.get("tp." + t.id, 0), seq.length - 1);
-    app.innerHTML = '<div class="stack"><a class="muted small" href="#' + t.id + '">← ' + esc(t.name) + '</a><h1>' + esc(t.name) + ': whole topic</h1><div class="deck" id="deck"><div class="sprog" aria-hidden="true"><i id="sprog"></i></div><div id="slidebox" class="slidebox"></div><div class="deck-ctrl"><button class="btn" id="sp">← Prev</button><button class="btn primary" id="sn">Next →</button><button class="btn" id="sfull">Present full screen</button><select id="tpj" aria-label="Jump to lesson">' + ls.map(function (l) { return '<option value="' + l.id + '">' + l.id + " " + esc(l.title) + "</option>"; }).join("") + '</select><label class="small row" style="gap:6px"><input type="checkbox" id="sstep"' + (store.get("steps", true) !== false ? " checked" : "") + '> One point at a time</label><span class="mono small muted" id="tpn"></span></div></div></div>';
+    app.innerHTML = '<div class="stack"><a class="muted small crumb" href="#' + t.id + '">← ' + esc(t.name) + '</a><h1>' + esc(t.name) + ': whole topic</h1><div class="deck" id="deck"><div class="sprog" aria-hidden="true"><i id="sprog"></i></div><div id="slidebox" class="slidebox"></div><div class="deck-ctrl"><button class="btn" id="sp">← Prev</button><button class="btn primary" id="sn">Next →</button><button class="btn" id="sfull">Present full screen</button><select id="tpj" aria-label="Jump to lesson">' + ls.map(function (l) { return '<option value="' + l.id + '">' + l.id + " " + esc(l.title) + "</option>"; }).join("") + '</select><label class="small row" style="gap:6px"><input type="checkbox" id="sstep"' + (store.get("steps", true) !== false ? " checked" : "") + '> One point at a time</label><span class="mono small muted" id="tpn"></span></div></div></div>';
     function fwd() { if (steps && steps.next()) return; if (idx < seq.length - 1) { idx++; back = false; draw(); } }
     function bwd() { if (idx > 0) { idx--; back = true; draw(); } }
     function draw() {
@@ -1496,6 +1510,22 @@
   window.addEventListener("hashchange", function () {
     var a = lastHash.slice(1).split("-")[0], b = location.hash.slice(1).split("-")[0];
     lastHash = location.hash; route(); if (a !== b) window.scrollTo(0, 0);
+    if (EMBED) { sentH = 0; postSize(a !== b); }
   });
   route();
+  var sentH = 0;
+  function postSize(nav) {
+    if (!EMBED || window.parent === window) return;
+    var h = Math.ceil(app.getBoundingClientRect().bottom + (window.scrollY || 0));
+    if (!nav && Math.abs(h - sentH) < 2) return;
+    sentH = h;
+    try { window.parent.postMessage({ type: "dth-embed", h: h, hash: location.hash, nav: !!nav }, "*"); } catch (e) {}
+  }
+  if (EMBED) {
+    if (window.ResizeObserver) new ResizeObserver(function () { postSize(false); }).observe(app);
+    window.addEventListener("load", function () { postSize(false); });
+    document.addEventListener("toggle", function () { postSize(false); }, true);
+    setInterval(function () { postSize(false); }, 1000);
+    postSize(false);
+  }
 })();

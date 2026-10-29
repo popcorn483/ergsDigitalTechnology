@@ -2,22 +2,18 @@
 
 A free, open revision site for **CCEA Digital Technology**. There are no passwords and every answer and mark scheme is visible.
 
-| Site | Course |
-| --- | --- |
-| `index.html` | GCSE Digital Technology, Route B: Programming (Unit 1 and Unit 4, C#) |
-| `gce/index.html` | GCE Digital Technology (AS 1, AS 2, A2 1 and the A2 2 coursework in Microsoft Access with VBA) |
-| `notes/` | Revision notebooks, one per unit. Start here. |
+## Start here: `index.html`
 
-## How to revise
+The front door lists every unit for **GCSE** and **A level (GCE)**. Each topic has two buttons:
 
-1. **Open the notebook** for your unit. Each page is one specification point, with notes, an interactive diagram, quick checks, past-paper questions with tips, videos and key terms.
-2. **Learn and practise.** Every notebook page links to its lesson in the hub: video, podcast, slides, fact file, worksheet, quiz and activities.
-3. **Test yourself.** Each chapter links to its topic test and practice paper. Write your answer first, then press **Show mark scheme**.
-4. **Print or download** fact files, workbooks (with and without answers) and flashcards from the unit and Media pages.
+- **Revision workbook** opens the notebook (`notes/`) at that topic. Everything else is built into the workbook. Each page has a *Learn and practise* strip: video, podcast, slides, fact file, quiz, worksheet with mark schemes, and activities. They open inside the page. The first page of each topic has the topic test, the practice paper and the topic PowerPoint.
+- **PowerPoint** shows View and Download for the file you uploaded (see below). If there is no file yet, Download builds the hub's own whole-topic PowerPoint on the pupil's device.
+
+The full lesson hubs are still there for teachers: `hub.html` (GCSE) and `gce/hub.html` (GCE). `gce/index.html` redirects to the GCE section of the front door. The workbooks show hub pages through `hub.html?embed=1#<route>`, which hides the hub's header and menus.
 
 ## Topic PowerPoints
 
-Put one PowerPoint per topic in `notes/slides/`, named by topic id, for example `notes/slides/T1.pptx` or `notes/slides/G18.pptx`. The full list is in `notes/slides/README.md`. The first page of each notebook chapter then shows **Topic slides** with View and Download buttons.
+Put one PowerPoint per topic in `notes/slides/`, named by topic id, for example `notes/slides/T1.pptx` or `notes/slides/G18.pptx` (a `.pdf` also works). The full list is in `notes/slides/README.md`. The front door and the topic's first workbook page then show View and Download for it.
 
 ## Folders
 

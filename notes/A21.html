@@ -481,6 +481,44 @@ mark{background:var(--mark);color:var(--mark-ink);border-radius:2px;padding:0 1p
 .libmenu a.hubl svg{width:13px;height:13px}
 .tipbox > b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
 @media (max-width:420px){ .libwrap .ib{width:34px} }
+/* ---------- hub content built into the page (?embed=1 frames) ---------- */
+.lp-sec .lp-pick{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;font-family:var(--sans)}
+.lp-pick button{display:inline-flex;gap:6px;align-items:baseline;max-width:100%;text-align:left;font-size:13px;border:1px solid var(--line);background:var(--paper);border-radius:8px;padding:5px 10px;line-height:1.3;color:var(--ink-2)}
+.lp-pick button em{font-style:normal;font-weight:700;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.lp-pick button[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);background:var(--paper-2)}
+.lp-pick button[aria-pressed="true"] em{color:var(--accent)}
+.lp-tabs{display:flex;flex-wrap:wrap;gap:6px;font-family:var(--sans)}
+.lp-tabs button{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;font-weight:700;border:1px solid var(--line);background:var(--paper-2);border-radius:999px;padding:6px 13px 6px 11px;line-height:1.25;color:var(--ink)}
+.lp-tabs button svg{width:14px;height:14px;color:var(--ink-3);flex:none}
+.lp-tabs button:hover{border-color:var(--accent);color:var(--accent)}
+.lp-tabs button:hover svg{color:var(--accent)}
+.lp-tabs button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.lp-tabs button[aria-pressed="true"] svg{color:var(--accent-ink)}
+.emb{margin-top:12px;border:1px solid var(--line);border-radius:8px;background:var(--paper);overflow:hidden;font-family:var(--sans)}
+.emb-bar{display:flex;align-items:center;gap:8px;padding:7px 8px 7px 14px;background:var(--paper-2);border-bottom:1px solid var(--line);font-size:13px;min-width:0}
+.emb-bar b{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2)}
+.emb-bar a{flex:none;font-size:12.5px;font-weight:700;text-decoration:none;display:inline-flex;align-items:center;gap:4px}
+.emb-bar a svg{width:12px;height:12px}
+.emb-bar .ib{width:30px;height:30px}
+.emb-bar .ib svg{width:16px;height:16px}
+.emb-f{display:block;width:100%;height:340px;border:0;background:transparent;transition:height .15s ease}
+.emb-load{padding:10px 14px;color:var(--ink-3);font-size:13px}
+.emb.ready .emb-load{display:none}
+.emb-in{padding:6px 10px 2px}
+.chl{display:flex;flex-direction:column;background:var(--paper)}
+.chl > div,.chl > details{border-top:1px solid var(--line-2);padding:10px 16px}
+.chl > :first-child{border-top:0}
+.chl .k{display:block;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
+.chl .row{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin-top:4px}
+.chl summary{cursor:pointer;list-style:none;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center}
+.chl summary::-webkit-details-marker{display:none}
+.chl summary .t{font-weight:700;font-size:14.5px;line-height:1.35;color:var(--ink);grid-column:1}
+.chl summary .k{grid-column:1;grid-row:1}
+.chl summary .go{grid-column:2;grid-row:1 / span 2;font-size:12.5px;font-weight:700;color:var(--accent);border:1px solid var(--line);border-radius:999px;padding:4px 11px;white-space:nowrap}
+.chl details[open] summary .go{background:var(--accent-soft);border-color:var(--accent)}
+.chl details > .emb{margin:10px -6px 2px}
+.chl .fname{font-family:var(--mono);font-size:12px;color:var(--ink-3);overflow-wrap:anywhere}
+@media (max-width:699px){ .chl > div,.chl > details{padding:10px 12px} .chl details > .emb{margin:10px -4px 2px} }
 /* table reveal */
 .cellbtn{border:1.5px dashed var(--accent);background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:2px 12px;font-weight:700;min-width:44px}
 td.shown{animation:rise .3s ease;background:var(--good-soft)}
@@ -577,7 +615,9 @@ function svText(parent, lines, x, cy, cls, lh = 15, anchor = 'middle') {
 function hashStr(s) { let h = 2166136261; for (const c of String(s)) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
 function rng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 /* on GitHub Pages, links to the claude.ai hubs are swapped for the hubs in the same repo */
-const HUB_LOCAL = { 'https://claude.ai/artifact/TBq7fpKDyTvbJrtFT8kaMP': '../index.html', 'https://claude.ai/artifact/4QJmiYYmf3Xpupq3QHDeeP': '../gce/index.html' };
+const HUB_LOCAL = { 'https://claude.ai/artifact/TBq7fpKDyTvbJrtFT8kaMP': '../hub.html', 'https://claude.ai/artifact/4QJmiYYmf3Xpupq3QHDeeP': '../gce/hub.html' };
+/* the front door (landing page): next to notes/ on the web, the GitHub Pages site from claude.ai */
+const FRONT_WEB = 'https://popcorn483.github.io/ergsdigitaltechnology/';
 const safeUrl = u => { u = String(u || ''); if (!/^https?:\/\//i.test(u)) return null; if (ON_WEB) for (const k in HUB_LOCAL) if (u.startsWith(k)) return HUB_LOCAL[k] + u.slice(k.length); return u; };
 const ICON_EXT = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 3h4v4M13 3L7 9M11 9.5V13H3V5h3.5"/></svg>';
 /* where are we served from? GitHub Pages (or any web host) unlocks relative files; claude.ai does not */
@@ -812,6 +852,7 @@ function learnHTML(p) {
   return h + '</aside>';
 }
 function chapterCardHTML(ch) {
+  if (EMBED_ON()) return `<section class="chcard" aria-label="Chapter ${esc(ch.n)} overview"><div class="chcard-h"><small>Chapter ${esc(ch.n)}${ch.topicName ? ' · Topic ' + esc(ch.topic) + ': ' + esc(ch.topicName) : ''}</small>${ch.intro ? `<p>${inline(ch.intro)}</p>` : ''}</div>${chapterListHTML(ch)}</section>`;
   const L = ch.links || {}, tests = (L.tests || []).filter(x => safeUrl(x.url)), papers = (L.papers || []).filter(x => safeUrl(x.url));
   const cells = [];
   if (tests.length) cells.push(`<div class="cl"><b>Topic test</b>${tests.map(x => `<a class="lk" href="${esc(safeUrl(x.url) || '#')}" target="_blank" rel="noopener">${esc(x.title)} ${ICON_EXT}</a>`).join('')}</div>`);
@@ -845,13 +886,108 @@ function findSlides(topic) {
   return SLIDES.get(topic);
 }
 function mountSlides(ch, pid) {
-  if (!ON_WEB || !ch.topic) return;
+  if (!ON_WEB || !ch.topic || EMBED_ON()) return;
   findSlides(ch.topic).then(f => {
     const cell = $('#slides-cell');
     if (!f || !cell || PAGES[cur].p.id !== pid) return;
     const view = f.ext === 'pptx' ? 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(f.abs) : f.abs;
     cell.innerHTML = `<b>Topic slides (${f.ext === 'pptx' ? 'PowerPoint' : 'PDF'})</b><div class="row"><a class="lk" href="${esc(view)}" target="_blank" rel="noopener">View ${ICON_EXT}</a><a class="lk" href="${esc(f.rel)}" download>Download</a></div><span class="fname">${esc(f.rel)}</span>`;
     cell.hidden = false;
+  }).catch(() => { });
+}
+
+
+/* ---------- hub content inside the workbook: <hub>?embed=1#<route> in a frame that sizes itself ---------- */
+const EMBED_ON = () => ON_WEB && !!hubBase();
+const ICON_X = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+const LP_TABS = [['video', 'Video', 'M8 5.5v13l10-6.5z'], ['podcast', 'Podcast', 'M5 14v-2a7 7 0 0114 0v2M5 14h3v5H5zM16 14h3v5h-3z'], ['slides', 'Slides', 'M4 5h16v11H4zM12 16v4M8 20h8'],
+  ['notes', 'Fact file', 'M7 3.5h7l4 4V20.5H7zM14 3.5v4h4M10 12h5M10 15.5h5'], ['quiz', 'Quiz', 'M9.2 9a3 3 0 115 2.2c-.9.6-2.2 1.2-2.2 2.8M12 17.5v.5'],
+  ['worksheet', 'Worksheet', 'M6 4h12v16H6zM9 9h6M9 12.5h6M9 16h3'], ['activities', 'Activities', 'M5 5h6v6H5zM13 5h6v6h-6zM5 13h6v6H5zM13 13h6v6h-6z']];
+const LP_TITLE = { video: 'Narrated video', podcast: 'Revision podcast', slides: 'Lesson slides', notes: 'Fact file', quiz: 'Quiz', worksheet: 'Worksheet with mark schemes', activities: 'Activities' };
+const lpIcon = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+function embedUrl(route, extra) { const b = hubBase(); return b ? `${b}?embed=1${extra || ''}#${route}` : null; }
+/* one frame per slot; switching routes on the same hub URL only changes the hash, so the hub doesn't reload */
+function openEmbed(slot, route, title, opts) {
+  opts = opts || {};
+  const url = embedUrl(route, opts.extra), full = (hubBase() || '') + '#' + route;
+  if (!url) return null;
+  let box = slot.querySelector(':scope > .emb'), f = box && box.querySelector('iframe');
+  if (box && f && f.dataset.base === (opts.extra || '')) {
+    box.querySelector('.emb-bar b').textContent = title; box.querySelector('.emb-bar a').href = full;
+    f.src = url; return box;
+  }
+  if (box) box.remove();
+  box = el('div', { class: 'emb' });
+  box.innerHTML = `<div class="emb-bar"><b></b><a href="${esc(full)}" target="_blank" rel="noopener">Open full screen ${ICON_EXT}</a>${opts.noClose ? '' : `<button type="button" class="ib" aria-label="Close">${ICON_X}</button>`}</div><div class="emb-load">Loading…</div>`;
+  box.querySelector('.emb-bar b').textContent = title;
+  f = el('iframe', { class: 'emb-f', title, src: url, allow: 'fullscreen; autoplay; clipboard-write', allowfullscreen: true, 'data-base': opts.extra || '' });
+  if (opts.h) f.style.height = opts.h + 'px';
+  box.append(f);
+  const x = box.querySelector('.emb-bar .ib');
+  if (x) x.addEventListener('click', () => { box.remove(); if (opts.onClose) opts.onClose(); });
+  slot.append(box);
+  return box;
+}
+window.addEventListener('message', e => {
+  const d = e.data;
+  if (!d || d.type !== 'dth-embed' || !(d.h > 0)) return;
+  for (const f of document.querySelectorAll('iframe.emb-f')) {
+    if (f.contentWindow !== e.source) continue;
+    f.style.height = clamp(Math.ceil(d.h) + 4, 90, 30000) + 'px';
+    f.closest('.emb').classList.add('ready');
+    if (d.nav) { const r = f.getBoundingClientRect(), top = $('#bar').getBoundingClientRect().bottom; if (r.top < top) window.scrollBy(0, r.top - top - 8); }
+  }
+});
+/* Learn and practise: the page's hub lessons as tabs that open inside the page */
+function lpHTML(p) {
+  const ids = (p.lessons || []).filter(Boolean);
+  if (!ids.length || !EMBED_ON()) return '';
+  const names = BK.lessonNames || {};
+  return `<section class="sec lp-sec" aria-labelledby="s-lp"><h2 id="s-lp">Learn and practise <small>${ids.length > 1 ? 'choose a lesson, then' : 'lesson ' + esc(ids[0]) + ' ·'} opens here</small></h2>
+    ${ids.length > 1 ? `<div class="lp-pick" role="group" aria-label="Hub lesson">${ids.map((id, i) => `<button type="button" data-lp-l="${esc(id)}" aria-pressed="${i === 0}"><em>${esc(id)}</em><span>${esc(names[id] || 'Hub lesson')}</span></button>`).join('')}</div>` : ''}
+    <div class="lp-tabs" role="group" aria-label="Lesson resources">${LP_TABS.map(([t, lab, ic]) => `<button type="button" data-lp-t="${t}" aria-pressed="false" title="${esc(LP_TITLE[t])}">${lpIcon(ic)}${esc(lab)}</button>`).join('')}</div>
+    <div class="lp-slot"></div></section>`;
+}
+function wireLP(p) {
+  const sec = $('.lp-sec', main);
+  if (!sec) return;
+  const names = BK.lessonNames || {}, slot = $('.lp-slot', sec);
+  let lid = (p.lessons || [])[0], tab = null;
+  const paint = () => {
+    sec.querySelectorAll('[data-lp-t]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lpT === tab)));
+    sec.querySelectorAll('[data-lp-l]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lpL === lid)));
+    if (!tab) { const b = slot.querySelector('.emb'); if (b) b.remove(); return; }
+    openEmbed(slot, `${encodeURIComponent(lid)}-${tab}`, `${LP_TITLE[tab]} · ${lid} ${names[lid] || ''}`, { onClose: () => { tab = null; paint(); } });
+  };
+  sec.querySelectorAll('[data-lp-t]').forEach(b => b.addEventListener('click', () => { tab = tab === b.dataset.lpT ? null : b.dataset.lpT; paint(); }));
+  sec.querySelectorAll('[data-lp-l]').forEach(b => b.addEventListener('click', () => { lid = b.dataset.lpL; if (!tab) tab = 'video'; paint(); }));
+}
+/* chapter card on the web: Topic PowerPoint, then the topic test(s) and practice paper(s) opening inside the card */
+function chapterListHTML(ch) {
+  const L = ch.links || {}, rows = [];
+  if (ch.topic) rows.push(`<div class="ppt-row"><span class="k">Topic PowerPoint</span><div class="row" id="ppt-cell"><span class="muted">Looking for the topic PowerPoint…</span></div><div class="ppt-slot"></div></div>`);
+  const det = (kind, x) => `<details data-emb="${esc(x.id)}" data-emb-t="${esc(x.title)}"><summary><span class="k">${kind}</span><span class="t">${esc(x.title)}</span><span class="go">Open here</span></summary></details>`;
+  (L.tests || []).filter(x => x.id).forEach(x => rows.push(det('Topic test', x)));
+  (L.papers || []).filter(x => x.id).forEach(x => rows.push(det('Practice paper', x)));
+  return `<div class="chl">${rows.join('')}</div>`;
+}
+function wireChapterList(ch, pid) {
+  main.querySelectorAll('.chl details[data-emb]').forEach(d => d.addEventListener('toggle', () => {
+    const s = d.querySelector('summary .go');
+    if (d.open) { openEmbed(d, encodeURIComponent(d.dataset.emb), d.dataset.embT, { noClose: true, h: 480 }); s.textContent = 'Close'; }
+    else { const b = d.querySelector('.emb'); if (b) b.remove(); s.textContent = 'Open here'; }
+  }));
+  if (!ch.topic) return;
+  findSlides(ch.topic).then(f => {
+    const cell = $('#ppt-cell'), slot = $('.ppt-slot');
+    if (!cell || PAGES[cur].p.id !== pid) return;
+    if (f) {
+      const view = f.ext === 'pptx' ? 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(f.abs) : f.abs;
+      cell.innerHTML = `<a class="lk" href="${esc(view)}" target="_blank" rel="noopener">View ${ICON_EXT}</a><a class="lk" href="${esc(f.rel)}" download>Download (${f.ext === 'pptx' ? 'PowerPoint' : 'PDF'})</a><span class="fname">${esc(f.rel)}</span>`;
+    } else {
+      cell.innerHTML = `<button type="button" class="btn" id="ppt-build">Download the topic PowerPoint</button><span class="muted">built from the hub slides on your device</span>`;
+      $('#ppt-build').addEventListener('click', () => { openEmbed(slot, encodeURIComponent(ch.topic) + '-deck', 'Topic PowerPoint · ' + (ch.topicName || ch.topic), { extra: '&auto=1', h: 150 }); });
+    }
   }).catch(() => { });
 }
 
@@ -867,7 +1003,7 @@ function renderPage(i, focus) {
   if (P.pi === 0) h.push(chapterCardHTML(ch));
   h.push(`<h1 id="ph" tabindex="-1">${inline(p.spec)}${P.cont ? ' <span class="cont">(continued)</span>' : ''}</h1>`);
   if (p.summary) h.push(`<p class="lede">${inline(p.summary)}</p>`);
-  h.push(learnHTML(p));
+  if (!EMBED_ON()) h.push(learnHTML(p));
   h.push(`<div class="notes">${(p.blocks || []).map(blockHTML).join('')}</div>`);
   h.push(`<div id="dg-slot"></div>`);
   if (p.check && p.check.length) {
@@ -896,7 +1032,8 @@ function renderPage(i, focus) {
     p.practice.forEach((q, qi) => h.push(`<div class="pq"><div class="pq-q"><div>${inline(q.q)}</div><span>[${marksTxt(q.m)}]</span></div><div><button type="button" class="btn" data-ans="${qi}" aria-expanded="false" aria-controls="ans-${qi}">Show answer</button></div><div class="pq-a" id="ans-${qi}" hidden>${answerHTML(q.a)}</div></div>`));
     h.push(`</div></section>`);
   }
-  const vids = (p.videos || []).filter(v => safeUrl(v.url));
+  h.push(lpHTML(p));
+  const vids = (p.videos || []).filter(v => safeUrl(v.url) && !(EMBED_ON() && /^Hub (video|podcast)/i.test(v.source || '')));
   if (vids.length) {
     h.push(`<section class="sec" aria-labelledby="s-vd"><h2 id="s-vd">Watch <small>opens in a new tab</small></h2><div class="vids">`);
     vids.forEach(v => h.push(`<a class="vid" href="${esc(safeUrl(v.url) || '#')}" target="_blank" rel="noopener"><span class="src"><span class="${srcClass(v.source)}">${esc(v.source || 'Link')}</span>${v.mins ? `<span>${esc(v.mins)} min</span>` : ''}</span><span class="t">${esc(v.title)}</span><span class="go">Open ${ICON_EXT}</span></a>`));
@@ -936,7 +1073,8 @@ function renderPage(i, focus) {
     updateProgress();
   });
   if (p.diagram) mountDiagram(p.diagram, $('#dg-slot'), p.id);
-  if (P.pi === 0) mountSlides(ch, p.id);
+  if (P.pi === 0) { mountSlides(ch, p.id); if (EMBED_ON()) wireChapterList(ch, p.id); }
+  wireLP(p);
 
   // chrome
   $('#t-ch').textContent = `Chapter ${ch.n} · ${ch.title}`;
@@ -2001,6 +2139,8 @@ DIAG['table-reveal'] = (d, st, cx) => {
 const libBtn = $('#b-lib'), libMenu = $('#libmenu');
 (function buildLib() {
   const hub = hubBase(), h = [];
+  const course = /GCE/.test(BK.qual || '') || /^(AS|A2)/.test(BK.id || '') ? 'gce' : 'gcse';
+  h.push(`<a class="hubl" href="${esc((ON_WEB ? '../index.html' : FRONT_WEB) + '#' + course)}"${ON_WEB ? '' : ' target="_blank" rel="noopener"'}><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 7.5L8 3l5.5 4.5M4 6.5V13h8V6.5"/></svg>All units and topic PowerPoints</a><hr>`);
   const books = (Array.isArray(LIBRARY) ? LIBRARY : []).filter(x => x && (safeUrl(x.url) || x.file));
   if (books.length) {
     h.push('<b>Revision notebooks</b>');
@@ -2011,7 +2151,7 @@ const libBtn = $('#b-lib'), libMenu = $('#libmenu');
       h.push(`<a href="${esc(href)}" ${here ? 'aria-current="page" data-here' : 'target="_blank" rel="noopener"'}><small>${esc(x.qual || '')}</small><span>${esc(x.title || x.id)}</span></a>`);
     });
   }
-  if (hub) { if (books.length) h.push('<hr>'); h.push(`<a class="hubl" href="${esc(hub)}" target="_blank" rel="noopener">Back to the lesson hub ${ICON_EXT}</a>`); }
+  if (hub) { if (books.length) h.push('<hr>'); h.push(`<a class="hubl" href="${esc(hub)}" target="_blank" rel="noopener">Lesson hub ${ICON_EXT}</a>`); }
   if (!h.length) { libBtn.closest('.libwrap').hidden = true; return; }
   libMenu.innerHTML = h.join('');
 })();
