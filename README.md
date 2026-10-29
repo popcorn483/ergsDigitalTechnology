@@ -1,20 +1,35 @@
-# Digital Technology Hub: CCEA GCSE Digital Technology
+# Digital Technology Revision Hub: CCEA Digital Technology
 
-A complete teaching and revision hub for **CCEA GCSE Digital Technology, Route B: Programming**. It covers Unit 1 (Digital Technology) and Unit 4 (Digital Development Concepts), with C# for programming.
+A free, open revision site for **CCEA Digital Technology**. There are no passwords and every answer and mark scheme is visible.
 
-## Opening the hub
+| Site | Course |
+| --- | --- |
+| `index.html` | GCSE Digital Technology, Route B: Programming (Unit 1 and Unit 4, C#) |
+| `gce/index.html` | GCE Digital Technology (AS 1, AS 2, A2 1 and the A2 2 coursework in Microsoft Access with VBA) |
+| `notes/` | Revision notebooks, one per unit. Start here. |
 
-- **Pupils:** open the site and enter the pupil passcode from your teacher.
-- **Teachers:** after entering the pupil passcode, use **Teacher login** with the teacher code. This unlocks lesson plans, slide notes, mark schemes, answer workbooks, PowerPoint downloads and the Forms export.
+## How to revise
 
-## How the content is protected
+1. **Open the notebook** for your unit. Each page is one specification point, with notes, an interactive diagram, quick checks, past-paper questions with tips, videos and key terms.
+2. **Learn and practise.** Every notebook page links to its lesson in the hub: video, podcast, slides, fact file, worksheet, quiz and activities.
+3. **Test yourself.** Each chapter links to its topic test and practice paper. Write your answer first, then press **Show mark scheme**.
+4. **Print or download** fact files, workbooks (with and without answers) and flashcards from the unit and Media pages.
 
-| Folder | Contents | Protected by |
-| --- | --- | --- |
-| `enc/` | Lessons, activities, videos and podcasts (audio), fact files, diagrams, workbooks | Pupil passcode (AES-256-GCM, PBKDF2-SHA-256 with 600,000 iterations) |
-| `teacher/` | Plans, slide notes, mark schemes, answer workbooks | Teacher code (same method, separate key) |
+## Topic PowerPoints
 
-Neither code is stored in this repository. A short code can be guessed by someone with the files and time, so treat this as keeping pupils and casual visitors out, not as high security.
+Put one PowerPoint per topic in `notes/slides/`, named by topic id, for example `notes/slides/T1.pptx` or `notes/slides/G18.pptx`. The full list is in `notes/slides/README.md`. The first page of each notebook chapter then shows **Topic slides** with View and Download buttons.
+
+## Folders
+
+| Folder | Contents |
+| --- | --- |
+| `audio/` | Recorded narration for lesson videos and podcasts. Lessons without a recording use the device voice. |
+| `diagrams/`, `icons/` | Lesson diagrams and topic icons |
+| `factfiles/` | One-page fact files per lesson and a combined file per unit |
+| `pdf/` | Workbooks, answer workbooks and flashcards |
+| `notes/` | Revision notebooks and `slides/` for topic PowerPoints |
+
+The GCE site in `gce/` has the same folders.
 
 ## Hosting
 
@@ -22,4 +37,4 @@ Go to Settings → Pages, choose *Deploy from a branch*, then `main` and `/ (roo
 
 ## Running locally
 
-Run a web server in this folder, for example `python3 -m http.server`. Opening the file by double-clicking won't work.
+Run a web server in this folder, for example `python3 -m http.server`, then open http://localhost:8000. Opening the file by double-clicking won't work.

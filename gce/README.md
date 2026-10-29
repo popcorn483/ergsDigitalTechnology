@@ -1,25 +1,5 @@
-# Digital Technology Hub: CCEA GCSE Digital Technology
+# Digital Technology Revision Hub: CCEA GCE Digital Technology
 
-A complete teaching and revision hub for **CCEA GCE Digital Technology (AS and A2)**. It covers AS 1, AS 2, A2 1 and A2 2, with C# for programming.
+The open revision site for **CCEA GCE Digital Technology (AS and A2)**: AS 1, AS 2, A2 1, and the A2 2 coursework in Microsoft Access with VBA. There are no passwords and every mark scheme is visible.
 
-## Opening the hub
-
-- **Pupils:** open the site and enter the pupil passcode from your teacher.
-- **Teachers:** after entering the pupil passcode, use **Teacher login** with the teacher code. This unlocks lesson plans, slide notes, mark schemes, answer workbooks, PowerPoint downloads and the Forms export.
-
-## How the content is protected
-
-| Folder | Contents | Protected by |
-| --- | --- | --- |
-| `enc/` | Lessons, activities, videos and podcasts (audio), fact files, diagrams, workbooks | Pupil passcode (AES-256-GCM, PBKDF2-SHA-256 with 600,000 iterations) |
-| `teacher/` | Plans, slide notes, mark schemes, answer workbooks | Teacher code (same method, separate key) |
-
-Neither code is stored in this repository. A short code can be guessed by someone with the files and time, so treat this as keeping pupils and casual visitors out, not as high security.
-
-## Hosting
-
-Go to Settings → Pages, choose *Deploy from a branch*, then `main` and `/ (root)`.
-
-## Running locally
-
-Run a web server in this folder, for example `python3 -m http.server`. Opening the file by double-clicking won't work.
+The revision notebooks for AS 1, AS 2, A2 1 and the A2 2 coursework guide are in `../notes/`. See the README in the repository root for how to revise, where topic PowerPoints go, and hosting.

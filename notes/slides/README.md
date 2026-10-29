@@ -25,6 +25,16 @@ The PowerPoint must be publicly reachable (a public repo with GitHub Pages) for 
 | `slides/G22.pptx` | 5. Information systems in organisations | G22 – Information systems in organisations |
 | `slides/G23.pptx` | 6. Legal, ethical and social issues | G23 – Legal, ethical and social issues |
 
+## A2 2: Application Development (coursework guide) (A22)
+
+| File | Chapter | Topic |
+|---|---|---|
+| `slides/G24.pptx` | 1. Getting started and analysis | G24 – Application development project |
+| `slides/G24.pptx` | 2. Design | G24 – Application development project (same file as above) |
+| `slides/G24.pptx` | 3. Building in Access and VBA | G24 – Application development project (same file as above) |
+| `slides/G24.pptx` | 4. Testing | G24 – Application development project (same file as above) |
+| `slides/G24.pptx` | 5. Evaluation, user guide and the finished portfolio | G24 – Application development project (same file as above) |
+
 ## AS 1: Approaches to Systems Development (AS1)
 
 | File | Chapter | Topic |
