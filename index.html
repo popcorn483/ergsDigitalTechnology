@@ -9,103 +9,191 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Literata:opsz,wght@7..72,600;7..72,700&display=swap">
 <style>
-/* The front door: pick a course, then a topic. Each topic has two things: its revision workbook and its PowerPoint. Same paper-and-ink look as the workbooks. */
+/* The front door: pick a course, then a topic. Each topic has its revision workbook and its PowerPoint.
+   Same visual language as the workbooks: dotted desk, rounded cards, one colour per chapter (hue = chapter position in its unit). */
 :root{
-  --desk:#E2E6EC; --paper:#FFFFFF; --paper-2:#F4F6F9; --ink:#1B2230; --ink-2:#465063; --ink-3:#687386;
-  --line:#D3D9E2; --line-2:#E7EBF0; --accent:#2445B4; --accent-ink:#FFFFFF; --accent-soft:#E5EAFA;
-  --shadow:0 1px 2px rgba(20,30,50,.06),0 8px 28px rgba(20,30,50,.10);
-  --serif:'Literata',Georgia,'Times New Roman',serif;
-  --sans:'Atkinson Hyperlegible','Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;
+  --desk:#E6EAF0; --paper:#FFFFFF; --paper-2:#F4F6F9; --ink:#172033; --ink-2:#465063; --ink-3:#687386;
+  --line:#D3D9E2; --line-2:#E7EBF0; --accent:#1F5FBF; --accent-ink:#FFFFFF; --accent-soft:#E4ECFA;
+  --dot:rgba(36,52,84,.13); --card-shadow:0 1px 2px rgba(20,30,50,.05),0 10px 30px -14px rgba(20,30,50,.22); --card-line:rgba(20,30,50,.06);
+  --h1d:#1F5FBF;--h2d:#0B7A70;--h3d:#6A45C2;--h4d:#B5306A;--h5d:#A0560A;--h6d:#2B7A33;--h7d:#3F4FB0;--h8d:#00708A;--h9d:#BE3B12;--h10d:#8B3A9C;
+  --h1l:#8AB6FF;--h2l:#4FD6C6;--h3l:#BDA2FF;--h4l:#FF8FBC;--h5l:#F5B25C;--h6l:#85D68C;--h7l:#A8B2FF;--h8l:#5CD3EE;--h9l:#FF9E78;--h10l:#E59AF2;
+  --h1:var(--h1d);--h2:var(--h2d);--h3:var(--h3d);--h4:var(--h4d);--h5:var(--h5d);--h6:var(--h6d);--h7:var(--h7d);--h8:var(--h8d);--h9:var(--h9d);--h10:var(--h10d);
+  --serif:'Literata','Iowan Old Style','Palatino Linotype',Palatino,'Book Antiqua','URW Palladio L',P052,Georgia,serif;
+  --sans:'Atkinson Hyperlegible','Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --mono:ui-monospace,'Cascadia Mono',Consolas,Menlo,monospace;
+  --ease:cubic-bezier(.2,.7,.2,1);
 }
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
   --desk:#0E1117; --paper:#181C24; --paper-2:#1F2430; --ink:#E5E8EE; --ink-2:#B2B9C6; --ink-3:#8A93A3;
-  --line:#2F3644; --line-2:#252B36; --accent:#93ABFF; --accent-ink:#0E1117; --accent-soft:#232C4C;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35); color-scheme:dark; } }
+  --line:#2F3644; --line-2:#252B36; --accent:#8AB6FF; --accent-ink:#0E1117; --accent-soft:#232C4C;
+  --dot:rgba(160,175,205,.10); --card-shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -12px rgba(0,0,0,.5); --card-line:rgba(255,255,255,.07);
+  --h1:var(--h1l);--h2:var(--h2l);--h3:var(--h3l);--h4:var(--h4l);--h5:var(--h5l);--h6:var(--h6l);--h7:var(--h7l);--h8:var(--h8l);--h9:var(--h9l);--h10:var(--h10l);
+  color-scheme:dark; } }
 :root[data-theme="dark"]{
   --desk:#0E1117; --paper:#181C24; --paper-2:#1F2430; --ink:#E5E8EE; --ink-2:#B2B9C6; --ink-3:#8A93A3;
-  --line:#2F3644; --line-2:#252B36; --accent:#93ABFF; --accent-ink:#0E1117; --accent-soft:#232C4C;
-  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.35); color-scheme:dark; }
+  --line:#2F3644; --line-2:#252B36; --accent:#8AB6FF; --accent-ink:#0E1117; --accent-soft:#232C4C;
+  --dot:rgba(160,175,205,.10); --card-shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -12px rgba(0,0,0,.5); --card-line:rgba(255,255,255,.07);
+  --h1:var(--h1l);--h2:var(--h2l);--h3:var(--h3l);--h4:var(--h4l);--h5:var(--h5l);--h6:var(--h6l);--h7:var(--h7l);--h8:var(--h8l);--h9:var(--h9l);--h10:var(--h10l);
+  color-scheme:dark; }
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--desk);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
+body{margin:0;background-color:var(--desk);background-image:radial-gradient(var(--dot) 1px,transparent 1.3px);background-size:22px 22px;color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5}
 a{color:var(--accent)}
 button{font:inherit;color:inherit;cursor:pointer}
 :focus-visible{outline:2.5px solid var(--accent);outline-offset:2px;border-radius:4px}
 svg{display:block}
-.wrap{max-width:900px;margin:0 auto;padding:36px max(16px,env(safe-area-inset-right,0px)) 56px max(16px,env(safe-area-inset-left,0px))}
-.top{display:flex;flex-direction:column;gap:6px;margin-bottom:22px}
-.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--ink-3)}
-h1{font-family:var(--serif);font-size:clamp(28px,5vw,40px);line-height:1.12;margin:0;letter-spacing:-.01em;text-wrap:balance}
-.lead{margin:4px 0 0;color:var(--ink-2);font-size:16px;max-width:60ch}
-.seg{display:inline-grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;background:var(--paper);border:1px solid var(--line);border-radius:12px;margin:18px 0 26px;width:min(100%,440px)}
-.seg button{border:0;background:transparent;border-radius:9px;padding:10px 12px;font-weight:700;font-size:15px;color:var(--ink-2);line-height:1.2}
+.wrap{max-width:960px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-right,0px)) 56px max(16px,env(safe-area-inset-left,0px))}
+/* hero */
+.hero{position:relative;isolation:isolate;overflow:hidden;background:#16213A;color:#fff;border-radius:26px;padding:44px 44px 38px;display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:28px;align-items:center;box-shadow:var(--card-shadow)}
+.hero .pat{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+.hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:7px;background:linear-gradient(90deg,var(--h1d) 0 10%,var(--h2d) 10% 20%,var(--h3d) 20% 30%,var(--h4d) 30% 40%,var(--h5d) 40% 50%,var(--h6d) 50% 60%,var(--h7d) 60% 70%,var(--h8d) 70% 80%,var(--h9d) 80% 90%,var(--h10d) 90%)}
+.eyebrow{font-size:14px;font-weight:700;color:#C9D6F2}
+h1{font-family:var(--serif);font-size:clamp(32px,5.4vw,50px);line-height:1.06;margin:10px 0 12px;letter-spacing:-.02em;text-wrap:balance}
+.lead{margin:0;color:#D5DCEA;font-size:16.5px;max-width:52ch}
+.wall{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.wall span{aspect-ratio:1;border-radius:16px;display:grid;place-items:center;background:var(--hd);box-shadow:0 8px 18px -8px rgba(0,0,0,.6);color:#fff;font-family:var(--mono);font-weight:700;font-size:15px;transform:rotate(var(--r,0deg))}
+.wall img{width:56%;height:56%;object-fit:contain;filter:brightness(0) invert(1)}
+.wall img + b{display:none}.wall .noimg img{display:none}.wall .noimg img + b{display:block}
+.seg{display:inline-grid;grid-template-columns:1fr 1fr;gap:4px;padding:5px;background:var(--paper);border-radius:16px;margin:22px 0 22px;width:min(100%,460px);box-shadow:var(--card-shadow);outline:1px solid var(--card-line)}
+.seg button{border:0;background:transparent;border-radius:12px;padding:10px 12px;font-weight:700;font-size:15px;color:var(--ink-2);line-height:1.2;transition:background-color .2s,color .2s,transform .12s}
+.seg button:active{transform:scale(.97)}
 .seg button small{display:block;font-weight:400;font-size:12px;color:var(--ink-3)}
-.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
-.seg button[aria-pressed="true"] small{color:var(--accent-ink);opacity:.85}
-.unit{background:var(--paper);box-shadow:var(--shadow);border-radius:4px;padding:26px 30px 14px;margin-bottom:22px}
-.unit-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:6px 16px;padding-bottom:10px;border-bottom:2px solid var(--ink)}
-.unit-h h2{font-family:var(--serif);font-size:23px;line-height:1.2;margin:2px 0 0;text-wrap:balance}
+.seg button[aria-pressed="true"]{background:#16213A;color:#fff}
+.seg button[aria-pressed="true"] small{color:#fff;opacity:.8}
+/* unit cards */
+.unit{background:var(--paper);box-shadow:var(--card-shadow);outline:1px solid var(--card-line);border-radius:24px;padding:0 0 10px;margin-bottom:22px;overflow:hidden}
+.spec{display:flex;height:6px}.spec i{flex:1}
+.unit-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:8px 16px;padding:22px 28px 16px}
+.unit-k{display:inline-block;font-family:var(--mono);font-size:13px;font-weight:700;color:#fff;background:#16213A;border-radius:8px;padding:3px 9px}
+:root[data-theme="dark"] .unit-k,:root[data-theme="dark"] .seg button[aria-pressed="true"]{background:#2B3A5E}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .unit-k,:root:not([data-theme="light"]) .seg button[aria-pressed="true"]{background:#2B3A5E} }
+.unit-h h2{font-family:var(--serif);font-size:25px;line-height:1.2;margin:8px 0 0;text-wrap:balance}
 .unit-h a{font-size:14px;font-weight:700;text-decoration:none;white-space:nowrap}
 .unit-h a:hover{text-decoration:underline}
 .unit-l{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
 .unit-l a{display:inline-flex;align-items:center;gap:6px}
 .unit-l a svg{width:15px;height:15px;flex:none}
-.gl-t{display:inline-flex;align-items:center;gap:5px;font-size:13.5px;font-weight:700;color:var(--accent);text-decoration:none;padding:7px 4px;white-space:nowrap}
+.gl-t{display:inline-flex;align-items:center;gap:5px;font-size:13.5px;font-weight:700;color:var(--cc);text-decoration:none;padding:7px 4px;white-space:nowrap}
 .gl-t svg{width:14px;height:14px;flex:none}
 .gl-t:hover{text-decoration:underline}
-ol.topics{list-style:none;margin:0;padding:0}
-.tp{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:4px 14px;align-items:center;padding:12px 0;border-bottom:1px solid var(--line-2)}
-.tp:last-child{border-bottom:0}
-.num{width:28px;height:28px;border-radius:50%;border:1.5px solid var(--ink);display:grid;place-items:center;font-size:13px;font-weight:700;font-variant-numeric:tabular-nums}
+ol.topics{list-style:none;margin:0;padding:0 14px}
+.tp{display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:6px 16px;align-items:center;padding:12px 14px;border-radius:16px;position:relative;transition:background-color .2s}
+.tp + .tp::before{content:"";position:absolute;left:82px;right:14px;top:0;border-top:1px solid var(--line-2)}
+.tp:hover{background:color-mix(in srgb,var(--cc) 6%,var(--paper))}
+.ic{width:52px;height:52px;border-radius:15px;background:var(--cc-d);display:grid;place-items:center;color:#fff;font-family:var(--mono);font-weight:700;font-size:17px;transition:transform .25s var(--ease)}
+.tp:hover .ic{transform:rotate(-6deg) scale(1.05)}
+.ic img{width:58%;height:58%;object-fit:contain;filter:brightness(0) invert(1)}
+.ic img + b{display:none}.ic.noimg img{display:none}.ic.noimg img + b{display:block}
 .tp-t{min-width:0}
-.tp-t b{display:block;font-size:16px;line-height:1.3}
+.tp-t small{display:block;font-size:12.5px;font-weight:700;color:var(--cc)}
+.tp-t b{display:block;font-family:var(--serif);font-size:17.5px;line-height:1.28}
 .tp-t span{font-size:12.5px;color:var(--ink-3)}
 .acts{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;align-items:center}
-.btn{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:700;text-decoration:none;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:8px;padding:7px 12px;line-height:1.25;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:7px;font-size:14px;font-weight:700;text-decoration:none;border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:12px;padding:8px 13px;line-height:1.25;white-space:nowrap;transition:transform .15s var(--ease),box-shadow .15s,filter .15s}
 .btn svg{width:15px;height:15px;flex:none}
-.btn:hover{border-color:var(--accent);color:var(--accent)}
-.btn.pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.btn.pri:hover{filter:brightness(1.08);color:var(--accent-ink)}
-.ppt{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.btn.pri{background:var(--cc-d);border-color:var(--cc-d);color:#fff;box-shadow:0 6px 14px -8px var(--cc-d)}
+.btn.pri:hover{transform:translateY(-1px);box-shadow:0 10px 18px -8px var(--cc-d);filter:brightness(1.08)}
+.btn:active{transform:scale(.96)}
+.ppt{display:inline-flex;align-items:stretch;border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper)}
 .ppt > span{display:inline-flex;align-items:center;gap:6px;padding:0 10px;font-size:13px;font-weight:700;color:var(--ink-2);background:var(--paper-2);border-right:1px solid var(--line)}
 .ppt > span svg{width:15px;height:15px}
-.ppt a,.ppt button{border:0;background:var(--paper);font-size:14px;font-weight:700;color:var(--accent);text-decoration:none;padding:7px 11px;line-height:1.25;white-space:nowrap}
+.ppt a,.ppt button{border:0;background:var(--paper);font-size:14px;font-weight:700;color:var(--cc);text-decoration:none;padding:8px 11px;line-height:1.25;white-space:nowrap;transition:background-color .15s}
 .ppt a + a{border-left:1px solid var(--line)}
-.ppt a:hover,.ppt button:hover{background:var(--accent-soft)}
+.ppt a:hover,.ppt button:hover{background:color-mix(in srgb,var(--cc) 10%,var(--paper))}
+.ppt a:active,.ppt button:active{background:color-mix(in srgb,var(--cc) 18%,var(--paper))}
 .soon{font-size:13px;color:var(--ink-3);padding:7px 2px}
-.deck{grid-column:2 / -1;border:1px solid var(--line);border-radius:8px;overflow:hidden;margin-top:6px}
+.deck{grid-column:2 / -1;border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-top:6px}
 .deck iframe{display:block;width:100%;height:150px;border:0;background:transparent}
 .deck-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:5px 6px 5px 12px;background:var(--paper-2);border-bottom:1px solid var(--line);font-size:12.5px;color:var(--ink-3)}
 .deck-bar button{border:0;background:transparent;border-radius:6px;width:28px;height:28px;display:grid;place-items:center;color:var(--ink-2)}
 .deck-bar button:hover{background:var(--paper)}
 .foot{margin-top:30px;font-size:13px;color:var(--ink-3);text-align:center}
 .foot a{font-weight:700}
+/* motion: the hero traces draw in, topic rows stagger in */
+@keyframes draw{from{stroke-dashoffset:var(--len,400)}to{stroke-dashoffset:0}}
+.hero.anim .pt{stroke-dasharray:var(--len,400);animation:draw 1.4s var(--ease) both;animation-delay:var(--d,0ms)}
+@keyframes pop{0%{opacity:0;transform:scale(.5) rotate(var(--r,0deg))}100%{opacity:1;transform:rotate(var(--r,0deg))}}
+.hero.anim .wall span{animation:pop .45s var(--ease) both;animation-delay:calc(var(--i,0) * 45ms + 150ms)}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.anim-in .tp,.anim-in .unit-h{animation:rise .42s var(--ease) both;animation-delay:calc(var(--i,0) * 40ms)}
+
+/* filter bar */
+.filt{display:flex;flex-direction:column;gap:10px;margin:-6px 0 20px;padding:14px;background:var(--paper);border-radius:20px;box-shadow:var(--card-shadow);outline:1px solid var(--card-line)}
+.f-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.f-q{flex:1 1 260px;min-width:0;display:flex;align-items:center;gap:8px;border:1.5px solid var(--line);border-radius:12px;padding:0 12px;background:var(--paper-2);transition:border-color .15s}
+.f-q:focus-within{border-color:var(--accent)}
+.f-q svg{width:18px;height:18px;color:var(--ink-3);flex:none}
+.f-q input{flex:1;min-width:0;border:0;background:transparent;padding:10px 0;font-size:15px;outline:none}
+.f-ppt{display:inline-flex;align-items:center;gap:8px;font-weight:700;font-size:14px;color:var(--ink-2);border:1.5px solid var(--line);border-radius:12px;padding:9px 12px;cursor:pointer;user-select:none;transition:border-color .15s,background-color .15s}
+.f-ppt input{accent-color:var(--accent);width:16px;height:16px;margin:0}
+.f-ppt:has(input:checked){border-color:var(--accent);background:var(--accent-soft);color:var(--ink)}
+.f-row2{justify-content:space-between}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1 1 auto;padding:2px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 14px;font-weight:700;font-size:13.5px;color:var(--ink-2);white-space:nowrap;transition:background-color .15s,border-color .15s,color .15s,transform .12s}
+.chip:hover{border-color:var(--ink-3)}
+.chip:active{transform:scale(.95)}
+.chip[aria-pressed="true"]{background:#16213A;border-color:#16213A;color:#fff}
+:root[data-theme="dark"] .chip[aria-pressed="true"]{background:#2B3A5E;border-color:#5C74A8}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .chip[aria-pressed="true"]{background:#2B3A5E;border-color:#5C74A8} }
+.f-count{flex:none;font-size:13px;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.f-count b{color:var(--ink)}
+.hit{display:inline-flex;align-items:center;gap:4px;margin-top:3px;font-size:12.5px;color:var(--ink-2);background:color-mix(in srgb,var(--cc) 10%,var(--paper));border-radius:8px;padding:1px 8px}
+.hit mark{background:none;color:var(--cc);font-weight:700}
+.tp-t b mark{background:color-mix(in srgb,var(--cc) 18%,transparent);color:inherit;border-radius:3px}
+.tp.out,.unit.out{display:none}
+@keyframes fin{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.tp.flt-in,.unit.flt-in{animation:fin .28s var(--ease)}
+.empty{text-align:center;padding:40px 20px;background:var(--paper);border-radius:24px;box-shadow:var(--card-shadow);animation:fin .3s var(--ease)}
+.empty svg{width:44px;height:44px;margin:0 auto 8px;color:var(--ink-3)}
+.empty h2{font-family:var(--serif);margin:0 0 4px;font-size:22px}
+.empty p{margin:0 0 16px;color:var(--ink-2)}
+.empty .btn.pri{--cc-d:#16213A}
+@media (max-width:699px){ .filt{padding:12px;border-radius:18px} .f-ppt{flex:1 1 auto;justify-content:center} .f-row2{flex-wrap:nowrap} .f-count{font-size:12px} }
+@media (max-width:760px){
+  .hero{grid-template-columns:minmax(0,1fr);padding:30px 22px 30px;border-radius:22px;gap:20px}
+  .wall{grid-template-columns:repeat(10,minmax(0,1fr));gap:5px;order:-1}
+  .wall span{border-radius:9px;font-size:10px}
+  .lead{font-size:15px}
+}
 @media (max-width:699px){
-  .wrap{padding-top:24px}
-  .unit{padding:18px 16px 8px;border-radius:0;margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)))}
-  .tp{grid-template-columns:30px minmax(0,1fr)}
-  .acts{grid-column:2;justify-content:flex-start}
+  .wrap{padding-top:14px}
+  .unit{border-radius:20px}
+  .unit-h{padding:18px 18px 12px}
+  ol.topics{padding:0 6px}
+  .tp{grid-template-columns:44px minmax(0,1fr);padding:12px 10px;gap:6px 12px}
+  .tp + .tp::before{left:10px;right:10px}
+  .ic{width:44px;height:44px;border-radius:13px}
+  .acts{grid-column:1 / -1;justify-content:flex-start}
   .deck{grid-column:1 / -1}
 }
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <header class="top">
-    <span class="eyebrow">CCEA Digital Technology</span>
+  <header class="hero" id="hero">
+    <div><span class="eyebrow">CCEA Digital Technology</span>
     <h1>Revision, one topic at a time</h1>
-    <p class="lead">Pick your course, then a topic. Each topic has a revision workbook (notes, diagrams, videos, quizzes, worksheets, tests and past-paper questions, all inside) and the topic PowerPoint, plus a glossary of its key terms with flashcards.</p>
+    <p class="lead">Pick your course, then a topic. Each topic has a revision workbook (notes, diagrams, videos, quizzes, worksheets, tests and past-paper questions, all inside) and the topic PowerPoint, plus a glossary of its key terms with flashcards.</p></div>
+    <div class="wall" id="wall" aria-hidden="true"></div>
   </header>
   <div class="seg" role="group" aria-label="Course">
     <button type="button" data-course="gcse" aria-pressed="true">GCSE<small>Unit 1 and Unit 4</small></button>
     <button type="button" data-course="gce" aria-pressed="false">A level (GCE)<small>AS 1, AS 2, A2 1, A2 2</small></button>
   </div>
+  <div class="filt" role="search" aria-label="Filter topics">
+    <div class="f-row"><label class="f-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="fq" type="search" placeholder="Search topics and key terms" autocomplete="off" aria-label="Search topics and key terms"></label>
+      <label class="f-ppt"><input type="checkbox" id="fppt"><span>Has PowerPoint</span></label></div>
+    <div class="f-row f-row2"><div class="chips" id="fchips" role="group" aria-label="Units"></div><span class="f-count" id="fcount" aria-live="polite"></span></div>
+  </div>
   <main id="units"></main>
+  <div class="empty" id="empty" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5M8.5 11h5"/></svg><h2>No topics match</h2><p id="empty-t">Try a different word, or show every unit.</p><button type="button" class="btn pri" id="fclear">Clear filters</button></div>
   <p class="foot">For teachers: the full lesson hubs for <a href="hub.html">GCSE</a> and <a href="gce/hub.html">A level</a>.</p>
 </div>
 <script>
-const UNITS = [{"terms":331,"id":"U1","course":"gcse","short":"Unit 1","title":"Digital Technology","file":"notes/U1.html","chapters":[{"n":1,"id":"c01","title":"Digital data","topic":"T1","page":"c01-p01","pages":20,"terms":53},{"n":2,"id":"c02","title":"Software","topic":"T2","page":"c02-p01","pages":10,"terms":24},{"n":3,"id":"c03","title":"Database applications","topic":"T3","page":"c03-p01","pages":16,"terms":47},{"n":4,"id":"c04","title":"Spreadsheet applications","topic":"T4","page":"c04-p01","pages":13,"terms":39},{"n":5,"id":"c05","title":"Computer hardware","topic":"T5","page":"c05-p01","pages":14,"terms":41},{"n":6,"id":"c06","title":"Network technologies","topic":"T6","page":"c06-p01","pages":9,"terms":32},{"n":7,"id":"c07","title":"Cyberspace, network security and data transfer","topic":"T7","page":"c07-p01","pages":8,"terms":28},{"n":8,"id":"c08","title":"Cloud technology","topic":"T8","page":"c08-p01","pages":5,"terms":11},{"n":9,"id":"c09","title":"Ethical, legal and environmental impact","topic":"T9","page":"c09-p01","pages":16,"terms":41},{"n":10,"id":"c10","title":"Digital applications","topic":"T10","page":"c10-p01","pages":6,"terms":15}]},{"terms":124,"id":"U4","course":"gcse","short":"Unit 4","title":"Digital Development Concepts (Programming)","file":"notes/U4.html","chapters":[{"n":1,"id":"c01","title":"Contemporary trends in software development","topic":"T41","page":"c01-p01","pages":4,"terms":22},{"n":2,"id":"c02","title":"Digital data","topic":"T42","page":"c02-p01","pages":8,"terms":21},{"n":3,"id":"c03","title":"Digital design principles","topic":"T43","page":"c03-p01","pages":9,"terms":22},{"n":4,"id":"c04","title":"Programming constructs","topic":"T44","page":"c04-p01","pages":9,"terms":28},{"n":5,"id":"c05","title":"Simple error handling techniques","topic":"T45","page":"c05-p01","pages":3,"terms":12},{"n":6,"id":"c06","title":"Developing test plans and testing a solution","topic":"T46","page":"c06-p01","pages":3,"terms":13},{"n":7,"id":"c07","title":"Evaluation of digitally authored systems","topic":"T47","page":"c07-p01","pages":2,"terms":6}]},{"terms":325,"id":"AS1","course":"gce","short":"AS 1","title":"Approaches to Systems Development","file":"notes/AS1.html","chapters":[{"n":1,"id":"c01","title":"Reasons for systems development","topic":"G1","page":"c01-p01","pages":11,"terms":29},{"n":2,"id":"c02","title":"Analysis","topic":"G2","page":"c02-p01","pages":16,"terms":33},{"n":3,"id":"c03","title":"System design, development and testing","topic":"G3","page":"c03-p01","pages":11,"terms":35},{"n":4,"id":"c04","title":"System implementation","topic":"G4","page":"c04-p01","pages":10,"terms":25},{"n":5,"id":"c05","title":"Alternative development approaches","topic":"G5","page":"c05-p01","pages":11,"terms":30},{"n":6,"id":"c06","title":"Software projects","topic":"G6","page":"c06-p01","pages":12,"terms":25},{"n":7,"id":"c07","title":"Security issues","topic":"G7","page":"c07-p01","pages":12,"terms":33},{"n":8,"id":"c08","title":"Algorithms","topic":"G8","page":"c08-p01","pages":14,"terms":35},{"n":9,"id":"c09","title":"Fundamentals of programming","topic":"G9","page":"c09-p01","pages":28,"terms":54},{"n":10,"id":"c10","title":"Object-oriented programming","topic":"G10","page":"c10-p01","pages":10,"terms":26}]},{"terms":269,"id":"AS2","course":"gce","short":"AS 2","title":"Fundamentals of Digital Technology","file":"notes/AS2.html","chapters":[{"n":1,"id":"c01","title":"Data representation","topic":"G11","page":"c01-p01","pages":27,"terms":57},{"n":2,"id":"c02","title":"Data and information","topic":"G12","page":"c02-p01","pages":10,"terms":36},{"n":3,"id":"c03","title":"Architecture","topic":"G13","page":"c03-p01","pages":25,"terms":63},{"n":4,"id":"c04","title":"User interface and data compression","topic":"G14","page":"c04-p01","pages":13,"terms":28},{"n":5,"id":"c05","title":"Software","topic":"G15","page":"c05-p01","pages":15,"terms":28},{"n":6,"id":"c06","title":"Web applications","topic":"G16","page":"c06-p01","pages":12,"terms":34},{"n":7,"id":"c07","title":"Website development","topic":"G17","page":"c07-p01","pages":12,"terms":23}]},{"terms":196,"id":"A21","course":"gce","short":"A2 1","title":"Information Systems","file":"notes/A21.html","chapters":[{"n":1,"id":"c01","title":"Relational database design","topic":"G18","page":"c01-p01","pages":15,"terms":42},{"n":2,"id":"c02","title":"SQL and database management","topic":"G19","page":"c02-p01","pages":13,"terms":22},{"n":3,"id":"c03","title":"Networks","topic":"G20","page":"c03-p01","pages":14,"terms":37},{"n":4,"id":"c04","title":"Network security and cloud computing","topic":"G21","page":"c04-p01","pages":9,"terms":43},{"n":5,"id":"c05","title":"Information systems in organisations","topic":"G22","page":"c05-p01","pages":7,"terms":27},{"n":6,"id":"c06","title":"Legal, ethical and social issues","topic":"G23","page":"c06-p01","pages":9,"terms":25}]},{"terms":71,"id":"A22","course":"gce","short":"A2 2","title":"Application Development (coursework guide)","file":"notes/A22.html","chapters":[{"n":1,"id":"c01","title":"Getting started and analysis","topic":"G24","page":"c01-p01","pages":10,"terms":22},{"n":2,"id":"c02","title":"Design","topic":"G24","page":"c02-p01","pages":9,"terms":20},{"n":3,"id":"c03","title":"Building in Access and VBA","topic":"G24","page":"c03-p01","pages":9,"terms":4},{"n":4,"id":"c04","title":"Testing","topic":"G24","page":"c04-p01","pages":6,"terms":11},{"n":5,"id":"c05","title":"Evaluation, user guide and the finished portfolio","topic":"G24","page":"c05-p01","pages":8,"terms":14}]}];
+const UNITS = [{"terms":331,"id":"U1","course":"gcse","short":"Unit 1","title":"Digital Technology","file":"notes/U1.html","chapters":[{"n":1,"id":"c01","title":"Digital data","topic":"T1","page":"c01-p01","pages":20,"terms":53,"tn":["Analogue signal","Analogue-to-digital converter (ADC)","ASCII","Binary","Bit","Bit depth","Bit rate","Bitmap graphic","Boolean","Buffer / buffering","Byte","Character","Character set","Colour depth","Compression","CSV","Currency","Data","Data portability","Data type","Date/time","File format","Gigabyte (GB)","Information","Information system","Integer","JPEG","Kilobyte (KB)","Lossless compression","Lossy compression","Megabyte (MB)","Metadata","MIDI","Nibble","PDF","Pixel","Pixelation","PPI / DPI","Real","Resolution","RTF","Sample rate","Sampling","Stereo","Storage capacity","Streaming","String","Terabyte (TB)","TIFF","Type check","Unicode","Vector graphic","WAV"],"vids":5},{"n":2,"id":"c02","title":"Software","topic":"T2","page":"c02-p01","pages":10,"terms":24,"tn":["Antivirus software","Application software","Backup","Batch processing","Boot-up sequence","Disk defragmenter","File fragmentation","Full backup","Incremental backup","Master file","Multi-user system","Operating system","Packaged software","Quarantine","Real-time processing","Restore","Round robin","System software","Tailored software","Task scheduler","Time slice","Transaction file","Utility software","Virus"],"vids":6},{"n":3,"id":"c03","title":"Database applications","topic":"T3","page":"c03-p01","pages":16,"terms":47,"tn":["Attachment","AutoNumber","BETWEEN","Big data","Calculated field","Comparison operator","Composite key","Criteria","Crow's foot","Data analytics","Data mining","Data redundancy","Database","Field","Flat file","Foreign key","Form","Format check","Hyperlink","Import","Input mask","Key field","Length check","Logical operator","Lookup Wizard","Macro","OLE Object","One-to-many relationship","Presence check","Query","Range check","Record","Referential integrity","Relational database","Relationship","Report","Structured data","Table","Unstructured data","Validation","Validation rule","Validation text","Variety","Velocity","Verification","Volume","Yes/No"],"vids":6},{"n":4,"id":"c04","title":"Spreadsheet applications","topic":"T4","page":"c04-p01","pages":13,"terms":39,"tn":["Absolute cell reference","Arithmetic operator","AVERAGE","Cell","Cell range","Cell reference","Chart","Conditional formatting","COUNT","COUNTIF","Data format","Data validation","Error alert","Fill handle","Formula","Function","Headers and footers","IF function","Importing data","Label","Legend","Lookup table","MAX","Merge and centre","MIN","Nested IF","Print area","Relative cell reference","Replication","Spreadsheet","Spreadsheet model","SUM","Template","Value","VLOOKUP","What-if analysis","Workbook","Worksheet","Wrap text"],"vids":1},{"n":5,"id":"c05","title":"Computer hardware","topic":"T5","page":"c05-p01","pages":14,"terms":41,"tn":["3D printer","Access speed","Accumulator","ALU","Boot program","Cache","CAD","Capacity","Clock speed","Control unit","Core","CPU","Durability","Fetch–execute cycle","Flash memory","Graphics digitiser","Hard disc drive (HDD)","HD storage media","IAR","Immediate-access store","Input device","Laser printer","MAR","MDR","Memory card","Microprocessor","Multi-core processor","Non-volatile","Output device","Portability","Program counter","RAM","Register","ROM","Smart card","Solid state drive (SSD)","Touch screen","USB flash drive","Virtual memory","Voice recognition","Volatile"],"vids":4},{"n":6,"id":"c06","title":"Network technologies","topic":"T6","page":"c06-p01","pages":9,"terms":32,"tn":["4G","5G","Bandwidth","Bluetooth","Bus topology","Data collision","File server","Interference","Internet","Internet of Things (IoT)","Intranet","IP address","LAN","Latency","MAC address","Network","Network cable","NIC","Optical fibre","Pairing","Repeater","Ring topology","Router","Standalone computer","Star topology","Switch","Terminator","Topology","URL","WAN","Wi-Fi","World Wide Web"],"vids":11},{"n":7,"id":"c07","title":"Cyberspace, network security and data transfer","topic":"T7","page":"c07-p01","pages":8,"terms":28,"tn":["Access rights / levels of access","Anti-virus software","Cyber defamation","Cyber stalking","Cybercrime","Cybersecurity","Data theft","Decryption","Denial of service","Digital forgery","Encryption","Firewall","FTP","Hacking","HTTP","HTTPS","Identity fraud / theft","Key logger","Malware","Phishing","Protocol","Read only","Spamming","Spyware","Strong password","Trojan horse","Two-factor authentication","Worm"],"vids":9},{"n":8,"id":"c08","title":"Cloud technology","topic":"T8","page":"c08-p01","pages":5,"terms":11,"tn":["Carbon footprint","Cloud computing","Cloud gaming","Cloud storage","Collaborative tool","Data centre","Downtime","Pay as you go","Scalability","Synchronisation","Version history"],"vids":2},{"n":9,"id":"c09","title":"Ethical, legal and environmental impact","topic":"T9","page":"c09-p01","pages":16,"terms":41,"tn":["Acceptable use policy","Automation","Computer Misuse Act 1990","Consumer Contracts Regulations 2013","Cooling-off period","Copyright","Copyright, Designs and Patents Act 1988","Cyberbullying","Dark web","Data (Use and Access) Act 2025","Data breach","Data controller","Data minimisation","Data Protection Act 2018","Data Protection Officer","Data protection principles","Data subject","Distance contract","Ergonomic","Ethics","Fake news","GPS","Hacker","Information Commission","Intellectual property","Job displacement","Open source","Personal data","Plagiarism","Privacy","Privacy notice","Repetitive strain injury (RSI)","Software licence","Software piracy","Special category data","Subject access request","Teleworking","Trolling","UK GDPR","Unauthorised access","Upskilling"],"vids":1},{"n":10,"id":"c10","title":"Digital applications","topic":"T10","page":"c10-p01","pages":6,"terms":15,"tn":["App store","Automatic tracking","Computer model","E-commerce","Faster Payments","Gamification","Gaming application","Immediate feedback","Leaderboard","Mobile app","Online banking","Online training","Quality of written communication","Simulation","Virtual reality"],"vids":0}]},{"terms":124,"id":"U4","course":"gcse","short":"Unit 4","title":"Digital Development Concepts (Programming)","file":"notes/U4.html","chapters":[{"n":1,"id":"c01","title":"Contemporary trends in software development","topic":"T41","page":"c01-p01","pages":4,"terms":22,"tn":["Breakpoint","Class","Code outlining","Compiler","Debugger","Encapsulation","Executable file","High-level language","IDE","Inheritance","IntelliSense","Interpreter","Machine code","Method","Object","Object-oriented programming","Procedural programming","Programming paradigm","Property","Source code","Syntax highlighting","Translator"],"vids":2},{"n":2,"id":"c02","title":"Digital data","topic":"T42","page":"c02-p01","pages":8,"terms":21,"tn":["ASCII","Binary","Bit","Boolean","Boolean operator","Byte","Carry","Character","Character set","Data type","Date/time","Denary","Hexadecimal","Integer","Kilobyte","Nibble","Overflow","Real","String","Truth table","Unicode"],"vids":8},{"n":3,"id":"c03","title":"Digital design principles","topic":"T43","page":"c03-p01","pages":9,"terms":22,"tn":["Abstraction","Algorithm","Binary search","Bubble sort","Computational thinking","Data dictionary","Data requirements","Decomposition","Desk checking","Dry run","Flowchart","Index","Insertion sort","Iteration","Linear search","Pass","Pseudocode","Refinement","Selection","Sequence","Top-down design","Trace table"],"vids":7},{"n":4,"id":"c04","title":"Programming constructs","topic":"T44","page":"c04-p01","pages":9,"terms":28,"tn":["Arithmetic operator","Array","Assignment","Built-in function","Concatenation","Condition-controlled loop","Constant","Count-controlled loop","DIV","Element","File handling","Function","Identifier","Infinite loop","Input","MOD","Nested IF","Output","Parameter","Procedure","Record","Relational operator","Running total","Sentinel value","String function","Subroutine","Substring","Variable"],"vids":5},{"n":5,"id":"c05","title":"Simple error handling techniques","topic":"T45","page":"c05-p01","pages":3,"terms":12,"tn":["Error trapping","Exception","Execution error","Format check","Length check","Logic error","Presence check","Range check","Syntax error","Type check","Validation","Validation loop"],"vids":2},{"n":6,"id":"c06","title":"Developing test plans and testing a solution","topic":"T46","page":"c06-p01","pages":3,"terms":13,"tn":["Black box testing","Expected outcome","Extreme data","Integration testing","Invalid data","Iterative testing","Null data","Success criteria","System testing","Test plan","Unit testing","Valid data","White box testing"],"vids":2},{"n":7,"id":"c07","title":"Evaluation of digitally authored systems","topic":"T47","page":"c07-p01","pages":2,"terms":6,"tn":["Efficient solution","Evaluation","High-volume testing","Robustness","Stakeholders","User requirements"],"vids":0}]},{"terms":325,"id":"AS1","course":"gce","short":"AS 1","title":"Approaches to Systems Development","file":"notes/AS1.html","chapters":[{"n":1,"id":"c01","title":"Reasons for systems development","topic":"G1","page":"c01-p01","pages":11,"terms":29,"tn":["Constraint","Cost–benefit analysis","Data","Deliverable","Economic feasibility","Feasibility report","Feasibility study","Information","Information system","Intangible benefit","Legacy system","Legal feasibility","Operational feasibility","Payback period","Process","Programmer","Project manager","Schedule feasibility","Software crisis","Software engineering","Sub-system","System","Systems analyst","Systems development life cycle (SDLC)","Tangible benefit","Technical feasibility","Usability","User interface (UI)","User needs"],"vids":1},{"n":2,"id":"c02","title":"Analysis","topic":"G2","page":"c02-p01","pages":16,"terms":33,"tn":["Agile","Analysis","Balancing","Black hole","Change control","Closed question","Context diagram","Data flow","Data flow diagram (DFD)","Data store","DFD process","Direct data source","Document sampling","End user","Explode","External entity","Fact-finding","Functional requirement","Hawthorne effect","Indirect data source","Level 1 DFD","MoSCoW","Non-functional requirement","Open question","Quality attribute","Sink","Source","Stakeholder","Structured interview","System specification","Testable requirement","Triangulation","User requirements"],"vids":6},{"n":3,"id":"c03","title":"System design, development and testing","topic":"G3","page":"c03-p01","pages":11,"terms":35,"tn":["Acceptance testing","Alpha testing","Beta testing","Black-box testing","Boundary data","Check digit","Consistency check","Data dictionary","Data model","Data structure","Design document","Erroneous data","Expected outcome","Format check","Human–computer interaction (HCI)","Input design","Integration error","Integration testing","Look and feel","Lookup check","Navigation","Normal data","Output design","Presence check","Prototyping","Range check","Sign-off","Storyboarding","Stub","System testing","Test plan","Unit testing","Validation","Verification","White-box testing"],"vids":6},{"n":4,"id":"c04","title":"System implementation","topic":"G4","page":"c04-p01","pages":10,"terms":25,"tn":["Adaptive maintenance","Annotated code","Cascade training","Changeover","Corrective maintenance","Data conversion","Data migration","Direct changeover","Documentation","E-learning","Evaluation criteria","FAQ","Implementation","Maintenance contract","Parallel changeover","Perfective maintenance","Phased changeover","Pilot changeover","Post-implementation review","Software patch","System maintenance","Technical documentation","Troubleshooting guide","User documentation","User guide"],"vids":2},{"n":5,"id":"c05","title":"Alternative development approaches","topic":"G5","page":"c05-p01","pages":11,"terms":30,"tn":["Burn down chart","Continuous integration","Cutover","Daily Scrum","Development methodology","Evolutionary prototyping","Extreme programming (XP)","Handover","Increment","Iterative development","Pair programming","Product backlog","Product owner","Prototype","Rapid application development (RAD)","Refactoring","Release backlog","Risk analysis","Scrum","Scrum master","Scrum team","Spiral model","Sprint","Sprint retrospective","Sprint review","Story point","Test-driven development","Throwaway prototyping","Timeboxing","Waterfall model"],"vids":11},{"n":6,"id":"c06","title":"Software projects","topic":"G6","page":"c06-p01","pages":12,"terms":25,"tn":["Branch","CASE tool","Code review","Coding standards","Collaboration tools","Commit","Critical path","Critical path analysis (CPA)","Earliest start time (EST)","Elastic resource","Float","Gantt chart","Latest finish time (LFT)","Merge","Milestone","Performance indicator","Quality assurance","Repository","Requirements shift","Resources","Risk","Rollback","SMART objectives","Version management","Version management graph"],"vids":6},{"n":7,"id":"c07","title":"Security issues","topic":"G7","page":"c07-p01","pages":12,"terms":33,"tn":["Access rights","Active data","Authentication","Backup","Business continuity plan","Data archiving","Data recovery","Differential backup","Disaster recovery","Disaster recovery plan","Distributed denial of service (DDoS)","Downtime","Encryption","Firewall","Full backup","Hacking","Inactive data","Incremental backup","Insider threat","Malware","Multi-factor authentication (MFA)","Phishing","Ransomware","Recovery point objective (RPO)","Recovery time objective (RTO)","Restore point","Security policy","Social engineering","Spyware","Transaction log","Trojan","Virus","Worm"],"vids":10},{"n":8,"id":"c08","title":"Algorithms","topic":"G8","page":"c08-p01","pages":14,"terms":35,"tn":["Abstraction","Algorithm","Application program","Best case","Big-O notation","Binary search","Bubble sort","Computer program","Decomposition","Divide and conquer","Dry run","Finiteness","Flowchart","In place","Insertion sort","Integer division","Iteration","Linear search","Logarithmic time","Logic error","Merge sort","Pass","Pivot","Pseudocode","Quick sort","Selection","Sentinel value","Sequence","Space complexity","Structure diagram","Swapped flag","Temporary variable","Time complexity","Trace table","Worst case"],"vids":15},{"n":9,"id":"c09","title":"Fundamentals of programming","topic":"G9","page":"c09-p01","pages":28,"terms":54,"tn":["Argument","Array","Assembler","Breakpoint","Call stack","Casting","Compiler","Condition-controlled loop","Constant","Count-controlled loop","Data type","Delimiter","Dynamic data structure","Exception","Extreme data","Field","Function","Global variable","Identifier","Index","Infinite loop","Integrated development environment (IDE)","Interpreter","Library routine","List","Local variable","Machine code","Modular programming","Modulus","Nested loop","Nested selection","Object code","Parameter","Passing by reference","Passing by value","Persistent storage","Post-condition loop","Pre-condition loop","Procedure","Record","Robust program","Run-time error","Scope","Semantic error","Source code","Static data structure","Stepping","Subroutine","Syntax","Syntax error","Text file","Translation","Two-dimensional array","Variable"],"vids":28},{"n":10,"id":"c10","title":"Object-oriented programming","topic":"G10","page":"c10-p01","pages":10,"terms":26,"tn":["Abstract class","Attribute","Base class","Class","Class diagram","Class hierarchy","Constructor","Control","Derived class","Encapsulation","Event","Event handler","Event-driven programming","Get method","Inheritance","Instantiation","Method","Object","Overloading","Overriding","Parameter list","Polymorphism","Property (C#)","Protected","Return type","Set method"],"vids":6}]},{"terms":269,"id":"AS2","course":"gce","short":"AS 2","title":"Fundamentals of Digital Technology","file":"notes/AS2.html","chapters":[{"n":1,"id":"c01","title":"Data representation","topic":"G11","page":"c01-p01","pages":27,"terms":57,"tn":["Analogue-to-digital converter (ADC)","ASCII","Binary","Binary addition","Binary point","Binary-coded decimal (BCD)","Bit","Bitmap","Byte","Carry","Character set","Check digit","Colour depth","Control character","Denary","EXIF","Exponent","Extended ASCII","Fixed-point representation","Floating-point representation","Gigabyte (GB)","Hexadecimal","Kilobyte (KB)","Least significant bit (LSB)","Mantissa","Megabyte (MB)","Metadata","Modulus 11","Most significant bit (MSB)","Nibble","Normalisation","Nyquist theorem","Overflow","Overflow flag","Parity bit","Pixel","Pixelation","Place value","Precision","Range (floating point)","Range (integers)","Real number","Resolution","RGB","Rounding error","Sample resolution","Sampling rate","Sign and magnitude","Sign bit","Terabyte (TB)","Transposition error","Two's complement","Underflow","Unicode","Unsigned integer","UTF-8","Vector graphic"],"vids":30},{"n":2,"id":"c02","title":"Data and information","topic":"G12","page":"c02-p01","pages":10,"terms":36,"tn":["Batch processing","Batch total","Context","Control total","Currency","Data","Data capture","Data integrity","Double entry","Format check","GIGO","Hash total","Information","Knowledge","Length check","Lookup check","Master file","Multi-user","Multitasking","Multithreading","Optical character recognition (OCR)","Optical mark recognition (OMR)","Presence check","Proofreading","Range check","Real-time control","Real-time processing","Real-time transaction processing","Record locking","Reliability","Transaction file","Transcription error","Type check","Validation","Verification","Weighting"],"vids":10},{"n":3,"id":"c03","title":"Architecture","topic":"G13","page":"c03-p01","pages":25,"terms":63,"tn":["Accumulator (ACC)","Address bus","Arithmetic logic unit (ALU)","Benchmark","Bus width","Cache controller","Cache memory","Central processing unit (CPU)","CISC","Clock","Clock speed","Co-processor","Control bus","Control unit (CU)","Core","Current instruction register (CIR)","Data bus","Direct access","Disk thrashing","Embedded system","Fetch–decode–execute cycle","FLOPS","Graphics processing unit (GPU)","Hard disk drive (HDD)","Harvard architecture","I/O controller","Instruction set","Main memory","Maximum addressable memory","Memory address register (MAR)","Memory data register (MDR)","MIPS","Motherboard","Multi-core processor","Non-volatile","Opcode","Operand","Optical storage","Page","Parallel processing","Peripheral","Pipelining","Port","Program counter (PC)","RAM","Register","RISC","ROM","Secondary storage","Sector","Serial access","SIMD","Solid-state drive (SSD)","Solid-state storage","System bus","Thread","Track","USB","Virtual memory","Volatile","Von Neumann architecture","Von Neumann bottleneck","Word size"],"vids":31},{"n":4,"id":"c04","title":"User interface and data compression","topic":"G14","page":"c04-p01","pages":13,"terms":28,"tn":["Accessibility","Biometric interface","Bitmap (BMP)","Command line interface (CLI)","Compression ratio","Data compression","Dictionary-based compression","Forms dialogue interface","GIF","Graphical user interface (GUI)","Human–computer interaction (HCI)","JPEG","Lossless compression","Lossy compression","Menu-driven interface","MPEG","Natural language interface","Plain text file","Redundancy","Run-length encoding (RLE)","Screen reader","Speech recognition","Switch","Touch-sensitive interface","User interface","Voice (dialogue) interface","WAV","Zipping"],"vids":12},{"n":5,"id":"c05","title":"Software","topic":"G15","page":"c05-p01","pages":15,"terms":28,"tn":["Application software","Assembler","Compiler","Custom-built software","Deadlock","Device driver","Disk defragmenter","EFTPOS","Generic software","Intermediate code","Interpreter","Interrupt","Interrupt service routine (ISR)","Kernel","Lexical analysis","Multi-user operating system","Multiprocessing","Multiprogramming","Off-the-shelf software","Open source software","Operating system","Paging","Proprietary software","Round robin","Segmentation","Special purpose software","Time-slicing","Utility program"],"vids":14},{"n":6,"id":"c06","title":"Web applications","topic":"G16","page":"c06-p01","pages":12,"terms":34,"tn":["Client-side scripting","Cookie","Digital certificate","Digital signature","Domain Name System (DNS)","Dynamic web page","E-government","E-services","Encryption","File Transfer Protocol (FTP)","HTTPS","Internet","Internet service provider (ISP)","Intranet","IP address","Native application","PageRank","Portal","Public key encryption","Search index","Server-side scripting","Session","SQL injection","SSL/TLS","Standard","Symmetric encryption","Top-level domain (TLD)","URL","Web application","Web cache","Web crawler","Web hosting","Web server","World Wide Web"],"vids":14},{"n":7,"id":"c07","title":"Website development","topic":"G17","page":"c07-p01","pages":12,"terms":23,"tn":["Alt text","Anchor tag","Attribute","Broken link","Character entity","Client-side processing","Container tag","CSS","Empty tag","External style sheet","Hierarchical structure","HTML","Inheritance","Inline style","Linear structure","Precedence","Responsive design","Selector","Server-side processing","Site map","Storyboard","Target audience","WCAG"],"vids":9}]},{"terms":196,"id":"A21","course":"gce","short":"A2 1","title":"Information Systems","file":"notes/A21.html","chapters":[{"n":1,"id":"c01","title":"Relational database design","topic":"G18","page":"c01-p01","pages":15,"terms":42,"tn":["Atomic","Attribute","Candidate key","Cascade delete","Composite key","Data dictionary","Data inconsistency","Data independence","Data integrity","Data redundancy","Database management system (DBMS)","Degree of relationship","Deletion anomaly","Entity","Entity integrity","Entity-relationship (ER) diagram","First normal form (1NF)","Flat file","Foreign key","Functional dependency","Index","Insertion anomaly","Link entity","Metadata","Normalisation","Orphan record","Partial dependency","Primary key","Program-data dependence","Referential integrity","Relational database","Relationship","Repeating group","Schema","Second normal form (2NF)","Secondary key","Third normal form (3NF)","Transitive dependency","Update anomaly","Validation","Verification","View"],"vids":16},{"n":2,"id":"c02","title":"SQL and database management","topic":"G19","page":"c02-p01","pages":13,"terms":22,"tn":["ACID","Aggregate function","Big data","Cartesian product","Client–server database","Constraint","Data definition language (DDL)","Data manipulation language (DML)","Data mining","Data warehouse","Deadlock","Distributed database","ETL","GROUP BY","HAVING","Join","OLAP","Record locking","Rollback","SQL","Transaction","Wildcard"],"vids":10},{"n":3,"id":"c03","title":"Networks","topic":"G20","page":"c03-p01","pages":14,"terms":37,"tn":["Asynchronous transmission","Automatic repeat request (ARQ)","Bandwidth","Bit rate","Broadband","Checksum","Circuit switching","Cyclic redundancy check (CRC)","DHCP","Encapsulation (networking)","Fibre-optic cable","Full-duplex","Gateway","HTTPS","IP address","Local area network (LAN)","MAC address","Metropolitan area network (MAN)","Network address translation (NAT)","Network interface card (NIC)","OSI model","Packet switching","Parity bit","Personal area network (PAN)","Protocol","Router","Routing table","Skew","Subnet mask","Switch","TCP","TCP/IP model","Time to live (TTL)","Topology","UDP","Wide area network (WAN)","Wireless access point (WAP)"],"vids":16},{"n":4,"id":"c04","title":"Network security and cloud computing","topic":"G21","page":"c04-p01","pages":9,"terms":43,"tn":["Asymmetric encryption","Authentication","Authorisation","Biometrics","Botnet","Certificate authority (CA)","Cloud computing","Data sovereignty","Defence in depth","Denial of service (DoS)","Digital certificate","Digital signature","Encryption","Firewall","Hash","Hybrid cloud","Hypervisor","Infrastructure as a service (IaaS)","Insider threat","Key distribution problem","Malware","Man-in-the-middle attack","Multi-factor authentication (MFA)","Phishing","Platform as a service (PaaS)","Private cloud","Private key","Proxy server","Public cloud","Public key","Ransomware","Scalability","Server consolidation","Session key","Snapshot","Social engineering","Software as a service (SaaS)","Stateful inspection","Symmetric encryption","Vendor lock-in","Virtual machine (VM)","Virtual private network (VPN)","Virtualisation"],"vids":7},{"n":5,"id":"c05","title":"Information systems in organisations","topic":"G22","page":"c05-p01","pages":7,"terms":27,"tn":["Actuator","Algorithmic bias","Artificial intelligence (AI)","Automation","Batch processing","Decision support system (DSS)","Exception report","Expert system","Explanation facility","Inference engine","Information system","Internet of Things (IoT)","Knowledge base","Knowledge engineer","Machine learning","Management information system (MIS)","Neural network","Predictive maintenance","Real-time processing","Reinforcement learning","Robotics","Sensor","Supervised learning","Training data","Transaction processing system (TPS)","Unsupervised learning","What-if analysis"],"vids":3},{"n":6,"id":"c06","title":"Legal, ethical and social issues","topic":"G23","page":"c06-p01","pages":9,"terms":25,"tn":["Chilling effect","Computer Misuse Act 1990","Copyright","Data controller","Data minimisation","Data processor","Data subject","Deskilling","Digital divide","E-waste","Freedom of Information Act 2000","Information Commission","Investigatory Powers Act 2016","Lawful basis","Open source","Personal data","Planned obsolescence","Repetitive strain injury (RSI)","Software licence","Special category data","Subject access request (SAR)","Surveillance","Sustainability","Unauthorised access","Upskilling"],"vids":10}]},{"terms":99,"id":"A22","course":"gce","short":"A2 2","title":"Building in Access and VBA (tutorials)","file":"notes/A22.html","chapters":[{"n":1,"id":"c01","title":"Getting started with Access","topic":"G24","page":"c01-p01","pages":5,"terms":13,"tn":["Backup","Compact and repair","Datasheet view","Design view","Form","Layout view","Macro","Module","Navigation Pane","Query","Report","Table","Trusted location"],"vids":0},{"n":2,"id":"c02","title":"Tables and relationships","topic":"G24","page":"c02-p01","pages":8,"terms":18,"tn":["AutoNumber","Cascade delete","Cascade update","Data type","Default value","Field","Field size","Foreign key","Import","Index","Input mask","Lookup field","Primary key","Record","Referential integrity","Relationship","Validation rule","Validation text"],"vids":0},{"n":3,"id":"c03","title":"Queries","topic":"G24","page":"c03-p01","pages":9,"terms":13,"tn":["Action query","Append query","Calculated field","Criteria","Delete query","Join","Parameter query","Select query","SQL","SQL view","Totals query","Update query","Wildcard"],"vids":0},{"n":4,"id":"c04","title":"Forms","topic":"G24","page":"c04-p01","pages":9,"terms":21,"tn":["AutoExec","Bound column","Bound control","Calculated control","Combo box","Command button","Conditional formatting","Control","DoCmd","Event","Event procedure","List box","Modal","MsgBox","Navigation form","Option Explicit","Property Sheet","Record Source","Subform","Unbound control","VBA"],"vids":0},{"n":5,"id":"c05","title":"Reports","topic":"G24","page":"c05-p01","pages":6,"terms":7,"tn":["Group footer","Grouping","Print Preview","Report section","Report Wizard","Running sum","WhereCondition"],"vids":0},{"n":6,"id":"c06","title":"VBA basics","topic":"G24","page":"c06-p01","pages":11,"terms":20,"tn":["Breakpoint","Compile error","Constant","DCount","DLookup","Domain aggregate function","DSum","Error handling","Function","Immediate window","Iteration","Me","Nz","Run-time error","Select Case","Selection","Standard module","Sub procedure","Variable","Visual Basic Editor"],"vids":0},{"n":7,"id":"c07","title":"VBA task tutorials","topic":"G24","page":"c07-p01","pages":11,"terms":7,"tn":["Boundary data","DMax","Erroneous data","Filter","Normal data","Recordset","TempVars"],"vids":0}]}];
 (function () {
 'use strict';
 const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
@@ -130,19 +218,52 @@ function slidesFor(topic) {
   })());
   return probes.get(topic);
 }
+const RM = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const IMG = (course, topic) => WEB && topic ? `${course === 'gce' ? 'gce/' : ''}icons/${encodeURIComponent(topic)}.png` : null;
+const hue = i => (i % 10) + 1;
+const pad2 = n => String(n).padStart(2, '0');
+function rng(a) { a >>>= 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
+function circuit(seed, W, H, n) {
+  const R = rng(seed), st = 24, out = [];
+  for (let i = 0; i < n; i++) {
+    const x = Math.round(R() * W / st) * st, y = Math.round(R() * H / st) * st, dir = R() < .5 ? 1 : -1;
+    const l1 = (2 + Math.floor(R() * 5)) * st, dg = (1 + Math.floor(R() * 2)) * st * (R() < .5 ? 1 : -1), l2 = (1 + Math.floor(R() * 5)) * st;
+    const x1 = x + dir * l1, x2 = x1 + dir * Math.abs(dg), y2 = y + dg, x3 = x2 + dir * l2, len = Math.round(l1 + Math.abs(dg) * 1.42 + l2), d = Math.round(R() * 800);
+    out.push(`<g opacity="${(.25 + R() * .3).toFixed(2)}" style="color:var(--h${hue(i)}l)"><path class="pt" d="M${x} ${y}H${x1}L${x2} ${y2}H${x3}" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="--len:${len};--d:${d}ms"/><circle cx="${x}" cy="${y}" r="3.2" fill="currentColor"/><circle cx="${x3}" cy="${y2}" r="4.5" fill="none" stroke="currentColor" stroke-width="2"/></g>`);
+  }
+  return `<svg class="pat" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" aria-hidden="true">${out.join('')}</svg>`;
+}
+function guard(root) { root.querySelectorAll('img').forEach(im => { const f = () => im.parentNode.classList.add('noimg'); im.addEventListener('error', f); if (im.complete && im.naturalWidth === 0) f(); }); }
+const hero = document.getElementById('hero');
+hero.insertAdjacentHTML('afterbegin', circuit(20261029, 960, 360, 22));
+if (!RM()) hero.classList.add('anim');
+function wall(course) {
+  const tiles = [];
+  UNITS.filter(u => u.course === course).forEach(u => u.chapters.forEach((c, i) => tiles.push([c, i])));
+  const w = document.getElementById('wall'), seen = new Set();
+  const pick = tiles.filter(([c]) => { const k = c.topic || c.id + c.title; if (seen.has(k)) return false; seen.add(k); return true; }).slice(0, 10);
+  w.innerHTML = pick.map(([c, i], k) => { const im = IMG(course, c.topic); return `<span style="--hd:var(--h${hue(k)}d);--i:${k};--r:${[-4, 3, -2, 5, -3, 2, -5, 4, -1, 3][k]}deg">${im ? `<img src="${esc(im)}" alt="">` : ''}<b>${esc(pad2(c.n))}</b></span>`; }).join('');
+  guard(w);
+}
 function render(course) {
   document.querySelectorAll(".seg [data-course]").forEach(b => b.setAttribute('aria-pressed', String(b.dataset.course === course)));
-  box.innerHTML = UNITS.filter(u => u.course === course).map(u => `<section class="unit" aria-labelledby="h-${esc(u.id)}">
-    <div class="unit-h"><div><span class="eyebrow">${esc(u.short)}</span><h2 id="h-${esc(u.id)}">${esc(u.title)}</h2></div><div class="unit-l">${u.terms ? `<a href="${esc(u.file)}#glossary" title="All ${esc(u.terms)} key terms, with flashcards and a quiz">${I_GL}Glossary</a>` : ''}<a href="${esc(u.file)}">Whole workbook →</a></div></div>
-    <ol class="topics">${u.chapters.map(c => `<li class="tp" data-topic="${esc(c.topic || '')}" data-hub="${course}">
-      <span class="num" aria-hidden="true">${esc(c.n)}</span>
-      <div class="tp-t"><b>${esc(c.title)}</b><span>${c.pages} workbook page${c.pages === 1 ? '' : 's'}</span></div>
+  wall(course);
+  let k = 0;
+  box.classList.toggle('anim-in', !RM());
+  box.innerHTML = UNITS.filter(u => u.course === course).map(u => `<section class="unit" data-unit="${esc(u.id)}" aria-labelledby="h-${esc(u.id)}">
+    <div class="spec" aria-hidden="true">${u.chapters.map((c, i) => `<i style="background:var(--h${hue(i)}d)"></i>`).join('')}</div>
+    <div class="unit-h" style="--i:${k++}"><div><span class="unit-k">${esc(u.short)}</span><h2 id="h-${esc(u.id)}">${esc(u.title)}</h2></div><div class="unit-l">${u.terms ? `<a href="${esc(u.file)}#glossary" title="All ${esc(u.terms)} key terms, with flashcards and a quiz">${I_GL}Glossary</a>` : ''}<a href="${esc(u.file)}">Whole workbook →</a></div></div>
+    <ol class="topics">${u.chapters.map((c, i) => { const im = IMG(course, c.topic), n = hue(i); return `<li class="tp" data-ci="${i}" data-topic="${esc(c.topic || '')}" data-hub="${course}" style="--cc:var(--h${n});--cc-d:var(--h${n}d);--i:${k++}">
+      <span class="ic" aria-hidden="true">${im ? `<img src="${esc(im)}" alt="" width="30" height="30" loading="lazy">` : ''}<b>${esc(pad2(c.n))}</b></span>
+      <div class="tp-t"><small>Chapter ${esc(c.n)}</small><b>${esc(c.title)}</b><span>${c.pages} workbook page${c.pages === 1 ? '' : 's'}${c.terms ? ` · ${c.terms} key terms` : ''}${c.vids ? ` · ${c.vids} video${c.vids === 1 ? '' : 's'}` : ''}</span></div>
       <div class="acts"><a class="btn pri" href="${esc(u.file)}#${esc(c.page)}">${I_BOOK}Revision workbook</a><span class="ppt-slot">${c.topic ? '' : '<span class="soon">PowerPoint coming soon</span>'}</span>${c.terms ? `<a class="gl-t" href="${esc(u.file)}#glossary-${esc(c.id)}" aria-label="Glossary for ${esc(c.title)}: ${esc(c.terms)} key terms">${I_GL}Glossary</a>` : ''}</div>
-    </li>`).join('')}</ol></section>`).join('');
+    </li>`; }).join('')}</ol></section>`).join('');
+  guard(box);
   box.querySelectorAll('.tp[data-topic]').forEach(li => {
     const t = li.dataset.topic, slot = li.querySelector('.ppt-slot');
     if (!t) return;
     slidesFor(t).then(f => {
+      const had = PPT_OK.has(t); PPT_OK.set(t, !!f); if (F.ppt && !had) applyFilter(false);
       if (f) {
         const view = f.ext === 'pptx' ? 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(f.abs) : f.abs;
         slot.innerHTML = `<span class="ppt" role="group" aria-label="Topic PowerPoint"><span>${I_PPT}PowerPoint</span><a href="${esc(view)}" target="_blank" rel="noopener">View</a><a href="${esc(f.rel)}" download>Download</a></span>`;
@@ -168,14 +289,82 @@ window.addEventListener('message', e => {
   const m = e.data; if (!m || m.type !== 'dth-embed' || !(m.h > 0)) return;
   document.querySelectorAll('.deck iframe').forEach(f => { if (f.contentWindow === e.source) { f.style.height = Math.min(Math.ceil(m.h) + 4, 600) + 'px'; f.previousElementSibling.querySelector('span').textContent = 'Topic PowerPoint'; } });
 });
-function current() { return /^#gce\b/i.test(location.hash) ? 'gce' : 'gcse'; }
+/* ---------- filters: unit chips, search (topic names and key terms), Has PowerPoint; kept in the hash ---------- */
+const F = { units: new Set(), q: '', ppt: false };
+function parseHash() {
+  const parts = decodeURIComponent((location.hash || '').slice(1)).split('&'), course = /^gce$/i.test(parts[0]) ? 'gce' : 'gcse';
+  F.units = new Set(); F.q = ''; F.ppt = false;
+  parts.slice(1).forEach(kv => { const i = kv.indexOf('='), k = i < 0 ? kv : kv.slice(0, i), v = i < 0 ? '' : kv.slice(i + 1); if (k === 'units') v.split(',').filter(Boolean).forEach(u => F.units.add(u)); else if (k === 'q') F.q = v; else if (k === 'ppt') F.ppt = v === '1'; });
+  return course;
+}
+let course = 'gcse';
+function writeHash() {
+  const ex = [];
+  if (F.units.size) ex.push('units=' + [...F.units].join(','));
+  if (F.q) ex.push('q=' + encodeURIComponent(F.q));
+  if (F.ppt) ex.push('ppt=1');
+  try { history.replaceState(null, '', '#' + [course, ...ex].join('&')); } catch (e) { }
+}
+const fq = document.getElementById('fq'), fppt = document.getElementById('fppt'), fchips = document.getElementById('fchips');
+function chipsFor() {
+  const us = UNITS.filter(u => u.course === course);
+  [...F.units].forEach(u => { if (!us.some(x => x.id === u)) F.units.delete(u); });
+  fchips.innerHTML = `<button type="button" class="chip" data-u="" aria-pressed="${!F.units.size}">All</button>` + us.map(u => `<button type="button" class="chip" data-u="${esc(u.id)}" aria-pressed="${F.units.has(u.id)}">${esc(u.short)}</button>`).join('');
+}
+fchips.addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  const u = b.dataset.u;
+  if (!u) F.units.clear(); else if (F.units.has(u)) F.units.delete(u); else F.units.add(u);
+  const all = UNITS.filter(x => x.course === course).every(x => F.units.has(x.id)); if (all) F.units.clear();
+  fchips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.u ? F.units.has(c.dataset.u) : !F.units.size)));
+  applyFilter(true); writeHash();
+});
+let qT = 0;
+fq.addEventListener('input', () => { clearTimeout(qT); qT = setTimeout(() => { F.q = fq.value.trim(); applyFilter(false); writeHash(); }, 90); });
+fppt.addEventListener('change', () => { F.ppt = fppt.checked; applyFilter(true); writeHash(); });
+document.getElementById('fclear').addEventListener('click', () => { F.units.clear(); F.q = ''; F.ppt = false; fq.value = ''; fppt.checked = false; chipsFor(); applyFilter(true); writeHash(); fq.focus(); });
+const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const PPT_OK = new Map();
+function applyFilter(anim) {
+  const q = F.q.toLowerCase(), re = q ? new RegExp('(' + reEsc(esc(F.q)) + ')', 'ig') : null;
+  let shown = 0, total = 0;
+  box.querySelectorAll('.unit').forEach(sec => {
+    const u = UNITS.find(x => x.id === sec.dataset.unit), unitOn = !F.units.size || F.units.has(u.id);
+    let vis = 0;
+    sec.querySelectorAll('.tp').forEach(li => {
+      const c = u.chapters[+li.dataset.ci]; total++;
+      const tb = li.querySelector('.tp-t b'), old = li.querySelector('.hit'); if (old) old.remove();
+      tb.innerHTML = esc(c.title);
+      let ok = unitOn, hit = null;
+      if (ok && q) {
+        if (c.title.toLowerCase().includes(q)) tb.innerHTML = esc(c.title).replace(re, '<mark>$1</mark>');
+        else { const ts = (c.tn || []).filter(t => t.toLowerCase().includes(q)); if (ts.length) hit = ts; else ok = false; }
+      }
+      if (ok && F.ppt) ok = PPT_OK.get(c.topic) === true;
+      if (hit) li.querySelector('.tp-t span').insertAdjacentHTML('afterend', `<span class="hit">matches term: ${hit.slice(0, 2).map(t => esc(t).replace(re, '<mark>$1</mark>')).join(', ')}${hit.length > 2 ? ` +${hit.length - 2}` : ''}</span>`);
+      const was = li.classList.contains('out');
+      li.classList.toggle('out', !ok);
+      if (ok) { vis++; shown++; if (was && !RM()) { li.classList.remove('flt-in'); void li.offsetWidth; li.classList.add('flt-in'); } }
+    });
+    sec.classList.toggle('out', !vis);
+  });
+  const filtering = F.units.size || F.q || F.ppt;
+  document.getElementById('fcount').innerHTML = filtering ? `<b>${shown}</b> of ${total} topics` : `${total} topics`;
+  const em = document.getElementById('empty'); em.hidden = shown > 0;
+  if (!shown) document.getElementById('empty-t').textContent = F.ppt && !F.q ? 'No topics in this selection have an uploaded PowerPoint yet.' : F.q ? `Nothing matches “${F.q}” in these units. Try a shorter word or another unit.` : 'Try another unit.';
+}
+function show(c, keepFilters) {
+  course = c;
+  if (!keepFilters) { F.units.clear(); }
+  fq.value = F.q; fppt.checked = F.ppt;
+  chipsFor(); render(course); applyFilter(false);
+}
 document.querySelectorAll('[data-course]').forEach(b => b.addEventListener('click', () => {
-  if (current() === b.dataset.course) return;
-  try { history.replaceState(null, '', '#' + b.dataset.course); } catch (e) { }
-  render(b.dataset.course);
+  if (course === b.dataset.course) return;
+  course = b.dataset.course; F.units.clear(); writeHash(); show(course, true);
 }));
-window.addEventListener('hashchange', () => render(current()));
-render(current());
+window.addEventListener('hashchange', () => show(parseHash(), true));
+show(parseHash(), true);
 })();
 </script>
 </body>
