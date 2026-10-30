@@ -1936,6 +1936,13 @@ body.ppv-on{overflow:hidden}
 /* the library menu grew (My progress, My course, install, animation speed): keep it inside the screen and scrollable */
 .libmenu{max-height:calc(100vh - 64px);max-height:calc(100dvh - 64px);overflow-y:auto;overscroll-behavior:contain}
 /* ================= APP: END ================= */
+
+/* past-paper crops: the question's lead-in shown above the part */
+.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
+.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
+.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
+.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
+.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
 .pp-vq{font:inherit;font-size:.82em;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid var(--cc,var(--accent));background:transparent;color:var(--cc,var(--accent));cursor:pointer}.pp-vq:hover{background:var(--cc,var(--accent));color:#fff}</style>
 
 <header class="bar" id="bar">
@@ -8265,7 +8272,7 @@ document.addEventListener('click', e => {
    a mark scheme PDF. papers/manifest.json lists them (GitHub API fallback, as for the slides); papers/folders.json maps
    "<book>|<series>" to the folder; papers/pages.json optionally gives the page of each question. Shown with pdf.js. ---------- */
 const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
-const PP_SERIES = e => /^(AS|A2)/.test(BK.id || '') ? String(e.series || (e.year ? 'Summer ' + e.year : '')) : String(e.year || e.series || '');
+const PP_SERIES = e => /specimen/i.test(String(e.series || '')) ? 'Specimen' : /^(AS|A2)/.test(BK.id || '') ? String(e.series || (e.year ? 'Summer ' + e.year : '')) : String(e.year || e.series || '');
 const PP_VIEW = ON_WEB ? (() => {
   let data = null;
   const getJ = u => fetch(u, { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null);
@@ -8289,8 +8296,8 @@ const PP_VIEW = ON_WEB ? (() => {
     if (!f || !(f.paper || f.ms)) return null;
     const qk = `${key}|${String(e.q || '').replace(/^Q/i, '')}`, pk = D.pg[qk] || {}, ck = D.cr[qk] || {};
     const segs = a => Array.isArray(a) && a.length ? a.filter(x => Array.isArray(x) && x.length === 3) : null;   /* [[page, top, bottom]] as fractions of the page height */
-    const cp = segs(ck.paper), cm = segs(ck.ms);
-    return { paper: f.paper ? '../' + f.paper : null, ms: f.ms ? '../' + f.ms : null, pp: +pk.paper || (cp ? cp[0][0] : 1), pm: +pk.ms || (cm ? cm[0][0] : 1), crop: { paper: cp, ms: cm }, key };
+    const cp = segs(ck.paper), cm = segs(ck.ms), cs = segs(ck.stem);   /* stem: the question's lead-in (scenario, table) that the part needs */
+    return { paper: f.paper ? '../' + f.paper : null, ms: f.ms ? '../' + f.ms : null, pp: +pk.paper || (cp ? cp[0][0] : 1), pm: +pk.ms || (cm ? cm[0][0] : 1), crop: { paper: cp, ms: cm, stem: cp ? cs : null }, key };
   }
   let lib = null;
   const pdfjs = () => lib || (lib = new Promise((ok, no) => { if (window.pdfjsLib) return ok(window.pdfjsLib); const s = document.createElement('script'); s.src = PDFJS + 'pdf.min.js'; s.onload = () => { try { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; } catch (e) { } ok(window.pdfjsLib); }; s.onerror = () => { lib = null; no(new Error('pdf.js')); }; document.head.append(s); }));
@@ -8309,6 +8316,14 @@ const PP_VIEW = ON_WEB ? (() => {
       el.append(out);
     }
   }
+  /* the part, with its question's lead-in above it (dimmed, labelled) when it has one */
+  async function cropWithStem(el, doc, C, S) {
+    el.innerHTML = '';
+    if (S) { const a = el.appendChild(document.createElement('div')), b = el.appendChild(document.createElement('div'));
+      a.className = 'ppv-stem'; a.setAttribute('aria-label', 'Introduction to the question'); b.className = 'ppv-part';
+      a.style.width = b.style.width = '100%'; await cropInto(a, doc, S); await cropInto(b, doc, C); return; }
+    await cropInto(el, doc, C);
+  }
   const docs = new Map(), getDoc = async url => { if (!docs.has(url)) docs.set(url, (await pdfjs()).getDocument(url).promise); return docs.get(url); };
   /* show one question's crop inside a page (the "all past-paper questions" list); resolves to the files when shown, else null */
   const lazy = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { lazy.unobserve(x.target); x.target._go && x.target._go(); } }), { rootMargin: '600px 0px' }) : null;
@@ -8317,7 +8332,7 @@ const PP_VIEW = ON_WEB ? (() => {
     const F = await files(e); if (!F || !F[which] || !F.crop[which] || !el) return null;
     el.hidden = false; el.classList.add('ppv-inl'); el.setAttribute('aria-label', which === 'ms' ? 'Mark scheme for this question' : 'This question from the CCEA paper');
     el.innerHTML = '<p class="ppv-load">Loading…</p>';
-    const go = async () => { try { await cropInto(el, await getDoc(F[which]), F.crop[which]); } catch (x) { el.hidden = true; } };
+    const go = async () => { try { await cropWithStem(el, await getDoc(F[which]), F.crop[which], which === 'paper' ? F.crop.stem : null); } catch (x) { el.hidden = true; } };
     if (lazy) { el._go = go; lazy.observe(el); } else go();
     return F;
   }
@@ -8352,7 +8367,7 @@ const PP_VIEW = ON_WEB ? (() => {
         only.hidden = !cropOn; crb.hidden = !cropOn; cv.hidden = cropOn;
         $$('[data-pg]', v).forEach(b => { b.hidden = cropOn; }); $('.ppv-pn', v).hidden = cropOn;
         if (cropOn) {   /* only this question: each page segment rendered and cut to its band, stacked */
-          crb.style.width = (box.clientWidth - 16) * st.z + 'px'; await cropInto(crb, doc, C, 1);
+          crb.style.width = (box.clientWidth - 16) * st.z + 'px'; await cropWithStem(crb, doc, C, st.w === 'paper' ? F.crop.stem : null);
           st.page[st.w] = C[0][0]; $('.ppv-zl', v).textContent = Math.round(st.z * 100) + '%';
           return;
         }
