@@ -274,6 +274,32 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 .wm{display:block;width:max-content;margin-bottom:8px;font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.05em;font-size:clamp(15px,2vw,18px);line-height:1.1;color:#fff;text-decoration:none}
 .wm:hover{opacity:.85}
 .brand-foot{margin-bottom:-18px;font-weight:700;color:var(--ink-2)}
+/* ---------- TROPHIES (front page): unit chip and the course cabinet in My progress. Source notes/app/front_trophies.css ---------- */
+:root{--tb-a:#D99A5E;--tb-b:#A8642E;--tb-d:#7A4520;--ts-a:#D5DBE3;--ts-b:#9AA4B2;--ts-d:#5F6A7A;--tg-a:#F3C553;--tg-b:#CF9512;--tg-d:#8A6206;--tp-a:#E4F0F4;--tp-b:#93BCCB;--tp-d:#3E7385;--tl-a:var(--paper-2);--tl-b:var(--line);--tl-d:var(--ink-3)}
+.tr-ic{width:22px;height:22px;flex:none;display:block}
+.tr-ic .m1{fill:var(--a);stroke:var(--d);stroke-width:1.3}.tr-ic .m2{fill:var(--b);stroke:var(--b)}.tr-ic path.m2[fill="none"]{fill:none;stroke:var(--b)}.tr-ic .m3{stroke:var(--d);opacity:.55}.tr-ic .m4{fill:var(--a);stroke:var(--d);stroke-width:1}
+.tr-ic.t-bronze{--a:var(--tb-a);--b:var(--tb-b);--d:var(--tb-d)}.tr-ic.t-silver{--a:var(--ts-a);--b:var(--ts-b);--d:var(--ts-d)}.tr-ic.t-gold{--a:var(--tg-a);--b:var(--tg-b);--d:var(--tg-d)}.tr-ic.t-platinum{--a:var(--tp-a);--b:var(--tp-b);--d:var(--tp-d)}
+.tr-ic.t-none{--a:var(--tl-a);--b:var(--tl-b);--d:var(--tl-d)}.tr-ic.t-none .m2{fill:var(--line)}
+.unit-l a.tr-chip{gap:5px;padding:3px 10px 3px 6px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);font-size:13px;text-decoration:none}
+.unit-l a.tr-chip svg{width:18px;height:18px}
+.unit-l a.tr-chip:hover{border-color:var(--ink-3)}
+.unit-l a.tr-chip:focus-visible,.trc a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.trc{border-top:1px solid var(--line-2);padding:12px 0 10px;font-family:var(--sans)}
+.trc-h{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.trc-h .tr-ic{width:34px;height:34px}
+.trc-h > div{flex:1;min-width:180px;display:flex;flex-direction:column;gap:2px}
+.trc-h > div > b{font-size:14.5px;color:var(--ink)}
+.trc-t{display:flex;flex-wrap:wrap;align-items:center;gap:2px 4px;font-size:13.5px;color:var(--ink)}
+.tr-tn{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.tr-tn i{width:10px;height:10px;border-radius:50%;background:var(--line);border:1px solid rgba(0,0,0,.18)}
+.tr-tn.t-bronze i{background:var(--tb-a)}.tr-tn.t-silver i{background:var(--ts-a)}.tr-tn.t-gold i{background:var(--tg-a)}.tr-tn.t-platinum i{background:var(--tp-b)}
+.tr-dot{color:var(--ink-3)}
+.trc-us{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0 0 46px}
+.trc-u{padding:3px 10px;border-radius:999px;background:var(--paper-2);border:1px solid var(--line-2);font-size:12.5px;color:var(--ink-2);text-decoration:none}
+.trc-u b{color:var(--ink)}
+.trc-n{margin:8px 0 0 46px;font-size:12.5px;color:var(--ink-3);max-width:70ch}
+@media (max-width:520px){ .trc-us,.trc-n{margin-left:0} }
+/* ---------- TROPHIES css (front): END ---------- */
 /* ================= APP: END ================= */
 /* ================= WELCOME: BEGIN (splash + welcome screen + "← Home"; source notes/app/front_welcome.css) ================= */
 /* splash: full screen, hero navy, once per browser session and on app launch; never blocks the page underneath */
@@ -1104,6 +1130,121 @@ function appUpdates(reg, base, where) {
   });
   window.__appReg = reg;
 }
+/* ---------- TROPHIES: shared by the workbooks and the front page (source notes/app/trophies_common.js) ----------
+   Two mechanics, shown together as one cabinet per course ("GCSE trophies", "A level trophies"):
+   - theory units (U1, U4 · AS1, AS2, A21) share ONE set of 100 generic trophy types (TR_THEORY_DEFS below), each measured inside
+     one unit; a type's tier is the number of the pupil's theory units it has been earned in (bronze 1, silver 2, gold 3);
+   - the coursework units (U5 · A22) each have their own 100, generated from the book (trophies.js), with a fixed tier.
+   Every workbook keeps a per-book cache, localStorage 'notes-trophy:<BOOK>' { earned: {id: date}, prog: {id: [have, need]},
+   defs (coursework books only), plus its own tracking }, so the front page and the other workbooks can read it. */
+const TR_KEY = id => 'notes-trophy:' + id;
+const TR_COURSE = { gcse: { name: 'GCSE', theory: ['U1', 'U4'], cw: 'U5' }, gce: { name: 'A level', theory: ['AS1', 'AS2', 'A21'], cw: 'A22' } };
+const TR_SHORT = { U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+const TR_TAG = { U1: 'U1', U4: 'U4', U5: 'U5', AS1: 'AS1', AS2: 'AS2', A21: 'A2 1', A22: 'A2 2' };
+const TR_TIERS = ['bronze', 'silver', 'gold', 'platinum'];
+const TR_TN = { bronze: 'Bronze', silver: 'Silver', gold: 'Gold', platinum: 'Platinum' };
+const TR_CATS = [['cover', 'Coverage'], ['checks', 'Quick checks'], ['quiz', 'Chapter quizzes'], ['exam', 'Past papers and exam practice'], ['gloss', 'Glossary'], ['tut', 'Coursework: tutorials'], ['cw', 'Coursework: write-up tasks'], ['lib', 'Coursework: library'], ['habits', 'Habits'], ['mile', 'Milestones']];
+const trCourseOf = id => TR_COURSE.gce.theory.includes(id) || id === 'A22' || /^(AS|A2)/.test(id || '') ? 'gce' : 'gcse';
+const trIsCW = id => id === 'U5' || id === 'A22';
+function trCache(id) { try { const o = JSON.parse(localStorage.getItem(TR_KEY(id))); return o && typeof o === 'object' ? o : {}; } catch (e) { return {}; } }
+/* the theory units that count for a course: the pupil's ticked units (My course), else all of them */
+function trScope(course) {
+  const all = TR_COURSE[course].theory;
+  try { const o = JSON.parse(localStorage.getItem('notes-mycourse')) || {}; if (o.course === course && Array.isArray(o.units)) { const s = all.filter(x => o.units.includes(x)); if (s.length) return s; } } catch (e) { }
+  return all.slice();
+}
+/* tier of a theory type from the units it is earned in */
+const trTierN = n => n > 0 ? TR_TIERS[Math.min(n, 4) - 1] : '';
+/* the course cabinet: tier totals over the shared theory types (at their current tier) and the coursework trophies (fixed tier) */
+function trCabinet(course, live) {
+  const C = TR_COURSE[course], scope = trScope(course), caches = {};
+  scope.concat(C.cw).forEach(id => { caches[id] = live && live.id === id ? live.cache : trCache(id); });
+  const tiers = { platinum: 0, silver: 0, gold: 0, bronze: 0 }, types = new Set();
+  scope.forEach(id => Object.keys(caches[id].earned || {}).forEach(t => { if (TR_THEORY_IDS.has(t)) types.add(t); }));
+  types.forEach(t => { const n = scope.filter(id => (caches[id].earned || {})[t]).length; tiers[trTierN(n)]++; });
+  const cw = caches[C.cw] || {}, cwTier = {}; (cw.defs || []).forEach(d => { cwTier[d[0]] = d[4]; });
+  Object.keys(cw.earned || {}).forEach(t => { if (cwTier[t]) tiers[cwTier[t]]++; });
+  const per = {}; scope.concat(C.cw).forEach(id => { per[id] = Object.keys(caches[id].earned || {}).length; });
+  return { course, scope, caches, tiers, types: types.size, per, total: types.size + Object.keys(cw.earned || {}).length };
+}
+const trTierLine = t => ['platinum', 'gold', 'silver', 'bronze'].filter(k => t[k]).map(k => `<span class="tr-tn t-${k}"><i aria-hidden="true"></i>${t[k]} ${k}</span>`).join('<span class="tr-dot" aria-hidden="true"> · </span>') || '<span class="tr-tn">No trophies yet</span>';
+/* original icons: a medal on a ribbon, or a cup for the big ones */
+function trIcon(tier, cup) {
+  const c = 'tr-ic ' + (tier ? 't-' + tier : 't-none');
+  if (cup) return `<svg class="${c}" viewBox="0 0 40 40" aria-hidden="true"><path class="m2" d="M11.5 9.5H6.8v2.6a6 6 0 006 6M28.5 9.5h4.7v2.6a6 6 0 01-6 6" fill="none" stroke-width="2.4" stroke-linecap="round"/><path class="m1" d="M11 6h18v9.5a9 9 0 01-18 0z"/><path class="m3" d="M15.5 9.5v5.6a4.5 4.5 0 002.6 4.1" fill="none" stroke-width="1.8" stroke-linecap="round"/><path class="m2" d="M17.6 24h4.8v5h-4.8z"/><rect class="m1" x="13" y="29" width="14" height="5.5" rx="1.6"/></svg>`;
+  return `<svg class="${c}" viewBox="0 0 40 40" aria-hidden="true"><path class="m2" d="M12.5 3.5h6.2l4.2 11.6h-6.2z"/><path class="m4" d="M27.5 3.5h-6.2l-4.2 11.6h6.2z"/><circle class="m1" cx="20" cy="25" r="11"/><circle class="m3" cx="20" cy="25" r="7.6" fill="none" stroke-width="1.6"/><path class="m2" d="M20 19.6l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z"/></svg>`;
+}
+/* the 100 theory trophy types: [id, category, name, how, measure, arg]. Measures are evaluated per unit in trophies.js */
+const TR_THEORY_DEFS = [
+  ['pg1', 'cover', 'First steps', 'Cover your first page.', 'pages', 1], ['pg3', 'cover', 'Warming up', 'Cover 3 pages.', 'pages', 3], ['pg5', 'cover', 'High five', 'Cover 5 pages.', 'pages', 5],
+  ['pg10', 'cover', 'Double figures', 'Cover 10 pages.', 'pages', 10], ['pg15', 'cover', 'Getting going', 'Cover 15 pages.', 'pages', 15], ['pg20', 'cover', 'Twenty up', 'Cover 20 pages.', 'pages', 20],
+  ['pg25', 'cover', 'Quarter century', 'Cover 25 pages.', 'pages', 25], ['pg30', 'cover', 'Thirty strong', 'Cover 30 pages.', 'pages', 30], ['pg40', 'cover', 'Forty-page club', 'Cover 40 pages.', 'pages', 40],
+  ['pc10', 'cover', 'Off the mark', 'Cover 10% of the unit.', 'pagesPc', 10], ['pc25', 'cover', 'A quarter done', 'Cover a quarter of the unit.', 'pagesPc', 25], ['pc50', 'cover', 'Halfway', 'Cover half of the unit.', 'pagesPc', 50],
+  ['pc75', 'cover', 'Three quarters', 'Cover three quarters of the unit.', 'pagesPc', 75], ['pc90', 'cover', 'Nearly there', 'Cover 90% of the unit.', 'pagesPc', 90], ['pc100', 'cover', 'Full coverage', 'Cover every page in the unit.', 'pagesPc', 100],
+  ['sn5', 'cover', 'Browser', 'Open 5 different pages.', 'seen', 5], ['sn15', 'cover', 'Explorer', 'Open 15 different pages.', 'seen', 15], ['sn30', 'cover', 'Navigator', 'Open 30 different pages.', 'seen', 30],
+  ['snA', 'cover', 'Cartographer', 'Open every page in the unit.', 'seen', 'all'], ['chH', 'cover', 'Half a topic', 'Cover half the pages of any chapter.', 'chHalf', 50],
+  ['ch1', 'cover', 'Chapter finisher', 'Complete a chapter: every page covered.', 'chDone', 1], ['ch2', 'cover', 'Double', 'Complete 2 chapters.', 'chDone', 2], ['ch3', 'cover', 'Hat-trick', 'Complete 3 chapters.', 'chDone', 3],
+  ['ch4', 'cover', 'Four square', 'Complete 4 chapters.', 'chDone', 4], ['ch5', 'cover', 'Five topics', 'Complete 5 chapters.', 'chDone', 5], ['chP', 'cover', 'Half the topics', 'Complete half of the chapters in the unit.', 'chDone', 'half'],
+  ['chA', 'cover', 'Every topic', 'Complete every chapter in the unit.', 'chDone', 'all'],
+  ['qc1', 'checks', 'Correct!', 'Answer a quick check correctly.', 'qc', 1], ['qc5', 'checks', 'On a roll', 'Get 5 quick checks right.', 'qc', 5], ['qc10', 'checks', 'Ten right', 'Get 10 quick checks right.', 'qc', 10],
+  ['qc25', 'checks', 'Sharp', 'Get 25 quick checks right.', 'qc', 25], ['qc50', 'checks', 'Fifty right', 'Get 50 quick checks right.', 'qc', 50], ['qc100', 'checks', 'Century', 'Get 100 quick checks right.', 'qc', 100],
+  ['qc150', 'checks', 'Quick-fire expert', 'Get 150 quick checks right.', 'qc', 150], ['qp1', 'checks', 'Clean sheet', 'Get every quick check on a page right.', 'qcPages', 1], ['qp5', 'checks', 'Five clean sheets', 'Get every quick check right on 5 pages.', 'qcPages', 5],
+  ['qp10', 'checks', 'Ten clean sheets', 'Get every quick check right on 10 pages.', 'qcPages', 10], ['qp25', 'checks', 'Spotless', 'Get every quick check right on 25 pages.', 'qcPages', 25], ['qp40', 'checks', 'Immaculate', 'Get every quick check right on 40 pages.', 'qcPages', 40],
+  ['qa1', 'quiz', 'Quiz taker', 'Finish a chapter quiz.', 'quizAtt', 1], ['qa2', 'quiz', 'Quiz double', 'Finish the quizzes for 2 chapters.', 'quizAtt', 2], ['qa3', 'quiz', 'Quiz trio', 'Finish the quizzes for 3 chapters.', 'quizAtt', 3],
+  ['qa5', 'quiz', 'Quiz regular', 'Finish the quizzes for 5 chapters.', 'quizAtt', 5], ['qaA', 'quiz', 'Quizzed out', 'Finish the quiz for every chapter.', 'quizAtt', 'all'],
+  ['q50a', 'quiz', 'Pass mark', 'Score 50% or more on a chapter quiz.', 'quizPc', [50, 1]], ['q50b', 'quiz', 'Solid three', 'Score 50%+ on 3 chapter quizzes.', 'quizPc', [50, 3]], ['q50c', 'quiz', 'Steady all round', 'Score 50%+ on every chapter quiz.', 'quizPc', [50, 'all']],
+  ['q80a', 'quiz', 'Quiz ace', 'Score 80% or more on a chapter quiz.', 'quizPc', [80, 1]], ['q80b', 'quiz', 'Ace double', 'Score 80%+ on 2 chapter quizzes.', 'quizPc', [80, 2]], ['q80c', 'quiz', 'Ace hat-trick', 'Score 80%+ on 3 chapter quizzes.', 'quizPc', [80, 3]],
+  ['q80d', 'quiz', 'Five aces', 'Score 80%+ on 5 chapter quizzes.', 'quizPc', [80, 5]], ['q80e', 'quiz', 'Top of the class', 'Score 80%+ on every chapter quiz.', 'quizPc', [80, 'all']],
+  ['q100a', 'quiz', 'Perfectionist', 'Score 100% on a chapter quiz.', 'quizPc', [100, 1]], ['q100b', 'quiz', 'Flawless three', 'Score 100% on 3 chapter quizzes.', 'quizPc', [100, 3]], ['q100c', 'quiz', 'Perfect record', 'Score 100% on every chapter quiz.', 'quizPc', [100, 'all']],
+  ['ea1', 'exam', 'Exam starter', "Finish a chapter's exam questions: its past-paper quiz, or the exam-style part of its full quiz.", 'exAtt', 1], ['ea3', 'exam', 'Exam regular', 'Finish the exam questions for 3 chapters.', 'exAtt', 3],
+  ['eaA', 'exam', 'Exam ready', 'Finish the exam questions for every chapter.', 'exAtt', 'all'], ['e50a', 'exam', 'Scoring marks', "Score 50%+ on a chapter's exam questions.", 'exPc', [50, 1]], ['e50b', 'exam', 'Banking marks', 'Score 50%+ on the exam questions of 3 chapters.', 'exPc', [50, 3]],
+  ['e80a', 'exam', 'Past-paper pro', "Score 80%+ on a chapter's exam questions.", 'exPc', [80, 1]], ['e80b', 'exam', "Examiner's favourite", 'Score 80%+ on the exam questions of 3 chapters.', 'exPc', [80, 3]], ['e80c', 'exam', 'Exam master', 'Score 80%+ on the exam questions of every chapter.', 'exPc', [80, 'all']],
+  ['e100', 'exam', 'Full marks', "Score 100% on a chapter's exam questions.", 'exPc', [100, 1]], ['xm1', 'exam', 'Self-marker', 'Mark yourself on an exam question in a chapter quiz.', 'xm', 1], ['xm10', 'exam', 'Honest marker', 'Mark yourself on 10 exam questions.', 'xm', 10],
+  ['xm25', 'exam', 'Mark-scheme reader', 'Mark yourself on 25 exam questions.', 'xm', 25], ['xm50', 'exam', 'Seasoned marker', 'Mark yourself on 50 exam questions.', 'xm', 50],
+  ['gk1', 'gloss', 'Word one', 'Mark a glossary flashcard “I knew it”.', 'gk', 1], ['gk10', 'gloss', 'Word bank', 'Know 10 terms in the flashcards.', 'gk', 10], ['gk25', 'gloss', 'Vocabulary', 'Know 25 terms in the flashcards.', 'gk', 25],
+  ['gk50', 'gloss', 'Word power', 'Know 50 terms in the flashcards.', 'gk', 50], ['gk100', 'gloss', 'Walking glossary', 'Know 100 terms in the flashcards.', 'gk', 100], ['gr1', 'gloss', 'Term tester', 'Finish a glossary quiz round.', 'gr', 1],
+  ['gr3', 'gloss', 'Term trio', 'Finish 3 glossary quiz rounds.', 'gr', 3], ['gr10', 'gloss', 'Term machine', 'Finish 10 glossary quiz rounds.', 'gr', 10], ['gp1', 'gloss', 'Spot on', 'Get every question right in a glossary quiz round.', 'gp', 1],
+  ['d2', 'habits', 'Back again', 'Revise this unit on 2 different days.', 'days', 2], ['d3', 'habits', 'Three days', 'Revise this unit on 3 different days.', 'days', 3], ['d5', 'habits', 'Regular', 'Revise this unit on 5 different days.', 'days', 5],
+  ['d7', 'habits', "A week's worth", 'Revise this unit on 7 different days.', 'days', 7], ['d10', 'habits', 'Ten days', 'Revise this unit on 10 different days.', 'days', 10], ['d20', 'habits', 'Dedicated', 'Revise this unit on 20 different days.', 'days', 20],
+  ['d30', 'habits', 'Committed', 'Revise this unit on 30 different days.', 'days', 30], ['s2', 'habits', 'Two in a row', 'Revise this unit 2 days in a row.', 'streak', 2], ['s3', 'habits', 'Streak of three', 'Revise this unit 3 days in a row.', 'streak', 3],
+  ['s5', 'habits', 'Five-day streak', 'Revise this unit 5 days in a row.', 'streak', 5], ['s7', 'habits', 'Week-long streak', 'Revise this unit 7 days in a row.', 'streak', 7], ['wk', 'habits', 'Weekend warrior', 'Revise this unit on a Saturday or Sunday.', 'weekend', 1],
+  ['cb', 'habits', 'Comeback', 'Come back to this unit after a week or more away.', 'comeback', 1], ['dp3', 'habits', 'Good session', 'Cover 3 pages in one day.', 'dayPages', 3], ['dp10', 'habits', 'Power session', 'Cover 10 pages in one day.', 'dayPages', 10],
+  ['vp', 'habits', 'Check-in', 'Open My progress.', 'view', 'progress'], ['vt', 'habits', 'Trophy hunter', 'Open the trophy cabinet.', 'view', 'trophies'], ['vs', 'habits', 'Seeker', 'Search the workbook.', 'view', 'search'],
+  ['m10', 'mile', 'Collector', 'Earn 10 trophies in this unit.', 'meta', 10], ['m25', 'mile', 'Cabinet builder', 'Earn 25 trophies in this unit.', 'meta', 25], ['m50', 'mile', 'Half the cabinet', 'Earn 50 trophies in this unit.', 'meta', 50],
+  ['m75', 'mile', 'Trophy legend', 'Earn 75 trophies in this unit.', 'meta', 75], ['mx', 'mile', 'Unit master', 'Cover every page and score 80%+ on every chapter quiz.', 'master', 1]
+];
+const TR_THEORY_IDS = new Set(TR_THEORY_DEFS.map(d => d[0]));
+/* ---------- TROPHIES (shared): END ---------- */
+/* ---------- TROPHIES on the front page (source notes/app/front_trophies.js): a "12/100" chip on each unit header and the
+   course cabinet ("GCSE trophies" / "A level trophies") in My progress. Read from the workbooks' caches 'notes-trophy:<BOOK>';
+   a unit that has never been opened shows 0/100. ---------- */
+function trUnitChip(u) {
+  const n = Object.keys(trCache(u.id).earned || {}).length;
+  return `<a class="tr-chip" href="${esc(u.file)}#trophies" title="Trophies earned in ${esc(u.short)}: ${n} of 100" aria-label="Trophies earned in ${esc(u.short)}: ${n} of 100">${trIcon(n ? 'gold' : '', true)}<span>${n}/100</span></a>`;
+}
+function trChips() {
+  document.querySelectorAll('.unit[data-unit]').forEach(sec => {
+    const u = UNITS.find(x => x.id === sec.dataset.unit), l = sec.querySelector('.unit-l'); if (!u || !l) return;
+    const old = l.querySelector('.tr-chip'); if (old) old.remove();
+    l.insertAdjacentHTML('afterbegin', trUnitChip(u));
+  });
+}
+function trCabHTML(course) {
+  const C = TR_COURSE[course], cab = trCabinet(course), sc = cab.scope, first = UNITS.find(u => u.id === sc[0]);
+  const top = trTierN(sc.length);
+  return `<div class="trc" aria-labelledby="trc-${course}"><div class="trc-h">${trIcon(cab.total ? 'gold' : '', true)}<div><b id="trc-${course}">${esc(C.name)} trophies</b><span class="trc-t">${trTierLine(cab.tiers)}</span></div>${first ? `<a class="btn" href="${esc(first.file)}#trophies">Open the cabinet</a>` : ''}</div>
+    <div class="trc-us">${sc.concat(C.cw).map(id => { const u = UNITS.find(x => x.id === id); return u ? `<a class="trc-u" href="${esc(u.file)}#trophies">${esc(u.short)}: <b>${cab.per[id] || 0}</b>/100</a>` : ''; }).join('')}</div>
+    <p class="trc-n">Theory trophies are shared by ${esc(sc.length > 1 ? sc.slice(0, -1).map(id => TR_SHORT[id]).join(', ') + ' and ' + TR_SHORT[sc[sc.length - 1]] : TR_SHORT[sc[0]])} and upgrade each time you earn one in another unit: ${esc(top)} is the top level for ${esc(C.name)}. ${esc(TR_SHORT[C.cw])} has its own 100 coursework trophies.</p></div>`;
+}
+{
+  const ar = appRings; appRings = function () { ar.apply(this, arguments); try { trChips(); } catch (e) { } };
+  const pp = progPanel;
+  progPanel = function () {
+    pp.apply(this, arguments);
+    try { const body = document.getElementById('mp-body'), sc = myScope(); if (!body || !sc) return; const all = body.querySelector('.mp-all'); if (all) all.insertAdjacentHTML('afterend', trCabHTML(sc.course)); } catch (e) { }
+  };
+}
+/* ---------- TROPHIES (front): END ---------- */
 /* ================= APP: END ================= */
 /* ================= WELCOME: BEGIN =================
    Welcome screen when the address has no hash: wordmark, one line, GCSE / A level cards (My course, else the last chosen one, marked; picking a card remembers the course) and a "My course" setting,

@@ -1945,6 +1945,125 @@ body.ppv-on{overflow:hidden}
 .ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
 .ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
 .ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
+/* ---------- TROPHIES (workbook): icons, top-bar pill, rail card, #trophies view, toast. Source notes/app/trophies.css ---------- */
+:root{--tb-a:#D99A5E;--tb-b:#A8642E;--tb-d:#7A4520;--ts-a:#DCE2EA;--ts-b:#8E99A8;--ts-d:#4E5969;--tg-a:#F3C553;--tg-b:#CF9512;--tg-d:#8A6206;--tp-a:#E4F0F4;--tp-b:#93BCCB;--tp-d:#3E7385;--tl-a:var(--paper-2);--tl-b:var(--line);--tl-d:var(--ink-3)}
+.tr-ic{width:28px;height:28px;flex:none;display:block}
+.tr-ic .m1{fill:var(--a);stroke:var(--d);stroke-width:1.3}.tr-ic .m2{fill:var(--b);stroke:var(--b)}.tr-ic path.m2[fill="none"]{fill:none;stroke:var(--b)}.tr-ic .m3{stroke:var(--d);opacity:.55}.tr-ic .m4{fill:var(--a);stroke:var(--d);stroke-width:1}
+.tr-ic.t-bronze{--a:var(--tb-a);--b:var(--tb-b);--d:var(--tb-d)}.tr-ic.t-silver{--a:var(--ts-a);--b:var(--ts-b);--d:var(--ts-d)}.tr-ic.t-gold{--a:var(--tg-a);--b:var(--tg-b);--d:var(--tg-d)}.tr-ic.t-platinum{--a:var(--tp-a);--b:var(--tp-b);--d:var(--tp-d)}
+.tr-ic.t-none{--a:var(--tl-a);--b:var(--tl-b);--d:var(--tl-d)}
+.tr-ic.t-none .m2{fill:var(--line)}.tr-ic.t-none .m3{opacity:.35}
+/* top bar pill (wide screens) */
+.tr-pill{display:inline-flex;align-items:center;gap:6px;position:relative;height:36px;padding:0 10px 0 7px;margin-right:4px;border:1px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);text-decoration:none;font:600 13px/1 var(--sans);white-space:nowrap}
+.tr-pill .tr-ic{width:22px;height:22px}
+.tr-pill .tr-pt b{font-size:14px}
+.tr-pill .tr-pt{color:var(--ink-3);font-weight:600}.tr-pill .tr-pt b{color:var(--ink)}
+.tr-pb{display:block;height:3px;border-radius:2px;background:var(--line-2);overflow:hidden}
+.tr-pb i{display:block;height:100%;background:var(--tg-b);border-radius:inherit}
+.tr-pill .tr-pb{position:absolute;left:12px;right:12px;bottom:4px}
+.tr-pill:hover{border-color:var(--ink-3)}
+.tr-pill:focus-visible,.tr-rail:focus-visible,.tr-cov:focus-visible,.tr-toast a:focus-visible,.tr-toast button:focus-visible,.tr-ups a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:899px){ .tr-pill{display:none} }
+/* contents rail card */
+.tr-rail{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:4px 10px;margin:12px 0 2px;padding:9px 11px;border:1px solid var(--line-2);border-radius:12px;background:var(--paper);color:var(--ink);text-decoration:none;font-family:var(--sans)}
+.tr-rail .tr-ic{grid-row:span 2;width:30px;height:30px}
+.tr-rail .tr-pt{order:3;font-size:12.5px;color:var(--ink-3)}.tr-rail .tr-pt b{color:var(--ink);font-size:13.5px}
+.tr-rail .tr-rn{order:2;display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.tr-rail .tr-rn small{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.tr-rail .tr-rn b{font-size:13.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tr-rail .tr-rn em{font-style:normal;font-size:12px;color:var(--ink-2)}
+.tr-rail .tr-pb{order:4;grid-column:2/4}
+.tr-rail:hover{border-color:var(--line)}
+/* footer link, menu link, cover card */
+.tr-flink .tr-ic,.tr-ml .tr-ic{width:18px;height:18px}
+.tr-cov{display:flex;align-items:center;gap:12px;margin:12px 0;padding:12px 16px;text-decoration:none;color:var(--ink);font-family:var(--sans)}
+.tr-cov span{display:flex;flex-direction:column;flex:1;min-width:0}.tr-cov b{font-size:15px}.tr-cov small{color:var(--ink-2);font-size:13px}
+.tr-cov .tr-go{flex:none;color:var(--ink-3);font-size:18px}
+.tr-pgx .tr-ic{width:32px;height:32px}
+/* the view */
+.tr-v .tr-hero .lib-k .tr-ic{width:18px;height:18px;display:inline-block;vertical-align:-3px;margin-right:4px}
+.tr-sum{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:14px 26px;align-items:start;margin:10px 0 6px;font-family:var(--sans)}
+.tr-here{display:grid;grid-template-columns:auto 1fr;align-items:baseline;gap:2px 10px}
+.tr-big{font-size:15px;color:var(--ink-3);font-weight:700}.tr-big b{font-size:34px;line-height:1;color:var(--ink);letter-spacing:-.01em}
+.tr-hl{color:var(--ink-2);font-size:14px}
+.tr-bar{display:block;height:6px;border-radius:4px;background:var(--line-2);overflow:hidden}
+.tr-bar i{display:block;height:100%;border-radius:inherit;background:var(--tg-b)}
+.tr-bar.big{grid-column:1/-1;height:8px;margin-top:8px}
+.tr-cabs{font-size:13.5px;color:var(--ink-2)}
+.tr-cabs > b{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--ink-3)}
+.tr-tl{margin:5px 0 6px;display:flex;flex-wrap:wrap;align-items:center;gap:2px 4px;font-size:14px;color:var(--ink)}
+.tr-tn{display:inline-flex;align-items:center;gap:6px;font-weight:600}
+.tr-tn i{width:11px;height:11px;border-radius:50%;background:var(--line);border:1px solid rgba(0,0,0,.18)}
+.tr-tn.t-bronze i{background:var(--tb-a)}.tr-tn.t-silver i{background:var(--ts-a)}.tr-tn.t-gold i{background:var(--tg-a)}.tr-tn.t-platinum i{background:var(--tp-b)}
+.tr-dot{color:var(--ink-3)}
+.tr-per{display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.tr-pu{padding:2px 9px;border-radius:999px;background:var(--paper-2);border:1px solid var(--line-2);font-size:12.5px;color:var(--ink-2)}
+.tr-pu.me{border-color:var(--ink-3);color:var(--ink);font-weight:600}
+.tr-v .lib-hero > p.tr-note{font-family:var(--sans);font-size:14px;color:var(--ink-2);margin:10px 0 0;max-width:72ch}
+.tr-next{margin-top:14px;padding:18px 22px;font-family:var(--sans)}
+.tr-next h2,.tr-ups h3{margin:0 0 10px;font-size:16px;font-weight:700}
+.tr-nxl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.tr-nx{display:flex;gap:10px;padding:12px;border:1px solid var(--line-2);border-radius:12px;background:var(--paper-2)}
+.tr-nx .tr-ic{width:30px;height:30px}
+.tr-nx > div{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.tr-nx b{font-size:14.5px}.tr-nx > div > span:not(.tr-cp){font-size:13px;color:var(--ink-2);line-height:1.35}
+.tr-upg{font-style:normal;font-size:12px;color:var(--good);font-weight:600}
+.tr-cp{display:flex;align-items:center;gap:8px;margin-top:4px}
+.tr-cp .tr-bar{flex:1;height:5px;min-width:40px}
+.tr-cp small{font-size:12px;color:var(--ink-2);white-space:nowrap}
+.tr-ups{margin-top:14px;padding-top:12px;border-top:1px solid var(--line-2)}
+.tr-ups ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.tr-ups li{display:flex;align-items:center;gap:10px;font-size:13.5px}
+.tr-ups li .tr-ic{width:22px;height:22px}
+.tr-ups li span{flex:1;min-width:0}
+.tr-ups a{font-size:13px;font-weight:600;color:var(--accent);white-space:nowrap}
+.tr-all{margin-top:14px;font-family:var(--sans)}
+.tr-fs{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:6px 6px 4px}
+.tr-miss{display:flex;align-items:center;gap:10px;margin:10px 6px 0;padding:10px 12px;border:1px dashed var(--line);border-radius:12px;font-size:13.5px;color:var(--ink-2)}
+.tr-cat{padding:4px 6px 6px}
+.tr-cat h2{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:18px 0 10px;font-size:16px;font-weight:700}
+.tr-cat h2 small{font-size:12.5px;font-weight:600;color:var(--ink-3)}
+.tr-g{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:8px}
+.tr-c{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border:1px solid var(--line-2);border-radius:12px;background:var(--paper);min-width:0}
+.tr-c .tr-ic{width:34px;height:34px}
+.tr-c:not(.ok){background:var(--paper-2)}
+.tr-c:not(.ok) .tr-cn{color:var(--ink-2)}
+.tr-c:not(.ok) .tr-ic,.tr-nx .tr-ic.t-none{opacity:.7}
+.tr-c.ok{border-color:var(--line)}
+.tr-cb{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1}
+.tr-cn{font-size:14px;line-height:1.3;overflow-wrap:anywhere}
+.tr-ch{font-size:12.5px;color:var(--ink-2);line-height:1.35}
+.tr-cs{font-size:12px;color:var(--ink-3)}
+.tr-cf{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin-top:5px}
+.tr-tier{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:1px 7px;border-radius:999px;border:1px solid var(--line);color:var(--ink-3)}
+.tr-tier.t-bronze{background:#F6E6D6;border-color:#E2C2A2;color:#6E3F1C}.tr-tier.t-silver{background:#EEF1F5;border-color:#CBD2DC;color:#46505F}.tr-tier.t-gold{background:#FBF0CC;border-color:#E9CF7C;color:#6B4C04}.tr-tier.t-platinum{background:#E7F2F5;border-color:#B5D3DD;color:#2F5E6E}
+.tr-us{display:inline-flex;flex-wrap:wrap;gap:4px}
+.tr-u{font-size:11px;padding:1px 6px;border-radius:6px;background:var(--paper-2);color:var(--ink-3);border:1px solid var(--line-2);white-space:nowrap}
+.tr-c:not(.ok) .tr-u{background:var(--paper)}
+.tr-u.got{color:var(--good);border-color:color-mix(in srgb,var(--good) 35%,transparent);background:var(--good-soft)}
+.tr-u.me{font-weight:700}
+/* toast */
+.tr-toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:90;display:flex;align-items:center;gap:10px;max-width:min(520px,calc(100vw - 24px));padding:10px 10px 10px 12px;border-radius:14px;background:var(--paper);color:var(--ink);border:1px solid var(--line);box-shadow:var(--shadow);font:14px/1.35 var(--sans);transform:translate(-50%,14px);opacity:0;transition:transform .24s ease,opacity .24s ease}
+.tr-toast.in{transform:translate(-50%,0);opacity:1}
+.tr-toast.out{transform:translate(-50%,14px);opacity:0}
+.tr-toast .tr-ic{width:30px;height:30px}
+.tr-tx{flex:1;min-width:0}
+.tr-tv{font-weight:700;color:var(--accent);text-decoration:none;padding:6px 8px;border-radius:8px}
+.tr-tc{border:0;background:none;font-size:20px;line-height:1;color:var(--ink-3);padding:4px 8px;border-radius:8px;cursor:pointer}
+@media (prefers-reduced-motion: reduce){ .tr-toast{transition:none;transform:translate(-50%,0)} .tr-toast.out{transform:translate(-50%,0)} }
+/* dark: tier labels on dark paper */
+:root[data-theme="dark"] .tr-tier.t-bronze{background:#3A2616;border-color:#6B4628;color:#F0C49C}:root[data-theme="dark"] .tr-tier.t-silver{background:#2A2F38;border-color:#4A525F;color:#D6DCE4}:root[data-theme="dark"] .tr-tier.t-gold{background:#3A2F0E;border-color:#6E5715;color:#F6D77A}:root[data-theme="dark"] .tr-tier.t-platinum{background:#1C3138;border-color:#36606D;color:#BFE1EB}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tr-tier.t-bronze{background:#3A2616;border-color:#6B4628;color:#F0C49C} :root:not([data-theme="light"]) .tr-tier.t-silver{background:#2A2F38;border-color:#4A525F;color:#D6DCE4} :root:not([data-theme="light"]) .tr-tier.t-gold{background:#3A2F0E;border-color:#6E5715;color:#F6D77A} :root:not([data-theme="light"]) .tr-tier.t-platinum{background:#1C3138;border-color:#36606D;color:#BFE1EB} }
+@media (max-width:640px){
+  .tr-sum{grid-template-columns:1fr}
+  .tr-next{padding:14px}
+  .tr-g{grid-template-columns:1fr}
+  .tr-fs{flex-direction:column}
+  .tr-ups li{flex-wrap:wrap}
+  .tr-ups li span{flex-basis:calc(100% - 40px)}
+  .tr-ups a{margin-left:32px}
+}
+@media print{ .tr-pill,.tr-toast{display:none!important} }
+/* ---------- TROPHIES css: END ---------- */
 /* ================= APP: END ================= */
 
 
@@ -8678,6 +8797,468 @@ function appUpdates(reg, base, where) {
   });
   window.__appReg = reg;
 }
+/* ---------- TROPHIES: shared by the workbooks and the front page (source notes/app/trophies_common.js) ----------
+   Two mechanics, shown together as one cabinet per course ("GCSE trophies", "A level trophies"):
+   - theory units (U1, U4 · AS1, AS2, A21) share ONE set of 100 generic trophy types (TR_THEORY_DEFS below), each measured inside
+     one unit; a type's tier is the number of the pupil's theory units it has been earned in (bronze 1, silver 2, gold 3);
+   - the coursework units (U5 · A22) each have their own 100, generated from the book (trophies.js), with a fixed tier.
+   Every workbook keeps a per-book cache, localStorage 'notes-trophy:<BOOK>' { earned: {id: date}, prog: {id: [have, need]},
+   defs (coursework books only), plus its own tracking }, so the front page and the other workbooks can read it. */
+const TR_KEY = id => 'notes-trophy:' + id;
+const TR_COURSE = { gcse: { name: 'GCSE', theory: ['U1', 'U4'], cw: 'U5' }, gce: { name: 'A level', theory: ['AS1', 'AS2', 'A21'], cw: 'A22' } };
+const TR_SHORT = { U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+const TR_TAG = { U1: 'U1', U4: 'U4', U5: 'U5', AS1: 'AS1', AS2: 'AS2', A21: 'A2 1', A22: 'A2 2' };
+const TR_TIERS = ['bronze', 'silver', 'gold', 'platinum'];
+const TR_TN = { bronze: 'Bronze', silver: 'Silver', gold: 'Gold', platinum: 'Platinum' };
+const TR_CATS = [['cover', 'Coverage'], ['checks', 'Quick checks'], ['quiz', 'Chapter quizzes'], ['exam', 'Past papers and exam practice'], ['gloss', 'Glossary'], ['tut', 'Coursework: tutorials'], ['cw', 'Coursework: write-up tasks'], ['lib', 'Coursework: library'], ['habits', 'Habits'], ['mile', 'Milestones']];
+const trCourseOf = id => TR_COURSE.gce.theory.includes(id) || id === 'A22' || /^(AS|A2)/.test(id || '') ? 'gce' : 'gcse';
+const trIsCW = id => id === 'U5' || id === 'A22';
+function trCache(id) { try { const o = JSON.parse(localStorage.getItem(TR_KEY(id))); return o && typeof o === 'object' ? o : {}; } catch (e) { return {}; } }
+/* the theory units that count for a course: the pupil's ticked units (My course), else all of them */
+function trScope(course) {
+  const all = TR_COURSE[course].theory;
+  try { const o = JSON.parse(localStorage.getItem('notes-mycourse')) || {}; if (o.course === course && Array.isArray(o.units)) { const s = all.filter(x => o.units.includes(x)); if (s.length) return s; } } catch (e) { }
+  return all.slice();
+}
+/* tier of a theory type from the units it is earned in */
+const trTierN = n => n > 0 ? TR_TIERS[Math.min(n, 4) - 1] : '';
+/* the course cabinet: tier totals over the shared theory types (at their current tier) and the coursework trophies (fixed tier) */
+function trCabinet(course, live) {
+  const C = TR_COURSE[course], scope = trScope(course), caches = {};
+  scope.concat(C.cw).forEach(id => { caches[id] = live && live.id === id ? live.cache : trCache(id); });
+  const tiers = { platinum: 0, silver: 0, gold: 0, bronze: 0 }, types = new Set();
+  scope.forEach(id => Object.keys(caches[id].earned || {}).forEach(t => { if (TR_THEORY_IDS.has(t)) types.add(t); }));
+  types.forEach(t => { const n = scope.filter(id => (caches[id].earned || {})[t]).length; tiers[trTierN(n)]++; });
+  const cw = caches[C.cw] || {}, cwTier = {}; (cw.defs || []).forEach(d => { cwTier[d[0]] = d[4]; });
+  Object.keys(cw.earned || {}).forEach(t => { if (cwTier[t]) tiers[cwTier[t]]++; });
+  const per = {}; scope.concat(C.cw).forEach(id => { per[id] = Object.keys(caches[id].earned || {}).length; });
+  return { course, scope, caches, tiers, types: types.size, per, total: types.size + Object.keys(cw.earned || {}).length };
+}
+const trTierLine = t => ['platinum', 'gold', 'silver', 'bronze'].filter(k => t[k]).map(k => `<span class="tr-tn t-${k}"><i aria-hidden="true"></i>${t[k]} ${k}</span>`).join('<span class="tr-dot" aria-hidden="true"> · </span>') || '<span class="tr-tn">No trophies yet</span>';
+/* original icons: a medal on a ribbon, or a cup for the big ones */
+function trIcon(tier, cup) {
+  const c = 'tr-ic ' + (tier ? 't-' + tier : 't-none');
+  if (cup) return `<svg class="${c}" viewBox="0 0 40 40" aria-hidden="true"><path class="m2" d="M11.5 9.5H6.8v2.6a6 6 0 006 6M28.5 9.5h4.7v2.6a6 6 0 01-6 6" fill="none" stroke-width="2.4" stroke-linecap="round"/><path class="m1" d="M11 6h18v9.5a9 9 0 01-18 0z"/><path class="m3" d="M15.5 9.5v5.6a4.5 4.5 0 002.6 4.1" fill="none" stroke-width="1.8" stroke-linecap="round"/><path class="m2" d="M17.6 24h4.8v5h-4.8z"/><rect class="m1" x="13" y="29" width="14" height="5.5" rx="1.6"/></svg>`;
+  return `<svg class="${c}" viewBox="0 0 40 40" aria-hidden="true"><path class="m2" d="M12.5 3.5h6.2l4.2 11.6h-6.2z"/><path class="m4" d="M27.5 3.5h-6.2l-4.2 11.6h6.2z"/><circle class="m1" cx="20" cy="25" r="11"/><circle class="m3" cx="20" cy="25" r="7.6" fill="none" stroke-width="1.6"/><path class="m2" d="M20 19.6l1.6 3.3 3.6.5-2.6 2.5.6 3.6-3.2-1.7-3.2 1.7.6-3.6-2.6-2.5 3.6-.5z"/></svg>`;
+}
+/* the 100 theory trophy types: [id, category, name, how, measure, arg]. Measures are evaluated per unit in trophies.js */
+const TR_THEORY_DEFS = [
+  ['pg1', 'cover', 'First steps', 'Cover your first page.', 'pages', 1], ['pg3', 'cover', 'Warming up', 'Cover 3 pages.', 'pages', 3], ['pg5', 'cover', 'High five', 'Cover 5 pages.', 'pages', 5],
+  ['pg10', 'cover', 'Double figures', 'Cover 10 pages.', 'pages', 10], ['pg15', 'cover', 'Getting going', 'Cover 15 pages.', 'pages', 15], ['pg20', 'cover', 'Twenty up', 'Cover 20 pages.', 'pages', 20],
+  ['pg25', 'cover', 'Quarter century', 'Cover 25 pages.', 'pages', 25], ['pg30', 'cover', 'Thirty strong', 'Cover 30 pages.', 'pages', 30], ['pg40', 'cover', 'Forty-page club', 'Cover 40 pages.', 'pages', 40],
+  ['pc10', 'cover', 'Off the mark', 'Cover 10% of the unit.', 'pagesPc', 10], ['pc25', 'cover', 'A quarter done', 'Cover a quarter of the unit.', 'pagesPc', 25], ['pc50', 'cover', 'Halfway', 'Cover half of the unit.', 'pagesPc', 50],
+  ['pc75', 'cover', 'Three quarters', 'Cover three quarters of the unit.', 'pagesPc', 75], ['pc90', 'cover', 'Nearly there', 'Cover 90% of the unit.', 'pagesPc', 90], ['pc100', 'cover', 'Full coverage', 'Cover every page in the unit.', 'pagesPc', 100],
+  ['sn5', 'cover', 'Browser', 'Open 5 different pages.', 'seen', 5], ['sn15', 'cover', 'Explorer', 'Open 15 different pages.', 'seen', 15], ['sn30', 'cover', 'Navigator', 'Open 30 different pages.', 'seen', 30],
+  ['snA', 'cover', 'Cartographer', 'Open every page in the unit.', 'seen', 'all'], ['chH', 'cover', 'Half a topic', 'Cover half the pages of any chapter.', 'chHalf', 50],
+  ['ch1', 'cover', 'Chapter finisher', 'Complete a chapter: every page covered.', 'chDone', 1], ['ch2', 'cover', 'Double', 'Complete 2 chapters.', 'chDone', 2], ['ch3', 'cover', 'Hat-trick', 'Complete 3 chapters.', 'chDone', 3],
+  ['ch4', 'cover', 'Four square', 'Complete 4 chapters.', 'chDone', 4], ['ch5', 'cover', 'Five topics', 'Complete 5 chapters.', 'chDone', 5], ['chP', 'cover', 'Half the topics', 'Complete half of the chapters in the unit.', 'chDone', 'half'],
+  ['chA', 'cover', 'Every topic', 'Complete every chapter in the unit.', 'chDone', 'all'],
+  ['qc1', 'checks', 'Correct!', 'Answer a quick check correctly.', 'qc', 1], ['qc5', 'checks', 'On a roll', 'Get 5 quick checks right.', 'qc', 5], ['qc10', 'checks', 'Ten right', 'Get 10 quick checks right.', 'qc', 10],
+  ['qc25', 'checks', 'Sharp', 'Get 25 quick checks right.', 'qc', 25], ['qc50', 'checks', 'Fifty right', 'Get 50 quick checks right.', 'qc', 50], ['qc100', 'checks', 'Century', 'Get 100 quick checks right.', 'qc', 100],
+  ['qc150', 'checks', 'Quick-fire expert', 'Get 150 quick checks right.', 'qc', 150], ['qp1', 'checks', 'Clean sheet', 'Get every quick check on a page right.', 'qcPages', 1], ['qp5', 'checks', 'Five clean sheets', 'Get every quick check right on 5 pages.', 'qcPages', 5],
+  ['qp10', 'checks', 'Ten clean sheets', 'Get every quick check right on 10 pages.', 'qcPages', 10], ['qp25', 'checks', 'Spotless', 'Get every quick check right on 25 pages.', 'qcPages', 25], ['qp40', 'checks', 'Immaculate', 'Get every quick check right on 40 pages.', 'qcPages', 40],
+  ['qa1', 'quiz', 'Quiz taker', 'Finish a chapter quiz.', 'quizAtt', 1], ['qa2', 'quiz', 'Quiz double', 'Finish the quizzes for 2 chapters.', 'quizAtt', 2], ['qa3', 'quiz', 'Quiz trio', 'Finish the quizzes for 3 chapters.', 'quizAtt', 3],
+  ['qa5', 'quiz', 'Quiz regular', 'Finish the quizzes for 5 chapters.', 'quizAtt', 5], ['qaA', 'quiz', 'Quizzed out', 'Finish the quiz for every chapter.', 'quizAtt', 'all'],
+  ['q50a', 'quiz', 'Pass mark', 'Score 50% or more on a chapter quiz.', 'quizPc', [50, 1]], ['q50b', 'quiz', 'Solid three', 'Score 50%+ on 3 chapter quizzes.', 'quizPc', [50, 3]], ['q50c', 'quiz', 'Steady all round', 'Score 50%+ on every chapter quiz.', 'quizPc', [50, 'all']],
+  ['q80a', 'quiz', 'Quiz ace', 'Score 80% or more on a chapter quiz.', 'quizPc', [80, 1]], ['q80b', 'quiz', 'Ace double', 'Score 80%+ on 2 chapter quizzes.', 'quizPc', [80, 2]], ['q80c', 'quiz', 'Ace hat-trick', 'Score 80%+ on 3 chapter quizzes.', 'quizPc', [80, 3]],
+  ['q80d', 'quiz', 'Five aces', 'Score 80%+ on 5 chapter quizzes.', 'quizPc', [80, 5]], ['q80e', 'quiz', 'Top of the class', 'Score 80%+ on every chapter quiz.', 'quizPc', [80, 'all']],
+  ['q100a', 'quiz', 'Perfectionist', 'Score 100% on a chapter quiz.', 'quizPc', [100, 1]], ['q100b', 'quiz', 'Flawless three', 'Score 100% on 3 chapter quizzes.', 'quizPc', [100, 3]], ['q100c', 'quiz', 'Perfect record', 'Score 100% on every chapter quiz.', 'quizPc', [100, 'all']],
+  ['ea1', 'exam', 'Exam starter', "Finish a chapter's exam questions: its past-paper quiz, or the exam-style part of its full quiz.", 'exAtt', 1], ['ea3', 'exam', 'Exam regular', 'Finish the exam questions for 3 chapters.', 'exAtt', 3],
+  ['eaA', 'exam', 'Exam ready', 'Finish the exam questions for every chapter.', 'exAtt', 'all'], ['e50a', 'exam', 'Scoring marks', "Score 50%+ on a chapter's exam questions.", 'exPc', [50, 1]], ['e50b', 'exam', 'Banking marks', 'Score 50%+ on the exam questions of 3 chapters.', 'exPc', [50, 3]],
+  ['e80a', 'exam', 'Past-paper pro', "Score 80%+ on a chapter's exam questions.", 'exPc', [80, 1]], ['e80b', 'exam', "Examiner's favourite", 'Score 80%+ on the exam questions of 3 chapters.', 'exPc', [80, 3]], ['e80c', 'exam', 'Exam master', 'Score 80%+ on the exam questions of every chapter.', 'exPc', [80, 'all']],
+  ['e100', 'exam', 'Full marks', "Score 100% on a chapter's exam questions.", 'exPc', [100, 1]], ['xm1', 'exam', 'Self-marker', 'Mark yourself on an exam question in a chapter quiz.', 'xm', 1], ['xm10', 'exam', 'Honest marker', 'Mark yourself on 10 exam questions.', 'xm', 10],
+  ['xm25', 'exam', 'Mark-scheme reader', 'Mark yourself on 25 exam questions.', 'xm', 25], ['xm50', 'exam', 'Seasoned marker', 'Mark yourself on 50 exam questions.', 'xm', 50],
+  ['gk1', 'gloss', 'Word one', 'Mark a glossary flashcard “I knew it”.', 'gk', 1], ['gk10', 'gloss', 'Word bank', 'Know 10 terms in the flashcards.', 'gk', 10], ['gk25', 'gloss', 'Vocabulary', 'Know 25 terms in the flashcards.', 'gk', 25],
+  ['gk50', 'gloss', 'Word power', 'Know 50 terms in the flashcards.', 'gk', 50], ['gk100', 'gloss', 'Walking glossary', 'Know 100 terms in the flashcards.', 'gk', 100], ['gr1', 'gloss', 'Term tester', 'Finish a glossary quiz round.', 'gr', 1],
+  ['gr3', 'gloss', 'Term trio', 'Finish 3 glossary quiz rounds.', 'gr', 3], ['gr10', 'gloss', 'Term machine', 'Finish 10 glossary quiz rounds.', 'gr', 10], ['gp1', 'gloss', 'Spot on', 'Get every question right in a glossary quiz round.', 'gp', 1],
+  ['d2', 'habits', 'Back again', 'Revise this unit on 2 different days.', 'days', 2], ['d3', 'habits', 'Three days', 'Revise this unit on 3 different days.', 'days', 3], ['d5', 'habits', 'Regular', 'Revise this unit on 5 different days.', 'days', 5],
+  ['d7', 'habits', "A week's worth", 'Revise this unit on 7 different days.', 'days', 7], ['d10', 'habits', 'Ten days', 'Revise this unit on 10 different days.', 'days', 10], ['d20', 'habits', 'Dedicated', 'Revise this unit on 20 different days.', 'days', 20],
+  ['d30', 'habits', 'Committed', 'Revise this unit on 30 different days.', 'days', 30], ['s2', 'habits', 'Two in a row', 'Revise this unit 2 days in a row.', 'streak', 2], ['s3', 'habits', 'Streak of three', 'Revise this unit 3 days in a row.', 'streak', 3],
+  ['s5', 'habits', 'Five-day streak', 'Revise this unit 5 days in a row.', 'streak', 5], ['s7', 'habits', 'Week-long streak', 'Revise this unit 7 days in a row.', 'streak', 7], ['wk', 'habits', 'Weekend warrior', 'Revise this unit on a Saturday or Sunday.', 'weekend', 1],
+  ['cb', 'habits', 'Comeback', 'Come back to this unit after a week or more away.', 'comeback', 1], ['dp3', 'habits', 'Good session', 'Cover 3 pages in one day.', 'dayPages', 3], ['dp10', 'habits', 'Power session', 'Cover 10 pages in one day.', 'dayPages', 10],
+  ['vp', 'habits', 'Check-in', 'Open My progress.', 'view', 'progress'], ['vt', 'habits', 'Trophy hunter', 'Open the trophy cabinet.', 'view', 'trophies'], ['vs', 'habits', 'Seeker', 'Search the workbook.', 'view', 'search'],
+  ['m10', 'mile', 'Collector', 'Earn 10 trophies in this unit.', 'meta', 10], ['m25', 'mile', 'Cabinet builder', 'Earn 25 trophies in this unit.', 'meta', 25], ['m50', 'mile', 'Half the cabinet', 'Earn 50 trophies in this unit.', 'meta', 50],
+  ['m75', 'mile', 'Trophy legend', 'Earn 75 trophies in this unit.', 'meta', 75], ['mx', 'mile', 'Unit master', 'Cover every page and score 80%+ on every chapter quiz.', 'master', 1]
+];
+const TR_THEORY_IDS = new Set(TR_THEORY_DEFS.map(d => d[0]));
+/* ---------- TROPHIES (shared): END ---------- */
+/* ---------- TROPHIES: the workbook side (source notes/app/trophies.js, inserted by notes/app/inject.py after chquiz.js) ----------
+   100 trophies per unit. Theory books use the shared TR_THEORY_DEFS (trophies_common.js); the coursework books (U5, A22) generate
+   their own 100 from the book. Route #trophies ("GCSE trophies" / "A level trophies": the whole course cabinet), a trophy pill
+   in the top bar and the contents rail, a toast when something is earned.
+   Extra tracking, all in localStorage 'notes-trophy:<BOOK>' (a notes-* key, so it is in the progress backup and reset):
+     days [dates opened] · dd {page: date first covered, 0 = before trophies} · qc {"page:kN": 1} quick checks right (page or quiz)
+     xm {"page:xN"/"page:eN": 1} exam questions self-marked in a quiz · ex {chapter: best % on the exam-style part of a full quiz}
+     gk {term: 1} flashcards "I knew it" · gr / gp glossary quiz rounds / perfect rounds · sol {"page:N": 1} worked solutions opened
+     v {progress, trophies, search, writeup, library: 1} · earned {id: date} · prog {id: [have, need]} · defs (coursework books) */
+const TR_ID = BK.id || '', TR_C = trCourseOf(TR_ID), TR_CW = TUT || trIsCW(TR_ID);
+const TR_COURSE_NAME = TR_COURSE[TR_C].name;
+let TR = trCache(TR_ID);
+['days', 'dd', 'qc', 'xm', 'ex', 'gk', 'sol', 'v', 'earned', 'prog'].forEach(k => { if (!TR[k] || typeof TR[k] !== 'object') TR[k] = k === 'days' ? [] : {}; });
+if (!Array.isArray(TR.days)) TR.days = [];
+let TR_LAST = '';
+function trSave() { const s = JSON.stringify(TR); if (s === TR_LAST) return; TR_LAST = s; try { localStorage.setItem(TR_KEY(TR_ID), s); } catch (e) { /* storage unavailable */ } }
+const trToday = () => { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; };
+const trDayN = s => Math.round(Date.UTC(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10)) / 864e5);
+{ const t = trToday(); if (!TR.days.includes(t)) { TR.days.push(t); TR.days.sort(); } }
+const trPl = (n, w) => `${n} ${w}${n === 1 ? '' : 's'}`;
+
+/* ---------- metrics: what this unit's progress adds up to (max = everything done, for the achievability check) ---------- */
+function trMetrics(max) {
+  const M = {}, pages = PAGES.map(P => P.p), done = p => max || !!state.done[p.id], seen = p => max || !!(state.seen[p.id] || state.done[p.id]);
+  M.N = pages.length; M.done = pages.filter(done).length; M.seen = pages.filter(seen).length;
+  M.chs = B.chapters.filter(c => (c.pages || []).length).map(c => ({ c, n: c.pages.length, d: c.pages.filter(done).length, s: c.pages.filter(seen).length }));
+  M.chDone = M.chs.filter(x => x.d === x.n).length;
+  /* days */
+  const ds = max ? [] : TR.days.map(trDayN).sort((a, b) => a - b);
+  let run = ds.length ? 1 : 0, best = run, gap = 0;
+  for (let i = 1; i < ds.length; i++) { const g = ds[i] - ds[i - 1]; run = g === 1 ? run + 1 : 1; best = Math.max(best, run); gap = Math.max(gap, g); }
+  M.days = max ? 99 : ds.length; M.streak = max ? 99 : best; M.comeback = max || gap >= 7 ? 1 : 0;
+  M.weekend = max || TR.days.some(s => [0, 6].includes(new Date(+s.slice(0, 4), +s.slice(5, 7) - 1, +s.slice(8, 10)).getDay())) ? 1 : 0;
+  const per = {}; Object.keys(TR.dd).forEach(id => { const d = TR.dd[id]; if (d && state.done[id]) per[d] = (per[d] || 0) + 1; });
+  M.dayPages = max ? M.N : Math.max(0, ...Object.values(per));
+  M.v = k => max || TR.v[k] ? 1 : 0;
+  if (!TUT) {
+    const cq = typeof cqState === 'function' ? cqState() : { best: {} };
+    M.quiz = []; M.exam = []; M.master = 0;
+    M.chs.forEach(x => {
+      const its = cqItems(x.c); if (!its.length) return;
+      const b = cq.best[x.c.id], q = max ? 100 : b ? b.pc : null; M.quiz.push(q);
+      if (x.d === x.n && q != null && q >= 80) M.master++;
+      if (its.some(i => i.t !== 'mcq')) { const pp = cq.best[x.c.id + '|pp'], v = [pp && pp.pc, TR.ex[x.c.id]].filter(n => typeof n === 'number'); M.exam.push(max ? 100 : v.length ? Math.max(...v) : null); }
+    });
+    let qcAll = 0; M.qcPages = 0;
+    pages.forEach(p => { const n = (p.check || []).length; if (!n) return; qcAll += n; let ok = true; for (let i = 0; i < n; i++) if (!max && !TR.qc[p.id + ':k' + i]) { ok = false; break; } if (ok) M.qcPages++; });
+    M.qc = max ? qcAll : Object.keys(TR.qc).length;
+    M.xm = max ? pages.reduce((s, p) => s + (p.practice || []).length + (p.exam || []).length, 0) : Object.keys(TR.xm).length;
+    M.gk = max ? GLOSS.length : Object.keys(TR.gk).length; M.gr = max ? 99 : +TR.gr || 0; M.gp = max ? 1 : +TR.gp || 0;
+  } else {
+    /* coursework: tasks (deliverable checklists), other checklists, worked solutions, the recipe library */
+    M.tasks = TASKS.map(t => { const set = new Set(TODO[t.P.p.id + '#' + t.bi + 'd'] || []), its = (t.b.deliver || []).filter(x => typeof x === 'string' && x.trim()); return { t, ch: t.P.ch, n: its.length, d: max ? its.length : its.filter(x => set.has(todoH(x))).length, seen: seen(t.P.p) }; });
+    M.tDone = M.tasks.filter(x => x.n && x.d === x.n).length; M.dTot = M.tasks.reduce((s, x) => s + x.n, 0); M.dDone = M.tasks.reduce((s, x) => s + x.d, 0);
+    M.todos = []; PAGES.forEach(P => (P.p.blocks || []).forEach((b, bi) => { if (b && b.t === 'todo') { const its = (b.items || []).filter(x => typeof x === 'string' && x.trim()), set = new Set(TODO[P.p.id + '#' + bi] || []); M.todos.push({ n: its.length, d: max ? its.length : its.filter(x => set.has(todoH(x))).length }); } }));
+    M.solAll = []; PAGES.forEach(P => (P.p.practice || []).forEach((q, qi) => { if (q && q.q && q.a) M.solAll.push({ k: P.p.id + ':' + qi, ch: P.ch }); }));
+    M.sol = M.solAll.filter(x => max || TR.sol[x.k]).length;
+    M.solCh = new Map(); M.solAll.forEach(x => { const o = M.solCh.get(x.ch) || { n: 0, d: 0 }; o.n++; if (max || TR.sol[x.k]) o.d++; M.solCh.set(x.ch, o); });
+    if (typeof LIB !== 'undefined' && LIB) {
+      const rec = PAGES.filter(isRecipe); M.recN = rec.length; M.recDone = rec.filter(P => done(P.p)).length;
+      M.pick = max ? rec.length : BL.pick.length; M.built = max ? rec.length : BL.done.filter(id => BYID.has(id)).length;
+    }
+  }
+  return M;
+}
+/* theory measures: [have, need, unit] */
+const TR_ALL = (a, len) => a === 'all' ? Math.max(1, len) : a === 'half' ? Math.max(1, Math.ceil(len / 2)) : a;
+const TRM = {
+  pages: (M, a) => [M.done, a, 'page'], pagesPc: (M, a) => [M.done, Math.max(1, Math.ceil(M.N * a / 100)), 'page'], seen: (M, a) => [M.seen, TR_ALL(a, M.N), 'page opened', 'pages opened'],
+  chHalf: M => [Math.min(50, Math.max(0, ...M.chs.map(x => Math.floor(x.d / x.n * 100)))), 50, '% of a chapter', '% of a chapter'],
+  chDone: (M, a) => [M.chDone, TR_ALL(a, M.chs.length), 'chapter'],
+  qc: (M, a) => [M.qc, a, 'quick check right', 'quick checks right'], qcPages: (M, a) => [M.qcPages, a, 'page'],
+  quizAtt: (M, a) => [M.quiz.filter(x => x != null).length, TR_ALL(a, M.quiz.length), 'quiz', 'quizzes'],
+  quizPc: (M, a) => [M.quiz.filter(x => x != null && x >= a[0]).length, TR_ALL(a[1], M.quiz.length), 'quiz', 'quizzes'],
+  exAtt: (M, a) => [M.exam.filter(x => x != null).length, TR_ALL(a, M.exam.length), 'chapter'],
+  exPc: (M, a) => [M.exam.filter(x => x != null && x >= a[0]).length, TR_ALL(a[1], M.exam.length), 'chapter'],
+  xm: (M, a) => [M.xm, a, 'question'], gk: (M, a) => [M.gk, a, 'term'], gr: (M, a) => [M.gr, a, 'round'], gp: (M, a) => [M.gp, a, 'perfect round'],
+  days: (M, a) => [M.days, a, 'day'], streak: (M, a) => [M.streak, a, 'day in a row', 'days in a row'], weekend: M => [M.weekend, 1, ''], comeback: M => [M.comeback, 1, ''],
+  dayPages: (M, a) => [M.dayPages, a, 'page in a day', 'pages in a day'], view: (M, a) => [M.v(a), 1, ''],
+  master: M => [M.master, Math.max(1, M.quiz.length), 'chapter'], meta: (M, a) => [M.meta || 0, a, 'trophy', 'trophies']
+};
+
+/* ---------- coursework books: 100 trophies generated from the book (fixed tiers) ---------- */
+function trCWDefs() {
+  const out = [], add = (pri, id, cat, name, how, tier, f) => out.push({ pri, id: 'k-' + id, cat, name, how, tier, f, cup: tier === 'platinum' || cat === 'mile' });
+  const N = PAGES.length, chs = B.chapters.filter(c => (c.pages || []).length), cn = ch => `chapter ${ch.n}: ${plain(ch.title)}`;
+  const libCh = c => typeof LIB_CH !== 'undefined' && LIB_CH.has(c);
+  const chName = c => { const t = plain(c.title).replace(/^Your coursework:\s*(the\s+)?/i, ''); return libCh(c) ? 'Library: ' + t : t.charAt(0).toUpperCase() + t.slice(1); };
+  const PN = { 1: 'First page done', 5: 'Five down', 10: 'Ten down', 20: 'Twenty done', 30: 'Thirty done', 40: 'Forty done', 50: 'Fifty done', 75: 'Seventy-five done', 100: 'A hundred pages', 150: '150 pages', 200: '200 pages', 250: '250 pages' };
+  [1, 5, 10, 20, 30, 40, 50, 75, 100, 150, 200, 250].filter(n => n < N).forEach(n => add([1, 10, 50, 100, 200].includes(n) ? 1 : 3, 'pg' + n, 'tut', PN[n], n === 1 ? 'Mark your first tutorial page done.' : `Mark ${n} tutorial pages done.`, n <= 5 ? 'bronze' : n <= 40 ? 'silver' : 'gold', M => [M.done, n, 'page']));
+  [[25, 'A quarter of the way', 'silver'], [50, 'Halfway', 'silver'], [75, 'Three quarters', 'gold'], [100, 'Every page done', 'platinum']].forEach(([pc, nm, tier]) => add(1, 'pc' + pc, 'tut', nm, pc === 100 ? `Mark all ${N} pages done.` : `Mark ${pc}% of the pages done.`, tier, M => [M.done, Math.ceil(N * pc / 100), 'page']));
+  chs.forEach((ch, ci) => {
+    const n = ch.pages.length, cat = libCh(ch) ? 'lib' : 'tut', t = chName(ch);
+    add(1, 'ch-' + ch.id, cat, t, n === 2 ? `Mark both pages of ${cn(ch)} done.` : `Mark all ${n} pages of ${cn(ch)} done.`, n >= 10 ? 'gold' : n >= 5 ? 'silver' : 'bronze', M => [M.chs[ci].d, n, 'page']);
+    if (n >= 4) add(4, 'chh-' + ch.id, cat, `${t}: halfway`, `Mark half the pages of ${cn(ch)} done.`, 'bronze', M => [M.chs[ci].d, Math.ceil(n / 2), 'page']);
+    add(6, 'chs-' + ch.id, cat, `${t}: explored`, `Open every page of ${cn(ch)}.`, 'bronze', M => [M.chs[ci].s, n, 'page opened', 'pages opened']);
+  });
+  if (TUT_PARTS.length > 1) TUT_PARTS.filter(pt => !pt.lib && pt.chs.length > 1).forEach((pt, i) => {
+    const ids = new Set(pt.chs.map(c => c.id)), n = pt.chs.reduce((s, c) => s + (c.pages || []).length, 0);
+    add(1, 'part' + (i + 1), 'tut', `${plain(pt.title)}: complete`, `Mark every page of part ${pt.k}, ${plain(pt.title)}, done.`, 'platinum', M => [M.chs.filter(x => ids.has(x.c.id)).reduce((s, x) => s + x.d, 0), n, 'page']);
+  });
+  /* worked solutions */
+  const nS = TR_MAXM.solAll.length;
+  [[1, 'Peek at the answer', 'bronze'], [10, 'Solution studier', 'bronze'], [25, 'Learning from examples', 'silver'], [50, 'Fifty solutions', 'silver'], [100, 'A hundred solutions', 'gold'], [200, 'Solution library', 'gold']].filter(([n]) => n < nS).forEach(([n, nm, tier]) => add(n === 1 || n === 25 ? 2 : 4, 'sol' + n, 'tut', nm, n === 1 ? 'Open a worked solution after trying the task yourself.' : `Open ${n} worked solutions after trying the tasks.`, tier, M => [M.sol, n, 'solution']));
+  if (nS) add(2, 'solA', 'tut', 'Every solution studied', `Open all ${nS} worked solutions.`, 'gold', M => [M.sol, nS, 'solution']);
+  TR_MAXM.solCh.forEach((o, ch) => { const ci = chs.indexOf(ch); if (ci < 0 || o.n < 3) return; add(7, 'solc-' + ch.id, libCh(ch) ? 'lib' : 'tut', `${chName(ch)}: solutions studied`, `Open every worked solution in ${cn(ch)}.`, 'bronze', M => [(M.solCh.get(ch) || { d: 0 }).d, o.n, 'solution']); });
+  /* coursework write-up tasks, by tutorial chapter */
+  const T = TR_MAXM.tasks, nT = T.length;
+  if (nT) {
+    chs.forEach(ch => {
+      const ix = T.map((x, i) => x.ch === ch ? i : -1).filter(i => i >= 0); if (!ix.length) return;
+      const t = chName(ch), m = ix.length;
+      add(1, 'tc-' + ch.id, 'cw', `${t}: all tasks ticked off`, `Tick every checklist item on the ${trPl(m, 'task')} in ${cn(ch)}.`, m >= 8 ? 'gold' : m >= 3 ? 'silver' : 'bronze', M => [ix.filter(i => M.tasks[i].n && M.tasks[i].d === M.tasks[i].n).length, m, 'task']);
+      add(2, 'tv-' + ch.id, 'cw', `${t}: all tasks visited`, `Open every task page in ${cn(ch)}.`, 'bronze', M => [ix.filter(i => M.tasks[i].seen).length, m, 'task']);
+      if (m >= 3) add(3, 't1-' + ch.id, 'cw', `${t}: first task ticked off`, `Tick off a whole checklist for one task in ${cn(ch)}.`, 'bronze', M => [Math.min(1, ix.filter(i => M.tasks[i].n && M.tasks[i].d === M.tasks[i].n).length), 1, 'task']);
+    });
+    [[1, 'First task ticked off', 'bronze'], [3, 'Three tasks done', 'bronze'], [5, 'Five tasks done', 'bronze'], [10, 'Ten tasks done', 'silver'], [20, 'Twenty tasks done', 'silver'], [30, 'Thirty tasks done', 'gold'], [40, 'Forty tasks done', 'gold']].filter(([n]) => n < nT).forEach(([n, nm, tier]) => add(n === 1 || n === 10 || n === 20 ? 1 : 2, 'tn' + n, 'cw', nm, n === 1 ? 'Tick off every checklist item on a coursework task.' : `Tick off every checklist item on ${n} coursework tasks.`, tier, M => [M.tDone, n, 'task']));
+    add(1, 'tnA', 'cw', 'Every task ticked off', `Tick off the checklists on all ${nT} coursework tasks.`, 'platinum', M => [M.tDone, nT, 'task']);
+    const dT = TR_MAXM.dTot;
+    [[1, 'First tick', 'bronze'], [25, 'Twenty-five ticks', 'bronze'], [50, 'Fifty ticks', 'silver'], [100, 'A hundred ticks', 'silver'], [200, 'Two hundred ticks', 'gold']].filter(([n]) => n < dT).forEach(([n, nm, tier]) => add(n === 1 || n === 100 ? 2 : 3, 'dn' + n, 'cw', nm, n === 1 ? 'Tick your first item on a coursework task checklist.' : `Tick ${n} items on the coursework task checklists.`, tier, M => [M.dDone, n, 'item']));
+    T.forEach((x, i) => { if (x.n) add(8, 'task-' + x.t.P.p.id + '-' + x.t.bi, 'cw', plain(x.t.b.title || 'Task'), `Tick every item on the checklist for “${plain(x.t.b.title || 'this task')}” (${cn(x.ch)}).`, 'bronze', M => [M.tasks[i].d, x.n, 'item']); });
+  }
+  /* other checklists */
+  const TD = TR_MAXM.todos, tdN = TD.reduce((s, x) => s + x.n, 0);
+  if (TD.length) {
+    [[1, 'Checklist starter', 'bronze'], [10, 'Ten checklist ticks', 'bronze'], [25, 'Twenty-five checklist ticks', 'silver'], [50, 'Fifty checklist ticks', 'silver']].filter(([n]) => n < tdN).forEach(([n, nm, tier]) => add(n === 1 ? 2 : 4, 'td' + n, 'tut', nm, n === 1 ? 'Tick your first item on a tutorial checklist.' : `Tick ${n} items on the tutorial checklists.`, tier, M => [M.todos.reduce((s, x) => s + x.d, 0), n, 'item']));
+    add(2, 'tdA', 'tut', 'Every checklist complete', `Tick all ${tdN} items on the tutorial checklists.`, 'gold', M => [M.todos.reduce((s, x) => s + x.d, 0), tdN, 'item']);
+  }
+  /* the recipe library */
+  if (typeof LIB !== 'undefined' && LIB) {
+    const R = TR_MAXM.recN;
+    [[1, 'Recipe picked', 'bronze'], [5, 'Five on the list', 'bronze'], [10, 'Library: 10 recipes picked', 'silver']].filter(([n]) => n <= R).forEach(([n, nm, tier]) => add(2, 'lp' + n, 'lib', nm, n === 1 ? 'Add a recipe to My build list.' : `Add ${n} recipes to My build list.`, tier, M => [M.pick, n, 'recipe']));
+    [[1, 'First recipe built', 'bronze'], [5, 'Five recipes built', 'silver'], [10, 'Library: 10 recipes tried', 'silver'], [20, 'Twenty recipes built', 'gold']].filter(([n]) => n <= R).forEach(([n, nm, tier]) => add(n === 10 ? 1 : 2, 'lb' + n, 'lib', nm, n === 1 ? 'Tick a recipe as added to my system on My build list.' : `Tick ${n} recipes as added to my system on My build list.`, tier, M => [M.built, n, 'recipe']));
+    [[10, 'Library reader', 'bronze'], [25, 'Library regular', 'silver'], [50, 'Library expert', 'gold']].filter(([n]) => n < R).forEach(([n, nm, tier]) => add(3, 'lr' + n, 'lib', nm, `Mark ${n} recipe pages done.`, tier, M => [M.recDone, n, 'recipe page']));
+    add(2, 'lrA', 'lib', 'The whole library', `Mark all ${R} recipe pages done.`, 'platinum', M => [M.recDone, R, 'recipe page']);
+    add(3, 'vl', 'habits', 'Browsing the shelves', 'Open the recipe library.', 'bronze', M => [M.v('library'), 1, '']);
+  }
+  /* habits */
+  [[2, 'Back again', 'bronze'], [3, 'Three days', 'bronze'], [5, 'Regular', 'silver'], [7, "A week's worth", 'silver'], [10, 'Ten days', 'gold'], [20, 'Dedicated', 'gold']].forEach(([n, nm, tier]) => add(n <= 7 ? 2 : 3, 'd' + n, 'habits', nm, `Work in this book on ${n} different days.`, tier, M => [M.days, n, 'day']));
+  [[2, 'Two in a row', 'bronze'], [3, 'Streak of three', 'silver'], [5, 'Five-day streak', 'gold']].forEach(([n, nm, tier]) => add(n <= 3 ? 2 : 3, 's' + n, 'habits', nm, `Work in this book ${n} days in a row.`, tier, M => [M.streak, n, 'day in a row', 'days in a row']));
+  add(4, 'wk', 'habits', 'Weekend warrior', 'Work in this book on a Saturday or Sunday.', 'bronze', M => [M.weekend, 1, '']);
+  add(4, 'cb', 'habits', 'Comeback', 'Come back to this book after a week or more away.', 'bronze', M => [M.comeback, 1, '']);
+  [[3, 'Good session', 'bronze'], [10, 'Power session', 'silver']].forEach(([n, nm, tier]) => add(3, 'dp' + n, 'habits', nm, `Mark ${n} pages done in one day.`, tier, M => [M.dayPages, n, 'page in a day', 'pages in a day']));
+  add(2, 'vp', 'habits', 'Check-in', 'Open My progress.', 'bronze', M => [M.v('progress'), 1, '']);
+  add(2, 'vt', 'habits', 'Trophy hunter', 'Open the trophy cabinet.', 'bronze', M => [M.v('trophies'), 1, '']);
+  add(4, 'vs', 'habits', 'Seeker', 'Search the tutorials.', 'bronze', M => [M.v('search'), 1, '']);
+  if (typeof WU !== 'undefined' && WU.length) add(2, 'vw', 'habits', 'Map reader', 'Open the write-up map.', 'bronze', M => [M.v('writeup'), 1, '']);
+  /* milestones */
+  [[10, 'Collector', 'bronze'], [25, 'Cabinet builder', 'silver'], [50, 'Half the cabinet', 'gold'], [75, 'Trophy legend', 'platinum']].forEach(([n, nm, tier]) => add(1, 'm' + n, 'mile', nm, `Earn ${n} trophies in this book.`, tier, M => [M.meta || 0, n, 'trophy', 'trophies']));
+  add(1, 'mx', 'mile', TR_ID === 'U5' ? 'Ready to submit' : 'Coursework complete', `Mark every page done and tick off every coursework task checklist.`, 'platinum', M => [(M.done === N ? 1 : 0) + (M.tasks.length ? (M.tDone === M.tasks.filter(x => x.n).length ? 1 : 0) : 1), 2, 'part']);
+  /* exactly 100: the most important first, then shown in book order within each category */
+  const ids = new Set(), uniq = out.filter(d => !ids.has(d.id) && ids.add(d.id));
+  const keep = new Set(uniq.map((d, i) => [d, i]).sort((a, b) => a[0].pri - b[0].pri || a[1] - b[1]).slice(0, 100).map(x => x[0]));
+  return uniq.filter(d => keep.has(d));
+}
+const TR_MAXM = trMetrics(true);
+const TR_DEFS = TR_CW ? trCWDefs() : TR_THEORY_DEFS.map(([id, cat, name, how, m, a]) => ({ id, cat, name, how, f: M => TRM[m](M, a), cup: cat === 'mile' }));
+const TR_BYID = new Map(TR_DEFS.map(d => [d.id, d]));
+/* evaluate every trophy: { d, h, n, unit, ok } (two passes: the milestone trophies count the others) */
+function trEval(max) {
+  const M = max ? Object.assign({}, TR_MAXM) : trMetrics(false);
+  const run = () => TR_DEFS.map(d => { const [h, n, u1, u2] = d.f(M); return { d, h: Math.min(h, n), n, unit: n === 1 ? (u1 || '') : (u2 || (u1 ? u1 + 's' : '')), ok: h >= n || (!max && !!TR.earned[d.id]) }; });   /* once earned, kept */
+  let R = run(); M.meta = max ? 100 : R.filter(r => r.ok && r.d.cat !== 'mile').length; R = run();
+  return R;
+}
+/* the other units in this course: theory scope + coursework book */
+function trUnits() { const sc = trScope(TR_C); if (!TR_CW && !sc.includes(TR_ID)) { sc.push(TR_ID); sc.sort((a, b) => TR_COURSE[TR_C].theory.indexOf(a) - TR_COURSE[TR_C].theory.indexOf(b)); } return sc; }
+const trCacheOf = id => id === TR_ID ? TR : trCache(id);
+function trTheoryTier(id) { const sc = trUnits(); const inU = sc.map(u => [u, !!(trCacheOf(u).earned || {})[id]]); const n = inU.filter(x => x[1]).length; return { n, tier: trTierN(n), inU, max: sc.length }; }
+
+/* ---------- check: record new trophies, keep the cache fresh, toast what was earned ---------- */
+let TR_R = [];
+function trCheck(quiet) {
+  const today = trToday();
+  if (!TR.days.includes(today)) { TR.days.push(today); TR.days.sort(); }
+  PAGES.forEach(P => { const id = P.p.id; if (state.done[id] && !(id in TR.dd)) TR.dd[id] = TR.init ? today : 0; });
+  TR_R = trEval(false);
+  const fresh = [];
+  TR_R.forEach(r => { if (r.ok && !TR.earned[r.d.id]) { TR.earned[r.d.id] = today; fresh.push(r.d); } });
+  const prog = {}; TR_R.forEach(r => { if (!r.ok && r.h > 0) prog[r.d.id] = [r.h, r.n]; }); TR.prog = prog;
+  TR.n = TR_R.filter(r => r.ok).length; TR.kind = TR_CW ? 'cw' : 'theory'; TR.at = today;
+  if (TR_CW) TR.defs = TR_DEFS.map(d => [d.id, d.cat, d.name, d.how, d.tier, d.cup ? 1 : 0]);
+  const first = !TR.init; TR.init = 1;
+  trSave();
+  trPaint();
+  if (fresh.length && !first && !quiet) trToast(fresh);
+  if (TUT_VIEW === 'trophies' && fresh.length) renderTrophies(false);
+}
+let trT = 0; const trSoon = (ms) => { clearTimeout(trT); trT = setTimeout(() => trCheck(false), ms || 140); };
+const trTierOf = d => TR_CW ? d.tier : trTheoryTier(d.id).tier;
+/* the closest trophies to earn in this unit: real work first (habits and milestones only when nothing else has started) */
+const trEnsure = () => { if (!TR_R.length) { try { TR_R = trEval(false); } catch (e) { } } };
+function trNext(k) {
+  trEnsure();
+  const work = r => !['habits', 'mile'].includes(r.d.cat) && !/^(k-chs-|sn)/.test(r.d.id);   /* opening pages and habits come after real work */
+  const open = TR_R.filter(r => !r.ok), score = r => r.h / r.n;
+  const sort = l => l.slice().sort((a, b) => score(b) - score(a) || a.n - b.n || TR_DEFS.indexOf(a.d) - TR_DEFS.indexOf(b.d));
+  const w = sort(open.filter(work)), o = sort(open.filter(r => !work(r)));
+  return w.concat(o).slice(0, k || 3);
+}
+const trProgTxt = r => r.unit ? `${r.h} of ${r.n} ${r.unit}` : r.ok ? 'Done' : 'Not yet';
+
+/* ---------- top bar pill, contents-rail card, footer link ---------- */
+function trPillHTML(cls) {
+  const n = TR_R.filter(r => r.ok).length, nx = trNext(1)[0], pc = nx ? Math.round(nx.h / nx.n * 100) : 100;
+  return `<a class="${cls}" href="#trophies" aria-label="Trophies: ${n} of 100 earned in ${esc(TR_SHORT[TR_ID] || TR_ID)}${nx ? `. Next: ${esc(nx.d.name)}, ${esc(trProgTxt(nx))}` : ''}">${trIcon(n ? 'gold' : '', true)}<span class="tr-pt"><b>${n}</b>/100</span><span class="tr-pb" aria-hidden="true"><i style="width:${pc}%"></i></span>${cls === 'tr-rail' && nx ? `<span class="tr-rn"><small>Next trophy</small><b>${esc(nx.d.name)}</b><em>${esc(trProgTxt(nx))}</em></span>` : cls === 'tr-rail' ? '<span class="tr-rn"><b>All 100 earned</b></span>' : ''}</a>`;
+}
+function trPaint() {
+  const s = $('#b-search'); if (!s) return;
+  let p = $('#bar .tr-pill');
+  if (p) p.outerHTML = trPillHTML('tr-pill'); else s.insertAdjacentHTML('beforebegin', trPillHTML('tr-pill'));
+  const rh = $('#rail .r-head'); if (rh) { const r = $('.tr-rail', rh); if (r) r.outerHTML = trPillHTML('tr-rail'); else rh.insertAdjacentHTML('beforeend', trPillHTML('tr-rail')); }
+}
+{
+  const br = buildRail; buildRail = () => { br(); if (TR_R.length) trPaint(); };
+  const rp = renderPage;
+  renderPage = (i, f) => {
+    rp(i, f);
+    const row = $('.done-row', main), pl = row && $('.pg-link', row);
+    if (pl) pl.insertAdjacentHTML('afterend', `<a class="pg-link tr-flink" href="#trophies">${trIcon('', false)}Trophies</a>`);
+  };
+  /* My progress: a trophies card */
+  const rpg = renderProgress;
+  renderProgress = f => {
+    TR.v.progress = 1; trSave(); rpg(f); trEnsure();
+    const n = TR_R.filter(r => r.ok).length, nx = trNext(1)[0];
+    const card = `<a class="pg-x tr-pgx" href="#trophies">${trIcon(n ? 'gold' : '', true)}<span><b>${TR_COURSE_NAME} trophies</b>${n} of 100 earned in ${esc(TR_SHORT[TR_ID] || TR_ID)}${nx ? ` · next: ${esc(nx.d.name)} (${esc(trProgTxt(nx))})` : ''}</span></a>`;
+    const xs = $('.pg-xs', main); if (xs) xs.insertAdjacentHTML('afterbegin', card); else { const sm = $('.pg-sum', main); if (sm) sm.insertAdjacentHTML('afterend', `<div class="pg-xs">${card}</div>`); }
+    trSoon();
+  };
+  /* the cover: a quiet line under the hero */
+  const rc = renderCover;
+  renderCover = f => {
+    rc(f); trEnsure();
+    const n = TR_R.filter(r => r.ok).length, nx = trNext(1)[0], hero = $('.sheet .cover, .sheet .tcv-hero, .sheet header', main) || $('.sheet', main);
+    if (!hero || $('.tr-cov', main)) return;
+    hero.insertAdjacentHTML('afterend', `<a class="tr-cov card" href="#trophies">${trIcon(n ? 'gold' : '', true)}<span><b>${TR_COURSE_NAME} trophies · ${n}/100 in ${esc(TR_SHORT[TR_ID] || TR_ID)}</b><small>${nx ? `Next: ${esc(nx.d.name)} · ${esc(trProgTxt(nx))}` : 'All 100 earned in this unit.'}</small></span><span class="tr-go" aria-hidden="true">→</span></a>`);
+  };
+  const hr = hashRoute, rr = runRoute;
+  hashRoute = () => decodeURIComponent((location.hash || '').slice(1)) === 'trophies' ? { kind: 'trophies' } : hr();
+  runRoute = r => { if (r && r.kind === 'trophies') { TUT_VIEW = 'trophies'; closeDrawers(); renderTrophies(true); } else { rr(r); if (r && (r.kind === 'writeup-map' || r.kind === 'library' || r.kind === 'mybuild')) { TR.v[r.kind === 'writeup-map' ? 'writeup' : 'library'] = 1; trSoon(); } } };
+  setTimeout(() => {   /* the "More" menu (built by appMenu) */
+    const mm = $('#libmenu .app-m'), pg = mm && $('a[href="#progress"]', mm);
+    if (pg && !$('a[href="#trophies"]', mm)) pg.insertAdjacentHTML('afterend', `<a class="hubl tr-ml" href="#trophies">${trIcon('', false)}Trophies</a>`);
+  }, 30);
+}
+
+/* ---------- tracking hooks (no changes to the reader itself: delegated listeners that read its state) ---------- */
+document.addEventListener('click', e => {
+  const t = e.target;
+  if (!t.closest) return;
+  /* flashcard "I knew it": read the term before the reader moves on (capture phase) */
+  const fc = t.closest('#gl [data-fc="ok"]');
+  if (fc && G.fc) { try { const g = scopeStudy()[G.fc.order[G.fc.i]]; if (g) TR.gk[g.term] = 1; } catch (er) { } }
+}, true);
+document.addEventListener('click', e => {
+  const t = e.target; if (!t.closest) return;
+  try {
+    const opt = t.closest('#main fieldset[data-q] .opt');
+    if (opt && PAGES[cur] && !opt.classList.contains('wrong')) TR.qc[PAGES[cur].p.id + ':k' + opt.closest('fieldset').dataset.q] = 1;
+    const tt = t.closest('[data-tt]');
+    if (tt && PAGES[cur] && tt.getAttribute('aria-expanded') === 'true') TR.sol[PAGES[cur].p.id + ':' + tt.dataset.tt] = 1;
+    if (G.mode === 'quiz' && G.qz && G.qz.i >= G.qz.qs.length && !G.qz.trDone) { G.qz.trDone = 1; TR.gr = (+TR.gr || 0) + 1; if (G.qz.score === G.qz.qs.length) TR.gp = (+TR.gp || 0) + 1; }
+    if (typeof CQ !== 'undefined' && CQ && /^quiz-/.test(TUT_VIEW || '')) {
+      CQ.items.forEach(it => { const a = CQ.ans[it.key]; if (!a || !a.done) return; if (it.t === 'mcq') { if (a.s) TR.qc[it.key] = 1; } else TR.xm[it.key] = 1; });
+      if (CQ.i >= CQ.items.length && CQ.mode === 'all' && !CQ.retry && !CQ.trDone) {
+        CQ.trDone = 1; let s = 0, m = 0;
+        CQ.items.forEach(it => { if (it.t === 'mcq') return; const a = CQ.ans[it.key]; m += it.max; s += a && a.done ? a.s : 0; });
+        if (m) { const pc = Math.round(s / m * 100), id = CQ.ch.id; if (!(TR.ex[id] >= pc)) TR.ex[id] = pc; }
+      }
+    }
+  } catch (er) { /* never break the page */ }
+  trSoon();
+});
+document.addEventListener('change', () => trSoon());
+document.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ' || /^[1-4]$/.test(e.key)) trSoon(250); });
+window.addEventListener('hashchange', () => trSoon(200));
+{ const q = $('#q'); if (q) q.addEventListener('input', () => { if (q.value.trim().length >= 2 && !TR.v.search) { TR.v.search = 1; trSoon(600); } }); }
+window.addEventListener('storage', e => { if (e.key && e.key.indexOf('notes-') === 0) { if (e.key === TR_KEY(TR_ID)) { TR = Object.assign(TR, trCache(TR_ID)); } trSoon(300); } });
+
+/* ---------- toast: one at a time; a burst of trophies is one toast; waits for the "Topic complete" dialog ---------- */
+let TR_Q = [], TR_TT = 0;
+function trToast(list) {
+  TR_Q = TR_Q.concat(list.filter(d => !TR_Q.includes(d)));
+  const show = () => {
+    if ($('dialog.cq-ask')) { clearTimeout(TR_TT); TR_TT = setTimeout(show, 500); return; }
+    const L = TR_Q.slice(); if (!L.length) return;
+    const lab = d => { if (TR_CW) return `${d.name} (${d.tier})`; const t = trTheoryTier(d.id); return t.n > 1 ? `${d.name} (upgraded to ${t.tier})` : `${d.name} (bronze)`; };
+    const one = L[0], t1 = !TR_CW && trTheoryTier(one.id);
+    const head = L.length > 1 ? `${L.length} trophies earned` : TR_CW ? 'Trophy earned' : t1.n > 1 ? `Trophy upgraded to ${t1.tier}` : 'Trophy earned';
+    const body = L.length > 1 ? L.slice(0, 2).map(lab).join(', ') + (L.length > 2 ? ` and ${L.length - 2} more` : '') : TR_CW ? `${one.name} (${one.tier})` : t1.n > 1 ? one.name : `${one.name} (bronze)`;
+    let el = $('#tr-toast');
+    if (!el) { document.body.insertAdjacentHTML('beforeend', `<div class="tr-toast" id="tr-toast" role="status" aria-live="polite"></div>`); el = $('#tr-toast'); }
+    el.innerHTML = `${trIcon(TR_CW ? one.tier : (t1.tier || 'bronze'), one.cup)}<span class="tr-tx"><b>${esc(head)}:</b> ${esc(body)}</span><a class="tr-tv" href="#trophies">View</a><button type="button" class="tr-tc" aria-label="Dismiss">×</button>`;
+    $('.tr-tc', el).addEventListener('click', () => hide());
+    $('.tr-tv', el).addEventListener('click', () => hide());
+    el.classList.remove('out'); el.hidden = false; void el.offsetWidth; el.classList.add('in');
+    const hide = () => { TR_Q = []; el.classList.remove('in'); el.classList.add('out'); setTimeout(() => { if (el.classList.contains('out')) el.hidden = true; }, RM() ? 0 : 260); };
+    clearTimeout(TR_TT); TR_TT = setTimeout(hide, 6000);
+  };
+  show();
+}
+
+/* ---------- #trophies: the course cabinet ---------- */
+let TR_F = { scope: 'unit', st: 'all' };
+function trCard(o) {
+  /* o: { d (def), tier, cup, ok, prog (text), pc, badges (html), unit tag, here (bool) } */
+  return `<li class="tr-c${o.ok ? ' ok' : ''}${o.here ? ' here' : ''}" data-st="${o.ok ? 'got' : 'lock'}" data-sh="${(o.okHere != null ? o.okHere : o.ok) ? 'got' : 'lock'}" data-u="${o.here ? 'unit' : 'other'}">${trIcon(o.ok ? o.tier : '', o.cup)}
+    <div class="tr-cb"><b class="tr-cn">${esc(o.d.name)}</b><span class="tr-ch">${esc(o.d.how)}</span>
+    ${o.bar != null ? `<span class="tr-cp"><span class="tr-bar" aria-hidden="true"><i style="width:${o.bar}%"></i></span><small>${esc(o.prog)}</small></span>` : o.prog ? `<small class="tr-cs">${esc(o.prog)}</small>` : ''}
+    <span class="tr-cf">${o.ok ? `<span class="tr-tier t-${o.tier}">${TR_TN[o.tier]}</span>` : '<span class="tr-tier t-none">Locked</span>'}${o.badges || ''}</span></div></li>`;
+}
+function renderTrophies(focus) {
+  TR.v.trophies = 1; trCheck(true);
+  tutView('trophies', 'Trophies');
+  const C = TR_COURSE[TR_C], sc = trUnits(), cab = trCabinet(TR_C, { id: TR_ID, cache: TR }), here = TR_SHORT[TR_ID] || TR_ID;
+  const nHere = TR_R.filter(r => r.ok).length, maxTier = trTierN(sc.length);
+  const badges = id => `<span class="tr-us">${sc.map(u => { const got = !!(trCacheOf(u).earned || {})[id]; return `<span class="tr-u${got ? ' got' : ''}${u === TR_ID ? ' me' : ''}" title="${esc(TR_SHORT[u])}: ${got ? 'earned' : 'not yet'}">${esc(TR_TAG[u])} ${got ? '✓' : '–'}</span>`; }).join('')}</span>`;
+  /* theory cards */
+  const theory = TR_THEORY_DEFS.map(([id, cat, name, how]) => {
+    const t = trTheoryTier(id), d = TR_CW ? { id, cat, name, how } : TR_BYID.get(id), r = !TR_CW && TR_R.find(x => x.d.id === id);
+    let prog = '', bar = null;
+    if (r) { if (!r.ok) { prog = `${here}: ${trProgTxt(r)}`; bar = Math.round(r.h / r.n * 100); } else prog = t.n < sc.length ? `Earn it in ${sc.filter(u => !(trCacheOf(u).earned || {})[id]).map(u => TR_SHORT[u]).join(' or ')} to make it ${trTierN(t.n + 1)}` : `Top level for ${C.name}`; }
+    else if (!t.n) { const best = sc.map(u => (trCacheOf(u).prog || {})[id]).filter(Boolean).sort((a, b) => b[0] / b[1] - a[0] / a[1])[0]; prog = best ? `Best so far: ${best[0]} of ${best[1]}` : ''; }
+    return { k: cat, here: !TR_CW, html: trCard({ d, tier: t.tier, cup: cat === 'mile', ok: t.n > 0, okHere: r ? r.ok : null, prog, bar, badges: badges(id), here: !TR_CW }) , ok: t.n > 0 };
+  });
+  /* coursework cards (this book live, or the coursework book's cache) */
+  const cw = TR_CW ? null : trCache(C.cw), cwDefs = TR_CW ? TR_DEFS.map(d => [d.id, d.cat, d.name, d.how, d.tier, d.cup ? 1 : 0]) : (cw.defs || []);
+  const cwCards = cwDefs.map(([id, cat, name, how, tier, cup]) => {
+    const r = TR_CW && TR_R.find(x => x.d.id === id), ok = TR_CW ? r.ok : !!(cw.earned || {})[id], pr = TR_CW ? null : (cw.prog || {})[id];
+    const prog = TR_CW ? (r.ok ? '' : `${trProgTxt(r)}`) : ok ? '' : pr ? `${pr[0]} of ${pr[1]}` : '';
+    const bar = TR_CW ? (r.ok ? null : Math.round(r.h / r.n * 100)) : (!ok && pr ? Math.round(pr[0] / pr[1] * 100) : null);
+    return { k: cat, here: TR_CW, ok, html: trCard({ d: { name, how }, tier, cup: !!cup, ok, prog, bar, badges: `<span class="tr-us"><span class="tr-u${ok ? ' got' : ''}${TR_CW ? ' me' : ''}">${esc(TR_TAG[C.cw])} · ${TR_TN[tier]}</span></span>`, here: TR_CW }) };
+  });
+  const all = theory.concat(cwCards);
+  const cwMissing = !TR_CW && !cwDefs.length;
+  /* next: this unit, with the upgrade it brings */
+  const nx = trNext(3).map(r => {
+    const up = TR_CW ? '' : (() => { const t = trTheoryTier(r.d.id); return t.n ? `Earning it here makes it ${trTierN(t.n + 1)}` : ''; })();
+    return `<li class="tr-nx">${trIcon('', r.d.cup)}<div><b>${esc(r.d.name)}</b><span>${esc(r.d.how)}</span><span class="tr-cp"><span class="tr-bar" aria-hidden="true"><i style="width:${Math.round(r.h / r.n * 100)}%"></i></span><small>${esc(trProgTxt(r))}</small></span>${up ? `<em class="tr-upg">${esc(up)}</em>` : ''}</div></li>`;
+  }).join('');
+  const ups = TR_CW ? [] : TR_R.filter(r => r.ok).map(r => {
+    const miss = sc.filter(u => u !== TR_ID && !(trCacheOf(u).earned || {})[r.d.id]); if (!miss.length) return null;
+    const u = miss.map(u => { const p = (trCacheOf(u).prog || {})[r.d.id]; return [u, p ? p[0] / p[1] : 0]; }).sort((a, b) => b[1] - a[1])[0];
+    return { r, u: u[0], f: u[1], t: trTierN(trTheoryTier(r.d.id).n + 1) };
+  }).filter(Boolean).sort((a, b) => b.f - a.f || TR_DEFS.indexOf(a.r.d) - TR_DEFS.indexOf(b.r.d)).slice(0, 3);
+  const cats = TR_CATS.map(([k, name]) => { const l = all.filter(x => x.k === k); return l.length ? `<section class="tr-cat" data-cat="${k}"><h2>${esc(name)}<small><span class="tr-cc"></span></small></h2><ul class="tr-g">${l.map(x => x.html).join('')}</ul></section>` : ''; }).join('');
+  const scL = sc.map(u => TR_SHORT[u]), scLab = scL.length > 1 ? scL.slice(0, -1).join(', ') + ' and ' + scL[scL.length - 1] : scL.join('');
+  main.innerHTML = `<article class="sheet lib-v tr-v" aria-labelledby="tr-h">
+    <header class="lib-hero card tr-hero"><small class="lib-k">${trIcon('gold', true)}${esc(BK.title || '')}</small><h1 id="tr-h" tabindex="-1">${esc(C.name)} trophies</h1>
+      <div class="tr-sum"><div class="tr-here"><span class="tr-big"><b>${nHere}</b>/100</span><span class="tr-hl">earned in ${esc(here)}</span><span class="tr-bar big" role="progressbar" aria-label="Trophies earned in ${esc(here)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${nHere}"><i style="width:${nHere}%"></i></span></div>
+      <div class="tr-cabs"><b>Your ${esc(C.name)} cabinet</b><p class="tr-tl">${trTierLine(cab.tiers)}</p><p class="tr-per">${sc.concat(C.cw).map(u => `<span class="tr-pu${u === TR_ID ? ' me' : ''}">${esc(TR_SHORT[u])}: ${u === TR_ID ? nHere : cab.per[u]}/100</span>`).join('')}</p></div></div>
+      <p class="tr-note">${TR_CW ? `These 100 trophies belong to ${esc(here)}, each with a fixed tier from bronze to platinum. The theory trophies in this cabinet are shared by ${esc(scLab)} and upgrade each time one is earned in another unit (${esc(maxTier)} is the top level for ${esc(C.name)}).` : `The 100 theory trophies are shared by ${esc(scLab)}. Earn one in one unit for bronze${sc.length > 1 ? `, in two for silver${sc.length > 2 ? ', in three for gold' : ''}` : ''}. ${esc(TR_TN[maxTier])} is the top level for ${esc(C.name)}${sc.length < C.theory.length ? ' with the units you take' : ''}. ${esc(TR_SHORT[C.cw])} has its own 100 coursework trophies.`}</p></header>
+    <section class="card tr-next" aria-labelledby="tr-nh"><h2 id="tr-nh">Next to earn in ${esc(here)}</h2>${nx ? `<ul class="tr-nxl">${nx}</ul>` : '<p>Every trophy in this unit is yours. Brilliant.</p>'}
+      ${ups.length ? `<div class="tr-ups"><h3>Upgrades</h3><ul>${ups.map(x => `<li>${trIcon(x.t, x.r.d.cup)}<span>Earn <b>${esc(x.r.d.name)}</b> in ${esc(TR_SHORT[x.u])} to make it ${x.t}</span><a href="${esc(x.u)}.html#trophies">Open ${esc(TR_SHORT[x.u])}</a></li>`).join('')}</ul></div>` : ''}</section>
+    <section class="card lib-body tr-all" aria-label="All trophies">
+      <div class="tr-fs"><div class="lib-chips" role="group" aria-label="Which trophies">${[['unit', `${here} (100)`], ['all', `Whole ${C.name} cabinet`]].map(([k, l]) => `<button type="button" class="lib-chip" data-trs="${k}" aria-pressed="${TR_F.scope === k}">${esc(l)}</button>`).join('')}</div>
+      <div class="lib-chips" role="group" aria-label="Show">${[['all', 'All'], ['got', 'Earned'], ['lock', 'Locked']].map(([k, l]) => `<button type="button" class="lib-chip" data-trf="${k}" aria-pressed="${TR_F.st === k}">${esc(l)}</button>`).join('')}</div></div>
+      ${cwMissing ? `<p class="tr-miss">${trIcon('', true)}<span>Open <a href="${esc(C.cw)}.html#trophies">${esc(TR_SHORT[C.cw])}</a> once to add its 100 coursework trophies to this cabinet.</span></p>` : ''}
+      ${cats}<p class="lib-none" id="tr-none" hidden>Nothing here yet.</p></section></article>`;
+  const filt = () => {
+    const k = TR_F.scope === 'unit' ? 'sh' : 'st';
+    $$('.tr-c', main).forEach(li => { li.hidden = (TR_F.scope === 'unit' && li.dataset.u !== 'unit') || (TR_F.st !== 'all' && li.dataset[k] !== TR_F.st); });
+    $$('.tr-cat', main).forEach(s => { const v = $$('.tr-c:not([hidden])', s), all = $$('.tr-c', s).filter(li => TR_F.scope !== 'unit' || li.dataset.u === 'unit'); s.hidden = !v.length; $('.tr-cc', s).textContent = `${all.filter(li => li.dataset[k] === 'got').length} of ${all.length} earned`; });
+    $('#tr-none').hidden = !!$('.tr-c:not([hidden])', main);
+    const m = $('.tr-miss', main); if (m) m.hidden = TR_F.scope === 'unit';
+  };
+  $$('[data-trs]', main).forEach(b => b.addEventListener('click', () => { TR_F.scope = b.dataset.trs; $$('[data-trs]', main).forEach(c => c.setAttribute('aria-pressed', String(c.dataset.trs === TR_F.scope))); filt(); }));
+  $$('[data-trf]', main).forEach(b => b.addEventListener('click', () => { TR_F.st = b.dataset.trf; $$('[data-trf]', main).forEach(c => c.setAttribute('aria-pressed', String(c.dataset.trf === TR_F.st))); filt(); }));
+  filt();
+  tutViewDone(focus, '#tr-h');
+}
+/* read-only test hook (used by the build checks) */
+try { window.__trophies = { defs: () => TR_DEFS.map(d => ({ id: d.id, cat: d.cat, name: d.name, how: d.how, tier: d.tier || '' })), max: () => trEval(true).map(r => ({ id: r.d.id, ok: r.ok, h: r.h, n: r.n })), now: () => trEval(false).map(r => ({ id: r.d.id, ok: r.ok, h: r.h, n: r.n })) }; } catch (e) { }
+/* first run: record what is already earned quietly (no toast for old progress), then paint */
+setTimeout(() => { try { trCheck(false); } catch (e) { /* never break the workbook */ } }, 0);
+/* ---------- TROPHIES: END ---------- */
 /* ================= APP: END ================= */
 /* ================= boot ================= */
 buildRail(); updateProgress(); syncMenuBtn();
