@@ -1701,6 +1701,13 @@ body.tut-book #b-gloss{display:none!important}
 .mk-adv{padding:16px 22px}
 .mk-adv h2{margin:0 0 8px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:15px}
 .mk-adv ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.5}
+/* coursework task pages (.sheet.cw): calm and simple, the task card first, then a few quiet cards */
+.sheet.cw .ncard{box-shadow:none;outline:1px solid var(--line-2);background:var(--paper)}
+.sheet.cw .ncard.cw-task{outline:0;background:transparent;padding:0}
+.sheet.cw .ncard.cw-task > .notes{margin:0}
+.sheet.cw .ncard h2{font-size:16px}
+.sheet.cw .ncard.cw-ex h2 .bi,.sheet.cw .ncard.cw-code h2 .bi,.sheet.cw .ncard.cw-st h2 .bi{opacity:.85}
+.sheet.cw .ncard.cw-warn{background:transparent;outline:0;padding-top:0;padding-bottom:0}
 /* ================= TUTORIAL BOOK: END ================= */
 /* ================= APP: BEGIN (progress view, covered button, install menu; source notes/app/app.css) ================= */
 .cov-btn{font-weight:700}
@@ -2728,19 +2735,18 @@ function renderPage(i, focus) {
   onCover = false; onCredits = false;
   cur = clamp(i, 0, PAGES.length - 1);
   const P = PAGES[cur], p = P.p, ch = P.ch, N = PAGES.length;
-  state.last = p.id; state.seen[p.id] = 1; save(); try { localStorage.setItem('notes-last', JSON.stringify({ book: BK.id, page: p.id, title: p.title || p.spec || '', at: Date.now() })); } catch (e) { }   /* APP hook: Continue where you left off */
+  state.last = p.id; state.seen[p.id] = 1; save(); try { const t = Date.now(), e = { page: p.id, title: p.title || p.spec || '', at: t }, o = JSON.parse(localStorage.getItem('notes-last') || '{}') || {}; o.books = o.books || {}; o.books[BK.id] = e; localStorage.setItem('notes-last', JSON.stringify(Object.assign(o, { book: BK.id }, e))); } catch (e) { }   /* APP hook: Continue where you left off (latest page per book) */
   setHue(ch);
   const turn = was == null || was === cur || RM() ? '' : cur > was ? ' t-next' : ' t-prev';
-  const h = [];
-  h.push(`<article class="sheet${turn}" aria-labelledby="ph">`);
+  const h = [], CW = isCW(p);   /* TUTORIAL BOOK hook: coursework task page */
+  h.push(`<article class="sheet${turn}${CW ? ' cw' : ''}" aria-labelledby="ph">`);
   if (P.pi === 0) { h.push(bannerHTML(ch, cur, N)); h.push(chapterCardHTML(ch)); h.push(chapterGlossHTML(ch)); }
   h.push(heroHTML(P, N));
-  h.push(lessonHTML(p));
-  if (!EMBED_ON()) h.push(learnHTML(p));
-  h.push(notesHTML(p.blocks || []));
+  if (!CW) { h.push(lessonHTML(p)); if (!EMBED_ON()) h.push(learnHTML(p)); }
+  h.push(CW ? cwNotesHTML(p) : notesHTML(p.blocks || []));   /* TUTORIAL BOOK hook */
   h.push(`<div id="dg-slot"></div>`);
   const vids = (p.videos || []).filter(v => (safeUrl(v.url) || YT_OK(v)) && !(EMBED_ON() && /^Hub (video|podcast)/i.test(v.source || '')));
-  if (vids.length) {
+  if (vids.length && !CW) {   /* TUTORIAL BOOK hook */
     h.push(`<section class="sec s-vid" aria-labelledby="s-vd"><h2 id="s-vd">${bi('vid')}<span>Watch</span> <small>${vids.length} video${vids.length === 1 ? '' : 's'}${vids.some(YT_OK) ? '' : ', opens in a new tab'}</small></h2>${videosHTML(vids)}</section>`);
   }
   /* "Check your knowledge": quick check, exam-style practice and past papers in ONE collapsed card with tabs */
@@ -2784,9 +2790,8 @@ function renderPage(i, focus) {
     h.push(`</ul>`); }
     cykTabs.push(['exam', 'Past papers', 'exam', h2.join(''), `${p.exam.length} past-paper question${p.exam.length === 1 ? '' : 's'}`]);
   }
-  if (TUT) h.push(tutTurnHTML(p)); else if (cykTabs.length) h.push(cykHTML(cykTabs));   /* TUTORIAL BOOK hook */
-  h.push(keyTermsHTML(p));
-  h.push(lpHTML(p));
+  if (TUT) { if (!CW) h.push(tutTurnHTML(p)); } else if (cykTabs.length) h.push(cykHTML(cykTabs));   /* TUTORIAL BOOK hook */
+  if (!CW) { h.push(keyTermsHTML(p)); h.push(lpHTML(p)); }   /* TUTORIAL BOOK hook */
   const prevP = PAGES[cur - 1], nextP = PAGES[cur + 1];
   h.push(`<div class="foot card"><div class="done-row"><button type="button" class="donebtn" id="donebtn" aria-pressed="${!!state.done[p.id]}">${ICON_TICK}<span>${state.done[p.id] ? 'Done – tap to undo' : 'Mark this page as done'}</span></button></div>
     <nav class="nextprev" aria-label="Page navigation">${prevP ? `<a class="np" href="#${esc(prevP.p.id)}"><small>← Previous</small><span>${esc(plain(prevP.p.spec))}</span></a>` : ''}${nextP ? `<a class="np nx" href="#${esc(nextP.p.id)}"><small>Next →</small><span>${esc(plain(nextP.p.spec))}</span></a>` : ''}</nav>
@@ -2834,7 +2839,7 @@ function renderPage(i, focus) {
       else { const r = $('#donebtn').getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 10, hueCols()); }
     }
   });
-  if (p.diagram) mountDiagram(p.diagram, $('#dg-slot'), p.id);
+  if (p.diagram && !CW) mountDiagram(p.diagram, $('#dg-slot'), p.id);   /* TUTORIAL BOOK hook: no interactive on coursework pages */
   if (P.pi === 0) { mountSlides(ch, p.id); if (EMBED_ON()) wireChapterList(ch, p.id); }
   wireLP(p);
   wireVisuals(p);
@@ -7610,6 +7615,38 @@ function ctaHTML() {
   if (MM) h.push(`<a class="lib-cta sm card" href="#marks"><span class="lib-ci" aria-hidden="true">${tutIc('table')}</span><span class="lib-ct"><b>Mark scheme overview</b><span>${CRIT.size} criteria</span></span></a>`);
   return h.length ? `<div class="lib-ctas">${h.join('')}</div>` : '';
 }
+
+/* ---------- coursework task pages (any page with a `task` block, tutorial books only): a calm, simple page.
+   Shown: the task card; at most ONE example (the first example / compare / table that is not a "How to …"), under "Example";
+   the "How to …" walkthrough; on U5 TASK 16 build pages the code (the code is the how-to); sentence starters / a paragraph
+   framework; one warning. Not shown: the interactive diagram, animations, "Your turn: build it", extra tables, examples and
+   key / tip / note boxes, videos, hub lessons. The book data is untouched; block indices stay the originals, so wiring works. */
+const isCW = p => TUT && !!p && (p.blocks || []).some(b => b && b.t === 'task');
+function cwNotesHTML(p) {
+  const bs = p.blocks || [], tk = bs.find(b => b && b.t === 'task');
+  const t16 = /^U5$/i.test(BK.id || '') && tk && /^TASK\s*16\b/i.test(String(tk.label || ''));
+  const isHow = b => b.t === 'example' && /^how to\b/i.test(plain(String(b.title || '')));
+  let curH = null, ex = null, how = null, warn = null, starters = null; const task = [], code = [];
+  bs.forEach((b, i) => {
+    if (!b) return;
+    if (b.t === 'h') { curH = b; return; }
+    const hx = curH ? plain(curH.text) : '';
+    if (b.t === 'task') task.push([b, i]);
+    else if (b.t === 'list' && /starter|framework|prompt/i.test(hx)) { if (!starters) starters = { h: curH, items: [] }; if (starters.h === curH) starters.items.push([b, i]); }
+    else if (isHow(b)) { if (!how) how = [b, i]; }
+    else if (['example', 'compare', 'table'].includes(b.t)) { if (!ex) ex = [b, i]; }
+    else if (b.t === 'code' && t16) code.push([b, i]);
+    else if (b.t === 'warn') { if (!warn) warn = [b, i]; }
+  });
+  const G = [];
+  if (task.length) G.push({ items: task, cls: 'cw-task' });
+  if (ex) G.push({ h: 'Example', icon: 'ex', items: [ex], cls: 'cw-ex' });
+  if (how) G.push({ items: [how], cls: 'cw-how' });
+  if (code.length) G.push({ h: 'The code for this step', icon: 'code', items: code, cls: 'cw-code' });
+  if (starters && starters.items.length) G.push({ h: plain(starters.h.text), icon: 'note', items: starters.items, cls: 'cw-st' });
+  if (warn) G.push({ items: [warn], cls: 'cw-warn' });
+  return G.map(g => `<section class="ncard card ${g.cls}">${g.h ? `<h2>${bi(g.icon || hIcon(g.h))}<span>${esc(g.h)}</span></h2>` : ''}<div class="notes">${g.items.map(([b, i]) => blockHTML(b, i)).join('')}</div></section>`).join('');
+}
 if (TUT) {
   document.body.classList.add('tut-book');
   keyTermsHTML = () => ''; chapterGlossHTML = () => ''; lessonHTML = () => ''; learnHTML = () => ''; lpHTML = () => '';
@@ -7754,7 +7791,7 @@ const IOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform
 const STANDALONE = () => window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 function appMenu() {
   const mm = $('#libmenu'); if (!mm || mm.querySelector('.app-m')) return;
-  mm.insertAdjacentHTML('afterbegin', `<div class="app-m"><a class="hubl" href="#progress">${icon('chk')}My progress</a>${ON_WEB ? `<button type="button" class="hubl app-inst" hidden>${icon('play')}Install app</button><p class="app-ios" hidden>On iPhone or iPad: tap <b>Share</b> › <b>Add to Home Screen</b>.</p><span class="app-off" hidden>● Available offline</span>` : ''}</div><hr>`);
+  mm.insertAdjacentHTML('afterbegin', `<div class="app-m"><a class="hubl" href="#progress">${icon('chk')}My progress</a><a class="hubl app-mc" href="${esc((ON_WEB ? '../index.html' : FRONT_WEB) + '#mycourse')}"${ON_WEB ? '' : ' target="_blank" rel="noopener"'}>${icon('book')}My course</a>${ON_WEB ? `<button type="button" class="hubl app-inst" hidden>${icon('play')}Install app</button><p class="app-ios" hidden>On iPhone or iPad: tap <b>Share</b> › <b>Add to Home Screen</b>.</p><span class="app-off" hidden>● Available offline</span>` : ''}</div><hr>`);
   const ib = mm.querySelector('.app-inst'); if (!ib) return;
   const paint = () => { ib.hidden = STANDALONE() || !(INSTALL || IOS); };
   ib.addEventListener('click', async () => {
