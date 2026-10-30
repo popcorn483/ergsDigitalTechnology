@@ -1850,6 +1850,31 @@ body.tut-book #b-gloss{display:none!important}
 .cq-miss ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
 .cq-miss li{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:6px 12px;padding:10px 0;border-top:1px solid var(--line-2);font-size:14px}
 .cq-ms2{font-weight:700;font-variant-numeric:tabular-nums}
+.cq-opts{display:grid;gap:12px;margin-top:14px}
+.cq-opt{display:flex;align-items:center;gap:14px;padding:18px 20px;border-radius:18px;text-decoration:none;color:var(--ink);background:var(--paper);box-shadow:var(--card-shadow,0 1px 2px rgba(0,0,0,.06)),inset 0 0 0 1.5px color-mix(in srgb,var(--cc-d) 30%,transparent);font-family:var(--sans)}
+.cq-opt:hover,.cq-opt:focus-visible{box-shadow:inset 0 0 0 2px var(--cc-d)}
+.cq-opt > svg{width:30px;height:30px;flex:none;color:var(--cc-d);padding:9px;border-radius:12px;background:color-mix(in srgb,var(--cc-d) 12%,var(--paper));box-sizing:content-box}
+.cq-opt > span:not(.cq-go){flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.cq-opt b{font-size:17px}
+.cq-opt small{font-size:14px;color:var(--ink-2);line-height:1.45}
+.cq-opt em{font-style:normal;font-size:12.5px;font-weight:700;color:var(--cc-d)}
+.cq-go{font-size:20px;color:var(--cc-d);flex:none}
+.cq-chip2{margin-left:0}
+.cq-pl{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:14px;counter-reset:pq}
+.cq-pi{padding:18px 20px;display:flex;flex-direction:column;gap:10px;counter-increment:pq}
+.cq-pi .cq-meta::before{content:counter(pq) ". ";font-weight:700;color:var(--cc-d)}
+.cq-pi .cq-big{display:flex;flex-wrap:wrap;gap:8px}
+.cq-pi .btn{display:inline-flex;align-items:center;gap:7px}
+.cq-pi .btn svg{width:18px;height:18px;flex:none}
+.ppv-inl{display:flex;flex-direction:column;align-items:center;border-radius:10px;overflow:hidden;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
+.ppv-inl canvas{display:block;max-width:100%;height:auto!important}
+.ppv-inl canvas + canvas{border-top:2px dashed #C9D2DE}
+.ppv-load{margin:0;padding:24px;color:#687386;font-family:var(--sans);font-size:14px}
+.cq-msbox{display:flex;flex-direction:column;gap:6px}
+.cq-msbox::before{content:"CCEA mark scheme";font:700 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.cq-tipd summary{cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:700;color:var(--ink-2)}
+.cq-tipd > div{padding:8px 0 0;font-size:15px;line-height:1.5}
+.cq-rv{font-family:var(--sans);font-size:14px;font-weight:700;text-decoration:none;align-self:flex-start}
 .cq-ask{border:0;padding:26px 24px 20px;border-radius:22px;width:min(440px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);text-align:center;font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
 .cq-ask::backdrop{background:rgba(10,16,30,.55)}
 .cq-ask-ic{display:grid;place-items:center;width:54px;height:54px;margin:0 auto 10px;border-radius:50%;background:color-mix(in srgb,#E0A100 18%,var(--paper));color:#B07C00}
@@ -8055,13 +8080,60 @@ function cqPoints(q) {
 }
 const SEC = { mcq: 'Quick check', prac: 'Exam-style practice', exam: 'Past papers' };
 let CQ = null;   /* the running quiz: { ch, items, i, ans: { key: { s, done, pick, txt, tick } } } */
-function renderChQuiz(ch, only) {
+/* past-paper items of a chapter, once each (the same question can sit on two pages), newest first */
+function cqPast(ch) {
+  const seen = new Set(), out = [];
+  cqItems(ch).filter(x => x.t === 'exam').forEach(x => { const k = examRef(x.q).toLowerCase(); if (seen.has(k)) return; seen.add(k); out.push(x); });
+  const yr = e => /specimen/i.test(String(e.series || '')) ? 0 : (parseInt(e.year, 10) || parseInt((String(e.series || '').match(/\d{4}/) || [])[0], 10) || 1);
+  return out.sort((a, b) => yr(b.q) - yr(a.q));
+}
+function renderChQuiz(ch, only, mode) {
   tutView('quiz-' + ch.id, 'Chapter quiz');
   setHue(ch);
-  const items = cqItems(ch).filter(x => !only || only.has(x.key));
-  if (!CQ || CQ.ch !== ch || only) CQ = { ch, items, i: 0, ans: {}, retry: !!only };
   if (!cqUnlocked(ch)) { cqLocked(ch); return; }
+  if (only) { const m = CQ && CQ.ch === ch ? CQ.mode : 'all'; CQ = { ch, mode: m, items: (m === 'pp' ? cqPast(ch) : cqItems(ch)).filter(x => only.has(x.key)), i: 0, ans: {}, retry: true }; }
+  else if (mode) CQ = { ch, mode, items: mode === 'pp' ? cqPast(ch) : cqItems(ch), i: 0, ans: {}, retry: false };
+  else if (!CQ || CQ.ch !== ch) { cqChoose(ch); return; }
   cqPaint(true);
+}
+/* the start screen: which quiz, or every past-paper question on the topic at once */
+function cqChoose(ch) {
+  const all = cqItems(ch), pp = cqPast(ch), st = cqState(), b = st.best[ch.id], bp = st.best[ch.id + '|pp'];
+  const marks = pp.reduce((s, x) => s + (x.max || 0), 0);
+  const opt = (href, ic, t, d, extra) => `<a class="cq-opt" ${href}>${icon(ic)}<span><b>${t}</b><small>${d}</small>${extra ? `<em>${extra}</em>` : ''}</span><span class="cq-go" aria-hidden="true">→</span></a>`;
+  main.innerHTML = `<article class="sheet lib-v cq-v" aria-labelledby="cq-h" style="${chVars(ch)}"><header class="lib-hero card cq-hero"><small class="lib-k">${icon('exam')}Chapter ${esc(ch.n)} · ${esc(ch.title)}</small><h1 id="cq-h" tabindex="-1">Test yourself on this topic</h1><p>Choose how you want to revise it.</p></header>
+    <section class="cq-opts">
+      ${pp.length ? opt('href="#" data-mode="pp"', 'exam', 'Past-paper quiz', `${pp.length} real CCEA question${pp.length === 1 ? '' : 's'} on this topic, one at a time. Answer, check the mark scheme, mark yourself.`, bp ? `Best ${bp.pc}%` : '') : ''}
+      ${pp.length ? opt(`href="#pp-${esc(ch.id)}"`, 'doc', 'All past-paper questions at once', `Every question CCEA has asked on this topic${marks ? ` (${marks} marks)` : ''} on one page, newest first, with the mark schemes.`, '') : ''}
+      ${all.length > pp.length ? opt('href="#" data-mode="all"', 'chk', 'Full topic quiz', `${all.length} questions: quick checks, exam-style practice${pp.length ? ' and the past-paper questions' : ''}.`, b ? `Best ${b.pc}%` : '') : ''}
+    </section></article>`;
+  $$('[data-mode]', main).forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); renderChQuiz(ch, null, a.dataset.mode); }));
+  tutViewDone(true, '#cq-h');
+}
+/* every past-paper question on the topic on one page (route #pp-cNN); not locked: it is revision material */
+function renderChPast(ch) {
+  tutView('pp-' + ch.id, 'Past-paper questions');
+  setHue(ch);
+  const pp = cqPast(ch), marks = pp.reduce((s, x) => s + (x.max || 0), 0);
+  main.innerHTML = `<article class="sheet lib-v cq-v cq-all" aria-labelledby="cq-h" style="${chVars(ch)}"><header class="lib-hero card cq-hero"><small class="lib-k">${icon('exam')}Chapter ${esc(ch.n)} · ${esc(ch.title)}</small><h1 id="cq-h" tabindex="-1">Past-paper questions on this topic</h1>
+    <p>${pp.length} question${pp.length === 1 ? '' : 's'}${marks ? ` · ${marks} marks` : ''}, newest first. ${PP_VIEW ? 'Each shows the question from the CCEA paper; open the mark scheme under it.' : 'Open each one in the CCEA paper and mark scheme.'}</p>
+    <div class="cq-acts">${pp.length && cqUnlocked(ch) ? `<a class="btn pri" href="#quiz-${esc(ch.id)}">Quiz me on these instead</a>` : ''}<a class="btn" href="#${esc(ch.pages[0].id)}">Back to the chapter</a></div></header>
+    ${pp.length ? `<ol class="cq-pl">${pp.map((x, i) => { const e = x.q, ser = String(e.series || ''), when = /specimen/i.test(ser) ? 'Specimen' : String(e.year || ser), u = safeUrl(e.url), ms = safeUrl(e.ms) || safeUrl(e.report);
+      return `<li class="card cq-pi" id="pq${i}"><div class="cq-meta"><b>${esc(when)}</b>${e.paper ? ' · ' + esc(e.paper) : ''}${e.q ? ' · Q' + esc(String(e.q).replace(/^Q/i, '')) : ''} · ${x.max ? marksTxt(x.max) : 'marks not stated'}</div>
+        <p class="cq-q">${inline(e.summary)}</p>
+        <div class="cq-crop" data-cq-crop="${i}" hidden></div>
+        <div class="cq-big" data-pp-slot>${u ? `<a class="btn" href="${esc(u)}" target="_blank" rel="noopener">${icon('exam')}CCEA question paper ${ICON_EXT}</a>` : ''}${ms ? `<a class="btn" href="${esc(ms)}" target="_blank" rel="noopener">${icon('chk')}CCEA ${safeUrl(e.ms) ? 'mark scheme' : 'examiner report'} ${ICON_EXT}</a>` : ''}</div>
+        ${e.tip ? `<details class="cq-tipd"><summary>Examiner tip · our summary of what earned the marks</summary><div>${inline(e.tip)}</div></details>` : ''}
+        <a class="cq-rv" href="#${esc(x.p.id)}">Revise this on the workbook page →</a></li>`; }).join('')}</ol>` : '<section class="card lib-body"><p>No past-paper questions on this topic yet.</p></section>'}</article>`;
+  if (PP_VIEW) pp.forEach((x, i) => {
+    const li = $('#pq' + i, main); if (!li) return;
+    PP_VIEW.inline($('[data-cq-crop]', li), x.q).then(ok => {
+      const slot = $('[data-pp-slot]', li); if (!slot || !li.isConnected) return;
+      if (ok) { slot.innerHTML = ''; PP_VIEW.slot(slot, x.q, false, ok); }   /* question already shown: offer the mark scheme inline, and the full viewer */
+      else PP_VIEW.slot(slot, x.q);
+    });
+  });
+  tutViewDone(true, '#cq-h');
 }
 function cqLocked(ch) {
   const n = (ch.pages || []).length, d = ch.pages.filter(p => state.done[p.id]).length;
@@ -8100,7 +8172,7 @@ function cqPaint(focus) {
       ${a.done ? `${e.tip ? `<div class="cq-tip"><b>Examiner tip · our summary of what earned the marks</b>${inline(e.tip)}</div>` : ''}` : `<button type="button" class="btn pri" data-rec>${it.max ? 'Save my mark' : 'Done'}</button>`}</div>`;
   }
   main.innerHTML = `<article class="sheet lib-v cq-v" aria-labelledby="cq-h" style="${chVars(ch)}">
-    <header class="cq-top"><a class="cq-x" href="#${esc(ch.pages[0].id)}" aria-label="Leave the quiz">✕</a><div><small>Chapter ${esc(ch.n)} quiz${CQ.retry ? ' · retry' : ''}</small><h1 id="cq-h" tabindex="-1">${esc(ch.title)}</h1></div><span class="cq-n" aria-live="polite">Question ${CQ.i + 1} of ${N}</span></header>
+    <header class="cq-top"><a class="cq-x" href="#${esc(ch.pages[0].id)}" aria-label="Leave the quiz">✕</a><div><small>Chapter ${esc(ch.n)} ${CQ.mode === 'pp' ? 'past-paper quiz' : 'quiz'}${CQ.retry ? ' · retry' : ''}</small><h1 id="cq-h" tabindex="-1">${esc(ch.title)}</h1></div><span class="cq-n" aria-live="polite">Question ${CQ.i + 1} of ${N}</span></header>
     <div class="cq-bar" role="progressbar" aria-valuemin="0" aria-valuemax="${N}" aria-valuenow="${done}"><i style="width:${Math.round(done / N * 100)}%"></i></div>
     <section class="card cq-card" data-kind="${it.t}"><span class="cq-sec">${esc(SEC[it.t])}</span>${body}</section>
     <nav class="cq-nav"><button type="button" class="btn" data-prev${CQ.i ? '' : ' disabled'}>← Previous</button><span class="cq-keys">Keys: 1–4 answer · ← → move</span><button type="button" class="btn ${a.done ? 'pri' : ''}" data-next>${CQ.i === N - 1 ? 'See my score' : a.done ? 'Next →' : 'Skip →'}</button></nav></article>`;
@@ -8124,15 +8196,17 @@ function cqResults() {
   let s = 0, m = 0;
   items.forEach(it => { const a = CQ.ans[it.key], x = sec[it.t] = sec[it.t] || { s: 0, m: 0, n: 0 }; const got = a && a.done ? a.s : 0; x.s += got; x.m += it.max; x.n++; s += got; m += it.max; });
   const pc = m ? Math.round(s / m * 100) : 0, missed = items.filter(it => { const a = CQ.ans[it.key]; return !a || !a.done || a.s < it.max; });
-  if (!CQ.retry) { const o = cqState(), b = o.best[ch.id]; if (!b || pc > b.pc) { o.best[ch.id] = { s, m, pc, date: new Date().toISOString().slice(0, 10) }; cqSave(o); } }
-  const best = cqState().best[ch.id];
+  const bk = ch.id + (CQ.mode === 'pp' ? '|pp' : '');
+  if (!CQ.retry) { const o = cqState(), b = o.best[bk]; if (!b || pc > b.pc) { o.best[bk] = { s, m, pc, date: new Date().toISOString().slice(0, 10) }; cqSave(o); } }
+  const best = cqState().best[bk];
   main.innerHTML = `<article class="sheet lib-v cq-v" aria-labelledby="cq-h" style="${chVars(ch)}"><header class="lib-hero card cq-res"><small class="lib-k">${icon('exam')}Chapter ${esc(ch.n)} quiz · ${esc(ch.title)}</small><h1 id="cq-h" tabindex="-1">${CQ.retry ? 'Retry score' : 'Your score'}</h1>
     <div class="pg-sum">${ring(s, m, true)}<div><p class="cq-tot"><b>${s} / ${m}</b> marks · <b>${pc}%</b></p>${best ? `<p class="cq-best">Best: ${best.pc}% (${best.s}/${best.m}) on ${esc(best.date)}</p>` : ''}</div></div>
     <div class="cq-secs">${['mcq', 'prac', 'exam'].filter(k => sec[k]).map(k => `<div><b>${esc(SEC[k])}</b><span>${sec[k].s} / ${sec[k].m}</span><small>${sec[k].n} question${sec[k].n === 1 ? '' : 's'} · ${k === 'mcq' ? 'auto-marked' : 'self-marked'}</small></div>`).join('')}</div>
-    <div class="cq-acts">${missed.length ? `<button type="button" class="btn pri" data-retry>Retry wrong ones (${missed.length})</button>` : '<b>Full marks. Brilliant.</b>'}<button type="button" class="btn" data-again>Start again</button><a class="btn" href="#${esc(ch.pages[0].id)}">Back to the chapter</a></div></header>
+    <div class="cq-acts">${missed.length ? `<button type="button" class="btn pri" data-retry>Retry wrong ones (${missed.length})</button>` : '<b>Full marks. Brilliant.</b>'}<button type="button" class="btn" data-again>Start again</button>${cqPast(ch).length ? `<a class="btn" href="#pp-${esc(ch.id)}">All past-paper questions</a>` : ''}<button type="button" class="btn" data-other>Choose a different quiz</button><a class="btn" href="#${esc(ch.pages[0].id)}">Back to the chapter</a></div></header>
     ${missed.length ? `<section class="card lib-body cq-miss"><h2>To look at again</h2><ul>${missed.map(it => { const a = CQ.ans[it.key]; return `<li><span class="cq-sec">${esc(SEC[it.t])}</span><span class="cq-mt">${esc(plain(it.t === 'exam' ? it.q.summary : it.q.q)).slice(0, 140)}</span><span class="cq-ms2">${a && a.done ? a.s : 0}/${it.max}</span><a href="#${esc(it.p.id)}">Review page →</a></li>`; }).join('')}</ul></section>` : ''}</article>`;
   const r = $('[data-retry]', main); if (r) r.addEventListener('click', () => { const ks = new Set(missed.map(x => x.key)); CQ = null; renderChQuiz(ch, ks); });
-  $('[data-again]', main).addEventListener('click', () => { CQ = null; renderChQuiz(ch); });
+  $('[data-again]', main).addEventListener('click', () => { const m = CQ.mode; CQ = null; renderChQuiz(ch, null, m); });
+  $('[data-other]', main).addEventListener('click', () => { CQ = null; cqChoose(ch); });
   tutViewDone(true, '#cq-h');
   if (pc >= 70 && !RM()) { const h = $('.cq-res .pg-ring'); if (h) { const b = h.getBoundingClientRect(); burst(b.left + b.width / 2, b.top + b.height / 2, 28, hueCols()); } }
 }
@@ -8141,8 +8215,9 @@ function cqCardHTML(ch) {
   if (!CQ_ON) return '';
   const n = cqItems(ch).length; if (!n) return '';
   const b = cqState().best[ch.id], np = (ch.pages || []).length;
-  return cqUnlocked(ch) ? `<a class="cq-chip" href="#quiz-${esc(ch.id)}">${icon('exam')}<span><b>Chapter quiz</b><small>${n} questions${b ? ` · best ${b.pc}%` : ''}</small></span></a>`
-    : `<span class="cq-chip locked">${CQ_LOCK}<span><b>Chapter quiz</b><small>Mark all ${np} pages covered to unlock</small></span><button type="button" class="cq-any" data-cq-any="${esc(ch.id)}">Unlock anyway</button></span>`;
+  const np2 = cqPast(ch).length, ppChip = np2 ? `<a class="cq-chip cq-chip2" href="#pp-${esc(ch.id)}">${icon('terms')}<span><b>Past-paper questions</b><small>${np2} on this topic, all at once</small></span></a>` : '';
+  return cqUnlocked(ch) ? `<a class="cq-chip" href="#quiz-${esc(ch.id)}">${icon('exam')}<span><b>Chapter quiz</b><small>${n} questions${b ? ` · best ${b.pc}%` : ''}</small></span></a>${ppChip}`
+    : `<span class="cq-chip locked">${CQ_LOCK}<span><b>Chapter quiz</b><small>Mark all ${np} pages covered to unlock</small></span><button type="button" class="cq-any" data-cq-any="${esc(ch.id)}">Unlock anyway</button></span>${ppChip}`;
 }
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-cq-any]'); if (!b || b.closest('.cq-lock')) return;
@@ -8150,8 +8225,11 @@ document.addEventListener('click', e => {
 });
 {
   const hr = hashRoute, rr = runRoute;
-  hashRoute = () => { const m = /^quiz-(c\d+)$/.exec(decodeURIComponent((location.hash || '').slice(1))); return m && CQ_ON && CH_BY_ID.has(m[1]) ? { kind: 'chquiz', ch: m[1] } : hr(); };
-  runRoute = r => { if (r && r.kind === 'chquiz') { closeDrawers(); const ch = CH_BY_ID.get(r.ch); if (!CQ || CQ.ch !== ch) CQ = null; renderChQuiz(ch); } else rr(r); };
+  hashRoute = () => { const h = decodeURIComponent((location.hash || '').slice(1)), m = /^quiz-(c\d+)$/.exec(h), p = /^pp-(c\d+)$/.exec(h);
+    if (m && CQ_ON && CH_BY_ID.has(m[1])) return { kind: 'chquiz', ch: m[1] };
+    if (p && CQ_ON && CH_BY_ID.has(p[1])) return { kind: 'chpast', ch: p[1] };
+    return hr(); };
+  runRoute = r => { if (r && r.kind === 'chquiz') { closeDrawers(); const ch = CH_BY_ID.get(r.ch); if (!CQ || CQ.ch !== ch) CQ = null; renderChQuiz(ch); } else if (r && r.kind === 'chpast') { closeDrawers(); renderChPast(CH_BY_ID.get(r.ch)); } else rr(r); };
   const rp = renderPage;
   renderPage = (i, f) => {
     rp(i, f);
@@ -8164,11 +8242,11 @@ document.addEventListener('click', e => {
       const old = $('.cq-ask'); if (old) old.remove();
       const b = cqState().best[ch.id], n = cqItems(ch).length;
       const d = el('dialog', { class: 'cq-ask', 'aria-labelledby': 'cq-ask-t' });
-      d.innerHTML = `<div class="cq-ask-ic">${bi('star')}</div><h2 id="cq-ask-t">Topic complete!</h2><p>You have finished <b>${esc(ch.title)}</b>. Do you want to take the topic quiz now?</p><p class="cq-ask-s">${n} past-paper question${n === 1 ? '' : 's'} on this topic${b ? ` · your best so far ${b.pc}%` : ''}</p><div class="cq-ask-b"><a class="btn pri" href="#quiz-${esc(ch.id)}">Yes, take the quiz</a><button type="button" class="btn" value="no">Not now</button></div><p class="cq-ask-n">You can take it any time from the chapter's first page.</p>`;
+      d.innerHTML = `<div class="cq-ask-ic">${bi('star')}</div><h2 id="cq-ask-t">Topic complete!</h2><p>You have finished <b>${esc(ch.title)}</b>. Do you want to take the topic quiz now?</p><p class="cq-ask-s">${n} question${n === 1 ? '' : 's'} on this topic${b ? ` · your best so far ${b.pc}%` : ''}</p><div class="cq-ask-b"><a class="btn pri" href="#quiz-${esc(ch.id)}">Yes, take the quiz</a>${cqPast(ch).length ? `<a class="btn" href="#pp-${esc(ch.id)}">See all ${cqPast(ch).length} past-paper questions</a>` : ''}<button type="button" class="btn" value="no">Not now</button></div><p class="cq-ask-n">You can take it any time from the chapter's first page.</p>`;
       document.body.append(d);
       const close = () => { try { d.close(); } catch (e) {} d.remove(); };
       $('button[value="no"]', d).addEventListener('click', close);
-      $('a', d).addEventListener('click', close);
+      $$('a', d).forEach(a => a.addEventListener('click', close));
       d.addEventListener('click', e => { if (e.target === d) close(); });
       d.addEventListener('close', () => d.remove());
       try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
@@ -8216,6 +8294,33 @@ const PP_VIEW = ON_WEB ? (() => {
   }
   let lib = null;
   const pdfjs = () => lib || (lib = new Promise((ok, no) => { if (window.pdfjsLib) return ok(window.pdfjsLib); const s = document.createElement('script'); s.src = PDFJS + 'pdf.min.js'; s.onload = () => { try { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; } catch (e) { } ok(window.pdfjsLib); }; s.onerror = () => { lib = null; no(new Error('pdf.js')); }; document.head.append(s); }));
+  /* draw just the bands [[page, top, bottom]] of a PDF, stacked, into el (width = el's width) */
+  async function cropInto(el, doc, C, z) {
+    el.innerHTML = ''; const dpr = Math.min(2, window.devicePixelRatio || 1);
+    for (const [pn, t, b] of C) {
+      if (pn < 1 || pn > doc.numPages) continue;
+      const pg = await doc.getPage(pn), base = pg.getViewport({ scale: 1 }), fit = Math.max(.3, (el.clientWidth || 600) / base.width);
+      const vp = pg.getViewport({ scale: fit * (z || 1) * dpr }), full = document.createElement('canvas');
+      full.width = Math.floor(vp.width); full.height = Math.floor(vp.height);
+      await pg.render({ canvasContext: full.getContext('2d'), viewport: vp }).promise;
+      const y0 = Math.max(0, Math.floor(t * full.height)), y1 = Math.min(full.height, Math.ceil(b * full.height)), out = document.createElement('canvas');
+      out.width = full.width; out.height = Math.max(1, y1 - y0); out.getContext('2d').drawImage(full, 0, y0, full.width, out.height, 0, 0, full.width, out.height);
+      out.style.width = Math.floor(full.width / dpr) + 'px'; out.style.height = Math.floor(out.height / dpr) + 'px';
+      el.append(out);
+    }
+  }
+  const docs = new Map(), getDoc = async url => { if (!docs.has(url)) docs.set(url, (await pdfjs()).getDocument(url).promise); return docs.get(url); };
+  /* show one question's crop inside a page (the "all past-paper questions" list); resolves to the files when shown, else null */
+  const lazy = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(x => { if (x.isIntersecting) { lazy.unobserve(x.target); x.target._go && x.target._go(); } }), { rootMargin: '600px 0px' }) : null;
+  async function inline(el, e, which) {
+    which = which || 'paper';
+    const F = await files(e); if (!F || !F[which] || !F.crop[which] || !el) return null;
+    el.hidden = false; el.classList.add('ppv-inl'); el.setAttribute('aria-label', which === 'ms' ? 'Mark scheme for this question' : 'This question from the CCEA paper');
+    el.innerHTML = '<p class="ppv-load">Loading…</p>';
+    const go = async () => { try { await cropInto(el, await getDoc(F[which]), F.crop[which]); } catch (x) { el.hidden = true; } };
+    if (lazy) { el._go = go; lazy.observe(el); } else go();
+    return F;
+  }
   /* the viewer: question / mark scheme tabs, page prev/next, zoom */
   async function open(e, which) {
     const F = await files(e); if (!F) return;
@@ -8247,18 +8352,7 @@ const PP_VIEW = ON_WEB ? (() => {
         only.hidden = !cropOn; crb.hidden = !cropOn; cv.hidden = cropOn;
         $$('[data-pg]', v).forEach(b => { b.hidden = cropOn; }); $('.ppv-pn', v).hidden = cropOn;
         if (cropOn) {   /* only this question: each page segment rendered and cut to its band, stacked */
-          crb.innerHTML = ''; const dpr = Math.min(2, window.devicePixelRatio || 1);
-          for (const [pn, t, b] of C) {
-            if (pn < 1 || pn > doc.numPages) continue;
-            const pg = await doc.getPage(pn), base = pg.getViewport({ scale: 1 }), fit = Math.max(.3, (box.clientWidth - 16) / base.width);
-            const vp = pg.getViewport({ scale: fit * st.z * dpr }), full = document.createElement('canvas');
-            full.width = Math.floor(vp.width); full.height = Math.floor(vp.height);
-            await pg.render({ canvasContext: full.getContext('2d'), viewport: vp }).promise;
-            const y0 = Math.max(0, Math.floor(t * full.height)), y1 = Math.min(full.height, Math.ceil(b * full.height)), out = document.createElement('canvas');
-            out.width = full.width; out.height = Math.max(1, y1 - y0); out.getContext('2d').drawImage(full, 0, y0, full.width, out.height, 0, 0, full.width, out.height);
-            out.style.width = Math.floor(full.width / dpr) + 'px'; out.style.height = Math.floor(out.height / dpr) + 'px';
-            crb.append(out);
-          }
+          crb.style.width = (box.clientWidth - 16) * st.z + 'px'; await cropInto(crb, doc, C, 1);
           st.page[st.w] = C[0][0]; $('.ppv-zl', v).textContent = Math.round(st.z * 100) + '%';
           return;
         }
@@ -8280,13 +8374,28 @@ const PP_VIEW = ON_WEB ? (() => {
     draw();
   }
   /* add "View question" / "View mark scheme" next to the CCEA links when the PDFs are uploaded */
-  async function slot(where, e, api) {
-    if (!where) return; const F = await files(e, api); if (!F || !where.isConnected) return;
+  async function slot(where, e, api, shown) {
+    if (!where) return; const F = shown || await files(e, api); if (!F || !where.isConnected) return;
+    if (shown) {
+      where.insertAdjacentHTML('afterbegin', `${F.ms ? `<button type="button" class="btn pri" data-ppms aria-expanded="false">${icon('chk')}Show the mark scheme</button>` : ''}<button type="button" class="btn" data-ppv="paper">${icon('zoom')}Open in the viewer</button>`);
+      where.classList.add('has-ppv');
+      const mb = $('[data-ppms]', where);
+      if (mb) mb.addEventListener('click', async () => {
+        let box = where.nextElementSibling && where.nextElementSibling.matches('.cq-msbox') ? where.nextElementSibling : null;
+        if (box) { box.hidden = !box.hidden; mb.setAttribute('aria-expanded', String(!box.hidden)); mb.lastChild.textContent = box.hidden ? 'Show the mark scheme' : 'Hide the mark scheme'; return; }
+        box = el('div', { class: 'cq-msbox' }); where.after(box);
+        mb.setAttribute('aria-expanded', 'true'); mb.lastChild.textContent = 'Hide the mark scheme';
+        if (F.crop.ms) { const c = el('div', {}); box.append(c); c.hidden = false; c.classList.add('ppv-inl'); try { await cropInto(c, await getDoc(F.ms), F.crop.ms); } catch (x) { open(e, 'ms'); } }
+        else { box.remove(); mb.setAttribute('aria-expanded', 'false'); mb.lastChild.textContent = 'Show the mark scheme'; open(e, 'ms'); }
+      });
+      $$('[data-ppv]', where).forEach(b => b.addEventListener('click', () => open(e, b.dataset.ppv)));
+      return;
+    }
     where.insertAdjacentHTML('afterbegin', `${F.paper ? `<button type="button" class="btn pri big" data-ppv="paper">${icon('exam')}View the question</button>` : ''}${F.ms ? `<button type="button" class="btn big" data-ppv="ms">${icon('chk')}View the mark scheme</button>` : ''}`);
     where.classList.add('has-ppv');
     $$('[data-ppv]', where).forEach(b => b.addEventListener('click', () => open(e, b.dataset.ppv)));
   }
-  return { open, slot, files };
+  return { open, slot, files, inline };
 })() : null;
 if (PP_VIEW) {
   const rp = renderPage;
