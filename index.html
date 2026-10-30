@@ -298,12 +298,26 @@ h1{font-family:var(--font-hero);font-weight:900;text-transform:uppercase;letter-
 @media (prefers-reduced-motion: reduce){ #splash,#splash *{animation:none!important;transition:none!important} #splash .sp-mb,#splash .sp-dt,#splash .sp-c circle{opacity:1;transform:none} #splash .sp-c path{stroke-dashoffset:0} #splash .sp-strip{transform:none} }
 
 /* welcome screen (no hash): the page shows only #welcome; a course card opens the topic view */
-/* the dotted desk drifts very slowly (one 22px tile every 80 s, on its own fixed layer behind the page); still with reduced motion or a hidden tab */
+/* tech grid background (homepage only): the dot field is a plane larger than the screen, tilted back a little and turning
+   once every 3.5 minutes; soft pulses in the chapter colours run along its grid lines; a faint highlight sweeps across;
+   a few pixels of mouse parallax on desktop. Transform/opacity animations on compositor layers only. Static dots with
+   reduced motion; paused when the tab is hidden. */
 body{background-image:none}
-body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(var(--dot) 1px,transparent 1.3px);background-size:22px 22px;animation:desk-drift 80s linear infinite}
-@keyframes desk-drift{from{background-position:0 0}to{background-position:22px 22px}}
-html.tab-hidden body::before{animation-play-state:paused}
-@media (prefers-reduced-motion: reduce){ body::before{animation:none} }
+.tech-bg{position:fixed;inset:0;z-index:-1;overflow:hidden;pointer-events:none;contain:strict}
+.tb-par{position:absolute;inset:0;transform:translate3d(var(--px,0px),var(--py,0px),0);transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.tb-plane{position:absolute;left:50%;top:50%;width:170vmax;height:170vmax;margin:-85vmax 0 0 -85vmax;transform:perspective(1100px) rotateX(10deg) rotate(0deg);animation:tb-turn 210s linear infinite;will-change:transform}
+@keyframes tb-turn{to{transform:perspective(1100px) rotateX(10deg) rotate(360deg)}}
+.tb-dots{position:absolute;inset:0;background-image:radial-gradient(var(--tb-dot) 1px,transparent 1.4px);background-size:22px 22px}
+.tb-p{position:absolute;left:0;height:2px;width:22vmax;top:calc(var(--r) * 22px + 10px);border-radius:2px;background:linear-gradient(90deg,transparent,var(--c) 45%,#fff 50%,var(--c) 55%,transparent);box-shadow:0 0 10px 1px var(--c);opacity:var(--tb-po);transform:translate3d(-30vmax,0,0);animation:tb-run var(--d) linear var(--dl) infinite;will-change:transform}
+.tb-p.v{transform-origin:0 0;rotate:90deg;left:calc(var(--r) * 22px + 12px);top:0}
+@keyframes tb-run{0%{transform:translate3d(-30vmax,0,0)}70%,100%{transform:translate3d(180vmax,0,0)}}
+.tb-shine{position:absolute;left:0;top:0;width:90vmax;height:90vmax;margin:-45vmax 0 0 -45vmax;border-radius:50%;background:radial-gradient(closest-side,var(--tb-shine),transparent);animation:tb-sweep 16s ease-in-out infinite alternate;will-change:transform}
+@keyframes tb-sweep{from{transform:translate3d(-10vw,20vh,0)}to{transform:translate3d(110vw,80vh,0)}}
+:root{--tb-dot:rgba(36,52,84,.16);--tb-po:.45;--tb-shine:rgba(140,170,230,.16)}
+:root[data-theme="dark"]{--tb-dot:rgba(138,182,255,.22);--tb-po:.75;--tb-shine:rgba(92,211,238,.10)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--tb-dot:rgba(138,182,255,.22);--tb-po:.75;--tb-shine:rgba(92,211,238,.10)} }
+html.tab-hidden .tech-bg *{animation-play-state:paused}
+@media (prefers-reduced-motion: reduce){ .tb-plane{animation:none;transform:none} .tb-p,.tb-shine{display:none} .tb-par{transform:none} }
 html.wl-on body{background-image:radial-gradient(ellipse 55% 42% at 28% 16%,color-mix(in srgb,var(--h1d) 14%,transparent),transparent 72%),radial-gradient(ellipse 50% 40% at 76% 30%,color-mix(in srgb,var(--h3d) 12%,transparent),transparent 72%);background-size:100% 100%,100% 100%;background-repeat:no-repeat,no-repeat;background-attachment:fixed,fixed}
 html.wl-on .wrap > :not(#welcome){display:none!important}
 html:not(.wl-on) #welcome{display:none}
@@ -970,12 +984,12 @@ function appUpdates(reg, base, where) {
     const ver = run || (v && v.version); if (!ver) return;
     window.__appVersion = ver;
     document.querySelectorAll('[data-app-ver]').forEach(e => { e.textContent = `Version ${ver}${v && v.version === ver && v.date ? ' · ' + v.date : ''}`; });
-    const seen = ls('notes-app-version');
+    const seen = ls('dt-app-version');
     if (seen && seen !== ver && v && v.version === ver && Array.isArray(v.notes) && v.notes.length) {   /* once, after an update */
       const d = toast('upd-wn', `${icon}<div><b>What's new</b><ul>${v.notes.slice(0, 4).map(n => `<li>${String(n).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])}</li>`).join('')}</ul></div><button type="button" class="upd-later" aria-label="Close">OK</button>`);
       d.querySelector('.upd-later').addEventListener('click', () => d.remove());
     }
-    ls('notes-app-version', ver);
+    ls('dt-app-version', ver);
   });
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') check(); });
   setInterval(check, 30 * 60 * 1000);
@@ -1089,7 +1103,16 @@ function route() {
   /* remember the course only when the pupil picks one (a reset must leave nothing behind) */
   document.querySelectorAll('.wl-c[data-wl]').forEach(a => a.addEventListener('click', () => wlCourse(a.dataset.wl)));
   document.querySelectorAll('.seg [data-course]').forEach(b => b.addEventListener('click', () => wlCourse(b.dataset.course)));
-  document.addEventListener('visibilitychange', () => document.documentElement.classList.toggle('tab-hidden', document.visibilityState === 'hidden'));   /* pause the desk drift */
+  /* tech grid background: pulses along grid lines in the chapter colours; pause when hidden; desktop mouse parallax */
+  if (!document.querySelector('.tech-bg')) {
+    const P = [[6, 1, 11, 0], [14, 3, 13, 4], [23, 7, 10, 2], [31, 2, 12, 7], [9, 5, 14, 9, 'v'], [27, 9, 12, 5, 'v'], [40, 4, 15, 11], [45, 8, 13, 6, 'v']];
+    document.body.insertAdjacentHTML('afterbegin', `<div class="tech-bg" aria-hidden="true"><div class="tb-par"><div class="tb-plane"><div class="tb-dots"></div>${P.map(([r, h, d, dl, v]) => `<i class="tb-p${v ? ' v' : ''}" style="--r:${r * 3};--c:var(--h${h}l);--d:${d}s;--dl:-${dl}s"></i>`).join('')}</div><div class="tb-shine"></div></div></div>`);
+  }
+  document.addEventListener('visibilitychange', () => document.documentElement.classList.toggle('tab-hidden', document.visibilityState === 'hidden'));
+  if (window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const par = document.querySelector('.tb-par'); let raf = 0, mx = 0, my = 0;
+    window.addEventListener('pointermove', e => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; if (!raf) raf = requestAnimationFrame(() => { raf = 0; par.style.setProperty('--px', (-mx * 10).toFixed(1) + 'px'); par.style.setProperty('--py', (-my * 10).toFixed(1) + 'px'); }); }, { passive: true });
+  }
   window.addEventListener('popstate', route);
   window.addEventListener('pageshow', e => { if (e.persisted && !location.hash) wlPaint(); });
   window.addEventListener('storage', () => { if (!location.hash) wlPaint(); });

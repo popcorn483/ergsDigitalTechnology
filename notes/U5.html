@@ -1895,7 +1895,7 @@ body.ppv-on{overflow:hidden}
 /* the library menu grew (My progress, My course, install, animation speed): keep it inside the screen and scrollable */
 .libmenu{max-height:calc(100vh - 64px);max-height:calc(100dvh - 64px);overflow-y:auto;overscroll-behavior:contain}
 /* ================= APP: END ================= */
-</style>
+.pp-vq{font:inherit;font-size:.82em;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid var(--cc,var(--accent));background:transparent;color:var(--cc,var(--accent));cursor:pointer}.pp-vq:hover{background:var(--cc,var(--accent));color:#fff}</style>
 
 <header class="bar" id="bar">
   <div class="bar-in">
@@ -3186,9 +3186,16 @@ if (EXAM_ITEMS.length) GLOSS.forEach(g => {
   if (hits.length) PP_USES.set(g, hits);
 });
 const ppCount = g => (PP_USES.get(g) || []).length;
+const PPQ = [];
+document.addEventListener('click', async ev => {
+  const b = ev.target.closest && ev.target.closest('[data-ppq]'); if (!b) return;
+  ev.preventDefault(); const e = PPQ[+b.dataset.ppq]; if (!e) return;
+  try { const F = PP_VIEW && await PP_VIEW.files(e); if (F && F.paper) { PP_VIEW.open(e, 'paper'); return; } } catch (x) {}
+  const [href] = examLink(e); window.open(href, '_blank', 'noopener');
+});
 function ppItem(x) {
   const [href, lab] = examLink(x.e);
-  return `<li><div class="pp-r"><b>${esc(examRef(x.e))}</b><a href="${esc(href)}" target="_blank" rel="noopener">${esc(lab)} ${ICON_EXT}</a><a href="#${esc(x.P.p.id)}:e${(x.P.p.exam || []).indexOf(x.e)}">Go to page ${x.P.i + 1} →</a></div>${x.e.tip ? `<div class="pp-t"><span>What earned the marks:</span> ${inlineFlat(x.e.tip)}</div>` : `<div class="pp-t">${inlineFlat(x.e.summary)}</div>`}</li>`;
+  return `<li><div class="pp-r"><b>${esc(examRef(x.e))}</b><a href="${esc(href)}" target="_blank" rel="noopener">${esc(lab)} ${ICON_EXT}</a>${typeof PP_VIEW !== 'undefined' && PP_VIEW ? `<button type="button" class="pp-vq" data-ppq="${PPQ.push(x.e) - 1}">View the question</button>` : ''}<a href="#${esc(x.P.p.id)}:e${(x.P.p.exam || []).indexOf(x.e)}">Go to page ${x.P.i + 1} →</a></div>${x.e.tip ? `<div class="pp-t"><span>What earned the marks:</span> ${inlineFlat(x.e.tip)}</div>` : `<div class="pp-t">${inlineFlat(x.e.summary)}</div>`}</li>`;
 }
 function ppHTML(g) {
   const hits = PP_USES.get(g);
@@ -8263,12 +8270,12 @@ function appUpdates(reg, base, where) {
     const ver = run || (v && v.version); if (!ver) return;
     window.__appVersion = ver;
     document.querySelectorAll('[data-app-ver]').forEach(e => { e.textContent = `Version ${ver}${v && v.version === ver && v.date ? ' · ' + v.date : ''}`; });
-    const seen = ls('notes-app-version');
+    const seen = ls('dt-app-version');
     if (seen && seen !== ver && v && v.version === ver && Array.isArray(v.notes) && v.notes.length) {   /* once, after an update */
       const d = toast('upd-wn', `${icon}<div><b>What's new</b><ul>${v.notes.slice(0, 4).map(n => `<li>${String(n).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])}</li>`).join('')}</ul></div><button type="button" class="upd-later" aria-label="Close">OK</button>`);
       d.querySelector('.upd-later').addEventListener('click', () => d.remove());
     }
-    ls('notes-app-version', ver);
+    ls('dt-app-version', ver);
   });
   document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') check(); });
   setInterval(check, 30 * 60 * 1000);
