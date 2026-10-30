@@ -1939,49 +1939,22 @@ body.ppv-on{overflow:hidden}
 .app-ver{display:block;padding:2px 10px 6px;font-size:11.5px;color:var(--ink-3)}
 /* the library menu grew (My progress, My course, install, animation speed): keep it inside the screen and scrollable */
 .libmenu{max-height:calc(100vh - 64px);max-height:calc(100dvh - 64px);overflow-y:auto;overscroll-behavior:contain}
+/* past-paper crops: the question's lead-in shown above the part */
+.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
+.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
+.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
+.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
+.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
 /* ================= APP: END ================= */
 
-/* past-paper crops: the question's lead-in shown above the part */
-.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
-.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
-.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
-.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
-.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
 
-/* past-paper crops: the question's lead-in shown above the part */
-.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
-.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
-.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
-.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
-.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
 
-/* past-paper crops: the question's lead-in shown above the part */
-.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
-.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
-.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
-.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
-.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
 
-/* past-paper crops: the question's lead-in shown above the part */
-.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
-.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
-.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
-.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
-.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
 
-/* past-paper crops: the question's lead-in shown above the part */
-.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
-.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
-.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
-.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
-.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
 
-/* past-paper crops: the question's lead-in shown above the part */
-.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
-.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
-.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
-.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
-.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
+
+
+
 .pp-vq{font:inherit;font-size:.82em;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid var(--cc,var(--accent));background:transparent;color:var(--cc,var(--accent));cursor:pointer}.pp-vq:hover{background:var(--cc,var(--accent));color:#fff}/* ================= DESIGN: BEGIN (workbook calm-down layer; source notes/app/design.css, injected last by notes/app/inject.py) =================
    One type system: headings, labels and buttons in the sans (sentence case); notes prose in the serif; Lemon Milk only for the
    "Mr Butler's" wordmark and the book-cover title. One radius scale (10 / 14), lighter shadows, a plain desk, no decorative
@@ -2021,7 +1994,7 @@ body{background-image:none}
 #b-lib{position:relative}
 @media (max-width:699px){ #b-back > span:not(.bk-wm){display:inline!important} #b-back .bk-wm{display:none!important} }
 @media (max-width:560px){ .lb{font-size:11px;font-weight:700} }
-@media (max-width:440px){ .pn{max-width:92px;overflow:hidden;text-overflow:ellipsis} }
+@media (max-width:440px){ .pn{max-width:84px;overflow:hidden;text-overflow:ellipsis} .bar .sep{display:none} }
 
 /* ---------- contents rail: other chapters fold away, the current one is open ---------- */
 .r-spec{display:none}
@@ -2051,7 +2024,7 @@ body{background-image:none}
 .r-ch:is(.open,:has(.r-pg[aria-current="page"])):not(.shut){padding-bottom:8px}
 .r-pg{margin-left:14px;padding:6px 8px 6px 10px;font-size:13.5px}
 .r-pg > span:last-child{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
-.r-pg[aria-current="page"] > span:last-child{-webkit-line-clamp:unset;display:block}
+.r-pg[aria-current="page"] > span:last-child,.r-pg > span:last-child:has(em){-webkit-line-clamp:unset;display:block}
 .r-pg[aria-current="page"]{font-weight:700}
 
 /* ---------- surfaces: one radius, lighter shadows ---------- */

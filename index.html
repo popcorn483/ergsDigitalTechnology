@@ -467,13 +467,23 @@ html:not(.wl-on) #welcome{display:none}
 .wall{gap:8px}
 .wall span{border-radius:12px;box-shadow:none;transform:none}
 .hero.anim .wall span{animation-name:fin}
-/* course switch and filter bar */
+/* course switch */
 .seg{border-radius:var(--r-m);padding:4px;margin:20px 0 16px}
 .seg button{border-radius:var(--r-s)}
-.filt{border-radius:var(--r-m);margin:0 0 18px;padding:12px}
-.f-q,.f-ppt{border-radius:var(--r-s);border-width:1px}
-.f-ppt{font-size:14px}
-.chip{border-width:1px}
+/* unit filter: a single-row strip of unit tabs under the course switch (scrolls sideways on a phone if it must) */
+.filt{flex-direction:row;align-items:center;gap:12px;margin:0 0 16px;padding:0 2px;background:none;border-radius:0;box-shadow:none;outline:0;border-bottom:1px solid var(--line)}
+.filt .chips{flex:1 1 auto;gap:2px;padding:0;overflow-x:auto;scrollbar-width:none}
+.filt .chip,:root .filt .chip[aria-pressed="true"]{border:0;border-bottom:2.5px solid transparent;border-radius:0;background:none;margin-bottom:-1px;padding:10px 12px 9px;font-size:14.5px;color:var(--ink-2)}
+.filt .chip:hover{color:var(--ink);border-color:transparent;border-bottom-color:var(--line)}
+:root .filt .chip[aria-pressed="true"]{color:var(--ink);border-bottom-color:var(--accent)}
+.filt .chip:active{transform:none}
+.filt .chip:focus-visible{outline-offset:-3px}
+.f-count{font-size:13px}
+/* course switch and My progress on a phone: short labels, two tidy lines */
+.mp-l1,.mp-l2{display:block}
+.mp-l2{font-size:13px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.myprog > summary > span:nth-child(2){min-width:0}
+@media (max-width:520px){ .seg{width:100%;margin:16px 0 12px} .seg button{padding:9px 8px;font-size:15px} .seg button small{font-size:11.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis} .filt .chip,:root .filt .chip[aria-pressed="true"]{padding:10px 10px 9px} }
 /* unit cards: no top strip; topic rows a little tighter, no wobble on hover */
 .unit{border-radius:var(--r-l);margin-bottom:18px}
 .unit > .spec{display:none}
@@ -493,7 +503,7 @@ html:not(.wl-on) #welcome{display:none}
 #mp-body h3{font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink-2)}
 .home-row{margin:-4px 0 14px}
 @media (max-width:760px){ .hero{padding:26px 20px 24px;border-radius:var(--r-l)} .hero h1{max-width:none} }
-@media (max-width:699px){ .unit{border-radius:var(--r-m)} .unit-h{padding:18px 16px 10px} .filt{border-radius:var(--r-m)} }
+@media (max-width:699px){ .unit{border-radius:var(--r-m)} .unit-h{padding:18px 16px 10px} }
 /* ================= DESIGN: END ================= */
 </style>
 </head>
@@ -584,14 +594,8 @@ html:not(.wl-on) #welcome{display:none}
     <button type="button" data-course="gcse" aria-pressed="true">GCSE<small>Unit 1 and Unit 4</small></button>
     <button type="button" data-course="gce" aria-pressed="false">A level (GCE)<small>AS 1, AS 2, A2 1, A2 2</small></button>
   </div>
-  <div class="filt" role="search" aria-label="Filter topics">
-    <div class="f-row"><label class="f-q"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><input id="fq" type="search" placeholder="Search topics and key terms" autocomplete="off" aria-label="Search topics and key terms"></label>
-      <label class="f-ppt" title="Topics where your teacher has added their own PowerPoint"><input type="checkbox" id="fppt"><span>Has PowerPoint</span></label>
-      <label class="f-ppt f-tmp" title="Also count topics that only have a temporary PowerPoint made from the lesson slides"><input type="checkbox" id="ftmp"><span>Include temporary</span></label></div>
-    <div class="f-row f-row2"><div class="chips" id="fchips" role="group" aria-label="Units"></div><span class="f-count" id="fcount" aria-live="polite"></span></div>
-  </div>
+  <nav class="filt" aria-label="Units"><div class="chips" id="fchips" role="group" aria-label="Show units"></div><span class="f-count" id="fcount" aria-live="polite"></span></nav>
   <main id="units"></main>
-  <div class="empty" id="empty" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5M8.5 11h5"/></svg><h2>No topics match</h2><p id="empty-t">Try a different word, or show every unit.</p><button type="button" class="btn pri" id="fclear">Clear filters</button></div>
   <p class="foot brand-foot">Mr Butler’s Digital Technology · CCEA revision</p>
   <p class="foot"><a href="sow.html">Teacher scheme of work</a></p>
   <details class="foot-up" id="upl"><summary>Where to upload topic PowerPoints</summary><p>Put a PowerPoint (or PDF) with any file name in the topic’s folder in the GitHub repo. Too big for GitHub (over 25 MB)? Put a OneDrive, SharePoint or Google Drive share link in a <code>link.txt</code> file in the folder instead. It appears on this page and in the workbook a minute or two later.</p><div id="upl-l"></div></details>
@@ -742,25 +746,22 @@ async function mountPpt() {
   });
   box.querySelectorAll('.unit').forEach(sec => { if (missing.has(sec.dataset.unit)) pptIO.observe(sec); });
 }
-/* ---------- filters: unit chips, search (topic names and key terms), Has PowerPoint; kept in the hash ---------- */
-const F = { units: new Set(), q: '', ppt: false, tmp: false };
+/* ---------- filter: unit chips only, kept in the hash (#gcse&units=U1). DESIGN PASS: the search box and the PowerPoint
+   checkboxes were removed; an old link or bookmark with q= / ppt= / tmp= is ignored, so every topic still shows. ---------- */
+const F = { units: new Set(), q: '', ppt: false, tmp: false };   /* q / ppt / tmp stay empty: kept only so older hooks that read them see "no filter" */
 function parseHash() {
   const parts = decodeURIComponent((location.hash || '').slice(1)).split('&'), course = /^gce$/i.test(parts[0]) ? 'gce' : 'gcse';
   F.units = new Set(); F.q = ''; F.ppt = false; F.tmp = false;
-  parts.slice(1).forEach(kv => { const i = kv.indexOf('='), k = i < 0 ? kv : kv.slice(0, i), v = i < 0 ? '' : kv.slice(i + 1); if (k === 'units') v.split(',').filter(Boolean).forEach(u => F.units.add(u)); else if (k === 'q') F.q = v; else if (k === 'ppt') F.ppt = v === '1'; else if (k === 'tmp') F.tmp = v === '1'; });
-  if (F.tmp) F.ppt = true;
+  parts.slice(1).forEach(kv => { const i = kv.indexOf('='), k = i < 0 ? kv : kv.slice(0, i), v = i < 0 ? '' : kv.slice(i + 1); if (k === 'units') v.split(',').filter(Boolean).forEach(u => F.units.add(u)); });
   return course;
 }
 let course = 'gcse';
 function writeHash() {
   const ex = [];
   if (F.units.size) ex.push('units=' + [...F.units].join(','));
-  if (F.q) ex.push('q=' + encodeURIComponent(F.q));
-  if (F.ppt) ex.push('ppt=1');
-  if (F.ppt && F.tmp) ex.push('tmp=1');
   try { history.replaceState(null, '', '#' + [course, ...ex].join('&')); } catch (e) { }
 }
-const fq = document.getElementById('fq'), fppt = document.getElementById('fppt'), ftmp = document.getElementById('ftmp'), fchips = document.getElementById('fchips');
+const fchips = document.getElementById('fchips');
 function chipsFor() {
   const us = UNITS.filter(u => u.course === course);
   [...F.units].forEach(u => { if (!us.some(x => x.id === u)) F.units.delete(u); });
@@ -774,42 +775,23 @@ fchips.addEventListener('click', e => {
   fchips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.u ? F.units.has(c.dataset.u) : !F.units.size)));
   applyFilter(true); writeHash();
 });
-let qT = 0;
-fq.addEventListener('input', () => { clearTimeout(qT); qT = setTimeout(() => { F.q = fq.value.trim(); applyFilter(false); writeHash(); }, 90); });
-fppt.addEventListener('change', () => { F.ppt = fppt.checked; if (!F.ppt) { F.tmp = false; ftmp.checked = false; } applyFilter(true); writeHash(); });
-/* Include temporary widens Has PowerPoint to the temporary decks too (and switches it on) */
-ftmp.addEventListener('change', () => { F.tmp = ftmp.checked; if (F.tmp) { F.ppt = true; fppt.checked = true; } applyFilter(true); writeHash(); });
-document.getElementById('fclear').addEventListener('click', () => { F.units.clear(); F.q = ''; F.ppt = false; F.tmp = false; fq.value = ''; fppt.checked = false; ftmp.checked = false; chipsFor(); applyFilter(true); writeHash(); fq.focus(); });
 const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const PPT_OK = new Map();
 function applyFilter(anim) {
-  const q = F.q.toLowerCase(), re = q ? new RegExp('(' + reEsc(esc(F.q)) + ')', 'ig') : null;
   let shown = 0, total = 0;
   box.querySelectorAll('.unit').forEach(sec => {
     const u = UNITS.find(x => x.id === sec.dataset.unit), unitOn = !F.units.size || F.units.has(u.id);
     let vis = 0;
     sec.querySelectorAll('.tp').forEach(li => {
-      const c = u.chapters[+li.dataset.ci]; total++;
-      const tb = li.querySelector('.tp-t b'), old = li.querySelector('.hit'); if (old) old.remove();
-      tb.innerHTML = esc(c.title);
-      let ok = unitOn, hit = null;
-      if (ok && q) {
-        if (c.title.toLowerCase().includes(q)) tb.innerHTML = esc(c.title).replace(re, '<mark>$1</mark>');
-        else { const ts = (c.tn || []).filter(t => t.toLowerCase().includes(q)); if (ts.length) hit = ts; else ok = false; }
-      }
-      if (ok && F.ppt) { const st = PPT_OK.get(u.id + '/' + c.id); ok = st === 'own' || (F.tmp && st === 'temp'); }
-      if (hit) li.querySelector('.tp-t span').insertAdjacentHTML('afterend', `<span class="hit">matches term: ${hit.slice(0, 2).map(t => esc(t).replace(re, '<mark>$1</mark>')).join(', ')}${hit.length > 2 ? ` +${hit.length - 2}` : ''}</span>`);
+      total++;
       const was = li.classList.contains('out');
-      li.classList.toggle('out', !ok);
-      if (ok) { vis++; shown++; if (was && !RM()) { li.classList.remove('flt-in'); void li.offsetWidth; li.classList.add('flt-in'); } }
+      li.classList.toggle('out', !unitOn);
+      if (unitOn) { vis++; shown++; if (was && anim && !RM()) { li.classList.remove('flt-in'); void li.offsetWidth; li.classList.add('flt-in'); } }
     });
     sec.querySelectorAll('.tpart').forEach(g => g.classList.toggle('out', !g.querySelector('.tp:not(.out)')));   /* TUTORIAL BOOK hook */
     sec.classList.toggle('out', !vis);
   });
-  const filtering = F.units.size || F.q || F.ppt;
-  document.getElementById('fcount').innerHTML = filtering ? `<b>${shown}</b> of ${total} topics` : `${total} topics`;
-  const em = document.getElementById('empty'); em.hidden = shown > 0;
-  if (!shown) document.getElementById('empty-t').textContent = F.ppt && !F.q ? (F.tmp ? 'No topics in this selection have a PowerPoint yet, not even a temporary one.' : 'No topics in this selection have your teacher\'s own PowerPoint yet. Tick “Include temporary” to see the temporary ones.') : F.q ? `Nothing matches “${F.q}” in these units. Try a shorter word or another unit.` : 'Try another unit.';
+  document.getElementById('fcount').textContent = F.units.size ? `${shown} of ${total} topics` : `${total} topics`;
 }
 /* ================= APP: BEGIN =================
    Front page: covered/total ring on every topic row, "My progress" for the pupil's own course ("My course"; never totalled across GCSE and A level),
@@ -913,7 +895,7 @@ function progSummary() {
   const sc = myScope();
   if (!sc) { el.textContent = 'Choose your course to see your progress'; return; }
   const t = scopeCount(sc);
-  el.innerHTML = `<b>${t.d}</b> of ${t.n} pages covered · ${esc(scopeTxt(sc))}`;
+  el.innerHTML = `<span class="mp-l1"><b>${t.d}</b> of ${t.n} pages covered</span><span class="mp-l2">${esc(scopeTxt(sc))}</span>`;   /* two short lines, not one long wrapping one */
 }
 function progPanel() {
   const body = document.getElementById('mp-body'); if (!body) return;
@@ -1167,7 +1149,6 @@ function route() {
 function show(c, keepFilters) {
   course = c;
   if (!keepFilters) { F.units.clear(); }
-  fq.value = F.q; fppt.checked = F.ppt; ftmp.checked = F.tmp;
   chipsFor(); render(course); applyFilter(false); appRings();   /* APP hook */
 }
 document.querySelectorAll('[data-course]').forEach(b => b.addEventListener('click', () => {
