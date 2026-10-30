@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>GCSE Unit 1 Notes</title>
+<title>GCSE Unit 1 Notes – Mr Butler's</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1288,8 +1288,21 @@ figure.anim{   /* figure only: the cover hero and chapter banners also carry .an
 .anim figcaption{padding:9px 14px 11px;border-top:1px solid color-mix(in srgb,var(--k) 14%,var(--line));font-size:13.5px;color:var(--ink-2);font-style:italic}
 .anim .an-all{display:none;margin:0;padding:6px 14px 10px 34px;font-size:14px;color:var(--ink-2);background:var(--kt);gap:2px;flex-direction:column}
 .an-all li::marker{color:var(--k);font-weight:700}
-@media (prefers-reduced-motion:reduce){ .anim .an-all{display:flex} .an-pp{display:none} .an-cap{display:none} }
-@media print{ .an-bar,.an-cap{display:none} .anim .an-all{display:flex} }
+.an-ctl{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px;padding:0 12px 10px;background:var(--kt)}
+.an-seg{display:inline-flex;border-radius:9px;border:1px solid color-mix(in srgb,var(--k,var(--accent)) 28%,var(--line));overflow:hidden;background:var(--paper)}
+.an-seg button{border:0;background:transparent;padding:5px 10px;font-family:var(--sans);font-size:12.5px;font-weight:700;color:var(--ink-2);line-height:1.3;cursor:pointer}
+.an-seg button + button{border-left:1px solid var(--line-2)}
+.an-seg button[aria-pressed="true"]{background:var(--k,var(--accent));color:var(--paper)}
+.an-seg button:focus-visible{outline-offset:-3px}
+.an-sp button{padding:5px 8px;font-variant-numeric:tabular-nums}
+.anim[data-mode="step"] .an-st{cursor:pointer}
+.anim:focus-visible{outline:2.5px solid var(--k);outline-offset:2px}
+.an-n{min-width:5.6em}
+.an-mpref{display:flex;flex-direction:column;gap:6px;padding:4px 10px 8px;font-family:var(--sans)}
+.an-mpref > b{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.an-mpref .an-ctl{background:none;padding:0;justify-content:flex-start}
+@media (prefers-reduced-motion:reduce){ .anim .an-all{display:flex} .an-pp{display:none} .an-cap{display:none} .anim .an-ctl{display:none} }
+@media print{ .an-bar,.an-cap,.an-ctl{display:none} .anim .an-all{display:flex} }
 @media (max-width:520px){ .an-st{padding:10px 4px 4px} .an-h{padding:9px 12px} .an-cap{padding:8px 12px 11px;font-size:14px} .an-bar{padding:8px 8px 0} }
 /* scene vocabulary: f* = fill, s* = stroke, t* = text colour */
 .an-svg text{white-space:pre;font-family:var(--sans);font-size:15px;fill:var(--ink);dominant-baseline:central;text-anchor:middle}
@@ -1501,7 +1514,253 @@ figure.anim{   /* figure only: the cover hero and chapter banners also carry .an
 .r-part span{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
 .tch .chcard-h{border-bottom:0}
 body.tut-book #b-gloss{display:none!important}
+
+/* ---------- coursework task card (dominant), lighter page after it ---------- */
+.tcard{--tk:var(--cc);border-radius:22px;background:var(--paper);box-shadow:var(--card-shadow),0 0 0 2px color-mix(in srgb,var(--tk) 45%,transparent);overflow:hidden;font-family:var(--sans);display:flex;flex-direction:column}
+.tcard > div{padding:18px 24px}
+.tcard > div + div{border-top:1px solid color-mix(in srgb,var(--tk) 18%,var(--line-2))}
+.tc-k{display:block;margin-bottom:8px;font-family:var(--display);font-weight:500;letter-spacing:.06em;font-size:12px;color:var(--tk);text-transform:uppercase}
+.tc-top{background:color-mix(in srgb,var(--tk) 9%,var(--paper))}
+.tc-h{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px}
+.tc-lab{display:inline-flex;align-items:center;flex:none;font-family:var(--display);font-weight:500;letter-spacing:.04em;font-size:12.5px;line-height:1;padding:6px 10px;border-radius:8px;background:var(--cc-d);color:#fff;white-space:nowrap}
+.tc-h h2{margin:0;font-family:var(--font-hero);font-weight:900;text-transform:uppercase;letter-spacing:.01em;font-size:clamp(20px,3vw,27px);line-height:1.12;color:var(--ink);text-wrap:balance}
+.tc-brief{margin:10px 0 0;font-family:var(--serif);font-size:17px;line-height:1.6;color:var(--ink)}
+.tc-where dl{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.tc-where dl > div{border-radius:10px;background:var(--paper-2);padding:7px 11px}
+.tc-where dt{font-size:11.5px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.06em}
+.tc-where dd{margin:0;font-size:14.5px;line-height:1.35;color:var(--ink);font-weight:700}
+.wu-mini{display:flex;flex-direction:column;gap:6px;margin-top:12px;text-decoration:none;color:inherit;border-radius:12px;padding:8px 10px;outline:1px dashed color-mix(in srgb,var(--tk) 35%,var(--line))}
+.wu-mini:hover{background:color-mix(in srgb,var(--tk) 6%,var(--paper))}
+.wu-cap{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:12.5px;color:var(--ink-3)}
+.wu-cap b{color:var(--tk)}
+.wu-bar{display:flex;gap:2px;height:14px;width:100%;border-radius:7px;overflow:visible}
+.wu-s{position:relative;min-width:6px;border-radius:4px;background:color-mix(in srgb,var(--wc) 30%,var(--line-2))}
+.wu-s.on{background:var(--wc)}
+.wu-here{position:absolute;top:-5px;bottom:-5px;width:4px;margin-left:-2px;border-radius:2px;background:var(--ink);box-shadow:0 0 0 2px var(--paper)}
+.wu-bar.big{height:26px;gap:3px;margin-top:14px}
+.wu-bar.big .wu-s{background:var(--wc);border-radius:6px}
+.wu-leg{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:8px 14px}
+.wu-leg li{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;line-height:1.3}
+.wu-leg i{flex:none;width:14px;height:14px;margin-top:2px;border-radius:4px;background:var(--wc)}
+.wu-leg span{display:flex;flex-direction:column}
+.wu-leg small{color:var(--ink-3);font-size:12px}
+.tc-app ol{margin:0;padding:0;list-style:none;counter-reset:ap;display:flex;flex-direction:column;gap:8px}
+.tc-app li{counter-increment:ap;position:relative;padding-left:38px;font-family:var(--serif);font-size:16px;line-height:1.55}
+.tc-app li::before{content:counter(ap);position:absolute;left:0;top:0;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:color-mix(in srgb,var(--tk) 14%,var(--paper));color:var(--tk);font-family:var(--sans);font-weight:700;font-size:13px}
+.tc-del .todo{--tc:var(--tk);outline:0;background:transparent;padding:0}
+.tc-del .todo-t small{display:none}
+.tc-marks p{margin:8px 0 0;font-size:14.5px;line-height:1.5}
+.mk-cs{display:flex;flex-wrap:wrap;gap:6px}
+.mk-chip{display:inline-flex;align-items:baseline;gap:6px;padding:5px 11px;border-radius:999px;background:color-mix(in srgb,var(--b-exam) 11%,var(--paper));color:var(--b-exam);font-size:13px;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--b-exam) 35%,transparent)}
+.mk-chip b{font-family:var(--display);font-weight:500;letter-spacing:.03em}
+.mk-chip.none{background:var(--paper-2);color:var(--ink-3);box-shadow:none}
+.mk-top{padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--b-tip) 9%,var(--paper));box-shadow:inset 3px 0 0 var(--b-tip)}
+.mk-no{color:var(--ink-2)}
+.mk-b{margin-top:10px}
+.mk-b > summary{cursor:pointer;font-weight:700;font-size:14px;color:var(--tk)}
+.mk-bd{margin-top:8px}
+.mk-bd > b{font-size:13.5px}
+.mk-bd dl,.mk-dl{margin:6px 0 0;display:flex;flex-direction:column;gap:4px}
+.mk-bd dl > div,.mk-dl > div{display:grid;grid-template-columns:minmax(64px,auto) minmax(0,1fr);gap:10px;font-size:13.5px;line-height:1.45;padding:5px 8px;border-radius:8px;background:var(--paper-2)}
+.mk-bd dt,.mk-dl dt{font-weight:700;color:var(--ink)}
+.mk-bd dd,.mk-dl dd{margin:0;color:var(--ink-2)}
+.mk-f{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:center;margin-top:10px;font-size:13.5px}
+.mk-unc{display:inline-block;font-size:12px;color:var(--warn);background:var(--warn-soft);border-radius:6px;padding:2px 8px}
+.sheet.has-task .ncard{background:transparent;box-shadow:none;outline:1px solid var(--line-2);padding-top:18px;padding-bottom:18px}
+.sheet.has-task .ncard > h2{font-size:17px}
+.sheet.has-task .ncard > h2 .bi{width:26px;height:26px}
+.sheet.has-task .notes{font-size:15.5px}
+.sheet.has-task #dg-slot > *,.sheet.has-task .s-turn{opacity:.96}
+@media (max-width:560px){ .tcard > div{padding:14px 14px} .tcard{border-radius:18px} .tc-where dl{grid-template-columns:minmax(0,1fr) minmax(0,1fr)} .wu-cap span{flex-basis:100%} }
+
+/* ---------- library, build list, write-up map and marks views ---------- */
+.lib-v{gap:16px}
+.lib-hero{padding:24px 28px;font-family:var(--sans)}
+.lib-k{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--cc);letter-spacing:.04em;text-transform:uppercase}
+.lib-k svg{width:16px;height:16px}
+.lib-hero h1{margin:6px 0 6px;font-family:var(--font-hero);font-weight:900;text-transform:uppercase;font-size:clamp(26px,4.4vw,40px);line-height:1.05;letter-spacing:.01em}
+.lib-hero > p{margin:0 0 14px;font-family:var(--serif);font-size:16.5px;line-height:1.55;color:var(--ink-2);max-width:60ch}
+.lib-q{display:flex;align-items:center;gap:10px;padding:0 16px;border-radius:16px;background:var(--paper-2);outline:2px solid color-mix(in srgb,var(--cc) 45%,var(--line));transition:outline-color .15s}
+.lib-q:focus-within{outline:3px solid var(--cc)}
+.lib-q svg{flex:none;width:24px;height:24px;color:var(--cc)}
+.lib-q input{flex:1;min-width:0;border:0;background:transparent;font-size:19px;padding:15px 0;outline:none}
+.lib-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.lib-chip{border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 13px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:12.5px;color:var(--ink-2)}
+.lib-chip[aria-pressed="true"]{background:var(--cc-d);border-color:var(--cc-d);color:#fff}
+.lib-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-top:12px;font-size:13.5px;color:var(--ink-3)}
+.lib-my{font-weight:700;text-decoration:none;color:var(--cc)}
+.lib-my b{display:inline-block;min-width:22px;text-align:center;border-radius:999px;background:var(--cc-d);color:#fff;padding:0 6px;margin-left:4px;font-size:12px}
+.lib-body{padding:10px 18px 18px}
+.lib-cat{margin-top:12px}
+.lib-cat > h2{display:flex;align-items:center;gap:10px;margin:8px 4px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:15px;color:var(--cc)}
+.lib-cat > h2 span{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--cc-d);color:#fff;font-family:var(--mono);font-size:13px}
+.lib-cat > h2 small{margin-left:auto;font-family:var(--sans);letter-spacing:0;font-size:12.5px;color:var(--ink-3)}
+.lib-l,.bl-l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.lib-r,.bl-l li{display:flex;align-items:center;gap:6px;border-top:1px solid var(--line-2)}
+.lib-r > a,.bl-l li > a{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;padding:10px 8px;text-decoration:none;color:var(--ink);border-radius:10px}
+.lib-r > a:hover,.bl-l li > a:hover{background:var(--cc-t)}
+.lib-r small{font-size:11.5px;font-weight:700;color:var(--cc)}
+.lib-r b,.bl-l b{font-size:15.5px;line-height:1.3}
+.lib-r span,.bl-l li > a > span{font-size:13.5px;line-height:1.4;color:var(--ink-2)}
+.lib-r .lib-tg,.lib-r .lib-tx{font-size:12.5px;color:var(--ink-3)}
+.lib-r mark{background:var(--mark);color:var(--mark-ink);border-radius:3px;padding:0 1px}
+.lib-none{padding:14px 6px;color:var(--ink-2)}
+.lib-none button{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:2px 10px;margin:2px}
+.star{flex:none;display:inline-flex;align-items:center;gap:6px;border:0;background:transparent;border-radius:10px;padding:8px;color:var(--ink-3);font-size:22px;line-height:1}
+.star i{font-style:normal;transition:transform .2s var(--ease)}
+.star[aria-pressed="true"]{color:#E0A100}
+.star[aria-pressed="true"] i{transform:scale(1.12)}
+.star:hover{background:var(--paper-2)}
+.star.big{font-size:18px;padding:7px 13px;border:1.5px solid var(--line);background:var(--paper)}
+.star.big span{font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:12.5px;color:var(--ink)}
+.star.big[aria-pressed="true"]{border-color:#E0A100;background:color-mix(in srgb,#E0A100 12%,var(--paper))}
+.lib-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;font-family:var(--sans);font-size:14px}
+.lib-top a{font-weight:700;text-decoration:none;color:var(--cc)}
+.lib-top > span{color:var(--ink-3);font-size:13px}
+.lib-top .star{margin-left:auto}
+.is-recipe .tut-n{pointer-events:auto}
+.rc-chk .boxed.key{--bc:var(--b-tip)}
+.bl-prog{display:flex;align-items:center;gap:12px;font-weight:700;font-size:14.5px}
+.bl-prog .meter{flex:1;max-width:320px;height:8px}
+.bl-cb{flex:none;padding:8px 2px 8px 8px;cursor:pointer}
+.bl-cb input{position:absolute;opacity:0;width:1px;height:1px}
+.bl-cb input:checked + .todo-box{background:var(--good);border-color:var(--good)}
+.bl-cb input:checked + .todo-box svg{opacity:1;transform:none}
+.bl-cb input:focus-visible + .todo-box{outline:2.5px solid var(--accent);outline-offset:2px}
+.bl-cb .todo-box{--tc:var(--good)}
+.bl-l li.ok b{text-decoration:line-through;color:var(--ink-3)}
+.lib-ctas{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.lib-cta{display:flex;align-items:center;gap:14px;padding:18px 20px;text-decoration:none;color:var(--ink);font-family:var(--sans);transition:transform .15s var(--ease)}
+.lib-cta:not(.sm){grid-column:1/-1;background:linear-gradient(120deg,color-mix(in srgb,var(--h2d) 14%,var(--paper)),var(--paper));outline:2px solid color-mix(in srgb,var(--h2d) 40%,transparent)}
+.lib-cta:hover{transform:translateY(-2px)}
+.lib-ci{flex:none;width:50px;height:50px;border-radius:14px;display:grid;place-items:center;background:var(--h2d);color:#fff;font-size:22px}
+.lib-cta.sm .lib-ci{width:40px;height:40px;border-radius:12px;font-size:18px;background:#16213A}
+.lib-ci svg{width:26px;height:26px}
+.lib-ct{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.lib-ct small{font-family:var(--display);font-weight:500;letter-spacing:.04em;font-size:12px;color:var(--h2)}
+.lib-ct > b{font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:18px;line-height:1.25}
+.lib-cta.sm .lib-ct > b{font-size:14px}
+.lib-ct > span{font-size:13.5px;color:var(--ink-2);line-height:1.4}
+.lib-go{flex:none;font-weight:700;color:var(--h2)}
+.tmap-tile .cv-ic{background:#16213A}
+.tmap-tile .cv-ic svg{width:24px;height:24px}
+.r-lib{display:flex;flex-direction:column;gap:2px;padding:4px 0 10px;border-bottom:1px solid var(--line);margin-bottom:6px}
+.r-lib a{display:flex;align-items:center;gap:9px;padding:8px;border-radius:8px;text-decoration:none;color:var(--ink);font-weight:700;font-size:13.5px}
+.r-lib a:hover,.r-lib a[aria-current="page"]{background:var(--accent-soft)}
+.r-lib svg{width:17px;height:17px;flex:none;color:var(--ink-2)}
+.r-lib i{font-style:normal;color:#E0A100;width:17px;text-align:center}
+.r-lib b{margin-left:auto;font-size:11.5px;color:var(--ink-3)}
+.wu-ch{padding:18px 22px}
+.wu-ch > h2{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:0 0 8px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:16px}
+.wu-n{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--wc);color:#fff;font-family:var(--mono);font-size:14px}
+.wu-ch > h2 small{margin-left:auto;font-family:var(--sans);letter-spacing:0;font-size:12.5px;color:var(--ink-3)}
+.wu-ch .mk-cs{margin:0 0 6px}
+.wu-l{list-style:none;margin:0;padding:0}
+.wu-l a{display:flex;align-items:center;gap:10px;padding:9px 6px;border-top:1px solid var(--line-2);text-decoration:none;color:var(--ink)}
+.wu-l a:hover{background:var(--paper-2)}
+.wu-l .tc-lab{background:var(--wc);min-width:74px;justify-content:center}
+.wu-t{flex:1;min-width:0;display:flex;flex-direction:column}
+.wu-t b{font-size:14.5px;line-height:1.3}
+.wu-t small{font-size:12px;color:var(--ink-3)}
+.wu-p{flex:none;display:flex;flex-direction:column;align-items:flex-end;font-size:12.5px;color:var(--ink-2);text-align:right}
+.wu-p em{font-style:normal;font-size:11.5px;color:var(--ink-3)}
+.wu-p em.ok{color:var(--good);font-weight:700}
+.mk-tw table{font-size:13.5px}
+.mk-tw th[scope="row"]{min-width:130px}
+.mk-tw th[scope="row"] .lk,.mk-tw th[scope="row"] .mk-unc{display:block;margin-top:4px;font-weight:400}
+.mk-n{font-size:20px;font-weight:700;text-align:center}
+.mk-ts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.mk-ts a{display:flex;gap:6px;align-items:baseline;text-decoration:none;color:var(--ink)}
+.mk-ts .tc-lab{font-size:11px;padding:3px 6px}
+@media (max-width:560px){
+  .lib-hero{padding:18px 16px}.lib-q input{font-size:17px;padding:13px 0}.lib-body{padding:6px 8px 12px}
+  .wu-ch{padding:14px 12px}.wu-l .tc-lab{min-width:0}.wu-l a{flex-wrap:wrap;gap:4px 10px}.wu-t{flex-basis:calc(100% - 90px)}.wu-p{flex-direction:row;gap:10px;flex-basis:100%;justify-content:flex-start;text-align:left;padding-left:2px}
+  .lib-cta{padding:14px}.lib-go{display:none}
+  .mk-tw table,.mk-tw tbody,.mk-tw tr,.mk-tw th,.mk-tw td{display:block}.mk-tw thead{display:none}.mk-tw tr{border-top:2px solid var(--line);padding:8px 0}.mk-n{text-align:left}
+}
+@media print{
+  body.bl-on .bar,body.bl-on .rail,body.bl-on .scrim,body.bl-on .lib-np,body.bl-on .star,body.bl-on #bl-empty,body.bl-on .drawer,body.bl-on .prog{display:none!important}
+  body.bl-on,body.bl-on main{background:#fff!important;padding:0!important}
+  body.bl-on .shell{display:block}
+  body.bl-on .card{box-shadow:none!important;outline:0!important;border:0}
+  body.bl-on .lib-hero h1{font-size:26px;color:#000}
+  body.bl-on .bl-l li{break-inside:avoid}
+  body.bl-on .todo-box{border:1.5px solid #000!important;background:#fff!important}
+  body.bl-on .bl-l li.ok .todo-box svg{opacity:1;color:#000}
+}
+.tryit{padding:0;overflow:hidden;font-family:var(--sans)}
+.tryit > details > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:12px 18px}
+.tryit > details > summary::-webkit-details-marker{display:none}
+.tryit .bi{--bc:var(--b-prac);width:28px;height:28px}
+.tryit summary b{font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:14px}
+.tryit summary > span:last-child{font-size:13px;color:var(--ink-3)}
+.tryit summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);transform:rotate(45deg);transition:transform .2s}
+.tryit details[open] summary::after{transform:rotate(-135deg)}
+.tryit .tt-mini{margin:0 14px 14px;box-shadow:none;outline:1px solid var(--line);--bc:var(--b-prac)}
+.mk-meta{font-size:14px!important;margin:0 0 6px!important}
+.mk-adv{padding:16px 22px}
+.mk-adv h2{margin:0 0 8px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:15px}
+.mk-adv ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.5}
 /* ================= TUTORIAL BOOK: END ================= */
+/* ================= APP: BEGIN (progress view, covered button, install menu; source notes/app/app.css) ================= */
+.cov-btn{font-weight:700}
+.done-row{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px}
+.pg-link{display:inline-flex;align-items:center;gap:6px;font-family:var(--sans);font-size:13.5px;font-weight:700;text-decoration:none;color:var(--cc)}
+.pg-link svg{width:16px;height:16px}
+.pg-ring{position:relative;flex:none;width:46px;height:46px;display:grid;place-items:center;--tc:var(--good)}
+.pg-ring.big{width:92px;height:92px}
+.pg-ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.pg-ring circle{fill:none;stroke-width:4.5}
+.pg-ring .tr-bg{stroke:color-mix(in srgb,var(--tc) 18%,var(--line-2))}
+.pg-ring .tr-fg{stroke:var(--tc);stroke-linecap:round}
+.pg-ring b{font-family:var(--sans);font-size:14px;font-variant-numeric:tabular-nums}
+.pg-ring.big b{font-size:20px}
+.pg-sum{display:flex;align-items:center;gap:18px;flex-wrap:wrap;font-family:var(--sans)}
+.pg-sum .btn{text-decoration:none;display:inline-block}
+.pg-sum p{margin:0 0 8px}
+.pg-c{display:flex;flex-wrap:wrap;gap:6px}
+.pg-k{display:inline-block;font-family:var(--sans);font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;white-space:nowrap}
+.pg-k.cov{background:color-mix(in srgb,var(--good) 15%,var(--paper));color:var(--good)}
+.pg-k.vis{background:color-mix(in srgb,var(--warn) 15%,var(--paper));color:var(--warn)}
+.pg-k.not{background:var(--paper-2);color:var(--ink-3);box-shadow:inset 0 0 0 1px var(--line)}
+.pg-xs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px;margin-top:14px}
+.pg-x{display:flex;align-items:center;gap:10px;padding:8px 12px;border-radius:12px;background:var(--paper-2);text-decoration:none;color:var(--ink);font-family:var(--sans);font-size:13px}
+.pg-x span{display:flex;flex-direction:column}
+.pg-x b{font-size:14px}
+.pg-ch .meter{display:block;margin:0 4px 6px;height:6px}
+.pg-l{list-style:none;margin:0;padding:0}
+.pg-l a{display:flex;align-items:baseline;gap:10px;padding:7px 6px;border-top:1px solid var(--line-2);text-decoration:none;color:var(--ink);font-family:var(--sans);font-size:14px;line-height:1.35}
+.pg-l a:hover{background:var(--cc-t)}
+.pg-l .pg-k{flex:none;min-width:8.4em;text-align:center}
+.pg-bks{padding:18px 22px}
+.pg-bks h2{margin:0 0 6px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:15px}
+.pg-note{margin:0 0 10px;font-family:var(--sans);font-size:13.5px;color:var(--ink-2)}
+.pg-bk{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.pg-ld{cursor:pointer}
+.pg-msg{font-family:var(--sans);font-size:13px;color:var(--bad)}
+.app-m{display:flex;flex-direction:column;gap:2px}
+.app-m button.hubl{border:0;background:none;font:inherit;text-align:left;cursor:pointer;color:inherit;width:100%}
+.app-m svg{width:16px;height:16px}
+.app-ios{margin:2px 10px 6px;font-size:12.5px;color:var(--ink-2)}
+.app-off{margin:2px 10px 4px;font-size:12px;font-weight:700;color:var(--good)}
+@media (max-width:560px){ .pg-l .pg-k{min-width:0} .pg-l a{flex-direction:column;gap:3px} .pg-bks{padding:14px} }
+.wm{flex:none;display:inline-flex;align-items:center;height:36px;padding:0 6px;text-decoration:none;font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.05em;font-size:13px;color:var(--ink);white-space:nowrap}
+.wm:hover{color:var(--accent)}
+.wm-s{display:none}
+.wm-m{display:flex;flex-direction:column;gap:0;padding:6px 10px 8px;text-decoration:none;color:var(--ink)}
+.wm-m b{font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.05em;font-size:15px;line-height:1.2}
+.wm-m span{font-size:12px;color:var(--ink-3)}
+.cv-brand{display:block;margin-bottom:6px;font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.05em;font-size:13px;color:#fff;opacity:.95}
+.bk-wm{display:none}
+@media (max-width:699px){ #bar .wm{display:none} #b-back > span:not(.bk-wm){display:none} #b-back .bk-wm{display:inline;font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.05em;font-size:9.5px;color:var(--ink)} }
+.mb-wm{font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.05em;font-size:11px;color:var(--ink-3);text-decoration:none}
+.cbn-wm{position:absolute;top:12px;left:var(--px,18px);z-index:2;font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.05em;font-size:10.5px;color:#fff;opacity:.85}
+.v-wm{display:block;margin-bottom:4px;font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.05em;font-size:11.5px;color:var(--ink-3)}
+.foot-wm{margin-top:6px;text-align:center;font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.05em;font-size:10.5px;color:var(--ink-3)}
+.dr-h .mb-wm{margin-right:auto;margin-left:10px;align-self:center}
+.cr-wm{display:block;margin-bottom:6px}
+@media print{ body.bl-on .pg-bks,body.bl-on .pg-f,body.bl-on .pg-sum .btn{display:none!important} .v-wm{color:#000!important;font-size:13px} .foot-wm{color:#000} body.bl-on .lib-hero{display:block!important} }
+/* ================= APP: END ================= */
 </style>
 
 <header class="bar" id="bar">
@@ -1716,7 +1975,7 @@ if (!B || !Array.isArray(B.chapters)) {
   return;
 }
 const BK = B.book || {};
-document.title = BK.title || document.title;
+document.title = /Mr Butler/.test(document.title) ? document.title : (BK.title || document.title);   /* APP hook: keep the branded <title> */
 const TUT = BK.mode === 'tutorial';   /* TUTORIAL BOOK hook */
 const PAGES = [];
 B.chapters.forEach((ch, ci) => (ch.pages || []).forEach((p, pi) => {
@@ -1971,7 +2230,7 @@ function blockHTML(b, bi) {
     const head = where ? `<span class="code-w">${ICON_MOD}<span><small>Where it goes</small>${inline(where)}</span></span>` : `<span class="code-t">${ICONB('code')}<span>${inline(t || (LANG[lang] || 'Code'))}</span></span>`;
     return `<div class="code lang-${esc(lang)}" data-code="${bi}"><div class="code-h">${head}<span class="code-r"><span class="code-l">${esc(LANG[lang] || lang || '')}</span><button type="button" class="code-cp" aria-label="Copy the code">${ICON_COPY}<span>Copy</span></button></span></div><pre class="${num ? 'numbered' : ''}"><code>${body}</code></pre>${b.output != null && b.output !== '' ? `<div class="out"><b>Output</b><pre><code>${esc(b.output)}</code></pre></div>` : ''}</div>`;
   }
-  if (T === 'project' || T === 'todo') return tutBlockHTML(b, bi);   /* TUTORIAL BOOK hook */
+  if (T === 'project' || T === 'todo' || T === 'task') return tutBlockHTML(b, bi);   /* TUTORIAL BOOK hook */
   return `<p class="muted">[Unknown block type: ${esc(T)}]</p>`;
 }
 function wireExamples(root, blocks) {
@@ -2469,7 +2728,7 @@ function renderPage(i, focus) {
   onCover = false; onCredits = false;
   cur = clamp(i, 0, PAGES.length - 1);
   const P = PAGES[cur], p = P.p, ch = P.ch, N = PAGES.length;
-  state.last = p.id; state.seen[p.id] = 1; save();
+  state.last = p.id; state.seen[p.id] = 1; save(); try { localStorage.setItem('notes-last', JSON.stringify({ book: BK.id, page: p.id, title: p.title || p.spec || '', at: Date.now() })); } catch (e) { }   /* APP hook: Continue where you left off */
   setHue(ch);
   const turn = was == null || was === cur || RM() ? '' : cur > was ? ' t-next' : ' t-prev';
   const h = [];
@@ -5656,6 +5915,31 @@ scene('stock-update', {
 });
 /* ---------- the player ---------- */
 const END_HOLD = 2000, FADE = 320;
+/* pupil preferences for every animation (localStorage 'notes-anim'): speed (0.5, 0.75, 1, 1.5; default 0.75 because 1 felt
+   too quick) and mode ('auto' = autoplay, 'step' = step through: each tap plays one step and holds on its final frame) */
+const SPEEDS = [0.5, 0.75, 1, 1.5];
+const PREF = { speed: 0.75, mode: 'auto' };
+try { const o = JSON.parse(localStorage.getItem('notes-anim')) || {}; if (SPEEDS.includes(o.speed)) PREF.speed = o.speed; if (o.mode === 'step' || o.mode === 'auto') PREF.mode = o.mode; } catch (e) { /* storage unavailable */ }
+function savePref() { try { localStorage.setItem('notes-anim', JSON.stringify(PREF)); } catch (e) { /* storage unavailable */ } }
+const spLabel = v => String(v).replace(/^0\./, '0.') + '×';
+function ctlHTML() {
+  return `<div class="an-ctl"><div class="an-seg" role="group" aria-label="Animation mode"><button type="button" data-an-mode="auto" aria-pressed="${PREF.mode === 'auto'}">Autoplay</button><button type="button" data-an-mode="step" aria-pressed="${PREF.mode === 'step'}">Step through</button></div>
+    <div class="an-seg an-sp" role="group" aria-label="Animation speed">${SPEEDS.map(v => `<button type="button" data-an-speed="${v}" aria-pressed="${PREF.speed === v}" aria-label="Speed ${spLabel(v)}">${spLabel(v)}</button>`).join('')}</div></div>`;
+}
+function paintCtl(root) {
+  root.querySelectorAll('[data-an-mode]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.anMode === PREF.mode)));
+  root.querySelectorAll('[data-an-speed]').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.anSpeed === PREF.speed)));
+}
+function setPref(k, v) { PREF[k] = v; savePref(); paintCtl(document); PLAYERS.forEach(pl => pl.pref(k)); }
+document.addEventListener('click', e => {
+  const m = e.target.closest('[data-an-mode]'), sp = e.target.closest('[data-an-speed]');
+  if (m) setPref('mode', m.dataset.anMode); else if (sp) setPref('speed', +sp.dataset.anSpeed);
+});
+/* the global setting in the workbook menu (the grid button): added once, if the menu exists */
+function menuPref() {
+  const mm = document.getElementById('libmenu'); if (!mm || mm.querySelector('.an-mpref')) return;
+  mm.insertAdjacentHTML('beforeend', `<hr><div class="an-mpref"><b>Animation speed</b>${ctlHTML()}</div>`);
+}
 const AN_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M10 9.2v5.6l4.6-2.8z"/><path d="M3 9h2M3 15h2M19 9h2M19 15h2"/></svg>';
 const I_PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6.5" y="5" width="4" height="14" rx="1.2"/><rect x="13.5" y="5" width="4" height="14" rx="1.2"/></svg>';
 const I_PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.2v13.6a.8.8 0 001.2.7l10.6-6.8a.8.8 0 000-1.4L9.2 4.5A.8.8 0 008 5.2z"/></svg>';
@@ -5675,7 +5959,8 @@ function html(b, bi, inl) {
       <button type="button" class="an-b an-prev" aria-label="Previous step">${I_PREV}</button>
       <button type="button" class="an-b an-next" aria-label="Next step">${I_NEXT}</button>
     </div>
-    <p class="an-cap"><b class="an-n">1/${n}</b><span class="an-ct">${inl(D.steps[0])}</span></p>
+    <p class="an-cap"><b class="an-n">Step 1 of ${n}</b><span class="an-ct">${inl(D.steps[0])}</span></p>
+    ${ctlHTML()}
     <ol class="an-all">${D.steps.map(s => `<li>${inl(s)}</li>`).join('')}</ol>
     ${b.caption ? `<figcaption>${inl(b.caption)}</figcaption>` : ''}
   </figure>`;
@@ -5692,7 +5977,13 @@ const kick = () => { if (!raf) raf = requestAnimationFrame(tick); };
 document.addEventListener('visibilitychange', () => PLAYERS.forEach(pl => pl.sync()));
 function makePlayer(fig, D, rm, inl) {
   const n = D.steps.length, W = D.w || 440, Hh = D.h || 240, ACT = D.act || .62;
-  const dur = k => (Array.isArray(D.dur) ? D.dur[k] : D.dur) || 3000;
+  const base = k => (Array.isArray(D.dur) ? D.dur[k] : D.dur) || 3000;
+  /* step k: the movement (actD) then a hold on its final frame (holdD) long enough to read the caption: at least 2.5 s,
+     longer for long captions; both stretched by the speed (0.75× = a third slower) */
+  const capLen = k => String(D.steps[k] || '').replace(/\*\*|\*|`/g, '').length;
+  const actD = k => base(k) * ACT / PREF.speed;
+  const holdD = k => Math.max(base(k) * (1 - ACT), 2500, 1200 + capLen(k) * 38) / PREF.speed;
+  const stepD = k => actD(k) + holdD(k);
   const svg = document.createElementNS(SVGN, 'svg');
   svg.setAttribute('viewBox', `0 0 ${W} ${Hh}`); svg.setAttribute('class', 'an-svg'); svg.setAttribute('role', 'img');
   const plain = s => String(s).replace(/\*\*|\*|`|\[\[([^\]|]*\|)?|\]\]/g, '');
@@ -5709,10 +6000,10 @@ function makePlayer(fig, D, rm, inl) {
   const intro = () => { if (!wraps) return; const d = .55 / wraps.length; wraps.forEach((w, i) => { const o = p >= 1 ? 1 : Math.round(S(p, i * d, i * d + .3) * 100) / 100; if (w._o !== o) { w._o = o; w.style.opacity = o; } }); };
   const pp = fig.querySelector('.an-pp'), pips = [...fig.querySelectorAll('.an-pip')], cap = fig.querySelector('.an-cap'), capN = fig.querySelector('.an-n'), capT = fig.querySelector('.an-ct');
   const pl = { run: false };
-  let p = 0, k = 0, e = 0, phase = 'run', mode = rm ? 'step' : 'auto', s = n - 1, userPaused = false, vis = false, last = 0, tw = null, shownCap = -1, fills = [];
+  let p = 0, k = 0, e = 0, phase = 'run', mode = rm || PREF.mode === 'step' ? 'step' : 'auto', s = rm ? n - 1 : 0, userPaused = false, vis = false, last = 0, tw = null, shownCap = -1, fills = [], seen = false;
   function caption(j) {
     if (j === shownCap) return; shownCap = j;
-    capN.textContent = `${j + 1}/${n}`; capT.innerHTML = inl(D.steps[j]);
+    capN.textContent = `Step ${j + 1} of ${n}`; capT.innerHTML = inl(D.steps[j]);
     pips.forEach((b, i) => { b.classList.toggle('on', i === j); b.setAttribute('aria-current', i === j ? 'step' : 'false'); });
   }
   function fill(i, f) { f = Math.round(C01(f) * 1000) / 1000; if (fills[i] !== f) { fills[i] = f; pips[i].style.setProperty('--f', f); } }
@@ -5720,7 +6011,7 @@ function makePlayer(fig, D, rm, inl) {
     try { draw(p); } catch (err) { if (window.console) console.warn(err); }
     intro();
     fig.dataset.p = p.toFixed(3);
-    if (mode === 'auto') { const j = Math.min(n - 1, k); caption(j); for (let i = 0; i < n; i++) fill(i, i < k ? 1 : i > k ? 0 : e / dur(k)); }
+    if (mode === 'auto') { const j = Math.min(n - 1, k); caption(j); for (let i = 0; i < n; i++) fill(i, i < k ? 1 : i > k ? 0 : e / stepD(k)); }
     else { caption(s); for (let i = 0; i < n; i++) fill(i, i <= s ? 1 : 0); }
   }
   function want() { return vis && !document.hidden && (mode === 'tween' || (mode === 'auto' && !userPaused && !rm)); }
@@ -5730,7 +6021,8 @@ function makePlayer(fig, D, rm, inl) {
     else if (!w && pl.run) pl.run = false;
     fig.dataset.state = pl.run ? 'playing' : 'paused';
     const playing = mode === 'auto' && !userPaused;
-    pp.innerHTML = playing ? I_PAUSE : I_PLAY; pp.setAttribute('aria-label', playing ? 'Pause the animation' : 'Play the animation');
+    pp.innerHTML = playing ? I_PAUSE : I_PLAY; pp.setAttribute('aria-label', playing ? 'Pause the animation' : PREF.mode === 'step' ? 'Play the next step' : 'Play the animation');
+    fig.dataset.mode = PREF.mode;
     cap.setAttribute('aria-live', mode === 'auto' ? 'off' : 'polite');
     fig.classList.toggle('stepping', mode !== 'auto');
   };
@@ -5741,8 +6033,8 @@ function makePlayer(fig, D, rm, inl) {
       if (f >= 1) { mode = 'step'; tw = null; render(); pl.sync(); return; }
     } else if (phase === 'run') {
       e += dt;
-      if (e >= dur(k)) { k++; e = 0; if (k >= n) { k = n - 1; e = dur(k); phase = 'end'; pl.hold = 0; } }
-      p = phase === 'end' ? n : k + C01(e / (dur(k) * ACT));
+      if (e >= stepD(k)) { k++; e = 0; if (k >= n) { k = n - 1; e = stepD(k); phase = 'end'; pl.hold = 0; } }
+      p = phase === 'end' ? n : k + C01(e / actD(k));
     } else if (phase === 'end') {
       pl.hold += dt;
       if (pl.hold >= END_HOLD) { phase = 'fade'; pl.hold = 0; svg.classList.add('an-out'); }
@@ -5755,35 +6047,58 @@ function makePlayer(fig, D, rm, inl) {
   function tweenStep(j) {
     s = j; svg.classList.remove('an-out'); phase = 'run';
     if (rm) { mode = 'step'; p = j + 1; render(); pl.sync(); return; }
-    p = j; mode = 'tween'; tw = { a: j, b: j + 1, e: 0, d: dur(j) * ACT };
+    p = j; mode = 'tween'; tw = { a: j, b: j + 1, e: 0, d: actD(j) };
     render(); pl.sync();
   }
-  pp.addEventListener('click', () => {
-    if (mode === 'auto' && !userPaused) { userPaused = true; }
-    else {
-      userPaused = false;
-      if (mode !== 'auto') { mode = 'auto'; tw = null; if (s >= n - 1 && p >= n) { k = 0; e = 0; } else { k = Math.min(n - 1, Math.floor(p)); e = (p - k) * dur(k) * ACT; } phase = 'run'; }
-    }
-    render(); pl.sync();
-  });
-  fig.querySelector('.an-next').addEventListener('click', () => {
+  const toAuto = () => { userPaused = false; mode = 'auto'; tw = null; if (s >= n - 1 && p >= n) { k = 0; e = 0; } else { k = Math.min(n - 1, Math.floor(p)); e = (p - k) * actD(k); } phase = 'run'; };
+  const next = () => {
     let j;
     if (mode === 'auto') j = phase !== 'run' ? 0 : (p < k + 1 ? k : k + 1);
-    else j = s + 1;
-    tweenStep(j >= n ? 0 : j);
-  });
-  fig.querySelector('.an-prev').addEventListener('click', () => {
+    else j = mode === 'step' && p < s + 1 ? s : s + 1;
+    seen = true; tweenStep(j >= n ? 0 : j);
+  };
+  const prev = () => {
     let j;
     if (mode === 'auto') j = phase !== 'run' ? n - 1 : Math.max(0, k - 1);
     else j = s - 1;
-    tweenStep(j < 0 ? n - 1 : j);
+    seen = true; tweenStep(j < 0 ? n - 1 : j);
+  };
+  /* a change of the shared preferences (from any card or the menu) */
+  pl.pref = key => {
+    if (key === 'mode' && !rm) {
+      if (PREF.mode === 'step' && mode === 'auto') { s = phase === 'run' ? Math.min(n - 1, k) : n - 1; p = s + 1; mode = 'step'; tw = null; seen = true; svg.classList.remove('an-out'); phase = 'run'; }
+      else if (PREF.mode === 'auto' && mode !== 'auto') toAuto();
+    }
+    if (key === 'speed' && mode === 'auto') e = Math.min(e, stepD(k));
+    render(); pl.sync();
+  };
+  pp.addEventListener('click', () => {
+    if (PREF.mode === 'step' && mode !== 'auto') { next(); return; }
+    if (mode === 'auto' && !userPaused) { userPaused = true; }
+    else {
+      userPaused = false;
+      if (mode !== 'auto') toAuto();
+    }
+    render(); pl.sync();
   });
-  pips.forEach(b => b.addEventListener('click', () => tweenStep(+b.dataset.j)));
+  fig.querySelector('.an-next').addEventListener('click', next);
+  fig.querySelector('.an-prev').addEventListener('click', prev);
+  pips.forEach(b => b.addEventListener('click', () => { seen = true; tweenStep(+b.dataset.j); }));
+  /* step through: tap the picture for the next step; arrow keys when the card has focus */
+  const stage = fig.querySelector('.an-st');
+  stage.addEventListener('click', () => { if (PREF.mode === 'step') next(); });
+  fig.tabIndex = 0;
+  fig.addEventListener('keydown', e2 => {
+    if (e2.target.closest('button') && e2.target !== fig) return;
+    if (e2.key === 'ArrowRight') { e2.preventDefault(); e2.stopPropagation(); next(); }
+    else if (e2.key === 'ArrowLeft') { e2.preventDefault(); e2.stopPropagation(); prev(); }
+  });
   /* deterministic frame at a time into the loop (used by the review captures; the player stays paused) */
-  let loopMs = END_HOLD; for (let i = 0; i < n; i++) loopMs += dur(i);
-  fig.dataset.loopMs = loopMs;
-  fig.animAt = ms => { userPaused = true; mode = 'auto'; tw = null; phase = 'run'; let t = ms; k = 0; while (k < n && t >= dur(k)) { t -= dur(k); k++; } if (k >= n) { k = n - 1; e = dur(k); p = n; } else { e = t; p = k + C01(t / (dur(k) * ACT)); } svg.classList.remove('an-out'); render(); pl.sync(); };
-  pl.setVis = v => { vis = v; pl.sync(); };
+  let loopMs = END_HOLD; for (let i = 0; i < n; i++) loopMs += stepD(i);
+  fig.dataset.loopMs = Math.round(loopMs);
+  fig.animAt = ms => { userPaused = true; mode = 'auto'; tw = null; phase = 'run'; let t = ms; k = 0; while (k < n && t >= stepD(k)) { t -= stepD(k); k++; } if (k >= n) { k = n - 1; e = stepD(k); p = n; } else { e = t; p = k + C01(t / actD(k)); } svg.classList.remove('an-out'); render(); pl.sync(); };
+  /* in step-through mode the first step plays once when the card first comes into view, then holds */
+  pl.setVis = v => { vis = v; if (v && !seen && !rm && mode === 'step') { seen = true; tweenStep(0); } pl.sync(); };
   pl.fig = fig;
   if (rm) { p = n; s = n - 1; }
   render(); pl.sync();
@@ -5791,6 +6106,7 @@ function makePlayer(fig, D, rm, inl) {
 }
 function wire(root, blocks, cleanups, rm, inl) {
   const figs = [...root.querySelectorAll('figure.anim[data-anim]')];
+  menuPref();
   if (!figs.length) return;
   const mine = [];
   figs.forEach(fig => { const b = blocks[+fig.dataset.anim]; const D = b && SCN[b.scene]; if (!D) return; const pl = makePlayer(fig, D, rm, inl); if (pl) { PLAYERS.add(pl); mine.push(pl); } });
@@ -5801,6 +6117,7 @@ function wire(root, blocks, cleanups, rm, inl) {
   } else mine.forEach(pl => pl.setVis(true));
   cleanups.push(() => { if (io) io.disconnect(); mine.forEach(pl => { pl.run = false; PLAYERS.delete(pl); }); });
 }
+setTimeout(menuPref, 0);   /* after the workbook menu has been filled */
 return { SCN, html, wire };
 })();
 /* ---------- notes motion: runs once per page, only when motion is allowed ---------- */
@@ -6741,7 +7058,7 @@ const tutIc = k => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" s
 /* parts of the book: book.parts = [{title, chapters: [ids]}]; chapters in no part go in a last group */
 const TUT_PARTS = (() => {
   const ps = Array.isArray(BK.parts) ? BK.parts : [], used = new Set();
-  const out = ps.map(x => ({ title: String((x && x.title) || ''), chs: B.chapters.filter(c => (c.pages || []).length && ((x && x.chapters) || []).includes(c.id)) })).filter(x => x.chs.length);
+  const out = ps.map(x => ({ title: String((x && x.title) || ''), lib: !!(x && x.library), chs: B.chapters.filter(c => (c.pages || []).length && ((x && x.chapters) || []).includes(c.id)) })).filter(x => x.chs.length);
   out.forEach(x => x.chs.forEach(c => used.add(c)));
   const rest = B.chapters.filter(c => (c.pages || []).length && !used.has(c));
   if (rest.length) out.push({ title: out.length ? 'More chapters' : 'Chapters', chs: rest });
@@ -6929,6 +7246,7 @@ function wireProjects(root, p) {
   });
 }
 function tutBlockHTML(b, bi) {
+  if (b.t === 'task') return taskHTML(b, bi);
   if (b.t === 'todo') return todoHTML(b.title, b.items, (PAGES[cur] ? PAGES[cur].p.id : 'p') + '#' + bi);
   return projectHTML(b, bi);
 }
@@ -6966,6 +7284,8 @@ function tutTurnHTML(p) {
   const qs = (p.practice || []).filter(q => q && q.q);
   if (!qs.length) return '';
   TT_CODE.clear();
+  if (isRecipe(BYID.get(p.id))) return `<section class="tryit card" id="tt"><details><summary><span class="bi">${tutIc('build')}</span><b>Try it</b><span>${qs.length === 1 ? 'a quick practice task' : qs.length + ' quick practice tasks'}</span></summary>
+    ${qs.map((q, qi) => `<div class="tt-c tt-mini" id="cyk-x${qi}"><div class="tt-q">${inline(q.q)}</div>${q.a ? `<div class="tt-go"><button type="button" class="btn tt-b" data-tt="${qi}" aria-expanded="false" aria-controls="tt-a${qi}">Show worked solution</button></div><div class="tt-a" id="tt-a${qi}" hidden>${solutionHTML(q.a, qi)}</div>` : ''}</div>`).join('')}</details></section>`;
   return `<section class="sec s-turn" id="tt" aria-labelledby="s-tt"><h2 id="s-tt"><span class="bi">${tutIc('build')}</span><span>Your turn: build it</span> <small>${qs.length} task${qs.length === 1 ? '' : 's'} · try it before you open the solution</small></h2>
     <ol class="tt-l">${qs.map((q, qi) => `<li class="tt-c" id="cyk-x${qi}"><div class="tt-top"><span class="tt-n">${tutIc('flag')}Task ${qi + 1}</span>${tutSize(q.m)}</div>
       <div class="tt-q">${inline(q.q)}</div>
@@ -6990,7 +7310,10 @@ function wireTurn(root) {
   if (TUT && tg && tg[0] === 'x') { const it = $('#cyk-' + tg, root); if (it) setTimeout(() => { const top = $('#bar').getBoundingClientRect().bottom; window.scrollTo(0, it.getBoundingClientRect().top + window.scrollY - top - 14); }, 0); }
 }
 /* the renderPage hook: every page wires its todo and project blocks; tutorial pages also their task cards */
-function tutWire(root, p) { wireTodos(root); wireProjects(root, p); if (TUT) wireTurn(root); }
+function tutWire(root, p) {
+  wireTodos(root); wireProjects(root, p); wireTask(root);
+  if (TUT) { wireTurn(root); const P = BYID.get(p.id); if (isRecipe(P)) wireRecipe(root, P); }
+}
 
 /* ---------- tutorial-book chrome: cover, chapter card, rail parts; hide glossary, key terms, quiz and hub lessons ---------- */
 function tutChapterCardHTML(ch) {
@@ -7001,6 +7324,7 @@ function tutCover(focus) {
   cleanups.forEach(f => { try { f(); } catch (e) { } }); cleanups = [];
   closePop(); closeLbx();
   const was = booted && !onCover; onCover = true; onCredits = false; setHue(B.chapters[0]);
+  TUT_VIEW = null; document.body.classList.remove('bl-on');
   const N = PAGES.length, T = String(BK.title || 'Tutorial book'), k = T.indexOf(': ');
   const unit = k > 0 ? T.slice(0, k) : (BK.id || ''), name = (k > 0 ? T.slice(k + 2) : T).replace(/\s*\((?:[^)]*\b)?tutorials?\b[^)]*\)\s*$/i, '');
   const last = state.last && BYID.get(state.last), nDone = PAGES.filter(P => state.done[P.p.id]).length;
@@ -7014,7 +7338,7 @@ function tutCover(focus) {
   const many = TUT_PARTS.length > 1;
   const groups = TUT_PARTS.map(pt => {
     const a = pt.chs[0], z = pt.chs[pt.chs.length - 1], np = pt.chs.reduce((s, c) => s + c.pages.length, 0);
-    return `<section class="tcv-part chs" style="${chVars(a)}" aria-labelledby="tcv-p${pt.k}">${many ? `<div class="tcv-ph"><span class="tcv-pn" aria-hidden="true">${pt.k}</span><div><small>Part ${pt.k} · ${a === z ? `Chapter ${esc(a.n)}` : `Chapters ${esc(a.n)}–${esc(z.n)}`} · ${np} pages</small><h3 id="tcv-p${pt.k}">${esc(pt.title)}</h3></div></div>` : `<h3 id="tcv-p${pt.k}" class="sr">${esc(pt.title)}</h3>`}<div class="cv-grid">${pt.chs.map(tile).join('')}</div></section>`;
+    return `<section class="tcv-part chs" style="${chVars(a)}" aria-labelledby="tcv-p${pt.k}">${many ? `<div class="tcv-ph"><span class="tcv-pn" aria-hidden="true">${pt.k}</span><div><small>Part ${pt.k} · ${a === z ? `Chapter ${esc(a.n)}` : `Chapters ${esc(a.n)}–${esc(z.n)}`} · ${np} pages</small><h3 id="tcv-p${pt.k}">${esc(pt.title)}</h3></div></div>` : `<h3 id="tcv-p${pt.k}" class="sr">${esc(pt.title)}</h3>`}<div class="cv-grid">${pt.chs.map(tile).join('')}${WU.length && TASKS[0] && pt.chs.includes(TASKS[0].P.ch) ? `<a class="cv-tile tmap-tile" href="#writeup-map"><span class="cv-ic"><span>${tutIc('flag')}</span></span><span class="cv-n">${TASKS.length} tasks · about ${esc(pgTxt(WU_TOTAL))}</span><b>Write-up map</b><span class="cv-m">${wuBarHTML(null, false)}</span></a>` : ''}${pt.lib ? `<a class="cv-tile tmap-tile" href="#library"><span class="cv-ic"><span>${tutIc('build')}</span></span><span class="cv-n">${LIB_IDX.length} recipes</span><b>Search the library</b><span class="cv-m">Pick recipes for your build list</span></a>` : ''}</div></section>`;
   }).join('');
   main.innerHTML = `<article class="sheet cover tcover${was && !RM() ? ' t-prev' : ''}" aria-labelledby="cv-h">
     <header class="cv-hero card${RM() ? '' : ' anim'}">${patternSVG('circuit', hashStr((BK.id || '') + 'cover'), 900, 420, { cols, op: .28, opv: .3, sw: 2.4, n: 20 })}
@@ -7024,6 +7348,7 @@ function tutCover(focus) {
       <div class="cv-go">${last && last.i > 0 ? `<a class="pri" href="#${esc(last.p.id)}">${icon('play')}<span>Continue</span><small>${esc(plain(last.p.spec))}</small></a><a href="#${esc(PAGES[0].p.id)}">${icon('book')}Start at page 1</a>` : `<a class="pri" href="#${esc(PAGES[0].p.id)}">${icon('book')}Start the tutorials</a>`}</div>
     </header>
     <div class="cv-spec" aria-hidden="true">${B.chapters.map(ch => `<i style="background:var(--h${hueN(ch)}d)"></i>`).join('')}</div>
+    ${ctaHTML()}
     <section class="cv-body card" aria-labelledby="cv-ch"><h2 id="cv-ch">${many ? 'What’s inside' : 'Chapters'}</h2>${groups}</section>
   </article>`;
   $('#t-ch').textContent = 'Cover and chapters';
@@ -7035,11 +7360,274 @@ function tutCover(focus) {
   booted = true;
   if (focus) { const h1 = $('#cv-h'); h1 && h1.focus({ preventScroll: true }); }
 }
+/* ---------- coursework task card: {"t":"task", label, title, brief, where:{chapter, heading, after, pages}, approach:[…], deliver:[…]} ---------- */
+/* typical pages: "3–6 pages" -> 4.5 (midpoint), "1 page" -> 1, "½ page" / "half a page" -> 0.5; nothing usable -> 1 */
+function taskPages(s) {
+  s = String(s || '').replace(/½/g, '.5').replace(/\bhalf\b/i, '0.5').replace(/(\d+)\s*\/\s*(\d+)/g, (m, a, b) => String(+a / +b));
+  const ns = (s.match(/\d*\.?\d+/g) || []).map(Number).filter(n => n >= 0);
+  return ns.length >= 2 ? (ns[0] + ns[1]) / 2 : ns.length ? ns[0] : 1;
+}
+const TASKS = [];
+PAGES.forEach(P => (P.p.blocks || []).forEach((b, bi) => { if (b && b.t === 'task') TASKS.push({ P, b, bi, pg: taskPages(b.where && b.where.pages), ch: String((b.where && b.where.chapter) || 'Other').trim() }); }));
+const WU = (() => {   /* write-up chapters in order of first appearance, with their tasks and summed typical pages */
+  const m = new Map();
+  TASKS.forEach(t => { if (!m.has(t.ch)) m.set(t.ch, { name: t.ch, tasks: [], pages: 0 }); const c = m.get(t.ch); c.tasks.push(t); c.pages += t.pg; });
+  const list = [...m.values()]; list.forEach((c, k) => { c.k = k; });
+  return list;
+})();
+const WU_TOTAL = WU.reduce((s, c) => s + c.pages, 0);
+const pgTxt = n => { const r = Math.round(n * 2) / 2; if (!r) return 'no pages'; return `${String(r).replace('.5', '½').replace(/^0½/, '½')} page${r === 1 ? '' : 's'}`; };
+const wuHue = k => (k % NHUE) + 1;
+/* the write-up bar: one segment per write-up chapter, width = its share of the typical pages; `here` marks a task */
+function wuBarHTML(here, big) {
+  if (!WU.length) return '';
+  const segs = WU.map(c => {
+    const w = c.pages / WU_TOTAL * 100, on = here && here.ch === c.name;
+    let mark = '';
+    if (on) { let before = 0; for (const t of c.tasks) { if (t === here) break; before += t.pg; } mark = `<i class="wu-here" style="left:${((before + here.pg / 2) / c.pages * 100).toFixed(1)}%" aria-hidden="true"></i>`; }
+    return `<span class="wu-s${on ? ' on' : ''}" style="flex:${w.toFixed(2)} 1 0;--wc:var(--h${wuHue(c.k)}d)" title="${esc(c.name)}: about ${esc(pgTxt(c.pages))}">${mark}</span>`;
+  }).join('');
+  const lab = here ? `${here.b.label} is in ${here.ch}: chapter ${WU.findIndex(c => c.name === here.ch) + 1} of ${WU.length} in the write-up` : `Write-up map: ${WU.length} chapters, about ${pgTxt(WU_TOTAL)}`;
+  return `<span class="wu-bar${big ? ' big' : ''}" role="img" aria-label="${esc(lab)}">${segs}</span>`;
+}
+/* ---------- mark scheme (notes/markmap-<BOOK>.json, merged by build.py: B.markmap.criteria + each task block's b.marks) ---------- */
+const MM = B.markmap && Array.isArray(B.markmap.criteria) ? B.markmap : null;
+const CRIT = new Map(((MM && MM.criteria) || []).map(c => [String(c.id), c]));
+const critOf = x => CRIT.get(String(x)) || [...CRIT.values()].find(c => String(c.name || '').toLowerCase() === String(x).toLowerCase()) || null;
+const taskCrits = b => ((b.marks && b.marks.criteria) || []).map(critOf).filter(Boolean);
+const marksTxt2 = n => n == null || n === '' ? 'marks not stated' : `${n} mark${+n === 1 ? '' : 's'}`;
+const EXT = ICON_EXT;
+function marksHTML(b) {
+  if (!MM) return '';
+  const m = b.marks || null, cs = m ? taskCrits(b) : [];
+  const src = [...new Set(cs.map(c => safeUrl(c.source_url)).filter(Boolean))], unconf = cs.some(c => c.confirmed === false);
+  if (!cs.length) return `<div class="tc-marks none"><small class="tc-k">Where the marks are</small><div class="mk-cs"><span class="mk-chip none"><b>No marks directly</b></span></div><p class="mk-no">${m && m.evidence ? inline(m.evidence) : 'Supports organisation and quality of written communication.'}</p>${m && m.top_band ? `<p class="mk-top"><b>Why it still matters:</b> ${inline(m.top_band)}</p>` : ''}</div>`;
+  return `<div class="tc-marks"><small class="tc-k">Where the marks are</small>
+    <div class="mk-cs">${cs.map(c => `<span class="mk-chip"><b>${esc(c.name || c.id)}</b>${esc(marksTxt2(c.marks))}</span>`).join('')}</div>
+    ${m.evidence ? `<p><b>This task gives evidence for:</b> ${inline(m.evidence)}</p>` : ''}
+    ${m.top_band ? `<p class="mk-top"><b>To reach the top band:</b> ${inline(m.top_band)}</p>` : ''}
+    <details class="mk-b"><summary>See the mark bands</summary>${cs.map(c => `<div class="mk-bd"><b>${esc(c.name || c.id)} · ${esc(marksTxt2(c.marks))}</b><dl>${(c.bands || []).map(x => `<div><dt>${esc(x.band)}</dt><dd>${inline(x.needs)}</dd></div>`).join('')}</dl></div>`).join('')}</details>
+    <div class="mk-f">${src.map(u => `<a class="lk" href="${esc(u)}" target="_blank" rel="noopener">CCEA mark scheme ${EXT}</a>`).join('')}<a class="lk" href="#marks">Mark scheme overview →</a>${unconf ? '<span class="mk-unc">Check with your teacher: this mapping is our best reading of the mark scheme.</span>' : ''}</div></div>`;
+}
+/* #marks: every criterion, its marks and bands, and the tasks that give evidence for it */
+function renderMarks(focus) {
+  tutView('marks', 'Mark scheme overview');
+  const total = [...CRIT.values()].reduce((s, c) => s + (+c.marks || 0), 0);
+  main.innerHTML = `<article class="sheet lib-v mk-v" aria-labelledby="mk-h">
+    <header class="lib-hero card"><small class="lib-k">${tutIc('flag')}${esc((BK.title || '').split(':')[0])} · Coursework</small><h1 id="mk-h" tabindex="-1">Mark scheme overview</h1>
+      <p>Where the marks are: ${CRIT.size} criteria${total ? `, <b>${total} marks</b> in all` : ''}. Each criterion lists its mark bands and the tasks in this book that give evidence for it.</p>
+      ${MM.weighting ? `<p class="mk-meta">${inline(MM.weighting)}</p>` : ''}${MM.qwc_note ? `<p class="mk-meta"><b>Written communication:</b> ${inline(MM.qwc_note)}</p>` : ''}
+      <div class="lib-bar"><a class="lib-my" href="#writeup-map">Write-up map →</a></div></header>
+    <section class="card lib-body"><div class="tw mk-tw"><table><thead><tr><th scope="col">Criterion</th><th scope="col">Marks</th><th scope="col">Bands</th><th scope="col">Tasks</th></tr></thead><tbody>
+    ${[...CRIT.values()].map(c => { const ts = TASKS.filter(t => taskCrits(t.b).includes(c)); const u = safeUrl(c.source_url); return `<tr><th scope="row">${esc(c.name || c.id)}${u ? `<a class="lk" href="${esc(u)}" target="_blank" rel="noopener">CCEA mark scheme ${EXT}</a>` : ''}${c.confirmed === false ? '<span class="mk-unc">check with your teacher</span>' : ''}</th><td class="mk-n">${esc(c.marks == null ? '–' : c.marks)}</td>
+      <td><dl class="mk-dl">${(c.bands || []).map(x => `<div><dt>${esc(x.band)}</dt><dd>${inline(x.needs)}</dd></div>`).join('')}</dl></td>
+      <td>${ts.length ? `<ul class="mk-ts">${ts.map(t => `<li><a href="#${esc(t.P.p.id)}"><span class="tc-lab">${esc(t.b.label)}</span>${inline(t.b.title || '')}</a></li>`).join('')}</ul>` : '<span class="muted">–</span>'}</td></tr>`; }).join('')}
+    </tbody></table></div></section>
+    ${Array.isArray(MM.moderator_advice) && MM.moderator_advice.length ? `<section class="card lib-body mk-adv"><h2>What moderators say</h2><ul>${MM.moderator_advice.map(x => { const u = safeUrl(x.source_url); return `<li>${inline(x.point || '')}${u ? ` <a class="lk" href="${esc(u)}" target="_blank" rel="noopener">Source ${EXT}</a>` : ''}</li>`; }).join('')}</ul></section>` : ''}
+    ${Array.isArray(MM.source) && MM.source.length ? `<section class="card lib-body mk-adv"><h2>Sources</h2><ul>${MM.source.map(x => { const u = safeUrl(x.url); return `<li>${u ? `<a href="${esc(u)}" target="_blank" rel="noopener">${esc(x.title || u)}</a>` : esc(x.title || '')}</li>`; }).join('')}</ul></section>` : ''}</article>`;
+  tutViewDone(focus, '#mk-h');
+}
+function wuLegend() {
+  return `<ol class="wu-leg">${WU.map(c => { const cr = [...new Set(c.tasks.flatMap(t => taskCrits(t.b)))]; return `<li style="--wc:var(--h${wuHue(c.k)}d)"><i aria-hidden="true"></i><span><b>${esc(c.name)}</b><small>about ${esc(pgTxt(c.pages))}${MM ? ' · ' + esc(cr.length ? cr.map(x => `${x.name || x.id}${x.marks != null ? ' ' + x.marks : ''}`).join(', ') : 'no marks directly') : ''}</small></span></li>`; }).join('')}</ol>`;
+}
+function taskHTML(b, bi) {
+  const P = PAGES[cur], key = (P ? P.p.id : 'p') + '#' + bi, w = b.where || {}, me = TASKS.find(t => t.b === b);
+  const cells = [['Chapter', w.chapter], ['Heading', w.heading], ['Comes after', w.after], ['Typical length', w.pages]].filter(x => x[1]);
+  return `<section class="tcard" data-task="${bi}" aria-label="${esc(b.label || 'Task')}: ${esc(plain(b.title || ''))}">
+    <div class="tc-top"><small class="tc-k">The task</small><div class="tc-h"><span class="tc-lab">${esc(b.label || 'Task')}</span><h2>${inline(b.title || '')}</h2></div>${b.brief ? `<p class="tc-brief">${inline(b.brief)}</p>` : ''}</div>
+    <div class="tc-where"><small class="tc-k">Where it goes</small><dl>${cells.map(([k, v]) => `<div><dt>${k}</dt><dd>${inline(v)}</dd></div>`).join('')}</dl>
+      ${WU.length ? `<a class="wu-mini" href="#writeup-map" aria-label="Open the write-up map">${wuBarHTML(me, false)}<span class="wu-cap"><b>Write-up map</b><span>${me ? `${esc(me.ch)} · chapter ${WU.findIndex(c => c.name === me.ch) + 1} of ${WU.length}` : `${WU.length} chapters`} · open map →</span></span></a>` : ''}</div>
+    ${(b.approach || []).length ? `<div class="tc-app"><small class="tc-k">How to approach it</small><ol>${b.approach.map(x => `<li>${inline(x)}</li>`).join('')}</ol></div>` : ''}
+    ${marksHTML(b)}
+    ${(b.deliver || []).length ? `<div class="tc-del">${todoHTML('What this page must deliver', b.deliver, key + 'd', 'Checklist')}</div>` : ''}
+  </section>`;
+}
+/* move the task card out of its notes card to the top of the page; everything after it is styled lighter */
+function wireTask(root) {
+  const tc = root.querySelector('.tcard'); if (!tc) return;
+  const art = root.querySelector('article.sheet'), hero = root.querySelector('.phero');
+  const card = tc.closest('.ncard'); art.classList.add('has-task');
+  if (hero) hero.after(tc);
+  if (card && !card.querySelector('.notes > *')) card.remove();
+}
+/* #writeup-map: every task in order, chapter by chapter, with typical pages and how much of each checklist is ticked */
+function renderMap(focus) {
+  tutView('writeup-map', 'Write-up map');
+  const got = t => { const k = t.P.p.id + '#' + t.bi + 'd', set = new Set(TODO[k] || []), d = (t.b.deliver || []).filter(x => set.has(todoH(x))).length; return [d, (t.b.deliver || []).length]; };
+  main.innerHTML = `<article class="sheet lib-v wu-v" aria-labelledby="wu-h">
+    <header class="lib-hero card"><small class="lib-k">${tutIc('flag')}${esc((BK.title || '').split(':')[0])} · Coursework</small><h1 id="wu-h" tabindex="-1">Write-up map</h1>
+      <p>Every task in the order it goes in your write-up, with the typical length of each. About <b>${esc(pgTxt(WU_TOTAL))}</b> in all, in ${WU.length} chapters. Bar widths show how much of the write-up each chapter takes.</p>
+      ${wuBarHTML(null, true)}${wuLegend()}${MM ? '<div class="lib-bar"><a class="lib-my" href="#marks">Mark scheme overview →</a></div>' : ''}</header>
+    ${WU.map(c => { const cr = [...new Set(c.tasks.flatMap(t => taskCrits(t.b)))]; return `<section class="card wu-ch" style="--wc:var(--h${wuHue(c.k)}d);--wl:var(--h${wuHue(c.k)})"><h2><span class="wu-n">${c.k + 1}</span><span>${esc(c.name)}</span><small>about ${esc(pgTxt(c.pages))} · ${c.tasks.length} task${c.tasks.length === 1 ? '' : 's'}</small></h2>${MM ? `<div class="mk-cs">${cr.length ? cr.map(x => `<span class="mk-chip"><b>${esc(x.name || x.id)}</b>${esc(marksTxt2(x.marks))}</span>`).join('') : '<span class="mk-chip none">No marks directly</span>'}</div>` : ''}
+      <ol class="wu-l">${c.tasks.map(t => { const [d, n] = got(t); return `<li><a href="#${esc(t.P.p.id)}"><span class="tc-lab">${esc(t.b.label || 'Task')}</span><span class="wu-t"><b>${inline(t.b.title || '')}</b>${t.b.where && t.b.where.heading ? `<small>${inline(t.b.where.heading)}</small>` : ''}</span><span class="wu-p">${esc((t.b.where && t.b.where.pages) || '')}${n ? `<em${d === n ? ' class="ok"' : ''}>${d}/${n} delivered</em>` : ''}</span></a></li>`; }).join('')}</ol></section>`; }).join('')}
+  </article>`;
+  tutViewDone(focus, '#wu-h');
+}
+
+/* ---------- recipe library (the book.parts entry with library:true): #library index, #mybuild build list ---------- */
+const LIB = TUT_PARTS.find(x => x.lib) || null;
+const LIB_CH = new Set(LIB ? LIB.chs : []);
+const isRecipe = P => !!P && LIB_CH.has(P.ch);
+const catName = ch => String(ch.title || '').replace(/^(access tutorial library|tutorial library|library|recipes?)\s*[:·–-]\s*/i, '');
+const LIB_IDX = PAGES.filter(isRecipe).map(P => ({ P, spec: plain(P.p.spec), sum: plain(P.p.summary), tags: (P.p.tags || []).map(plain).join(' · '), text: plain(walkStr(P.p.blocks || [], []).join('   ')) }));
+const BL_KEY = 'notes-build:' + (BK.id || BK.title || 'book');
+let BL = { pick: [], done: [] };
+try { const o = JSON.parse(localStorage.getItem(BL_KEY)); if (o && Array.isArray(o.pick)) BL = { pick: o.pick.filter(id => BYID.has(id)), done: Array.isArray(o.done) ? o.done : [] }; } catch (e) { /* storage unavailable */ }
+function blSave() { try { localStorage.setItem(BL_KEY, JSON.stringify(BL)); } catch (e) { /* storage unavailable */ } }
+const blHas = id => BL.pick.includes(id);
+const starHTML = (id, big) => { const on = blHas(id); return `<button type="button" class="star${big ? ' big' : ''}" data-star="${esc(id)}" aria-pressed="${on}" aria-label="${on ? 'Remove from' : 'Add to'} my build list"><i aria-hidden="true">${on ? '★' : '☆'}</i>${big ? `<span>${on ? 'In my build list' : 'Add to my build list'}</span>` : ''}</button>`; };
+function paintStars() {
+  $$('[data-star]').forEach(b => { const on = blHas(b.dataset.star); b.setAttribute('aria-pressed', String(on)); b.setAttribute('aria-label', `${on ? 'Remove from' : 'Add to'} my build list`); b.querySelector('i').textContent = on ? '★' : '☆'; const s = b.querySelector('span'); if (s) s.textContent = on ? 'In my build list' : 'Add to my build list'; });
+  $$('[data-blcount]').forEach(e => { e.textContent = BL.pick.length; });
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-star]'); if (!b) return;
+  e.preventDefault(); const id = b.dataset.star;
+  if (blHas(id)) { BL.pick = BL.pick.filter(x => x !== id); BL.done = BL.done.filter(x => x !== id); } else BL.pick.push(id);
+  blSave(); paintStars();
+  if (blHas(id)) { const r = b.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + r.height / 2, 8, hueCols()); }
+  if (TUT_VIEW === 'mybuild' && !blHas(id)) { const li = b.closest('li'); if (li) { li.remove(); buildCount(); } }
+});
+let TUT_VIEW = null, LIB_Q = '', LIB_CAT = '';
+function tutView(kind, title) {
+  cleanups.forEach(f => { try { f(); } catch (e) { } }); cleanups = [];
+  closePop(); closeLbx();
+  TUT_VIEW = kind; onCover = true; onCredits = false;
+  document.body.classList.toggle('bl-on', kind === 'mybuild' || kind === 'progress');
+  setHue(kind === 'writeup-map' ? (TASKS[0] ? TASKS[0].P.ch : B.chapters[0]) : (LIB ? LIB.chs[0] : B.chapters[0]));
+  $('#t-ch').textContent = title; $('#pn').innerHTML = `<b>${esc({ mybuild: 'Build list', library: 'Library', 'writeup-map': 'Map', marks: 'Marks', progress: 'Progress' }[kind] || title)}</b>`; $('#pn').setAttribute('aria-label', title);
+  $('#b-prev').disabled = true; $('#b-next').disabled = false;
+  rail.querySelectorAll('.r-pg').forEach(a => a.removeAttribute('aria-current'));
+  rail.querySelectorAll('[data-view]').forEach(a => { if (a.dataset.view === kind) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+}
+function tutViewDone(focus, h) {
+  const hero = main.querySelector('.lib-hero'); if (hero && !hero.querySelector('.v-wm')) hero.insertAdjacentHTML('afterbegin', `<span class="v-wm">Mr Butler’s Digital Technology</span>`);
+  try { history.replaceState(null, '', '#' + TUT_VIEW); } catch (e) { /* sandboxed */ }
+  window.scrollTo(0, 0); setupReveal(); booted = true;
+  if (focus) { const x = $(h); x && x.focus({ preventScroll: true }); }
+}
+function libMatch(x, terms, phrase) {
+  const L = { spec: x.spec.toLowerCase(), tags: x.tags.toLowerCase(), sum: x.sum.toLowerCase(), text: x.text.toLowerCase() };
+  const all = L.spec + ' ' + L.tags + ' ' + L.sum + ' ' + L.text;
+  if (!terms.every(t => all.includes(t))) return 0;
+  let sc = 0;
+  for (const t of terms) { if (L.spec.includes(t)) sc += 6; if (L.tags.includes(t)) sc += 5; if (L.sum.includes(t)) sc += 3; if (L.text.includes(t)) sc += 1; }
+  if (terms.length > 1) { if (L.spec.includes(phrase)) sc += 14; if (L.tags.includes(phrase)) sc += 12; if (L.sum.includes(phrase)) sc += 6; if (L.text.includes(phrase)) sc += 3; }
+  return sc;
+}
+const libTerms = q => q.toLowerCase().split(/\s+/).filter(Boolean).map(t => t.length > 3 ? t.replace(/(es|s)$/, m => (t.length - m.length > 3 ? '' : m)) : t);
+function libRow(x, terms, showCat) {
+  const P = x.P, hi = s => terms.length ? hiSnip(s, terms, 400) : esc(s);
+  let extra = '';
+  if (terms.length) {
+    const inHead = terms.some(t => (x.spec + ' ' + x.sum).toLowerCase().includes(t));
+    if (x.tags && terms.some(t => x.tags.toLowerCase().includes(t))) extra = `<span class="lib-tg">Tags: ${hiSnip(x.tags, terms, 200)}</span>`;
+    else if (!inHead) extra = `<span class="lib-tx">${hiSnip(x.text, terms, 130)}</span>`;
+  }
+  return `<li class="lib-r chs" style="${chVars(P.ch)}"><a href="#${esc(P.p.id)}">${showCat ? `<small>${esc(catName(P.ch))}</small>` : ''}<b>${hi(x.spec)}</b><span>${hi(x.sum)}</span>${extra}</a>${starHTML(P.p.id)}</li>`;
+}
+function libResults() {
+  const q = LIB_Q.trim(), terms = libTerms(q), phrase = q.toLowerCase().replace(/\s+/g, ' ');
+  const pool = LIB_IDX.filter(x => !LIB_CAT || x.P.ch.id === LIB_CAT);
+  const box = $('#lib-res'); if (!box) return;
+  let h = '', n = 0;
+  if (terms.length) {
+    const hits = pool.map(x => [x, libMatch(x, terms, phrase)]).filter(([, s]) => s > 0).sort((a, b) => b[1] - a[1] || a[0].P.i - b[0].P.i);
+    n = hits.length;
+    h = n ? `<ul class="lib-l">${hits.map(([x]) => libRow(x, terms, true)).join('')}</ul>` : `<p class="lib-none">No recipe matches “${esc(q)}”. Try one word, e.g. <button type="button" data-try="key">key</button> <button type="button" data-try="form">form</button> <button type="button" data-try="query">query</button></p>`;
+  } else {
+    n = pool.length;
+    h = LIB.chs.filter(ch => !LIB_CAT || ch.id === LIB_CAT).map(ch => `<section class="lib-cat chs" style="${chVars(ch)}"><h2><span>${esc(pad2(ch.n))}</span>${esc(catName(ch))}<small>${ch.pages.length} recipe${ch.pages.length === 1 ? '' : 's'}</small></h2><ul class="lib-l">${LIB_IDX.filter(x => x.P.ch === ch).map(x => libRow(x, [], false)).join('')}</ul></section>`).join('');
+  }
+  box.innerHTML = h;
+  $('#lib-n').textContent = terms.length ? `${n} recipe${n === 1 ? '' : 's'} match` : `${n} recipe${n === 1 ? '' : 's'}`;
+}
+function renderLibrary(focus) {
+  tutView('library', LIB.title);
+  const N = LIB_IDX.length;
+  main.innerHTML = `<article class="sheet lib-v" aria-labelledby="lib-h">
+    <header class="lib-hero card"><small class="lib-k">${tutIc('build')}${esc((BK.title || '').split(':')[0])} · Tutorial library</small><h1 id="lib-h" tabindex="-1">${esc(LIB.title)}</h1>
+      <p>${N} short, step-by-step recipes. Search for what your system needs, then tap ☆ to add it to your build list.</p>
+      <label class="lib-q">${'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg>'}<input id="lib-q" type="search" placeholder="Search recipes: primary key, validation, combo box…" autocomplete="off" aria-label="Search the recipes" aria-controls="lib-res" value="${esc(LIB_Q)}"></label>
+      <div class="lib-chips" role="group" aria-label="Category"><button type="button" class="lib-chip" data-cat="" aria-pressed="${!LIB_CAT}">All</button>${LIB.chs.map(ch => `<button type="button" class="lib-chip chs" style="${chVars(ch)}" data-cat="${esc(ch.id)}" aria-pressed="${LIB_CAT === ch.id}">${esc(catName(ch))}</button>`).join('')}</div>
+      <div class="lib-bar"><span id="lib-n" aria-live="polite"></span><a class="lib-my" href="#mybuild">★ My build list <b data-blcount>${BL.pick.length}</b></a></div></header>
+    <section class="card lib-body" aria-label="Recipes"><div id="lib-res"></div></section>
+  </article>`;
+  libResults();
+  const qi = $('#lib-q'); let t = 0;
+  qi.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { LIB_Q = qi.value; libResults(); }, 80); });
+  qi.addEventListener('keydown', e => { if (e.key === 'Enter') { const a = $('#lib-res a'); if (a) a.click(); } });
+  $$('.lib-chip', main).forEach(b => b.addEventListener('click', () => { LIB_CAT = b.dataset.cat; $$('.lib-chip', main).forEach(c => c.setAttribute('aria-pressed', String(c.dataset.cat === LIB_CAT))); libResults(); }));
+  main.addEventListener('click', e => { const b = e.target.closest('[data-try]'); if (b && TUT_VIEW === 'library') { qi.value = LIB_Q = b.dataset.try; libResults(); qi.focus(); } });
+  tutViewDone(false);
+  if (focus) (isNarrow() ? $('#lib-h') : qi).focus({ preventScroll: true });
+}
+function buildCount() {
+  const ids = BL.pick, d = ids.filter(id => BL.done.includes(id)).length, n = ids.length;
+  const c = $('#bl-c'); if (c) c.textContent = n ? `${d} of ${n} added to my system` : 'Nothing picked yet';
+  const m = $('#bl-m'); if (m) m.style.width = (n ? d / n * 100 : 0) + '%';
+  const e = $('#bl-empty'); if (e) e.hidden = n > 0;
+  $$('[data-blcount]').forEach(x => { x.textContent = n; });
+}
+function renderBuild(focus) {
+  tutView('mybuild', 'My build list');
+  const picked = PAGES.filter(P => blHas(P.p.id));   /* book order = category order */
+  const cats = (LIB ? LIB.chs : []).concat(B.chapters.filter(ch => !LIB_CH.has(ch))).filter(ch => picked.some(P => P.ch === ch));
+  main.innerHTML = `<article class="sheet lib-v bl-v" aria-labelledby="bl-h">
+    <header class="lib-hero card"><small class="lib-k">${tutIc('flag')}${esc(BK.title || '')}</small><h1 id="bl-h" tabindex="-1">My build list</h1>
+      <p class="lib-np">The recipes you picked for your own system, in category order. Tick each one when it is in your database.</p>
+      <div class="bl-prog"><span id="bl-c"></span><span class="meter"><i id="bl-m"></i></span></div>
+      <div class="lib-bar lib-np"><a class="lib-my" href="#library">◀ Back to library</a><button type="button" class="btn pri" id="bl-print">Print my build list</button></div></header>
+    <section class="card lib-body"><p id="bl-empty" class="lib-none"${picked.length ? ' hidden' : ''}>No recipes yet. Open the <a href="#library">tutorial library</a> and tap ☆ on the recipes you want to add to your system.</p>
+      ${cats.map(ch => `<section class="lib-cat chs" style="${chVars(ch)}"><h2><span>${esc(pad2(ch.n))}</span>${esc(catName(ch))}</h2><ul class="bl-l">${picked.filter(P => P.ch === ch).map(P => { const d = BL.done.includes(P.p.id); return `<li class="${d ? 'ok' : ''}"><label class="bl-cb"><input type="checkbox" data-bl="${esc(P.p.id)}"${d ? ' checked' : ''} aria-label="Added to my system: ${esc(plain(P.p.spec))}"><span class="todo-box" aria-hidden="true">${ICON_TICK}</span></label><a href="#${esc(P.p.id)}"><b>${esc(plain(P.p.spec))}</b><span>${esc(plain(P.p.summary))}</span></a>${starHTML(P.p.id)}</li>`; }).join('')}</ul></section>`).join('')}</section>
+  </article>`;
+  buildCount();
+  $$('[data-bl]', main).forEach(cb => cb.addEventListener('change', () => {
+    const id = cb.dataset.bl; BL.done = BL.done.filter(x => x !== id); if (cb.checked) BL.done.push(id); blSave();
+    cb.closest('li').classList.toggle('ok', cb.checked); buildCount();
+    if (cb.checked && BL.pick.every(x => BL.done.includes(x))) { const r = cb.getBoundingClientRect(); burst(r.left + 10, r.top + 10, 16, hueCols()); }
+  }));
+  $('#bl-print').addEventListener('click', () => window.print());
+  tutViewDone(focus, '#bl-h');
+}
+/* a recipe page: back link + star at the top, "Check it works" last, previous/next within its category */
+function wireRecipe(root, P) {
+  const hero = root.querySelector('.phero'); if (!hero) return;
+  hero.insertAdjacentHTML('beforebegin', `<nav class="lib-top" aria-label="Tutorial library"><a href="#library">◀ Back to library</a><span>${esc(catName(P.ch))}</span>${starHTML(P.p.id, true)}</nav>`);
+  root.querySelector('article.sheet').classList.add('is-recipe');
+  const chk = [...root.querySelectorAll('.boxed.key')].find(k => /check it works/i.test(k.querySelector('.blk-h') ? k.querySelector('.blk-h').textContent : '')), slot = root.querySelector('#dg-slot');
+  if (chk && slot) { const sec = el('section', { class: 'ncard card rc-chk' }); const nt = el('div', { class: 'notes' }); nt.append(chk); sec.append(nt); slot.after(sec); }
+  const ps = P.ch.pages, k = ps.indexOf(P.p), prev = ps[k - 1], next = ps[k + 1], nav = root.querySelector('.nextprev');
+  if (nav) nav.innerHTML = (prev ? `<a class="np" href="#${esc(prev.id)}"><small>← Previous in ${esc(catName(P.ch))}</small><span>${esc(plain(prev.spec))}</span></a>` : `<a class="np" href="#library"><small>← Back</small><span>Tutorial library</span></a>`)
+    + (next ? `<a class="np nx" href="#${esc(next.id)}"><small>Next in ${esc(catName(P.ch))} →</small><span>${esc(plain(next.spec))}</span></a>` : `<a class="np nx" href="#mybuild"><small>Done with ${esc(catName(P.ch))} →</small><span>My build list</span></a>`);
+}
+function ctaHTML() {
+  const h = [];
+  if (LIB) h.push(`<a class="lib-cta card" href="#library"><span class="lib-ci" aria-hidden="true">${tutIc('build')}</span><span class="lib-ct"><small>${esc(LIB.title)}</small><b>Search ${LIB_IDX.length} step-by-step recipes</b><span>Tables and keys, relationships, queries, forms, reports, macros and VBA: pick what your system needs and add it to your build list.</span></span><span class="lib-go">Open the library →</span></a>`);
+  if (LIB) h.push(`<a class="lib-cta sm card" href="#mybuild"><span class="lib-ci" aria-hidden="true">★</span><span class="lib-ct"><b>My build list</b><span><b data-blcount>${BL.pick.length}</b> recipes picked</span></span></a>`);
+  if (WU.length && !LIB) h.push(`<a class="lib-cta card" href="#writeup-map"><span class="lib-ci" aria-hidden="true">${tutIc('flag')}</span><span class="lib-ct"><small>Write-up map</small><b>${TASKS.length} tasks in ${WU.length} chapters, about ${esc(pgTxt(WU_TOTAL))}</b>${wuBarHTML(null, false)}</span><span class="lib-go">Open the map →</span></a>`);
+  if (WU.length && LIB) h.push(`<a class="lib-cta sm card" href="#writeup-map"><span class="lib-ci" aria-hidden="true">${tutIc('flag')}</span><span class="lib-ct"><b>Write-up map</b><span>${TASKS.length} coursework tasks</span></span></a>`);
+  if (MM) h.push(`<a class="lib-cta sm card" href="#marks"><span class="lib-ci" aria-hidden="true">${tutIc('table')}</span><span class="lib-ct"><b>Mark scheme overview</b><span>${CRIT.size} criteria</span></span></a>`);
+  return h.length ? `<div class="lib-ctas">${h.join('')}</div>` : '';
+}
 if (TUT) {
   document.body.classList.add('tut-book');
   keyTermsHTML = () => ''; chapterGlossHTML = () => ''; lessonHTML = () => ''; learnHTML = () => ''; lpHTML = () => '';
   wireChapterList = () => { }; chapterCardHTML = tutChapterCardHTML; renderCover = tutCover;
-  runRoute = () => { closeDrawers(); goCover(); };   /* #glossary, #flashcards, #quiz, #keyterms: no such views here */
+  /* extra views: #library and #mybuild (a book with a recipe library), #writeup-map (task blocks), #marks (a mark map);
+     #glossary, #flashcards, #quiz and #keyterms have no view here and go to the cover */
+  const VIEWS = { library: LIB && renderLibrary, mybuild: LIB && renderBuild, 'writeup-map': WU.length && renderMap, marks: MM && CRIT.size && renderMarks };
+  const hashRoute0 = hashRoute;
+  hashRoute = () => { const h = decodeURIComponent((location.hash || '').slice(1)); return VIEWS[h] ? { kind: h } : hashRoute0(); };
+  runRoute = r => { if (r && VIEWS[r.kind]) { TUT_VIEW = r.kind; closeDrawers(); VIEWS[r.kind](true); } else { TUT_VIEW = null; closeDrawers(); goCover(); } };
+  const settleHash0 = settleHash;
+  settleHash = () => { if (TUT_VIEW && !onCredits) { try { history.replaceState(null, '', '#' + TUT_VIEW); } catch (e) { /* sandboxed */ } } else settleHash0(); };
+  const renderPage0 = renderPage;
+  renderPage = (i, f) => { TUT_VIEW = null; document.body.classList.remove('bl-on'); renderPage0(i, f); };
+  const renderCredits0 = renderCredits;
+  renderCredits = f => { TUT_VIEW = null; document.body.classList.remove('bl-on'); renderCredits0(f); };
+  /* the top-bar search also searches recipe tags */
+  IDX.forEach(x => { const t = x.P.p.tags; if (Array.isArray(t) && t.length) x.notes += '   ' + t.map(plain).join(' · '); });
   openGloss = () => { };
   DRB.gloss.hidden = true; DRB.gloss.setAttribute('aria-hidden', 'true');
   $('#q').placeholder = 'Search the tutorials'; $('#q').setAttribute('aria-label', 'Search the tutorials');
@@ -7048,12 +7636,167 @@ if (TUT) {
   const buildRail0 = buildRail;
   buildRail = () => {
     buildRail0();
+    const lk = [];
+    if (LIB) lk.push(`<a href="#library" data-view="library">${tutIc('build')}<span>${esc(LIB.title)}</span></a>`, `<a href="#mybuild" data-view="mybuild"><i aria-hidden="true">★</i><span>My build list</span><b data-blcount>${BL.pick.length}</b></a>`);
+    if (WU.length) lk.push(`<a href="#writeup-map" data-view="writeup-map">${tutIc('flag')}<span>Write-up map</span></a>`);
+    if (MM && CRIT.size) lk.push(`<a href="#marks" data-view="marks">${tutIc('table')}<span>Mark scheme overview</span></a>`);
+    const hd = rail.querySelector('.r-head'); if (hd && lk.length) hd.insertAdjacentHTML('afterend', `<nav class="r-lib" aria-label="Tools">${lk.join('')}</nav>`);
     if (TUT_PARTS.length < 2) return;
     const secs = rail.querySelectorAll('.r-ch');
     TUT_PARTS.forEach(pt => { const s = secs[B.chapters.indexOf(pt.chs[0])]; if (s) s.insertAdjacentHTML('beforebegin', `<div class="r-part"><span>Part ${pt.k}</span>${esc(pt.title)}</div>`); });
   };
 }
 /* ================= TUTORIAL BOOK: END ================= */
+/* ================= APP: BEGIN =================
+   Installable app + progress (source notes/app/app.js, inserted by notes/app/inject.py after the tutorial block):
+   - "Mark as covered" in every page footer (the page's existing done tick, state.done), "My progress" view at #progress
+   - Download / load / reset progress (every notes-* localStorage key on this site)
+   - on a web host only: the web app manifest, the service worker (../sw.js), "Install app" and "Available offline" in the menu */
+const APP_REV = !TUT;   /* revision workbooks say "covered"; tutorial books keep "done" and add their checklists */
+const covTxt = d => APP_REV ? (d ? 'Covered – tap to undo' : 'Mark as covered') : (d ? 'Done – tap to undo' : 'Mark this page as done');
+const pageStatus = id => state.done[id] ? 'cov' : state.seen[id] ? 'vis' : 'not';
+const ST_NAME = { cov: APP_REV ? 'Covered' : 'Done', vis: 'Visited, not marked', not: APP_REV ? 'Not covered' : 'Not started' };
+/* ---------- backup: all notes-* keys ---------- */
+function progressKeys() { const ks = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && /^notes-/.test(k)) ks.push(k); } } catch (e) { /* storage unavailable */ } return ks.sort(); }
+function exportProgress() {
+  const data = {}; progressKeys().forEach(k => { try { data[k] = localStorage.getItem(k); } catch (e) { } });
+  const blob = new Blob([JSON.stringify({ app: 'ccea-dt-revision', brand: "Mr Butler's Digital Technology", version: 1, exported: new Date().toISOString(), data }, null, 1)], { type: 'application/json' });
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = `my-dt-progress-${new Date().toISOString().slice(0, 10)}.json`;
+  document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+}
+function importProgress(file, done) {
+  const rd = new FileReader();
+  rd.onload = () => {
+    let o; try { o = JSON.parse(rd.result); } catch (e) { done('That file is not a progress file.'); return; }
+    const d = o && o.data && typeof o.data === 'object' ? o.data : null, ks = d ? Object.keys(d).filter(k => /^notes-/.test(k) && typeof d[k] === 'string') : [];
+    if (!ks.length) { done('No progress found in that file.'); return; }
+    if (!confirm(`Load progress from this file? It replaces the progress saved in this browser (${ks.length} item${ks.length === 1 ? '' : 's'}).`)) { done(''); return; }
+    try { progressKeys().forEach(k => localStorage.removeItem(k)); ks.forEach(k => localStorage.setItem(k, d[k])); } catch (e) { done('This browser would not save the progress.'); return; }
+    location.reload();
+  };
+  rd.onerror = () => done('That file could not be read.');
+  rd.readAsText(file);
+}
+function resetProgress() {
+  if (!confirm('Reset ALL your progress on this site (every workbook: covered pages, ticks, build lists)? This cannot be undone. Download a copy first if you might want it back.')) return;
+  try { progressKeys().forEach(k => localStorage.removeItem(k)); } catch (e) { }
+  location.reload();
+}
+function backupHTML() {
+  if (!ON_WEB) return `<p class="pg-note">Download and load your progress on the website version of this workbook.</p><div class="pg-bk"><button type="button" class="btn" data-pg-reset>Reset progress</button></div>`;
+  return `<div class="pg-bk"><button type="button" class="btn pri" data-pg-dl>Download my progress</button><label class="btn pg-ld">Load progress from file<input type="file" accept="application/json,.json" data-pg-ld hidden></label><button type="button" class="btn" data-pg-reset>Reset progress</button><span class="pg-msg" aria-live="polite"></span></div>`;
+}
+function wireBackup(root) {
+  const dl = $('[data-pg-dl]', root), ld = $('[data-pg-ld]', root), rs = $('[data-pg-reset]', root), msg = $('.pg-msg', root);
+  if (dl) dl.addEventListener('click', exportProgress);
+  if (ld) ld.addEventListener('change', () => { if (ld.files[0]) importProgress(ld.files[0], m => { if (msg) msg.textContent = m; ld.value = ''; }); });
+  if (rs) rs.addEventListener('click', resetProgress);
+}
+/* ---------- #progress ---------- */
+let PG_F = 'all';
+function ring(d, n, big) { const pc = n ? Math.round(d / n * 100) : 0; return `<span class="pg-ring${big ? ' big' : ''}" aria-hidden="true"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="18" class="tr-bg"/><circle cx="22" cy="22" r="18" class="tr-fg" pathLength="100" stroke-dasharray="${pc} 100"/></svg><b>${big ? pc + '%' : d}</b></span>`; }
+function renderProgress(focus) {
+  tutView('progress', 'My progress');
+  const cnt = { cov: 0, vis: 0, not: 0 }; PAGES.forEach(P => cnt[pageStatus(P.p.id)]++);
+  const N = PAGES.length, nextNot = PAGES.find(P => pageStatus(P.p.id) !== 'cov');
+  const extra = [];
+  if (typeof TASKS !== 'undefined' && TASKS.length) {
+    let d = 0, n = 0; TASKS.forEach(t => { const set = new Set(TODO[t.P.p.id + '#' + t.bi + 'd'] || []); (t.b.deliver || []).forEach(x => { n++; if (set.has(todoH(x))) d++; }); });
+    extra.push(`<a class="pg-x" href="#writeup-map">${ring(d, n)}<span><b>Coursework checklists</b>${d} of ${n} items ticked across ${TASKS.length} tasks</span></a>`);
+  }
+  if (typeof LIB !== 'undefined' && LIB) { const n = BL.pick.length, d = BL.pick.filter(id => BL.done.includes(id)).length; extra.push(`<a class="pg-x" href="#mybuild">${ring(d, n)}<span><b>My build list</b>${n ? `${d} of ${n} recipes added to my system` : 'No recipes picked yet'}</span></a>`); }
+  const todos = Object.keys(TODO).filter(k => !/d$/.test(k)); if (todos.length) { const d = todos.reduce((s, k) => s + TODO[k].length, 0); extra.push(`<div class="pg-x">${ring(d, d)}<span><b>Checklists</b>${d} item${d === 1 ? '' : 's'} ticked in ${todos.length} checklist${todos.length === 1 ? '' : 's'}</span></div>`); }
+  main.innerHTML = `<article class="sheet lib-v pg-v" aria-labelledby="pg-h">
+    <header class="lib-hero card"><small class="lib-k">${icon('chk')}${esc(BK.title || '')}</small><h1 id="pg-h" tabindex="-1">My progress</h1>
+      <div class="pg-sum">${ring(cnt.cov, N, true)}<div><p><b>${cnt.cov} of ${N}</b> pages ${APP_REV ? 'covered' : 'done'}.</p><p class="pg-c"><span class="pg-k cov">${cnt.cov} ${ST_NAME.cov.toLowerCase()}</span><span class="pg-k vis">${cnt.vis} visited, not marked</span><span class="pg-k not">${cnt.not} ${ST_NAME.not.toLowerCase()}</span></p>
+      ${nextNot ? `<a class="btn pri" href="#${esc(nextNot.p.id)}">Next ${APP_REV ? 'not-covered' : 'unfinished'} page →</a>` : '<p><b>Everything is marked. Brilliant.</b></p>'}</div></div>
+      ${extra.length ? `<div class="pg-xs">${extra.join('')}</div>` : ''}
+      <div class="lib-chips pg-f" role="group" aria-label="Show">${[['all', 'All pages'], ['not', ST_NAME.not], ['vis', 'Visited, not marked'], ['cov', ST_NAME.cov]].map(([k, l]) => `<button type="button" class="lib-chip" data-pgf="${k}" aria-pressed="${PG_F === k}">${esc(l)}</button>`).join('')}</div></header>
+    <section class="card lib-body" id="pg-list">${B.chapters.filter(ch => (ch.pages || []).length).map(ch => {
+      const ps = ch.pages, d = ps.filter(p => state.done[p.id]).length;
+      return `<section class="lib-cat chs pg-ch" style="${chVars(ch)}"><h2><span>${esc(pad2(ch.n))}</span>${esc(ch.title)}<small>${d}/${ps.length}</small></h2><span class="meter"><i style="width:${Math.round(d / ps.length * 100)}%"></i></span>
+        <ul class="pg-l">${ps.map(p => { const st = pageStatus(p.id); return `<li data-st="${st}"><a href="#${esc(p.id)}"><span class="pg-k ${st}">${esc(ST_NAME[st])}</span><span>${esc(plain(p.spec))}</span></a></li>`; }).join('')}</ul></section>`;
+    }).join('')}<p class="lib-none" id="pg-none" hidden>Nothing here.</p></section>
+    <section class="card lib-body pg-bks"><h2>Back up or move your progress</h2><p class="pg-note">Your progress is saved in this browser only. Download it to keep a copy or to move it to another device, then load it there.</p>${backupHTML()}</section>
+  </article>`;
+  const filt = () => { $$('.pg-l li', main).forEach(li => { li.hidden = PG_F !== 'all' && li.dataset.st !== PG_F; }); $$('.pg-ch', main).forEach(s => { s.hidden = !$('.pg-l li:not([hidden])', s); }); $('#pg-none').hidden = !!$('.pg-l li:not([hidden])', main); };
+  $$('[data-pgf]', main).forEach(b => b.addEventListener('click', () => { PG_F = b.dataset.pgf; $$('[data-pgf]', main).forEach(c => c.setAttribute('aria-pressed', String(c.dataset.pgf === PG_F))); filt(); }));
+  filt(); wireBackup(main);
+  tutViewDone(focus, '#pg-h');
+}
+/* routes for books without the tutorial views (tutorial books route #progress through VIEWS below) */
+{
+  const hr = hashRoute, rr = runRoute;
+  hashRoute = () => decodeURIComponent((location.hash || '').slice(1)) === 'progress' ? { kind: 'progress' } : hr();
+  runRoute = r => { if (r && r.kind === 'progress') { TUT_VIEW = 'progress'; closeDrawers(); renderProgress(true); } else rr(r); };
+  if (!TUT) {
+    const sh = settleHash; settleHash = () => { if (TUT_VIEW && !onCredits) { try { history.replaceState(null, '', '#' + TUT_VIEW); } catch (e) { } } else sh(); };
+    const rp = renderPage; renderPage = (i, f) => { TUT_VIEW = null; rp(i, f); };
+    const rc = renderCover; renderCover = f => { TUT_VIEW = null; rc(f); };
+    const rcr = renderCredits; renderCredits = f => { TUT_VIEW = null; rcr(f); };
+  }
+  /* the page footer: "Mark as covered" + a link to My progress */
+  const rp2 = renderPage;
+  renderPage = (i, f) => {
+    rp2(i, f);
+    const btn = $('#donebtn'); if (!btn) return;
+    const p = PAGES[cur].p, sp = $('#donebtn span');
+    btn.classList.add('cov-btn'); sp.textContent = covTxt(state.done[p.id]);
+    btn.addEventListener('click', () => { sp.textContent = covTxt(state.done[p.id]); });
+    btn.closest('.done-row').insertAdjacentHTML('beforeend', `<a class="pg-link" href="#progress">${icon('chk')}My progress</a>`);
+  };
+  const up = updateProgress;
+  updateProgress = () => { up(); if (APP_REV) { const t = $('#r-done'); if (t) t.textContent = t.textContent.replace(/pages done$/, 'pages covered'); } };
+}
+/* ---------- installable app (web host only) ---------- */
+let INSTALL = null;
+const IOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const STANDALONE = () => window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+function appMenu() {
+  const mm = $('#libmenu'); if (!mm || mm.querySelector('.app-m')) return;
+  mm.insertAdjacentHTML('afterbegin', `<div class="app-m"><a class="hubl" href="#progress">${icon('chk')}My progress</a>${ON_WEB ? `<button type="button" class="hubl app-inst" hidden>${icon('play')}Install app</button><p class="app-ios" hidden>On iPhone or iPad: tap <b>Share</b> › <b>Add to Home Screen</b>.</p><span class="app-off" hidden>● Available offline</span>` : ''}</div><hr>`);
+  const ib = mm.querySelector('.app-inst'); if (!ib) return;
+  const paint = () => { ib.hidden = STANDALONE() || !(INSTALL || IOS); };
+  ib.addEventListener('click', async () => {
+    if (INSTALL) { INSTALL.prompt(); try { await INSTALL.userChoice; } catch (e) { } INSTALL = null; paint(); }
+    else if (IOS) mm.querySelector('.app-ios').hidden = false;
+  });
+  window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); INSTALL = e; paint(); });
+  window.addEventListener('appinstalled', () => { INSTALL = null; paint(); });
+  paint();
+}
+if (ON_WEB) {
+  if (!document.querySelector('link[rel="manifest"]')) {
+    document.head.insertAdjacentHTML('beforeend', '<link rel="manifest" href="../manifest.webmanifest"><meta name="theme-color" content="#16213A"><link rel="apple-touch-icon" href="../app-icons/apple-touch-icon.png"><link rel="icon" href="../app-icons/favicon-32.png" sizes="32x32">');
+  }
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('../sw.js').then(() => navigator.serviceWorker.ready).then(async () => {
+      try { const hit = await caches.match(location.href.split('#')[0]); const off = $('#libmenu .app-off'); if (hit && off) off.hidden = false; document.body.dataset.offline = hit ? 'yes' : 'no'; } catch (e) { }
+    }).catch(() => { });
+  }
+}
+setTimeout(appMenu, 0);
+/* ---------- brand: "Mr Butler's" wordmark in the top bar (compact on a phone) and the menu; a label on the cover ---------- */
+const BRAND = "Mr Butler's", BRAND_FULL = "Mr Butler's Digital Technology";
+const unitLabel = () => { const t = String(BK.title || ''), u = t.indexOf(': ') > 0 ? t.slice(0, t.indexOf(': ')) : (BK.id || ''); return COURSE === 'gcse' && !/^GCSE/i.test(u) ? 'GCSE ' + u : u; };
+(function () {
+  const bk = $('#b-back'); if (!bk || $('#bar .wm')) return;
+  bk.insertAdjacentHTML('beforeend', '<span class="bk-wm" aria-hidden="true">Mr B’s</span>');   /* phones: the back button carries the compact wordmark */
+  bk.insertAdjacentHTML('afterend', `<a class="wm" href="${esc(bk.getAttribute('href'))}"${bk.target ? ' target="_blank" rel="noopener"' : ''} aria-label="${esc(BRAND_FULL)}: front page"><span class="wm-l">${esc(BRAND)}</span><span class="wm-s" aria-hidden="true">Mr B’s</span></a>`);
+})();
+setTimeout(() => { const mm = $('#libmenu'); if (mm && !mm.querySelector('.wm-m')) mm.insertAdjacentHTML('afterbegin', `<a class="wm-m" href="${esc($('#b-back').getAttribute('href'))}"><b>${esc(BRAND)}</b><span>Digital Technology</span></a>`); }, 0);
+{
+  const rcv = renderCover;
+  renderCover = f => { rcv(f); const q = $('.cv-hero .cv-q', main); if (q && !$('.cv-brand', main)) q.insertAdjacentHTML('beforebegin', `<span class="cv-brand">${esc(BRAND)} · ${esc(unitLabel())}</span>`); };
+  /* every page: a corner mark on the chapter banner and a line under the footer */
+  const rpb = renderPage;
+  renderPage = (i, f) => { rpb(i, f); const bn = $('.cbn', main); if (bn && !$('.cbn-wm', bn)) bn.insertAdjacentHTML('afterbegin', `<span class="cbn-wm" aria-hidden="true">${esc(BRAND)}</span>`); const ft = $('.foot', main); if (ft && !$('.foot-wm', ft)) ft.insertAdjacentHTML('beforeend', `<div class="foot-wm">${esc(BRAND_FULL)}</div>`); };
+  const rcr2 = renderCredits;
+  renderCredits = f => { rcr2(f); const a = $('article', main); if (a && !$('.cr-wm', a)) a.insertAdjacentHTML('afterbegin', `<span class="v-wm cr-wm">${esc(BRAND_FULL)}</span>`); };
+  /* the glossary, flashcards and quiz drawer */
+  const gh = $('#d-gloss .dr-h'); if (gh && !$('.mb-wm', gh)) $('.gv-t', gh).insertAdjacentHTML('afterend', `<span class="mb-wm" aria-hidden="true">${esc(BRAND)}</span>`);
+}
+/* ================= APP: END ================= */
 /* ================= boot ================= */
 buildRail(); updateProgress(); syncMenuBtn();
 const route0 = hashRoute();

@@ -1,6 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <meta charset="utf-8">
-<title>Digital Technology Hub · GCE</title>
+<title>Digital Technology Hub · GCE – Mr Butler’s</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -598,4 +598,28 @@ html.embed .stack { gap: 14px; }
 <script src="tutorials.js"></script>
 <script src="app.js"></script>
 
+<!-- MB-BRAND -->
+<style>
+@font-face{font-family:'Lemon Milk';src:url('../fonts/lemonmilk-bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
+.mb-wm{display:block;font-family:'Lemon Milk',system-ui,sans-serif;font-weight:700;letter-spacing:.05em;font-size:11px;line-height:1.2;text-transform:uppercase;opacity:.9}
+.mb-wm-page{display:inline-block;margin:0 0 6px;font-family:'Lemon Milk',system-ui,sans-serif;font-weight:700;letter-spacing:.05em;font-size:12px;text-transform:uppercase;color:inherit;opacity:.85}
+</style>
+<script>
+(function () {
+  'use strict';
+  if (/[?&]embed=1(&|$)/.test(location.search)) return;            /* inside a workbook: unbranded */
+  var SUF = " \u2013 Mr Butler\u2019s";
+  var fix = function () { if (document.title.indexOf("Mr Butler") < 0) document.title = document.title + SUF; };
+  fix();
+  var t = document.querySelector('title'); if (t && window.MutationObserver) new MutationObserver(fix).observe(t, { childList: true, characterData: true, subtree: true });
+  var add = function () {
+    var b = document.querySelector('header.top .brand span:not(.chip-logo)');
+    if (b && !b.querySelector('.mb-wm')) { b.insertAdjacentHTML('afterbegin', '<span class="mb-wm">Mr Butler\u2019s</span>'); return; }
+    var c = document.querySelector('main, .card, body > div') || document.body;
+    if (!document.querySelector('header.top') && c && !document.querySelector('.mb-wm-page')) c.insertAdjacentHTML('afterbegin', '<span class="mb-wm-page">Mr Butler\u2019s Digital Technology</span>');
+  };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', add); else add();
+})();
+</script>
+<!-- /MB-BRAND -->
 </body></html>
