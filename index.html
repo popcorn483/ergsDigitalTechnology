@@ -547,6 +547,16 @@ html:not(.wl-on) #welcome{display:none}
 .lm-i{flex:none;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);color:#fff}
 .lm-i.lm-p{background:#3B6FD0;box-shadow:none}
 .lm-i svg{width:16px;height:16px}
+/* My progress: a pill at the top right; the full card only while open */
+.myprog:not([open]){display:none}
+.myprog[open] > summary .mp-go{display:inline}
+.mp-pill{display:inline-flex;align-items:center;gap:8px;padding:5px 12px 5px 5px;border:0;border-radius:999px;background:var(--paper);color:var(--ink);font:700 13.5px/1.2 var(--sans);cursor:pointer;box-shadow:0 1px 2px rgba(0,0,0,.06),inset 0 0 0 1px var(--line)}
+.mp-pill:hover{box-shadow:inset 0 0 0 1.5px #18744A}
+.mp-pill:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.mp-pi{display:inline-grid;place-items:center;width:24px;height:24px;border-radius:50%;background:#18744A;color:#fff;font-size:13px}
+.mp-pn{font-weight:400;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.mp-pill[aria-expanded="true"]{box-shadow:inset 0 0 0 1.5px #18744A}
+@media (max-width:380px){ .mp-pt{display:none} }
 /* ================= DESIGN: END ================= */
 </style>
 </head>
@@ -945,9 +955,23 @@ function scopeCount(sc) {
 function progSummary() {
   const el = document.getElementById('mp-sum'); if (!el) return;
   const sc = myScope();
-  if (!sc) { el.textContent = 'Choose your course to see your progress'; return; }
+  if (!sc) { el.textContent = 'Choose your course to see your progress'; mpPill(null); return; }
   const t = scopeCount(sc);
   el.innerHTML = `<span class="mp-l1"><b>${t.d}</b> of ${t.n} pages covered</span><span class="mp-l2">${esc(scopeTxt(sc))}</span>`;   /* two short lines, not one long wrapping one */
+  mpPill(t);
+}
+/* "My progress" lives in a small pill at the top right (beside Home); the panel opens below only when asked for */
+function mpPill(t) {
+  const row = document.querySelector('.home-row'); if (!row) return;
+  let p = document.getElementById('mp-pill');
+  if (!p) {
+    row.insertAdjacentHTML('beforeend', `<button type="button" class="mp-pill" id="mp-pill" aria-controls="myprog" aria-expanded="false"><span class="mp-pi" aria-hidden="true">✓</span><span class="mp-pt">My progress</span><span class="mp-pn"></span></button>`);
+    p = document.getElementById('mp-pill');
+    p.addEventListener('click', () => { const mp = document.getElementById('myprog'); if (!mp) return; mp.open = !mp.open; if (mp.open) setTimeout(() => mp.scrollIntoView({ block: 'nearest', behavior: 'smooth' }), 0); });
+  }
+  const mp = document.getElementById('myprog'); p.setAttribute('aria-expanded', String(!!(mp && mp.open)));
+  p.querySelector('.mp-pn').textContent = t && t.n ? `${t.d}/${t.n}` : '';
+  p.title = t && t.n ? `${t.d} of ${t.n} pages covered` : 'My progress';
 }
 function progPanel() {
   const body = document.getElementById('mp-body'); if (!body) return;
@@ -996,7 +1020,8 @@ function pImport(file, say) {
     <div class="mp-bk"><b>Back up or move your progress</b><span>It is saved in this browser only.</span><div><button type="button" class="btn pri" id="mp-dl">Download my progress</button><label class="btn mp-ld">Load progress from file<input type="file" id="mp-ld" accept="application/json,.json" hidden></label><button type="button" class="btn" id="mp-rs">Reset progress</button><span id="mp-msg" aria-live="polite"></span></div></div></details>`);
   const mp = document.getElementById('myprog');
   if (mp) {
-    mp.addEventListener('toggle', () => { if (mp.open) progPanel(); mp.querySelector('.mp-go').textContent = mp.open ? 'Hide' : 'Show'; });
+    mp.addEventListener('toggle', () => { if (mp.open) progPanel(); mp.querySelector('.mp-go').textContent = mp.open ? 'Hide' : 'Show'; const p = document.getElementById('mp-pill'); if (p) p.setAttribute('aria-expanded', String(mp.open)); });
+    setTimeout(() => { if (!document.getElementById('mp-pill')) progSummary(); }, 0);   /* the Home row is added after this script */
     document.getElementById('mp-dl').addEventListener('click', pExport);
     const ld = document.getElementById('mp-ld'); ld.addEventListener('change', () => { if (ld.files[0]) pImport(ld.files[0], m => { document.getElementById('mp-msg').textContent = m; ld.value = ''; }); });
     document.getElementById('mp-rs').addEventListener('click', () => { if (confirm('Reset ALL your progress on this site (every workbook)? This cannot be undone. Download a copy first if you might want it back.')) { pKeys().forEach(k => { try { localStorage.removeItem(k); } catch (e) { } }); location.reload(); } });
