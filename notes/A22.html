@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>A2 2 Access and VBA Tutorials – Mr Butler's</title>
+<title>A2 2 Access and VBA Tutorials – Mr Butler's</title><meta name="apple-mobile-web-app-title" content="Mr B's Digital Technology Revision"><meta name="application-name" content="Mr B's Digital Technology Revision">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -8937,7 +8937,7 @@ function trMetrics(max) {
     M.tasks = TASKS.map(t => { const set = new Set(TODO[t.P.p.id + '#' + t.bi + 'd'] || []), its = (t.b.deliver || []).filter(x => typeof x === 'string' && x.trim()); return { t, ch: t.P.ch, n: its.length, d: max ? its.length : its.filter(x => set.has(todoH(x))).length, seen: seen(t.P.p) }; });
     M.tDone = M.tasks.filter(x => x.n && x.d === x.n).length; M.dTot = M.tasks.reduce((s, x) => s + x.n, 0); M.dDone = M.tasks.reduce((s, x) => s + x.d, 0);
     M.todos = []; PAGES.forEach(P => (P.p.blocks || []).forEach((b, bi) => { if (b && b.t === 'todo') { const its = (b.items || []).filter(x => typeof x === 'string' && x.trim()), set = new Set(TODO[P.p.id + '#' + bi] || []); M.todos.push({ n: its.length, d: max ? its.length : its.filter(x => set.has(todoH(x))).length }); } }));
-    M.solAll = []; PAGES.forEach(P => (P.p.practice || []).forEach((q, qi) => { if (q && q.q && q.a) M.solAll.push({ k: P.p.id + ':' + qi, ch: P.ch }); }));
+    M.solAll = []; PAGES.filter(P => !isCW(P.p)).forEach(P => (P.p.practice || []).forEach((q, qi) => {   /* task pages do not show the Your turn tasks */ if (q && q.q && q.a) M.solAll.push({ k: P.p.id + ':' + qi, ch: P.ch }); }));
     M.sol = M.solAll.filter(x => max || TR.sol[x.k]).length;
     M.solCh = new Map(); M.solAll.forEach(x => { const o = M.solCh.get(x.ch) || { n: 0, d: 0 }; o.n++; if (max || TR.sol[x.k]) o.d++; M.solCh.set(x.ch, o); });
     if (typeof LIB !== 'undefined' && LIB) {
