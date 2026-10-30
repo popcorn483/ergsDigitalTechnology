@@ -187,20 +187,20 @@ ol.topics{list-style:none;margin:0;padding:0 14px}
 @font-face{font-family:'Lemon Milk';src:url('fonts/lemonmilk-medium.woff') format('woff');font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:'Lemon Milk';src:url('fonts/lemonmilk-bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
 @font-face{font-family:'Saira Hero';src:url('fonts/saira-hero.woff') format('woff');font-weight:900;font-style:normal;font-display:swap}
-:root{--display:'Lemon Milk','Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;--font-hero:'Saira Hero','Lemon Milk',sans-serif}
-h1{font-family:var(--font-hero);font-weight:900;text-transform:uppercase;letter-spacing:.01em;font-size:clamp(28px,4.6vw,44px);line-height:1.05}
-.unit-h h2{font-family:var(--display);font-weight:700;letter-spacing:.03em;font-size:21px}
-.tp-t b{font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:15px;line-height:1.3}
+:root{--brand:'Lemon Milk','Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;--display:var(--sans);--font-hero:var(--sans)}   /* DESIGN PASS: Lemon Milk = the "Mr Butler's" wordmark only */
+h1{font-family:var(--sans);font-weight:700;letter-spacing:-.015em;font-size:clamp(28px,4.4vw,40px);line-height:1.1}
+.unit-h h2{font-family:var(--sans);font-weight:700;letter-spacing:-.01em;font-size:22px}
+.tp-t b{font-family:var(--sans);font-weight:700;letter-spacing:0;font-size:16.5px;line-height:1.3}
 .seg button small{font-family:var(--sans);letter-spacing:0}
-.btn,.ppt a,.ppt > span,.seg button,.f-ppt span,.gl-t,.unit-l a{font-family:var(--display);letter-spacing:.03em;font-weight:500}
-.btn,.ppt a,.gl-t{font-size:12.5px}
-@media (max-width:520px){ .tp-t b{font-size:14px} .unit-h h2{font-size:18px} }
+.btn,.ppt a,.ppt > span,.seg button,.f-ppt span,.gl-t,.unit-l a{font-family:var(--sans);letter-spacing:0;font-weight:700}
+.btn,.ppt a,.gl-t{font-size:14px}
+@media (max-width:520px){ .tp-t b{font-size:15.5px} .unit-h h2{font-size:19px} }
 /* ================= TUTORIAL BOOK: BEGIN (tutorial unit cards; source notes/tutorial/front_tut.css) ================= */
-.tut-b{display:inline-flex;align-items:center;gap:5px;margin-left:8px;vertical-align:top;font-family:var(--display);font-weight:500;letter-spacing:.04em;font-size:11.5px;line-height:1;padding:5px 10px 5px 8px;border-radius:999px;background:color-mix(in srgb,var(--h2d) 12%,var(--paper));color:var(--h2d);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--h2d) 45%,transparent)}
+.tut-b{display:inline-flex;align-items:center;gap:5px;margin-left:8px;vertical-align:top;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:11.5px;line-height:1;padding:5px 10px 5px 8px;border-radius:999px;background:color-mix(in srgb,var(--h2d) 12%,var(--paper));color:var(--h2d);box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--h2d) 45%,transparent)}
 .tut-b svg{width:14px;height:14px}
 :root[data-theme="dark"] .tut-b{color:var(--h2l);background:color-mix(in srgb,var(--h2l) 12%,var(--paper));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--h2l) 45%,transparent)}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .tut-b{color:var(--h2l);background:color-mix(in srgb,var(--h2l) 12%,var(--paper));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--h2l) 45%,transparent)} }
-.tpart-h{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:14px 28px 4px;padding-top:12px;border-top:1px solid var(--line-2);font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:14px;color:var(--ink)}
+.tpart-h{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 10px;margin:14px 28px 4px;padding-top:12px;border-top:1px solid var(--line-2);font-family:var(--display);font-weight:700;letter-spacing:0;font-size:14px;color:var(--ink)}
 .unit-h + .tpart .tpart-h{border-top:0;padding-top:0;margin-top:2px}
 .tpart-h span{font-family:var(--sans);font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:11px;color:var(--ink-3)}
 .tpart.out{display:none}
@@ -210,7 +210,7 @@ h1{font-family:var(--font-hero);font-weight:900;text-transform:uppercase;letter-
 .tlib-i{flex:none;width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:var(--h2d);color:#fff}
 .tlib-i svg{width:24px;height:24px}
 .tlib > span:nth-child(2){flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
-.tlib b{font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:16px}
+.tlib b{font-family:var(--display);font-weight:700;letter-spacing:0;font-size:16px}
 .tlib > span:nth-child(2) > span{font-size:13.5px;color:var(--ink-2)}
 .tlib-go{flex:none;font-size:22px;font-weight:700;color:var(--h2d)}
 @media (max-width:520px){ .tlib{margin:0 12px 10px;padding:12px} }
@@ -313,12 +313,12 @@ body{background-image:none}
 @keyframes tb-run{0%{transform:translate3d(-30vmax,0,0)}70%,100%{transform:translate3d(180vmax,0,0)}}
 .tb-shine{position:absolute;left:0;top:0;width:90vmax;height:90vmax;margin:-45vmax 0 0 -45vmax;border-radius:50%;background:radial-gradient(closest-side,var(--tb-shine),transparent);animation:tb-sweep 16s ease-in-out infinite alternate;will-change:transform}
 @keyframes tb-sweep{from{transform:translate3d(-10vw,20vh,0)}to{transform:translate3d(110vw,80vh,0)}}
-:root{--tb-dot:rgba(36,52,84,.16);--tb-po:.45;--tb-shine:rgba(140,170,230,.16)}
-:root[data-theme="dark"]{--tb-dot:rgba(138,182,255,.22);--tb-po:.75;--tb-shine:rgba(92,211,238,.10)}
-@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--tb-dot:rgba(138,182,255,.22);--tb-po:.75;--tb-shine:rgba(92,211,238,.10)} }
+:root{--tb-dot:rgba(36,52,84,.11);--tb-po:.28;--tb-shine:rgba(140,170,230,.10)}
+:root[data-theme="dark"]{--tb-dot:rgba(138,182,255,.13);--tb-po:.42;--tb-shine:rgba(92,211,238,.06)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--tb-dot:rgba(138,182,255,.13);--tb-po:.42;--tb-shine:rgba(92,211,238,.06)} }
 html.tab-hidden .tech-bg *{animation-play-state:paused}
 @media (prefers-reduced-motion: reduce){ .tb-plane{animation:none;transform:none} .tb-p,.tb-shine{display:none} .tb-par{transform:none} }
-html.wl-on body{background-image:radial-gradient(ellipse 55% 42% at 28% 16%,color-mix(in srgb,var(--h1d) 14%,transparent),transparent 72%),radial-gradient(ellipse 50% 40% at 76% 30%,color-mix(in srgb,var(--h3d) 12%,transparent),transparent 72%);background-size:100% 100%,100% 100%;background-repeat:no-repeat,no-repeat;background-attachment:fixed,fixed}
+html.wl-on body{background-image:radial-gradient(ellipse 55% 42% at 28% 16%,color-mix(in srgb,var(--h1d) 8%,transparent),transparent 72%),radial-gradient(ellipse 50% 40% at 76% 30%,color-mix(in srgb,var(--h3d) 7%,transparent),transparent 72%);background-size:100% 100%,100% 100%;background-repeat:no-repeat,no-repeat;background-attachment:fixed,fixed}
 html.wl-on .wrap > :not(#welcome){display:none!important}
 html:not(.wl-on) #welcome{display:none}
 #welcome{position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:center;max-width:780px;margin:0 auto;padding:clamp(28px,9vh,96px) 0 24px;text-align:center}
@@ -327,44 +327,45 @@ html:not(.wl-on) #welcome{display:none}
 .wl-dt{font-family:'Lemon Milk',var(--sans);font-weight:400;letter-spacing:.3em;margin-right:-.3em;font-size:clamp(12px,2.2vw,16.5px);color:var(--ink-2)}
 .wl-strip{display:flex;gap:3px;width:min(70%,300px);height:5px;margin:18px auto 0}
 .wl-strip i{flex:1;border-radius:3px}
-.wl-line{margin:20px auto 0;max-width:34em;font-size:clamp(15.5px,2vw,17.5px);line-height:1.5;color:var(--ink-2);text-wrap:balance}
-.wl-ch{display:grid;grid-template-columns:1fr 1fr;gap:18px;width:100%;margin-top:clamp(28px,6vh,48px)}
+.wl-line{margin:18px auto 0;max-width:34em;font-size:clamp(15.5px,2vw,17.5px);line-height:1.5;color:var(--ink-2);text-wrap:balance}
+.wl-q{margin:clamp(30px,6vh,52px) 0 0;font-size:15px;font-weight:700;color:var(--ink-2)}
+.wl-ch{display:grid;grid-template-columns:1fr 1fr;gap:16px;width:100%;margin-top:14px}
 .wl-c,.wl-cont{--wc:var(--wcd,#1F5FBF)}
-.wl-c{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding:24px 24px 30px;border-radius:24px;text-align:left;text-decoration:none;color:var(--ink);overflow:hidden;
-  background:linear-gradient(150deg,color-mix(in srgb,var(--wc) 11%,var(--paper)) 0%,var(--paper) 62%);box-shadow:var(--card-shadow);outline:1px solid var(--card-line);transition:transform .18s var(--ease),box-shadow .18s}
-.wl-c:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(20,30,50,.06),0 18px 40px -16px color-mix(in srgb,var(--wc) 55%,transparent)}
+.wl-c{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:16px;padding:22px 22px 24px;border-radius:16px;text-align:left;text-decoration:none;color:var(--ink);overflow:hidden;
+  background:var(--paper);box-shadow:0 1px 2px rgba(20,30,50,.05);outline:1px solid var(--line);transition:transform .18s var(--ease),box-shadow .18s,outline-color .18s}
+.wl-c:hover{transform:translateY(-2px);outline-color:var(--wc);box-shadow:0 10px 26px -14px color-mix(in srgb,var(--wc) 45%,transparent)}
 .wl-c:focus-visible{outline:3px solid var(--wc);outline-offset:3px}
-.wl-c.last{outline:2px solid color-mix(in srgb,var(--wc) 70%,transparent)}
-.wl-ic{width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:var(--wc);color:#fff;box-shadow:0 10px 20px -10px var(--wc)}
-.wl-ic svg{width:30px;height:30px}
-.wl-c b{display:block;font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.04em;font-size:clamp(24px,3.4vw,30px);line-height:1.05}
-.wl-u{display:block;margin-top:6px;font-size:15px;font-weight:700;color:var(--ink-2)}
+.wl-c.last{outline:2px solid var(--wc)}
+.wl-ic{width:48px;height:48px;border-radius:12px;display:grid;place-items:center;background:var(--wc);color:#fff}
+.wl-ic svg{width:26px;height:26px}
+.wl-c b{display:block;font-family:var(--sans);font-weight:700;letter-spacing:-.01em;font-size:clamp(24px,3vw,28px);line-height:1.1}
+.wl-u{display:block;margin-top:4px;font-size:15px;font-weight:400;color:var(--ink-2)}
 .wl-n{display:block;margin-top:2px;font-size:13.5px;color:var(--ink-3)}
-.wl-go{position:absolute;right:22px;top:24px;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-size:20px;font-weight:700;color:var(--wc);background:color-mix(in srgb,var(--wc) 12%,transparent);transition:transform .18s var(--ease)}
+.wl-go{position:absolute;right:20px;top:22px;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;font-size:20px;font-weight:700;color:var(--wc);background:color-mix(in srgb,var(--wc) 12%,transparent);transition:transform .18s var(--ease)}
 .wl-c:hover .wl-go{transform:translateX(3px)}
-.wl-last{position:absolute;right:72px;top:31px;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--wc)}
+.wl-last{position:absolute;right:66px;top:28px;font-size:12.5px;font-weight:700;color:var(--wc);background:color-mix(in srgb,var(--wc) 10%,var(--paper));border-radius:999px;padding:2px 10px}
 .wl-c:not(.last) .wl-last{display:none}
-.wl-sp{position:absolute;left:0;right:0;bottom:0;display:flex;gap:4px;height:7px}
+.wl-sp{display:none}
 .wl-sp > span{flex:1;display:flex}
 .wl-sp i{flex:1}
-.wl-cont{display:flex;align-items:center;gap:16px;width:100%;margin-top:18px;padding:16px 20px;border-radius:20px;text-align:left;text-decoration:none;color:var(--ink);background:var(--paper);box-shadow:var(--card-shadow);outline:1px solid var(--card-line);transition:transform .18s var(--ease)}
+.wl-cont{display:flex;align-items:center;gap:16px;width:100%;margin-top:16px;padding:14px 18px;border-radius:16px;text-align:left;text-decoration:none;color:var(--ink);background:var(--paper);box-shadow:0 1px 2px rgba(20,30,50,.05);outline:1px solid var(--line);transition:transform .18s var(--ease)}
 .wl-cont:hover{transform:translateY(-2px)}
 .wl-cont[hidden]{display:none}
 .wl-cont .tp-ring{width:48px;height:48px}
 .wl-cont .tp-ring b{font-size:10.5px}
 .wl-cont .tp-ring .r1{stroke:var(--wc)}
 .wl-ct{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
-.wl-ct small{font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}
+.wl-ct small{font-size:13px;font-weight:700;color:var(--ink-3)}
 .wl-ct b{font-size:16px;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .wl-ct span{font-size:13.5px;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.wl-cgo{flex:none;font-family:'Lemon Milk',var(--sans);font-weight:500;letter-spacing:.04em;font-size:13px;color:#fff;background:var(--wc);padding:9px 14px;border-radius:12px}
-.wl-sec{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 10px;margin-top:clamp(26px,5vh,40px)}
-.wl-s{display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:14px;font-weight:700;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:999px;padding:8px 15px;cursor:pointer;text-decoration:none;transition:background .15s,color .15s}
-.wl-s:hover,.wl-s[aria-expanded="true"]{background:var(--paper);color:var(--ink)}
+.wl-cgo{flex:none;font-family:var(--sans);font-weight:700;font-size:14px;color:#fff;background:var(--wc);padding:9px 14px;border-radius:12px}
+.wl-sec{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 6px;margin-top:clamp(22px,4vh,34px)}
+.wl-s{display:inline-flex;align-items:center;gap:7px;font:inherit;font-size:14px;font-weight:700;color:var(--ink-2);background:transparent;border:1px solid transparent;border-radius:10px;padding:8px 12px;cursor:pointer;text-decoration:none;transition:background .15s,color .15s}
+.wl-s:hover,.wl-s[aria-expanded="true"]{background:var(--paper);border-color:var(--line);color:var(--ink)}
 .wl-s svg{width:16px;height:16px}
 .wl-s[hidden]{display:none}
 .wl-ios{margin-top:10px;font-size:13.5px;color:var(--ink-2)}
-.wl-about{width:100%;max-width:560px;margin-top:14px;padding:16px 20px;border-radius:18px;background:var(--paper);box-shadow:var(--card-shadow);outline:1px solid var(--card-line);text-align:left;font-size:14px;color:var(--ink-2)}
+.wl-about{width:100%;max-width:560px;margin-top:14px;padding:16px 20px;border-radius:14px;background:var(--paper);outline:1px solid var(--line);text-align:left;font-size:14px;color:var(--ink-2)}
 .wl-about[hidden]{display:none}
 .wl-about p{margin:0 0 8px}
 .wl-about p:last-child{margin:0}
@@ -377,23 +378,23 @@ html:not(.wl-on) #welcome{display:none}
 @media (max-width:600px){
   #welcome{padding-top:clamp(24px,6vh,48px)}
   .wl-ch{grid-template-columns:1fr;gap:14px}
-  .wl-c{flex-direction:row;align-items:center;gap:16px;padding:18px 18px 24px;border-radius:20px}
-  .wl-ic{flex:none;width:50px;height:50px;border-radius:14px}
-  .wl-ic svg{width:26px;height:26px}
+  .wl-c{flex-direction:row;align-items:center;gap:14px;padding:16px;border-radius:14px}
+  .wl-ic{flex:none;width:44px;height:44px;border-radius:11px}
+  .wl-ic svg{width:24px;height:24px}
   .wl-go{position:static;flex:none;margin-left:auto;width:36px;height:36px}
   .wl-last{top:10px;right:16px}
-  .wl-c.last .wl-tx{padding-top:8px}
+  .wl-c.last .wl-tx{padding-top:14px}
   .wl-cont{padding:12px 14px;gap:12px}
   .wl-cgo{display:none}
 }
 /* My course picker (welcome prompt, welcome "My course", My progress) */
 .mc-slot[hidden]{display:none}
-.wl-mc{width:100%;max-width:560px;margin-top:clamp(22px,4vh,32px)}
+.wl-mc{width:100%;max-width:560px;margin-top:14px}
 .wl-mc + .wl-ch{margin-top:18px}
-.mc{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px 20px;border-radius:20px;background:var(--paper);box-shadow:var(--card-shadow);outline:1px solid var(--card-line);text-align:center}
+.mc{display:flex;flex-direction:column;align-items:center;gap:12px;padding:18px 20px;border-radius:14px;background:var(--paper);outline:1px solid var(--line);text-align:center}
 .mc-q{font-size:16px;color:var(--ink)}
 .mc-cs{display:inline-grid;grid-template-columns:1fr 1fr;gap:4px;padding:4px;border-radius:14px;background:var(--paper-2);outline:1px solid var(--line-2)}
-.mc-c{font:inherit;font-family:'Lemon Milk',var(--sans);font-weight:500;letter-spacing:.04em;font-size:14px;min-width:120px;padding:9px 16px;border:0;border-radius:10px;background:transparent;color:var(--ink-2);cursor:pointer}
+.mc-c{font:inherit;font-family:var(--sans);font-weight:700;font-size:15px;min-width:120px;padding:9px 16px;border:0;border-radius:10px;background:transparent;color:var(--ink-2);cursor:pointer}
 .mc-c[aria-pressed="true"]{background:#16213A;color:#fff}
 :root[data-theme="dark"] .mc-c[aria-pressed="true"]{background:#2B3A5E}
 @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .mc-c[aria-pressed="true"]{background:#2B3A5E} }
@@ -446,10 +447,54 @@ html:not(.wl-on) #welcome{display:none}
 .mp-tr[aria-pressed="false"]{color:var(--accent);border-style:dashed}
 /* topic view: "← Home" back to the welcome screen */
 .home-row{display:flex;align-items:center;justify-content:space-between;margin:-6px 0 14px}
-.home-l{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--ink-2);text-decoration:none;padding:6px 12px 6px 9px;border-radius:999px;border:1px solid var(--line);background:var(--paper)}
+.home-l{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--ink-2);text-decoration:none;padding:7px 12px 7px 10px;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
 .home-l:hover{color:var(--ink)}
 @media (max-width:520px){ .home-row{margin:0 0 10px} }
 /* ================= WELCOME: END ================= */
+/* ================= DESIGN: BEGIN (front page calm-down layer; source notes/app/front_design.css) =================
+   Loaded last on the front page. Fewer shadows and borders, one radius scale (10 / 14 / 18), no decorative rainbow strips,
+   the hero's circuit traces faded right back. Headings and buttons are the sans in sentence case; Lemon Milk is the wordmark only. */
+:root{--r-s:10px;--r-m:14px;--r-l:18px;--card-shadow:0 1px 2px rgba(20,30,50,.05),0 4px 14px -8px rgba(20,30,50,.12);--card-line:rgba(20,30,50,.09)}
+:root[data-theme="dark"]{--card-shadow:0 1px 2px rgba(0,0,0,.35);--card-line:rgba(255,255,255,.08)}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--card-shadow:0 1px 2px rgba(0,0,0,.35);--card-line:rgba(255,255,255,.08)} }
+/* hero: the navy card stays (brand), but quieter */
+.hero{border-radius:var(--r-l);padding:36px 40px 34px;gap:28px}
+.hero .pat{opacity:.28}
+.hero::after{display:none}
+.hero h1{margin:8px 0 12px;max-width:16ch;text-wrap:balance}
+.lead{font-size:16px;line-height:1.55;color:#CBD4E4}
+.eyebrow{font-weight:400;color:#AFC0DE}
+.wall{gap:8px}
+.wall span{border-radius:12px;box-shadow:none;transform:none}
+.hero.anim .wall span{animation-name:fin}
+/* course switch and filter bar */
+.seg{border-radius:var(--r-m);padding:4px;margin:20px 0 16px}
+.seg button{border-radius:var(--r-s)}
+.filt{border-radius:var(--r-m);margin:0 0 18px;padding:12px}
+.f-q,.f-ppt{border-radius:var(--r-s);border-width:1px}
+.f-ppt{font-size:14px}
+.chip{border-width:1px}
+/* unit cards: no top strip; topic rows a little tighter, no wobble on hover */
+.unit{border-radius:var(--r-l);margin-bottom:18px}
+.unit > .spec{display:none}
+.unit-h{padding:22px 24px 12px}
+.unit-k{border-radius:6px;font-size:12.5px}
+.tp{border-radius:var(--r-m)}
+.tp:hover .ic{transform:none}
+.ic{border-radius:12px}
+.tp-t small{font-weight:700}
+.btn{border-radius:var(--r-s)}
+.btn.pri{box-shadow:none}
+.btn.pri:hover{transform:none;box-shadow:none;filter:brightness(1.08)}
+.ppt{border-radius:var(--r-s)}
+.empty{border-radius:var(--r-l)}
+/* My progress panel and the front-page wordmark */
+.myprog{border-radius:var(--r-m);margin-bottom:14px}
+#mp-body h3{font-size:14px;letter-spacing:0;text-transform:none;color:var(--ink-2)}
+.home-row{margin:-4px 0 14px}
+@media (max-width:760px){ .hero{padding:26px 20px 24px;border-radius:var(--r-l)} .hero h1{max-width:none} }
+@media (max-width:699px){ .unit{border-radius:var(--r-m)} .unit-h{padding:18px 16px 10px} .filt{border-radius:var(--r-m)} }
+/* ================= DESIGN: END ================= */
 </style>
 </head>
 <body>
@@ -508,8 +553,8 @@ html:not(.wl-on) #welcome{display:none}
     <h1 class="wl-wm" id="wl-h"><span class="wl-mb">Mr Butler’s</span><span class="wl-dt">Digital Technology</span></h1>
     <span class="wl-strip" aria-hidden="true"><i style="background:var(--h1d)"></i><i style="background:var(--h2d)"></i><i style="background:var(--h3d)"></i><i style="background:var(--h4d)"></i><i style="background:var(--h5d)"></i><i style="background:var(--h6d)"></i><i style="background:var(--h7d)"></i><i style="background:var(--h8d)"></i><i style="background:var(--h9d)"></i><i style="background:var(--h10d)"></i></span>
     <p class="wl-line">Revision workbooks, tutorials and topic PowerPoints for CCEA Digital Technology.</p>
-    <div class="mc-slot wl-mc" id="wl-mc" hidden></div>
-    <div class="wl-ch" role="list">
+    <h2 class="wl-q" id="wl-q">Choose your course</h2>
+    <div class="wl-ch" role="list" aria-labelledby="wl-q">
       <a class="wl-c" role="listitem" href="#gcse" data-wl="gcse" style="--wcd:var(--h1d);--wcl:var(--h1l)"><span class="wl-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="11.5" rx="1.8"/><path d="M8 20h8M12 16v4M7.5 9.5l2 1.75-2 1.75M12 13h4"/></svg></span><span class="wl-tx"><b>GCSE</b><span class="wl-u">Units 1, 4, 5</span><span class="wl-n"></span></span><span class="wl-go" aria-hidden="true">→</span><span class="wl-last">Last opened</span><span class="wl-sp" aria-hidden="true"></span></a>
       <a class="wl-c" role="listitem" href="#gce" data-wl="gce" style="--wcd:var(--h3d);--wcl:var(--h3l)"><span class="wl-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.5 9L12 4.5 21.5 9 12 13.5z"/><path d="M6.5 11v4.6c1.5 1.6 3.4 2.4 5.5 2.4s4-.8 5.5-2.4V11M21.5 9v5.5"/></svg></span><span class="wl-tx"><b>A level</b><span class="wl-u">AS 1, AS 2, A2 1, A2 2</span><span class="wl-n"></span></span><span class="wl-go" aria-hidden="true">→</span><span class="wl-last">Last opened</span><span class="wl-sp" aria-hidden="true"></span></a>
     </div>
@@ -520,6 +565,7 @@ html:not(.wl-on) #welcome{display:none}
       <a class="wl-s" href="#progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.2l2.4 2.4 4.6-5"/></svg>My progress</a>
       <button type="button" class="wl-s" id="wl-ab" aria-expanded="false" aria-controls="wl-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg>About</button>
     </div>
+    <div class="mc-slot wl-mc" id="wl-mc" hidden></div>
     <p class="wl-ios app-ios" hidden>On iPhone or iPad: tap <b>Share</b> › <b>Add to Home Screen</b>.</p>
     <div class="wl-about" id="wl-about" hidden>
       <p>Mr Butler’s revision workbooks and tutorials for pupils following the CCEA GCSE and GCE Digital Technology specifications. They are written by a teacher, not by CCEA: always check the CCEA specification and your teacher for the final word.</p>
@@ -1001,7 +1047,7 @@ function appUpdates(reg, base, where) {
 }
 /* ================= APP: END ================= */
 /* ================= WELCOME: BEGIN =================
-   Welcome screen when the address has no hash: wordmark, one line, GCSE / A level cards (My course, else the last chosen one, marked), a once-only "Which course are you on?" prompt and a "My course" setting,
+   Welcome screen when the address has no hash: wordmark, one line, GCSE / A level cards (My course, else the last chosen one, marked; picking a card remembers the course) and a "My course" setting,
    "Continue where you left off" (from localStorage 'notes-last', written by the workbooks), Install app, My progress, About.
    A card opens the topic view (#gcse / #gce); "← Home" comes back. Source notes/app/front_welcome.js. */
 const WL_KEY = 'notes-front';
@@ -1047,9 +1093,8 @@ function wlPaint() {
     const nn = a.querySelector('.wl-n'); if (nn) nn.textContent = `${n} topics · ${us.length} book${us.length === 1 ? '' : 's'}`;
     const sp = a.querySelector('.wl-sp'); if (sp) sp.innerHTML = us.map(u => `<span>${u.chapters.map((c, i) => `<i style="background:var(--h${i % 10 + 1}d)"></i>`).join('')}</span>`).join('');   /* one group per book, in its chapter colours */
   });
-  /* first run: ask once, lightly ("Not now" or Save closes it for good) */
-  const slot = document.getElementById('wl-mc');
-  if (slot && slot.hidden && !mcGet() && !wlGet().asked) mcPicker(slot, () => wlPaint());
+  /* DESIGN PASS: no first-run "Which course are you on?" prompt any more: the GCSE / A level cards are the one choice
+     (a card remembers the course when it is picked); "My course" below still sets units and sections */
   const box = document.getElementById('wl-cont'), L = wlLast();
   if (!box) return;
   if (!L) { box.hidden = true; return; }

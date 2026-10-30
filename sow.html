@@ -2,6 +2,7 @@
 <html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Scheme of Work – Mr Butler's</title>
 <meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap">
 <style>
 @font-face{font-family:'Lemon Milk';src:url('fonts/lemonmilk-bold.woff') format('woff');font-weight:700;font-display:swap}
 :root{--desk:#E6EAF0;--paper:#fff;--paper-2:#F4F6F9;--ink:#172033;--ink-2:#465063;--ink-3:#687386;--line:#D3D9E2;--accent:#1F5FBF;--accent-soft:#E4ECFA;
@@ -10,20 +11,21 @@
 :root[data-theme="dark"]{--desk:#0E1117;--paper:#181C24;--paper-2:#1F2430;--ink:#E5E8EE;--ink-2:#B2B9C6;--ink-3:#8A93A3;--line:#2F3644;--accent:#8AB6FF;--accent-soft:#232C4C}
 *{box-sizing:border-box} body{margin:0;background:var(--desk);color:var(--ink);font:16px/1.5 var(--sans)}
 .wrap{max-width:1040px;margin:0 auto;padding:24px 16px 48px}
-a{color:var(--accent)} .back{display:inline-block;margin-bottom:14px;font-weight:600;text-decoration:none}
-h1{font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.03em;font-size:clamp(22px,4vw,32px);margin:0 0 6px}
+a{color:var(--accent)} .back{display:inline-block;margin-bottom:14px;font-weight:700;text-decoration:none}
+.brand{display:block;font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.05em;font-size:13px;color:var(--ink-3);margin:0 0 4px}
+h1{font-family:var(--sans);font-weight:700;letter-spacing:-.01em;font-size:clamp(24px,4vw,32px);line-height:1.2;margin:0 0 6px}
 .lead{color:var(--ink-2);margin:0 0 16px;max-width:70ch}
 .bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:18px}
 .bar label{display:flex;gap:8px;align-items:center;font-size:15px} .bar input{width:4.2em;font:inherit;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--paper-2);color:var(--ink)}
-.seg button{font:inherit;font-weight:600;padding:6px 12px;border:1px solid var(--line);background:var(--paper-2);color:var(--ink);border-radius:8px;cursor:pointer}
+.seg button{font:inherit;font-weight:700;padding:6px 12px;border:1px solid var(--line);background:var(--paper-2);color:var(--ink);border-radius:8px;cursor:pointer}
 .seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--paper)}
 .pr{margin-left:auto}
 .u{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:18px}
 .u h2{margin:0 0 10px;font-size:20px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
-.k{font-family:'Lemon Milk',var(--sans);font-size:13px;letter-spacing:.05em;background:var(--accent-soft);color:var(--accent);padding:3px 8px;border-radius:6px}
+.k{font-family:var(--sans);font-weight:700;font-size:13px;background:var(--accent-soft);color:var(--accent);padding:3px 8px;border-radius:6px}
 .note{color:var(--ink-2);margin:0 0 10px;font-size:15px}
 table{width:100%;border-collapse:collapse;font-size:15px} th,td{text-align:left;vertical-align:top;padding:8px 6px;border-top:1px solid var(--line)}
-th{font-size:13px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em;border-top:0}
+th{font-size:13px;font-weight:700;color:var(--ink-3);border-top:0}
 td.n,th.n{width:2.2em;color:var(--ink-3)} td.w,th.w{width:4.5em;text-align:right;font-variant-numeric:tabular-nums}
 tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:block;color:var(--ink-3);font-size:13px}
 ul{margin:0;padding:0;list-style:none} li{margin:0 0 2px} li a{font-variant-numeric:tabular-nums;font-weight:600;text-decoration:none;margin-right:4px}
@@ -32,7 +34,7 @@ ul{margin:0;padding:0;list-style:none} li{margin:0 0 2px} li a{font-variant-nume
 @media print{body{background:#fff;color:#000} .bar,.back{display:none} .u{border:0;padding:0;break-inside:auto} .u[hidden]{display:none} a{color:#000}}
 </style></head><body><div class="wrap">
 <a class="back" href="index.html">‹ Back to the revision site</a>
-<h1>Scheme of work</h1>
+<span class="brand">Mr Butler’s Digital Technology</span><h1>Scheme of work</h1>
 <p class="lead">Each unit in teaching order: its topics, the hub lessons that go with each one, and a rough number of weeks. Topic names open the workbook; lesson codes open the lesson in the full teaching hub (<a href="hub.html">GCSE hub</a>, <a href="gce/hub.html">A level hub</a>).</p>
 <div class="bar">
  <div class="seg" role="group" aria-label="Course"><button type="button" data-c="all" aria-pressed="true">All</button> <button type="button" data-c="gcse" aria-pressed="false">GCSE</button> <button type="button" data-c="gce" aria-pressed="false">A level</button></div>

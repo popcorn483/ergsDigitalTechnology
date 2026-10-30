@@ -1133,19 +1133,22 @@ body{background-color:var(--desk);background-image:radial-gradient(var(--dot) 1p
 @font-face{font-family:'Lemon Milk';src:url('../fonts/lemonmilk-medium.woff') format('woff');font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:'Lemon Milk';src:url('../fonts/lemonmilk-bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
 @font-face{font-family:'Saira Hero';src:url('../fonts/saira-hero.woff') format('woff');font-weight:900;font-style:normal;font-display:swap}
-:root{--display:'Lemon Milk','Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;--font-hero:'Saira Hero','Lemon Milk',sans-serif}
-.cv-t{font-family:var(--font-hero);font-weight:900;text-transform:uppercase;letter-spacing:.01em;font-size:clamp(28px,5vw,46px);line-height:1.05;max-width:18ch}
-.cbn-t{font-family:var(--font-hero);font-weight:900;text-transform:uppercase;letter-spacing:.01em;font-size:clamp(22px,3.6vw,31px);line-height:1.1}
-.sheet .phero h1{font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:clamp(18px,2.2vw,22px)!important;line-height:1.3;max-width:34ch}
+/* DESIGN PASS: Lemon Milk is now the brand face only ("Mr Butler's" wordmark, the book-cover title). Headings, labels and
+   buttons use the sans (Atkinson Hyperlegible) in sentence case; long-form notes keep the serif (Literata). --display and
+   --font-hero are kept as names so older rules still resolve, but both now point at the sans. */
+:root{--brand:'Lemon Milk','Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;--display:var(--sans);--font-hero:var(--sans)}
+.cv-t{font-family:var(--brand);font-weight:700;letter-spacing:.01em;font-size:clamp(28px,4.6vw,42px);line-height:1.08;max-width:18ch}
+.cbn-t{font-family:var(--sans);font-weight:700;letter-spacing:-.01em;font-size:clamp(22px,3.4vw,30px);line-height:1.15}
+.sheet .phero h1{font-family:var(--sans);font-weight:700;letter-spacing:-.01em;font-size:clamp(22px,2.6vw,27px)!important;line-height:1.25;max-width:36ch;text-wrap:balance}
 .sheet .phero h1 .cont{font-family:var(--sans);text-transform:none;letter-spacing:0;font-weight:400}
-.sec > h2,.kt > summary b,.dg-head h3,.an-h b,.ncard > h2,.cv-tile b{font-family:var(--display);letter-spacing:.03em;font-weight:500}
-.sec > h2{font-size:14.5px}.kt > summary b{font-size:14px}.dg-head h3{font-size:16px;line-height:1.35}.an-h b{font-size:13.5px}
-.ncard > h2{font-size:18px;line-height:1.3}.cv-tile b{font-size:14.5px;line-height:1.3}
-.btn,.lp-tabs button,.gv-modes button,.chip,.donebtn,.code-cp,.an-k{font-family:var(--display);letter-spacing:.03em;font-weight:500}
-.btn,.lp-tabs button,.gv-modes button{font-size:12.5px}
-.kt-l dt{font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:13px;line-height:1.45}
-.fc-face .fc-term{font-family:var(--display);font-weight:700;letter-spacing:.03em;font-size:clamp(19px,4.4vw,26px)}
-@media (max-width:520px){ .sheet .phero h1{font-size:17.5px} .cbn-t{font-size:20px} .ncard > h2{font-size:16px} .cv-t{font-size:27px} }
+.sec > h2,.kt > summary b,.dg-head h3,.an-h b,.ncard > h2,.cv-tile b{font-family:var(--sans);letter-spacing:0;font-weight:700}
+.sec > h2{font-size:16px}.kt > summary b{font-size:16px}.dg-head h3{font-size:17px;line-height:1.35}.an-h b{font-size:14.5px}
+.ncard > h2{font-size:20px;line-height:1.3}.cv-tile b{font-size:15.5px;line-height:1.3}
+.btn,.lp-tabs button,.gv-modes button,.chip,.donebtn,.code-cp,.an-k{font-family:var(--sans);letter-spacing:0;font-weight:700}
+.btn,.lp-tabs button,.gv-modes button{font-size:14px}
+.kt-l dt{font-family:var(--sans);font-weight:700;letter-spacing:0;font-size:15px;line-height:1.45}
+.fc-face .fc-term{font-family:var(--sans);font-weight:700;letter-spacing:-.01em;font-size:clamp(21px,4.6vw,28px)}
+@media (max-width:520px){ .sheet .phero h1{font-size:21px!important} .cbn-t{font-size:21px} .ncard > h2{font-size:18px} .cv-t{font-size:26px} }
 /*CYK-CSS*/
 /* "Check your knowledge": one collapsed card holding Quick check · Exam-style practice · Past papers as tabs */
 .cyk{--bc:var(--cc);overflow:hidden}
@@ -1156,9 +1159,9 @@ body{background-color:var(--desk);background-image:radial-gradient(var(--dot) 1p
 .cyk-h .bi{flex:none;width:36px;height:36px;border-radius:11px;background:var(--cc);color:var(--paper)}
 .cyk-h .bi svg{width:20px;height:20px}
 .cyk-tt{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
-.cyk-tt b{font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:18px;line-height:1.25;color:var(--ink)}
+.cyk-tt b{font-family:var(--display);font-weight:700;letter-spacing:0;font-size:18px;line-height:1.25;color:var(--ink)}
 .cyk-tt small{font-family:var(--sans);font-size:13.5px;line-height:1.35;color:var(--ink-2)}
-.cyk-sw{flex:none;display:inline-flex;align-items:center;gap:7px;font-style:normal;font-family:var(--display);font-weight:500;letter-spacing:.04em;font-size:12px;color:var(--cc);border:1.5px solid color-mix(in srgb,var(--cc) 40%,var(--line));border-radius:999px;padding:6px 13px 6px 11px;background:var(--paper)}
+.cyk-sw{flex:none;display:inline-flex;align-items:center;gap:7px;font-style:normal;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:12px;color:var(--cc);border:1.5px solid color-mix(in srgb,var(--cc) 40%,var(--line));border-radius:999px;padding:6px 13px 6px 11px;background:var(--paper)}
 .cyk-sw::before{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .25s var(--ease)}
 .cyk-sw::after{content:"Show"}
 .cyk.open .cyk-sw::before{transform:translateY(2px) rotate(-135deg)}
@@ -1167,7 +1170,7 @@ body{background-color:var(--desk);background-image:radial-gradient(var(--dot) 1p
 .cyk-b{overflow:hidden}
 .cyk-tabs{display:flex;gap:4px;padding:10px var(--px) 0;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
 .cyk-tabs::-webkit-scrollbar{display:none}
-.cyk-tab{--tc:var(--cc);flex:none;display:inline-flex;align-items:center;gap:7px;margin:0 0 -1px;padding:9px 13px 10px;border:0;border-bottom:3px solid transparent;border-radius:10px 10px 0 0;background:none;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:12.5px;color:var(--ink-2);cursor:pointer;transition:color .15s,background-color .15s,border-color .15s}
+.cyk-tab{--tc:var(--cc);flex:none;display:inline-flex;align-items:center;gap:7px;margin:0 0 -1px;padding:9px 13px 10px;border:0;border-bottom:3px solid transparent;border-radius:10px 10px 0 0;background:none;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:12.5px;color:var(--ink-2);cursor:pointer;transition:color .15s,background-color .15s,border-color .15s}
 .cyk-tab svg{width:17px;height:17px;flex:none}
 .cyk-tab:hover{color:var(--tc);background:color-mix(in srgb,var(--tc) 6%,var(--paper))}
 .cyk-tab[aria-selected="true"]{color:var(--tc);border-bottom-color:var(--tc);background:color-mix(in srgb,var(--tc) 10%,var(--paper))}
@@ -1175,7 +1178,7 @@ body{background-color:var(--desk);background-image:radial-gradient(var(--dot) 1p
 .cyk-tab.t-chk{--tc:var(--b-chk)}.cyk-tab.t-prac{--tc:var(--b-prac)}.cyk-tab.t-exam{--tc:var(--b-exam)}
 .cyk .sec.cyk-p{margin:0;border-radius:0;box-shadow:none;outline:0;padding:18px var(--px) 24px;background:color-mix(in srgb,var(--bc) 4%,var(--paper))}
 .cyk-lead{margin:0 0 12px;font-family:var(--sans);font-size:13.5px;color:var(--ink-2)}
-.cyk-one{display:flex;align-items:center;gap:8px;margin:0 0 14px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:13px;color:var(--bc)}
+.cyk-one{display:flex;align-items:center;gap:8px;margin:0 0 14px;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:13px;color:var(--bc)}
 .cyk-one svg{width:18px;height:18px}
 .cyk .mcq legend span{flex:none}
 .cyk-hit{animation:cyk-hit 1.8s ease}
@@ -1203,7 +1206,7 @@ body{background-color:var(--desk);background-image:radial-gradient(var(--dot) 1p
 .fig-ph .fig-m img.ld{opacity:1;transform:none}
 .fig-ph .fig-m:hover img.ld{transform:scale(1.015)}
 .fig figcaption{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:6px 10px;padding:10px 14px 11px;border-top:3px solid var(--k);font-size:14px;line-height:1.4;color:var(--ink)}
-.fig-k{display:inline-flex;align-items:center;gap:5px;font-family:var(--display);font-weight:500;letter-spacing:.05em;font-size:10.5px;line-height:1.5;color:var(--k);background:color-mix(in srgb,var(--k) 9%,var(--paper));border:1px solid color-mix(in srgb,var(--k) 30%,transparent);border-radius:999px;padding:2px 9px 2px 7px;white-space:nowrap}
+.fig-k{display:inline-flex;align-items:center;gap:5px;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:10.5px;line-height:1.5;color:var(--k);background:color-mix(in srgb,var(--k) 9%,var(--paper));border:1px solid color-mix(in srgb,var(--k) 30%,transparent);border-radius:999px;padding:2px 9px 2px 7px;white-space:nowrap}
 .fig-k svg{width:13px;height:13px}
 .fig-c{min-width:0;text-wrap:pretty}
 .fig .fig-z{color:var(--k)}
@@ -1373,7 +1376,7 @@ figure.anim{   /* figure only: the cover hero and chapter banners also carry .an
 .todo-ring b{font-size:15px;font-variant-numeric:tabular-nums;color:var(--ink)}
 .todo-t{min-width:0;flex:1;display:flex;flex-direction:column;line-height:1.25}
 .todo-t small{font-size:12px;font-weight:700;color:var(--tc);text-transform:uppercase;letter-spacing:.06em}
-.todo-t b{font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:15px;color:var(--ink)}
+.todo-t b{font-family:var(--display);font-weight:700;letter-spacing:0;font-size:15px;color:var(--ink)}
 .todo-c{flex:none;font-size:12.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .todo-l{list-style:none;margin:0;padding:0!important;display:flex;flex-direction:column;gap:2px!important}
 .todo-l label{display:flex;gap:11px;align-items:flex-start;padding:8px 8px;border-radius:10px;cursor:pointer;font-family:var(--serif);font-size:15.5px;line-height:1.5}
@@ -1400,13 +1403,13 @@ figure.anim{   /* figure only: the cover hero and chapter banners also carry .an
 .proj-ic svg{width:28px;height:28px}
 .proj-tt{min-width:0;flex:1;display:flex;flex-direction:column;gap:2px}
 .proj-tt small{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.88}
-.proj-tt b{font-family:var(--font-hero);font-weight:900;text-transform:uppercase;letter-spacing:.01em;font-size:clamp(19px,3vw,25px);line-height:1.1;text-wrap:balance}
+.proj-tt b{font-family:var(--font-hero);font-weight:700;letter-spacing:-.01em;font-size:clamp(19px,3vw,25px);line-height:1.1;text-wrap:balance}
 .proj-st{flex:none;display:flex;gap:14px;font-size:12px;opacity:.92}
 .proj-st span{display:flex;flex-direction:column;align-items:center;line-height:1.1}
 .proj-st b{font-size:22px}
 .proj-b{padding:18px 22px 20px;display:flex;flex-direction:column;gap:18px}
 .proj-sc{margin:0;font-family:var(--serif);font-size:16.5px;line-height:1.65;padding-left:14px;box-shadow:inset 3px 0 0 var(--pc)}
-.proj h3{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 10px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:14px;color:var(--pc)}
+.proj h3{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin:0 0 10px;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:14px;color:var(--pc)}
 .proj h3 > svg{width:18px;height:18px;flex:none}
 .proj h3 small{font-family:var(--sans);letter-spacing:0;font-size:12.5px;color:var(--ink-3);font-weight:400;margin-left:auto}
 .proj-u{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px}
@@ -1481,7 +1484,7 @@ figure.anim{   /* figure only: the cover hero and chapter banners also carry .an
 .tt-c{border-radius:16px;background:var(--paper);outline:1.5px solid color-mix(in srgb,var(--bc) 28%,var(--line));box-shadow:var(--soft-shadow);padding:14px 18px 16px;display:flex;flex-direction:column;gap:10px;transition:outline-color .2s}
 .tt-c.open{outline-color:var(--bc)}
 .tt-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
-.tt-n{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-weight:500;letter-spacing:.04em;font-size:13px;color:var(--bc)}
+.tt-n{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:13px;color:var(--bc)}
 .tt-n svg{width:16px;height:16px}
 .tt-sz{--sc:var(--b-tip);margin-left:auto;display:inline-flex;align-items:center;gap:8px;font-family:var(--sans);font-size:12.5px;border-radius:999px;padding:3px 11px 3px 9px;background:color-mix(in srgb,var(--sc) 11%,var(--paper));color:var(--sc)}
 .tt-sz.sz-m{--sc:var(--b-prac)}.tt-sz.sz-l{--sc:var(--b-warn)}
@@ -1495,7 +1498,7 @@ figure.anim{   /* figure only: the cover hero and chapter banners also carry .an
 .tt-go .btn[aria-expanded="true"]{background:var(--bc);color:var(--paper)}
 .tt-a{border-radius:12px;background:color-mix(in srgb,var(--b-tip) 7%,var(--paper));box-shadow:inset 3px 0 0 var(--b-tip);padding:12px 16px 14px;display:flex;flex-direction:column;gap:10px;font-family:var(--serif);font-size:15.5px;line-height:1.6;min-width:0}
 .tt-a p{margin:0}
-.tt-ah{font-family:var(--display);font-weight:500;letter-spacing:.04em;font-size:12.5px;color:var(--b-tip)}
+.tt-ah{font-family:var(--display);font-weight:700;letter-spacing:0;font-size:12.5px;color:var(--b-tip)}
 .tt-a .code{margin:2px 0;min-width:0}
 @media (max-width:560px){ .tt-c{padding:12px 12px 14px} .tt-sz{margin-left:0} .tt-a{padding:10px 10px 12px} }
 
@@ -1507,10 +1510,10 @@ figure.anim{   /* figure only: the cover hero and chapter banners also carry .an
 .tcover .cv-body > h2{margin-bottom:0}
 .tcv-part{display:flex;flex-direction:column;gap:12px}
 .tcv-ph{display:flex;align-items:center;gap:12px;padding-bottom:10px;border-bottom:2px solid color-mix(in srgb,var(--cc) 30%,var(--line-2))}
-.tcv-pn{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--cc-d);color:#fff;font-family:var(--font-hero);font-weight:900;font-size:21px}
+.tcv-pn{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:var(--cc-d);color:#fff;font-family:var(--font-hero);font-weight:700;font-size:21px}
 .tcv-ph small{display:block;font-size:12.5px;color:var(--ink-3);font-weight:700}
-.tcv-ph h3{margin:0;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:17px;color:var(--cc)}
-.r-part{margin:18px 6px 2px;padding-top:12px;border-top:1px solid var(--line);font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:12.5px;color:var(--ink);line-height:1.35}
+.tcv-ph h3{margin:0;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:17px;color:var(--cc)}
+.r-part{margin:18px 6px 2px;padding-top:12px;border-top:1px solid var(--line);font-family:var(--display);font-weight:700;letter-spacing:0;font-size:12.5px;color:var(--ink);line-height:1.35}
 .r-part span{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);font-weight:700}
 .tch .chcard-h{border-bottom:0}
 body.tut-book #b-gloss{display:none!important}
@@ -1519,11 +1522,11 @@ body.tut-book #b-gloss{display:none!important}
 .tcard{--tk:var(--cc);border-radius:22px;background:var(--paper);box-shadow:var(--card-shadow),0 0 0 2px color-mix(in srgb,var(--tk) 45%,transparent);overflow:hidden;font-family:var(--sans);display:flex;flex-direction:column}
 .tcard > div{padding:18px 24px}
 .tcard > div + div{border-top:1px solid color-mix(in srgb,var(--tk) 18%,var(--line-2))}
-.tc-k{display:block;margin-bottom:8px;font-family:var(--display);font-weight:500;letter-spacing:.06em;font-size:12px;color:var(--tk);text-transform:uppercase}
+.tc-k{display:block;margin-bottom:8px;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:12px;color:var(--tk);text-transform:uppercase}
 .tc-top{background:color-mix(in srgb,var(--tk) 9%,var(--paper))}
 .tc-h{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px}
-.tc-lab{display:inline-flex;align-items:center;flex:none;font-family:var(--display);font-weight:500;letter-spacing:.04em;font-size:12.5px;line-height:1;padding:6px 10px;border-radius:8px;background:var(--cc-d);color:#fff;white-space:nowrap}
-.tc-h h2{margin:0;font-family:var(--font-hero);font-weight:900;text-transform:uppercase;letter-spacing:.01em;font-size:clamp(20px,3vw,27px);line-height:1.12;color:var(--ink);text-wrap:balance}
+.tc-lab{display:inline-flex;align-items:center;flex:none;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:12.5px;line-height:1;padding:6px 10px;border-radius:8px;background:var(--cc-d);color:#fff;white-space:nowrap}
+.tc-h h2{margin:0;font-family:var(--font-hero);font-weight:700;letter-spacing:-.01em;font-size:clamp(20px,3vw,27px);line-height:1.12;color:var(--ink);text-wrap:balance}
 .tc-brief{margin:10px 0 0;font-family:var(--serif);font-size:17px;line-height:1.6;color:var(--ink)}
 .tc-where dl{margin:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
 .tc-where dl > div{border-radius:10px;background:var(--paper-2);padding:7px 11px}
@@ -1552,7 +1555,7 @@ body.tut-book #b-gloss{display:none!important}
 .tc-marks p{margin:8px 0 0;font-size:14.5px;line-height:1.5}
 .mk-cs{display:flex;flex-wrap:wrap;gap:6px}
 .mk-chip{display:inline-flex;align-items:baseline;gap:6px;padding:5px 11px;border-radius:999px;background:color-mix(in srgb,var(--b-exam) 11%,var(--paper));color:var(--b-exam);font-size:13px;box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--b-exam) 35%,transparent)}
-.mk-chip b{font-family:var(--display);font-weight:500;letter-spacing:.03em}
+.mk-chip b{font-family:var(--display);font-weight:700;letter-spacing:0}
 .mk-chip.none{background:var(--paper-2);color:var(--ink-3);box-shadow:none}
 .mk-top{padding:8px 12px;border-radius:10px;background:color-mix(in srgb,var(--b-tip) 9%,var(--paper));box-shadow:inset 3px 0 0 var(--b-tip)}
 .mk-no{color:var(--ink-2)}
@@ -1578,21 +1581,21 @@ body.tut-book #b-gloss{display:none!important}
 .lib-hero{padding:24px 28px;font-family:var(--sans)}
 .lib-k{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:var(--cc);letter-spacing:.04em;text-transform:uppercase}
 .lib-k svg{width:16px;height:16px}
-.lib-hero h1{margin:6px 0 6px;font-family:var(--font-hero);font-weight:900;text-transform:uppercase;font-size:clamp(26px,4.4vw,40px);line-height:1.05;letter-spacing:.01em}
+.lib-hero h1{margin:6px 0 6px;font-family:var(--font-hero);font-weight:700;letter-spacing:-.01em;font-size:clamp(26px,4.4vw,40px);line-height:1.05;letter-spacing:.01em}
 .lib-hero > p{margin:0 0 14px;font-family:var(--serif);font-size:16.5px;line-height:1.55;color:var(--ink-2);max-width:60ch}
 .lib-q{display:flex;align-items:center;gap:10px;padding:0 16px;border-radius:16px;background:var(--paper-2);outline:2px solid color-mix(in srgb,var(--cc) 45%,var(--line));transition:outline-color .15s}
 .lib-q:focus-within{outline:3px solid var(--cc)}
 .lib-q svg{flex:none;width:24px;height:24px;color:var(--cc)}
 .lib-q input{flex:1;min-width:0;border:0;background:transparent;font-size:19px;padding:15px 0;outline:none}
 .lib-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.lib-chip{border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 13px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:12.5px;color:var(--ink-2)}
+.lib-chip{border:1.5px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 13px;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:12.5px;color:var(--ink-2)}
 .lib-chip[aria-pressed="true"]{background:var(--cc-d);border-color:var(--cc-d);color:#fff}
 .lib-bar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin-top:12px;font-size:13.5px;color:var(--ink-3)}
 .lib-my{font-weight:700;text-decoration:none;color:var(--cc)}
 .lib-my b{display:inline-block;min-width:22px;text-align:center;border-radius:999px;background:var(--cc-d);color:#fff;padding:0 6px;margin-left:4px;font-size:12px}
 .lib-body{padding:10px 18px 18px}
 .lib-cat{margin-top:12px}
-.lib-cat > h2{display:flex;align-items:center;gap:10px;margin:8px 4px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:15px;color:var(--cc)}
+.lib-cat > h2{display:flex;align-items:center;gap:10px;margin:8px 4px;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:15px;color:var(--cc)}
 .lib-cat > h2 span{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--cc-d);color:#fff;font-family:var(--mono);font-size:13px}
 .lib-cat > h2 small{margin-left:auto;font-family:var(--sans);letter-spacing:0;font-size:12.5px;color:var(--ink-3)}
 .lib-l,.bl-l{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
@@ -1612,7 +1615,7 @@ body.tut-book #b-gloss{display:none!important}
 .star[aria-pressed="true"] i{transform:scale(1.12)}
 .star:hover{background:var(--paper-2)}
 .star.big{font-size:18px;padding:7px 13px;border:1.5px solid var(--line);background:var(--paper)}
-.star.big span{font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:12.5px;color:var(--ink)}
+.star.big span{font-family:var(--display);font-weight:700;letter-spacing:0;font-size:12.5px;color:var(--ink)}
 .star.big[aria-pressed="true"]{border-color:#E0A100;background:color-mix(in srgb,#E0A100 12%,var(--paper))}
 .lib-top{display:flex;align-items:center;flex-wrap:wrap;gap:8px 14px;font-family:var(--sans);font-size:14px}
 .lib-top a{font-weight:700;text-decoration:none;color:var(--cc)}
@@ -1637,8 +1640,8 @@ body.tut-book #b-gloss{display:none!important}
 .lib-cta.sm .lib-ci{width:40px;height:40px;border-radius:12px;font-size:18px;background:#16213A}
 .lib-ci svg{width:26px;height:26px}
 .lib-ct{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
-.lib-ct small{font-family:var(--display);font-weight:500;letter-spacing:.04em;font-size:12px;color:var(--h2)}
-.lib-ct > b{font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:18px;line-height:1.25}
+.lib-ct small{font-family:var(--display);font-weight:700;letter-spacing:0;font-size:12px;color:var(--h2)}
+.lib-ct > b{font-family:var(--display);font-weight:700;letter-spacing:0;font-size:18px;line-height:1.25}
 .lib-cta.sm .lib-ct > b{font-size:14px}
 .lib-ct > span{font-size:13.5px;color:var(--ink-2);line-height:1.4}
 .lib-go{flex:none;font-weight:700;color:var(--h2)}
@@ -1651,7 +1654,7 @@ body.tut-book #b-gloss{display:none!important}
 .r-lib i{font-style:normal;color:#E0A100;width:17px;text-align:center}
 .r-lib b{margin-left:auto;font-size:11.5px;color:var(--ink-3)}
 .wu-ch{padding:18px 22px}
-.wu-ch > h2{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:0 0 8px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:16px}
+.wu-ch > h2{display:flex;align-items:center;flex-wrap:wrap;gap:6px 10px;margin:0 0 8px;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:16px}
 .wu-n{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;background:var(--wc);color:#fff;font-family:var(--mono);font-size:14px}
 .wu-ch > h2 small{margin-left:auto;font-family:var(--sans);letter-spacing:0;font-size:12.5px;color:var(--ink-3)}
 .wu-ch .mk-cs{margin:0 0 6px}
@@ -1692,14 +1695,14 @@ body.tut-book #b-gloss{display:none!important}
 .tryit > details > summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:10px;padding:12px 18px}
 .tryit > details > summary::-webkit-details-marker{display:none}
 .tryit .bi{--bc:var(--b-prac);width:28px;height:28px}
-.tryit summary b{font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:14px}
+.tryit summary b{font-family:var(--display);font-weight:700;letter-spacing:0;font-size:14px}
 .tryit summary > span:last-child{font-size:13px;color:var(--ink-3)}
 .tryit summary::after{content:"";margin-left:auto;width:8px;height:8px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);transform:rotate(45deg);transition:transform .2s}
 .tryit details[open] summary::after{transform:rotate(-135deg)}
 .tryit .tt-mini{margin:0 14px 14px;box-shadow:none;outline:1px solid var(--line);--bc:var(--b-prac)}
 .mk-meta{font-size:14px!important;margin:0 0 6px!important}
 .mk-adv{padding:16px 22px}
-.mk-adv h2{margin:0 0 8px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:15px}
+.mk-adv h2{margin:0 0 8px;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:15px}
 .mk-adv ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:6px;font-size:14px;line-height:1.5}
 /* coursework task pages (.sheet.cw): calm and simple, the task card first, then a few quiet cards */
 .sheet.cw .ncard{box-shadow:none;outline:1px solid var(--line-2);background:var(--paper)}
@@ -1740,7 +1743,7 @@ body.tut-book #b-gloss{display:none!important}
 .pg-l a:hover{background:var(--cc-t)}
 .pg-l .pg-k{flex:none;min-width:8.4em;text-align:center}
 .pg-bks{padding:18px 22px}
-.pg-bks h2{margin:0 0 6px;font-family:var(--display);font-weight:500;letter-spacing:.03em;font-size:15px}
+.pg-bks h2{margin:0 0 6px;font-family:var(--display);font-weight:700;letter-spacing:0;font-size:15px}
 .pg-note{margin:0 0 10px;font-family:var(--sans);font-size:13.5px;color:var(--ink-2)}
 .pg-bk{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .pg-ld{cursor:pointer}
@@ -1943,11 +1946,185 @@ body.ppv-on{overflow:hidden}
 .ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
 .ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
 .ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
-.pp-vq{font:inherit;font-size:.82em;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid var(--cc,var(--accent));background:transparent;color:var(--cc,var(--accent));cursor:pointer}.pp-vq:hover{background:var(--cc,var(--accent));color:#fff}</style>
+
+/* past-paper crops: the question's lead-in shown above the part */
+.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
+.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
+.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
+.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
+.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
+
+/* past-paper crops: the question's lead-in shown above the part */
+.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
+.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
+.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
+.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
+.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
+
+/* past-paper crops: the question's lead-in shown above the part */
+.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
+.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
+.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
+.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
+.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
+
+/* past-paper crops: the question's lead-in shown above the part */
+.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
+.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
+.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
+.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
+.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
+.pp-vq{font:inherit;font-size:.82em;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid var(--cc,var(--accent));background:transparent;color:var(--cc,var(--accent));cursor:pointer}.pp-vq:hover{background:var(--cc,var(--accent));color:#fff}/* ================= DESIGN: BEGIN (workbook calm-down layer; source notes/app/design.css, injected last by notes/app/inject.py) =================
+   One type system: headings, labels and buttons in the sans (sentence case); notes prose in the serif; Lemon Milk only for the
+   "Mr Butler's" wordmark and the book-cover title. One radius scale (10 / 14), lighter shadows, a plain desk, no decorative
+   circuit lines or floating icons on the page title card, chapter colour used for small accents rather than large fills. */
+:root{--r-s:10px;--r-m:14px;
+  --card-shadow:0 1px 2px rgba(20,30,50,.05),0 3px 12px -6px rgba(20,30,50,.10);--card-line:rgba(20,30,50,.09);
+  --soft-shadow:0 1px 2px rgba(20,30,50,.05)}
+:root[data-theme="dark"]{--card-shadow:0 1px 2px rgba(0,0,0,.35);--card-line:rgba(255,255,255,.08);--soft-shadow:none}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){--card-shadow:0 1px 2px rgba(0,0,0,.35);--card-line:rgba(255,255,255,.08);--soft-shadow:none} }
+
+/* ---------- desk and type ---------- */
+body{background-image:none}
+.sheet :is(h1,h2,h3,h4),.dr-h h2,.pop h3,.r-title,.cv-body h2,.cv-tile b,.gl-l,.empty h2,.chcard-h h3,.lib-it b,.cq-pi h2,.cq-pi h3{font-family:var(--sans)}
+.sheet .cv-t{font-family:var(--brand)}
+.bt b{font-family:var(--sans);font-weight:700;font-size:15px}
+.gl-l{font-size:20px;color:var(--ink-2)}
+
+/* ---------- top bar ---------- */
+.lb{border-radius:var(--r-s)}
+.lb.bk{color:var(--ink);gap:5px}
+.lb.bk:hover{color:var(--accent)}
+.wm{color:var(--ink-2);font-size:12.5px;padding:0 8px 0 4px}
+#b-lib{position:relative}
+@media (max-width:699px){ #b-back > span:not(.bk-wm){display:inline!important} #b-back .bk-wm{display:none!important} }
+@media (max-width:560px){ .lb{font-size:11px;font-weight:700} }
+@media (max-width:440px){ .pn{max-width:92px;overflow:hidden;text-overflow:ellipsis} }
+
+/* ---------- contents rail: other chapters fold away, the current one is open ---------- */
+.r-spec{display:none}
+.rail{padding-top:16px}
+.r-head{padding:2px 6px 14px}
+.r-title{font-size:17px;font-weight:700;margin:2px 0 12px}
+.r-ch{margin:2px 0}
+.r-ch h2{margin:0;padding:0;font-family:var(--sans)}
+.r-ch h2 span:not(.r-n):not(.r-cnt){font-family:var(--sans);font-size:14px;font-weight:700;line-height:1.3}
+.r-ch h2 .r-n{width:26px;height:22px;border-radius:6px;font-size:11.5px}
+.r-tg{display:flex;align-items:center;gap:9px;flex:1;min-width:0;margin:0;padding:8px 6px;border:0;border-radius:8px;background:none;text-align:left;font:inherit;color:inherit;cursor:pointer}
+.r-tg:hover{background:var(--line-2)}
+.r-tg > span:nth-child(2){flex:1;min-width:0}
+.r-tg::after{content:"";flex:none;width:7px;height:7px;margin:0 4px 0 2px;border-right:1.8px solid var(--ink-3);border-bottom:1.8px solid var(--ink-3);transform:rotate(-45deg);transition:transform .2s var(--ease)}
+.r-tg[aria-expanded="true"]::after{transform:rotate(45deg) translate(-2px,-1px)}
+.r-ch h2 .r-cnt{flex:none;font-family:var(--sans);font-size:12px;font-weight:400;color:var(--ink-3);font-variant-numeric:tabular-nums;letter-spacing:0}
+.r-ch.cur .r-tg{background:color-mix(in srgb,var(--cc) 9%,transparent)}
+.r-ch h2{flex-wrap:wrap}
+.r-ch h2 .r-kt{flex:1 1 100%;font-size:12.5px;padding:0 0 2px 41px;text-decoration:none}
+.r-ch h2 .r-kt:hover{text-decoration:underline}
+.r-ch:has(.r-tg[aria-expanded="false"]) .r-kt{display:none}
+.lib-k{text-transform:none;letter-spacing:0;font-size:14px}
+.lib-r > a,.bl-l li > a{font-family:var(--sans)}
+.cv-unit{display:none}
+:is(h1,h2,h3)[tabindex="-1"]:focus{outline:none}
+.r-ch:not(.open):not(:has(.r-pg[aria-current="page"])) .r-pg,.r-ch.shut .r-pg{display:none}
+.r-ch:is(.open,:has(.r-pg[aria-current="page"])):not(.shut){padding-bottom:8px}
+.r-pg{margin-left:14px;padding:6px 8px 6px 10px;font-size:13.5px}
+.r-pg > span:last-child{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+.r-pg[aria-current="page"] > span:last-child{-webkit-line-clamp:unset;display:block}
+.r-pg[aria-current="page"]{font-weight:700}
+
+/* ---------- surfaces: one radius, lighter shadows ---------- */
+.card,.sec,.kt,.chcard,.dg,.cyk{border-radius:var(--r-m)}
+.sec > h2{border-radius:var(--r-m) var(--r-m) 0 0}
+.kt > summary{border-radius:var(--r-m)}.kt[open] > summary{border-radius:var(--r-m) var(--r-m) 0 0}
+.cyk-h{border-radius:var(--r-m)}.cyk.open .cyk-h{border-radius:var(--r-m) var(--r-m) 0 0}
+.sheet{gap:14px}
+.boxed.key,.call,.ex,.code,.tw,.fig,figure.anim,.tut,.lfig,.vid,.exq li,.pq{border-radius:12px}
+.boxed.key,.ex,.code,.tw,.fig,figure.anim,.tut,.lfig{box-shadow:none}
+.boxed.key{box-shadow:inset 3px 0 0 var(--bc)}
+.call{box-shadow:inset 3px 0 0 var(--bc)}
+.tw{outline:1px solid var(--line-2)}
+.vid:hover{transform:none;box-shadow:none}
+.np:hover{transform:none}
+.cv-tile:hover{transform:none;box-shadow:none;outline-color:var(--cc)}
+
+/* ---------- page title card: no circuit pattern, no floating icon ---------- */
+.ph-pat,.strip-r svg{display:none}
+.ph-ic{display:none!important}
+.phero:has(.ph-ic:not(.noimg)) .lede{margin-right:0}
+.phero:has(.ph-ic) .strip{margin-right:0}
+.phero{padding:22px var(--px) 24px}
+.strip{font-size:13px}
+.strip::after{height:2px;background:linear-gradient(90deg,var(--cc) 0 56px,var(--line-2) 56px)}
+.strip-ch i{border-radius:6px;font-size:11.5px;padding:2px 7px}
+.sheet .phero h1{margin:16px 0 10px}
+.lede{border-left-width:3px;font-size:17px;color:var(--ink-2)}
+
+/* ---------- notes ---------- */
+.ncard > h2{gap:10px;color:var(--ink)}
+.ncard > h2 .bi{width:30px;height:30px;border-radius:9px;box-shadow:none}
+.ncard > h2 .bi svg{width:17px;height:17px}
+.notes h2{color:var(--ink);font-size:19px}
+.notes h2::before{width:8px;height:8px;border-radius:2px}
+.sec > h2{background:color-mix(in srgb,var(--bc) 7%,var(--paper));font-size:16px}
+.sec > h2 .bi{width:28px;height:28px;border-radius:8px}.sec > h2 .bi svg{width:16px;height:16px}
+.kt > summary b{font-size:16px}
+.kt[open] > summary,.dg-head,.chcard-h{background:color-mix(in srgb,var(--cc) 5%,var(--paper))}
+.cyk-h .bi{width:32px;height:32px;border-radius:9px}
+.cyk-h .bi svg{width:18px;height:18px}
+.cyk-tt b{font-size:17px}
+.cyk-sw{font-size:13px;border-width:1px}
+.cyk-tab{font-size:14px}
+.cyk-one{font-size:14px}
+.fig-k{font-size:12px}
+
+/* ---------- buttons and controls: one size, sentence case, icons that never outgrow the label ---------- */
+.btn{border-radius:var(--r-s);font-size:14px;line-height:1.3}
+.btn svg{width:16px;height:16px;flex:none}
+.btn.big{border-radius:12px;font-size:15px}
+.btn.big svg{width:18px;height:18px}
+.cq-pi .btn svg,.cq-big .btn svg,.cq-ask .btn svg,.ppv .btn svg,#glossary .btn svg,.gv .btn svg{width:16px;height:16px}
+.chip,.lib-chip{font-size:14px}
+.donebtn{font-size:15px;padding:9px 18px}
+.code-cp{font-size:13px}
+.lp-tabs button,.gv-modes button{font-size:14px}
+.an-k{font-size:12px}
+
+/* ---------- cover and chapter banners: the brand navy stays, the circuit lines step back ---------- */
+.cv-hero .cbn-pat,.cbn .cbn-pat{opacity:.4}
+.cv-hero{border-radius:var(--r-m) var(--r-m) 0 0;padding:46px 40px 36px}
+.cv-spec{border-radius:0 0 var(--r-m) var(--r-m);height:4px}
+.cv-tile{border-radius:12px}
+.cv-ic{width:44px;height:44px;border-radius:11px}
+.cbn{border-radius:var(--r-m)}
+
+/* ---------- chapter quiz, past papers, glossary drawer ---------- */
+.cq-opt{border-radius:var(--r-m);padding:16px 18px}
+.cq-opt > svg{width:24px;height:24px;padding:9px;border-radius:10px}
+.cq-chip{border-radius:12px}
+.cq-o{border-radius:12px;border-width:1px}
+.cq-ask{border-radius:18px}
+.cq-top small,.cq-sec{letter-spacing:.04em}
+.lib-hero h1{letter-spacing:-.01em}
+
+a.btn{text-decoration:none}
+.cq-ask-b{flex-direction:column;align-items:stretch;max-width:300px;margin-inline:auto}
+.cq-ask-b .btn{min-width:0;display:flex;justify-content:center}
+.cq-ask h2{font-size:21px}
+@media (max-width:699px){
+  .card,.sec,.kt,.chcard,.dg,.cyk{border-radius:12px}
+  .sec > h2{border-radius:12px 12px 0 0}
+  .cv-hero{padding:28px 20px 24px;border-radius:12px 12px 0 0}
+  .cv-spec{border-radius:0 0 12px 12px}
+  .cbn{padding-top:40px}
+}
+@media (prefers-reduced-motion:reduce){ .r-tg::after{transition:none} }
+@media print{ .r-ch .r-pg{display:flex!important} }
+/* ================= DESIGN: END ================= */
+</style>
 
 <header class="bar" id="bar">
   <div class="bar-in">
-    <a class="lb bk" id="b-back" href="#" title="Back to all topics on the front page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>All topics</span></a>
+    <a class="lb bk" id="b-back" href="#" title="Back to the topic list"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg><span>Topics</span></a>
     <button class="ib" id="b-menu" aria-label="Contents" aria-controls="rail" aria-expanded="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg></button>
     <div class="bt"><b id="t-book">Notes</b><span id="t-ch"></span></div>
     <div class="pager">
@@ -1958,7 +2135,7 @@ body.ppv-on{overflow:hidden}
     <span class="sep"></span>
     <button class="ib" id="b-search" aria-label="Search (press /)" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></button>
     <button class="lb" id="b-gloss" aria-expanded="false" aria-controls="d-gloss" title="Glossary, flashcards and key-term quiz"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h10.5"/><path d="M9 8h5"/></svg><span>Glossary</span></button>
-    <div class="libwrap"><button class="ib" id="b-lib" aria-label="Other notebooks and the lesson hub" aria-expanded="false" aria-controls="libmenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg></button>
+    <div class="libwrap"><button class="ib" id="b-lib" title="More: other books, My progress, settings" aria-label="More: other notebooks, the lesson hub, My progress and settings" aria-expanded="false" aria-controls="libmenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/></svg></button>
       <div class="libmenu" id="libmenu" hidden></div></div>
   </div>
   <div class="prog" id="prog" style="width:0"></div>
@@ -2202,7 +2379,7 @@ $('#t-book').textContent = BK.title || 'Notes';
   const a = $('#b-back');
   a.href = (ON_WEB ? '../index.html' : FRONT_WEB) + '#' + COURSE;
   if (!ON_WEB) { a.target = '_blank'; a.rel = 'noopener'; }
-  a.setAttribute('aria-label', `All topics: back to the ${COURSE === 'gce' ? 'A level' : 'GCSE'} topic list`);
+  a.setAttribute('aria-label', `Topics: back to the ${COURSE === 'gce' ? 'A level' : 'GCSE'} topic list`);
 })();
 const narrowMQ = window.matchMedia('(max-width: 999px)');
 const isNarrow = () => narrowMQ.matches;
@@ -8023,9 +8200,36 @@ const BRAND = "Mr Butler's", BRAND_FULL = "Mr Butler's Digital Technology";
 const unitLabel = () => { const t = String(BK.title || ''), u = t.indexOf(': ') > 0 ? t.slice(0, t.indexOf(': ')) : (BK.id || ''); return COURSE === 'gcse' && !/^GCSE/i.test(u) ? 'GCSE ' + u : u; };
 (function () {
   const bk = $('#b-back'); if (!bk || $('#bar .wm')) return;
-  bk.insertAdjacentHTML('beforeend', '<span class="bk-wm" aria-hidden="true">Mr B’s</span>');   /* phones: the back button carries the compact wordmark */
   bk.insertAdjacentHTML('afterend', `<a class="wm" href="${esc(bk.getAttribute('href'))}"${bk.target ? ' target="_blank" rel="noopener"' : ''} aria-label="${esc(BRAND_FULL)}: front page"><span class="wm-l">${esc(BRAND)}</span><span class="wm-s" aria-hidden="true">Mr B’s</span></a>`);
 })();
+/* ---------- contents rail (DESIGN PASS): each chapter heading is a toggle; only the chapter you are in is open by default
+   (CSS: .r-ch:has([aria-current]) shows its pages); a done / total count on every chapter ---------- */
+{
+  const br0 = buildRail;
+  const railSync = () => {
+    rail.querySelectorAll('.r-ch').forEach(sec => {
+      const pgs = sec.querySelectorAll('.r-pg'), cnt = sec.querySelector('.r-cnt'), tg = sec.querySelector('.r-tg');
+      if (cnt) { const d = [...pgs].filter(a => a.classList.contains('done')).length; cnt.textContent = `${d}/${pgs.length}`; cnt.title = `${d} of ${pgs.length} pages covered`; }
+      const cur = !!sec.querySelector('.r-pg[aria-current="page"]'), open = sec.classList.contains('open') || (cur && !sec.classList.contains('shut'));
+      sec.classList.toggle('cur', cur);
+      if (tg) tg.setAttribute('aria-expanded', String(open));
+    });
+  };
+  buildRail = () => {
+    br0();
+    rail.querySelectorAll('.r-ch').forEach((sec, i) => {
+      const h = sec.querySelector('h2'), n = h && h.querySelector('.r-n'), t = n && n.nextElementSibling; if (!h || !n || !t) return;
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'r-tg'; b.setAttribute('aria-expanded', 'false');
+      h.insertBefore(b, n); b.append(n, t); b.insertAdjacentHTML('beforeend', '<span class="r-cnt"></span>');
+      b.addEventListener('click', () => {
+        const open = b.getAttribute('aria-expanded') === 'true';
+        sec.classList.toggle('open', !open); sec.classList.toggle('shut', open); railSync();
+      });
+    });
+    railSync();
+  };
+  new MutationObserver(railSync).observe(rail, { subtree: true, attributes: true, attributeFilter: ['class', 'aria-current'] });
+}
 setTimeout(() => { const mm = $('#libmenu'); if (mm && !mm.querySelector('.wm-m')) mm.insertAdjacentHTML('afterbegin', `<a class="wm-m" href="${esc($('#b-back').getAttribute('href'))}"><b>${esc(BRAND)}</b><span>Digital Technology</span></a>`); }, 0);
 {
   const rcv = renderCover;
@@ -8111,7 +8315,7 @@ function cqChoose(ch) {
   main.innerHTML = `<article class="sheet lib-v cq-v" aria-labelledby="cq-h" style="${chVars(ch)}"><header class="lib-hero card cq-hero"><small class="lib-k">${icon('exam')}Chapter ${esc(ch.n)} · ${esc(ch.title)}</small><h1 id="cq-h" tabindex="-1">Test yourself on this topic</h1><p>Choose how you want to revise it.</p></header>
     <section class="cq-opts">
       ${pp.length ? opt('href="#" data-mode="pp"', 'exam', 'Past-paper quiz', `${pp.length} real CCEA question${pp.length === 1 ? '' : 's'} on this topic, one at a time. Answer, check the mark scheme, mark yourself.`, bp ? `Best ${bp.pc}%` : '') : ''}
-      ${pp.length ? opt(`href="#pp-${esc(ch.id)}"`, 'doc', 'All past-paper questions at once', `Every question CCEA has asked on this topic${marks ? ` (${marks} marks)` : ''} on one page, newest first, with the mark schemes.`, '') : ''}
+      ${pp.length ? opt(`href="#pp-${esc(ch.id)}"`, 'prac', 'All past-paper questions at once', `Every question CCEA has asked on this topic${marks ? ` (${marks} marks)` : ''} on one page, newest first, with the mark schemes.`, '') : ''}
       ${all.length > pp.length ? opt('href="#" data-mode="all"', 'chk', 'Full topic quiz', `${all.length} questions: quick checks, exam-style practice${pp.length ? ' and the past-paper questions' : ''}.`, b ? `Best ${b.pc}%` : '') : ''}
     </section></article>`;
   $$('[data-mode]', main).forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); renderChQuiz(ch, null, a.dataset.mode); }));
