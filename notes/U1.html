@@ -1767,6 +1767,133 @@ body.tut-book #b-gloss{display:none!important}
 .dr-h .mb-wm{margin-right:auto;margin-left:10px;align-self:center}
 .cr-wm{display:block;margin-bottom:6px}
 @media print{ body.bl-on .pg-bks,body.bl-on .pg-f,body.bl-on .pg-sum .btn{display:none!important} .v-wm{color:#000!important;font-size:13px} .foot-wm{color:#000} body.bl-on .lib-hero{display:block!important} }
+/* section tracking (My course) */
+.trk-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:1px solid var(--line-2)}
+.trk-b{display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:13px;font-weight:700;padding:6px 12px;border-radius:999px;cursor:pointer;border:1px solid var(--line);background:var(--paper);color:var(--ink-2)}
+.trk-b svg{width:15px;height:15px}
+.trk-b[aria-pressed="true"]{color:#18744A;border-color:color-mix(in srgb,#18744A 40%,var(--line))}
+.trk-b[aria-pressed="false"]{border-style:dashed}
+.trk-b[aria-pressed="false"] span{font-weight:400;color:var(--ink-3)}
+.trk-b[aria-pressed="false"] b{color:var(--accent)}
+.pg-ch.off h2,.pg-ch.off .pg-l{opacity:.55}
+.pg-chx{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:6px 0 4px}
+.pg-k.off{border:1px dashed var(--line);color:var(--ink-3);background:transparent}
+/* chapter quiz */
+.cq-chip{display:inline-flex;align-items:center;gap:10px;padding:8px 14px 8px 10px;border-radius:14px;text-decoration:none;color:var(--ink);background:color-mix(in srgb,var(--cc-d) 10%,var(--paper));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--cc-d) 40%,transparent)}
+.cq-chip > svg,.cq-chip .cq-lk{width:22px;height:22px;color:var(--cc-d);flex:none}
+.cq-chip > span{display:flex;flex-direction:column;line-height:1.2}
+.cq-chip b{font-size:14px}
+.cq-chip small{font-size:12px;color:var(--ink-3)}
+.cq-chip.locked{background:var(--paper-2);box-shadow:inset 0 0 0 1px var(--line);flex-wrap:wrap}
+.cq-chip.locked .cq-lk{color:var(--ink-3)}
+.cq-any{font:inherit;font-size:12px;color:var(--ink-3);background:none;border:0;padding:2px 0;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.cq-v{max-width:760px;margin-inline:auto}
+.cq-sec,.cq-top small,.cq-n,.cq-meta,.cq-note,.cq-lab,.cq-self,.cq-keys,.cq-fb,.cq-ms,.cq-tip,.cq-miss li{font-family:var(--sans)}
+.cq-top{display:flex;align-items:center;gap:14px;padding:4px 2px}
+.cq-top > div{flex:1;min-width:0}
+.cq-top small{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--cc-d)}
+.cq-top h1{margin:2px 0 0;font-size:clamp(18px,3vw,24px);line-height:1.2}
+.cq-x{flex:none;width:38px;height:38px;border-radius:50%;display:grid;place-items:center;text-decoration:none;color:var(--ink-2);border:1px solid var(--line);background:var(--paper);font-weight:700}
+.cq-n{flex:none;font-size:13px;font-weight:700;color:var(--ink-2);font-variant-numeric:tabular-nums}
+.cq-bar{height:8px;border-radius:8px;background:var(--line-2);overflow:hidden}
+.cq-bar i{display:block;height:100%;background:var(--cc-d);transition:width .3s}
+.cq-card{display:flex;flex-direction:column;gap:12px;padding:22px 24px}
+.cq-sec{align-self:flex-start;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cc-d);background:color-mix(in srgb,var(--cc-d) 10%,transparent);padding:3px 9px;border-radius:999px}
+.cq-q{margin:0;font-size:clamp(16.5px,2.2vw,19px);line-height:1.5;font-weight:700;color:var(--ink)}
+.cq-m{font-weight:400;color:var(--ink-3);font-size:14px}
+.cq-os{display:grid;gap:10px}
+.cq-o{display:flex;align-items:flex-start;gap:12px;text-align:left;font:inherit;font-size:15.5px;line-height:1.45;padding:12px 14px;border-radius:14px;border:1.5px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer}
+.cq-o:hover:not(:disabled){border-color:var(--cc-d)}
+.cq-ok{flex:none;width:26px;height:26px;border-radius:8px;display:grid;place-items:center;font-weight:700;font-size:13px;background:var(--paper-2);color:var(--ink-2)}
+.cq-o.ok{border-color:#18744A;background:color-mix(in srgb,#18744A 10%,var(--paper))}
+.cq-o.ok .cq-ok{background:#18744A;color:#fff}
+.cq-o.no{border-color:#B3261E;background:color-mix(in srgb,#B3261E 8%,var(--paper))}
+.cq-o.no .cq-ok{background:#B3261E;color:#fff}
+.cq-o:disabled{cursor:default}
+.cq-fb{margin:0;padding:10px 14px;border-radius:12px;font-size:14.5px;line-height:1.5}
+.cq-fb.ok{background:color-mix(in srgb,#18744A 10%,var(--paper));border-left:4px solid #18744A}
+.cq-fb.no{background:color-mix(in srgb,#B3261E 8%,var(--paper));border-left:4px solid #B3261E}
+.cq-lab{font-size:13px;font-weight:700;color:var(--ink-2)}
+.cq-txt{width:100%;box-sizing:border-box;font:inherit;font-size:15px;line-height:1.5;resize:vertical;min-height:90px}
+.cq-ms{display:flex;flex-direction:column;gap:10px;padding:14px 16px;border-radius:14px;background:var(--paper-2);border:1px solid var(--line-2)}
+.cq-ms > b{font-size:13px;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-3)}
+.cq-pts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.cq-pts label{display:flex;gap:10px;align-items:flex-start;font-size:14.5px;line-height:1.45;cursor:pointer}
+.cq-pts input{margin-top:3px;width:18px;height:18px;accent-color:#18744A;flex:none}
+.cq-pts em{color:var(--ink-3);font-style:normal}
+.cq-self{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:14px;font-weight:700}
+.cq-self input{width:72px;font:inherit;font-size:16px;text-align:center}
+.cq-ms .btn,.cq-pp > .btn,.cq-card > .btn{align-self:flex-start}
+.cq-meta{font-size:13.5px;color:var(--ink-2)}
+.cq-pp{display:flex;flex-direction:column;gap:12px}
+.cq-note{margin:0;font-size:13.5px;color:var(--ink-3)}
+.cq-big{display:flex;flex-wrap:wrap;gap:10px}
+.btn.big{display:inline-flex;align-items:center;gap:8px;font-size:15px;padding:12px 16px;border-radius:14px;text-decoration:none}
+.btn.big svg{display:inline-block;flex:none}
+.cq-big.has-ppv > a.btn{display:inline-flex;align-items:center;gap:4px;background:none;border:0;box-shadow:none;padding:4px 2px;font-size:13px;color:var(--ink-2);text-decoration:underline;text-underline-offset:2px;font-family:var(--sans);text-transform:none;letter-spacing:0}
+.cq-big.has-ppv > a.btn > svg:first-child{display:none}
+.cq-big.has-ppv{align-items:center}
+.btn.big svg{width:18px;height:18px}
+.cq-tip{padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--cc-d) 8%,var(--paper));border-left:4px solid var(--cc-d);font-size:14.5px;line-height:1.5}
+.cq-tip b{display:block;font-size:12.5px;color:var(--ink-3);margin-bottom:4px}
+.cq-nav{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.cq-keys{font-size:12px;color:var(--ink-3)}
+.cq-lock{display:flex;gap:14px;align-items:flex-start;margin-top:10px}
+.cq-lock .cq-lk{width:40px;height:40px;color:var(--ink-3);flex:none}
+.cq-acts{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:12px}
+.cq-tot{font-size:18px;margin:0}
+.cq-best{margin:4px 0 0;color:var(--ink-3);font-size:13.5px}
+.cq-secs{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin-top:14px}
+.cq-secs > div{display:flex;flex-direction:column;padding:10px 12px;border-radius:12px;background:var(--paper-2)}
+.cq-secs span{font-size:20px;font-weight:700}
+.cq-secs small{color:var(--ink-3)}
+.cq-miss ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.cq-miss li{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:6px 12px;padding:10px 0;border-top:1px solid var(--line-2);font-size:14px}
+.cq-ms2{font-weight:700;font-variant-numeric:tabular-nums}
+.cq-pop{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:300;display:flex;align-items:center;gap:12px;width:min(560px,calc(100vw - 24px));box-sizing:border-box;padding:14px 16px;border-radius:18px;background:#16213A;color:#fff;box-shadow:0 18px 40px -12px rgba(0,0,0,.45);transition:opacity .5s}
+.cq-pop.fade{opacity:0}
+.cq-pop > div{flex:1;min-width:0;display:flex;flex-direction:column}
+.cq-pop span{font-size:13px;opacity:.85}
+.cq-pop .btn.pri{--cc-d:#3F5A99;flex:none}
+.cq-px{flex:none;background:none;border:0;color:#fff;font-size:16px;cursor:pointer;padding:4px}
+@media (max-width:600px){ .cq-card{padding:16px} .cq-keys{display:none} .cq-miss li{grid-template-columns:1fr auto;} .cq-miss li .cq-sec{grid-column:1/-1} .cq-pop{flex-wrap:wrap} .cq-pop .btn.pri{width:100%;justify-content:center} }
+@media (prefers-reduced-motion: reduce){ .cq-bar i,.cq-pop{transition:none} }
+/* CCEA past-paper viewer (teacher's uploads, used with permission) */
+body.ppv-on{overflow:hidden}
+.ppv{position:fixed;inset:0;z-index:400;background:rgba(10,16,30,.6);display:grid;place-items:center;padding:12px}
+.ppv-in{display:flex;flex-direction:column;width:min(980px,100%);height:min(100%,1100px);background:var(--paper);border-radius:18px;overflow:hidden;box-shadow:0 30px 80px -20px rgba(0,0,0,.5)}
+.ppv-h{display:flex;align-items:flex-start;gap:12px;padding:12px 14px 6px}
+.ppv-h > div{flex:1;min-width:0;display:flex;flex-direction:column}
+.ppv-h small{font-size:12px;color:var(--ink-3)}
+.ppv-x{flex:none;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink);cursor:pointer;font-size:15px}
+.ppv-tabs{display:flex;gap:4px;padding:0 14px}
+.ppv-tabs button{flex:1;font:inherit;font-weight:700;font-size:14px;padding:9px;border:1px solid var(--line);border-radius:10px;background:var(--paper-2);color:var(--ink-2);cursor:pointer}
+.ppv-tabs button[aria-selected="true"]{background:#16213A;border-color:#16213A;color:#fff}
+.ppv-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;padding:8px 14px;border-bottom:1px solid var(--line-2)}
+.ppv-bar .btn{padding:6px 11px}
+.ppv-pn,.ppv-zl{font-size:13px;font-variant-numeric:tabular-nums;color:var(--ink-2);min-width:4.5em;text-align:center}
+.ppv-sp{flex:1}
+.ppv-c{flex:1;overflow:auto;background:var(--paper-2);padding:8px;text-align:center;touch-action:pan-x pan-y pinch-zoom}
+.ppv-c canvas{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.15);margin:0 auto}
+.ppv-msg{padding:20px;color:var(--ink-2)}
+.has-ppv{flex-wrap:wrap}
+@media (max-width:600px){ .ppv{padding:0} .ppv-in{border-radius:0;height:100%} .ppv-dl{display:none} }
+/* app update toast (source notes/app/update.js) */
+.upd{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:500;display:flex;align-items:center;flex-wrap:wrap;gap:10px 12px;width:min(600px,calc(100vw - 24px));box-sizing:border-box;padding:14px 16px;border-radius:18px;background:#16213A;color:#fff;box-shadow:0 18px 44px -12px rgba(0,0,0,.5);font-family:var(--sans)}
+.upd > svg{flex:none;width:24px;height:24px;color:#8AB6FF}
+.upd > div{flex:1;min-width:200px;display:flex;flex-direction:column;gap:2px}
+.upd b{font-size:15px}
+.upd span{font-size:13px;opacity:.85}
+.upd ul{margin:2px 0 0;padding-left:1.1em;font-size:13.5px;line-height:1.45}
+.upd button{font:inherit;font-weight:700;font-size:14px;border-radius:12px;padding:9px 14px;cursor:pointer}
+.upd .upd-go{background:#8AB6FF;color:#101826;border:0}
+.upd .upd-go:disabled{opacity:.7}
+.upd .upd-later{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
+@media (max-width:520px){ .upd{bottom:10px} .upd .upd-go{flex:1} }
+.app-chk{width:100%;font:inherit;text-align:left;background:none;border:0;cursor:pointer}
+.app-ver{display:block;padding:2px 10px 6px;font-size:11.5px;color:var(--ink-3)}
+/* the library menu grew (My progress, My course, install, animation speed): keep it inside the screen and scrollable */
+.libmenu{max-height:calc(100vh - 64px);max-height:calc(100dvh - 64px);overflow-y:auto;overscroll-behavior:contain}
 /* ================= APP: END ================= */
 </style>
 
@@ -7692,7 +7819,7 @@ if (TUT) {
 const APP_REV = !TUT;   /* revision workbooks say "covered"; tutorial books keep "done" and add their checklists */
 const covTxt = d => APP_REV ? (d ? 'Covered – tap to undo' : 'Mark as covered') : (d ? 'Done – tap to undo' : 'Mark this page as done');
 const pageStatus = id => state.done[id] ? 'cov' : state.seen[id] ? 'vis' : 'not';
-const ST_NAME = { cov: APP_REV ? 'Covered' : 'Done', vis: 'Visited, not marked', not: APP_REV ? 'Not covered' : 'Not started' };
+const ST_NAME = { cov: APP_REV ? 'Covered' : 'Done', vis: 'Visited, not marked', not: APP_REV ? 'Not covered' : 'Not started', off: 'Not tracking' };
 /* ---------- backup: all notes-* keys ---------- */
 function progressKeys() { const ks = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && /^notes-/.test(k)) ks.push(k); } } catch (e) { /* storage unavailable */ } return ks.sort(); }
 function exportProgress() {
@@ -7734,8 +7861,9 @@ let PG_F = 'all';
 function ring(d, n, big) { const pc = n ? Math.round(d / n * 100) : 0; return `<span class="pg-ring${big ? ' big' : ''}" aria-hidden="true"><svg viewBox="0 0 44 44"><circle cx="22" cy="22" r="18" class="tr-bg"/><circle cx="22" cy="22" r="18" class="tr-fg" pathLength="100" stroke-dasharray="${pc} 100"/></svg><b>${big ? pc + '%' : d}</b></span>`; }
 function renderProgress(focus) {
   tutView('progress', 'My progress');
-  const cnt = { cov: 0, vis: 0, not: 0 }; PAGES.forEach(P => cnt[pageStatus(P.p.id)]++);
-  const N = PAGES.length, nextNot = PAGES.find(P => pageStatus(P.p.id) !== 'cov');
+  const TP = PAGES.filter(P => typeof isTrk !== 'function' || isTrk(P.ch));   /* tracked sections only (My course) */
+  const cnt = { cov: 0, vis: 0, not: 0 }; TP.forEach(P => cnt[pageStatus(P.p.id)]++);
+  const N = TP.length, nextNot = TP.find(P => pageStatus(P.p.id) !== 'cov');
   const extra = [];
   if (typeof TASKS !== 'undefined' && TASKS.length) {
     let d = 0, n = 0; TASKS.forEach(t => { const set = new Set(TODO[t.P.p.id + '#' + t.bi + 'd'] || []); (t.b.deliver || []).forEach(x => { n++; if (set.has(todoH(x))) d++; }); });
@@ -7751,8 +7879,9 @@ function renderProgress(focus) {
       <div class="lib-chips pg-f" role="group" aria-label="Show">${[['all', 'All pages'], ['not', ST_NAME.not], ['vis', 'Visited, not marked'], ['cov', ST_NAME.cov]].map(([k, l]) => `<button type="button" class="lib-chip" data-pgf="${k}" aria-pressed="${PG_F === k}">${esc(l)}</button>`).join('')}</div></header>
     <section class="card lib-body" id="pg-list">${B.chapters.filter(ch => (ch.pages || []).length).map(ch => {
       const ps = ch.pages, d = ps.filter(p => state.done[p.id]).length;
-      return `<section class="lib-cat chs pg-ch" style="${chVars(ch)}"><h2><span>${esc(pad2(ch.n))}</span>${esc(ch.title)}<small>${d}/${ps.length}</small></h2><span class="meter"><i style="width:${Math.round(d / ps.length * 100)}%"></i></span>
-        <ul class="pg-l">${ps.map(p => { const st = pageStatus(p.id); return `<li data-st="${st}"><a href="#${esc(p.id)}"><span class="pg-k ${st}">${esc(ST_NAME[st])}</span><span>${esc(plain(p.spec))}</span></a></li>`; }).join('')}</ul></section>`;
+      const on = typeof isTrk !== 'function' || isTrk(ch);
+      return `<section class="lib-cat chs pg-ch${on ? '' : ' off'}" style="${chVars(ch)}"><h2><span>${esc(pad2(ch.n))}</span>${esc(ch.title)}<small>${on ? `${d}/${ps.length}` : 'Not tracking'}</small></h2>${on ? `<span class="meter"><i style="width:${Math.round(d / ps.length * 100)}%"></i></span>` : ''}<div class="pg-chx">${typeof cqCardHTML === 'function' ? cqCardHTML(ch) : ''}${typeof trkBtn === 'function' ? trkBtn(ch) : ''}</div>
+        <ul class="pg-l">${ps.map(p => { const st = on ? pageStatus(p.id) : 'off'; return `<li data-st="${st}"><a href="#${esc(p.id)}"><span class="pg-k ${st}">${esc(ST_NAME[st])}</span><span>${esc(plain(p.spec))}</span></a></li>`; }).join('')}</ul></section>`;
     }).join('')}<p class="lib-none" id="pg-none" hidden>Nothing here.</p></section>
     <section class="card lib-body pg-bks"><h2>Back up or move your progress</h2><p class="pg-note">Your progress is saved in this browser only. Download it to keep a copy or to move it to another device, then load it there.</p>${backupHTML()}</section>
   </article>`;
@@ -7791,7 +7920,7 @@ const IOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform
 const STANDALONE = () => window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 function appMenu() {
   const mm = $('#libmenu'); if (!mm || mm.querySelector('.app-m')) return;
-  mm.insertAdjacentHTML('afterbegin', `<div class="app-m"><a class="hubl" href="#progress">${icon('chk')}My progress</a><a class="hubl app-mc" href="${esc((ON_WEB ? '../index.html' : FRONT_WEB) + '#mycourse')}"${ON_WEB ? '' : ' target="_blank" rel="noopener"'}>${icon('book')}My course</a>${ON_WEB ? `<button type="button" class="hubl app-inst" hidden>${icon('play')}Install app</button><p class="app-ios" hidden>On iPhone or iPad: tap <b>Share</b> › <b>Add to Home Screen</b>.</p><span class="app-off" hidden>● Available offline</span>` : ''}</div><hr>`);
+  mm.insertAdjacentHTML('afterbegin', `<div class="app-m"><a class="hubl" href="#progress">${icon('chk')}My progress</a><a class="hubl app-mc" href="${esc((ON_WEB ? '../index.html' : FRONT_WEB) + '#mycourse')}"${ON_WEB ? '' : ' target="_blank" rel="noopener"'}>${icon('book')}My course</a>${ON_WEB ? `<button type="button" class="hubl app-inst" hidden>${icon('play')}Install app</button><p class="app-ios" hidden>On iPhone or iPad: tap <b>Share</b> › <b>Add to Home Screen</b>.</p><span class="app-off" hidden>● Available offline</span><button type="button" class="hubl app-chk" data-app-check>${icon('play')}<span>Check for updates</span></button><small class="app-ver" data-app-ver></small>` : ''}</div><hr>`);
   const ib = mm.querySelector('.app-inst'); if (!ib) return;
   const paint = () => { ib.hidden = STANDALONE() || !(INSTALL || IOS); };
   ib.addEventListener('click', async () => {
@@ -7807,7 +7936,7 @@ if (ON_WEB) {
     document.head.insertAdjacentHTML('beforeend', '<link rel="manifest" href="../manifest.webmanifest"><meta name="theme-color" content="#16213A"><link rel="apple-touch-icon" href="../app-icons/apple-touch-icon.png"><link rel="icon" href="../app-icons/favicon-32.png" sizes="32x32">');
   }
   if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('../sw.js').then(() => navigator.serviceWorker.ready).then(async () => {
+    navigator.serviceWorker.register('../sw.js').then(reg => { appUpdates(reg, new URL('../', location.href).href); return navigator.serviceWorker.ready; }).then(async () => {
       try { const hit = await caches.match(location.href.split('#')[0]); const off = $('#libmenu .app-off'); if (hit && off) off.hidden = false; document.body.dataset.offline = hit ? 'yes' : 'no'; } catch (e) { }
     }).catch(() => { });
   }
@@ -7832,6 +7961,323 @@ setTimeout(() => { const mm = $('#libmenu'); if (mm && !mm.querySelector('.wm-m'
   renderCredits = f => { rcr2(f); const a = $('article', main); if (a && !$('.cr-wm', a)) a.insertAdjacentHTML('afterbegin', `<span class="v-wm cr-wm">${esc(BRAND_FULL)}</span>`); };
   /* the glossary, flashcards and quiz drawer */
   const gh = $('#d-gloss .dr-h'); if (gh && !$('.mb-wm', gh)) $('.gv-t', gh).insertAdjacentHTML('afterend', `<span class="mb-wm" aria-hidden="true">${esc(BRAND)}</span>`);
+}
+/* ---------- Section tracking (My course): which chapters of this book count ----------
+   localStorage 'notes-mycourse' .track[book] = [chapter ids]; no entry = every chapter. Shared with the front page. */
+function mcRead() { try { return JSON.parse(localStorage.getItem('notes-mycourse')) || {}; } catch (e) { return {}; } }
+function trackSet() { const t = (mcRead().track || {})[BK.id]; return Array.isArray(t) ? new Set(t) : null; }
+const isTrk = ch => { const t = trackSet(); return !t || !ch || t.has(ch.id); };
+function setTrk(ch, on) {
+  const o = mcRead(); o.track = o.track || {};
+  const all = B.chapters.filter(c => (c.pages || []).length).map(c => c.id), cur = trackSet() || new Set(all);
+  if (on) cur.add(ch.id); else cur.delete(ch.id);
+  const ids = all.filter(id => cur.has(id));
+  if (ids.length === all.length) delete o.track[BK.id]; else o.track[BK.id] = ids;
+  try { localStorage.setItem('notes-mycourse', JSON.stringify(o)); } catch (e) { }
+}
+const trkBtn = ch => { const on = isTrk(ch); return `<button type="button" class="trk-b" data-trk-ch="${esc(ch.id)}" aria-pressed="${on}">${on ? `${icon('chk')}<span>Tracking this section</span>` : `<span>Not tracking</span><b>Track this section</b>`}</button>`; };
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-trk-ch]'); if (!b) return;
+  const ch = CH_BY_ID.get(b.dataset.trkCh); if (!ch) return;
+  setTrk(ch, !isTrk(ch));
+  if (TUT_VIEW === 'progress') renderProgress(false); else $$(`[data-trk-ch="${ch.id}"]`).forEach(x => { x.outerHTML = trkBtn(ch); });
+  if (typeof updateProgress === 'function') updateProgress();
+});
+
+/* ---------- Chapter quiz (revision workbooks only): every quick check, exam-style practice and past-paper item in a chapter.
+   Unlocks when every page of the chapter is covered (or "Unlock anyway"). Route #quiz-cNN. Best score per chapter in
+   localStorage 'notes-chquiz:<book>' { best: { cNN: { s, m, pc, date } }, open: { cNN: 1 } }. CCEA text is never reproduced:
+   past-paper items show our summary and link to (or, when the teacher has uploaded them, display) CCEA's own PDFs. */
+const CQ_KEY = 'notes-chquiz:' + (BK.id || BK.title || 'book');
+const CQ_ON = !TUT;
+function cqState() { try { const o = JSON.parse(localStorage.getItem(CQ_KEY)) || {}; o.best = o.best || {}; o.open = o.open || {}; return o; } catch (e) { return { best: {}, open: {} }; } }
+function cqSave(o) { try { localStorage.setItem(CQ_KEY, JSON.stringify(o)); } catch (e) { } }
+const chDone = ch => (ch.pages || []).length && ch.pages.every(p => state.done[p.id]);
+const cqUnlocked = ch => chDone(ch) || !!cqState().open[ch.id];
+function cqItems(ch) {
+  const out = [];
+  (ch.pages || []).forEach(p => (p.check || []).forEach((q, i) => { if (q && q.q && Array.isArray(q.o)) out.push({ t: 'mcq', q, p, max: 1, key: `${p.id}:k${i}` }); }));
+  (ch.pages || []).forEach(p => (p.practice || []).forEach((q, i) => { if (q && q.q) out.push({ t: 'prac', q, p, max: +q.m || 1, key: `${p.id}:x${i}`, pts: cqPoints(q) }); }));
+  (ch.pages || []).forEach(p => (p.exam || []).forEach((e, i) => { if (e && e.summary) out.push({ t: 'exam', q: e, p, max: +e.marks || 0, key: `${p.id}:e${i}` }); }));
+  return out;
+}
+/* our mark scheme "point (1); point (1); …" as tickable points; otherwise one self-assessed block */
+function cqPoints(q) {
+  const a = String(q.a || ''), pts = [], re = /([^;]*?)\((\d+)\)\s*[;.]?/g; let m, used = 0;
+  while ((m = re.exec(a))) { const t = m[1].replace(/^\s*[;,.]\s*/, '').trim(); if (t) { pts.push({ t, n: +m[2] }); used = re.lastIndex; } }
+  const rest = a.slice(used).trim();
+  if (pts.length >= 2 && !/\S{3,}/.test(rest.replace(/^[;.,\s]+/, '').slice(0, 0))) return pts;
+  return null;
+}
+const SEC = { mcq: 'Quick check', prac: 'Exam-style practice', exam: 'Past papers' };
+let CQ = null;   /* the running quiz: { ch, items, i, ans: { key: { s, done, pick, txt, tick } } } */
+function renderChQuiz(ch, only) {
+  tutView('quiz-' + ch.id, 'Chapter quiz');
+  setHue(ch);
+  const items = cqItems(ch).filter(x => !only || only.has(x.key));
+  if (!CQ || CQ.ch !== ch || only) CQ = { ch, items, i: 0, ans: {}, retry: !!only };
+  if (!cqUnlocked(ch)) { cqLocked(ch); return; }
+  cqPaint(true);
+}
+function cqLocked(ch) {
+  const n = (ch.pages || []).length, d = ch.pages.filter(p => state.done[p.id]).length;
+  main.innerHTML = `<article class="sheet lib-v cq-v" aria-labelledby="cq-h" style="${chVars(ch)}"><header class="lib-hero card cq-hero"><small class="lib-k">${icon('exam')}Chapter ${esc(ch.n)} · ${esc(ch.title)}</small><h1 id="cq-h" tabindex="-1">Chapter quiz</h1>
+    <div class="cq-lock">${CQ_LOCK}<div><p><b>Mark all ${n} pages covered to unlock.</b> ${d} of ${n} done so far.</p>
+    <div class="cq-acts">${(() => { const nx = ch.pages.find(p => !state.done[p.id]); return nx ? `<a class="btn pri" href="#${esc(nx.id)}">Next page to cover →</a>` : ''; })()}<button type="button" class="cq-any" data-cq-any="${esc(ch.id)}">Unlock anyway</button></div></div></div></header></article>`;
+  $('[data-cq-any]', main).addEventListener('click', () => { const o = cqState(); o.open[ch.id] = 1; cqSave(o); renderChQuiz(ch); });
+  tutViewDone(true, '#cq-h');
+}
+const CQ_LOCK = '<svg class="cq-lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg>';
+function cqPaint(focus) {
+  const { ch, items } = CQ, N = items.length;
+  if (!N) { main.innerHTML = `<article class="sheet lib-v cq-v"><header class="lib-hero card"><h1 id="cq-h" tabindex="-1">Chapter quiz</h1><p>This chapter has no questions yet.</p></header></article>`; tutViewDone(focus, '#cq-h'); return; }
+  if (CQ.i >= N) { cqResults(); return; }
+  const it = items[CQ.i], a = CQ.ans[it.key] || {}, done = Object.keys(CQ.ans).filter(k => CQ.ans[k].done).length;
+  let body = '';
+  if (it.t === 'mcq') {
+    body = `<p class="cq-q">${inline(it.q.q)}</p><div class="cq-os" role="group" aria-label="Answers">${it.q.o.map((o, k) => {
+      const st = a.done ? (k === it.q.a ? ' ok' : k === a.pick ? ' no' : '') : '';
+      return `<button type="button" class="cq-o${st}" data-o="${k}"${a.done ? ' disabled' : ''}><span class="cq-ok">${'ABCD'[k]}</span><span>${inline(o)}</span></button>`; }).join('')}</div>
+      ${a.done ? `<p class="cq-fb ${a.s ? 'ok' : 'no'}"><b>${a.s ? 'Correct.' : 'Not quite.'}</b> ${inline(it.q.why || '')}</p>` : ''}`;
+  } else if (it.t === 'prac') {
+    body = `<p class="cq-q">${inline(it.q.q)} <span class="cq-m">[${marksTxt(it.max)}]</span></p>
+      <label class="cq-lab" for="cq-txt">Your answer</label><textarea id="cq-txt" class="field cq-txt" rows="5" placeholder="Type your answer, then check it against the mark scheme">${esc(a.txt || '')}</textarea>
+      ${a.shown ? `<div class="cq-ms"><b>Mark scheme · tick each point you made</b>${it.pts ? `<ul class="cq-pts">${it.pts.map((pt, k) => `<li><label><input type="checkbox" data-pt="${k}"${(a.tick || []).includes(k) ? ' checked' : ''}${a.done ? ' disabled' : ''}><span>${inline(pt.t)} <em>(${pt.n})</em></span></label></li>`).join('')}</ul>`
+        : `<div class="cq-msa">${inline(it.q.a || '')}</div><label class="cq-self">Marks I gave myself <input type="number" class="field" min="0" max="${it.max}" data-self value="${a.done ? a.s : ''}"${a.done ? ' disabled' : ''}> / ${it.max}</label>`}
+        ${a.done ? `<p class="cq-fb ok"><b>${a.s} / ${it.max}</b> recorded.</p>` : `<button type="button" class="btn pri" data-rec>Record my mark</button>`}</div>`
+        : `<button type="button" class="btn pri" data-show>Show the mark scheme</button>`}`;
+  } else {
+    const e = it.q, ser = String(e.series || ''), when = /specimen/i.test(ser) ? 'Specimen' : String(e.year || ser), u = safeUrl(e.url), ms = safeUrl(e.ms) || safeUrl(e.report);
+    body = `<div class="cq-pp"><div class="cq-meta"><b>${esc(when)}</b>${e.paper ? ' · ' + esc(e.paper) : ''}${e.q ? ' · Q' + esc(String(e.q).replace(/^Q/i, '')) : ''} · ${it.max ? marksTxt(it.max) : 'marks not stated'}</div>
+      <p class="cq-q">${inline(e.summary)}</p><p class="cq-note">Our summary. Answer the exact question from CCEA's paper on paper or below, check it against CCEA's mark scheme, then enter the mark you gave yourself.</p>
+      <div class="cq-big" data-pp-slot>${u ? `<a class="btn pri big" href="${esc(u)}" target="_blank" rel="noopener">${icon('exam')}Open the CCEA question paper ${ICON_EXT}</a>` : ''}${ms ? `<a class="btn big" href="${esc(ms)}" target="_blank" rel="noopener">${icon('chk')}Open the CCEA ${safeUrl(e.ms) ? 'mark scheme' : 'examiner report'} ${ICON_EXT}</a>` : ''}</div>
+      <label class="cq-lab" for="cq-txt">Your answer (optional)</label><textarea id="cq-txt" class="field cq-txt" rows="4">${esc(a.txt || '')}</textarea>
+      ${it.max ? `<label class="cq-self">Mark I gave myself <input type="number" class="field" min="0" max="${it.max}" data-self value="${a.done ? a.s : ''}"${a.done ? ' disabled' : ''}> / ${it.max}</label>` : ''}
+      ${a.done ? `${e.tip ? `<div class="cq-tip"><b>Examiner tip · our summary of what earned the marks</b>${inline(e.tip)}</div>` : ''}` : `<button type="button" class="btn pri" data-rec>${it.max ? 'Save my mark' : 'Done'}</button>`}</div>`;
+  }
+  main.innerHTML = `<article class="sheet lib-v cq-v" aria-labelledby="cq-h" style="${chVars(ch)}">
+    <header class="cq-top"><a class="cq-x" href="#${esc(ch.pages[0].id)}" aria-label="Leave the quiz">✕</a><div><small>Chapter ${esc(ch.n)} quiz${CQ.retry ? ' · retry' : ''}</small><h1 id="cq-h" tabindex="-1">${esc(ch.title)}</h1></div><span class="cq-n" aria-live="polite">Question ${CQ.i + 1} of ${N}</span></header>
+    <div class="cq-bar" role="progressbar" aria-valuemin="0" aria-valuemax="${N}" aria-valuenow="${done}"><i style="width:${Math.round(done / N * 100)}%"></i></div>
+    <section class="card cq-card" data-kind="${it.t}"><span class="cq-sec">${esc(SEC[it.t])}</span>${body}</section>
+    <nav class="cq-nav"><button type="button" class="btn" data-prev${CQ.i ? '' : ' disabled'}>← Previous</button><span class="cq-keys">Keys: 1–4 answer · ← → move</span><button type="button" class="btn ${a.done ? 'pri' : ''}" data-next>${CQ.i === N - 1 ? 'See my score' : a.done ? 'Next →' : 'Skip →'}</button></nav></article>`;
+  const go = d => { const t = $('#cq-txt'); if (t) (CQ.ans[it.key] = CQ.ans[it.key] || {}).txt = t.value; CQ.i = Math.max(0, CQ.i + d); cqPaint(true); };
+  $('[data-prev]', main).addEventListener('click', () => go(-1));
+  $('[data-next]', main).addEventListener('click', () => go(1));
+  $$('.cq-o', main).forEach(b => b.addEventListener('click', () => { const k = +b.dataset.o; CQ.ans[it.key] = { done: 1, pick: k, s: k === it.q.a ? 1 : 0 }; cqPaint(false); const n = $('[data-next]'); n && n.focus(); }));
+  const sh = $('[data-show]', main); if (sh) sh.addEventListener('click', () => { const t = $('#cq-txt'); CQ.ans[it.key] = Object.assign(CQ.ans[it.key] || {}, { shown: 1, txt: t ? t.value : '' }); cqPaint(false); });
+  const rec = $('[data-rec]', main);
+  if (rec) rec.addEventListener('click', () => {
+    const A = CQ.ans[it.key] = CQ.ans[it.key] || {}, t = $('#cq-txt'); if (t) A.txt = t.value;
+    if (it.t === 'prac' && it.pts) { A.tick = $$('[data-pt]:checked', main).map(x => +x.dataset.pt); A.s = Math.min(it.max, A.tick.reduce((s, k) => s + it.pts[k].n, 0)); }
+    else { const v = $('[data-self]', main); const n = v ? Math.round(+v.value) : 0; if (v && (v.value === '' || isNaN(n) || n < 0 || n > it.max)) { v.setCustomValidity(`Enter 0 to ${it.max}`); v.reportValidity(); return; } A.s = n; }
+    A.done = 1; cqPaint(false); const n = $('[data-next]'); n && n.focus();
+  });
+  if (PP_VIEW && it.t === 'exam') PP_VIEW.slot($('[data-pp-slot]', main), it.q, true);
+  tutViewDone(focus, '#cq-h');
+}
+function cqResults() {
+  const { ch, items } = CQ, sec = {};
+  let s = 0, m = 0;
+  items.forEach(it => { const a = CQ.ans[it.key], x = sec[it.t] = sec[it.t] || { s: 0, m: 0, n: 0 }; const got = a && a.done ? a.s : 0; x.s += got; x.m += it.max; x.n++; s += got; m += it.max; });
+  const pc = m ? Math.round(s / m * 100) : 0, missed = items.filter(it => { const a = CQ.ans[it.key]; return !a || !a.done || a.s < it.max; });
+  if (!CQ.retry) { const o = cqState(), b = o.best[ch.id]; if (!b || pc > b.pc) { o.best[ch.id] = { s, m, pc, date: new Date().toISOString().slice(0, 10) }; cqSave(o); } }
+  const best = cqState().best[ch.id];
+  main.innerHTML = `<article class="sheet lib-v cq-v" aria-labelledby="cq-h" style="${chVars(ch)}"><header class="lib-hero card cq-res"><small class="lib-k">${icon('exam')}Chapter ${esc(ch.n)} quiz · ${esc(ch.title)}</small><h1 id="cq-h" tabindex="-1">${CQ.retry ? 'Retry score' : 'Your score'}</h1>
+    <div class="pg-sum">${ring(s, m, true)}<div><p class="cq-tot"><b>${s} / ${m}</b> marks · <b>${pc}%</b></p>${best ? `<p class="cq-best">Best: ${best.pc}% (${best.s}/${best.m}) on ${esc(best.date)}</p>` : ''}</div></div>
+    <div class="cq-secs">${['mcq', 'prac', 'exam'].filter(k => sec[k]).map(k => `<div><b>${esc(SEC[k])}</b><span>${sec[k].s} / ${sec[k].m}</span><small>${sec[k].n} question${sec[k].n === 1 ? '' : 's'} · ${k === 'mcq' ? 'auto-marked' : 'self-marked'}</small></div>`).join('')}</div>
+    <div class="cq-acts">${missed.length ? `<button type="button" class="btn pri" data-retry>Retry wrong ones (${missed.length})</button>` : '<b>Full marks. Brilliant.</b>'}<button type="button" class="btn" data-again>Start again</button><a class="btn" href="#${esc(ch.pages[0].id)}">Back to the chapter</a></div></header>
+    ${missed.length ? `<section class="card lib-body cq-miss"><h2>To look at again</h2><ul>${missed.map(it => { const a = CQ.ans[it.key]; return `<li><span class="cq-sec">${esc(SEC[it.t])}</span><span class="cq-mt">${esc(plain(it.t === 'exam' ? it.q.summary : it.q.q)).slice(0, 140)}</span><span class="cq-ms2">${a && a.done ? a.s : 0}/${it.max}</span><a href="#${esc(it.p.id)}">Review page →</a></li>`; }).join('')}</ul></section>` : ''}</article>`;
+  const r = $('[data-retry]', main); if (r) r.addEventListener('click', () => { const ks = new Set(missed.map(x => x.key)); CQ = null; renderChQuiz(ch, ks); });
+  $('[data-again]', main).addEventListener('click', () => { CQ = null; renderChQuiz(ch); });
+  tutViewDone(true, '#cq-h');
+  if (pc >= 70 && !RM()) { const h = $('.cq-res .pg-ring'); if (h) { const b = h.getBoundingClientRect(); burst(b.left + b.width / 2, b.top + b.height / 2, 28, hueCols()); } }
+}
+/* chapter card: Chapter quiz (locked / unlocked / best) + the tracking toggle; "Chapter complete" prompt */
+function cqCardHTML(ch) {
+  if (!CQ_ON) return '';
+  const n = cqItems(ch).length; if (!n) return '';
+  const b = cqState().best[ch.id], np = (ch.pages || []).length;
+  return cqUnlocked(ch) ? `<a class="cq-chip" href="#quiz-${esc(ch.id)}">${icon('exam')}<span><b>Chapter quiz</b><small>${n} questions${b ? ` · best ${b.pc}%` : ''}</small></span></a>`
+    : `<span class="cq-chip locked">${CQ_LOCK}<span><b>Chapter quiz</b><small>Mark all ${np} pages covered to unlock</small></span><button type="button" class="cq-any" data-cq-any="${esc(ch.id)}">Unlock anyway</button></span>`;
+}
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-cq-any]'); if (!b || b.closest('.cq-lock')) return;
+  const o = cqState(); o.open[b.dataset.cqAny] = 1; cqSave(o); location.hash = 'quiz-' + b.dataset.cqAny;
+});
+{
+  const hr = hashRoute, rr = runRoute;
+  hashRoute = () => { const m = /^quiz-(c\d+)$/.exec(decodeURIComponent((location.hash || '').slice(1))); return m && CQ_ON && CH_BY_ID.has(m[1]) ? { kind: 'chquiz', ch: m[1] } : hr(); };
+  runRoute = r => { if (r && r.kind === 'chquiz') { closeDrawers(); const ch = CH_BY_ID.get(r.ch); if (!CQ || CQ.ch !== ch) CQ = null; renderChQuiz(ch); } else rr(r); };
+  const rp = renderPage;
+  renderPage = (i, f) => {
+    rp(i, f);
+    const P = PAGES[cur]; if (!P) return;
+    if (P.pi === 0) { const cc = $('.sheet .chcard'); if (cc) cc.insertAdjacentHTML('beforeend', `<div class="trk-row">${cqCardHTML(P.ch)}${trkBtn(P.ch)}</div>`); }
+    const btn = $('#donebtn');
+    if (btn && CQ_ON) btn.addEventListener('click', () => setTimeout(() => {
+      const ch = P.ch; if (!state.done[P.p.id] || !chDone(ch) || !isTrk(ch) || !cqItems(ch).length) return;
+      const old = $('.cq-pop'); if (old) old.remove();
+      const c = el('div', { class: 'cq-pop', role: 'status' });
+      c.innerHTML = `${bi('star')}<div><b>Chapter complete – take the chapter quiz</b><span>${cqItems(ch).length} questions on ${esc(ch.title)}</span></div><a class="btn pri" href="#quiz-${esc(ch.id)}">Start the quiz</a><button type="button" class="cq-px" aria-label="Close">✕</button>`;
+      document.body.append(c); $('.cq-px', c).addEventListener('click', () => c.remove()); $('a', c).addEventListener('click', () => c.remove());
+      setTimeout(() => { if (c.isConnected) c.classList.add('fade'); }, 9000); setTimeout(() => c.remove(), 9600);
+    }, 60));
+  };
+  document.addEventListener('keydown', e => {
+    if (!CQ || !(TUT_VIEW || '').startsWith('quiz-') || e.target.closest('textarea,input') || e.altKey || e.ctrlKey || e.metaKey) return;
+    if (/^[1-4]$/.test(e.key)) { const b = $(`.cq-o[data-o="${+e.key - 1}"]`); if (b && !b.disabled) { e.preventDefault(); b.click(); } }
+    else if (e.key === 'ArrowRight') { const b = $('[data-next]'); if (b) { e.preventDefault(); b.click(); } }
+    else if (e.key === 'ArrowLeft') { const b = $('[data-prev]'); if (b && !b.disabled) { e.preventDefault(); b.click(); } }
+  });
+}
+
+/* ---------- CCEA past papers uploaded by the teacher (used with permission): ../papers/<folder>/ with a question paper PDF and
+   a mark scheme PDF. papers/manifest.json lists them (GitHub API fallback, as for the slides); papers/folders.json maps
+   "<book>|<series>" to the folder; papers/pages.json optionally gives the page of each question. Shown with pdf.js. ---------- */
+const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+const PP_SERIES = e => /^(AS|A2)/.test(BK.id || '') ? String(e.series || (e.year ? 'Summer ' + e.year : '')) : String(e.year || e.series || '');
+const PP_VIEW = ON_WEB ? (() => {
+  let data = null;
+  const getJ = u => fetch(u, { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null);
+  const load = () => data || (data = Promise.all([getJ('../papers/folders.json'), getJ('../papers/manifest.json'), getJ('../papers/pages.json')]).then(async ([fo, man, pg]) => {
+    fo = fo || {}; man = man || {};
+    return { fo, man, pg: pg || {} };
+  }));
+  const isMS = n => /(^|[^a-z])ms([^a-z]|$)|mark\s*-?_?scheme|markscheme/i.test(n);
+  const asked = new Set();
+  async function files(e, api) {
+    const D = await load(), key = `${BK.id}|${PP_SERIES(e)}`, folder = D.fo[key]; if (!folder) return null;
+    let f = D.man[folder];
+    const neg = (() => { try { return sessionStorage.getItem('notes-pp-api:' + folder); } catch (x) { return null; } })();
+    if (!f && api && !asked.has(folder) && !neg) {   /* not in the manifest yet (just uploaded): ask GitHub once per folder per session, quiz only */
+      asked.add(folder); try { sessionStorage.setItem('notes-pp-api:' + folder, '1'); } catch (x) { }
+      try {
+        const r = await fetch(`https://api.github.com/repos/popcorn483/ergsDigitalTechnology/contents/${folder.split('/').map(encodeURIComponent).join('/')}?ref=main`);
+        if (r.ok) { const ls = (await r.json()).filter(x => x.type === 'file' && /\.pdf$/i.test(x.name)); const ms = ls.find(x => isMS(x.name)), qp = ls.find(x => !isMS(x.name)); f = D.man[folder] = { paper: qp ? folder + '/' + qp.name : null, ms: ms ? folder + '/' + ms.name : null }; }
+      } catch (x) { }
+    }
+    if (!f || !(f.paper || f.ms)) return null;
+    const pk = D.pg[`${key}|${String(e.q || '').replace(/^Q/i, '')}`] || {};
+    return { paper: f.paper ? '../' + f.paper : null, ms: f.ms ? '../' + f.ms : null, pp: +pk.paper || 1, pm: +pk.ms || 1, key };
+  }
+  let lib = null;
+  const pdfjs = () => lib || (lib = new Promise((ok, no) => { if (window.pdfjsLib) return ok(window.pdfjsLib); const s = document.createElement('script'); s.src = PDFJS + 'pdf.min.js'; s.onload = () => { try { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; } catch (e) { } ok(window.pdfjsLib); }; s.onerror = () => { lib = null; no(new Error('pdf.js')); }; document.head.append(s); }));
+  /* the viewer: question / mark scheme tabs, page prev/next, zoom */
+  async function open(e, which) {
+    const F = await files(e); if (!F) return;
+    const old = $('#ppv'); if (old) old.remove();
+    const v = el('div', { id: 'ppv', class: 'ppv', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'CCEA past paper' });
+    const ser = PP_SERIES(e), qn = e.q ? 'Q' + String(e.q).replace(/^Q/i, '') : '';
+    v.innerHTML = `<div class="ppv-in"><header class="ppv-h"><div><b>${esc([e.paper, ser, qn].filter(Boolean).join(' · '))}</b><small>CCEA question paper and mark scheme – used with permission</small></div><button type="button" class="ppv-x" aria-label="Close">✕</button></header>
+      <div class="ppv-tabs" role="tablist">${F.paper ? `<button type="button" role="tab" data-w="paper">Question</button>` : ''}${F.ms ? `<button type="button" role="tab" data-w="ms">Mark scheme</button>` : ''}</div>
+      <div class="ppv-bar"><button type="button" class="btn" data-pg="-1" aria-label="Previous page">‹</button><span class="ppv-pn" aria-live="polite"></span><button type="button" class="btn" data-pg="1" aria-label="Next page">›</button><span class="ppv-sp"></span><button type="button" class="btn" data-z="-1" aria-label="Zoom out">−</button><span class="ppv-zl"></span><button type="button" class="btn" data-z="1" aria-label="Zoom in">+</button><a class="btn ppv-dl" target="_blank" rel="noopener">Open PDF</a></div>
+      <div class="ppv-c" tabindex="0"><canvas></canvas><p class="ppv-msg" hidden></p></div></div>`;
+    document.body.append(v); document.body.classList.add('ppv-on');
+    const st = { w: which === 'ms' && F.ms ? 'ms' : (F.paper ? 'paper' : 'ms'), doc: {}, page: { paper: F.pp, ms: F.pm }, z: 1 };
+    const cv = $('canvas', v), msg = $('.ppv-msg', v), box = $('.ppv-c', v);
+    const close = () => { v.remove(); document.body.classList.remove('ppv-on'); document.removeEventListener('keydown', key, true); };
+    const key = ev => { if (ev.key === 'Escape') { ev.preventDefault(); close(); } else if (ev.key === 'ArrowRight' && ev.target === box) turn(1); else if (ev.key === 'ArrowLeft' && ev.target === box) turn(-1); };
+    document.addEventListener('keydown', key, true);
+    $('.ppv-x', v).addEventListener('click', close);
+    v.addEventListener('click', ev => { if (ev.target === v) close(); });
+    async function draw() {
+      $$('[data-w]', v).forEach(b => b.setAttribute('aria-selected', String(b.dataset.w === st.w)));
+      const url = F[st.w]; $('.ppv-dl', v).href = url;
+      msg.hidden = true; cv.hidden = false;
+      try {
+        const L = await pdfjs();
+        const doc = st.doc[st.w] || (st.doc[st.w] = await L.getDocument(url).promise);
+        const n = Math.min(Math.max(1, st.page[st.w]), doc.numPages); st.page[st.w] = n;
+        const pg = await doc.getPage(n), base = pg.getViewport({ scale: 1 }), fit = Math.max(.3, (box.clientWidth - 16) / base.width), dpr = Math.min(2, window.devicePixelRatio || 1);
+        const vp = pg.getViewport({ scale: fit * st.z * dpr });
+        cv.width = Math.floor(vp.width); cv.height = Math.floor(vp.height); cv.style.width = Math.floor(vp.width / dpr) + 'px'; cv.style.height = Math.floor(vp.height / dpr) + 'px';
+        await pg.render({ canvasContext: cv.getContext('2d'), viewport: vp }).promise;
+        $('.ppv-pn', v).textContent = `Page ${n} of ${doc.numPages}`; $('.ppv-zl', v).textContent = Math.round(st.z * 100) + '%';
+        $('[data-pg="-1"]', v).disabled = n <= 1; $('[data-pg="1"]', v).disabled = n >= doc.numPages;
+      } catch (x) { cv.hidden = true; msg.hidden = false; msg.innerHTML = `The PDF viewer could not load here. <a href="${esc(url)}" target="_blank" rel="noopener">Open the PDF</a> instead.`; }
+    }
+    const turn = d => { st.page[st.w] += d; draw(); };
+    $$('[data-w]', v).forEach(b => b.addEventListener('click', () => { st.w = b.dataset.w; draw(); }));
+    $$('[data-pg]', v).forEach(b => b.addEventListener('click', () => turn(+b.dataset.pg)));
+    $$('[data-z]', v).forEach(b => b.addEventListener('click', () => { st.z = Math.min(3, Math.max(.5, st.z + (+b.dataset.z) * .25)); draw(); }));
+    $('.ppv-x', v).focus();
+    draw();
+  }
+  /* add "View question" / "View mark scheme" next to the CCEA links when the PDFs are uploaded */
+  async function slot(where, e, api) {
+    if (!where) return; const F = await files(e, api); if (!F || !where.isConnected) return;
+    where.insertAdjacentHTML('afterbegin', `${F.paper ? `<button type="button" class="btn pri big" data-ppv="paper">${icon('exam')}View the question</button>` : ''}${F.ms ? `<button type="button" class="btn big" data-ppv="ms">${icon('chk')}View the mark scheme</button>` : ''}`);
+    where.classList.add('has-ppv');
+    $$('[data-ppv]', where).forEach(b => b.addEventListener('click', () => open(e, b.dataset.ppv)));
+  }
+  return { open, slot, files };
+})() : null;
+if (PP_VIEW) {
+  const rp = renderPage;
+  renderPage = (i, f) => {
+    rp(i, f);
+    const p = PAGES[cur] && PAGES[cur].p; if (!p || !p.exam) return;
+    p.exam.forEach((e, ei) => { const li = $(`#cyk-e${ei} .btns`); if (li) PP_VIEW.slot(li, e); });
+  };
+}
+/* ---------- app updates (web host only): every deploy has a new service worker (sw.js VERSION = hash of the cached files) and
+   version.json { version, date, notes }. A waiting worker shows "A new version … is available" with Update now / Later.
+   Update now posts SKIP_WAITING and reloads once on controllerchange; Later hides it for this session. Checks on launch, when
+   the app becomes visible again and every 30 minutes. After an update a "What's new" note shows once. Source notes/app/update.js. */
+const APP_NAME = 'Digital Technology | Mr Butler';
+function appUpdates(reg, base, where) {
+  if (!reg || window.__appUpd) return; window.__appUpd = true;
+  let want = false, shown = null;
+  const ss = (k, v) => { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } };
+  const ls = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
+  const toast = (cls, html) => { const old = document.querySelector('.upd'); if (old) old.remove(); const d = document.createElement('div'); d.className = 'upd ' + cls; d.setAttribute('role', 'status'); d.innerHTML = html; document.body.append(d); return d; };
+  const icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 11-2.34-5.66M20 4v4.5h-4.5"/></svg>';
+  function offer(w) {
+    if (!w || ss('notes-upd-later') === '1' || shown === w) return; shown = w;
+    const d = toast('upd-new', `${icon}<div><b>A new version of ${APP_NAME} is available</b><span>Update now to get the latest workbooks and features.</span></div><button type="button" class="upd-go">Update now</button><button type="button" class="upd-later">Later</button>`);
+    d.querySelector('.upd-go').addEventListener('click', () => {
+      want = true; ss('notes-upd-reloading', '1');
+      const ww = reg.waiting || w;
+      if (ww) ww.postMessage({ type: 'SKIP_WAITING' }); else location.reload();
+      d.querySelector('.upd-go').disabled = true; d.querySelector('.upd-go').textContent = 'Updating…';
+      setTimeout(() => { if (want) location.reload(); }, 4000);   /* the new worker never took over: reload anyway, once */
+    });
+    d.querySelector('.upd-later').addEventListener('click', () => { ss('notes-upd-later', '1'); d.remove(); });
+  }
+  if (reg.waiting && navigator.serviceWorker.controller) offer(reg.waiting);
+  reg.addEventListener('updatefound', () => { const w = reg.installing; if (w) w.addEventListener('statechange', () => { if (w.state === 'installed' && navigator.serviceWorker.controller) offer(w); }); });
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (!want || reloaded) return; reloaded = true; want = false; location.reload(); });
+  /* version line + What's new */
+  const vurl = new URL('version.json', base).href;
+  const getV = () => fetch(vurl, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
+  const check = () => { reg.update().catch(() => { }); return getV(); };
+  /* the version actually running = the controlling worker's VERSION (version.json may already describe a newer, waiting one) */
+  const running = () => new Promise(res => {
+    const c = navigator.serviceWorker.controller; if (!c) return res(null);
+    const t = setTimeout(() => res(null), 3000);
+    const on = ev => { if (ev.data && ev.data.type === 'VERSION') { clearTimeout(t); navigator.serviceWorker.removeEventListener('message', on); res(ev.data.version); } };
+    navigator.serviceWorker.addEventListener('message', on); c.postMessage({ type: 'VERSION' });
+  });
+  Promise.all([running(), getV()]).then(([run, v]) => {
+    const ver = run || (v && v.version); if (!ver) return;
+    window.__appVersion = ver;
+    document.querySelectorAll('[data-app-ver]').forEach(e => { e.textContent = `Version ${ver}${v && v.version === ver && v.date ? ' · ' + v.date : ''}`; });
+    const seen = ls('notes-app-version');
+    if (seen && seen !== ver && v && v.version === ver && Array.isArray(v.notes) && v.notes.length) {   /* once, after an update */
+      const d = toast('upd-wn', `${icon}<div><b>What's new</b><ul>${v.notes.slice(0, 4).map(n => `<li>${String(n).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])}</li>`).join('')}</ul></div><button type="button" class="upd-later" aria-label="Close">OK</button>`);
+      d.querySelector('.upd-later').addEventListener('click', () => d.remove());
+    }
+    ls('notes-app-version', ver);
+  });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') check(); });
+  setInterval(check, 30 * 60 * 1000);
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-app-check]'); if (!b) return;
+    e.preventDefault(); const lab = b.querySelector('span') || b, was = lab.textContent; lab.textContent = 'Checking…';
+    check().then(() => setTimeout(() => { lab.textContent = reg.waiting ? 'Update available' : 'You have the latest version'; if (reg.waiting) offer(reg.waiting); setTimeout(() => { lab.textContent = was; }, 3000); }, 1200));
+  });
+  window.__appReg = reg;
 }
 /* ================= APP: END ================= */
 /* ================= boot ================= */

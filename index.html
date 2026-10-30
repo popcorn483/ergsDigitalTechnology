@@ -257,6 +257,20 @@ h1{font-family:var(--font-hero);font-weight:900;text-transform:uppercase;letter-
 .app-ios{font-size:13px;opacity:.9}
 .app-off{font-size:12.5px;font-weight:700;color:#5CC58E}
 @media (max-width:520px){ .myprog > summary{padding:12px} #mp-body{padding:0 12px} .mp-bk{padding:12px} .tp-ring{width:34px;height:34px} }
+/* app update toast (source notes/app/update.js) */
+.upd{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:500;display:flex;align-items:center;flex-wrap:wrap;gap:10px 12px;width:min(600px,calc(100vw - 24px));box-sizing:border-box;padding:14px 16px;border-radius:18px;background:#16213A;color:#fff;box-shadow:0 18px 44px -12px rgba(0,0,0,.5);font-family:var(--sans)}
+.upd > svg{flex:none;width:24px;height:24px;color:#8AB6FF}
+.upd > div{flex:1;min-width:200px;display:flex;flex-direction:column;gap:2px}
+.upd b{font-size:15px}
+.upd span{font-size:13px;opacity:.85}
+.upd ul{margin:2px 0 0;padding-left:1.1em;font-size:13.5px;line-height:1.45}
+.upd button{font:inherit;font-weight:700;font-size:14px;border-radius:12px;padding:9px 14px;cursor:pointer}
+.upd .upd-go{background:#8AB6FF;color:#101826;border:0}
+.upd .upd-go:disabled{opacity:.7}
+.upd .upd-later{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.35)}
+@media (max-width:520px){ .upd{bottom:10px} .upd .upd-go{flex:1} }
+.wl-ver{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;font-size:13px;color:var(--ink-3)}
+.wl-chk{font:inherit;font-size:13px;font-weight:700;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:2px}
 .wm{display:block;width:max-content;margin-bottom:8px;font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.05em;font-size:clamp(15px,2vw,18px);line-height:1.1;color:#fff;text-decoration:none}
 .wm:hover{opacity:.85}
 .brand-foot{margin-bottom:-18px;font-weight:700;color:var(--ink-2)}
@@ -284,7 +298,13 @@ h1{font-family:var(--font-hero);font-weight:900;text-transform:uppercase;letter-
 @media (prefers-reduced-motion: reduce){ #splash,#splash *{animation:none!important;transition:none!important} #splash .sp-mb,#splash .sp-dt,#splash .sp-c circle{opacity:1;transform:none} #splash .sp-c path{stroke-dashoffset:0} #splash .sp-strip{transform:none} }
 
 /* welcome screen (no hash): the page shows only #welcome; a course card opens the topic view */
-html.wl-on body{background-image:radial-gradient(ellipse 55% 42% at 28% 16%,color-mix(in srgb,var(--h1d) 14%,transparent),transparent 72%),radial-gradient(ellipse 50% 40% at 76% 30%,color-mix(in srgb,var(--h3d) 12%,transparent),transparent 72%),radial-gradient(var(--dot) 1px,transparent 1.3px);background-size:100% 100%,100% 100%,22px 22px;background-repeat:no-repeat,no-repeat,repeat;background-attachment:fixed,fixed,scroll}
+/* the dotted desk drifts very slowly (one 22px tile every 80 s, on its own fixed layer behind the page); still with reduced motion or a hidden tab */
+body{background-image:none}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background-image:radial-gradient(var(--dot) 1px,transparent 1.3px);background-size:22px 22px;animation:desk-drift 80s linear infinite}
+@keyframes desk-drift{from{background-position:0 0}to{background-position:22px 22px}}
+html.tab-hidden body::before{animation-play-state:paused}
+@media (prefers-reduced-motion: reduce){ body::before{animation:none} }
+html.wl-on body{background-image:radial-gradient(ellipse 55% 42% at 28% 16%,color-mix(in srgb,var(--h1d) 14%,transparent),transparent 72%),radial-gradient(ellipse 50% 40% at 76% 30%,color-mix(in srgb,var(--h3d) 12%,transparent),transparent 72%);background-size:100% 100%,100% 100%;background-repeat:no-repeat,no-repeat;background-attachment:fixed,fixed}
 html.wl-on .wrap > :not(#welcome){display:none!important}
 html:not(.wl-on) #welcome{display:none}
 #welcome{position:relative;isolation:isolate;display:flex;flex-direction:column;align-items:center;max-width:780px;margin:0 auto;padding:clamp(28px,9vh,96px) 0 24px;text-align:center}
@@ -383,6 +403,33 @@ html:not(.wl-on) #welcome{display:none}
 .mp-sc{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;margin:12px 0 4px;font-size:14px;color:var(--ink-2)}
 #mp-mc .mc{box-shadow:none;outline:1px solid var(--line-2);margin:4px 0 10px}
 .mp-all{background:var(--paper-2);border-radius:14px;padding:10px 12px;border-top:0;margin-bottom:6px}
+.mc-secs{display:flex;flex-direction:column;gap:8px;width:100%;max-width:460px;text-align:left}
+.mc-secs > span{font-size:13px;color:var(--ink-3);text-align:center}
+.mc-sec{border:1px solid var(--line-2);border-radius:14px;background:var(--paper)}
+.mc-sec > summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;cursor:pointer;font-weight:700;font-size:14px;list-style:none}
+.mc-sec > summary::-webkit-details-marker{display:none}
+.mc-sec > summary::after{content:"▾";color:var(--ink-3);transition:transform .15s}
+.mc-sec[open] > summary::after{transform:rotate(180deg)}
+.mc-sec > summary small{margin-left:auto;font-weight:400;color:var(--ink-3)}
+.mc-sa{display:flex;gap:12px;padding:0 14px 4px}
+.mc-sa button{font:inherit;font-size:13px;font-weight:700;color:var(--accent);background:none;border:0;padding:4px 0;cursor:pointer}
+.mc-sec ul{list-style:none;margin:0;padding:2px 10px 10px;display:flex;flex-direction:column;gap:2px;max-height:260px;overflow:auto}
+.mc-sec li label{display:flex;align-items:flex-start;gap:9px;padding:5px 4px;font-size:13.5px;line-height:1.35;cursor:pointer;border-radius:8px}
+.mc-sec li label:hover{background:var(--paper-2)}
+.mc-sec li input{margin-top:2px;width:16px;height:16px;accent-color:var(--accent);flex:none}
+/* tracking on the front page */
+.tp.untracked .tp-t{opacity:.55}
+.tp-trk{flex:none;display:inline-flex;flex-direction:column;align-items:center;gap:0;font:inherit;line-height:1.1;padding:4px 8px;border-radius:10px;border:1px dashed var(--line);background:transparent;color:var(--ink-3);cursor:pointer}
+.tp-trk small{font-size:9.5px}
+.tp-trk b{font-size:12px;color:var(--accent)}
+.mp-t li{display:flex;align-items:center;gap:6px}
+.mp-t li > a{flex:1;min-width:0}
+.mp-t li.off > a{opacity:.55}
+.mp-nt{flex:none;font-size:11.5px;font-weight:700;color:var(--ink-3);border:1px dashed var(--line);border-radius:999px;padding:1px 8px}
+.mp-q{flex:none;font-size:11.5px;font-weight:700;text-decoration:none;color:#fff;background:var(--accent);border-radius:999px;padding:2px 8px}
+.mp-tr{flex:none;min-width:30px;height:26px;font:inherit;font-size:12px;font-weight:700;border-radius:8px;border:1px solid var(--line);background:var(--paper);color:var(--ink-3);cursor:pointer;padding:0 8px}
+.mp-tr[aria-pressed="true"]{color:#18744A;border-color:color-mix(in srgb,#18744A 40%,var(--line))}
+.mp-tr[aria-pressed="false"]{color:var(--accent);border-style:dashed}
 /* topic view: "← Home" back to the welcome screen */
 .home-row{display:flex;align-items:center;justify-content:space-between;margin:-6px 0 14px}
 .home-l{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--ink-2);text-decoration:none;padding:6px 12px 6px 9px;border-radius:999px;border:1px solid var(--line);background:var(--paper)}
@@ -463,6 +510,7 @@ html:not(.wl-on) #welcome{display:none}
     <div class="wl-about" id="wl-about" hidden>
       <p>Mr Butler’s revision workbooks and tutorials for pupils following the CCEA GCSE and GCE Digital Technology specifications. They are written by a teacher, not by CCEA: always check the CCEA specification and your teacher for the final word.</p>
       <p>Your progress is saved in this browser only. Use <a href="#progress">My progress</a> to back it up or move it.</p>
+      <p class="wl-ver"><span data-app-ver></span> <button type="button" class="wl-chk" data-app-check><span>Check for updates</span></button></p>
       <p><b>For teachers:</b> the full lesson hubs for <a href="hub.html">GCSE</a> and <a href="gce/hub.html">A level</a>.</p>
     </div>
   </section>
@@ -712,11 +760,15 @@ const ringSVG = (d, n, cls) => { const pc = n ? Math.round(d / n * 100) : 0; ret
 function appRings() {
   box.querySelectorAll('.tp').forEach(li => {
     const u = UNITS.find(x => x.id === li.closest('.unit').dataset.unit), c = u && u.chapters[+li.dataset.ci]; if (!c || !c.pids) return;
-    const st = unitState(u.id), d = c.pids.filter(id => st.done[id]).length, old = li.querySelector('.tp-ring'); if (old) old.remove();
-    li.querySelector('.acts').insertAdjacentHTML('afterbegin', ringSVG(d, c.pids.length, 'tp-ring' + (d && d === c.pids.length ? ' all' : '')));
+    const st = unitState(u.id), d = c.pids.filter(id => st.done[id]).length, on = isTracked(u.id, c.id);
+    li.querySelectorAll('.tp-ring,.tp-trk').forEach(e => e.remove());
+    li.classList.toggle('untracked', !on);
+    li.querySelector('.acts').insertAdjacentHTML('afterbegin', on ? ringSVG(d, c.pids.length, 'tp-ring' + (d && d === c.pids.length ? ' all' : ''))
+      : `<button type="button" class="tp-trk" data-trk="${esc(u.id)}|${esc(c.id)}" title="Not tracking this section: tap to track it"><small>Not tracking</small><b>Track</b></button>`);
   });
   progSummary();
 }
+document.addEventListener('click', e => { const b = e.target.closest('[data-trk]'); if (!b) return; e.preventDefault(); const [u, c] = b.dataset.trk.split('|'); setTracked(u, c, !isTracked(u, c)); appRings(); if (document.getElementById('myprog') && document.getElementById('myprog').open) progPanel(); if (typeof wlPaint === 'function' && !location.hash) wlPaint(); });
 /* ---------- My course: the pupil's course (GCSE or A level) and the units they take, localStorage 'notes-mycourse'.
    It scopes My progress, the Continue card and the topic list's starting filter. No setting yet: the last course they opened.
    Progress is never totalled across GCSE and A level. ---------- */
@@ -730,28 +782,63 @@ function myScope() {
   if (o) { const ids = unitsOf(o.course).map(u => u.id), sel = (o.units || []).filter(x => ids.includes(x)); return { course: o.course, units: sel.length ? sel : ids, set: true }; }
   const c = lastCourse(); return c ? { course: c, units: unitsOf(c).map(u => u.id), set: false } : null;
 }
+/* sections (chapters) tracked per book: notes-mycourse.track[book] = [chapter ids]; no entry = every chapter */
+function mcRaw() { try { return JSON.parse(localStorage.getItem(MC_KEY)) || {}; } catch (e) { return {}; } }
+function trackOf(uid) { const t = (mcRaw().track || {})[uid]; return Array.isArray(t) ? new Set(t) : null; }
+const isTracked = (uid, cid) => { const t = trackOf(uid); return !t || t.has(cid); };
+function setTracked(uid, cid, on) {
+  const u = UNITS.find(x => x.id === uid); if (!u) return;
+  const o = mcRaw(); o.track = o.track || {};
+  const cur = trackOf(uid) || new Set(u.chapters.map(c => c.id));
+  if (on) cur.add(cid); else cur.delete(cid);
+  const ids = u.chapters.map(c => c.id).filter(id => cur.has(id));
+  if (ids.length === u.chapters.length) delete o.track[uid]; else o.track[uid] = ids;
+  try { localStorage.setItem(MC_KEY, JSON.stringify(o)); } catch (e) { }
+}
+const cqBest = uid => { try { return (JSON.parse(localStorage.getItem('notes-chquiz:' + uid)) || {}).best || {}; } catch (e) { return {}; } };   /* chapter quiz best scores (the workbooks) */
+const trackedPids = u => u.chapters.filter(c => isTracked(u.id, c.id)).flatMap(c => c.pids || []);
 const scopeTxt = sc => `${CN[sc.course]}: ${sc.units.map(id => (UNITS.find(u => u.id === id) || {}).short || id).join(', ')}`;
 /* the picker: course, then unit chips (all ticked by default); used on the welcome screen and in My progress */
 function mcPicker(slot, done, opts) {
   opts = opts || {};
-  const cur = mcGet() || (lastCourse() ? { course: lastCourse() } : null);
+  const cur = mcGet() || (lastCourse() ? { course: lastCourse() } : null), raw = mcRaw();
   let course = cur ? cur.course : null, picked = new Set(cur && cur.units ? cur.units : (course ? unitsOf(course).map(u => u.id) : []));
+  const trk = {};   /* book -> Set of tracked chapter ids */
+  UNITS.forEach(u => { const t = (raw.track || {})[u.id]; trk[u.id] = new Set(Array.isArray(t) ? t : u.chapters.map(c => c.id)); });
   slot.hidden = false;
+  const secs = u => {   /* tutorial books with parts (A2 2): one tick per part; others: one per chapter */
+    const parts = (u.parts || []).filter(g => (g.chapters || []).length);
+    const rows = parts.length > 1 ? parts.map(g => ({ ids: g.chapters, label: g.title })) : u.chapters.map(c => ({ ids: [c.id], label: `${pad2(c.n)} ${c.title}` }));
+    const n = rows.filter(r => r.ids.every(id => trk[u.id].has(id))).length;
+    return `<details class="mc-sec" data-u="${esc(u.id)}"><summary><span>${esc(u.short)} sections</span><small>${n === rows.length ? 'all tracked' : `${n} of ${rows.length} tracked`}</small></summary>
+      <div class="mc-sa"><button type="button" data-sa="1">Select all</button><button type="button" data-sa="0">Clear</button></div>
+      <ul>${rows.map(r => `<li><label><input type="checkbox" data-ids="${esc(r.ids.join(','))}"${r.ids.every(id => trk[u.id].has(id)) ? ' checked' : ''}><span>${esc(r.label)}</span></label></li>`).join('')}</ul></details>`;
+  };
+  const okToSave = () => course && picked.size && [...picked].every(id => trk[id] && trk[id].size);
   const paint = () => {
-    const us = course ? unitsOf(course) : [];
+    const us = course ? unitsOf(course) : [], open = new Set([...slot.querySelectorAll('.mc-sec[open]')].map(d => d.dataset.u));
     slot.innerHTML = `<div class="mc" role="group" aria-label="My course"><b class="mc-q">${esc(opts.q || 'Which course are you on?')}</b>
       <div class="mc-cs">${['gcse', 'gce'].map(c => `<button type="button" class="mc-c" data-mc="${c}" aria-pressed="${course === c}">${CN[c]}</button>`).join('')}</div>
-      ${course ? `<div class="mc-us"><span>Tick the units you take</span><div class="mc-chips">${us.map(u => `<label class="mc-chip"><input type="checkbox" value="${esc(u.id)}"${picked.has(u.id) ? ' checked' : ''}><span>${esc(u.short)}</span></label>`).join('')}</div></div>` : ''}
-      <div class="mc-acts"><button type="button" class="btn pri mc-save"${course && picked.size ? '' : ' disabled'}>Save</button><button type="button" class="mc-skip">${esc(opts.skip || 'Not now')}</button></div></div>`;
+      ${course ? `<div class="mc-us"><span>Tick the units you take</span><div class="mc-chips">${us.map(u => `<label class="mc-chip"><input type="checkbox" value="${esc(u.id)}"${picked.has(u.id) ? ' checked' : ''}><span>${esc(u.short)}</span></label>`).join('')}</div></div>
+      <div class="mc-secs"><span>Sections to track <small>(all by default)</small></span>${us.filter(u => picked.has(u.id)).map(secs).join('')}</div>` : ''}
+      <div class="mc-acts"><button type="button" class="btn pri mc-save"${okToSave() ? '' : ' disabled'}>Save</button><button type="button" class="mc-skip">${esc(opts.skip || 'Not now')}</button></div></div>`;
+    slot.querySelectorAll('.mc-sec').forEach(d => { if (open.has(d.dataset.u)) d.open = true; });
     slot.querySelectorAll('.mc-c').forEach(b => b.addEventListener('click', () => { if (course !== b.dataset.mc) { course = b.dataset.mc; picked = new Set(unitsOf(course).map(u => u.id)); } paint(); const f = slot.querySelector('.mc-chip input') || slot.querySelector('.mc-save'); if (f) f.focus(); }));
-    slot.querySelectorAll('.mc-chip input').forEach(x => x.addEventListener('change', () => { if (x.checked) picked.add(x.value); else picked.delete(x.value); slot.querySelector('.mc-save').disabled = !picked.size; }));
+    slot.querySelectorAll('.mc-chip input').forEach(x => x.addEventListener('change', () => { if (x.checked) picked.add(x.value); else picked.delete(x.value); paint(); const f = slot.querySelector(`.mc-chip input[value="${x.value}"]`); if (f) f.focus(); }));
+    slot.querySelectorAll('.mc-sec').forEach(d => {
+      const uid = d.dataset.u;
+      d.querySelectorAll('input[data-ids]').forEach(x => x.addEventListener('change', () => { x.dataset.ids.split(',').forEach(id => x.checked ? trk[uid].add(id) : trk[uid].delete(id)); paint(); }));
+      d.querySelectorAll('[data-sa]').forEach(b => b.addEventListener('click', () => { const u = UNITS.find(z => z.id === uid); trk[uid] = new Set(b.dataset.sa === '1' ? u.chapters.map(c => c.id) : []); paint(); }));
+    });
     slot.querySelector('.mc-save').addEventListener('click', () => {
-      mcSave({ course, units: unitsOf(course).map(u => u.id).filter(id => picked.has(id)) });
-      try { const o = JSON.parse(localStorage.getItem('notes-front')) || {}; o.course = course; o.asked = 1; localStorage.setItem('notes-front', JSON.stringify(o)); } catch (e) { }
+      const o = mcRaw(); o.course = course; o.units = unitsOf(course).map(u => u.id).filter(id => picked.has(id)); o.track = o.track || {};
+      unitsOf(course).forEach(u => { const ids = u.chapters.map(c => c.id).filter(id => trk[u.id].has(id)); if (ids.length === u.chapters.length) delete o.track[u.id]; else o.track[u.id] = ids; });
+      mcSave(o);
+      try { const f = JSON.parse(localStorage.getItem('notes-front')) || {}; f.course = course; f.asked = 1; localStorage.setItem('notes-front', JSON.stringify(f)); } catch (e) { }
       slot.hidden = true; slot.innerHTML = ''; done(true);
     });
     slot.querySelector('.mc-skip').addEventListener('click', () => {
-      try { const o = JSON.parse(localStorage.getItem('notes-front')) || {}; o.asked = 1; localStorage.setItem('notes-front', JSON.stringify(o)); } catch (e) { }
+      try { const f = JSON.parse(localStorage.getItem('notes-front')) || {}; f.asked = 1; localStorage.setItem('notes-front', JSON.stringify(f)); } catch (e) { }
       slot.hidden = true; slot.innerHTML = ''; done(false);
     });
   };
@@ -759,7 +846,7 @@ function mcPicker(slot, done, opts) {
 }
 function scopeCount(sc) {
   let d = 0, n = 0, next = null;
-  sc.units.forEach(id => { const u = UNITS.find(x => x.id === id); if (!u) return; const st = unitState(u.id); u.chapters.forEach(c => (c.pids || []).forEach(pid => { n++; if (st.done[pid]) d++; else if (!next) next = { u, pid }; })); });
+  sc.units.forEach(id => { const u = UNITS.find(x => x.id === id); if (!u) return; const st = unitState(u.id); u.chapters.filter(c => isTracked(u.id, c.id)).forEach(c => (c.pids || []).forEach(pid => { n++; if (st.done[pid]) d++; else if (!next) next = { u, pid }; })); });
   return { d, n, next };
 }
 function progSummary() {
@@ -782,10 +869,10 @@ function progPanel() {
   body.innerHTML = `<div class="mp-sc"><span>Showing <b>${esc(scopeTxt(sc))}</b>${sc.set ? '' : ' (the course you opened last)'}</span><button type="button" class="btn mp-mcb" aria-expanded="false">My course</button></div><div class="mc-slot" id="mp-mc" hidden></div>
     <div class="mp-u mp-all"><div class="mp-uh">${ringSVG(t.d, t.n, 'mp-ring')}<div><b>${esc(CN[sc.course])}: your units</b><span>${t.d} of ${t.n} pages covered</span></div>${t.next ? `<a class="btn pri" href="${esc(t.next.u.file)}#${esc(t.next.pid)}">Next not-covered page</a>` : '<span class="mp-ok">All covered</span>'}</div></div>` + sc.units.map(id => {
       const u = UNITS.find(x => x.id === id); if (!u) return '';
-      const st = unitState(u.id), all = u.chapters.flatMap(c => c.pids || []), d = all.filter(x => st.done[x]).length;
+      const st = unitState(u.id), all = trackedPids(u), d = all.filter(x => st.done[x]).length, nT = u.chapters.filter(c => isTracked(u.id, c.id)).length;
       const next = all.find(x => !st.done[x]);
-      return `<div class="mp-u"><div class="mp-uh">${ringSVG(d, all.length, 'mp-ring')}<div><b>${esc(u.short)}: ${esc(u.title)}</b><span>${d} of ${all.length} pages ${u.mode === 'tutorial' ? 'done' : 'covered'}</span></div>${next ? `<a class="btn" href="${esc(u.file)}#${esc(next)}">Next in ${esc(u.short)}</a>` : '<span class="mp-ok">All covered</span>'}<a class="btn" href="${esc(u.file)}#progress">Details</a></div>
-        <ul class="mp-t">${u.chapters.map(c => { const n = (c.pids || []).length, dd = (c.pids || []).filter(x => st.done[x]).length, nx = (c.pids || []).find(x => !st.done[x]); return `<li><a href="${esc(u.file)}#${esc(nx || c.page)}"><span class="mp-n">${esc(pad2(c.n))}</span><span class="mp-tt">${esc(c.title)}</span><span class="mp-bar"><i style="width:${n ? Math.round(dd / n * 100) : 0}%"></i></span><span class="mp-c">${dd}/${n}</span></a></li>`; }).join('')}</ul></div>`;
+      return `<div class="mp-u"><div class="mp-uh">${ringSVG(d, all.length, 'mp-ring')}<div><b>${esc(u.short)}: ${esc(u.title)}</b><span>${d} of ${all.length} pages ${u.mode === 'tutorial' ? 'done' : 'covered'}${nT < u.chapters.length ? ` · tracking ${nT} of ${u.chapters.length} sections` : ''}</span></div>${next ? `<a class="btn" href="${esc(u.file)}#${esc(next)}">Next in ${esc(u.short)}</a>` : (all.length ? '<span class="mp-ok">All covered</span>' : '')}<a class="btn" href="${esc(u.file)}#progress">Details</a></div>
+        <ul class="mp-t">${u.chapters.map(c => { const on = isTracked(u.id, c.id), n = (c.pids || []).length, dd = (c.pids || []).filter(x => st.done[x]).length, nx = (c.pids || []).find(x => !st.done[x]); return `<li class="${on ? '' : 'off'}"><a href="${esc(u.file)}#${esc(nx || c.page)}"><span class="mp-n">${esc(pad2(c.n))}</span><span class="mp-tt">${esc(c.title)}</span>${on ? `<span class="mp-bar"><i style="width:${n ? Math.round(dd / n * 100) : 0}%"></i></span><span class="mp-c">${dd}/${n}</span>` : '<span class="mp-nt">Not tracking</span>'}</a>${(() => { const b = cqBest(u.id)[c.id]; return b ? `<a class="mp-q" href="${esc(u.file)}#quiz-${esc(c.id)}" title="Chapter quiz: best ${b.pc}% on ${esc(b.date)}">Quiz ${b.pc}%</a>` : (u.mode !== 'tutorial' && n && dd === n ? `<a class="mp-q" href="${esc(u.file)}#quiz-${esc(c.id)}">Quiz</a>` : ''); })()}<button type="button" class="mp-tr" data-trk="${esc(u.id)}|${esc(c.id)}" aria-pressed="${on}" title="${on ? 'Tracking this section: tap to stop' : 'Track this section'}">${on ? '✓' : 'Track'}</button></li>`; }).join('')}</ul></div>`;
     }).join('');
   const b = body.querySelector('.mp-mcb'), slot = document.getElementById('mp-mc');
   b.addEventListener('click', () => { if (!slot.hidden) { slot.hidden = true; slot.innerHTML = ''; b.setAttribute('aria-expanded', 'false'); return; } b.setAttribute('aria-expanded', 'true'); mcPicker(slot, again, { skip: 'Cancel' }); });
@@ -833,13 +920,72 @@ function pImport(file, say) {
     window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); ev = e; paint(); });
     window.addEventListener('appinstalled', () => { ev = null; paint(); });
     paint();
-    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').then(() => navigator.serviceWorker.ready).then(async () => {
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').then(reg => { appUpdates(reg, new URL('./', location.href).href); return navigator.serviceWorker.ready; }).then(async () => {
       try { const hit = await caches.match(new URL('index.html', location.href).href); if (hit) hero.querySelector('.app-off').hidden = false; document.body.dataset.offline = hit ? 'yes' : 'no'; } catch (e) { }
     }).catch(() => { });
   }
   window.addEventListener('pageshow', () => appRings());
   window.addEventListener('storage', () => appRings());
 })();
+/* ---------- app updates (web host only): every deploy has a new service worker (sw.js VERSION = hash of the cached files) and
+   version.json { version, date, notes }. A waiting worker shows "A new version … is available" with Update now / Later.
+   Update now posts SKIP_WAITING and reloads once on controllerchange; Later hides it for this session. Checks on launch, when
+   the app becomes visible again and every 30 minutes. After an update a "What's new" note shows once. Source notes/app/update.js. */
+const APP_NAME = 'Digital Technology | Mr Butler';
+function appUpdates(reg, base, where) {
+  if (!reg || window.__appUpd) return; window.__appUpd = true;
+  let want = false, shown = null;
+  const ss = (k, v) => { try { if (v === undefined) return sessionStorage.getItem(k); sessionStorage.setItem(k, v); } catch (e) { return null; } };
+  const ls = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
+  const toast = (cls, html) => { const old = document.querySelector('.upd'); if (old) old.remove(); const d = document.createElement('div'); d.className = 'upd ' + cls; d.setAttribute('role', 'status'); d.innerHTML = html; document.body.append(d); return d; };
+  const icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 11-2.34-5.66M20 4v4.5h-4.5"/></svg>';
+  function offer(w) {
+    if (!w || ss('notes-upd-later') === '1' || shown === w) return; shown = w;
+    const d = toast('upd-new', `${icon}<div><b>A new version of ${APP_NAME} is available</b><span>Update now to get the latest workbooks and features.</span></div><button type="button" class="upd-go">Update now</button><button type="button" class="upd-later">Later</button>`);
+    d.querySelector('.upd-go').addEventListener('click', () => {
+      want = true; ss('notes-upd-reloading', '1');
+      const ww = reg.waiting || w;
+      if (ww) ww.postMessage({ type: 'SKIP_WAITING' }); else location.reload();
+      d.querySelector('.upd-go').disabled = true; d.querySelector('.upd-go').textContent = 'Updating…';
+      setTimeout(() => { if (want) location.reload(); }, 4000);   /* the new worker never took over: reload anyway, once */
+    });
+    d.querySelector('.upd-later').addEventListener('click', () => { ss('notes-upd-later', '1'); d.remove(); });
+  }
+  if (reg.waiting && navigator.serviceWorker.controller) offer(reg.waiting);
+  reg.addEventListener('updatefound', () => { const w = reg.installing; if (w) w.addEventListener('statechange', () => { if (w.state === 'installed' && navigator.serviceWorker.controller) offer(w); }); });
+  let reloaded = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => { if (!want || reloaded) return; reloaded = true; want = false; location.reload(); });
+  /* version line + What's new */
+  const vurl = new URL('version.json', base).href;
+  const getV = () => fetch(vurl, { cache: 'no-store' }).then(r => r.ok ? r.json() : null).catch(() => null);
+  const check = () => { reg.update().catch(() => { }); return getV(); };
+  /* the version actually running = the controlling worker's VERSION (version.json may already describe a newer, waiting one) */
+  const running = () => new Promise(res => {
+    const c = navigator.serviceWorker.controller; if (!c) return res(null);
+    const t = setTimeout(() => res(null), 3000);
+    const on = ev => { if (ev.data && ev.data.type === 'VERSION') { clearTimeout(t); navigator.serviceWorker.removeEventListener('message', on); res(ev.data.version); } };
+    navigator.serviceWorker.addEventListener('message', on); c.postMessage({ type: 'VERSION' });
+  });
+  Promise.all([running(), getV()]).then(([run, v]) => {
+    const ver = run || (v && v.version); if (!ver) return;
+    window.__appVersion = ver;
+    document.querySelectorAll('[data-app-ver]').forEach(e => { e.textContent = `Version ${ver}${v && v.version === ver && v.date ? ' · ' + v.date : ''}`; });
+    const seen = ls('notes-app-version');
+    if (seen && seen !== ver && v && v.version === ver && Array.isArray(v.notes) && v.notes.length) {   /* once, after an update */
+      const d = toast('upd-wn', `${icon}<div><b>What's new</b><ul>${v.notes.slice(0, 4).map(n => `<li>${String(n).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c])}</li>`).join('')}</ul></div><button type="button" class="upd-later" aria-label="Close">OK</button>`);
+      d.querySelector('.upd-later').addEventListener('click', () => d.remove());
+    }
+    ls('notes-app-version', ver);
+  });
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') check(); });
+  setInterval(check, 30 * 60 * 1000);
+  document.addEventListener('click', e => {
+    const b = e.target.closest('[data-app-check]'); if (!b) return;
+    e.preventDefault(); const lab = b.querySelector('span') || b, was = lab.textContent; lab.textContent = 'Checking…';
+    check().then(() => setTimeout(() => { lab.textContent = reg.waiting ? 'Update available' : 'You have the latest version'; if (reg.waiting) offer(reg.waiting); setTimeout(() => { lab.textContent = was; }, 3000); }, 1200));
+  });
+  window.__appReg = reg;
+}
 /* ================= APP: END ================= */
 /* ================= WELCOME: BEGIN =================
    Welcome screen when the address has no hash: wordmark, one line, GCSE / A level cards (My course, else the last chosen one, marked), a once-only "Which course are you on?" prompt and a "My course" setting,
@@ -894,7 +1040,7 @@ function wlPaint() {
   const box = document.getElementById('wl-cont'), L = wlLast();
   if (!box) return;
   if (!L) { box.hidden = true; return; }
-  const st = unitState(L.u.id), all = L.u.chapters.flatMap(c => c.pids || []), d = all.filter(id => st.done[id]).length, hn = L.ci % 10 + 1;
+  const st = unitState(L.u.id), all = trackedPids(L.u), d = all.filter(id => st.done[id]).length, hn = L.ci % 10 + 1;   /* tracked sections only */
   box.href = L.u.file + '#' + L.page;
   box.style.cssText = `--wcd:var(--h${hn}d);--wcl:var(--h${hn}l)`;
   box.innerHTML = `${ringSVG(d, all.length, 'tp-ring')}<span class="wl-ct"><small>Continue where you left off</small><b>${esc(L.title || L.c.title)}</b><span>${esc(L.u.course === 'gce' ? L.u.short : 'GCSE ' + L.u.short)} · Chapter ${esc(L.c.n)}${L.title ? ': ' + esc(L.c.title) : ''}</span></span><span class="wl-cgo" aria-hidden="true">Resume →</span>`;
@@ -943,10 +1089,12 @@ function route() {
   /* remember the course only when the pupil picks one (a reset must leave nothing behind) */
   document.querySelectorAll('.wl-c[data-wl]').forEach(a => a.addEventListener('click', () => wlCourse(a.dataset.wl)));
   document.querySelectorAll('.seg [data-course]').forEach(b => b.addEventListener('click', () => wlCourse(b.dataset.course)));
+  document.addEventListener('visibilitychange', () => document.documentElement.classList.toggle('tab-hidden', document.visibilityState === 'hidden'));   /* pause the desk drift */
   window.addEventListener('popstate', route);
   window.addEventListener('pageshow', e => { if (e.persisted && !location.hash) wlPaint(); });
   window.addEventListener('storage', () => { if (!location.hash) wlPaint(); });
   if (wrap) wrap.dataset.welcome = '1';
+  if (!WEB) { const v = document.querySelector('.wl-ver'); if (v) v.remove(); }   /* updates: web host only */
 })();
 /* ================= WELCOME: END ================= */
 function show(c, keepFilters) {
