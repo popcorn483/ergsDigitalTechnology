@@ -504,6 +504,27 @@ html:not(.wl-on) #welcome{display:none}
 .home-row{margin:-4px 0 14px}
 @media (max-width:760px){ .hero{padding:26px 20px 24px;border-radius:var(--r-l)} .hero h1{max-width:none} }
 @media (max-width:699px){ .unit{border-radius:var(--r-m)} .unit-h{padding:18px 16px 10px} }
+/* topic actions on one line: progress ring, then icon buttons (workbook, PowerPoint view/download, glossary) */
+.acts{flex-wrap:nowrap;gap:8px;justify-content:flex-end}
+.ib{position:relative;display:inline-grid;place-items:center;width:40px;height:40px;border-radius:var(--r-s,10px);color:var(--cc-d,var(--accent));background:var(--paper);box-shadow:inset 0 0 0 1px var(--line);text-decoration:none;transition:background-color .15s,box-shadow .15s;flex:none}
+.ib svg{width:20px;height:20px}
+.ib:hover{background:color-mix(in srgb,var(--cc-d,var(--accent)) 10%,var(--paper));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--cc-d,var(--accent)) 45%,transparent)}
+.ib:focus-visible{outline:2px solid var(--cc-d,var(--accent));outline-offset:2px}
+.ib-pri{background:var(--cc-d,var(--accent));color:#fff;box-shadow:none}
+.ib-pri:hover{background:color-mix(in srgb,var(--cc-d,var(--accent)) 85%,#000);box-shadow:none}
+:root[data-theme="dark"] .ib{color:var(--cc,var(--accent))}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .ib{color:var(--cc,var(--accent))} }
+:root[data-theme="dark"] .ib-pri{color:#fff}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .ib-pri{color:#fff} }
+.ppt.ppt-i{border:0;background:none;overflow:visible;gap:0;display:inline-flex}
+.ppt.ppt-i .ib{padding:0;border-left:0}
+.ppt.ppt-i .ib:first-child{border-radius:var(--r-s,10px) 0 0 var(--r-s,10px)}
+.ppt.ppt-i .ib + .ib{border-radius:0 var(--r-s,10px) var(--r-s,10px) 0;margin-left:-1px}
+.ppt-slot:empty{display:none}
+.tmp-dot{position:absolute;top:5px;right:5px;width:8px;height:8px;border-radius:50%;background:var(--warn);box-shadow:0 0 0 2px var(--paper)}
+.tmp-leg{margin:0 0 6px;padding:0 4px;font-size:12.5px;color:var(--ink-3);font-family:var(--sans)}
+.tmp-leg::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--warn);margin-right:6px;vertical-align:0}
+@media (max-width:699px){ .acts{justify-content:flex-start} }
 /* ================= DESIGN: END ================= */
 </style>
 </head>
@@ -609,6 +630,7 @@ const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ESC[c]);
 const WEB = /^https?:$/.test(location.protocol);
 const I_BOOK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg>';
 const I_PPT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="12" rx="1.5"/><path d="M12 16.5V20M8.5 20h7M8 12.5l2.5-3 2 2 3.5-4"/></svg>';
+const I_DL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19.5h14"/></svg>';
 const I_GL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h10.5"/><path d="M9 8h5"/></svg>';
 const box = document.getElementById('units');
 /* ---------- topic PowerPoints: the teacher drops any .pptx/.ppt/.pdf into the chapter's folder under notes/slides/
@@ -684,7 +706,7 @@ function tutUnitHTML(u, next, course) {
   const row = i => { const c = u.chapters[i], n = hue(i); return `<li class="tp" data-tut="1" data-ci="${i}" data-topic="" data-ch="${esc(c.id)}" data-folder="" data-hub="${course}" style="--cc:var(--h${n});--cc-d:var(--h${n}d);--i:${next()}">
       <span class="ic" aria-hidden="true"><b>${esc(pad2(c.n))}</b></span>
       <div class="tp-t"><small>Chapter ${esc(c.n)}</small><b>${esc(c.title)}</b><span>${c.pages} tutorial page${c.pages === 1 ? '' : 's'}${c.tasks ? ` · ${c.tasks} build task${c.tasks === 1 ? '' : 's'}` : ''}${c.vids ? ` · ${c.vids} video${c.vids === 1 ? '' : 's'}` : ''}</span></div>
-      <div class="acts"><a class="btn pri" href="${esc(u.file)}#${esc(c.page)}">${I_TOOL}Open tutorial</a></div></li>`; };
+      <div class="acts"><a class="ib ib-pri" href="${esc(u.file)}#${esc(c.page)}" title="Open tutorial" aria-label="Open tutorial: ${esc(c.title)}">${I_TOOL}</a></div></li>`; };
   return `<section class="unit u-tut" data-unit="${esc(u.id)}" aria-labelledby="h-${esc(u.id)}">
     <div class="spec" aria-hidden="true">${u.chapters.map((c, i) => `<i style="background:var(--h${hue(i)}d)"></i>`).join('')}</div>
     <div class="unit-h" style="--i:${next()}"><div><span class="unit-k">${esc(u.short)}</span><span class="tut-b">${I_TOOL}Tutorial book</span><h2 id="h-${esc(u.id)}">${esc(u.title)}</h2></div><div class="unit-l"><a href="${esc(u.file)}">Whole tutorial book →</a></div></div>
@@ -705,7 +727,7 @@ function render(course) {
     <ol class="topics">${u.chapters.map((c, i) => { const im = IMG(course, c.topic), n = hue(i); return `<li class="tp" data-ci="${i}" data-topic="${esc(c.topic || '')}" data-ch="${esc(c.id)}" data-folder="${esc(c.folder || '')}" data-hub="${course}" style="--cc:var(--h${n});--cc-d:var(--h${n}d);--i:${k++}">
       <span class="ic" aria-hidden="true">${im ? `<img src="${esc(im)}" alt="" width="30" height="30" loading="lazy">` : ''}<b>${esc(pad2(c.n))}</b></span>
       <div class="tp-t"><small>Chapter ${esc(c.n)}</small><b>${esc(c.title)}</b><span>${c.pages} workbook page${c.pages === 1 ? '' : 's'}${c.terms ? ` · ${c.terms} key terms` : ''}${c.vids ? ` · ${c.vids} video${c.vids === 1 ? '' : 's'}` : ''}</span></div>
-      <div class="acts"><a class="btn pri" href="${esc(u.file)}#${esc(c.page)}">${I_BOOK}Revision workbook</a><span class="ppt-slot"></span>${c.terms ? `<a class="gl-t" href="${esc(u.file)}#glossary-${esc(c.id)}" aria-label="Glossary for ${esc(c.title)}: ${esc(c.terms)} key terms">${I_GL}Glossary</a>` : ''}</div>
+      <div class="acts"><a class="ib ib-pri" href="${esc(u.file)}#${esc(c.page)}" title="Workbook" aria-label="Workbook: ${esc(c.title)}">${I_BOOK}</a><span class="ppt-slot"></span>${c.terms ? `<a class="ib" href="${esc(u.file)}#glossary-${esc(c.id)}" title="Glossary (${esc(c.terms)} key terms)" aria-label="Glossary for ${esc(c.title)}: ${esc(c.terms)} key terms">${I_GL}</a>` : ''}</div>
     </li>`; }).join('')}</ol></section>`).join('');
   guard(box);
   mountPpt();
@@ -724,13 +746,14 @@ function pptSlot(li, f) {
   if (!f) { slot.innerHTML = ''; return; }
   if (f.temp) {
     const L = slideLinks(f, 'notes/slides/'), tt = esc(TMP_TXT);
-    slot.innerHTML = `<span class="ppt-w"><span class="ppt is-temp" role="group" aria-label="Temporary topic PowerPoint" title="${tt}"><span>${I_PPT}PowerPoint</span><a href="${esc(L.view)}" target="_blank" rel="noopener" title="${tt}">View</a><a href="${esc(L.rel)}" download="${esc(li.dataset.topic)} ${esc(li.querySelector('.tp-t b').textContent.replace(/[:\/,]/g, ''))} (temporary).pptx" title="${tt}">Download</a></span><i class="tmp-b" title="${tt}" aria-hidden="true">Temporary</i></span>`;
-    li.insertAdjacentHTML('beforeend', `<p class="tmp-n">${esc(TMP_TXT)}</p>`);
+    const un = li.closest('.unit'); if (un && !un.querySelector('.tmp-leg')) { const ol = un.querySelector('.topics'); if (ol) ol.insertAdjacentHTML('beforebegin', `<p class="tmp-leg">Orange dot: a temporary PowerPoint made from the lesson slides, until your teacher adds their own</p>`); }
+    slot.innerHTML = `<span class="ppt ppt-i is-temp" role="group" aria-label="Temporary topic PowerPoint"><a class="ib" href="${esc(L.view)}" target="_blank" rel="noopener" title="View the PowerPoint (temporary: ${tt})" aria-label="View the temporary PowerPoint">${I_PPT}<i class="tmp-dot" aria-hidden="true"></i></a><a class="ib" href="${esc(L.rel)}" download="${esc(li.dataset.topic)} ${esc(li.querySelector('.tp-t b').textContent.replace(/[:\/,]/g, ''))} (temporary).pptx" title="Download the PowerPoint (temporary)" aria-label="Download the temporary PowerPoint">${I_DL}</a></span>`;
     return;
   }
-  if (!f.path) { slot.innerHTML = `<span class="ppt" role="group" aria-label="Topic PowerPoint"><span>${I_PPT}PowerPoint</span><a href="${esc(f.url)}" target="_blank" rel="noopener">Open PowerPoint</a></span>`; return; }
+  if (!f.path) { slot.innerHTML = `<span class="ppt ppt-i" role="group" aria-label="Topic PowerPoint"><a class="ib" href="${esc(f.url)}" target="_blank" rel="noopener" title="Open the PowerPoint" aria-label="Open the PowerPoint">${I_PPT}</a></span>`; return; }
   const L = slideLinks(f, 'notes/slides/');
-  slot.innerHTML = `<span class="ppt" role="group" aria-label="Topic PowerPoint: ${esc(f.name)}"><span>${I_PPT}${L.pdf ? 'PDF' : 'PowerPoint'}</span><a href="${esc(L.view)}" target="_blank" rel="noopener">View</a><a href="${esc(L.rel)}" download>Download</a></span>`;
+  const kind = L.pdf ? 'PDF' : 'PowerPoint';
+  slot.innerHTML = `<span class="ppt ppt-i" role="group" aria-label="Topic ${kind}: ${esc(f.name)}"><a class="ib" href="${esc(L.view)}" target="_blank" rel="noopener" title="View the ${kind}" aria-label="View the ${kind}">${I_PPT}</a><a class="ib" href="${esc(L.rel)}" download title="Download the ${kind}" aria-label="Download the ${kind}">${I_DL}</a></span>`;
 }
 let apiBatchUsed = false, pptIO = null;
 async function mountPpt() {
