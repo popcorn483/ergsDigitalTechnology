@@ -18,7 +18,13 @@ What happens next:
 3. Until the Action has run, the pages ask the GitHub API about the chapter's folder directly, so a new file usually
    shows within a minute or two.
 
-Nothing is shown for a topic with no file: no button and no "coming soon". The folder names come from
+**Temporary PowerPoints.** Until you upload your own, most topics show a temporary PowerPoint made from the hub's
+lesson slides (`_temporary/<topic>.pptx`, for example `_temporary/T6.pptx`). It carries an amber **Temporary** badge and
+the line "Temporary PowerPoint made from the lesson slides – your teacher's own version will replace it". As soon as
+you upload a file (or a link) to a chapter's folder, your file is shown instead and the badge goes. You don't need to
+delete anything; the files in `_temporary/` are never treated as your uploads. A2 2 has no temporary PowerPoints.
+
+Nothing else is shown for a topic with no file: no "coming soon". The folder names come from
 `folders.json`; don't rename or move the folders. Each workbook chapter card also shows its folder in a small line
 for teachers, and the front page lists every folder under "Where to upload topic PowerPoints" at the bottom.
 
@@ -39,13 +45,13 @@ The site must be public on GitHub Pages for the Office viewer to open a PowerPoi
 
 | Chapter | Upload folder |
 |---|---|
-| 1. Getting started with Access | `notes/slides/A level/A2 2/01 Getting started with Access/` |
-| 2. Tables and relationships | `notes/slides/A level/A2 2/02 Tables and relationships/` |
-| 3. Queries | `notes/slides/A level/A2 2/03 Queries/` |
-| 4. Forms | `notes/slides/A level/A2 2/04 Forms/` |
-| 5. Reports | `notes/slides/A level/A2 2/05 Reports/` |
-| 6. VBA basics | `notes/slides/A level/A2 2/06 VBA basics/` |
-| 7. VBA task tutorials | `notes/slides/A level/A2 2/07 VBA task tutorials/` |
+| 1. Choose your project | `notes/slides/A level/A2 2/01 Getting started with Access/` |
+| 2. Design your database | `notes/slides/A level/A2 2/02 Tables and relationships/` |
+| 3. Getting started with Access | `notes/slides/A level/A2 2/03 Queries/` |
+| 4. Tables and relationships | `notes/slides/A level/A2 2/04 Forms/` |
+| 5. Queries | `notes/slides/A level/A2 2/05 Reports/` |
+| 6. Forms | `notes/slides/A level/A2 2/06 VBA basics/` |
+| 7. Reports | `notes/slides/A level/A2 2/07 VBA task tutorials/` |
 
 ## AS 1: Approaches to Systems Development (AS1)
 
