@@ -1731,7 +1731,7 @@ const ICON_MOD = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" str
    photo: a hotlinked Wikimedia Commons image, lazy, fades in on load; if it fails the whole figure is removed. */
 const ILLUS = (B.illus && B.illus.svg) || {};
 if (B.illus && B.illus.css && !document.getElementById('ix-css')) { const st = document.createElement('style'); st.id = 'ix-css'; st.textContent = B.illus.css; document.head.append(st); }
-const photoUrl = u => /^https:\/\/upload\.wikimedia\.org\//.test(String(u || '')) ? String(u) : null;
+const photoUrl = u => /^https:\/\/(upload\.wikimedia\.org\/|commons\.wikimedia\.org\/wiki\/Special:FilePath\/)/.test(String(u || '')) ? String(u) : null;
 const commonsUrl = u => /^https:\/\/commons\.wikimedia\.org\//.test(String(u || '')) ? String(u) : null;
 const creditTxt = b => `Photo: ${b.credit || 'unknown'}, ${b.licence || 'licence not stated'}, via Wikimedia Commons`;
 function illusSVG(id, alt) {
