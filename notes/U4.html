@@ -1133,7 +1133,8 @@ body{background-color:var(--desk);background-image:radial-gradient(var(--dot) 1p
 @font-face{font-family:'Lemon Milk';src:url('../fonts/lemonmilk-medium.woff') format('woff');font-weight:500;font-style:normal;font-display:swap}
 @font-face{font-family:'Lemon Milk';src:url('../fonts/lemonmilk-bold.woff') format('woff');font-weight:700;font-style:normal;font-display:swap}
 @font-face{font-family:'Saira Hero';src:url('../fonts/saira-hero.woff') format('woff');font-weight:900;font-style:normal;font-display:swap}
-/* DESIGN PASS: Lemon Milk is now the brand face only ("Mr Butler's" wordmark, the book-cover title). Headings, labels and
+/* DESIGN PASS: Lemon Milk is the brand face: the "Mr Butler's" wordmark and the big headings (page, chapter, cover and view
+   titles; those rules live in notes/app/design.css). Section headings, labels and
    buttons use the sans (Atkinson Hyperlegible) in sentence case; long-form notes keep the serif (Literata). --display and
    --font-hero are kept as names so older rules still resolve, but both now point at the sans. */
 :root{--brand:'Lemon Milk','Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;--display:var(--sans);--font-hero:var(--sans)}
@@ -1974,6 +1975,13 @@ body.ppv-on{overflow:hidden}
 .ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
 .ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
 .ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
+
+/* past-paper crops: the question's lead-in shown above the part */
+.ppv-stem,.ppv-part{display:flex;flex-direction:column;align-items:center}
+.ppv-stem{position:relative;opacity:.72;padding-top:22px;background:#fff}
+.ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
+.ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
+.ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
 .pp-vq{font:inherit;font-size:.82em;font-weight:700;padding:3px 10px;border-radius:999px;border:1px solid var(--cc,var(--accent));background:transparent;color:var(--cc,var(--accent));cursor:pointer}.pp-vq:hover{background:var(--cc,var(--accent));color:#fff}/* ================= DESIGN: BEGIN (workbook calm-down layer; source notes/app/design.css, injected last by notes/app/inject.py) =================
    One type system: headings, labels and buttons in the sans (sentence case); notes prose in the serif; Lemon Milk only for the
    "Mr Butler's" wordmark and the book-cover title. One radius scale (10 / 14), lighter shadows, a plain desk, no decorative
@@ -1987,9 +1995,23 @@ body.ppv-on{overflow:hidden}
 /* ---------- desk and type ---------- */
 body{background-image:none}
 .sheet :is(h1,h2,h3,h4),.dr-h h2,.pop h3,.r-title,.cv-body h2,.cv-tile b,.gl-l,.empty h2,.chcard-h h3,.lib-it b,.cq-pi h2,.cq-pi h3{font-family:var(--sans)}
-.sheet .cv-t{font-family:var(--brand)}
 .bt b{font-family:var(--sans);font-weight:700;font-size:15px}
 .gl-l{font-size:20px;color:var(--ink-2)}
+
+/* ---------- big headings keep the brand face (teacher's choice): Lemon Milk, upright, medium weight, gentle tracking so
+   long spec-wording titles stay readable. Everything smaller (section headings, buttons, chips, labels, nav, sidebar) is the sans. ---------- */
+.sheet .phero h1,.sheet .cbn-t,.sheet .cv-t,.sheet .lib-hero h1,.sheet .cq-top h1,.sheet .tc-h h2,.sheet .proj-tt b,.gv-t h2,.sheet .cv-tile b{font-family:var(--brand);font-style:normal;text-transform:none;font-weight:500;letter-spacing:.02em;text-wrap:balance}
+.sheet .phero h1{font-size:clamp(18px,2.1vw,21px)!important;line-height:1.35;max-width:38ch}
+.sheet .cbn-t,.sheet .cv-t{font-weight:700;letter-spacing:.015em}
+.sheet .cbn-t{font-size:clamp(20px,3vw,27px);line-height:1.15}
+.sheet .cv-t{font-size:clamp(26px,4.2vw,40px);line-height:1.08}
+.sheet .lib-hero h1{font-weight:700;font-size:clamp(22px,3.4vw,32px);line-height:1.12}
+.sheet .cq-top h1{font-size:clamp(17px,2.6vw,21px);line-height:1.25}
+.sheet .tc-h h2{font-size:clamp(17px,2.4vw,22px);line-height:1.25}
+.sheet .proj-tt b{font-size:clamp(17px,2.6vw,22px);line-height:1.2}
+.gv-t h2{font-size:18px}
+.sheet .cv-tile b{font-size:14px;line-height:1.35}
+@media (max-width:520px){ .sheet .phero h1{font-size:16.5px!important;letter-spacing:.015em} .sheet .cbn-t{font-size:19px} .sheet .cv-t{font-size:25px} .sheet .lib-hero h1{font-size:21px} .sheet .tc-h h2{font-size:17px} .sheet .cv-tile b{font-size:13px} }
 
 /* ---------- top bar ---------- */
 .lb{border-radius:var(--r-s)}
