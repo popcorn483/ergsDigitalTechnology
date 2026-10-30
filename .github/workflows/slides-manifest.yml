@@ -8,6 +8,7 @@ on:
       - "!notes/slides/manifest.json"
       - "papers/**"
       - "!papers/manifest.json"
+      - "!papers/crops.json"
   workflow_dispatch:
 
 permissions:
@@ -22,12 +23,16 @@ jobs:
         run: python3 tools/slides_manifest.py
       - name: List uploaded past papers
         run: python3 tools/papers_manifest.py
+      - name: Find each question on its page (so the app can show just that question)
+        run: |
+          pip install --quiet pdfplumber
+          python3 tools/papers_crops.py || echo "crop finder failed; keeping the previous crops.json"
       - name: Commit the list if it changed
         run: |
-          if ! git diff --quiet -- notes/slides/manifest.json papers/manifest.json; then
+          if ! git diff --quiet -- notes/slides/manifest.json papers/manifest.json papers/crops.json; then
             git config user.name "github-actions[bot]"
             git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-            git add notes/slides/manifest.json papers/manifest.json
+            git add notes/slides/manifest.json papers/manifest.json papers/crops.json
             git commit -m "Update topic PowerPoint and past-paper lists"
             git push
           fi
