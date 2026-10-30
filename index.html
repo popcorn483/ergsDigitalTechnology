@@ -450,6 +450,16 @@ html:not(.wl-on) #welcome{display:none}
 .home-l{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:var(--ink-2);text-decoration:none;padding:7px 12px 7px 10px;border-radius:10px;border:1px solid var(--line);background:var(--paper)}
 .home-l:hover{color:var(--ink)}
 @media (max-width:520px){ .home-row{margin:0 0 10px} }
+/* "Continue where you left off": a small pill in the top-right corner, not a big card */
+#welcome .wl-cont{position:fixed;top:max(12px,env(safe-area-inset-top));right:max(12px,env(safe-area-inset-right));z-index:20;width:auto;max-width:min(300px,calc(100vw - 24px));margin:0;padding:6px 14px 6px 6px;gap:9px;border-radius:999px;font-family:var(--sans);box-shadow:0 2px 10px -4px rgba(0,0,0,.25),inset 0 0 0 1px var(--line)}
+#welcome .wl-cont:hover{transform:none;box-shadow:0 2px 10px -4px rgba(0,0,0,.25),inset 0 0 0 1.5px var(--wc)}
+#welcome .wl-cont .tp-ring{width:30px;height:30px}
+#welcome .wl-cont .tp-ring b{font-size:0}
+#welcome .wl-cont .wl-ct{display:flex;flex-direction:column;min-width:0;line-height:1.2}
+#welcome .wl-cont .wl-ct small{font-size:11px;font-weight:700;letter-spacing:0;text-transform:none;color:var(--wc)}
+#welcome .wl-cont .wl-ct b{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--sans);letter-spacing:0;text-transform:none}
+#welcome .wl-cont .wl-ct > span,#welcome .wl-cont .wl-cgo{display:none}
+@media (max-width:520px){ #welcome .wl-cont{max-width:min(210px,calc(100vw - 24px))} #welcome:has(.wl-cont:not([hidden])){padding-top:max(72px,calc(env(safe-area-inset-top) + 64px))} }
 /* ================= WELCOME: END ================= */
 /* ================= DESIGN: BEGIN (front page calm-down layer; source notes/app/front_design.css) =================
    Loaded last on the front page. Fewer shadows and borders, one radius scale (10 / 14 / 18), no decorative rainbow strips,
@@ -525,6 +535,18 @@ html:not(.wl-on) #welcome{display:none}
 .tmp-leg{margin:0 0 6px;padding:0 4px;font-size:12.5px;color:var(--ink-3);font-family:var(--sans)}
 .tmp-leg::before{content:"";display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--warn);margin-right:6px;vertical-align:0}
 @media (max-width:699px){ .acts{justify-content:flex-start} }
+/* hero: one short line, the rest folded away */
+.lead-more{margin-top:10px;color:#CBD4E4;font-size:14.5px;font-family:var(--sans)}
+.lead-more > summary{cursor:pointer;display:inline-flex;align-items:center;gap:8px;font-weight:700;color:#E5EAF3;list-style:none;padding:4px 0}
+.lead-more > summary::-webkit-details-marker{display:none}
+.lead-more > summary::after{content:"";width:7px;height:7px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.lead-more[open] > summary::after{transform:rotate(225deg) translateY(-1px)}
+.lm{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:8px;max-width:52ch}
+.lm li{display:flex;gap:10px;align-items:flex-start;line-height:1.45}
+.lm b{color:#fff}
+.lm-i{flex:none;display:inline-grid;place-items:center;width:28px;height:28px;border-radius:8px;background:rgba(255,255,255,.08);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18);color:#fff}
+.lm-i.lm-p{background:#3B6FD0;box-shadow:none}
+.lm-i svg{width:16px;height:16px}
 /* ================= DESIGN: END ================= */
 </style>
 </head>
@@ -608,7 +630,13 @@ html:not(.wl-on) #welcome{display:none}
   <header class="hero" id="hero">
     <div><a class="wm" href="index.html" aria-label="Mr Butler’s Digital Technology: home">Mr Butler’s</a><span class="eyebrow">CCEA Digital Technology</span>
     <h1>Revision, one topic at a time</h1>
-    <p class="lead">Pick your course, then a topic. Each topic has a revision workbook (notes, diagrams, animations, videos, quizzes, worksheets, tests and past-paper questions, all inside) and a glossary of its key terms with flashcards. Where your teacher has added the topic PowerPoint, you can view or download it too; until then, most topics have a temporary one made from the lesson slides.</p></div>
+    <p class="lead">Pick your course, then a topic.</p>
+    <details class="lead-more"><summary>What's in each topic?</summary>
+      <ul class="lm">
+        <li><span class="lm-i lm-p" data-ic="book"></span><span><b>Workbook</b>: notes, diagrams, animations, videos, quizzes and past-paper questions</span></li>
+        <li><span class="lm-i" data-ic="ppt"></span><span><b>PowerPoint</b>: view or download the topic slides (an orange dot means a temporary one)</span></li>
+        <li><span class="lm-i" data-ic="gl"></span><span><b>Glossary</b>: the key terms, with flashcards</span></li>
+      </ul></details></div>
     <div class="wall" id="wall" aria-hidden="true"></div>
   </header>
   <div class="seg" role="group" aria-label="Course">
@@ -632,6 +660,7 @@ const I_BOOK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strok
 const I_PPT = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="12" rx="1.5"/><path d="M12 16.5V20M8.5 20h7M8 12.5l2.5-3 2 2 3.5-4"/></svg>';
 const I_DL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19.5h14"/></svg>';
 const I_GL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h10.5"/><path d="M9 8h5"/></svg>';
+document.querySelectorAll('.lm-i[data-ic]').forEach(e => { e.innerHTML = { book: I_BOOK, ppt: I_PPT, gl: I_GL }[e.dataset.ic] || ''; });
 const box = document.getElementById('units');
 /* ---------- topic PowerPoints: the teacher drops any .pptx/.ppt/.pdf into the chapter's folder under notes/slides/
    (see notes/slides/folders.json). notes/slides/manifest.json lists them (a GitHub Action rebuilds it on every upload);
@@ -1106,7 +1135,7 @@ function wlPaint() {
   const st = unitState(L.u.id), all = trackedPids(L.u), d = all.filter(id => st.done[id]).length, hn = L.ci % 10 + 1;   /* tracked sections only */
   box.href = L.u.file + '#' + L.page;
   box.style.cssText = `--wcd:var(--h${hn}d);--wcl:var(--h${hn}l)`;
-  box.innerHTML = `${ringSVG(d, all.length, 'tp-ring')}<span class="wl-ct"><small>Continue where you left off</small><b>${esc(L.title || L.c.title)}</b><span>${esc(L.u.course === 'gce' ? L.u.short : 'GCSE ' + L.u.short)} · Chapter ${esc(L.c.n)}${L.title ? ': ' + esc(L.c.title) : ''}</span></span><span class="wl-cgo" aria-hidden="true">Resume →</span>`;
+  box.innerHTML = `${ringSVG(d, all.length, 'tp-ring')}<span class="wl-ct"><small>Continue</small><b>${esc(L.title || L.c.title)}</b><span>${esc(L.u.course === 'gce' ? L.u.short : 'GCSE ' + L.u.short)} · Chapter ${esc(L.c.n)}${L.title ? ': ' + esc(L.c.title) : ''}</span></span><span class="wl-cgo" aria-hidden="true">Resume →</span>`;
   box.setAttribute('aria-label', `Continue where you left off: ${L.u.short}, ${L.title || L.c.title}`);
   box.hidden = false;
 }
