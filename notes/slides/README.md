@@ -4,6 +4,11 @@ Every workbook chapter has its own folder here. To add a topic PowerPoint, uploa
 in the GitHub repo (Add file → Upload files). **Any file name works**, for example `Network technologies v3.pptx`.
 A PDF also works. If a folder holds more than one file, the first PowerPoint (alphabetically) is used, then PDFs.
 
+**PowerPoint too big for GitHub (over 25 MB)?** Keep it on OneDrive, SharePoint or Google Drive, make a share link
+that anyone with the link can view, and save the link in a text file called `link.txt` in the chapter's folder
+(a Windows `.url` shortcut also works). The topic then shows one **Open PowerPoint** button that opens the link.
+If a folder has both an uploaded file and a link, the uploaded file is used.
+
 What happens next:
 
 1. A GitHub Action (`.github/workflows/slides-manifest.yml`) runs `tools/slides_manifest.py`, which lists every
