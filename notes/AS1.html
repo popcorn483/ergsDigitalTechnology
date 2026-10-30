@@ -1884,6 +1884,12 @@ body.ppv-on{overflow:hidden}
 .ppv-pn,.ppv-zl{font-size:13px;font-variant-numeric:tabular-nums;color:var(--ink-2);min-width:4.5em;text-align:center}
 .ppv-sp{flex:1}
 .ppv-c{flex:1;overflow:auto;background:var(--paper-2);padding:8px;text-align:center;touch-action:pan-x pan-y pinch-zoom}
+.ppv-cr{display:flex;flex-direction:column;align-items:center;gap:0}
+.ppv-cr canvas{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.15);display:block}
+.ppv-cr canvas + canvas{border-top:2px dashed #C9D2DE}
+.ppv-cr[hidden]{display:none}
+.ppv-only{margin:0;padding:6px 14px;font-size:13px;color:var(--ink-2);background:var(--accent-soft,#E4ECFA);border-bottom:1px solid var(--line-2)}
+.ppv-full[aria-pressed="true"]{box-shadow:inset 0 0 0 1.5px currentColor}
 .ppv-c canvas{background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.15);margin:0 auto}
 .ppv-msg{padding:20px;color:var(--ink-2)}
 .has-ppv{flex-wrap:wrap}
@@ -8185,9 +8191,9 @@ const PP_SERIES = e => /^(AS|A2)/.test(BK.id || '') ? String(e.series || (e.year
 const PP_VIEW = ON_WEB ? (() => {
   let data = null;
   const getJ = u => fetch(u, { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null);
-  const load = () => data || (data = Promise.all([getJ('../papers/folders.json'), getJ('../papers/manifest.json'), getJ('../papers/pages.json')]).then(async ([fo, man, pg]) => {
+  const load = () => data || (data = Promise.all([getJ('../papers/folders.json'), getJ('../papers/manifest.json'), getJ('../papers/pages.json'), getJ('../papers/crops.json')]).then(async ([fo, man, pg, cr]) => {
     fo = fo || {}; man = man || {};
-    return { fo, man, pg: pg || {} };
+    return { fo, man, pg: pg || {}, cr: cr || {} };
   }));
   const isMS = n => /(^|[^a-z])ms([^a-z]|$)|mark\s*-?_?scheme|markscheme/i.test(n);
   const asked = new Set();
@@ -8203,8 +8209,10 @@ const PP_VIEW = ON_WEB ? (() => {
       } catch (x) { }
     }
     if (!f || !(f.paper || f.ms)) return null;
-    const pk = D.pg[`${key}|${String(e.q || '').replace(/^Q/i, '')}`] || {};
-    return { paper: f.paper ? '../' + f.paper : null, ms: f.ms ? '../' + f.ms : null, pp: +pk.paper || 1, pm: +pk.ms || 1, key };
+    const qk = `${key}|${String(e.q || '').replace(/^Q/i, '')}`, pk = D.pg[qk] || {}, ck = D.cr[qk] || {};
+    const segs = a => Array.isArray(a) && a.length ? a.filter(x => Array.isArray(x) && x.length === 3) : null;   /* [[page, top, bottom]] as fractions of the page height */
+    const cp = segs(ck.paper), cm = segs(ck.ms);
+    return { paper: f.paper ? '../' + f.paper : null, ms: f.ms ? '../' + f.ms : null, pp: +pk.paper || (cp ? cp[0][0] : 1), pm: +pk.ms || (cm ? cm[0][0] : 1), crop: { paper: cp, ms: cm }, key };
   }
   let lib = null;
   const pdfjs = () => lib || (lib = new Promise((ok, no) => { if (window.pdfjsLib) return ok(window.pdfjsLib); const s = document.createElement('script'); s.src = PDFJS + 'pdf.min.js'; s.onload = () => { try { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; } catch (e) { } ok(window.pdfjsLib); }; s.onerror = () => { lib = null; no(new Error('pdf.js')); }; document.head.append(s); }));
@@ -8216,11 +8224,12 @@ const PP_VIEW = ON_WEB ? (() => {
     const ser = PP_SERIES(e), qn = e.q ? 'Q' + String(e.q).replace(/^Q/i, '') : '';
     v.innerHTML = `<div class="ppv-in"><header class="ppv-h"><div><b>${esc([e.paper, ser, qn].filter(Boolean).join(' · '))}</b><small>CCEA question paper and mark scheme – used with permission</small></div><button type="button" class="ppv-x" aria-label="Close">✕</button></header>
       <div class="ppv-tabs" role="tablist">${F.paper ? `<button type="button" role="tab" data-w="paper">Question</button>` : ''}${F.ms ? `<button type="button" role="tab" data-w="ms">Mark scheme</button>` : ''}</div>
-      <div class="ppv-bar"><button type="button" class="btn" data-pg="-1" aria-label="Previous page">‹</button><span class="ppv-pn" aria-live="polite"></span><button type="button" class="btn" data-pg="1" aria-label="Next page">›</button><span class="ppv-sp"></span><button type="button" class="btn" data-z="-1" aria-label="Zoom out">−</button><span class="ppv-zl"></span><button type="button" class="btn" data-z="1" aria-label="Zoom in">+</button><a class="btn ppv-dl" target="_blank" rel="noopener">Open PDF</a></div>
-      <div class="ppv-c" tabindex="0"><canvas></canvas><p class="ppv-msg" hidden></p></div></div>`;
+      <div class="ppv-bar"><button type="button" class="btn" data-pg="-1" aria-label="Previous page">‹</button><span class="ppv-pn" aria-live="polite"></span><button type="button" class="btn" data-pg="1" aria-label="Next page">›</button><span class="ppv-sp"></span><button type="button" class="btn" data-z="-1" aria-label="Zoom out">−</button><span class="ppv-zl"></span><button type="button" class="btn" data-z="1" aria-label="Zoom in">+</button><button type="button" class="btn ppv-full" aria-pressed="false" hidden>Show whole page</button><a class="btn ppv-dl" target="_blank" rel="noopener">Open PDF</a></div>
+      <p class="ppv-only" hidden>Showing just this question. Use <b>Show whole page</b> to see the rest.</p>
+      <div class="ppv-c" tabindex="0"><canvas></canvas><div class="ppv-cr"></div><p class="ppv-msg" hidden></p></div></div>`;
     document.body.append(v); document.body.classList.add('ppv-on');
-    const st = { w: which === 'ms' && F.ms ? 'ms' : (F.paper ? 'paper' : 'ms'), doc: {}, page: { paper: F.pp, ms: F.pm }, z: 1 };
-    const cv = $('canvas', v), msg = $('.ppv-msg', v), box = $('.ppv-c', v);
+    const st = { w: which === 'ms' && F.ms ? 'ms' : (F.paper ? 'paper' : 'ms'), doc: {}, page: { paper: F.pp, ms: F.pm }, z: 1, full: { paper: false, ms: false } };
+    const cv = $('canvas', v), msg = $('.ppv-msg', v), box = $('.ppv-c', v), crb = $('.ppv-cr', v), fullB = $('.ppv-full', v), only = $('.ppv-only', v);
     const close = () => { v.remove(); document.body.classList.remove('ppv-on'); document.removeEventListener('keydown', key, true); };
     const key = ev => { if (ev.key === 'Escape') { ev.preventDefault(); close(); } else if (ev.key === 'ArrowRight' && ev.target === box) turn(1); else if (ev.key === 'ArrowLeft' && ev.target === box) turn(-1); };
     document.addEventListener('keydown', key, true);
@@ -8233,6 +8242,26 @@ const PP_VIEW = ON_WEB ? (() => {
       try {
         const L = await pdfjs();
         const doc = st.doc[st.w] || (st.doc[st.w] = await L.getDocument(url).promise);
+        const C = F.crop[st.w], cropOn = !!C && !st.full[st.w];
+        fullB.hidden = !C; fullB.setAttribute('aria-pressed', String(!cropOn)); fullB.textContent = cropOn ? 'Show whole page' : 'Just this question';
+        only.hidden = !cropOn; crb.hidden = !cropOn; cv.hidden = cropOn;
+        $$('[data-pg]', v).forEach(b => { b.hidden = cropOn; }); $('.ppv-pn', v).hidden = cropOn;
+        if (cropOn) {   /* only this question: each page segment rendered and cut to its band, stacked */
+          crb.innerHTML = ''; const dpr = Math.min(2, window.devicePixelRatio || 1);
+          for (const [pn, t, b] of C) {
+            if (pn < 1 || pn > doc.numPages) continue;
+            const pg = await doc.getPage(pn), base = pg.getViewport({ scale: 1 }), fit = Math.max(.3, (box.clientWidth - 16) / base.width);
+            const vp = pg.getViewport({ scale: fit * st.z * dpr }), full = document.createElement('canvas');
+            full.width = Math.floor(vp.width); full.height = Math.floor(vp.height);
+            await pg.render({ canvasContext: full.getContext('2d'), viewport: vp }).promise;
+            const y0 = Math.max(0, Math.floor(t * full.height)), y1 = Math.min(full.height, Math.ceil(b * full.height)), out = document.createElement('canvas');
+            out.width = full.width; out.height = Math.max(1, y1 - y0); out.getContext('2d').drawImage(full, 0, y0, full.width, out.height, 0, 0, full.width, out.height);
+            out.style.width = Math.floor(full.width / dpr) + 'px'; out.style.height = Math.floor(out.height / dpr) + 'px';
+            crb.append(out);
+          }
+          st.page[st.w] = C[0][0]; $('.ppv-zl', v).textContent = Math.round(st.z * 100) + '%';
+          return;
+        }
         const n = Math.min(Math.max(1, st.page[st.w]), doc.numPages); st.page[st.w] = n;
         const pg = await doc.getPage(n), base = pg.getViewport({ scale: 1 }), fit = Math.max(.3, (box.clientWidth - 16) / base.width), dpr = Math.min(2, window.devicePixelRatio || 1);
         const vp = pg.getViewport({ scale: fit * st.z * dpr });
@@ -8245,6 +8274,7 @@ const PP_VIEW = ON_WEB ? (() => {
     const turn = d => { st.page[st.w] += d; draw(); };
     $$('[data-w]', v).forEach(b => b.addEventListener('click', () => { st.w = b.dataset.w; draw(); }));
     $$('[data-pg]', v).forEach(b => b.addEventListener('click', () => turn(+b.dataset.pg)));
+    fullB.addEventListener('click', () => { st.full[st.w] = !st.full[st.w]; if (st.full[st.w] && F.crop[st.w]) st.page[st.w] = F.crop[st.w][0][0]; draw(); });
     $$('[data-z]', v).forEach(b => b.addEventListener('click', () => { st.z = Math.min(3, Math.max(.5, st.z + (+b.dataset.z) * .25)); draw(); }));
     $('.ppv-x', v).focus();
     draw();
