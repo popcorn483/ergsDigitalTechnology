@@ -1850,6 +1850,16 @@ body.tut-book #b-gloss{display:none!important}
 .cq-miss ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
 .cq-miss li{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:6px 12px;padding:10px 0;border-top:1px solid var(--line-2);font-size:14px}
 .cq-ms2{font-weight:700;font-variant-numeric:tabular-nums}
+.cq-ask{border:0;padding:26px 24px 20px;border-radius:22px;width:min(440px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);text-align:center;font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.cq-ask::backdrop{background:rgba(10,16,30,.55)}
+.cq-ask-ic{display:grid;place-items:center;width:54px;height:54px;margin:0 auto 10px;border-radius:50%;background:color-mix(in srgb,#E0A100 18%,var(--paper));color:#B07C00}
+.cq-ask-ic svg{width:28px;height:28px}
+.cq-ask h2{margin:0 0 8px;font-size:22px}
+.cq-ask p{margin:0 0 8px;font-size:15.5px;line-height:1.5}
+.cq-ask-s{color:var(--ink-2);font-size:14px!important}
+.cq-ask-b{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:16px 0 10px}
+.cq-ask-b .btn{min-width:150px;justify-content:center}
+.cq-ask-n{color:var(--ink-3);font-size:12.5px!important;margin:0!important}
 .cq-pop{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:300;display:flex;align-items:center;gap:12px;width:min(560px,calc(100vw - 24px));box-sizing:border-box;padding:14px 16px;border-radius:18px;background:#16213A;color:#fff;box-shadow:0 18px 40px -12px rgba(0,0,0,.45);transition:opacity .5s}
 .cq-pop.fade{opacity:0}
 .cq-pop > div{flex:1;min-width:0;display:flex;flex-direction:column}
@@ -8143,12 +8153,20 @@ document.addEventListener('click', e => {
     if (P.pi === 0) { const cc = $('.sheet .chcard'); if (cc) cc.insertAdjacentHTML('beforeend', `<div class="trk-row">${cqCardHTML(P.ch)}${trkBtn(P.ch)}</div>`); }
     const btn = $('#donebtn');
     if (btn && CQ_ON) btn.addEventListener('click', () => setTimeout(() => {
-      const ch = P.ch; if (!state.done[P.p.id] || !chDone(ch) || !isTrk(ch) || !cqItems(ch).length) return;
-      const old = $('.cq-pop'); if (old) old.remove();
-      const c = el('div', { class: 'cq-pop', role: 'status' });
-      c.innerHTML = `${bi('star')}<div><b>Chapter complete – take the chapter quiz</b><span>${cqItems(ch).length} questions on ${esc(ch.title)}</span></div><a class="btn pri" href="#quiz-${esc(ch.id)}">Start the quiz</a><button type="button" class="cq-px" aria-label="Close">✕</button>`;
-      document.body.append(c); $('.cq-px', c).addEventListener('click', () => c.remove()); $('a', c).addEventListener('click', () => c.remove());
-      setTimeout(() => { if (c.isConnected) c.classList.add('fade'); }, 9000); setTimeout(() => c.remove(), 9600);
+      const ch = P.ch; if (!state.done[P.p.id] || !chDone(ch) || !cqItems(ch).length) return;
+      /* topic finished: ask whether they want the chapter quiz now (a real choice, not a toast that fades) */
+      const old = $('.cq-ask'); if (old) old.remove();
+      const b = cqState().best[ch.id], n = cqItems(ch).length;
+      const d = el('dialog', { class: 'cq-ask', 'aria-labelledby': 'cq-ask-t' });
+      d.innerHTML = `<div class="cq-ask-ic">${bi('star')}</div><h2 id="cq-ask-t">Topic complete!</h2><p>You have finished <b>${esc(ch.title)}</b>. Do you want to take the topic quiz now?</p><p class="cq-ask-s">${n} past-paper question${n === 1 ? '' : 's'} on this topic${b ? ` · your best so far ${b.pc}%` : ''}</p><div class="cq-ask-b"><a class="btn pri" href="#quiz-${esc(ch.id)}">Yes, take the quiz</a><button type="button" class="btn" value="no">Not now</button></div><p class="cq-ask-n">You can take it any time from the chapter's first page.</p>`;
+      document.body.append(d);
+      const close = () => { try { d.close(); } catch (e) {} d.remove(); };
+      $('button[value="no"]', d).addEventListener('click', close);
+      $('a', d).addEventListener('click', close);
+      d.addEventListener('click', e => { if (e.target === d) close(); });
+      d.addEventListener('close', () => d.remove());
+      try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+      $('a', d).focus();
     }, 60));
   };
   document.addEventListener('keydown', e => {
