@@ -3160,7 +3160,7 @@ const EXAM_ITEMS = [];
 PAGES.forEach(P => (P.p.exam || []).forEach(e => {
   const ser = String(e.series || ''), spec = /specimen/i.test(ser);
   const yr = spec ? 0 : (parseInt(e.year, 10) || parseInt((ser.match(/\d{4}/) || [])[0], 10) || 1);
-  EXAM_ITEMS.push({ e, P, yr, text: (plain(e.summary) + '   ' + plain(e.tip || '')).toLowerCase() });
+  EXAM_ITEMS.push({ e, P, yr, text: plain(e.summary).toLowerCase() });   /* match glossary terms on what the question asked, not on tips */
 }));
 EXAM_ITEMS.sort((a, b) => b.yr - a.yr || a.P.i - b.P.i);
 function examRef(e) {
@@ -3175,16 +3175,37 @@ function examLink(e) {
   return [PP_PAGE, 'CCEA past papers'];
 }
 const PP_USES = new Map();
-if (EXAM_ITEMS.length) GLOSS.forEach(g => {
-  const names = new Set();
-  const add = n => { n = String(n || '').replace(/\*\*|`/g, '').trim(); if (n.length >= 3) names.add(n.toLowerCase()); };
-  add(g.term); add(g.term.replace(/\s*\([^)]*\)\s*/g, ' ')); (g.term.match(/\(([^)]+)\)/g) || []).forEach(x => add(x.slice(1, -1)));
-  plain(g.alt || '').split(/\s*(?:[,;\/]|\bor\b)\s*/i).forEach(add);
-  if (!names.size) return;
-  const re = new RegExp('(^|[^a-z0-9])(?:' + [...names].sort((a, b) => b.length - a.length).map(n => reEsc(n).replace(/\s+/g, '[\\s-]+')).join('|') + ')(?:s|es)?(?![a-z0-9])', 'i');
-  const seenQ = new Set(), hits = EXAM_ITEMS.filter(x => { if (!re.test(x.text)) return false; const k = examRef(x.e).toLowerCase(); if (seenQ.has(k)) return false; seenQ.add(k); return true; });
-  if (hits.length) PP_USES.set(g, hits);
-});
+/* Glossary -> past-paper links. A term links to a question when the question's summary names it, unless every
+   mention sits inside a longer glossary term (so "data" does not link to "big data" questions, nor "real" to "real-time processing").
+   Hyphenated words count as one word ("8-bit" is not "bit"). Very common terms (named in over 4% of questions, like "data")
+   only link to questions in the term's own chapter, where the word is the topic rather than a passing mention. */
+if (EXAM_ITEMS.length) {
+  const RX = [];
+  GLOSS.forEach(g => {
+    const names = new Set();
+    const add = n => { n = String(n || '').replace(/\*\*|`/g, '').trim(); if (n.length >= 3) names.add(n.toLowerCase()); };
+    add(g.term); add(g.term.replace(/\s*\([^)]*\)\s*/g, ' ')); (g.term.match(/\(([^)]+)\)/g) || []).forEach(x => add(x.slice(1, -1)));
+    plain(g.alt || '').split(/\s*(?:[,;\/]|\bor\b)\s*/i).forEach(add);
+    if (names.size) RX.push([g, new RegExp('(^|[^a-z0-9-])((?:' + [...names].sort((a, b) => b.length - a.length).map(n => reEsc(n).replace(/\s+/g, '[\\s-]+')).join('|') + ')(?:s|es)?)(?![a-z0-9-])', 'gi')]);
+  });
+  const seen = new Map(), freq = new Map(), hitsOf = [];
+  EXAM_ITEMS.forEach(x => {
+    const spans = [];
+    RX.forEach(([g, re]) => { re.lastIndex = 0; let m; while ((m = re.exec(x.text))) { const st = m.index + m[1].length; spans.push([g, st, st + m[2].length]); if (re.lastIndex <= m.index) re.lastIndex = m.index + 1; } });
+    const own = new Set();
+    spans.forEach(([g, a, b]) => { if (!spans.some(([h, c, d]) => h !== g && c <= a && d >= b && d - c > b - a)) own.add(g); });
+    hitsOf.push([x, own]); own.forEach(g => freq.set(g, (freq.get(g) || 0) + 1));
+  });
+  const common = g => (freq.get(g) || 0) > Math.max(3, EXAM_ITEMS.length * 0.04);
+  hitsOf.forEach(([x, own]) => {
+    own.forEach(g => {
+      if (common(g)) { const H = BYID.get(g.page); if (!H || H.ch !== x.P.ch) return; }
+      const k = examRef(x.e).toLowerCase(); let S = seen.get(g); if (!S) seen.set(g, S = new Set());
+      if (S.has(k)) return; S.add(k);
+      if (!PP_USES.has(g)) PP_USES.set(g, []); PP_USES.get(g).push(x);
+    });
+  });
+}
 const ppCount = g => (PP_USES.get(g) || []).length;
 const PPQ = [];
 document.addEventListener('click', async ev => {
