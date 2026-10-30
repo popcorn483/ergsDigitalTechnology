@@ -1,90 +1,97 @@
-# Topic slides for the revision notebooks
+# Topic PowerPoints
 
-Put one PowerPoint per topic in a folder called `slides` next to the notebook pages in the GitHub repo:
+Every workbook chapter has its own folder here. To add a topic PowerPoint, upload it to that chapter's folder
+in the GitHub repo (Add file → Upload files). **Any file name works**, for example `Network technologies v3.pptx`.
+A PDF also works. If a folder holds more than one file, the first PowerPoint (alphabetically) is used, then PDFs.
 
-    U1.html
-    AS1.html
-    slides/T1.pptx
-    slides/G11.pptx
+What happens next:
 
-The file name is the hub topic id (case matters) with `.pptx`. A PDF export (`slides/T1.pdf`) also works if you prefer.
-When a pupil opens the first page of a chapter, the chapter card checks for the file and, if it is there, shows
-"Topic slides" with View (opens in the Office online viewer) and Download. Nothing shows when the file is missing,
-or when the notebook is opened on claude.ai rather than from GitHub Pages.
+1. A GitHub Action (`.github/workflows/slides-manifest.yml`) runs `tools/slides_manifest.py`, which lists every
+   uploaded file in `notes/slides/manifest.json`. Don't edit that file by hand.
+2. The front page topic row and the chapter card on the topic's first workbook page show **View** and **Download**.
+   View opens a PowerPoint in the Office online viewer (a PDF opens directly); Download saves the file.
+3. Until the Action has run, the pages ask the GitHub API about the chapter's folder directly, so a new file usually
+   shows within a minute or two.
 
-The PowerPoint must be publicly reachable (a public repo with GitHub Pages) for the Office viewer to open it.
+Nothing is shown for a topic with no file: no button and no "coming soon". The folder names come from
+`folders.json`; don't rename or move the folders. Each workbook chapter card also shows its folder in a small line
+for teachers, and the front page lists every folder under "Where to upload topic PowerPoints" at the bottom.
+
+The site must be public on GitHub Pages for the Office viewer to open a PowerPoint.
 
 ## A2 1: Information Systems (A21)
 
-| File | Chapter | Topic |
-|---|---|---|
-| `slides/G18.pptx` | 1. Relational database design | G18 – Relational database design |
-| `slides/G19.pptx` | 2. SQL and database management | G19 – SQL and database management |
-| `slides/G20.pptx` | 3. Networks | G20 – Networks |
-| `slides/G21.pptx` | 4. Network security and cloud computing | G21 – Network security and cloud computing |
-| `slides/G22.pptx` | 5. Information systems in organisations | G22 – Information systems in organisations |
-| `slides/G23.pptx` | 6. Legal, ethical and social issues | G23 – Legal, ethical and social issues |
+| Chapter | Upload folder |
+|---|---|
+| 1. Relational database design | `notes/slides/A level/A2 1/01 Relational database design/` |
+| 2. SQL and database management | `notes/slides/A level/A2 1/02 SQL and database management/` |
+| 3. Networks | `notes/slides/A level/A2 1/03 Networks/` |
+| 4. Network security and cloud computing | `notes/slides/A level/A2 1/04 Network security and cloud computing/` |
+| 5. Information systems in organisations | `notes/slides/A level/A2 1/05 Information systems in organisations/` |
+| 6. Legal, ethical and social issues | `notes/slides/A level/A2 1/06 Legal, ethical and social issues/` |
 
-## A2 2: Application Development (coursework guide) (A22)
+## A2 2: Building in Access and VBA (tutorials) (A22)
 
-| File | Chapter | Topic |
-|---|---|---|
-| `slides/G24.pptx` | 1. Getting started and analysis | G24 – Application development project |
-| `slides/G24.pptx` | 2. Design | G24 – Application development project (same file as above) |
-| `slides/G24.pptx` | 3. Building in Access and VBA | G24 – Application development project (same file as above) |
-| `slides/G24.pptx` | 4. Testing | G24 – Application development project (same file as above) |
-| `slides/G24.pptx` | 5. Evaluation, user guide and the finished portfolio | G24 – Application development project (same file as above) |
+| Chapter | Upload folder |
+|---|---|
+| 1. Getting started with Access | `notes/slides/A level/A2 2/01 Getting started with Access/` |
+| 2. Tables and relationships | `notes/slides/A level/A2 2/02 Tables and relationships/` |
+| 3. Queries | `notes/slides/A level/A2 2/03 Queries/` |
+| 4. Forms | `notes/slides/A level/A2 2/04 Forms/` |
+| 5. Reports | `notes/slides/A level/A2 2/05 Reports/` |
+| 6. VBA basics | `notes/slides/A level/A2 2/06 VBA basics/` |
+| 7. VBA task tutorials | `notes/slides/A level/A2 2/07 VBA task tutorials/` |
 
 ## AS 1: Approaches to Systems Development (AS1)
 
-| File | Chapter | Topic |
-|---|---|---|
-| `slides/G1.pptx` | 1. Reasons for systems development | G1 – Reasons for systems development |
-| `slides/G2.pptx` | 2. Analysis | G2 – Analysis |
-| `slides/G3.pptx` | 3. System design, development and testing | G3 – System design, development and testing |
-| `slides/G4.pptx` | 4. System implementation | G4 – System implementation |
-| `slides/G5.pptx` | 5. Alternative development approaches | G5 – Alternative development approaches |
-| `slides/G6.pptx` | 6. Software projects | G6 – Software projects |
-| `slides/G7.pptx` | 7. Security issues | G7 – Security issues |
-| `slides/G8.pptx` | 8. Algorithms | G8 – Algorithms |
-| `slides/G9.pptx` | 9. Fundamentals of programming | G9 – Fundamentals of programming |
-| `slides/G10.pptx` | 10. Object-oriented programming | G10 – Object-oriented programming |
+| Chapter | Upload folder |
+|---|---|
+| 1. Reasons for systems development | `notes/slides/A level/AS 1/01 Reasons for systems development/` |
+| 2. Analysis | `notes/slides/A level/AS 1/02 Analysis/` |
+| 3. System design, development and testing | `notes/slides/A level/AS 1/03 System design, development and testing/` |
+| 4. System implementation | `notes/slides/A level/AS 1/04 System implementation/` |
+| 5. Alternative development approaches | `notes/slides/A level/AS 1/05 Alternative development approaches/` |
+| 6. Software projects | `notes/slides/A level/AS 1/06 Software projects/` |
+| 7. Security issues | `notes/slides/A level/AS 1/07 Security issues/` |
+| 8. Algorithms | `notes/slides/A level/AS 1/08 Algorithms/` |
+| 9. Fundamentals of programming | `notes/slides/A level/AS 1/09 Fundamentals of programming/` |
+| 10. Object-oriented programming | `notes/slides/A level/AS 1/10 Object-oriented programming/` |
 
 ## AS 2: Fundamentals of Digital Technology (AS2)
 
-| File | Chapter | Topic |
-|---|---|---|
-| `slides/G11.pptx` | 1. Data representation | G11 – Data representation |
-| `slides/G12.pptx` | 2. Data and information | G12 – Data and information |
-| `slides/G13.pptx` | 3. Architecture | G13 – Architecture |
-| `slides/G14.pptx` | 4. User interface and data compression | G14 – User interface and data compression |
-| `slides/G15.pptx` | 5. Software | G15 – Software |
-| `slides/G16.pptx` | 6. Web applications | G16 – Web applications |
-| `slides/G17.pptx` | 7. Website development | G17 – Website development |
+| Chapter | Upload folder |
+|---|---|
+| 1. Data representation | `notes/slides/A level/AS 2/01 Data representation/` |
+| 2. Data and information | `notes/slides/A level/AS 2/02 Data and information/` |
+| 3. Architecture | `notes/slides/A level/AS 2/03 Architecture/` |
+| 4. User interface and data compression | `notes/slides/A level/AS 2/04 User interface and data compression/` |
+| 5. Software | `notes/slides/A level/AS 2/05 Software/` |
+| 6. Web applications | `notes/slides/A level/AS 2/06 Web applications/` |
+| 7. Website development | `notes/slides/A level/AS 2/07 Website development/` |
 
 ## Unit 1: Digital Technology (U1)
 
-| File | Chapter | Topic |
-|---|---|---|
-| `slides/T1.pptx` | 1. Digital data | T1 – Digital data |
-| `slides/T2.pptx` | 2. Software | T2 – Software |
-| `slides/T3.pptx` | 3. Database applications | T3 – Database applications |
-| `slides/T4.pptx` | 4. Spreadsheet applications | T4 – Spreadsheet applications |
-| `slides/T5.pptx` | 5. Computer hardware | T5 – Computer hardware |
-| `slides/T6.pptx` | 6. Network technologies | T6 – Network technologies |
-| `slides/T7.pptx` | 7. Cyberspace, network security and data transfer | T7 – Cyberspace, network security and data transfer |
-| `slides/T8.pptx` | 8. Cloud technology | T8 – Cloud technology |
-| `slides/T9.pptx` | 9. Ethical, legal and environmental impact | T9 – Ethical, legal and environmental impact |
-| `slides/T10.pptx` | 10. Digital applications | T10 – Digital applications |
+| Chapter | Upload folder |
+|---|---|
+| 1. Digital data | `notes/slides/GCSE/Unit 1/01 Digital data/` |
+| 2. Software | `notes/slides/GCSE/Unit 1/02 Software/` |
+| 3. Database applications | `notes/slides/GCSE/Unit 1/03 Database applications/` |
+| 4. Spreadsheet applications | `notes/slides/GCSE/Unit 1/04 Spreadsheet applications/` |
+| 5. Computer hardware | `notes/slides/GCSE/Unit 1/05 Computer hardware/` |
+| 6. Network technologies | `notes/slides/GCSE/Unit 1/06 Network technologies/` |
+| 7. Cyberspace, network security and data transfer | `notes/slides/GCSE/Unit 1/07 Cyberspace, network security and data transfer/` |
+| 8. Cloud technology | `notes/slides/GCSE/Unit 1/08 Cloud technology/` |
+| 9. Ethical, legal and environmental impact | `notes/slides/GCSE/Unit 1/09 Ethical, legal and environmental impact/` |
+| 10. Digital applications | `notes/slides/GCSE/Unit 1/10 Digital applications/` |
 
 ## Unit 4: Digital Development Concepts (Programming) (U4)
 
-| File | Chapter | Topic |
-|---|---|---|
-| `slides/T41.pptx` | 1. Contemporary trends in software development | T41 – Contemporary trends in software development |
-| `slides/T42.pptx` | 2. Digital data | T42 – Digital data |
-| `slides/T43.pptx` | 3. Digital design principles | T43 – Digital design principles |
-| `slides/T44.pptx` | 4. Programming constructs | T44 – Programming constructs |
-| `slides/T45.pptx` | 5. Simple error handling techniques | T45 – Simple error handling techniques |
-| `slides/T46.pptx` | 6. Developing test plans and testing a solution | T46 – Developing test plans and testing a solution |
-| `slides/T47.pptx` | 7. Evaluation of digitally authored systems | T47 – Evaluation of digitally authored systems |
+| Chapter | Upload folder |
+|---|---|
+| 1. Contemporary trends in software development | `notes/slides/GCSE/Unit 4/01 Contemporary trends in software development/` |
+| 2. Digital data | `notes/slides/GCSE/Unit 4/02 Digital data/` |
+| 3. Digital design principles | `notes/slides/GCSE/Unit 4/03 Digital design principles/` |
+| 4. Programming constructs | `notes/slides/GCSE/Unit 4/04 Programming constructs/` |
+| 5. Simple error handling techniques | `notes/slides/GCSE/Unit 4/05 Simple error handling techniques/` |
+| 6. Developing test plans and testing a solution | `notes/slides/GCSE/Unit 4/06 Developing test plans and testing a solution/` |
+| 7. Evaluation of digitally authored systems | `notes/slides/GCSE/Unit 4/07 Evaluation of digitally authored systems/` |
