@@ -326,6 +326,31 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 @media (max-width:520px){ .trs-next{grid-template-columns:1fr auto} .trs-next .trs-bar{grid-column:1 / -1;order:3} }
 /* ---------- TROPHIES css (front): END ---------- */
 /* ================= APP: END ================= */
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .btn{width:100%;justify-content:center}
 /* ================= WELCOME: BEGIN (splash + welcome screen + "← Home"; source notes/app/front_welcome.css) ================= */
 /* splash: full screen, hero navy, once per browser session and on app launch; never blocks the page underneath */
 #splash{position:fixed;inset:0;z-index:1000;display:grid;place-items:center;background:#16213A;color:#fff;overflow:hidden;cursor:pointer;opacity:1;transition:opacity .38s ease;-webkit-tap-highlight-color:transparent}
@@ -1064,6 +1089,26 @@ function pImport(file, say) {
   };
   rd.readAsText(file);
 }
+/* iPhone / iPad: Safari has no install prompt, so explain Share › Add to Home Screen in a proper dialog */
+function iosInstallModal() {
+  const old = document.getElementById('ios-add'); if (old) old.remove();
+  const SH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v11M8 7.5l4-4 4 4"/><path d="M8.5 10.5H6.5a1 1 0 00-1 1v8a1 1 0 001 1h11a1 1 0 001-1v-8a1 1 0 00-1-1h-2"/></svg>';
+  const PL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M12 8.5v7M8.5 12h7"/></svg>';
+  const d = document.createElement('dialog'); d.id = 'ios-add'; d.className = 'ios-add'; d.setAttribute('aria-labelledby', 'ios-add-t');
+  d.innerHTML = `<h2 id="ios-add-t">Add the app to your Home Screen</h2>
+    <ol><li><span class="ia-i">${SH}</span><span>Tap the <b>Share</b> button in the browser toolbar (at the bottom in Safari, or top right on iPad).</span></li>
+    <li><span class="ia-i">${PL}</span><span>Scroll down and tap <b>Add to Home Screen</b>.</span></li>
+    <li><span class="ia-i ia-n">3</span><span>Tap <b>Add</b>. The app appears on your Home Screen and works offline.</span></li></ol>
+    <p class="ia-s">Use Safari if you don't see the option in another browser.</p>
+    <button type="button" class="ia-ok" value="ok">Got it</button>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); };
+  d.querySelector('button').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('button').focus();
+}
 (function () {
   const filt = document.querySelector('.filt');
   if (filt) filt.insertAdjacentHTML('beforebegin', `<details class="myprog" id="myprog"><summary><span class="mp-i" aria-hidden="true">✓</span><span><b>My progress</b><span id="mp-sum"></span></span><span class="mp-go">Show</span></summary>
@@ -1085,7 +1130,7 @@ function pImport(file, say) {
     const ibs = [...document.querySelectorAll('.app-inst')], ios = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);   /* hero row + welcome screen */
     const sa = () => window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
     let ev = null; const paint = () => ibs.forEach(b => { b.hidden = sa() || !(ev || ios); });
-    ibs.forEach(b => b.addEventListener('click', async () => { if (ev) { ev.prompt(); try { await ev.userChoice; } catch (e) { } ev = null; paint(); } else if (ios) { const h = b.closest('#welcome,.app-row').querySelector('.app-ios'); if (h) h.hidden = false; } }));
+    ibs.forEach(b => b.addEventListener('click', async () => { if (ev) { ev.prompt(); try { await ev.userChoice; } catch (e) { } ev = null; paint(); } else if (ios) iosInstallModal(); }));
     window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); ev = e; paint(); });
     window.addEventListener('appinstalled', () => { ev = null; paint(); });
     paint();

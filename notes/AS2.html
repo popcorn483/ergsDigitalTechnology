@@ -1945,6 +1945,18 @@ body.ppv-on{overflow:hidden}
 .ppv-stem::before{content:"Question introduction";position:absolute;top:4px;left:10px;font:700 11px/1 var(--sans,system-ui);letter-spacing:.06em;text-transform:uppercase;color:#687386}
 .ppv-stem + .ppv-part{border-top:2px solid #C9D2DE}
 .ppv-stem canvas + canvas,.ppv-part canvas + canvas{border-top:2px dashed #C9D2DE}
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
 /* ---------- TROPHIES (workbook): icons, top-bar pill, rail card, #trophies view, toast. Source notes/app/trophies.css ---------- */
 :root{--tb-a:#D99A5E;--tb-b:#A8642E;--tb-d:#7A4520;--ts-a:#DCE2EA;--ts-b:#8E99A8;--ts-d:#4E5969;--tg-a:#F3C553;--tg-b:#CF9512;--tg-d:#8A6206;--tp-a:#E4F0F4;--tp-b:#93BCCB;--tp-d:#3E7385;--tl-a:var(--paper-2);--tl-b:var(--line);--tl-d:var(--ink-3)}
 .tr-ic{width:28px;height:28px;flex:none;display:block}
@@ -8285,6 +8297,26 @@ function renderProgress(focus) {
 let INSTALL = null;
 const IOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
 const STANDALONE = () => window.matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+/* iPhone / iPad: Safari has no install prompt, so explain Share › Add to Home Screen in a proper dialog */
+function iosInstallModal() {
+  const old = document.getElementById('ios-add'); if (old) old.remove();
+  const SH = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v11M8 7.5l4-4 4 4"/><path d="M8.5 10.5H6.5a1 1 0 00-1 1v8a1 1 0 001 1h11a1 1 0 001-1v-8a1 1 0 00-1-1h-2"/></svg>';
+  const PL = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="3.5"/><path d="M12 8.5v7M8.5 12h7"/></svg>';
+  const d = document.createElement('dialog'); d.id = 'ios-add'; d.className = 'ios-add'; d.setAttribute('aria-labelledby', 'ios-add-t');
+  d.innerHTML = `<h2 id="ios-add-t">Add the app to your Home Screen</h2>
+    <ol><li><span class="ia-i">${SH}</span><span>Tap the <b>Share</b> button in the browser toolbar (at the bottom in Safari, or top right on iPad).</span></li>
+    <li><span class="ia-i">${PL}</span><span>Scroll down and tap <b>Add to Home Screen</b>.</span></li>
+    <li><span class="ia-i ia-n">3</span><span>Tap <b>Add</b>. The app appears on your Home Screen and works offline.</span></li></ol>
+    <p class="ia-s">Use Safari if you don't see the option in another browser.</p>
+    <button type="button" class="ia-ok" value="ok">Got it</button>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); };
+  d.querySelector('button').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('button').focus();
+}
 function appMenu() {
   const mm = $('#libmenu'); if (!mm || mm.querySelector('.app-m')) return;
   mm.insertAdjacentHTML('afterbegin', `<div class="app-m"><a class="hubl" href="#progress">${icon('chk')}My progress</a><a class="hubl app-mc" href="${esc((ON_WEB ? '../index.html' : FRONT_WEB) + '#mycourse')}"${ON_WEB ? '' : ' target="_blank" rel="noopener"'}>${icon('book')}My course</a>${ON_WEB ? `<button type="button" class="hubl app-inst" hidden>${icon('play')}Install app</button><p class="app-ios" hidden>On iPhone or iPad: tap <b>Share</b> › <b>Add to Home Screen</b>.</p><span class="app-off" hidden>● Available offline</span><button type="button" class="hubl app-chk" data-app-check>${icon('play')}<span>Check for updates</span></button><small class="app-ver" data-app-ver></small>` : ''}</div><hr>`);
@@ -8292,7 +8324,7 @@ function appMenu() {
   const paint = () => { ib.hidden = STANDALONE() || !(INSTALL || IOS); };
   ib.addEventListener('click', async () => {
     if (INSTALL) { INSTALL.prompt(); try { await INSTALL.userChoice; } catch (e) { } INSTALL = null; paint(); }
-    else if (IOS) mm.querySelector('.app-ios').hidden = false;
+    else if (IOS) iosInstallModal();
   });
   window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); INSTALL = e; paint(); });
   window.addEventListener('appinstalled', () => { INSTALL = null; paint(); });
