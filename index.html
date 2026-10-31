@@ -350,6 +350,19 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 .ia-i svg{width:20px;height:20px}
 .ia-n{font-weight:700;font-size:15px}
 .ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
 .ios-add .btn{width:100%;justify-content:center}
 /* ================= WELCOME: BEGIN (splash + welcome screen + "← Home"; source notes/app/front_welcome.css) ================= */
 /* splash: full screen, hero navy, once per browser session and on app launch; never blocks the page underneath */
@@ -536,6 +549,21 @@ html:not(.wl-on) #welcome{display:none}
 #welcome .wl-cont .wl-ct b{font-size:13px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-family:var(--sans);letter-spacing:0;text-transform:none}
 #welcome .wl-cont .wl-ct > span,#welcome .wl-cont .wl-cgo{display:none}
 @media (max-width:520px){ #welcome .wl-cont{max-width:min(210px,calc(100vw - 24px))} #welcome:has(.wl-cont:not([hidden])){padding-top:max(72px,calc(env(safe-area-inset-top) + 64px))} }
+/* Share dialog */
+.wl-share{border:0;padding:26px 22px 20px;border-radius:20px;width:min(380px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);text-align:center;box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.wl-share::backdrop{background:rgba(10,16,30,.55)}
+.wl-share h2{margin:0 0 6px;font-size:20px}
+.wl-share p{margin:0 0 10px;font-size:14.5px;line-height:1.45;color:var(--ink-2)}
+.ws-x{position:absolute;top:10px;right:10px;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:var(--paper);color:var(--ink-2);font-size:15px;cursor:pointer}
+.ws-qr{width:220px;max-width:66vw;aspect-ratio:1;margin:6px auto 10px;background:#fff;border-radius:14px;padding:10px;box-sizing:border-box;display:grid;place-items:center;box-shadow:inset 0 0 0 1px #D3D9E2}
+.ws-qr svg{width:100%;height:100%;display:block}
+.ws-load{font-size:13px;color:#687386}
+.ws-url{font-family:var(--mono,monospace);font-size:13px!important;word-break:break-all;color:var(--accent)!important;user-select:all}
+.ws-b{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:4px}
+.ws-btn{min-height:42px;padding:0 18px;border-radius:12px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font:700 14.5px/1 var(--sans);cursor:pointer}
+.ws-pri{background:var(--accent);border-color:var(--accent);color:var(--accent-ink,#fff)}
+.ws-btn:focus-visible,.ws-x:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.ws-msg{min-height:1.2em;margin:8px 0 0!important;font-size:13px!important;color:#18744A!important}
 /* ================= WELCOME: END ================= */
 /* ================= DESIGN: BEGIN (front page calm-down layer; source notes/app/front_design.css) =================
    Loaded last on the front page. Fewer shadows and borders, one radius scale (10 / 14 / 18), no decorative rainbow strips,
@@ -702,7 +730,7 @@ html:not(.wl-on) #welcome{display:none}
       <button type="button" class="wl-s app-inst" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19.5h14"/></svg>Install app</button>
       <button type="button" class="wl-s" id="wl-mcb" aria-expanded="false" aria-controls="wl-mc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>My course</span></button>
       <a class="wl-s" href="#progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.2l2.4 2.4 4.6-5"/></svg>My progress</a>
-      <button type="button" class="wl-s" id="wl-ab" aria-expanded="false" aria-controls="wl-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg>About</button>
+      <button type="button" class="wl-s" id="wl-ab" aria-expanded="false" aria-controls="wl-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg>About</button><button type="button" class="wl-s" id="wl-share-b" aria-haspopup="dialog"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6l6.8-4.2M8.6 13.4l6.8 4.2"/></svg>Share</button>
     </div>
     <div class="mc-slot wl-mc" id="wl-mc" hidden></div>
     <p class="wl-ios app-ios" hidden>On iPhone or iPad: tap <b>Share</b> › <b>Add to Home Screen</b>.</p>
@@ -1457,6 +1485,35 @@ function route() {
   if (!WEB) { const v = document.querySelector('.wl-ver'); if (v) v.remove(); }   /* updates: web host only */
 })();
 /* ================= WELCOME: END ================= */
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
 function show(c, keepFilters) {
   course = c;
   if (!keepFilters) { F.units.clear(); }
