@@ -299,6 +299,31 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 .trc-u b{color:var(--ink)}
 .trc-n{margin:8px 0 0 46px;font-size:12.5px;color:var(--ink-3);max-width:70ch}
 @media (max-width:520px){ .trc-us,.trc-n{margin-left:0} }
+/* the home-page trophy strip */
+.trs{margin:0 0 14px;padding:12px 14px;border-radius:var(--r-m,14px);background:var(--paper);box-shadow:inset 0 0 0 1px var(--line-2);font-family:var(--sans);display:grid;gap:10px}
+.trs-main{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink)}
+.trs-main .tr-ic{width:34px;height:34px}
+.trs-t{flex:1;min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 14px}
+.trs-t b{font-size:15px}
+.trs-tl{display:inline-flex;flex-wrap:wrap;gap:4px 12px;font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
+.trs-k{display:inline-flex;align-items:center;gap:6px}
+.trs-k i{width:11px;height:11px;border-radius:50%;box-shadow:inset 0 0 0 1px rgba(0,0,0,.18)}
+.trs-k.t-bronze i{background:var(--tb-a)}.trs-k.t-silver i{background:var(--ts-a)}.trs-k.t-gold i{background:var(--tg-a)}.trs-k.t-platinum i{background:var(--tp-b)}
+.trs-kn{font-weight:400;color:var(--ink-2)}
+.trs-none{font-size:13px;font-weight:400;color:var(--ink-3)}
+.trs-go{font-size:22px;line-height:1;color:var(--ink-3)}
+.trs-main:hover .trs-go{color:var(--ink)}
+.trs-main:focus-visible,.trs-u:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:8px}
+.trs-next{display:grid;grid-template-columns:1fr minmax(60px,120px) auto;align-items:center;gap:10px;font-size:13px;color:var(--ink-2);padding-top:10px;border-top:1px solid var(--line-2)}
+.trs-next b{color:var(--ink)}
+.trs-bar,.trs-ub{height:6px;border-radius:6px;background:var(--line-2);overflow:hidden}
+.trs-bar i,.trs-ub i{display:block;height:100%;border-radius:6px;background:var(--tg-b)}
+.trs-next small,.trs-u small{color:var(--ink-3);font-variant-numeric:tabular-nums;font-size:12px}
+.trs-us{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:6px 16px}
+.trs-u{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:8px;font-size:12.5px;font-weight:700;color:var(--ink-2);text-decoration:none}
+.trs-u:hover{color:var(--ink)}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@media (max-width:520px){ .trs-next{grid-template-columns:1fr auto} .trs-next .trs-bar{grid-column:1 / -1;order:3} }
 /* ---------- TROPHIES css (front): END ---------- */
 /* ================= APP: END ================= */
 /* ================= WELCOME: BEGIN (splash + welcome screen + "← Home"; source notes/app/front_welcome.css) ================= */
@@ -1244,6 +1269,29 @@ function trCabHTML(course) {
     try { const body = document.getElementById('mp-body'), sc = myScope(); if (!body || !sc) return; const all = body.querySelector('.mp-all'); if (all) all.insertAdjacentHTML('afterend', trCabHTML(sc.course)); } catch (e) { }
   };
 }
+/* a slim, clean trophy strip under the course switch: the cabinet's tier totals, each unit's count, and the closest next trophy */
+function trNext(course) {
+  const C = TR_COURSE[course], ids = trScope(course).concat(C.cw); let best = null;
+  ids.forEach(id => {
+    const c = trCache(id), names = {}; TR_THEORY_DEFS.forEach(d => { names[d[0]] = d[2]; }); (c.defs || []).forEach(d => { names[d[0]] = d[2]; });
+    Object.entries(c.prog || {}).forEach(([t, p]) => { if (!Array.isArray(p) || !p[1] || (c.earned || {})[t]) return; const r = p[0] / p[1]; if (r < 1 && names[t] && (!best || r > best.r)) best = { r, id, name: names[t], h: p[0], n: p[1] }; });
+  });
+  return best;
+}
+function trStrip() {
+  const seg = document.querySelector('.seg'); if (!seg) return;
+  const fu = document.querySelector('#units .unit[data-unit]'), uu = fu && UNITS.find(u => u.id === fu.dataset.unit), on = seg.querySelector('[aria-pressed="true"]');
+  const course = uu ? uu.course : on && on.dataset.course === 'gce' ? 'gce' : 'gcse', C = TR_COURSE[course];
+  const cab = trCabinet(course), units = cab.scope.concat(C.cw).map(id => UNITS.find(u => u.id === id)).filter(Boolean);
+  const nx = trNext(course), go = (nx && UNITS.find(u => u.id === nx.id)) || units[0];
+  const tiers = ['platinum', 'gold', 'silver', 'bronze'].filter(k => cab.tiers[k]);
+  const old = document.getElementById('tr-strip'); if (old) old.remove();
+  seg.insertAdjacentHTML('afterend', `<section class="trs" id="tr-strip" aria-labelledby="trs-h">
+    <a class="trs-main" href="${go ? esc(go.file) + '#trophies' : '#'}">${trIcon(cab.total ? 'gold' : '', true)}<span class="trs-t"><b id="trs-h">${esc(C.name)} trophies</b><span class="trs-tl">${tiers.length ? tiers.map(k => `<span class="trs-k t-${k}"><i aria-hidden="true"></i>${cab.tiers[k]} <span class="trs-kn">${k}</span></span>`).join('') : '<span class="trs-none">None yet: cover your first page to earn one</span>'}</span></span><span class="trs-go" aria-hidden="true">›</span></a>
+    ${nx ? `<div class="trs-next"><span>Next: <b>${esc(nx.name)}</b> in ${esc(TR_SHORT[nx.id])}</span><span class="trs-bar" aria-hidden="true"><i style="width:${Math.round(nx.r * 100)}%"></i></span><small>${nx.h} of ${nx.n}</small></div>` : ''}
+    <div class="trs-us">${units.map(u => { const n = cab.per[u.id] || 0; return `<a class="trs-u" href="${esc(u.file)}#trophies" title="${esc(u.short)}: ${n} of 100 trophies"><span>${esc(u.short)}</span><span class="trs-ub" aria-hidden="true"><i style="width:${n}%"></i></span><small>${n}/100</small></a>`; }).join('')}</div></section>`);
+}
+{ const ar2 = appRings; appRings = function () { ar2.apply(this, arguments); try { trStrip(); } catch (e) { } }; }
 /* ---------- TROPHIES (front): END ---------- */
 /* ================= APP: END ================= */
 /* ================= WELCOME: BEGIN =================
