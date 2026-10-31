@@ -2076,6 +2076,40 @@ body.ppv-on{overflow:hidden}
 }
 @media print{ .tr-pill,.tr-toast{display:none!important} }
 /* ---------- TROPHIES css: END ---------- */
+/* ---------- NOTES ⇄ POWERPOINT (source notes/app/slides_view.css) ---------- */
+.sv{position:fixed;left:0;right:0;bottom:0;top:calc(var(--barh) + env(safe-area-inset-top,0px));z-index:45;display:flex;flex-direction:column;background:var(--desk,#E6EAF0);transform:translateX(100%);transition:transform .32s cubic-bezier(.2,.7,.2,1);box-shadow:-12px 0 30px -18px rgba(0,0,0,.45);visibility:hidden}
+body.sv-on .sv{transform:none;visibility:visible}
+.sv.drag{transition:none;visibility:visible}
+.sv-h{display:flex;align-items:center;gap:8px;padding:8px max(12px,env(safe-area-inset-right,0px)) 8px max(12px,env(safe-area-inset-left,0px));background:var(--paper);border-bottom:1px solid var(--line);font-family:var(--sans);touch-action:pan-y}
+.sv-back{flex:none;min-height:36px;padding:0 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);font:700 14px/1 var(--sans);cursor:pointer}
+.sv-tabs{display:flex;gap:6px;min-width:0;overflow-x:auto;scrollbar-width:none}
+.sv-tabs::-webkit-scrollbar{display:none}
+.sv-tabs button{flex:none;min-height:34px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--ink-2);font:700 13px/1 var(--sans);cursor:pointer;white-space:nowrap}
+.sv-tabs button[aria-selected="true"]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.sv-one{font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.sv-tmp{font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--warn,#8E5300);background:var(--warn-soft,#FFF0D6);padding:2px 6px;border-radius:6px;margin-left:6px}
+.sv-sp{flex:1}
+.sv-a{flex:none;font:700 13px/1 var(--sans);color:var(--accent);text-decoration:none;padding:8px 4px;white-space:nowrap}
+.sv-a[hidden]{display:none}
+.sv-edge{position:absolute;left:0;top:52px;bottom:0;width:22px;z-index:2;touch-action:pan-y}
+.sv-b{position:relative;flex:1;min-height:0;display:flex}
+.sv-f{flex:1;width:100%;height:100%;border:0;background:#fff}
+.sv-f[hidden]{display:none}
+.sv-msg{margin:auto;padding:24px;text-align:center;font-family:var(--sans);color:var(--ink-2)}
+.sv-btn{display:inline-flex;align-items:center;min-height:42px;padding:0 18px;border-radius:12px;background:var(--accent);color:var(--accent-ink,#fff);font-weight:700;text-decoration:none}
+.sv-sw{position:fixed;left:50%;bottom:max(14px,env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:46;display:flex;padding:4px;border-radius:999px;background:var(--paper);box-shadow:0 8px 24px -8px rgba(0,0,0,.35),inset 0 0 0 1px var(--line);font-family:var(--sans)}
+.sv-sw[hidden]{display:none}
+.sv-sw button{min-height:34px;padding:0 14px;border:0;border-radius:999px;background:none;color:var(--ink-2);font:700 13px/1 var(--sans);cursor:pointer}
+.sv-sw button[aria-pressed="true"]{background:var(--ink);color:var(--paper)}
+.sv-sw button:focus-visible,.sv-back:focus-visible,.sv-tabs button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.sv-sw.hint [data-sv="slides"]{animation:sv-pulse 1.6s ease-in-out 3}
+@keyframes sv-pulse{50%{box-shadow:0 0 0 4px color-mix(in srgb,var(--accent) 35%,transparent)}}
+body.sv-on #main{visibility:hidden}
+body:has(#sv-sw:not([hidden])) #main{padding-bottom:72px}
+@media (max-width:520px){ .sv-new{display:none} }
+@media (prefers-reduced-motion: reduce){ .sv{transition:none} .sv-sw.hint [data-sv="slides"]{animation:none} }
+@media print{ .sv,.sv-sw{display:none!important} }
+/* ---------- NOTES ⇄ POWERPOINT css: END ---------- */
 /* ================= APP: END ================= */
 
 
@@ -9310,6 +9344,106 @@ try { window.__trophies = { defs: () => TR_DEFS.map(d => ({ id: d.id, cat: d.cat
 /* first run: record what is already earned quietly (no toast for old progress), then paint */
 setTimeout(() => { try { trCheck(false); } catch (e) { /* never break the workbook */ } }, 0);
 /* ---------- TROPHIES: END ---------- */
+/* ---------- NOTES ⇄ POWERPOINT (source notes/app/slides_view.js): the topic's PowerPoint opens beside the workbook.
+   Swipe left on the notes (touch) or tap the "Notes | PowerPoint" switch to slide the PowerPoint in; swipe right on its edge
+   or header, tap "Notes", or press Escape to slide back. The deck is shown with Microsoft's online viewer (embed mode); several
+   decks for one topic get tabs; a deck too big for the viewer (over 10 MB) or a share link gets Open / Download buttons. ---------- */
+const SV = { open: false, ch: null, decks: [], i: 0, el: null, sw: null, loaded: '' };
+const SV_HINT = 'notes-slides-hint';
+function svDecks(f) {
+  if (!f) return [];
+  if (f.link) return [{ name: f.name || 'PowerPoint', link: f.link }];
+  return [f].concat(f.more || []).map(x => ({ name: x.name, rel: x.rel, ppt: x.ppt, temp: x.temp, size: x.size || 0, view: x.view }));
+}
+const svTitle = n => String(n || '').replace(/\.(pptx?|pdf)$/i, '').replace(/^\d+\s*[-–.]\s*/, '').replace(/^U\d+\s+\d+\s*-\s*/, '').trim() || 'PowerPoint';
+function svBuild() {
+  if (SV.el) return;
+  document.body.insertAdjacentHTML('beforeend', `<section class="sv" id="sv" aria-label="Topic PowerPoint" aria-hidden="true" inert>
+    <div class="sv-h"><button type="button" class="sv-back" data-sv-close>‹ Notes</button><div class="sv-tabs" role="tablist" aria-label="PowerPoints for this topic"></div><span class="sv-sp"></span><a class="sv-a sv-new" target="_blank" rel="noopener">Open in new tab</a><a class="sv-a sv-dl" download>Download</a></div>
+    <div class="sv-edge" aria-hidden="true"></div>
+    <div class="sv-b"><div class="sv-msg" hidden></div><iframe class="sv-f" title="Topic PowerPoint" allowfullscreen loading="lazy"></iframe></div></section>
+    <div class="sv-sw" id="sv-sw" role="group" aria-label="Show the notes or the PowerPoint" hidden><button type="button" data-sv="notes" aria-pressed="true">Notes</button><button type="button" data-sv="slides" aria-pressed="false">PowerPoint</button></div>`);
+  SV.el = document.getElementById('sv'); SV.sw = document.getElementById('sv-sw');
+  SV.sw.addEventListener('click', e => { const b = e.target.closest('[data-sv]'); if (b) svShow(b.dataset.sv === 'slides'); });
+  SV.el.addEventListener('click', e => { if (e.target.closest('[data-sv-close]')) svShow(false); const t = e.target.closest('[data-sv-i]'); if (t) { SV.i = +t.dataset.svI; svPaint(); } });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && SV.open) { e.preventDefault(); svShow(false); } }, true);
+  svSwipe();
+}
+function svPaint() {
+  const d = SV.decks[SV.i]; if (!d || !SV.el) return;
+  const tabs = SV.el.querySelector('.sv-tabs');
+  tabs.innerHTML = SV.decks.length > 1 ? SV.decks.map((x, k) => `<button type="button" role="tab" aria-selected="${k === SV.i}" data-sv-i="${k}">${esc(svTitle(x.name))}</button>`).join('') : `<b class="sv-one">${esc(svTitle(d.name))}${d.temp ? ' <span class="sv-tmp">Temporary</span>' : ''}</b>`;
+  const f = SV.el.querySelector('.sv-f'), msg = SV.el.querySelector('.sv-msg'), nw = SV.el.querySelector('.sv-new'), dl = SV.el.querySelector('.sv-dl');
+  dl.hidden = !d.rel; if (d.rel) dl.href = d.rel;
+  if (d.link) { nw.href = d.link; nw.hidden = false; f.hidden = true; msg.hidden = false; msg.innerHTML = `<p>This PowerPoint is stored online.</p><a class="sv-btn" href="${esc(d.link)}" target="_blank" rel="noopener">Open the PowerPoint</a>`; return; }
+  const abs = new URL(d.rel, location.href).href;
+  if (!d.ppt) { nw.href = d.rel; nw.hidden = false; f.hidden = false; msg.hidden = true; if (SV.loaded !== d.rel) { f.src = d.rel; SV.loaded = d.rel; } return; }
+  if (!d.view) { nw.hidden = true; f.hidden = true; msg.hidden = false; msg.innerHTML = `<p>This PowerPoint is too big (${(d.size / 1048576).toFixed(0)} MB) for the online viewer.</p><a class="sv-btn" href="${esc(d.rel)}" download>Download it</a>`; return; }
+  const emb = 'https://view.officeapps.live.com/op/embed.aspx?src=' + encodeURIComponent(abs);
+  nw.href = d.view; nw.hidden = false; f.hidden = false; msg.hidden = true;
+  if (SV.open && SV.loaded !== emb) { f.src = emb; SV.loaded = emb; }
+}
+function svShow(on) {
+  if (!SV.el || (on && !SV.decks.length)) return;
+  SV.open = !!on;
+  document.body.classList.toggle('sv-on', SV.open);
+  SV.el.setAttribute('aria-hidden', String(!SV.open)); SV.el.inert = !SV.open;
+  SV.el.style.transform = ''; const mn = document.getElementById('main'); if (mn) mn.style.transform = '';
+  SV.sw.querySelectorAll('[data-sv]').forEach(b => b.setAttribute('aria-pressed', String((b.dataset.sv === 'slides') === SV.open)));
+  if (SV.open) { svPaint(); try { localStorage.setItem(SV_HINT, '1'); } catch (e) { } SV.sw.classList.remove('hint'); const b = SV.el.querySelector('.sv-back'); if (b) b.focus({ preventScroll: true }); }
+  else { const b = SV.sw.querySelector('[data-sv="slides"]'); if (b && SV.el.contains(document.activeElement)) b.focus({ preventScroll: true }); }
+}
+/* touch swipes: left on the notes opens the PowerPoint, right on its header or left edge closes it (the viewer frame keeps its own touches) */
+function svSwipe() {
+  const skip = t => t.closest('input,textarea,select,pre,code,table,.tbl,.scroll-x,canvas,iframe,video,[contenteditable],.rail,.drawer,.libmenu,dialog,.ppv,.cq-o,[data-noswipe],.sv-tabs');
+  let x0 = 0, y0 = 0, t0 = 0, on = false, dir = 0, from = null;
+  document.addEventListener('touchstart', e => {
+    if (e.touches.length !== 1 || !SV.decks.length) { on = false; return; }
+    const t = e.target; from = SV.open ? (t.closest('.sv-h,.sv-edge') ? 'sv' : null) : (t.closest('#main') && !skip(t) ? 'main' : null);
+    if (!from || (getSelection && String(getSelection()).length)) { on = false; return; }
+    x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; t0 = Date.now(); on = true; dir = 0;
+  }, { passive: true });
+  document.addEventListener('touchmove', e => {
+    if (!on) return;
+    const dx = e.touches[0].clientX - x0, dy = e.touches[0].clientY - y0;
+    if (!dir) { if (Math.abs(dx) < 10 && Math.abs(dy) < 10) return; dir = Math.abs(dx) > Math.abs(dy) * 1.4 ? 1 : -1; if (dir < 0) { on = false; return; } }
+    if (RM()) return;
+    const w = window.innerWidth;
+    if (from === 'main' && dx < 0) { SV.el.style.transform = `translateX(${Math.max(0, w + dx)}px)`; SV.el.classList.add('drag'); }
+    if (from === 'sv' && dx > 0) { SV.el.style.transform = `translateX(${dx}px)`; SV.el.classList.add('drag'); }
+  }, { passive: true });
+  document.addEventListener('touchend', e => {
+    if (!on) return; on = false; SV.el.classList.remove('drag');
+    const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0, fast = Date.now() - t0 < 300;
+    const far = Math.abs(dx) > Math.min(120, window.innerWidth * 0.28) || (fast && Math.abs(dx) > 50);
+    if (dir === 1 && far && Math.abs(dx) > Math.abs(dy) * 1.4) { if (from === 'main' && dx < 0) { svShow(true); return; } if (from === 'sv' && dx > 0) { svShow(false); return; } }
+    SV.el.style.transform = '';
+  }, { passive: true });
+}
+/* which topic is on screen: load its decks and show the switch */
+function svUpdate() {
+  if (!ON_WEB || typeof findSlides !== 'function') return;
+  const P = PAGES[cur], ch = P && !onCover ? P.ch : null;
+  if (!ch) { if (SV.sw) SV.sw.hidden = true; if (SV.open) svShow(false); return; }
+  if (ch === SV.ch) { if (SV.sw) SV.sw.hidden = !SV.decks.length; return; }
+  SV.ch = ch; SV.decks = []; SV.i = 0; SV.loaded = '';
+  findSlides(ch).then(f => {
+    if (SV.ch !== ch) return;
+    SV.decks = svDecks(f); svBuild();
+    const fr = SV.el.querySelector('.sv-f'); fr.removeAttribute('src');
+    SV.sw.hidden = !SV.decks.length;
+    if (!SV.decks.length) { if (SV.open) svShow(false); return; }
+    let seen = false; try { seen = !!localStorage.getItem(SV_HINT); } catch (e) { }
+    SV.sw.classList.toggle('hint', !seen);
+    if (SV.open) svPaint();
+  }).catch(() => { });
+}
+if (ON_WEB) {
+  const rp = renderPage;
+  renderPage = function () { const r = rp.apply(this, arguments); try { svUpdate(); } catch (e) { } return r; };
+  window.addEventListener('hashchange', () => setTimeout(() => { try { svUpdate(); } catch (e) { } }, 0));
+}
+/* ---------- NOTES ⇄ POWERPOINT: END ---------- */
 /* ================= APP: END ================= */
 /* ================= boot ================= */
 buildRail(); updateProgress(); syncMenuBtn();
