@@ -6,6 +6,8 @@ deduplicated, newest series first. Writes papers/topics.json:
                                "items": [ { "k": "AS2|Summer 2025|1(c)", "s": "Summer 2025", "q": "1(c)", "m": 2, "t": "summary" } ] } ] } ],
     "ccea_reports": { "gce": { "Summer 2025": "<CCEA examiner report URL>" }, "gcse": {} } }
 
+Each topic also lists its workbook "pages" [{"id": "c01-p01", "s": "spec wording"}] and each item the page ids "p" it sits on
+(the Teacher area's exam trends drill down to spec points with them).
 k is the key used by papers/crops.json and papers/pages.json (<book>|<series>|<question>), s the series (folders.json
 spelling), q the question as printed, m the marks the workbook gives (null when it does not; the page then uses the
 "marks" papers/crops.json reads off the paper), t the workbook's one-line summary. ccea_reports lists the CCEA examiner
@@ -70,8 +72,10 @@ def main():
         gce = "GCE" in (bk.get("qual") or "")
         topics = []
         for ch in d.get("chapters", []):
-            seen, items = set(), []
+            seen, items, byk, pages = set(), [], {}, []
             for pg in ch.get("pages", []):
+                if pg.get("id"):
+                    pages.append({"id": pg["id"], "s": re.sub(r"\s+", " ", str(pg.get("spec") or "")).strip()})
                 for e in pg.get("exam") or []:
                     if not e.get("q"):
                         continue
@@ -81,14 +85,17 @@ def main():
                     if e.get("report") and s not in reports["gce" if gce else "gcse"]:
                         reports["gce" if gce else "gcse"][s] = e["report"]
                     if k in seen:
+                        if pg.get("id") and pg["id"] not in byk[k]["p"]:
+                            byk[k]["p"].append(pg["id"])
                         continue
                     seen.add(k)
-                    items.append({"k": k, "s": s, "q": q, "m": e.get("marks") if isinstance(e.get("marks"), int) else None,
-                                  "t": (e.get("summary") or "").strip()})
+                    byk[k] = {"k": k, "s": s, "q": q, "m": e.get("marks") if isinstance(e.get("marks"), int) else None,
+                              "t": (e.get("summary") or "").strip(), "p": [pg["id"]] if pg.get("id") else []}
+                    items.append(byk[k])
             if not items:
                 continue
             items.sort(key=lambda x: (ser_rank(x["s"]), q_rank(x["q"])))
-            topics.append({"n": ch.get("n"), "title": ch.get("title", ""), "items": items})
+            topics.append({"n": ch.get("n"), "title": ch.get("title", ""), "items": items, "pages": pages})
         if topics:
             books.append({"id": b, "short": SHORT.get(b, b), "title": (bk.get("title") or "").split(": ", 1)[-1],
                           "course": "gce" if gce else "gcse", "topics": topics})
