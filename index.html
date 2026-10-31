@@ -363,6 +363,45 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 .ia-i svg{width:20px;height:20px}
 .ia-n{font-weight:700;font-size:15px}
 .ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
 .ios-add .btn{width:100%;justify-content:center}
 /* ================= WELCOME: BEGIN (splash + welcome screen + "← Home"; source notes/app/front_welcome.css) ================= */
 /* splash: full screen, hero navy, once per browser session and on app launch; never blocks the page underneath */
@@ -661,6 +700,22 @@ html:not(.wl-on) #welcome{display:none}
 .mp-pn{font-weight:400;color:var(--ink-2);font-variant-numeric:tabular-nums}
 .mp-pill[aria-expanded="true"]{box-shadow:inset 0 0 0 1.5px #18744A}
 @media (max-width:380px){ .mp-pt{display:none} }
+/* several PowerPoints for one topic */
+.ppt-many{position:relative;display:inline-block}
+.tp:has(.ppt-many[open]),.unit:has(.ppt-many[open]){position:relative;z-index:40}
+.ppt-many > summary{list-style:none;cursor:pointer}
+.ppt-many > summary::-webkit-details-marker{display:none}
+.ppt-n{position:absolute;top:-6px;right:-6px;min-width:18px;height:18px;padding:0 4px;box-sizing:border-box;border-radius:9px;background:var(--cc-d,var(--accent));color:#fff;font:700 11px/18px var(--sans);font-style:normal;text-align:center;box-shadow:0 0 0 2px var(--paper)}
+.ppt-menu{position:absolute;z-index:30;right:0;top:calc(100% + 8px);width:min(300px,calc(100vw - 40px));padding:12px;border-radius:14px;background:var(--paper);box-shadow:0 12px 32px -10px rgba(0,0,0,.35),inset 0 0 0 1px var(--line);font-family:var(--sans)}
+.ppt-menu b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:0 0 6px}
+.ppt-menu ul{list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.ppt-menu li{display:flex;align-items:center;gap:10px;padding:7px 6px;border-radius:8px;font-size:14px}
+.ppt-menu li:hover{background:var(--paper-2)}
+.ppt-menu li > span{flex:1;min-width:0;display:flex;flex-direction:column;font-weight:700;color:var(--ink)}
+.ppt-menu small{font-weight:400;font-size:12px;color:var(--ink-3)}
+.ppt-menu a{font-weight:700;font-size:13.5px;color:var(--cc-d,var(--accent));text-decoration:none;white-space:nowrap}
+.ppt-menu a:hover{text-decoration:underline}
+@media (max-width:699px){ .ppt-menu{right:auto;left:-60px} }
 /* ================= DESIGN: END ================= */
 </style>
 </head>
@@ -803,7 +858,19 @@ async function apiList(folder) {
   return files;
 }
 /* uploaded files come before share links (big PowerPoints live on OneDrive, SharePoint or Google Drive) */
-const pickSlide = es => (es || []).find(e => e && e.path) || (es || []).find(e => e && /^https:\/\//.test(e.url || '')) || null;
+const pickSlide = es => { const fs = (es || []).filter(e => e && e.path), ls = (es || []).filter(e => e && !e.path && /^https:\/\//.test(e.url || '')), all = fs.concat(ls); if (!all.length) return null; return Object.assign({}, all[0], { more: all.slice(1) }); };
+/* several decks for one topic: one PowerPoint button with a count, opening a small list (view / download each) */
+const PPT_VIEW_MAX = 10 * 1024 * 1024;   /* Microsoft's online viewer only opens PowerPoints up to 10 MB */
+const pptMB = n => (n / 1048576).toFixed(n < 10485760 ? 1 : 0) + ' MB';
+const deckTitle = n => String(n || '').replace(/\.(pptx?|pdf)$/i, '').replace(/^\d+\s*[-–.]\s*/, '').replace(/^(lesson|LESSON)\s*-\s*/, '').trim();
+function pptMany(li, fs) {
+  const rows = fs.map(f => { if (!f.path) return `<li><span>${esc(deckTitle(f.name))}</span><a href="${esc(f.url)}" target="_blank" rel="noopener">Open</a></li>`;
+    const L = slideLinks(f, 'notes/slides/'), big = f.size > PPT_VIEW_MAX;
+    return `<li><span>${esc(deckTitle(f.name))}${f.size ? `<small>${pptMB(f.size)}</small>` : ''}</span>${big ? '' : `<a href="${esc(L.view)}" target="_blank" rel="noopener">View</a>`}<a href="${esc(L.rel)}" download>Download</a></li>`; }).join('');
+  return `<details class="ppt-many"><summary class="ib" title="${fs.length} PowerPoints for this topic" aria-label="${fs.length} PowerPoints for ${esc(li.querySelector('.tp-t b').textContent)}">${I_PPT}<i class="ppt-n" aria-hidden="true">${fs.length}</i></summary><div class="ppt-menu"><b>Topic PowerPoints</b><ul>${rows}</ul></div></details>`;
+}
+document.addEventListener('click', e => { document.querySelectorAll('details.ppt-many[open]').forEach(d => { if (!d.contains(e.target)) d.open = false; }); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') document.querySelectorAll('details.ppt-many[open]').forEach(d => { d.open = false; d.querySelector('summary').focus(); }); });
 function slideLinks(f, base) {
   const rel = base + encPath(f.path), abs = new URL(rel, location.href).href;
   return { rel, view: isPpt(f.name) ? 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(abs) : rel, pdf: !isPpt(f.name) };
@@ -894,8 +961,10 @@ function pptSlot(li, f) {
     return;
   }
   if (!f.path) { slot.innerHTML = `<span class="ppt ppt-i" role="group" aria-label="Topic PowerPoint"><a class="ib" href="${esc(f.url)}" target="_blank" rel="noopener" title="Open the PowerPoint" aria-label="Open the PowerPoint">${I_PPT}</a></span>`; return; }
+  if (f.more && f.more.length) { slot.innerHTML = pptMany(li, [f].concat(f.more)); return; }
   const L = slideLinks(f, 'notes/slides/');
-  const kind = L.pdf ? 'PDF' : 'PowerPoint';
+  const kind = L.pdf ? 'PDF' : 'PowerPoint', big = f.size > PPT_VIEW_MAX;
+  if (big) { slot.innerHTML = `<span class="ppt ppt-i" role="group" aria-label="Topic ${kind}: ${esc(f.name)}"><a class="ib" href="${esc(L.rel)}" download title="Download the ${kind} (${pptMB(f.size)}: too big to preview online)" aria-label="Download the ${kind}">${I_PPT}</a><a class="ib" href="${esc(L.rel)}" download title="Download the ${kind}" aria-label="Download the ${kind}">${I_DL}</a></span>`; return; }
   slot.innerHTML = `<span class="ppt ppt-i" role="group" aria-label="Topic ${kind}: ${esc(f.name)}"><a class="ib" href="${esc(L.view)}" target="_blank" rel="noopener" title="View the ${kind}" aria-label="View the ${kind}">${I_PPT}</a><a class="ib" href="${esc(L.rel)}" download title="Download the ${kind}" aria-label="Download the ${kind}">${I_DL}</a></span>`;
 }
 let apiBatchUsed = false, pptIO = null;
@@ -1485,6 +1554,93 @@ function route() {
   if (!WEB) { const v = document.querySelector('.wl-ver'); if (v) v.remove(); }   /* updates: web host only */
 })();
 /* ================= WELCOME: END ================= */
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
 
 /* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
 function wlShare() {

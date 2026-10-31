@@ -2245,6 +2245,11 @@ a.btn{text-decoration:none}
 }
 @media (prefers-reduced-motion:reduce){ .r-tg::after{transition:none} }
 @media print{ .r-ch .r-pg{display:flex!important} }
+.ppt-l{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:4px}
+.ppt-l li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px}
+.ppt-l li > span{flex:1;min-width:140px;font-weight:700}
+.ppt-l .ppt-dn{flex:1 1 100%;font-size:14px}
+#ppt-cell:has(.ppt-l){display:block}
 /* ================= DESIGN: END ================= */
 </style>
 
@@ -2806,8 +2811,11 @@ function findSlides(ch) {
       f = { name: (ch.topic + ' ' + (ch.topicName || '').replace(/[:\/,]/g, '')).trim() + ' (temporary).pptx', path: tp }; temp = true;
     }
     if (!f.path) return { link: f.url, name: f.name };
-    const rel = 'slides/' + encPath(f.path), abs = new URL(rel, location.href).href, ppt = isPpt(f.name);
-    return { rel, name: f.name, ppt, temp, view: ppt ? 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(abs) : rel };
+    const one = x => { const rel = 'slides/' + encPath(x.path), abs = new URL(rel, location.href).href, ppt = isPpt(x.name);
+      return { rel, name: x.name, ppt, temp, size: +x.size || 0, view: ppt && !(x.size > 10485760) ? 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(abs) : (ppt ? null : rel) }; };
+    const all = temp ? [] : ((((m || {})[BK.id] || {})[ch.id]) || []).filter(e => e && e.path);
+    const out = one(f); out.more = all.filter(e => e.path !== f.path).map(one);   /* several decks for one topic */
+    return out;
   })().catch(() => null));
   return SLIDES.get(key);
 }
@@ -2820,6 +2828,12 @@ function mountSlides(ch, pid) {
     const cell = $('#slides-cell');
     if (!f || !cell || PAGES[cur].p.id !== pid) return;
     if (f.link) { cell.innerHTML = `<b>Topic PowerPoint</b><div class="row"><a class="lk" href="${esc(f.link)}" target="_blank" rel="noopener">Open PowerPoint ${ICON_EXT}</a></div>`; cell.hidden = false; return; }
+    if (f.more && f.more.length) {
+      const dt = n => String(n || '').replace(/\.(pptx?|pdf)$/i, '').replace(/^\d+\s*[-–.]\s*/, '').trim(), mb = n => n ? ` <span class="fname">${(n / 1048576).toFixed(1)} MB</span>` : '';
+      cell.innerHTML = `<b>Topic PowerPoints (${f.more.length + 1})</b><ul class="ppt-l">${[f].concat(f.more).map(x => `<li><span>${esc(dt(x.name))}${mb(x.size)}</span>${x.view ? `<a class="lk" href="${esc(x.view)}" target="_blank" rel="noopener">View ${ICON_EXT}</a>` : ''}<a class="lk" href="${esc(x.rel)}" download>Download</a></li>`).join('')}</ul>`;
+      cell.hidden = false; return;
+    }
+    if (!f.view) { cell.innerHTML = `<b>Topic PowerPoint</b><div class="row"><a class="lk" href="${esc(f.rel)}" download>Download</a></div><span class="fname">${esc(f.name)}${f.size ? ' · ' + (f.size / 1048576).toFixed(0) + ' MB, too big to preview online' : ''}</span>`; cell.hidden = false; return; }
     const tt = f.temp ? ` title="${esc(TMP_TXT)}"` : '', dn = f.temp ? `="${esc(f.name)}"` : '';
     cell.innerHTML = `<b>Topic PowerPoint${f.ppt ? '' : ' (PDF)'}${f.temp ? tmpBadge() : ''}</b><div class="row"><a class="lk" href="${esc(f.view)}" target="_blank" rel="noopener"${tt}>View ${ICON_EXT}</a><a class="lk" href="${esc(f.rel)}" download${dn}${tt}>Download</a></div>${f.temp ? tmpNote() : `<span class="fname">${esc(f.name)}</span>`}`;
     cell.classList.toggle('is-temp', !!f.temp);
@@ -2912,8 +2926,13 @@ function wireChapterList(ch, pid) {
     const cell = $('#ppt-cell'), row = $('#ppt-row');
     if (!cell || !row || !f || PAGES[cur].p.id !== pid) return;   /* the teacher's own file, or (badged) the temporary deck for the topic */
     const tt = f.temp ? ` title="${esc(TMP_TXT)}"` : '', dn = f.temp ? `="${esc(f.name)}"` : '';
-    cell.innerHTML = f.link ? `<a class="lk" href="${esc(f.link)}" target="_blank" rel="noopener">Open PowerPoint ${ICON_EXT}</a>` : `<a class="lk" href="${esc(f.view)}" target="_blank" rel="noopener"${tt}>View ${ICON_EXT}</a><a class="lk" href="${esc(f.rel)}" download${dn}${tt}>Download (${f.ppt ? 'PowerPoint' : 'PDF'})</a>${f.temp ? tmpNote() : `<span class="fname">${esc(f.name)}</span>`}`;
-    const k = row.querySelector('.k'); if (k) k.innerHTML = 'Topic PowerPoint' + (f.temp ? tmpBadge() : '');
+    const dt = n => String(n || '').replace(/\.(pptx?|pdf)$/i, '').replace(/^\d+\s*[-–.]\s*/, '').trim(), big = x => x.size ? ` <span class="fname">${(x.size / 1048576).toFixed(x.size < 10485760 ? 1 : 0)} MB${x.view ? '' : ', too big to preview online'}</span>` : '';
+    const deck = (x, solo) => `${solo ? '' : `<b class="ppt-dn">${esc(dt(x.name))}</b>`}${x.view ? `<a class="lk" href="${esc(x.view)}" target="_blank" rel="noopener"${tt}>View ${ICON_EXT}</a>` : ''}<a class="lk" href="${esc(x.rel)}" download${dn}${tt}>Download (${x.ppt ? 'PowerPoint' : 'PDF'})</a>`;
+    const many = f.more && f.more.length;
+    cell.innerHTML = f.link ? `<a class="lk" href="${esc(f.link)}" target="_blank" rel="noopener">Open PowerPoint ${ICON_EXT}</a>`
+      : many ? `<ul class="ppt-l">${[f].concat(f.more).map(x => `<li>${deck(x)}${big(x)}</li>`).join('')}</ul>`
+      : `${deck(f, true)}${f.temp ? tmpNote() : `<span class="fname">${esc(f.name)}</span>${big(f)}`}`;
+    const k = row.querySelector('.k'); if (k) k.innerHTML = (many ? `Topic PowerPoints (${f.more.length + 1})` : 'Topic PowerPoint') + (f.temp ? tmpBadge() : '');
     row.classList.toggle('is-temp', !!f.temp);
     row.hidden = false;
   }).catch(() => { });

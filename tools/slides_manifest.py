@@ -42,7 +42,7 @@ for book, chapters in folders.items():
         files = sorted(f for f in os.listdir(d) if f.lower().endswith(EXT) and not f.startswith("."))
         # PowerPoint first, then PDF
         files.sort(key=lambda f: (not f.lower().endswith((".pptx", ".ppt")), f.lower()))
-        entries = [{"name": f, "path": rel + "/" + f} for f in files]
+        entries = [{"name": f, "path": rel + "/" + f, "size": os.path.getsize(os.path.join(d, f))} for f in files]  # size: the pages skip the online viewer over 10 MB
         for f in sorted(os.listdir(d)):
             if f.lower().endswith(LINKS) and f.lower() != "readme.md":
                 url = read_link(os.path.join(d, f))
