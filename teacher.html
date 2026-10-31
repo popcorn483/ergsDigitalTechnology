@@ -134,6 +134,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 .bt-head{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .dim{opacity:.5}
 .bt-mixset{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:8px 0 0}
+.bt-tps{display:flex;flex-direction:column;gap:6px}.bt-tp{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13.5px;font-weight:700;color:var(--ink)}.bt-tp>span{color:var(--ink);font-weight:700}.bt-tp small{display:block;font-weight:400;color:var(--ink-3);font-size:12px}.bt-tp small.over{color:var(--warn);font-weight:700}.bt-tp .bt-spin button{width:32px;height:32px;font-size:16px}.bt-tp .bt-spin input{height:32px;width:2.8em}
 .bt-sps{display:flex;flex-wrap:wrap;gap:8px 18px}.bt-sp{display:flex;flex-direction:column;gap:2px;font-size:13px;font-weight:700;color:var(--ink-2)}
 .bt-sp small{font-weight:400;color:var(--ink-3);font-size:12px}.bt-sp small.over{color:var(--warn);font-weight:700}
 .bt-spin{display:flex;align-items:center;gap:0}.bt-spin button{font:inherit;font-weight:700;font-size:18px;width:36px;height:36px;border:1px solid var(--line);background:var(--paper);color:var(--accent);cursor:pointer}
@@ -263,7 +264,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
    <div class="st" data-step="1" id="bt-s1"><button type="button" class="st-h" aria-expanded="false" aria-controls="bt-s1-b"><span class="st-n">1</span><span class="st-l">Course</span><span class="st-v"></span><span class="st-c" aria-hidden="true"></span></button><div class="st-b" id="bt-s1-b" hidden><div class="tp-opts" id="bt-course" role="group" aria-label="Course"></div></div></div>
    <div class="st" data-step="2" id="bt-s2"><button type="button" class="st-h" aria-expanded="false" aria-controls="bt-s2-b"><span class="st-n">2</span><span class="st-l">Units and topics</span><span class="st-v"></span><span class="st-c" aria-hidden="true"></span></button><div class="st-b" id="bt-s2-b" hidden><div id="bt-units"></div><div class="bt-go"><button type="button" class="bt-btn sec" id="bt-next">Next</button></div></div></div>
    <div class="st" data-step="3" id="bt-s3"><button type="button" class="st-h" aria-expanded="false" aria-controls="bt-s3-b"><span class="st-n">3</span><span class="st-l">Length and options</span><span class="st-v"></span><span class="st-c" aria-hidden="true"></span></button><div class="st-b" id="bt-s3-b" hidden><div class="bt-grid">
- <label class="bt-f"><span>Question mix</span><select id="bt-qmix"><option value="auto">Balanced (automatic)</option><option value="set">Set numbers of each type</option></select></label>
+ <label class="bt-f"><span>Question mix</span><select id="bt-qmix"><option value="auto">Balanced (automatic)</option><option value="set">Set numbers of each type</option><option value="topic">Set numbers for each topic</option></select></label>
  <div class="bt-f" id="bt-len"><span>Length</span><div class="bt-row"><div class="seg" id="bt-mode" role="group" aria-label="Set the length by"><button type="button" data-v="marks" aria-pressed="true">Marks</button> <button type="button" data-v="time" aria-pressed="false">Time</button></div>
   <span id="bt-mw"><input type="number" id="bt-marks" min="1" max="300" step="1" aria-label="Target marks"> marks</span><span id="bt-tw" hidden><input type="number" id="bt-mins" min="5" max="300" step="5" aria-label="Time in minutes"> min</span></div></div>
  <label class="bt-f"><span>Marks a minute</span><select id="bt-rate"><option value="paper">As in the CCEA paper</option><option value="one">1 mark a minute</option></select></label>
@@ -272,7 +273,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
  <label class="bt-f"><span>Order</span><select id="bt-order"><option value="topic">By topic</option><option value="short">Short questions first</option><option value="paper">Paper by paper</option></select></label>
  
 </div>
-<div id="bt-mixset" class="bt-mixset" hidden><div class="bt-sps"><div class="bt-sp"><span>Multiple choice</span><div class="bt-spin"><button type="button" data-d="-1" aria-label="One fewer multiple choice">−</button><input type="number" id="bt-n-mc" min="0" max="99" step="1" aria-label="Multiple choice questions"><button type="button" data-d="1" aria-label="One more multiple choice">+</button></div><small id="bt-max-mc"></small></div><div class="bt-sp"><span>Short answer</span><div class="bt-spin"><button type="button" data-d="-1" aria-label="One fewer short answer">−</button><input type="number" id="bt-n-short" min="0" max="99" step="1" aria-label="Short answer questions"><button type="button" data-d="1" aria-label="One more short answer">+</button></div><small id="bt-max-short"></small></div><div class="bt-sp"><span>Longer answer</span><div class="bt-spin"><button type="button" data-d="-1" aria-label="One fewer longer answer">−</button><input type="number" id="bt-n-long" min="0" max="99" step="1" aria-label="Longer answer questions"><button type="button" data-d="1" aria-label="One more longer answer">+</button></div><small id="bt-max-long"></small></div></div><p class="small" id="bt-mixest" style="margin:6px 0 0"></p></div>
+<div id="bt-topicset" class="bt-mixset" hidden><div class="bt-tps" id="bt-tps"></div><p class="small" id="bt-tsest" style="margin:6px 0 0"></p></div><div id="bt-mixset" class="bt-mixset" hidden><div class="bt-sps"><div class="bt-sp"><span>Multiple choice</span><div class="bt-spin"><button type="button" data-d="-1" aria-label="One fewer multiple choice">−</button><input type="number" id="bt-n-mc" min="0" max="99" step="1" aria-label="Multiple choice questions"><button type="button" data-d="1" aria-label="One more multiple choice">+</button></div><small id="bt-max-mc"></small></div><div class="bt-sp"><span>Short answer</span><div class="bt-spin"><button type="button" data-d="-1" aria-label="One fewer short answer">−</button><input type="number" id="bt-n-short" min="0" max="99" step="1" aria-label="Short answer questions"><button type="button" data-d="1" aria-label="One more short answer">+</button></div><small id="bt-max-short"></small></div><div class="bt-sp"><span>Longer answer</span><div class="bt-spin"><button type="button" data-d="-1" aria-label="One fewer longer answer">−</button><input type="number" id="bt-n-long" min="0" max="99" step="1" aria-label="Longer answer questions"><button type="button" data-d="1" aria-label="One more longer answer">+</button></div><small id="bt-max-long"></small></div></div><p class="small" id="bt-mixest" style="margin:6px 0 0"></p></div>
 <p class="small" id="bt-rate-t" style="margin:8px 0 0"></p>
 <div class="bt-checks"><label class="bt-chk"><input type="checkbox" id="bt-dedupe"><span>Avoid near-duplicates</span></label><label class="bt-chk"><input type="checkbox" id="bt-fresh"><span>Leave out questions used before</span></label><button type="button" class="ib" aria-expanded="false" aria-controls="i-opts" aria-label="About these options" title="About these options"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
 <div class="ip" id="i-opts" hidden><ul><li><b>Avoid near-duplicates</b>: never two questions that ask the same thing, such as the same part in two years with the same wording.</li><li><b>Leave out questions used before</b>: questions in tests you have downloaded on this device are remembered and skipped. <span id="bt-used-t"></span> <button type="button" class="tp-mini" id="bt-forget" hidden>Forget them</button></li><li><b>Marks a minute</b>: CCEA’s papers are not all 1 mark a minute; the time allowed uses the real paper’s rate unless you choose 1 mark a minute.</li><li><b>Question mix</b>: <i>Balanced</i> mixes short and longer questions to hit the marks; <i>Set numbers</i> picks exactly so many multiple-choice (incl. tick-box, true/false and matching), short-answer (1–3 marks, or 4–5 for stating or describing a few points) and longer-answer questions, and the marks follow. All are real CCEA questions, so the numbers are capped at what the chosen topics have.</li><li><b>Short questions first</b> orders the test like a CCEA paper; <b>By topic</b> groups it.</li></ul></div>
@@ -707,10 +708,16 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const T = job.test, pupil = variant === 'questions';
       const k1 = job.kicker, k2 = "MR BUTLER'S DIGITAL TECHNOLOGY";
       txt(page, k1, M.l, y - 8, 7.5, bold, C.ink3); txt(page, k2, W - M.r - tw(k2, 7.5, bold), y - 8, 7.5, bold, C.ink3);
-      const head = String(job.heading).replace(/\s*–\s*\d+ marks?$/, '') + (variant === 'answers' ? ': mark scheme' : variant === 'full' ? ': with answers' : '');
+      const head = String(job.heading).replace(/\s*–\s*\d+ marks?$/, '') + (variant === 'answers' ? ': mark scheme' : variant === 'full' ? ': with answers' : ':');
       if (lmOK(head)) lmText(page, head.toUpperCase(), M.l, y - 30, 17, C.ink); else txt(page, head, M.l, y - 30, 17, bold, C.ink);
       const meta = `${tot} marks`; void T; txt(page, meta, W - M.r - tw(meta, 11, bold), y - 30, 11, bold, C.ink2);
-      y -= 38; page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: 1.2, color: C.ink }); y -= 6;
+      y -= 30;
+      if (job.topics) {   /* the topics tested, under the heading (wrapped) */
+        const S2 = 12, up = String(job.topics).toUpperCase(), lm = lmOK(up), wid = t => lm ? lmW(t, S2) : tw(t, S2, bold);
+        const lines = []; let cur = ''; for (const w of up.split(/\s+/)) { const t = cur ? cur + ' ' + w : w; if (wid(t) > CW && cur) { lines.push(cur); cur = w; } else cur = t; } if (cur) lines.push(cur);
+        for (const ln of lines) { y -= 17; if (lm) lmText(page, ln, M.l, y, S2, C.ink2); else txt(page, ln, M.l, y, S2, bold, C.ink2); }
+      }
+      y -= 8; page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: 1.2, color: C.ink }); y -= 6;
       if (pupil) {
         const fld = (t, x0, x1) => { txt(page, t, x0, y - 14, 9.5, bold, C.ink); page.drawLine({ start: { x: x0 + tw(t, 9.5, bold) + 5, y: y - 16 }, end: { x: x1, y: y - 16 }, thickness: .6, color: C.ink3 }); };
         fld('Name', M.l, M.l + 270); fld('Class', M.l + 286, M.l + 380); fld('Date', M.l + 396, W - M.r); y -= 26;
@@ -885,7 +892,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     ps.forEach((p, i) => { if (!i) return; const r = TEST ? `Page ${i + 1} of ${ps.length}` : `${VARIANT[variant].name} · Page ${i + 1} of ${ps.length}`; txt(p, r, W - M.r - tw(r, 8.5, reg), H - 28, 8.5, reg, C.ink3); });
     setStatus('Saving the PDF…', 'busy', .99); await tick();
     const bytes = await doc.save();
-    const name = `${job.file}${VARIANT[variant].file}.pdf`.replace(/[\\/:*?"<>|]/g, '-');
+    const name = `${job.file}${TEST && variant === 'answers' ? ' (mark scheme)' : VARIANT[variant].file}.pdf`.replace(/[\\/:*?"<>|]/g, '-');
     const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
     const a = el('a', { href: url, download: name }); document.body.append(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 60000);
@@ -1043,7 +1050,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   const B = { course: null, units: new Set(), topics: new Set(), mode: store.get('bt.mode', 'marks'), marks: +store.get('bt.marks', 60) || 60, mins: +store.get('bt.mins', 60) || 60,
               rate: store.get('bt.rate', 'paper'), spread: 'freq', papers: store.get('bt.papers', 'all'), dedupe: store.get('bt.dedupe', '1') === '1',
               fresh: store.get('bt.fresh', '0') === '1', mix: store.get('bt.mix', 'auto'),
-              want: { mc: +store.get('bt.n.mc', 5) || 0, short: +store.get('bt.n.short', 6) || 0, long: +store.get('bt.n.long', 3) || 0 }, order: store.get('bt.order', 'topic'), layout: store.get('bt.layout', 'standard'), sel: [], seed: 1, target: 0, quota: null, note: '' };
+              pt: (() => { try { return JSON.parse(store.get('bt.pt', '{}')) || {}; } catch (e) { return {}; } })(), want: { mc: +store.get('bt.n.mc', 5) || 0, short: +store.get('bt.n.short', 6) || 0, long: +store.get('bt.n.long', 3) || 0 }, order: store.get('bt.order', 'topic'), layout: store.get('bt.layout', 'standard'), sel: [], seed: 1, target: 0, quota: null, note: '' };
   const used = { get() { try { return JSON.parse(localStorage.getItem('teacher.bt.used') || '{}') || {}; } catch (e) { return {}; } },
                  add(keys) { const u = used.get(), now = Date.now(); keys.forEach(k => { u[k] = now; }); try { localStorage.setItem('teacher.bt.used', JSON.stringify(u)); } catch (e) { } },
                  clear() { try { localStorage.removeItem('teacher.bt.used'); } catch (e) { } } };
@@ -1119,6 +1126,39 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     if (capped.length) B.note = (B.note ? B.note + ' ' : '') + `These topics only have ${capped.join(' and ')}${B.papers === 'all' ? '' : ' in the papers chosen'}, so the test has ${capped.length > 1 ? 'those' : 'that many'}.`;
     return pickd[1];
   }
+  /* "Set numbers for each topic": exactly n questions from each topic (a spread of sizes, no repeats); the marks follow */
+  const ptKeys = () => [...B.topics].filter(k => B.units.has(k.split('|')[0])).sort((a, b) => { const [ba, na] = a.split('|'), [bb, nb] = b.split('|'); return books().findIndex(x => x.id === ba) - books().findIndex(x => x.id === bb) || na - nb; });
+  const ptWant = k => B.pt[k] == null ? 3 : B.pt[k];
+  const ptHas = (cands, k) => cands.filter(c => c.tps.some(n => tkey(c.book.id, n) === k));
+  function pickPerTopic(cands, R) {
+    const sel = [], ok = c => !sel.some(s => s.k === c.k || (B.dedupe && similar(s, c))), short = [];
+    for (const k of ptKeys()) {
+      const n = ptWant(k); if (!n) continue;
+      const pool = ptHas(cands, k).map(c => [R(), c]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+      let got = 0;
+      for (let pass = 0; got < n && pass < n * 3 + 3; pass++) {   /* cycle through the sizes so a topic gets a mix of short and long */
+        const sz = pass % 3, c = pool.find(x => sizeOf(x.marks) === sz && ok(x)) || (pass >= 3 ? pool.find(ok) : null);
+        if (c) { sel.push({ ...c, topic: +k.split('|')[1] }); got++; }
+      }
+      if (got < n) { const [b, tn] = k.split('|'), bk = D.topics.books.find(x => x.id === b); short.push(`${bk.topics.find(t => t.n === +tn).title} (${got})`); }
+    }
+    B.sel = sel;
+    if (short.length) B.note = (B.note ? B.note + ' ' : '') + `Not enough questions for ${short.join(', ')} with these options, so fewer were used.`;
+  }
+  function renderPerTopic() {
+    const box = $('#bt-tps'), cs = pool(); box.innerHTML = ''; let est = 0, any = false, over = false;
+    for (const k of ptKeys()) {
+      const [b, tn] = k.split('|'), bk = D.topics.books.find(x => x.id === b), t = bk.topics.find(x => x.n === +tn), has = ptHas(cs, k), av = has.length, n = ptWant(k);
+      const avg = av ? has.reduce((a, c) => a + c.marks, 0) / av : 0; est += Math.min(n, av) * avg; if (n) any = true; if (n > av) over = true;
+      const inp = el('input', { type: 'number', min: '0', max: String(av), step: '1', value: String(n), 'aria-label': `Questions from ${t.title}` });
+      const setN = v => { B.pt[k] = Math.max(0, Math.min(99, Math.round(+v || 0))); store.set('bt.pt', JSON.stringify(B.pt)); renderTarget(); };
+      inp.addEventListener('change', () => setN(inp.value));
+      const btn = (d, lab) => el('button', { type: 'button', 'aria-label': lab, text: d < 0 ? '−' : '+', onclick: () => setN(Math.min(d > 0 ? av : 99, ptWant(k) + d)) });
+      box.append(el('div', { class: 'bt-tp' }, el('span', {}, document.createTextNode((books().length > 1 ? bk.short + ': ' : '') + t.title), el('small', { class: n > av ? 'over' : '', text: `max ${av}` })),
+        el('div', { class: 'bt-spin' }, btn(-1, `One fewer from ${t.title}`), inp, btn(1, `One more from ${t.title}`))));
+    }
+    $('#bt-tsest').textContent = any ? `About ${Math.round(est)} marks (the marks depend on which questions are picked).${over ? ' Some numbers are more than the topic has, so they will be capped.' : ''}` : 'Set at least one number.';
+  }
   function rng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
   function pick() {
     const cands = pool(), T = targetMarks(), w = weights(cands), wsum = [...w.values()].reduce((a, x) => a + x, 0);
@@ -1126,6 +1166,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const skipped = [...B.topics].filter(k => !w.has(k));
     B.note = skipped.length ? `${plural(skipped.length, 'topic')} had no questions left with these options: ${skipped.map(k => { const [b, n] = k.split('|'); const bk = D.topics.books.find(x => x.id === b); return (books().length > 1 ? bk.short + ' ' : '') + bk.topics.find(t => t.n === +n).title; }).join(', ')}.` : '';
     if (!cands.length) { B.sel = []; return; }
+    if (B.mix === 'topic') { pickPerTopic(cands, rng(B.seed * 7919 + 29)); B.target = B.sel.reduce((a, x) => a + x.marks, 0); B.quota = new Map([...w.keys()].map(k => [k, B.sel.filter(x => tkey(x.book.id, x.topic) === k).reduce((a, x) => a + x.marks, 0)])); sortSel(); return; }
     if (B.mix === 'set') { const sel = pickSet(cands, w, rng(B.seed * 7919 + 17)); B.sel = sel.map(x => ({ ...x.c, topic: +x.t.split('|')[1] })); sortSel(); return; }
     /* the natural mix of short, medium and long questions in this pool (by marks) */
     const mix = [0, 0, 0]; cands.forEach(c => { mix[sizeOf(c.marks)] += c.marks; }); const ms = mix.reduce((a, x) => a + x, 0); for (let i = 0; i < 3; i++) mix[i] /= ms;
@@ -1225,7 +1266,8 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   }
   function renderTarget() {
     pressed(ui.mode, B.mode); ui.marksWrap.hidden = B.mode !== 'marks'; ui.minsWrap.hidden = B.mode !== 'time';
-    const setMix = B.mix === 'set'; ui.mixSet.hidden = !setMix; ui.lenWrap.classList.toggle('dim', setMix);
+    const setMix = B.mix === 'set', topicMix = B.mix === 'topic'; ui.mixSet.hidden = !setMix; $('#bt-topicset').hidden = !topicMix; ui.lenWrap.classList.toggle('dim', setMix || topicMix);
+    if (topicMix) renderPerTopic();
     if (setMix) {
       const cs = pool(), av = available(cs); let est = 0, any = false;
       for (const [y] of TYPES) {
@@ -1244,10 +1286,10 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const u = Object.keys(used.get()).length;
     ui.usedText.textContent = u ? `${plural(u, 'question')} remembered from earlier tests.` : 'None remembered yet: questions are remembered when you download a test.';
     ui.forget.hidden = !u;
-    ui.go.disabled = !nt || !n || (B.mix === 'set' && !TYPES.some(([y]) => B.want[y] > 0));
+    ui.go.disabled = !nt || !n || (B.mix === 'set' && !TYPES.some(([y]) => B.want[y] > 0)) || (B.mix === 'topic' && !ptKeys().some(k => ptWant(k) > 0));
     ui.poolText.textContent = !nt ? 'Tick at least one topic.' : `${plural(n, 'question')} to choose from.`;
     ui.steps.val(2, books().length ? `${books().map(b => b.short).join(' + ')} · ${nt === books().reduce((a, b) => a + b.topics.length, 0) ? 'all topics' : plural(nt, 'topic')}` : '');
-    ui.steps.val(3, `${B.mix === 'set' ? TYPES.map(([y, , t]) => B.want[y] + ' ' + t).join(' + ') : B.mode === 'time' ? hm(B.mins) : B.marks + ' marks'}${B.papers === 'all' ? '' : B.papers === 'r3' ? ' · last 3 years' : ' · last 5 years'}`);
+    ui.steps.val(3, `${B.mix === 'topic' ? plural(ptKeys().reduce((a, k) => a + ptWant(k), 0), 'question') + ' by topic' : B.mix === 'set' ? TYPES.map(([y, , t]) => B.want[y] + ' ' + t).join(' + ') : B.mode === 'time' ? hm(B.mins) : B.marks + ' marks'}${B.papers === 'all' ? '' : B.papers === 'r3' ? ' · last 3 years' : ' · last 5 years'}`);
     ui.next.disabled = !nt;
   }
   function build() {
@@ -1255,7 +1297,14 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     pick(); ui.steps.open(0); ui.s4.hidden = false; ui.qs.open = false; renderSel(); setStatus('');
     if (window.matchMedia('(max-width: 720px)').matches) ui.s4.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
-  function title() { const bs = books(), tot = B.sel.reduce((a, x) => a + x.marks, 0); return `${bs.map(b => b.short).join(' + ')} – ${B.mode === 'time' ? 'Mock test' : 'Mock test'} – ${tot} marks`; }
+  /* the topics in the test: "All topics" when it covers a whole unit */
+  function topicsLabel() {
+    const bs = books(), multi = bs.length > 1;
+    return bs.map(b => { const ns = new Set(B.sel.filter(x => x.book.id === b.id).map(x => x.topic)); if (!ns.size) return '';
+      const ts = b.topics.filter(t => ns.has(t.n)), all = ts.length === b.topics.length;
+      return (multi ? b.short + ': ' : '') + (all ? 'All topics' : ts.map(t => t.title).join(', ')); }).filter(Boolean).join('; ');
+  }
+  function title() { const bs = books(), tl = topicsLabel(); return `${bs.map(b => b.short).join(' + ')} – End of topic test – ${tl.length > 60 ? tl.slice(0, 57).replace(/[,;\s]+\S*$/, '') + '…' : tl}`; }
   function renderSel() {
     const tot = B.sel.reduce((a, x) => a + x.marks, 0), T = B.target, multi = books().length > 1;
     ui.title.textContent = title();
@@ -1300,7 +1349,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       rows = [...m.values()].map(r => ({ label: r.label, qs: rng2(r.nums), marks: r.marks }));
     } else rows = B.sel.map((x, i) => ({ qs: String(i + 1), label: (multi ? x.book.short + ': ' : '') + topicOf(x).title + ' (' + TYPE_TAG[x.type] + ')', sub: `${serLabel(x.it.s)} ${qLabel(x.it.q)}`, marks: x.marks }));
     const ri = rateInfo();
-    return { title: name, heading: `Mock test – ${tot} marks`, kicker: `${bs.map(b => b.short.toUpperCase()).join(' + ')} · CCEA PAST-PAPER QUESTIONS`,
+    return { title: name, heading: 'End of topic test', topics: topicsLabel(), kicker: `${bs.map(b => b.short.toUpperCase()).join(' + ')} · CCEA PAST-PAPER QUESTIONS`,
              docTitle: name, file: name, layout: B.layout, items,
              test: { minutes: Math.round(tot / ri.rate), rows, perTopic,
                      types: TYPES.map(([y, name]) => { const xs = B.sel.filter(x => x.type === y); return { label: name, n: xs.length, marks: xs.reduce((a, x) => a + x.marks, 0) }; }).filter(t => t.n),
