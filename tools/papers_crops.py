@@ -1,12 +1,13 @@
 """Work out where each workbook exam question sits on its CCEA question paper and mark scheme, so the notes viewer can
 show just that question. Writes papers/crops.json:
 
-  { "BOOK|series|q": { "paper": [[page, top, bottom], ...], "ms": [[page, top, bottom], ...], "stem": [[...]] } }
+  { "BOOK|series|q": { "paper": [[page, top, bottom], ...], "ms": [[page, top, bottom], ...], "stem": [[...]], "marks": n } }
 
 page is 1-based; top/bottom are fractions of the page height (0 = top). One segment per page the part spans, in reading
 order. "stem" (question paper only, optional) is the shared lead-in of the parent question/part (e.g. the table that
 2(a) and 2(b) both refer to) when the part itself does not start with it. Keys that cannot be located are left out, as is
-either side that cannot be located.
+either side that cannot be located. "marks" (optional) is the total of the "[n]" marks printed in the part on the question
+paper (used by the Teacher area's topic packs).
 
 How: the PDFs have text layers. Question labels are found from words at the start of each text line ("3", "(b)", "(ii)",
 or combined "3 (b) (ii)"), accepted only in sequence (questions 1, 2, 3 ...; parts (a), (b) ...; (i), (ii) ...), with the
@@ -464,6 +465,26 @@ def locate(doc, nodes, stems, qs, with_stem=False):
     return (seg or None), st
 
 
+def marks_of(doc, nodes, qs):
+    """Total of the "[n]" marks printed at the right-hand end of the lines of a part (question papers), or None."""
+    pq = parse_q(qs)
+    if not pq:
+        return None
+    a, b = lookup(nodes, pq[0]), lookup(nodes, pq[1])
+    if not a or not b or b[1] < a[0]:
+        return None
+    tot, n = 0, 0
+    for p in range(a[0][0], b[1][0] + 1):
+        pg = doc.pages[p]
+        for l in pg["body"]:
+            if (p, l["top"]) < (a[0][0], a[0][1] - 1) or (p, l["top"]) > b[1]:
+                continue
+            m = re.search(r"\[(\d{1,2})\]\s*$", l["text"])
+            if m and l["x1"] > 0.6 * pg["W"]:
+                tot += int(m.group(1)); n += 1
+    return tot if n else None
+
+
 def label_key(pth):
     s = str(pth[0])
     for x in pth[1:]:
@@ -520,6 +541,10 @@ def main(argv):
                     res.setdefault(q, {})[side] = seg
                     if st:
                         res[q]["stem"] = st
+                    if side == "paper":
+                        mk = marks_of(doc, nodes, q)
+                        if mk:
+                            res[q]["marks"] = mk
         for q in (qs if folder else ()):
             st = stats.setdefault(b, {"keys": 0, "paper": 0, "ms": 0})
             st["keys"] += 1

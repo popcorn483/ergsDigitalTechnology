@@ -22,6 +22,21 @@ After an upload, a GitHub Action rebuilds `papers/manifest.json` (the list the s
 The key is `<book>|<series>|<question>` (book: U1, U4, AS1, AS2; series exactly as the folder name; question as in the workbook, without the Q).
 Without an entry the viewer opens at page 1.
 
+## Examiner reports (for the Teacher area's topic packs)
+
+CCEA's Chief Examiner's reports go in **`papers/GCSE/Examiner reports/`** and **`papers/A level/Examiner reports/`**: one PDF per
+series, named after it (e.g. `Summer 2024.pdf`; any name containing the year works). One report covers every unit of that
+qualification. `tools/report_crops.py` finds each question's comment (unit section first, then "Q3", "(b)", "(ii)") and writes
+`papers/reports.json`; the Teacher area (`teacher.html`) puts each comment after the question's mark scheme in its topic packs.
+See the README.md in each folder.
+
+## Generated files (don't edit by hand)
+
+- `manifest.json`: the uploaded PDFs (`tools/papers_manifest.py`)
+- `crops.json`: where each question and mark scheme sits on its page, plus the marks printed in the part (`tools/papers_crops.py`)
+- `reports.json`: where each question's examiner-report comment is (`tools/report_crops.py`)
+- `topics.json`: every workbook topic's CCEA questions, for the topic packs (`tools/papers_topics.py`, also run by the notes build)
+
 ## Folders
 
 | Folder | Paper | Series |

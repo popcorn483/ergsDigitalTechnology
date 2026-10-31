@@ -1,6 +1,9 @@
 """List the CCEA past-paper PDFs the teacher has uploaded under papers/ (one folder per paper and series, see
 papers/folders.json) into papers/manifest.json: { "<folder>": { "paper": "<folder>/<file>.pdf", "ms": "<folder>/<file>.pdf" } }.
 The mark scheme is the PDF whose name contains "MS", "mark scheme" or "markscheme" (any case); the other PDF is the paper.
+CCEA examiner reports (one PDF per qualification per year, covering every unit) go in papers/GCSE/Examiner reports/ and
+papers/A level/Examiner reports/; they are listed as { "<folder>": { "reports": ["<folder>/<file>.pdf", ...] } } and
+tools/report_crops.py finds each question's comment in them.
 Run by .github/workflows/slides-manifest.yml on every push that touches papers/ (and by hand: python3 tools/papers_manifest.py)."""
 import json, os, re
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -17,7 +20,15 @@ for key, folder in sorted(folders.items()):
     qp = next((f for f in pdfs if f != ms and not is_ms(f)), None)
     if ms or qp:
         out[folder] = {"paper": folder + "/" + qp if qp else None, "ms": folder + "/" + ms if ms else None}
+REPORT_FOLDERS = ["papers/GCSE/Examiner reports", "papers/A level/Examiner reports"]
+for folder in REPORT_FOLDERS:
+    d = os.path.join(ROOT, folder)
+    if os.path.isdir(d):
+        pdfs = sorted(f for f in os.listdir(d) if f.lower().endswith(".pdf") and os.path.isfile(os.path.join(d, f)))
+        if pdfs:
+            out[folder] = {"reports": [folder + "/" + f for f in pdfs]}
 with open(os.path.join(P, "manifest.json"), "w", encoding="utf-8") as fh:
     json.dump(out, fh, ensure_ascii=False, indent=1, sort_keys=True)
     fh.write("\n")
-print(f"papers/manifest.json: {len(out)} folder(s) with PDFs")
+nrep = sum(len(v.get("reports", [])) for v in out.values())
+print(f"papers/manifest.json: {len(out) - sum(1 for v in out.values() if 'reports' in v)} paper folder(s) with PDFs, {nrep} examiner report(s)")

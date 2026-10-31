@@ -9,6 +9,8 @@ on:
       - "papers/**"
       - "!papers/manifest.json"
       - "!papers/crops.json"
+      - "!papers/reports.json"
+      - "!papers/topics.json"
   workflow_dispatch:
 
 permissions:
@@ -27,12 +29,16 @@ jobs:
         run: |
           pip install --quiet pdfplumber
           python3 tools/papers_crops.py || echo "crop finder failed; keeping the previous crops.json"
+      - name: List each topic's questions and find their examiner-report comments (Teacher area topic packs)
+        run: |
+          python3 tools/papers_topics.py || echo "topic list failed; keeping the previous topics.json"
+          python3 tools/report_crops.py || echo "report finder failed; keeping the previous reports.json"
       - name: Commit the list if it changed
         run: |
-          if ! git diff --quiet -- notes/slides/manifest.json papers/manifest.json papers/crops.json; then
+          git add notes/slides/manifest.json papers/manifest.json papers/crops.json papers/reports.json papers/topics.json
+          if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-            git add notes/slides/manifest.json papers/manifest.json papers/crops.json
             git commit -m "Update topic PowerPoint and past-paper lists"
             git push
           fi
