@@ -551,6 +551,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     s.onerror = () => { LIB = null; no(new Error('Could not load the PDF library (lib/pdf-lib.min.js). Check the connection and try again.')); };
     document.head.append(s);
   }));
+  let GLYPHS = null;
   const VARIANT = {
     full: { name: 'Full pack', sub: 'Each question, then its mark scheme and examiner-report comment', file: '' },
     questions: { name: 'Questions only', sub: 'Pupil worksheet', file: ' (worksheet)' },
@@ -644,6 +645,12 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     /* 3. lay out on A4: a branded title band, numbered question headers, the question as cut from the paper,
        the mark scheme in a green bx and the examiner's comment in a yellow bx (boxes continue across pages) */
     const W = 595.28, H = 841.89, M = TEST ? { l: 36, r: 36, t: 42, b: 36 } : { l: 40, r: 40, t: 46, b: 52 }, CW = W - M.l - M.r;
+    /* Lemon Milk for a test's heading: glyph outlines drawn as vector paths (fonts/lemonmilk-bold-glyphs.json) */
+    let LM = null;
+    if (TEST) { try { LM = GLYPHS || (GLYPHS = await fetch('fonts/lemonmilk-bold-glyphs.json').then(r => r.ok ? r.json() : null)); } catch (e) { LM = null; } }
+    const lmOK = t => LM && [...String(t)].every(ch => LM.g[ch]);
+    const lmW = (t, size) => [...String(t)].reduce((a, ch) => a + LM.g[ch][0], 0) * size / LM.upm;
+    const lmText = (p, t, x, yy, size, color) => { let px = x; for (const ch of String(t)) { const [adv, d] = LM.g[ch]; if (d) p.drawSvgPath(d, { x: px, y: yy, scale: size / LM.upm, color }); px += adv * size / LM.upm; } };
     const reg = await doc.embedFont(StandardFonts.Helvetica), bold = await doc.embedFont(StandardFonts.HelveticaBold), ital = await doc.embedFont(StandardFonts.HelveticaOblique);
     const C = { ink: rgb(.09, .125, .2), ink2: rgb(.27, .31, .39), ink3: rgb(.43, .47, .55), line: rgb(.84, .86, .9), navy: rgb(.086, .13, .23), navy2: rgb(.15, .22, .38),
       acc: rgb(.12, .37, .75), warn: rgb(.56, .33, 0), qbg: rgb(.94, .955, .975),
@@ -701,7 +708,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const k1 = job.kicker, k2 = "MR BUTLER'S DIGITAL TECHNOLOGY";
       txt(page, k1, M.l, y - 8, 7.5, bold, C.ink3); txt(page, k2, W - M.r - tw(k2, 7.5, bold), y - 8, 7.5, bold, C.ink3);
       const head = String(job.heading).replace(/\s*–\s*\d+ marks?$/, '') + (variant === 'answers' ? ': mark scheme' : variant === 'full' ? ': with answers' : '');
-      txt(page, head, M.l, y - 30, 17, bold, C.ink);
+      if (lmOK(head)) lmText(page, head.toUpperCase(), M.l, y - 30, 17, C.ink); else txt(page, head, M.l, y - 30, 17, bold, C.ink);
       const meta = `${tot} marks`; void T; txt(page, meta, W - M.r - tw(meta, 11, bold), y - 30, 11, bold, C.ink2);
       y -= 38; page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: 1.2, color: C.ink }); y -= 6;
       if (pupil) {
