@@ -854,25 +854,24 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         txt(p, t1, x1, 17, 8, reg, C.ink3); p.drawRectangle({ x: xb, y: 12, width: bw, height: 16, borderColor: C.ink3, borderWidth: .7 }); txt(p, t2, x2, 17, 8.5, bold, C.ink2); }
     }
     /* after the questions: how pupils check their work now and learn from it once it is marked */
-    function reflect() {
-      const need = 295; if (room() < need) newPage(); else y -= 6;
-      page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: 1.2, color: C.ink }); y -= 22;
-      txt(page, 'Before you hand in', M.l, y, 11, bold, C.ink); y -= 17;
-      const tick = (t, x0) => { page.drawRectangle({ x: x0, y: y - 2, width: 8, height: 8, borderColor: C.ink2, borderWidth: .7 }); txt(page, t, x0 + 13, y - 1, 9, reg, C.ink); };
-      const two = (a, b2) => { tick(a, M.l); if (b2) tick(b2, M.l + CW / 2); y -= 14; };
-      two('I have answered every question', 'One point for each mark: [3] means three points');
-      two('I have used the key terms, spelt correctly', '“Explain” answers give a reason (“because…”)');
-      y -= 12;
-      txt(page, 'After it is marked', M.l, y, 11, bold, C.ink); y -= 6;
-      const line = (lab, n) => { y -= 24; txt(page, lab, M.l, y, 9, bold, C.ink); const x0 = M.l + tw(lab, 9, bold) + 6; page.drawLine({ start: { x: x0, y: y - 2 }, end: { x: W - M.r, y: y - 2 }, thickness: .5, color: C.ink3 });
-        for (let i = 1; i < (n || 1); i++) { y -= 24; page.drawLine({ start: { x: M.l, y: y - 2 }, end: { x: W - M.r, y: y - 2 }, thickness: .5, color: C.ink3 }); } };
-      y -= 15; const sc = 'My score:', sx = M.l + tw(sc, 9, bold) + 6; txt(page, sc, M.l, y, 9, bold, C.ink);
-      page.drawLine({ start: { x: sx, y: y - 2 }, end: { x: sx + 40, y: y - 2 }, thickness: .5, color: C.ink3 }); txt(page, `/ ${tot}`, sx + 44, y, 9, bold, C.ink);
-      const pc = 'Percentage:', px = sx + 100; txt(page, pc, px, y, 9, bold, C.ink); page.drawLine({ start: { x: px + tw(pc, 9, bold) + 6, y: y - 2 }, end: { x: px + tw(pc, 9, bold) + 46, y: y - 2 }, thickness: .5, color: C.ink3 }); txt(page, '%', px + tw(pc, 9, bold) + 50, y, 9, bold, C.ink);
-      y -= 20; txt(page, 'Where did I lose marks? Tick any that apply:', M.l, y, 9, bold, C.ink); y -= 15;
-      two('I didn’t know or remember it', 'I misread the question'); two('Not enough points for the marks', 'Missing key terms'); two('No example or reason given', 'Ran out of time');
-      line('One thing I did well:'); line('Topics to revise (use the workbook):'); line('Two things I will do differently next time:', 2);
-      y -= 10;
+    function reflect() {   /* compact, two columns, so it usually fits under the last question */
+      const need = 190; if (room() < need) newPage(); else y -= 4;
+      page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .8, color: C.ink3 }); y -= 16;
+      const L = M.l, Rx = M.l + CW / 2 + 8, top = y;
+      const tick = (t, x0, yy) => { page.drawRectangle({ x: x0, y: yy - 1.5, width: 7.5, height: 7.5, borderColor: C.ink2, borderWidth: .6 }); txt(page, t, x0 + 12, yy, 8.5, reg, C.ink); };
+      txt(page, 'Before you hand in', L, y, 10, bold, C.ink);
+      let yl = y - 15; for (const t of ['I have answered every question', 'One point for each mark: [3] = three points', 'I have used the key terms, spelt correctly', '“Explain” answers give a reason (“because…”)']) { tick(t, L, yl); yl -= 13; }
+      txt(page, 'After it is marked', Rx, y, 10, bold, C.ink);
+      let yr = y - 15; const sc = 'Score', sx = Rx + tw(sc, 8.5, bold) + 5;
+      txt(page, sc, Rx, yr, 8.5, bold, C.ink); page.drawLine({ start: { x: sx, y: yr - 2 }, end: { x: sx + 34, y: yr - 2 }, thickness: .5, color: C.ink3 }); txt(page, `/ ${tot}`, sx + 38, yr, 8.5, bold, C.ink);
+      const pc = sx + 78; page.drawLine({ start: { x: pc, y: yr - 2 }, end: { x: pc + 30, y: yr - 2 }, thickness: .5, color: C.ink3 }); txt(page, '%', pc + 33, yr, 8.5, bold, C.ink);
+      yr -= 15; txt(page, 'I lost marks because:', Rx, yr, 8.5, bold, C.ink); yr -= 13;
+      const lost = ['I didn’t know it', 'I misread the question', 'Too few points', 'Missing key terms', 'No example or reason', 'Ran out of time'], half = (W - M.r - Rx) / 2;
+      for (let k = 0; k < lost.length; k += 2) { tick(lost[k], Rx, yr); tick(lost[k + 1], Rx + half, yr); yr -= 13; }
+      y = Math.min(yl, yr) - 4;
+      const line = lab => { y -= 20; txt(page, lab, L, y, 8.5, bold, C.ink); page.drawLine({ start: { x: L + tw(lab, 8.5, bold) + 6, y: y - 2 }, end: { x: W - M.r, y: y - 2 }, thickness: .5, color: C.ink3 }); };
+      line('One thing I did well:'); line('Topics to revise (use the workbook):'); line('Next time I will:');
+      y -= 8; void top;
     }
     /* page numbers in the running header (no footer) */
     const ps = doc.getPages();
