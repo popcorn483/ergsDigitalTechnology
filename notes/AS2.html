@@ -2961,7 +2961,7 @@ function wireChapterList(ch, pid) {
     if (!cell || !row || !f || PAGES[cur].p.id !== pid) return;   /* the teacher's own file, or (badged) the temporary deck for the topic */
     const tt = f.temp ? ` title="${esc(TMP_TXT)}"` : '', dn = f.temp ? `="${esc(f.name)}"` : '';
     const dt = n => String(n || '').replace(/\.(pptx?|pdf)$/i, '').replace(/^\d+\s*[-–.]\s*/, '').trim(), big = x => x.size ? ` <span class="fname">${(x.size / 1048576).toFixed(x.size < 10485760 ? 1 : 0)} MB${x.view ? '' : ', too big to preview online'}</span>` : '';
-    const deck = (x, solo) => `${solo ? '' : `<b class="ppt-dn">${esc(dt(x.name))}</b>`}${x.view ? `<a class="lk" href="${esc(x.view)}" target="_blank" rel="noopener"${tt}>View ${ICON_EXT}</a>` : ''}<a class="lk" href="${esc(x.rel)}" download${dn}${tt}>Download (${x.ppt ? 'PowerPoint' : 'PDF'})</a>`;
+    const deck = (x, solo) => `${solo ? '' : `<b class="ppt-dn">${esc(dt(x.name))}</b>`}${x.view ? `<a class="lk" href="${esc(x.view)}" target="_blank" rel="noopener"${tt}>View ${ICON_EXT}</a>` : `<a class="lk" href="${esc(x.rel)}" download${dn}${tt}>Download (${x.ppt ? 'PowerPoint' : 'PDF'})</a>`}`;   /* the viewer has its own download */
     const many = f.more && f.more.length;
     cell.innerHTML = f.link ? `<a class="lk" href="${esc(f.link)}" target="_blank" rel="noopener">Open PowerPoint ${ICON_EXT}</a>`
       : many ? `<ul class="ppt-l">${[f].concat(f.more).map(x => `<li>${deck(x)}${big(x)}</li>`).join('')}</ul>`
