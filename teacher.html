@@ -267,7 +267,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
  <div class="bt-f" id="bt-len"><span>Length</span><div class="bt-row"><div class="seg" id="bt-mode" role="group" aria-label="Set the length by"><button type="button" data-v="marks" aria-pressed="true">Marks</button> <button type="button" data-v="time" aria-pressed="false">Time</button></div>
   <span id="bt-mw"><input type="number" id="bt-marks" min="1" max="300" step="1" aria-label="Target marks"> marks</span><span id="bt-tw" hidden><input type="number" id="bt-mins" min="5" max="300" step="5" aria-label="Time in minutes"> min</span></div></div>
  <label class="bt-f"><span>Marks a minute</span><select id="bt-rate"><option value="paper">As in the CCEA paper</option><option value="one">1 mark a minute</option></select></label>
- <label class="bt-f"><span>Spread</span><select id="bt-spread"><option value="freq">As often as CCEA asks each topic</option><option value="even">Evenly across topics</option></select></label>
+ 
  <label class="bt-f"><span>Papers</span><select id="bt-papers"><option value="all">All papers, specimen too</option><option value="r5">Last 5 years only</option><option value="r3">Last 3 years only</option></select></label>
  <label class="bt-f"><span>Order</span><select id="bt-order"><option value="topic">By topic</option><option value="short">Short questions first</option><option value="paper">Paper by paper</option></select></label>
  <label class="bt-f"><span>Layout</span><select id="bt-layout"><option value="standard">One question per page</option><option value="compact">Compressed</option></select></label>
@@ -558,7 +558,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   };
 
   /* the blocks for one question: head / label / seg {src, page, t, b, hl} / note */
-  function blocks(variant, n, book, it, layout) {
+  function blocks(variant, n, book, it, layout, noStem) {
     const x = info(book, it), out = [];
     /* X: [left, right] per segment (cuts off CCEA's edge watermark); G: blank runs per segment, squeezed out of the compressed
        answer packs (never out of a worksheet, where pupils need the answer space) */
@@ -572,7 +572,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const whole = (src, p, what) => [{ k: 'label', text: `${what}: whole page ${p} (this question could not be cut out automatically)`, tone: 'warn' }, { k: 'seg', src, page: p, t: 0, b: 1, hl: [] }];
     const question = () => {
       if (!x.paper) return [{ k: 'note', text: `The ${x.series} ${book.short} question paper is not uploaded yet.` }];
-      if (x.cp) return [...(x.cs ? [{ k: 'label', text: `From the start of Q${String(it.q).match(/^\d+/)}`, tone: 'mute' }, ...segOf(x.paper, x.cs, null, x.sx, x.sg), { k: 'gap' }] : []), ...segOf(x.paper, x.cp, null, x.px, x.pg)];
+      if (x.cp) return [...(x.cs && !noStem ? [{ k: 'label', text: `From the start of Q${String(it.q).match(/^\d+/)}`, tone: 'mute' }, ...segOf(x.paper, x.cs, null, x.sx, x.sg), { k: 'gap' }] : []), ...segOf(x.paper, x.cp, null, x.px, x.pg)];
       if (x.pp) return whole(x.paper, x.pp, 'Question paper');
       return [{ k: 'note', text: `Not located in the ${x.series} question paper: see the paper itself.` }];
     };
@@ -610,7 +610,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const L = await pdfLib(), { PDFDocument, StandardFonts, rgb, BlendMode } = L;
     job = job || packJob();
     const its = job.items, title = job.title, LAY = job.layout || 'standard'; if (!its.length) return;
-    const plan = its.map((x, i) => blocks(variant, i + 1, x.book, x.it, LAY));
+    const plan = its.map((x, i) => blocks(variant, i + 1, x.book, x.it, LAY, !!job.test));
     /* 1. load each source PDF once */
     const urls = [...new Set(plan.flat().filter(b => b.k === 'seg').map(b => b.src))];
     const src = new Map(), failed = [];
@@ -964,7 +964,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
 
   /* ================================================================== the test builder */
   const B = { course: null, units: new Set(), topics: new Set(), mode: store.get('bt.mode', 'marks'), marks: +store.get('bt.marks', 60) || 60, mins: +store.get('bt.mins', 60) || 60,
-              rate: store.get('bt.rate', 'paper'), spread: store.get('bt.spread', 'freq'), papers: store.get('bt.papers', 'all'), dedupe: store.get('bt.dedupe', '1') === '1',
+              rate: store.get('bt.rate', 'paper'), spread: 'freq', papers: store.get('bt.papers', 'all'), dedupe: store.get('bt.dedupe', '1') === '1',
               fresh: store.get('bt.fresh', '0') === '1', mix: store.get('bt.mix', 'auto'),
               want: { mc: +store.get('bt.n.mc', 5) || 0, short: +store.get('bt.n.short', 6) || 0, long: +store.get('bt.n.long', 3) || 0 }, order: store.get('bt.order', 'topic'), layout: store.get('bt.layout', 'standard'), sel: [], seed: 1, target: 0, quota: null, note: '' };
   const used = { get() { try { return JSON.parse(localStorage.getItem('teacher.bt.used') || '{}') || {}; } catch (e) { return {}; } },
@@ -988,7 +988,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   function pool() {
     const from = recentFrom(), u = B.fresh ? used.get() : {}, out = [];
     for (const b of books()) for (const q of unitQs(b).values()) {
-      const tps = q.topics.filter(n => B.topics.has(tkey(b.id, n))); if (!tps.length) continue;
+      const tps = q.topics.filter(n => B.topics.has(tkey(b.id, n))); if (!tps.length || tps.length < q.topics.length) continue;   /* only questions wholly inside the chosen topics */
       if (!q.marks || q.marks < 1) continue;
       if (from && (!yr(q.it.s) || yr(q.it.s) < from)) continue;
       if (u[q.k]) continue;
@@ -1170,7 +1170,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     ui.go.disabled = !nt || !n || (B.mix === 'set' && !TYPES.some(([y]) => B.want[y] > 0));
     ui.poolText.textContent = !nt ? 'Tick at least one topic.' : `${plural(n, 'question')} to choose from.`;
     ui.steps.val(2, books().length ? `${books().map(b => b.short).join(' + ')} · ${nt === books().reduce((a, b) => a + b.topics.length, 0) ? 'all topics' : plural(nt, 'topic')}` : '');
-    ui.steps.val(3, `${B.mix === 'set' ? TYPES.map(([y, , t]) => B.want[y] + ' ' + t).join(' + ') : B.mode === 'time' ? hm(B.mins) : B.marks + ' marks'} · ${B.spread === 'even' ? 'even spread' : 'CCEA’s spread'}${B.papers === 'all' ? '' : B.papers === 'r3' ? ' · last 3 years' : ' · last 5 years'}`);
+    ui.steps.val(3, `${B.mix === 'set' ? TYPES.map(([y, , t]) => B.want[y] + ' ' + t).join(' + ') : B.mode === 'time' ? hm(B.mins) : B.marks + ' marks'}${B.papers === 'all' ? '' : B.papers === 'r3' ? ' · last 3 years' : ' · last 5 years'}`);
     ui.next.disabled = !nt;
   }
   function build() {
@@ -1242,7 +1242,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const st = { box: ui.status, text: $('#bt-status-t'), bar: $('#bt-bar') };
     const set = (id, k, fn) => { const e = $(id); if (!e) return; if (e.type === 'checkbox') e.checked = !!B[k]; else e.value = B[k]; e.addEventListener(e.type === 'checkbox' ? 'change' : 'input', () => { B[k] = fn ? fn(e) : e.value; store.set('bt.' + k, e.type === 'checkbox' ? (e.checked ? '1' : '0') : e.value); renderTarget(); if (k === 'order' && B.sel.length) { sortSel(); renderSel(); } }); };
     set('#bt-marks', 'marks', e => Math.max(1, Math.min(300, +e.value || 0))); set('#bt-mins', 'mins', e => Math.max(5, Math.min(300, +e.value || 0)));
-    set('#bt-rate', 'rate'); set('#bt-spread', 'spread'); set('#bt-papers', 'papers'); set('#bt-dedupe', 'dedupe', e => e.checked); set('#bt-fresh', 'fresh', e => e.checked);
+    set('#bt-rate', 'rate'); set('#bt-papers', 'papers'); set('#bt-dedupe', 'dedupe', e => e.checked); set('#bt-fresh', 'fresh', e => e.checked);
     set('#bt-order', 'order'); set('#bt-layout', 'layout'); set('#bt-qmix', 'mix');
     ui.mixSet = $('#bt-mixset'); ui.mixEst = $('#bt-mixest'); ui.lenWrap = $('#bt-len');
     for (const [y] of TYPES) {
