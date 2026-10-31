@@ -702,7 +702,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       txt(page, k1, M.l, y - 8, 7.5, bold, C.ink3); txt(page, k2, W - M.r - tw(k2, 7.5, bold), y - 8, 7.5, bold, C.ink3);
       const head = String(job.heading).replace(/\s*–\s*\d+ marks?$/, '') + (variant === 'answers' ? ': mark scheme' : variant === 'full' ? ': with answers' : '');
       txt(page, head, M.l, y - 30, 17, bold, C.ink);
-      const meta = `${tot} marks${T.minutes ? ' · ' + hm(T.minutes) : ''}`; txt(page, meta, W - M.r - tw(meta, 11, bold), y - 30, 11, bold, C.ink2);
+      const meta = `${tot} marks`; void T; txt(page, meta, W - M.r - tw(meta, 11, bold), y - 30, 11, bold, C.ink2);
       y -= 38; page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: 1.2, color: C.ink }); y -= 6;
       if (pupil) {
         const fld = (t, x0, x1) => { txt(page, t, x0, y - 14, 9.5, bold, C.ink); page.drawLine({ start: { x: x0 + tw(t, 9.5, bold) + 5, y: y - 16 }, end: { x: x1, y: y - 16 }, thickness: .6, color: C.ink3 }); };
