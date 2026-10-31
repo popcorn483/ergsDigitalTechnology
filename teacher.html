@@ -328,24 +328,24 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
       if (x.pp) return whole(x.paper, x.pp, 'Question paper');
       return [{ k: 'note', text: `Not located in the ${x.series} question paper: see the paper itself.` }];
     };
+    const box = (kind, title, sub, items) => [{ k: 'box', kind, title, sub }, ...items, { k: 'boxend' }];
     const scheme = () => {
-      const lab = { k: 'label', text: 'Mark scheme', tone: 'accent' };
-      if (!x.ms) return [lab, { k: 'note', text: `The ${x.series} ${book.short} mark scheme is not uploaded yet.` }];
-      if (x.cm) return [lab, ...segOf(x.ms, x.cm)];
-      if (x.pm) return whole(x.ms, x.pm, 'Mark scheme');
-      return [lab, { k: 'note', text: 'Not located in the mark scheme: see the mark scheme itself.' }];
+      if (!x.ms) return box('ms', 'Mark scheme', '', [{ k: 'note', text: `The ${x.series} ${book.short} mark scheme is not uploaded yet.` }]);
+      if (x.cm) return box('ms', 'Mark scheme', '', segOf(x.ms, x.cm));
+      if (x.pm) return box('ms', 'Mark scheme', `whole page ${x.pm}: not cut out automatically`, [{ k: 'seg', src: x.ms, page: x.pm, t: 0, b: 1, hl: [] }]);
+      return box('ms', 'Mark scheme', '', [{ k: 'note', text: 'Not located in the mark scheme: see the mark scheme itself.' }]);
     };
     const report = () => {
       if (x.report === 'none') return [];
-      if (x.report === 'missing') return [{ k: 'label', text: 'Examiner report', tone: 'accent' }, { k: 'note', text: `Examiner report not uploaded yet: upload CCEA’s ${x.series} report to ${REPORT_DIR[book.course]}.` }];
-      if (x.report === 'nocomment') return [{ k: 'label', text: 'Examiner report', tone: 'accent' }, { k: 'note', text: `The ${x.series} examiner report has no comment on this question.` }];
+      if (x.report === 'missing') return box('er', 'Examiner’s comment', x.series, [{ k: 'note', text: `Examiner report not uploaded yet: upload CCEA’s ${x.series} report to ${REPORT_DIR[book.course]}.` }]);
+      if (x.report === 'nocomment') return box('er', 'Examiner’s comment', x.series, [{ k: 'note', text: `The ${x.series} examiner report has no comment on this question.` }]);
       const f = x.rep.found, own = f === it.q;
-      return [{ k: 'label', text: `Examiner report, ${x.series}` + (own ? '' : ` (comment on ${qLabel(f)}${x.rep.hl ? '; the lines about this part are highlighted' : ''})`), tone: 'accent' },
-        ...segOf(x.rep.report_file, x.rep.report, x.rep.hl)];
+      return box('er', 'Examiner’s comment', x.series + (own ? '' : ` · comment on ${qLabel(f)}${x.rep.hl ? ', the lines about this part highlighted' : ''}`), segOf(x.rep.report_file, x.rep.report, x.rep.hl));
     };
-    if (variant === 'answers') out.push({ k: 'head', text: `${n}.  ${x.head}`, tail: 'answers' }, ...scheme(), ...report());
-    else if (variant === 'questions') out.push({ k: 'head', text: `${n}.  ${x.head}` }, ...question());
-    else out.push({ k: 'head', text: `${n}.  ${x.head}` }, ...question(), { k: 'gap' }, ...scheme(), ...report());
+    const hd = { k: 'head', n, text: `${x.series} · ${book.short} · ${qLabel(it.q)}`, marks: x.marks };
+    if (variant === 'answers') out.push(hd, ...scheme(), { k: 'gap' }, ...report());
+    else if (variant === 'questions') out.push(hd, ...question());
+    else out.push(hd, ...question(), { k: 'gap' }, ...scheme(), { k: 'gap' }, ...report());
     return out;
   }
 
@@ -382,30 +382,76 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
         segs.forEach((b, i) => { b.emb = emb[i]; b.w = bbs[i].right - bbs[i].left; b.h = bbs[i].top - bbs[i].bottom; });
       } catch (e) { segs.forEach(b => { b.k = 'note'; b.text = `Could not read ${url.split('/').pop()}.`; }); failed.push(url); }
     }
-    /* 3. lay out on A4 */
-    const W = 595.28, H = 841.89, M = { l: 36, r: 36, t: 38, b: 48 }, CW = W - M.l - M.r;
+    /* 3. lay out on A4: a branded title band, numbered question headers, the question as cut from the paper,
+       the mark scheme in a green bx and the examiner's comment in a yellow bx (boxes continue across pages) */
+    const W = 595.28, H = 841.89, M = { l: 40, r: 40, t: 46, b: 52 }, CW = W - M.l - M.r;
     const reg = await doc.embedFont(StandardFonts.Helvetica), bold = await doc.embedFont(StandardFonts.HelveticaBold), ital = await doc.embedFont(StandardFonts.HelveticaOblique);
-    const INK = rgb(.09, .125, .2), INK3 = rgb(.41, .45, .53), ACC = rgb(.12, .37, .75), WARN = rgb(.56, .33, 0), HEAD = rgb(.894, .925, .98), LINE = rgb(.83, .85, .89);
-    const okc = new Map(); const safe = (f, s) => Array.from(String(s).replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/→/g, '->').replace(/≤/g, '<=').replace(/≥/g, '>=').replace(/×/g, 'x').replace(/−/g, '-')).map(ch => { const k = f === bold ? 'b' + ch : 'r' + ch; if (!okc.has(k)) { try { f.encodeText(ch); okc.set(k, true); } catch (e) { okc.set(k, false); } } return okc.get(k) ? ch : '?'; }).join('');
+    const C = { ink: rgb(.09, .125, .2), ink2: rgb(.27, .31, .39), ink3: rgb(.43, .47, .55), line: rgb(.84, .86, .9), navy: rgb(.086, .13, .23), navy2: rgb(.15, .22, .38),
+      acc: rgb(.12, .37, .75), warn: rgb(.56, .33, 0), qbg: rgb(.94, .955, .975),
+      ms: { fill: rgb(.91, .965, .925), edge: rgb(.12, .48, .27), text: rgb(.07, .36, .19) },
+      er: { fill: rgb(1, .965, .84), edge: rgb(.8, .6, .05), text: rgb(.47, .33, 0) } };
+    const okc = new Map(); const safe = (f, s) => Array.from(String(s).replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/→/g, '->').replace(/≤/g, '<=').replace(/≥/g, '>=').replace(/×/g, 'x').replace(/−/g, '-')).map(ch => { const k = (f === bold ? 'b' : f === ital ? 'i' : 'r') + ch; if (!okc.has(k)) { try { f.encodeText(ch); okc.set(k, true); } catch (e) { okc.set(k, false); } } return okc.get(k) ? ch : '?'; }).join('');
     const wrap = (f, size, text, width) => { const ws = safe(f, text).split(/\s+/), lines = []; let cur = ''; for (const w of ws) { const t = cur ? cur + ' ' + w : w; if (f.widthOfTextAtSize(t, size) > width && cur) { lines.push(cur); cur = w; } else cur = t; } if (cur) lines.push(cur); return lines; };
-    let page = null, y = 0;
-    const newPage = () => { page = doc.addPage([W, H]); y = H - M.t; };
-    const room = () => y - M.b, FULL = H - M.t - M.b, SHRINK = .8;   /* a crop may shrink to 80% to fit the space left */
-    const segH = b => { const s = CW / b.w; let h = b.h * s; return Math.min(h, FULL); };
-    /* height a heading or label needs below it: itself, any labels that follow, and the first crop or note they introduce (crops are never split) */
+    const txt = (p, t, x, yy, size, f, color) => p.drawText(safe(f, t), { x, y: yy, size, font: f, color });
+    const tw = (t, size, f) => f.widthOfTextAtSize(safe(f, t), size);
+    const PAD = 10, BOXHEAD = 22;
+    let page = null, y = 0, first = true, bx = null;   /* box: { kind, title, sub, page, top } while a bx is open */
+    const cx = () => bx ? M.l + PAD : M.l, cw = () => bx ? CW - 2 * PAD : CW;
+    const closeFrag = (cont) => {   /* draw the open box's fill (multiplied under the crops, so they read on the tint), edge and header on its page */
+      if (!bx) return; const k = C[bx.kind], bottom = y - (cont ? 0 : PAD - 4), hgt = bx.top - bottom;
+      bx.page.drawRectangle({ x: M.l, y: bottom, width: CW, height: hgt, color: k.fill, blendMode: BlendMode.Multiply });
+      bx.page.drawRectangle({ x: M.l, y: bottom, width: CW, height: hgt, borderColor: k.edge, borderWidth: .9, borderOpacity: .55 });
+      bx.page.drawRectangle({ x: M.l, y: bottom, width: 3.5, height: hgt, color: k.edge });
+      y = bottom - (cont ? 0 : 2);
+    };
+    const openFrag = (cont) => {
+      const k = C[bx.kind]; bx.page = page; bx.top = y;
+      txt(page, (bx.title + (cont ? ' (continued)' : '')).toUpperCase(), M.l + PAD + 2, y - 14.5, 8.5, bold, k.text);
+      if (bx.sub && !cont) { const t0 = (bx.title + '').toUpperCase(), x0 = M.l + PAD + 2 + tw(t0, 8.5, bold) + 8; const sub = wrap(reg, 8.5, bx.sub, W - M.r - PAD - x0)[0] || ''; txt(page, sub, x0, y - 14.5, 8.5, reg, k.text); }
+      y -= BOXHEAD;
+    };
+    const newPage = () => {
+      const had = !!bx; if (had) closeFrag(true);
+      page = doc.addPage([W, H]); y = H - M.t;
+      if (!first) {   /* running header */
+        txt(page, title, M.l, H - 28, 8.5, bold, C.ink2);
+        const r = `CCEA past-paper questions · ${VARIANT[variant].name}`; txt(page, r, W - M.r - tw(r, 8.5, reg), H - 28, 8.5, reg, C.ink3);
+        page.drawLine({ start: { x: M.l, y: H - 34 }, end: { x: W - M.r, y: H - 34 }, thickness: .6, color: C.line });
+        y = H - M.t - 4;
+      }
+      first = false;
+      if (had) openFrag(true);
+    };
+    const room = () => y - M.b - (bx ? PAD : 0), FULL = H - M.t - M.b - 30, SHRINK = .8;
+    const segH = b => Math.min(b.h * (cw() / b.w), FULL);
     const chain = (bl, i) => { let h = 0; for (let j = i; j < bl.length; j++) { const z = bl[j];
-      if (z.k === 'head') h += 25; else if (z.k === 'label') h += 14; else if (z.k === 'gap') h += 6;
+      if (z.k === 'head') h += 34; else if (z.k === 'box') h += BOXHEAD; else if (z.k === 'label') h += 14; else if (z.k === 'gap') h += 8;
+      else if (z.k === 'boxend') continue;
       else return Math.min(FULL, h + (z.k === 'seg' ? segH(z) * SHRINK : 30)); } return Math.min(FULL, h); };
     newPage();
-    /* title block */
-    for (const ln of wrap(bold, 17, title, CW)) { page.drawText(ln, { x: M.l, y: y - 17, size: 17, font: bold, color: INK }); y -= 22; }
+    /* title band */
     const known = its.map(it => info(book, it).marks).filter(m => m !== null), tot = known.reduce((a, m) => a + m, 0);
     const sers = its.map(it => serLabel(it.s)), span = sers.length ? (sers[0] === sers[sers.length - 1] ? sers[0] : `${sers[0]} to ${sers[sers.length - 1]}`) : '';
-    const sub = `CCEA past-paper questions · ${VARIANT[variant].name}: ${VARIANT[variant].sub.toLowerCase()}`;
-    page.drawText(safe(reg, sub), { x: M.l, y: y - 11, size: 10, font: reg, color: INK }); y -= 15;
-    page.drawText(safe(reg, `${its.length} question${its.length === 1 ? '' : 's'} · ${known.length < its.length ? 'at least ' : ''}${tot} marks · ${span}`), { x: M.l, y: y - 11, size: 10, font: reg, color: INK3 }); y -= 18;
-    if (variant === 'questions') { page.drawText('Name ______________________________   Class ________   Date ____________', { x: M.l, y: y - 12, size: 10.5, font: reg, color: INK }); y -= 24; }
-    page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .8, color: LINE }); y -= 12;
+    const tl = wrap(bold, 20, topic.title, CW - 40), bandH = 74 + tl.length * 24;
+    page.drawRectangle({ x: 0, y: H - bandH, width: W, height: bandH, color: C.navy });
+    page.drawRectangle({ x: 0, y: H - bandH, width: W, height: 3, color: variant === 'answers' ? C.ms.edge : variant === 'questions' ? C.acc : C.er.edge });
+    txt(page, "MR BUTLER'S DIGITAL TECHNOLOGY", M.l, H - 30, 8.5, bold, rgb(.7, .77, .9));
+    const kicker = `${book.short.toUpperCase()} · CCEA PAST-PAPER QUESTIONS`; txt(page, kicker, W - M.r - tw(kicker, 8.5, bold), H - 30, 8.5, bold, rgb(.7, .77, .9));
+    let ty = H - 58; for (const ln of tl) { txt(page, ln, M.l, ty, 20, bold, rgb(1, 1, 1)); ty -= 24; }
+    txt(page, `${VARIANT[variant].name}: ${VARIANT[variant].sub}`, M.l, ty + 2, 10, reg, rgb(.84, .88, .95));
+    y = H - bandH - 16;
+    /* summary chips */
+    const chips = [`${its.length} question${its.length === 1 ? '' : 's'}`, `${known.length < its.length ? 'at least ' : ''}${tot} marks`, span].filter(Boolean);
+    let chx = M.l; for (const c of chips) { const w = tw(c, 9.5, bold) + 18; page.drawRectangle({ x: chx, y: y - 20, width: w, height: 20, color: C.qbg, borderColor: C.line, borderWidth: .6 }); txt(page, c, chx + 9, y - 13.5, 9.5, bold, C.ink); chx += w + 8; }
+    y -= 30;
+    if (variant === 'questions') { txt(page, 'Name', M.l, y - 12, 10, bold, C.ink); page.drawLine({ start: { x: M.l + 34, y: y - 14 }, end: { x: M.l + 260, y: y - 14 }, thickness: .6, color: C.ink3 });
+      txt(page, 'Class', M.l + 278, y - 12, 10, bold, C.ink); page.drawLine({ start: { x: M.l + 310, y: y - 14 }, end: { x: M.l + 380, y: y - 14 }, thickness: .6, color: C.ink3 });
+      txt(page, 'Date', M.l + 398, y - 12, 10, bold, C.ink); page.drawLine({ start: { x: M.l + 426, y: y - 14 }, end: { x: W - M.r, y: y - 14 }, thickness: .6, color: C.ink3 }); y -= 30; }
+    if (variant !== 'questions') {   /* key */
+      let kx = M.l; for (const [k, t] of [['ms', 'Mark scheme'], ['er', 'Examiner’s comment']]) { page.drawRectangle({ x: kx, y: y - 11, width: 11, height: 11, color: C[k].fill, borderColor: C[k].edge, borderWidth: .8 }); txt(page, t, kx + 16, y - 9.5, 9, reg, C.ink2); kx += 30 + tw(t, 9, reg); }
+      y -= 22;
+    }
+    page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .8, color: C.line }); y -= 14;
     for (let qi = 0; qi < plan.length; qi++) {
       if (qi % 4 === 0) { setStatus(`Placing question ${qi + 1} of ${plan.length}`, 'busy', .75 + qi / plan.length * .23); await tick(); }
       const bl = plan[qi];
@@ -413,48 +459,55 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
         const b = bl[i];
         if (b.k === 'head') {
           if (room() < chain(bl, i)) newPage();
-          page.drawRectangle({ x: M.l, y: y - 19, width: CW, height: 19, color: HEAD });
-          page.drawText(safe(bold, b.text), { x: M.l + 7, y: y - 13.5, size: 10.5, font: bold, color: INK });
-          if (b.tail === 'answers') { const t = 'Mark scheme and examiner report', w = reg.widthOfTextAtSize(t, 8.5); page.drawText(t, { x: W - M.r - 7 - w, y: y - 13, size: 8.5, font: reg, color: INK3 }); }
-          y -= 25;
+          const r = 11, cxn = M.l + r, cyn = y - r;
+          page.drawCircle({ x: cxn, y: cyn, size: r, color: C.navy });
+          const ns = String(b.n), nf = ns.length > 2 ? 8.5 : 10; txt(page, ns, cxn - tw(ns, nf, bold) / 2, cyn - nf * .36, nf, bold, rgb(1, 1, 1));
+          txt(page, b.text, M.l + 2 * r + 9, y - 15, 11.5, bold, C.ink);
+          if (b.marks) { const mt = `[${b.marks} mark${b.marks === 1 ? '' : 's'}]`; txt(page, mt, W - M.r - tw(mt, 10, bold), y - 15, 10, bold, C.ink2); }
+          page.drawLine({ start: { x: M.l + 2 * r + 9, y: y - 23 }, end: { x: W - M.r, y: y - 23 }, thickness: .6, color: C.line });
+          y -= 32;
+        } else if (b.k === 'box') {
+          if (room() < chain(bl, i)) newPage();
+          bx = { kind: b.kind, title: b.title, sub: b.sub }; openFrag(false);
+        } else if (b.k === 'boxend') {
+          closeFrag(false); bx = null;
         } else if (b.k === 'label') {
           if (room() < chain(bl, i)) newPage();
-          const f = b.tone === 'mute' ? ital : bold, c = b.tone === 'warn' ? WARN : b.tone === 'mute' ? INK3 : ACC;
-          for (const ln of wrap(f, 9, b.text, CW)) { page.drawText(ln, { x: M.l, y: y - 9, size: 9, font: f, color: c }); y -= 12; }
-          y -= 2;
+          const f = b.tone === 'mute' ? ital : bold, c = b.tone === 'warn' ? C.warn : b.tone === 'mute' ? C.ink3 : C.acc;
+          for (const ln of wrap(f, 8.5, b.text, cw())) { txt(page, ln, cx(), y - 9, 8.5, f, c); y -= 11.5; }
+          y -= 3;
         } else if (b.k === 'note') {
-          const lines = wrap(ital, 9.5, b.text, CW - 10);
-          if (room() < lines.length * 12 + 6) newPage();
-          for (const ln of lines) { page.drawText(ln, { x: M.l + 4, y: y - 10, size: 9.5, font: ital, color: INK3 }); y -= 12.5; }
+          const lines = wrap(ital, 9.5, b.text, cw() - 4);
+          if (room() < lines.length * 12.5 + 4) newPage();
+          for (const ln of lines) { txt(page, ln, cx() + 2, y - 10, 9.5, ital, C.ink2); y -= 12.5; }
           y -= 4;
         } else if (b.k === 'gap') {
-          y -= 6;
+          y -= 8;
         } else if (b.k === 'seg') {
-          const s0 = CW / b.w; let w = CW, h = b.h * s0;
-          if (h > FULL) { w = CW * FULL / h; h = FULL; }
+          const W0 = cw(); let w = W0, h = b.h * (W0 / b.w);
+          if (h > FULL) { w = W0 * FULL / h; h = FULL; }
           if (room() < h && room() < h * SHRINK) newPage();
           if (room() < h) { w = w * room() / h; h = room(); }
-          const x = M.l + (CW - w) / 2;
+          const x = cx() + (W0 - w) / 2;
           page.drawPage(b.emb, { x, y: y - h, width: w, height: h });
           for (const [ht, hb] of b.hl) {   /* highlight the lines about this part (fractions of the source page) */
             const a = Math.max(ht, b.t), z = Math.min(hb, b.b); if (z <= a) continue;
             const k = h / (b.b - b.t);
-            page.drawRectangle({ x, y: y - (z - b.t) * k, width: w, height: (z - a) * k, color: rgb(1, .87, .2), opacity: .45, blendMode: BlendMode.Multiply });
+            page.drawRectangle({ x, y: y - (z - b.t) * k, width: w, height: (z - a) * k, color: rgb(1, .78, .16), opacity: .5, blendMode: BlendMode.Multiply });
           }
-          y -= h + 3;
+          y -= h + 4;
         }
       }
-      y -= 8;
-      if (qi < plan.length - 1 && room() > 30) { page.drawLine({ start: { x: M.l, y: y + 3 }, end: { x: W - M.r, y: y + 3 }, thickness: .5, color: LINE }); y -= 8; }
+      if (bx) { closeFrag(false); bx = null; }
+      y -= 14;
     }
     /* footer on every page */
     const ps = doc.getPages(), foot = 'CCEA past paper material – used with permission';
     ps.forEach((p, i) => {
-      p.drawLine({ start: { x: M.l, y: 34 }, end: { x: W - M.r, y: 34 }, thickness: .5, color: LINE });
-      p.drawText(foot, { x: M.l, y: 22, size: 8, font: reg, color: INK3 });
-      const room8 = CW - reg.widthOfTextAtSize(foot, 8) - 24, pn = `page ${i + 1} of ${ps.length}`;
-      const r = [`${title} · ${VARIANT[variant].name} · ${pn}`, `${title} · ${pn}`, pn].map(t => safe(reg, t)).find(t => reg.widthOfTextAtSize(t, 8) <= room8) || pn, w = reg.widthOfTextAtSize(r, 8);
-      p.drawText(r, { x: W - M.r - w, y: 22, size: 8, font: reg, color: INK3 });
+      p.drawLine({ start: { x: M.l, y: 36 }, end: { x: W - M.r, y: 36 }, thickness: .5, color: C.line });
+      txt(p, foot, M.l, 24, 7.5, reg, C.ink3);
+      const pn = `Page ${i + 1} of ${ps.length}`; txt(p, pn, W - M.r - tw(pn, 7.5, bold), 24, 7.5, bold, C.ink2);
+      const mid = "Mr Butler's Digital Technology"; txt(p, mid, (W - tw(mid, 7.5, reg)) / 2, 24, 7.5, reg, C.ink3);
     });
     setStatus('Saving the PDF…', 'busy', .99); await tick();
     const bytes = await doc.save();
