@@ -103,7 +103,7 @@ details.cd-ed input[type=number]{width:4em}
 .cd-sow{margin:-4px 0 10px;font-size:14.5px;color:var(--ink-2);background:var(--accent-soft);border-radius:8px;padding:6px 10px}.cd-sow.warn{background:var(--warn-soft);color:var(--ink)}
 /* build a test */
 .bt-unit{border:1.5px solid var(--line);border-radius:12px;padding:6px 12px 12px;margin:0 0 10px;min-width:0} .bt-unit.on{border-color:var(--accent)}
-.bt-unit legend{padding:0 6px} .bt-ul{display:flex;gap:8px;align-items:baseline;cursor:pointer;flex-wrap:wrap} .bt-ul input,.bt-t input,.bt-chk input{width:18px;height:18px;accent-color:var(--accent);align-self:center;flex:none}
+.bt-unit legend{padding:0 6px} .bt-unit:not(.on){border-color:transparent;padding:0 12px 2px;background:var(--paper-2)} .bt-ul{display:flex;gap:8px;align-items:baseline;cursor:pointer;flex-wrap:wrap} .bt-ul input,.bt-t input,.bt-chk input{width:18px;height:18px;accent-color:var(--accent);align-self:center;flex:none}
 .bt-ul span{color:var(--ink-2);font-size:14px}
 .bt-ut{display:flex;gap:8px;margin:2px 0 8px}
 .bt-topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px}
@@ -649,7 +649,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         for (const ln of ins.flatMap(t => wrap(reg, 10, t, CW))) { txt(page, ln, M.l, y - 10, 10, reg, C.ink); y -= 14; }
         y -= 8;
       }
-      txt(page, pupil ? 'FOR THE TEACHER: MARKS' : 'MARKS SUMMARY', M.l, y - 10, 9, bold, C.ink2); y -= 18;
+      txt(page, pupil ? 'MARKS (FOR THE TEACHER)' : 'MARKS SUMMARY', M.l, y - 10, 9, bold, C.ink2); y -= 18;
       const cols = T.perTopic ? (pupil ? [['Topic', .56], ['Questions', .18], ['Available', .13], ['Awarded', .13]] : [['Topic', .6], ['Questions', .2], ['Marks', .2]])
                               : (pupil ? [['Q', .07], ['Topic', .53], ['Available', .2], ['Awarded', .2]] : [['Q', .07], ['Topic', .43], ['From', .32], ['Marks', .18]]);
       const rows = T.rows.map(r => T.perTopic ? (pupil ? [r.label, r.qs, String(r.marks), ''] : [r.label, r.qs, String(r.marks)]) : (pupil ? [r.qs, r.label, String(r.marks), ''] : [r.qs, r.label, r.sub, String(r.marks)]));
@@ -869,7 +869,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   }
 
   /* ================================================================== near-duplicates */
-  const STOP = new Set('a an the and or of to in on for with by from is are be as at its it this that their which what how why when two three four one each give state describe explain identify outline discuss using use used can will your you between'.split(' '));
+  const STOP = new Set('a an the and or of to in on for with by from is are be as at its it this that their which what how why when two three four one each give state describe explain identify outline discuss using use used can will your you between multiple choice statement statements true untrue false pick spot tick main feature features purpose advantage advantages disadvantage disadvantages showing working name draw short question questions about which describes distinguish compare suitable example examples further other different another type types'.split(' '));
   const toks = t => new Set(String(t || '').toLowerCase().replace(/[^a-z0-9 ]+/g, ' ').split(/\s+/).filter(w => w.length > 2 && !STOP.has(w)).map(w => w.replace(/(ing|es|s)$/, '')));
   const TK = new Map(); const tk = q => { if (!TK.has(q.k)) TK.set(q.k, toks(q.it.t)); return TK.get(q.k); };
   function similar(a, b) {   /* the same part asked again with (nearly) the same summary */
@@ -877,6 +877,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     if (a.book.id !== b.book.id) return false;
     const x = tk(a), y = tk(b); if (!x.size || !y.size) return false;
     let n = 0; x.forEach(w => { if (y.has(w)) n++; });
+    if (n < Math.min(2, x.size, y.size)) return false;
     const j = n / (x.size + y.size - n), sameQ = a.it.q === b.it.q;
     return j >= .7 || (sameQ && j >= .45) || (j >= .55 && Math.abs((a.marks || 0) - (b.marks || 0)) <= 1);
   }
@@ -930,7 +931,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     /* the natural mix of short, medium and long questions in this pool (by marks) */
     const mix = [0, 0, 0]; cands.forEach(c => { mix[sizeOf(c.marks)] += c.marks; }); const ms = mix.reduce((a, x) => a + x, 0); for (let i = 0; i < 3; i++) mix[i] /= ms;
     const R = rng(B.seed * 7919 + T), keys = [...B.quota.keys()];
-    let best = null, bestScore = Infinity;
+    let bestScore = Infinity; const good = [];
     for (let trial = 0; trial < 260; trial++) {
       const sel = [], tm = new Map(keys.map(k => [k, 0])), cm = [0, 0, 0]; let tot = 0;
       const order = cands.map(c => [R(), c]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
@@ -957,9 +958,11 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       }
       const off = keys.reduce((a, k) => a + Math.abs(tm.get(k) - B.quota.get(k)), 0), mixOff = [0, 1, 2].reduce((a, i) => a + Math.abs(cm[i] / Math.max(1, tot) - mix[i]), 0) * T * .5;
       const missing = keys.filter(k => tm.get(k) === 0 && B.quota.get(k) >= 1).length;
-      const score = Math.abs(T - tot) * 12 + off + mixOff + missing * 6 + R() * .01;
-      if (score < bestScore) { bestScore = score; best = sel; }
+      const score = Math.abs(T - tot) * 12 + off + mixOff + missing * 6;
+      good.push([score, sel]); if (score < bestScore) bestScore = score;
     }
+    /* any of the near-best sets, so "Shuffle again" gives a different test, not the same optimum */
+    const near = good.filter(g => g[0] <= bestScore + 2.5), best = near[Math.floor(R() * near.length)][1];
     B.sel = best.map(x => ({ ...x.c, topic: +x.t.split('|')[1] }));
     sortSel();
   }
@@ -1023,8 +1026,9 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   function renderTarget() {
     pressed(ui.mode, B.mode); ui.marksWrap.hidden = B.mode !== 'marks'; ui.minsWrap.hidden = B.mode !== 'time';
     const ri = rateInfo(), T = targetMarks(), n = pool().length, nt = [...B.topics].filter(k => B.units.has(k.split('|')[0])).length;
-    ui.rateOpt.textContent = `As in the CCEA paper (${ri.paperRate ? (Math.round(ri.paperRate * 100) / 100) : 1} marks a minute)`;
-    ui.rateText.textContent = ri.text ? `CCEA papers: ${ri.text}. ` + (B.mode === 'time' ? `${hm(B.mins)} at ${Math.round(ri.rate * 100) / 100} marks a minute ≈ ${T} marks.` : `${T} marks at ${Math.round(ri.rate * 100) / 100} marks a minute ≈ ${hm(targetMins())}.`) : '';
+    const mpm = r => { const v = Math.round(r * 100) / 100; return `${v} mark${v === 1 ? '' : 's'} a minute`; };
+    ui.rateOpt.textContent = `As in the CCEA paper (${mpm(ri.paperRate || 1)})`;
+    ui.rateText.textContent = ri.text ? `CCEA papers: ${ri.text}. ` + (B.mode === 'time' ? `${hm(B.mins)} at ${mpm(ri.rate)} ≈ ${T} marks.` : `${T} marks at ${mpm(ri.rate)} ≈ ${hm(targetMins())}.`) : '';
     const u = Object.keys(used.get()).length;
     ui.usedText.textContent = u ? `${plural(u, 'question')} remembered from earlier tests.` : 'None remembered yet: questions are remembered when you download a test.';
     ui.forget.hidden = !u;
@@ -1083,7 +1087,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     return { title: name, heading: `Mock test – ${tot} marks`, kicker: `${bs.map(b => b.short.toUpperCase()).join(' + ')} · CCEA PAST-PAPER QUESTIONS`,
              docTitle: name, file: name, layout: B.layout, items,
              test: { minutes: Math.round(tot / ri.rate), rows, perTopic,
-                     note: `Time allowed worked out at ${Math.round(ri.rate * 100) / 100} marks a minute${B.rate === 'one' ? '' : ' (the rate of the real CCEA paper)'}. Questions from CCEA past papers, chosen across ${plural(new Set(B.sel.map(x => x.book.id + x.topic)).size, 'topic')}.` } };
+                     note: `Time allowed worked out at ${Math.round(ri.rate * 100) / 100} mark${Math.round(ri.rate * 100) === 100 ? '' : 's'} a minute${B.rate === 'one' ? '' : ' (the rate of the real CCEA paper)'}. Questions from CCEA past papers, chosen across ${plural(new Set(B.sel.map(x => x.book.id + x.topic)).size, 'topic')}.` } };
   }
 
   function startBuilder() {
@@ -1220,7 +1224,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         el('span', { class: 'cd-n', text: x.name.replace(/^(GCSE )?(Unit \d|AS \d|A2 \d):\s*/, '') }),
         el('span', { class: 'cd-big', text: big }),
         el('span', { class: 'cd-w', text: when + (x.edited ? ' (edited)' : '') }),
-        l && l.n > 0 ? el('span', { class: 'cd-t', text: `≈ ${pl(l.teach, 'teaching week')}` }) : (!l && x.note ? el('span', { class: 'cd-t', text: x.note }) : null)));
+        l && l.n > 0 ? el('span', { class: 'cd-t', text: `≈ ${pl(l.teach, 'teaching week')}` }) : (!l && (x.hint || x.note) ? el('span', { class: 'cd-t', text: x.hint || x.note, title: x.note || '' }) : null)));
     }
     const src = $('#cd-src'); src.innerHTML = '';
     const used = new Set(exams().map(x => x.src));
