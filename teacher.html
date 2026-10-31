@@ -785,6 +785,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       if (LAY !== 'compact') newPage();   /* standard: the cover page stands alone */
     }
     }
+    const pageMarks = new Map();   /* tests: marks of the questions that start on each page */
     for (let qi = 0; qi < plan.length; qi++) {
       if (qi % 4 === 0) { setStatus(`Placing question ${qi + 1} of ${plan.length}`, 'busy', .75 + qi / plan.length * .23); await tick(); }
       const bl = plan[qi];
@@ -797,6 +798,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
           page.drawCircle({ x: cxn, y: cyn, size: r, color: C.ink });
           txt(page, ns, cxn - tw(ns, nf, bold) / 2, cyn - nf * .36, nf, bold, rgb(1, 1, 1));
           txt(page, b.text, M.l + 2 * r + 6, y - 11, 8, reg, C.ink3);
+          const qm = info(its[qi].book, its[qi].it).marks; if (qm) pageMarks.set(page, (pageMarks.get(page) || 0) + qm);
           y -= 20;
         } else if (b.k === 'head') {
           if (room() < chain(bl, i)) newPage();
@@ -844,6 +846,33 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       }
       if (bx) { closeFrag(false); bx = null; }
       y -= TEST ? 12 : LAY === 'compact' ? 10 : 14;
+    }
+    if (TEST && variant === 'questions') {
+      reflect();
+      /* marks per page, bottom right, for quick totting up */
+      for (const [p, m] of pageMarks) { const t1 = 'Marks on this page', t2 = `/ ${m}`, bw = 36, x2 = W - M.r - tw(t2, 8.5, bold), xb = x2 - 4 - bw, x1 = xb - 6 - tw(t1, 8, reg);
+        txt(p, t1, x1, 17, 8, reg, C.ink3); p.drawRectangle({ x: xb, y: 12, width: bw, height: 16, borderColor: C.ink3, borderWidth: .7 }); txt(p, t2, x2, 17, 8.5, bold, C.ink2); }
+    }
+    /* after the questions: how pupils check their work now and learn from it once it is marked */
+    function reflect() {
+      const need = 295; if (room() < need) newPage(); else y -= 6;
+      page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: 1.2, color: C.ink }); y -= 22;
+      txt(page, 'Before you hand in', M.l, y, 11, bold, C.ink); y -= 17;
+      const tick = (t, x0) => { page.drawRectangle({ x: x0, y: y - 2, width: 8, height: 8, borderColor: C.ink2, borderWidth: .7 }); txt(page, t, x0 + 13, y - 1, 9, reg, C.ink); };
+      const two = (a, b2) => { tick(a, M.l); if (b2) tick(b2, M.l + CW / 2); y -= 14; };
+      two('I have answered every question', 'One point for each mark: [3] means three points');
+      two('I have used the key terms, spelt correctly', '“Explain” answers give a reason (“because…”)');
+      y -= 12;
+      txt(page, 'After it is marked', M.l, y, 11, bold, C.ink); y -= 6;
+      const line = (lab, n) => { y -= 24; txt(page, lab, M.l, y, 9, bold, C.ink); const x0 = M.l + tw(lab, 9, bold) + 6; page.drawLine({ start: { x: x0, y: y - 2 }, end: { x: W - M.r, y: y - 2 }, thickness: .5, color: C.ink3 });
+        for (let i = 1; i < (n || 1); i++) { y -= 24; page.drawLine({ start: { x: M.l, y: y - 2 }, end: { x: W - M.r, y: y - 2 }, thickness: .5, color: C.ink3 }); } };
+      y -= 15; const sc = 'My score:', sx = M.l + tw(sc, 9, bold) + 6; txt(page, sc, M.l, y, 9, bold, C.ink);
+      page.drawLine({ start: { x: sx, y: y - 2 }, end: { x: sx + 40, y: y - 2 }, thickness: .5, color: C.ink3 }); txt(page, `/ ${tot}`, sx + 44, y, 9, bold, C.ink);
+      const pc = 'Percentage:', px = sx + 100; txt(page, pc, px, y, 9, bold, C.ink); page.drawLine({ start: { x: px + tw(pc, 9, bold) + 6, y: y - 2 }, end: { x: px + tw(pc, 9, bold) + 46, y: y - 2 }, thickness: .5, color: C.ink3 }); txt(page, '%', px + tw(pc, 9, bold) + 50, y, 9, bold, C.ink);
+      y -= 20; txt(page, 'Where did I lose marks? Tick any that apply:', M.l, y, 9, bold, C.ink); y -= 15;
+      two('I didn’t know or remember it', 'I misread the question'); two('Not enough points for the marks', 'Missing key terms'); two('No example or reason given', 'Ran out of time');
+      line('One thing I did well:'); line('Topics to revise (use the workbook):'); line('Two things I will do differently next time:', 2);
+      y -= 10;
     }
     /* page numbers in the running header (no footer) */
     const ps = doc.getPages();
