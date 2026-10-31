@@ -295,10 +295,12 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
   function number() { let i = 0; ui.list.querySelectorAll('li').forEach(li => { li.querySelector('.tp-num').textContent = li.classList.contains('off') ? '–' : String(++i); }); }
 
   /* ------------------------------------------------------------------ progress and errors */
+  let ST = null;   /* the status box in use: the topic packs' or the test builder's {box, text, bar} */
   function setStatus(msg, kind, frac) {
-    ui.status.hidden = !msg; ui.status.className = 'tp-status' + (kind ? ' ' + kind : '');
-    ui.statusText.textContent = msg || '';
-    ui.bar.hidden = frac === undefined || frac === null; if (!ui.bar.hidden) ui.bar.value = Math.max(0, Math.min(1, frac));
+    const st = ST || { box: ui.status, text: ui.statusText, bar: ui.bar }; if (!st.box) return;
+    st.box.hidden = !msg; st.box.className = 'tp-status' + (kind ? ' ' + kind : '');
+    st.text.textContent = msg || '';
+    st.bar.hidden = frac === undefined || frac === null; if (!st.bar.hidden) st.bar.value = Math.max(0, Math.min(1, frac));
   }
   const tick = () => new Promise(r => setTimeout(r, 0));
 
@@ -318,11 +320,11 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
   };
 
   /* the blocks for one question: head / label / seg {src, page, t, b, hl} / note */
-  function blocks(variant, n, book, it) {
+  function blocks(variant, n, book, it, layout) {
     const x = info(book, it), out = [];
     /* X: [left, right] per segment (cuts off CCEA's edge watermark); G: blank runs per segment, squeezed out of the compressed
        answer packs (never out of a worksheet, where pupils need the answer space) */
-    const squeeze = S.layout === 'compact' && variant !== 'questions';
+    const squeeze = (layout || S.layout) === 'compact' && variant !== 'questions';
     const segOf = (src, C, hl, X, G) => C.flatMap(([p, t, b], i) => {
       const lr = (X && X[i]) || [0, 1], h = (hl || []).filter(z => z[0] === p).map(z => [z[1], z[2]]), mk = (a, z) => ({ k: 'seg', src, page: p, t: a, b: z, l: lr[0], r: lr[1], hl: h });
       const gs = squeeze && G && G[i] ? G[i].filter(g => g[0] > t && g[1] < b && g[1] > g[0]) : [];
@@ -357,11 +359,20 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
     return out;
   }
 
-  async function build(variant) {
+  /* the topic pack as a job for build(): the test builder (teacher_tests.js) makes its own jobs */
+  function packJob() {
+    const book = S.book, topic = S.topic;
+    return { title: `${book.short} – ${topic.title}`, heading: topic.title, kicker: `${book.short.toUpperCase()} · CCEA PAST-PAPER QUESTIONS`,
+             docTitle: `${book.short} – ${topic.title} – CCEA questions`, file: `${book.short} – ${topic.title} – CCEA questions`,
+             layout: S.layout, items: chosen().map(it => ({ book, it })) };
+  }
+  /* job: { title (running header), heading (title band), kicker, docTitle, file, layout, items: [{book, it, topic?}],
+            test?: { minutes, rows: [{label, sub, marks, qs}] , perTopic } } */
+  async function build(variant, job) {
     const L = await pdfLib(), { PDFDocument, StandardFonts, rgb, BlendMode } = L;
-    const book = S.book, topic = S.topic, its = chosen(); if (!its.length) return;
-    const title = `${book.short} – ${topic.title}`;
-    const plan = its.map((it, i) => blocks(variant, i + 1, book, it));
+    job = job || packJob();
+    const its = job.items, title = job.title, LAY = job.layout || 'standard'; if (!its.length) return;
+    const plan = its.map((x, i) => blocks(variant, i + 1, x.book, x.it, LAY));
     /* 1. load each source PDF once */
     const urls = [...new Set(plan.flat().filter(b => b.k === 'seg').map(b => b.src))];
     const src = new Map(), failed = [];
@@ -376,7 +387,7 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
     for (const bl of plan.flat()) if (bl.k === 'seg' && !src.has(bl.src)) { bl.k = 'note'; bl.text = `Could not load ${bl.src.split('/').pop()}${navigator.onLine === false ? ' (offline: open it once online first)' : ''}.`; }
     /* 2. embed every segment of each source PDF in one go (shared fonts/resources keep the file small) */
     const doc = await PDFDocument.create();
-    doc.setTitle(`${title} – CCEA questions – ${VARIANT[variant].name}`); doc.setAuthor('Mr Butler’s Digital Technology'); doc.setSubject('CCEA past paper material, used with permission'); doc.setCreator('Teacher area topic packs (pdf-lib)');
+    doc.setTitle(`${job.docTitle || title} – ${VARIANT[variant].name}`); doc.setAuthor('Mr Butler’s Digital Technology'); doc.setSubject('CCEA past paper material, used with permission'); doc.setCreator('Teacher area topic packs (pdf-lib)');
     const box = pg => { const mb = pg.getMediaBox(), cb = pg.getCropBox(); const x0 = Math.max(mb.x, cb.x), x1 = Math.min(mb.x + mb.width, cb.x + cb.width), y0 = Math.max(mb.y, cb.y), y1 = Math.min(mb.y + mb.height, cb.y + cb.height); return x1 > x0 && y1 > y0 ? { x0, x1, y0, y1 } : { x0: mb.x, x1: mb.x + mb.width, y0: mb.y, y1: mb.y + mb.height }; };
     let si = 0;
     for (const [url, sd] of src) {
@@ -431,7 +442,7 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
       if (had) openFrag(true);
     };
     const room = () => y - M.b - (bx ? PAD : 0), FULL = H - M.t - M.b - 30, SHRINK = .8;
-    const segW = b => S.layout === 'compact' && b.pw ? Math.min(cw(), b.w * CW / b.pw) : cw();   /* compressed: no enlarging of trimmed crops */
+    const segW = b => LAY === 'compact' && b.pw ? Math.min(cw(), b.w * CW / b.pw) : cw();   /* compressed: no enlarging of trimmed crops */
     const segH = b => Math.min(b.h * (segW(b) / b.w), FULL);
     const chain = (bl, i) => { let h = 0; for (let j = i; j < bl.length; j++) { const z = bl[j];
       if (z.k === 'head') h += 34; else if (z.k === 'box') h += BOXHEAD; else if (z.k === 'label') h += 14; else if (z.k === 'gap') h += 8;
@@ -439,18 +450,21 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
       else return Math.min(FULL, h + (z.k === 'seg' ? segH(z) * SHRINK : 30)); } return Math.min(FULL, h); };
     newPage();
     /* title band */
-    const known = its.map(it => info(book, it).marks).filter(m => m !== null), tot = known.reduce((a, m) => a + m, 0);
-    const sers = its.map(it => serLabel(it.s)), span = sers.length ? (sers[0] === sers[sers.length - 1] ? sers[0] : `${sers[0]} to ${sers[sers.length - 1]}`) : '';
-    const tl = wrap(bold, 20, topic.title, CW - 40), bandH = 74 + tl.length * 24;
+    const known = its.map(x => info(x.book, x.it).marks).filter(m => m !== null), tot = known.reduce((a, m) => a + m, 0);
+    let span = '';
+    if (job.test) { const ys = its.map(x => yr(x.it.s)).filter(Boolean).sort((a, b) => a - b), spec = its.some(x => !yr(x.it.s)); span = ys.length ? (ys[0] === ys[ys.length - 1] ? String(ys[0]) : `${ys[0]} to ${ys[ys.length - 1]}`) + (spec ? ' + specimen' : '') : spec ? 'Specimen' : ''; }
+    else { const sers = its.map(x => serLabel(x.it.s)); span = sers.length ? (sers[0] === sers[sers.length - 1] ? sers[0] : `${sers[0]} to ${sers[sers.length - 1]}`) : ''; }
+    const tl = wrap(bold, 20, job.heading, CW - 40), bandH = 74 + tl.length * 24;
     page.drawRectangle({ x: 0, y: H - bandH, width: W, height: bandH, color: C.navy });
     page.drawRectangle({ x: 0, y: H - bandH, width: W, height: 3, color: variant === 'answers' ? C.ms.edge : variant === 'questions' ? C.acc : C.er.edge });
     txt(page, "MR BUTLER'S DIGITAL TECHNOLOGY", M.l, H - 30, 8.5, bold, rgb(.7, .77, .9));
-    const kicker = `${book.short.toUpperCase()} · CCEA PAST-PAPER QUESTIONS`; txt(page, kicker, W - M.r - tw(kicker, 8.5, bold), H - 30, 8.5, bold, rgb(.7, .77, .9));
+    const kicker = job.kicker; txt(page, kicker, W - M.r - tw(kicker, 8.5, bold), H - 30, 8.5, bold, rgb(.7, .77, .9));
     let ty = H - 58; for (const ln of tl) { txt(page, ln, M.l, ty, 20, bold, rgb(1, 1, 1)); ty -= 24; }
     txt(page, `${VARIANT[variant].name}: ${VARIANT[variant].sub}`, M.l, ty + 2, 10, reg, rgb(.84, .88, .95));
     y = H - bandH - 16;
     /* summary chips */
-    const chips = [`${its.length} question${its.length === 1 ? '' : 's'}`, `${known.length < its.length ? 'at least ' : ''}${tot} marks`, span].filter(Boolean);
+    const hm = m => { const h = Math.floor(m / 60), r = m % 60; return [h ? `${h} hour${h === 1 ? '' : 's'}` : '', r ? `${r} minutes` : ''].filter(Boolean).join(' '); };
+    const chips = [`${its.length} question${its.length === 1 ? '' : 's'}`, `${known.length < its.length ? 'at least ' : ''}${tot} marks`, job.test && job.test.minutes ? 'Time: ' + hm(job.test.minutes) : '', span].filter(Boolean);
     let chx = M.l; for (const c of chips) { const w = tw(c, 9.5, bold) + 18; page.drawRectangle({ x: chx, y: y - 20, width: w, height: 20, color: C.qbg, borderColor: C.line, borderWidth: .6 }); txt(page, c, chx + 9, y - 13.5, 9.5, bold, C.ink); chx += w + 8; }
     y -= 30;
     if (variant === 'questions') { txt(page, 'Name', M.l, y - 12, 10, bold, C.ink); page.drawLine({ start: { x: M.l + 34, y: y - 14 }, end: { x: M.l + 260, y: y - 14 }, thickness: .6, color: C.ink3 });
@@ -461,10 +475,40 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
       y -= 22;
     }
     page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .8, color: C.line }); y -= 14;
+    if (job.test) {   /* the test cover: instructions, then a marks table (per question, or per topic for long tests) */
+      const T = job.test, pupil = variant === 'questions';
+      if (pupil) {
+        const ins = [`Time allowed: ${T.minutes ? hm(T.minutes) : '________'}.`, `Total marks: ${tot}.`, 'Answer all questions in the spaces provided. The marks for each question are shown in brackets on the right.'];
+        for (const ln of ins.flatMap(t => wrap(reg, 10, t, CW))) { txt(page, ln, M.l, y - 10, 10, reg, C.ink); y -= 14; }
+        y -= 8;
+      }
+      txt(page, pupil ? 'FOR THE TEACHER: MARKS' : 'MARKS SUMMARY', M.l, y - 10, 9, bold, C.ink2); y -= 18;
+      const cols = T.perTopic ? (pupil ? [['Topic', .56], ['Questions', .18], ['Available', .13], ['Awarded', .13]] : [['Topic', .6], ['Questions', .2], ['Marks', .2]])
+                              : (pupil ? [['Q', .07], ['Topic', .53], ['Available', .2], ['Awarded', .2]] : [['Q', .07], ['Topic', .43], ['From', .32], ['Marks', .18]]);
+      const rows = T.rows.map(r => T.perTopic ? (pupil ? [r.label, r.qs, String(r.marks), ''] : [r.label, r.qs, String(r.marks)]) : (pupil ? [r.qs, r.label, String(r.marks), ''] : [r.qs, r.label, r.sub, String(r.marks)]));
+      rows.push(T.perTopic ? (pupil ? ['Total', '', String(tot), ''] : ['Total', '', String(tot)]) : (pupil ? ['', 'Total', String(tot), ''] : ['', 'Total', '', String(tot)]));
+      const RH = 17, numeric = i => /^(Available|Awarded|Marks|Q|Questions)$/.test(cols[i][0]);
+      const row = (cells, head, last) => {
+        if (room() < RH + 2) newPage();
+        if (head) page.drawRectangle({ x: M.l, y: y - RH, width: CW, height: RH, color: C.qbg });
+        let cxp = M.l; cells.forEach((c, i) => { const w = cols[i][1] * CW, f = head || last ? bold : reg, sz = head ? 8.5 : 9.5;
+          const t = wrap(f, sz, c, w - 10)[0] || '', tx = numeric(i) ? cxp + w / 2 - tw(t, sz, f) / 2 : cxp + 5;
+          txt(page, t, tx, y - RH + 5.5, sz, f, head ? C.ink2 : C.ink);
+          if (i) page.drawLine({ start: { x: cxp, y }, end: { x: cxp, y: y - RH }, thickness: .5, color: C.line });
+          cxp += w; });
+        page.drawLine({ start: { x: M.l, y: y - RH }, end: { x: W - M.r, y: y - RH }, thickness: last ? 1 : .5, color: last ? C.ink3 : C.line });
+        y -= RH;
+      };
+      page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .5, color: C.line });
+      row(cols.map(c => c[0]), true); rows.forEach((r, i) => row(r, false, i === rows.length - 1));
+      y -= 12;
+      if (T.note) { for (const ln of wrap(ital, 8.5, T.note, CW)) { txt(page, ln, M.l, y - 9, 8.5, ital, C.ink3); y -= 11.5; } y -= 6; }
+      if (LAY !== 'compact') newPage();   /* standard: the cover page stands alone */
+    }
     for (let qi = 0; qi < plan.length; qi++) {
       if (qi % 4 === 0) { setStatus(`Placing question ${qi + 1} of ${plan.length}`, 'busy', .75 + qi / plan.length * .23); await tick(); }
       const bl = plan[qi];
-      if (S.layout !== 'compact' && qi > 0) newPage();   /* standard: every question starts on its own page */
+      if (LAY !== 'compact' && qi > 0) newPage();   /* standard: every question starts on its own page */
       for (let i = 0; i < bl.length; i++) {
         const b = bl[i];
         if (b.k === 'head') {
@@ -492,7 +536,7 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
           for (const ln of lines) { txt(page, ln, cx() + 2, y - 10, 9.5, ital, C.ink2); y -= 12.5; }
           y -= 4;
         } else if (b.k === 'gap') {
-          y -= S.layout === 'compact' ? 5 : 8;
+          y -= LAY === 'compact' ? 5 : 8;
         } else if (b.k === 'squeeze') {   /* answer space taken out: a short dashed rule shows where */
           page.drawLine({ start: { x: cx() + cw() * .3, y: y - 3 }, end: { x: cx() + cw() * .7, y: y - 3 }, thickness: .6, color: C.line, dashArray: [3, 3] });
           y -= 8;
@@ -512,14 +556,14 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
         }
       }
       if (bx) { closeFrag(false); bx = null; }
-      y -= S.layout === 'compact' ? 10 : 14;
+      y -= LAY === 'compact' ? 10 : 14;
     }
     /* page numbers in the running header (no footer) */
     const ps = doc.getPages();
     ps.forEach((p, i) => { if (!i) return; const r = `${VARIANT[variant].name} · Page ${i + 1} of ${ps.length}`; txt(p, r, W - M.r - tw(r, 8.5, reg), H - 28, 8.5, reg, C.ink3); });
     setStatus('Saving the PDF…', 'busy', .99); await tick();
     const bytes = await doc.save();
-    const name = `${book.short} – ${topic.title} – CCEA questions${VARIANT[variant].file}.pdf`.replace(/[\\/:*?"<>|]/g, '-');
+    const name = `${job.file}${VARIANT[variant].file}.pdf`.replace(/[\\/:*?"<>|]/g, '-');
     const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
     const a = el('a', { href: url, download: name }); document.body.append(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 60000);
@@ -527,15 +571,17 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
   }
 
   let busy = false;
-  async function download(variant, btn) {
-    if (busy) return; busy = true; ui.dl.forEach(b => { b.disabled = true; }); btn.classList.add('working');
+  async function download(variant, btn, job, opt) {
+    opt = opt || {}; const dls = opt.dls || ui.dl;
+    if (busy) return; busy = true; ST = opt.status || null; dls.forEach(b => { b.disabled = true; }); btn.classList.add('working');
     try {
-      const r = await build(variant);
+      const r = await build(variant, job);
+      if (r && opt.done) opt.done(r);
       if (r) setStatus(`Downloaded “${r.name}”: ${r.pages} page${r.pages === 1 ? '' : 's'}, ${r.kb >= 1024 ? (r.kb / 1024).toFixed(1) + ' MB' : r.kb + ' KB'}.` +
         (r.failed.length ? ` ${r.failed.length} PDF${r.failed.length === 1 ? '' : 's'} could not be loaded (${r.failed.map(f => f.split('/').pop()).join(', ')}); the pack says so where they belong.` : ''), r.failed.length ? 'warn' : 'ok');
     } catch (e) {
       console.error(e); setStatus('The pack could not be made: ' + String(e && e.message ? e.message : e).replace(/\.$/, '') + '. Try again; if it keeps failing, try fewer questions or another browser.', 'err');
-    } finally { busy = false; btn.classList.remove('working'); renderSummary(); }
+    } finally { busy = false; ST = null; btn.classList.remove('working'); if (opt.after) opt.after(); else renderSummary(); }
   }
 
   /* ------------------------------------------------------------------ examiner reports panel */
@@ -559,7 +605,7 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
     ui.course = $('#tp-course'); ui.unit = $('#tp-unit'); ui.unitWrap = $('#tp-s2'); ui.topic = $('#tp-topic'); ui.topicWrap = $('#tp-s3'); ui.packWrap = $('#tp-s4');
     ui.packTitle = $('#tp-title'); ui.count = $('#tp-count'); ui.count2 = $('#tp-count2'); ui.list = $('#tp-list'); ui.status = $('#tp-status'); ui.statusText = $('#tp-status-t'); ui.bar = $('#tp-bar');
     ui.reports = $('#tp-reports'); ui.dl = [...document.querySelectorAll('[data-dl]')];
-    ui.dl.forEach(b => b.addEventListener('click', () => download(b.dataset.dl, b)));
+    ui.dl.forEach(b => b.addEventListener('click', () => download(b.dataset.dl, b, packJob())));
     const lay = $('#tp-layout'); if (lay) { lay.value = S.layout; lay.addEventListener('change', () => { S.layout = lay.value; store.set('layout', S.layout); }); }
     const ord = $('#tp-order'); ord.value = S.order; ord.addEventListener('change', () => { S.order = ord.value; store.set('order', S.order); if (S.topic) renderPack(); });
     $('#tp-all').addEventListener('click', () => { S.off = new Set(); renderPack(); });
@@ -572,12 +618,20 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
     }
     $('#tp-load').remove(); $('#tp-flow').hidden = false;
     renderCourses(); renderReports(); stepState(1);
+    API.D = D; readyOk(D);
     const c = store.get('course', null), bk = store.get('book', null), tp = store.get('topic', null);
     if (c && D.topics.books.some(b => b.course === c)) {
       pickCourse(c, true);
       if (bk && D.topics.books.some(b => b.id === bk && b.course === c)) { pickBook(bk, true); if (tp && tp.split('|')[0] === bk) { const n = +tp.split('|')[1]; if (S.book.topics.some(t => t.n === n)) pickTopic(n, true); } }
     }
   }
+  /* shared with teacher_tests.js (test builder, exam trends): the data, the per-question facts and the PDF engine */
+  let readyOk; const API = window.TeacherPacks = { ready: new Promise(r => { readyOk = r; }), info, blocks, build, download, yr, serLabel, qLabel, el, store,
+    open(bookId, n) {   /* pre-select a topic in the Topic packs tab */
+      const b = D.topics.books.find(x => x.id === bookId); if (!b) return;
+      pickCourse(b.course, true); pickBook(bookId, true); if (b.topics.some(t => t.n === n)) pickTopic(n, true);
+      ui.packWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
 
