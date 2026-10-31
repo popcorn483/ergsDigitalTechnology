@@ -270,7 +270,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
  
  <label class="bt-f"><span>Papers</span><select id="bt-papers"><option value="all">All papers, specimen too</option><option value="r5">Last 5 years only</option><option value="r3">Last 3 years only</option></select></label>
  <label class="bt-f"><span>Order</span><select id="bt-order"><option value="topic">By topic</option><option value="short">Short questions first</option><option value="paper">Paper by paper</option></select></label>
- <label class="bt-f"><span>Layout</span><select id="bt-layout"><option value="standard">One question per page</option><option value="compact">Compressed</option></select></label>
+ 
 </div>
 <div id="bt-mixset" class="bt-mixset" hidden><div class="bt-sps"><div class="bt-sp"><span>Multiple choice</span><div class="bt-spin"><button type="button" data-d="-1" aria-label="One fewer multiple choice">−</button><input type="number" id="bt-n-mc" min="0" max="99" step="1" aria-label="Multiple choice questions"><button type="button" data-d="1" aria-label="One more multiple choice">+</button></div><small id="bt-max-mc"></small></div><div class="bt-sp"><span>Short answer</span><div class="bt-spin"><button type="button" data-d="-1" aria-label="One fewer short answer">−</button><input type="number" id="bt-n-short" min="0" max="99" step="1" aria-label="Short answer questions"><button type="button" data-d="1" aria-label="One more short answer">+</button></div><small id="bt-max-short"></small></div><div class="bt-sp"><span>Longer answer</span><div class="bt-spin"><button type="button" data-d="-1" aria-label="One fewer longer answer">−</button><input type="number" id="bt-n-long" min="0" max="99" step="1" aria-label="Longer answer questions"><button type="button" data-d="1" aria-label="One more longer answer">+</button></div><small id="bt-max-long"></small></div></div><p class="small" id="bt-mixest" style="margin:6px 0 0"></p></div>
 <p class="small" id="bt-rate-t" style="margin:8px 0 0"></p>
@@ -591,7 +591,9 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       return box('er', 'Examiner’s comment', x.series + (own ? '' : ` · comment on ${qLabel(f)}${x.rep.hl ? ', the lines about this part highlighted' : ''}`), segOf(x.rep.report_file, x.rep.report, x.rep.hl));
     };
     const hd = { k: 'head', n, text: `${x.series} · ${book.short} · ${qLabel(it.q)}`, marks: x.marks };
-    if (variant === 'answers') out.push(hd, ...scheme(), { k: 'gap' }, ...report());
+    if (variant === 'answers' && noStem) {   /* a test's mark scheme: just the answers, no tinted boxes or reports (prints cleanly, uses less paper) */
+      const sc = scheme(); out.push(hd, ...sc.filter(z => z.k !== 'box' && z.k !== 'boxend'));
+    } else if (variant === 'answers') out.push(hd, ...scheme(), { k: 'gap' }, ...report());
     else if (variant === 'questions') out.push(hd, ...question());
     else out.push(hd, ...question(), { k: 'gap' }, ...scheme(), { k: 'gap' }, ...report());
     return out;
@@ -609,7 +611,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   async function build(variant, job) {
     const L = await pdfLib(), { PDFDocument, StandardFonts, rgb, BlendMode } = L;
     job = job || packJob();
-    const its = job.items, title = job.title, LAY = job.layout || 'standard'; if (!its.length) return;
+    const its = job.items, title = job.title, TEST = !!job.test, LAY = TEST ? 'compact' : job.layout || 'standard'; if (!its.length) return;   /* tests always flow, to save paper */
     const plan = its.map((x, i) => blocks(variant, i + 1, x.book, x.it, LAY, !!job.test));
     /* 1. load each source PDF once */
     const urls = [...new Set(plan.flat().filter(b => b.k === 'seg').map(b => b.src))];
@@ -641,7 +643,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     }
     /* 3. lay out on A4: a branded title band, numbered question headers, the question as cut from the paper,
        the mark scheme in a green bx and the examiner's comment in a yellow bx (boxes continue across pages) */
-    const W = 595.28, H = 841.89, M = { l: 40, r: 40, t: 46, b: 52 }, CW = W - M.l - M.r;
+    const W = 595.28, H = 841.89, M = TEST ? { l: 36, r: 36, t: 42, b: 36 } : { l: 40, r: 40, t: 46, b: 52 }, CW = W - M.l - M.r;
     const reg = await doc.embedFont(StandardFonts.Helvetica), bold = await doc.embedFont(StandardFonts.HelveticaBold), ital = await doc.embedFont(StandardFonts.HelveticaOblique);
     const C = { ink: rgb(.09, .125, .2), ink2: rgb(.27, .31, .39), ink3: rgb(.43, .47, .55), line: rgb(.84, .86, .9), navy: rgb(.086, .13, .23), navy2: rgb(.15, .22, .38),
       acc: rgb(.12, .37, .75), warn: rgb(.56, .33, 0), qbg: rgb(.94, .955, .975),
@@ -671,7 +673,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const had = !!bx; if (had) closeFrag(true);
       page = doc.addPage([W, H]); y = H - M.t;
       if (!first) {   /* running header */
-        txt(page, title, M.l, H - 28, 8.5, bold, C.ink2);
+        txt(page, title, M.l, H - 28, TEST ? 7.5 : 8.5, bold, TEST ? C.ink3 : C.ink2);
         /* the page number is added on the right once the page count is known */
         page.drawLine({ start: { x: M.l, y: H - 34 }, end: { x: W - M.r, y: H - 34 }, thickness: .6, color: C.line });
         y = H - M.t - 4;
@@ -683,7 +685,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const segW = b => LAY === 'compact' && b.pw ? Math.min(cw(), b.w * CW / b.pw) : cw();   /* compressed: no enlarging of trimmed crops */
     const segH = b => Math.min(b.h * (segW(b) / b.w), FULL);
     const chain = (bl, i) => { let h = 0; for (let j = i; j < bl.length; j++) { const z = bl[j];
-      if (z.k === 'head') h += 34; else if (z.k === 'box') h += BOXHEAD; else if (z.k === 'label') h += 14; else if (z.k === 'gap') h += 8;
+      if (z.k === 'head') h += TEST ? 20 : 34; else if (z.k === 'box') h += BOXHEAD; else if (z.k === 'label') h += 14; else if (z.k === 'gap') h += 8;
       else if (z.k === 'boxend') continue;
       else return Math.min(FULL, h + (z.k === 'seg' ? segH(z) * SHRINK : 30)); } return Math.min(FULL, h); };
     newPage();
@@ -692,6 +694,39 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     let span = '';
     if (job.test) { const ys = its.map(x => yr(x.it.s)).filter(Boolean).sort((a, b) => a - b), spec = its.some(x => !yr(x.it.s)); span = ys.length ? (ys[0] === ys[ys.length - 1] ? String(ys[0]) : `${ys[0]} to ${ys[ys.length - 1]}`) + (spec ? ' + specimen' : '') : spec ? 'Specimen' : ''; }
     else { const sers = its.map(x => serLabel(x.it.s)); span = sers.length ? (sers[0] === sers[sers.length - 1] ? sers[0] : `${sers[0]} to ${sers[sers.length - 1]}`) : ''; }
+    const hm = m => { const h = Math.floor(m / 60), r = m % 60; return [h ? `${h} hour${h === 1 ? '' : 's'}` : '', r ? `${r} minutes` : ''].filter(Boolean).join(' '); };
+    if (TEST) testHead(); else coverBand();
+    function testHead() {   /* tests: a plain, printer-friendly header, then straight into the questions */
+      const T = job.test, pupil = variant === 'questions';
+      const k1 = job.kicker, k2 = "MR BUTLER'S DIGITAL TECHNOLOGY";
+      txt(page, k1, M.l, y - 8, 7.5, bold, C.ink3); txt(page, k2, W - M.r - tw(k2, 7.5, bold), y - 8, 7.5, bold, C.ink3);
+      const head = String(job.heading).replace(/\s*–\s*\d+ marks?$/, '') + (variant === 'answers' ? ': mark scheme' : variant === 'full' ? ': with answers' : '');
+      txt(page, head, M.l, y - 30, 17, bold, C.ink);
+      const meta = `${tot} marks${T.minutes ? ' · ' + hm(T.minutes) : ''}`; txt(page, meta, W - M.r - tw(meta, 11, bold), y - 30, 11, bold, C.ink2);
+      y -= 38; page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: 1.2, color: C.ink }); y -= 6;
+      if (pupil) {
+        const fld = (t, x0, x1) => { txt(page, t, x0, y - 14, 9.5, bold, C.ink); page.drawLine({ start: { x: x0 + tw(t, 9.5, bold) + 5, y: y - 16 }, end: { x: x1, y: y - 16 }, thickness: .6, color: C.ink3 }); };
+        fld('Name', M.l, M.l + 270); fld('Class', M.l + 286, M.l + 380); fld('Date', M.l + 396, W - M.r); y -= 26;
+        txt(page, 'Answer all questions in the spaces provided. Marks are shown in brackets [ ].', M.l, y - 9, 9, reg, C.ink2); y -= 16;
+        /* marking grid: question, marks, awarded (wraps onto more rows for long tests) */
+        const qs = its.map((x, i) => [String(i + 1), info(x.book, x.it).marks]), LW = 50, CWc = 22, RH = 13, per = Math.max(1, Math.floor((CW - LW - 34) / CWc));
+        for (let a = 0; a < qs.length; a += per) {
+          const part = qs.slice(a, a + per), last = a + per >= qs.length, cols = part.length + (last ? 1 : 0), gw = LW + part.length * CWc + (last ? 34 : 0);
+          [['Question', part.map(q => q[0]).concat(last ? ['Total'] : [])], ['Marks', part.map(q => q[1] == null ? '' : String(q[1])).concat(last ? [String(tot)] : [])], ['Awarded', part.map(() => '').concat(last ? [''] : [])]].forEach(([lab, cells], ri) => {
+            if (ri === 0) page.drawRectangle({ x: M.l, y: y - RH, width: gw, height: RH, color: C.qbg });
+            txt(page, lab, M.l + 4, y - RH + 4, 7.5, bold, C.ink2);
+            let xx = M.l + LW; cells.forEach((c, i) => { const w = i === part.length ? 34 : CWc, f = ri === 0 || i === part.length ? bold : reg; txt(page, c, xx + w / 2 - tw(c, 7.5, f) / 2, y - RH + 4, 7.5, f, C.ink); page.drawLine({ start: { x: xx, y }, end: { x: xx, y: y - RH }, thickness: .5, color: C.line }); xx += w; });
+            page.drawLine({ start: { x: M.l + gw, y }, end: { x: M.l + gw, y: y - RH }, thickness: .5, color: C.line });
+            page.drawLine({ start: { x: M.l, y }, end: { x: M.l + gw, y }, thickness: .5, color: C.line });
+            y -= RH; page.drawLine({ start: { x: M.l, y }, end: { x: M.l + gw, y }, thickness: .5, color: C.line });
+            page.drawLine({ start: { x: M.l, y: y + RH }, end: { x: M.l, y }, thickness: .5, color: C.line });
+          });
+          y -= 6; void cols;
+        }
+      }
+      y -= 8;
+    }
+    function coverBand() {
     const tl = wrap(bold, 20, job.heading, CW - 40), bandH = 74 + tl.length * 24;
     page.drawRectangle({ x: 0, y: H - bandH, width: W, height: bandH, color: C.navy });
     page.drawRectangle({ x: 0, y: H - bandH, width: W, height: 3, color: variant === 'answers' ? C.ms.edge : variant === 'questions' ? C.acc : C.er.edge });
@@ -701,7 +736,6 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     txt(page, `${VARIANT[variant].name}: ${VARIANT[variant].sub}`, M.l, ty + 2, 10, reg, rgb(.84, .88, .95));
     y = H - bandH - 16;
     /* summary chips */
-    const hm = m => { const h = Math.floor(m / 60), r = m % 60; return [h ? `${h} hour${h === 1 ? '' : 's'}` : '', r ? `${r} minutes` : ''].filter(Boolean).join(' '); };
     const chips = [`${its.length} question${its.length === 1 ? '' : 's'}`, `${known.length < its.length ? 'at least ' : ''}${tot} marks`, job.test && job.test.minutes ? 'Time: ' + hm(job.test.minutes) : '', span].filter(Boolean);
     let chx = M.l; for (const c of chips) { const w = tw(c, 9.5, bold) + 18; page.drawRectangle({ x: chx, y: y - 20, width: w, height: 20, color: C.qbg, borderColor: C.line, borderWidth: .6 }); txt(page, c, chx + 9, y - 13.5, 9.5, bold, C.ink); chx += w + 8; }
     y -= 30;
@@ -750,13 +784,21 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       if (T.note) { for (const ln of wrap(ital, 8.5, T.note, CW)) { txt(page, ln, M.l, y - 9, 8.5, ital, C.ink3); y -= 11.5; } y -= 6; }
       if (LAY !== 'compact') newPage();   /* standard: the cover page stands alone */
     }
+    }
     for (let qi = 0; qi < plan.length; qi++) {
       if (qi % 4 === 0) { setStatus(`Placing question ${qi + 1} of ${plan.length}`, 'busy', .75 + qi / plan.length * .23); await tick(); }
       const bl = plan[qi];
       if (LAY !== 'compact' && qi > 0) newPage();   /* standard: every question starts on its own page */
       for (let i = 0; i < bl.length; i++) {
         const b = bl[i];
-        if (b.k === 'head') {
+        if (b.k === 'head' && TEST) {   /* tests: a small number and the source, in grey */
+          if (room() < chain(bl, i)) newPage();
+          const r = 8, cxn = M.l + r, cyn = y - r, ns = String(b.n), nf = ns.length > 2 ? 7 : 8.5;
+          page.drawCircle({ x: cxn, y: cyn, size: r, color: C.ink });
+          txt(page, ns, cxn - tw(ns, nf, bold) / 2, cyn - nf * .36, nf, bold, rgb(1, 1, 1));
+          txt(page, b.text, M.l + 2 * r + 6, y - 11, 8, reg, C.ink3);
+          y -= 20;
+        } else if (b.k === 'head') {
           if (room() < chain(bl, i)) newPage();
           const r = 11, cxn = M.l + r, cyn = y - r;
           page.drawCircle({ x: cxn, y: cyn, size: r, color: C.navy });
@@ -801,11 +843,11 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         }
       }
       if (bx) { closeFrag(false); bx = null; }
-      y -= LAY === 'compact' ? 10 : 14;
+      y -= TEST ? 12 : LAY === 'compact' ? 10 : 14;
     }
     /* page numbers in the running header (no footer) */
     const ps = doc.getPages();
-    ps.forEach((p, i) => { if (!i) return; const r = `${VARIANT[variant].name} · Page ${i + 1} of ${ps.length}`; txt(p, r, W - M.r - tw(r, 8.5, reg), H - 28, 8.5, reg, C.ink3); });
+    ps.forEach((p, i) => { if (!i) return; const r = TEST ? `Page ${i + 1} of ${ps.length}` : `${VARIANT[variant].name} · Page ${i + 1} of ${ps.length}`; txt(p, r, W - M.r - tw(r, 8.5, reg), H - 28, 8.5, reg, C.ink3); });
     setStatus('Saving the PDF…', 'busy', .99); await tick();
     const bytes = await doc.save();
     const name = `${job.file}${VARIANT[variant].file}.pdf`.replace(/[\\/:*?"<>|]/g, '-');
