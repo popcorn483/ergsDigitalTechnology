@@ -454,6 +454,19 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 .ia-i svg{width:20px;height:20px}
 .ia-n{font-weight:700;font-size:15px}
 .ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
 .ios-add .btn{width:100%;justify-content:center}
 /* ================= WELCOME: BEGIN (splash + welcome screen + "← Home"; source notes/app/front_welcome.css) ================= */
 /* splash: full screen, hero navy, once per browser session and on app launch; never blocks the page underneath */
@@ -768,6 +781,19 @@ html:not(.wl-on) #welcome{display:none}
 .ppt-menu a{font-weight:700;font-size:13.5px;color:var(--cc-d,var(--accent));text-decoration:none;white-space:nowrap}
 .ppt-menu a:hover{text-decoration:underline}
 @media (max-width:699px){ .ppt-menu{right:auto;left:-60px} }
+/* compact topic rows: title only (no page / term / video counts); on phones the buttons sit under the title, not under the icon */
+.tp{padding-top:10px;padding-bottom:10px}
+@media (max-width:699px){
+  .tp{grid-template-columns:38px minmax(0,1fr);gap:4px 10px;padding:9px 6px}
+  .tp .ic{width:38px;height:38px;border-radius:10px}
+  .tp .ic img{width:22px;height:22px}
+  .tp .acts{grid-column:2 / -1;gap:6px}
+  .tp .ib{width:36px;height:36px}
+  .tp .ib svg{width:18px;height:18px}
+  .tp .tp-ring{width:32px;height:32px}
+  .tp + .tp::before{left:54px;right:6px}
+  .tp-t small{font-size:11.5px}
+}
 /* ================= DESIGN: END ================= */
 </style>
 </head>
@@ -967,7 +993,7 @@ function tutUnitHTML(u, next, course) {
   if (rest.length) groups.push({ title: groups.length ? 'More chapters' : '', ids: rest });
   const row = i => { const c = u.chapters[i], n = hue(i); return `<li class="tp" data-tut="1" data-ci="${i}" data-topic="" data-ch="${esc(c.id)}" data-folder="" data-hub="${course}" style="--cc:var(--h${n});--cc-d:var(--h${n}d);--i:${next()}">
       <span class="ic" aria-hidden="true"><b>${esc(pad2(c.n))}</b></span>
-      <div class="tp-t"><small>Chapter ${esc(c.n)}</small><b>${esc(c.title)}</b><span>${c.pages} tutorial page${c.pages === 1 ? '' : 's'}${c.tasks ? ` · ${c.tasks} build task${c.tasks === 1 ? '' : 's'}` : ''}${c.vids ? ` · ${c.vids} video${c.vids === 1 ? '' : 's'}` : ''}</span></div>
+      <div class="tp-t"><small>Chapter ${esc(c.n)}</small><b>${esc(c.title)}</b></div>
       <div class="acts"><a class="ib ib-pri" href="${esc(u.file)}#${esc(c.page)}" title="Open tutorial" aria-label="Open tutorial: ${esc(c.title)}">${I_TOOL}</a></div></li>`; };
   return `<section class="unit u-tut" data-unit="${esc(u.id)}" aria-labelledby="h-${esc(u.id)}">
     <div class="spec" aria-hidden="true">${u.chapters.map((c, i) => `<i style="background:var(--h${hue(i)}d)"></i>`).join('')}</div>
@@ -988,7 +1014,7 @@ function render(course) {
     <div class="unit-h" style="--i:${k++}"><div><span class="unit-k">${esc(u.short)}</span><h2 id="h-${esc(u.id)}">${esc(u.title)}</h2></div><div class="unit-l">${u.terms ? `<a href="${esc(u.file)}#glossary" title="All ${esc(u.terms)} key terms, with flashcards and a quiz">${I_GL}Glossary</a>` : ''}<a href="${esc(u.file)}">Whole workbook →</a></div></div>
     <ol class="topics">${u.chapters.map((c, i) => { const im = IMG(course, c.topic), n = hue(i); return `<li class="tp" data-ci="${i}" data-topic="${esc(c.topic || '')}" data-ch="${esc(c.id)}" data-folder="${esc(c.folder || '')}" data-hub="${course}" style="--cc:var(--h${n});--cc-d:var(--h${n}d);--i:${k++}">
       <span class="ic" aria-hidden="true">${im ? `<img src="${esc(im)}" alt="" width="30" height="30" loading="lazy">` : ''}<b>${esc(pad2(c.n))}</b></span>
-      <div class="tp-t"><small>Chapter ${esc(c.n)}</small><b>${esc(c.title)}</b><span>${c.pages} workbook page${c.pages === 1 ? '' : 's'}${c.terms ? ` · ${c.terms} key terms` : ''}${c.vids ? ` · ${c.vids} video${c.vids === 1 ? '' : 's'}` : ''}</span></div>
+      <div class="tp-t"><small>Chapter ${esc(c.n)}</small><b>${esc(c.title)}</b></div>
       <div class="acts"><a class="ib ib-pri" href="${esc(u.file)}#${esc(c.page)}" title="Workbook" aria-label="Workbook: ${esc(c.title)}">${I_BOOK}</a><span class="ppt-slot"></span>${c.terms ? `<a class="ib" href="${esc(u.file)}#glossary-${esc(c.id)}" title="Glossary (${esc(c.terms)} key terms)" aria-label="Glossary for ${esc(c.title)}: ${esc(c.terms)} key terms">${I_GL}</a>` : ''}</div>
     </li>`; }).join('')}</ol></section>`).join('');
   guard(box);
@@ -1606,6 +1632,35 @@ function route() {
   if (!WEB) { const v = document.querySelector('.wl-ver'); if (v) v.remove(); }   /* updates: web host only */
 })();
 /* ================= WELCOME: END ================= */
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
 
 /* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
 function wlShare() {
