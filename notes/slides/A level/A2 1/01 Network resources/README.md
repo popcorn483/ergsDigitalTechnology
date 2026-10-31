@@ -1,4 +1,4 @@
-# A2 1: Relational database design
+# A2 1: Network resources
 
 Upload the PowerPoint (or PDF) for this topic into this folder. Any file name works.
 

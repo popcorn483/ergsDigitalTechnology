@@ -1,4 +1,4 @@
-# A2 1: Information systems in organisations
+# A2 1: Databases
 
 Upload the PowerPoint (or PDF) for this topic into this folder. Any file name works.
 

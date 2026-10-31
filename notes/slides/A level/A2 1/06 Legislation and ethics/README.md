@@ -1,4 +1,4 @@
-# A2 1: Legal, ethical and social issues
+# A2 1: Legislation and ethics
 
 Upload the PowerPoint (or PDF) for this topic into this folder. Any file name works.
 

@@ -1,4 +1,4 @@
-# A2 1: SQL and database management
+# A2 1: Mobile technology, data mining and the cloud
 
 Upload the PowerPoint (or PDF) for this topic into this folder. Any file name works.
 

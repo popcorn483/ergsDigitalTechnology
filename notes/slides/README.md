@@ -34,12 +34,12 @@ The site must be public on GitHub Pages for the Office viewer to open a PowerPoi
 
 | Chapter | Upload folder |
 |---|---|
-| 1. Relational database design | `notes/slides/A level/A2 1/01 Relational database design/` |
-| 2. SQL and database management | `notes/slides/A level/A2 1/02 SQL and database management/` |
-| 3. Networks | `notes/slides/A level/A2 1/03 Networks/` |
-| 4. Network security and cloud computing | `notes/slides/A level/A2 1/04 Network security and cloud computing/` |
-| 5. Information systems in organisations | `notes/slides/A level/A2 1/05 Information systems in organisations/` |
-| 6. Legal, ethical and social issues | `notes/slides/A level/A2 1/06 Legal, ethical and social issues/` |
+| 1. Network resources | `notes/slides/A level/A2 1/01 Network resources/` |
+| 2. Protocols, transmission media and errors | `notes/slides/A level/A2 1/02 Protocols, transmission media and errors/` |
+| 3. Databases | `notes/slides/A level/A2 1/03 Databases/` |
+| 4. AI, expert systems and robotics | `notes/slides/A level/A2 1/04 AI, expert systems and robotics/` |
+| 5. Mobile technology, data mining and the cloud | `notes/slides/A level/A2 1/05 Mobile technology, data mining and the cloud/` |
+| 6. Legislation and ethics | `notes/slides/A level/A2 1/06 Legislation and ethics/` |
 
 ## A2 2: Building in Access and VBA (tutorials) (A22)
 

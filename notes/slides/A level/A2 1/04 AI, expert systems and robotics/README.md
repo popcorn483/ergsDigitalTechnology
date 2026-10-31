@@ -1,4 +1,4 @@
-# A2 1: Networks
+# A2 1: AI, expert systems and robotics
 
 Upload the PowerPoint (or PDF) for this topic into this folder. Any file name works.
 

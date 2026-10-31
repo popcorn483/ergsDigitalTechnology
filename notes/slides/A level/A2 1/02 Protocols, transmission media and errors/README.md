@@ -1,4 +1,4 @@
-# A2 1: Network security and cloud computing
+# A2 1: Protocols, transmission media and errors
 
 Upload the PowerPoint (or PDF) for this topic into this folder. Any file name works.
 
