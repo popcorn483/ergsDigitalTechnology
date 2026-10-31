@@ -9444,6 +9444,38 @@ if (ON_WEB) {
   window.addEventListener('hashchange', () => setTimeout(() => { try { svUpdate(); } catch (e) { } }, 0));
 }
 /* ---------- NOTES ⇄ POWERPOINT: END ---------- */
+/* ---------- VISITS (source notes/app/visits.js): anonymous, cookie-free visit counting with GoatCounter (mrbdt.goatcounter.com).
+   Counts a visit to each unit ("/u/U1") and the first time each chapter is opened in a session ("/u/U1/c03"), plus the home page.
+   No personal data and no cookies. Not counted: offline use, the claude.ai preview, and a device where the Teacher area's
+   "Don't count my visits on this device" is ticked (localStorage 'notes-nocount'). The Teacher area reads the totals back from
+   GoatCounter's public counter (https://mrbdt.goatcounter.com/counter/<path>.json). ---------- */
+(function () {
+  const Q = [], GC = 'https://mrbdt.goatcounter.com/count';
+  let off = !/^https?:$/.test(location.protocol) || /(^|\.)claude\.ai$|claudeusercontent|^localhost$|^127\./i.test(location.hostname);
+  try { if (localStorage.getItem('notes-nocount')) off = true; } catch (e) { }
+  const flush = () => { const g = window.goatcounter; if (!g || typeof g.count !== 'function') return; while (Q.length) { const [path, title] = Q.shift(); try { g.count({ path, title, event: false }); } catch (e) { } } };
+  window.MRB_COUNT = (path, title) => { if (off) return; Q.push([path, title || path]); flush(); };
+  window.MRB_COUNT_ONCE = (path, title) => {   /* once per browser session */
+    if (off) return; try { const k = 'notes-counted:' + path; if (sessionStorage.getItem(k)) return; sessionStorage.setItem(k, '1'); } catch (e) { }
+    window.MRB_COUNT(path, title);
+  };
+  if (off) return;
+  window.goatcounter = Object.assign(window.goatcounter || {}, { no_onload: true });
+  const s = document.createElement('script'); s.async = true; s.src = 'https://gc.zgo.at/count.js'; s.setAttribute('data-goatcounter', GC); s.onload = flush;
+  (document.head || document.documentElement).appendChild(s);
+})();
+/* where to count: a workbook (the unit, then each chapter once per session) or the home page */
+try {
+  if (typeof BK !== 'undefined' && BK && BK.id && typeof PAGES !== 'undefined' && typeof renderPage === 'function') {
+    const short = (BK.title || BK.id).split(':')[0];
+    MRB_COUNT_ONCE('/u/' + BK.id, short);
+    const rpv = renderPage;
+    renderPage = function () { const r = rpv.apply(this, arguments); try { const P = PAGES[cur]; if (P && P.ch && P.ch.id) MRB_COUNT_ONCE('/u/' + BK.id + '/' + P.ch.id, short + ': ' + (P.ch.title || P.ch.id)); } catch (e) { } return r; };
+  } else if (document.getElementById('welcome') || document.getElementById('units')) {
+    MRB_COUNT_ONCE('/', 'Home');
+  }
+} catch (e) { }
+/* ---------- VISITS: END ---------- */
 /* ================= APP: END ================= */
 /* ================= boot ================= */
 buildRail(); updateProgress(); syncMenuBtn();
