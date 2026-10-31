@@ -677,7 +677,7 @@ html:not(.wl-on) #welcome{display:none}
       <button type="button" class="wl-s app-inst" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19.5h14"/></svg>Install app</button>
       <button type="button" class="wl-s" id="wl-mcb" aria-expanded="false" aria-controls="wl-mc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg><span>My course</span></button>
       <a class="wl-s" href="#progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M8.5 12.2l2.4 2.4 4.6-5"/></svg>My progress</a>
-      <button type="button" class="wl-s" id="wl-ab" aria-expanded="false" aria-controls="wl-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg>About</button>
+      <button type="button" class="wl-s" id="wl-ab" aria-expanded="false" aria-controls="wl-about"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 11v5.5M12 7.6v.1"/></svg>About</button><button type="button" class="wl-s" id="wl-share-b" aria-expanded="false" aria-controls="wl-share"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 10.6l6.8-4.2M8.6 13.4l6.8 4.2"/></svg>Share</button>
     </div>
     <div class="mc-slot wl-mc" id="wl-mc" hidden></div>
     <p class="wl-ios app-ios" hidden>On iPhone or iPad: tap <b>Share</b> › <b>Add to Home Screen</b>.</p>
@@ -686,6 +686,7 @@ html:not(.wl-on) #welcome{display:none}
       <p>Your progress is saved in this browser only. Use <a href="#progress">My progress</a> to back it up or move it.</p>
       <p class="wl-ver"><span data-app-ver></span> <button type="button" class="wl-chk" data-app-check><span>Check for updates</span></button></p>
     </div>
+    <div class="wl-about" id="wl-share" hidden style="text-align:center"><p>Students scan this QR code or open the link to jump straight in — no login, nothing to install.</p><div class="dt-share-qr" id="dt-share-box"></div><p class="dt-share-url" id="dt-share-url"></p><button type="button" class="wl-s" id="dt-share-copy" style="border:1px solid var(--line)">📋 Copy link</button></div>
   </section>
 <!-- WELCOME: END -->
   <header class="hero" id="hero">
@@ -1426,5 +1427,12 @@ route();
 document.getElementById('upl-l').innerHTML = UNITS.filter(u => u.mode !== 'tutorial').map(u => `<h3>${esc(u.short)}: ${esc(u.title)}</h3><ul>${u.chapters.filter(c => c.folder).map(c => `<li><code>notes/slides/${esc(c.folder)}/</code></li>`).join('')}</ul>`).join('');
 })();
 </script>
+<script src="qrcode.js"></script>
+<script>(function(){function u(){return location.origin+location.pathname;}
+var b=document.getElementById('wl-share-b'),p=document.getElementById('wl-share');
+if(b&&p){b.addEventListener('click',function(){var open=p.hidden;var ab=document.getElementById('wl-about');if(ab)ab.hidden=true;p.hidden=!open;b.setAttribute('aria-expanded',open?'true':'false');if(open){try{var q=qrcode(0,'M');q.addData(u());q.make();document.getElementById('dt-share-box').innerHTML=q.createSvgTag({cellSize:6,margin:3,scalable:true});}catch(e){}document.getElementById('dt-share-url').textContent=u();p.scrollIntoView({block:'nearest'});}});}
+var c=document.getElementById('dt-share-copy');if(c)c.addEventListener('click',function(){try{navigator.clipboard&&navigator.clipboard.writeText(u());}catch(e){}});
+}());</script>
+<style>.dt-share-qr{width:220px;max-width:70vw;aspect-ratio:1;margin:10px auto;background:#fff;border-radius:12px;padding:12px;box-sizing:border-box}.dt-share-qr svg{width:100%;height:100%;display:block}.dt-share-url{font-family:var(--mono);word-break:break-all;color:var(--accent)}</style>
 </body>
 </html>
