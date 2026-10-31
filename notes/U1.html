@@ -8699,7 +8699,9 @@ const PP_VIEW = ON_WEB ? (() => {
     if (!f || !(f.paper || f.ms)) return null;
     const qk = `${key}|${String(e.q || '').replace(/^Q/i, '')}`, pk = D.pg[qk] || {}, ck = D.cr[qk] || {};
     const segs = a => Array.isArray(a) && a.length ? a.filter(x => Array.isArray(x) && x.length === 3) : null;   /* [[page, top, bottom]] as fractions of the page height */
-    const cp = segs(ck.paper), cm = segs(ck.ms), cs = segs(ck.stem);   /* stem: the question's lead-in (scenario, table) that the part needs */
+    /* [left, right] per segment (px / mx / sx): trims CCEA's edge watermark, the page frame and the mark scheme's marks column */
+    const withX = (A, X) => A && A.map((g, i) => (Array.isArray(X) && Array.isArray(X[i]) && X[i].length === 2 ? g.concat(X[i]) : g));
+    const cp = withX(segs(ck.paper), ck.px), cm = withX(segs(ck.ms), ck.mx), cs = withX(segs(ck.stem), ck.sx);   /* stem: the question's lead-in (scenario, table) that the part needs */
     return { paper: f.paper ? '../' + f.paper : null, ms: f.ms ? '../' + f.ms : null, pp: +pk.paper || (cp ? cp[0][0] : 1), pm: +pk.ms || (cm ? cm[0][0] : 1), crop: { paper: cp, ms: cm, stem: cp ? cs : null }, key };
   }
   let lib = null;
@@ -8707,15 +8709,16 @@ const PP_VIEW = ON_WEB ? (() => {
   /* draw just the bands [[page, top, bottom]] of a PDF, stacked, into el (width = el's width) */
   async function cropInto(el, doc, C, z) {
     el.innerHTML = ''; const dpr = Math.min(2, window.devicePixelRatio || 1);
-    for (const [pn, t, b] of C) {
+    for (const [pn, t, b, l = 0, r = 1] of C) {
       if (pn < 1 || pn > doc.numPages) continue;
-      const pg = await doc.getPage(pn), base = pg.getViewport({ scale: 1 }), fit = Math.max(.3, (el.clientWidth || 600) / base.width);
+      const pg = await doc.getPage(pn), base = pg.getViewport({ scale: 1 }), fit = Math.max(.3, (el.clientWidth || 600) / (base.width * Math.max(.3, r - l)));
       const vp = pg.getViewport({ scale: fit * (z || 1) * dpr }), full = document.createElement('canvas');
       full.width = Math.floor(vp.width); full.height = Math.floor(vp.height);
       await pg.render({ canvasContext: full.getContext('2d'), viewport: vp }).promise;
       const y0 = Math.max(0, Math.floor(t * full.height)), y1 = Math.min(full.height, Math.ceil(b * full.height)), out = document.createElement('canvas');
-      out.width = full.width; out.height = Math.max(1, y1 - y0); out.getContext('2d').drawImage(full, 0, y0, full.width, out.height, 0, 0, full.width, out.height);
-      out.style.width = Math.floor(full.width / dpr) + 'px'; out.style.height = Math.floor(out.height / dpr) + 'px';
+      const x0 = Math.max(0, Math.floor(l * full.width)), x1 = Math.min(full.width, Math.ceil(r * full.width));
+      out.width = Math.max(1, x1 - x0); out.height = Math.max(1, y1 - y0); out.getContext('2d').drawImage(full, x0, y0, out.width, out.height, 0, 0, out.width, out.height);
+      out.style.width = Math.floor(out.width / dpr) + 'px'; out.style.height = Math.floor(out.height / dpr) + 'px';
       el.append(out);
     }
   }

@@ -11,48 +11,65 @@
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--desk:#0E1117;--paper:#181C24;--paper-2:#1F2430;--ink:#E5E8EE;--ink-2:#B2B9C6;--ink-3:#8A93A3;--line:#2F3644;--accent:#8AB6FF;--accent-ink:#0E1117;--accent-soft:#232C4C;--ok:#7FD6A4;--ok-soft:#173226;--warn:#F1B44E;--warn-soft:#382B13;--err:#FF9C94;--err-soft:#3B1B1A;--card-shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -12px rgba(0,0,0,.5)}}
 :root[data-theme="dark"]{--desk:#0E1117;--paper:#181C24;--paper-2:#1F2430;--ink:#E5E8EE;--ink-2:#B2B9C6;--ink-3:#8A93A3;--line:#2F3644;--accent:#8AB6FF;--accent-ink:#0E1117;--accent-soft:#232C4C;--ok:#7FD6A4;--ok-soft:#173226;--warn:#F1B44E;--warn-soft:#382B13;--err:#FF9C94;--err-soft:#3B1B1A;--card-shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -12px rgba(0,0,0,.5)}
 *{box-sizing:border-box} html{-webkit-text-size-adjust:100%} body{margin:0;background:var(--desk);color:var(--ink);font:16px/1.5 var(--sans)}
-.wrap{max-width:1040px;margin:0 auto;padding:24px 16px 48px}
+.wrap{max-width:1040px;margin:0 auto;padding:18px 16px 40px}
 a{color:var(--accent)} .back{display:inline-block;margin-bottom:14px;font-weight:700;text-decoration:none}
 .brand{display:block;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12px;color:var(--ink-3);margin:0 0 4px}
-h1{font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.03em;font-size:clamp(26px,5vw,38px);line-height:1.1;margin:0 0 8px}
+h1{font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.03em;font-size:clamp(24px,5vw,34px);line-height:1.1;margin:0}
 .lead{color:var(--ink-2);margin:0 0 18px;max-width:72ch}
 .tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:0 0 18px;overflow-x:auto}
 .tabs a{font-weight:700;text-decoration:none;color:var(--ink-2);padding:10px 14px;border-bottom:3px solid transparent;margin-bottom:-1px;white-space:nowrap}
 .tabs a[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
 .tabs a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:16px;box-shadow:var(--card-shadow)}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:var(--card-shadow)}
 /* topic packs */
 .tp-intro{display:grid;grid-template-columns:1fr;gap:4px;margin-bottom:16px}
 .tp-intro h2{margin:0;font-size:22px} .tp-intro p{margin:0;color:var(--ink-2);max-width:72ch}
-.tp-step{position:relative;padding-left:62px}
-.tp-step>h3{margin:2px 0 10px;font-size:17px;display:flex;align-items:center;gap:10px}
-.tp-step>h3::before{content:attr(data-n);position:absolute;left:16px;top:14px;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:15px;background:var(--paper-2);color:var(--ink-3);border:2px solid var(--line)}
-.tp-step.now>h3::before{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
-.tp-step.done>h3::before{content:'✓';background:var(--ok-soft);color:var(--ok);border-color:var(--ok)}
-.tp-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px}
-.tp-opt{font:inherit;text-align:left;color:var(--ink);background:var(--paper-2);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;cursor:pointer;display:flex;flex-direction:column;gap:2px;min-height:48px}
-.tp-opt small{color:var(--ink-3);font-size:13px;line-height:1.35}
+.hrow{display:flex;align-items:center;gap:4px 8px;flex-wrap:wrap;margin:0 0 8px} .hrow h2{margin:0;font-size:19px;line-height:1.25}
+.ib{flex:none;width:32px;height:32px;display:inline-grid;place-items:center;border:0;border-radius:50%;background:transparent;color:var(--ink-3);cursor:pointer;padding:0}
+.ib:hover,.ib[aria-expanded="true"]{color:var(--accent);background:var(--accent-soft)}
+.ip{background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:8px 12px;margin:0 0 12px;font-size:14px;color:var(--ink-2);max-width:78ch}
+.ip p{margin:0 0 6px}.ip p:last-child{margin:0}.ip ul{margin:0;padding-left:18px}.ip li{margin:0 0 4px}
+.steps{padding:4px 14px}
+.st{border-top:1px solid var(--line)}.st:first-child{border-top:0}
+.st-h{font:inherit;width:100%;display:flex;align-items:center;gap:10px;padding:10px 0;background:none;border:0;color:var(--ink);cursor:pointer;text-align:left;min-height:46px}
+.st-n{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--paper-2);color:var(--ink-3);border:1px solid var(--line)}
+.st.open .st-n{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)} .st.has:not(.open) .st-n{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.st-l{font-weight:700;font-size:15px;flex:none}.st-v{flex:1;min-width:0;color:var(--accent);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-v:not(:empty)::before{content:'· ';color:var(--ink-3)}
+.st-c{flex:none;width:9px;height:9px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);transform:rotate(45deg);margin:-4px 6px 0 auto;transition:transform .15s}
+.st.open .st-c{transform:rotate(-135deg);margin-top:4px}
+.st-b{padding:0 0 12px}
+.tp-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.tp-opts.tp-topics{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.tp-opt{font:inherit;font-size:15px;text-align:left;color:var(--ink);background:var(--paper-2);border:1.5px solid var(--line);border-radius:9px;padding:7px 10px;cursor:pointer;display:flex;flex-direction:column;gap:0;min-height:44px;line-height:1.3}
+.tp-opt small{color:var(--ink-3);font-size:12.5px;line-height:1.3}
 .tp-opt:hover{border-color:var(--accent)}
 .tp-opt[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
 .tp-topic{flex-direction:row;align-items:flex-start;gap:10px}.tp-topic>span:last-child{display:flex;flex-direction:column;gap:2px;min-width:0}
-.tp-n{flex:none;font-weight:700;font-size:13px;min-width:26px;height:26px;border-radius:7px;display:grid;place-items:center;background:var(--paper);border:1px solid var(--line);color:var(--ink-2)}
+.tp-n{flex:none;font-weight:700;font-size:12px;min-width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:var(--paper);border:1px solid var(--line);color:var(--ink-2)}
 .tp-head{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between}
 .tp-head h3{margin:0;font-size:20px}
 #tp-count{font-weight:700} #tp-count2{color:var(--ink-3);font-size:14px;display:block}
-.tp-dls{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0 10px}
-.tp-dl{font:inherit;text-align:left;cursor:pointer;border-radius:12px;padding:12px 14px;border:1.5px solid var(--accent);background:var(--paper);color:var(--ink);display:flex;flex-direction:column;gap:3px;min-height:48px}
+.tp-dls{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 8px}
+.tp-title{margin:0;font-size:17px;line-height:1.3}
+.tp-dl{font:inherit;font-weight:700;font-size:15px;cursor:pointer;border-radius:10px;padding:8px 10px;border:1.5px solid var(--accent);background:var(--paper);color:var(--accent);display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;text-align:center;line-height:1.2}
 .tp-dl b{display:flex;gap:8px;align-items:center;color:var(--accent)} .tp-dl small{color:var(--ink-2);font-size:13px;line-height:1.35}
-.tp-dl.pri{background:var(--accent);color:var(--accent-ink)} .tp-dl.pri b,.tp-dl.pri small{color:var(--accent-ink)}
+.tp-dl.pri{background:var(--accent);color:var(--accent-ink)}
 .tp-dl:disabled{opacity:.55;cursor:default} .tp-dl.working{opacity:1;cursor:progress}
 .tp-dl svg{flex:none}
 .tp-status{border-radius:10px;padding:10px 12px;margin:6px 0 4px;background:var(--paper-2);border:1px solid var(--line);font-size:15px}
 .tp-status.busy{background:var(--accent-soft);border-color:var(--accent)} .tp-status.ok{background:var(--ok-soft);border-color:var(--ok)} .tp-status.warn{background:var(--warn-soft);border-color:var(--warn)} .tp-status.err{background:var(--err-soft);border-color:var(--err);color:var(--ink)}
 .tp-status progress{display:block;width:100%;height:8px;margin-top:8px;accent-color:var(--accent)}
-.tp-tools{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin:14px 0 8px;font-size:15px}
+.tp-tools{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:6px 0;font-size:15px}
 .tp-tools label{display:flex;gap:8px;align-items:center}
-.tp-tools select,.tp-mini{font:inherit;font-size:14px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper-2);color:var(--ink);cursor:pointer}
+.tp-tools select,.tp-mini{min-height:36px;font:inherit;font-size:14px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper-2);color:var(--ink);cursor:pointer}
 .tp-tools .sp{flex:1}
 #tp-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+details.qs{margin:8px 0 0} details.qs>summary{list-style:none;display:flex;flex-wrap:wrap;gap:2px 10px;align-items:center;justify-content:space-between;padding:9px 12px;background:var(--paper-2);border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:14.5px;font-weight:700;min-height:44px}
+details.qs>summary::-webkit-details-marker{display:none}
+.qs-more{color:var(--accent);white-space:nowrap}.qs-more::after{content:' ▸'}details.qs[open] .qs-more::after{content:' ▾'}
+details.qs[open]>summary{margin-bottom:6px}
+details.about{margin:4px 0 12px;font-size:14px;color:var(--ink-2)} details.about>summary{cursor:pointer;font-weight:700;color:var(--ink-3);padding:6px 0}
+details.about ul{margin:6px 0 0;padding-left:18px} details.about li{margin:0 0 4px}
 #tp-list li{border-bottom:1px solid var(--line)}
 .tp-q{display:grid;grid-template-columns:auto 2.2em 1fr;gap:4px 8px;align-items:start;padding:9px 2px;cursor:pointer}
 .tp-q input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--accent)}
@@ -63,8 +80,8 @@ h1{font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.03em;fon
 .tp-flag{font-size:12px;font-weight:700;border-radius:6px;padding:1px 7px;background:var(--paper-2);color:var(--ink-3)}
 .tp-flag.ok{background:var(--ok-soft);color:var(--ok)} .tp-flag.warn{background:var(--warn-soft);color:var(--warn)}
 #tp-list li.off .tp-qt{opacity:.5} #tp-list li.off .tp-num{color:var(--ink-3)}
-.tp-reps{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tp-rep h4{margin:0 0 4px;font-size:16px} .tp-rep p{margin:0 0 6px;font-size:14px;color:var(--ink-2)} .tp-rep p.warn{color:var(--warn)}
+.tp-reps{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:13px}
+.tp-rep h4{margin:0;font-size:13px} .tp-rep p{margin:0 0 4px;font-size:13px;color:var(--ink-2)} .tp-rep p.warn{color:var(--warn)}
 .small{font-size:14px;color:var(--ink-3)} code{font-size:13px;overflow-wrap:anywhere;background:var(--paper-2);padding:1px 4px;border-radius:4px}
 details.how summary{cursor:pointer;font-weight:700;color:var(--ink-2)} details.how ul{margin:6px 0 0;padding-left:20px;font-size:14px;color:var(--ink-2)}
 /* scheme of work */
@@ -86,20 +103,19 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
 .foot{color:var(--ink-3);font-size:14px}
 [hidden]{display:none!important}
 /* exam countdown */
-.cd{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:0 0 16px;box-shadow:var(--card-shadow)}
-.cd-top{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;margin-bottom:8px}.cd-top h2{margin:0;font-size:17px}.cd-top span{color:var(--ink-3);font-size:13px;font-weight:700}
-#cd-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
-.cd-c{background:var(--paper-2);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;padding:8px 10px;display:flex;flex-direction:column;gap:1px;min-width:0}
-.cd-c.soon{border-left-color:var(--warn)} .cd-c.past{opacity:.6;border-left-color:var(--line)} .cd-c.none{border-left-color:var(--line);border-left-style:dashed}
-.cd-k{display:flex;justify-content:space-between;gap:6px;font-size:13px}.cd-k span{color:var(--ink-3);font-weight:700;font-size:12px}
-.cd-n{font-size:12.5px;color:var(--ink-2);line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.cd-big{font-weight:700;font-size:18px;line-height:1.25;margin-top:2px;font-variant-numeric:tabular-nums}.cd-c.none .cd-big{font-size:15px;color:var(--ink-3)}
-.cd-w{font-size:12.5px;color:var(--ink-2)} .cd-t{font-size:12px;color:var(--ink-3);line-height:1.3}
-.cd-foot{display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;margin-top:8px;font-size:13px;color:var(--ink-3)} .cd-foot a{overflow-wrap:anywhere}
-details.cd-ed summary{cursor:pointer;font-weight:700;color:var(--accent);font-size:14px}
-details.cd-ed table{margin:8px 0;font-size:14px} details.cd-ed td,details.cd-ed th{padding:5px 6px} details.cd-ed th{font-size:14px;color:var(--ink);font-weight:400}
-details.cd-ed input{font:inherit;font-size:14px;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--paper-2);color:var(--ink);max-width:100%}
-details.cd-ed input[type=number]{width:4em}
+.cd{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:12px 0 12px;box-shadow:var(--card-shadow)}
+.cd .hrow{margin-bottom:6px}.cd .hrow h2{font-size:16px}.cd-st{color:var(--ink-3);font-size:12.5px;font-weight:700}
+#cd-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.cd-c{background:var(--paper-2);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:9px;padding:6px 8px;display:flex;flex-direction:column;min-width:0;line-height:1.3}
+.cd-c.soon{border-top-color:var(--warn)} .cd-c.past{opacity:.6;border-top-color:var(--line)} .cd-c.none{border-top-color:var(--line);border-top-style:dashed}
+.cd-k{display:flex;justify-content:space-between;gap:4px;font-size:13px}.cd-k span{color:var(--ink-3);font-weight:700;font-size:11px}
+.cd-big{font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}.cd-c.none .cd-big{font-size:13px;color:var(--ink-3)}
+.cd-w{font-size:12px;color:var(--ink-2)} .cd-t{font-size:11.5px;color:var(--ink-3)}
+details.cd-ed{margin-top:6px} details.cd-ed>summary{cursor:pointer;font-weight:700;color:var(--accent);font-size:13px;display:inline-block}
+details.cd-ed table{margin:6px 0;font-size:14px} details.cd-ed td,details.cd-ed th{padding:4px 6px} details.cd-ed th{font-size:13.5px;color:var(--ink);font-weight:400}
+details.cd-ed input{font:inherit;font-size:14px;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--paper-2);color:var(--ink);max-width:100%}
+details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+@media (max-width:820px){#cd-list{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:4px}.cd-c{flex:0 0 128px;scroll-snap-align:start}}
 .cd-sow{margin:-4px 0 10px;font-size:14.5px;color:var(--ink-2);background:var(--accent-soft);border-radius:8px;padding:6px 10px}.cd-sow.warn{background:var(--warn-soft);color:var(--ink)}
 /* build a test */
 .bt-unit{border:1.5px solid var(--line);border-radius:12px;padding:6px 12px 12px;margin:0 0 10px;min-width:0} .bt-unit.on{border-color:var(--accent)}
@@ -109,12 +125,25 @@ details.cd-ed input[type=number]{width:4em}
 .bt-topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px}
 .bt-t{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:8px;background:var(--paper-2);cursor:pointer;min-width:0}
 .bt-tt{display:flex;flex-direction:column;min-width:0}.bt-tt b{font-size:14.5px;line-height:1.3}.bt-tt small{color:var(--ink-3);font-size:12.5px}
-.bt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px 16px;align-items:start}
-.bt-f{display:flex;flex-direction:column;gap:4px;font-size:15px;min-width:0}.bt-f>span{font-weight:700;font-size:14px;color:var(--ink-2)}
+.bt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px 14px;align-items:start}
+.bt-f{display:flex;flex-direction:column;gap:3px;font-size:15px;min-width:0}.bt-f>span{font-weight:700;font-size:13px;color:var(--ink-3)}
 .bt-f select,.bt-f input[type=number]{font:inherit;font-size:15px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper-2);color:var(--ink);max-width:100%}
 .bt-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.bt-row input[type=number]{width:5.5em}
 .bt-chk{display:flex;gap:8px;align-items:flex-start;font-size:15px;cursor:pointer} .bt-chk small{display:block;color:var(--ink-3);font-size:13px}
-.bt-go{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-top:14px}
+.bt-go{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-top:10px}
+.bt-head{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.dim{opacity:.5}
+.bt-mixset{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:8px 0 0}
+.bt-sps{display:flex;flex-wrap:wrap;gap:8px 18px}.bt-sp{display:flex;flex-direction:column;gap:2px;font-size:13px;font-weight:700;color:var(--ink-2)}
+.bt-sp small{font-weight:400;color:var(--ink-3);font-size:12px}.bt-sp small.over{color:var(--warn);font-weight:700}
+.bt-spin{display:flex;align-items:center;gap:0}.bt-spin button{font:inherit;font-weight:700;font-size:18px;width:36px;height:36px;border:1px solid var(--line);background:var(--paper);color:var(--accent);cursor:pointer}
+.bt-spin button:first-child{border-radius:8px 0 0 8px}.bt-spin button:last-child{border-radius:0 8px 8px 0}
+.bt-spin input{font:inherit;width:3.2em;height:36px;text-align:center;border:1px solid var(--line);border-left:0;border-right:0;background:var(--paper);color:var(--ink);-moz-appearance:textfield}
+.bt-spin input::-webkit-inner-spin-button{-webkit-appearance:none}
+.bt-ty{display:inline-block;font-size:11px;font-weight:700;border-radius:5px;padding:0 5px;background:var(--paper-2);color:var(--ink-3);border:1px solid var(--line);vertical-align:1px}
+.bt-ty.mc{background:var(--accent-soft);color:var(--accent);border-color:transparent}.bt-ty.long{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.bt-checks{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;margin:8px 0 4px}
+.vs-lead{margin:0 0 8px}.vs-me{margin:0 0 8px}
 .bt-btn{font:inherit;font-weight:700;padding:10px 18px;border-radius:10px;border:1.5px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;min-height:44px}.bt-btn:disabled{opacity:.5;cursor:default}
 .bt-btn.sec{background:var(--paper);color:var(--accent)}
 #bt-bal{list-style:none;margin:10px 0 4px;padding:0;display:grid;gap:4px}
@@ -157,7 +186,7 @@ details.cd-ed input[type=number]{width:4em}
 .tr-sp{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px}.tr-sp a{font-weight:600;text-decoration:none}.tr-sm{font-size:13px;color:var(--ink-3);white-space:nowrap}
 .tr-spec details summary{cursor:pointer;font-size:13px;color:var(--ink-2)}.tr-spec details ul{margin:4px 0 0;padding-left:18px;font-size:13px;color:var(--ink-2)}
 .tr-key{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--ink-3);margin:8px 0 0;align-items:center}.tr-key i{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:4px;border:1px solid var(--line)}
-#tr-print-h{display:none}
+#tr-print-h{display:none}.tr-h4{margin:14px 0 6px;font-size:15px}
 /* pupil visits */
 #vs-t{font-size:14.5px;min-width:0}#vs-t th,#vs-t td{vertical-align:middle}
 .vs-n{text-align:right;width:22%;font-variant-numeric:tabular-nums;white-space:nowrap}.vs-n span{display:block}
@@ -165,122 +194,131 @@ details.cd-ed input[type=number]{width:4em}
 .vs-g th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding-top:14px}
 #vs-t .tr-open b{font-size:14px;min-width:3.6em}
 .vs-ch{font-size:13.5px}.vs-ch th{font-weight:400} .vs-ch a{text-decoration:none}
-@media (max-width:720px){.tp-dls{grid-template-columns:1fr}.tp-reps{grid-template-columns:1fr}.tp-step{padding-left:16px}.tp-step>h3{padding-left:42px;min-height:32px}.tp-opts{grid-template-columns:1fr}}
+@media (max-width:720px){.wrap{padding:12px 12px 32px}.card{padding:12px;border-radius:12px}.steps{padding:2px 12px}.tp-reps{grid-template-columns:1fr}.tp-dl{font-size:14px;padding:6px}.tp-dl svg{display:none}.tp-opts.tp-topics{grid-template-columns:1fr}.hrow h2{font-size:17px}.tabs a{padding:8px 10px;font-size:15px}.u{padding:12px}}
 @media (max-width:640px){.u th:nth-child(3),.u td:nth-child(3){display:none}.pr{margin-left:0}#bt-list li{grid-template-columns:2em minmax(0,1fr) auto}.bt-act{grid-column:2/-1}#tr-bars li{grid-template-columns:minmax(0,1fr) 5.5em}.tr-bt{grid-column:1/-1;grid-row:2}}
 @media print{body{background:#fff;color:#000} .bar,.back,.tabs,.cd,.lead,.brand,h1,.noprint{display:none!important} .wrap{padding:0;max-width:none} .u{border:0;padding:0;break-inside:auto} .u[hidden]{display:none} a{color:#000}
  .card{box-shadow:none;border:0;padding:0} #tr-print-h{display:block;font-size:18px;margin:0 0 8px} .tr-scroll{overflow:visible} #tr-grid{min-width:0;font-size:10px} .tr-tn{min-width:0} .tr-open::after{display:none}
  .tr-c,.tr-duebox,.tr-due,.tr-bt i{-webkit-print-color-adjust:exact;print-color-adjust:exact} .cd-sow{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 </style></head><body><div class="wrap">
 <a class="back" href="index.html">‹ Back to the revision site</a>
-<span class="brand">Mr Butler’s Digital Technology · for teachers</span><h1>Teacher area</h1>
-<p class="lead">Tools for planning and teaching: topic packs and mock tests of CCEA past-paper questions, ready to print, how often CCEA asks each topic, the scheme of work and pupil visits.</p>
+<span class="brand">Mr Butler’s Digital Technology · for teachers</span>
+<div class="hrow"><h1>Teacher area</h1><button type="button" class="ib" aria-expanded="false" aria-controls="i-lead" aria-label="About the Teacher area" title="About the Teacher area"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+<div class="ip" id="i-lead" hidden><p>Tools for planning and teaching: topic packs and mock tests of CCEA past-paper questions (cut straight from CCEA’s papers, with mark schemes and examiner comments), how often CCEA asks each topic, the scheme of work and pupil visits.</p></div>
 <section class="cd" id="cd" aria-labelledby="cd-h">
- <div class="cd-top"><h2 id="cd-h">Summer exams</h2><span id="cd-st"></span></div>
+ <div class="hrow"><h2 id="cd-h">Summer exams</h2><span class="cd-st" id="cd-st"></span><button type="button" class="ib" aria-expanded="false" aria-controls="i-cd" aria-label="About the exam dates" title="About the exam dates"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+ <div class="ip" id="i-cd" hidden><p>Dates from <span id="cd-src"></span>.</p><p><span id="cd-hol-t"></span> Exams with no date have not been published by CCEA yet: add them under “Edit dates”.</p></div>
  <ul id="cd-list" aria-label="Exam countdown"></ul>
- <div class="cd-foot"><span>Dates from <span id="cd-src"></span>. <span id="cd-hol-t"></span></span></div>
  <details class="cd-ed"><summary>Edit dates</summary>
-  <p class="small" style="margin:6px 0 0">Change a date here if CCEA changes the timetable: it is saved on this device only. To change it for everyone, edit <code>papers/exam-dates.json</code> in the GitHub repo. Leave a date empty if it is not known.</p>
+  <p class="small">Saved on this device only. To change a date for everyone, edit <code>papers/exam-dates.json</code> in the GitHub repo. Leave a date empty if it is not known.</p>
   <div style="overflow-x:auto"><table><thead><tr><th>Exam</th><th>Date</th><th>Start</th></tr></thead><tbody id="cd-edit"></tbody></table></div>
-  <label class="small" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">Holiday weeks still to come before the exams <input type="number" id="cd-hol" min="0" max="20" step="1"> <span>(a guess of Christmas 2 + Easter 2: set it to your school’s calendar)</span></label>
+  <label class="small cd-hl">Holiday weeks still to come <input type="number" id="cd-hol" min="0" max="20" step="1"> <span>(a guess: Christmas 2 + Easter 2; set it for your school)</span></label>
   <p style="margin:8px 0 0"><button type="button" class="tp-mini" id="cd-reset">Reset to CCEA’s dates</button></p>
  </details>
 </section>
 <nav class="tabs" role="tablist" aria-label="Teacher area sections"><a href="#packs" role="tab" id="t-packs" aria-controls="packs" aria-selected="true">Topic packs</a><a href="#test" role="tab" id="t-test" aria-controls="test" aria-selected="false">Build a test</a><a href="#trends" role="tab" id="t-trends" aria-controls="trends" aria-selected="false">Exam trends</a><a href="#sow" role="tab" id="t-sow" aria-controls="sow" aria-selected="false">Scheme of work</a><a href="#visits" role="tab" id="t-visits" aria-controls="visits" aria-selected="false">Pupil visits</a></nav>
 
 <section id="packs" role="tabpanel" aria-labelledby="t-packs">
- <div class="tp-intro"><h2>CCEA questions by topic</h2><p>Pick a course, a unit and a topic, then download a PDF of every CCEA past-paper question the workbooks place in that topic, newest first, cut straight from CCEA’s papers. Each question has its mark scheme and, where there is one, the examiner’s comment on it.</p></div>
+ <div class="hrow"><h2>CCEA questions by topic</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-packs" aria-label="About topic packs" title="About topic packs"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+ <div class="ip" id="i-packs" hidden><p>Pick a course, a unit and a topic, then download a PDF of every CCEA past-paper question the workbooks place in that topic, cut straight from CCEA’s papers. Each question comes with its mark scheme and, where there is one, the examiner’s comment.</p></div>
  <p class="tp-status" id="tp-load">Loading the question lists…</p>
  <div id="tp-flow" hidden>
-  <div class="card tp-step" data-step="1"><h3 data-n="1">Course</h3><div class="tp-opts" id="tp-course" role="group" aria-label="Course"></div></div>
-  <div class="card tp-step" data-step="2" id="tp-s2" hidden><h3 data-n="2">Unit</h3><div class="tp-opts" id="tp-unit" role="group" aria-label="Unit"></div></div>
-  <div class="card tp-step" data-step="3" id="tp-s3" hidden><h3 data-n="3">Topic</h3><div class="tp-opts" id="tp-topic" role="group" aria-label="Topic"></div></div>
-  <div class="card tp-step" data-step="4" id="tp-s4" hidden><h3 data-n="4">Download</h3>
-   <div class="tp-head"><h3 id="tp-title"></h3><span id="tp-count" aria-live="polite"></span></div><span id="tp-count2"></span>
+  <div class="card steps" id="tp-steps">
+   <div class="st" data-step="1" id="tp-s1"><button type="button" class="st-h" aria-expanded="false" aria-controls="tp-s1-b"><span class="st-n">1</span><span class="st-l">Course</span><span class="st-v"></span><span class="st-c" aria-hidden="true"></span></button><div class="st-b" id="tp-s1-b" hidden><div class="tp-opts" id="tp-course" role="group" aria-label="Course"></div></div></div>
+   <div class="st" data-step="2" id="tp-s2"><button type="button" class="st-h" aria-expanded="false" aria-controls="tp-s2-b"><span class="st-n">2</span><span class="st-l">Unit</span><span class="st-v"></span><span class="st-c" aria-hidden="true"></span></button><div class="st-b" id="tp-s2-b" hidden><div class="tp-opts" id="tp-unit" role="group" aria-label="Unit"></div></div></div>
+   <div class="st" data-step="3" id="tp-s3"><button type="button" class="st-h" aria-expanded="false" aria-controls="tp-s3-b"><span class="st-n">3</span><span class="st-l">Topic</span><span class="st-v"></span><span class="st-c" aria-hidden="true"></span></button><div class="st-b" id="tp-s3-b" hidden><div class="tp-opts tp-topics" id="tp-topic" role="group" aria-label="Topic"></div></div></div>
+  </div>
+  <div class="card" id="tp-s4" hidden>
+   <h3 class="tp-title" id="tp-title"></h3>
    <div class="tp-dls">
-    <button type="button" class="tp-dl pri" data-dl="full"><b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Full pack</b><small>Each question, then its mark scheme and examiner-report comment</small></button>
-    <button type="button" class="tp-dl" data-dl="questions"><b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Questions only</b><small>A pupil worksheet, with space for a name</small></button>
-    <button type="button" class="tp-dl" data-dl="answers"><b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Mark schemes and reports</b><small>The answers, numbered to match the worksheet</small></button>
+    <button type="button" class="tp-dl pri" data-dl="full" title="Each question, then its mark scheme and examiner-report comment"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Full pack</button>
+    <button type="button" class="tp-dl" data-dl="questions" title="A pupil worksheet, with space for a name"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Worksheet</button>
+    <button type="button" class="tp-dl" data-dl="answers" title="The answers, numbered to match the worksheet"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Mark schemes</button>
    </div>
    <div class="tp-status" id="tp-status" role="status" aria-live="polite" hidden><span id="tp-status-t"></span><progress id="tp-bar" max="1" value="0" hidden></progress></div>
-   <div class="tp-tools"><label>Layout <select id="tp-layout"><option value="standard">Standard: one question per page</option><option value="compact">Compressed: saves paper</option></select></label><label>Order <select id="tp-order"><option value="new">Newest first</option><option value="old">Oldest first</option></select></label><span class="sp"></span><button type="button" class="tp-mini" id="tp-all">Select all</button><button type="button" class="tp-mini" id="tp-none">Select none</button></div>
-   <p class="small" style="margin:0 0 6px">Untick any question to leave it out. The numbers are the ones printed in the packs.</p>
-   <ol id="tp-list" aria-label="Questions in this pack"></ol>
+   <div class="tp-tools"><select id="tp-layout" aria-label="Layout"><option value="standard">One question per page</option><option value="compact">Compressed</option></select><select id="tp-order" aria-label="Order"><option value="new">Newest first</option><option value="old">Oldest first</option></select><button type="button" class="ib" aria-expanded="false" aria-controls="i-dl" aria-label="About the downloads and options" title="About the downloads and options"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+   <div class="ip" id="i-dl" hidden><ul><li><b>Full pack</b>: each question, then its mark scheme (green box) and the examiner’s comment (yellow box).</li><li><b>Worksheet</b>: the questions only, with space for a name, class and date.</li><li><b>Mark schemes</b>: the answers and examiner comments, numbered to match the worksheet.</li><li><b>One question per page</b> keeps the answer space; <b>Compressed</b> saves paper (blank answer space is squeezed out of the answer packs, never out of a worksheet).</li><li><b>Order</b>: newest or oldest paper first.</li></ul></div>
+   <details class="qs" id="tp-qs"><summary><span id="tp-count" aria-live="polite"></span><span class="qs-more">Show questions</span></summary>
+    <p class="small" id="tp-count2"></p>
+    <div class="tp-tools"><button type="button" class="tp-mini" id="tp-all">Select all</button><button type="button" class="tp-mini" id="tp-none">Select none</button><button type="button" class="ib" aria-expanded="false" aria-controls="i-qs" aria-label="About the question list" title="About the question list"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+    <div class="ip" id="i-qs" hidden><p>Untick any question to leave it out of the PDFs. The numbers are the ones printed in the packs.</p></div>
+    <ol id="tp-list" aria-label="Questions in this pack"></ol>
+   </details>
   </div>
-  <div class="card"><h3 style="margin:0 0 8px;font-size:17px">Examiner reports</h3><div class="tp-reps" id="tp-reports"></div>
-   <details class="how"><summary>How to add a report</summary><ul>
-    <li>Upload CCEA’s Chief Examiner’s report PDF to <code>papers/GCSE/Examiner reports/</code> or <code>papers/A level/Examiner reports/</code> in the GitHub repo, named after the series, e.g. <code>Summer 2027.pdf</code>. Any name with the year works.</li>
-    <li>A GitHub Action finds each question’s comment (the unit’s section, then “Q3”, “(b)”, “(ii)”) a minute or two later.</li>
+  <details class="about"><summary>About the papers and reports</summary>
+   <div class="tp-reps" id="tp-reports"></div>
+   <ul class="small">
+    <li>To add an examiner report, upload CCEA’s Chief Examiner’s report PDF to <code>papers/GCSE/Examiner reports/</code> or <code>papers/A level/Examiner reports/</code> in the GitHub repo, named after the series, e.g. <code>Summer 2027.pdf</code>. A GitHub Action finds each question’s comment a minute or two later.</li>
     <li>Where a report discusses a whole question in one paragraph, the pack shows that paragraph with the lines about the part highlighted.</li>
-    <li>CCEA publishes no report for the 2021 series, the specimen papers or the 2022 A2 1 resit, so those questions have no report section.</li></ul></details>
-  </div>
-  <p class="small">The papers, mark schemes and examiner reports are CCEA material, used with permission, cut straight from CCEA's PDFs (the edge watermark is trimmed off). Packs are made in your browser from the PDFs in this site; nothing is uploaded.</p>
+    <li>CCEA publishes no report for the 2021 series, the specimen papers or the 2022 A2 1 resit, so those questions have no report section.</li>
+    <li>The papers, mark schemes and examiner reports are CCEA material, used with permission, cut straight from CCEA’s PDFs (the edge watermark is trimmed off). Packs are made in your browser; nothing is uploaded.</li></ul>
+  </details>
  </div>
 </section>
 
 <section id="test" role="tabpanel" aria-labelledby="t-test" hidden>
- <div class="tp-intro"><h2>Build a test across topics</h2><p>A mock or end-of-unit test: pick the units and topics, set the marks or the time, and the questions are chosen from CCEA’s past papers, spread across the topics and mixing short and longer questions. Check the list, swap or remove any question, then download it as a worksheet, with the mark schemes and examiner comments to match.</p></div>
+ <div class="hrow"><h2>Build a test</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-test" aria-label="About the test builder" title="About the test builder"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+ <div class="ip" id="i-test" hidden><p>A mock or end-of-unit test from CCEA’s past papers. Pick the units and topics and set the marks or the time; the questions are spread across the topics (as often as CCEA asks each one, or evenly), mix short and longer questions and hit the marks. Check the list, swap or remove any question, then download the test paper, the mark schemes and examiner comments, or both together.</p></div>
  <p class="tp-status" id="bt-load">Loading the question lists…</p>
  <div id="bt-flow" hidden>
-  <div class="card tp-step"><h3 data-n="1">Course</h3><div class="tp-opts" id="bt-course" role="group" aria-label="Course"></div></div>
-  <div class="card tp-step" id="bt-s2" hidden><h3 data-n="2">Units and topics</h3><p class="small" style="margin:-4px 0 10px">Tick one or more units, then the topics to cover. The percentage is each topic’s share of the marks in all CCEA’s papers for that unit.</p><div id="bt-units"></div></div>
-  <div class="card tp-step" id="bt-s3" hidden><h3 data-n="3">Length and options</h3>
-   <div class="bt-grid">
-    <div class="bt-f"><span>Set the length by</span><div class="seg" id="bt-mode" role="group" aria-label="Set the length by"><button type="button" data-v="marks" aria-pressed="true">Marks</button> <button type="button" data-v="time" aria-pressed="false">Time</button></div>
-     <div class="bt-row" id="bt-mw"><input type="number" id="bt-marks" min="1" max="300" step="1" aria-label="Target marks"> marks</div>
-     <div class="bt-row" id="bt-tw" hidden><input type="number" id="bt-mins" min="5" max="300" step="5" aria-label="Time in minutes"> minutes</div></div>
-    <label class="bt-f"><span>Marks a minute</span><select id="bt-rate"><option value="paper">As in the CCEA paper</option><option value="one">1 mark a minute</option></select></label>
-    <label class="bt-f"><span>Spread across topics</span><select id="bt-spread"><option value="freq">As often as CCEA asks each topic</option><option value="even">Evenly</option></select></label>
-    <label class="bt-f"><span>Papers</span><select id="bt-papers"><option value="all">All papers, specimen too</option><option value="r5">The last 5 years only</option><option value="r3">The last 3 years only</option></select></label>
-    <label class="bt-f"><span>Order</span><select id="bt-order"><option value="topic">By topic</option><option value="short">Short questions first, like a paper</option><option value="paper">Paper by paper, newest first</option></select></label>
-    <label class="bt-f"><span>Layout</span><select id="bt-layout"><option value="standard">Standard: one question per page</option><option value="compact">Compressed: saves paper</option></select></label>
-   </div>
-   <p class="small" id="bt-rate-t" style="margin:10px 0 0"></p>
-   <div class="bt-grid" style="margin-top:12px">
-    <label class="bt-chk"><input type="checkbox" id="bt-dedupe"><span>Avoid near-duplicates<small>Never two questions that ask the same thing (the same part in two years with the same wording).</small></span></label>
-    <label class="bt-chk"><input type="checkbox" id="bt-fresh"><span>Leave out questions used in earlier tests<small><span id="bt-used-t"></span> <button type="button" class="tp-mini" id="bt-forget" hidden>Forget them</button></small></span></label>
-   </div>
-   <div class="bt-go"><button type="button" class="bt-btn" id="bt-go">Choose the questions</button><span class="small" id="bt-pool"></span></div>
+  <div class="card steps" id="bt-steps">
+   <div class="st" data-step="1" id="bt-s1"><button type="button" class="st-h" aria-expanded="false" aria-controls="bt-s1-b"><span class="st-n">1</span><span class="st-l">Course</span><span class="st-v"></span><span class="st-c" aria-hidden="true"></span></button><div class="st-b" id="bt-s1-b" hidden><div class="tp-opts" id="bt-course" role="group" aria-label="Course"></div></div></div>
+   <div class="st" data-step="2" id="bt-s2"><button type="button" class="st-h" aria-expanded="false" aria-controls="bt-s2-b"><span class="st-n">2</span><span class="st-l">Units and topics</span><span class="st-v"></span><span class="st-c" aria-hidden="true"></span></button><div class="st-b" id="bt-s2-b" hidden><div id="bt-units"></div><div class="bt-go"><button type="button" class="bt-btn sec" id="bt-next">Next</button><span class="small">The % is each topic’s share of CCEA’s marks for the unit.</span></div></div></div>
+   <div class="st" data-step="3" id="bt-s3"><button type="button" class="st-h" aria-expanded="false" aria-controls="bt-s3-b"><span class="st-n">3</span><span class="st-l">Length and options</span><span class="st-v"></span><span class="st-c" aria-hidden="true"></span></button><div class="st-b" id="bt-s3-b" hidden><div class="bt-grid">
+ <label class="bt-f"><span>Question mix</span><select id="bt-qmix"><option value="auto">Balanced (automatic)</option><option value="set">Set numbers of each type</option></select></label>
+ <div class="bt-f" id="bt-len"><span>Length</span><div class="bt-row"><div class="seg" id="bt-mode" role="group" aria-label="Set the length by"><button type="button" data-v="marks" aria-pressed="true">Marks</button> <button type="button" data-v="time" aria-pressed="false">Time</button></div>
+  <span id="bt-mw"><input type="number" id="bt-marks" min="1" max="300" step="1" aria-label="Target marks"> marks</span><span id="bt-tw" hidden><input type="number" id="bt-mins" min="5" max="300" step="5" aria-label="Time in minutes"> min</span></div></div>
+ <label class="bt-f"><span>Marks a minute</span><select id="bt-rate"><option value="paper">As in the CCEA paper</option><option value="one">1 mark a minute</option></select></label>
+ <label class="bt-f"><span>Spread</span><select id="bt-spread"><option value="freq">As often as CCEA asks each topic</option><option value="even">Evenly across topics</option></select></label>
+ <label class="bt-f"><span>Papers</span><select id="bt-papers"><option value="all">All papers, specimen too</option><option value="r5">Last 5 years only</option><option value="r3">Last 3 years only</option></select></label>
+ <label class="bt-f"><span>Order</span><select id="bt-order"><option value="topic">By topic</option><option value="short">Short questions first</option><option value="paper">Paper by paper</option></select></label>
+ <label class="bt-f"><span>Layout</span><select id="bt-layout"><option value="standard">One question per page</option><option value="compact">Compressed</option></select></label>
+</div>
+<div id="bt-mixset" class="bt-mixset" hidden><div class="bt-sps"><div class="bt-sp"><span>Multiple choice</span><div class="bt-spin"><button type="button" data-d="-1" aria-label="One fewer multiple choice">−</button><input type="number" id="bt-n-mc" min="0" max="99" step="1" aria-label="Multiple choice questions"><button type="button" data-d="1" aria-label="One more multiple choice">+</button></div><small id="bt-max-mc"></small></div><div class="bt-sp"><span>Short answer</span><div class="bt-spin"><button type="button" data-d="-1" aria-label="One fewer short answer">−</button><input type="number" id="bt-n-short" min="0" max="99" step="1" aria-label="Short answer questions"><button type="button" data-d="1" aria-label="One more short answer">+</button></div><small id="bt-max-short"></small></div><div class="bt-sp"><span>Longer answer</span><div class="bt-spin"><button type="button" data-d="-1" aria-label="One fewer longer answer">−</button><input type="number" id="bt-n-long" min="0" max="99" step="1" aria-label="Longer answer questions"><button type="button" data-d="1" aria-label="One more longer answer">+</button></div><small id="bt-max-long"></small></div></div><p class="small" id="bt-mixest" style="margin:6px 0 0"></p></div>
+<p class="small" id="bt-rate-t" style="margin:8px 0 0"></p>
+<div class="bt-checks"><label class="bt-chk"><input type="checkbox" id="bt-dedupe"><span>Avoid near-duplicates</span></label><label class="bt-chk"><input type="checkbox" id="bt-fresh"><span>Leave out questions used before</span></label><button type="button" class="ib" aria-expanded="false" aria-controls="i-opts" aria-label="About these options" title="About these options"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+<div class="ip" id="i-opts" hidden><ul><li><b>Avoid near-duplicates</b>: never two questions that ask the same thing, such as the same part in two years with the same wording.</li><li><b>Leave out questions used before</b>: questions in tests you have downloaded on this device are remembered and skipped. <span id="bt-used-t"></span> <button type="button" class="tp-mini" id="bt-forget" hidden>Forget them</button></li><li><b>Marks a minute</b>: CCEA’s papers are not all 1 mark a minute; the time allowed uses the real paper’s rate unless you choose 1 mark a minute.</li><li><b>Question mix</b>: <i>Balanced</i> mixes short and longer questions to hit the marks; <i>Set numbers</i> picks exactly so many multiple-choice (incl. tick-box, true/false and matching), short-answer (1–3 marks, or 4–5 for stating or describing a few points) and longer-answer questions, and the marks follow. All are real CCEA questions, so the numbers are capped at what the chosen topics have.</li><li><b>Short questions first</b> orders the test like a CCEA paper; <b>By topic</b> groups it.</li></ul></div>
+<div class="bt-go"><button type="button" class="bt-btn" id="bt-go">Choose the questions</button><span class="small" id="bt-pool"></span></div>
+</div></div>
   </div>
-  <div class="card tp-step" id="bt-s4" hidden><h3 data-n="4">Check and download</h3>
-   <div class="tp-head"><h3 id="bt-title"></h3><span id="bt-count" aria-live="polite" style="font-weight:700"></span></div>
+  <div class="card" id="bt-s4" hidden>
+   <div class="bt-head"><h3 class="tp-title" id="bt-title"></h3><button type="button" class="tp-mini" id="bt-again">Shuffle again</button></div>
    <p class="tp-status warn" id="bt-note" hidden></p>
-   <ul id="bt-bal" aria-label="Marks per topic against its share"></ul>
-   <p class="small" style="margin:0"><span id="bt-mix"></span> The bars show each topic’s marks; the line is its share of the target.</p>
    <div class="tp-dls">
-    <button type="button" class="tp-dl pri" data-bt="questions"><b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Test paper</b><small>The worksheet: a cover with name, class, date, time and a marks table</small></button>
-    <button type="button" class="tp-dl" data-bt="answers"><b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Mark schemes and reports</b><small>The answers, numbered to match, with a marks summary</small></button>
-    <button type="button" class="tp-dl" data-bt="full"><b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Full pack</b><small>Each question, then its mark scheme and examiner comment</small></button>
+    <button type="button" class="tp-dl pri" data-bt="questions" title="The worksheet: a cover with name, class, date, time allowed and a marks table"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Test paper</button>
+    <button type="button" class="tp-dl" data-bt="answers" title="The mark schemes and examiner comments, numbered to match, with a marks summary"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Mark schemes</button>
+    <button type="button" class="tp-dl" data-bt="full" title="Each question, then its mark scheme and examiner comment"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Full pack</button>
    </div>
    <div class="tp-status" id="bt-status" role="status" aria-live="polite" hidden><span id="bt-status-t"></span><progress id="bt-bar" max="1" value="0" hidden></progress></div>
-   <div class="tp-tools"><button type="button" class="bt-btn sec" id="bt-again">Shuffle again</button><span class="small">Swap a question for another from the same topic with similar marks, or remove it.</span></div>
-   <ol id="bt-list" aria-label="Questions in this test"></ol>
+   <details class="qs" id="bt-qs"><summary><span id="bt-count" aria-live="polite"></span><span class="qs-more">Review / swap questions</span></summary>
+    <ul id="bt-bal" aria-label="Marks per topic against its share"></ul>
+    <p class="small" style="margin:0 0 6px"><span id="bt-mix"></span> Bar: the topic’s marks; line: its share of the target.</p>
+    <div class="tp-tools"><button type="button" class="tp-mini" id="bt-again2">Shuffle again</button><span class="small">Swap: another question from the same topic with similar marks.</span></div>
+    <ol id="bt-list" aria-label="Questions in this test"></ol>
+   </details>
   </div>
  </div>
 </section>
 
 <section id="trends" role="tabpanel" aria-labelledby="t-trends" hidden>
- <div class="tp-intro noprint"><h2>How often CCEA examines each topic</h2><p>Every question in CCEA’s past papers, as the workbooks place them, totalled by topic and paper. Open a topic to see its spec points and the questions on each, or to make its topic pack.</p></div>
+ <div class="hrow noprint"><h2>Exam trends</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-trends" aria-label="How the numbers are worked out" title="How the numbers are worked out"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+ <div class="ip" id="i-trends" hidden><p>Every question in CCEA’s past papers, as the workbooks place them, totalled by topic and paper. Open a topic for its spec points and the questions on each, or to make its topic pack.</p><ul><li>Each question counts once per paper, with the marks the workbook gives it, or else the marks printed on the paper.</li><li>A question the workbook places in two topics has its marks split equally between them, so each paper’s topics add up to the paper’s total. On the spec points, a question on two pages of a topic is split between them too.</li><li>Papers: the specimen, every summer series and the 2022 A2 1 resit. “Last” is the last summer it was asked (not the specimen). <b>Due</b>: not asked in the last two summer papers.</li><li>Totals are rounded to whole marks.</li></ul></div>
  <p class="tp-status" id="tr-load">Loading the question lists…</p>
  <div id="tr-flow" hidden>
-  <div class="tr-bar noprint"><div class="tr-u" id="tr-units" role="group" aria-label="Unit"></div><label class="small" style="display:flex;gap:8px;align-items:center">Sort <select id="tr-sort" class="tp-mini"><option value="n">Workbook order</option><option value="marks">Most marks first</option><option value="last">Longest since asked first</option></select></label><button type="button" class="prb" id="tr-print">Print</button></div>
+  <div class="tr-bar noprint"><div class="tr-u" id="tr-units" role="group" aria-label="Unit"></div><select id="tr-sort" class="tp-mini" aria-label="Sort"><option value="n">Workbook order</option><option value="marks">Most marks first</option><option value="last">Longest since asked</option></select><button type="button" class="tp-mini" id="tr-print">Print</button></div>
   <h2 id="tr-print-h"></h2>
-  <div class="card"><div class="tp-head"><h3 id="tr-title"></h3></div><p class="small" id="tr-sum" style="margin:2px 0 12px"></p>
-   <h4 style="margin:0 0 8px;font-size:15px">Total marks by topic, all papers</h4><ol id="tr-bars"></ol>
-   <p id="tr-due" class="tr-duebox"></p></div>
-  <div class="card"><h4 style="margin:0 0 8px;font-size:15px">Marks per topic in each paper</h4>
+  <div class="card"><h3 class="tp-title" id="tr-title"></h3><p class="small" id="tr-sum" style="margin:0 0 10px"></p>
+   <ol id="tr-bars" aria-label="Total marks by topic, all papers"></ol>
+   <p id="tr-due" class="tr-duebox"></p>
+   <h4 class="tr-h4">Marks per topic in each paper</h4>
    <div class="tr-scroll"><table id="tr-grid"></table></div>
-   <div class="tr-key"><span><i style="background:color-mix(in srgb,var(--accent) 25%,var(--paper))"></i>few marks</span><span><i style="background:var(--accent)"></i>many marks</span><span>blank: not asked</span><span><span class="tr-due" style="margin:0">Due</span> not asked in the last two summer papers</span></div>
+   <div class="tr-key"><span><i style="background:color-mix(in srgb,var(--accent) 25%,var(--paper))"></i>few marks</span><span><i style="background:var(--accent)"></i>many</span><span>blank: not asked</span><span><span class="tr-due" style="margin:0">Due</span> not asked in the last two summers</span></div>
   </div>
-  <details class="how card"><summary>How the numbers are worked out</summary><ul>
-   <li>Each question is counted once per paper, with the marks the workbook gives it, or else the marks printed on the paper.</li>
-   <li>A question the workbook places in two topics has its marks split equally between them, so each paper’s topics add up to the paper’s total. On the spec points, a question on two pages of a topic is split between them too.</li>
-   <li>Papers: the specimen, every summer series and the 2022 A2 1 resit. “Last” is the last summer it was asked (the specimen does not count).</li>
-   <li>Totals are rounded to whole marks, so a row can differ from the sum of its cells by one.</li></ul></details>
  </div>
 </section>
 
 <section id="sow" role="tabpanel" aria-labelledby="t-sow" hidden>
-<p class="lead">Each unit in teaching order: its topics, the lessons for each one, and a rough number of weeks. Topic names open the pupil workbook.</p>
+<div class="hrow noprint"><h2>Scheme of work</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-sow" aria-label="About the scheme of work" title="About the scheme of work"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+<div class="ip" id="i-sow" hidden><p>Each unit in teaching order: its topics, the lessons for each one, and a rough number of weeks. Topic names open the pupil workbook.</p><p>Weeks = lessons × periods per lesson ÷ periods a week, rounded to the nearest half week (a workbook-only topic counts one lesson per two workbook sections). Coursework units have no weeks: they run to your own deadlines. AS 1 and AS 2 run side by side, so share the A level periods between them. The exam line on each unit compares the weeks left with the scheme’s weeks.</p></div>
 <div class="bar">
  <div class="seg" role="group" aria-label="Course"><button type="button" data-c="all" aria-pressed="true">All</button> <button type="button" data-c="gcse" aria-pressed="false">GCSE</button> <button type="button" data-c="gce" aria-pressed="false">A level</button></div>
  <label>Periods per lesson <input type="number" id="ppl" min="1" max="8" step="1" value="2"></label>
@@ -288,18 +326,19 @@ details.cd-ed input[type=number]{width:4em}
  <button type="button" class="prb pr" id="pr">Print</button>
 </div>
 <section class="u" id="U1" data-c="gcse"><h2><span class="k">Unit 1</span>Digital Technology</h2><table><thead><tr><th class="n">#</th><th>Topic</th><th>Lessons</th><th class="w">Weeks</th></tr></thead><tbody><tr data-l="5" data-s="20" data-p="2"><td class="n">1</td><td><a class="t" href="notes/U1.html#c01-p01">Digital data</a><span class="sub">20 workbook sections</span></td><td><ul><li><span class="lc">L01</span> Data, information and units of storage</li><li><span class="lc">L02</span> Data types</li><li><span class="lc">L03</span> Representing images: pixels, resolution, bitmap and vector</li><li><span class="lc">L04</span> Representing sound; buffering and streaming</li><li><span class="lc">L05</span> Data portability, file formats and compression</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="10" data-p="2"><td class="n">2</td><td><a class="t" href="notes/U1.html#c02-p01">Software</a><span class="sub">10 workbook sections</span></td><td><ul><li><span class="lc">L06</span> System software and modes of processing</li><li><span class="lc">L07</span> Utility applications and antivirus software</li></ul></td><td class="w"></td></tr><tr data-l="3" data-s="16" data-p="2"><td class="n">3</td><td><a class="t" href="notes/U1.html#c03-p01">Database applications</a><span class="sub">16 workbook sections</span></td><td><ul><li><span class="lc">L08</span> Database concepts</li><li><span class="lc">L09</span> Database data types and validation</li><li><span class="lc">L10</span> Queries, logical operators and big data</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="13" data-p="2"><td class="n">4</td><td><a class="t" href="notes/U1.html#c04-p01">Spreadsheet applications</a><span class="sub">13 workbook sections</span></td><td><ul><li><span class="lc">L11</span> Spreadsheets 1: structure, formatting, formulae and cell referencing</li><li><span class="lc">L12</span> Spreadsheets 2: IF, VLOOKUP, validation, templates, modelling, charts and macros</li></ul></td><td class="w"></td></tr><tr data-l="3" data-s="14" data-p="2"><td class="n">5</td><td><a class="t" href="notes/U1.html#c05-p01">Computer hardware</a><span class="sub">14 workbook sections</span></td><td><ul><li><span class="lc">L13</span> The CPU and the fetch–execute cycle</li><li><span class="lc">L14</span> CPU performance and memory: RAM, ROM and cache</li><li><span class="lc">L15</span> Input, output and storage devices</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="9" data-p="2"><td class="n">6</td><td><a class="t" href="notes/U1.html#c06-p01">Network technologies</a><span class="sub">9 workbook sections</span></td><td><ul><li><span class="lc">L16</span> Networks: LAN, WAN, internet, hardware and topologies</li><li><span class="lc">L17</span> Network communication technologies</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="8" data-p="2"><td class="n">7</td><td><a class="t" href="notes/U1.html#c07-p01">Cyberspace, network security and data transfer</a><span class="sub">8 workbook sections</span></td><td><ul><li><span class="lc">L18</span> Cybercrime and malware</li><li><span class="lc">L19</span> Protecting networks and data; protocols</li></ul></td><td class="w"></td></tr><tr data-l="1" data-s="5" data-p="2"><td class="n">8</td><td><a class="t" href="notes/U1.html#c08-p01">Cloud technology</a><span class="sub">5 workbook sections</span></td><td><ul><li><span class="lc">L20</span> Cloud technology</li></ul></td><td class="w"></td></tr><tr data-l="3" data-s="16" data-p="2"><td class="n">9</td><td><a class="t" href="notes/U1.html#c09-p01">Ethical, legal and environmental impact</a><span class="sub">16 workbook sections</span></td><td><ul><li><span class="lc">L21</span> Legislation 1: Consumer Contracts, Copyright and Computer Misuse</li><li><span class="lc">L22</span> Legislation 2: Data protection (UK GDPR and the Data Protection Act 2018)</li><li><span class="lc">L23</span> Ethics, employment and health and safety</li></ul></td><td class="w"></td></tr><tr data-l="1" data-s="6" data-p="2"><td class="n">10</td><td><a class="t" href="notes/U1.html#c10-p01">Digital applications</a><span class="sub">6 workbook sections</span></td><td><ul><li><span class="lc">L24</span> Digital applications and extended-answer technique</li></ul></td><td class="w"></td></tr></tbody><tfoot><tr><td></td><td colspan="2">Total</td><td class="w tot"></td></tr></tfoot></table></section><section class="u" id="U4" data-c="gcse"><h2><span class="k">Unit 4</span>Digital Development Concepts (Programming)</h2><table><thead><tr><th class="n">#</th><th>Topic</th><th>Lessons</th><th class="w">Weeks</th></tr></thead><tbody><tr data-l="2" data-s="4" data-p="2"><td class="n">1</td><td><a class="t" href="notes/U4.html#c01-p01">Contemporary trends in software development</a><span class="sub">4 workbook sections</span></td><td><ul><li><span class="lc">D01</span> Programming paradigms: procedural and object-oriented</li><li><span class="lc">D02</span> Development environments, editing features and translators</li></ul></td><td class="w"></td></tr><tr data-l="6" data-s="9" data-p="2"><td class="n">2</td><td><a class="t" href="notes/U4.html#c02-p01">Digital data</a><span class="sub">9 workbook sections</span></td><td><ul><li><span class="lc">D03</span> Binary, units of data and denary–binary conversion</li><li><span class="lc">D06</span> Character sets: ASCII and Unicode</li><li><span class="lc">D04</span> Hexadecimal</li><li><span class="lc">D05</span> Binary addition and overflow</li><li><span class="lc">D07</span> Data types</li><li><span class="lc">D08</span> Boolean operators and truth tables</li></ul></td><td class="w"></td></tr><tr data-l="5" data-s="9" data-p="2"><td class="n">3</td><td><a class="t" href="notes/U4.html#c03-p01">Digital design principles</a><span class="sub">9 workbook sections</span></td><td><ul><li><span class="lc">D09</span> Computational thinking: abstraction and decomposition</li><li><span class="lc">D10</span> Designing algorithms: flowcharts and pseudocode</li><li><span class="lc">D11</span> Sorting algorithms: bubble sort and insertion sort</li><li><span class="lc">D12</span> Searching algorithms: linear and binary search</li><li><span class="lc">D13</span> Dry runs, trace tables, data requirements and interfaces</li></ul></td><td class="w"></td></tr><tr data-l="9" data-s="11" data-p="2"><td class="n">4</td><td><a class="t" href="notes/U4.html#c04-p01">Programming constructs</a><span class="sub">11 workbook sections</span></td><td><ul><li><span class="lc">D14</span> Variables, constants, operators, input, output and assignment</li><li><span class="lc">D17</span> One-dimensional arrays</li><li><span class="lc">D11</span> Sorting algorithms: bubble sort and insertion sort</li><li><span class="lc">D12</span> Searching algorithms: linear and binary search</li><li><span class="lc">D18</span> String manipulation</li><li><span class="lc">D15</span> Selection: IF, ELSE IF and nested IF</li><li><span class="lc">D16</span> Iteration: FOR, WHILE and REPEAT loops</li><li><span class="lc">D19</span> Subroutines: user-defined functions and procedures</li><li><span class="lc">D20</span> Basic file handling</li></ul></td><td class="w"></td></tr><tr data-l="1" data-s="3" data-p="2"><td class="n">5</td><td><a class="t" href="notes/U4.html#c05-p01">Simple error handling techniques</a><span class="sub">3 workbook sections</span></td><td><ul><li><span class="lc">D21</span> Validation, error types and error trapping</li></ul></td><td class="w"></td></tr><tr data-l="1" data-s="3" data-p="2"><td class="n">6</td><td><a class="t" href="notes/U4.html#c06-p01">Developing test plans and testing a solution</a><span class="sub">3 workbook sections</span></td><td><ul><li><span class="lc">D22</span> Testing approaches, test plans and test data</li></ul></td><td class="w"></td></tr><tr data-l="1" data-s="2" data-p="2"><td class="n">7</td><td><a class="t" href="notes/U4.html#c07-p01">Evaluation of digitally authored systems</a><span class="sub">2 workbook sections</span></td><td><ul><li><span class="lc">D23</span> Evaluating a solution</li></ul></td><td class="w"></td></tr></tbody><tfoot><tr><td></td><td colspan="2">Total</td><td class="w tot"></td></tr></tfoot></table></section><section class="u" id="U5" data-c="gcse" data-t="1"><h2><span class="k">Unit 5</span>Digital Development Practice (controlled assessment tutorials)</h2><p class="note">Coursework: taught as a build alongside the theory. Work through the stages in order; the workbook has each task, where it goes and a checklist.</p><table><thead><tr><th class="n">#</th><th>Topic</th><th>Lessons</th><th class="w">Weeks</th></tr></thead><tbody><tr data-l="0" data-s="7" data-p="2"><td class="n">1</td><td><a class="t" href="notes/U5.html#c01-p01">Getting set up</a><span class="sub">7 workbook sections</span></td><td><ul><li class="sub">Tasks 1–5 from the guidance booklet: your OneDrive folder, a correctly formatted Write Up document, the front page, header and footer, contents page and the Design chapter subtitle page.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="14" data-p="2"><td class="n">2</td><td><a class="t" href="notes/U5.html#c02-p01">Design</a><span class="sub">14 workbook sections</span></td><td><ul><li class="sub">Tasks 6–15: introduction, functional and non-functional requirements, target audience, data requirements, objects, wireframes, User Feedback I, final designs, control tables, flowcharts and pseudocode, navigation structure, User Feedback II and submission. Worked examples use the fictional Ballyvaren High School Tuck Shop – your own work must use this year&#x27;s CCEA scenario.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="12" data-p="2"><td class="n">3</td><td><a class="t" href="notes/U5.html#c03-p01">Building it in Visual Studio</a><span class="sub">12 workbook sections</span></td><td><ul><li class="sub">TASK 16: build your program in C# (Windows Forms, Visual Studio) and record every error you fix. Step-by-step tutorials on the fictional Ballyvaren High School Tuck Shop practice project: forms with user help, classes, lists, navigation, files, validation, calculations, display, searching, sorting and debugging.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="5" data-p="2"><td class="n">4</td><td><a class="t" href="notes/U5.html#c04-p01">Testing</a><span class="sub">5 workbook sections</span></td><td><ul><li class="sub">Tasks 17–19: the Testing chapter subtitle page, the requirements being tested, test cases, a full test table with valid, invalid, null and extreme data, and corrective actions. Examples use the fictional Ballyvaren High School Tuck Shop.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="11" data-p="2"><td class="n">5</td><td><a class="t" href="notes/U5.html#c05-p01">Evaluation</a><span class="sub">11 workbook sections</span></td><td><ul><li class="sub">Tasks 20–24: evaluate every user requirement (met, partially met or not met, with evidence and further developments), reflect on each stage, and write the performance, robustness and personal reflection sections, with paragraph frameworks and sentence starters.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="2" data-p="2"><td class="n">6</td><td><a class="t" href="notes/U5.html#c06-p01">Before you submit</a><span class="sub">2 workbook sections</span></td><td><ul><li class="sub">Extra help that is not a booklet task: frequently asked questions and the full checklist from the guidance booklet, with final checks before you upload your Word and PDF copies.</li></ul></td><td class="w"></td></tr></tbody><tfoot><tr><td></td><td colspan="2">Total</td><td class="w tot"></td></tr></tfoot></table></section><section class="u" id="AS1" data-c="gce"><h2><span class="k">AS 1</span>Approaches to Systems Development</h2><table><thead><tr><th class="n">#</th><th>Topic</th><th>Lessons</th><th class="w">Weeks</th></tr></thead><tbody><tr data-l="2" data-s="11" data-p="4"><td class="n">1</td><td><a class="t" href="notes/AS1.html#c01-p01">Reasons for systems development</a><span class="sub">11 workbook sections</span></td><td><ul><li><span class="lc">AP01</span> Why develop new systems? Systems, the software crisis and the life cycle</li><li><span class="lc">AP02</span> User needs, time and cost: the feasibility study and the development team</li></ul></td><td class="w"></td></tr><tr data-l="3" data-s="16" data-p="4"><td class="n">2</td><td><a class="t" href="notes/AS1.html#c02-p01">Analysis</a><span class="sub">16 workbook sections</span></td><td><ul><li><span class="lc">AP03</span> Analysis and fact-finding methods</li><li><span class="lc">AP04</span> Stakeholders, requirements and the system specification</li><li><span class="lc">AP05</span> Data flow diagrams</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="11" data-p="4"><td class="n">3</td><td><a class="t" href="notes/AS1.html#c03-p01">System design, development and testing</a><span class="sub">11 workbook sections</span></td><td><ul><li><span class="lc">AP06</span> System design: storyboarding, prototyping and data design</li><li><span class="lc">AP07</span> Testing and test plans</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="10" data-p="4"><td class="n">4</td><td><a class="t" href="notes/AS1.html#c04-p01">System implementation</a><span class="sub">10 workbook sections</span></td><td><ul><li><span class="lc">AP08</span> Implementation: changeover, data conversion and training</li><li><span class="lc">AP09</span> Documentation, maintenance and evaluation</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="11" data-p="4"><td class="n">5</td><td><a class="t" href="notes/AS1.html#c05-p01">Alternative development approaches</a><span class="sub">11 workbook sections</span></td><td><ul><li><span class="lc">AP10</span> The waterfall model, iterative and spiral development</li><li><span class="lc">AP11</span> Prototyping, RAD and Agile methods</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="12" data-p="4"><td class="n">6</td><td><a class="t" href="notes/AS1.html#c06-p01">Software projects</a><span class="sub">12 workbook sections</span></td><td><ul><li><span class="lc">AP12</span> Organising and managing a software project</li><li><span class="lc">AP13</span> Version management and tools for software projects</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="12" data-p="4"><td class="n">7</td><td><a class="t" href="notes/AS1.html#c07-p01">Security issues</a><span class="sub">12 workbook sections</span></td><td><ul><li><span class="lc">AP14</span> Threats to data, archiving and the need for backup</li><li><span class="lc">AP15</span> Protecting systems: security measures, backup methods and disaster recovery</li></ul></td><td class="w"></td></tr><tr data-l="3" data-s="14" data-p="4"><td class="n">8</td><td><a class="t" href="notes/AS1.html#c08-p01">Algorithms</a><span class="sub">14 workbook sections</span></td><td><ul><li><span class="lc">AP16</span> Programs, algorithms and their design</li><li><span class="lc">AP17</span> Searching algorithms</li><li><span class="lc">AP18</span> Sorting algorithms</li></ul></td><td class="w"></td></tr><tr data-l="5" data-s="28" data-p="4"><td class="n">9</td><td><a class="t" href="notes/AS1.html#c09-p01">Fundamentals of programming</a><span class="sub">28 workbook sections</span></td><td><ul><li><span class="lc">AP19</span> IDEs, translators, data types, variables and operators</li><li><span class="lc">AP20</span> Program control: sequence, selection and iteration</li><li><span class="lc">AP21</span> Subroutines: procedures, functions, parameters and scope</li><li><span class="lc">AP22</span> Data structures: arrays, lists, records and files</li><li><span class="lc">AP23</span> Robust programs: validation, exceptions, errors, testing and debugging</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="10" data-p="4"><td class="n">10</td><td><a class="t" href="notes/AS1.html#c10-p01">Object-oriented programming</a><span class="sub">10 workbook sections</span></td><td><ul><li><span class="lc">AP24</span> Classes, objects and encapsulation</li><li><span class="lc">AP25</span> Inheritance, polymorphism, evaluating OOP and event-driven programming</li></ul></td><td class="w"></td></tr></tbody><tfoot><tr><td></td><td colspan="2">Total</td><td class="w tot"></td></tr></tfoot></table></section><section class="u" id="AS2" data-c="gce"><h2><span class="k">AS 2</span>Fundamentals of Digital Technology</h2><table><thead><tr><th class="n">#</th><th>Topic</th><th>Lessons</th><th class="w">Weeks</th></tr></thead><tbody><tr data-l="5" data-s="27" data-p="4"><td class="n">1</td><td><a class="t" href="notes/AS2.html#c01-p01">Data representation</a><span class="sub">27 workbook sections</span></td><td><ul><li><span class="lc">FD01</span> Number systems: bits, bytes, binary, denary, hexadecimal and BCD</li><li><span class="lc">FD02</span> Negative numbers and binary arithmetic</li><li><span class="lc">FD03</span> Real numbers: fixed-point and floating-point</li><li><span class="lc">FD04</span> Character sets and error detection</li><li><span class="lc">FD05</span> Representing images and sound</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="10" data-p="4"><td class="n">2</td><td><a class="t" href="notes/AS2.html#c02-p01">Data and information</a><span class="sub">10 workbook sections</span></td><td><ul><li><span class="lc">FD06</span> Data, information and knowledge; quality of information; validation and verification</li><li><span class="lc">FD07</span> Check digits, batch totals, data capture and processing methods</li></ul></td><td class="w"></td></tr><tr data-l="4" data-s="25" data-p="4"><td class="n">3</td><td><a class="t" href="notes/AS2.html#c03-p01">Architecture</a><span class="sub">25 workbook sections</span></td><td><ul><li><span class="lc">FD08</span> Internal components: CPU, registers, buses, I/O controllers and the Von Neumann architecture</li><li><span class="lc">FD09</span> The fetch–decode–execute cycle, pipelining and processor performance</li><li><span class="lc">FD10</span> Main memory, cache and secondary storage</li><li><span class="lc">FD11</span> Alternative architectures: parallel, multicore, Harvard, RISC and CISC, GPUs</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="13" data-p="4"><td class="n">4</td><td><a class="t" href="notes/AS2.html#c04-p01">User interface and data compression</a><span class="sub">13 workbook sections</span></td><td><ul><li><span class="lc">FD12</span> User interfaces and HCI design</li><li><span class="lc">FD13</span> Data compression and file formats</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="15" data-p="4"><td class="n">5</td><td><a class="t" href="notes/AS2.html#c05-p01">Software</a><span class="sub">15 workbook sections</span></td><td><ul><li><span class="lc">FD14</span> Operating systems and utility programs</li><li><span class="lc">FD15</span> Translators, application software and processing systems</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="12" data-p="4"><td class="n">6</td><td><a class="t" href="notes/AS2.html#c06-p01">Web applications</a><span class="sub">12 workbook sections</span></td><td><ul><li><span class="lc">FD16</span> How the internet and the web work</li><li><span class="lc">FD17</span> Web applications, intranets and web security</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="12" data-p="4"><td class="n">7</td><td><a class="t" href="notes/AS2.html#c07-p01">Website development</a><span class="sub">12 workbook sections</span></td><td><ul><li><span class="lc">FD18</span> HTML and CSS</li><li><span class="lc">FD19</span> Website design, client-side and server-side processing, testing and publishing</li></ul></td><td class="w"></td></tr></tbody><tfoot><tr><td></td><td colspan="2">Total</td><td class="w tot"></td></tr></tfoot></table></section><section class="u" id="A21" data-c="gce"><h2><span class="k">A2 1</span>Information Systems</h2><table><thead><tr><th class="n">#</th><th>Topic</th><th>Lessons</th><th class="w">Weeks</th></tr></thead><tbody><tr data-l="2" data-s="5" data-p="4"><td class="n">1</td><td><a class="t" href="notes/A21.html#c01-p01">Network resources</a><span class="sub">5 workbook sections</span></td><td><ul><li><span class="lc">IS09</span> Network types, topologies and hardware</li><li><span class="lc">IS11</span> IP addressing, switching and routing</li></ul></td><td class="w"></td></tr><tr data-l="3" data-s="10" data-p="4"><td class="n">2</td><td><a class="t" href="notes/A21.html#c02-p01">Protocols, transmission media and errors</a><span class="sub">10 workbook sections</span></td><td><ul><li><span class="lc">IS10</span> Layered network models and protocols</li><li><span class="lc">IS13</span> Network security: threats, firewalls, encryption and authentication</li><li><span class="lc">IS12</span> Data transmission and error control</li></ul></td><td class="w"></td></tr><tr data-l="7" data-s="14" data-p="4"><td class="n">3</td><td><a class="t" href="notes/A21.html#c03-p01">Databases</a><span class="sub">14 workbook sections</span></td><td><ul><li><span class="lc">IS01</span> Data management: flat files, relational databases and the DBMS</li><li><span class="lc">IS07</span> Multi-user databases: transactions, ACID, locking and distributed databases</li><li><span class="lc">IS02</span> Entity-relationship modelling</li><li><span class="lc">IS04</span> Data integrity: data dictionary, integrity rules, validation and indexing</li><li><span class="lc">IS03</span> Normalisation to third normal form</li><li><span class="lc">IS05</span> SQL data definition and data manipulation</li><li><span class="lc">IS06</span> SQL queries: SELECT, aggregates, grouping and joins</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="11" data-p="4"><td class="n">4</td><td><a class="t" href="notes/A21.html#c04-p01">AI, expert systems and robotics</a><span class="sub">11 workbook sections</span></td><td><ul><li><span class="lc">IS16</span> Artificial intelligence, machine learning and emerging technologies</li><li><span class="lc">IS15</span> Types of information system</li></ul></td><td class="w"></td></tr><tr data-l="7" data-s="9" data-p="4"><td class="n">5</td><td><a class="t" href="notes/A21.html#c05-p01">Mobile technology, data mining and the cloud</a><span class="sub">9 workbook sections</span></td><td><ul><li><span class="lc">IS09</span> Network types, topologies and hardware</li><li><span class="lc">IS12</span> Data transmission and error control</li><li><span class="lc">IS08</span> Big data, data warehousing, data mining and analytics</li><li><span class="lc">IS15</span> Types of information system</li><li><span class="lc">IS17</span> Legislation: data protection, computer misuse, copyright, FOI and RIPA</li><li><span class="lc">IS14</span> Cloud computing and virtualisation</li><li><span class="lc">IS13</span> Network security: threats, firewalls, encryption and authentication</li></ul></td><td class="w"></td></tr><tr data-l="4" data-s="6" data-p="4"><td class="n">6</td><td><a class="t" href="notes/A21.html#c06-p01">Legislation and ethics</a><span class="sub">6 workbook sections</span></td><td><ul><li><span class="lc">IS17</span> Legislation: data protection, computer misuse, copyright, FOI and RIPA</li><li><span class="lc">IS13</span> Network security: threats, firewalls, encryption and authentication</li><li><span class="lc">IS18</span> Ethical, social and environmental issues</li><li><span class="lc">IS16</span> Artificial intelligence, machine learning and emerging technologies</li></ul></td><td class="w"></td></tr></tbody><tfoot><tr><td></td><td colspan="2">Total</td><td class="w tot"></td></tr></tfoot></table></section><section class="u" id="A22" data-c="gce" data-t="1"><h2><span class="k">A2 2</span>Building in Access and VBA (tutorials)</h2><p class="note">Coursework: taught as a build alongside the theory. Work through the stages in order; the workbook has each task, where it goes and a checklist; the Access tutorial library (chapters 18 to 24) is for pupils to dip into as they build.</p><table><thead><tr><th class="n">#</th><th>Topic</th><th>Lessons</th><th class="w">Weeks</th></tr></thead><tbody><tr data-l="0" data-s="11" data-p="4"><td class="n">1</td><td><a class="t" href="notes/A22.html#c01-p01">Choose your project</a><span class="sub">11 workbook sections</span></td><td><ul><li class="sub">Pick a project with a real user, real data and 5–7 tables, browse eight shop, booking and job ideas with full project cards, and turn your choice into numbered requirements.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="11" data-p="4"><td class="n">2</td><td><a class="t" href="notes/A22.html#c02-p01">Design your database</a><span class="sub">11 workbook sections</span></td><td><ul><li class="sub">Design QuickFix Phone Repairs from its paper job card: normalise to 3NF, draw the ER diagram, write the data dictionary and validation, and plan the forms, queries, reports, test data, names and menu before you build anything.</li></ul></td><td class="w"></td></tr><tr data-l="1" data-s="5" data-p="4"><td class="n">3</td><td><a class="t" href="notes/A22.html#c03-p01">Getting started with Access</a><span class="sub">5 workbook sections</span></td><td><ul><li><span class="lc">AD04</span> Development: building and evidencing the database application</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="8" data-p="4"><td class="n">4</td><td><a class="t" href="notes/A22.html#c04-p01">Tables and relationships</a><span class="sub">8 workbook sections</span></td><td><ul><li><span class="lc">AD04</span> Development: building and evidencing the database application</li><li><span class="lc">AD05</span> Testing and evaluation against the requirements</li></ul></td><td class="w"></td></tr><tr data-l="1" data-s="9" data-p="4"><td class="n">5</td><td><a class="t" href="notes/A22.html#c05-p01">Queries</a><span class="sub">9 workbook sections</span></td><td><ul><li><span class="lc">AD04</span> Development: building and evidencing the database application</li></ul></td><td class="w"></td></tr><tr data-l="1" data-s="9" data-p="4"><td class="n">6</td><td><a class="t" href="notes/A22.html#c06-p01">Forms</a><span class="sub">9 workbook sections</span></td><td><ul><li><span class="lc">AD04</span> Development: building and evidencing the database application</li></ul></td><td class="w"></td></tr><tr data-l="1" data-s="6" data-p="4"><td class="n">7</td><td><a class="t" href="notes/A22.html#c07-p01">Reports</a><span class="sub">6 workbook sections</span></td><td><ul><li><span class="lc">AD04</span> Development: building and evidencing the database application</li></ul></td><td class="w"></td></tr><tr data-l="1" data-s="11" data-p="4"><td class="n">8</td><td><a class="t" href="notes/A22.html#c08-p01">VBA basics</a><span class="sub">11 workbook sections</span></td><td><ul><li><span class="lc">AD04</span> Development: building and evidencing the database application</li></ul></td><td class="w"></td></tr><tr data-l="2" data-s="11" data-p="4"><td class="n">9</td><td><a class="t" href="notes/A22.html#c09-p01">VBA task tutorials</a><span class="sub">11 workbook sections</span></td><td><ul><li><span class="lc">AD04</span> Development: building and evidencing the database application</li><li><span class="lc">AD05</span> Testing and evaluation against the requirements</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="9" data-p="4"><td class="n">10</td><td><a class="t" href="notes/A22.html#c10-p01">Booking system: tables, relationships and forms</a><span class="sub">9 workbook sections</span></td><td><ul><li class="sub">Start the Mournview Dance &amp; Music Academy booking system: six tables with validation and lookups, five relationships, sample data, session queries with spaces left, and the customer, activity, session and booking forms with a menu.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="10" data-p="4"><td class="n">11</td><td><a class="t" href="notes/A22.html#c11-p01">Booking system: the booking logic in VBA</a><span class="sub">10 workbook sections</span></td><td><ul><li class="sub">Write the Mournview booking rules in VBA: spaces left and capacity, the minimum-age check, instructor and customer double-booking, cost and balance, cancelling with refunds, a session register, a booking search and a reused login.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="6" data-p="4"><td class="n">12</td><td><a class="t" href="notes/A22.html#c12-p01">Booking system: reports, menu and finishing touches</a><span class="sub">6 workbook sections</span></td><td><ul><li class="sub">Finish Mournview: a daily register grouped by session, a one-booking confirmation saved as PDF, income by activity, unpaid balances, the start-up menu with the Navigation Pane hidden, and a full test plan for the booking rules.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="4" data-p="4"><td class="n">13</td><td><a class="t" href="notes/A22.html#c13-p01">Your coursework: setting up the write-up</a><span class="sub">4 workbook sections</span></td><td><ul><li class="sub">Tasks 1–3 of your teacher&#x27;s Year 14 guidance: create the write-up file in the right place, give it a title page, header and footer, and set up heading styles and an automatic contents page before you start writing.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="12" data-p="4"><td class="n">14</td><td><a class="t" href="notes/A22.html#c14-p01">Your coursework: the Analysis chapter</a><span class="sub">12 workbook sections</span></td><td><ul><li class="sub">Tasks 4–15 of your teacher&#x27;s guidance: the subtitle page, Introduction, Gantt chart, critical path, constraints, user requirements, hardware and software, data flow diagrams and user feedback.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="10" data-p="4"><td class="n">15</td><td><a class="t" href="notes/A22.html#c15-p01">Your coursework: the Design chapter</a><span class="sub">10 workbook sections</span></td><td><ul><li class="sub">Tasks 16–24 of your teacher&#x27;s guidance: the subtitle page, structure diagrams, ER diagrams, normalisation, data dictionaries, interface, query, macro and report designs, then build the database you designed in Access.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="11" data-p="4"><td class="n">16</td><td><a class="t" href="notes/A22.html#c16-p01">Your coursework: the Testing and Evaluation chapter</a><span class="sub">11 workbook sections</span></td><td><ul><li class="sub">Tasks 25–34 of your teacher&#x27;s guidance: the subtitle page, testing strategy, unit, integration, system and acceptance testing, then changeover, staff training, evaluation and personal performance.</li></ul></td><td class="w"></td></tr><tr data-l="0" data-s="9" data-p="4"><td class="n">17</td><td><a class="t" href="notes/A22.html#c17-p01">Your coursework: the User Guide, Appendix and Bibliography</a><span class="sub">9 workbook sections</span></td><td><ul><li class="sub">Tasks 35–41 of your teacher&#x27;s guidance: the user guide subtitle page, introduction, system requirements, installation, using the system, troubleshooting and FAQs, then the optional Appendix and Bibliography and the final checks before hand-in.</li></ul></td><td class="w"></td></tr></tbody><tfoot><tr><td></td><td colspan="2">Total</td><td class="w tot"></td></tr></tfoot></table></section>
-<p class="foot">Weeks = lessons × periods per lesson ÷ periods a week, rounded to the nearest half week (a workbook-only topic counts one lesson per two workbook sections). Coursework units have no weeks: they run to your own internal deadlines. A rough guide only: adjust for your own calendar. AS 1 and AS 2 run side by side, so share the A level periods between them.</p>
 </section>
 
 <section id="visits" role="tabpanel" aria-labelledby="t-visits" hidden>
- <div class="tp-intro"><h2>Pupil visits</h2><p>How often each workbook is opened. Anonymous, cookie-free counts via GoatCounter: visits, not individual pupils; offline use isn’t counted. The numbers update every few hours. <a href="https://mrbdt.goatcounter.com" target="_blank" rel="noopener">Open full stats</a> (your GoatCounter login).</p></div>
- <div class="card"><label class="bt-chk"><input type="checkbox" id="vs-nocount"><span><b>Don’t count my visits on this device</b><small>So your own browsing of the workbooks doesn’t add to the counts. It is ticked automatically the first time the Teacher area is opened on a device; untick it on a pupil’s device.</small></span></label>
-  <p class="tp-status ok" id="vs-first" hidden>This device is now set not to count visits, because the Teacher area was opened on it.</p></div>
+ <div class="hrow"><h2>Pupil visits</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-vs" aria-label="About the visit counts" title="About the visit counts"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+ <div class="ip" id="i-vs" hidden><p>A unit counts once per visit (browser session); a chapter counts once per visit, the first time it is opened. Results are cached by GoatCounter, so they update every few hours. Counts come from GoatCounter’s public counter for mrbdt.goatcounter.com.</p></div>
+ <p class="small vs-lead">Anonymous, cookie-free counts via GoatCounter: visits, not individual pupils; offline use isn’t counted. Updates every few hours. <a href="https://mrbdt.goatcounter.com" target="_blank" rel="noopener">Open full stats</a></p>
+ <div class="hrow vs-me"><label class="bt-chk"><input type="checkbox" id="vs-nocount"><span>Don’t count my visits on this device</span></label><button type="button" class="ib" aria-expanded="false" aria-controls="i-me" aria-label="About not counting this device" title="About not counting this device"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+ <div class="ip" id="i-me" hidden><p>So your own browsing of the workbooks doesn’t add to the counts. It is ticked automatically the first time the Teacher area is opened on a device; untick it if this is a pupil’s device.</p></div>
+ <p class="tp-status ok" id="vs-first" hidden>This device is now set not to count visits, because the Teacher area was opened on it.</p>
  <p class="tp-status" id="vs-status" role="status" aria-live="polite" hidden></p>
  <p><button type="button" class="tp-mini" id="vs-retry" hidden>Try again</button></p>
- <div class="card"><table id="vs-t"><thead><tr><th>Unit</th><th class="vs-n">Last 7 days</th><th class="vs-n">Last 30 days</th><th class="vs-n">All time</th></tr></thead><tbody id="vs-body"></tbody></table>
-  <p class="small" id="vs-home" style="margin:10px 0 0"></p>
-  <p class="small" style="margin:4px 0 0">A unit counts once per visit (browser session). Open a unit to see its chapters.</p></div>
+ <div class="card"><table id="vs-t"><thead><tr><th>Unit</th><th class="vs-n">7 days</th><th class="vs-n">30 days</th><th class="vs-n">All time</th></tr></thead><tbody id="vs-body"></tbody></table>
+  <p class="small" id="vs-home" style="margin:10px 0 0"></p></div>
 </section>
 </div>
 <script>
@@ -336,7 +375,23 @@ details.cd-ed input[type=number]{width:4em}
 })();
 </script>
 <script>
-window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit a date (YYYY-MM-DD) or time (24-hour HH:MM) here when CCEA publishes a new timetable; leave a date null when it is not known. The page also lets a teacher override dates on their own device.","series":"Summer 2027","status":"final","checked":"2026-10-31","sources":[{"id":"gcse","label":"CCEA FINAL GCSE Timetable, June 2027 (footer dated 01/09/2026)","url":"https://ccea.org.uk/document/24212","page":"https://ccea.org.uk/key-stage-4/gcse/timetables"},{"id":"gce","label":"CCEA FINAL GCE Timetable, Summer 2027 (footer dated 19/05/2026)","url":"https://ccea.org.uk/document/24135","page":"https://ccea.org.uk/post-16/gce/timetables"},{"id":"mod","label":"CCEA Key Moderation Dates Summer 2026 (no 2027 version published yet)","url":"https://ccea.org.uk/document/23917"}],"exams":[{"id":"U1","course":"gcse","name":"GCSE Unit 1: Digital Technology","code":"GDG11","date":"2027-05-17","start":"13:30","end":"14:30","src":"gcse"},{"id":"U4","course":"gcse","name":"GCSE Unit 4: Digital Development Concepts (Programming)","code":"GDG41","date":"2027-05-31","start":"09:15","end":"10:45","src":"gcse"},{"id":"U5","course":"gcse","kind":"deadline","name":"GCSE Unit 5: controlled assessment (sample upload)","code":"GDG51","date":null,"start":null,"end":null,"src":"mod","note":"CCEA has not published the 2027 deadline yet. In 2026 the closing date for uploading GDG31/51 samples was 6 May 2026 (marks: 1 May 2026 for most GCSE/GCE)."},{"id":"AS1","course":"gce","name":"AS 1: Approaches to Systems Development","code":"SDT11","date":"2027-05-14","start":"09:15","end":"10:45","src":"gce"},{"id":"AS2","course":"gce","name":"AS 2: Fundamentals of Digital Technology","code":"SDT21","date":"2027-05-24","start":"09:15","end":"10:45","src":"gce"},{"id":"A21","course":"gce","name":"A2 1: Information Systems","code":"ADT11","date":"2027-06-04","start":"09:15","end":"11:45","src":"gce"}]};window.VISIT_UNITS=[{"id":"U1","short":"Unit 1","title":"Digital Technology","course":"gcse","chapters":[{"id":"c01","n":1,"title":"Digital data","page":"c01-p01"},{"id":"c02","n":2,"title":"Software","page":"c02-p01"},{"id":"c03","n":3,"title":"Database applications","page":"c03-p01"},{"id":"c04","n":4,"title":"Spreadsheet applications","page":"c04-p01"},{"id":"c05","n":5,"title":"Computer hardware","page":"c05-p01"},{"id":"c06","n":6,"title":"Network technologies","page":"c06-p01"},{"id":"c07","n":7,"title":"Cyberspace, network security and data transfer","page":"c07-p01"},{"id":"c08","n":8,"title":"Cloud technology","page":"c08-p01"},{"id":"c09","n":9,"title":"Ethical, legal and environmental impact","page":"c09-p01"},{"id":"c10","n":10,"title":"Digital applications","page":"c10-p01"}]},{"id":"U4","short":"Unit 4","title":"Digital Development Concepts (Programming)","course":"gcse","chapters":[{"id":"c01","n":1,"title":"Contemporary trends in software development","page":"c01-p01"},{"id":"c02","n":2,"title":"Digital data","page":"c02-p01"},{"id":"c03","n":3,"title":"Digital design principles","page":"c03-p01"},{"id":"c04","n":4,"title":"Programming constructs","page":"c04-p01"},{"id":"c05","n":5,"title":"Simple error handling techniques","page":"c05-p01"},{"id":"c06","n":6,"title":"Developing test plans and testing a solution","page":"c06-p01"},{"id":"c07","n":7,"title":"Evaluation of digitally authored systems","page":"c07-p01"}]},{"id":"U5","short":"Unit 5","title":"Digital Development Practice (controlled assessment tutorials)","course":"gcse","chapters":[{"id":"c01","n":1,"title":"Getting set up","page":"c01-p01"},{"id":"c02","n":2,"title":"Design","page":"c02-p01"},{"id":"c03","n":3,"title":"Building it in Visual Studio","page":"c03-p01"},{"id":"c04","n":4,"title":"Testing","page":"c04-p01"},{"id":"c05","n":5,"title":"Evaluation","page":"c05-p01"},{"id":"c06","n":6,"title":"Before you submit","page":"c06-p01"}]},{"id":"AS1","short":"AS 1","title":"Approaches to Systems Development","course":"gce","chapters":[{"id":"c01","n":1,"title":"Reasons for systems development","page":"c01-p01"},{"id":"c02","n":2,"title":"Analysis","page":"c02-p01"},{"id":"c03","n":3,"title":"System design, development and testing","page":"c03-p01"},{"id":"c04","n":4,"title":"System implementation","page":"c04-p01"},{"id":"c05","n":5,"title":"Alternative development approaches","page":"c05-p01"},{"id":"c06","n":6,"title":"Software projects","page":"c06-p01"},{"id":"c07","n":7,"title":"Security issues","page":"c07-p01"},{"id":"c08","n":8,"title":"Algorithms","page":"c08-p01"},{"id":"c09","n":9,"title":"Fundamentals of programming","page":"c09-p01"},{"id":"c10","n":10,"title":"Object-oriented programming","page":"c10-p01"}]},{"id":"AS2","short":"AS 2","title":"Fundamentals of Digital Technology","course":"gce","chapters":[{"id":"c01","n":1,"title":"Data representation","page":"c01-p01"},{"id":"c02","n":2,"title":"Data and information","page":"c02-p01"},{"id":"c03","n":3,"title":"Architecture","page":"c03-p01"},{"id":"c04","n":4,"title":"User interface and data compression","page":"c04-p01"},{"id":"c05","n":5,"title":"Software","page":"c05-p01"},{"id":"c06","n":6,"title":"Web applications","page":"c06-p01"},{"id":"c07","n":7,"title":"Website development","page":"c07-p01"}]},{"id":"A21","short":"A2 1","title":"Information Systems","course":"gce","chapters":[{"id":"c01","n":1,"title":"Network resources","page":"c01-p01"},{"id":"c02","n":2,"title":"Protocols, transmission media and errors","page":"c02-p01"},{"id":"c03","n":3,"title":"Databases","page":"c03-p01"},{"id":"c04","n":4,"title":"AI, expert systems and robotics","page":"c04-p01"},{"id":"c05","n":5,"title":"Mobile technology, data mining and the cloud","page":"c05-p01"},{"id":"c06","n":6,"title":"Legislation and ethics","page":"c06-p01"}]},{"id":"A22","short":"A2 2","title":"Building in Access and VBA (tutorials)","course":"gce","chapters":[{"id":"c01","n":1,"title":"Choose your project","page":"c01-p01"},{"id":"c02","n":2,"title":"Design your database","page":"c02-p01"},{"id":"c03","n":3,"title":"Getting started with Access","page":"c03-p01"},{"id":"c04","n":4,"title":"Tables and relationships","page":"c04-p01"},{"id":"c05","n":5,"title":"Queries","page":"c05-p01"},{"id":"c06","n":6,"title":"Forms","page":"c06-p01"},{"id":"c07","n":7,"title":"Reports","page":"c07-p01"},{"id":"c08","n":8,"title":"VBA basics","page":"c08-p01"},{"id":"c09","n":9,"title":"VBA task tutorials","page":"c09-p01"},{"id":"c10","n":10,"title":"Booking system: tables, relationships and forms","page":"c10-p01"},{"id":"c11","n":11,"title":"Booking system: the booking logic in VBA","page":"c11-p01"},{"id":"c12","n":12,"title":"Booking system: reports, menu and finishing touches","page":"c12-p01"},{"id":"c13","n":13,"title":"Your coursework: setting up the write-up","page":"c13-p01"},{"id":"c14","n":14,"title":"Your coursework: the Analysis chapter","page":"c14-p01"},{"id":"c15","n":15,"title":"Your coursework: the Design chapter","page":"c15-p01"},{"id":"c16","n":16,"title":"Your coursework: the Testing and Evaluation chapter","page":"c16-p01"},{"id":"c17","n":17,"title":"Your coursework: the User Guide, Appendix and Bibliography","page":"c17-p01"},{"id":"c18","n":18,"title":"Tables and keys","page":"c18-p01"},{"id":"c19","n":19,"title":"Relationships","page":"c19-p01"},{"id":"c20","n":20,"title":"Queries","page":"c20-p01"},{"id":"c21","n":21,"title":"Forms","page":"c21-p01"},{"id":"c22","n":22,"title":"Reports","page":"c22-p01"},{"id":"c23","n":23,"title":"Macros","page":"c23-p01"},{"id":"c24","n":24,"title":"VBA quick recipes","page":"c24-p01"}]}];
+window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit a date (YYYY-MM-DD) or time (24-hour HH:MM) here when CCEA publishes a new timetable; leave a date null when it is not known. The page also lets a teacher override dates on their own device.","series":"Summer 2027","status":"final","checked":"2026-10-31","sources":[{"id":"gcse","label":"CCEA FINAL GCSE Timetable, June 2027 (footer dated 01/09/2026)","url":"https://ccea.org.uk/document/24212","page":"https://ccea.org.uk/key-stage-4/gcse/timetables"},{"id":"gce","label":"CCEA FINAL GCE Timetable, Summer 2027 (footer dated 19/05/2026)","url":"https://ccea.org.uk/document/24135","page":"https://ccea.org.uk/post-16/gce/timetables"},{"id":"mod","label":"CCEA Key Moderation Dates Summer 2026 (no 2027 version published yet)","url":"https://ccea.org.uk/document/23917"}],"exams":[{"id":"U1","course":"gcse","name":"GCSE Unit 1: Digital Technology","code":"GDG11","date":"2027-05-17","start":"13:30","end":"14:30","src":"gcse"},{"id":"U4","course":"gcse","name":"GCSE Unit 4: Digital Development Concepts (Programming)","code":"GDG41","date":"2027-05-31","start":"09:15","end":"10:45","src":"gcse"},{"id":"U5","course":"gcse","kind":"deadline","name":"GCSE Unit 5: controlled assessment (sample upload)","code":"GDG51","date":null,"start":null,"end":null,"src":"mod","hint":"2026 deadline was 6 May","note":"CCEA has not published the 2027 deadline yet. In 2026 the closing date for uploading GDG31/51 samples was 6 May 2026 (marks: 1 May 2026 for most GCSE/GCE)."},{"id":"AS1","course":"gce","name":"AS 1: Approaches to Systems Development","code":"SDT11","date":"2027-05-14","start":"09:15","end":"10:45","src":"gce"},{"id":"AS2","course":"gce","name":"AS 2: Fundamentals of Digital Technology","code":"SDT21","date":"2027-05-24","start":"09:15","end":"10:45","src":"gce"},{"id":"A21","course":"gce","name":"A2 1: Information Systems","code":"ADT11","date":"2027-06-04","start":"09:15","end":"11:45","src":"gce"}]};window.VISIT_UNITS=[{"id":"U1","short":"Unit 1","title":"Digital Technology","course":"gcse","chapters":[{"id":"c01","n":1,"title":"Digital data","page":"c01-p01"},{"id":"c02","n":2,"title":"Software","page":"c02-p01"},{"id":"c03","n":3,"title":"Database applications","page":"c03-p01"},{"id":"c04","n":4,"title":"Spreadsheet applications","page":"c04-p01"},{"id":"c05","n":5,"title":"Computer hardware","page":"c05-p01"},{"id":"c06","n":6,"title":"Network technologies","page":"c06-p01"},{"id":"c07","n":7,"title":"Cyberspace, network security and data transfer","page":"c07-p01"},{"id":"c08","n":8,"title":"Cloud technology","page":"c08-p01"},{"id":"c09","n":9,"title":"Ethical, legal and environmental impact","page":"c09-p01"},{"id":"c10","n":10,"title":"Digital applications","page":"c10-p01"}]},{"id":"U4","short":"Unit 4","title":"Digital Development Concepts (Programming)","course":"gcse","chapters":[{"id":"c01","n":1,"title":"Contemporary trends in software development","page":"c01-p01"},{"id":"c02","n":2,"title":"Digital data","page":"c02-p01"},{"id":"c03","n":3,"title":"Digital design principles","page":"c03-p01"},{"id":"c04","n":4,"title":"Programming constructs","page":"c04-p01"},{"id":"c05","n":5,"title":"Simple error handling techniques","page":"c05-p01"},{"id":"c06","n":6,"title":"Developing test plans and testing a solution","page":"c06-p01"},{"id":"c07","n":7,"title":"Evaluation of digitally authored systems","page":"c07-p01"}]},{"id":"U5","short":"Unit 5","title":"Digital Development Practice (controlled assessment tutorials)","course":"gcse","chapters":[{"id":"c01","n":1,"title":"Getting set up","page":"c01-p01"},{"id":"c02","n":2,"title":"Design","page":"c02-p01"},{"id":"c03","n":3,"title":"Building it in Visual Studio","page":"c03-p01"},{"id":"c04","n":4,"title":"Testing","page":"c04-p01"},{"id":"c05","n":5,"title":"Evaluation","page":"c05-p01"},{"id":"c06","n":6,"title":"Before you submit","page":"c06-p01"}]},{"id":"AS1","short":"AS 1","title":"Approaches to Systems Development","course":"gce","chapters":[{"id":"c01","n":1,"title":"Reasons for systems development","page":"c01-p01"},{"id":"c02","n":2,"title":"Analysis","page":"c02-p01"},{"id":"c03","n":3,"title":"System design, development and testing","page":"c03-p01"},{"id":"c04","n":4,"title":"System implementation","page":"c04-p01"},{"id":"c05","n":5,"title":"Alternative development approaches","page":"c05-p01"},{"id":"c06","n":6,"title":"Software projects","page":"c06-p01"},{"id":"c07","n":7,"title":"Security issues","page":"c07-p01"},{"id":"c08","n":8,"title":"Algorithms","page":"c08-p01"},{"id":"c09","n":9,"title":"Fundamentals of programming","page":"c09-p01"},{"id":"c10","n":10,"title":"Object-oriented programming","page":"c10-p01"}]},{"id":"AS2","short":"AS 2","title":"Fundamentals of Digital Technology","course":"gce","chapters":[{"id":"c01","n":1,"title":"Data representation","page":"c01-p01"},{"id":"c02","n":2,"title":"Data and information","page":"c02-p01"},{"id":"c03","n":3,"title":"Architecture","page":"c03-p01"},{"id":"c04","n":4,"title":"User interface and data compression","page":"c04-p01"},{"id":"c05","n":5,"title":"Software","page":"c05-p01"},{"id":"c06","n":6,"title":"Web applications","page":"c06-p01"},{"id":"c07","n":7,"title":"Website development","page":"c07-p01"}]},{"id":"A21","short":"A2 1","title":"Information Systems","course":"gce","chapters":[{"id":"c01","n":1,"title":"Network resources","page":"c01-p01"},{"id":"c02","n":2,"title":"Protocols, transmission media and errors","page":"c02-p01"},{"id":"c03","n":3,"title":"Databases","page":"c03-p01"},{"id":"c04","n":4,"title":"AI, expert systems and robotics","page":"c04-p01"},{"id":"c05","n":5,"title":"Mobile technology, data mining and the cloud","page":"c05-p01"},{"id":"c06","n":6,"title":"Legislation and ethics","page":"c06-p01"}]},{"id":"A22","short":"A2 2","title":"Building in Access and VBA (tutorials)","course":"gce","chapters":[{"id":"c01","n":1,"title":"Choose your project","page":"c01-p01"},{"id":"c02","n":2,"title":"Design your database","page":"c02-p01"},{"id":"c03","n":3,"title":"Getting started with Access","page":"c03-p01"},{"id":"c04","n":4,"title":"Tables and relationships","page":"c04-p01"},{"id":"c05","n":5,"title":"Queries","page":"c05-p01"},{"id":"c06","n":6,"title":"Forms","page":"c06-p01"},{"id":"c07","n":7,"title":"Reports","page":"c07-p01"},{"id":"c08","n":8,"title":"VBA basics","page":"c08-p01"},{"id":"c09","n":9,"title":"VBA task tutorials","page":"c09-p01"},{"id":"c10","n":10,"title":"Booking system: tables, relationships and forms","page":"c10-p01"},{"id":"c11","n":11,"title":"Booking system: the booking logic in VBA","page":"c11-p01"},{"id":"c12","n":12,"title":"Booking system: reports, menu and finishing touches","page":"c12-p01"},{"id":"c13","n":13,"title":"Your coursework: setting up the write-up","page":"c13-p01"},{"id":"c14","n":14,"title":"Your coursework: the Analysis chapter","page":"c14-p01"},{"id":"c15","n":15,"title":"Your coursework: the Design chapter","page":"c15-p01"},{"id":"c16","n":16,"title":"Your coursework: the Testing and Evaluation chapter","page":"c16-p01"},{"id":"c17","n":17,"title":"Your coursework: the User Guide, Appendix and Bibliography","page":"c17-p01"},{"id":"c18","n":18,"title":"Tables and keys","page":"c18-p01"},{"id":"c19","n":19,"title":"Relationships","page":"c19-p01"},{"id":"c20","n":20,"title":"Queries","page":"c20-p01"},{"id":"c21","n":21,"title":"Forms","page":"c21-p01"},{"id":"c22","n":22,"title":"Reports","page":"c22-p01"},{"id":"c23","n":23,"title":"Macros","page":"c23-p01"},{"id":"c24","n":24,"title":"VBA quick recipes","page":"c24-p01"}]}];
+/* Teacher area: the ⓘ info buttons. A button.ib (aria-controls -> div.ip) opens its note; a second tap, Escape or a tap
+   anywhere outside closes it. Works for buttons added later (event delegation). Inlined into teacher.html by sow.py. */
+(function () {
+  'use strict';
+  const panel = b => document.getElementById(b.getAttribute('aria-controls'));
+  const close = (b, focus) => { const p = panel(b); b.setAttribute('aria-expanded', 'false'); if (p) p.hidden = true; if (focus) b.focus(); };
+  const openOnes = () => [...document.querySelectorAll('button.ib[aria-expanded="true"]')];
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button.ib');
+    if (b) { const on = b.getAttribute('aria-expanded') === 'true'; openOnes().forEach(x => { if (x !== b) close(x); }); if (on) close(b); else { const p = panel(b); b.setAttribute('aria-expanded', 'true'); if (p) p.hidden = false; } return; }
+    if (e.target.closest('.ip')) return;
+    openOnes().forEach(x => close(x));
+  });
+  document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; const o = openOnes(); if (o.length) { o.forEach((x, i) => close(x, i === o.length - 1)); e.preventDefault(); } });
+})();
+
 /* Teacher area: topic packs. Builds a PDF in the browser (pdf-lib, lib/pdf-lib.min.js) of every CCEA past-paper question the
    workbooks place in a topic, each with its mark scheme and examiner-report comment, cut from the uploaded CCEA PDFs.
    Data: papers/topics.json (topic -> questions), folders.json + manifest.json (which PDFs), crops.json (where each question and
@@ -371,7 +426,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const rkey = book.course + '|' + s, rfile = (D.reports.files || {})[rkey] || null;
     const none = ((D.reports.none || NO_REPORT)[book.course] || []).includes(s) || /specimen|resit/i.test(s) || /\b2021\b/.test(s);
     const report = rep ? 'crop' : rfile ? 'nocomment' : none ? 'none' : 'missing';
-    return { paper: files.paper || null, ms: files.ms || null, cp: segs(cr.paper), cm: segs(cr.ms), cs: segs(cr.stem), px: cr.px || [], sx: cr.sx || [], pg: cr.pg || [], sg: cr.sg || [], pp: +pg.paper || null, pm: +pg.ms || null,
+    return { paper: files.paper || null, ms: files.ms || null, cp: segs(cr.paper), cm: segs(cr.ms), cs: segs(cr.stem), px: cr.px || [], sx: cr.sx || [], mx: cr.mx || [], pg: cr.pg || [], sg: cr.sg || [], pp: +pg.paper || null, pm: +pg.ms || null,
              marks, rep, rfile, report, series: serLabel(s), head: `${serLabel(s)} · ${book.short} · ${qLabel(it.q)}${marks ? ` · ${marks} mark${marks === 1 ? '' : 's'}` : ''}` };
   }
   const yr = s => { const m = /(20\d\d)/.exec(s); return m ? +m[1] : 0; };
@@ -383,7 +438,17 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
 
   /* ------------------------------------------------------------------ the step flow */
   const ui = {};
-  function stepState(n) { document.querySelectorAll('.tp-step').forEach(s => { const k = +s.dataset.step; s.classList.toggle('done', k < n); s.classList.toggle('now', k === n); }); }
+  /* collapsible steps: the current step shows its options; a step with a choice is one row ("Course · GCSE ▾") that reopens on a tap */
+  function Steps(root) {
+    const all = () => [...root.querySelectorAll(':scope > .st')], get = n => all().find(x => +x.dataset.step === n);
+    const api = {
+      open(n) { all().forEach(x => { const on = +x.dataset.step === n; x.classList.toggle('open', on); x.querySelector('.st-h').setAttribute('aria-expanded', String(on)); x.querySelector('.st-b').hidden = !on; }); },
+      val(n, v) { const x = get(n); if (!x) return; x.querySelector('.st-v').textContent = v || ''; x.classList.toggle('has', !!v); },
+      show(n, on) { const x = get(n); if (x) x.hidden = !on; },
+    };
+    all().forEach(x => x.querySelector('.st-h').addEventListener('click', () => { const n = +x.dataset.step; api.open(x.classList.contains('open') && x.classList.contains('has') ? 0 : n); }));
+    return api;
+  }
   function pressed(group, val) { group.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === val))); }
 
   function renderCourses() {
@@ -396,6 +461,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     }
   }
   function pickCourse(c, keep) {
+    const same = S.course === c && S.book && S.book.course === c;
     S.course = c; store.set('course', c); pressed(ui.course, c);
     ui.unit.innerHTML = '';
     for (const b of D.topics.books.filter(b => b.course === c)) {
@@ -403,11 +469,14 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       ui.unit.append(el('button', { type: 'button', class: 'tp-opt', 'data-v': b.id, 'aria-pressed': 'false', onclick: () => pickBook(b.id) },
         el('b', { text: b.short }), el('small', { text: b.title + ' · ' + n + ' questions' })));
     }
-    ui.unitWrap.hidden = false; ui.topicWrap.hidden = true; ui.packWrap.hidden = true; stepState(2);
-    if (!keep) S.book = S.topic = null;
+    ui.steps.val(1, COURSE_NAME[c]); ui.steps.show(2, true);
+    if (same) pressed(ui.unit, S.book.id);
+    if (!keep && !same) { S.book = S.topic = null; ui.steps.val(2, ''); ui.steps.val(3, ''); ui.steps.show(3, false); ui.packWrap.hidden = true; }
+    if (!keep) ui.steps.open(2);
   }
   function pickBook(id, keep) {
     const b = D.topics.books.find(x => x.id === id); if (!b) return;
+    const same = S.book === b && S.topic;
     S.book = b; store.set('book', id); pressed(ui.unit, id);
     ui.topic.innerHTML = '';
     for (const t of b.topics) {
@@ -415,13 +484,16 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       ui.topic.append(el('button', { type: 'button', class: 'tp-opt tp-topic', 'data-v': String(t.n), 'aria-pressed': 'false', onclick: () => pickTopic(t.n) },
         el('span', { class: 'tp-n', text: String(t.n) }), el('span', {}, el('b', { text: t.title }), el('small', { text: `${t.items.length} question${t.items.length === 1 ? '' : 's'} · ${tot} marks` }))));
     }
-    ui.topicWrap.hidden = false; ui.packWrap.hidden = true; stepState(3);
-    if (!keep) S.topic = null;
+    ui.steps.val(2, b.short); ui.steps.show(3, true);
+    if (same) pressed(ui.topic, String(S.topic.n));
+    if (!keep && !same) { S.topic = null; ui.steps.val(3, ''); ui.packWrap.hidden = true; }
+    if (!keep) ui.steps.open(3);
   }
   function pickTopic(n, restore) {
     const t = S.book.topics.find(x => x.n === n); if (!t) return;
     S.topic = t; S.off = new Set(); store.set('topic', S.book.id + '|' + n); pressed(ui.topic, String(n));
-    ui.packWrap.hidden = false; stepState(4); renderPack();
+    ui.steps.val(3, t.title); ui.steps.open(0); ui.qs.open = false;
+    ui.packWrap.hidden = false; renderPack();
     if (!restore && window.matchMedia('(max-width: 720px)').matches) ui.packWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function chosen() { return ordered(S.book, S.topic).filter(it => !S.off.has(it.k)); }
@@ -429,12 +501,12 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const its = chosen(), inf = its.map(it => info(S.book, it));
     const known = inf.filter(x => x.marks !== null), tot = known.reduce((a, x) => a + x.marks, 0);
     const reps = inf.filter(x => x.report === 'crop').length, whole = inf.filter(x => x.paper && !x.cp).length, nopaper = inf.filter(x => !x.paper).length;
-    ui.count.textContent = `${its.length} of ${S.topic.items.length} question${S.topic.items.length === 1 ? '' : 's'} · ${known.length < inf.length ? 'at least ' : ''}${tot} marks`;
+    const all = S.topic.items.length, pl = n => n === 1 ? '' : 's';
+    ui.count.textContent = (its.length < all ? `${its.length} of ${all} question${pl(all)} selected` : `${all} question${pl(all)}`) + ` · ${known.length < inf.length ? 'at least ' : ''}${tot} marks · ${reps} with examiner comment${pl(reps)}`;
     const notes = [];
-    notes.push(`${reps} with an examiner-report comment`);
     if (whole) notes.push(`${whole} shown as the whole page (not cut out automatically)`);
     if (nopaper) notes.push(`${nopaper} whose paper is not uploaded yet`);
-    ui.count2.textContent = notes.join(' · ');
+    ui.count2.textContent = notes.join(' · '); ui.count2.hidden = !notes.length;
     ui.dl.forEach(b => { b.disabled = !its.length; });
   }
   function renderPack() {
@@ -508,7 +580,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const box = (kind, title, sub, items) => [{ k: 'box', kind, title, sub }, ...items, { k: 'boxend' }];
     const scheme = () => {
       if (!x.ms) return box('ms', 'Mark scheme', '', [{ k: 'note', text: `The ${x.series} ${book.short} mark scheme is not uploaded yet.` }]);
-      if (x.cm) return box('ms', 'Mark scheme', '', segOf(x.ms, x.cm));
+      if (x.cm) return box('ms', 'Mark scheme', '', segOf(x.ms, x.cm, null, x.mx));
       if (x.pm) return box('ms', 'Mark scheme', `whole page ${x.pm}: not cut out automatically`, [{ k: 'seg', src: x.ms, page: x.pm, t: 0, b: 1, hl: [] }]);
       return box('ms', 'Mark scheme', '', [{ k: 'note', text: 'Not located in the mark scheme: see the mark scheme itself.' }]);
     };
@@ -650,7 +722,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         y -= 8;
       }
       txt(page, pupil ? 'MARKS (FOR THE TEACHER)' : 'MARKS SUMMARY', M.l, y - 10, 9, bold, C.ink2); y -= 18;
-      const cols = T.perTopic ? (pupil ? [['Topic', .56], ['Questions', .18], ['Available', .13], ['Awarded', .13]] : [['Topic', .6], ['Questions', .2], ['Marks', .2]])
+      let cols = T.perTopic ? (pupil ? [['Topic', .56], ['Questions', .18], ['Available', .13], ['Awarded', .13]] : [['Topic', .6], ['Questions', .2], ['Marks', .2]])
                               : (pupil ? [['Q', .07], ['Topic', .53], ['Available', .2], ['Awarded', .2]] : [['Q', .07], ['Topic', .43], ['From', .32], ['Marks', .18]]);
       const rows = T.rows.map(r => T.perTopic ? (pupil ? [r.label, r.qs, String(r.marks), ''] : [r.label, r.qs, String(r.marks)]) : (pupil ? [r.qs, r.label, String(r.marks), ''] : [r.qs, r.label, r.sub, String(r.marks)]));
       rows.push(T.perTopic ? (pupil ? ['Total', '', String(tot), ''] : ['Total', '', String(tot)]) : (pupil ? ['', 'Total', String(tot), ''] : ['', 'Total', '', String(tot)]));
@@ -669,6 +741,13 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .5, color: C.line });
       row(cols.map(c => c[0]), true); rows.forEach((r, i) => row(r, false, i === rows.length - 1));
       y -= 12;
+      if (T.types && T.types.length) {   /* count and marks per question type */
+        cols = [['Question type', .6], ['Questions', .2], ['Marks', .2]];
+        if (room() < RH * (T.types.length + 2) + 4) newPage();
+        page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .5, color: C.line });
+        row(cols.map(c => c[0]), true); T.types.forEach(t => row([t.label, String(t.n), String(t.marks)], false, false));
+        y -= 12;
+      }
       if (T.note) { for (const ln of wrap(ital, 8.5, T.note, CW)) { txt(page, ln, M.l, y - 9, 8.5, ital, C.ink3); y -= 11.5; } y -= 6; }
       if (LAY !== 'compact') newPage();   /* standard: the cover page stands alone */
     }
@@ -769,7 +848,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
 
   /* ------------------------------------------------------------------ start */
   async function start() {
-    ui.course = $('#tp-course'); ui.unit = $('#tp-unit'); ui.unitWrap = $('#tp-s2'); ui.topic = $('#tp-topic'); ui.topicWrap = $('#tp-s3'); ui.packWrap = $('#tp-s4');
+    ui.course = $('#tp-course'); ui.unit = $('#tp-unit'); ui.unitWrap = $('#tp-s2'); ui.topic = $('#tp-topic'); ui.topicWrap = $('#tp-s3'); ui.packWrap = $('#tp-s4'); ui.steps = Steps($('#tp-steps')); ui.qs = $('#tp-qs');
     ui.packTitle = $('#tp-title'); ui.count = $('#tp-count'); ui.count2 = $('#tp-count2'); ui.list = $('#tp-list'); ui.status = $('#tp-status'); ui.statusText = $('#tp-status-t'); ui.bar = $('#tp-bar');
     ui.reports = $('#tp-reports'); ui.dl = [...document.querySelectorAll('[data-dl]')];
     ui.dl.forEach(b => b.addEventListener('click', () => download(b.dataset.dl, b, packJob())));
@@ -784,19 +863,21 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       $('#tp-load').textContent = 'The question lists could not be loaded. Check the connection and reload the page.'; $('#tp-load').className = 'tp-status err'; return;
     }
     $('#tp-load').remove(); $('#tp-flow').hidden = false;
-    renderCourses(); renderReports(); stepState(1);
+    renderCourses(); renderReports(); ui.steps.open(1); ui.steps.show(2, false); ui.steps.show(3, false);
     API.D = D; readyOk(D);
     const c = store.get('course', null), bk = store.get('book', null), tp = store.get('topic', null);
     if (c && D.topics.books.some(b => b.course === c)) {
       pickCourse(c, true);
       if (bk && D.topics.books.some(b => b.id === bk && b.course === c)) { pickBook(bk, true); if (tp && tp.split('|')[0] === bk) { const n = +tp.split('|')[1]; if (S.book.topics.some(t => t.n === n)) pickTopic(n, true); } }
+      if (!S.book) ui.steps.open(2); else if (!S.topic) ui.steps.open(3);
     }
   }
   /* shared with teacher_tests.js (test builder, exam trends): the data, the per-question facts and the PDF engine */
   let readyOk; const API = window.TeacherPacks = { ready: new Promise(r => { readyOk = r; }), info, blocks, build, download, yr, serLabel, qLabel, el, store,
+    Steps,
     open(bookId, n) {   /* pre-select a topic in the Topic packs tab */
       const b = D.topics.books.find(x => x.id === bookId); if (!b) return;
-      pickCourse(b.course, true); pickBook(bookId, true); if (b.topics.some(t => t.n === n)) pickTopic(n, true);
+      pickCourse(b.course); pickBook(bookId); if (b.topics.some(t => t.n === n)) pickTopic(n, true);
       ui.packWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
     } };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
@@ -832,7 +913,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     if (UQ.has(book.id)) return UQ.get(book.id);
     const m = new Map();
     for (const t of book.topics) for (const it of t.items) {
-      if (!m.has(it.k)) m.set(it.k, { k: it.k, it, book, topics: [], marks: TP.info(book, it).marks });
+      if (!m.has(it.k)) { const mk = TP.info(book, it).marks; m.set(it.k, { k: it.k, it, book, topics: [], marks: mk, type: it.y || (mk !== null && mk >= 4 ? 'long' : 'short') }); }
       const q = m.get(it.k); if (!q.topics.includes(t.n)) q.topics.push(t.n);
     }
     UQ.set(book.id, m); return m;
@@ -885,7 +966,8 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   /* ================================================================== the test builder */
   const B = { course: null, units: new Set(), topics: new Set(), mode: store.get('bt.mode', 'marks'), marks: +store.get('bt.marks', 60) || 60, mins: +store.get('bt.mins', 60) || 60,
               rate: store.get('bt.rate', 'paper'), spread: store.get('bt.spread', 'freq'), papers: store.get('bt.papers', 'all'), dedupe: store.get('bt.dedupe', '1') === '1',
-              fresh: store.get('bt.fresh', '0') === '1', order: store.get('bt.order', 'topic'), layout: store.get('bt.layout', 'standard'), sel: [], seed: 1, target: 0, quota: null, note: '' };
+              fresh: store.get('bt.fresh', '0') === '1', mix: store.get('bt.mix', 'auto'),
+              want: { mc: +store.get('bt.n.mc', 5) || 0, short: +store.get('bt.n.short', 6) || 0, long: +store.get('bt.n.long', 3) || 0 }, order: store.get('bt.order', 'topic'), layout: store.get('bt.layout', 'standard'), sel: [], seed: 1, target: 0, quota: null, note: '' };
   const used = { get() { try { return JSON.parse(localStorage.getItem('teacher.bt.used') || '{}') || {}; } catch (e) { return {}; } },
                  add(keys) { const u = used.get(), now = Date.now(); keys.forEach(k => { u[k] = now; }); try { localStorage.setItem('teacher.bt.used', JSON.stringify(u)); } catch (e) { } },
                  clear() { try { localStorage.removeItem('teacher.bt.used'); } catch (e) { } } };
@@ -921,6 +1003,46 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     return w;
   }
   const sizeOf = m => m <= 3 ? 0 : m <= 7 ? 1 : 2;   /* short, medium, long */
+  const TYPES = [['mc', 'Multiple choice', 'MC'], ['short', 'Short answer', 'Short'], ['long', 'Longer answer', 'Long']];
+  const TYPE_NAME = Object.fromEntries(TYPES.map(t => [t[0], t[1]])), TYPE_TAG = Object.fromEntries(TYPES.map(t => [t[0], t[2]]));
+  /* how many distinct questions of each type the chosen topics offer (near-duplicates counted once when avoiding them) */
+  function available(cands) {
+    const out = { mc: 0, short: 0, long: 0 };
+    for (const y of Object.keys(out)) { const kept = []; cands.filter(c => c.type === y).forEach(c => { if (!(B.dedupe && kept.some(k => similar(k, c)))) kept.push(c); }); out[y] = kept.length; }
+    return out;
+  }
+  /* "Set numbers": exactly so many of each type, spread over the topics like the automatic mix; the marks follow */
+  function pickSet(cands, w, R) {
+    const av = available(cands), want = {}, capped = [];
+    for (const [y, name] of TYPES) { want[y] = Math.min(B.want[y], av[y]); if (want[y] < B.want[y]) capped.push(`${av[y]} ${name.toLowerCase()} question${av[y] === 1 ? '' : 's'}`); }
+    const keys = [...w.keys()], ws = [...w.values()].reduce((a, x) => a + x, 0);
+    let bestScore = Infinity; const good = [];
+    for (let trial = 0; trial < 120; trial++) {
+      const sel = [], ok = c => !sel.some(s => s.c.k === c.k || (B.dedupe && similar(s.c, c)));
+      const order = cands.map(c => [R(), c]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+      for (const [y] of TYPES.slice().reverse()) {
+        const got = new Map(keys.map(k => [k, 0]));
+        const hasY = keys.filter(k => order.some(c => c.type === y && c.tps.some(n => tkey(c.book.id, n) === k)));
+        const wy = hasY.reduce((a, k) => a + w.get(k), 0) || 1;
+        for (let i = 0; i < want[y]; i++) {
+          const open = hasY.filter(k => order.some(c => c.type === y && c.tps.some(n => tkey(c.book.id, n) === k) && ok(c)));
+          let c = null, tk = null;
+          for (const k of open.map(k => [want[y] * w.get(k) / wy - got.get(k) + R() * .8, k]).sort((a, b) => b[0] - a[0]).map(x => x[1])) {
+            c = order.find(x => x.type === y && x.tps.some(n => tkey(x.book.id, n) === k) && ok(x)); if (c) { tk = k; break; }
+          }
+          if (!c) break;
+          sel.push({ c, t: tk }); got.set(tk, got.get(tk) + 1);
+        }
+      }
+      const tot = sel.reduce((a, x) => a + x.c.marks, 0), tm = new Map(keys.map(k => [k, 0])); sel.forEach(x => tm.set(x.t, tm.get(x.t) + x.c.marks));
+      const score = keys.reduce((a, k) => a + Math.abs(tm.get(k) - tot * w.get(k) / ws), 0);
+      good.push([score, sel, tot]); if (score < bestScore) bestScore = score;
+    }
+    const near = good.filter(g => g[0] <= bestScore + 3), pickd = near[Math.floor(R() * near.length)];
+    B.target = pickd[2]; B.quota = new Map(keys.map(k => [k, pickd[2] * w.get(k) / ws]));
+    if (capped.length) B.note = (B.note ? B.note + ' ' : '') + `These topics only have ${capped.join(' and ')}${B.papers === 'all' ? '' : ' in the papers chosen'}, so the test has ${capped.length > 1 ? 'those' : 'that many'}.`;
+    return pickd[1];
+  }
   function rng(seed) { let a = seed >>> 0; return () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
   function pick() {
     const cands = pool(), T = targetMarks(), w = weights(cands), wsum = [...w.values()].reduce((a, x) => a + x, 0);
@@ -928,6 +1050,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const skipped = [...B.topics].filter(k => !w.has(k));
     B.note = skipped.length ? `${plural(skipped.length, 'topic')} had no questions left with these options: ${skipped.map(k => { const [b, n] = k.split('|'); const bk = D.topics.books.find(x => x.id === b); return (books().length > 1 ? bk.short + ' ' : '') + bk.topics.find(t => t.n === +n).title; }).join(', ')}.` : '';
     if (!cands.length) { B.sel = []; return; }
+    if (B.mix === 'set') { const sel = pickSet(cands, w, rng(B.seed * 7919 + 17)); B.sel = sel.map(x => ({ ...x.c, topic: +x.t.split('|')[1] })); sortSel(); return; }
     /* the natural mix of short, medium and long questions in this pool (by marks) */
     const mix = [0, 0, 0]; cands.forEach(c => { mix[sizeOf(c.marks)] += c.marks; }); const ms = mix.reduce((a, x) => a + x, 0); for (let i = 0; i < 3; i++) mix[i] /= ms;
     const R = rng(B.seed * 7919 + T), keys = [...B.quota.keys()];
@@ -976,7 +1099,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   }
   function swap(i) {
     const cur = B.sel[i], others = B.sel.filter((_, j) => j !== i), seen = cur.tried || new Set([cur.k]);
-    const cands = pool().filter(c => c.tps.includes(cur.topic) && c.book.id === cur.book.id && !B.sel.some(s => s.k === c.k) && !seen.has(c.k) && !(B.dedupe && others.some(s => similar(s, c))));
+    const cands = pool().filter(c => c.type === cur.type && c.tps.includes(cur.topic) && c.book.id === cur.book.id && !B.sel.some(s => s.k === c.k) && !seen.has(c.k) && !(B.dedupe && others.some(s => similar(s, c))));
     if (!cands.length) return false;
     const d = Math.min(...cands.map(c => Math.abs(c.marks - cur.marks))), near = cands.filter(c => Math.abs(c.marks - cur.marks) === d);
     const c = near[Math.floor(Math.random() * near.length)];
@@ -997,7 +1120,8 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     B.course = c; store.set('bt.course', c); pressed(ui.course, c);
     const bs = D.topics.books.filter(b => b.course === c);
     if (!B.units.size) { B.units.add(bs[0].id); bs[0].topics.forEach(t => B.topics.add(tkey(bs[0].id, t.n))); }
-    renderUnits(); ui.s2.hidden = false; ui.s3.hidden = false; renderTarget();
+    ui.steps.val(1, COURSE_NAME[c]); ui.steps.show(2, true); ui.steps.show(3, true);
+    renderUnits(); renderTarget(); if (!keep) ui.steps.open(2);
   }
   function saveSel() { store.set('bt.units', [...B.units].join(',')); store.set('bt.topics', [...B.topics].join(',')); }
   function renderUnits() {
@@ -1025,6 +1149,18 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   }
   function renderTarget() {
     pressed(ui.mode, B.mode); ui.marksWrap.hidden = B.mode !== 'marks'; ui.minsWrap.hidden = B.mode !== 'time';
+    const setMix = B.mix === 'set'; ui.mixSet.hidden = !setMix; ui.lenWrap.classList.toggle('dim', setMix);
+    if (setMix) {
+      const cs = pool(), av = available(cs); let est = 0, any = false;
+      for (const [y] of TYPES) {
+        const inp = $('#bt-n-' + y); $('#bt-max-' + y).textContent = `max ${av[y]}`; inp.max = av[y];
+        const n = Math.min(B.want[y], av[y]); if (+inp.value !== B.want[y]) inp.value = B.want[y];
+        const xs = cs.filter(c => c.type === y), avg = xs.length ? xs.reduce((a, c) => a + c.marks, 0) / xs.length : 0; est += n * avg; if (n) any = true;
+        $('#bt-max-' + y).classList.toggle('over', B.want[y] > av[y]);
+      }
+      const r = rateInfo().rate;
+      ui.mixEst.textContent = any ? `About ${Math.round(est)} marks, about ${hm(est / r)} (the marks depend on which questions are picked).` + (TYPES.some(([y]) => B.want[y] > av[y]) ? ' Some numbers are more than these topics have, so they will be capped.' : '') : 'Set at least one number.';
+    }
     const ri = rateInfo(), T = targetMarks(), n = pool().length, nt = [...B.topics].filter(k => B.units.has(k.split('|')[0])).length;
     const mpm = r => { const v = Math.round(r * 100) / 100; return `${v} mark${v === 1 ? '' : 's'} a minute`; };
     ui.rateOpt.textContent = `As in the CCEA paper (${mpm(ri.paperRate || 1)})`;
@@ -1032,19 +1168,23 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const u = Object.keys(used.get()).length;
     ui.usedText.textContent = u ? `${plural(u, 'question')} remembered from earlier tests.` : 'None remembered yet: questions are remembered when you download a test.';
     ui.forget.hidden = !u;
-    ui.go.disabled = !nt || !n;
-    ui.poolText.textContent = !nt ? 'Tick at least one topic.' : `${plural(nt, 'topic')} · ${plural(n, 'question')} to choose from.`;
+    ui.go.disabled = !nt || !n || (B.mix === 'set' && !TYPES.some(([y]) => B.want[y] > 0));
+    ui.poolText.textContent = !nt ? 'Tick at least one topic.' : `${plural(n, 'question')} to choose from.`;
+    ui.steps.val(2, books().length ? `${books().map(b => b.short).join(' + ')} · ${nt === books().reduce((a, b) => a + b.topics.length, 0) ? 'all topics' : plural(nt, 'topic')}` : '');
+    ui.steps.val(3, `${B.mix === 'set' ? TYPES.map(([y, , t]) => B.want[y] + ' ' + t).join(' + ') : B.mode === 'time' ? hm(B.mins) : B.marks + ' marks'} · ${B.spread === 'even' ? 'even spread' : 'CCEA’s spread'}${B.papers === 'all' ? '' : B.papers === 'r3' ? ' · last 3 years' : ' · last 5 years'}`);
+    ui.next.disabled = !nt;
   }
   function build() {
     B.seed = (B.seed * 48271 + Date.now()) % 2147483647 || 1;
-    pick(); ui.s4.hidden = false; renderSel(); setStatus('');
+    pick(); ui.steps.open(0); ui.s4.hidden = false; ui.qs.open = false; renderSel(); setStatus('');
     if (window.matchMedia('(max-width: 720px)').matches) ui.s4.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
   function title() { const bs = books(), tot = B.sel.reduce((a, x) => a + x.marks, 0); return `${bs.map(b => b.short).join(' + ')} – ${B.mode === 'time' ? 'Mock test' : 'Mock test'} – ${tot} marks`; }
   function renderSel() {
     const tot = B.sel.reduce((a, x) => a + x.marks, 0), T = B.target, multi = books().length > 1;
     ui.title.textContent = title();
-    ui.count.textContent = `${plural(B.sel.length, 'question')} · ${tot} of ${T} marks${tot === T ? ' ✓' : ''} · about ${hm(tot / rateInfo().rate)}`;
+    const nT = new Set(B.sel.map(x => x.book.id + '|' + x.topic)).size;
+    ui.count.textContent = `${plural(B.sel.length, 'question')} · ${tot}${tot === T ? '' : ' of ' + T} marks across ${plural(nT, 'topic')} · about ${hm(tot / rateInfo().rate)}`;
     ui.note.textContent = B.note; ui.note.hidden = !B.note;
     /* balance: marks per topic against its share */
     ui.bal.innerHTML = '';
@@ -1056,16 +1196,16 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         el('span', { class: 'bt-bm', text: `${got} / ${Math.round(q)}` })));
     }
     const sz = [0, 0, 0]; B.sel.forEach(x => { sz[sizeOf(x.marks)]++; });
-    ui.mix.textContent = `Mix: ${sz[0]} short (1–3 marks), ${sz[1]} medium (4–7), ${sz[2]} long (8+).`;
+    ui.mix.textContent = 'Mix: ' + TYPES.map(([y, name]) => { const xs = B.sel.filter(x => x.type === y); return xs.length ? `${xs.length} ${name.toLowerCase()} (${xs.reduce((a, x) => a + x.marks, 0)} marks)` : ''; }).filter(Boolean).join(', ') + '.';
     ui.list.innerHTML = '';
     B.sel.forEach((x, i) => {
       const t = topicOf(x), inf = TP.info(x.book, x.it);
       const li = el('li', {},
         el('span', { class: 'tp-num', text: String(i + 1) }),
         el('span', { class: 'tp-qt' }, el('b', { text: `${inf.series} · ${x.book.short} · ${qLabel(x.it.q)}` }), el('span', { class: 'bt-tp', text: (multi ? x.book.short + ' · ' : '') + t.title + (x.topics.length > 1 ? ' (also in another topic)' : '') }), el('span', { class: 'tp-sum', text: x.it.t || '' })),
-        el('span', { class: 'bt-mk', text: plural(x.marks, 'mark') }),
+        el('span', { class: 'bt-mk' }, el('span', { class: 'bt-ty ' + x.type, text: TYPE_TAG[x.type] }), ' ' + plural(x.marks, 'mark')),
         el('span', { class: 'bt-act' },
-          el('button', { type: 'button', class: 'tp-mini', text: 'Swap', 'aria-label': `Swap question ${i + 1} for another ${t.title} question`, onclick: () => { if (swap(i)) { renderSel(); flash(i, 'Swapped'); } else flash(i, 'No other question left in this topic', true); } }),
+          el('button', { type: 'button', class: 'tp-mini', text: 'Swap', 'aria-label': `Swap question ${i + 1} for another ${t.title} question`, onclick: () => { if (swap(i)) { renderSel(); flash(i, 'Swapped'); } else flash(i, `No other ${TYPE_TAG[x.type].toLowerCase()} question left in this topic`, true); } }),
           el('button', { type: 'button', class: 'tp-mini', text: 'Remove', 'aria-label': `Remove question ${i + 1}`, onclick: () => { B.sel.splice(i, 1); renderSel(); } })));
       ui.list.append(li);
     });
@@ -1082,15 +1222,19 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const m = new Map(); B.sel.forEach((x, i) => { const k = x.book.id + '|' + x.topic; if (!m.has(k)) m.set(k, { label: (multi ? x.book.short + ': ' : '') + topicOf(x).title, nums: [], marks: 0 }); const r = m.get(k); r.nums.push(i + 1); r.marks += x.marks; });
       const rng2 = a => a.reduce((o, n) => { const l = o[o.length - 1]; if (l && n === l[1] + 1) l[1] = n; else o.push([n, n]); return o; }, []).map(([a, b]) => a === b ? String(a) : `${a}–${b}`).join(', ');
       rows = [...m.values()].map(r => ({ label: r.label, qs: rng2(r.nums), marks: r.marks }));
-    } else rows = B.sel.map((x, i) => ({ qs: String(i + 1), label: (multi ? x.book.short + ': ' : '') + topicOf(x).title, sub: `${serLabel(x.it.s)} ${qLabel(x.it.q)}`, marks: x.marks }));
+    } else rows = B.sel.map((x, i) => ({ qs: String(i + 1), label: (multi ? x.book.short + ': ' : '') + topicOf(x).title + ' (' + TYPE_TAG[x.type] + ')', sub: `${serLabel(x.it.s)} ${qLabel(x.it.q)}`, marks: x.marks }));
     const ri = rateInfo();
     return { title: name, heading: `Mock test – ${tot} marks`, kicker: `${bs.map(b => b.short.toUpperCase()).join(' + ')} · CCEA PAST-PAPER QUESTIONS`,
              docTitle: name, file: name, layout: B.layout, items,
              test: { minutes: Math.round(tot / ri.rate), rows, perTopic,
+                     types: TYPES.map(([y, name]) => { const xs = B.sel.filter(x => x.type === y); return { label: name, n: xs.length, marks: xs.reduce((a, x) => a + x.marks, 0) }; }).filter(t => t.n),
                      note: `Time allowed worked out at ${Math.round(ri.rate * 100) / 100} mark${Math.round(ri.rate * 100) === 100 ? '' : 's'} a minute${B.rate === 'one' ? '' : ' (the rate of the real CCEA paper)'}. Questions from CCEA past papers, chosen across ${plural(new Set(B.sel.map(x => x.book.id + x.topic)).size, 'topic')}.` } };
   }
 
   function startBuilder() {
+    ui.steps = TP.Steps($('#bt-steps')); ui.qs = $('#bt-qs'); ui.next = $('#bt-next');
+    ui.next.addEventListener('click', () => ui.steps.open(3));
+    ui.steps.open(1); ui.steps.show(2, false); ui.steps.show(3, false);
     ui.course = $('#bt-course'); ui.units = $('#bt-units'); ui.s2 = $('#bt-s2'); ui.s3 = $('#bt-s3'); ui.s4 = $('#bt-s4');
     ui.mode = $('#bt-mode'); ui.marksWrap = $('#bt-mw'); ui.minsWrap = $('#bt-tw'); ui.rateText = $('#bt-rate-t'); ui.rateOpt = $('#bt-rate [value="paper"]');
     ui.usedText = $('#bt-used-t'); ui.forget = $('#bt-forget'); ui.go = $('#bt-go'); ui.poolText = $('#bt-pool');
@@ -1100,17 +1244,24 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const set = (id, k, fn) => { const e = $(id); if (!e) return; if (e.type === 'checkbox') e.checked = !!B[k]; else e.value = B[k]; e.addEventListener(e.type === 'checkbox' ? 'change' : 'input', () => { B[k] = fn ? fn(e) : e.value; store.set('bt.' + k, e.type === 'checkbox' ? (e.checked ? '1' : '0') : e.value); renderTarget(); if (k === 'order' && B.sel.length) { sortSel(); renderSel(); } }); };
     set('#bt-marks', 'marks', e => Math.max(1, Math.min(300, +e.value || 0))); set('#bt-mins', 'mins', e => Math.max(5, Math.min(300, +e.value || 0)));
     set('#bt-rate', 'rate'); set('#bt-spread', 'spread'); set('#bt-papers', 'papers'); set('#bt-dedupe', 'dedupe', e => e.checked); set('#bt-fresh', 'fresh', e => e.checked);
-    set('#bt-order', 'order'); set('#bt-layout', 'layout');
+    set('#bt-order', 'order'); set('#bt-layout', 'layout'); set('#bt-qmix', 'mix');
+    ui.mixSet = $('#bt-mixset'); ui.mixEst = $('#bt-mixest'); ui.lenWrap = $('#bt-len');
+    for (const [y] of TYPES) {
+      const inp = $('#bt-n-' + y); inp.value = B.want[y];
+      const setN = v => { B.want[y] = Math.max(0, Math.min(99, Math.round(+v || 0))); inp.value = B.want[y]; store.set('bt.n.' + y, String(B.want[y])); renderTarget(); };
+      inp.addEventListener('input', () => setN(inp.value));
+      inp.parentNode.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { const mx = +inp.max; let v = B.want[y] + +b.dataset.d; if (+b.dataset.d > 0 && !isNaN(mx) && inp.max !== '' && v > mx) v = mx; setN(v); }));
+    }
     ui.mode.querySelectorAll('button').forEach(b => b.addEventListener('click', () => { B.mode = b.dataset.v; store.set('bt.mode', B.mode); renderTarget(); }));
     ui.forget.addEventListener('click', () => { used.clear(); renderTarget(); });
-    ui.go.addEventListener('click', build); $('#bt-again').addEventListener('click', build);
+    ui.go.addEventListener('click', build); $('#bt-again').addEventListener('click', build); $('#bt-again2').addEventListener('click', build);
     ui.dl.forEach(b => b.addEventListener('click', () => TP.download(b.dataset.bt, b, job(), { dls: ui.dl, status: st, done: () => { used.add(B.sel.map(x => x.k)); }, after: () => { ui.dl.forEach(x => { x.disabled = !B.sel.length; }); renderTarget(); } })));
     renderCourses();
     const c = store.get('bt.course', null);
     if (c && D.topics.books.some(b => b.course === c)) {
       const us = (store.get('bt.units', '') || '').split(',').filter(id => D.topics.books.some(b => b.id === id && b.course === c));
       const ts = (store.get('bt.topics', '') || '').split(',').filter(k => us.includes(k.split('|')[0]));
-      B.units = new Set(us); B.topics = new Set(ts); pickCourse(c, true);
+      B.units = new Set(us); B.topics = new Set(ts); pickCourse(c, true); ui.steps.open(3);
     }
     $('#bt-load').remove(); $('#bt-flow').hidden = false;
   }
@@ -1217,14 +1368,13 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const box = $('#cd-list'); if (!box) return; box.innerHTML = '';
     for (const x of exams()) {
       const l = left(x), dl = x.kind === 'deadline';
-      const when = l ? `${fmtDate(l.d)}${x.start ? ', ' + fmtTime(x.start) + (x.end ? '–' + fmtTime(x.end) : '') : ''}` : (dl ? 'Deadline not published yet' : 'Date not published yet');
-      const big = !l ? 'Add the date' : l.n < 0 ? 'Done' : l.n === 0 ? 'Today' : `${l.w ? pl(l.w, 'week') + ' ' : ''}${l.r ? pl(l.r, 'day') : ''}`.trim();
-      box.append(el('li', { class: 'cd-c' + (!l ? ' none' : l.n < 0 ? ' past' : l.n <= 42 ? ' soon' : '') + (dl ? ' dl' : '') },
+      const when = l ? `${l.d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' })}${x.start ? ', ' + fmtTime(x.start) : ''}` : (dl ? 'Deadline not published' : 'Date not published');
+      const big = !l ? 'No date yet' : l.n < 0 ? 'Done' : l.n === 0 ? 'Today' : `${l.w ? l.w + ' wk' + (l.w === 1 ? '' : 's') + ' ' : ''}${l.r ? l.r + ' day' + (l.r === 1 ? '' : 's') : ''}`.trim();
+      box.append(el('li', { title: x.name + (l ? ' · ' + when : ''), class: 'cd-c' + (!l ? ' none' : l.n < 0 ? ' past' : l.n <= 42 ? ' soon' : '') + (dl ? ' dl' : '') },
         el('span', { class: 'cd-k' }, el('b', { text: SHORT[x.id] || x.id }), el('span', { text: x.code || '' })),
-        el('span', { class: 'cd-n', text: x.name.replace(/^(GCSE )?(Unit \d|AS \d|A2 \d):\s*/, '') }),
         el('span', { class: 'cd-big', text: big }),
         el('span', { class: 'cd-w', text: when + (x.edited ? ' (edited)' : '') }),
-        l && l.n > 0 ? el('span', { class: 'cd-t', text: `≈ ${pl(l.teach, 'teaching week')}` }) : (!l && (x.hint || x.note) ? el('span', { class: 'cd-t', text: x.hint || x.note, title: x.note || '' }) : null)));
+        l && l.n > 0 ? el('span', { class: 'cd-t', text: `≈ ${l.teach} teaching wks` }) : (!l && x.hint ? el('span', { class: 'cd-t', text: x.hint }) : null)));
     }
     const src = $('#cd-src'); src.innerHTML = '';
     const used = new Set(exams().map(x => x.src));
@@ -1320,7 +1470,8 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     paths.forEach(p => ['d7', 'd30', 'all'].forEach(per => jobs.push(async () => { (R[p.id] = R[p.id] || {})[per] = await count(p.path, per).catch(e => e); })));
     await pool(jobs, 6);
     const vals = Object.values(R).flatMap(x => Object.values(x)), bad = vals.filter(v => v instanceof Error).length;
-    if (bad === vals.length) { st.className = 'tp-status warn'; st.textContent = 'The visit counts could not be loaded. You may be offline, or the public counter may not be switched on in GoatCounter (Settings › “Allow adding visitor counts on your website”). Try again later.'; loaded = false; $('#vs-retry').hidden = false; return; }
+    if (bad === vals.length) { st.className = 'tp-status warn'; st.textContent = 'The visit counts could not be loaded. You may be offline, or the public counter may not be switched on in GoatCounter (Settings › “Allow adding visitor counts on your website”). Try again later.'; loaded = false; $('#vs-retry').hidden = false; $('#vs-t').closest('.card').hidden = true; return; }
+    $('#vs-t').closest('.card').hidden = false;
     st.hidden = !bad; if (bad) { st.className = 'tp-status warn'; st.textContent = `${bad} of ${vals.length} counts could not be loaded and show as –.`; }
     $('#vs-retry').hidden = !bad;
     render();

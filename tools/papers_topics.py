@@ -7,7 +7,8 @@ deduplicated, newest series first. Writes papers/topics.json:
     "ccea_reports": { "gce": { "Summer 2025": "<CCEA examiner report URL>" }, "gcse": {} } }
 
 Each topic also lists its workbook "pages" [{"id": "c01-p01", "s": "spec wording"}] and each item the page ids "p" it sits on
-(the Teacher area's exam trends drill down to spec points with them).
+(the Teacher area's exam trends drill down to spec points with them), and its question type "y": "mc" (multiple choice,
+tick or match), "short" (1-3 marks, or 4-5 for stating or describing a few points) or "long" (4+ marks or an extended answer), for the test builder's question mix.
 k is the key used by papers/crops.json and papers/pages.json (<book>|<series>|<question>), s the series (folders.json
 spelling), q the question as printed, m the marks the workbook gives (null when it does not; the page then uses the
 "marks" papers/crops.json reads off the paper), t the workbook's one-line summary. ccea_reports lists the CCEA examiner
@@ -62,7 +63,39 @@ def q_rank(q):
     return out
 
 
+MC = re.compile(r"multiple[- ]choice|\btick\b|select the (correct|true|right)|which (statement|one|of the following)|true (or|and|/) ?false|"
+                r"(?<!pattern )\bmatch(es|ing)?\b|\bpick the\b|spot the statement|choose the (correct|right)", re.I)
+LONG_VERB = re.compile(r"\b(evaluate|discuss|analy[sz]e|assess|justify|QWC|extended writing|essay|write (an? )?(algorithm|program|code|pseudocode)|"
+                       r"pseudocode|algorithm|trace table|normalis|draw an? (ER|entity|data flow|DFD)|explain how|explain why)", re.I)
+
+
+def qtype(summary, marks):
+    """mc (multiple choice / tick / match), short (1-3 marks: state, identify, define, describe) or long (4+ marks, or an
+    extended answer, an algorithm, code or a multi-mark calculation). Precomputed for the Teacher area's test builder."""
+    t = summary or ""
+    if MC.search(t) and (marks is None or marks <= 4):
+        return "mc"
+    if re.match(r"\s*(match|tick|true or false|multiple[- ]choice)\b", t, re.I) and not re.search(r"\b(then|describe|explain)\b", t, re.I):
+        return "mc"   # a whole matching or tick-box question, whatever its marks
+    if re.match(r"\s*short questions\b", t, re.I):
+        return "short"
+    if LONG_VERB.search(t) and (marks is None or marks >= 3):
+        return "long"
+    if marks is None or marks <= 3:
+        return "short"
+    # 4 or 5 marks for listing, naming or describing a few points is still a short answer; 6+ is always long
+    if marks <= 5 and re.match(r"\s*(state|identify|define|list|name|give|describe|outline|label|convert|complete|what|purpose|"
+                               r"two|three|four|main features|features)\b", t, re.I):
+        return "short"
+    return "long"
+
+
 def main():
+    crops = {}
+    try:
+        crops = json.load(open(os.path.join(ROOT, "papers", "crops.json"), encoding="utf-8"))
+    except (OSError, ValueError):
+        pass
     books, reports = [], {"gcse": {}, "gce": {}}
     for b in BOOKS:
         d = load_book(b)
@@ -91,6 +124,8 @@ def main():
                     seen.add(k)
                     byk[k] = {"k": k, "s": s, "q": q, "m": e.get("marks") if isinstance(e.get("marks"), int) else None,
                               "t": (e.get("summary") or "").strip(), "p": [pg["id"]] if pg.get("id") else []}
+                    mk = byk[k]["m"] if byk[k]["m"] is not None else (crops.get(k) or {}).get("marks")
+                    byk[k]["y"] = qtype(byk[k]["t"], mk if isinstance(mk, int) else None)
                     items.append(byk[k])
             if not items:
                 continue
@@ -107,6 +142,12 @@ def main():
     n = sum(len(t["items"]) for bk in books for t in bk["topics"])
     print("papers/topics.json: %d book(s), %d topic(s), %d question(s), %.0f KB" % (
         len(books), sum(len(bk["topics"]) for bk in books), n, os.path.getsize(p) / 1024))
+    for bk in books:
+        u = {}
+        for t in bk["topics"]:
+            for it in t["items"]:
+                u[it["k"]] = it["y"]
+        print("  %s question types: %s" % (bk["id"], ", ".join("%s %d" % (y, list(u.values()).count(y)) for y in ("mc", "short", "long"))))
 
 
 if __name__ == "__main__":

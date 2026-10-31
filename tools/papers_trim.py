@@ -31,14 +31,29 @@ def page_info(pdf, cache, n):
         off, vh, x0, x1 = 0.0, H, 0.0, W
     if vh <= 0 or x1 <= x0:
         off, vh, x0, x1 = 0.0, H, 0.0, W
-    objs, wl, wr = [], x0, x1   # wl / wr: inner edges of the left / right logo strips
+    objs, wl, wr = [], x0, x1   # wl / wr: inner edges of the left / right logo strips (and of a marks column)
     texty = []
+    shapes = list(pg.rects) + list(pg.lines) + list(pg.curves)
+    tall = lambda o: float(o["bottom"]) - float(o["top"]) > 0.4 * H
+    # the mark scheme's "available marks" column (and any examiner-only column): a tall box in the right-hand 40% of the page
+    col = [float(o["x0"]) for o in shapes if tall(o) and float(o["x0"]) > x0 + 0.6 * (x1 - x0) and float(o["x1"]) - float(o["x0"]) > 8]
+    if col:
+        wr = min(wr, min(col) - 1)
     for c in pg.chars:
-        if c.get("text", "").strip():
+        if c.get("text", "").strip() and float(c["x0"]) < wr and c.get("upright", True):   # sideways text is the page's reference code down the margin
             objs.append((float(c["x0"]), float(c["x1"]), float(c["top"]), float(c["bottom"])))
             if float(x0 + EDGE * (x1 - x0)) < float(c["x0"]) < float(x1 - EDGE * (x1 - x0)):
                 texty.append((float(c["top"]), float(c["bottom"])))
-    for o in list(pg.rects) + list(pg.lines) + list(pg.curves):
+    edges = [float(o[k]) for o in shapes if tall(o) for k in ("x0", "x1")]
+    corner = lambda o: (float(o["x1"]) - float(o["x0"]) < 25 and float(o["bottom"]) - float(o["top"]) < 25
+                        and any(abs(float(o["x0"]) - e) < 2 or abs(float(o["x1"]) - e) < 2 for e in edges))
+    for o in shapes:
+        if corner(o):   # the corner brackets of the page frame
+            continue
+        if tall(o) or float(o["x0"]) >= wr:   # page frames, column rules and the marks column itself are not content
+            continue
+        if float(o["x1"]) - float(o["x0"]) < 2.5 and float(o["bottom"]) - float(o["top"]) > 15:   # thin upright rules (bits of the answer-box frame); tables keep their width from their horizontal rules
+            continue
         objs.append((float(o["x0"]), float(o["x1"]), float(o["top"]), float(o["bottom"])))
     for im in pg.images:
         a, b = float(im["x0"]), float(im["x1"])
@@ -99,29 +114,9 @@ def main():
             if k.startswith("_") or not isinstance(v, dict):
                 continue
             b, s, _ = k.split("|", 2)
-            fn = (manifest.get(folders.get("%s|%s" % (b, s), ""), {}) or {}).get("paper")
-            if not fn or not os.path.exists(os.path.join(ROOT, fn)):
-                continue
-            if fn not in open_pdfs:
-                try:
-                    open_pdfs[fn] = (pdfplumber.open(os.path.join(ROOT, fn)), {})
-                except Exception as ex:
-                    print("skip %s: %s" % (fn, ex), file=sys.stderr); open_pdfs[fn] = None
-            if not open_pdfs[fn]:
-                continue
-            pdf, cache = open_pdfs[fn]
-            for side, out, go in (("paper", "px", "pg"), ("stem", "sx", "sg")):
-                segs = v.get(side) or []
-                bs = [bounds(pdf, cache, sg) for sg in segs]
-                if any(bs):
-                    v[out] = [x or [0, 1] for x in bs]; n_trim += 1
-                else:
-                    v.pop(out, None)
-                gs = [gaps(pdf, cache, sg) for sg in segs]
-                if any(gs):
-                    v[go] = gs
-                else:
-                    v.pop(go, None)
+            files = manifest.get(folders.get("%s|%s" % (b, s), ""), {}) or {}
+            for fn, sides in ((files.get("paper"), (("paper", "px", "pg"), ("stem", "sx", "sg"))), (files.get("ms"), (("ms", "mx", None),))):
+                n_trim += trim_one(v, fn, sides, open_pdfs)
     finally:
         for x in open_pdfs.values():
             if x:
@@ -131,6 +126,36 @@ def main():
                                      for k in sorted(crops)) + "\n}\n")
     print("papers/crops.json: trimmed %d crop list(s)" % n_trim)
 
+
+def trim_one(v, fn, sides, open_pdfs):
+    import pdfplumber
+    n = 0
+    if True:
+            if not fn or not os.path.exists(os.path.join(ROOT, fn)):
+                return 0
+            if fn not in open_pdfs:
+                try:
+                    open_pdfs[fn] = (pdfplumber.open(os.path.join(ROOT, fn)), {})
+                except Exception as ex:
+                    print("skip %s: %s" % (fn, ex), file=sys.stderr); open_pdfs[fn] = None
+            if not open_pdfs[fn]:
+                return 0
+            pdf, cache = open_pdfs[fn]
+            for side, out, go in sides:
+                segs = v.get(side) or []
+                bs = [bounds(pdf, cache, sg) for sg in segs]
+                if any(bs):
+                    v[out] = [x or [0, 1] for x in bs]; n += 1
+                else:
+                    v.pop(out, None)
+                if not go:
+                    continue
+                gs = [gaps(pdf, cache, sg) for sg in segs]
+                if any(gs):
+                    v[go] = gs
+                else:
+                    v.pop(go, None)
+    return n
 
 if __name__ == "__main__":
     main()
