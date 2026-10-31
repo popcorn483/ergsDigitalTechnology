@@ -109,7 +109,7 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
     <button type="button" class="tp-dl" data-dl="answers"><b><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Mark schemes and reports</b><small>The answers, numbered to match the worksheet</small></button>
    </div>
    <div class="tp-status" id="tp-status" role="status" aria-live="polite" hidden><span id="tp-status-t"></span><progress id="tp-bar" max="1" value="0" hidden></progress></div>
-   <div class="tp-tools"><label>Order <select id="tp-order"><option value="new">Newest first</option><option value="old">Oldest first</option></select></label><span class="sp"></span><button type="button" class="tp-mini" id="tp-all">Select all</button><button type="button" class="tp-mini" id="tp-none">Select none</button></div>
+   <div class="tp-tools"><label>Layout <select id="tp-layout"><option value="standard">Standard: one question per page</option><option value="compact">Compressed: saves paper</option></select></label><label>Order <select id="tp-order"><option value="new">Newest first</option><option value="old">Oldest first</option></select></label><span class="sp"></span><button type="button" class="tp-mini" id="tp-all">Select all</button><button type="button" class="tp-mini" id="tp-none">Select none</button></div>
    <p class="small" style="margin:0 0 6px">Untick any question to leave it out. The numbers are the ones printed in the packs.</p>
    <ol id="tp-list" aria-label="Questions in this pack"></ol>
   </div>
@@ -120,7 +120,7 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
     <li>Where a report discusses a whole question in one paragraph, the pack shows that paragraph with the lines about the part highlighted.</li>
     <li>CCEA publishes no report for the 2021 series, the specimen papers or the 2022 A2 1 resit, so those questions have no report section.</li></ul></details>
   </div>
-  <p class="small">The papers, mark schemes and examiner reports are CCEA material, used with permission and shown unchanged. Every page of a pack says so. Packs are made in your browser from the PDFs in this site; nothing is uploaded.</p>
+  <p class="small">The papers, mark schemes and examiner reports are CCEA material, used with permission, cut straight from CCEA's PDFs (the edge watermark is trimmed off). Packs are made in your browser from the PDFs in this site; nothing is uploaded.</p>
  </div>
 </section>
 
@@ -191,7 +191,7 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
   const store = { get(k, d) { try { const v = localStorage.getItem('teacher.' + k); return v === null ? d : v; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem('teacher.' + k, v); } catch (e) { } } };
 
   let D = null;   /* all the data */
-  const S = { course: null, book: null, topic: null, order: store.get('order', 'new'), off: new Set() };
+  const S = { course: null, book: null, topic: null, order: store.get('order', 'new'), layout: store.get('layout', 'standard'), off: new Set() };
 
   /* ------------------------------------------------------------------ helpers on one question */
   const serLabel = s => /^\d{4}$/.test(s) ? 'Summer ' + s : s;
@@ -204,7 +204,7 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
     const rkey = book.course + '|' + s, rfile = (D.reports.files || {})[rkey] || null;
     const none = ((D.reports.none || NO_REPORT)[book.course] || []).includes(s) || /specimen|resit/i.test(s) || /\b2021\b/.test(s);
     const report = rep ? 'crop' : rfile ? 'nocomment' : none ? 'none' : 'missing';
-    return { paper: files.paper || null, ms: files.ms || null, cp: segs(cr.paper), cm: segs(cr.ms), cs: segs(cr.stem), pp: +pg.paper || null, pm: +pg.ms || null,
+    return { paper: files.paper || null, ms: files.ms || null, cp: segs(cr.paper), cm: segs(cr.ms), cs: segs(cr.stem), px: cr.px || [], sx: cr.sx || [], pg: cr.pg || [], sg: cr.sg || [], pp: +pg.paper || null, pm: +pg.ms || null,
              marks, rep, rfile, report, series: serLabel(s), head: `${serLabel(s)} · ${book.short} · ${qLabel(it.q)}${marks ? ` · ${marks} mark${marks === 1 ? '' : 's'}` : ''}` };
   }
   const yr = s => { const m = /(20\d\d)/.exec(s); return m ? +m[1] : 0; };
@@ -320,11 +320,19 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
   /* the blocks for one question: head / label / seg {src, page, t, b, hl} / note */
   function blocks(variant, n, book, it) {
     const x = info(book, it), out = [];
-    const segOf = (src, C, hl) => C.map(([p, t, b]) => ({ k: 'seg', src, page: p, t, b, hl: (hl || []).filter(h => h[0] === p).map(h => [h[1], h[2]]) }));
+    /* X: [left, right] per segment (cuts off CCEA's edge watermark); G: blank runs per segment, squeezed out of the compressed
+       answer packs (never out of a worksheet, where pupils need the answer space) */
+    const squeeze = S.layout === 'compact' && variant !== 'questions';
+    const segOf = (src, C, hl, X, G) => C.flatMap(([p, t, b], i) => {
+      const lr = (X && X[i]) || [0, 1], h = (hl || []).filter(z => z[0] === p).map(z => [z[1], z[2]]), mk = (a, z) => ({ k: 'seg', src, page: p, t: a, b: z, l: lr[0], r: lr[1], hl: h });
+      const gs = squeeze && G && G[i] ? G[i].filter(g => g[0] > t && g[1] < b && g[1] > g[0]) : [];
+      if (!gs.length) return [mk(t, b)];
+      const out = []; let a = t; gs.forEach(g => { out.push(mk(a, g[0]), { k: 'squeeze' }); a = g[1]; }); out.push(mk(a, b)); return out;
+    });
     const whole = (src, p, what) => [{ k: 'label', text: `${what}: whole page ${p} (this question could not be cut out automatically)`, tone: 'warn' }, { k: 'seg', src, page: p, t: 0, b: 1, hl: [] }];
     const question = () => {
       if (!x.paper) return [{ k: 'note', text: `The ${x.series} ${book.short} question paper is not uploaded yet.` }];
-      if (x.cp) return [...(x.cs ? [{ k: 'label', text: `From the start of Q${String(it.q).match(/^\d+/)}`, tone: 'mute' }, ...segOf(x.paper, x.cs), { k: 'gap' }] : []), ...segOf(x.paper, x.cp)];
+      if (x.cp) return [...(x.cs ? [{ k: 'label', text: `From the start of Q${String(it.q).match(/^\d+/)}`, tone: 'mute' }, ...segOf(x.paper, x.cs, null, x.sx, x.sg), { k: 'gap' }] : []), ...segOf(x.paper, x.cp, null, x.px, x.pg)];
       if (x.pp) return whole(x.paper, x.pp, 'Question paper');
       return [{ k: 'note', text: `Not located in the ${x.series} question paper: see the paper itself.` }];
     };
@@ -376,10 +384,10 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
       const segs = plan.flat().filter(b => b.k === 'seg' && b.src === url && b.page >= 1 && b.page <= sd.getPageCount());
       plan.flat().filter(b => b.k === 'seg' && b.src === url && !segs.includes(b)).forEach(b => { b.k = 'note'; b.text = `Page ${b.page} is not in ${url.split('/').pop()}.`; });
       if (!segs.length) continue;
-      const pages = segs.map(b => sd.getPage(b.page - 1)), bbs = segs.map((b, i) => { const v = box(pages[i]), h = v.y1 - v.y0; return { left: v.x0, right: v.x1, top: v.y1 - b.t * h, bottom: v.y1 - b.b * h }; });
+      const pages = segs.map(b => sd.getPage(b.page - 1)), bbs = segs.map((b, i) => { const v = box(pages[i]), h = v.y1 - v.y0; const ww = v.x1 - v.x0; return { left: v.x0 + (b.l || 0) * ww, right: v.x0 + (b.r == null ? 1 : b.r) * ww, top: v.y1 - b.t * h, bottom: v.y1 - b.b * h }; });
       try {
         const emb = await doc.embedPages(pages, bbs);
-        segs.forEach((b, i) => { b.emb = emb[i]; b.w = bbs[i].right - bbs[i].left; b.h = bbs[i].top - bbs[i].bottom; });
+        segs.forEach((b, i) => { b.emb = emb[i]; b.w = bbs[i].right - bbs[i].left; b.h = bbs[i].top - bbs[i].bottom; const v = box(pages[i]); b.pw = v.x1 - v.x0; });
       } catch (e) { segs.forEach(b => { b.k = 'note'; b.text = `Could not read ${url.split('/').pop()}.`; }); failed.push(url); }
     }
     /* 3. lay out on A4: a branded title band, numbered question headers, the question as cut from the paper,
@@ -415,7 +423,7 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
       page = doc.addPage([W, H]); y = H - M.t;
       if (!first) {   /* running header */
         txt(page, title, M.l, H - 28, 8.5, bold, C.ink2);
-        const r = `CCEA past-paper questions · ${VARIANT[variant].name}`; txt(page, r, W - M.r - tw(r, 8.5, reg), H - 28, 8.5, reg, C.ink3);
+        /* the page number is added on the right once the page count is known */
         page.drawLine({ start: { x: M.l, y: H - 34 }, end: { x: W - M.r, y: H - 34 }, thickness: .6, color: C.line });
         y = H - M.t - 4;
       }
@@ -423,7 +431,8 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
       if (had) openFrag(true);
     };
     const room = () => y - M.b - (bx ? PAD : 0), FULL = H - M.t - M.b - 30, SHRINK = .8;
-    const segH = b => Math.min(b.h * (cw() / b.w), FULL);
+    const segW = b => S.layout === 'compact' && b.pw ? Math.min(cw(), b.w * CW / b.pw) : cw();   /* compressed: no enlarging of trimmed crops */
+    const segH = b => Math.min(b.h * (segW(b) / b.w), FULL);
     const chain = (bl, i) => { let h = 0; for (let j = i; j < bl.length; j++) { const z = bl[j];
       if (z.k === 'head') h += 34; else if (z.k === 'box') h += BOXHEAD; else if (z.k === 'label') h += 14; else if (z.k === 'gap') h += 8;
       else if (z.k === 'boxend') continue;
@@ -455,6 +464,7 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
     for (let qi = 0; qi < plan.length; qi++) {
       if (qi % 4 === 0) { setStatus(`Placing question ${qi + 1} of ${plan.length}`, 'busy', .75 + qi / plan.length * .23); await tick(); }
       const bl = plan[qi];
+      if (S.layout !== 'compact' && qi > 0) newPage();   /* standard: every question starts on its own page */
       for (let i = 0; i < bl.length; i++) {
         const b = bl[i];
         if (b.k === 'head') {
@@ -482,13 +492,16 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
           for (const ln of lines) { txt(page, ln, cx() + 2, y - 10, 9.5, ital, C.ink2); y -= 12.5; }
           y -= 4;
         } else if (b.k === 'gap') {
+          y -= S.layout === 'compact' ? 5 : 8;
+        } else if (b.k === 'squeeze') {   /* answer space taken out: a short dashed rule shows where */
+          page.drawLine({ start: { x: cx() + cw() * .3, y: y - 3 }, end: { x: cx() + cw() * .7, y: y - 3 }, thickness: .6, color: C.line, dashArray: [3, 3] });
           y -= 8;
         } else if (b.k === 'seg') {
-          const W0 = cw(); let w = W0, h = b.h * (W0 / b.w);
+          const W0 = segW(b); let w = W0, h = b.h * (W0 / b.w);
           if (h > FULL) { w = W0 * FULL / h; h = FULL; }
           if (room() < h && room() < h * SHRINK) newPage();
           if (room() < h) { w = w * room() / h; h = room(); }
-          const x = cx() + (W0 - w) / 2;
+          const x = cx() + (cw() - w) / 2;
           page.drawPage(b.emb, { x, y: y - h, width: w, height: h });
           for (const [ht, hb] of b.hl) {   /* highlight the lines about this part (fractions of the source page) */
             const a = Math.max(ht, b.t), z = Math.min(hb, b.b); if (z <= a) continue;
@@ -499,16 +512,11 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
         }
       }
       if (bx) { closeFrag(false); bx = null; }
-      y -= 14;
+      y -= S.layout === 'compact' ? 10 : 14;
     }
-    /* footer on every page */
-    const ps = doc.getPages(), foot = 'CCEA past paper material – used with permission';
-    ps.forEach((p, i) => {
-      p.drawLine({ start: { x: M.l, y: 36 }, end: { x: W - M.r, y: 36 }, thickness: .5, color: C.line });
-      txt(p, foot, M.l, 24, 7.5, reg, C.ink3);
-      const pn = `Page ${i + 1} of ${ps.length}`; txt(p, pn, W - M.r - tw(pn, 7.5, bold), 24, 7.5, bold, C.ink2);
-      const mid = "Mr Butler's Digital Technology"; txt(p, mid, (W - tw(mid, 7.5, reg)) / 2, 24, 7.5, reg, C.ink3);
-    });
+    /* page numbers in the running header (no footer) */
+    const ps = doc.getPages();
+    ps.forEach((p, i) => { if (!i) return; const r = `${VARIANT[variant].name} · Page ${i + 1} of ${ps.length}`; txt(p, r, W - M.r - tw(r, 8.5, reg), H - 28, 8.5, reg, C.ink3); });
     setStatus('Saving the PDF…', 'busy', .99); await tick();
     const bytes = await doc.save();
     const name = `${book.short} – ${topic.title} – CCEA questions${VARIANT[variant].file}.pdf`.replace(/[\\/:*?"<>|]/g, '-');
@@ -552,6 +560,7 @@ tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:
     ui.packTitle = $('#tp-title'); ui.count = $('#tp-count'); ui.count2 = $('#tp-count2'); ui.list = $('#tp-list'); ui.status = $('#tp-status'); ui.statusText = $('#tp-status-t'); ui.bar = $('#tp-bar');
     ui.reports = $('#tp-reports'); ui.dl = [...document.querySelectorAll('[data-dl]')];
     ui.dl.forEach(b => b.addEventListener('click', () => download(b.dataset.dl, b)));
+    const lay = $('#tp-layout'); if (lay) { lay.value = S.layout; lay.addEventListener('change', () => { S.layout = lay.value; store.set('layout', S.layout); }); }
     const ord = $('#tp-order'); ord.value = S.order; ord.addEventListener('change', () => { S.order = ord.value; store.set('order', S.order); if (S.topic) renderPack(); });
     $('#tp-all').addEventListener('click', () => { S.off = new Set(); renderPack(); });
     $('#tp-none').addEventListener('click', () => { S.off = new Set(S.topic.items.map(i => i.k)); renderPack(); });

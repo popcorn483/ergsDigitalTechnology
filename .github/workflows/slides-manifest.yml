@@ -29,6 +29,7 @@ jobs:
         run: |
           pip install --quiet pdfplumber
           python3 tools/papers_crops.py || echo "crop finder failed; keeping the previous crops.json"
+          python3 tools/papers_trim.py || echo "watermark trim failed"
       - name: List each topic's questions and find their examiner-report comments (Teacher area topic packs)
         run: |
           python3 tools/papers_topics.py || echo "topic list failed; keeping the previous topics.json"
