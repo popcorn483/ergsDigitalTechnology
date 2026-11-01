@@ -134,7 +134,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 .bt-head{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .dim{opacity:.5}
 .bt-mixset{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:8px 0 0}
-.bt-tps{display:flex;flex-direction:column;gap:6px}.bt-tp{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13.5px;font-weight:700;color:var(--ink)}.bt-tp>span{color:var(--ink);font-weight:700}.bt-tp small{display:block;font-weight:400;color:var(--ink-3);font-size:12px}.bt-tp small.over{color:var(--warn);font-weight:700}.bt-tp .bt-spin button{width:32px;height:32px;font-size:16px}.bt-tp .bt-spin input{height:32px;width:2.8em}
+.bt-tps{display:flex;flex-direction:column;gap:6px}.bt-tp{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13.5px;font-weight:700;color:var(--ink)}.bt-tp>span{color:var(--ink);font-weight:700}.bt-tq{display:flex;flex-wrap:wrap;gap:6px 10px;margin:-2px 0 6px;padding-bottom:8px;border-bottom:1px solid var(--line)}.bt-tq:last-of-type{border-bottom:0}.bt-tql{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--ink-2)}.bt-tql select{font:inherit;font-weight:400;font-size:13px;padding:4px 6px;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--ink)}.bt-tp small{display:block;font-weight:400;color:var(--ink-3);font-size:12px}.bt-tp small.over{color:var(--warn);font-weight:700}.bt-tp .bt-spin button{width:32px;height:32px;font-size:16px}.bt-tp .bt-spin input{height:32px;width:2.8em}
 .bt-sps{display:flex;flex-wrap:wrap;gap:8px 18px}.bt-sp{display:flex;flex-direction:column;gap:2px;font-size:13px;font-weight:700;color:var(--ink-2)}
 .bt-sp small{font-weight:400;color:var(--ink-3);font-size:12px}.bt-sp small.over{color:var(--warn);font-weight:700}
 .bt-spin{display:flex;align-items:center;gap:0}.bt-spin button{font:inherit;font-weight:700;font-size:18px;width:36px;height:36px;border:1px solid var(--line);background:var(--paper);color:var(--accent);cursor:pointer}
@@ -1050,7 +1050,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   const B = { course: null, units: new Set(), topics: new Set(), mode: store.get('bt.mode', 'marks'), marks: +store.get('bt.marks', 60) || 60, mins: +store.get('bt.mins', 60) || 60,
               rate: store.get('bt.rate', 'paper'), spread: 'freq', papers: store.get('bt.papers', 'all'), dedupe: store.get('bt.dedupe', '1') === '1',
               fresh: store.get('bt.fresh', '0') === '1', mix: store.get('bt.mix', 'auto'),
-              pt: (() => { try { return JSON.parse(store.get('bt.pt', '{}')) || {}; } catch (e) { return {}; } })(), want: { mc: +store.get('bt.n.mc', 5) || 0, short: +store.get('bt.n.short', 6) || 0, long: +store.get('bt.n.long', 3) || 0 }, order: store.get('bt.order', 'topic'), layout: store.get('bt.layout', 'standard'), sel: [], seed: 1, target: 0, quota: null, note: '' };
+              pt: (() => { try { return JSON.parse(store.get('bt.pt', '{}')) || {}; } catch (e) { return {}; } })(), ptm: (() => { try { return JSON.parse(store.get('bt.ptm', '{}')) || {}; } catch (e) { return {}; } })(), want: { mc: +store.get('bt.n.mc', 5) || 0, short: +store.get('bt.n.short', 6) || 0, long: +store.get('bt.n.long', 3) || 0 }, order: store.get('bt.order', 'topic'), layout: store.get('bt.layout', 'standard'), sel: [], seed: 1, target: 0, quota: null, note: '' };
   const used = { get() { try { return JSON.parse(localStorage.getItem('teacher.bt.used') || '{}') || {}; } catch (e) { return {}; } },
                  add(keys) { const u = used.get(), now = Date.now(); keys.forEach(k => { u[k] = now; }); try { localStorage.setItem('teacher.bt.used', JSON.stringify(u)); } catch (e) { } },
                  clear() { try { localStorage.removeItem('teacher.bt.used'); } catch (e) { } } };
@@ -1129,6 +1129,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   /* "Set numbers for each topic": exactly n questions from each topic (a spread of sizes, no repeats); the marks follow */
   const ptKeys = () => [...B.topics].filter(k => B.units.has(k.split('|')[0])).sort((a, b) => { const [ba, na] = a.split('|'), [bb, nb] = b.split('|'); return books().findIndex(x => x.id === ba) - books().findIndex(x => x.id === bb) || na - nb; });
   const ptWant = k => B.pt[k] == null ? 3 : B.pt[k];
+  const ptMarks = k => { const n = ptWant(k), a = (B.ptm[k] || []).slice(0, n); while (a.length < n) a.push(0); return a; };   /* marks wanted per question slot (0 = any) */
   const ptHas = (cands, k) => cands.filter(c => c.tps.some(n => tkey(c.book.id, n) === k));
   function pickPerTopic(cands, R) {
     const sel = [], ok = c => !sel.some(s => s.k === c.k || (B.dedupe && similar(s, c))), short = [];
@@ -1136,9 +1137,12 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const n = ptWant(k); if (!n) continue;
       const pool = ptHas(cands, k).map(c => [R(), c]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
       let got = 0;
-      for (let pass = 0; got < n && pass < n * 3 + 3; pass++) {   /* cycle through the sizes so a topic gets a mix of short and long */
+      const ms = ptMarks(k);
+      for (const m of ms) if (m) { const c = pool.find(x => x.marks === m && ok(x)); if (c) { sel.push({ ...c, topic: +k.split('|')[1] }); got++; } }
+      const anyN = ms.filter(m => !m).length; let anyGot = 0;
+      for (let pass = 0; anyGot < anyN && pass < anyN * 3 + 3; pass++) {   /* "any" slots cycle through the sizes so a topic gets a mix of short and long */
         const sz = pass % 3, c = pool.find(x => sizeOf(x.marks) === sz && ok(x)) || (pass >= 3 ? pool.find(ok) : null);
-        if (c) { sel.push({ ...c, topic: +k.split('|')[1] }); got++; }
+        if (c) { sel.push({ ...c, topic: +k.split('|')[1] }); got++; anyGot++; }
       }
       if (got < n) { const [b, tn] = k.split('|'), bk = D.topics.books.find(x => x.id === b); short.push(`${bk.topics.find(t => t.n === +tn).title} (${got})`); }
     }
@@ -1149,13 +1153,22 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const box = $('#bt-tps'), cs = pool(); box.innerHTML = ''; let est = 0, any = false, over = false;
     for (const k of ptKeys()) {
       const [b, tn] = k.split('|'), bk = D.topics.books.find(x => x.id === b), t = bk.topics.find(x => x.n === +tn), has = ptHas(cs, k), av = has.length, n = ptWant(k);
-      const avg = av ? has.reduce((a, c) => a + c.marks, 0) / av : 0; est += Math.min(n, av) * avg; if (n) any = true; if (n > av) over = true;
+      const avg = av ? has.reduce((a, c) => a + c.marks, 0) / av : 0; est += ptMarks(k).slice(0, av).reduce((a, m) => a + (m || avg), 0); if (n) any = true; if (n > av) over = true;
       const inp = el('input', { type: 'number', min: '0', max: String(av), step: '1', value: String(n), 'aria-label': `Questions from ${t.title}` });
       const setN = v => { B.pt[k] = Math.max(0, Math.min(99, Math.round(+v || 0))); store.set('bt.pt', JSON.stringify(B.pt)); renderTarget(); };
       inp.addEventListener('change', () => setN(inp.value));
       const btn = (d, lab) => el('button', { type: 'button', 'aria-label': lab, text: d < 0 ? '−' : '+', onclick: () => setN(Math.min(d > 0 ? av : 99, ptWant(k) + d)) });
+      const marksOf = [...new Set(has.map(c => c.marks))].sort((a, b) => a - b);
+      const slots = el('div', { class: 'bt-tq' }); ptMarks(k).forEach((m, qi) => {
+        const sl = el('select', { 'aria-label': `${t.title}: marks for question ${qi + 1}` }); sl.append(el('option', { value: '0', text: 'Any marks' }));
+        marksOf.forEach(v => sl.append(el('option', { value: String(v), text: `${v} mark${v === 1 ? '' : 's'} (${has.filter(c => c.marks === v).length})` })));
+        sl.value = marksOf.includes(m) ? String(m) : '0';
+        sl.addEventListener('change', () => { const a = ptMarks(k); a[qi] = +sl.value; B.ptm[k] = a; store.set('bt.ptm', JSON.stringify(B.ptm)); renderTarget(); });
+        slots.append(el('label', { class: 'bt-tql' }, el('span', { text: `Q${qi + 1}` }), sl));
+      });
       box.append(el('div', { class: 'bt-tp' }, el('span', {}, document.createTextNode((books().length > 1 ? bk.short + ': ' : '') + t.title), el('small', { class: n > av ? 'over' : '', text: `max ${av}` })),
         el('div', { class: 'bt-spin' }, btn(-1, `One fewer from ${t.title}`), inp, btn(1, `One more from ${t.title}`))));
+      if (n) box.append(slots);
     }
     $('#bt-tsest').textContent = any ? `About ${Math.round(est)} marks (the marks depend on which questions are picked).${over ? ' Some numbers are more than the topic has, so they will be capped.' : ''}` : 'Set at least one number.';
   }
