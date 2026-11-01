@@ -133,6 +133,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 .bt-go{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-top:10px}
 .bt-head{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
 .dim{opacity:.5}
+.ws{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}.ws .ws-h{margin:0;font-size:16px}.ws-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px 12px;margin:8px 0 10px}
 .bt-mixset{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:8px 0 0}
 .bt-tps{display:flex;flex-direction:column;gap:6px}.bt-tp{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13.5px;font-weight:700;color:var(--ink)}.bt-tp>span{color:var(--ink);font-weight:700}.bt-tq{display:flex;flex-wrap:wrap;gap:6px 10px;margin:-2px 0 6px;padding-bottom:8px;border-bottom:1px solid var(--line)}.bt-tq:last-of-type{border-bottom:0}.bt-tql{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--ink-2)}.bt-tql select{font:inherit;font-weight:400;font-size:13px;padding:4px 6px;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--ink)}.bt-tp small{display:block;font-weight:400;color:var(--ink-3);font-size:12px}.bt-tp small.over{color:var(--warn);font-weight:700}.bt-tp .bt-spin button{width:32px;height:32px;font-size:16px}.bt-tp .bt-spin input{height:32px;width:2.8em}
 .bt-sps{display:flex;flex-wrap:wrap;gap:8px 18px}.bt-sp{display:flex;flex-direction:column;gap:2px;font-size:13px;font-weight:700;color:var(--ink-2)}
@@ -231,18 +232,30 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
    <h3 class="tp-title" id="tp-title"></h3>
    <div class="tp-dls">
     <button type="button" class="tp-dl pri" data-dl="full" title="Each question, then its mark scheme and examiner-report comment"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Full pack</button>
-    <button type="button" class="tp-dl" data-dl="questions" title="A pupil worksheet, with space for a name"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Worksheet</button>
+    <button type="button" class="tp-dl" data-dl="questions" title="The questions only, with space for a name"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Questions only</button>
     <button type="button" class="tp-dl" data-dl="answers" title="The answers, numbered to match the worksheet"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Mark schemes</button>
    </div>
    <div class="tp-status" id="tp-status" role="status" aria-live="polite" hidden><span id="tp-status-t"></span><progress id="tp-bar" max="1" value="0" hidden></progress></div>
    <div class="tp-tools"><select id="tp-layout" aria-label="Layout"><option value="standard">One question per page</option><option value="compact">Compressed</option></select><select id="tp-order" aria-label="Order"><option value="new">Newest first</option><option value="old">Oldest first</option></select><button type="button" class="ib" aria-expanded="false" aria-controls="i-dl" aria-label="About the downloads and options" title="About the downloads and options"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
-   <div class="ip" id="i-dl" hidden><ul><li><b>Full pack</b>: each question, then its mark scheme (green box) and the examiner’s comment (yellow box).</li><li><b>Worksheet</b>: the questions only, with space for a name, class and date.</li><li><b>Mark schemes</b>: the answers and examiner comments, numbered to match the worksheet.</li><li><b>One question per page</b> keeps the answer space; <b>Compressed</b> saves paper (blank answer space is squeezed out of the answer packs, never out of a worksheet).</li><li><b>Order</b>: newest or oldest paper first.</li></ul></div>
+   <div class="ip" id="i-dl" hidden><ul><li><b>Full pack</b>: each question, then its mark scheme (green box) and the examiner’s comment (yellow box).</li><li><b>Questions only</b>: the questions, with space for a name, class and date.</li><li><b>Mark schemes</b>: the answers and examiner comments, numbered to match the worksheet.</li><li><b>One question per page</b> keeps the answer space; <b>Compressed</b> saves paper (blank answer space is squeezed out of the answer packs, never out of a worksheet).</li><li><b>Order</b>: newest or oldest paper first.</li></ul></div>
    <details class="qs" id="tp-qs"><summary><span id="tp-count" aria-live="polite"></span><span class="qs-more">Show questions</span></summary>
     <p class="small" id="tp-count2"></p>
     <div class="tp-tools"><button type="button" class="tp-mini" id="tp-all">Select all</button><button type="button" class="tp-mini" id="tp-none">Select none</button><button type="button" class="ib" aria-expanded="false" aria-controls="i-qs" aria-label="About the question list" title="About the question list"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
     <div class="ip" id="i-qs" hidden><p>Untick any question to leave it out of the PDFs. The numbers are the ones printed in the packs.</p></div>
     <ol id="tp-list" aria-label="Questions in this pack"></ol>
    </details>
+   <div class="ws">
+    <div class="hrow"><h3 class="ws-h">Topic worksheet</h3><button type="button" class="ib" aria-expanded="false" aria-controls="i-ws" aria-label="About topic worksheets" title="About topic worksheets"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+    <div class="ip" id="i-ws" hidden><p>A compact worksheet for this topic: key terms from the workbook glossary, the workbook’s exam tips, then CCEA past-paper questions (the first ones in the list above, in its order; untick any you don’t want). <b>Answers</b> gives the key-term answers and the mark schemes.</p></div>
+    <div class="ws-opts">
+     <label class="bt-f"><span>Key terms</span><select id="ws-mode"><option value="match">Matching activity</option><option value="write">Pupils write definitions</option><option value="ref">Definitions given</option></select></label>
+     <label class="bt-f"><span>How many terms</span><select id="ws-terms"><option value="8">8</option><option value="12">12</option><option value="16">16</option><option value="0">All</option></select></label>
+     <label class="bt-f"><span>Exam tips</span><select id="ws-tips"><option value="5">5</option><option value="8">8</option><option value="0">All</option></select></label>
+     <label class="bt-f"><span>CCEA questions</span><select id="ws-qs"><option value="0">None</option><option value="4">4</option><option value="6">6</option><option value="10">10</option><option value="999">All selected</option></select></label>
+    </div>
+    <div class="tp-dls"><button type="button" class="tp-dl pri" data-ws="questions"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Worksheet</button><button type="button" class="tp-dl" data-ws="answers"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Answers</button></div>
+    <div class="tp-status" id="ws-status" role="status" aria-live="polite" hidden><span id="ws-status-t"></span><progress id="ws-bar" max="1" value="0" hidden></progress></div>
+   </div>
   </div>
   <details class="about"><summary>About the papers and reports</summary>
    <div class="tp-reps" id="tp-reports"></div>
@@ -601,6 +614,22 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     return out;
   }
 
+  /* topic worksheets (papers/worksheets.json): key terms and exam tips from the workbook, plus a few CCEA questions */
+  let WSD = null;
+  const hashSeed = str => [...str].reduce((a, c) => (Math.imul(a, 31) + c.charCodeAt(0)) >>> 0, 7) || 1;
+  async function wsJob() {
+    WSD = WSD || await getJ('papers/worksheets.json', true);
+    const book = S.book, topic = S.topic, d = ((WSD || {})[book.id] || {})[String(topic.n)] || { terms: [], tips: [] };
+    const nT = +S.wsTerms || d.terms.length, nQ = S.wsQs === '0' ? 0 : +S.wsQs || 9999, nTip = +S.wsTips || d.tips.length;
+    const step = d.terms.length / Math.max(1, Math.min(nT, d.terms.length));
+    const terms = (nT >= d.terms.length ? d.terms.slice() : Array.from({ length: nT }, (_, i) => d.terms[Math.floor(i * step)])).sort((a, b) => a[0].localeCompare(b[0]));
+    let a = hashSeed(book.id + topic.n + terms.length) >>> 0; const R = () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    const perm = terms.map((_, i) => i); for (let i = perm.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [perm[i], perm[j]] = [perm[j], perm[i]]; }
+    const qs = chosen().slice(0, nQ);
+    return { title: `${book.short} – Topic worksheet – ${topic.title}`, heading: 'Topic worksheet', topics: topic.title, kicker: `${book.short.toUpperCase()} · KEY TERMS, CCEA QUESTIONS AND EXAM TIPS`,
+             docTitle: `${book.short} – ${topic.title} – topic worksheet`, file: `${book.short} – ${topic.title} – topic worksheet`, layout: 'compact',
+             items: qs.map(it => ({ book, it })), ws: { mode: S.wsMode, terms, perm, tips: d.tips.slice(0, nTip) } };
+  }
   /* the topic pack as a job for build(): the test builder (teacher_tests.js) makes its own jobs */
   function packJob() {
     const book = S.book, topic = S.topic;
@@ -613,8 +642,8 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   async function build(variant, job) {
     const L = await pdfLib(), { PDFDocument, StandardFonts, rgb, BlendMode } = L;
     job = job || packJob();
-    const its = job.items, title = job.title, TEST = !!job.test, LAY = TEST ? 'compact' : job.layout || 'standard'; if (!its.length) return;   /* tests always flow, to save paper */
-    const plan = its.map((x, i) => blocks(variant, i + 1, x.book, x.it, LAY, !!job.test));
+    const its = job.items, title = job.title, TEST = !!(job.test || job.ws), LAY = TEST ? 'compact' : job.layout || 'standard'; if (!its.length && !job.ws) return;   /* tests always flow, to save paper */
+    const plan = its.map((x, i) => blocks(variant, i + 1, x.book, x.it, LAY, TEST));
     /* 1. load each source PDF once */
     const urls = [...new Set(plan.flat().filter(b => b.k === 'seg').map(b => b.src))];
     const src = new Map(), failed = [];
@@ -704,11 +733,54 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     else { const sers = its.map(x => serLabel(x.it.s)); span = sers.length ? (sers[0] === sers[sers.length - 1] ? sers[0] : `${sers[0]} to ${sers[sers.length - 1]}`) : ''; }
     const hm = m => { const h = Math.floor(m / 60), r = m % 60; return [h ? `${h} hour${h === 1 ? '' : 's'}` : '', r ? `${r} minutes` : ''].filter(Boolean).join(' '); };
     if (TEST) testHead(); else coverBand();
+    if (job.ws) wsSections();
+    /* topic worksheets: key terms (matching, write the definition, or a reference list) and exam tips, then the questions */
+    function wsSections() {
+      const WS = job.ws, pupil = variant === 'questions';
+      const sec = (t, sub) => { if (room() < 60) newPage(); y -= 6; txt(page, t.toUpperCase(), M.l, y - 10, 10, bold, C.ink); if (sub) txt(page, sub, M.l + tw(t.toUpperCase(), 10, bold) + 8, y - 10, 8.5, reg, C.ink3); y -= 15; page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .5, color: C.line }); y -= 8; };
+      const para = (lines, x, size, f, color, lh) => { for (const ln of lines) { if (room() < lh) newPage(); txt(page, ln, x, y - size, size, f, color); y -= lh; } };
+      const T = WS.terms;
+      if (T.length && (pupil || WS.mode !== 'ref')) {
+        if (WS.mode === 'match' && pupil) {
+          sec('Key terms', 'Match each term to its definition: write the number next to the letter.');
+          const lw = CW * .3, rw = CW - lw - 10;
+          T.forEach((t, i) => {
+            const d = T[WS.perm[i]], dl = wrap(reg, 8.8, d[1], rw - 18), h = Math.max(1, dl.length) * 11 + 5;
+            if (room() < h) newPage();
+            const L = String.fromCharCode(65 + i);
+            txt(page, L, M.l, y - 9, 9, bold, C.ink3); txt(page, wrap(bold, 9, t[0], lw - 34)[0] || '', M.l + 12, y - 9, 9, bold, C.ink);
+            page.drawRectangle({ x: M.l + lw - 18, y: y - 12, width: 14, height: 13, borderColor: C.ink3, borderWidth: .6 });
+            txt(page, String(i + 1), M.l + lw + 10, y - 9, 9, bold, C.ink3);
+            dl.forEach((ln, k) => txt(page, ln, M.l + lw + 28, y - 9 - k * 11, 8.8, reg, C.ink));
+            y -= h; page.drawLine({ start: { x: M.l, y: y + 2 }, end: { x: W - M.r, y: y + 2 }, thickness: .3, color: C.line });
+          });
+          y -= 4;
+        } else if (WS.mode === 'write' && pupil) {
+          sec('Key terms', 'Write a definition of each term.');
+          T.forEach(t => { if (room() < 40) newPage(); txt(page, t[0], M.l, y - 10, 9.5, bold, C.ink);
+            for (let k = 0; k < 2; k++) { page.drawLine({ start: { x: M.l + (k ? 0 : CW * .28), y: y - 12 - k * 19 }, end: { x: W - M.r, y: y - 12 - k * 19 }, thickness: .5, color: C.ink3 }); } y -= 40; });
+        } else if (WS.mode === 'match') {   /* answers: the key */
+          sec('Key terms: answers');
+          const key = T.map((t, i) => `${String.fromCharCode(65 + i)} ${WS.perm.indexOf(i) + 1}`);
+          const per = 8, cwk = CW / per; for (let r0 = 0; r0 < key.length; r0 += per) { if (room() < 15) newPage(); key.slice(r0, r0 + per).forEach((k, c) => { const [L, N] = k.split(' '); txt(page, L, M.l + c * cwk, y - 10, 10, bold, C.ink3); txt(page, N, M.l + c * cwk + 12, y - 10, 10, bold, C.ink); }); y -= 16; } y -= 2; void para;
+        } else {   /* reference list, or the answers to "write the definition" */
+          sec(pupil ? 'Key terms' : 'Key terms: definitions');
+          T.forEach(t => { const lines = wrap(reg, 9, t[0] + ' – ' + t[1], CW); if (room() < lines.length * 11.5 + 3) newPage();
+            let first = true; for (const ln of lines) { if (first) { const bt = t[0]; txt(page, bt, M.l, y - 9, 9, bold, C.ink); const rest = ln.slice(bt.length); txt(page, rest, M.l + tw(bt, 9, bold), y - 9, 9, reg, C.ink); first = false; } else txt(page, ln, M.l, y - 9, 9, reg, C.ink); y -= 11.5; } y -= 2.5; });
+        }
+      }
+      if (pupil && WS.tips.length) {
+        sec('Exam tips');
+        WS.tips.forEach(t => { const lines = wrap(reg, 9, t, CW - 12); if (room() < lines.length * 11.5) newPage();
+          page.drawCircle({ x: M.l + 3, y: y - 6, size: 1.6, color: C.ink2 }); lines.forEach((ln, k) => txt(page, ln, M.l + 12, y - 9 - k * 11.5, 9, reg, C.ink)); y -= lines.length * 11.5 + 3; });
+      }
+      if (its.length) sec(pupil ? 'CCEA past-paper questions' : 'Mark schemes', pupil ? 'Answer in the spaces provided.' : '');
+    }
     function testHead() {   /* tests: a plain, printer-friendly header, then straight into the questions */
       const T = job.test, pupil = variant === 'questions';
       const k1 = job.kicker, k2 = "MR BUTLER'S DIGITAL TECHNOLOGY";
       txt(page, k1, M.l, y - 8, 7.5, bold, C.ink3); txt(page, k2, W - M.r - tw(k2, 7.5, bold), y - 8, 7.5, bold, C.ink3);
-      const head = String(job.heading).replace(/\s*–\s*\d+ marks?$/, '') + (variant === 'answers' ? ': mark scheme' : variant === 'full' ? ': with answers' : ':');
+      const head = String(job.heading).replace(/\s*–\s*\d+ marks?$/, '') + (variant === 'answers' ? (job.ws ? ': answers' : ': mark scheme') : variant === 'full' ? ': with answers' : ':');
       if (lmOK(head)) lmText(page, head.toUpperCase(), M.l, y - 30, 17, C.ink); else txt(page, head, M.l, y - 30, 17, bold, C.ink);
       const meta = `${tot} marks`; void T; txt(page, meta, W - M.r - tw(meta, 11, bold), y - 30, 11, bold, C.ink2);
       y -= 30;
@@ -718,7 +790,10 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         for (const ln of lines) { y -= 17; if (lm) lmText(page, ln, M.l, y, S2, C.ink2); else txt(page, ln, M.l, y, S2, bold, C.ink2); }
       }
       y -= 8; page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: 1.2, color: C.ink }); y -= 6;
-      if (pupil) {
+      if (pupil && job.ws) {
+        const fld = (t, x0, x1) => { txt(page, t, x0, y - 14, 9.5, bold, C.ink); page.drawLine({ start: { x: x0 + tw(t, 9.5, bold) + 5, y: y - 16 }, end: { x: x1, y: y - 16 }, thickness: .6, color: C.ink3 }); };
+        fld('Name', M.l, M.l + 270); fld('Class', M.l + 286, M.l + 380); fld('Date', M.l + 396, W - M.r); y -= 26;
+      } else if (pupil) {
         const fld = (t, x0, x1) => { txt(page, t, x0, y - 14, 9.5, bold, C.ink); page.drawLine({ start: { x: x0 + tw(t, 9.5, bold) + 5, y: y - 16 }, end: { x: x1, y: y - 16 }, thickness: .6, color: C.ink3 }); };
         fld('Name', M.l, M.l + 270); fld('Class', M.l + 286, M.l + 380); fld('Date', M.l + 396, W - M.r); y -= 26;
         txt(page, 'Answer all questions in the spaces provided. Marks are shown in brackets [ ].', M.l, y - 9, 9, reg, C.ink2); y -= 16;
@@ -861,7 +936,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       if (bx) { closeFrag(false); bx = null; }
       y -= TEST ? 12 : LAY === 'compact' ? 10 : 14;
     }
-    if (TEST && variant === 'questions') {
+    if (job.test && variant === 'questions') {
       reflect();
       /* marks per page, bottom right, for quick totting up */
       for (const [p, m] of pageMarks) { const t1 = 'Marks on this page', t2 = `/ ${m}`, bw = 36, x2 = W - M.r - tw(t2, 8.5, bold), xb = x2 - 4 - bw, x1 = xb - 6 - tw(t1, 8, reg);
@@ -892,7 +967,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     ps.forEach((p, i) => { if (!i) return; const r = TEST ? `Page ${i + 1} of ${ps.length}` : `${VARIANT[variant].name} · Page ${i + 1} of ${ps.length}`; txt(p, r, W - M.r - tw(r, 8.5, reg), H - 28, 8.5, reg, C.ink3); });
     setStatus('Saving the PDF…', 'busy', .99); await tick();
     const bytes = await doc.save();
-    const name = `${job.file}${TEST && variant === 'answers' ? ' (mark scheme)' : VARIANT[variant].file}.pdf`.replace(/[\\/:*?"<>|]/g, '-');
+    const name = `${job.file}${job.ws ? (variant === 'answers' ? ' (answers)' : '') : TEST && variant === 'answers' ? ' (mark scheme)' : VARIANT[variant].file}.pdf`.replace(/[\\/:*?"<>|]/g, '-');
     const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
     const a = el('a', { href: url, download: name }); document.body.append(a); a.click(); a.remove();
     setTimeout(() => URL.revokeObjectURL(url), 60000);
@@ -938,6 +1013,11 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const lay = $('#tp-layout'); if (lay) { lay.value = S.layout; lay.addEventListener('change', () => { S.layout = lay.value; store.set('layout', S.layout); }); }
     const ord = $('#tp-order'); ord.value = S.order; ord.addEventListener('change', () => { S.order = ord.value; store.set('order', S.order); if (S.topic) renderPack(); });
     $('#tp-all').addEventListener('click', () => { S.off = new Set(); renderPack(); });
+    /* topic worksheet options and downloads */
+    S.wsMode = store.get('ws.mode', 'match'); S.wsTerms = store.get('ws.terms', '12'); S.wsTips = store.get('ws.tips', '8'); S.wsQs = store.get('ws.qs', '6');
+    [['#ws-mode', 'wsMode', 'ws.mode'], ['#ws-terms', 'wsTerms', 'ws.terms'], ['#ws-tips', 'wsTips', 'ws.tips'], ['#ws-qs', 'wsQs', 'ws.qs']].forEach(([id, k, sk]) => { const e = $(id); if (!e) return; e.value = S[k]; if (e.value !== S[k]) { S[k] = e.value; } e.addEventListener('change', () => { S[k] = e.value; store.set(sk, e.value); }); });
+    const wsb = [...document.querySelectorAll('[data-ws]')], wst = { box: $('#ws-status'), text: $('#ws-status-t'), bar: $('#ws-bar') };
+    wsb.forEach(b => b.addEventListener('click', async () => download(b.dataset.ws, b, await wsJob(), { dls: wsb, status: wst, after: () => { wsb.forEach(x => { x.disabled = false; }); renderSummary(); } })));
     $('#tp-none').addEventListener('click', () => { S.off = new Set(S.topic.items.map(i => i.k)); renderPack(); });
     try {
       const [topics, folders, manifest, crops, pages, reports] = await Promise.all(['papers/topics.json', 'papers/folders.json', 'papers/manifest.json', 'papers/crops.json', 'papers/pages.json', 'papers/reports.json'].map((u, i) => getJ(u, i < 2)));
