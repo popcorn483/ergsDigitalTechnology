@@ -191,7 +191,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 #tr-print-h{display:none}.tr-h4{margin:14px 0 6px;font-size:15px}
 /* pupil visits */
 #vs-t{font-size:14.5px;min-width:0}#vs-t th,#vs-t td{vertical-align:middle}
-#ac-t{font-size:14px}#ac-t th,#ac-t td{vertical-align:middle}#ac-t td small{display:block;color:var(--ink-3);font-size:12px;font-weight:400}#ac-t .vs-n{white-space:nowrap;width:auto}#ac-t .vs-bar{display:block;margin-top:3px}
+#ac-t{font-size:14px}#ac-t .ac-cb{width:28px;padding-right:0}#ac-t .ac-cb input{width:18px;height:18px}#ac-t tr.sel td{background:var(--paper-2)}#ac-t .ac-typed{color:var(--warn)}.ac-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:8px 0}.ac-panel{margin:0 0 10px}.ac-panel p{margin:0 0 8px;font-size:14px}.ac-row{display:flex;flex-wrap:wrap;gap:6px}.ac-row input{font:inherit;padding:7px 9px;border:1px solid var(--line);border-radius:8px;min-width:0;flex:1}.ac-row input:first-child{flex:1 1 180px}.tp-mini.danger{color:#fff;background:#B42318;border-color:#B42318}.tp-mini.pri{color:#fff;background:var(--accent);border-color:var(--accent)}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}#ac-t th,#ac-t td{vertical-align:middle}#ac-t td small{display:block;color:var(--ink-3);font-size:12px;font-weight:400}#ac-t .vs-n{white-space:nowrap;width:auto}#ac-t .vs-bar{display:block;margin-top:3px}
 .vs-n{text-align:right;width:22%;font-variant-numeric:tabular-nums;white-space:nowrap}.vs-n span{display:block}
 .vs-bar{display:block;height:6px;background:var(--paper-2);border-radius:3px;margin-top:3px}.vs-bar i{display:block;height:100%;background:var(--accent);border-radius:3px;margin-left:auto}
 .vs-g th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding-top:14px}
@@ -351,7 +351,9 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
   <div class="hrow" id="ac-keyrow" hidden><input type="password" id="ac-key" placeholder="Teacher key" aria-label="Teacher key (TEACHER_KEY in the Apps Script)" autocomplete="off" style="font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:9px;min-width:0;flex:1;max-width:260px"><button type="button" class="tp-mini" id="ac-save">Show activity</button></div>
   <div class="tp-tools" id="ac-tools" hidden><select id="ac-cls" aria-label="Class"></select><select id="ac-sort" aria-label="Sort"><option value="total">Most time</option><option value="week">Most this week</option><option value="last">Last active</option><option value="name">Name</option></select><button type="button" class="tp-mini" id="ac-refresh">Refresh</button><button type="button" class="tp-mini" id="ac-csv">Download CSV</button><button type="button" class="tp-mini" id="ac-forget">Forget key</button></div>
   <p class="tp-status" id="ac-status" role="status" aria-live="polite" hidden></p>
-  <div class="card" id="ac-wrap" hidden><p class="small" id="ac-sum" style="margin:0 0 8px"></p><div style="overflow-x:auto"><table id="ac-t"><thead><tr><th>Pupil</th><th>Class</th><th class="vs-n">Total</th><th class="vs-n">7 days</th><th class="vs-n">Days</th><th class="vs-n">Last</th></tr></thead><tbody id="ac-body"></tbody></table></div></div>
+  <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Clear</button></div>
+  <div class="ac-panel card" id="ac-panel" hidden></div>
+  <div class="card" id="ac-wrap" hidden><p class="small" id="ac-sum" style="margin:0 0 8px"></p><div style="overflow-x:auto"><table id="ac-t"><thead><tr><th class="ac-cb"><span class="sr-only">Select</span></th><th>Pupil</th><th>Class</th><th class="vs-n">Total</th><th class="vs-n">7 days</th><th class="vs-n">Days</th><th class="vs-n">Last</th></tr></thead><tbody id="ac-body"></tbody></table></div></div>
  </div>
  </div>
  <div class="hrow" style="margin-top:22px"><h2>Visits</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-vs" aria-label="About the visit counts" title="About the visit counts"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
@@ -1767,9 +1769,11 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   const UNIT = { home: 'Home', U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
   const hm = s => { const m = Math.round(s / 60); return m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')}`; };
   const when = t => { if (!t) return '–'; const d = Math.floor((Date.now() - t) / 864e5); return d <= 0 ? 'Today' : d === 1 ? 'Yesterday' : d < 7 ? `${d} days ago` : new Date(t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); };
+  const SEL = new Set();
   let URL0 = '', DATA = null, sortBy = LS.get('teacher.actsort') || 'total', cls = LS.get('teacher.actcls') || '';
 
   function status(msg, kind) { const s = $('#ac-status'); s.hidden = !msg; s.className = 'tp-status' + (kind ? ' ' + kind : ''); s.textContent = msg || ''; }
+  const api = (params) => { const key = LS.get('teacher.actkey'), u = new URLSearchParams(Object.assign({ key }, params)); return fetch(URL0 + (URL0.includes('?') ? '&' : '?') + u, { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); };
   async function load() {
     const key = LS.get('teacher.actkey');
     $('#ac-keyrow').hidden = !!key; $('#ac-tools').hidden = !key;
@@ -1791,12 +1795,42 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const max = Math.max(1, ...rows.map(p => p.total));
     rows.forEach(p => {
       const top = Object.entries(p.units || {}).filter(([u]) => u !== 'home').sort((a, b) => b[1] - a[1]).slice(0, 2).map(([u, s]) => `${UNIT[u] || u} ${hm(s)}`).join(', ');
-      tb.append(el('tr', {}, el('td', {}, el('b', { text: p.name }), el('small', { text: top || '' })), el('td', { text: p.cls }),
+      const cb = el('input', { type: 'checkbox', 'aria-label': `Select ${p.name}` }); cb.checked = SEL.has(p.id);
+      cb.addEventListener('change', () => { cb.checked ? SEL.add(p.id) : SEL.delete(p.id); bar(); });
+      const typed = (p.typed || []).filter(t => t !== `${p.name} (${p.cls})`);
+      tb.append(el('tr', { class: SEL.has(p.id) ? 'sel' : '' }, el('td', { class: 'ac-cb' }, cb), el('td', {}, el('b', { text: p.name }), el('small', { text: top || '' }), typed.length ? el('small', { class: 'ac-typed', text: 'Also typed: ' + typed.slice(0, 3).join(', ') }) : null), el('td', { text: p.cls }),
         el('td', { class: 'vs-n' }, document.createTextNode(hm(p.total)), el('span', { class: 'vs-bar', 'aria-hidden': 'true' }, el('i', { style: `width:${p.total / max * 100}%` }))),
         el('td', { class: 'vs-n', text: hm(p.week) }), el('td', { class: 'vs-n', text: String(p.days) }), el('td', { class: 'vs-n', text: when(p.last) })));
     });
+    [...SEL].forEach(id => { if (!DATA.some(p => p.id === id)) SEL.delete(id); }); bar();
     const tot = rows.reduce((a, p) => a + p.total, 0), wk = rows.reduce((a, p) => a + p.week, 0), act = rows.filter(p => p.week > 0).length;
     $('#ac-sum').textContent = rows.length ? `${rows.length} pupil${rows.length === 1 ? '' : 's'} · ${act} active this week · ${hm(wk)} this week · ${hm(tot)} in all` : 'No pupils yet: activity appears once pupils add their name.';
+  }
+  /* merge / rename / delete the ticked pupils */
+  function bar() {
+    const n = SEL.size, b = $('#ac-bar'); b.hidden = !n; if (!n) { $('#ac-panel').hidden = true; return; }
+    $('#ac-n').textContent = `${n} selected`; $('#ac-merge').hidden = n < 2; $('#ac-rename').hidden = n !== 1;
+  }
+  function panel(kind) {
+    const ps = DATA.filter(p => SEL.has(p.id)), box = $('#ac-panel'); box.innerHTML = ''; box.hidden = false;
+    const busy = (btn, f) => async () => { btn.disabled = true; try { const r = await f(); if (!r || !r.ok) throw new Error(r && r.error || 'failed'); SEL.clear(); box.hidden = true; await load(); status(kind === 'delete' ? 'Deleted.' : kind === 'merge' ? 'Merged.' : 'Renamed.', 'ok'); }
+      catch (e) { status('That didn’t work: ' + e.message + '. If you’ve just updated the Apps Script, check you deployed it as a new version.', 'warn'); btn.disabled = false; } };
+    const cancel = el('button', { type: 'button', class: 'tp-mini', text: 'Cancel', onclick: () => { box.hidden = true; } });
+    if (kind === 'delete') {
+      const go = el('button', { type: 'button', class: 'tp-mini danger', text: `Delete ${ps.length === 1 ? 'pupil' : ps.length + ' pupils'}` });
+      go.addEventListener('click', busy(go, () => api({ action: 'delete', ids: ps.map(p => p.id).join(',') })));
+      box.append(el('p', { text: `Delete ${ps.map(p => p.name).join(', ')} and all their activity? This can’t be undone. If they carry on using the site on that device they will appear again as new.` }), el('div', { class: 'ac-row' }, go, cancel));
+      return;
+    }
+    const keep = ps.slice().sort((a, b) => b.total - a.total)[0];
+    const nm = el('input', { type: 'text', maxlength: '40', 'aria-label': 'Name' }), cl = el('input', { type: 'text', maxlength: '12', 'aria-label': 'Class', style: 'max-width:90px' });
+    nm.value = keep.name; cl.value = keep.cls;
+    const go = el('button', { type: 'button', class: 'tp-mini pri', text: kind === 'merge' ? `Merge ${ps.length} into one` : 'Save' });
+    go.addEventListener('click', busy(go, () => { const name = nm.value.replace(/\s+/g, ' ').trim(), cls = cl.value.replace(/\s+/g, '').toUpperCase(); if (!name) throw new Error('give a name');
+      return kind === 'merge' ? api({ action: 'merge', ids: ps.map(p => p.id).join(','), to: keep.id, name, cls }) : api({ action: 'rename', to: keep.id, name, cls }); }));
+    box.append(el('p', { text: kind === 'merge' ? `Merge ${ps.map(p => `${p.name} (${p.cls})`).join(', ')} into one pupil, adding up their time. Their devices keep counting under the merged pupil.` : 'Change the name and class shown for this pupil (what they typed is kept in the Sheet).' }),
+      el('div', { class: 'ac-row' }, nm, cl, go, cancel));
+    nm.focus();
   }
   function csv() {
     if (!DATA) return;
@@ -1815,7 +1849,9 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     $('#ac-key').addEventListener('keydown', e => { if (e.key === 'Enter') $('#ac-save').click(); });
     $('#ac-save').addEventListener('click', () => { const k = $('#ac-key').value.trim(); if (!k) return; LS.set('teacher.actkey', k); $('#ac-key').value = ''; load(); });
     $('#ac-forget').addEventListener('click', () => { LS.set('teacher.actkey', null); DATA = null; load(); });
-    $('#ac-refresh').addEventListener('click', load); $('#ac-csv').addEventListener('click', csv);
+    $('#ac-refresh').addEventListener('click', load);
+    $('#ac-merge').addEventListener('click', () => panel('merge')); $('#ac-rename').addEventListener('click', () => panel('rename')); $('#ac-del').addEventListener('click', () => panel('delete'));
+    $('#ac-clear').addEventListener('click', () => { SEL.clear(); render(); }); $('#ac-csv').addEventListener('click', csv);
     $('#ac-cls').addEventListener('change', e => { cls = e.target.value; LS.set('teacher.actcls', cls); render(); });
     $('#ac-sort').value = sortBy; $('#ac-sort').addEventListener('change', e => { sortBy = e.target.value; LS.set('teacher.actsort', sortBy); render(); });
     let done = false; const go = () => { if (done || location.hash !== '#visits') return; done = true; load(); };
