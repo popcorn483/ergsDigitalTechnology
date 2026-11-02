@@ -18,7 +18,8 @@
    Deploy › Manage deployments › pencil (Edit) › Version: New version › Deploy. The URL stays the same.
 
    Sheets it uses: Log (one row per few minutes of use, per page), Progress (one row per pupil per workbook: pages covered,
-   best chapter-quiz scores, trophies), Saves (progress saved with a code: no names), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
+   best chapter-quiz scores, trophies), Saves (saved progress: under a save code, or P-<pupil ID>), Pins (each pupil's
+   4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
 const TEACHER_KEY = 'change-me';
@@ -58,11 +59,34 @@ function save_(code, data) {   /* code: a save code (K7P4-QX9M) or P-<pupil ID> 
     if (i >= 0) sh.getRange(i + 2, 1, 1, row.length).setValues([row]); else sh.appendRow(row); return { ok: true }; });
 }
 const norm_ = (n, c) => String(n || '').toLowerCase().replace(/\s+/g, ' ').trim() + '|' + String(c || '').toUpperCase().replace(/\s+/g, '');
-function whois_(name, cls) {   /* the pupil with this name and form class (as shown, or as they once typed it): their ID and saved progress */
+/* PINs: a pupil's 4-digit PIN, stored only as a salted hash (Pins sheet). Five wrong tries locks that pupil for 15 minutes. */
+const pins_ = () => tab_('Pins', ['Pupil ID', 'PIN hash', 'Set']);
+function salt_() { const pr = PropertiesService.getScriptProperties(); let s = pr.getProperty('PIN_SALT'); if (!s) { s = Utilities.getUuid(); pr.setProperty('PIN_SALT', s); } return s; }   // made once, kept in the script's properties
+function pinHash_(id, pin) { return Utilities.base64Encode(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, 'mrbdt|' + id + '|' + pin + '|' + salt_())); }
+function getPin_(id) { const r = rows_(pins_()).find(x => String(x[0]) === id); return r ? String(r[1]) : ''; }
+function setPin_(id, pin) { const sh = pins_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === id), row = [id, pinHash_(id, pin), new Date()];
+  if (i >= 0) sh.getRange(i + 2, 1, 1, 3).setValues([row]); else sh.appendRow(row); }
+function dropPins_(ids) { const sh = pins_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (ids.indexOf(String(r[i][0])) >= 0) sh.deleteRow(i + 2); }
+/* signing in: the pupil with this name and form class (as shown, or as they once typed it). With the right PIN: their ID and
+   saved progress. A pupil with no PIN yet takes this one. Nobody with that name: this device's ID becomes a new pupil with this PIN. */
+function whois_(name, cls, pin, devId) {
   const want = norm_(name, cls); if (want.length < 4) return { ok: false };
+  if (!/^\d{4}$/.test(String(pin || ''))) return { ok: false, error: 'pin' };
   const hits = summary_().pupils.filter(p => norm_(p.name, p.cls) === want || (p.typed || []).some(t => { const m = /^(.*) \(([^)]*)\)$/.exec(t); return m && norm_(m[1], m[2]) === want; }));
-  if (!hits.length) return { ok: false };
-  const p = hits.sort((a, b) => b.total - a.total)[0], sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + p.id);
+  if (!hits.length) {
+    if (!okId(devId)) return { ok: false };
+    const id = resolve_(String(devId), aliases_()), had = getPin_(id);
+    if (had && had !== pinHash_(id, pin)) return { ok: false, error: 'pin' };
+    locked_(() => setPin_(id, pin));
+    return { ok: true, id, fresh: true };
+  }
+  const p = hits.sort((a, b) => b.total - a.total)[0], cache = CacheService.getScriptCache(), fk = 'fail:' + p.id, fails = +(cache.get(fk) || 0);
+  if (fails >= 5) return { ok: false, error: 'locked' };
+  const had = getPin_(p.id);
+  if (had && had !== pinHash_(p.id, pin)) { cache.put(fk, String(fails + 1), 900); return { ok: false, error: 'pin', left: 4 - fails }; }
+  if (!had) locked_(() => setPin_(p.id, pin));
+  cache.remove(fk);
+  const sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + p.id);
   return { ok: true, id: p.id, name: p.name, cls: p.cls, updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' };
 }
 function load_(code) {
@@ -93,7 +117,7 @@ function doPost(e) {
 function doGet(e) {
   const q = (e && e.parameter) || {};
   if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
-  if (q.action === 'whois') return out_(whois_(q.name, q.cls));   /* pupils signing in: find them by name and form class */
+  if (q.action === 'whois') return out_(whois_(q.name, q.cls, q.pin, q.id));   /* pupils signing in: find them by name and form class */
   if (q.key !== TEACHER_KEY || TEACHER_KEY === 'change-me') return out_({ error: 'key' });
   if (q.action) return out_(locked_(() => act_(q)));
   return out_(summary_());
@@ -106,7 +130,7 @@ function act_(q) {
     rows_(al).forEach((r, i) => { if (from.indexOf(String(r[1])) >= 0) al.getRange(i + 2, 2).setValue(to); });   // older merges into a merged ID follow it
     from.forEach(f => al.appendRow([f, to]));
     relabel_(from, to); relabelProg_(from, to);
-    dropNames_(from);
+    dropNames_(from); dropPins_(from);
     if (q.name) setName_(to, q.name, q.cls);
     return { ok: true };
   }
@@ -116,6 +140,7 @@ function act_(q) {
     rows_(log_()).forEach(r => { if (resolve_(String(r[1]), A) !== to) return; const k = String(r[4]) + '|' + (String(r[7] || '') || String(r[5] || '')); pages[k] = (pages[k] || 0) + (+r[6] || 0); });
     return { ok: true, pages };
   }
+  if (q.action === 'resetpin') { if (!okId(to)) return { ok: false, error: 'bad request' }; dropPins_([to]); return { ok: true }; }   /* the pupil chooses a new PIN next time they sign in */
   if (q.action === 'rename') { if (!okId(to) || !q.name) return { ok: false, error: 'bad request' }; setName_(to, q.name, q.cls); return { ok: true }; }
   if (q.action === 'delete') {   /* remove their rows; a device that keeps sending starts a fresh record */
     if (!ids.length) return { ok: false, error: 'bad request' };
@@ -125,6 +150,7 @@ function act_(q) {
     const ps = prog_(), pk = rows_(ps).filter(r => ids.indexOf(String(r[1])) < 0), pn = ps.getLastRow() - 1;
     if (pn > 0) ps.getRange(2, 1, pn, PROG_HEAD.length).clearContent();
     if (pk.length) ps.getRange(2, 1, pk.length, PROG_HEAD.length).setValues(pk);
+    dropPins_(ids);
     const sv = saves_(), sr = rows_(sv); for (let i = sr.length - 1; i >= 0; i--) if (ids.indexOf(String(sr[i][0]).replace(/^P-/, '')) >= 0 && /^P-/.test(String(sr[i][0]))) sv.deleteRow(i + 2);
     dropNames_(ids);
     const al = tab_('Aliases', ['Old ID', 'Kept ID']), ak = rows_(al).filter(r => ids.indexOf(String(r[1])) < 0 && ids.indexOf(String(r[0])) < 0), an = al.getLastRow() - 1;
@@ -158,6 +184,7 @@ function dropNames_(ids) {
   for (let i = r.length - 1; i >= 0; i--) if (ids.indexOf(String(r[i][0])) >= 0) sh.deleteRow(i + 2);
 }
 function summary_() {
+  const PN = {}; rows_(pins_()).forEach(r => { PN[String(r[0])] = 1; });
   const rows = rows_(log_()), A = aliases_(), N = names_(), now = Date.now(), WEEK = 7 * 864e5, P = {};
   for (const r of rows) {
     const t = new Date(r[0]).getTime(), id = resolve_(String(r[1]), A), s = +r[6] || 0; if (!id || !s) continue;
@@ -175,6 +202,6 @@ function summary_() {
     if (!old || +r[5] >= old.cov) { let q = {}; try { q = JSON.parse(r[9] || '{}'); } catch (x) { } p.prog[u] = { cov: +r[5], seen: +r[6], total: +r[7], tr: +r[8], quiz: q, at: new Date(r[0]).getTime() }; }
   }
   const pupils = Object.keys(P).map(k => { const p = P[k]; p.days = Object.keys(p.days).length; p.typed = Object.keys(p.typed);
-    if (N[k]) { p.name = N[k][0] || p.name; p.cls = N[k][1] || p.cls; p.fixed = true; } return p; });
+    if (N[k]) { p.name = N[k][0] || p.name; p.cls = N[k][1] || p.cls; p.fixed = true; } p.pin = !!PN[k]; return p; });
   return { pupils, updated: now };
 }

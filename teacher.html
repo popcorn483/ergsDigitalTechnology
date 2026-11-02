@@ -345,13 +345,13 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 <section id="visits" role="tabpanel" aria-labelledby="t-visits" hidden>
  <div id="activity">
  <div class="hrow"><h2>Pupil activity</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-ac" aria-label="About pupil activity" title="About pupil activity"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
- <div class="ip" id="i-ac" hidden><p>Pupils must enter their first name, surname and form class before using the Revision Guide (they can change it under About on the home page). If that name and form class are already in your sheet, the device joins that pupil and pulls in their saved progress. Their <b>active</b> time is then sent per page, along with each workbook’s pages covered and opened, best chapter-quiz scores and trophies, and their progress is saved online under their name. Names are not checked. Devices that have opened the Teacher area are never asked and never counted.</p><p>The data is in your Google Sheet (the Log tab). Your key stays on this device.</p></div>
+ <div class="ip" id="i-ac" hidden><p>Pupils must enter their first name, surname, form class and a 4-digit PIN before using the Revision Guide (they can change it under About on the home page). If that name and form class are already in your sheet and the PIN matches, the device joins that pupil and pulls in their saved progress (five wrong PINs locks it for 15 minutes; <b>Reset PIN</b> lets them choose a new one). PINs are stored only as a scrambled hash. Their <b>active</b> time is then sent per page, along with each workbook’s pages covered and opened, best chapter-quiz scores and trophies, and their progress is saved online under their name. Names are not checked. Devices that have opened the Teacher area are never asked and never counted.</p><p>The data is in your Google Sheet (the Log tab). Your key stays on this device.</p></div>
  <div id="ac-setup" hidden><p class="small">Not set up yet. Make a Google Sheet, paste in the Apps Script from <code>tools/pupil-activity.gs</code> (its first lines are the steps), deploy it as a web app, then paste its URL into <code>activity.json</code> in the GitHub repo.</p></div>
  <div id="ac-on" hidden>
   <div class="hrow" id="ac-keyrow" hidden><input type="password" id="ac-key" placeholder="Teacher key" aria-label="Teacher key (TEACHER_KEY in the Apps Script)" autocomplete="off" style="font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:9px;min-width:0;flex:1;max-width:260px"><button type="button" class="tp-mini" id="ac-save">Show activity</button></div>
   <div class="tp-tools" id="ac-tools" hidden><select id="ac-cls" aria-label="Class"></select><select id="ac-sort" aria-label="Sort"><option value="total">Most time</option><option value="week">Most this week</option><option value="last">Last active</option><option value="name">Name</option></select><button type="button" class="tp-mini" id="ac-refresh">Refresh</button><button type="button" class="tp-mini" id="ac-csv">Download CSV</button><button type="button" class="tp-mini" id="ac-forget">Forget key</button></div>
   <p class="tp-status" id="ac-status" role="status" aria-live="polite" hidden></p>
-  <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Clear</button></div>
+  <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-pin">Reset PIN</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Clear</button></div>
   <div class="ac-panel card" id="ac-panel" hidden></div>
   <div class="card" id="ac-wrap" hidden><p class="small" id="ac-sum" style="margin:0 0 8px"></p><div style="overflow-x:auto"><table id="ac-t"><thead><tr><th class="ac-cb"><span class="sr-only">Select</span></th><th>Pupil</th><th>Class</th><th class="vs-n">Total</th><th class="vs-n">7 days</th><th class="vs-n">Days</th><th class="vs-n">Last</th></tr></thead><tbody id="ac-body"></tbody></table></div></div>
  </div>
@@ -1841,7 +1841,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const typed = (p.typed || []).filter(t => t !== `${p.name} (${p.cls})`);
       const nameBtn = el('button', { type: 'button', class: 'ac-nm', 'aria-expanded': String(OPEN === p.id), text: p.name, onclick: () => { OPEN = OPEN === p.id ? null : p.id; render(); } });
       const pr = progLine(p);
-      tb.append(el('tr', { class: SEL.has(p.id) ? 'sel' : '' }, el('td', { class: 'ac-cb' }, cb), el('td', {}, nameBtn, el('small', { text: top || '' }), pr ? el('small', { class: 'ac-pr', text: pr }) : null, typed.length ? el('small', { class: 'ac-typed', text: 'Also typed: ' + typed.slice(0, 3).join(', ') }) : null), el('td', { text: p.cls }),
+      tb.append(el('tr', { class: SEL.has(p.id) ? 'sel' : '' }, el('td', { class: 'ac-cb' }, cb), el('td', {}, nameBtn, el('small', { text: top || '' }), pr ? el('small', { class: 'ac-pr', text: pr }) : null, typed.length ? el('small', { class: 'ac-typed', text: 'Also typed: ' + typed.slice(0, 3).join(', ') }) : null, p.pin === false ? el('small', { class: 'ac-typed', text: 'No PIN yet' }) : null), el('td', { text: p.cls }),
         el('td', { class: 'vs-n' }, document.createTextNode(hm(p.total)), el('span', { class: 'vs-bar', 'aria-hidden': 'true' }, el('i', { style: `width:${p.total / max * 100}%` }))),
         el('td', { class: 'vs-n', text: hm(p.week) }), el('td', { class: 'vs-n', text: String(p.days) }), el('td', { class: 'vs-n', text: when(p.last) })));
       if (OPEN === p.id) tb.append(el('tr', { class: 'ac-det' }, el('td', {}), el('td', { colspan: '6' }, detail(p))));
@@ -1853,13 +1853,19 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   /* merge / rename / delete the ticked pupils */
   function bar() {
     const n = SEL.size, b = $('#ac-bar'); b.hidden = !n; if (!n) { $('#ac-panel').hidden = true; return; }
-    $('#ac-n').textContent = `${n} selected`; $('#ac-merge').hidden = n < 2; $('#ac-rename').hidden = n !== 1;
+    $('#ac-n').textContent = `${n} selected`; $('#ac-merge').hidden = n < 2; $('#ac-rename').hidden = n !== 1; $('#ac-pin').hidden = n !== 1;
   }
   function panel(kind) {
     const ps = DATA.filter(p => SEL.has(p.id)), box = $('#ac-panel'); box.innerHTML = ''; box.hidden = false;
-    const busy = (btn, f) => async () => { btn.disabled = true; try { const r = await f(); if (!r || !r.ok) throw new Error(r && r.error || 'failed'); SEL.clear(); box.hidden = true; await load(); status(kind === 'delete' ? 'Deleted.' : kind === 'merge' ? 'Merged.' : 'Renamed.', 'ok'); }
+    const busy = (btn, f) => async () => { btn.disabled = true; try { const r = await f(); if (!r || !r.ok) throw new Error(r && r.error || 'failed'); SEL.clear(); box.hidden = true; await load(); status(kind === 'delete' ? 'Deleted.' : kind === 'merge' ? 'Merged.' : kind === 'pin' ? 'PIN reset.' : 'Renamed.', 'ok'); }
       catch (e) { status('That didn’t work: ' + e.message + '. If you’ve just updated the Apps Script, check you deployed it as a new version.', 'warn'); btn.disabled = false; } };
     const cancel = el('button', { type: 'button', class: 'tp-mini', text: 'Cancel', onclick: () => { box.hidden = true; } });
+    if (kind === 'pin') {
+      const go = el('button', { type: 'button', class: 'tp-mini pri', text: 'Reset PIN' });
+      go.addEventListener('click', busy(go, () => api({ action: 'resetpin', to: ps[0].id })));
+      box.append(el('p', { text: `Reset ${ps[0].name}’s PIN? Next time they sign in, the PIN they type becomes their new PIN.` }), el('div', { class: 'ac-row' }, go, cancel));
+      return;
+    }
     if (kind === 'delete') {
       const go = el('button', { type: 'button', class: 'tp-mini danger', text: `Delete ${ps.length === 1 ? 'pupil' : ps.length + ' pupils'}` });
       go.addEventListener('click', busy(go, () => api({ action: 'delete', ids: ps.map(p => p.id).join(',') })));
@@ -1895,7 +1901,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     $('#ac-save').addEventListener('click', () => { const k = $('#ac-key').value.trim(); if (!k) return; LS.set('teacher.actkey', k); $('#ac-key').value = ''; load(); });
     $('#ac-forget').addEventListener('click', () => { LS.set('teacher.actkey', null); DATA = null; load(); });
     $('#ac-refresh').addEventListener('click', () => { Object.keys(DET).forEach(k => delete DET[k]); load(); });
-    $('#ac-merge').addEventListener('click', () => panel('merge')); $('#ac-rename').addEventListener('click', () => panel('rename')); $('#ac-del').addEventListener('click', () => panel('delete'));
+    $('#ac-merge').addEventListener('click', () => panel('merge')); $('#ac-rename').addEventListener('click', () => panel('rename')); $('#ac-pin').addEventListener('click', () => panel('pin')); $('#ac-del').addEventListener('click', () => panel('delete'));
     $('#ac-clear').addEventListener('click', () => { SEL.clear(); render(); }); $('#ac-csv').addEventListener('click', csv);
     $('#ac-cls').addEventListener('change', e => { cls = e.target.value; LS.set('teacher.actcls', cls); render(); });
     $('#ac-sort').value = sortBy; $('#ac-sort').addEventListener('change', e => { sortBy = e.target.value; LS.set('teacher.actsort', sortBy); render(); });
