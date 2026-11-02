@@ -50,12 +50,20 @@ const okId = id => /^[a-z0-9]{6,24}$/i.test(String(id || ''));
 /* the site posts { id, name, cls, book, ch, s } */
 const CODE_RE = /^[A-HJ-NP-Z2-9]{4}-[A-HJ-NP-Z2-9]{4}$/, PART = 45000, PARTS = 10;
 function saves_() { return tab_('Saves', ['Code', 'Updated', 'Characters'].concat(Array.from({ length: PARTS }, (_, i) => 'Part ' + (i + 1)))); }
-function save_(code, data) {   /* progress saved with a code: the browser's notes-* items as one JSON string, split over cells */
-  if (!CODE_RE.test(code) || typeof data !== 'string' || data.length > PART * PARTS) return { ok: false };
+function save_(code, data) {   /* code: a save code (K7P4-QX9M) or P-<pupil ID> for a named pupil */   /* progress saved with a code: the browser's notes-* items as one JSON string, split over cells */
+  if (!(CODE_RE.test(code) || /^P-[a-z0-9]{6,24}$/i.test(code)) || typeof data !== 'string' || data.length > PART * PARTS) return { ok: false };
   try { JSON.parse(data); } catch (x) { return { ok: false }; }
   const parts = Array.from({ length: PARTS }, (_, i) => { const p = data.slice(i * PART, (i + 1) * PART); return p ? '~' + p : ''; });   // '~' so a part never starts like a formula
   return locked_(() => { const sh = saves_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === code), row = [code, new Date(), data.length].concat(parts);
     if (i >= 0) sh.getRange(i + 2, 1, 1, row.length).setValues([row]); else sh.appendRow(row); return { ok: true }; });
+}
+const norm_ = (n, c) => String(n || '').toLowerCase().replace(/\s+/g, ' ').trim() + '|' + String(c || '').toUpperCase().replace(/\s+/g, '');
+function whois_(name, cls) {   /* the pupil with this name and form class (as shown, or as they once typed it): their ID and saved progress */
+  const want = norm_(name, cls); if (want.length < 4) return { ok: false };
+  const hits = summary_().pupils.filter(p => norm_(p.name, p.cls) === want || (p.typed || []).some(t => { const m = /^(.*) \(([^)]*)\)$/.exec(t); return m && norm_(m[1], m[2]) === want; }));
+  if (!hits.length) return { ok: false };
+  const p = hits.sort((a, b) => b.total - a.total)[0], sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + p.id);
+  return { ok: true, id: p.id, name: p.name, cls: p.cls, updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' };
 }
 function load_(code) {
   if (!CODE_RE.test(code)) return { ok: false, error: 'code' };
@@ -65,6 +73,7 @@ function load_(code) {
 function doPost(e) {
   let d; try { d = JSON.parse(e.postData.contents); } catch (x) { return out_({ ok: false }); }
   if (d.kind === 'save') return out_(save_(String(d.code || '').toUpperCase(), d.data));
+  if (d.kind === 'psave') { if (!okId(d.id)) return out_({ ok: false }); return out_(save_('P-' + resolve_(String(d.id), aliases_()), d.data)); }
   const s = Math.round(+d.s || 0), book = String(d.book || ''), name = clean_(d.name, 40);
   if (BOOKS.indexOf(book) < 0 || !okId(d.id) || !name) return out_({ ok: false });
   if (d.kind === 'snap') {   /* progress snapshot: replace this pupil's row for this workbook */
@@ -84,6 +93,7 @@ function doPost(e) {
 function doGet(e) {
   const q = (e && e.parameter) || {};
   if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
+  if (q.action === 'whois') return out_(whois_(q.name, q.cls));   /* pupils signing in: find them by name and form class */
   if (q.key !== TEACHER_KEY || TEACHER_KEY === 'change-me') return out_({ error: 'key' });
   if (q.action) return out_(locked_(() => act_(q)));
   return out_(summary_());
@@ -115,6 +125,7 @@ function act_(q) {
     const ps = prog_(), pk = rows_(ps).filter(r => ids.indexOf(String(r[1])) < 0), pn = ps.getLastRow() - 1;
     if (pn > 0) ps.getRange(2, 1, pn, PROG_HEAD.length).clearContent();
     if (pk.length) ps.getRange(2, 1, pk.length, PROG_HEAD.length).setValues(pk);
+    const sv = saves_(), sr = rows_(sv); for (let i = sr.length - 1; i >= 0; i--) if (ids.indexOf(String(sr[i][0]).replace(/^P-/, '')) >= 0 && /^P-/.test(String(sr[i][0]))) sv.deleteRow(i + 2);
     dropNames_(ids);
     const al = tab_('Aliases', ['Old ID', 'Kept ID']), ak = rows_(al).filter(r => ids.indexOf(String(r[1])) < 0 && ids.indexOf(String(r[0])) < 0), an = al.getLastRow() - 1;
     if (an > 0) al.getRange(2, 1, an, 2).clearContent();
