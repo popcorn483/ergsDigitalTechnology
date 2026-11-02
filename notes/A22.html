@@ -8315,7 +8315,7 @@ function renderProgress(focus) {
       return `<section class="lib-cat chs pg-ch${on ? '' : ' off'}" style="${chVars(ch)}"><h2><span>${esc(pad2(ch.n))}</span>${esc(ch.title)}<small>${on ? `${d}/${ps.length}` : 'Not tracking'}</small></h2>${on ? `<span class="meter"><i style="width:${Math.round(d / ps.length * 100)}%"></i></span>` : ''}<div class="pg-chx">${typeof cqCardHTML === 'function' ? cqCardHTML(ch) : ''}${typeof trkBtn === 'function' ? trkBtn(ch) : ''}</div>
         <ul class="pg-l">${ps.map(p => { const st = on ? pageStatus(p.id) : 'off'; return `<li data-st="${st}"><a href="#${esc(p.id)}"><span class="pg-k ${st}">${esc(ST_NAME[st])}</span><span>${esc(plain(p.spec))}</span></a></li>`; }).join('')}</ul></section>`;
     }).join('')}<p class="lib-none" id="pg-none" hidden>Nothing here.</p></section>
-    <section class="card lib-body pg-bks"><h2>Back up or move your progress</h2><p class="pg-note">Your progress is saved in this browser only. Download it to keep a copy or to move it to another device, then load it there.</p>${backupHTML()}</section>
+    <section class="card lib-body pg-bks"><h2>Back up or move your progress</h2><p class="pg-note">Your progress is saved in this browser only. Download it to keep a copy or to move it to another device, then load it there.</p>${backupHTML()}<div data-mrb-cloud hidden></div></section>
   </article>`;
   const filt = () => { $$('.pg-l li', main).forEach(li => { li.hidden = PG_F !== 'all' && li.dataset.st !== PG_F; }); $$('.pg-ch', main).forEach(s => { s.hidden = !$('.pg-l li:not([hidden])', s); }); $('#pg-none').hidden = !!$('.pg-l li:not([hidden])', main); };
   $$('[data-pgf]', main).forEach(b => b.addEventListener('click', () => { PG_F = b.dataset.pgf; $$('[data-pgf]', main).forEach(c => c.setAttribute('aria-pressed', String(c.dataset.pgf === PG_F))); filt(); }));
@@ -9568,6 +9568,84 @@ try {
     addEventListener('pagehide', flush);
     window.MRB_ACTIVITY = { flush, state: () => ({ acc, key, idle: Date.now() - lastUse }) };
   }
+})();
+/* ---------- SAVE ONLINE: any pupil (no name needed) can save their progress (every notes-* item, as in "Download my
+   progress") to Mr Butler's Google Sheet under a save code like K7P4-QX9M, and load it on another device with the code.
+   Once saved, it saves again by itself whenever the progress changes. Shown wherever a [data-mrb-cloud] slot appears
+   (My progress on the home page and in the workbooks). ---------- */
+(function () {
+  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
+  const inBook = typeof BK !== 'undefined' && BK && BK.id;
+  if (!/^https?:$/.test(location.protocol)) return;
+  const url = () => { const u = LS.get('mrb-act-url') || ''; return /^https:\/\/script\.google(usercontent)?\.com\//.test(u) ? u : ''; };
+  const ABC = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const newCode = () => { const a = new Uint32Array(8); crypto.getRandomValues(a); const c = [...a].map(x => ABC[x % ABC.length]).join(''); return c.slice(0, 4) + '-' + c.slice(4); };
+  const SKIP = /^notes-(nocount|counted)/;
+  const payload = () => { const d = {}; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && /^notes-/.test(k) && !SKIP.test(k)) d[k] = localStorage.getItem(k); } } catch (e) { } return JSON.stringify(d); };
+  const hash = s => { let h = 0; for (let i = 0; i < s.length; i++) h = (Math.imul(h, 31) + s.charCodeAt(i)) | 0; return String(h) + ':' + s.length; };
+  const ago = t => { if (!t) return ''; const m = Math.round((Date.now() - t) / 6e4); return m < 1 ? 'just now' : m < 60 ? `${m} min ago` : m < 1440 ? `${Math.round(m / 60)} h ago` : new Date(t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); };
+  let busy = false;
+  async function save(force) {
+    const code = LS.get('mrb-save-code'), u = url(); if (!code || !u || busy) return false;
+    const data = payload(), h = hash(data); if (!force && h === LS.get('mrb-save-hash')) return true;
+    busy = true;
+    try {
+      const body = JSON.stringify({ kind: 'save', code, data });
+      let ok = false;
+      try { const r = await fetch(u, { method: 'POST', body, headers: { 'Content-Type': 'text/plain' } }); const j = await r.json(); ok = !!(j && j.ok); }
+      catch (e) { await fetch(u, { method: 'POST', mode: 'no-cors', body }); ok = true; }   /* could not read the reply: assume it went */
+      if (ok) { LS.set('mrb-save-hash', h); LS.set('mrb-save-at', String(Date.now())); }
+      return ok;
+    } catch (e) { return false; } finally { busy = false; paint(); }
+  }
+  async function load(code, msg) {
+    const u = url(); code = String(code || '').toUpperCase().replace(/[^A-Z0-9]/g, ''); if (code.length === 8) code = code.slice(0, 4) + '-' + code.slice(4);
+    if (!/^[A-HJ-NP-Z2-9]{4}-[A-HJ-NP-Z2-9]{4}$/.test(code)) { msg('That doesn’t look like a save code: it is 8 letters and numbers, like K7P4-QX9M.'); return; }
+    if (!u) { msg('Saving online isn’t switched on yet.'); return; }
+    msg('Loading…');
+    try {
+      const j = await fetch(u + (u.includes('?') ? '&' : '?') + 'action=load&code=' + encodeURIComponent(code), { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
+      if (!j || !j.ok) { msg('No progress is saved with that code. Check it and try again.'); return; }
+      let d; try { d = JSON.parse(j.data); } catch (e) { d = null; }
+      const ks = d ? Object.keys(d).filter(k => /^notes-/.test(k) && !SKIP.test(k) && typeof d[k] === 'string') : [];
+      if (!confirm(`Load the progress saved ${ago(j.updated)} with ${code}? It replaces the progress in this browser.`)) { msg(''); return; }
+      try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && /^notes-/.test(k) && !SKIP.test(k)) localStorage.removeItem(k); } ks.forEach(k => localStorage.setItem(k, d[k])); } catch (e) { msg('This browser would not save the progress.'); return; }
+      LS.set('mrb-save-code', code); LS.set('mrb-save-hash', hash(payload())); LS.set('mrb-save-at', String(j.updated || Date.now()));
+      location.reload();
+    } catch (e) { msg('Couldn’t reach the save. Check you are online and try again.'); }
+  }
+  const CSS = `.mrb-cloud{margin-top:12px;padding-top:12px;border-top:1px solid var(--line,#DCE2EA);font-size:14px}.mrb-cloud b.k{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:17px;letter-spacing:.06em;background:var(--paper-2,#F1F4F8);padding:2px 8px;border-radius:6px}.mrb-cloud p{margin:0 0 8px}.mrb-cloud .r{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.mrb-cloud input{font:inherit;text-transform:uppercase;padding:8px 10px;border:1px solid var(--line,#C9D2DE);border-radius:9px;width:11em;background:var(--paper,#fff);color:inherit}.mrb-cloud .m{display:block;margin-top:6px;color:var(--ink-3,#687386);font-size:13px}.mrb-cloud .lk{font:inherit;background:none;border:0;padding:0;color:var(--accent,#1F5FBF);text-decoration:underline;cursor:pointer}`;
+  function paintOne(el) {
+    const u = url(), code = LS.get('mrb-save-code');
+    if (!u) { el.hidden = true; return; }
+    el.hidden = false; el.classList.add('mrb-cloud');
+    if (!document.getElementById('mrb-cloud-css')) { const st = document.createElement('style'); st.id = 'mrb-cloud-css'; st.textContent = CSS; document.head.append(st); }
+    el.innerHTML = code
+      ? `<p><b>Saved online</b> with code <b class="k"></b>. Keep the code safe: use it to load your progress on another device. It saves again by itself as you go.</p><div class="r"><button type="button" class="btn" data-c="save">Save now</button><button type="button" class="lk" data-c="stop">Stop saving online on this device</button></div><span class="m" data-c="msg"></span>`
+      : `<p><b>Save online</b> and get a save code: load your progress on any device with it. No name or email needed.</p><div class="r"><button type="button" class="btn pri" data-c="new">Save my progress online</button></div><span class="m" data-c="msg"></span>`;
+    el.insertAdjacentHTML('beforeend', `<div class="r" style="margin-top:8px"><input data-c="code" placeholder="Save code" aria-label="Save code" maxlength="9" autocomplete="off"><button type="button" class="btn" data-c="load">Load with a code</button></div>`);
+    if (code) el.querySelector('b.k').textContent = code;
+    const msg = t => { el.querySelector('[data-c="msg"]').textContent = t; };
+    const at = +LS.get('mrb-save-at'); if (code && at) msg(`Last saved ${ago(at)}.`);
+    const q = s => el.querySelector(`[data-c="${s}"]`);
+    if (q('new')) q('new').addEventListener('click', async () => { LS.set('mrb-save-code', newCode()); LS.set('mrb-save-hash', null); msg('Saving…'); const ok = await save(true); if (!ok) { LS.set('mrb-save-code', null); msg('Couldn’t save just now. Check you are online and try again.'); } });
+    if (q('save')) q('save').addEventListener('click', async () => { msg('Saving…'); const ok = await save(true); msg(ok ? 'Saved.' : 'Couldn’t save just now. Check you are online and try again.'); });
+    if (q('stop')) q('stop').addEventListener('click', () => { if (confirm('Stop saving online on this device? Your saved copy stays online: load it any time with your code.')) { LS.set('mrb-save-code', null); paint(); } });
+    q('load').addEventListener('click', () => load(q('code').value, msg));
+    q('code').addEventListener('keydown', e => { if (e.key === 'Enter') load(q('code').value, msg); });
+  }
+  function paint() { document.querySelectorAll('[data-mrb-cloud]').forEach(paintOne); }
+  window.MRB_CLOUD = { save, load, paint };
+  const boot = () => {
+    paint();
+    new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) if (n.nodeType === 1 && (n.matches('[data-mrb-cloud]') || n.querySelector('[data-mrb-cloud]'))) { paint(); return; } }).observe(document.body, { childList: true, subtree: true });
+    /* the activity.json URL may arrive a moment later (first visit) */
+    setTimeout(paint, 2500);
+    setInterval(() => { if (document.visibilityState === 'visible') save(false); }, 60000);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') save(false); });
+  };
+  void inBook;
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
 })();
 /* ---------- VISITS: END ---------- */
 /* ================= APP: END ================= */

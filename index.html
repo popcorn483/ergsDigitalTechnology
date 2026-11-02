@@ -974,6 +974,19 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 .ia-i svg{width:20px;height:20px}
 .ia-n{font-weight:700;font-size:15px}
 .ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
 .ios-add .btn{width:100%;justify-content:center}
 /* ================= WELCOME: BEGIN (splash + welcome screen + "← Home"; source notes/app/front_welcome.css) ================= */
 /* splash: full screen, hero navy, once per browser session and on app launch; never blocks the page underneath */
@@ -1807,7 +1820,7 @@ function iosInstallModal() {
   const filt = document.querySelector('.filt');
   if (filt) filt.insertAdjacentHTML('beforebegin', `<details class="myprog" id="myprog"><summary><span class="mp-i" aria-hidden="true">✓</span><span><b>My progress</b><span id="mp-sum"></span></span><span class="mp-go">Show</span></summary>
     <div id="mp-body"></div>
-    <div class="mp-bk"><b>Back up or move your progress</b><span>It is saved in this browser only.</span><div><button type="button" class="btn pri" id="mp-dl">Download my progress</button><label class="btn mp-ld">Load progress from file<input type="file" id="mp-ld" accept="application/json,.json" hidden></label><button type="button" class="btn" id="mp-rs">Reset progress</button><span id="mp-msg" aria-live="polite"></span></div></div></details>`);
+    <div class="mp-bk"><b>Back up or move your progress</b><span>It is saved in this browser only.</span><div><button type="button" class="btn pri" id="mp-dl">Download my progress</button><label class="btn mp-ld">Load progress from file<input type="file" id="mp-ld" accept="application/json,.json" hidden></label><button type="button" class="btn" id="mp-rs">Reset progress</button><span id="mp-msg" aria-live="polite"></span></div><div data-mrb-cloud hidden></div></div></details>`);
   const mp = document.getElementById('myprog');
   if (mp) {
     mp.addEventListener('toggle', () => { if (mp.open) progPanel(); mp.querySelector('.mp-go').textContent = mp.open ? 'Hide' : 'Show'; const p = document.getElementById('mp-pill'); if (p) p.setAttribute('aria-expanded', String(mp.open)); });
@@ -2154,6 +2167,84 @@ try {
     window.MRB_ACTIVITY = { flush, state: () => ({ acc, key, idle: Date.now() - lastUse }) };
   }
 })();
+/* ---------- SAVE ONLINE: any pupil (no name needed) can save their progress (every notes-* item, as in "Download my
+   progress") to Mr Butler's Google Sheet under a save code like K7P4-QX9M, and load it on another device with the code.
+   Once saved, it saves again by itself whenever the progress changes. Shown wherever a [data-mrb-cloud] slot appears
+   (My progress on the home page and in the workbooks). ---------- */
+(function () {
+  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
+  const inBook = typeof BK !== 'undefined' && BK && BK.id;
+  if (!/^https?:$/.test(location.protocol)) return;
+  const url = () => { const u = LS.get('mrb-act-url') || ''; return /^https:\/\/script\.google(usercontent)?\.com\//.test(u) ? u : ''; };
+  const ABC = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const newCode = () => { const a = new Uint32Array(8); crypto.getRandomValues(a); const c = [...a].map(x => ABC[x % ABC.length]).join(''); return c.slice(0, 4) + '-' + c.slice(4); };
+  const SKIP = /^notes-(nocount|counted)/;
+  const payload = () => { const d = {}; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && /^notes-/.test(k) && !SKIP.test(k)) d[k] = localStorage.getItem(k); } } catch (e) { } return JSON.stringify(d); };
+  const hash = s => { let h = 0; for (let i = 0; i < s.length; i++) h = (Math.imul(h, 31) + s.charCodeAt(i)) | 0; return String(h) + ':' + s.length; };
+  const ago = t => { if (!t) return ''; const m = Math.round((Date.now() - t) / 6e4); return m < 1 ? 'just now' : m < 60 ? `${m} min ago` : m < 1440 ? `${Math.round(m / 60)} h ago` : new Date(t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); };
+  let busy = false;
+  async function save(force) {
+    const code = LS.get('mrb-save-code'), u = url(); if (!code || !u || busy) return false;
+    const data = payload(), h = hash(data); if (!force && h === LS.get('mrb-save-hash')) return true;
+    busy = true;
+    try {
+      const body = JSON.stringify({ kind: 'save', code, data });
+      let ok = false;
+      try { const r = await fetch(u, { method: 'POST', body, headers: { 'Content-Type': 'text/plain' } }); const j = await r.json(); ok = !!(j && j.ok); }
+      catch (e) { await fetch(u, { method: 'POST', mode: 'no-cors', body }); ok = true; }   /* could not read the reply: assume it went */
+      if (ok) { LS.set('mrb-save-hash', h); LS.set('mrb-save-at', String(Date.now())); }
+      return ok;
+    } catch (e) { return false; } finally { busy = false; paint(); }
+  }
+  async function load(code, msg) {
+    const u = url(); code = String(code || '').toUpperCase().replace(/[^A-Z0-9]/g, ''); if (code.length === 8) code = code.slice(0, 4) + '-' + code.slice(4);
+    if (!/^[A-HJ-NP-Z2-9]{4}-[A-HJ-NP-Z2-9]{4}$/.test(code)) { msg('That doesn’t look like a save code: it is 8 letters and numbers, like K7P4-QX9M.'); return; }
+    if (!u) { msg('Saving online isn’t switched on yet.'); return; }
+    msg('Loading…');
+    try {
+      const j = await fetch(u + (u.includes('?') ? '&' : '?') + 'action=load&code=' + encodeURIComponent(code), { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
+      if (!j || !j.ok) { msg('No progress is saved with that code. Check it and try again.'); return; }
+      let d; try { d = JSON.parse(j.data); } catch (e) { d = null; }
+      const ks = d ? Object.keys(d).filter(k => /^notes-/.test(k) && !SKIP.test(k) && typeof d[k] === 'string') : [];
+      if (!confirm(`Load the progress saved ${ago(j.updated)} with ${code}? It replaces the progress in this browser.`)) { msg(''); return; }
+      try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && /^notes-/.test(k) && !SKIP.test(k)) localStorage.removeItem(k); } ks.forEach(k => localStorage.setItem(k, d[k])); } catch (e) { msg('This browser would not save the progress.'); return; }
+      LS.set('mrb-save-code', code); LS.set('mrb-save-hash', hash(payload())); LS.set('mrb-save-at', String(j.updated || Date.now()));
+      location.reload();
+    } catch (e) { msg('Couldn’t reach the save. Check you are online and try again.'); }
+  }
+  const CSS = `.mrb-cloud{margin-top:12px;padding-top:12px;border-top:1px solid var(--line,#DCE2EA);font-size:14px}.mrb-cloud b.k{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:17px;letter-spacing:.06em;background:var(--paper-2,#F1F4F8);padding:2px 8px;border-radius:6px}.mrb-cloud p{margin:0 0 8px}.mrb-cloud .r{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.mrb-cloud input{font:inherit;text-transform:uppercase;padding:8px 10px;border:1px solid var(--line,#C9D2DE);border-radius:9px;width:11em;background:var(--paper,#fff);color:inherit}.mrb-cloud .m{display:block;margin-top:6px;color:var(--ink-3,#687386);font-size:13px}.mrb-cloud .lk{font:inherit;background:none;border:0;padding:0;color:var(--accent,#1F5FBF);text-decoration:underline;cursor:pointer}`;
+  function paintOne(el) {
+    const u = url(), code = LS.get('mrb-save-code');
+    if (!u) { el.hidden = true; return; }
+    el.hidden = false; el.classList.add('mrb-cloud');
+    if (!document.getElementById('mrb-cloud-css')) { const st = document.createElement('style'); st.id = 'mrb-cloud-css'; st.textContent = CSS; document.head.append(st); }
+    el.innerHTML = code
+      ? `<p><b>Saved online</b> with code <b class="k"></b>. Keep the code safe: use it to load your progress on another device. It saves again by itself as you go.</p><div class="r"><button type="button" class="btn" data-c="save">Save now</button><button type="button" class="lk" data-c="stop">Stop saving online on this device</button></div><span class="m" data-c="msg"></span>`
+      : `<p><b>Save online</b> and get a save code: load your progress on any device with it. No name or email needed.</p><div class="r"><button type="button" class="btn pri" data-c="new">Save my progress online</button></div><span class="m" data-c="msg"></span>`;
+    el.insertAdjacentHTML('beforeend', `<div class="r" style="margin-top:8px"><input data-c="code" placeholder="Save code" aria-label="Save code" maxlength="9" autocomplete="off"><button type="button" class="btn" data-c="load">Load with a code</button></div>`);
+    if (code) el.querySelector('b.k').textContent = code;
+    const msg = t => { el.querySelector('[data-c="msg"]').textContent = t; };
+    const at = +LS.get('mrb-save-at'); if (code && at) msg(`Last saved ${ago(at)}.`);
+    const q = s => el.querySelector(`[data-c="${s}"]`);
+    if (q('new')) q('new').addEventListener('click', async () => { LS.set('mrb-save-code', newCode()); LS.set('mrb-save-hash', null); msg('Saving…'); const ok = await save(true); if (!ok) { LS.set('mrb-save-code', null); msg('Couldn’t save just now. Check you are online and try again.'); } });
+    if (q('save')) q('save').addEventListener('click', async () => { msg('Saving…'); const ok = await save(true); msg(ok ? 'Saved.' : 'Couldn’t save just now. Check you are online and try again.'); });
+    if (q('stop')) q('stop').addEventListener('click', () => { if (confirm('Stop saving online on this device? Your saved copy stays online: load it any time with your code.')) { LS.set('mrb-save-code', null); paint(); } });
+    q('load').addEventListener('click', () => load(q('code').value, msg));
+    q('code').addEventListener('keydown', e => { if (e.key === 'Enter') load(q('code').value, msg); });
+  }
+  function paint() { document.querySelectorAll('[data-mrb-cloud]').forEach(paintOne); }
+  window.MRB_CLOUD = { save, load, paint };
+  const boot = () => {
+    paint();
+    new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) if (n.nodeType === 1 && (n.matches('[data-mrb-cloud]') || n.querySelector('[data-mrb-cloud]'))) { paint(); return; } }).observe(document.body, { childList: true, subtree: true });
+    /* the activity.json URL may arrive a moment later (first visit) */
+    setTimeout(paint, 2500);
+    setInterval(() => { if (document.visibilityState === 'visible') save(false); }, 60000);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') save(false); });
+  };
+  void inBook;
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
 /* ---------- VISITS: END ---------- */
 /* ================= APP: END ================= */
 /* ================= WELCOME: BEGIN =================
@@ -2274,6 +2365,35 @@ function route() {
   if (!WEB) { const v = document.querySelector('.wl-ver'); if (v) v.remove(); }   /* updates: web host only */
 })();
 /* ================= WELCOME: END ================= */
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
 
 /* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
 function wlShare() {

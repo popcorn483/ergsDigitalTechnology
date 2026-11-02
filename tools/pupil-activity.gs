@@ -2,6 +2,7 @@
 
    The revision site sends each pupil's ACTIVE time (the page on screen and in use, not just left open) with the name
    and class they typed in. This script adds it to a "Log" sheet and gives the Teacher area a summary, protected by your key.
+   Pupils (named or not) can also SAVE their progress online with a save code and load it on another device.
    The Teacher area can also merge pupils (the same pupil on two devices, or a mistyped name), rename them and delete them.
 
    SET UP (about 5 minutes, once):
@@ -17,7 +18,7 @@
    Deploy › Manage deployments › pencil (Edit) › Version: New version › Deploy. The URL stays the same.
 
    Sheets it uses: Log (one row per few minutes of use, per page), Progress (one row per pupil per workbook: pages covered,
-   best chapter-quiz scores, trophies), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
+   best chapter-quiz scores, trophies), Saves (progress saved with a code: no names), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
 const TEACHER_KEY = 'change-me';
@@ -47,8 +48,23 @@ function locked_(fn) { const l = LockService.getScriptLock(); l.waitLock(20000);
 const okId = id => /^[a-z0-9]{6,24}$/i.test(String(id || ''));
 
 /* the site posts { id, name, cls, book, ch, s } */
+const CODE_RE = /^[A-HJ-NP-Z2-9]{4}-[A-HJ-NP-Z2-9]{4}$/, PART = 45000, PARTS = 10;
+function saves_() { return tab_('Saves', ['Code', 'Updated', 'Characters'].concat(Array.from({ length: PARTS }, (_, i) => 'Part ' + (i + 1)))); }
+function save_(code, data) {   /* progress saved with a code: the browser's notes-* items as one JSON string, split over cells */
+  if (!CODE_RE.test(code) || typeof data !== 'string' || data.length > PART * PARTS) return { ok: false };
+  try { JSON.parse(data); } catch (x) { return { ok: false }; }
+  const parts = Array.from({ length: PARTS }, (_, i) => { const p = data.slice(i * PART, (i + 1) * PART); return p ? '~' + p : ''; });   // '~' so a part never starts like a formula
+  return locked_(() => { const sh = saves_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === code), row = [code, new Date(), data.length].concat(parts);
+    if (i >= 0) sh.getRange(i + 2, 1, 1, row.length).setValues([row]); else sh.appendRow(row); return { ok: true }; });
+}
+function load_(code) {
+  if (!CODE_RE.test(code)) return { ok: false, error: 'code' };
+  const r = rows_(saves_()).find(x => String(x[0]) === code); if (!r) return { ok: false, error: 'code' };
+  return { ok: true, updated: new Date(r[1]).getTime(), data: r.slice(3, 3 + PARTS).map(p => String(p || '').replace(/^~/, '')).join('') };
+}
 function doPost(e) {
   let d; try { d = JSON.parse(e.postData.contents); } catch (x) { return out_({ ok: false }); }
+  if (d.kind === 'save') return out_(save_(String(d.code || '').toUpperCase(), d.data));
   const s = Math.round(+d.s || 0), book = String(d.book || ''), name = clean_(d.name, 40);
   if (BOOKS.indexOf(book) < 0 || !okId(d.id) || !name) return out_({ ok: false });
   if (d.kind === 'snap') {   /* progress snapshot: replace this pupil's row for this workbook */
@@ -67,6 +83,7 @@ function doPost(e) {
 /* the Teacher area: ?key=… gives one summary row per pupil; &action=merge|rename|delete changes them */
 function doGet(e) {
   const q = (e && e.parameter) || {};
+  if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
   if (q.key !== TEACHER_KEY || TEACHER_KEY === 'change-me') return out_({ error: 'key' });
   if (q.action) return out_(locked_(() => act_(q)));
   return out_(summary_());
