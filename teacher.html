@@ -191,6 +191,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 #tr-print-h{display:none}.tr-h4{margin:14px 0 6px;font-size:15px}
 /* pupil visits */
 #vs-t{font-size:14.5px;min-width:0}#vs-t th,#vs-t td{vertical-align:middle}
+#ac-t{font-size:14px}#ac-t th,#ac-t td{vertical-align:middle}#ac-t td small{display:block;color:var(--ink-3);font-size:12px;font-weight:400}#ac-t .vs-n{white-space:nowrap;width:auto}#ac-t .vs-bar{display:block;margin-top:3px}
 .vs-n{text-align:right;width:22%;font-variant-numeric:tabular-nums;white-space:nowrap}.vs-n span{display:block}
 .vs-bar{display:block;height:6px;background:var(--paper-2);border-radius:3px;margin-top:3px}.vs-bar i{display:block;height:100%;background:var(--accent);border-radius:3px;margin-left:auto}
 .vs-g th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding-top:14px}
@@ -216,7 +217,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
   <p style="margin:8px 0 0"><button type="button" class="tp-mini" id="cd-reset">Reset to CCEA’s dates</button></p>
  </details>
 </section>
-<nav class="tabs" role="tablist" aria-label="Teacher area sections"><a href="#packs" role="tab" id="t-packs" aria-controls="packs" aria-selected="true">Topic packs</a><a href="#test" role="tab" id="t-test" aria-controls="test" aria-selected="false">Build a test</a><a href="#trends" role="tab" id="t-trends" aria-controls="trends" aria-selected="false">Exam trends</a><a href="#sow" role="tab" id="t-sow" aria-controls="sow" aria-selected="false">Scheme of work</a><a href="#visits" role="tab" id="t-visits" aria-controls="visits" aria-selected="false">Pupil visits</a></nav>
+<nav class="tabs" role="tablist" aria-label="Teacher area sections"><a href="#packs" role="tab" id="t-packs" aria-controls="packs" aria-selected="true">Topic packs</a><a href="#test" role="tab" id="t-test" aria-controls="test" aria-selected="false">Build a test</a><a href="#trends" role="tab" id="t-trends" aria-controls="trends" aria-selected="false">Exam trends</a><a href="#sow" role="tab" id="t-sow" aria-controls="sow" aria-selected="false">Scheme of work</a><a href="#visits" role="tab" id="t-visits" aria-controls="visits" aria-selected="false">Pupils</a></nav>
 
 <section id="packs" role="tabpanel" aria-labelledby="t-packs">
  <div class="hrow"><h2>CCEA questions by topic</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-packs" aria-label="About topic packs" title="About topic packs"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
@@ -342,7 +343,18 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 </section>
 
 <section id="visits" role="tabpanel" aria-labelledby="t-visits" hidden>
- <div class="hrow"><h2>Pupil visits</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-vs" aria-label="About the visit counts" title="About the visit counts"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+ <div id="activity">
+ <div class="hrow"><h2>Pupil activity</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-ac" aria-label="About pupil activity" title="About pupil activity"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+ <div class="ip" id="i-ac" hidden><p>Pupils type their first name, surname and class once (they can change it under About on the home page). Their <b>active</b> time is then sent per unit and topic: time with the page on screen and used in the last 90 seconds, or a video playing. Names are not checked. Nothing is sent before a pupil gives a name, or from a device that has opened the Teacher area.</p><p>The data is in your Google Sheet (the Log tab). Your key stays on this device.</p></div>
+ <div id="ac-setup" hidden><p class="small">Not set up yet. Make a Google Sheet, paste in the Apps Script from <code>tools/pupil-activity.gs</code> (its first lines are the steps), deploy it as a web app, then paste its URL into <code>activity.json</code> in the GitHub repo.</p></div>
+ <div id="ac-on" hidden>
+  <div class="hrow" id="ac-keyrow" hidden><input type="password" id="ac-key" placeholder="Teacher key" aria-label="Teacher key (TEACHER_KEY in the Apps Script)" autocomplete="off" style="font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:9px;min-width:0;flex:1;max-width:260px"><button type="button" class="tp-mini" id="ac-save">Show activity</button></div>
+  <div class="tp-tools" id="ac-tools" hidden><select id="ac-cls" aria-label="Class"></select><select id="ac-sort" aria-label="Sort"><option value="total">Most time</option><option value="week">Most this week</option><option value="last">Last active</option><option value="name">Name</option></select><button type="button" class="tp-mini" id="ac-refresh">Refresh</button><button type="button" class="tp-mini" id="ac-csv">Download CSV</button><button type="button" class="tp-mini" id="ac-forget">Forget key</button></div>
+  <p class="tp-status" id="ac-status" role="status" aria-live="polite" hidden></p>
+  <div class="card" id="ac-wrap" hidden><p class="small" id="ac-sum" style="margin:0 0 8px"></p><div style="overflow-x:auto"><table id="ac-t"><thead><tr><th>Pupil</th><th>Class</th><th class="vs-n">Total</th><th class="vs-n">7 days</th><th class="vs-n">Days</th><th class="vs-n">Last</th></tr></thead><tbody id="ac-body"></tbody></table></div></div>
+ </div>
+ </div>
+ <div class="hrow" style="margin-top:22px"><h2>Visits</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-vs" aria-label="About the visit counts" title="About the visit counts"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
  <div class="ip" id="i-vs" hidden><p>Cookie-free counts from GoatCounter; offline use isn’t counted. A unit counts once per visit (browser session); a chapter counts once per visit, the first time it is opened. Results are cached by GoatCounter, so they update every few hours. Counts come from GoatCounter’s public counter for mrbdt.goatcounter.com.</p></div>
  <p class="small vs-lead">Anonymous visits, not pupils. <a href="https://mrbdt.goatcounter.com" target="_blank" rel="noopener">Full stats</a></p>
  <div class="hrow vs-me"><label class="bt-chk"><input type="checkbox" id="vs-nocount"><span>Don’t count my visits on this device</span></label><button type="button" class="ib" aria-expanded="false" aria-controls="i-me" aria-label="About not counting this device" title="About not counting this device"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
@@ -1741,6 +1753,74 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     go();
   }
   window.TeacherVisits = { parseCount, count };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+
+/* Teacher area: pupil activity. Reads the summary from the Google Apps Script web app (tools/pupil-activity.gs, URL in
+   activity.json) with the teacher's key (kept on this device only, localStorage 'teacher.actkey'): one row per pupil with
+   name, class, active time (all time and the last 7 days), days used, last active and time per unit. */
+(function () {
+  'use strict';
+  const $ = (s, r) => (r || document).querySelector(s);
+  const el = (t, a, ...kids) => { const e = document.createElement(t); for (const k in a || {}) { if (k === 'class') e.className = a[k]; else if (k === 'text') e.textContent = a[k]; else if (k.startsWith('on')) e.addEventListener(k.slice(2), a[k]); else e.setAttribute(k, a[k]); } kids.forEach(c => c != null && e.append(c)); return e; };
+  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
+  const UNIT = { home: 'Home', U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+  const hm = s => { const m = Math.round(s / 60); return m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')}`; };
+  const when = t => { if (!t) return '–'; const d = Math.floor((Date.now() - t) / 864e5); return d <= 0 ? 'Today' : d === 1 ? 'Yesterday' : d < 7 ? `${d} days ago` : new Date(t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); };
+  let URL0 = '', DATA = null, sortBy = LS.get('teacher.actsort') || 'total', cls = LS.get('teacher.actcls') || '';
+
+  function status(msg, kind) { const s = $('#ac-status'); s.hidden = !msg; s.className = 'tp-status' + (kind ? ' ' + kind : ''); s.textContent = msg || ''; }
+  async function load() {
+    const key = LS.get('teacher.actkey');
+    $('#ac-keyrow').hidden = !!key; $('#ac-tools').hidden = !key;
+    if (!key) { $('#ac-wrap').hidden = true; return; }
+    status('Loading…');
+    try {
+      const r = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'key=' + encodeURIComponent(key), { cache: 'no-store', credentials: 'omit' });
+      const j = await r.json();
+      if (j.error === 'key') { LS.set('teacher.actkey', null); status('That key doesn’t match TEACHER_KEY in the Apps Script. Type it again.', 'warn'); $('#ac-keyrow').hidden = false; $('#ac-tools').hidden = true; return; }
+      DATA = j.pupils || []; status(''); render();
+    } catch (e) { status('Couldn’t load pupil activity. Check you’re online and that the Apps Script is deployed for “Anyone”.', 'warn'); }
+  }
+  function render() {
+    const wrap = $('#ac-wrap'); wrap.hidden = false;
+    const classes = [...new Set(DATA.map(p => p.cls).filter(Boolean))].sort();
+    const sel = $('#ac-cls'); sel.innerHTML = ''; sel.append(el('option', { value: '', text: 'All classes' }), ...classes.map(c => el('option', { value: c, text: c }))); sel.value = classes.includes(cls) ? cls : '';
+    const rows = DATA.filter(p => !sel.value || p.cls === sel.value).sort((a, b) => sortBy === 'name' ? a.name.localeCompare(b.name) : sortBy === 'last' ? b.last - a.last : sortBy === 'week' ? b.week - a.week : b.total - a.total);
+    const tb = $('#ac-body'); tb.innerHTML = '';
+    const max = Math.max(1, ...rows.map(p => p.total));
+    rows.forEach(p => {
+      const top = Object.entries(p.units || {}).filter(([u]) => u !== 'home').sort((a, b) => b[1] - a[1]).slice(0, 2).map(([u, s]) => `${UNIT[u] || u} ${hm(s)}`).join(', ');
+      tb.append(el('tr', {}, el('td', {}, el('b', { text: p.name }), el('small', { text: top || '' })), el('td', { text: p.cls }),
+        el('td', { class: 'vs-n' }, document.createTextNode(hm(p.total)), el('span', { class: 'vs-bar', 'aria-hidden': 'true' }, el('i', { style: `width:${p.total / max * 100}%` }))),
+        el('td', { class: 'vs-n', text: hm(p.week) }), el('td', { class: 'vs-n', text: String(p.days) }), el('td', { class: 'vs-n', text: when(p.last) })));
+    });
+    const tot = rows.reduce((a, p) => a + p.total, 0), wk = rows.reduce((a, p) => a + p.week, 0), act = rows.filter(p => p.week > 0).length;
+    $('#ac-sum').textContent = rows.length ? `${rows.length} pupil${rows.length === 1 ? '' : 's'} · ${act} active this week · ${hm(wk)} this week · ${hm(tot)} in all` : 'No pupils yet: activity appears once pupils add their name.';
+  }
+  function csv() {
+    if (!DATA) return;
+    const units = Object.keys(UNIT).filter(u => DATA.some(p => p.units && p.units[u]));
+    const q = v => `"${String(v).replace(/"/g, '""')}"`;
+    const lines = [['Name', 'Class', 'Total minutes', 'Last 7 days minutes', 'Days used', 'Last active', ...units.map(u => UNIT[u] + ' minutes')].map(q).join(',')];
+    DATA.slice().sort((a, b) => a.cls.localeCompare(b.cls) || a.name.localeCompare(b.name)).forEach(p => lines.push([p.name, p.cls, Math.round(p.total / 60), Math.round(p.week / 60), p.days, p.last ? new Date(p.last).toISOString().slice(0, 10) : '', ...units.map(u => Math.round(((p.units || {})[u] || 0) / 60))].map(q).join(',')));
+    const a = el('a', { href: URL.createObjectURL(new Blob([lines.join('\r\n')], { type: 'text/csv' })), download: 'Pupil activity.csv' }); document.body.append(a); a.click(); a.remove();
+  }
+  async function start() {
+    if (!$('#activity')) return;
+    try { const j = await fetch('activity.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null); URL0 = (j && j.url || '').trim(); } catch (e) { }
+    const on = /^https:\/\/script\.google(usercontent)?\.com\//.test(URL0);
+    $('#ac-setup').hidden = on; $('#ac-on').hidden = !on;
+    if (!on) return;
+    $('#ac-key').addEventListener('keydown', e => { if (e.key === 'Enter') $('#ac-save').click(); });
+    $('#ac-save').addEventListener('click', () => { const k = $('#ac-key').value.trim(); if (!k) return; LS.set('teacher.actkey', k); $('#ac-key').value = ''; load(); });
+    $('#ac-forget').addEventListener('click', () => { LS.set('teacher.actkey', null); DATA = null; load(); });
+    $('#ac-refresh').addEventListener('click', load); $('#ac-csv').addEventListener('click', csv);
+    $('#ac-cls').addEventListener('change', e => { cls = e.target.value; LS.set('teacher.actcls', cls); render(); });
+    $('#ac-sort').value = sortBy; $('#ac-sort').addEventListener('change', e => { sortBy = e.target.value; LS.set('teacher.actsort', sortBy); render(); });
+    let done = false; const go = () => { if (done || location.hash !== '#visits') return; done = true; load(); };
+    addEventListener('hashchange', go); go();
+  }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();
 

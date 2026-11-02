@@ -9478,6 +9478,77 @@ try {
     MRB_COUNT_ONCE('/', 'Home');
   }
 } catch (e) { }
+/* ---------- PUPIL ACTIVITY: the pupil types their name and class once; their ACTIVE time (page on screen and used in the
+   last 90 seconds) is sent, per unit and topic, to Mr Butler's Google Sheet (the Apps Script in tools/pupil-activity.gs,
+   its URL in activity.json). Nothing is sent before a name is given, nor from a teacher's device ('notes-nocount'),
+   offline, or in the claude.ai preview. ---------- */
+(function () {
+  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) { } } };
+  const inBook = typeof BK !== 'undefined' && BK && BK.id && typeof PAGES !== 'undefined';
+  const isTeacherPage = /teacher\.html$/i.test(location.pathname);
+  if (isTeacherPage || !/^https?:$/.test(location.protocol) || /(^|\.)claude\.ai$|claudeusercontent/i.test(location.hostname)) return;
+  const me = () => { try { return JSON.parse(LS.get('mrb-pupil') || 'null'); } catch (e) { return null; } };
+  let URL0 = LS.get('mrb-act-url') || '';
+  fetch((inBook ? '../' : '') + 'activity.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).then(j => { if (j && typeof j.url === 'string') { URL0 = j.url.trim(); LS.set('mrb-act-url', URL0); } start(); }).catch(start);
+  let started = false;
+  function start() {
+    if (started) return; started = true;
+    if (!/^https:\/\/script\.google(usercontent)?\.com\//.test(URL0) || LS.get('notes-nocount')) return;
+    if (!me()) { const snooze = +LS.get('mrb-pupil-later') || 0; if (Date.now() - snooze > 864e5) setTimeout(ask, 1200); }
+    track();
+  }
+  /* the name dialog (also opened from "Change" in About / My progress) */
+  function ask() {
+    if (document.getElementById('mrb-who')) return;
+    const p = me() || {};
+    const css = `#mrb-who{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:rgba(10,16,30,.55);padding:16px}#mrb-who form{background:#fff;color:#16213A;border-radius:14px;max-width:380px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}#mrb-who h2{margin:0 0 4px;font-size:19px}#mrb-who p{margin:0 0 12px;color:#4A5468;font-size:13.5px}#mrb-who label{display:block;font-weight:700;font-size:13px;margin:8px 0 4px}#mrb-who input{width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px}#mrb-who .r{display:flex;gap:8px;margin-top:14px}#mrb-who button{font:inherit;font-weight:700;border-radius:9px;padding:9px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer}#mrb-who button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff;flex:1}@media (prefers-color-scheme:dark){#mrb-who form{background:#1B2233;color:#E8ECF4}#mrb-who p{color:#AEB8CA}#mrb-who input,#mrb-who button{background:#121826;color:#E8ECF4;border-color:#3A4458}}`;
+    const d = document.createElement('div'); d.id = 'mrb-who'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'mrb-who-h');
+    d.innerHTML = `<style>${css}</style><form><h2 id="mrb-who-h">Who’s revising?</h2><p>So Mr Butler can see how much revision you’ve done. Only your name, class and time spent are sent: nothing else.</p><label for="mrb-n">First name and surname</label><input id="mrb-n" autocomplete="name" maxlength="40" required><label for="mrb-c">Class</label><input id="mrb-c" maxlength="12" placeholder="e.g. 11B or 13D" required><div class="r"><button type="button" class="l">Not now</button><button class="p">Save</button></div></form>`;
+    document.body.append(d);
+    const n = d.querySelector('#mrb-n'), c = d.querySelector('#mrb-c'); n.value = p.name || ''; c.value = p.cls || '';
+    const close = () => { d.remove(); paintWho(); };
+    d.querySelector('.l').addEventListener('click', () => { if (!me()) LS.set('mrb-pupil-later', String(Date.now())); close(); });
+    d.querySelector('form').addEventListener('submit', e => { e.preventDefault(); const name = n.value.replace(/\s+/g, ' ').trim(), cls = c.value.replace(/\s+/g, '').toUpperCase();
+      if (name.split(' ').length < 2) { n.setCustomValidity('Please give your first name and surname'); n.reportValidity(); n.addEventListener('input', () => n.setCustomValidity(''), { once: true }); return; }
+      if (!cls) { c.reportValidity(); return; }
+      const id = (p.id) || (Math.random().toString(36).slice(2) + Date.now().toString(36)).slice(0, 16);
+      LS.set('mrb-pupil', JSON.stringify({ id, name, cls })); close(); });
+    setTimeout(() => n.focus(), 50);
+  }
+  window.MRB_WHO = ask;
+  /* "Revising as … · Change" wherever a [data-mrb-who] slot is on the page */
+  function paintWho() {
+    document.querySelectorAll('[data-mrb-who]').forEach(el => { const p = me(); el.hidden = false;
+      el.innerHTML = p ? `Revising as <b></b> (<span></span>) · <button type="button" class="mrb-ch">Change</button>` : `<button type="button" class="mrb-ch">Add your name</button> so Mr Butler can see your revision time.`;
+      if (p) { el.querySelector('b').textContent = p.name; el.querySelector('span').textContent = p.cls; }
+      el.querySelector('.mrb-ch').addEventListener('click', ask); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', paintWho); else paintWho();
+  /* active time: 5-second ticks while the page is visible and was used in the last 90 s (or a video is playing) */
+  function track() {
+    let lastUse = Date.now(), acc = 0, key = null;
+    const used = () => { lastUse = Date.now(); };
+    ['pointerdown', 'keydown', 'wheel', 'touchstart', 'scroll'].forEach(ev => addEventListener(ev, used, { passive: true, capture: true }));
+    let mm = 0; addEventListener('mousemove', () => { const t = Date.now(); if (t - mm > 5000) { mm = t; used(); } }, { passive: true });
+    const where = () => { if (!inBook) return ['home', '']; let ch = ''; try { const P = PAGES[cur]; ch = P && P.ch && P.ch.id || ''; } catch (e) { } return [BK.id, ch]; };
+    const playing = () => [...document.querySelectorAll('video,audio')].some(v => !v.paused && !v.ended);
+    function send(k, s) {
+      const p = me(); if (!p || !s || !URL0) return;
+      const body = JSON.stringify({ id: p.id, name: p.name, cls: p.cls, book: k[0], ch: k[1], s: Math.round(s) });
+      try { if (navigator.sendBeacon && navigator.sendBeacon(URL0, new Blob([body], { type: 'text/plain' }))) return; } catch (e) { }
+      try { fetch(URL0, { method: 'POST', mode: 'no-cors', body, keepalive: true }); } catch (e) { }
+    }
+    const flush = () => { if (key && acc >= 5) send(key, acc); acc = 0; };
+    setInterval(() => {
+      if (document.visibilityState !== 'visible' || (Date.now() - lastUse > 90000 && !playing())) return;
+      const k = where(); if (!key || k[0] !== key[0] || k[1] !== key[1]) { flush(); key = k; }
+      acc += 5; if (acc >= 180) flush();   /* at most one row every 3 minutes of use */
+    }, 5000);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); });
+    addEventListener('pagehide', flush);
+    window.MRB_ACTIVITY = { flush, state: () => ({ acc, key, idle: Date.now() - lastUse }) };
+  }
+})();
 /* ---------- VISITS: END ---------- */
 /* ================= APP: END ================= */
 /* ================= boot ================= */
