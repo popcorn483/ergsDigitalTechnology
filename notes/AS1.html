@@ -9503,7 +9503,7 @@ try {
     const p = me() || {};
     const css = `#mrb-who{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:rgba(10,16,30,.55);padding:16px}#mrb-who form{background:#fff;color:#16213A;border-radius:14px;max-width:380px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}#mrb-who h2{margin:0 0 4px;font-size:19px}#mrb-who p{margin:0 0 12px;color:#4A5468;font-size:13.5px}#mrb-who label{display:block;font-weight:700;font-size:13px;margin:8px 0 4px}#mrb-who input{width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px}#mrb-who .r{display:flex;gap:8px;margin-top:14px}#mrb-who button{font:inherit;font-weight:700;border-radius:9px;padding:9px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer}#mrb-who button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff;flex:1}@media (prefers-color-scheme:dark){#mrb-who form{background:#1B2233;color:#E8ECF4}#mrb-who p{color:#AEB8CA}#mrb-who input,#mrb-who button{background:#121826;color:#E8ECF4;border-color:#3A4458}}`;
     const d = document.createElement('div'); d.id = 'mrb-who'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'mrb-who-h');
-    d.innerHTML = `<style>${css}</style><form><h2 id="mrb-who-h">Who’s revising?</h2><p>So Mr Butler can see how much revision you’ve done. Only your name, class and time spent are sent: nothing else.</p><label for="mrb-n">First name and surname</label><input id="mrb-n" autocomplete="name" maxlength="40" required><label for="mrb-c">Class</label><input id="mrb-c" maxlength="12" placeholder="e.g. 11B or 13D" required><div class="r"><button type="button" class="l">Not now</button><button class="p">Save</button></div></form>`;
+    d.innerHTML = `<style>${css}</style><form><h2 id="mrb-who-h">Who’s revising?</h2><p>So Mr Butler can see how much revision you’ve done. Only your name, class, time spent, pages covered, quiz scores and trophies are sent: nothing else.</p><label for="mrb-n">First name and surname</label><input id="mrb-n" autocomplete="name" maxlength="40" required><label for="mrb-c">Class</label><input id="mrb-c" maxlength="12" placeholder="e.g. 11B or 13D" required><div class="r"><button type="button" class="l">Not now</button><button class="p">Save</button></div></form>`;
     document.body.append(d);
     const n = d.querySelector('#mrb-n'), c = d.querySelector('#mrb-c'); n.value = p.name || ''; c.value = p.cls || '';
     const close = () => { d.remove(); paintWho(); };
@@ -9530,18 +9530,38 @@ try {
     const used = () => { lastUse = Date.now(); };
     ['pointerdown', 'keydown', 'wheel', 'touchstart', 'scroll'].forEach(ev => addEventListener(ev, used, { passive: true, capture: true }));
     let mm = 0; addEventListener('mousemove', () => { const t = Date.now(); if (t - mm > 5000) { mm = t; used(); } }, { passive: true });
-    const where = () => { if (!inBook) return ['home', '']; let ch = ''; try { const P = PAGES[cur]; ch = P && P.ch && P.ch.id || ''; } catch (e) { } return [BK.id, ch]; };
+    const where = () => { if (!inBook) return ['home', '', '']; let ch = '', pg = ''; try { const P = PAGES[cur]; if (!onCover) { ch = P && P.ch && P.ch.id || ''; pg = P && P.p && P.p.id || ''; } } catch (e) { } if (!pg) { const h = location.hash.slice(1); if (/^(quiz|pp)-c\d+$/.test(h)) { ch = h.split('-')[1]; pg = h; } } return [BK.id, ch, pg]; };
     const playing = () => [...document.querySelectorAll('video,audio')].some(v => !v.paused && !v.ended);
     function send(k, s) {
       const p = me(); if (!p || !s || !URL0) return;
-      const body = JSON.stringify({ id: p.id, name: p.name, cls: p.cls, book: k[0], ch: k[1], s: Math.round(s) });
+      const body = JSON.stringify({ id: p.id, name: p.name, cls: p.cls, book: k[0], ch: k[1], pg: k[2] || '', s: Math.round(s) });
       try { if (navigator.sendBeacon && navigator.sendBeacon(URL0, new Blob([body], { type: 'text/plain' }))) return; } catch (e) { }
       try { fetch(URL0, { method: 'POST', mode: 'no-cors', body, keepalive: true }); } catch (e) { }
     }
-    const flush = () => { if (key && acc >= 5) send(key, acc); acc = 0; };
+    const flush = () => { if (key && acc >= 5) send(key, acc); acc = 0; snap(); };
+    /* progress snapshot for this workbook (pages covered and opened, best chapter-quiz scores, trophies), sent when it changes */
+    let lastSnap = LS.get('mrb-snap:' + (inBook ? BK.id : '')) || '';
+    function snap() {
+      const p = me(); if (!p || !inBook || !URL0) return;
+      let o;
+      try {
+        const ids = PAGES.map(P => P.p.id), cov = ids.filter(i => state.done[i]).length, seen = ids.filter(i => state.seen[i] || state.done[i]).length;
+        let quiz = {}; try { quiz = (JSON.parse(localStorage.getItem('notes-chquiz:' + BK.id) || '{}').best) || {}; } catch (e) { }
+        let tr = 0; try { tr = Object.keys((typeof TR !== 'undefined' && TR && TR.earned) || {}).length; } catch (e) { }
+        const q = {}; Object.keys(quiz).forEach(k => { const b = quiz[k]; if (b && b.m) q[k] = [b.s, b.m, b.date || '']; });
+        o = { cov, seen, total: ids.length, tr, quiz: q };
+      } catch (e) { return; }
+      const sig = JSON.stringify(o) + p.id + p.name + p.cls; if (sig === lastSnap) return;
+      const body = JSON.stringify(Object.assign({ kind: 'snap', id: p.id, name: p.name, cls: p.cls, book: BK.id }, o));
+      let sent = false;
+      try { sent = !!(navigator.sendBeacon && navigator.sendBeacon(URL0, new Blob([body], { type: 'text/plain' }))); } catch (e) { }
+      if (!sent) try { fetch(URL0, { method: 'POST', mode: 'no-cors', body, keepalive: true }); sent = true; } catch (e) { }
+      if (sent) { lastSnap = sig; LS.set('mrb-snap:' + BK.id, sig); }
+    }
+    setTimeout(snap, 4000);
     setInterval(() => {
       if (document.visibilityState !== 'visible' || (Date.now() - lastUse > 90000 && !playing())) return;
-      const k = where(); if (!key || k[0] !== key[0] || k[1] !== key[1]) { flush(); key = k; }
+      const k = where(); if (!key || k[0] !== key[0] || k[1] !== key[1] || k[2] !== key[2]) { flush(); key = k; }
       acc += 5; if (acc >= 180) flush();   /* at most one row every 3 minutes of use */
     }, 5000);
     document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); });
