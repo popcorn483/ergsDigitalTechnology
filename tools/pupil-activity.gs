@@ -31,7 +31,7 @@ const SITE = 'https://popcorn483.github.io/ergsdigitaltechnology/';
 const EMAIL_SIGNINS = true;   // email the script's owner each time a new pupil signs up (false to stop)   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
 const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
 const LOG_HEAD = ['When', 'Pupil ID', 'Name', 'Class', 'Unit', 'Topic', 'Active seconds', 'Page'];
-const PROG_HEAD = ['Updated', 'Pupil ID', 'Name', 'Class', 'Unit', 'Pages covered', 'Pages opened', 'Pages in unit', 'Trophies', 'Best quiz scores'];
+const PROG_HEAD = ['Updated', 'Pupil ID', 'Name', 'Class', 'Unit', 'Pages covered', 'Pages opened', 'Pages in unit', 'Trophies', 'Best quiz scores', 'Pages covered / opened'];
 
 function clean_(v, n) {
   let s = String(v == null ? '' : v).replace(/[\u0000-\u001f]/g, ' ').trim().slice(0, n);
@@ -111,7 +111,9 @@ function doPost(e) {
     const n = v => Math.max(0, Math.min(9999, Math.round(+v || 0))), q = {};
     Object.keys(d.quiz || {}).slice(0, 80).forEach(k => { const v = d.quiz[k]; if (/^c\d{1,2}(\|pp)?$/.test(k) && Array.isArray(v)) q[k] = [n(v[0]), n(v[1]), clean_(v[2], 10)]; });
     locked_(() => { const id = resolve_(String(d.id), aliases_()), sh = prog_(), r = rows_(sh), i = r.findIndex(x => String(x[1]) === id && String(x[4]) === book);
-      const row = [new Date(), id, name, clean_(d.cls, 12).toUpperCase(), book, n(d.cov), n(d.seen), n(d.total), n(d.tr), JSON.stringify(q)];
+      const ok = x => /^c\d{1,2}-p\d{1,3}$/.test(String(x)), done = (Array.isArray(d.done) ? d.done : []).filter(ok).slice(0, 600), seen = (Array.isArray(d.seenIds) ? d.seenIds : []).filter(ok).slice(0, 600);
+      const fixed = applyAwards_(id, book, done);   /* the teacher's marks win, even before the pupil's device has picked them up */
+      const row = [new Date(), id, name, clean_(d.cls, 12).toUpperCase(), book, fixed.length, n(d.seen), n(d.total), n(d.tr), JSON.stringify(q), fixed.join(',') + '|' + seen.filter(x => fixed.indexOf(x) < 0).join(',')];
       if (i >= 0) sh.getRange(i + 2, 1, 1, row.length).setValues([row]); else sh.appendRow(row); });
     return out_({ ok: true });
   }
@@ -149,7 +151,8 @@ function staffMail_() {
 function doGet(e) {
   const q = (e && e.parameter) || {};
   if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
-  if (q.action === 'whois') return out_(whois_(q.name, q.cls, q.pin, q.id));   /* pupils signing in: find them by name and form class */
+  if (q.action === 'whois') return out_(whois_(q.name, q.cls, q.pin, q.id));
+  if (q.action === 'awards') return out_(awardsFor_(q.id, +q.since || 0));   /* a pupil's device: pages the teacher marked or unmarked */   /* pupils signing in: find them by name and form class */
   if (q.action === 'staff') {   /* the sign-in box: staff password check (TEACHER_KEY or STAFF_PIN) */
     const k = String(q.key || ''), ok = (k === TEACHER_KEY && TEACHER_KEY !== 'change-me') || (k === STAFF_PIN && STAFF_PIN !== 'change-me');
     return out_(ok ? { ok: true, teacher: k === TEACHER_KEY } : { error: 'key' });
@@ -169,6 +172,7 @@ function act_(q) {
     rows_(al).forEach((r, i) => { if (from.indexOf(String(r[1])) >= 0) al.getRange(i + 2, 2).setValue(to); });   // older merges into a merged ID follow it
     from.forEach(f => al.appendRow([f, to]));
     relabel_(from, to); relabelProg_(from, to);
+    const aw = awards_(), an = aw.getLastRow() - 1; if (an > 0) { const c = aw.getRange(2, 2, an, 1), v = c.getValues(); let ch = false; v.forEach(r => { if (from.indexOf(String(r[0])) >= 0) { r[0] = to; ch = true; } }); if (ch) c.setValues(v); }
     dropNames_(from); dropPins_(from);
     if (q.name) setName_(to, q.name, q.cls);
     return { ok: true };
@@ -196,7 +200,19 @@ function act_(q) {
       cur[1] = Math.max(cur[1], t); cur[2] += s; cur[3][b] = 1; if (b !== 'home' && ch) cur[4][b + '|' + ch] = (cur[4][b + '|' + ch] || 0) + s;
     });
     const ses = sessions.slice(-40).reverse().map(x => [x[0], x[1], x[2], Object.keys(x[3]), Object.keys(x[4]).sort((a, b) => x[4][b] - x[4][a]).slice(0, 3)]);
-    return { ok: true, pages, topics, days, first, last, devices: Object.keys(devs).length, sessions: ses };
+    const state = {};   /* per workbook: the pages covered and opened (from the latest progress snapshot) */
+    rows_(prog_()).forEach(r => { if (resolve_(String(r[1]), A) !== to) return; const b = String(r[4]), [dn, sn] = String(r[10] || '|').split('|');
+      if (!state[b] || +r[5] >= state[b].cov) state[b] = { cov: +r[5], done: dn ? dn.split(',') : [], seen: sn ? sn.split(',') : [], at: new Date(r[0]).getTime() }; });
+    return { ok: true, pages, topics, days, first, last, devices: Object.keys(devs).length, sessions: ses, state };
+  }
+  if (q.action === 'award') {   /* the teacher marks (on=1) or unmarks (on=0) pages as covered for a pupil */
+    const book = String(q.book || ''), pages = String(q.pages || '').split(',').filter(x => /^c\d{1,2}-p\d{1,3}$/.test(x)), on = q.on === '0' ? 0 : 1;
+    if (!okId(to) || BOOKS.indexOf(book) < 0 || !pages.length) return { ok: false, error: 'bad request' };
+    const sh = awards_(), now = new Date(); pages.forEach(p => sh.appendRow([now, to, book, p, on]));
+    const ps = prog_(), r = rows_(ps), i = r.findIndex(x => String(x[1]) === to && String(x[4]) === book);
+    if (i >= 0) { const [dn, sn] = String(r[i][10] || '|').split('|'), done = applyAwards_(to, book, dn ? dn.split(',') : []), seen = (sn ? sn.split(',') : []).filter(x => done.indexOf(x) < 0);
+      ps.getRange(i + 2, 6).setValue(done.length); ps.getRange(i + 2, 11).setValue(done.join(',') + '|' + seen.join(',')); }
+    return { ok: true, n: pages.length };
   }
   if (q.action === 'resetpin') { if (!okId(to)) return { ok: false, error: 'bad request' }; dropPins_([to]); return { ok: true }; }   /* the pupil chooses a new PIN next time they sign in */
   if (q.action === 'rename') { if (!okId(to) || !q.name) return { ok: false, error: 'bad request' }; setName_(to, q.name, q.cls); return { ok: true }; }
@@ -209,6 +225,7 @@ function act_(q) {
     if (pn > 0) ps.getRange(2, 1, pn, PROG_HEAD.length).clearContent();
     if (pk.length) ps.getRange(2, 1, pk.length, PROG_HEAD.length).setValues(pk);
     dropPins_(ids);
+    const aws = awards_(), awr = rows_(aws); for (let i = awr.length - 1; i >= 0; i--) if (ids.indexOf(String(awr[i][1])) >= 0) aws.deleteRow(i + 2);
     const sv = saves_(), sr = rows_(sv); for (let i = sr.length - 1; i >= 0; i--) if (ids.indexOf(String(sr[i][0]).replace(/^P-/, '')) >= 0 && /^P-/.test(String(sr[i][0]))) sv.deleteRow(i + 2);
     dropNames_(ids);
     const al = tab_('Aliases', ['Old ID', 'Kept ID']), ak = rows_(al).filter(r => ids.indexOf(String(r[1])) < 0 && ids.indexOf(String(r[0])) < 0), an = al.getLastRow() - 1;
@@ -312,6 +329,18 @@ function weeklyEmail() {   /* runs every Monday about 7am: last week's report (y
   });
   h += `<p style="margin:20px 0 0;font-size:12px;color:#4A5468">Every pupil in detail: <a href="${SITE}teacher.html#visits">Teacher area › Pupils</a>. To stop this email, set WEEKLY_EMAIL to false in the Apps Script and deploy a new version.</p></div>`;
   MailApp.sendEmail({ to, subject: `Revision Guide weekly report: ${nice(w.start)} to ${nice(w.end)}`, htmlBody: h, body: `${active.length} of ${all.length} pupils revised, ${hm(tot)} in all. Open the email in HTML view, or see ${SITE}teacher.html#visits` });
+}
+/* teacher marks: Awards sheet [When, Pupil ID, Unit, Page, 1 = covered / 0 = not covered] */
+const awards_ = () => tab_('Awards', ['When', 'Pupil ID', 'Unit', 'Page', 'Covered (1) / not (0)']);
+function applyAwards_(id, book, done) {
+  const set = {}; done.forEach(p => { set[p] = 1; });
+  rows_(awards_()).forEach(r => { if (String(r[1]) !== id || String(r[2]) !== book) return; if (+r[4]) set[String(r[3])] = 1; else delete set[String(r[3])]; });
+  return Object.keys(set).sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+}
+function awardsFor_(id, since) {
+  if (!okId(id)) return { ok: false };
+  const A = aliases_(), me = resolve_(String(id), A);
+  return { ok: true, awards: rows_(awards_()).filter(r => String(r[1]) === me && new Date(r[0]).getTime() > since).map(r => [new Date(r[0]).getTime(), String(r[2]), String(r[3]), +r[4]]) };
 }
 function summary_() {
   const PN = {}; rows_(pins_()).forEach(r => { PN[String(r[0])] = 1; });

@@ -9499,6 +9499,22 @@ try {
     addEventListener('online', () => { if (me() && !LS.get('mrb-pin-ok') && !LS.get('notes-nocount')) { try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } ask(); } });   /* signed in offline: PIN checked as soon as it is back online */
     if (!me() || (!LS.get('mrb-pin-ok') && !later)) setTimeout(ask, 600);
     track();
+    setTimeout(syncAwards, 3000); setInterval(syncAwards, 5 * 60000);
+  }
+  /* pages the teacher marked (or unmarked) as covered for this pupil, applied to this device's progress */
+  async function syncAwards() {
+    const p = me(); if (!p || !URL0 || LS.get('notes-nocount')) return;
+    const since = +LS.get('mrb-awards-at') || 0;
+    let j; try { j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=awards&id=' + encodeURIComponent(p.id) + '&since=' + since, { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); } catch (e) { return; }
+    if (!j || !j.ok || !Array.isArray(j.awards) || !j.awards.length) return;
+    let mx = since, here = false;
+    j.awards.sort((a, b) => a[0] - b[0]).forEach(([t, b, pg, on]) => {
+      if (inBook && BK.id === b && typeof state !== 'undefined' && state && state.done) { if (on) { state.done[pg] = 1; state.seen[pg] = 1; } else delete state.done[pg]; here = true; }
+      else { const k = 'notes-reader:' + b; let o = {}; try { o = JSON.parse(LS.get(k) || '{}') || {}; } catch (e) { o = {}; } o.done = o.done || {}; o.seen = o.seen || {}; if (on) { o.done[pg] = 1; o.seen[pg] = 1; } else delete o.done[pg]; LS.set(k, JSON.stringify(o)); }
+      mx = Math.max(mx, t);
+    });
+    if (here && typeof save === 'function') save();
+    LS.set('mrb-awards-at', String(mx));
   }
   /* the name dialog (also opened from "Change" in About / My progress) */
   /* combine progress from the online copy with this browser's (a pupil on a second device keeps both) */
@@ -9644,7 +9660,7 @@ try {
         let quiz = {}; try { quiz = (JSON.parse(localStorage.getItem('notes-chquiz:' + BK.id) || '{}').best) || {}; } catch (e) { }
         let tr = 0; try { tr = Object.keys((typeof TR !== 'undefined' && TR && TR.earned) || {}).length; } catch (e) { }
         const q = {}; Object.keys(quiz).forEach(k => { const b = quiz[k]; if (b && b.m) q[k] = [b.s, b.m, b.date || '']; });
-        o = { cov, seen, total: ids.length, tr, quiz: q };
+        o = { cov, seen, total: ids.length, tr, quiz: q, done: ids.filter(i => state.done[i]), seenIds: ids.filter(i => (state.seen[i] || state.done[i]) && !state.done[i]) };
       } catch (e) { return; }
       const sig = JSON.stringify(o) + p.id + p.name + p.cls; if (sig === lastSnap) return;
       const body = JSON.stringify(Object.assign({ kind: 'snap', id: p.id, name: p.name, cls: p.cls, book: BK.id }, o));
