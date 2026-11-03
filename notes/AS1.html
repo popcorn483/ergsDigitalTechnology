@@ -9496,6 +9496,7 @@ try {
     if (started) return; started = true;
     if (!/^https:\/\/script\.google(usercontent)?\.com\//.test(URL0) || LS.get('notes-nocount')) return;
     let later = false; try { later = !!sessionStorage.getItem('mrb-pin-later'); } catch (x) { }
+    addEventListener('online', () => { if (me() && !LS.get('mrb-pin-ok') && !LS.get('notes-nocount')) { try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } ask(); } });   /* signed in offline: PIN checked as soon as it is back online */
     if (!me() || (!LS.get('mrb-pin-ok') && !later)) setTimeout(ask, 600);
     track();
   }
@@ -9567,8 +9568,13 @@ try {
         clearTimeout(t);
         if (j && j.error === 'pin') { go.disabled = false; pinI.value = ''; pinI.focus(); m.textContent = `That PIN doesn’t match the one for ${name}.${j.left != null ? ` ${j.left} ${j.left === 1 ? 'try' : 'tries'} left.` : ''} Forgotten it? Ask Mr Butler to reset it.`; return; }
         if (j && j.error === 'locked') { go.disabled = false; m.textContent = 'Too many wrong PINs. Try again in 15 minutes, or ask Mr Butler to reset your PIN.'; return; }
-        if (j && j.ok && j.id) found = j; else if (!j || !j.ok) offline = true;
-      } catch (x) { offline = true; /* offline or slow: carry on for now; the PIN is checked next time */ }
+        if (j && j.ok && j.id) found = j;
+        else { go.disabled = false; m.textContent = 'Your name and PIN couldn’t be checked just now. Please try again.'; return; }
+      } catch (x) {
+        /* only a device that is really offline may carry on (the PIN is then checked the next time it is online); otherwise try again */
+        if (navigator.onLine !== false) { go.disabled = false; m.textContent = 'Your name and PIN couldn’t be checked. Check you are online and try again.'; return; }
+        offline = true;
+      }
       const id = found ? found.id : devId;
       if (found) LS.set('mrb-pin-ok', '1'); else { LS.set('mrb-pin-ok', null); try { sessionStorage.setItem('mrb-pin-later', '1'); } catch (x) { } }
       void offline;
