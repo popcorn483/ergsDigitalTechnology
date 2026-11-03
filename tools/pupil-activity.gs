@@ -203,7 +203,9 @@ function act_(q) {
     const state = {};   /* per workbook: the pages covered and opened (from the latest progress snapshot) */
     rows_(prog_()).forEach(r => { if (resolve_(String(r[1]), A) !== to) return; const b = String(r[4]), [dn, sn] = String(r[10] || '|').split('|');
       if (!state[b] || +r[5] >= state[b].cov) state[b] = { cov: +r[5], done: dn ? dn.split(',') : [], seen: sn ? sn.split(',') : [], at: new Date(r[0]).getTime() }; });
-    return { ok: true, pages, topics, days, first, last, devices: Object.keys(devs).length, sessions: ses, state };
+    const marked = {};   /* pages the teacher has marked: the latest mark per page (1 covered, 0 not) */
+    rows_(awards_()).forEach(r => { if (String(r[1]) === to) marked[String(r[2]) + '|' + String(r[3])] = +r[4]; });
+    return { ok: true, pages, topics, days, first, last, devices: Object.keys(devs).length, sessions: ses, state, marked };
   }
   if (q.action === 'award') {   /* the teacher marks (on=1) or unmarks (on=0) pages as covered for a pupil */
     const book = String(q.book || ''), pages = String(q.pages || '').split(',').filter(x => /^c\d{1,2}-p\d{1,3}$/.test(x)), on = q.on === '0' ? 0 : 1;
