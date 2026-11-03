@@ -13,6 +13,8 @@
       and copy the Web app URL (it ends in /exec).
    5. In the GitHub repo, open activity.json (top level), edit it and paste the URL between the quotes after "url". Commit.
    6. In the Teacher area › Pupils, type the same TEACHER_KEY once on your device.
+   STAFF: typing TEACHER_KEY or STAFF_PIN in the sign-in box's name or PIN field marks that device as staff (never asked,
+   never counted). Its "Send me staff details" link emails both to the Google account that owns this script.
 
    UPDATING this code later: paste the new version over the old one (keep your TEACHER_KEY line), save, then
    Deploy › Manage deployments › pencil (Edit) › Version: New version › Deploy. The URL stays the same.
@@ -23,6 +25,7 @@
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
 const TEACHER_KEY = 'change-me';
+const STAFF_PIN = 'change-me';   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
 const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
 const LOG_HEAD = ['When', 'Pupil ID', 'Name', 'Class', 'Unit', 'Topic', 'Active seconds', 'Page'];
 const PROG_HEAD = ['Updated', 'Pupil ID', 'Name', 'Class', 'Unit', 'Pages covered', 'Pages opened', 'Pages in unit', 'Trophies', 'Best quiz scores'];
@@ -113,13 +116,29 @@ function doPost(e) {
   return out_({ ok: true });
 }
 
+function staffMail_() {
+  const c = CacheService.getScriptCache(); if (c.get('staffmail')) return { ok: true, again: true };   // at most one email every 10 minutes
+  const to = Session.getEffectiveUser().getEmail(); if (!to) return { ok: false };
+  MailApp.sendEmail(to, "Mr B's Revision Guide: staff details",
+    "Staff details for Mr B's Digital Technology Revision Guide\n\n" +
+    'Teacher area key (Teacher area › Pupils): ' + TEACHER_KEY + '\n' +
+    'Staff PIN (type it in the sign-in box to mark a device as staff): ' + STAFF_PIN + '\n\n' +
+    'Either one typed in the sign-in box (name or PIN field) marks a device as staff: it is never asked to sign in and never counted.\n' +
+    'Someone pressed "Send me staff details" on the sign-in box at ' + new Date().toLocaleString('en-GB') + '.');
+  c.put('staffmail', '1', 600);
+  return { ok: true };
+}
 /* the Teacher area: ?key=… gives one summary row per pupil; &action=merge|rename|delete changes them */
 function doGet(e) {
   const q = (e && e.parameter) || {};
   if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
   if (q.action === 'whois') return out_(whois_(q.name, q.cls, q.pin, q.id));   /* pupils signing in: find them by name and form class */
+  if (q.action === 'staff') {   /* the sign-in box: staff password check (TEACHER_KEY or STAFF_PIN) */
+    const k = String(q.key || ''), ok = (k === TEACHER_KEY && TEACHER_KEY !== 'change-me') || (k === STAFF_PIN && STAFF_PIN !== 'change-me');
+    return out_(ok ? { ok: true, teacher: k === TEACHER_KEY } : { error: 'key' });
+  }
+  if (q.action === 'staffmail') return out_(staffMail_());   /* "Send me staff details": only ever to the script's owner */
   if (q.key !== TEACHER_KEY || TEACHER_KEY === 'change-me') return out_({ error: 'key' });
-  if (q.action === 'staff') return out_({ ok: true });   /* the sign-in box: staff password check */
   if (q.action) return out_(locked_(() => act_(q)));
   return out_(summary_());
 }

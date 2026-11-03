@@ -1039,6 +1039,19 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 .ia-i svg{width:20px;height:20px}
 .ia-n{font-weight:700;font-size:15px}
 .ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
 .ios-add .btn{width:100%;justify-content:center}
 /* ================= WELCOME: BEGIN (splash + welcome screen + "← Home"; source notes/app/front_welcome.css) ================= */
 /* splash: full screen, hero navy, once per browser session and on app launch; never blocks the page underneath */
@@ -2177,25 +2190,31 @@ try {
   function ask() {
     if (document.getElementById('mrb-who')) return;
     const p = me() || {}, editing = !!me() && !!LS.get('mrb-pin-ok');
-    const css = `#mrb-who{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:rgba(10,16,30,.62);padding:16px}#mrb-who form{background:#fff;color:#16213A;border-radius:14px;max-width:380px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}#mrb-who h2{margin:0 0 4px;font-size:19px}#mrb-who p{margin:0 0 12px;color:#4A5468;font-size:13.5px}#mrb-who label{display:block;font-weight:700;font-size:13px;margin:8px 0 4px}#mrb-who input{width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px}#mrb-who .r{display:flex;gap:8px;margin-top:14px}#mrb-who button{font:inherit;font-weight:700;border-radius:9px;padding:10px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer}#mrb-who button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff;flex:1}#mrb-who button:disabled{opacity:.6}#mrb-who .m{margin:10px 0 0;font-size:13px;color:#4A5468;min-height:1em}@media (prefers-color-scheme:dark){#mrb-who form{background:#1B2233;color:#E8ECF4}#mrb-who p,#mrb-who .m{color:#AEB8CA}#mrb-who input,#mrb-who button:not(.p){background:#121826;color:#E8ECF4;border-color:#3A4458}}`;
+    const css = `#mrb-who{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:rgba(10,16,30,.62);padding:16px}#mrb-who form{background:#fff;color:#16213A;border-radius:14px;max-width:380px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}#mrb-who h2{margin:0 0 4px;font-size:19px}#mrb-who p{margin:0 0 12px;color:#4A5468;font-size:13.5px}#mrb-who label{display:block;font-weight:700;font-size:13px;margin:8px 0 4px}#mrb-who input{width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px}#mrb-who .r{display:flex;gap:8px;margin-top:14px}#mrb-who button{font:inherit;font-weight:700;border-radius:9px;padding:10px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer}#mrb-who button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff;flex:1}#mrb-who button:disabled{opacity:.6}#mrb-who .m{margin:10px 0 0;font-size:13px;color:#4A5468;min-height:1em}#mrb-who button.sd{display:block;margin:6px auto 0;padding:4px 6px;border:0;background:none;color:#8A93A6;font-size:12px;font-weight:600;text-decoration:underline}@media (prefers-color-scheme:dark){#mrb-who form{background:#1B2233;color:#E8ECF4}#mrb-who p,#mrb-who .m{color:#AEB8CA}#mrb-who input,#mrb-who button:not(.p){background:#121826;color:#E8ECF4;border-color:#3A4458}}`;
     const d = document.createElement('div'); d.id = 'mrb-who'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'mrb-who-h');
-    d.innerHTML = `<style>${css}</style><form novalidate><h2 id="mrb-who-h">Who’s using the Revision Guide?</h2><p>Enter your name, form class and a 4-digit PIN. Your progress is saved under your name, so it follows you to any device.</p><label for="mrb-n">First name and surname</label><input id="mrb-n" autocomplete="name" maxlength="40"><label for="mrb-c">Form class</label><input id="mrb-c" maxlength="12" placeholder="e.g. 11B or 13D" autocomplete="off"><label for="mrb-p">PIN</label><input id="mrb-p" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="4 digits"><small style="display:block;margin-top:4px;color:#687386;font-size:12.5px">First time? Choose one you’ll remember. Use the same PIN on every device.</small><div class="r">${editing ? '<button type="button" class="l">Cancel</button>' : ''}<button class="p">Continue</button></div><p class="m" aria-live="polite"></p></form>`;
+    d.innerHTML = `<style>${css}</style><form novalidate><h2 id="mrb-who-h">Who’s using the Revision Guide?</h2><p>Enter your name, form class and a 4-digit PIN. Your progress is saved under your name, so it follows you to any device.</p><label for="mrb-n">First name and surname</label><input id="mrb-n" autocomplete="name" maxlength="40"><label for="mrb-c">Form class</label><input id="mrb-c" maxlength="12" placeholder="e.g. 11B or 13D" autocomplete="off"><label for="mrb-p">PIN</label><input id="mrb-p" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="4 digits"><small style="display:block;margin-top:4px;color:#687386;font-size:12.5px">First time? Choose one you’ll remember. Use the same PIN on every device.</small><div class="r">${editing ? '<button type="button" class="l">Cancel</button>' : ''}<button class="p">Continue</button></div><p class="m" aria-live="polite"></p><button type="button" class="sd">Send me staff details</button></form>`;
     document.body.append(d);
     const n = d.querySelector('#mrb-n'), c = d.querySelector('#mrb-c'), pinI = d.querySelector('#mrb-p'), m = d.querySelector('.m'), go = d.querySelector('.p'); n.value = p.name || ''; c.value = p.cls || '';
     const close = () => { d.remove(); document.documentElement.style.overflow = ''; paintWho(); };
     document.documentElement.style.overflow = 'hidden';
     d.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); if (editing) close(); } }, true);
     const cancel = d.querySelector('.l'); if (cancel) cancel.addEventListener('click', close);
+    d.querySelector('.sd').addEventListener('click', async ev => { const bt = ev.currentTarget; bt.disabled = true; m.textContent = 'Sending…';
+      try { const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=staffmail', { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); m.textContent = j && j.ok ? 'The staff details have been emailed to Mr Butler.' : 'Couldn’t send just now.'; }
+      catch (x) { m.textContent = 'Couldn’t send just now. Check you are online.'; } bt.disabled = false; });
     d.querySelector('form').addEventListener('submit', async e => {
       e.preventDefault();
       const name = n.value.replace(/\s+/g, ' ').trim(), cls = c.value.replace(/\s+/g, '').toUpperCase();
+      const pinV = pinI.value.trim();
       if (name.split(' ').length < 2) {
-        /* staff: the staff password typed in the name box (checked by the Apps Script, never stored in the site) closes this for good on this device */
-        if (name.length >= 4) {
+        /* staff: the staff password or staff PIN typed in the name box (or the PIN box, name left empty), checked by the Apps Script
+           (never stored in the site), marks this device as staff: never asked again, never counted */
+        const tryK = name || pinV;
+        if (tryK.length >= 4) {
           go.disabled = true; m.textContent = 'Checking…';
           try {
-            const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=staff&key=' + encodeURIComponent(name), { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
-            if (j && j.ok) { LS.set('notes-nocount', '1'); LS.set('teacher.nocount-set', '1'); LS.set('teacher.actkey', name); LS.set('mrb-pupil', null); m.textContent = 'Staff device: you won’t be asked again or counted.'; setTimeout(close, 900); return; }
+            const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=staff&key=' + encodeURIComponent(tryK), { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
+            if (j && j.ok) { LS.set('notes-nocount', '1'); LS.set('teacher.nocount-set', '1'); if (j.teacher) LS.set('teacher.actkey', tryK); LS.set('mrb-pupil', null); m.textContent = 'Staff device: you won’t be asked again or counted.'; setTimeout(close, 900); return; }
           } catch (x) { }
           go.disabled = false;
         }
@@ -2484,6 +2503,35 @@ function route() {
   if (!WEB) { const v = document.querySelector('.wl-ver'); if (v) v.remove(); }   /* updates: web host only */
 })();
 /* ================= WELCOME: END ================= */
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
 
 /* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
 function wlShare() {
