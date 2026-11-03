@@ -191,6 +191,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 #tr-print-h{display:none}.tr-h4{margin:14px 0 6px;font-size:15px}
 /* pupil visits */
 #vs-t{font-size:14.5px;min-width:0}#vs-t th,#vs-t td{vertical-align:middle}
+.wk{margin-bottom:12px}.wk-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px}.wk-h h3{margin:0;font-size:16px}.wk-nav{display:flex;align-items:center;gap:6px}.wk-nav b{font-size:13.5px;min-width:9.5em;text-align:center}.wk h4{margin:14px 0 4px;font-size:14.5px}.wk h4 small{font-weight:400;color:var(--ink-3)}.wk table{font-size:13px}.wk td small{display:block;color:var(--ink-3)}.wk .up{color:#127A3A}.wk .down{color:#B42318}.wk .idle{color:#B42318;font-size:13px;margin:4px 0 0}@media print{.wk-nav button{display:none}body.wk-printing #activity > :not(#ac-on),body.wk-printing #ac-on > :not(#wk-wrap),body.wk-printing #visits > :not(#activity){display:none!important}}
 #ac-t{font-size:14px}#ac-t .ac-cb{width:28px;padding-right:0}#ac-t .ac-cb input{width:18px;height:18px}#ac-t tr.sel td{background:var(--paper-2)}#ac-t .ac-typed{color:var(--warn)}#ac-t .ac-nm{font:inherit;font-weight:700;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:2px}#ac-t .ac-pr{color:var(--ink-2)}#ac-t tr.ac-det td{border-top:0;padding-top:0}.ac-d{background:var(--paper-2);border-radius:10px;padding:10px 12px;box-sizing:border-box;max-width:min(680px,calc(100vw - 92px));position:sticky;left:0}.ac-u+.ac-u{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}.ac-u h4{margin:0 0 2px;font-size:14px}.ac-u p{margin:0 0 4px}.ac-cov{max-width:240px;margin:2px 0 6px}.ac-d .ac-cov i{margin-left:0}#ac-t td:nth-child(2){min-width:150px}.ac-sub{font-size:12px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em;margin:6px 0 2px!important}.ac-q{list-style:none;margin:0;padding:0;font-size:13px}.ac-q li{display:flex;justify-content:space-between;gap:10px;padding:2px 0;border-bottom:1px dashed var(--line)}.ac-q b{white-space:nowrap}.ac-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:8px 0}.ac-panel{margin:0 0 10px}.ac-panel p{margin:0 0 8px;font-size:14px}.ac-row{display:flex;flex-wrap:wrap;gap:6px}.ac-row input{font:inherit;padding:7px 9px;border:1px solid var(--line);border-radius:8px;min-width:0;flex:1}.ac-row input:first-child{flex:1 1 180px}.tp-mini.danger{color:#fff;background:#B42318;border-color:#B42318}.tp-mini.pri{color:#fff;background:var(--accent);border-color:var(--accent)}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}#ac-t th,#ac-t td{vertical-align:middle}#ac-t td small{display:block;color:var(--ink-3);font-size:12px;font-weight:400}#ac-t .vs-n{white-space:nowrap;width:auto}#ac-t .vs-bar{display:block;margin-top:3px}
 .vs-n{text-align:right;width:22%;font-variant-numeric:tabular-nums;white-space:nowrap}.vs-n span{display:block}
 .vs-bar{display:block;height:6px;background:var(--paper-2);border-radius:3px;margin-top:3px}.vs-bar i{display:block;height:100%;background:var(--accent);border-radius:3px;margin-left:auto}
@@ -353,6 +354,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
   <p class="tp-status" id="ac-status" role="status" aria-live="polite" hidden></p>
   <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-pin">Reset PIN</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Clear</button></div>
   <div class="ac-panel card" id="ac-panel" hidden></div>
+  <div class="card wk" id="wk-wrap" hidden><div class="wk-h"><h3>Weekly report</h3><span class="wk-nav"><button type="button" class="tp-mini" id="wk-prev" aria-label="Previous week">‹</button><b id="wk-range"></b><button type="button" class="tp-mini" id="wk-next" aria-label="Next week">›</button><button type="button" class="tp-mini" id="wk-print">Print</button></span></div><p class="small" id="wk-sum"></p><div id="wk-body"></div></div>
   <div class="card" id="ac-wrap" hidden><p class="small" id="ac-sum" style="margin:0 0 8px"></p><div style="overflow-x:auto"><table id="ac-t"><thead><tr><th class="ac-cb"><span class="sr-only">Select</span></th><th>Pupil</th><th>Class</th><th class="vs-n">Total</th><th class="vs-n">7 days</th><th class="vs-n">Days</th><th class="vs-n">Last</th></tr></thead><tbody id="ac-body"></tbody></table></div></div>
  </div>
  </div>
@@ -1818,13 +1820,13 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   async function load() {
     const key = LS.get('teacher.actkey');
     $('#ac-keyrow').hidden = !!key; $('#ac-tools').hidden = !key;
-    if (!key) { $('#ac-wrap').hidden = true; return; }
+    if (!key) { $('#ac-wrap').hidden = true; $('#wk-wrap').hidden = true; return; }
     status('Loading…');
     try {
       const r = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'key=' + encodeURIComponent(key), { cache: 'no-store', credentials: 'omit' });
       const j = await r.json();
       if (j.error === 'key') { LS.set('teacher.actkey', null); status('That key doesn’t match TEACHER_KEY in the Apps Script. Type it again.', 'warn'); $('#ac-keyrow').hidden = false; $('#ac-tools').hidden = true; return; }
-      DATA = j.pupils || []; status(''); render();
+      DATA = j.pupils || []; status(''); render(); week();
     } catch (e) { status('Couldn’t load pupil activity. Check you’re online and that the Apps Script is deployed for “Anyone”.', 'warn'); }
   }
   function render() {
@@ -1882,6 +1884,37 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       el('div', { class: 'ac-row' }, nm, cl, go, cancel));
     nm.focus();
   }
+  /* ---------- the weekly report (Monday to Sunday) */
+  let WK = null;   /* Monday of the week shown: null = this week */
+  const addD = (ds, n) => { const d = new Date(ds + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); };
+  const niceD = ds => new Date(ds + 'T12:00:00Z').toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+  async function week() {
+    const body = $('#wk-body'); $('#wk-wrap').hidden = false; body.innerHTML = '<p class="small">Loading…</p>';
+    let w; try { w = await api(Object.assign({ action: 'week' }, WK ? { start: WK } : {})); } catch (e) { w = null; }
+    if (!w || !w.ok) { body.innerHTML = ''; body.append(el('p', { class: 'small', text: w && w.error === 'unknown action' || !w ? 'The weekly report needs the updated Apps Script (deploy it as a new version).' : 'Couldn’t load the weekly report.' })); return; }
+    WK = w.start; $('#wk-range').textContent = `${niceD(w.start)} – ${niceD(w.end)}`;
+    $('#wk-next').disabled = addD(w.start, 7) > new Date().toISOString().slice(0, 10);
+    const all = w.pupils.filter(p => !cls || p.cls === cls).sort((a, b) => a.cls.localeCompare(b.cls) || b.secs - a.secs || a.name.localeCompare(b.name));
+    const act = all.filter(p => p.secs > 0), tot = act.reduce((a, p) => a + p.secs, 0), prev = all.reduce((a, p) => a + p.prev, 0);
+    $('#wk-sum').textContent = `${act.length} of ${all.length} pupils revised · ${hm(tot)} in all (week before: ${hm(prev)})`;
+    body.innerHTML = '';
+    [...new Set(all.map(p => p.cls))].forEach(c => {
+      const ps = all.filter(p => p.cls === c), a = ps.filter(p => p.secs > 0), idle = ps.filter(p => !p.secs);
+      body.append(el('h4', {}, document.createTextNode(c || 'No class'), el('small', { text: ` · ${a.length} of ${ps.length} revised · ${hm(a.reduce((x, p) => x + p.secs, 0))}` })));
+      if (a.length) {
+        const tb = el('tbody');
+        a.forEach(p => {
+          const d = p.secs - p.prev, tr = p.prev ? el('small', { class: d >= 0 ? 'up' : 'down', text: `${d >= 0 ? '▲' : '▼'} ${hm(Math.abs(d))}` }) : el('small', { text: 'new' });
+          const work = el('td'); (p.chapters.length ? p.chapters.slice(0, 3) : []).forEach(x => { const [b, ch] = x[0].split('|'); work.append(el('div', { text: `${UNIT[b] || b} ch ${+ch.replace(/\D/g, '')}${x[1] ? ' ' + x[1] : ''} (${hm(x[2])})` })); }); if (!p.chapters.length) work.textContent = 'Home page only';
+          const qz = el('td'); p.quizzes.forEach(q => { const [cid, pp] = q[1].split('|'); qz.append(el('div', { text: `${UNIT[q[0]] || q[0]} ch ${+cid.replace(/\D/g, '')}${pp ? ' (past papers)' : ''}: ${q[2]}/${q[3]}` })); }); if (!p.quizzes.length) qz.textContent = '–';
+          const prog = Object.entries(p.prog || {}).filter(([, v]) => v[1]).map(([b, v]) => `${UNIT[b] || b} ${pct(v[0], v[1])}%`).join(', ');
+          tb.append(el('tr', {}, el('td', {}, el('b', { text: p.name }), prog ? el('small', { text: 'Covered ' + prog }) : null), el('td', { class: 'vs-n' }, document.createTextNode(hm(p.secs)), tr), el('td', { class: 'vs-n', text: String(p.days) }), work, qz));
+        });
+        body.append(el('div', { style: 'overflow-x:auto' }, el('table', {}, el('thead', {}, el('tr', {}, el('th', { text: 'Pupil' }), el('th', { class: 'vs-n', text: 'Time' }), el('th', { class: 'vs-n', text: 'Days' }), el('th', { text: 'Worked on' }), el('th', { text: 'Quizzes' }))), tb)));
+      }
+      if (idle.length) body.append(el('p', { class: 'idle', text: 'No revision this week: ' + idle.map(p => p.name).join(', ') }));
+    });
+  }
   function csv() {
     if (!DATA) return;
     const units = Object.keys(UNIT).filter(u => DATA.some(p => p.units && p.units[u]));
@@ -1903,7 +1936,10 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     $('#ac-refresh').addEventListener('click', () => { Object.keys(DET).forEach(k => delete DET[k]); load(); });
     $('#ac-merge').addEventListener('click', () => panel('merge')); $('#ac-rename').addEventListener('click', () => panel('rename')); $('#ac-pin').addEventListener('click', () => panel('pin')); $('#ac-del').addEventListener('click', () => panel('delete'));
     $('#ac-clear').addEventListener('click', () => { SEL.clear(); render(); }); $('#ac-csv').addEventListener('click', csv);
-    $('#ac-cls').addEventListener('change', e => { cls = e.target.value; LS.set('teacher.actcls', cls); render(); });
+    $('#ac-cls').addEventListener('change', e => { cls = e.target.value; LS.set('teacher.actcls', cls); render(); week(); });
+    $('#wk-prev').addEventListener('click', () => { WK = addD(WK || new Date().toISOString().slice(0, 10), -7); week(); });
+    $('#wk-next').addEventListener('click', () => { if (WK) { WK = addD(WK, 7); week(); } });
+    $('#wk-print').addEventListener('click', () => { document.body.classList.add('wk-printing'); window.print(); setTimeout(() => document.body.classList.remove('wk-printing'), 500); });
     $('#ac-sort').value = sortBy; $('#ac-sort').addEventListener('change', e => { sortBy = e.target.value; LS.set('teacher.actsort', sortBy); render(); });
     let done = false; const go = () => { if (done || location.hash !== '#visits') return; done = true; load(); };
     addEventListener('hashchange', go); go();

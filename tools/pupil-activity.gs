@@ -26,6 +26,8 @@
 
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
+const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
+const SITE = 'https://popcorn483.github.io/ergsdigitaltechnology/';
 const EMAIL_SIGNINS = true;   // email the script's owner each time a new pupil signs up (false to stop)   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
 const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
 const LOG_HEAD = ['When', 'Pupil ID', 'Name', 'Class', 'Unit', 'Topic', 'Active seconds', 'Page'];
@@ -154,6 +156,8 @@ function doGet(e) {
   }
   if (q.action === 'staffmail') return out_(staffMail_());   /* "Send me staff details": only ever to the script's owner */
   if (q.key !== TEACHER_KEY || TEACHER_KEY === 'change-me') return out_({ error: 'key' });
+  ensureWeekly_();
+  if (q.action === 'week') return out_(week_(q.start));   /* the Teacher area's weekly report */
   if (q.action) return out_(locked_(() => act_(q)));
   return out_(summary_());
 }
@@ -217,6 +221,78 @@ function setName_(id, name, cls) {
 function dropNames_(ids) {
   const sh = tab_('Names', ['Pupil ID', 'Name', 'Class']), r = rows_(sh);
   for (let i = r.length - 1; i >= 0; i--) if (ids.indexOf(String(r[i][0])) >= 0) sh.deleteRow(i + 2);
+}
+/* ---------- WEEKLY REPORT: Monday to Sunday (UK time), per pupil: active time (and the week before), days used, what they
+   worked on (per workbook and topic), chapter quizzes done that week, and pages covered so far. ---------- */
+// CHAPTERS:BEGIN (topic titles, refreshed by notes/front/worksheets.py)
+const CHAPTERS = {"U1|c01":"Digital data","U1|c02":"Software","U1|c03":"Database applications","U1|c04":"Spreadsheet applications","U1|c05":"Computer hardware","U1|c06":"Network technologies","U1|c07":"Cyberspace, network security and data transfer","U1|c08":"Cloud technology","U1|c09":"Ethical, legal and environmental impact","U1|c10":"Digital applications","U4|c01":"Contemporary trends in software development","U4|c02":"Digital data","U4|c03":"Digital design principles","U4|c04":"Programming constructs","U4|c05":"Simple error handling techniques","U4|c06":"Developing test plans and testing a solution","U4|c07":"Evaluation of digitally authored systems","U5|c01":"Getting set up","U5|c02":"Design","U5|c03":"Building it in Visual Studio","U5|c04":"Testing","U5|c05":"Evaluation","U5|c06":"Before you submit","AS1|c01":"Reasons for systems development","AS1|c02":"Analysis","AS1|c03":"System design, development and testing","AS1|c04":"System implementation","AS1|c05":"Alternative development approaches","AS1|c06":"Software projects","AS1|c07":"Security issues","AS1|c08":"Algorithms","AS1|c09":"Fundamentals of programming","AS1|c10":"Object-oriented programming","AS2|c01":"Data representation","AS2|c02":"Data and information","AS2|c03":"Architecture","AS2|c04":"User interface and data compression","AS2|c05":"Software","AS2|c06":"Web applications","AS2|c07":"Website development","A21|c01":"Network resources","A21|c02":"Protocols, transmission media and errors","A21|c03":"Databases","A21|c04":"AI, expert systems and robotics","A21|c05":"Mobile technology, data mining and the cloud","A21|c06":"Legislation and ethics","A22|c01":"Choose your project","A22|c02":"Design your database","A22|c03":"Getting started with Access","A22|c04":"Tables and relationships","A22|c05":"Queries","A22|c06":"Forms","A22|c07":"Reports","A22|c08":"VBA basics","A22|c09":"VBA task tutorials","A22|c10":"Booking system: tables, relationships and forms","A22|c11":"Booking system: the booking logic in VBA","A22|c12":"Booking system: reports, menu and finishing touches","A22|c13":"Your coursework: setting up the write-up","A22|c14":"Your coursework: the Analysis chapter","A22|c15":"Your coursework: the Design chapter","A22|c16":"Your coursework: the Testing and Evaluation chapter","A22|c17":"Your coursework: the User Guide, Appendix and Bibliography","A22|c18":"Tables and keys","A22|c19":"Relationships","A22|c20":"Queries","A22|c21":"Forms","A22|c22":"Reports","A22|c23":"Macros","A22|c24":"VBA quick recipes"};
+// CHAPTERS:END
+const UNIT_NAMES = { home: 'Home', U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+function dayOf_(t) { return Utilities.formatDate(new Date(t), 'Europe/London', 'yyyy-MM-dd'); }
+function addDays_(ds, n) { const d = new Date(ds + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
+function mondayOf_(t) { const ds = dayOf_(t), d = new Date(ds + 'T12:00:00Z'); return addDays_(ds, -((d.getUTCDay() + 6) % 7)); }
+function week_(start) {
+  const mon = /^\d{4}-\d{2}-\d{2}$/.test(String(start || '')) ? mondayOf_(new Date(start + 'T12:00:00Z')) : mondayOf_(new Date()), prev = addDays_(mon, -7), sun = addDays_(mon, 6);
+  const A = aliases_(), N = names_(), P = {}, cut = new Date(prev + 'T00:00:00Z').getTime() - 864e5, cutEnd = new Date(sun + 'T23:59:59Z').getTime() + 864e5;
+  const get = id => P[id] || (P[id] = { id, name: '', cls: '', at: 0, secs: 0, prev: 0, days: {}, books: {}, chapters: {}, quizzes: [], prog: {} });
+  for (const r of rows_(log_())) {
+    const t = new Date(r[0]).getTime(), id = resolve_(String(r[1]), A), s = +r[6] || 0; if (!id || !s) continue;
+    if (t < cut || t > cutEnd) { const p = get(id); if (t > p.at) { p.at = t; p.name = String(r[2]); p.cls = String(r[3]); } continue; }   // quick skip: well outside the two weeks
+    const wk = mondayOf_(t); if (wk !== mon && wk !== prev) continue;
+    const p = get(id); if (t >= p.at) { p.at = t; p.name = String(r[2]); p.cls = String(r[3]); }
+    if (wk === prev) { p.prev += s; continue; }
+    p.secs += s; p.days[dayOf_(t)] = 1;
+    const b = String(r[4]); p.books[b] = (p.books[b] || 0) + s;
+    const ch = String(r[5] || ''); if (b !== 'home' && ch) { const k = b + '|' + ch; p.chapters[k] = (p.chapters[k] || 0) + s; }
+  }
+  for (const r of rows_(prog_())) {
+    const id = resolve_(String(r[1]), A); if (!id) continue; const p = get(id), b = String(r[4]);
+    if (!p.name) { p.name = String(r[2]); p.cls = String(r[3]); }
+    p.prog[b] = [+r[5], +r[7]];
+    let q = {}; try { q = JSON.parse(r[9] || '{}'); } catch (x) { }
+    Object.keys(q).forEach(k => { const v = q[k]; if (v[2] >= mon && v[2] <= sun) p.quizzes.push([b, k, v[0], v[1], v[2]]); });
+  }
+  const pupils = Object.keys(P).map(id => { const p = P[id]; if (N[id]) { p.name = N[id][0] || p.name; p.cls = N[id][1] || p.cls; }
+    p.days = Object.keys(p.days).length;
+    p.chapters = Object.keys(p.chapters).map(k => [k, CHAPTERS[k] || '', p.chapters[k]]).sort((a, b) => b[2] - a[2]);
+    delete p.at; return p; }).filter(p => p.name);
+  return { ok: true, start: mon, end: sun, pupils };
+}
+function ensureWeekly_() {   /* the Monday email: its trigger is made the first time the Teacher area opens after this code is deployed */
+  try {
+    const has = ScriptApp.getProjectTriggers().some(t => t.getHandlerFunction() === 'weeklyEmail');
+    if (WEEKLY_EMAIL && !has) ScriptApp.newTrigger('weeklyEmail').timeBased().onWeekDay(ScriptApp.WeekDay.MONDAY).atHour(7).inTimezone('Europe/London').create();
+  } catch (e) { }
+}
+function weeklyEmail() {   /* runs every Monday about 7am: last week's report (you can also run it by hand from the editor) */
+  if (!WEEKLY_EMAIL) return;
+  const w = week_(addDays_(mondayOf_(new Date()), -7)), to = Session.getEffectiveUser().getEmail(); if (!to) return;
+  const esc = x => String(x == null ? '' : x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const hm = s => { const m = Math.round(s / 60); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0'); };
+  const nice = ds => Utilities.formatDate(new Date(ds + 'T12:00:00Z'), 'Europe/London', 'EEE d MMM');
+  const all = w.pupils.slice().sort((a, b) => a.cls.localeCompare(b.cls) || b.secs - a.secs || a.name.localeCompare(b.name));
+  const active = all.filter(p => p.secs > 0), tot = active.reduce((a, p) => a + p.secs, 0), prevTot = all.reduce((a, p) => a + p.prev, 0);
+  const classes = [...new Set(all.map(p => p.cls))];
+  const th = 'style="text-align:left;padding:6px 8px;border-bottom:2px solid #16213A;font-size:12px;color:#4A5468"', td = 'style="padding:6px 8px;border-bottom:1px solid #DCE2EA;vertical-align:top;font-size:13px"';
+  let h = `<div style="font-family:Arial,Helvetica,sans-serif;color:#16213A;max-width:760px"><h2 style="margin:0 0 4px">Revision Guide: weekly report</h2>
+    <p style="margin:0 0 14px;color:#4A5468">${nice(w.start)} to ${nice(w.end)} · ${active.length} of ${all.length} pupils revised · ${hm(tot)} in all (week before: ${hm(prevTot)})</p>`;
+  classes.forEach(c => {
+    const ps = all.filter(p => p.cls === c), act = ps.filter(p => p.secs > 0), idle = ps.filter(p => !p.secs);
+    h += `<h3 style="margin:18px 0 6px">${esc(c || 'No class')} <span style="font-weight:normal;color:#4A5468;font-size:13px">· ${act.length} of ${ps.length} revised · ${hm(act.reduce((a, p) => a + p.secs, 0))}</span></h3>`;
+    if (act.length) {
+      h += `<table style="border-collapse:collapse;width:100%"><tr><th ${th}>Pupil</th><th ${th}>Time</th><th ${th}>Days</th><th ${th}>Worked on</th><th ${th}>Quizzes</th></tr>`;
+      act.forEach(p => {
+        const d = p.secs - p.prev, trend = p.prev ? (d >= 0 ? `<span style="color:#127A3A">▲ ${hm(d)}</span>` : `<span style="color:#B42318">▼ ${hm(-d)}</span>`) : '<span style="color:#4A5468">new</span>';
+        const work = p.chapters.slice(0, 3).map(x => { const [b, ch] = x[0].split('|'); return `${esc(UNIT_NAMES[b] || b)} ch ${+ch.replace(/\D/g, '')}${x[1] ? ' ' + esc(x[1]) : ''} (${hm(x[2])})`; }).join('<br>') || 'Home page only';
+        const qz = p.quizzes.map(q => { const [cid, pp] = q[1].split('|'); return `${esc(UNIT_NAMES[q[0]] || q[0])} ch ${+cid.replace(/\D/g, '')}${pp ? ' (past papers)' : ''}: ${q[2]}/${q[3]}`; }).join('<br>') || '–';
+        h += `<tr><td ${td}><b>${esc(p.name)}</b></td><td ${td}>${hm(p.secs)}<br><small>${trend}</small></td><td ${td}>${p.days}</td><td ${td}>${work}</td><td ${td}>${qz}</td></tr>`;
+      });
+      h += '</table>';
+    }
+    if (idle.length) h += `<p style="margin:6px 0 0;font-size:13px;color:#B42318">No revision this week: ${idle.map(p => esc(p.name)).join(', ')}</p>`;
+  });
+  h += `<p style="margin:20px 0 0;font-size:12px;color:#4A5468">Every pupil in detail: <a href="${SITE}teacher.html#visits">Teacher area › Pupils</a>. To stop this email, set WEEKLY_EMAIL to false in the Apps Script and deploy a new version.</p></div>`;
+  MailApp.sendEmail({ to, subject: `Revision Guide weekly report: ${nice(w.start)} to ${nice(w.end)}`, htmlBody: h, body: `${active.length} of ${all.length} pupils revised, ${hm(tot)} in all. Open the email in HTML view, or see ${SITE}teacher.html#visits` });
 }
 function summary_() {
   const PN = {}; rows_(pins_()).forEach(r => { PN[String(r[0])] = 1; });
