@@ -173,11 +173,30 @@ function act_(q) {
     if (q.name) setName_(to, q.name, q.cls);
     return { ok: true };
   }
-  if (q.action === 'detail') {   /* one pupil: active seconds per unit|page */
+  if (q.action === 'detail') {   /* one pupil in full: per page and per topic [seconds, last opened, times opened], per day, first/last use, devices */
     if (!okId(to)) return { ok: false, error: 'bad request' };
-    const A = aliases_(), pages = {};
-    rows_(log_()).forEach(r => { if (resolve_(String(r[1]), A) !== to) return; const k = String(r[4]) + '|' + (String(r[7] || '') || String(r[5] || '')); pages[k] = (pages[k] || 0) + (+r[6] || 0); });
-    return { ok: true, pages };
+    const A = aliases_(), pages = {}, topics = {}, days = {}, devs = {}, uses = []; let first = 0, last = 0;
+    const add = (o, k, s, t) => { const v = o[k] || (o[k] = [0, 0, 0]); v[0] += s; if (t > v[1]) v[1] = t; v[2]++; };
+    rows_(log_()).forEach(r => {
+      if (resolve_(String(r[1]), A) !== to) return;
+      const t = new Date(r[0]).getTime(), s = +r[6] || 0, b = String(r[4]), ch = String(r[5] || ''), pg = String(r[7] || '');
+      devs[String(r[1])] = 1; if (!first || t < first) first = t; if (t > last) last = t;
+      if (pg || ch) add(pages, b + '|' + (pg || ch), s, t);
+      if (b !== 'home' && ch) add(topics, b + '|' + ch, s, t);
+      const d = dayOf_(t); days[d] = (days[d] || 0) + s;
+      uses.push([t, s, b, ch]);
+    });
+    /* sessions of real use: each Log row is sent after up to 3 minutes of ACTIVE use (idle time is never counted), so rows less
+       than 20 minutes apart are one sitting: [start, end, active seconds, units, topics] */
+    uses.sort((x, y) => x[0] - y[0]);
+    const sessions = []; let cur = null;
+    uses.forEach(([t, s, b, ch]) => {
+      const st = t - s * 1000;
+      if (!cur || st - cur[1] > 20 * 60000) { cur = [st, t, 0, {}, {}]; sessions.push(cur); }
+      cur[1] = Math.max(cur[1], t); cur[2] += s; cur[3][b] = 1; if (b !== 'home' && ch) cur[4][b + '|' + ch] = (cur[4][b + '|' + ch] || 0) + s;
+    });
+    const ses = sessions.slice(-40).reverse().map(x => [x[0], x[1], x[2], Object.keys(x[3]), Object.keys(x[4]).sort((a, b) => x[4][b] - x[4][a]).slice(0, 3)]);
+    return { ok: true, pages, topics, days, first, last, devices: Object.keys(devs).length, sessions: ses };
   }
   if (q.action === 'resetpin') { if (!okId(to)) return { ok: false, error: 'bad request' }; dropPins_([to]); return { ok: true }; }   /* the pupil chooses a new PIN next time they sign in */
   if (q.action === 'rename') { if (!okId(to) || !q.name) return { ok: false, error: 'bad request' }; setName_(to, q.name, q.cls); return { ok: true }; }
