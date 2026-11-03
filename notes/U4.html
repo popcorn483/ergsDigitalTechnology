@@ -9484,7 +9484,7 @@ try {
    its URL in activity.json). Nothing is sent before a name is given, nor from a teacher's device ('notes-nocount'),
    offline, or in the claude.ai preview. ---------- */
 (function () {
-  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) { } } };
+  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
   const inBook = typeof BK !== 'undefined' && BK && BK.id && typeof PAGES !== 'undefined';
   const isTeacherPage = /teacher\.html$/i.test(location.pathname);
   if (isTeacherPage || !/^https?:$/.test(location.protocol) || /(^|\.)claude\.ai$|claudeusercontent/i.test(location.hostname)) return;
@@ -9539,7 +9539,18 @@ try {
     d.querySelector('form').addEventListener('submit', async e => {
       e.preventDefault();
       const name = n.value.replace(/\s+/g, ' ').trim(), cls = c.value.replace(/\s+/g, '').toUpperCase();
-      if (name.split(' ').length < 2) { m.textContent = 'Please enter your first name and surname.'; n.focus(); return; }
+      if (name.split(' ').length < 2) {
+        /* staff: the staff password typed in the name box (checked by the Apps Script, never stored in the site) closes this for good on this device */
+        if (name.length >= 4) {
+          go.disabled = true; m.textContent = 'Checking…';
+          try {
+            const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=staff&key=' + encodeURIComponent(name), { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
+            if (j && j.ok) { LS.set('notes-nocount', '1'); LS.set('teacher.nocount-set', '1'); LS.set('teacher.actkey', name); LS.set('mrb-pupil', null); m.textContent = 'Staff device: you won’t be asked again or counted.'; setTimeout(close, 900); return; }
+          } catch (x) { }
+          go.disabled = false;
+        }
+        m.textContent = 'Please enter your first name and surname.'; n.focus(); return;
+      }
       if (!/^[A-Z0-9]{1,12}$/.test(cls)) { m.textContent = 'Please enter your form class, e.g. 11B.'; c.focus(); return; }
       const pin = pinI.value.trim(); if (!/^\d{4}$/.test(pin)) { m.textContent = 'Please enter a 4-digit PIN.'; pinI.focus(); return; }
       go.disabled = true; m.textContent = 'Checking…';

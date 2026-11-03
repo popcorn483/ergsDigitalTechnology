@@ -119,6 +119,7 @@ function doGet(e) {
   if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
   if (q.action === 'whois') return out_(whois_(q.name, q.cls, q.pin, q.id));   /* pupils signing in: find them by name and form class */
   if (q.key !== TEACHER_KEY || TEACHER_KEY === 'change-me') return out_({ error: 'key' });
+  if (q.action === 'staff') return out_({ ok: true });   /* the sign-in box: staff password check */
   if (q.action) return out_(locked_(() => act_(q)));
   return out_(summary_());
 }
