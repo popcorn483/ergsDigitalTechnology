@@ -1732,6 +1732,12 @@ body.tut-book #b-gloss{display:none!important}
 .pg-c{display:flex;flex-wrap:wrap;gap:6px}
 .pg-k{display:inline-block;font-family:var(--sans);font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;white-space:nowrap}
 .pg-k.cov{background:color-mix(in srgb,var(--good) 15%,var(--paper));color:var(--good)}
+.pg-k.ret{background:color-mix(in srgb,#D08A00 16%,var(--paper));color:#9A6400}
+.r-pg.later .tk{border-color:#D08A00;border-style:dashed}
+.r-pg.later .tk::after{content:"↩";width:auto;height:auto;background:none;color:#D08A00;font-size:11px;font-weight:800;border-radius:0}
+.mrb-later{position:fixed;left:50%;bottom:calc(14px + env(safe-area-inset-bottom));transform:translateX(-50%);z-index:60;width:min(440px,calc(100vw - 24px));background:var(--paper,#fff);color:var(--ink,#16213A);border:1px solid var(--line,#DCE2EA);border-radius:14px;box-shadow:0 14px 40px rgba(10,16,30,.25);padding:12px 14px;font:14px/1.4 var(--sans,system-ui)}
+.mrb-later p{margin:0 28px 10px 0}.mrb-later .r{display:flex;flex-wrap:wrap;gap:8px}.mrb-later button{font:inherit;font-weight:700;border-radius:9px;padding:8px 12px;border:1px solid var(--line,#C9D2DE);background:var(--paper,#fff);color:inherit;cursor:pointer}.mrb-later .yes{background:var(--good,#1E8E4E);border-color:var(--good,#1E8E4E);color:#fff}.mrb-later .x{position:absolute;top:6px;right:8px;border:0;background:none;font-size:18px;padding:4px 6px}
+@media (prefers-reduced-motion:no-preference){.mrb-later{animation:mrbUp .25s ease-out}@keyframes mrbUp{from{transform:translate(-50%,20px);opacity:0}to{transform:translate(-50%,0);opacity:1}}}
 .pg-k.vis{background:color-mix(in srgb,var(--warn) 15%,var(--paper));color:var(--warn)}
 .pg-k.not{background:var(--paper-2);color:var(--ink-3);box-shadow:inset 0 0 0 1px var(--line)}
 .pg-xs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px;margin-top:14px}
@@ -8250,8 +8256,8 @@ if (TUT) {
    - on a web host only: the web app manifest, the service worker (../sw.js), "Install app" and "Available offline" in the menu */
 const APP_REV = !TUT;   /* revision workbooks say "covered"; tutorial books keep "done" and add their checklists */
 const covTxt = d => APP_REV ? (d ? 'Covered – tap to undo' : 'Mark as covered') : (d ? 'Done – tap to undo' : 'Mark this page as done');
-const pageStatus = id => state.done[id] ? 'cov' : state.seen[id] ? 'vis' : 'not';
-const ST_NAME = { cov: APP_REV ? 'Covered' : 'Done', vis: 'Visited, not marked', not: APP_REV ? 'Not covered' : 'Not started', off: 'Not tracking' };
+const pageStatus = id => state.done[id] ? 'cov' : state.later && state.later[id] ? 'ret' : state.seen[id] ? 'vis' : 'not';
+const ST_NAME = { cov: APP_REV ? 'Covered' : 'Done', vis: 'Visited, not marked', ret: 'Come back to', not: APP_REV ? 'Not covered' : 'Not started', off: 'Not tracking' };
 /* ---------- backup: all notes-* keys ---------- */
 function progressKeys() { const ks = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && /^notes-/.test(k)) ks.push(k); } } catch (e) { /* storage unavailable */ } return ks.sort(); }
 function exportProgress() {
@@ -8294,7 +8300,7 @@ function ring(d, n, big) { const pc = n ? Math.round(d / n * 100) : 0; return `<
 function renderProgress(focus) {
   tutView('progress', 'My progress');
   const TP = PAGES.filter(P => typeof isTrk !== 'function' || isTrk(P.ch));   /* tracked sections only (My course) */
-  const cnt = { cov: 0, vis: 0, not: 0 }; TP.forEach(P => cnt[pageStatus(P.p.id)]++);
+  const cnt = { cov: 0, vis: 0, ret: 0, not: 0 }; TP.forEach(P => cnt[pageStatus(P.p.id)]++);
   const N = TP.length, nextNot = TP.find(P => pageStatus(P.p.id) !== 'cov');
   const extra = [];
   if (typeof TASKS !== 'undefined' && TASKS.length) {
@@ -8308,7 +8314,7 @@ function renderProgress(focus) {
       <div class="pg-sum">${ring(cnt.cov, N, true)}<div><p><b>${cnt.cov} of ${N}</b> pages ${APP_REV ? 'covered' : 'done'}.</p><p class="pg-c"><span class="pg-k cov">${cnt.cov} ${ST_NAME.cov.toLowerCase()}</span><span class="pg-k vis">${cnt.vis} visited, not marked</span><span class="pg-k not">${cnt.not} ${ST_NAME.not.toLowerCase()}</span></p>
       ${nextNot ? `<a class="btn pri" href="#${esc(nextNot.p.id)}">Next ${APP_REV ? 'not-covered' : 'unfinished'} page →</a>` : '<p><b>Everything is marked. Brilliant.</b></p>'}</div></div>
       ${extra.length ? `<div class="pg-xs">${extra.join('')}</div>` : ''}
-      <div class="lib-chips pg-f" role="group" aria-label="Show">${[['all', 'All pages'], ['not', ST_NAME.not], ['vis', 'Visited, not marked'], ['cov', ST_NAME.cov]].map(([k, l]) => `<button type="button" class="lib-chip" data-pgf="${k}" aria-pressed="${PG_F === k}">${esc(l)}</button>`).join('')}</div></header>
+      <div class="lib-chips pg-f" role="group" aria-label="Show">${[['all', 'All pages'], ['ret', 'Come back to'], ['not', ST_NAME.not], ['vis', 'Visited, not marked'], ['cov', ST_NAME.cov]].map(([k, l]) => `<button type="button" class="lib-chip" data-pgf="${k}" aria-pressed="${PG_F === k}">${esc(l)}</button>`).join('')}</div></header>
     <section class="card lib-body" id="pg-list">${B.chapters.filter(ch => (ch.pages || []).length).map(ch => {
       const ps = ch.pages, d = ps.filter(p => state.done[p.id]).length;
       const on = typeof isTrk !== 'function' || isTrk(ch);
@@ -9660,7 +9666,7 @@ try {
         let quiz = {}; try { quiz = (JSON.parse(localStorage.getItem('notes-chquiz:' + BK.id) || '{}').best) || {}; } catch (e) { }
         let tr = 0; try { tr = Object.keys((typeof TR !== 'undefined' && TR && TR.earned) || {}).length; } catch (e) { }
         const q = {}; Object.keys(quiz).forEach(k => { const b = quiz[k]; if (b && b.m) q[k] = [b.s, b.m, b.date || '']; });
-        o = { cov, seen, total: ids.length, tr, quiz: q, done: ids.filter(i => state.done[i]), seenIds: ids.filter(i => (state.seen[i] || state.done[i]) && !state.done[i]) };
+        o = { cov, seen, total: ids.length, tr, quiz: q, done: ids.filter(i => state.done[i]), seenIds: ids.filter(i => (state.seen[i] || state.done[i]) && !state.done[i]), laterIds: ids.filter(i => state.later && state.later[i] && !state.done[i]) };
       } catch (e) { return; }
       const sig = JSON.stringify(o) + p.id + p.name + p.cls; if (sig === lastSnap) return;
       const body = JSON.stringify(Object.assign({ kind: 'snap', id: p.id, name: p.name, cls: p.cls, book: BK.id }, o));
@@ -9765,6 +9771,43 @@ try {
   };
   void inBook;
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+/* ---------- DID YOU FINISH IT? Leaving a workbook page that isn't marked done (after at least 4 seconds on it) brings up a small
+   reminder: "I've covered it" marks it done; "I need to come back to it" flags it (↩ in the page list and My progress,
+   "Come back to"), until it is marked done. Once per page per visit. Not on teacher devices or in tutorial books. ---------- */
+(function () {
+  if (typeof BK === 'undefined' || !BK || !BK.id || typeof PAGES === 'undefined' || typeof renderPage !== 'function' || (typeof TUT !== 'undefined' && TUT)) return;
+  let prev = null, since = Date.now(); const asked = new Set();
+  const ok = () => { try { return !localStorage.getItem('notes-nocount'); } catch (e) { return true; } };
+  const later = () => { if (!state.later || typeof state.later !== 'object') state.later = {}; return state.later; };
+  const paintRail = () => { try { document.querySelectorAll('.r-pg').forEach(a => a.classList.toggle('later', !!(state.later && state.later[a.dataset.id]) && !state.done[a.dataset.id])); } catch (e) { } };
+  function remind(P) {
+    const old = document.querySelector('.mrb-later'); if (old) old.remove();
+    const d = document.createElement('div'); d.className = 'mrb-later'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Did you finish that page?');
+    const title = String((P.p.spec || P.p.title || 'that page')).replace(/\*\*|\[\[|\]\]/g, '').replace(/\|[^\]]*$/, '');
+    d.innerHTML = `<button type="button" class="x" aria-label="Close">×</button><p>You didn’t mark <b></b> as ${APP_REV ? 'covered' : 'done'}. Have you finished it?</p><div class="r"><button type="button" class="yes">✓ I’ve ${APP_REV ? 'covered' : 'finished'} it</button><button type="button" class="ret">↩ I need to come back to it</button></div>`;
+    d.querySelector('b').textContent = title.length > 70 ? title.slice(0, 67) + '…' : title;
+    document.body.append(d);
+    const close = () => { clearTimeout(tm); d.remove(); };
+    const tm = setTimeout(close, 15000);
+    d.querySelector('.x').addEventListener('click', close);
+    d.querySelector('.yes').addEventListener('click', () => { state.done[P.p.id] = 1; delete later()[P.p.id]; save(); try { updateProgress(); } catch (e) { } paintRail(); close(); });
+    d.querySelector('.ret').addEventListener('click', () => { later()[P.p.id] = 1; save(); paintRail(); close(); });
+  }
+  const rp = renderPage;
+  renderPage = function () {
+    const r = rp.apply(this, arguments);
+    try {
+      const P = !onCover ? PAGES[cur] : null, id = P && P.p && P.p.id;
+      if (prev && prev.p.id !== id && ok() && !state.done[prev.p.id] && !asked.has(prev.p.id) && Date.now() - since >= 4000) { asked.add(prev.p.id); remind(prev); }
+      if (!prev || prev.p.id !== id) { prev = P; since = Date.now(); }
+      paintRail();
+    } catch (e) { }
+    return r;
+  };
+  /* marking a page done clears its "come back to" flag */
+  document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#donebtn')) setTimeout(() => { try { const P = PAGES[cur]; if (P && state.done[P.p.id] && state.later && state.later[P.p.id]) { delete state.later[P.p.id]; save(); } paintRail(); } catch (x) { } }, 0); }, true);
+  setTimeout(paintRail, 500);
 })();
 /* ---------- VISITS: END ---------- */
 /* ================= APP: END ================= */

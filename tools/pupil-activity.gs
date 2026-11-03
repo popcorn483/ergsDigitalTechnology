@@ -111,9 +111,9 @@ function doPost(e) {
     const n = v => Math.max(0, Math.min(9999, Math.round(+v || 0))), q = {};
     Object.keys(d.quiz || {}).slice(0, 80).forEach(k => { const v = d.quiz[k]; if (/^c\d{1,2}(\|pp)?$/.test(k) && Array.isArray(v)) q[k] = [n(v[0]), n(v[1]), clean_(v[2], 10)]; });
     locked_(() => { const id = resolve_(String(d.id), aliases_()), sh = prog_(), r = rows_(sh), i = r.findIndex(x => String(x[1]) === id && String(x[4]) === book);
-      const ok = x => /^c\d{1,2}-p\d{1,3}$/.test(String(x)), done = (Array.isArray(d.done) ? d.done : []).filter(ok).slice(0, 600), seen = (Array.isArray(d.seenIds) ? d.seenIds : []).filter(ok).slice(0, 600);
+      const ok = x => /^c\d{1,2}-p\d{1,3}$/.test(String(x)), done = (Array.isArray(d.done) ? d.done : []).filter(ok).slice(0, 600), seen = (Array.isArray(d.seenIds) ? d.seenIds : []).filter(ok).slice(0, 600), later = (Array.isArray(d.laterIds) ? d.laterIds : []).filter(ok).slice(0, 600);
       const fixed = applyAwards_(id, book, done);   /* the teacher's marks win, even before the pupil's device has picked them up */
-      const row = [new Date(), id, name, clean_(d.cls, 12).toUpperCase(), book, fixed.length, n(d.seen), n(d.total), n(d.tr), JSON.stringify(q), fixed.join(',') + '|' + seen.filter(x => fixed.indexOf(x) < 0).join(',')];
+      const row = [new Date(), id, name, clean_(d.cls, 12).toUpperCase(), book, fixed.length, n(d.seen), n(d.total), n(d.tr), JSON.stringify(q), fixed.join(',') + '|' + seen.filter(x => fixed.indexOf(x) < 0).join(',') + '|' + later.filter(x => fixed.indexOf(x) < 0).join(',')];
       if (i >= 0) sh.getRange(i + 2, 1, 1, row.length).setValues([row]); else sh.appendRow(row); });
     return out_({ ok: true });
   }
@@ -201,8 +201,8 @@ function act_(q) {
     });
     const ses = sessions.slice(-40).reverse().map(x => [x[0], x[1], x[2], Object.keys(x[3]), Object.keys(x[4]).sort((a, b) => x[4][b] - x[4][a]).slice(0, 3)]);
     const state = {};   /* per workbook: the pages covered and opened (from the latest progress snapshot) */
-    rows_(prog_()).forEach(r => { if (resolve_(String(r[1]), A) !== to) return; const b = String(r[4]), [dn, sn] = String(r[10] || '|').split('|');
-      if (!state[b] || +r[5] >= state[b].cov) state[b] = { cov: +r[5], done: dn ? dn.split(',') : [], seen: sn ? sn.split(',') : [], at: new Date(r[0]).getTime() }; });
+    rows_(prog_()).forEach(r => { if (resolve_(String(r[1]), A) !== to) return; const b = String(r[4]), [dn, sn, ln] = String(r[10] || '|').split('|');
+      if (!state[b] || +r[5] >= state[b].cov) state[b] = { cov: +r[5], done: dn ? dn.split(',') : [], seen: sn ? sn.split(',') : [], later: ln ? ln.split(',') : [], at: new Date(r[0]).getTime() }; });
     const marked = {};   /* pages the teacher has marked: the latest mark per page (1 covered, 0 not) */
     rows_(awards_()).forEach(r => { if (String(r[1]) === to) marked[String(r[2]) + '|' + String(r[3])] = +r[4]; });
     return { ok: true, pages, topics, days, first, last, devices: Object.keys(devs).length, sessions: ses, state, marked };
@@ -212,8 +212,8 @@ function act_(q) {
     if (!okId(to) || BOOKS.indexOf(book) < 0 || !pages.length) return { ok: false, error: 'bad request' };
     const sh = awards_(), now = new Date(); pages.forEach(p => sh.appendRow([now, to, book, p, on]));
     const ps = prog_(), r = rows_(ps), i = r.findIndex(x => String(x[1]) === to && String(x[4]) === book);
-    if (i >= 0) { const [dn, sn] = String(r[i][10] || '|').split('|'), done = applyAwards_(to, book, dn ? dn.split(',') : []), seen = (sn ? sn.split(',') : []).filter(x => done.indexOf(x) < 0);
-      ps.getRange(i + 2, 6).setValue(done.length); ps.getRange(i + 2, 11).setValue(done.join(',') + '|' + seen.join(',')); }
+    if (i >= 0) { const [dn, sn, ln] = String(r[i][10] || '|').split('|'), done = applyAwards_(to, book, dn ? dn.split(',') : []), seen = (sn ? sn.split(',') : []).filter(x => done.indexOf(x) < 0), lat = (ln ? ln.split(',') : []).filter(x => done.indexOf(x) < 0);
+      ps.getRange(i + 2, 6).setValue(done.length); ps.getRange(i + 2, 11).setValue(done.join(',') + '|' + seen.join(',') + '|' + lat.join(',')); }
     return { ok: true, n: pages.length };
   }
   if (q.action === 'resetpin') { if (!okId(to)) return { ok: false, error: 'bad request' }; dropPins_([to]); return { ok: true }; }   /* the pupil chooses a new PIN next time they sign in */
