@@ -25,7 +25,8 @@
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
 const TEACHER_KEY = 'change-me';
-const STAFF_PIN = 'change-me';   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
+const STAFF_PIN = 'change-me';
+const EMAIL_SIGNINS = true;   // email the script's owner each time a new pupil signs up (false to stop)   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
 const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
 const LOG_HEAD = ['When', 'Pupil ID', 'Name', 'Class', 'Unit', 'Topic', 'Active seconds', 'Page'];
 const PROG_HEAD = ['Updated', 'Pupil ID', 'Name', 'Class', 'Unit', 'Pages covered', 'Pages opened', 'Pages in unit', 'Trophies', 'Best quiz scores'];
@@ -81,6 +82,7 @@ function whois_(name, cls, pin, devId) {
     const id = resolve_(String(devId), aliases_()), had = getPin_(id);
     if (had && had !== pinHash_(id, pin)) return { ok: false, error: 'pin' };
     locked_(() => setPin_(id, pin));
+    if (!had) notify_('New sign-up', name, cls, 'A new pupil has signed up.');
     return { ok: true, id, fresh: true };
   }
   const p = hits.sort((a, b) => b.total - a.total)[0], cache = CacheService.getScriptCache(), fk = 'fail:' + p.id, fails = +(cache.get(fk) || 0);
@@ -116,6 +118,19 @@ function doPost(e) {
   return out_({ ok: true });
 }
 
+/* sign-up emails: one per new pupil, to the script's owner. Gmail allows about 100 a day from a script, so this stops
+   at 90 a day (the Log still has everything). */
+function notify_(what, name, cls, more) {
+  if (!EMAIL_SIGNINS) return;
+  try {
+    const pr = PropertiesService.getScriptProperties(), day = Utilities.formatDate(new Date(), 'Europe/London', 'yyyy-MM-dd');
+    let n = +(pr.getProperty('mails:' + day) || 0); if (n >= 90 || MailApp.getRemainingDailyQuota() < 5) return;
+    const to = Session.getEffectiveUser().getEmail(); if (!to) return;
+    const who = `${String(name || '').replace(/^'/, '')} (${String(cls || '').replace(/^'/, '')})`;
+    MailApp.sendEmail(to, `Revision Guide: ${what}: ${who}`, `${what}: ${who}\n${more}\n\n${new Date().toLocaleString('en-GB')}\nSee everyone in the Teacher area › Pupils. To stop these emails, set EMAIL_SIGNINS to false in the Apps Script and deploy a new version.`);
+    pr.setProperty('mails:' + day, String(n + 1));
+  } catch (e) { }
+}
 function staffMail_() {
   const c = CacheService.getScriptCache(); if (c.get('staffmail')) return { ok: true, again: true };   // at most one email every 10 minutes
   const to = Session.getEffectiveUser().getEmail(); if (!to) return { ok: false };
