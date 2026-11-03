@@ -350,7 +350,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
  <div id="ac-setup" hidden><p class="small">Not set up yet. Make a Google Sheet, paste in the Apps Script from <code>tools/pupil-activity.gs</code> (its first lines are the steps), deploy it as a web app, then paste its URL into <code>activity.json</code> in the GitHub repo.</p></div>
  <div id="ac-on" hidden>
   <div class="hrow" id="ac-keyrow" hidden><input type="password" id="ac-key" placeholder="Teacher key" aria-label="Teacher key (TEACHER_KEY in the Apps Script)" autocomplete="off" style="font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:9px;min-width:0;flex:1;max-width:260px"><button type="button" class="tp-mini" id="ac-save">Show activity</button></div>
-  <div class="tp-tools" id="ac-tools" hidden><select id="ac-cls" aria-label="Class"></select><select id="ac-sort" aria-label="Sort"><option value="total">Most time</option><option value="week">Most this week</option><option value="last">Last active</option><option value="name">Name</option></select><button type="button" class="tp-mini" id="ac-refresh">Refresh</button><button type="button" class="tp-mini" id="ac-csv">Download CSV</button><button type="button" class="tp-mini" id="ac-forget">Forget key</button></div>
+  <div class="tp-tools" id="ac-tools" hidden><select id="ac-yr" aria-label="Year group"></select><select id="ac-cls" aria-label="Class"></select><select id="ac-sort" aria-label="Sort"><option value="total">Most time</option><option value="week">Most this week</option><option value="last">Last active</option><option value="name">Name</option></select><button type="button" class="tp-mini" id="ac-refresh">Refresh</button><button type="button" class="tp-mini" id="ac-csv">Download CSV</button><button type="button" class="tp-mini" id="ac-forget">Forget key</button></div>
   <p class="tp-status" id="ac-status" role="status" aria-live="polite" hidden></p>
   <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-pin">Reset PIN</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Clear</button></div>
   <div class="ac-panel card" id="ac-panel" hidden></div>
@@ -1813,7 +1813,9 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       api({ action: 'detail', to: p.id }).then(r => { if (r && r.ok) { DET[p.id] = r.pages || {}; if (OPEN === p.id) render(); } else st.textContent = 'Page-by-page time needs the updated Apps Script (deploy it as a new version).'; }).catch(() => { st.textContent = 'Couldn’t load page-by-page time.'; }); }
     return box;
   }
-  let URL0 = '', DATA = null, sortBy = LS.get('teacher.actsort') || 'total', cls = LS.get('teacher.actcls') || '';
+  let URL0 = '', DATA = null, sortBy = LS.get('teacher.actsort') || 'total', cls = LS.get('teacher.actcls') || '', yr = LS.get('teacher.actyr') || '';
+  const yearOf = c => { const m = /^(\d{1,2})/.exec(String(c || '')); return m ? m[1] : ''; };   /* 11B → 11 */
+  const keep = p => (!yr || yearOf(p.cls) === yr) && (!cls || p.cls === cls);
 
   function status(msg, kind) { const s = $('#ac-status'); s.hidden = !msg; s.className = 'tp-status' + (kind ? ' ' + kind : ''); s.textContent = msg || ''; }
   const api = (params) => { const key = LS.get('teacher.actkey'), u = new URLSearchParams(Object.assign({ key }, params)); return fetch(URL0 + (URL0.includes('?') ? '&' : '?') + u, { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); };
@@ -1831,9 +1833,11 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   }
   function render() {
     const wrap = $('#ac-wrap'); wrap.hidden = false;
-    const classes = [...new Set(DATA.map(p => p.cls).filter(Boolean))].sort();
-    const sel = $('#ac-cls'); sel.innerHTML = ''; sel.append(el('option', { value: '', text: 'All classes' }), ...classes.map(c => el('option', { value: c, text: c }))); sel.value = classes.includes(cls) ? cls : '';
-    const rows = DATA.filter(p => !sel.value || p.cls === sel.value).sort((a, b) => sortBy === 'name' ? a.name.localeCompare(b.name) : sortBy === 'last' ? b.last - a.last : sortBy === 'week' ? b.week - a.week : b.total - a.total);
+    const years = [...new Set(DATA.map(p => yearOf(p.cls)).filter(Boolean))].sort((a, b) => a - b);
+    const ys = $('#ac-yr'); ys.innerHTML = ''; ys.append(el('option', { value: '', text: 'All years' }), ...years.map(y => el('option', { value: y, text: 'Year ' + y }))); if (!years.includes(yr)) yr = ''; ys.value = yr;
+    const classes = [...new Set(DATA.filter(p => !yr || yearOf(p.cls) === yr).map(p => p.cls).filter(Boolean))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+    const sel = $('#ac-cls'); sel.innerHTML = ''; sel.append(el('option', { value: '', text: yr ? `All Year ${yr}` : 'All classes' }), ...classes.map(c => el('option', { value: c, text: c }))); if (!classes.includes(cls)) cls = ''; sel.value = cls;
+    const rows = DATA.filter(keep).sort((a, b) => sortBy === 'name' ? a.name.localeCompare(b.name) : sortBy === 'last' ? b.last - a.last : sortBy === 'week' ? b.week - a.week : b.total - a.total);
     const tb = $('#ac-body'); tb.innerHTML = '';
     const max = Math.max(1, ...rows.map(p => p.total));
     rows.forEach(p => {
@@ -1894,7 +1898,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     if (!w || !w.ok) { body.innerHTML = ''; body.append(el('p', { class: 'small', text: w && w.error === 'unknown action' || !w ? 'The weekly report needs the updated Apps Script (deploy it as a new version).' : 'Couldn’t load the weekly report.' })); return; }
     WK = w.start; $('#wk-range').textContent = `${niceD(w.start)} – ${niceD(w.end)}`;
     $('#wk-next').disabled = addD(w.start, 7) > new Date().toISOString().slice(0, 10);
-    const all = w.pupils.filter(p => !cls || p.cls === cls).sort((a, b) => a.cls.localeCompare(b.cls) || b.secs - a.secs || a.name.localeCompare(b.name));
+    const all = w.pupils.filter(keep).sort((a, b) => a.cls.localeCompare(b.cls) || b.secs - a.secs || a.name.localeCompare(b.name));
     const act = all.filter(p => p.secs > 0), tot = act.reduce((a, p) => a + p.secs, 0), prev = all.reduce((a, p) => a + p.prev, 0);
     $('#wk-sum').textContent = `${act.length} of ${all.length} pupils revised · ${hm(tot)} in all (week before: ${hm(prev)})`;
     body.innerHTML = '';
@@ -1921,7 +1925,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const q = v => `"${String(v).replace(/"/g, '""')}"`;
     const pu = Object.keys(UNIT).filter(u => DATA.some(p => p.prog && p.prog[u]));
     const lines = [['Name', 'Class', 'Total minutes', 'Last 7 days minutes', 'Days used', 'Last active', ...units.map(u => UNIT[u] + ' minutes'), ...pu.flatMap(u => [UNIT[u] + ' % covered', UNIT[u] + ' quiz %', UNIT[u] + ' trophies'])].map(q).join(',')];
-    DATA.slice().sort((a, b) => a.cls.localeCompare(b.cls) || a.name.localeCompare(b.name)).forEach(p => lines.push([p.name, p.cls, Math.round(p.total / 60), Math.round(p.week / 60), p.days, p.last ? new Date(p.last).toISOString().slice(0, 10) : '', ...units.map(u => Math.round(((p.units || {})[u] || 0) / 60)), ...pu.flatMap(u => { const g = (p.prog || {})[u]; if (!g) return ['', '', '']; let s = 0, m = 0; Object.values(g.quiz || {}).forEach(x => { s += x[0]; m += x[1]; }); return [pct(g.cov, g.total), m ? pct(s, m) : '', g.tr]; })].map(q).join(',')));
+    DATA.filter(keep).sort((a, b) => a.cls.localeCompare(b.cls) || a.name.localeCompare(b.name)).forEach(p => lines.push([p.name, p.cls, Math.round(p.total / 60), Math.round(p.week / 60), p.days, p.last ? new Date(p.last).toISOString().slice(0, 10) : '', ...units.map(u => Math.round(((p.units || {})[u] || 0) / 60)), ...pu.flatMap(u => { const g = (p.prog || {})[u]; if (!g) return ['', '', '']; let s = 0, m = 0; Object.values(g.quiz || {}).forEach(x => { s += x[0]; m += x[1]; }); return [pct(g.cov, g.total), m ? pct(s, m) : '', g.tr]; })].map(q).join(',')));
     const a = el('a', { href: URL.createObjectURL(new Blob([lines.join('\r\n')], { type: 'text/csv' })), download: 'Pupil activity.csv' }); document.body.append(a); a.click(); a.remove();
   }
   async function start() {
@@ -1937,6 +1941,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     $('#ac-merge').addEventListener('click', () => panel('merge')); $('#ac-rename').addEventListener('click', () => panel('rename')); $('#ac-pin').addEventListener('click', () => panel('pin')); $('#ac-del').addEventListener('click', () => panel('delete'));
     $('#ac-clear').addEventListener('click', () => { SEL.clear(); render(); }); $('#ac-csv').addEventListener('click', csv);
     $('#ac-cls').addEventListener('change', e => { cls = e.target.value; LS.set('teacher.actcls', cls); render(); week(); });
+    $('#ac-yr').addEventListener('change', e => { yr = e.target.value; cls = ''; LS.set('teacher.actyr', yr); LS.set('teacher.actcls', ''); render(); week(); });
     $('#wk-prev').addEventListener('click', () => { WK = addD(WK || new Date().toISOString().slice(0, 10), -7); week(); });
     $('#wk-next').addEventListener('click', () => { if (WK) { WK = addD(WK, 7); week(); } });
     $('#wk-print').addEventListener('click', () => { document.body.classList.add('wk-printing'); window.print(); setTimeout(() => document.body.classList.remove('wk-printing'), 500); });
