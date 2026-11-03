@@ -1052,6 +1052,32 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 .ia-i svg{width:20px;height:20px}
 .ia-n{font-weight:700;font-size:15px}
 .ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
 .ios-add .btn{width:100%;justify-content:center}
 /* ================= WELCOME: BEGIN (splash + welcome screen + "← Home"; source notes/app/front_welcome.css) ================= */
 /* splash: full screen, hero navy, once per browser session and on app launch; never blocks the page underneath */
@@ -1269,6 +1295,7 @@ html:not(.wl-on) #welcome{display:none}
 @media (max-width:520px){ .wl-teach{padding:14px 16px;gap:12px} .wt-ic{width:42px;height:42px} .wt-tx b{font-size:17px} .wt-tx span{font-size:12.5px} .wt-go{display:none} }
 @media (prefers-reduced-motion: reduce){ .wl-teach{transition:none} }
 .wl-who .mrb-ch{font:inherit;font-weight:700;color:var(--accent,#1F5FBF);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+.mrb-whoslot .mrb-ch{font:inherit;font-weight:700;color:var(--accent,#1F5FBF);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
 /* ================= WELCOME: END ================= */
 /* ================= DESIGN: BEGIN (front page calm-down layer; source notes/app/front_design.css) =================
    Loaded last on the front page. Fewer shadows and borders, one radius scale (10 / 14 / 18), no decorative rainbow strips,
@@ -1885,7 +1912,7 @@ function iosInstallModal() {
   const filt = document.querySelector('.filt');
   if (filt) filt.insertAdjacentHTML('beforebegin', `<details class="myprog" id="myprog"><summary><span class="mp-i" aria-hidden="true">✓</span><span><b>My progress</b><span id="mp-sum"></span></span><span class="mp-go">Show</span></summary>
     <div id="mp-body"></div>
-    <div class="mp-bk"><b>Back up or move your progress</b><span>It is saved in this browser only.</span><div><button type="button" class="btn pri" id="mp-dl">Download my progress</button><label class="btn mp-ld">Load progress from file<input type="file" id="mp-ld" accept="application/json,.json" hidden></label><button type="button" class="btn" id="mp-rs">Reset progress</button><span id="mp-msg" aria-live="polite"></span></div><div data-mrb-cloud hidden></div></div></details>`);
+    <div class="mp-bk"><b>Back up or move your progress</b><span>It is saved in this browser only.</span><div><button type="button" class="btn pri" id="mp-dl">Download my progress</button><label class="btn mp-ld">Load progress from file<input type="file" id="mp-ld" accept="application/json,.json" hidden></label><button type="button" class="btn" id="mp-rs">Reset progress</button><span id="mp-msg" aria-live="polite"></span></div><div data-mrb-cloud hidden></div><p data-mrb-who hidden style="margin:10px 0 0;font-size:14px"></p></div></details>`);
   const mp = document.getElementById('myprog');
   if (mp) {
     mp.addEventListener('toggle', () => { if (mp.open) progPanel(); mp.querySelector('.mp-go').textContent = mp.open ? 'Hide' : 'Show'; const p = document.getElementById('mp-pill'); if (p) p.setAttribute('aria-expanded', String(mp.open)); });
@@ -2245,12 +2272,36 @@ try {
   }
   window.MRB_WHO = ask;
   /* "Revising as … · Change" wherever a [data-mrb-who] slot is on the page */
+  /* "Using the Revision Guide as … · Change · Sign out" (or "Staff device · Sign out") wherever a [data-mrb-who] slot is */
   function paintWho() {
-    document.querySelectorAll('[data-mrb-who]').forEach(el => { const p = me(); el.hidden = false;
-      el.innerHTML = p ? `Using the Revision Guide as <b></b> (<span></span>) · <button type="button" class="mrb-ch">Change</button>` : `<button type="button" class="mrb-ch">Enter your name</button> to save your progress.`;
-      if (p) { el.querySelector('b').textContent = p.name; el.querySelector('span').textContent = p.cls; }
-      el.querySelector('.mrb-ch').addEventListener('click', ask); });
+    document.querySelectorAll('[data-mrb-who]').forEach(el => {
+      const p = me(), staff = !!LS.get('notes-nocount'); el.hidden = false; el.classList.add('mrb-whoslot');
+      el.innerHTML = staff ? `<b>Staff device</b>: not asked to sign in, not counted · <button type="button" class="mrb-ch" data-w="out">Sign out</button>`
+        : p ? `Using the Revision Guide as <b></b> (<span></span>) · <button type="button" class="mrb-ch" data-w="ch">Change</button> · <button type="button" class="mrb-ch" data-w="out">Sign out</button>`
+        : `<button type="button" class="mrb-ch" data-w="ch">Enter your name</button> to save your progress.`;
+      if (p && !staff) { el.querySelector('b').textContent = p.name; el.querySelector('span').textContent = p.cls; }
+      const ch = el.querySelector('[data-w="ch"]'); if (ch) ch.addEventListener('click', ask);
+      const out = el.querySelector('[data-w="out"]'); if (out) out.addEventListener('click', () => signOut(staff, out));
+    });
   }
+  /* signing out: a pupil's progress is saved online first, then this device forgets them and their progress (so the next person
+     on a shared device starts fresh and signs in); a staff device goes back to asking for a name */
+  async function signOut(staff, btn) {
+    const clear = () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && (/^notes-/.test(k) || /^mrb-(pupil|pin-ok|save-|snap:)/.test(k))) localStorage.removeItem(k); } } catch (e) { } try { sessionStorage.clear(); } catch (e) { } };
+    if (staff) {
+      if (!confirm('Sign out of this staff device? It will ask for a name again and count visits.')) return;
+      ['notes-nocount', 'teacher.nocount-set', 'teacher.actkey'].forEach(k => LS.set(k, null)); location.reload(); return;
+    }
+    if (!confirm('Sign out? Your progress is saved online first, then removed from this device. Sign in again with your name, form class and PIN to get it back.')) return;
+    btn.disabled = true; btn.textContent = 'Saving…';
+    let ok = false;
+    try { ok = !!(window.MRB_CLOUD && await Promise.race([window.MRB_CLOUD.save(true), new Promise(r => setTimeout(() => r(false), 8000))])); } catch (e) { }
+    if (!ok && !confirm('Your progress couldn’t be saved online just now (are you offline?). Sign out anyway? Anything not saved will be lost from this device.')) { btn.disabled = false; btn.textContent = 'Sign out'; return; }
+    clear();
+    try { const set0 = Storage.prototype.setItem; Storage.prototype.setItem = function (k, v) { if (this === localStorage && /^notes-/.test(String(k))) return; return set0.call(this, k, v); }; } catch (e) { }   /* nothing on this page writes the old progress back before the reload */
+    location.reload();
+  }
+  window.MRB_PAINT_WHO = paintWho;
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', paintWho); else paintWho();
   /* active time: 5-second ticks while the page is visible and was used in the last 90 s (or a video is playing) */
   function track() {
@@ -2343,7 +2394,7 @@ try {
       location.reload();
     } catch (e) { msg('Couldn’t reach the save. Check you are online and try again.'); }
   }
-  const CSS = `.mrb-cloud{margin-top:12px;padding-top:12px;border-top:1px solid var(--line,#DCE2EA);font-size:14px}.mrb-cloud b.k{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:17px;letter-spacing:.06em;background:var(--paper-2,#F1F4F8);padding:2px 8px;border-radius:6px}.mrb-cloud p{margin:0 0 8px}.mrb-cloud .r{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.mrb-cloud input{font:inherit;text-transform:uppercase;padding:8px 10px;border:1px solid var(--line,#C9D2DE);border-radius:9px;width:11em;background:var(--paper,#fff);color:inherit}.mrb-cloud .m{display:block;margin-top:6px;color:var(--ink-3,#687386);font-size:13px}.mrb-cloud .lk{font:inherit;background:none;border:0;padding:0;color:var(--accent,#1F5FBF);text-decoration:underline;cursor:pointer}`;
+  const CSS = `.mrb-cloud{margin-top:12px;padding-top:12px;border-top:1px solid var(--line,#DCE2EA);font-size:14px}.mrb-cloud b.k{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:17px;letter-spacing:.06em;background:var(--paper-2,#F1F4F8);padding:2px 8px;border-radius:6px}.mrb-cloud p{margin:0 0 8px}.mrb-cloud .r{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.mrb-cloud input{font:inherit;text-transform:uppercase;padding:8px 10px;border:1px solid var(--line,#C9D2DE);border-radius:9px;width:11em;background:var(--paper,#fff);color:inherit}.mrb-cloud .m{display:block;margin-top:6px;color:var(--ink-3,#687386);font-size:13px}.mrb-cloud .lk{font:inherit;background:none;border:0;padding:0;color:var(--accent,#1F5FBF);text-decoration:underline;cursor:pointer}.mrb-whoslot .mrb-ch{font:inherit;font-weight:700;color:var(--accent,#1F5FBF);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}`;
   function paintOne(el) {
     const u = url(), code = LS.get('mrb-save-code'), pu = who();
     if (!u) { el.hidden = true; return; }
@@ -2370,11 +2421,11 @@ try {
     q('load').addEventListener('click', () => load(q('code').value, msg));
     q('code').addEventListener('keydown', e => { if (e.key === 'Enter') load(q('code').value, msg); });
   }
-  function paint() { document.querySelectorAll('[data-mrb-cloud]').forEach(paintOne); }
+  function paint() { document.querySelectorAll('[data-mrb-cloud]').forEach(paintOne); if (window.MRB_PAINT_WHO) window.MRB_PAINT_WHO(); }
   window.MRB_CLOUD = { save, load, paint };
   const boot = () => {
     paint();
-    new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) if (n.nodeType === 1 && (n.matches('[data-mrb-cloud]') || n.querySelector('[data-mrb-cloud]'))) { paint(); return; } }).observe(document.body, { childList: true, subtree: true });
+    new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) if (n.nodeType === 1 && (n.matches('[data-mrb-cloud],[data-mrb-who]') || n.querySelector('[data-mrb-cloud],[data-mrb-who]'))) { paint(); return; } }).observe(document.body, { childList: true, subtree: true });
     /* the activity.json URL may arrive a moment later (first visit) */
     setTimeout(paint, 2500);
     setInterval(() => { if (document.visibilityState === 'visible') save(false); }, 60000);
@@ -2503,6 +2554,64 @@ function route() {
   if (!WEB) { const v = document.querySelector('.wl-ver'); if (v) v.remove(); }   /* updates: web host only */
 })();
 /* ================= WELCOME: END ================= */
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
 
 /* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
 function wlShare() {

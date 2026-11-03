@@ -8315,7 +8315,7 @@ function renderProgress(focus) {
       return `<section class="lib-cat chs pg-ch${on ? '' : ' off'}" style="${chVars(ch)}"><h2><span>${esc(pad2(ch.n))}</span>${esc(ch.title)}<small>${on ? `${d}/${ps.length}` : 'Not tracking'}</small></h2>${on ? `<span class="meter"><i style="width:${Math.round(d / ps.length * 100)}%"></i></span>` : ''}<div class="pg-chx">${typeof cqCardHTML === 'function' ? cqCardHTML(ch) : ''}${typeof trkBtn === 'function' ? trkBtn(ch) : ''}</div>
         <ul class="pg-l">${ps.map(p => { const st = on ? pageStatus(p.id) : 'off'; return `<li data-st="${st}"><a href="#${esc(p.id)}"><span class="pg-k ${st}">${esc(ST_NAME[st])}</span><span>${esc(plain(p.spec))}</span></a></li>`; }).join('')}</ul></section>`;
     }).join('')}<p class="lib-none" id="pg-none" hidden>Nothing here.</p></section>
-    <section class="card lib-body pg-bks"><h2>Back up or move your progress</h2><p class="pg-note">Your progress is saved in this browser only. Download it to keep a copy or to move it to another device, then load it there.</p>${backupHTML()}<div data-mrb-cloud hidden></div></section>
+    <section class="card lib-body pg-bks"><h2>Back up or move your progress</h2><p class="pg-note">Your progress is saved in this browser only. Download it to keep a copy or to move it to another device, then load it there.</p>${backupHTML()}<div data-mrb-cloud hidden></div><p class="pg-note" data-mrb-who hidden></p></section>
   </article>`;
   const filt = () => { $$('.pg-l li', main).forEach(li => { li.hidden = PG_F !== 'all' && li.dataset.st !== PG_F; }); $$('.pg-ch', main).forEach(s => { s.hidden = !$('.pg-l li:not([hidden])', s); }); $('#pg-none').hidden = !!$('.pg-l li:not([hidden])', main); };
   $$('[data-pgf]', main).forEach(b => b.addEventListener('click', () => { PG_F = b.dataset.pgf; $$('[data-pgf]', main).forEach(c => c.setAttribute('aria-pressed', String(c.dataset.pgf === PG_F))); filt(); }));
@@ -9582,12 +9582,36 @@ try {
   }
   window.MRB_WHO = ask;
   /* "Revising as … · Change" wherever a [data-mrb-who] slot is on the page */
+  /* "Using the Revision Guide as … · Change · Sign out" (or "Staff device · Sign out") wherever a [data-mrb-who] slot is */
   function paintWho() {
-    document.querySelectorAll('[data-mrb-who]').forEach(el => { const p = me(); el.hidden = false;
-      el.innerHTML = p ? `Using the Revision Guide as <b></b> (<span></span>) · <button type="button" class="mrb-ch">Change</button>` : `<button type="button" class="mrb-ch">Enter your name</button> to save your progress.`;
-      if (p) { el.querySelector('b').textContent = p.name; el.querySelector('span').textContent = p.cls; }
-      el.querySelector('.mrb-ch').addEventListener('click', ask); });
+    document.querySelectorAll('[data-mrb-who]').forEach(el => {
+      const p = me(), staff = !!LS.get('notes-nocount'); el.hidden = false; el.classList.add('mrb-whoslot');
+      el.innerHTML = staff ? `<b>Staff device</b>: not asked to sign in, not counted · <button type="button" class="mrb-ch" data-w="out">Sign out</button>`
+        : p ? `Using the Revision Guide as <b></b> (<span></span>) · <button type="button" class="mrb-ch" data-w="ch">Change</button> · <button type="button" class="mrb-ch" data-w="out">Sign out</button>`
+        : `<button type="button" class="mrb-ch" data-w="ch">Enter your name</button> to save your progress.`;
+      if (p && !staff) { el.querySelector('b').textContent = p.name; el.querySelector('span').textContent = p.cls; }
+      const ch = el.querySelector('[data-w="ch"]'); if (ch) ch.addEventListener('click', ask);
+      const out = el.querySelector('[data-w="out"]'); if (out) out.addEventListener('click', () => signOut(staff, out));
+    });
   }
+  /* signing out: a pupil's progress is saved online first, then this device forgets them and their progress (so the next person
+     on a shared device starts fresh and signs in); a staff device goes back to asking for a name */
+  async function signOut(staff, btn) {
+    const clear = () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && (/^notes-/.test(k) || /^mrb-(pupil|pin-ok|save-|snap:)/.test(k))) localStorage.removeItem(k); } } catch (e) { } try { sessionStorage.clear(); } catch (e) { } };
+    if (staff) {
+      if (!confirm('Sign out of this staff device? It will ask for a name again and count visits.')) return;
+      ['notes-nocount', 'teacher.nocount-set', 'teacher.actkey'].forEach(k => LS.set(k, null)); location.reload(); return;
+    }
+    if (!confirm('Sign out? Your progress is saved online first, then removed from this device. Sign in again with your name, form class and PIN to get it back.')) return;
+    btn.disabled = true; btn.textContent = 'Saving…';
+    let ok = false;
+    try { ok = !!(window.MRB_CLOUD && await Promise.race([window.MRB_CLOUD.save(true), new Promise(r => setTimeout(() => r(false), 8000))])); } catch (e) { }
+    if (!ok && !confirm('Your progress couldn’t be saved online just now (are you offline?). Sign out anyway? Anything not saved will be lost from this device.')) { btn.disabled = false; btn.textContent = 'Sign out'; return; }
+    clear();
+    try { const set0 = Storage.prototype.setItem; Storage.prototype.setItem = function (k, v) { if (this === localStorage && /^notes-/.test(String(k))) return; return set0.call(this, k, v); }; } catch (e) { }   /* nothing on this page writes the old progress back before the reload */
+    location.reload();
+  }
+  window.MRB_PAINT_WHO = paintWho;
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', paintWho); else paintWho();
   /* active time: 5-second ticks while the page is visible and was used in the last 90 s (or a video is playing) */
   function track() {
@@ -9680,7 +9704,7 @@ try {
       location.reload();
     } catch (e) { msg('Couldn’t reach the save. Check you are online and try again.'); }
   }
-  const CSS = `.mrb-cloud{margin-top:12px;padding-top:12px;border-top:1px solid var(--line,#DCE2EA);font-size:14px}.mrb-cloud b.k{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:17px;letter-spacing:.06em;background:var(--paper-2,#F1F4F8);padding:2px 8px;border-radius:6px}.mrb-cloud p{margin:0 0 8px}.mrb-cloud .r{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.mrb-cloud input{font:inherit;text-transform:uppercase;padding:8px 10px;border:1px solid var(--line,#C9D2DE);border-radius:9px;width:11em;background:var(--paper,#fff);color:inherit}.mrb-cloud .m{display:block;margin-top:6px;color:var(--ink-3,#687386);font-size:13px}.mrb-cloud .lk{font:inherit;background:none;border:0;padding:0;color:var(--accent,#1F5FBF);text-decoration:underline;cursor:pointer}`;
+  const CSS = `.mrb-cloud{margin-top:12px;padding-top:12px;border-top:1px solid var(--line,#DCE2EA);font-size:14px}.mrb-cloud b.k{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:17px;letter-spacing:.06em;background:var(--paper-2,#F1F4F8);padding:2px 8px;border-radius:6px}.mrb-cloud p{margin:0 0 8px}.mrb-cloud .r{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.mrb-cloud input{font:inherit;text-transform:uppercase;padding:8px 10px;border:1px solid var(--line,#C9D2DE);border-radius:9px;width:11em;background:var(--paper,#fff);color:inherit}.mrb-cloud .m{display:block;margin-top:6px;color:var(--ink-3,#687386);font-size:13px}.mrb-cloud .lk{font:inherit;background:none;border:0;padding:0;color:var(--accent,#1F5FBF);text-decoration:underline;cursor:pointer}.mrb-whoslot .mrb-ch{font:inherit;font-weight:700;color:var(--accent,#1F5FBF);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}`;
   function paintOne(el) {
     const u = url(), code = LS.get('mrb-save-code'), pu = who();
     if (!u) { el.hidden = true; return; }
@@ -9707,11 +9731,11 @@ try {
     q('load').addEventListener('click', () => load(q('code').value, msg));
     q('code').addEventListener('keydown', e => { if (e.key === 'Enter') load(q('code').value, msg); });
   }
-  function paint() { document.querySelectorAll('[data-mrb-cloud]').forEach(paintOne); }
+  function paint() { document.querySelectorAll('[data-mrb-cloud]').forEach(paintOne); if (window.MRB_PAINT_WHO) window.MRB_PAINT_WHO(); }
   window.MRB_CLOUD = { save, load, paint };
   const boot = () => {
     paint();
-    new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) if (n.nodeType === 1 && (n.matches('[data-mrb-cloud]') || n.querySelector('[data-mrb-cloud]'))) { paint(); return; } }).observe(document.body, { childList: true, subtree: true });
+    new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) if (n.nodeType === 1 && (n.matches('[data-mrb-cloud],[data-mrb-who]') || n.querySelector('[data-mrb-cloud],[data-mrb-who]'))) { paint(); return; } }).observe(document.body, { childList: true, subtree: true });
     /* the activity.json URL may arrive a moment later (first visit) */
     setTimeout(paint, 2500);
     setInterval(() => { if (document.visibilityState === 'visible') save(false); }, 60000);
