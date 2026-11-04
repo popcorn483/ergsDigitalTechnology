@@ -2054,7 +2054,10 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     $('#wk-next').addEventListener('click', () => { if (WK) { WK = addD(WK, 7); week(); } });
     $('#wk-print').addEventListener('click', () => { document.body.classList.add('wk-printing'); window.print(); setTimeout(() => document.body.classList.remove('wk-printing'), 500); });
     $('#ac-sort').value = sortBy; $('#ac-sort').addEventListener('change', e => { sortBy = e.target.value; LS.set('teacher.actsort', sortBy); render(); });
-    let done = false; const go = () => { if (done || location.hash !== '#visits') return; done = true; load(); };
+    /* load when the Pupils tab is first shown: the tabs switch with history.replaceState (no hashchange), so watch the tab too */
+    let done = false; const go = () => { const sec = $('#visits'); if (done || !sec || sec.hidden) return; done = true; load(); };
+    const tb = $('#t-visits'); if (tb) tb.addEventListener('click', () => setTimeout(go, 0));
+    new MutationObserver(go).observe($('#visits'), { attributes: true, attributeFilter: ['hidden'] });
     addEventListener('hashchange', go); go();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
