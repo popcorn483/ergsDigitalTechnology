@@ -24,11 +24,12 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 9;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 10;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
 const SITE = 'https://popcorn483.github.io/ergsdigitaltechnology/';
+const REQUIRE_APPROVAL = true;   // new pupils wait until you approve them in the Teacher area › Pupils (false: anyone can sign up)
 const EMAIL_SIGNINS = true;   // email the script's owner each time a new pupil signs up (false to stop)   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
 const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
 const LOG_HEAD = ['When', 'Pupil ID', 'Name', 'Class', 'Unit', 'Topic', 'Active seconds', 'Page'];
@@ -81,12 +82,14 @@ function whois_(name, cls, pin, devId) {
   if (!/^\d{4}$/.test(String(pin || ''))) return { ok: false, error: 'pin' };
   const hits = summary_().pupils.filter(p => norm_(p.name, p.cls) === want || (p.typed || []).some(t => { const m = /^(.*) \(([^)]*)\)$/.exec(t); return m && norm_(m[1], m[2]) === want; }));
   if (!hits.length) {
-    if (!okId(devId)) return { ok: false };
-    const id = resolve_(String(devId), aliases_()), had = getPin_(id);
+    /* signed up but not used yet (still waiting, or declined): that same request, not a second one */
+    const req = REQUIRE_APPROVAL ? rows_(acc_()).find(x => norm_(x[2], x[3]) === want) : null;
+    if (!okId(devId) && !req) return { ok: false };
+    const id = req ? String(req[0]) : resolve_(String(devId), aliases_()), had = getPin_(id);
     if (had && had !== pinHash_(id, pin)) return { ok: false, error: 'pin' };
     locked_(() => setPin_(id, pin));
-    if (!had) notify_('New sign-up', name, cls, 'A new pupil has signed up.');
-    return { ok: true, id, fresh: true };
+    if (!had && !req) { if (REQUIRE_APPROVAL) setAccess_(id, 'pending', name, cls); notify_('New sign-up', name, cls, REQUIRE_APPROVAL ? 'A new pupil is waiting for you to approve them: Teacher area › Pupils › Requests.' : 'A new pupil has signed up.'); }
+    return { ok: true, id, fresh: !req, name: req ? String(req[2]) : undefined, cls: req ? String(req[3]) : undefined, status: access_(id) };
   }
   const p = hits.sort((a, b) => b.total - a.total)[0], cache = CacheService.getScriptCache(), fk = 'fail:' + p.id, fails = +(cache.get(fk) || 0);
   if (fails >= 5) return { ok: false, error: 'locked' };
@@ -95,7 +98,7 @@ function whois_(name, cls, pin, devId) {
   if (!had) locked_(() => setPin_(p.id, pin));
   cache.remove(fk);
   const sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + p.id);
-  return { ok: true, id: p.id, name: p.name, cls: p.cls, updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' };
+  return { ok: true, status: access_(p.id), id: p.id, name: p.name, cls: p.cls, updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' };
 }
 function load_(code) {
   if (!CODE_RE.test(code)) return { ok: false, error: 'code' };
@@ -125,6 +128,19 @@ function doPost(e) {
 
 /* sign-up emails: one per new pupil, to the script's owner. Gmail allows about 100 a day from a script, so this stops
    at 90 a day (the Log still has everything). */
+/* ACCESS: Access sheet [Pupil ID, Status (pending / approved / declined), Name, Class, Requested, Decided]. Pupils from before
+   approvals were switched on (no row) count as approved. */
+const acc_ = () => tab_('Access', ['Pupil ID', 'Status', 'Name', 'Class', 'Requested', 'Decided']);
+function access_(id) {
+  if (!REQUIRE_APPROVAL) return 'approved';
+  const r = rows_(acc_()).find(x => String(x[0]) === id); return r ? String(r[1]) : 'approved';
+}
+function setAccess_(id, status, name, cls) {
+  const sh = acc_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === id), now = new Date();
+  if (i >= 0) { sh.getRange(i + 2, 2).setValue(status); if (status !== 'pending') sh.getRange(i + 2, 6).setValue(now); }
+  else sh.appendRow([id, status, clean_(name || '', 40), clean_(cls || '', 12).toUpperCase(), now, status === 'pending' ? '' : now]);
+}
+function dropAccess_(ids) { const sh = acc_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (ids.indexOf(String(r[i][0])) >= 0) sh.deleteRow(i + 2); }
 function notify_(what, name, cls, more) {
   if (!EMAIL_SIGNINS) return;
   try {
@@ -132,7 +148,7 @@ function notify_(what, name, cls, more) {
     let n = +(pr.getProperty('mails:' + day) || 0); if (n >= 90 || MailApp.getRemainingDailyQuota() < 5) return;
     const to = Session.getEffectiveUser().getEmail(); if (!to) return;
     const who = `${String(name || '').replace(/^'/, '')} (${String(cls || '').replace(/^'/, '')})`;
-    MailApp.sendEmail(to, `Revision Guide: ${what}: ${who}`, `${what}: ${who}\n${more}\n\n${new Date().toLocaleString('en-GB')}\nSee everyone in the Teacher area › Pupils. To stop these emails, set EMAIL_SIGNINS to false in the Apps Script and deploy a new version.`);
+    MailApp.sendEmail(to, `Revision Guide: ${what}: ${who}`, `${what}: ${who}\n${more}\n\n${new Date().toLocaleString('en-GB')}\n${SITE}teacher.html#visits\nSee everyone in the Teacher area › Pupils. To stop these emails, set EMAIL_SIGNINS to false in the Apps Script and deploy a new version.`);
     pr.setProperty('mails:' + day, String(n + 1));
   } catch (e) { }
 }
@@ -153,6 +169,7 @@ function doGet(e) {
   const q = (e && e.parameter) || {};
   if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
   if (q.action === 'whois') return out_(whois_(q.name, q.cls, q.pin, q.id));
+  if (q.action === 'access') return out_(okId(q.id) ? { ok: true, status: access_(resolve_(String(q.id), aliases_())) } : { ok: false });   /* a pupil's device: approved yet? */
   if (q.action === 'awards') return out_(awardsFor_(q.id, +q.since || 0));   /* a pupil's device: pages the teacher marked or unmarked */   /* pupils signing in: find them by name and form class */
   if (q.action === 'staff') {   /* the sign-in box: staff password check (TEACHER_KEY or STAFF_PIN) */
     const k = String(q.key || ''), ok = (k === TEACHER_KEY && TEACHER_KEY !== 'change-me') || (k === STAFF_PIN && STAFF_PIN !== 'change-me');
@@ -174,7 +191,7 @@ function act_(q) {
     from.forEach(f => al.appendRow([f, to]));
     relabel_(from, to); relabelProg_(from, to);
     const aw = awards_(), an = aw.getLastRow() - 1; if (an > 0) { const c = aw.getRange(2, 2, an, 1), v = c.getValues(); let ch = false; v.forEach(r => { if (from.indexOf(String(r[0])) >= 0) { r[0] = to; ch = true; } }); if (ch) c.setValues(v); }
-    dropNames_(from); dropPins_(from);
+    dropNames_(from); dropPins_(from); if (access_(to) !== 'approved' && from.some(f => access_(f) === 'approved')) setAccess_(to, 'approved'); dropAccess_(from);
     if (q.name) setName_(to, q.name, q.cls);
     return { ok: true };
   }
@@ -217,6 +234,11 @@ function act_(q) {
       ps.getRange(i + 2, 6).setValue(done.length); ps.getRange(i + 2, 11).setValue(done.join(',') + '|' + seen.join(',') + '|' + lat.join(',')); }
     return { ok: true, n: pages.length };
   }
+  if (q.action === 'approve' || q.action === 'decline') {   /* the teacher answers sign-up requests */
+    if (!ids.length) return { ok: false, error: 'bad request' };
+    ids.forEach(id => setAccess_(id, q.action === 'approve' ? 'approved' : 'declined'));
+    return { ok: true };
+  }
   if (q.action === 'resetpin') { if (!okId(to)) return { ok: false, error: 'bad request' }; dropPins_([to]); return { ok: true }; }   /* the pupil chooses a new PIN next time they sign in */
   if (q.action === 'rename') { if (!okId(to) || !q.name) return { ok: false, error: 'bad request' }; setName_(to, q.name, q.cls); return { ok: true }; }
   if (q.action === 'delete') {   /* remove their rows; a device that keeps sending starts a fresh record */
@@ -227,7 +249,7 @@ function act_(q) {
     const ps = prog_(), pk = rows_(ps).filter(r => ids.indexOf(String(r[1])) < 0), pn = ps.getLastRow() - 1;
     if (pn > 0) ps.getRange(2, 1, pn, PROG_HEAD.length).clearContent();
     if (pk.length) ps.getRange(2, 1, pk.length, PROG_HEAD.length).setValues(pk);
-    dropPins_(ids);
+    dropPins_(ids); dropAccess_(ids);
     const aws = awards_(), awr = rows_(aws); for (let i = awr.length - 1; i >= 0; i--) if (ids.indexOf(String(awr[i][1])) >= 0) aws.deleteRow(i + 2);
     const sv = saves_(), sr = rows_(sv); for (let i = sr.length - 1; i >= 0; i--) if (ids.indexOf(String(sr[i][0]).replace(/^P-/, '')) >= 0 && /^P-/.test(String(sr[i][0]))) sv.deleteRow(i + 2);
     dropNames_(ids);
@@ -365,5 +387,9 @@ function summary_() {
   }
   const pupils = Object.keys(P).map(k => { const p = P[k]; p.days = Object.keys(p.days).length; p.typed = Object.keys(p.typed);
     if (N[k]) { p.name = N[k][0] || p.name; p.cls = N[k][1] || p.cls; p.fixed = true; } p.pin = !!PN[k]; return p; });
-  return { pupils, updated: now, v: SCRIPT_VERSION };
+  const AC = {}; rows_(acc_()).forEach(r => { AC[String(r[0])] = r; });
+  pupils.forEach(p => { p.access = AC[p.id] ? String(AC[p.id][1]) : 'approved'; });
+  const known = {}; pupils.forEach(p => { known[p.id] = 1; });
+  const requests = Object.keys(AC).filter(id => String(AC[id][1]) === 'pending').map(id => ({ id, name: String(AC[id][2]), cls: String(AC[id][3]), at: new Date(AC[id][4]).getTime() }));
+  return { pupils, requests, updated: now, v: SCRIPT_VERSION };
 }

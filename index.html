@@ -1377,6 +1377,19 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 .ia-i svg{width:20px;height:20px}
 .ia-n{font-weight:700;font-size:15px}
 .ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
 .ios-add .btn{width:100%;justify-content:center}
 /* ================= WELCOME: BEGIN (splash + welcome screen + "← Home"; source notes/app/front_welcome.css) ================= */
 /* splash: full screen, hero navy, once per browser session and on app launch; never blocks the page underneath */
@@ -2487,6 +2500,7 @@ try {
     let later = false; try { later = !!sessionStorage.getItem('mrb-pin-later'); } catch (x) { }
     addEventListener('online', () => { if (me() && !LS.get('mrb-pin-ok') && !LS.get('notes-nocount')) { try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } ask(); } });   /* signed in offline: PIN checked as soon as it is back online */
     if (!me() || (!LS.get('mrb-pin-ok') && !later)) setTimeout(ask, 600);
+    else { if (blocked()) setTimeout(gate, 300); checkAccess(); }
     track();
     setTimeout(syncAwards, 3000); setInterval(syncAwards, 5 * 60000);
   }
@@ -2528,6 +2542,38 @@ try {
     }
     return n;
   }
+  /* ACCESS: new pupils wait until Mr Butler approves them (Teacher area › Pupils › Requests). 'mrb-access' holds 'pending' or
+     'declined' while they wait; anything else (approved, an older Apps Script, offline) lets them in, so nobody is locked out by a fault */
+  const blocked = () => /^(pending|declined)$/.test(LS.get('mrb-access') || '');
+  async function checkAccess() {
+    const p = me(); if (!p || !URL0 || LS.get('notes-nocount')) return;
+    let j; try { j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=access&id=' + encodeURIComponent(p.id), { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); } catch (e) { return; }
+    const st = j && j.ok && typeof j.status === 'string' ? j.status : '';
+    if (/^(pending|declined)$/.test(st)) { LS.set('mrb-access', st); gate(); }
+    else if (j && j.ok) { const was = blocked(); LS.set('mrb-access', null); if (was) { const g = document.getElementById('mrb-gate'); if (g) { g.remove(); document.documentElement.style.overflow = ''; } } }
+  }
+  let gateT = 0;
+  function gate() {
+    if (!blocked() || LS.get('notes-nocount')) return;
+    const st = LS.get('mrb-access'), p = me() || {};
+    let g = document.getElementById('mrb-gate');
+    if (!g) {
+      g = document.createElement('div'); g.id = 'mrb-gate'; g.setAttribute('role', 'dialog'); g.setAttribute('aria-modal', 'true'); g.setAttribute('aria-labelledby', 'mrb-gate-h');
+      const css = `#mrb-gate{position:fixed;inset:0;z-index:2147483001;display:grid;place-items:center;background:rgba(10,16,30,.72);padding:16px}#mrb-gate .b{background:#fff;color:#16213A;border-radius:14px;max-width:380px;width:100%;padding:22px 20px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;text-align:center}#mrb-gate .i{font-size:34px;line-height:1;margin-bottom:8px}#mrb-gate h2{margin:0 0 6px;font-size:19px}#mrb-gate p{margin:0 0 10px;color:#4A5468;font-size:14px}#mrb-gate .r{display:flex;gap:8px;margin-top:14px}#mrb-gate button{font:inherit;font-weight:700;border-radius:9px;padding:10px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer;flex:1}#mrb-gate button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff}#mrb-gate .m{font-size:13px;min-height:1em;margin:10px 0 0}@media (prefers-color-scheme:dark){#mrb-gate .b{background:#1B2233;color:#E8ECF4}#mrb-gate p{color:#AEB8CA}#mrb-gate button:not(.p){background:#121826;color:#E8ECF4;border-color:#3A4458}}`;
+      g.innerHTML = `<style>${css}</style><div class="b"><div class="i" aria-hidden="true"></div><h2 id="mrb-gate-h"></h2><p class="t"></p><div class="r"><button type="button" class="o">Sign out</button><button type="button" class="p">Check again</button></div><p class="m" aria-live="polite"></p></div>`;
+      document.body.append(g); document.documentElement.style.overflow = 'hidden';
+      g.querySelector('.p').addEventListener('click', async ev => { const bt = ev.currentTarget; bt.disabled = true; g.querySelector('.m').textContent = 'Checking…'; await checkAccess(); bt.disabled = false; if (document.getElementById('mrb-gate')) g.querySelector('.m').textContent = blocked() && LS.get('mrb-access') === 'pending' ? 'Not approved yet. This page will open by itself once you are.' : ''; });
+      g.querySelector('.o').addEventListener('click', () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && /^mrb-(pupil|pin-ok|access|save-|snap:)/.test(k)) localStorage.removeItem(k); } } catch (e) { } location.reload(); });
+      g.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); } }, true);
+    }
+    const dec = st === 'declined';
+    g.querySelector('.i').textContent = dec ? '⛔' : '⏳';
+    g.querySelector('h2').textContent = dec ? 'Access not approved' : 'Waiting for approval';
+    g.querySelector('.t').textContent = dec ? `Mr Butler hasn’t approved access for ${p.name || 'this name'}${p.cls ? ' (' + p.cls + ')' : ''}. If you think this is a mistake, speak to him.`
+      : `Thanks, ${(p.name || '').split(' ')[0] || 'you'}! Mr Butler needs to approve you before you can use the Revision Guide. This page opens by itself as soon as he does.`;
+    g.querySelector('.p').hidden = dec;
+    clearInterval(gateT); if (!dec) gateT = setInterval(() => { if (!document.getElementById('mrb-gate')) return clearInterval(gateT); if (!document.hidden) checkAccess(); }, 20000);
+  }
   /* "Who's using the Revision Guide?": name and form class, required (it cannot be skipped). If that name and class are
      already in Mr Butler's sheet, this device joins that pupil and their saved progress is pulled in. */
   function ask() {
@@ -2557,7 +2603,7 @@ try {
           go.disabled = true; m.textContent = 'Checking…';
           try {
             const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=staff&key=' + encodeURIComponent(tryK), { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
-            if (j && j.ok) { LS.set('notes-nocount', '1'); LS.set('teacher.nocount-set', '1'); if (j.teacher) LS.set('teacher.actkey', tryK); LS.set('mrb-pupil', null); m.textContent = 'Staff device: you won’t be asked again or counted.'; setTimeout(close, 900); return; }
+            if (j && j.ok) { LS.set('notes-nocount', '1'); LS.set('teacher.nocount-set', '1'); if (j.teacher) LS.set('teacher.actkey', tryK); LS.set('mrb-pupil', null); LS.set('mrb-access', null); const gg = document.getElementById('mrb-gate'); if (gg) gg.remove(); m.textContent = 'Staff device: you won’t be asked again or counted.'; setTimeout(close, 900); return; }
           } catch (x) { }
           go.disabled = false;
         }
@@ -2582,6 +2628,8 @@ try {
       LS.set('mrb-pupil', JSON.stringify({ id, name: found && found.name ? found.name : name, cls: found && found.cls ? found.cls : cls }));
       let pulled = 0; if (found && found.data && !found.fresh) { try { pulled = mergeInto(JSON.parse(found.data)); } catch (x) { } }
       LS.set('mrb-save-hash', null);
+      LS.set('mrb-access', found && /^(pending|declined)$/.test(found.status || '') ? found.status : null);
+      if (blocked()) { close(); gate(); return; }
       if (pulled) { m.textContent = 'Welcome back! Loading your progress…'; setTimeout(() => location.reload(), 600); return; }
       close();
     });
@@ -2604,7 +2652,7 @@ try {
   /* signing out: a pupil's progress is saved online first, then this device forgets them and their progress (so the next person
      on a shared device starts fresh and signs in); a staff device goes back to asking for a name */
   async function signOut(staff, btn) {
-    const clear = () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && (/^notes-/.test(k) || /^mrb-(pupil|pin-ok|save-|snap:)/.test(k))) localStorage.removeItem(k); } } catch (e) { } try { sessionStorage.clear(); } catch (e) { } };
+    const clear = () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && (/^notes-/.test(k) || /^mrb-(pupil|pin-ok|access|save-|snap:)/.test(k))) localStorage.removeItem(k); } } catch (e) { } try { sessionStorage.clear(); } catch (e) { } };
     if (staff) {
       if (!confirm('Sign out of this staff device? It will ask for a name again and count visits.')) return;
       ['notes-nocount', 'teacher.nocount-set', 'teacher.actkey'].forEach(k => LS.set(k, null)); location.reload(); return;
@@ -2629,7 +2677,7 @@ try {
     const where = () => { if (!inBook) return ['home', '', '']; let ch = '', pg = ''; try { const P = PAGES[cur]; if (!onCover) { ch = P && P.ch && P.ch.id || ''; pg = P && P.p && P.p.id || ''; } } catch (e) { } if (!pg) { const h = location.hash.slice(1); if (/^(quiz|pp)-c\d+$/.test(h)) { ch = h.split('-')[1]; pg = h; } } return [BK.id, ch, pg]; };
     const playing = () => [...document.querySelectorAll('video,audio')].some(v => !v.paused && !v.ended);
     function send(k, s) {
-      const p = me(); if (!p || !s || !URL0) return;
+      const p = me(); if (!p || !s || !URL0 || blocked()) return;
       const body = JSON.stringify({ id: p.id, name: p.name, cls: p.cls, book: k[0], ch: k[1], pg: k[2] || '', s: Math.round(s) });
       try { if (navigator.sendBeacon && navigator.sendBeacon(URL0, new Blob([body], { type: 'text/plain' }))) return; } catch (e) { }
       try { fetch(URL0, { method: 'POST', mode: 'no-cors', body, keepalive: true }); } catch (e) { }
@@ -2908,6 +2956,35 @@ function route() {
   if (!WEB) { const v = document.querySelector('.wl-ver'); if (v) v.remove(); }   /* updates: web host only */
 })();
 /* ================= WELCOME: END ================= */
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
 
 /* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
 function wlShare() {
