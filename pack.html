@@ -1,0 +1,895 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Topic past paper – Mr Butler's</title><meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#16213A"><link rel="icon" href="app-icons/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="app-icons/apple-touch-icon.png">
+<style>@font-face{font-family:'Lemon Milk';src:url('fonts/lemonmilk-bold.woff') format('woff');font-weight:700;font-display:swap}@font-face{font-family:'Atkinson Hyperlegible';src:url('fonts/AtkinsonHyperlegible-Regular.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:'Atkinson Hyperlegible';src:url('fonts/AtkinsonHyperlegible-Bold.woff2') format('woff2');font-weight:700;font-style:normal;font-display:swap}@font-face{font-family:'Atkinson Hyperlegible';src:url('fonts/AtkinsonHyperlegible-Italic.woff2') format('woff2');font-weight:400;font-style:italic;font-display:swap}
+:root{--desk:#E6EAF0;--paper:#fff;--paper-2:#F4F6F9;--ink:#172033;--ink-2:#465063;--ink-3:#687386;--line:#D3D9E2;--accent:#1F5FBF;--accent-ink:#fff;--accent-soft:#E4ECFA;
+--ok:#18744A;--ok-soft:#E1F3EA;--warn:#8E5300;--warn-soft:#FFF0D6;--err:#B3261E;--err-soft:#FDE7E5;--navy:#16213A;
+--card-shadow:0 1px 2px rgba(20,30,50,.05),0 10px 30px -14px rgba(20,30,50,.22);
+--sans:'Atkinson Hyperlegible','Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--desk:#0E1117;--paper:#181C24;--paper-2:#1F2430;--ink:#E5E8EE;--ink-2:#B2B9C6;--ink-3:#8A93A3;--line:#2F3644;--accent:#8AB6FF;--accent-ink:#0E1117;--accent-soft:#232C4C;--ok:#7FD6A4;--ok-soft:#173226;--warn:#F1B44E;--warn-soft:#382B13;--err:#FF9C94;--err-soft:#3B1B1A;--card-shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -12px rgba(0,0,0,.5)}}
+:root[data-theme="dark"]{--desk:#0E1117;--paper:#181C24;--paper-2:#1F2430;--ink:#E5E8EE;--ink-2:#B2B9C6;--ink-3:#8A93A3;--line:#2F3644;--accent:#8AB6FF;--accent-ink:#0E1117;--accent-soft:#232C4C;--ok:#7FD6A4;--ok-soft:#173226;--warn:#F1B44E;--warn-soft:#382B13;--err:#FF9C94;--err-soft:#3B1B1A;--card-shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -12px rgba(0,0,0,.5)}
+*{box-sizing:border-box} html{-webkit-text-size-adjust:100%} body{margin:0;background:var(--desk);color:var(--ink);font:16px/1.5 var(--sans)}
+.wrap{max-width:1040px;margin:0 auto;padding:18px 16px 40px}
+a{color:var(--accent)} .back{display:inline-block;margin-bottom:14px;font-weight:700;text-decoration:none}
+.brand{display:block;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12px;color:var(--ink-3);margin:0 0 4px}
+h1{font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.03em;font-size:clamp(24px,5vw,34px);line-height:1.1;margin:0}
+.lead{color:var(--ink-2);margin:0 0 18px;max-width:72ch}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:0 0 18px;overflow-x:auto}
+.tabs a{font-weight:700;text-decoration:none;color:var(--ink-2);padding:10px 14px;border-bottom:3px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tabs a[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+.tabs a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:var(--card-shadow)}
+/* topic packs */
+.tp-intro{display:grid;grid-template-columns:1fr;gap:4px;margin-bottom:16px}
+.tp-intro h2{margin:0;font-size:22px} .tp-intro p{margin:0;color:var(--ink-2);max-width:72ch}
+.hrow{display:flex;align-items:center;gap:4px 8px;flex-wrap:wrap;margin:0 0 8px} .hrow h2{margin:0;font-size:19px;line-height:1.25}
+.ib{flex:none;width:32px;height:32px;display:inline-grid;place-items:center;border:0;border-radius:50%;background:transparent;color:var(--ink-3);cursor:pointer;padding:0}
+.ib:hover,.ib[aria-expanded="true"]{color:var(--accent);background:var(--accent-soft)}
+.ip{background:var(--paper-2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:8px 12px;margin:0 0 12px;font-size:14px;color:var(--ink-2);max-width:78ch}
+.ip p{margin:0 0 6px}.ip p:last-child{margin:0}.ip ul{margin:0;padding-left:18px}.ip li{margin:0 0 4px}
+.steps{padding:4px 14px}
+.st{border-top:1px solid var(--line)}.st:first-child{border-top:0}
+.st-h{font:inherit;width:100%;display:flex;align-items:center;gap:10px;padding:10px 0;background:none;border:0;color:var(--ink);cursor:pointer;text-align:left;min-height:46px}
+.st-n{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;background:var(--paper-2);color:var(--ink-3);border:1px solid var(--line)}
+.st.open .st-n{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)} .st.has:not(.open) .st-n{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.st-l{font-weight:700;font-size:15px;flex:none}.st-v{flex:1;min-width:0;color:var(--accent);font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st-v:not(:empty)::before{content:'· ';color:var(--ink-3)}
+.st-c{flex:none;width:9px;height:9px;border-right:2px solid var(--ink-3);border-bottom:2px solid var(--ink-3);transform:rotate(45deg);margin:-4px 6px 0 auto;transition:transform .15s}
+.st.open .st-c{transform:rotate(-135deg);margin-top:4px}
+.st-b{padding:0 0 12px}
+.tp-opts{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px}.tp-opts.tp-topics{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.tp-opt{font:inherit;font-size:15px;text-align:left;color:var(--ink);background:var(--paper-2);border:1.5px solid var(--line);border-radius:9px;padding:7px 10px;cursor:pointer;display:flex;flex-direction:column;gap:0;min-height:44px;line-height:1.3}
+.tp-opt small{color:var(--ink-3);font-size:12.5px;line-height:1.3}
+.tp-opt:hover{border-color:var(--accent)}
+.tp-opt[aria-pressed="true"]{background:var(--accent-soft);border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.tp-topic{flex-direction:row;align-items:flex-start;gap:10px}.tp-topic>span:last-child{display:flex;flex-direction:column;gap:2px;min-width:0}
+.tp-n{flex:none;font-weight:700;font-size:12px;min-width:22px;height:22px;border-radius:7px;display:grid;place-items:center;background:var(--paper);border:1px solid var(--line);color:var(--ink-2)}
+.tp-head{display:flex;flex-wrap:wrap;gap:6px 16px;align-items:baseline;justify-content:space-between}
+.tp-head h3{margin:0;font-size:20px}
+#tp-count{font-weight:700} #tp-count2{color:var(--ink-3);font-size:14px;display:block}
+.tp-dls{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 8px}
+.tp-title{margin:0;font-size:17px;line-height:1.3}
+.tp-dl{font:inherit;font-weight:700;font-size:15px;cursor:pointer;border-radius:10px;padding:8px 10px;border:1.5px solid var(--accent);background:var(--paper);color:var(--accent);display:flex;align-items:center;justify-content:center;gap:6px;min-height:44px;text-align:center;line-height:1.2}
+.tp-dl b{display:flex;gap:8px;align-items:center;color:var(--accent)} .tp-dl small{color:var(--ink-2);font-size:13px;line-height:1.35}
+.tp-dl.pri{background:var(--accent);color:var(--accent-ink)}
+.tp-dl:disabled{opacity:.55;cursor:default} .tp-dl.working{opacity:1;cursor:progress}
+.tp-dl svg{flex:none}
+.tp-status{border-radius:10px;padding:10px 12px;margin:6px 0 4px;background:var(--paper-2);border:1px solid var(--line);font-size:15px}
+.tp-status.busy{background:var(--accent-soft);border-color:var(--accent)} .tp-status.ok{background:var(--ok-soft);border-color:var(--ok)} .tp-status.warn{background:var(--warn-soft);border-color:var(--warn)} .tp-status.err{background:var(--err-soft);border-color:var(--err);color:var(--ink)}
+.tp-status progress{display:block;width:100%;height:8px;margin-top:8px;accent-color:var(--accent)}
+.tp-tools{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;margin:6px 0;font-size:15px}
+.tp-tools label{display:flex;gap:8px;align-items:center}
+.tp-tools select,.tp-mini{min-height:36px;font:inherit;font-size:14px;padding:5px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper-2);color:var(--ink);cursor:pointer}
+.tp-tools .sp{flex:1}
+#tp-list{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+details.qs{margin:8px 0 0} details.qs>summary{list-style:none;display:flex;flex-wrap:wrap;gap:2px 10px;align-items:center;justify-content:space-between;padding:9px 12px;background:var(--paper-2);border:1px solid var(--line);border-radius:10px;cursor:pointer;font-size:14.5px;font-weight:700;min-height:44px}
+details.qs>summary::-webkit-details-marker{display:none}
+.qs-more{color:var(--accent);white-space:nowrap}.qs-more::after{content:' ▸'}details.qs[open] .qs-more::after{content:' ▾'}
+details.qs[open]>summary{margin-bottom:6px}
+details.about{margin:4px 0 12px;font-size:14px;color:var(--ink-2)} details.about>summary{cursor:pointer;font-weight:700;color:var(--ink-3);padding:6px 0}
+details.about ul{margin:6px 0 0;padding-left:18px} details.about li{margin:0 0 4px}
+#tp-list li{border-bottom:1px solid var(--line)}
+.tp-q{display:grid;grid-template-columns:auto 2.2em 1fr;gap:4px 8px;align-items:start;padding:9px 2px;cursor:pointer}
+.tp-q input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--accent)}
+.tp-num{font-weight:700;color:var(--accent);text-align:right;font-variant-numeric:tabular-nums}
+.tp-qt{display:flex;flex-direction:column;gap:1px;min-width:0}
+.tp-qt b{font-size:15px} .tp-sum{color:var(--ink-2);font-size:14px}
+.tp-flags{display:flex;flex-wrap:wrap;gap:4px;margin-top:3px}
+.tp-flag{font-size:12px;font-weight:700;border-radius:6px;padding:1px 7px;background:var(--paper-2);color:var(--ink-3)}
+.tp-flag.ok{background:var(--ok-soft);color:var(--ok)} .tp-flag.warn{background:var(--warn-soft);color:var(--warn)}
+#tp-list li.off .tp-qt{opacity:.5} #tp-list li.off .tp-num{color:var(--ink-3)}
+.tp-reps{display:grid;grid-template-columns:1fr 1fr;gap:4px 12px;font-size:13px}
+.tp-rep h4{margin:0;font-size:13px} .tp-rep p{margin:0 0 4px;font-size:13px;color:var(--ink-2)} .tp-rep p.warn{color:var(--warn)}
+.small{font-size:14px;color:var(--ink-3)} code{font-size:13px;overflow-wrap:anywhere;background:var(--paper-2);padding:1px 4px;border-radius:4px}
+details.how summary{cursor:pointer;font-weight:700;color:var(--ink-2)} details.how ul{margin:6px 0 0;padding-left:20px;font-size:14px;color:var(--ink-2)}
+/* scheme of work */
+.bar{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:18px}
+.bar label{display:flex;gap:8px;align-items:center;font-size:15px} .bar input{width:4.2em;font:inherit;padding:4px 6px;border:1px solid var(--line);border-radius:6px;background:var(--paper-2);color:var(--ink)}
+.seg button,.prb{font:inherit;font-weight:700;padding:6px 12px;border:1px solid var(--line);background:var(--paper-2);color:var(--ink);border-radius:8px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.pr{margin-left:auto}
+.u{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:16px;margin-bottom:18px}
+.u h2{margin:0 0 10px;font-size:20px;display:flex;gap:10px;align-items:baseline;flex-wrap:wrap}
+.k{font-weight:700;font-size:13px;background:var(--accent-soft);color:var(--accent);padding:3px 8px;border-radius:6px}
+.note{color:var(--ink-2);margin:0 0 10px;font-size:15px}
+table{width:100%;border-collapse:collapse;font-size:15px} th,td{text-align:left;vertical-align:top;padding:8px 6px;border-top:1px solid var(--line)}
+th{font-size:13px;font-weight:700;color:var(--ink-3);border-top:0}
+td.n,th.n{width:2.2em;color:var(--ink-3)} td.w,th.w{width:4.5em;text-align:right;font-variant-numeric:tabular-nums}
+tfoot td{font-weight:700} .t{font-weight:600;text-decoration:none} .sub{display:block;color:var(--ink-3);font-size:13px}
+.u ul{margin:0;padding:0;list-style:none} .u li{margin:0 0 2px} .u li a,.u li .lc{font-variant-numeric:tabular-nums;font-weight:600;text-decoration:none;margin-right:4px}
+.u li .lc{color:var(--accent);font-family:var(--mono,monospace);font-size:13px}
+.foot{color:var(--ink-3);font-size:14px}
+[hidden]{display:none!important}
+/* exam countdown */
+.cd{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin:12px 0 12px;box-shadow:var(--card-shadow)}
+.cd .hrow{margin-bottom:6px}.cd .hrow h2{font-size:16px}.cd-st{display:none}
+#cd-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.cd-c{background:var(--paper-2);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:9px;padding:6px 8px;display:flex;flex-direction:column;min-width:0;line-height:1.3}
+.cd-c.soon{border-top-color:var(--warn)} .cd-c.past{opacity:.6;border-top-color:var(--line)} .cd-c.none{border-top-color:var(--line);border-top-style:dashed}
+.cd-k{display:flex;justify-content:space-between;gap:4px;font-size:13px}.cd-k span{color:var(--ink-3);font-weight:700;font-size:11px}
+.cd-big{font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}.cd-c.none .cd-big{font-size:13px;color:var(--ink-3)}
+.cd-w{font-size:12px;color:var(--ink-2)} .cd-t{font-size:11.5px;color:var(--ink-3)}
+details.cd-ed{margin-top:6px} details.cd-ed>summary{cursor:pointer;font-weight:700;color:var(--accent);font-size:13px;display:inline-block}
+details.cd-ed table{margin:6px 0;font-size:14px} details.cd-ed td,details.cd-ed th{padding:4px 6px} details.cd-ed th{font-size:13.5px;color:var(--ink);font-weight:400}
+details.cd-ed input{font:inherit;font-size:14px;padding:3px 6px;border:1px solid var(--line);border-radius:6px;background:var(--paper-2);color:var(--ink);max-width:100%}
+details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+@media (max-width:820px){#cd-list{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;padding-bottom:4px}.cd-c{flex:0 0 128px;scroll-snap-align:start}}
+.cd-sow{margin:-4px 0 10px;font-size:14.5px;color:var(--ink-2);background:var(--accent-soft);border-radius:8px;padding:6px 10px}.cd-sow.warn{background:var(--warn-soft);color:var(--ink)}
+/* build a test */
+.bt-unit{border:1.5px solid var(--line);border-radius:12px;padding:6px 12px 12px;margin:0 0 10px;min-width:0} .bt-unit.on{border-color:var(--accent)}
+.bt-unit legend{padding:0 6px} .bt-unit:not(.on){border-color:transparent;padding:0 12px 2px;background:var(--paper-2)} .bt-ul{display:flex;gap:8px;align-items:baseline;cursor:pointer;flex-wrap:wrap} .bt-ul input,.bt-t input,.bt-chk input{width:18px;height:18px;accent-color:var(--accent);align-self:center;flex:none}
+.bt-ul span{color:var(--ink-2);font-size:14px}
+.bt-ut{display:flex;gap:8px;margin:2px 0 8px}
+.bt-topics{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px}
+.bt-t{display:flex;gap:8px;align-items:flex-start;padding:6px 8px;border-radius:8px;background:var(--paper-2);cursor:pointer;min-width:0}
+.bt-tt{display:flex;flex-direction:column;min-width:0}.bt-tt b{font-size:14.5px;line-height:1.3}.bt-tt small{color:var(--ink-3);font-size:12.5px}
+.bt-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px 14px;align-items:start}
+.bt-f{display:flex;flex-direction:column;gap:3px;font-size:15px;min-width:0}.bt-f>span{font-weight:700;font-size:13px;color:var(--ink-3)}
+.bt-f select,.bt-f input[type=number]{font:inherit;font-size:15px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper-2);color:var(--ink);max-width:100%}
+.bt-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.bt-row input[type=number]{width:5.5em}
+.bt-chk{display:flex;gap:8px;align-items:flex-start;font-size:15px;cursor:pointer} .bt-chk small{display:block;color:var(--ink-3);font-size:13px}
+.bt-go{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin-top:10px}
+.bt-head{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.dim{opacity:.5}
+.ws{margin-top:14px;padding-top:12px;border-top:1px solid var(--line)}.ws .ws-h{margin:0;font-size:16px}.ws-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px 12px;margin:8px 0 10px}
+.bt-mixset{background:var(--paper-2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin:8px 0 0}
+.bt-tps{display:flex;flex-direction:column;gap:6px}.bt-tp{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:13.5px;font-weight:700;color:var(--ink)}.bt-tp>span{color:var(--ink);font-weight:700}.bt-tq{display:flex;flex-wrap:wrap;gap:6px 10px;margin:-2px 0 6px;padding-bottom:8px;border-bottom:1px solid var(--line)}.bt-tq:last-of-type{border-bottom:0}.bt-tql{display:flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;color:var(--ink-2)}.bt-tql select{font:inherit;font-weight:400;font-size:13px;padding:4px 6px;border:1px solid var(--line);border-radius:7px;background:var(--paper);color:var(--ink)}.bt-tp small{display:block;font-weight:400;color:var(--ink-3);font-size:12px}.bt-tp small.over{color:var(--warn);font-weight:700}.bt-tp .bt-spin button{width:32px;height:32px;font-size:16px}.bt-tp .bt-spin input{height:32px;width:2.8em}
+.bt-sps{display:flex;flex-wrap:wrap;gap:8px 18px}.bt-sp{display:flex;flex-direction:column;gap:2px;font-size:13px;font-weight:700;color:var(--ink-2)}
+.bt-sp small{font-weight:400;color:var(--ink-3);font-size:12px}.bt-sp small.over{color:var(--warn);font-weight:700}
+.bt-spin{display:flex;align-items:center;gap:0}.bt-spin button{font:inherit;font-weight:700;font-size:18px;width:36px;height:36px;border:1px solid var(--line);background:var(--paper);color:var(--accent);cursor:pointer}
+.bt-spin button:first-child{border-radius:8px 0 0 8px}.bt-spin button:last-child{border-radius:0 8px 8px 0}
+.bt-spin input{font:inherit;width:3.2em;height:36px;text-align:center;border:1px solid var(--line);border-left:0;border-right:0;background:var(--paper);color:var(--ink);-moz-appearance:textfield}
+.bt-spin input::-webkit-inner-spin-button{-webkit-appearance:none}
+.bt-ty{display:inline-block;font-size:11px;font-weight:700;border-radius:5px;padding:0 5px;background:var(--paper-2);color:var(--ink-3);border:1px solid var(--line);vertical-align:1px}
+.bt-ty.mc{background:var(--accent-soft);color:var(--accent);border-color:transparent}.bt-ty.long{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.bt-checks{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:center;margin:8px 0 4px}
+.vs-lead{margin:0 0 8px}.vs-me{margin:0 0 8px}
+.bt-btn{font:inherit;font-weight:700;padding:10px 18px;border-radius:10px;border:1.5px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;min-height:44px}.bt-btn:disabled{opacity:.5;cursor:default}
+.bt-btn.sec{background:var(--paper);color:var(--accent)}
+#bt-bal{list-style:none;margin:10px 0 4px;padding:0;display:grid;gap:4px}
+#bt-bal li{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(60px,1fr) auto;gap:10px;align-items:center;font-size:14px}
+.bt-bn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.bt-bm{font-variant-numeric:tabular-nums;color:var(--ink-2);min-width:4.5em;text-align:right}
+.bt-bb{position:relative;height:10px;background:var(--paper-2);border-radius:5px;border:1px solid var(--line)}.bt-bb i{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:5px}
+.bt-bb s{position:absolute;top:-3px;bottom:-3px;width:2px;background:var(--ink);margin-left:-1px}
+#bt-list{list-style:none;margin:8px 0 0;padding:0;border-top:1px solid var(--line)}
+#bt-list li{display:grid;grid-template-columns:2.2em minmax(0,1fr) auto auto;gap:4px 10px;align-items:start;padding:9px 2px;border-bottom:1px solid var(--line);position:relative}
+.bt-tp{font-size:13px;font-weight:700;color:var(--accent)} .bt-mk{font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap;padding-top:1px}
+.bt-act{display:flex;gap:6px}
+.bt-flash{position:absolute;right:4px;bottom:2px;font-size:12px;font-weight:700;color:var(--ok);background:var(--ok-soft);border-radius:6px;padding:1px 7px}.bt-flash.bad{color:var(--warn);background:var(--warn-soft)}
+/* exam trends */
+.tr-bar{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;margin:0 0 14px}
+.tr-u button{font:inherit;font-weight:700;padding:6px 12px;border:1px solid var(--line);background:var(--paper-2);color:var(--ink);border-radius:8px;cursor:pointer;margin:0 4px 4px 0}
+.tr-u button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+#tr-bars{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+#tr-bars li{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(80px,1fr) 5.5em;gap:10px;align-items:center;font-size:14px}
+.tr-bn{display:flex;gap:8px;align-items:center;min-width:0}.tr-bn span:last-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tr-bt{height:14px;background:var(--paper-2);border-radius:4px}.tr-bt i{display:block;height:100%;background:var(--accent);border-radius:4px}
+.tr-bv{font-variant-numeric:tabular-nums;color:var(--ink-2);text-align:right;white-space:nowrap}
+.tr-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -4px;padding:0 4px}
+#tr-grid{font-size:14px;min-width:640px}
+#tr-grid th,#tr-grid td{padding:5px 4px;border-top:1px solid var(--line);vertical-align:middle}
+#tr-grid thead th{font-size:12px;text-align:center;white-space:nowrap} #tr-grid thead th.tr-tn{text-align:left}
+.tr-tn{min-width:190px;max-width:300px;font-weight:400}
+.tr-open{font:inherit;color:var(--ink);background:none;border:0;padding:2px 0;cursor:pointer;display:flex;gap:8px;align-items:flex-start;text-align:left;width:100%}
+.tr-open::after{content:'▸';color:var(--ink-3);margin-left:auto;padding-left:6px}.tr-open[aria-expanded="true"]::after{content:'▾'}
+.tr-tt{font-weight:700;font-size:14px;line-height:1.3}
+.tr-c{text-align:center;font-variant-numeric:tabular-nums;font-weight:700;background:color-mix(in srgb,var(--accent) var(--h,0%),var(--paper));color:var(--ink);min-width:2.6em}
+.tr-c.z{background:transparent}
+@supports not (background:color-mix(in srgb,red 50%,blue)){.tr-c:not(.z){background:var(--accent-soft)}}
+.tr-x{text-align:center;font-variant-numeric:tabular-nums;white-space:nowrap}.tr-x.b{font-weight:700}
+#tr-grid tfoot th,#tr-grid tfoot td{border-top:2px solid var(--line);color:var(--ink-2)}
+.tr-due{display:inline-block;margin:2px 0 0 34px;font-size:12px;font-weight:700;color:var(--warn);background:var(--warn-soft);border-radius:6px;padding:0 6px}
+.tr-duebox{border-radius:10px;padding:8px 12px;margin:10px 0 0;font-size:14.5px;background:var(--ok-soft)}.tr-duebox.warn{background:var(--warn-soft)}
+.tr-drow>td{background:var(--paper-2);padding:10px 12px!important}
+.tr-det{max-width:820px}.tr-dh{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;justify-content:space-between}.tr-dh p{margin:0;font-size:14px;color:var(--ink-2)}
+.tr-spec{list-style:none;margin:8px 0 0;padding:0}.tr-spec>li{padding:6px 0;border-top:1px solid var(--line)}.tr-spec>li.none{opacity:.65}
+.tr-sp{display:flex;flex-wrap:wrap;justify-content:space-between;gap:2px 12px}.tr-sp a{font-weight:600;text-decoration:none}.tr-sm{font-size:13px;color:var(--ink-3);white-space:nowrap}
+.tr-spec details summary{cursor:pointer;font-size:13px;color:var(--ink-2)}.tr-spec details ul{margin:4px 0 0;padding-left:18px;font-size:13px;color:var(--ink-2)}
+.tr-key{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--ink-3);margin:8px 0 0;align-items:center}.tr-key i{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:4px;border:1px solid var(--line)}
+#tr-print-h{display:none}.tr-h4{margin:14px 0 6px;font-size:15px}
+/* pupil visits */
+#vs-t{font-size:14.5px;min-width:0}#vs-t th,#vs-t td{vertical-align:middle}
+.ac-more{position:relative;display:inline-block}.ac-more>summary{list-style:none;cursor:pointer;font-weight:800;letter-spacing:.1em}.ac-more>summary::-webkit-details-marker{display:none}.ac-menu{position:absolute;right:0;top:calc(100% + 4px);z-index:5;background:var(--paper);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px rgba(10,16,30,.15);padding:4px;min-width:200px;display:flex;flex-direction:column}.ac-menu button{font:inherit;font-size:14px;text-align:left;background:none;border:0;border-radius:7px;padding:8px 10px;cursor:pointer;color:var(--ink)}.ac-menu button:hover{background:var(--paper-2)}.ac-menu button.danger{color:#B42318}.ac-view{display:flex;gap:4px;margin:4px 0 10px;border-bottom:1px solid var(--line)}.ac-view button{font:inherit;font-weight:700;font-size:14px;background:none;border:0;border-bottom:3px solid transparent;padding:6px 10px;color:var(--ink-3);cursor:pointer}.ac-view button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}.vs-more{margin-top:22px}.wk{margin-bottom:12px}.wk-h{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 10px}.wk-h h3{margin:0;font-size:16px}.wk-nav{display:flex;align-items:center;gap:6px}.wk-nav b{font-size:13.5px;min-width:9.5em;text-align:center}.wk h4{margin:14px 0 4px;font-size:14.5px}.wk h4 small{font-weight:400;color:var(--ink-3)}.wk table{font-size:13px}.wk td small{display:block;color:var(--ink-3)}.wk .ac-nm{font:inherit;font-weight:700;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-align:left;text-decoration:underline}.wk .up{color:#127A3A}.wk .down{color:#B42318}.wk .idle{color:#B42318;font-size:13px;margin:4px 0 0}@media print{.wk-nav button{display:none}body.wk-printing #activity > :not(#ac-on),body.wk-printing #ac-on > :not(#wk-wrap),body.wk-printing #visits > :not(#activity){display:none!important}}
+#ac-t{font-size:14px}#ac-t .ac-cb{width:28px;padding-right:0}#ac-t .ac-cb input{width:18px;height:18px}#ac-t tr.sel td{background:var(--paper-2)}#ac-t .ac-typed{color:var(--warn)}#ac-t .ac-nm{font:inherit;font-weight:700;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-align:left;text-decoration:underline;text-underline-offset:2px}#ac-t .ac-pr{color:var(--ink-2)}#ac-t tr.ac-det td{border-top:0;padding-top:0}.ac-ov{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:6px 10px;margin:0 0 8px}.ac-ov div{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:5px 8px}.ac-ov dt{font-size:11px;color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em}.ac-ov dd{margin:0;font-weight:700;font-size:13.5px}.ac-ch{display:flex;align-items:flex-end;gap:2px;height:56px;padding:2px 0;border-bottom:1px solid var(--line)}.ac-ch span{flex:1;height:100%;display:flex;align-items:flex-end;position:relative}.ac-ch span.mon::before{content:"";position:absolute;left:-1px;top:0;bottom:0;border-left:1px dashed var(--line)}.ac-ch i{display:block;width:100%;background:var(--accent);border-radius:2px 2px 0 0}.ac-chx{display:flex;justify-content:space-between;font-size:11px;color:var(--ink-3);margin:2px 0 6px}.ac-ses{list-style:none;margin:0;padding:0;font-size:13px}.ac-ses li{padding:4px 0;border-bottom:1px dashed var(--line)}.ac-ses b{display:block;font-size:13px}.ac-ses span{color:var(--ink-2)}.ac-tps{display:flex;flex-direction:column;gap:2px}.ac-pg{border-bottom:1px dashed var(--line);padding:4px 0}.ac-pg summary small{display:block;color:var(--ink-3);font-weight:400;margin-left:14px}.ac-pg .ac-q{margin:4px 0 0 14px}.ac-pg p.small{margin:2px 0 4px 14px}.ac-tt{font-size:13px}.ac-tt td{vertical-align:top}.ac-pg summary{cursor:pointer}.ac-pg[open] summary{margin-bottom:4px}.ac-pg .ac-q{font-size:12.5px}
+.pd-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;align-items:flex-start;margin:0 0 8px}.pd-head h3{margin:0;font-size:18px}.pd-head p{margin:2px 0 0}.pd-btns{display:flex;flex-wrap:wrap;gap:6px}.pd-key{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:8px 0}.pd-key .pd-t{width:18px;height:18px;font-size:11px;cursor:default}.pd-tabs{display:flex;gap:6px;overflow-x:auto;margin:12px 0 8px;padding-bottom:2px}.pd-tab{flex:0 0 auto;min-width:76px;text-align:left;font:inherit;border:1px solid var(--line);border-radius:10px;background:var(--paper);padding:6px 10px;cursor:pointer;color:var(--ink)}.pd-tab b{display:block;font-size:13.5px}.pd-tab small{font-size:12px;color:var(--ink-3)}.pd-tab[aria-selected="true"]{border-color:var(--accent);box-shadow:inset 0 -3px 0 var(--accent);background:var(--paper-2)}.pd-tbar{display:block;height:4px;border-radius:2px;background:var(--paper-2);margin-top:4px;overflow:hidden}.pd-tbar i{display:block;height:100%;background:#1E8E4E}.pd-uh{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 10px}.pd-uh h4{margin:0;font-size:14.5px}.pd-pick{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:6px 0}.pd-cats{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:8px;margin-top:6px}.pd-cat{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:8px}.pd-cath{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:700;margin:0 0 6px}.pd-cath small{font-weight:400;color:var(--ink-3);white-space:nowrap}.pd-tiles{display:flex;flex-wrap:wrap;gap:4px}.pd-t{width:22px;height:22px;border-radius:4px;border:1px solid #C3CCD8;background:transparent;color:#fff;font:700 12px/1 var(--sans,system-ui);display:inline-grid;place-items:center;cursor:pointer;padding:0;transition:transform .1s}.pd-t:hover{transform:scale(1.25);box-shadow:0 0 0 2px var(--accent)}.pd-t.ok{background:#1E8E4E;border-color:#1E8E4E}.pd-t.ok.awd{background:transparent;color:#1E8E4E;border:2px solid #1E8E4E}.pd-t.seen{border:1px dashed #D08A00;color:#D08A00}.pd-t.ret{border:2px solid #C2410C;color:#C2410C;font-size:11px}.pd-key{gap:4px 2px}.pd-key .pd-t{margin:0 4px 0 10px}.pd-key .pd-t:first-child{margin-left:0}.pd-more{margin:8px 0;border:1px solid var(--line);border-radius:10px;padding:6px 10px;background:var(--paper)}.pd-more>summary{cursor:pointer;font-weight:700;font-size:14px;padding:2px 0}.pd-more[open]>summary{margin-bottom:6px}.ac-ov{grid-template-columns:repeat(4,1fr)!important}@media (max-width:420px){.ac-ov{grid-template-columns:repeat(2,1fr)!important}}.pd-btns .ac-menu{min-width:170px}.pd-lh{margin:16px 0 4px;font-size:14px}.pd-line{display:grid;grid-template-columns:1fr auto;gap:2px 10px;align-items:center;padding:6px 0;border-bottom:1px solid var(--line);font-size:13.5px}.pd-line .when{grid-column:1/-1;font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--ink-3)}.pd-line small{display:block;color:var(--ink-3)}.pd-line .badge{font-size:11.5px;font-weight:700;padding:2px 7px;border-radius:999px;border:1px solid var(--line);white-space:nowrap;color:var(--ink-2)}.pd-line .badge.good{color:#127A3A;border-color:#9BD3B0;background:#EAF7EF}.pd-cats.picking .pd-t{outline:1px dashed var(--ink-3);outline-offset:1px}.pd-t.picked{box-shadow:0 0 0 3px var(--accent);outline:none!important}.pd-info{margin:8px 0 0;padding:6px 8px;background:var(--paper);border:1px solid var(--line);border-radius:8px}.ac-pd{margin-top:12px}.ac-pd .ac-d{max-width:none;position:static;background:none;padding:0}
+.ac-d{background:var(--paper-2);border-radius:10px;padding:10px 12px;box-sizing:border-box;max-width:min(680px,calc(100vw - 92px));position:sticky;left:0}.ac-u+.ac-u{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}.ac-u h4{margin:0 0 2px;font-size:14px}.ac-u p{margin:0 0 4px}.ac-cov{max-width:240px;margin:2px 0 6px}.ac-d .ac-cov i{margin-left:0}#ac-t td:nth-child(2){min-width:150px}.ac-sub{font-size:12px;font-weight:700;color:var(--ink-3);text-transform:uppercase;letter-spacing:.04em;margin:6px 0 2px!important}.ac-q{list-style:none;margin:0;padding:0;font-size:13px}.ac-q li{display:flex;justify-content:space-between;gap:10px;padding:2px 0;border-bottom:1px dashed var(--line)}.ac-q b{white-space:nowrap}.ac-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:8px 0}.ac-panel{margin:0 0 10px}.ac-panel p{margin:0 0 8px;font-size:14px}.ac-row{display:flex;flex-wrap:wrap;gap:6px}.ac-row input{font:inherit;padding:7px 9px;border:1px solid var(--line);border-radius:8px;min-width:0;flex:1}.ac-row input:first-child{flex:1 1 180px}.tp-mini.danger{color:#fff;background:#B42318;border-color:#B42318}.tp-mini.pri{color:#fff;background:var(--accent);border-color:var(--accent)}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}#ac-t th,#ac-t td{vertical-align:middle}#ac-t td small{display:block;color:var(--ink-3);font-size:12px;font-weight:400}#ac-t .vs-n{white-space:nowrap;width:auto}#ac-t .vs-bar{display:block;margin-top:3px}
+.vs-n{text-align:right;width:22%;font-variant-numeric:tabular-nums;white-space:nowrap}.vs-n span{display:block}
+.vs-bar{display:block;height:6px;background:var(--paper-2);border-radius:3px;margin-top:3px}.vs-bar i{display:block;height:100%;background:var(--accent);border-radius:3px;margin-left:auto}
+.vs-g th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding-top:14px}
+#vs-t .tr-open b{font-size:14px;min-width:3.6em}
+.vs-ch{font-size:13.5px}.vs-ch th{font-weight:400} .vs-ch a{text-decoration:none}
+@media (max-width:720px){.wrap{padding:12px 12px 32px}.card{padding:12px;border-radius:12px}.steps{padding:2px 12px}.tp-reps{grid-template-columns:1fr}.tp-dl{font-size:14px;padding:6px}.tp-dl svg{display:none}.tp-opts.tp-topics{grid-template-columns:1fr}.hrow h2{font-size:17px}.tabs a{padding:8px 10px;font-size:15px}.u{padding:12px}}
+@media (max-width:640px){.u th:nth-child(3),.u td:nth-child(3){display:none}.pr{margin-left:0}#bt-list li{grid-template-columns:2em minmax(0,1fr) auto}.bt-act{grid-column:2/-1}#tr-bars li{grid-template-columns:minmax(0,1fr) 5.5em}.tr-bt{grid-column:1/-1;grid-row:2}}
+@media print{body{background:#fff;color:#000} .bar,.back,.tabs,.cd,.lead,.brand,h1,.noprint{display:none!important} .wrap{padding:0;max-width:none} .u{border:0;padding:0;break-inside:auto} .u[hidden]{display:none} a{color:#000}
+ .card{box-shadow:none;border:0;padding:0} #tr-print-h{display:block;font-size:18px;margin:0 0 8px} .tr-scroll{overflow:visible} #tr-grid{min-width:0;font-size:10px} .tr-tn{min-width:0} .tr-open::after{display:none}
+ .tr-c,.tr-duebox,.tr-due,.tr-bt i{-webkit-print-color-adjust:exact;print-color-adjust:exact} .cd-sow{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+.pk{max-width:560px;margin:0 auto}.pk h1{font-size:clamp(1.6rem,6vw,2.2rem);margin:4px 0 6px}.pk .pk-k{font-weight:700;color:var(--ink-3);font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.pk-btns{display:grid;gap:10px;margin:16px 0 10px}.pk-btns .tp-dl{width:100%;justify-content:center;padding:14px;font-size:16px}
+</style></head><body><div class="wrap pk" id="pk-root">
+<a class="back" href="#" onclick="if(history.length>1){history.back();return false}">‹ Back</a>
+<p class="pk-k" id="pk-unit">CCEA past papers</p><h1 id="pk-title">Loading…</h1><p class="small" id="pk-sub"></p>
+<div class="card"><p style="margin:0 0 4px"><b>Make a past paper for this topic</b></p><p class="small" style="margin:0">Every CCEA question on this topic, cut from the real papers, as a PDF to print or work through. Then check your answers with the mark schemes.</p>
+<div class="pk-btns"><button type="button" class="tp-dl pri" data-pk="questions" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Past paper (questions)</button><button type="button" class="tp-dl" data-pk="answers" disabled><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12m0 0-5-5m5 5 5-5M5 21h14"/></svg>Mark schemes and examiner comments</button></div>
+<div class="tp-status" id="pk-status" role="status" aria-live="polite" hidden><span id="pk-status-t"></span><progress id="pk-bar" max="1" value="0" hidden></progress></div>
+<p class="small" style="margin:8px 0 0">CCEA past-paper material, used with permission.</p></div>
+</div>
+<script>
+/* Teacher area: the ⓘ info buttons. A button.ib (aria-controls -> div.ip) opens its note; a second tap, Escape or a tap
+   anywhere outside closes it. Works for buttons added later (event delegation). Inlined into teacher.html by sow.py. */
+(function () {
+  'use strict';
+  const panel = b => document.getElementById(b.getAttribute('aria-controls'));
+  const close = (b, focus) => { const p = panel(b); b.setAttribute('aria-expanded', 'false'); if (p) p.hidden = true; if (focus) b.focus(); };
+  const openOnes = () => [...document.querySelectorAll('button.ib[aria-expanded="true"]')];
+  document.addEventListener('click', e => {
+    const b = e.target.closest('button.ib');
+    if (b) { const on = b.getAttribute('aria-expanded') === 'true'; openOnes().forEach(x => { if (x !== b) close(x); }); if (on) close(b); else { const p = panel(b); b.setAttribute('aria-expanded', 'true'); if (p) p.hidden = false; } return; }
+    if (e.target.closest('.ip')) return;
+    openOnes().forEach(x => close(x));
+  });
+  document.addEventListener('keydown', e => { if (e.key !== 'Escape') return; const o = openOnes(); if (o.length) { o.forEach((x, i) => close(x, i === o.length - 1)); e.preventDefault(); } });
+})();
+
+/* Teacher area: topic packs. Builds a PDF in the browser (pdf-lib, lib/pdf-lib.min.js) of every CCEA past-paper question the
+   workbooks place in a topic, each with its mark scheme and examiner-report comment, cut from the uploaded CCEA PDFs.
+   Data: papers/topics.json (topic -> questions), folders.json + manifest.json (which PDFs), crops.json (where each question and
+   mark scheme sits: [[page, top, bottom]] as fractions of the page height from the top), pages.json (the page, when a question
+   could not be cut out), reports.json (examiner-report comments). The crops are embedded as vector page parts (embedPages with
+   a bounding box), never rasterised. Inlined into teacher.html by notes/front/sow.py. */
+(function () {
+  'use strict';
+  const $ = (s, r) => (r || document).querySelector(s);
+  const el = (t, a, ...kids) => { const e = document.createElement(t); for (const k in a || {}) { if (k === 'class') e.className = a[k]; else if (k === 'text') e.textContent = a[k]; else if (k.startsWith('on')) e.addEventListener(k.slice(2), a[k]); else if (a[k] !== null && a[k] !== undefined && a[k] !== false) e.setAttribute(k, a[k] === true ? '' : a[k]); } for (const c of kids) if (c !== null && c !== undefined) e.append(c); return e; };
+  const getJ = async (u, need) => {
+    try { const r = await fetch(u, { cache: 'no-cache' }); if (r.ok) return await r.json(); } catch (e) { }
+    try { const c = await caches.match(new URL(u, location.href).href); if (c) return await c.json(); } catch (e) { }
+    if (need) throw new Error('Could not load ' + u); return null;
+  };
+  const COURSE_NAME = { gcse: 'GCSE', gce: 'A level' };
+  const REPORT_DIR = { gcse: 'papers/GCSE/Examiner reports/', gce: 'papers/A level/Examiner reports/' };
+  const NO_REPORT = { gcse: ['2021', 'Specimen'], gce: ['Summer 2021', 'Summer 2022 Resit', 'Specimen'] };   /* CCEA published none */
+  const store = { get(k, d) { try { const v = localStorage.getItem('teacher.' + k); return v === null ? d : v; } catch (e) { return d; } }, set(k, v) { try { localStorage.setItem('teacher.' + k, v); } catch (e) { } } };
+
+  let D = null;   /* all the data */
+  const S = { course: null, book: null, topic: null, order: store.get('order', 'new'), layout: store.get('layout', 'standard'), off: new Set() };
+
+  /* ------------------------------------------------------------------ helpers on one question */
+  const serLabel = s => /^\d{4}$/.test(s) ? 'Summer ' + s : s;
+  const qLabel = q => 'Q' + q;
+  function info(book, it) {
+    const [b, s] = [book.id, it.s], folder = D.folders[b + '|' + s], files = folder ? D.manifest[folder] || {} : {};
+    const cr = D.crops[it.k] || {}, pg = D.pages[it.k] || {}, rep = (D.reports.crops || {})[it.k] || null;
+    const segs = a => Array.isArray(a) && a.length ? a.filter(x => Array.isArray(x) && x.length === 3) : null;
+    const marks = Number.isInteger(it.m) ? it.m : (Number.isInteger(cr.marks) ? cr.marks : null);
+    const rkey = book.course + '|' + s, rfile = (D.reports.files || {})[rkey] || null;
+    const none = ((D.reports.none || NO_REPORT)[book.course] || []).includes(s) || /specimen|resit/i.test(s) || /\b2021\b/.test(s);
+    const report = rep ? 'crop' : rfile ? 'nocomment' : none ? 'none' : 'missing';
+    return { paper: files.paper || null, ms: files.ms || null, cp: segs(cr.paper), cm: segs(cr.ms), cs: segs(cr.stem), px: cr.px || [], sx: cr.sx || [], mx: cr.mx || [], pg: cr.pg || [], sg: cr.sg || [], pp: +pg.paper || null, pm: +pg.ms || null,
+             marks, rep, rfile, report, series: serLabel(s), head: `${serLabel(s)} · ${book.short} · ${qLabel(it.q)}${marks ? ` · ${marks} mark${marks === 1 ? '' : 's'}` : ''}` };
+  }
+  const yr = s => { const m = /(20\d\d)/.exec(s); return m ? +m[1] : 0; };
+  function ordered(book, topic) {
+    const it = topic.items.slice();   /* topics.json is newest first, specimens last */
+    if (S.order === 'old') it.sort((a, b) => (yr(a.s) || 9999) - (yr(b.s) || 9999) || (/resit/i.test(a.s) - /resit/i.test(b.s)) || topic.items.indexOf(a) - topic.items.indexOf(b));
+    return it;
+  }
+
+  /* ------------------------------------------------------------------ the step flow */
+  const ui = {};
+  /* collapsible steps: the current step shows its options; a step with a choice is one row ("Course · GCSE ▾") that reopens on a tap */
+  function Steps(root) {
+    const all = () => [...root.querySelectorAll(':scope > .st')], get = n => all().find(x => +x.dataset.step === n);
+    const api = {
+      open(n) { all().forEach(x => { const on = +x.dataset.step === n; x.classList.toggle('open', on); x.querySelector('.st-h').setAttribute('aria-expanded', String(on)); x.querySelector('.st-b').hidden = !on; }); },
+      val(n, v) { const x = get(n); if (!x) return; x.querySelector('.st-v').textContent = v || ''; x.classList.toggle('has', !!v); },
+      show(n, on) { const x = get(n); if (x) x.hidden = !on; },
+    };
+    all().forEach(x => x.querySelector('.st-h').addEventListener('click', () => { const n = +x.dataset.step; api.open(x.classList.contains('open') && x.classList.contains('has') ? 0 : n); }));
+    return api;
+  }
+  function pressed(group, val) { group.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.v === val))); }
+
+  function renderCourses() {
+    ui.course.innerHTML = '';
+    for (const c of ['gcse', 'gce']) {
+      const bs = D.topics.books.filter(b => b.course === c); if (!bs.length) continue;
+      const n = bs.reduce((a, b) => a + b.topics.reduce((x, t) => x + t.items.length, 0), 0);
+      ui.course.append(el('button', { type: 'button', class: 'tp-opt', 'data-v': c, 'aria-pressed': 'false', onclick: () => pickCourse(c) },
+        el('b', { text: COURSE_NAME[c] }), el('small', { text: bs.map(b => b.short).join(', ') + ' · ' + n + ' questions' })));
+    }
+  }
+  function pickCourse(c, keep) {
+    const same = S.course === c && S.book && S.book.course === c;
+    S.course = c; store.set('course', c); pressed(ui.course, c);
+    ui.unit.innerHTML = '';
+    for (const b of D.topics.books.filter(b => b.course === c)) {
+      const n = b.topics.reduce((x, t) => x + t.items.length, 0);
+      ui.unit.append(el('button', { type: 'button', class: 'tp-opt', 'data-v': b.id, 'aria-pressed': 'false', onclick: () => pickBook(b.id) },
+        el('b', { text: b.short }), el('small', { text: b.title + ' · ' + n + ' questions' })));
+    }
+    ui.steps.val(1, COURSE_NAME[c]); ui.steps.show(2, true);
+    if (same) pressed(ui.unit, S.book.id);
+    if (!keep && !same) { S.book = S.topic = null; ui.steps.val(2, ''); ui.steps.val(3, ''); ui.steps.show(3, false); ui.packWrap.hidden = true; }
+    if (!keep) ui.steps.open(2);
+  }
+  function pickBook(id, keep) {
+    const b = D.topics.books.find(x => x.id === id); if (!b) return;
+    const same = S.book === b && S.topic;
+    S.book = b; store.set('book', id); pressed(ui.unit, id);
+    ui.topic.innerHTML = '';
+    for (const t of b.topics) {
+      const tot = t.items.reduce((a, it) => a + (info(b, it).marks || 0), 0);
+      ui.topic.append(el('button', { type: 'button', class: 'tp-opt tp-topic', 'data-v': String(t.n), 'aria-pressed': 'false', onclick: () => pickTopic(t.n) },
+        el('span', { class: 'tp-n', text: String(t.n) }), el('span', {}, el('b', { text: t.title }), el('small', { text: `${t.items.length} question${t.items.length === 1 ? '' : 's'} · ${tot} marks` }))));
+    }
+    ui.steps.val(2, b.short); ui.steps.show(3, true);
+    if (same) pressed(ui.topic, String(S.topic.n));
+    if (!keep && !same) { S.topic = null; ui.steps.val(3, ''); ui.packWrap.hidden = true; }
+    if (!keep) ui.steps.open(3);
+  }
+  function pickTopic(n, restore) {
+    const t = S.book.topics.find(x => x.n === n); if (!t) return;
+    S.topic = t; S.off = new Set(); store.set('topic', S.book.id + '|' + n); pressed(ui.topic, String(n));
+    ui.steps.val(3, t.title); ui.steps.open(0); ui.qs.open = false;
+    ui.packWrap.hidden = false; renderPack();
+    if (!restore && window.matchMedia('(max-width: 720px)').matches) ui.packWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  function chosen() { return ordered(S.book, S.topic).filter(it => !S.off.has(it.k)); }
+  function renderSummary() {
+    const its = chosen(), inf = its.map(it => info(S.book, it));
+    const known = inf.filter(x => x.marks !== null), tot = known.reduce((a, x) => a + x.marks, 0);
+    const reps = inf.filter(x => x.report === 'crop').length, whole = inf.filter(x => x.paper && !x.cp).length, nopaper = inf.filter(x => !x.paper).length;
+    const all = S.topic.items.length, pl = n => n === 1 ? '' : 's';
+    ui.count.textContent = (its.length < all ? `${its.length} of ${all} question${pl(all)} selected` : `${all} question${pl(all)}`) + ` · ${known.length < inf.length ? 'at least ' : ''}${tot} marks · ${reps} with examiner comment${pl(reps)}`;
+    const notes = [];
+    if (whole) notes.push(`${whole} shown as the whole page (not cut out automatically)`);
+    if (nopaper) notes.push(`${nopaper} whose paper is not uploaded yet`);
+    ui.count2.textContent = notes.join(' · '); ui.count2.hidden = !notes.length;
+    ui.dl.forEach(b => { b.disabled = !its.length; });
+  }
+  function renderPack() {
+    const b = S.book, t = S.topic;
+    ui.packTitle.textContent = `${b.short} – ${t.title}`;
+    ui.list.innerHTML = '';
+    ordered(b, t).forEach(it => {
+      const x = info(b, it);
+      const flags = [];
+      if (!x.paper) flags.push(['warn', 'Paper not uploaded']);
+      else if (!x.cp) flags.push(['warn', x.pp ? 'Whole page ' + x.pp : 'Not located']);
+      if (x.report === 'crop') flags.push(['ok', x.rep.found === it.q ? 'Report comment' : `Report: ${qLabel(x.rep.found)} comment`]);
+      else if (x.report === 'nocomment') flags.push(['mute', 'No report comment']);
+      else if (x.report === 'missing') flags.push(['warn', 'Report not uploaded']);
+      const cb = el('input', { type: 'checkbox', checked: !S.off.has(it.k), 'aria-label': 'Include ' + x.head });
+      cb.addEventListener('change', () => { cb.checked ? S.off.delete(it.k) : S.off.add(it.k); row.classList.toggle('off', !cb.checked); number(); renderSummary(); });
+      const row = el('li', { class: S.off.has(it.k) ? 'off' : '' },
+        el('label', { class: 'tp-q' }, cb, el('span', { class: 'tp-num' }),
+          el('span', { class: 'tp-qt' }, el('b', { text: x.head }), el('span', { class: 'tp-sum', text: it.t || '' }),
+            el('span', { class: 'tp-flags' }, ...flags.map(([k, v]) => el('span', { class: 'tp-flag ' + k, text: v }))))));
+      row.dataset.k = it.k; ui.list.append(row);
+    });
+    number(); renderSummary(); setStatus('');
+  }
+  function number() { let i = 0; ui.list.querySelectorAll('li').forEach(li => { li.querySelector('.tp-num').textContent = li.classList.contains('off') ? '–' : String(++i); }); }
+
+  /* ------------------------------------------------------------------ progress and errors */
+  let ST = null;   /* the status box in use: the topic packs' or the test builder's {box, text, bar} */
+  function setStatus(msg, kind, frac) {
+    const st = ST || { box: ui.status, text: ui.statusText, bar: ui.bar }; if (!st.box) return;
+    st.box.hidden = !msg; st.box.className = 'tp-status' + (kind ? ' ' + kind : '');
+    st.text.textContent = msg || '';
+    st.bar.hidden = frac === undefined || frac === null; if (!st.bar.hidden) st.bar.value = Math.max(0, Math.min(1, frac));
+  }
+  const tick = () => new Promise(r => setTimeout(r, 0));
+
+  /* ------------------------------------------------------------------ building the PDF */
+  let LIB = null;
+  const pdfLib = () => LIB || (LIB = new Promise((ok, no) => {
+    if (window.PDFLib) return ok(window.PDFLib);
+    const s = document.createElement('script'); s.src = 'lib/pdf-lib.min.js';
+    s.onload = () => window.PDFLib ? ok(window.PDFLib) : no(new Error('pdf-lib did not load'));
+    s.onerror = () => { LIB = null; no(new Error('Could not load the PDF library (lib/pdf-lib.min.js). Check the connection and try again.')); };
+    document.head.append(s);
+  }));
+  let GLYPHS = null;
+  const VARIANT = {
+    full: { name: 'Full pack', sub: 'Each question, then its mark scheme and examiner-report comment', file: '' },
+    questions: { name: 'Questions only', sub: 'Pupil worksheet', file: ' (worksheet)' },
+    answers: { name: 'Mark schemes and reports', sub: 'Answers, numbered to match the worksheet', file: ' (mark schemes and reports)' },
+  };
+
+  /* the blocks for one question: head / label / seg {src, page, t, b, hl} / note */
+  function blocks(variant, n, book, it, layout, noStem) {
+    const x = info(book, it), out = [];
+    /* X: [left, right] per segment (cuts off CCEA's edge watermark); G: blank runs per segment, squeezed out of the compressed
+       answer packs (never out of a worksheet, where pupils need the answer space) */
+    const squeeze = (layout || S.layout) === 'compact' && variant !== 'questions';
+    const segOf = (src, C, hl, X, G) => C.flatMap(([p, t, b], i) => {
+      const lr = (X && X[i]) || [0, 1], h = (hl || []).filter(z => z[0] === p).map(z => [z[1], z[2]]), mk = (a, z) => ({ k: 'seg', src, page: p, t: a, b: z, l: lr[0], r: lr[1], hl: h });
+      const gs = squeeze && G && G[i] ? G[i].filter(g => g[0] > t && g[1] < b && g[1] > g[0]) : [];
+      if (!gs.length) return [mk(t, b)];
+      const out = []; let a = t; gs.forEach(g => { out.push(mk(a, g[0]), { k: 'squeeze' }); a = g[1]; }); out.push(mk(a, b)); return out;
+    });
+    const whole = (src, p, what) => [{ k: 'label', text: `${what}: whole page ${p} (this question could not be cut out automatically)`, tone: 'warn' }, { k: 'seg', src, page: p, t: 0, b: 1, hl: [] }];
+    const question = () => {
+      if (!x.paper) return [{ k: 'note', text: `The ${x.series} ${book.short} question paper is not uploaded yet.` }];
+      if (x.cp) return [...(x.cs && !noStem ? [{ k: 'label', text: `From the start of Q${String(it.q).match(/^\d+/)}`, tone: 'mute' }, ...segOf(x.paper, x.cs, null, x.sx, x.sg), { k: 'gap' }] : []), ...segOf(x.paper, x.cp, null, x.px, x.pg)];
+      if (x.pp) return whole(x.paper, x.pp, 'Question paper');
+      return [{ k: 'note', text: `Not located in the ${x.series} question paper: see the paper itself.` }];
+    };
+    const box = (kind, title, sub, items) => [{ k: 'box', kind, title, sub }, ...items, { k: 'boxend' }];
+    const scheme = () => {
+      if (!x.ms) return box('ms', 'Mark scheme', '', [{ k: 'note', text: `The ${x.series} ${book.short} mark scheme is not uploaded yet.` }]);
+      if (x.cm) return box('ms', 'Mark scheme', '', segOf(x.ms, x.cm, null, x.mx));
+      if (x.pm) return box('ms', 'Mark scheme', `whole page ${x.pm}: not cut out automatically`, [{ k: 'seg', src: x.ms, page: x.pm, t: 0, b: 1, hl: [] }]);
+      return box('ms', 'Mark scheme', '', [{ k: 'note', text: 'Not located in the mark scheme: see the mark scheme itself.' }]);
+    };
+    const report = () => {
+      if (x.report === 'none') return [];
+      if (x.report === 'missing') return box('er', 'Examiner’s comment', x.series, [{ k: 'note', text: `Examiner report not uploaded yet: upload CCEA’s ${x.series} report to ${REPORT_DIR[book.course]}.` }]);
+      if (x.report === 'nocomment') return box('er', 'Examiner’s comment', x.series, [{ k: 'note', text: `The ${x.series} examiner report has no comment on this question.` }]);
+      const f = x.rep.found, own = f === it.q;
+      return box('er', 'Examiner’s comment', x.series + (own ? '' : ` · comment on ${qLabel(f)}${x.rep.hl ? ', the lines about this part highlighted' : ''}`), segOf(x.rep.report_file, x.rep.report, x.rep.hl));
+    };
+    const hd = { k: 'head', n, text: `${x.series} · ${book.short} · ${qLabel(it.q)}`, marks: x.marks };
+    if (variant === 'answers' && noStem) {   /* a test's mark scheme: just the answers, no tinted boxes or reports (prints cleanly, uses less paper) */
+      const sc = scheme(); out.push(hd, ...sc.filter(z => z.k !== 'box' && z.k !== 'boxend'));
+    } else if (variant === 'answers') out.push(hd, ...scheme(), { k: 'gap' }, ...report());
+    else if (variant === 'questions') out.push(hd, ...question());
+    else out.push(hd, ...question(), { k: 'gap' }, ...scheme(), { k: 'gap' }, ...report());
+    return out;
+  }
+
+  /* topic worksheets (papers/worksheets.json): key terms and exam tips from the workbook, plus a few CCEA questions */
+  let WSD = null;
+  const hashSeed = str => [...str].reduce((a, c) => (Math.imul(a, 31) + c.charCodeAt(0)) >>> 0, 7) || 1;
+  async function wsJob() {
+    WSD = WSD || await getJ('papers/worksheets.json', true);
+    const book = S.book, topic = S.topic, d = ((WSD || {})[book.id] || {})[String(topic.n)] || { terms: [], tips: [] };
+    const nT = +S.wsTerms || d.terms.length, nQ = S.wsQs === '0' ? 0 : +S.wsQs || 9999, nTip = +S.wsTips || d.tips.length;
+    const step = d.terms.length / Math.max(1, Math.min(nT, d.terms.length));
+    const terms = (nT >= d.terms.length ? d.terms.slice() : Array.from({ length: nT }, (_, i) => d.terms[Math.floor(i * step)])).sort((a, b) => a[0].localeCompare(b[0]));
+    let a = hashSeed(book.id + topic.n + terms.length) >>> 0; const R = () => { a = (a + 0x6D2B79F5) >>> 0; let t = a; t = Math.imul(t ^ (t >>> 15), t | 1); t ^= t + Math.imul(t ^ (t >>> 7), t | 61); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    const perm = terms.map((_, i) => i); for (let i = perm.length - 1; i > 0; i--) { const j = Math.floor(R() * (i + 1)); [perm[i], perm[j]] = [perm[j], perm[i]]; }
+    const qs = chosen().slice(0, nQ);
+    return { title: `${book.short} – Topic worksheet – ${topic.title}`, heading: 'Topic worksheet', topics: topic.title, kicker: `${book.short.toUpperCase()} · KEY TERMS, CCEA QUESTIONS AND EXAM TIPS`,
+             docTitle: `${book.short} – ${topic.title} – topic worksheet`, file: `${book.short} – ${topic.title} – topic worksheet`, layout: 'compact',
+             items: qs.map(it => ({ book, it })), ws: { mode: S.wsMode, terms, perm, tips: d.tips.slice(0, nTip) } };
+  }
+  /* the topic pack as a job for build(): the test builder (teacher_tests.js) makes its own jobs */
+  function packJob() {
+    const book = S.book, topic = S.topic;
+    return { title: `${book.short} – ${topic.title}`, heading: topic.title, kicker: `${book.short.toUpperCase()} · CCEA PAST-PAPER QUESTIONS`,
+             docTitle: `${book.short} – ${topic.title} – CCEA questions`, file: `${book.short} – ${topic.title} – CCEA questions`,
+             layout: S.layout, items: chosen().map(it => ({ book, it })) };
+  }
+  /* job: { title (running header), heading (title band), kicker, docTitle, file, layout, items: [{book, it, topic?}],
+            test?: { minutes, rows: [{label, sub, marks, qs}] , perTopic } } */
+  async function build(variant, job) {
+    const L = await pdfLib(), { PDFDocument, StandardFonts, rgb, BlendMode } = L;
+    job = job || packJob();
+    const its = job.items, title = job.title, TEST = !!(job.test || job.ws), LAY = TEST ? 'compact' : job.layout || 'standard'; if (!its.length && !job.ws) return;   /* tests always flow, to save paper */
+    const plan = its.map((x, i) => blocks(variant, i + 1, x.book, x.it, LAY, TEST));
+    /* 1. load each source PDF once */
+    const urls = [...new Set(plan.flat().filter(b => b.k === 'seg').map(b => b.src))];
+    const src = new Map(), failed = [];
+    for (let i = 0; i < urls.length; i++) {
+      setStatus(`Loading CCEA PDFs: ${i + 1} of ${urls.length}`, 'busy', i / urls.length * .5);
+      try {
+        const r = await fetch(urls[i].split('/').map(encodeURIComponent).join('/'));
+        if (!r.ok) throw new Error(r.status);
+        src.set(urls[i], await PDFDocument.load(await r.arrayBuffer(), { ignoreEncryption: true, updateMetadata: false }));
+      } catch (e) { failed.push(urls[i]); }
+    }
+    for (const bl of plan.flat()) if (bl.k === 'seg' && !src.has(bl.src)) { bl.k = 'note'; bl.text = `Could not load ${bl.src.split('/').pop()}${navigator.onLine === false ? ' (offline: open it once online first)' : ''}.`; }
+    /* 2. embed every segment of each source PDF in one go (shared fonts/resources keep the file small) */
+    const doc = await PDFDocument.create();
+    doc.setTitle(`${job.docTitle || title} – ${VARIANT[variant].name}`); doc.setAuthor('Mr Butler’s Digital Technology'); doc.setSubject('CCEA past paper material, used with permission'); doc.setCreator('Teacher area topic packs (pdf-lib)');
+    const box = pg => { const mb = pg.getMediaBox(), cb = pg.getCropBox(); const x0 = Math.max(mb.x, cb.x), x1 = Math.min(mb.x + mb.width, cb.x + cb.width), y0 = Math.max(mb.y, cb.y), y1 = Math.min(mb.y + mb.height, cb.y + cb.height); return x1 > x0 && y1 > y0 ? { x0, x1, y0, y1 } : { x0: mb.x, x1: mb.x + mb.width, y0: mb.y, y1: mb.y + mb.height }; };
+    let si = 0;
+    for (const [url, sd] of src) {
+      setStatus(`Cutting out the questions: ${++si} of ${src.size} PDFs`, 'busy', .5 + si / src.size * .25); await tick();
+      const segs = plan.flat().filter(b => b.k === 'seg' && b.src === url && b.page >= 1 && b.page <= sd.getPageCount());
+      plan.flat().filter(b => b.k === 'seg' && b.src === url && !segs.includes(b)).forEach(b => { b.k = 'note'; b.text = `Page ${b.page} is not in ${url.split('/').pop()}.`; });
+      if (!segs.length) continue;
+      const pages = segs.map(b => sd.getPage(b.page - 1)), bbs = segs.map((b, i) => { const v = box(pages[i]), h = v.y1 - v.y0; const ww = v.x1 - v.x0; return { left: v.x0 + (b.l || 0) * ww, right: v.x0 + (b.r == null ? 1 : b.r) * ww, top: v.y1 - b.t * h, bottom: v.y1 - b.b * h }; });
+      try {
+        const emb = await doc.embedPages(pages, bbs);
+        segs.forEach((b, i) => { b.emb = emb[i]; b.w = bbs[i].right - bbs[i].left; b.h = bbs[i].top - bbs[i].bottom; const v = box(pages[i]); b.pw = v.x1 - v.x0; });
+      } catch (e) { segs.forEach(b => { b.k = 'note'; b.text = `Could not read ${url.split('/').pop()}.`; }); failed.push(url); }
+    }
+    /* 3. lay out on A4: a branded title band, numbered question headers, the question as cut from the paper,
+       the mark scheme in a green bx and the examiner's comment in a yellow bx (boxes continue across pages) */
+    const W = 595.28, H = 841.89, M = TEST ? { l: 36, r: 36, t: 42, b: 36 } : { l: 40, r: 40, t: 46, b: 52 }, CW = W - M.l - M.r;
+    /* Lemon Milk for a test's heading: glyph outlines drawn as vector paths (fonts/lemonmilk-bold-glyphs.json) */
+    let LM = null;
+    if (TEST) { try { LM = GLYPHS || (GLYPHS = await fetch('fonts/lemonmilk-bold-glyphs.json').then(r => r.ok ? r.json() : null)); } catch (e) { LM = null; } }
+    const lmOK = t => LM && [...String(t)].every(ch => LM.g[ch]);
+    const lmW = (t, size) => [...String(t)].reduce((a, ch) => a + LM.g[ch][0], 0) * size / LM.upm;
+    const lmText = (p, t, x, yy, size, color) => { let px = x; for (const ch of String(t)) { const [adv, d] = LM.g[ch]; if (d) p.drawSvgPath(d, { x: px, y: yy, scale: size / LM.upm, color }); px += adv * size / LM.upm; } };
+    const reg = await doc.embedFont(StandardFonts.Helvetica), bold = await doc.embedFont(StandardFonts.HelveticaBold), ital = await doc.embedFont(StandardFonts.HelveticaOblique);
+    const C = { ink: rgb(.09, .125, .2), ink2: rgb(.27, .31, .39), ink3: rgb(.43, .47, .55), line: rgb(.84, .86, .9), navy: rgb(.086, .13, .23), navy2: rgb(.15, .22, .38),
+      acc: rgb(.12, .37, .75), warn: rgb(.56, .33, 0), qbg: rgb(.94, .955, .975),
+      ms: { fill: rgb(.91, .965, .925), edge: rgb(.12, .48, .27), text: rgb(.07, .36, .19) },
+      er: { fill: rgb(1, .965, .84), edge: rgb(.8, .6, .05), text: rgb(.47, .33, 0) } };
+    const okc = new Map(); const safe = (f, s) => Array.from(String(s).replace(/[‘’]/g, "'").replace(/[“”]/g, '"').replace(/→/g, '->').replace(/≤/g, '<=').replace(/≥/g, '>=').replace(/×/g, 'x').replace(/−/g, '-')).map(ch => { const k = (f === bold ? 'b' : f === ital ? 'i' : 'r') + ch; if (!okc.has(k)) { try { f.encodeText(ch); okc.set(k, true); } catch (e) { okc.set(k, false); } } return okc.get(k) ? ch : '?'; }).join('');
+    const wrap = (f, size, text, width) => { const ws = safe(f, text).split(/\s+/), lines = []; let cur = ''; for (const w of ws) { const t = cur ? cur + ' ' + w : w; if (f.widthOfTextAtSize(t, size) > width && cur) { lines.push(cur); cur = w; } else cur = t; } if (cur) lines.push(cur); return lines; };
+    const txt = (p, t, x, yy, size, f, color) => p.drawText(safe(f, t), { x, y: yy, size, font: f, color });
+    const tw = (t, size, f) => f.widthOfTextAtSize(safe(f, t), size);
+    const PAD = 10, BOXHEAD = 22;
+    let page = null, y = 0, first = true, bx = null;   /* box: { kind, title, sub, page, top } while a bx is open */
+    const cx = () => bx ? M.l + PAD : M.l, cw = () => bx ? CW - 2 * PAD : CW;
+    const closeFrag = (cont) => {   /* draw the open box's fill (multiplied under the crops, so they read on the tint), edge and header on its page */
+      if (!bx) return; const k = C[bx.kind], bottom = y - (cont ? 0 : PAD - 4), hgt = bx.top - bottom;
+      bx.page.drawRectangle({ x: M.l, y: bottom, width: CW, height: hgt, color: k.fill, blendMode: BlendMode.Multiply });
+      bx.page.drawRectangle({ x: M.l, y: bottom, width: CW, height: hgt, borderColor: k.edge, borderWidth: .9, borderOpacity: .55 });
+      bx.page.drawRectangle({ x: M.l, y: bottom, width: 3.5, height: hgt, color: k.edge });
+      y = bottom - (cont ? 0 : 2);
+    };
+    const openFrag = (cont) => {
+      const k = C[bx.kind]; bx.page = page; bx.top = y;
+      txt(page, (bx.title + (cont ? ' (continued)' : '')).toUpperCase(), M.l + PAD + 2, y - 14.5, 8.5, bold, k.text);
+      if (bx.sub && !cont) { const t0 = (bx.title + '').toUpperCase(), x0 = M.l + PAD + 2 + tw(t0, 8.5, bold) + 8; const sub = wrap(reg, 8.5, bx.sub, W - M.r - PAD - x0)[0] || ''; txt(page, sub, x0, y - 14.5, 8.5, reg, k.text); }
+      y -= BOXHEAD;
+    };
+    const newPage = () => {
+      const had = !!bx; if (had) closeFrag(true);
+      page = doc.addPage([W, H]); y = H - M.t;
+      if (!first) {   /* running header */
+        txt(page, title, M.l, H - 28, TEST ? 7.5 : 8.5, bold, TEST ? C.ink3 : C.ink2);
+        /* the page number is added on the right once the page count is known */
+        page.drawLine({ start: { x: M.l, y: H - 34 }, end: { x: W - M.r, y: H - 34 }, thickness: .6, color: C.line });
+        y = H - M.t - 4;
+      }
+      first = false;
+      if (had) openFrag(true);
+    };
+    const room = () => y - M.b - (bx ? PAD : 0), FULL = H - M.t - M.b - 30, SHRINK = .8;
+    const segW = b => LAY === 'compact' && b.pw ? Math.min(cw(), b.w * CW / b.pw) : cw();   /* compressed: no enlarging of trimmed crops */
+    const segH = b => Math.min(b.h * (segW(b) / b.w), FULL);
+    const chain = (bl, i) => { let h = 0; for (let j = i; j < bl.length; j++) { const z = bl[j];
+      if (z.k === 'head') h += TEST ? 20 : 34; else if (z.k === 'box') h += BOXHEAD; else if (z.k === 'label') h += 14; else if (z.k === 'gap') h += 8;
+      else if (z.k === 'boxend') continue;
+      else return Math.min(FULL, h + (z.k === 'seg' ? segH(z) * SHRINK : 30)); } return Math.min(FULL, h); };
+    newPage();
+    /* title band */
+    const known = its.map(x => info(x.book, x.it).marks).filter(m => m !== null), tot = known.reduce((a, m) => a + m, 0);
+    let span = '';
+    if (job.test) { const ys = its.map(x => yr(x.it.s)).filter(Boolean).sort((a, b) => a - b), spec = its.some(x => !yr(x.it.s)); span = ys.length ? (ys[0] === ys[ys.length - 1] ? String(ys[0]) : `${ys[0]} to ${ys[ys.length - 1]}`) + (spec ? ' + specimen' : '') : spec ? 'Specimen' : ''; }
+    else { const sers = its.map(x => serLabel(x.it.s)); span = sers.length ? (sers[0] === sers[sers.length - 1] ? sers[0] : `${sers[0]} to ${sers[sers.length - 1]}`) : ''; }
+    const hm = m => { const h = Math.floor(m / 60), r = m % 60; return [h ? `${h} hour${h === 1 ? '' : 's'}` : '', r ? `${r} minutes` : ''].filter(Boolean).join(' '); };
+    if (TEST) testHead(); else coverBand();
+    if (job.ws) wsSections();
+    /* topic worksheets: key terms (matching, write the definition, or a reference list) and exam tips, then the questions */
+    function wsSections() {
+      const WS = job.ws, pupil = variant === 'questions';
+      const sec = (t, sub) => { if (room() < 60) newPage(); y -= 6; txt(page, t.toUpperCase(), M.l, y - 10, 10, bold, C.ink); if (sub) txt(page, sub, M.l + tw(t.toUpperCase(), 10, bold) + 8, y - 10, 8.5, reg, C.ink3); y -= 15; page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .5, color: C.line }); y -= 8; };
+      const para = (lines, x, size, f, color, lh) => { for (const ln of lines) { if (room() < lh) newPage(); txt(page, ln, x, y - size, size, f, color); y -= lh; } };
+      const T = WS.terms;
+      if (T.length && (pupil || WS.mode !== 'ref')) {
+        if (WS.mode === 'match' && pupil) {
+          sec('Key terms', 'Match each term to its definition: write the number next to the letter.');
+          const lw = CW * .3, rw = CW - lw - 10;
+          T.forEach((t, i) => {
+            const d = T[WS.perm[i]], dl = wrap(reg, 8.8, d[1], rw - 18), h = Math.max(1, dl.length) * 11 + 5;
+            if (room() < h) newPage();
+            const L = String.fromCharCode(65 + i);
+            txt(page, L, M.l, y - 9, 9, bold, C.ink3); txt(page, wrap(bold, 9, t[0], lw - 34)[0] || '', M.l + 12, y - 9, 9, bold, C.ink);
+            page.drawRectangle({ x: M.l + lw - 18, y: y - 12, width: 14, height: 13, borderColor: C.ink3, borderWidth: .6 });
+            txt(page, String(i + 1), M.l + lw + 10, y - 9, 9, bold, C.ink3);
+            dl.forEach((ln, k) => txt(page, ln, M.l + lw + 28, y - 9 - k * 11, 8.8, reg, C.ink));
+            y -= h; page.drawLine({ start: { x: M.l, y: y + 2 }, end: { x: W - M.r, y: y + 2 }, thickness: .3, color: C.line });
+          });
+          y -= 4;
+        } else if (WS.mode === 'write' && pupil) {
+          sec('Key terms', 'Write a definition of each term.');
+          T.forEach(t => { if (room() < 40) newPage(); txt(page, t[0], M.l, y - 10, 9.5, bold, C.ink);
+            for (let k = 0; k < 2; k++) { page.drawLine({ start: { x: M.l + (k ? 0 : CW * .28), y: y - 12 - k * 19 }, end: { x: W - M.r, y: y - 12 - k * 19 }, thickness: .5, color: C.ink3 }); } y -= 40; });
+        } else if (WS.mode === 'match') {   /* answers: the key */
+          sec('Key terms: answers');
+          const key = T.map((t, i) => `${String.fromCharCode(65 + i)} ${WS.perm.indexOf(i) + 1}`);
+          const per = 8, cwk = CW / per; for (let r0 = 0; r0 < key.length; r0 += per) { if (room() < 15) newPage(); key.slice(r0, r0 + per).forEach((k, c) => { const [L, N] = k.split(' '); txt(page, L, M.l + c * cwk, y - 10, 10, bold, C.ink3); txt(page, N, M.l + c * cwk + 12, y - 10, 10, bold, C.ink); }); y -= 16; } y -= 2; void para;
+        } else {   /* reference list, or the answers to "write the definition" */
+          sec(pupil ? 'Key terms' : 'Key terms: definitions');
+          T.forEach(t => { const lines = wrap(reg, 9, t[0] + ' – ' + t[1], CW); if (room() < lines.length * 11.5 + 3) newPage();
+            let first = true; for (const ln of lines) { if (first) { const bt = t[0]; txt(page, bt, M.l, y - 9, 9, bold, C.ink); const rest = ln.slice(bt.length); txt(page, rest, M.l + tw(bt, 9, bold), y - 9, 9, reg, C.ink); first = false; } else txt(page, ln, M.l, y - 9, 9, reg, C.ink); y -= 11.5; } y -= 2.5; });
+        }
+      }
+      if (pupil && WS.tips.length) {
+        sec('Exam tips');
+        WS.tips.forEach(t => { const lines = wrap(reg, 9, t, CW - 12); if (room() < lines.length * 11.5) newPage();
+          page.drawCircle({ x: M.l + 3, y: y - 6, size: 1.6, color: C.ink2 }); lines.forEach((ln, k) => txt(page, ln, M.l + 12, y - 9 - k * 11.5, 9, reg, C.ink)); y -= lines.length * 11.5 + 3; });
+      }
+      if (its.length) sec(pupil ? 'CCEA past-paper questions' : 'Mark schemes', pupil ? 'Answer in the spaces provided.' : '');
+    }
+    function testHead() {   /* tests: a plain, printer-friendly header, then straight into the questions */
+      const T = job.test, pupil = variant === 'questions';
+      const k1 = job.kicker, k2 = "MR BUTLER'S DIGITAL TECHNOLOGY";
+      txt(page, k1, M.l, y - 8, 7.5, bold, C.ink3); txt(page, k2, W - M.r - tw(k2, 7.5, bold), y - 8, 7.5, bold, C.ink3);
+      const head = String(job.heading).replace(/\s*–\s*\d+ marks?$/, '') + (variant === 'answers' ? (job.ws ? ': answers' : ': mark scheme') : variant === 'full' ? ': with answers' : ':');
+      if (lmOK(head)) lmText(page, head.toUpperCase(), M.l, y - 30, 17, C.ink); else txt(page, head, M.l, y - 30, 17, bold, C.ink);
+      const meta = `${tot} marks`; void T; txt(page, meta, W - M.r - tw(meta, 11, bold), y - 30, 11, bold, C.ink2);
+      y -= 30;
+      if (job.topics) {   /* the topics tested, under the heading (wrapped) */
+        const S2 = 12, up = String(job.topics).toUpperCase(), lm = lmOK(up), wid = t => lm ? lmW(t, S2) : tw(t, S2, bold);
+        const lines = []; let cur = ''; for (const w of up.split(/\s+/)) { const t = cur ? cur + ' ' + w : w; if (wid(t) > CW && cur) { lines.push(cur); cur = w; } else cur = t; } if (cur) lines.push(cur);
+        for (const ln of lines) { y -= 17; if (lm) lmText(page, ln, M.l, y, S2, C.ink2); else txt(page, ln, M.l, y, S2, bold, C.ink2); }
+      }
+      y -= 8; page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: 1.2, color: C.ink }); y -= 6;
+      if (pupil && job.ws) {
+        const fld = (t, x0, x1) => { txt(page, t, x0, y - 14, 9.5, bold, C.ink); page.drawLine({ start: { x: x0 + tw(t, 9.5, bold) + 5, y: y - 16 }, end: { x: x1, y: y - 16 }, thickness: .6, color: C.ink3 }); };
+        fld('Name', M.l, M.l + 270); fld('Class', M.l + 286, M.l + 380); fld('Date', M.l + 396, W - M.r); y -= 26;
+      } else if (pupil) {
+        const fld = (t, x0, x1) => { txt(page, t, x0, y - 14, 9.5, bold, C.ink); page.drawLine({ start: { x: x0 + tw(t, 9.5, bold) + 5, y: y - 16 }, end: { x: x1, y: y - 16 }, thickness: .6, color: C.ink3 }); };
+        fld('Name', M.l, M.l + 270); fld('Class', M.l + 286, M.l + 380); fld('Date', M.l + 396, W - M.r); y -= 26;
+        txt(page, 'Answer all questions in the spaces provided. Marks are shown in brackets [ ].', M.l, y - 9, 9, reg, C.ink2); y -= 16;
+        /* marking grid: question, marks, awarded (wraps onto more rows for long tests) */
+        const qs = its.map((x, i) => [String(i + 1), info(x.book, x.it).marks]), LW = 50, CWc = 22, RH = 13, per = Math.max(1, Math.floor((CW - LW - 34) / CWc));
+        for (let a = 0; a < qs.length; a += per) {
+          const part = qs.slice(a, a + per), last = a + per >= qs.length, cols = part.length + (last ? 1 : 0), gw = LW + part.length * CWc + (last ? 34 : 0);
+          [['Question', part.map(q => q[0]).concat(last ? ['Total'] : [])], ['Marks', part.map(q => q[1] == null ? '' : String(q[1])).concat(last ? [String(tot)] : [])], ['Awarded', part.map(() => '').concat(last ? [''] : [])]].forEach(([lab, cells], ri) => {
+            if (ri === 0) page.drawRectangle({ x: M.l, y: y - RH, width: gw, height: RH, color: C.qbg });
+            txt(page, lab, M.l + 4, y - RH + 4, 7.5, bold, C.ink2);
+            let xx = M.l + LW; cells.forEach((c, i) => { const w = i === part.length ? 34 : CWc, f = ri === 0 || i === part.length ? bold : reg; txt(page, c, xx + w / 2 - tw(c, 7.5, f) / 2, y - RH + 4, 7.5, f, C.ink); page.drawLine({ start: { x: xx, y }, end: { x: xx, y: y - RH }, thickness: .5, color: C.line }); xx += w; });
+            page.drawLine({ start: { x: M.l + gw, y }, end: { x: M.l + gw, y: y - RH }, thickness: .5, color: C.line });
+            page.drawLine({ start: { x: M.l, y }, end: { x: M.l + gw, y }, thickness: .5, color: C.line });
+            y -= RH; page.drawLine({ start: { x: M.l, y }, end: { x: M.l + gw, y }, thickness: .5, color: C.line });
+            page.drawLine({ start: { x: M.l, y: y + RH }, end: { x: M.l, y }, thickness: .5, color: C.line });
+          });
+          y -= 6; void cols;
+        }
+      }
+      y -= 8;
+    }
+    function coverBand() {
+    const tl = wrap(bold, 20, job.heading, CW - 40), bandH = 74 + tl.length * 24;
+    page.drawRectangle({ x: 0, y: H - bandH, width: W, height: bandH, color: C.navy });
+    page.drawRectangle({ x: 0, y: H - bandH, width: W, height: 3, color: variant === 'answers' ? C.ms.edge : variant === 'questions' ? C.acc : C.er.edge });
+    txt(page, "MR BUTLER'S DIGITAL TECHNOLOGY", M.l, H - 30, 8.5, bold, rgb(.7, .77, .9));
+    const kicker = job.kicker; txt(page, kicker, W - M.r - tw(kicker, 8.5, bold), H - 30, 8.5, bold, rgb(.7, .77, .9));
+    let ty = H - 58; for (const ln of tl) { txt(page, ln, M.l, ty, 20, bold, rgb(1, 1, 1)); ty -= 24; }
+    txt(page, `${VARIANT[variant].name}: ${VARIANT[variant].sub}`, M.l, ty + 2, 10, reg, rgb(.84, .88, .95));
+    y = H - bandH - 16;
+    /* summary chips */
+    const chips = [`${its.length} question${its.length === 1 ? '' : 's'}`, `${known.length < its.length ? 'at least ' : ''}${tot} marks`, job.test && job.test.minutes ? 'Time: ' + hm(job.test.minutes) : '', span].filter(Boolean);
+    let chx = M.l; for (const c of chips) { const w = tw(c, 9.5, bold) + 18; page.drawRectangle({ x: chx, y: y - 20, width: w, height: 20, color: C.qbg, borderColor: C.line, borderWidth: .6 }); txt(page, c, chx + 9, y - 13.5, 9.5, bold, C.ink); chx += w + 8; }
+    y -= 30;
+    if (variant === 'questions') { txt(page, 'Name', M.l, y - 12, 10, bold, C.ink); page.drawLine({ start: { x: M.l + 34, y: y - 14 }, end: { x: M.l + 260, y: y - 14 }, thickness: .6, color: C.ink3 });
+      txt(page, 'Class', M.l + 278, y - 12, 10, bold, C.ink); page.drawLine({ start: { x: M.l + 310, y: y - 14 }, end: { x: M.l + 380, y: y - 14 }, thickness: .6, color: C.ink3 });
+      txt(page, 'Date', M.l + 398, y - 12, 10, bold, C.ink); page.drawLine({ start: { x: M.l + 426, y: y - 14 }, end: { x: W - M.r, y: y - 14 }, thickness: .6, color: C.ink3 }); y -= 30; }
+    if (variant !== 'questions') {   /* key */
+      let kx = M.l; for (const [k, t] of [['ms', 'Mark scheme'], ['er', 'Examiner’s comment']]) { page.drawRectangle({ x: kx, y: y - 11, width: 11, height: 11, color: C[k].fill, borderColor: C[k].edge, borderWidth: .8 }); txt(page, t, kx + 16, y - 9.5, 9, reg, C.ink2); kx += 30 + tw(t, 9, reg); }
+      y -= 22;
+    }
+    page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .8, color: C.line }); y -= 14;
+    if (job.test) {   /* the test cover: instructions, then a marks table (per question, or per topic for long tests) */
+      const T = job.test, pupil = variant === 'questions';
+      if (pupil) {
+        const ins = [`Time allowed: ${T.minutes ? hm(T.minutes) : '________'}.`, `Total marks: ${tot}.`, 'Answer all questions in the spaces provided. The marks for each question are shown in brackets on the right.'];
+        for (const ln of ins.flatMap(t => wrap(reg, 10, t, CW))) { txt(page, ln, M.l, y - 10, 10, reg, C.ink); y -= 14; }
+        y -= 8;
+      }
+      txt(page, pupil ? 'MARKS (FOR THE TEACHER)' : 'MARKS SUMMARY', M.l, y - 10, 9, bold, C.ink2); y -= 18;
+      let cols = T.perTopic ? (pupil ? [['Topic', .56], ['Questions', .18], ['Available', .13], ['Awarded', .13]] : [['Topic', .6], ['Questions', .2], ['Marks', .2]])
+                              : (pupil ? [['Q', .07], ['Topic', .53], ['Available', .2], ['Awarded', .2]] : [['Q', .07], ['Topic', .43], ['From', .32], ['Marks', .18]]);
+      const rows = T.rows.map(r => T.perTopic ? (pupil ? [r.label, r.qs, String(r.marks), ''] : [r.label, r.qs, String(r.marks)]) : (pupil ? [r.qs, r.label, String(r.marks), ''] : [r.qs, r.label, r.sub, String(r.marks)]));
+      rows.push(T.perTopic ? (pupil ? ['Total', '', String(tot), ''] : ['Total', '', String(tot)]) : (pupil ? ['', 'Total', String(tot), ''] : ['', 'Total', '', String(tot)]));
+      const RH = 17, numeric = i => /^(Available|Awarded|Marks|Q|Questions)$/.test(cols[i][0]);
+      const row = (cells, head, last) => {
+        if (room() < RH + 2) newPage();
+        if (head) page.drawRectangle({ x: M.l, y: y - RH, width: CW, height: RH, color: C.qbg });
+        let cxp = M.l; cells.forEach((c, i) => { const w = cols[i][1] * CW, f = head || last ? bold : reg, sz = head ? 8.5 : 9.5;
+          const t = wrap(f, sz, c, w - 10)[0] || '', tx = numeric(i) ? cxp + w / 2 - tw(t, sz, f) / 2 : cxp + 5;
+          txt(page, t, tx, y - RH + 5.5, sz, f, head ? C.ink2 : C.ink);
+          if (i) page.drawLine({ start: { x: cxp, y }, end: { x: cxp, y: y - RH }, thickness: .5, color: C.line });
+          cxp += w; });
+        page.drawLine({ start: { x: M.l, y: y - RH }, end: { x: W - M.r, y: y - RH }, thickness: last ? 1 : .5, color: last ? C.ink3 : C.line });
+        y -= RH;
+      };
+      page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .5, color: C.line });
+      row(cols.map(c => c[0]), true); rows.forEach((r, i) => row(r, false, i === rows.length - 1));
+      y -= 12;
+      if (T.types && T.types.length) {   /* count and marks per question type */
+        cols = [['Question type', .6], ['Questions', .2], ['Marks', .2]];
+        if (room() < RH * (T.types.length + 2) + 4) newPage();
+        page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .5, color: C.line });
+        row(cols.map(c => c[0]), true); T.types.forEach(t => row([t.label, String(t.n), String(t.marks)], false, false));
+        y -= 12;
+      }
+      if (T.note) { for (const ln of wrap(ital, 8.5, T.note, CW)) { txt(page, ln, M.l, y - 9, 8.5, ital, C.ink3); y -= 11.5; } y -= 6; }
+      if (LAY !== 'compact') newPage();   /* standard: the cover page stands alone */
+    }
+    }
+    const pageMarks = new Map();   /* tests: marks of the questions that start on each page */
+    for (let qi = 0; qi < plan.length; qi++) {
+      if (qi % 4 === 0) { setStatus(`Placing question ${qi + 1} of ${plan.length}`, 'busy', .75 + qi / plan.length * .23); await tick(); }
+      const bl = plan[qi];
+      if (LAY !== 'compact' && qi > 0) newPage();   /* standard: every question starts on its own page */
+      for (let i = 0; i < bl.length; i++) {
+        const b = bl[i];
+        if (b.k === 'head' && TEST) {   /* tests: a small number and the source, in grey */
+          if (room() < chain(bl, i)) newPage();
+          const r = 8, cxn = M.l + r, cyn = y - r, ns = String(b.n), nf = ns.length > 2 ? 7 : 8.5;
+          page.drawCircle({ x: cxn, y: cyn, size: r, color: C.ink });
+          txt(page, ns, cxn - tw(ns, nf, bold) / 2, cyn - nf * .36, nf, bold, rgb(1, 1, 1));
+          txt(page, b.text, M.l + 2 * r + 6, y - 11, 8, reg, C.ink3);
+          const qm = info(its[qi].book, its[qi].it).marks; if (qm) pageMarks.set(page, (pageMarks.get(page) || 0) + qm);
+          y -= 20;
+        } else if (b.k === 'head') {
+          if (room() < chain(bl, i)) newPage();
+          const r = 11, cxn = M.l + r, cyn = y - r;
+          page.drawCircle({ x: cxn, y: cyn, size: r, color: C.navy });
+          const ns = String(b.n), nf = ns.length > 2 ? 8.5 : 10; txt(page, ns, cxn - tw(ns, nf, bold) / 2, cyn - nf * .36, nf, bold, rgb(1, 1, 1));
+          txt(page, b.text, M.l + 2 * r + 9, y - 15, 11.5, bold, C.ink);
+          if (b.marks) { const mt = `[${b.marks} mark${b.marks === 1 ? '' : 's'}]`; txt(page, mt, W - M.r - tw(mt, 10, bold), y - 15, 10, bold, C.ink2); }
+          page.drawLine({ start: { x: M.l + 2 * r + 9, y: y - 23 }, end: { x: W - M.r, y: y - 23 }, thickness: .6, color: C.line });
+          y -= 32;
+        } else if (b.k === 'box') {
+          if (room() < chain(bl, i)) newPage();
+          bx = { kind: b.kind, title: b.title, sub: b.sub }; openFrag(false);
+        } else if (b.k === 'boxend') {
+          closeFrag(false); bx = null;
+        } else if (b.k === 'label') {
+          if (room() < chain(bl, i)) newPage();
+          const f = b.tone === 'mute' ? ital : bold, c = b.tone === 'warn' ? C.warn : b.tone === 'mute' ? C.ink3 : C.acc;
+          for (const ln of wrap(f, 8.5, b.text, cw())) { txt(page, ln, cx(), y - 9, 8.5, f, c); y -= 11.5; }
+          y -= 3;
+        } else if (b.k === 'note') {
+          const lines = wrap(ital, 9.5, b.text, cw() - 4);
+          if (room() < lines.length * 12.5 + 4) newPage();
+          for (const ln of lines) { txt(page, ln, cx() + 2, y - 10, 9.5, ital, C.ink2); y -= 12.5; }
+          y -= 4;
+        } else if (b.k === 'gap') {
+          y -= LAY === 'compact' ? 5 : 8;
+        } else if (b.k === 'squeeze') {   /* answer space taken out: a short dashed rule shows where */
+          page.drawLine({ start: { x: cx() + cw() * .3, y: y - 3 }, end: { x: cx() + cw() * .7, y: y - 3 }, thickness: .6, color: C.line, dashArray: [3, 3] });
+          y -= 8;
+        } else if (b.k === 'seg') {
+          const W0 = segW(b); let w = W0, h = b.h * (W0 / b.w);
+          if (h > FULL) { w = W0 * FULL / h; h = FULL; }
+          if (room() < h && room() < h * SHRINK) newPage();
+          if (room() < h) { w = w * room() / h; h = room(); }
+          const x = cx() + (cw() - w) / 2;
+          page.drawPage(b.emb, { x, y: y - h, width: w, height: h });
+          for (const [ht, hb] of b.hl) {   /* highlight the lines about this part (fractions of the source page) */
+            const a = Math.max(ht, b.t), z = Math.min(hb, b.b); if (z <= a) continue;
+            const k = h / (b.b - b.t);
+            page.drawRectangle({ x, y: y - (z - b.t) * k, width: w, height: (z - a) * k, color: rgb(1, .78, .16), opacity: .5, blendMode: BlendMode.Multiply });
+          }
+          y -= h + 4;
+        }
+      }
+      if (bx) { closeFrag(false); bx = null; }
+      y -= TEST ? 12 : LAY === 'compact' ? 10 : 14;
+    }
+    if (job.test && variant === 'questions') {
+      reflect();
+      /* marks per page, bottom right, for quick totting up */
+      for (const [p, m] of pageMarks) { const t1 = 'Marks on this page', t2 = `/ ${m}`, bw = 36, x2 = W - M.r - tw(t2, 8.5, bold), xb = x2 - 4 - bw, x1 = xb - 6 - tw(t1, 8, reg);
+        txt(p, t1, x1, 17, 8, reg, C.ink3); p.drawRectangle({ x: xb, y: 12, width: bw, height: 16, borderColor: C.ink3, borderWidth: .7 }); txt(p, t2, x2, 17, 8.5, bold, C.ink2); }
+    }
+    /* after the questions: how pupils check their work now and learn from it once it is marked */
+    function reflect() {   /* compact, two columns, so it usually fits under the last question */
+      const need = 190; if (room() < need) newPage(); else y -= 4;
+      page.drawLine({ start: { x: M.l, y }, end: { x: W - M.r, y }, thickness: .8, color: C.ink3 }); y -= 16;
+      const L = M.l, Rx = M.l + CW / 2 + 8, top = y;
+      const tick = (t, x0, yy) => { page.drawRectangle({ x: x0, y: yy - 1.5, width: 7.5, height: 7.5, borderColor: C.ink2, borderWidth: .6 }); txt(page, t, x0 + 12, yy, 8.5, reg, C.ink); };
+      txt(page, 'Before you hand in', L, y, 10, bold, C.ink);
+      let yl = y - 15; for (const t of ['I have answered every question', 'One point for each mark: [3] = three points', 'I have used the key terms, spelt correctly', '“Explain” answers give a reason (“because…”)']) { tick(t, L, yl); yl -= 13; }
+      txt(page, 'After it is marked', Rx, y, 10, bold, C.ink);
+      let yr = y - 15; const sc = 'Score', sx = Rx + tw(sc, 8.5, bold) + 5;
+      txt(page, sc, Rx, yr, 8.5, bold, C.ink); page.drawLine({ start: { x: sx, y: yr - 2 }, end: { x: sx + 34, y: yr - 2 }, thickness: .5, color: C.ink3 }); txt(page, `/ ${tot}`, sx + 38, yr, 8.5, bold, C.ink);
+      const pc = sx + 78; page.drawLine({ start: { x: pc, y: yr - 2 }, end: { x: pc + 30, y: yr - 2 }, thickness: .5, color: C.ink3 }); txt(page, '%', pc + 33, yr, 8.5, bold, C.ink);
+      yr -= 15; txt(page, 'I lost marks because:', Rx, yr, 8.5, bold, C.ink); yr -= 13;
+      const lost = ['I didn’t know it', 'I misread the question', 'Too few points', 'Missing key terms', 'No example or reason', 'Ran out of time'], half = (W - M.r - Rx) / 2;
+      for (let k = 0; k < lost.length; k += 2) { tick(lost[k], Rx, yr); tick(lost[k + 1], Rx + half, yr); yr -= 13; }
+      y = Math.min(yl, yr) - 4;
+      const line = lab => { y -= 20; txt(page, lab, L, y, 8.5, bold, C.ink); page.drawLine({ start: { x: L + tw(lab, 8.5, bold) + 6, y: y - 2 }, end: { x: W - M.r, y: y - 2 }, thickness: .5, color: C.ink3 }); };
+      line('One thing I did well:'); line('Topics to revise (use the workbook):'); line('Next time I will:');
+      y -= 8; void top;
+    }
+    /* page numbers in the running header (no footer) */
+    const ps = doc.getPages();
+    ps.forEach((p, i) => { if (!i) return; const r = TEST ? `Page ${i + 1} of ${ps.length}` : `${VARIANT[variant].name} · Page ${i + 1} of ${ps.length}`; txt(p, r, W - M.r - tw(r, 8.5, reg), H - 28, 8.5, reg, C.ink3); });
+    setStatus('Saving the PDF…', 'busy', .99); await tick();
+    const bytes = await doc.save();
+    const name = `${job.file}${job.ws ? (variant === 'answers' ? ' (answers)' : '') : TEST && variant === 'answers' ? ' (mark scheme)' : VARIANT[variant].file}.pdf`.replace(/[\\/:*?"<>|]/g, '-');
+    const url = URL.createObjectURL(new Blob([bytes], { type: 'application/pdf' }));
+    const a = el('a', { href: url, download: name }); document.body.append(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+    return { name, pages: ps.length, kb: Math.round(bytes.length / 1024), failed };
+  }
+
+  let busy = false;
+  async function download(variant, btn, job, opt) {
+    opt = opt || {}; const dls = opt.dls || ui.dl;
+    if (busy) return; busy = true; ST = opt.status || null; dls.forEach(b => { b.disabled = true; }); btn.classList.add('working');
+    try {
+      const r = await build(variant, job);
+      if (r && opt.done) opt.done(r);
+      if (r) setStatus(`Downloaded “${r.name}”: ${r.pages} page${r.pages === 1 ? '' : 's'}, ${r.kb >= 1024 ? (r.kb / 1024).toFixed(1) + ' MB' : r.kb + ' KB'}.` +
+        (r.failed.length ? ` ${r.failed.length} PDF${r.failed.length === 1 ? '' : 's'} could not be loaded (${r.failed.map(f => f.split('/').pop()).join(', ')}); the pack says so where they belong.` : ''), r.failed.length ? 'warn' : 'ok');
+    } catch (e) {
+      console.error(e); setStatus('The pack could not be made: ' + String(e && e.message ? e.message : e).replace(/\.$/, '') + '. Try again; if it keeps failing, try fewer questions or another browser.', 'err');
+    } finally { busy = false; ST = null; btn.classList.remove('working'); if (opt.after) opt.after(); else renderSummary(); }
+  }
+
+  /* ------------------------------------------------------------------ examiner reports panel */
+  function renderReports() {
+    const files = D.reports.files || {}, box = ui.reports; box.innerHTML = '';
+    for (const c of ['gcse', 'gce']) {
+      const have = Object.keys(files).filter(k => k.startsWith(c + '|')).map(k => k.split('|')[1]).sort((a, b) => yr(a) - yr(b));
+      const want = [...new Set(D.topics.books.filter(b => b.course === c).flatMap(b => b.topics.flatMap(t => t.items.map(i => i.s))))]
+        .filter(s => !((D.reports.none || NO_REPORT)[c] || []).includes(s) && !/specimen|resit/i.test(s) && !/\b2021\b/.test(s));
+      const miss = want.filter(s => !have.includes(s)).sort((a, b) => yr(a) - yr(b));
+      const nComments = Object.keys(D.reports.crops || {}).filter(k => D.topics.books.some(b => b.course === c && k.startsWith(b.id + '|'))).length;
+      box.append(el('div', { class: 'tp-rep' },
+        el('h4', { text: `${COURSE_NAME[c]}: ${have.length} report${have.length === 1 ? '' : 's'} uploaded` }),
+        el('p', { text: have.length ? `${have.map(serLabel).join(', ')}. ${nComments} questions have a comment found in them.` : 'None yet.' }),
+        miss.length ? el('p', { class: 'warn', text: `Missing: ${miss.map(serLabel).join(', ')}. Upload CCEA’s Chief Examiner’s report for each to ${REPORT_DIR[c]} (any file name with the year, e.g. “Summer ${yr(miss[miss.length - 1]) || 2025}.pdf”).` }) : null));
+    }
+  }
+
+  /* ------------------------------------------------------------------ start */
+  /* pack.html (pupils): one topic's CCEA questions or mark schemes as a PDF: pack.html?b=U1&t=3 (&v=questions|answers starts it) */
+  async function pupilStart() {
+    const q = new URLSearchParams(location.search), bid = q.get('b'), tn = +q.get('t'), st = { box: $('#pk-status'), text: $('#pk-status-t'), bar: $('#pk-bar') };
+    const say = (m, k) => { ST = st; setStatus(m, k); ST = null; };
+    try {
+      const [topics, folders, manifest, crops, pages, reports] = await Promise.all(['papers/topics.json', 'papers/folders.json', 'papers/manifest.json', 'papers/crops.json', 'papers/pages.json', 'papers/reports.json'].map((u, i) => getJ(u, i < 2)));
+      D = { topics, folders: folders || {}, manifest: manifest || {}, crops: crops || {}, pages: pages || {}, reports: reports || { files: {}, crops: {} } };
+    } catch (e) { say('The questions could not be loaded. Check you are online and try again.', 'err'); return; }
+    const book = D.topics.books.find(b => b.id === bid), topic = book && book.topics.find(t => t.n === tn);
+    if (!topic || !topic.items.length) { $('#pk-title').textContent = 'No CCEA questions for this topic'; say('This topic has no CCEA past-paper questions yet.', 'warn'); return; }
+    S.book = book; S.topic = topic; S.layout = 'compact'; S.order = 'new'; S.off = new Set();
+    $('#pk-unit').textContent = book.short + ': ' + book.title; $('#pk-title').textContent = topic.title;
+    const n = topic.items.length; $('#pk-sub').textContent = `${n} CCEA past-paper question${n === 1 ? '' : 's'} on this topic, newest first.`;
+    const btns = [...document.querySelectorAll('[data-pk]')];
+    btns.forEach(b => { b.disabled = false; b.addEventListener('click', () => download(b.dataset.pk, b, packJob(), { dls: btns, status: st, after: () => btns.forEach(x => { x.disabled = false; }) })); });
+    const v = q.get('v'), go = btns.find(b => b.dataset.pk === v); if (go) go.click();
+  }
+  async function start() {
+    if ($('#pk-root')) return pupilStart();
+    ui.course = $('#tp-course'); ui.unit = $('#tp-unit'); ui.unitWrap = $('#tp-s2'); ui.topic = $('#tp-topic'); ui.topicWrap = $('#tp-s3'); ui.packWrap = $('#tp-s4'); ui.steps = Steps($('#tp-steps')); ui.qs = $('#tp-qs');
+    ui.packTitle = $('#tp-title'); ui.count = $('#tp-count'); ui.count2 = $('#tp-count2'); ui.list = $('#tp-list'); ui.status = $('#tp-status'); ui.statusText = $('#tp-status-t'); ui.bar = $('#tp-bar');
+    ui.reports = $('#tp-reports'); ui.dl = [...document.querySelectorAll('[data-dl]')];
+    ui.dl.forEach(b => b.addEventListener('click', () => download(b.dataset.dl, b, packJob())));
+    const lay = $('#tp-layout'); if (lay) { lay.value = S.layout; lay.addEventListener('change', () => { S.layout = lay.value; store.set('layout', S.layout); }); }
+    const ord = $('#tp-order'); ord.value = S.order; ord.addEventListener('change', () => { S.order = ord.value; store.set('order', S.order); if (S.topic) renderPack(); });
+    $('#tp-all').addEventListener('click', () => { S.off = new Set(); renderPack(); });
+    /* topic worksheet options and downloads */
+    S.wsMode = store.get('ws.mode', 'match'); S.wsTerms = store.get('ws.terms', '12'); S.wsTips = store.get('ws.tips', '8'); S.wsQs = store.get('ws.qs', '6');
+    [['#ws-mode', 'wsMode', 'ws.mode'], ['#ws-terms', 'wsTerms', 'ws.terms'], ['#ws-tips', 'wsTips', 'ws.tips'], ['#ws-qs', 'wsQs', 'ws.qs']].forEach(([id, k, sk]) => { const e = $(id); if (!e) return; e.value = S[k]; if (e.value !== S[k]) { S[k] = e.value; } e.addEventListener('change', () => { S[k] = e.value; store.set(sk, e.value); }); });
+    const wsb = [...document.querySelectorAll('[data-ws]')], wst = { box: $('#ws-status'), text: $('#ws-status-t'), bar: $('#ws-bar') };
+    wsb.forEach(b => b.addEventListener('click', async () => download(b.dataset.ws, b, await wsJob(), { dls: wsb, status: wst, after: () => { wsb.forEach(x => { x.disabled = false; }); renderSummary(); } })));
+    $('#tp-none').addEventListener('click', () => { S.off = new Set(S.topic.items.map(i => i.k)); renderPack(); });
+    try {
+      const [topics, folders, manifest, crops, pages, reports] = await Promise.all(['papers/topics.json', 'papers/folders.json', 'papers/manifest.json', 'papers/crops.json', 'papers/pages.json', 'papers/reports.json'].map((u, i) => getJ(u, i < 2)));
+      D = { topics, folders: folders || {}, manifest: manifest || {}, crops: crops || {}, pages: pages || {}, reports: reports || { files: {}, crops: {} } };
+    } catch (e) {
+      $('#tp-load').textContent = 'The question lists could not be loaded. Check the connection and reload the page.'; $('#tp-load').className = 'tp-status err'; return;
+    }
+    $('#tp-load').remove(); $('#tp-flow').hidden = false;
+    renderCourses(); renderReports(); ui.steps.open(1); ui.steps.show(2, false); ui.steps.show(3, false);
+    API.D = D; readyOk(D);
+    const c = store.get('course', null), bk = store.get('book', null), tp = store.get('topic', null);
+    if (c && D.topics.books.some(b => b.course === c)) {
+      pickCourse(c, true);
+      if (bk && D.topics.books.some(b => b.id === bk && b.course === c)) { pickBook(bk, true); if (tp && tp.split('|')[0] === bk) { const n = +tp.split('|')[1]; if (S.book.topics.some(t => t.n === n)) pickTopic(n, true); } }
+      if (!S.book) ui.steps.open(2); else if (!S.topic) ui.steps.open(3);
+    }
+  }
+  /* shared with teacher_tests.js (test builder, exam trends): the data, the per-question facts and the PDF engine */
+  let readyOk; const API = window.TeacherPacks = { ready: new Promise(r => { readyOk = r; }), info, blocks, build, download, yr, serLabel, qLabel, el, store,
+    Steps,
+    open(bookId, n) {   /* pre-select a topic in the Topic packs tab */
+      const b = D.topics.books.find(x => x.id === bookId); if (!b) return;
+      pickCourse(b.course); pickBook(bookId); if (b.topics.some(t => t.n === n)) pickTopic(n, true);
+      ui.packWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
+})();
+
+</script>
+</body></html>

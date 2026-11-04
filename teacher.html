@@ -1027,7 +1027,25 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   }
 
   /* ------------------------------------------------------------------ start */
+  /* pack.html (pupils): one topic's CCEA questions or mark schemes as a PDF: pack.html?b=U1&t=3 (&v=questions|answers starts it) */
+  async function pupilStart() {
+    const q = new URLSearchParams(location.search), bid = q.get('b'), tn = +q.get('t'), st = { box: $('#pk-status'), text: $('#pk-status-t'), bar: $('#pk-bar') };
+    const say = (m, k) => { ST = st; setStatus(m, k); ST = null; };
+    try {
+      const [topics, folders, manifest, crops, pages, reports] = await Promise.all(['papers/topics.json', 'papers/folders.json', 'papers/manifest.json', 'papers/crops.json', 'papers/pages.json', 'papers/reports.json'].map((u, i) => getJ(u, i < 2)));
+      D = { topics, folders: folders || {}, manifest: manifest || {}, crops: crops || {}, pages: pages || {}, reports: reports || { files: {}, crops: {} } };
+    } catch (e) { say('The questions could not be loaded. Check you are online and try again.', 'err'); return; }
+    const book = D.topics.books.find(b => b.id === bid), topic = book && book.topics.find(t => t.n === tn);
+    if (!topic || !topic.items.length) { $('#pk-title').textContent = 'No CCEA questions for this topic'; say('This topic has no CCEA past-paper questions yet.', 'warn'); return; }
+    S.book = book; S.topic = topic; S.layout = 'compact'; S.order = 'new'; S.off = new Set();
+    $('#pk-unit').textContent = book.short + ': ' + book.title; $('#pk-title').textContent = topic.title;
+    const n = topic.items.length; $('#pk-sub').textContent = `${n} CCEA past-paper question${n === 1 ? '' : 's'} on this topic, newest first.`;
+    const btns = [...document.querySelectorAll('[data-pk]')];
+    btns.forEach(b => { b.disabled = false; b.addEventListener('click', () => download(b.dataset.pk, b, packJob(), { dls: btns, status: st, after: () => btns.forEach(x => { x.disabled = false; }) })); });
+    const v = q.get('v'), go = btns.find(b => b.dataset.pk === v); if (go) go.click();
+  }
   async function start() {
+    if ($('#pk-root')) return pupilStart();
     ui.course = $('#tp-course'); ui.unit = $('#tp-unit'); ui.unitWrap = $('#tp-s2'); ui.topic = $('#tp-topic'); ui.topicWrap = $('#tp-s3'); ui.packWrap = $('#tp-s4'); ui.steps = Steps($('#tp-steps')); ui.qs = $('#tp-qs');
     ui.packTitle = $('#tp-title'); ui.count = $('#tp-count'); ui.count2 = $('#tp-count2'); ui.list = $('#tp-list'); ui.status = $('#tp-status'); ui.statusText = $('#tp-status-t'); ui.bar = $('#tp-bar');
     ui.reports = $('#tp-reports'); ui.dl = [...document.querySelectorAll('[data-dl]')];
