@@ -1965,6 +1965,22 @@ body.ppv-on{overflow:hidden}
 .ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
 .ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
 .ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+/* page footer: a big, obvious "Mark this page as covered" and a clear "Next page" */
+.foot .done-row{flex-direction:column;align-items:stretch;gap:10px;margin:0 0 16px}
+.foot .donebtn{justify-content:center;width:100%;min-height:54px;font-size:17px;border-width:2px;border-radius:14px;padding:12px 18px;border-color:var(--good);color:var(--good);background:color-mix(in srgb,var(--good) 8%,var(--paper));box-shadow:0 2px 0 color-mix(in srgb,var(--good) 35%,transparent)}
+.foot .donebtn svg{width:22px;height:22px}
+.foot .donebtn[aria-pressed="false"]{animation:mrbNudge 2.6s ease-in-out 1.2s 2}
+.foot .donebtn[aria-pressed="true"]{background:var(--good);border-color:var(--good);color:#fff;box-shadow:none}
+@keyframes mrbNudge{0%,100%{transform:none}8%{transform:scale(1.03)}16%{transform:none}}
+@media (prefers-reduced-motion:reduce){.foot .donebtn{animation:none!important}}
+.foot .pg-link{align-self:center}
+.foot .nextprev{grid-template-columns:minmax(0,1fr)!important;gap:8px}
+.foot .np.nx{order:-1;text-align:left;align-items:flex-start;background:var(--cc);border-color:var(--cc);color:#fff;padding:14px 18px;border-radius:14px;position:relative;padding-right:46px}
+.foot .np.nx small{color:#fff;opacity:.9;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
+.foot .np.nx span{font-size:15.5px;font-weight:700}
+.foot .np.nx::after{content:"→";position:absolute;right:16px;top:50%;transform:translateY(-50%);font:800 24px/1 var(--sans)}
+.foot .np:not(.nx){border-style:dashed;padding:8px 14px}
+.foot .np:not(.nx) span{font-size:13px;color:var(--ink-2)}
 /* ---------- TROPHIES (workbook): icons, top-bar pill, rail card, #trophies view, toast. Source notes/app/trophies.css ---------- */
 :root{--tb-a:#D99A5E;--tb-b:#A8642E;--tb-d:#7A4520;--ts-a:#DCE2EA;--ts-b:#8E99A8;--ts-d:#4E5969;--tg-a:#F3C553;--tg-b:#CF9512;--tg-d:#8A6206;--tp-a:#E4F0F4;--tp-b:#93BCCB;--tp-d:#3E7385;--tl-a:var(--paper-2);--tl-b:var(--line);--tl-d:var(--ink-3)}
 .tr-ic{width:28px;height:28px;flex:none;display:block}
@@ -8259,7 +8275,7 @@ if (TUT) {
    - Download / load / reset progress (every notes-* localStorage key on this site)
    - on a web host only: the web app manifest, the service worker (../sw.js), "Install app" and "Available offline" in the menu */
 const APP_REV = !TUT;   /* revision workbooks say "covered"; tutorial books keep "done" and add their checklists */
-const covTxt = d => APP_REV ? (d ? 'Covered – tap to undo' : 'Mark as covered') : (d ? 'Done – tap to undo' : 'Mark this page as done');
+const covTxt = d => APP_REV ? (d ? 'Covered (tap to undo)' : 'Mark this page as covered') : (d ? 'Done (tap to undo)' : 'Mark this page as done');
 const pageStatus = id => state.done[id] ? 'cov' : state.later && state.later[id] ? 'ret' : state.seen[id] ? 'vis' : 'not';
 const ST_NAME = { cov: APP_REV ? 'Covered' : 'Done', vis: 'Visited, not marked', ret: 'Come back to', not: APP_REV ? 'Not covered' : 'Not started', off: 'Not tracking' };
 /* ---------- backup: all notes-* keys ---------- */
