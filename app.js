@@ -28,6 +28,10 @@
   // the page reports its height to the parent with postMessage({type: "dth-embed", h}) so the workbook can size the frame.
   var EMBED = /[?&]embed=1(&|$)/.test(location.search);
   if (EMBED) document.documentElement.classList.add("embed");
+  // ?fit=<px> (from a workbook): the lesson video must fit in that many pixels, so the slide is shrunk to fit and the
+  // note and transcript are left out (no scrolling inside the page)
+  var FIT = EMBED ? +((location.search.match(/[?&]fit=(\d+)/) || [])[1] || 0) : 0;
+  if (FIT) document.documentElement.classList.add("fit");
   var UIDS = HUB.units.map(function (x) { return x.id; }), UNAME = {}, USHORT = {}, UINFO = {}, UKIND = {};
   HUB.units.forEach(function (x) { UNAME[x.id] = x.name; USHORT[x.id] = x.short; UINFO[x.id] = x.info; UKIND[x.id] = x.kind; });
   var UALL = USHORT[UIDS[0]] + (UIDS.length > 2 ? " to " : " and ") + USHORT[UIDS[UIDS.length - 1]];
@@ -533,8 +537,8 @@
       '<span class="mono small muted" id="vpos"></span><span class="grow"></span>' +
       '<label class="small">Speed <select id="vrate"><option value="0.85">0.85×</option><option value="1">1×</option><option value="1.15">1.15×</option><option value="1.3">1.3×</option></select></label>' +
       '<label class="small">Voice <select id="vvoice"></select></label><button class="btn sm" id="vcc" aria-pressed="true">CC</button><button class="btn sm" id="vfull">Full screen</button></div></div>' +
-      '<p class="muted small" id="vnote">About ' + mins + ' min. Narrated by your device\'s built-in voice, so it sounds different on each computer. If you hear nothing, choose another voice or use captions only.</p>' +
-      '<details class="panel"><summary><b>Transcript</b></summary><div class="stack" id="vtrans" style="margin-top:12px"></div></details>';
+      '<p class="muted small" id="vnote"' + (FIT ? ' hidden' : '') + '>About ' + mins + ' min. Narrated by your device\'s built-in voice, so it sounds different on each computer. If you hear nothing, choose another voice or use captions only.</p>' +
+      '<details class="panel"' + (FIT ? ' hidden' : '') + '><summary><b>Transcript</b></summary><div class="stack" id="vtrans" style="margin-top:12px"></div></details>';
   }
   function sceneHTML(l, s) {
     if (s.kind === "title") return slideHTML(l, 0);
@@ -543,6 +547,21 @@
     var q = l.quiz[0];
     if (s.kind === "check") return '<div class="slide"><div class="sh"><h2>Quick check</h2><span class="mono">' + l.id + '</span></div><div class="sb"><p style="font-size:1.15em"><b>' + esc(q[0]) + '</b></p><div class="opts">' + q[1].map(function (o, k) { return '<div class="opt" data-k="' + k + '"><span class="k">' + "ABCD"[k] + "</span><span>" + esc(o) + "</span></div>"; }).join("") + "</div></div></div>";
     return '<div class="slide title-slide"><div class="sh"><h2>Key terms to remember</h2><span class="mono">' + l.id + '</span></div><div class="sb"><div class="kw">' + l.kw.map(function (k) { return '<span class="tag t" style="font-size:.8em">' + esc(k) + "</span>"; }).join("") + '</div><p>Next: <a href="#' + l.id + '-worksheet">worksheet</a> · <a href="#' + l.id + '-quiz">quiz</a> · <a href="#' + l.id + '-podcast">podcast</a></p></div></div>';
+  }
+  /* ?fit: shrink the current scene so the whole player fits in FIT pixels (the text reflows wider, then scales down) */
+  function fitStage() {
+    var st = document.getElementById("vstage"), vp = document.getElementById("vp"), sl = st && st.querySelector(".slide");
+    if (!FIT || !sl || !vp) return;
+    var W = st.clientWidth; if (!W) return;
+    sl.style.transform = ""; sl.style.width = W + "px"; st.style.height = "";
+    var other = vp.offsetHeight - st.offsetHeight, avail = Math.max(150, FIT - other), s = 1;
+    for (var k = 0; k < 6; k++) { var h = sl.offsetHeight; if (h * s <= avail + 1) break; s = Math.max(0.4, Math.min(s * 0.98, avail / h)); sl.style.width = Math.round(W / s) + "px"; }   /* wider text is shorter: shrink until it fits */
+    sl.style.transformOrigin = "0 0"; sl.style.transform = s < 1 ? "scale(" + s + ")" : "";
+    st.style.height = Math.ceil(sl.offsetHeight * s) + "px"; st.style.overflow = "hidden";
+  }
+  if (FIT) {
+    window.addEventListener("resize", function () { fitStage(); });
+    new MutationObserver(function () { var st = document.getElementById("vstage"); if (st && !st.__fitObs) { st.__fitObs = true; new MutationObserver(function () { requestAnimationFrame(fitStage); }).observe(st, { childList: true }); } requestAnimationFrame(fitStage); }).observe(document.body, { childList: true, subtree: false });
   }
   function wireVideo(l) {
     loadAudio(l.id).then(function (A) { if (!document.getElementById("vp")) return; if (A) wireVideoAudio(l, A); else wireVideoSpeech(l); });

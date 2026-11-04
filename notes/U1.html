@@ -2890,6 +2890,8 @@ const LP_TABS = [['video', 'Video', 'M8 5.5v13l10-6.5z'], ['podcast', 'Podcast',
   ['worksheet', 'Worksheet', 'M6 4h12v16H6zM9 9h6M9 12.5h6M9 16h3'], ['activities', 'Activities', 'M5 5h6v6H5zM13 5h6v6h-6zM5 13h6v6H5zM13 13h6v6h-6z'], ['terms', 'Key terms', 'M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3zM5 17a3 3 0 013-3h10.5M9 8h5']];
 const LP_TITLE = { video: 'Narrated video', podcast: 'Revision podcast', slides: 'Lesson slides', notes: 'Fact file', quiz: 'Quiz', worksheet: 'Worksheet with mark schemes', activities: 'Activities', terms: 'Key terms for this lesson' };
 const lpIcon = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>`;
+/* lesson videos fit the screen: the hub shrinks the player to this many pixels (no scrolling, no transcript) */
+const vidFit = () => { const b = document.getElementById('bar'); return '&fit=' + Math.max(240, Math.round(window.innerHeight - (b ? b.getBoundingClientRect().height : 56) - 90)); };
 function embedUrl(route, extra) { const b = hubBase(); return b ? `${b}?embed=1${extra || ''}#${route}` : null; }
 /* one frame per slot; switching routes on the same hub URL only changes the hash, so the hub doesn't reload */
 function openEmbed(slot, route, title, opts) {
@@ -2942,7 +2944,7 @@ function wireLP(p) {
     sec.querySelectorAll('[data-lp-t]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lpT === tab)));
     sec.querySelectorAll('[data-lp-l]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.lpL === lid)));
     if (!tab) { const b = slot.querySelector('.emb'); if (b) b.remove(); return; }
-    openEmbed(slot, `${encodeURIComponent(lid)}-${tab}`, `${LP_TITLE[tab]} · ${lid} ${names[lid] || ''}`, { onClose: () => { tab = null; paint(); } });
+    openEmbed(slot, `${encodeURIComponent(lid)}-${tab}`, `${LP_TITLE[tab]} · ${lid} ${names[lid] || ''}`, { onClose: () => { tab = null; paint(); }, extra: tab === 'video' ? vidFit() : '' });
   };
   sec.querySelectorAll('[data-lp-t]').forEach(b => b.addEventListener('click', () => { tab = tab === b.dataset.lpT ? null : b.dataset.lpT; paint(); }));
   sec.querySelectorAll('[data-lp-l]').forEach(b => b.addEventListener('click', () => { lid = b.dataset.lpL; if (!tab) tab = 'video'; paint(); }));
@@ -3121,7 +3123,7 @@ function wireVisuals(p) {
   main.querySelectorAll('[data-zoom]').forEach(b => b.addEventListener('click', () => openLbx(b.dataset.zoom, b.dataset.cap, b)));
   main.querySelectorAll('[data-lv-play]').forEach(b => b.addEventListener('click', () => {
     const id = b.dataset.lvPlay, names = BK.lessonNames || {}, media = b.closest('.lv-media');
-    const url = embedUrl(`${encodeURIComponent(id)}-video`);
+    const url = embedUrl(`${encodeURIComponent(id)}-video`, vidFit());
     if (!url) return;
     media.classList.add('playing');
     media.innerHTML = `<iframe class="emb-f lv-f" src="${esc(url)}" title="Lesson video: ${esc(names[id] || id)}" allow="fullscreen; autoplay; clipboard-write" allowfullscreen></iframe>`;

@@ -552,6 +552,11 @@ html.embed, html.embed body { background: transparent; }
 html.embed body::before, html.embed header.top, html.embed .rail, html.embed .lv-head, html.embed .lv-tabs, html.embed .lv-nav,
 html.embed .nb-read, html.embed .nb-line, html.embed .nb-home, html.embed .crumb, html.embed .mob-jump, html.embed .tstrip { display: none !important; }
 html.embed .wrap { max-width: none; padding: 2px 2px 10px; }
+/* ?fit: the lesson video shrinks to fit the workbook's screen */
+html.fit .stage .slide { aspect-ratio: auto !important; min-height: 0 !important; max-width: none; }
+html.fit .stage .slide .sb { overflow: visible; }
+html.fit .player { gap: 6px; padding: 8px; }
+html.fit .pctl { flex-wrap: nowrap; gap: 6px; } html.fit .pctl label { display: none !important; } html.fit .pctl .btn { padding: 6px 10px; white-space: nowrap; } html.fit #vpos { display: none; }
 html.embed .cols { display: block; }
 html.embed h1 { font-size: 1.45rem; }
 html.embed .stack { gap: 14px; }
