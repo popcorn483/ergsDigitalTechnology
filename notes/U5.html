@@ -1881,6 +1881,8 @@ body.tut-book #b-gloss{display:none!important}
 .ppv-inl canvas + canvas{border-top:2px dashed #C9D2DE}
 .ppv-load{margin:0;padding:24px;color:#687386;font-family:var(--sans);font-size:14px}
 .cq-msbox{display:flex;flex-direction:column;gap:6px}
+.cq-msbox .cq-erh{margin:8px 0 0;font:12px var(--sans);letter-spacing:.02em;color:#8A5A00}.cq-msbox .cq-erh b{font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.cq-msbox .cq-er{background:#FFF6DB;border-left:3px solid #D9A300;border-radius:6px;padding:4px}
 .cq-msbox::before{content:"CCEA mark scheme";font:700 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
 .cq-tipd summary{cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:700;color:var(--ink-2)}
 .cq-tipd > div{padding:8px 0 0;font-size:15px;line-height:1.5}
@@ -8687,9 +8689,9 @@ const PP_SERIES = e => /specimen/i.test(String(e.series || '')) ? 'Specimen' : /
 const PP_VIEW = ON_WEB ? (() => {
   let data = null;
   const getJ = u => fetch(u, { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null);
-  const load = () => data || (data = Promise.all([getJ('../papers/folders.json'), getJ('../papers/manifest.json'), getJ('../papers/pages.json'), getJ('../papers/crops.json')]).then(async ([fo, man, pg, cr]) => {
+  const load = () => data || (data = Promise.all([getJ('../papers/folders.json'), getJ('../papers/manifest.json'), getJ('../papers/pages.json'), getJ('../papers/crops.json'), getJ('../papers/reports.json')]).then(async ([fo, man, pg, cr, rp]) => {
     fo = fo || {}; man = man || {};
-    return { fo, man, pg: pg || {}, cr: cr || {} };
+    return { fo, man, pg: pg || {}, cr: cr || {}, rp: (rp && rp.crops) || {} };
   }));
   const isMS = n => /(^|[^a-z])ms([^a-z]|$)|mark\s*-?_?scheme|markscheme/i.test(n);
   const asked = new Set();
@@ -8710,7 +8712,9 @@ const PP_VIEW = ON_WEB ? (() => {
     /* [left, right] per segment (px / mx / sx): trims CCEA's edge watermark, the page frame and the mark scheme's marks column */
     const withX = (A, X) => A && A.map((g, i) => (Array.isArray(X) && Array.isArray(X[i]) && X[i].length === 2 ? g.concat(X[i]) : g));
     const cp = withX(segs(ck.paper), ck.px), cm = withX(segs(ck.ms), ck.mx), cs = withX(segs(ck.stem), ck.sx);   /* stem: the question's lead-in (scenario, table) that the part needs */
-    return { paper: f.paper ? '../' + f.paper : null, ms: f.ms ? '../' + f.ms : null, pp: +pk.paper || (cp ? cp[0][0] : 1), pm: +pk.ms || (cm ? cm[0][0] : 1), crop: { paper: cp, ms: cm, stem: cp ? cs : null }, key };
+    const rc = D.rp[qk], rs = rc && segs(rc.report);   /* the Chief Examiner's comment on this question, cut from the report */
+    const rep = rs && rc.report_file ? { file: '../' + rc.report_file, segs: rs, found: String(rc.found || ''), series: (s => /^\d{4}$/.test(s) ? 'Summer ' + s : s)(String(PP_SERIES(e))) } : null;
+    return { rep, paper: f.paper ? '../' + f.paper : null, ms: f.ms ? '../' + f.ms : null, pp: +pk.paper || (cp ? cp[0][0] : 1), pm: +pk.ms || (cm ? cm[0][0] : 1), crop: { paper: cp, ms: cm, stem: cp ? cs : null }, key };
   }
   let lib = null;
   const pdfjs = () => lib || (lib = new Promise((ok, no) => { if (window.pdfjsLib) return ok(window.pdfjsLib); const s = document.createElement('script'); s.src = PDFJS + 'pdf.min.js'; s.onload = () => { try { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; } catch (e) { } ok(window.pdfjsLib); }; s.onerror = () => { lib = null; no(new Error('pdf.js')); }; document.head.append(s); }));
@@ -8815,6 +8819,12 @@ const PP_VIEW = ON_WEB ? (() => {
         box = el('div', { class: 'cq-msbox' }); where.after(box);
         mb.setAttribute('aria-expanded', 'true'); mb.lastChild.textContent = 'Hide the mark scheme';
         if (F.crop.ms) { const c = el('div', {}); box.append(c); c.hidden = false; c.classList.add('ppv-inl'); try { await cropInto(c, await getDoc(F.ms), F.crop.ms); } catch (x) { open(e, 'ms'); } }
+        if (F.rep) {   /* then what the examiners said about it */
+          const own = F.rep.found.replace(/^Q/i, '') === String(e.q || '').replace(/^Q/i, '') || !F.rep.found;
+          box.append(el('p', { class: 'cq-erh', html: `<b>Examiner’s comment</b> · ${esc(F.rep.series)}${own ? '' : ` · on Q${esc(F.rep.found)} as a whole`}` }));
+          const c = el('div', { class: 'ppv-inl cq-er' }); box.append(c);
+          try { await cropInto(c, await getDoc(F.rep.file), F.rep.segs); } catch (x) { c.remove(); }
+        }
         else { box.remove(); mb.setAttribute('aria-expanded', 'false'); mb.lastChild.textContent = 'Show the mark scheme'; open(e, 'ms'); }
       });
       $$('[data-ppv]', where).forEach(b => b.addEventListener('click', () => open(e, b.dataset.ppv)));
