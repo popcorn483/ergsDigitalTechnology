@@ -24,6 +24,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
+const SCRIPT_VERSION = 9;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -364,5 +365,5 @@ function summary_() {
   }
   const pupils = Object.keys(P).map(k => { const p = P[k]; p.days = Object.keys(p.days).length; p.typed = Object.keys(p.typed);
     if (N[k]) { p.name = N[k][0] || p.name; p.cls = N[k][1] || p.cls; p.fixed = true; } p.pin = !!PN[k]; return p; });
-  return { pupils, updated: now };
+  return { pupils, updated: now, v: SCRIPT_VERSION };
 }

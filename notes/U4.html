@@ -9603,12 +9603,8 @@ try {
         if (j && j.error === 'pin') { go.disabled = false; pinI.value = ''; pinI.focus(); m.textContent = `That PIN doesn’t match the one for ${name}.${j.left != null ? ` ${j.left} ${j.left === 1 ? 'try' : 'tries'} left.` : ''} Forgotten it? Ask Mr Butler to reset it.`; return; }
         if (j && j.error === 'locked') { go.disabled = false; m.textContent = 'Too many wrong PINs. Try again in 15 minutes, or ask Mr Butler to reset your PIN.'; return; }
         if (j && j.ok && j.id) found = j;
-        else { go.disabled = false; m.textContent = 'Your name and PIN couldn’t be checked just now. Please try again.'; return; }
-      } catch (x) {
-        /* only a device that is really offline may carry on (the PIN is then checked the next time it is online); otherwise try again */
-        if (navigator.onLine !== false) { go.disabled = false; m.textContent = 'Your name and PIN couldn’t be checked. Check you are online and try again.'; return; }
-        offline = true;
-      }
+        /* anything else (an older Apps Script, a server error): let them in now and check the PIN again next time, so nobody is ever locked out */
+      } catch (x) { offline = true; }
       const id = found ? found.id : devId;
       if (found) LS.set('mrb-pin-ok', '1'); else { LS.set('mrb-pin-ok', null); try { sessionStorage.setItem('mrb-pin-later', '1'); } catch (x) { } }
       void offline;
