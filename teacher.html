@@ -216,7 +216,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 .ac-ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}.ac-ring b small{font-size:8px;font-weight:700;margin-left:0}
 .ac-tags{grid-column:2;display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px 70px;margin-top:-6px}.ac-tag{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:#FFF4E0;color:#8A5300}.ac-tags .ac-acc{display:inline;font-size:11.5px;padding:2px 8px;border-radius:999px;background:#FDECEA}
 .ac-list .ac-pd{margin:0;border:0;border-radius:0;box-shadow:none;border-bottom:1px solid var(--line);padding:4px 10px 12px;background:var(--paper-2)}.ac-list .ac-d{max-width:none;position:static;background:var(--paper)}
-.ac-none{padding:14px;margin:0}html.t-lock body > .wrap{display:none!important}#t-gate{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:16px;box-sizing:border-box}.tg-box{width:min(380px,100%);background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 20px;box-shadow:0 20px 50px rgba(10,16,30,.12)}.tg-box h1{margin:0 0 6px;font-size:28px}.tg-box p{margin:0 0 14px;color:var(--ink-2)}.tg-box label{display:block;font-weight:700;font-size:14px;margin:0 0 6px}.tg-box input{width:100%;box-sizing:border-box;font:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:inherit}.tg-go{width:100%;margin-top:12px;font:inherit;font-weight:800;padding:12px;border:0;border-radius:10px;background:var(--accent);color:#fff;cursor:pointer}.tg-go:disabled{opacity:.6}.tg-m{min-height:1.2em;margin:10px 0 6px!important;font-size:14px}.tg-back{font-weight:700;font-size:14px}.pd-va{background:#7B4FD6!important;border-color:#7B4FD6!important;color:#fff!important}.pd-t{position:relative}.pd-t.q-hi::after,.pd-t.q-mid::after,.pd-t.q-lo::after{content:"";position:absolute;top:-3px;right:-3px;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--paper);background:#1E8E4E}.pd-t.q-mid::after{background:#E8A33D}.pd-t.q-lo::after{background:#C0392B}.ac-panel .ac-row input+input{flex:0 0 84px}
+.ac-none{padding:14px;margin:0}.pd-info .pd-go{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.pd-info .pd-ans{font-weight:700}html.t-lock body > .wrap{display:none!important}#t-gate{min-height:100vh;min-height:100dvh;display:grid;place-items:center;padding:16px;box-sizing:border-box}.tg-box{width:min(380px,100%);background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px 20px;box-shadow:0 20px 50px rgba(10,16,30,.12)}.tg-box h1{margin:0 0 6px;font-size:28px}.tg-box p{margin:0 0 14px;color:var(--ink-2)}.tg-box label{display:block;font-weight:700;font-size:14px;margin:0 0 6px}.tg-box input{width:100%;box-sizing:border-box;font:inherit;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:inherit}.tg-go{width:100%;margin-top:12px;font:inherit;font-weight:800;padding:12px;border:0;border-radius:10px;background:var(--accent);color:#fff;cursor:pointer}.tg-go:disabled{opacity:.6}.tg-m{min-height:1.2em;margin:10px 0 6px!important;font-size:14px}.tg-back{font-weight:700;font-size:14px}.pd-va{background:#7B4FD6!important;border-color:#7B4FD6!important;color:#fff!important}.pd-t{position:relative}.pd-t.q-hi::after,.pd-t.q-mid::after,.pd-t.q-lo::after{content:"";position:absolute;top:-3px;right:-3px;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--paper);background:#1E8E4E}.pd-t.q-mid::after{background:#E8A33D}.pd-t.q-lo::after{background:#C0392B}.ac-panel .ac-row input+input{flex:0 0 84px}
 .ac-bar{position:sticky;top:0;z-index:5;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:8px 10px;box-shadow:0 4px 14px rgba(10,16,30,.08)}.ac-bsp{flex:1}.ac-bar .tp-mini:disabled{opacity:.45}
 @media (max-width:720px){
  .tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;border:0;overflow:visible}.tabs a{border:1px solid var(--line);border-radius:10px;margin:0;text-align:center;justify-content:center;padding:9px 6px;font-size:14px;white-space:normal;line-height:1.2;background:var(--paper)}
@@ -446,12 +446,12 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   const BOOKS = { U1: 'notes/U1.html', U4: 'notes/U4.html', U5: 'notes/U5.html', AS1: 'notes/AS1.html', AS2: 'notes/AS2.html', A21: 'notes/A21.html', A22: 'notes/A22.html' };
   function keysNow() { const o = {}; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && MINE(k)) o[k] = localStorage.getItem(k); } } catch (e) { } return o; }
   function clearMine() { Object.keys(keysNow()).forEach(k => LS.set(k, null)); }
-  function start(who, keys, book) {
+  function start(who, keys, book, page) {
     if (!LS.get('mrb-viewas')) LS.set('mrb-va-backup', JSON.stringify(keysNow()));   /* only the teacher's own copy, never a pupil's */
     clearMine();
     Object.keys(keys || {}).forEach(k => { if (MINE(k)) LS.set(k, keys[k]); });
     LS.set('mrb-viewas', JSON.stringify(Object.assign({ at: Date.now() }, who)));
-    location.href = root + (BOOKS[book] ? BOOKS[book] : 'index.html');
+    location.href = root + (BOOKS[book] ? BOOKS[book] + (page ? '#' + page : '') : 'index.html');
   }
   function exit(to) {
     clearMine();
@@ -2028,7 +2028,12 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
           const t = el('button', { type: 'button', class: 'pd-t' + (isDone ? ' ok' : isRet ? ' ret' : isSeen ? ' seen' : '') + (awd ? ' awd' : '') + (picking && PICK.set.has(id) ? ' picked' : '') + pqc, title: tip, 'aria-label': tip, text: isDone ? '✓' : isRet ? '↩' : isSeen ? '•' : '' });
           t.addEventListener('click', () => {
             if (picking) { PICK.set.has(id) ? PICK.set.delete(id) : PICK.set.add(id); t.classList.toggle('picked'); const b = sec.querySelector('.pd-pick b'); if (b) b.textContent = `${PICK.set.size} selected`; return; }
-            info.hidden = false; info.textContent = `Ch ${c.n} page ${k + 1}: ${tip}`;
+            info.hidden = false; info.innerHTML = '';
+            const pqv = pqm[id];
+            info.append(el('b', { text: `Ch ${c.n} page ${k + 1}: ` }), document.createTextNode(tip),
+              pqv && pqv[4] ? el('span', { class: 'pd-ans', text: ` · their answers: ${String(pqv[4]).split('').map((x, i) => `${i + 1}${x}`).join(' ')}` }) : null,
+              el('span', { class: 'pd-go' }, el('button', { type: 'button', class: 'tp-mini pri', text: `👁 Open this page as ${p.name.split(' ')[0]}`, onclick: () => viewAs(p, u, id) }),
+                el('a', { class: 'tp-mini', href: `notes/${u}.html#${id}`, target: '_blank', rel: 'noopener', text: 'Open the page' })));
           });
           tiles.append(t);
         });
@@ -2057,7 +2062,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   /* "View as this pupil": this device shows the revision site with the pupil's progress (their saved copy, plus the
      pages covered / opened, page quiz marks and time from your sheet), with their locks. Nothing is sent or saved for
      them; "Exit" puts this device's own progress back. (app/visits.js: VIEW AS) */
-  async function viewAs(p) {
+  async function viewAs(p, book, page) {
     status(`Loading ${p.name}’s progress…`);
     try {
       const [sv, D] = await Promise.all([api({ action: 'pdata', to: p.id }), DET[p.id] ? Promise.resolve(DET[p.id]) : api({ action: 'detail', to: p.id })]);
@@ -2071,14 +2076,14 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         const k = 'notes-reader:' + b, o = J(keys[k]), s = st[b];
         o.done = o.done || {}; o.seen = o.seen || {}; o.later = o.later || {}; o.pq = o.pq || {}; o.ptime = o.ptime || {};
         if (s) { (s.done || []).forEach(id => { o.done[id] = 1; o.seen[id] = 1; }); (s.seen || []).forEach(id => { o.seen[id] = 1; }); (s.later || []).forEach(id => { o.later[id] = 1; });
-          Object.keys(s.pq || {}).forEach(id => { const v = s.pq[id]; o.pq[id] = { s: v[0], m: v[1], bs: v[2], n: v[3] || 1, at: s.at || 0 }; }); }
+          Object.keys(s.pq || {}).forEach(id => { const v = s.pq[id]; o.pq[id] = { s: v[0], m: v[1], bs: v[2], n: v[3] || 1, a: v[4] || '', at: s.at || 0 }; }); }
         Object.keys(pages).forEach(key => { const [bb, id] = key.split('|'); if (bb === b) o.ptime[id] = Math.max(o.ptime[id] || 0, pages[key][0] || 0); });
         keys[k] = JSON.stringify(o);
         const g = (p.prog || {})[b]; if (g && g.quiz) { const qk = 'notes-chquiz:' + b, q = J(keys[qk]); q.best = q.best || {}; q.open = q.open || {};
           Object.keys(g.quiz).forEach(c => { const v = g.quiz[c]; if (!q.best[c] || q.best[c].pc < Math.round(v[0] / v[1] * 100)) q.best[c] = { s: v[0], m: v[1], pc: Math.round(v[0] / v[1] * 100), date: v[2] || '' }; }); keys[qk] = JSON.stringify(q); }
       });
       if (!window.MRB_VIEWAS) throw new Error('reload the page and try again');
-      window.MRB_VIEWAS.start({ id: p.id, name: p.name, cls: p.cls }, keys, LS.get('teacher.actunit') || [...books][0] || '');
+      window.MRB_VIEWAS.start({ id: p.id, name: p.name, cls: p.cls }, keys, book || LS.get('teacher.actunit') || [...books][0] || '', page);
     } catch (e) { status('Couldn’t open the pupil view: ' + e.message + '.', 'warn'); }
   }
   let QRY = '', SELMODE = false; let URL0 = '', DATA = null, sortBy = LS.get('teacher.actsort') || 'total', cls = LS.get('teacher.actcls') || '', yr = LS.get('teacher.actyr') || '';
@@ -2096,7 +2101,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const r = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'key=' + encodeURIComponent(key), { cache: 'no-store', credentials: 'omit' });
       const j = await r.json();
       if (j.error === 'key') { LS.set('teacher.actkey', null); status('That key doesn’t match TEACHER_KEY in the Apps Script. Type it again.', 'warn'); $('#ac-keyrow').hidden = false; $('#ac-tools').hidden = true; return; }
-      DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; status((+j.v || 0) < 15 ? 'Your Google Apps Script is an older version, so PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 15 ? 'warn' : ''); $('#ac-view').hidden = false; view(); render(); requests();
+      DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; status((+j.v || 0) < 16 ? 'Your Google Apps Script is an older version, so page-quiz answers, PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 16 ? 'warn' : ''); $('#ac-view').hidden = false; view(); render(); requests();
       const ml = j.mail; if ((+j.v || 0) >= 13 && ml && (ml.err || !ml.to)) status(`Emails aren’t being sent${ml.err ? ': ' + ml.err.replace(/^\S+\s/, '') : ''}. In the Apps Script, choose testEmail in the function list and press Run, allow “Send email as you”, then deploy a new version. ⋯ › Send a test email checks it.`, 'warn');
     } catch (e) { status('Couldn’t load pupil activity. Check you’re online and that the Apps Script is deployed for “Anyone”.', 'warn'); }
   }
