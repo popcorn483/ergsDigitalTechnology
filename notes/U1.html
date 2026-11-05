@@ -8622,7 +8622,7 @@ function cqSave(o) { try { localStorage.setItem(CQ_KEY, JSON.stringify(o)); } ca
 const chDone = ch => (ch.pages || []).length && ch.pages.every(p => state.done[p.id]);
 /* the topic quiz and past papers unlock once every page of the topic is marked covered; staff devices always */
 const chLeft = ch => (ch.pages || []).filter(p => !state.done[p.id]);
-const cqStaff = () => { try { return !!localStorage.getItem('notes-nocount'); } catch (e) { return false; } };
+const cqStaff = () => { try { return !!localStorage.getItem('notes-nocount') && !localStorage.getItem('mrb-viewas'); } catch (e) { return false; } };   /* viewing as a pupil: their locks */
 const cqUnlocked = ch => !chLeft(ch).length || cqStaff();
 function cqItems(ch) {
   const out = [];
@@ -9609,6 +9609,44 @@ if (ON_WEB) {
   window.addEventListener('hashchange', () => setTimeout(() => { try { svUpdate(); } catch (e) { } }, 0));
 }
 /* ---------- NOTES ⇄ POWERPOINT: END ---------- */
+/* ---------- VIEW AS A PUPIL (source notes/app/viewas.js; in the workbooks, the home page and the Teacher area).
+   Teacher area › Pupil tracking › "View as pupil" copies that pupil's progress onto this (staff) device and opens the
+   site as they see it, locks included. This device's own progress is kept in 'mrb-va-backup' and put back by "Exit".
+   Nothing is sent for the pupil: the device stays a staff device ('notes-nocount'), so no time, snapshots or saves. ---------- */
+(function () {
+  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
+  const MINE = k => /^notes-/.test(k) && !/^notes-(nocount|counted)/.test(k);
+  const root = /\/(notes|gce)\/[^/]*$/.test(location.pathname) ? '../' : '';
+  const BOOKS = { U1: 'notes/U1.html', U4: 'notes/U4.html', U5: 'notes/U5.html', AS1: 'notes/AS1.html', AS2: 'notes/AS2.html', A21: 'notes/A21.html', A22: 'notes/A22.html' };
+  function keysNow() { const o = {}; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && MINE(k)) o[k] = localStorage.getItem(k); } } catch (e) { } return o; }
+  function clearMine() { Object.keys(keysNow()).forEach(k => LS.set(k, null)); }
+  function start(who, keys, book) {
+    if (!LS.get('mrb-viewas')) LS.set('mrb-va-backup', JSON.stringify(keysNow()));   /* only the teacher's own copy, never a pupil's */
+    clearMine();
+    Object.keys(keys || {}).forEach(k => { if (MINE(k)) LS.set(k, keys[k]); });
+    LS.set('mrb-viewas', JSON.stringify(Object.assign({ at: Date.now() }, who)));
+    location.href = root + (BOOKS[book] ? BOOKS[book] : 'index.html');
+  }
+  function exit(to) {
+    clearMine();
+    let b = {}; try { b = JSON.parse(LS.get('mrb-va-backup') || '{}') || {}; } catch (e) { b = {}; }
+    Object.keys(b).forEach(k => { if (MINE(k)) LS.set(k, b[k]); });
+    LS.set('mrb-va-backup', null); LS.set('mrb-viewas', null);
+    location.href = to || (root + 'teacher.html#visits');
+  }
+  window.MRB_VIEWAS = { start, exit, who: () => { try { return JSON.parse(LS.get('mrb-viewas') || 'null'); } catch (e) { return null; } } };
+  const who = window.MRB_VIEWAS.who();
+  if (!who) { if (LS.get('mrb-va-backup')) exit(location.href); return; }   /* a view left half-way: put the teacher's progress back */
+  const paint = () => {
+    if (document.getElementById('mrb-va')) return;
+    const d = document.createElement('div'); d.id = 'mrb-va'; d.setAttribute('role', 'status');
+    d.innerHTML = `<style>#mrb-va{position:fixed;top:0;left:0;right:0;z-index:2147482000;height:36px;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 10px calc(0px) ;padding-top:env(safe-area-inset-top,0px);box-sizing:content-box;background:#7B4FD6;color:#fff;font:700 13.5px/1 system-ui,-apple-system,Segoe UI,sans-serif}#mrb-va span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}#mrb-va small{font-weight:600;opacity:.85}#mrb-va button{flex:none;font:inherit;font-weight:800;border:0;border-radius:999px;padding:6px 12px;background:#fff;color:#4B2A9E;cursor:pointer}html.va-on body{padding-top:calc(36px + env(safe-area-inset-top,0px))!important}html.va-on .bar{top:calc(36px + env(safe-area-inset-top,0px))!important}@media (max-width:520px){#mrb-va small{display:none}}</style><span>👁 Viewing as <b></b> <small>· what they see · nothing is saved for them</small></span><button type="button">Exit</button>`;
+    d.querySelector('b').textContent = `${who.name}${who.cls ? ' (' + who.cls + ')' : ''}`;
+    d.querySelector('button').addEventListener('click', () => exit());
+    document.body.prepend(d); document.documentElement.classList.add('va-on');
+  };
+  if (document.body) paint(); else document.addEventListener('DOMContentLoaded', paint);
+})();
 /* ---------- VISITS (source notes/app/visits.js): anonymous, cookie-free visit counting with GoatCounter (mrbdt.goatcounter.com).
    Counts a visit to each unit ("/u/U1") and the first time each chapter is opened in a session ("/u/U1/c03"), plus the home page.
    No personal data and no cookies. Not counted: offline use, the claude.ai preview, and a device where the Teacher area's
@@ -9648,6 +9686,7 @@ try {
   const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
   const inBook = typeof BK !== 'undefined' && BK && BK.id && typeof PAGES !== 'undefined';
   const isTeacherPage = /teacher\.html$/i.test(location.pathname);
+  try { if (localStorage.getItem('mrb-staff-ok')) document.documentElement.classList.add('is-staff'); } catch (e) { }
   if (isTeacherPage || !/^https?:$/.test(location.protocol) || /(^|\.)claude\.ai$|claudeusercontent/i.test(location.hostname)) return;
   const me = () => { try { return JSON.parse(LS.get('mrb-pupil') || 'null'); } catch (e) { return null; } };
   let URL0 = LS.get('mrb-act-url') || '';
@@ -9655,7 +9694,10 @@ try {
   let started = false;
   function start() {
     if (started) return; started = true;
-    if (!/^https:\/\/script\.google(usercontent)?\.com\//.test(URL0) || LS.get('notes-nocount')) return;
+    if (!/^https:\/\/script\.google(usercontent)?\.com\//.test(URL0)) return;
+    /* a device marked as staff without the staff password (e.g. a pupil who once opened the Teacher area) is a pupil device again */
+    if (LS.get('notes-nocount') && !LS.get('mrb-staff-ok') && !LS.get('mrb-viewas')) { ['notes-nocount', 'teacher.nocount-set', 'teacher.actkey'].forEach(k => LS.set(k, null)); }
+    if (LS.get('notes-nocount')) return;
     let later = false; try { later = !!sessionStorage.getItem('mrb-pin-later'); } catch (x) { }
     addEventListener('online', () => { if (me() && !LS.get('mrb-pin-ok') && !LS.get('notes-nocount')) { try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } ask(); } });   /* signed in offline: PIN checked as soon as it is back online */
     if (!me() || (!LS.get('mrb-pin-ok') && !later)) setTimeout(ask, 600);
@@ -9762,7 +9804,7 @@ try {
           go.disabled = true; m.textContent = 'Checking…';
           try {
             const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=staff&key=' + encodeURIComponent(tryK), { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
-            if (j && j.ok) { LS.set('notes-nocount', '1'); LS.set('teacher.nocount-set', '1'); if (j.teacher) LS.set('teacher.actkey', tryK); LS.set('mrb-pupil', null); LS.set('mrb-access', null); const gg = document.getElementById('mrb-gate'); if (gg) gg.remove(); m.textContent = 'Staff device: you won’t be asked again or counted.'; setTimeout(close, 900); return; }
+            if (j && j.ok) { LS.set('notes-nocount', '1'); LS.set('teacher.nocount-set', '1'); LS.set('mrb-staff-ok', '1'); if (j.teacher) LS.set('teacher.actkey', tryK); LS.set('mrb-pupil', null); LS.set('mrb-access', null); const gg = document.getElementById('mrb-gate'); if (gg) gg.remove(); m.textContent = 'Staff device: you won’t be asked again or counted.'; setTimeout(close, 900); return; }
           } catch (x) { }
           go.disabled = false;
         }
@@ -9814,7 +9856,7 @@ try {
     const clear = () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && (/^notes-/.test(k) || /^mrb-(pupil|pin-ok|access|save-|snap:)/.test(k))) localStorage.removeItem(k); } } catch (e) { } try { sessionStorage.clear(); } catch (e) { } };
     if (staff) {
       if (!confirm('Sign out of this staff device? It will ask for a name again and count visits.')) return;
-      ['notes-nocount', 'teacher.nocount-set', 'teacher.actkey'].forEach(k => LS.set(k, null)); location.reload(); return;
+      ['notes-nocount', 'teacher.nocount-set', 'teacher.actkey', 'mrb-staff-ok'].forEach(k => LS.set(k, null)); location.reload(); return;
     }
     if (!confirm('Sign out? Your progress is saved online first, then removed from this device. Sign in again with your name, form class and PIN to get it back.')) return;
     btn.disabled = true; btn.textContent = 'Saving…';
@@ -9967,7 +10009,7 @@ try {
   const TUTB = typeof TUT !== 'undefined' && TUT;
   const REV = typeof APP_REV === 'undefined' ? true : APP_REV;
   let prev = null, since = Date.now(), passing = false; const asked = new Set();
-  const ok = () => { try { return !localStorage.getItem('notes-nocount'); } catch (e) { return true; } };
+  const ok = () => { try { return !localStorage.getItem('notes-nocount') || !!localStorage.getItem('mrb-viewas'); } catch (e) { return true; } };
   const later = () => { if (!state.later || typeof state.later !== 'object') state.later = {}; return state.later; };
   const paintRail = () => { try { document.querySelectorAll('.r-pg').forEach(a => a.classList.toggle('later', !!(state.later && state.later[a.dataset.id]) && !state.done[a.dataset.id])); } catch (e) { } };
   const here = () => (typeof onCover !== 'undefined' && onCover) || (typeof onCredits !== 'undefined' && onCredits) ? null : PAGES[cur];
@@ -10157,7 +10199,7 @@ try {
   const LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg>';
   const TICK = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>';
   const here = () => (typeof onCover !== 'undefined' && onCover) || (typeof onCredits !== 'undefined' && onCredits) ? null : PAGES[cur];
-  const ok = () => { try { return !localStorage.getItem('notes-nocount'); } catch (e) { return true; } };
+  const ok = () => { try { return !localStorage.getItem('notes-nocount') || !!localStorage.getItem('mrb-viewas'); } catch (e) { return true; } };   /* a staff device viewing as a pupil behaves as the pupil (nothing is sent) */
   const staff = () => !ok();
   const mins = s => { const m = Math.round((s || 0) / 60); return m < 1 ? (s ? 'under 1 min' : '0 min') : m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')}`; };
   const pqOf = id => (state.pq && state.pq[id]) || null;

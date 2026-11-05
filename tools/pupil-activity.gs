@@ -24,7 +24,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 11;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 12;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -239,6 +239,11 @@ function act_(q) {
     if (!ids.length) return { ok: false, error: 'bad request' };
     ids.forEach(id => setAccess_(id, q.action === 'approve' ? 'approved' : 'declined'));
     return { ok: true };
+  }
+  if (q.action === 'pdata') {   /* "View as this pupil": their saved progress (the same copy their devices load) */
+    if (!okId(to)) return { ok: false, error: 'bad request' };
+    const sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + to);
+    return { ok: true, updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' };
   }
   if (q.action === 'resetpin') { if (!okId(to)) return { ok: false, error: 'bad request' }; dropPins_([to]); return { ok: true }; }   /* the pupil chooses a new PIN next time they sign in */
   if (q.action === 'rename') { if (!okId(to) || !q.name) return { ok: false, error: 'bad request' }; setName_(to, q.name, q.cls); return { ok: true }; }
