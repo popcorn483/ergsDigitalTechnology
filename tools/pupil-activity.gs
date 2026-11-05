@@ -13,6 +13,8 @@
       and copy the Web app URL (it ends in /exec).
    5. In the GitHub repo, open activity.json (top level), edit it and paste the URL between the quotes after "url". Commit.
    6. In the Teacher area › Pupils, type the same TEACHER_KEY once on your device.
+   7. EMAILS: choose testEmail in the function list at the top of the editor and press Run once; allow "Send email as
+      you". Emails go to the account that owns the script, or to NOTIFY_EMAIL if you set it.
    STAFF: typing TEACHER_KEY or STAFF_PIN in the sign-in box's name or PIN field marks that device as staff (never asked,
    never counted). Its "Send me staff details" link emails both to the Google account that owns this script.
 
@@ -24,12 +26,13 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 12;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 13;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
 const SITE = 'https://popcorn483.github.io/ergsdigitaltechnology/';
 const REQUIRE_APPROVAL = true;   // new pupils wait until you approve them in the Teacher area › Pupils (false: anyone can sign up)
+const NOTIFY_EMAIL = '';   // where the emails go (sign-up requests, staff details, weekly report); empty: the Google account that owns this script
 const EMAIL_SIGNINS = true;   // email the script's owner each time a new pupil signs up (false to stop)   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
 const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
 const LOG_HEAD = ['When', 'Pupil ID', 'Name', 'Class', 'Unit', 'Topic', 'Active seconds', 'Page'];
@@ -142,26 +145,38 @@ function setAccess_(id, status, name, cls) {
   else sh.appendRow([id, status, clean_(name || '', 40), clean_(cls || '', 12).toUpperCase(), now, status === 'pending' ? '' : now]);
 }
 function dropAccess_(ids) { const sh = acc_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (ids.indexOf(String(r[i][0])) >= 0) sh.deleteRow(i + 2); }
+/* EMAILS: if none arrive, open the Apps Script, choose testEmail in the function list at the top and press Run. Google asks
+   you to allow "Send email as you" the first time; allow it, then Deploy › Manage deployments › pencil › New version.
+   The Teacher area › Pupil tracking › ⋯ › "Send a test email" shows what went wrong, if anything. */
+function mailTo_() { let to = NOTIFY_EMAIL; try { to = to || Session.getEffectiveUser().getEmail(); } catch (e) { } try { to = to || Session.getActiveUser().getEmail(); } catch (e) { } return to || ''; }
+function mailNote_(err) { try { const pr = PropertiesService.getScriptProperties(); if (err) pr.setProperty('mail:err', new Date().toISOString() + ' ' + String(err && err.message || err).slice(0, 300)); else { pr.deleteProperty('mail:err'); pr.setProperty('mail:ok', new Date().toISOString()); } } catch (e) { } }
+function mailState_() { try { const pr = PropertiesService.getScriptProperties(); return { to: mailTo_(), err: pr.getProperty('mail:err') || '', ok: pr.getProperty('mail:ok') || '' }; } catch (e) { return { to: '', err: String(e), ok: '' }; } }
+function testEmail() {   /* run this once from the editor (it asks for permission to send email) */
+  const to = mailTo_(); if (!to) throw new Error('No email address: set NOTIFY_EMAIL at the top of the script.');
+  MailApp.sendEmail(to, "Mr B's Revision Guide: test email", 'Emails from the Revision Guide are working. Sign-up requests, staff details and the weekly report come to this address.\n\n' + SITE + 'teacher.html#visits');
+  mailNote_(null); Logger.log('Test email sent to ' + to);
+  return to;
+}
 function notify_(what, name, cls, more) {
   if (!EMAIL_SIGNINS) return;
   try {
     const pr = PropertiesService.getScriptProperties(), day = Utilities.formatDate(new Date(), 'Europe/London', 'yyyy-MM-dd');
     let n = +(pr.getProperty('mails:' + day) || 0); if (n >= 90 || MailApp.getRemainingDailyQuota() < 5) return;
-    const to = Session.getEffectiveUser().getEmail(); if (!to) return;
+    const to = mailTo_(); if (!to) { mailNote_('no email address (set NOTIFY_EMAIL)'); return; }
     const who = `${String(name || '').replace(/^'/, '')} (${String(cls || '').replace(/^'/, '')})`;
     MailApp.sendEmail(to, `Revision Guide: ${what}: ${who}`, `${what}: ${who}\n${more}\n\n${new Date().toLocaleString('en-GB')}\n${SITE}teacher.html#visits\nSee everyone in the Teacher area › Pupils. To stop these emails, set EMAIL_SIGNINS to false in the Apps Script and deploy a new version.`);
-    pr.setProperty('mails:' + day, String(n + 1));
-  } catch (e) { }
+    pr.setProperty('mails:' + day, String(n + 1)); mailNote_(null);
+  } catch (e) { mailNote_(e); }
 }
 function staffMail_() {
   const c = CacheService.getScriptCache(); if (c.get('staffmail')) return { ok: true, again: true };   // at most one email every 10 minutes
-  const to = Session.getEffectiveUser().getEmail(); if (!to) return { ok: false };
-  MailApp.sendEmail(to, "Mr B's Revision Guide: staff details",
+  const to = mailTo_(); if (!to) { mailNote_('no email address (set NOTIFY_EMAIL)'); return { ok: false }; }
+  try { MailApp.sendEmail(to, "Mr B's Revision Guide: staff details",
     "Staff details for Mr B's Digital Technology Revision Guide\n\n" +
     'Teacher area key (Teacher area › Pupils): ' + TEACHER_KEY + '\n' +
     'Staff PIN (type it in the sign-in box to mark a device as staff): ' + STAFF_PIN + '\n\n' +
     'Either one typed in the sign-in box (name or PIN field) marks a device as staff: it is never asked to sign in and never counted.\n' +
-    'Someone pressed "Send me staff details" on the sign-in box at ' + new Date().toLocaleString('en-GB') + '.');
+    'Someone pressed "Send me staff details" on the sign-in box at ' + new Date().toLocaleString('en-GB') + '.'); mailNote_(null); } catch (e) { mailNote_(e); return { ok: false }; }
   c.put('staffmail', '1', 600);
   return { ok: true };
 }
@@ -240,6 +255,7 @@ function act_(q) {
     ids.forEach(id => setAccess_(id, q.action === 'approve' ? 'approved' : 'declined'));
     return { ok: true };
   }
+  if (q.action === 'testmail') { try { return { ok: true, to: testEmail() }; } catch (e) { mailNote_(e); return { ok: false, to: mailTo_(), error: String(e && e.message || e) }; } }
   if (q.action === 'pdata') {   /* "View as this pupil": their saved progress (the same copy their devices load) */
     if (!okId(to)) return { ok: false, error: 'bad request' };
     const sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + to);
@@ -333,7 +349,7 @@ function ensureWeekly_() {   /* the Monday email: its trigger is made the first 
 }
 function weeklyEmail() {   /* runs every Monday about 7am: last week's report (you can also run it by hand from the editor) */
   if (!WEEKLY_EMAIL) return;
-  const w = week_(addDays_(mondayOf_(new Date()), -7)), to = Session.getEffectiveUser().getEmail(); if (!to) return;
+  const w = week_(addDays_(mondayOf_(new Date()), -7)), to = mailTo_(); if (!to) return;
   const esc = x => String(x == null ? '' : x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
   const hm = s => { const m = Math.round(s / 60); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0'); };
   const nice = ds => Utilities.formatDate(new Date(ds + 'T12:00:00Z'), 'Europe/London', 'EEE d MMM');
@@ -359,7 +375,7 @@ function weeklyEmail() {   /* runs every Monday about 7am: last week's report (y
     if (idle.length) h += `<p style="margin:6px 0 0;font-size:13px;color:#B42318">No revision this week: ${idle.map(p => esc(p.name)).join(', ')}</p>`;
   });
   h += `<p style="margin:20px 0 0;font-size:12px;color:#4A5468">Every pupil in detail: <a href="${SITE}teacher.html#visits">Teacher area › Pupils</a>. To stop this email, set WEEKLY_EMAIL to false in the Apps Script and deploy a new version.</p></div>`;
-  MailApp.sendEmail({ to, subject: `Revision Guide weekly report: ${nice(w.start)} to ${nice(w.end)}`, htmlBody: h, body: `${active.length} of ${all.length} pupils revised, ${hm(tot)} in all. Open the email in HTML view, or see ${SITE}teacher.html#visits` });
+  try { MailApp.sendEmail({ to, subject: `Revision Guide weekly report: ${nice(w.start)} to ${nice(w.end)}`, htmlBody: h, body: `${active.length} of ${all.length} pupils revised, ${hm(tot)} in all. Open the email in HTML view, or see ${SITE}teacher.html#visits` }); mailNote_(null); } catch (e) { mailNote_(e); }
 }
 /* teacher marks: Awards sheet [When, Pupil ID, Unit, Page, 1 = covered / 0 = not covered] */
 const awards_ = () => tab_('Awards', ['When', 'Pupil ID', 'Unit', 'Page', 'Covered (1) / not (0)']);
@@ -397,5 +413,5 @@ function summary_() {
   pupils.forEach(p => { p.access = AC[p.id] ? String(AC[p.id][1]) : 'approved'; });
   const known = {}; pupils.forEach(p => { known[p.id] = 1; });
   const requests = Object.keys(AC).filter(id => String(AC[id][1]) === 'pending').map(id => ({ id, name: String(AC[id][2]), cls: String(AC[id][3]), at: new Date(AC[id][4]).getTime() }));
-  return { pupils, requests, updated: now, v: SCRIPT_VERSION };
+  return { pupils, requests, updated: now, v: SCRIPT_VERSION, mail: EMAIL_SIGNINS ? mailState_() : null };
 }
