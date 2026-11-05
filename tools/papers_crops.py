@@ -144,15 +144,20 @@ class Doc:
                     objs = list(pg.rects) + list(pg.lines) + list(pg.curves)
                 except Exception:
                     objs = []
+                try:   # pictures (screenshots, photos) count as content too; not the CCEA logo strips down the page edges
+                    objs += [im for im in pg.images if float(im["x1"]) > 0.1 * W and float(im["x0"]) < 0.9 * W
+                             and float(im["x1"]) - float(im["x0"]) >= 25 and float(im["bottom"]) - float(im["top"]) >= 20]
+                except Exception:
+                    pass
                 for o in objs:
                     top, bot = float(o["top"]), float(o["bottom"])
-                    if bot - top > 0.5 * H or bot > foot_top - 1 or top < 0.04 * H:
+                    pic = "stream" in o or o.get("object_type") == "image"
+                    if bot - top > (0.9 if pic else 0.5) * H or bot > foot_top - 1 or top < 0.04 * H:   # page frames; big pictures still count
                         continue
                     if float(o["x1"]) - float(o["x0"]) < 3 and bot - top < 3:
                         continue
                     g_bottom = max(g_bottom, bot); g_top = min(g_top, top)
                 text = " ".join(l["text"] for l in ls)
-                blank = not body or (re.search(r"blank page", text, re.I) and len(body) <= 3)
                 # the viewer (pdf.js) shows the crop box: positions are fractions of it, measured from its top edge
                 mb, cb = pg.mediabox, pg.cropbox
                 try:
@@ -162,9 +167,12 @@ class Doc:
                     off, vh = 0.0, H
                 if vh <= 0:
                     off, vh = 0.0, H
+                gfx = [(float(o["top"]), float(o["bottom"])) for o in objs if "stream" in o or o.get("object_type") == "image"]   # pictures only (not answer-box frames)
+                gfx = [(t, b) for t, b in gfx if b - t < 0.9 * H and t > 0.04 * H and b < foot_top + 1]
+                blank = (not body and not gfx) or (re.search(r"blank page", text, re.I) and len(body) <= 3)   # a page of only a picture is not blank
                 self.pages.append({
                     "off": off, "vh": vh, "rot": int(pg.page_obj.attrs.get("Rotate") or 0) % 360,
-                    "W": W, "H": H, "lines": ls, "body": body, "foot_top": foot_top, "blank": bool(blank),
+                    "W": W, "H": H, "lines": ls, "body": body, "gfx": gfx, "foot_top": foot_top, "blank": bool(blank),
                     "c_top": min([l["top"] for l in body] + ([g_top] if g_bottom else []) + [foot_top]),
                     "c_bot": max([l["bottom"] for l in body] + [g_bottom, 0]),
                 })
@@ -325,7 +333,8 @@ def segments(doc, start, end, margin=6.0):
         bot = min(H, bot)
         if bot - top < 14:
             continue
-        if p != p0 and not any(l["top"] >= top - 1 and l["bottom"] <= bot + 2 for l in pg["body"]):
+        if p != p0 and not any(l["top"] >= top - 1 and l["bottom"] <= bot + 2 for l in pg["body"]) and not any(
+                t >= top - 1 and b <= bot + 2 and b - t > 30 for t, b in pg.get("gfx", [])):
             continue   # only the page furniture (box edge) above the next label: nothing of this part here
         fr = lambda y: round(min(1.0, max(0.0, (y - pg["off"]) / pg["vh"])), 3)
         out.append([p + 1, fr(top), fr(bot)])

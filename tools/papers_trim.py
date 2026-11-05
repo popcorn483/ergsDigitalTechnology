@@ -63,6 +63,10 @@ def page_info(pdf, cache, n):
             wr = min(wr, a); continue
         objs.append((a, b, float(im["top"]), float(im["bottom"])))
         texty.append((float(im["top"]), float(im["bottom"])))
+    for o in pg.lines:   # drawn diagrams: arrows, connectors, slanted or short upright lines (not answer lines, not tall answer-box sides)
+        h, w = float(o["bottom"]) - float(o["top"]), float(o["x1"]) - float(o["x0"])
+        if 2 < h < 100 and not (w < 2.5 and any(abs(float(o["x0"]) - e) < 2 for e in edges)):
+            texty.append((float(o["top"]), float(o["bottom"])))
     for o in list(pg.rects) + list(pg.curves):   # boxes, tables and drawings count as content; thin rules (answer lines) do not
         if float(o["bottom"]) - float(o["top"]) > 4 and float(o["x1"]) - float(o["x0"]) > 4 and float(o["bottom"]) - float(o["top"]) < 0.6 * H:
             texty.append((float(o["top"]), float(o["bottom"])))
