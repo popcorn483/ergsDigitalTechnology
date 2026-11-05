@@ -10592,6 +10592,7 @@ try {
   /* opening the workbook: page quizzes not done on pages already marked covered → ask them to do those first (once a visit) */
   function quizNag() {
     if (!ok()) return;
+    try { if (localStorage.getItem('mrb-viewas')) return; } catch (e) { }   /* not when a teacher is viewing as a pupil */
     try { if (sessionStorage.getItem('mrb-pq-nag:' + BK.id)) return; sessionStorage.setItem('mrb-pq-nag:' + BK.id, '1'); } catch (e) { return; }
     const miss = PAGES.filter(P => state.done[P.p.id] && (P.p.check || []).length && !pqOf(P.p.id));
     if (!miss.length || document.getElementById('mrb-fin') || document.getElementById('mrb-who') || document.getElementById('mrb-gate')) return;
