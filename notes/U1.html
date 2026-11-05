@@ -2317,6 +2317,42 @@ a.btn{text-decoration:none}
 .pg-l .pg-k.ret{background:color-mix(in srgb,#D08A00 18%,var(--paper));box-shadow:inset 0 0 0 1.5px #D08A00;color:#9A6400}.pg-l .pg-k.ret::after{content:"↩"}
 .pg-l .pg-k.vis{background:var(--paper);box-shadow:inset 0 0 0 1.5px var(--warn)}.pg-l .pg-k.vis::after{content:"";width:6px;height:6px;border-radius:50%;background:var(--warn)}
 .pg-l .pg-k.not{background:var(--paper);box-shadow:inset 0 0 0 1.5px var(--line)}
+/* ACTIVITIES: icon tiles under the page heading; each opens in a pop-up. The notes stay in the page. */
+.act-hid{display:none!important}
+.acts{margin:0 0 14px;padding:12px 14px 14px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+.acts-h{margin:0 0 10px;font:800 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);display:flex;align-items:baseline;gap:8px}
+.acts-h small{font-weight:600;letter-spacing:0;text-transform:none;font-size:12px;opacity:.8}
+.acts-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:8px}
+.act{--k:#1F5FBF;display:flex;align-items:center;gap:10px;min-height:58px;padding:8px 10px;text-align:left;font:inherit;color:var(--ink);background:color-mix(in srgb,var(--k) 6%,var(--paper));border:1.5px solid color-mix(in srgb,var(--k) 28%,var(--line));border-radius:12px;cursor:pointer;min-width:0;-webkit-tap-highlight-color:transparent}
+.act:hover{border-color:var(--k);background:color-mix(in srgb,var(--k) 11%,var(--paper))}.act:active{transform:scale(.98)}
+.act-i{flex:none;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--k);color:#fff}.act-i svg{width:21px;height:21px}
+.act-t{display:flex;flex-direction:column;min-width:0}.act-t b{font:800 14px/1.2 var(--sans)}.act-t small{font:600 12px/1.3 var(--sans);color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.k-lesson{--k:#C0392B}.k-video{--k:#D64545}.k-anim{--k:#7B4FD6}.k-quiz{--k:#1E8E4E}.k-terms{--k:#0F7C8C}.k-learn{--k:#1F5FBF}.k-test{--k:#C77A00}
+.notes-k{display:flex;align-items:center;gap:8px;margin:4px 2px 8px;font:800 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}.notes-k svg{width:16px;height:16px}
+.act-pop{position:fixed;inset:0;z-index:100;background:rgba(10,14,22,.55);display:flex;align-items:center;justify-content:center;padding:24px}
+.act-pop .ap-box{--k:#1F5FBF;width:min(920px,100%);max-height:calc(100dvh - 48px);display:flex;flex-direction:column;background:var(--bg,var(--paper-2));border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.4);overflow:hidden}
+.act-pop.k-lesson .ap-box{--k:#C0392B}.act-pop.k-video .ap-box{--k:#D64545}.act-pop.k-anim .ap-box{--k:#7B4FD6}.act-pop.k-quiz .ap-box{--k:#1E8E4E}.act-pop.k-terms .ap-box{--k:#0F7C8C}.act-pop.k-test .ap-box{--k:#C77A00}
+.ap-h{display:flex;align-items:center;gap:10px;padding:10px 12px 10px 14px;background:var(--paper);border-bottom:3px solid var(--k);flex:none}
+.ap-i{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:var(--k);color:#fff;flex:none}.ap-i svg{width:18px;height:18px}
+.ap-h h2{flex:1;margin:0;font:800 17px/1.2 var(--sans);letter-spacing:0;text-transform:none}
+.ap-x{display:inline-flex;align-items:center;gap:6px;font:700 14px var(--sans);border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:8px 14px;cursor:pointer}.ap-x svg{width:16px;height:16px}
+.ap-b{overflow:auto;padding:14px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
+.ap-b > *{margin:0!important;opacity:1!important;transform:none!important}
+.ap-b > details.kt > summary{display:none}
+.ap-b > section.cyk > .cyk-hd{display:none}
+html.act-open{overflow:hidden}html.act-open .pbar,html.act-open .sv-sw{display:none!important}
+@media (max-width:699px){
+  .acts{padding:10px 10px 12px;border-radius:12px}
+  .acts-g{grid-template-columns:1fr 1fr;gap:7px}
+  .act{gap:8px;padding:8px;min-height:54px}
+  .act-i{width:32px;height:32px;border-radius:9px}.act-i svg{width:18px;height:18px}
+  .act-t b{font-size:13px}.act-t small{font-size:11.5px}
+  .act-pop{padding:0;align-items:stretch}
+  .act-pop .ap-box{width:100%;max-height:none;height:100%;border-radius:0;padding-top:env(safe-area-inset-top,0px)}
+  .ap-b{padding:10px 10px calc(16px + env(safe-area-inset-bottom,0px))}
+  .ap-x span{display:none}.ap-x{padding:8px}
+}
+@media (prefers-reduced-motion:no-preference){.act-pop{animation:mfFade .16s ease-out}.act-pop .ap-box{animation:mfUp .22s cubic-bezier(.2,.8,.2,1)}}
 /* PAGE BAR (phones): ‹ · Mark as covered · Next › fixed at the bottom; the "Before you move on" sheet */
 .pbar{display:none}
 #b-ppt{display:none}
@@ -9986,6 +10022,95 @@ try {
   setTimeout(() => { paintRail(); paintBar(); }, 500);
 })();
 /* ---------- VISITS: END ---------- */
+/* ---------- ACTIVITIES (source notes/app/activities.js): a workbook page keeps only its notes in the flow. Videos,
+   interactive diagrams, Check your knowledge, key terms, Learn and practise and the topic test become a row of icon tiles
+   under the page heading ("Activities"); a tile opens that activity in a pop-up (full screen on a phone). The activity's
+   own element is moved into the pop-up while it is open and back afterwards, so everything inside keeps working. ---------- */
+(function () {
+  if (typeof BK === 'undefined' || !BK || !BK.id || typeof PAGES === 'undefined' || typeof renderPage !== 'function' || (typeof TUT !== 'undefined' && TUT)) return;
+  const SV = (d, c) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"${c ? ` class="${c}"` : ''}>${d}</svg>`;
+  const IC = {
+    lesson: SV('<circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor"/>'),
+    video: SV('<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M10 9v6l5-3z" fill="currentColor"/>'),
+    anim: SV('<path d="M4 17l4-5 3.5 3L16 8l4 5"/><circle cx="16" cy="8" r="1.6" fill="currentColor"/><path d="M3 21h18"/>'),
+    quiz: SV('<circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.8 2.8L16 9.6"/>'),
+    terms: SV('<path d="M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h10.5"/><path d="M9 8h5"/>'),
+    learn: SV('<rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/>'),
+    test: SV('<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M8.5 10h7M8.5 14h7M8.5 18h4"/>'),
+    notes: SV('<path d="M7 3.5h7l4 4V20a.5.5 0 01-.5.5h-10.5a.5.5 0 01-.5-.5V4a.5.5 0 01.5-.5z"/><path d="M14 3.5V8h4M9 12h6M9 16h6"/>'),
+    x: SV('<path d="M6 6l12 12M18 6L6 18"/>')
+  };
+  const txt = (el, s) => { const e = el && el.querySelector(s); return e ? e.textContent.replace(/\s+/g, ' ').trim() : ''; };
+  /* what counts as an activity, in the order the tiles appear */
+  const KINDS = [
+    { sel: '.lvs', k: 'lesson', t: 'Lesson video', sub: e => txt(e, 'figcaption span').replace(/^Lesson diagram:\s*/, ''), start: e => { const b = e.querySelector('[data-lv-play]'); if (b) b.click(); } },
+    { sel: '.lchips', k: 'lesson', t: 'Lesson video', sub: e => txt(e, '.lchip b'), via: 'lp' },
+    { sel: 'section.s-vid', k: 'video', t: 'Videos', sub: e => txt(e, 'h2 small').replace(/,.*$/, '') || 'Watch' },
+    { sel: 'figure.dg', k: 'anim', t: 'Interactive', sub: e => txt(e, '.dg-head h3') || txt(e, '.dg-kicker'), kick: e => txt(e, '.dg-kicker').replace(/^Interactive\s*·\s*/i, '') },
+    { sel: 'section.cyk', k: 'quiz', t: 'Check your knowledge', sub: e => { const n = (txt(e, '.cyk-tt small').match(/\d+/g) || []).reduce((a, b) => a + +b, 0); return n ? `${n} questions` : 'Questions'; }, start: e => { const b = e.querySelector('.cyk-h'); if (b && b.getAttribute('aria-expanded') !== 'true') b.click(); } },
+    { sel: 'details.kt:not(.kt-ch)', k: 'terms', t: 'Key terms', sub: e => txt(e, 'summary > span') || 'This page', start: e => { e.open = true; } },
+    { sel: 'section.lp-sec', k: 'learn', t: 'Learn and practise', sub: e => { const m = /lesson\s+([A-Z]\d+)/i.exec(txt(e, 'h2 small')); return m ? 'Lesson ' + m[1].toUpperCase() + ': podcast, slides, quiz…' : 'Podcast, slides, quiz…'; } },
+    { sel: 'section.chcard', k: 'test', t: 'Topic test', sub: e => txt(e, 'h2, h3, b').replace(/^Topic test\s*/i, '') || 'Whole topic' },
+    { sel: 'details.kt-ch', k: 'terms', t: 'Topic key terms', sub: e => txt(e, 'summary > span').replace(/,\s*A–Z$/, '') || 'Whole topic', start: e => { e.open = true; } }
+  ];
+  let pop = null;
+  function closePop() {
+    if (!pop) return;
+    const { d, el, ph, prevFocus } = pop; pop = null;
+    if (ph.parentNode) { ph.parentNode.insertBefore(el, ph); ph.remove(); }
+    el.classList.add('act-hid');
+    d.remove(); document.documentElement.classList.remove('act-open');
+    if (prevFocus && prevFocus.isConnected) prevFocus.focus({ preventScroll: true });
+  }
+  function openPop(K, el, tile) {
+    closePop();
+    const main = document.getElementById('main'); if (!main || !el.isConnected) return;
+    const d = document.createElement('div'); d.className = 'act-pop k-' + K.k; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'act-pop-h');
+    d.innerHTML = `<div class="ap-box"><div class="ap-h"><span class="ap-i">${IC[K.k]}</span><h2 id="act-pop-h"></h2><button type="button" class="ap-x" aria-label="Close">${IC.x}<span>Close</span></button></div><div class="ap-b"></div></div>`;
+    d.querySelector('h2').textContent = K.t;
+    const ph = document.createComment('activity'); el.parentNode.insertBefore(ph, el);
+    el.classList.remove('act-hid'); el.classList.add('in');
+    d.querySelector('.ap-b').append(el);
+    main.append(d);   /* inside #main, so the page's own code still finds its parts (and a new page clears it) */
+    document.documentElement.classList.add('act-open');
+    pop = { d, el, ph, prevFocus: tile || document.activeElement };
+    d.querySelector('.ap-x').addEventListener('click', closePop);
+    d.addEventListener('click', e => { if (e.target === d) closePop(); });
+    if (K.start) try { K.start(el); } catch (e) { }
+    setTimeout(() => { try { dispatchEvent(new Event('resize')); } catch (e) { } d.querySelector('.ap-x').focus({ preventScroll: true }); }, 30);
+  }
+  addEventListener('keydown', e => { if (pop && e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closePop(); } }, true);
+  function build() {
+    pop = null; document.documentElement.classList.remove('act-open');
+    const main = document.getElementById('main'), art = main && main.querySelector('article'); if (!art || !art.querySelector('.ncard')) return;
+    const found = [];
+    KINDS.forEach(K => art.querySelectorAll(':scope > ' + K.sel).forEach(el => found.push([K, el])));
+    if (!found.length) return;
+    found.sort((a, b) => KINDS.indexOf(a[0]) - KINDS.indexOf(b[0]));
+    const lp = found.find(([K]) => K.k === 'learn');
+    const box = document.createElement('section'); box.className = 'acts'; box.setAttribute('aria-label', 'Activities for this page');
+    box.innerHTML = '<h2 class="acts-h">Activities <small>tap to open</small></h2><div class="acts-g"></div>';
+    const g = box.querySelector('.acts-g');
+    found.forEach(([K, el]) => {
+      const sub = (() => { try { return K.sub(el); } catch (e) { return ''; } })(), kick = K.kick ? K.kick(el) : '';
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'act k-' + K.k;
+      b.innerHTML = `<span class="act-i">${IC[K.k]}</span><span class="act-t"><b></b><small></small></span>`;
+      b.querySelector('b').textContent = K.t; if (kick) b.title = kick; b.querySelector('small').textContent = sub;
+      b.setAttribute('aria-haspopup', 'dialog');
+      if (K.via === 'lp' && lp) b.addEventListener('click', () => { const btn = el.querySelector('[data-lv-tab]'); openPop(lp[0], lp[1], b); if (btn) btn.click(); });
+      else b.addEventListener('click', () => openPop(K, el, b));
+      g.append(b);
+      el.classList.add('act-hid');
+    });
+    const head = art.querySelector(':scope > header.phero') || art.querySelector(':scope > header');
+    if (head) head.after(box); else art.prepend(box);
+    const first = art.querySelector(':scope > .ncard');
+    if (first) { const k = document.createElement('div'); k.className = 'notes-k'; k.innerHTML = `${IC.notes}<span>Notes</span>`; first.before(k); }
+  }
+  const rp = renderPage;
+  renderPage = function () { const r = rp.apply(this, arguments); try { build(); } catch (e) { } return r; };
+  if (typeof onCover !== 'undefined' && !onCover) setTimeout(() => { if (!document.querySelector('#main .acts')) try { build(); } catch (e) { } }, 0);
+})();
 /* ================= APP: END ================= */
 /* ================= boot ================= */
 buildRail(); updateProgress(); syncMenuBtn();
