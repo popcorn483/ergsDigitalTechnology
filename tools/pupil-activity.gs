@@ -26,7 +26,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 18;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 19;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -344,6 +344,22 @@ function act_(q) {
     const marked = {};   /* pages the teacher has marked: the latest mark per page (1 covered, 0 not) */
     rows_(awards_()).forEach(r => { if (String(r[1]) === to) marked[String(r[2]) + '|' + String(r[3])] = +r[4]; });
     return { ok: true, pages, topics, days, first, last, devices: Object.keys(devs).length, sessions: ses, state, marked };
+  }
+  if (q.action === 'report') {   /* REPORTS: every pupil's use between two days (31 at most): per day [seconds, {book|topic: s}, {book|page: s}] */
+    const okD = x => /^\d{4}-\d{2}-\d{2}$/.test(String(x || ''));
+    let till = okD(q.till) ? String(q.till) : dayOf_(Date.now()), from = okD(q.from) ? String(q.from) : addDays_(till, -6);
+    if (from > till) { const x = from; from = till; till = x; } if (addDays_(from, 31) <= till) from = addDays_(till, -30);
+    const t0 = new Date(from + 'T00:00:00Z').getTime() - 864e5, t1 = new Date(till + 'T23:59:59Z').getTime() + 864e5, A = aliases_(), N = names_(), P = {};
+    rows_(log_()).forEach(r => {
+      const t = new Date(r[0]).getTime(); if (!(t >= t0 && t <= t1)) return; const d = dayOf_(t); if (d < from || d > till) return;
+      const id = resolve_(String(r[1]), A), s = +r[6] || 0; if (!id || !s) return;
+      const p = P[id] || (P[id] = { id, name: String(r[2]), cls: String(r[3]), days: {} }), x = p.days[d] || (p.days[d] = [0, {}, {}]);
+      x[0] += s; const b = String(r[4]), ch = String(r[5] || ''), pg = String(r[7] || '');
+      if (b !== 'home' && ch) x[1][b + '|' + ch] = (x[1][b + '|' + ch] || 0) + s;
+      if (b !== 'home' && /^c\d{1,2}-p\d{1,3}$/.test(pg)) x[2][b + '|' + pg] = (x[2][b + '|' + pg] || 0) + s;
+    });
+    const pupils = Object.keys(P).map(id => { const p = P[id]; if (N[id]) { p.name = N[id][0] || p.name; p.cls = N[id][1] || p.cls; } return p; });
+    return { ok: true, from, till, pupils };
   }
   if (q.action === 'award') {   /* the teacher marks (on=1) or unmarks (on=0) pages as covered for a pupil */
     const book = String(q.book || ''), pages = String(q.pages || '').split(',').filter(x => /^c\d{1,2}-p\d{1,3}$/.test(x)), on = q.on === '0' ? 0 : 1;
