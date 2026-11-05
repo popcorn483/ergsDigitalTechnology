@@ -460,6 +460,21 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     LS.set('mrb-va-backup', null); LS.set('mrb-viewas', null);
     location.href = to || (root + 'teacher.html#visits');
   }
+  /* TEACHER VIEW ⇄ PUPIL VIEW (staff devices): in pupil view the site behaves as it does for a pupil (locks on the page and topic
+     quizzes, the "before you move on" prompt, no Teacher area links) with this device's own progress; nothing is sent */
+  const staffDev = LS.get('mrb-staff-ok') && LS.get('notes-nocount');
+  if (staffDev && !LS.get('mrb-viewas')) {
+    const pupil = !!LS.get('mrb-pupilmode'), onTeacher = /teacher\.html$/i.test(location.pathname);
+    const put = () => {
+      if (document.getElementById('mrb-mode')) return;
+      const b = document.createElement('button'); b.type = 'button'; b.id = 'mrb-mode';
+      b.innerHTML = `<style>#mrb-mode{position:fixed;left:10px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:65;display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;padding:8px 12px;font:800 12.5px/1 system-ui,-apple-system,Segoe UI,sans-serif;color:#fff;background:${pupil ? '#1E8E4E' : '#16213A'};box-shadow:0 6px 18px rgba(0,0,0,.25);cursor:pointer}#mrb-mode small{font-weight:600;opacity:.8}html.pbar-on #mrb-mode{bottom:calc(84px + env(safe-area-inset-bottom,0px))}html.act-open #mrb-mode,html.mf-open #mrb-mode{display:none}@media print{#mrb-mode{display:none}}@media (max-width:699px){#mrb-mode{padding:6px 10px;font-size:11.5px;opacity:.92}#mrb-mode small{display:none}}</style>${pupil ? '🎓 Pupil view ⇄ <small>switch to teacher</small>' : '👩‍🏫 Teacher view ⇄ <small>switch to pupil</small>'}`;
+      b.title = pupil ? 'You are seeing the site as a pupil does (locks on). Tap for the teacher view.' : 'Tap to use the site as a pupil would (locks and prompts on). Nothing is recorded.';
+      b.addEventListener('click', () => { LS.set('mrb-pupilmode', pupil ? null : '1'); if (!pupil && onTeacher) location.href = 'index.html'; else location.reload(); });
+      document.body.append(b);
+    };
+    if (document.body) put(); else document.addEventListener('DOMContentLoaded', put);
+  }
   window.MRB_VIEWAS = { start, exit, who: () => { try { return JSON.parse(LS.get('mrb-viewas') || 'null'); } catch (e) { return null; } } };
   const who = window.MRB_VIEWAS.who();
   if (!who) { if (LS.get('mrb-va-backup')) exit(location.href); return; }   /* a view left half-way: put the teacher's progress back */

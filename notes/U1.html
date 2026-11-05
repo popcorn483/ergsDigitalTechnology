@@ -2328,11 +2328,11 @@ a.btn{text-decoration:none}
 .act:hover{border-color:var(--k);background:color-mix(in srgb,var(--k) 11%,var(--paper))}.act:active{transform:scale(.98)}
 .act-i{flex:none;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--k);color:#fff}.act-i svg{width:21px;height:21px}
 .act-t{display:flex;flex-direction:column;min-width:0}.act-t b{font:800 14px/1.2 var(--sans)}.act-t small{font:600 12px/1.3 var(--sans);color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.k-lesson{--k:#C0392B}.k-video{--k:#D64545}.k-anim{--k:#7B4FD6}.k-quiz{--k:#1E8E4E}.k-terms{--k:#0F7C8C}.k-learn{--k:#1F5FBF}.k-test{--k:#C77A00}
+.k-ppt{--k:#C0392B}.k-sheet{--k:#1F5FBF}.k-prac{--k:#1E8E4E}.k-pod{--k:#B4416E}.k-tips{--k:#C77A00}.k-lesson{--k:#C0392B}.k-video{--k:#D64545}.k-anim{--k:#7B4FD6}.k-quiz{--k:#1E8E4E}.k-terms{--k:#0F7C8C}.k-learn{--k:#1F5FBF}.k-test{--k:#C77A00}
 .notes-k{display:flex;align-items:center;gap:8px;margin:4px 2px 8px;font:800 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}.notes-k svg{width:16px;height:16px}
 .act-pop{position:fixed;inset:0;z-index:100;background:rgba(10,14,22,.55);display:flex;align-items:center;justify-content:center;padding:24px}
 .act-pop .ap-box{--k:#1F5FBF;width:min(920px,100%);max-height:calc(100dvh - 48px);display:flex;flex-direction:column;background:var(--bg,var(--paper-2));border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.4);overflow:hidden}
-.act-pop.k-lesson .ap-box{--k:#C0392B}.act-pop.k-video .ap-box{--k:#D64545}.act-pop.k-anim .ap-box{--k:#7B4FD6}.act-pop.k-quiz .ap-box{--k:#1E8E4E}.act-pop.k-terms .ap-box{--k:#0F7C8C}.act-pop.k-test .ap-box{--k:#C77A00}
+.act-pop.k-ppt .ap-box{--k:#C0392B}.act-pop.k-sheet .ap-box{--k:#1F5FBF}.act-pop.k-prac .ap-box{--k:#1E8E4E}.act-pop.k-pod .ap-box{--k:#B4416E}.act-pop.k-tips .ap-box{--k:#C77A00}.act-pop.k-lesson .ap-box{--k:#C0392B}.act-pop.k-video .ap-box{--k:#D64545}.act-pop.k-anim .ap-box{--k:#7B4FD6}.act-pop.k-quiz .ap-box{--k:#1E8E4E}.act-pop.k-terms .ap-box{--k:#0F7C8C}.act-pop.k-test .ap-box{--k:#C77A00}
 .ap-h{display:flex;align-items:center;gap:10px;padding:10px 12px 10px 14px;background:var(--paper);border-bottom:3px solid var(--k);flex:none}
 .ap-i{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:var(--k);color:#fff;flex:none}.ap-i svg{width:18px;height:18px}
 .ap-h h2{flex:1;margin:0;font:800 17px/1.2 var(--sans);letter-spacing:0;text-transform:none}
@@ -2413,6 +2413,14 @@ html.act-open{overflow:hidden}html.act-open .pbar,html.act-open .sv-sw{display:n
   #d-gloss .gv-modes button{min-height:40px;font-size:14.5px}
   #d-gloss .dr-h h2{font-size:22px}
 }
+/* pop-up contents: hub lessons, key terms switch, revision tips */
+.ap-ls{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.ap-ls button{font:700 13px var(--sans);border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:999px;padding:6px 12px;cursor:pointer}.ap-ls button[aria-pressed="true"]{background:var(--k);border-color:var(--k);color:#fff}.ap-ls em{font-style:normal;opacity:.8}
+.ap-hub .emb{margin:0}.ap-hub .emb-bar{display:none}
+.ap-sw{display:inline-flex;gap:4px;padding:4px;border-radius:12px;background:var(--paper);border:1px solid var(--line);margin:0 0 8px}.ap-sw button{font:700 14px var(--sans);border:0;background:none;color:var(--ink-2);border-radius:9px;padding:8px 14px;cursor:pointer}.ap-sw button b{font-weight:800;opacity:.75;margin-left:4px}.ap-sw button[aria-selected="true"]{background:var(--k);color:#fff}
+.ap-note{margin:0 0 10px;font:600 13.5px/1.45 var(--sans);color:var(--ink-2)}
+.ap-terms details.kt > summary{display:none}.ap-terms .kt,.ap-terms .ap-topic{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin:0}.ap-terms .kt-l,.ap-terms .ap-topic{padding:4px 14px}
+.ap-tips .tip{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--k);border-radius:12px;padding:12px 14px;margin:0 0 10px;font-family:var(--sans)}.ap-tips .tip h3{margin:0 0 2px;font:800 16px var(--sans);text-transform:none;letter-spacing:0}.ap-tips .tip-w{margin:0 0 6px;color:var(--ink-3);font-size:13px;font-weight:600}.ap-tips ol{margin:0;padding-left:20px;font-size:14.5px;line-height:1.5}.ap-tips li{margin:2px 0}
+.tip-all{margin:4px 0 10px}.tip-all > summary{font:800 14px var(--sans);cursor:pointer;margin:0 0 8px;color:var(--k)}
 /* PAGE BAR (phones): ‹ · Mark as covered · Next › fixed at the bottom; the "Before you move on" sheet */
 .pbar{display:none}
 #b-ppt{display:none}
@@ -8655,7 +8663,7 @@ function cqSave(o) { try { localStorage.setItem(CQ_KEY, JSON.stringify(o)); } ca
 const chDone = ch => (ch.pages || []).length && ch.pages.every(p => state.done[p.id]);
 /* the topic quiz and past papers unlock once every page of the topic is marked covered; staff devices always */
 const chLeft = ch => (ch.pages || []).filter(p => !state.done[p.id]);
-const cqStaff = () => { try { return !!localStorage.getItem('notes-nocount') && !localStorage.getItem('mrb-viewas'); } catch (e) { return false; } };   /* viewing as a pupil: their locks */
+const cqStaff = () => { try { return !!localStorage.getItem('notes-nocount') && !localStorage.getItem('mrb-viewas') && !localStorage.getItem('mrb-pupilmode'); } catch (e) { return false; } };   /* viewing as a pupil: their locks */
 const cqUnlocked = ch => !chLeft(ch).length || cqStaff();
 function cqItems(ch) {
   const out = [];
@@ -9667,6 +9675,21 @@ if (ON_WEB) {
     LS.set('mrb-va-backup', null); LS.set('mrb-viewas', null);
     location.href = to || (root + 'teacher.html#visits');
   }
+  /* TEACHER VIEW ⇄ PUPIL VIEW (staff devices): in pupil view the site behaves as it does for a pupil (locks on the page and topic
+     quizzes, the "before you move on" prompt, no Teacher area links) with this device's own progress; nothing is sent */
+  const staffDev = LS.get('mrb-staff-ok') && LS.get('notes-nocount');
+  if (staffDev && !LS.get('mrb-viewas')) {
+    const pupil = !!LS.get('mrb-pupilmode'), onTeacher = /teacher\.html$/i.test(location.pathname);
+    const put = () => {
+      if (document.getElementById('mrb-mode')) return;
+      const b = document.createElement('button'); b.type = 'button'; b.id = 'mrb-mode';
+      b.innerHTML = `<style>#mrb-mode{position:fixed;left:10px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:65;display:inline-flex;align-items:center;gap:6px;border:0;border-radius:999px;padding:8px 12px;font:800 12.5px/1 system-ui,-apple-system,Segoe UI,sans-serif;color:#fff;background:${pupil ? '#1E8E4E' : '#16213A'};box-shadow:0 6px 18px rgba(0,0,0,.25);cursor:pointer}#mrb-mode small{font-weight:600;opacity:.8}html.pbar-on #mrb-mode{bottom:calc(84px + env(safe-area-inset-bottom,0px))}html.act-open #mrb-mode,html.mf-open #mrb-mode{display:none}@media print{#mrb-mode{display:none}}@media (max-width:699px){#mrb-mode{padding:6px 10px;font-size:11.5px;opacity:.92}#mrb-mode small{display:none}}</style>${pupil ? '🎓 Pupil view ⇄ <small>switch to teacher</small>' : '👩‍🏫 Teacher view ⇄ <small>switch to pupil</small>'}`;
+      b.title = pupil ? 'You are seeing the site as a pupil does (locks on). Tap for the teacher view.' : 'Tap to use the site as a pupil would (locks and prompts on). Nothing is recorded.';
+      b.addEventListener('click', () => { LS.set('mrb-pupilmode', pupil ? null : '1'); if (!pupil && onTeacher) location.href = 'index.html'; else location.reload(); });
+      document.body.append(b);
+    };
+    if (document.body) put(); else document.addEventListener('DOMContentLoaded', put);
+  }
   window.MRB_VIEWAS = { start, exit, who: () => { try { return JSON.parse(LS.get('mrb-viewas') || 'null'); } catch (e) { return null; } } };
   const who = window.MRB_VIEWAS.who();
   if (!who) { if (LS.get('mrb-va-backup')) exit(location.href); return; }   /* a view left half-way: put the teacher's progress back */
@@ -9719,7 +9742,7 @@ try {
   const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
   const inBook = typeof BK !== 'undefined' && BK && BK.id && typeof PAGES !== 'undefined';
   const isTeacherPage = /teacher\.html$/i.test(location.pathname);
-  try { if (localStorage.getItem('mrb-staff-ok')) document.documentElement.classList.add('is-staff'); } catch (e) { }
+  try { if (localStorage.getItem('mrb-staff-ok') && !localStorage.getItem('mrb-pupilmode')) document.documentElement.classList.add('is-staff'); } catch (e) { }
   if (isTeacherPage || !/^https?:$/.test(location.protocol) || /(^|\.)claude\.ai$|claudeusercontent/i.test(location.hostname)) return;
   const me = () => { try { return JSON.parse(LS.get('mrb-pupil') || 'null'); } catch (e) { return null; } };
   let URL0 = LS.get('mrb-act-url') || '';
@@ -10051,7 +10074,7 @@ try {
   const TUTB = typeof TUT !== 'undefined' && TUT;
   const REV = typeof APP_REV === 'undefined' ? true : APP_REV;
   let prev = null, since = Date.now(), passing = false; const asked = new Set();
-  const ok = () => { try { return !localStorage.getItem('notes-nocount') || !!localStorage.getItem('mrb-viewas'); } catch (e) { return true; } };
+  const ok = () => { try { return !localStorage.getItem('notes-nocount') || !!localStorage.getItem('mrb-viewas') || !!localStorage.getItem('mrb-pupilmode'); } catch (e) { return true; } };
   const later = () => { if (!state.later || typeof state.later !== 'object') state.later = {}; return state.later; };
   const paintRail = () => { try { document.querySelectorAll('.r-pg').forEach(a => a.classList.toggle('later', !!(state.later && state.later[a.dataset.id]) && !state.done[a.dataset.id])); } catch (e) { } };
   const here = () => (typeof onCover !== 'undefined' && onCover) || (typeof onCredits !== 'undefined' && onCredits) ? null : PAGES[cur];
@@ -10146,47 +10169,70 @@ try {
    own element is moved into the pop-up while it is open and back afterwards, so everything inside keeps working. ---------- */
 (function () {
   if (typeof BK === 'undefined' || !BK || !BK.id || typeof PAGES === 'undefined' || typeof renderPage !== 'function' || (typeof TUT !== 'undefined' && TUT)) return;
-  const SV = (d, c) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"${c ? ` class="${c}"` : ''}>${d}</svg>`;
+  const SVG = (d, c) => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"${c ? ` class="${c}"` : ''}>${d}</svg>`;
   const IC = {
-    lesson: SV('<circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor"/>'),
-    video: SV('<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M10 9v6l5-3z" fill="currentColor"/>'),
-    anim: SV('<path d="M4 17l4-5 3.5 3L16 8l4 5"/><circle cx="16" cy="8" r="1.6" fill="currentColor"/><path d="M3 21h18"/>'),
-    quiz: SV('<circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.8 2.8L16 9.6"/>'),
-    terms: SV('<path d="M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h10.5"/><path d="M9 8h5"/>'),
-    learn: SV('<rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/>'),
-    test: SV('<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M8.5 10h7M8.5 14h7M8.5 18h4"/>'),
-    notes: SV('<path d="M7 3.5h7l4 4V20a.5.5 0 01-.5.5h-10.5a.5.5 0 01-.5-.5V4a.5.5 0 01.5-.5z"/><path d="M14 3.5V8h4M9 12h6M9 16h6"/>'),
-    x: SV('<path d="M6 6l12 12M18 6L6 18"/>')
+    lesson: SVG('<circle cx="12" cy="12" r="9"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor"/>'),
+    video: SVG('<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M10 9v6l5-3z" fill="currentColor"/>'),
+    anim: SVG('<path d="M4 17l4-5 3.5 3L16 8l4 5"/><circle cx="16" cy="8" r="1.6" fill="currentColor"/><path d="M3 21h18"/>'),
+    quiz: SVG('<circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.8 2.8L16 9.6"/>'),
+    terms: SVG('<path d="M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h10.5"/><path d="M9 8h5"/>'),
+    learn: SVG('<rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/>'),
+    test: SVG('<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M8.5 10h7M8.5 14h7M8.5 18h4"/>'),
+    notes: SVG('<path d="M7 3.5h7l4 4V20a.5.5 0 01-.5.5h-10.5a.5.5 0 01-.5-.5V4a.5.5 0 01.5-.5z"/><path d="M14 3.5V8h4M9 12h6M9 16h6"/>'),
+    ppt: SVG('<rect x="3" y="4.5" width="18" height="12" rx="1.8"/><path d="M12 16.5V20M8.5 20h7M7.5 9h5M7.5 12h8"/>'),
+    sheet: SVG('<path d="M6 3.5h9l3 3V20.5H6z"/><path d="M9 9h6M9 12.5h6M9 16h4"/><path d="M15 3.5V7h3"/>'),
+    prac: SVG('<path d="M9 11l2.5 2.5L16 9"/><rect x="4" y="4" width="16" height="16" rx="3"/>'),
+    pod: SVG('<path d="M5 14v-2a7 7 0 0114 0v2M5 14h3v5H5zM16 14h3v5h-3z"/>'),
+    tips: SVG('<path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 00-3.5 10.9c.6.5 1 1.1 1 1.9V16h5v-.2c0-.8.4-1.4 1-1.9A6 6 0 0012 3z"/>'),
+    x: SVG('<path d="M6 6l12 12M18 6L6 18"/>')
   };
   const txt = (el, s) => { const e = el && el.querySelector(s); return e ? e.textContent.replace(/\s+/g, ' ').trim() : ''; };
   /* what counts as an activity, in the order the tiles appear */
   const KINDS = [
-    { sel: '.lvs', k: 'lesson', t: 'Lesson video', sub: e => txt(e, 'figcaption span').replace(/^Lesson diagram:\s*/, ''), start: e => { const b = e.querySelector('[data-lv-play]'); if (b) b.click(); } },
-    { sel: '.lchips', k: 'lesson', t: 'Lesson video', sub: e => txt(e, '.lchip b'), via: 'lp' },
     { sel: 'section.s-vid', k: 'video', t: 'Videos', sub: e => txt(e, 'h2 small').replace(/,.*$/, '') || 'Watch' },
     { sel: 'figure.dg', k: 'anim', t: 'Interactive', sub: e => txt(e, '.dg-head h3') || txt(e, '.dg-kicker'), kick: e => txt(e, '.dg-kicker').replace(/^Interactive\s*·\s*/i, '') },
     { sel: 'section.cyk', k: 'quiz', t: 'Page quiz', sub: e => { const n = (txt(e, '.cyk-tt small').match(/\d+/g) || []).reduce((a, b) => a + +b, 0); return n ? `${n} questions` : 'Questions'; }, start: e => { const b = e.querySelector('.cyk-h'); if (b && b.getAttribute('aria-expanded') !== 'true') b.click(); } },
-    { sel: 'details.kt:not(.kt-ch)', k: 'terms', t: 'Key terms', sub: e => txt(e, 'summary > span') || 'This page', start: e => { e.open = true; } },
-    { sel: 'section.lp-sec', k: 'learn', t: 'Learn and practise', sub: e => { const m = /lesson\s+([A-Z]\d+)/i.exec(txt(e, 'h2 small')); return m ? 'Lesson ' + m[1].toUpperCase() + ': podcast, slides, quiz…' : 'Podcast, slides, quiz…'; } },
-    { sel: 'section.chcard', k: 'test', t: 'Topic test', sub: e => txt(e, 'h2, h3, b').replace(/^Topic test\s*/i, '') || 'Whole topic' },
-    { sel: 'details.kt-ch', k: 'terms', t: 'Topic key terms', sub: e => txt(e, 'summary > span').replace(/,\s*A–Z$/, '') || 'Whole topic', start: e => { e.open = true; } }
+    { sel: 'section.chcard', k: 'test', t: 'Topic test', sub: e => txt(e, 'h2, h3, b').replace(/^Topic test\s*/i, '') || 'Whole topic' }
   ];
+  /* gone from the page: the lesson video (the topic PowerPoint replaces it), "Learn and practise" (its parts are tiles now)
+     and the chapter's separate key-terms box (the Key terms tile switches between this page and the whole topic) */
+  const DROP = ['.lvs', '.lchips', 'section.lp-sec', 'details.kt-ch'];
+  /* HOW TO REVISE (Mr Butler's sheet): the ways to revise, and which suit this page */
+  const HOW = {
+    gloss: { t: 'Glossary definitions', why: 'Around 60–70% of CCEA marks come from key-term definitions.', steps: ['Make a clear list of the key terms. Write them by hand: don’t type them.', 'Write each specialist term in RED pen as you go (don’t just highlight it afterwards) and its definition in BLACK.'] },
+    wdik: { t: 'What do I know?', why: 'Look, cover, write, check.', steps: ['On one side of A4, write everything you can remember about this in BLACK pen.', 'When you can’t remember any more, open your notes.', 'In RED pen, add everything you forgot.', 'Repeat until the whole page is black ink.'] },
+    hive: { t: 'Mind Hive', why: 'Like a mind map, but linking topics across the subject.', steps: ['In pencil, put the main topic in the centre of the page.', 'Connect related facts and examples around it to show how the ideas link.', 'Think how these points link to other topics. In time you can draw one Mind Hive joining all the topics.'] },
+    compare: { t: 'Comparison table', why: 'This page compares things: a table makes the differences clear.', steps: ['Draw a table with a column for each thing being compared.', 'Add a row for each feature, and fill in how they are similar and how they differ.'] },
+    summary: { t: 'One-page summary', why: 'Also called Cornell notes.', steps: ['Divide one side of A4 into four sections: Key terms | Diagrams | Concepts | Questions.', 'Summarise the topic’s notes into those sections, so the whole topic fits on one page.'] },
+    past: { t: 'Past paper questions', why: 'Do these after you have learnt the topic.', steps: ['Try the topic’s past-paper questions (Topic quiz and Past papers, above).', 'See where the gaps in your knowledge are, and go back to anything you got wrong.'] }
+  };
+  function tipsFor(P) {
+    const spec = String(P.p.spec || P.p.title || ''), nT = (P.p.terms || []).length, ps = P.ch.pages || [], last = ps.length && ps[ps.length - 1].id === P.p.id;
+    const out = [];
+    if (/differen|compar|distinguish|advantages and disadvantages|versus|\bvs\b|similarit/i.test(spec)) out.push('compare');
+    if (/impact|ethic|legal|environment|security|threat|benefit|society|role of|implication/i.test(spec)) out.push('hive');
+    if (nT >= 4) out.push('gloss');
+    if (out.length < 2) out.push('wdik');
+    if (out.length < 2 && !out.includes('gloss')) out.push('gloss');
+    if (last) out.push('summary');
+    try { if (typeof cqUnlocked === 'function' && cqUnlocked(P.ch)) out.push('past'); } catch (e) { }
+    return [...new Set(out)].slice(0, 3);
+  }
   let pop = null;
   function closePop() {
     if (!pop) return;
     const { d, el, ph, prevFocus } = pop; pop = null;
-    if (ph.parentNode) { ph.parentNode.insertBefore(el, ph); ph.remove(); }
-    el.classList.add('act-hid');
+    if (ph.parentNode) { ph.parentNode.insertBefore(el, ph); ph.remove(); el.classList.add('act-hid'); } else el.remove();
     d.remove(); document.documentElement.classList.remove('act-open');
     if (prevFocus && prevFocus.isConnected) prevFocus.focus({ preventScroll: true });
   }
   function openPop(K, el, tile) {
     closePop();
-    const main = document.getElementById('main'); if (!main || !el.isConnected) return;
+    const main = document.getElementById('main'); if (!main) return;
     const d = document.createElement('div'); d.className = 'act-pop k-' + K.k; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'act-pop-h');
     d.innerHTML = `<div class="ap-box"><div class="ap-h"><span class="ap-i">${IC[K.k]}</span><h2 id="act-pop-h"></h2><button type="button" class="ap-x" aria-label="Close">${IC.x}<span>Close</span></button></div><div class="ap-b"></div></div>`;
     d.querySelector('h2').textContent = K.t;
-    const ph = document.createComment('activity'); el.parentNode.insertBefore(ph, el);
+    const ph = document.createComment('activity'); if (el.parentNode) el.parentNode.insertBefore(ph, el);
     el.classList.remove('act-hid'); el.classList.add('in');
     d.querySelector('.ap-b').append(el);
     main.append(d);   /* inside #main, so the page's own code still finds its parts (and a new page clears it) */
@@ -10198,28 +10244,77 @@ try {
     setTimeout(() => { try { dispatchEvent(new Event('resize')); } catch (e) { } d.querySelector('.ap-x').focus({ preventScroll: true }); }, 30);
   }
   addEventListener('keydown', e => { if (pop && e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); closePop(); } }, true);
+  /* a hub lesson resource (Revision Summary Sheet, Activities & worksheet, Podcast) inside the pop-up, with a lesson picker
+     when the page has more than one lesson */
+  function hubNode(route, title, ids) {
+    const box = document.createElement('div'); box.className = 'ap-hub';
+    const names = BK.lessonNames || {};
+    if (ids.length > 1) box.insertAdjacentHTML('beforeend', `<div class="ap-ls" role="group" aria-label="Lesson">${ids.map((id, i) => `<button type="button" data-l="${esc(id)}" aria-pressed="${i === 0}"><em>${esc(id)}</em> ${esc(names[id] || '')}</button>`).join('')}</div>`);
+    const slot = document.createElement('div'); box.append(slot);
+    const show = id => { openEmbed(slot, `${encodeURIComponent(id)}-${route}`, `${title} · ${id} ${names[id] || ''}`, { noClose: true }); box.querySelectorAll('[data-l]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.l === id))); };
+    box.addEventListener('click', e => { const b = e.target.closest('[data-l]'); if (b) show(b.dataset.l); });
+    show(ids[0]);
+    return box;
+  }
+  /* Key terms: this page (the terms and the wording the mark schemes also credit) or the whole topic */
+  function termsNode(P, pageKt) {
+    const box = document.createElement('div'); box.className = 'ap-terms';
+    const all = (typeof CH_TERMS !== 'undefined' && CH_TERMS.get(P.ch.id)) || [];
+    const nPage = pageKt ? pageKt.querySelectorAll('.kt-l > div').length : 0;
+    box.innerHTML = `<div class="ap-sw" role="tablist" aria-label="Which key terms">${nPage ? `<button type="button" role="tab" data-v="page" aria-selected="true">This page <b>${nPage}</b></button>` : ''}<button type="button" role="tab" data-v="topic" aria-selected="${!nPage}">Whole topic <b>${all.length}</b></button></div>
+      <p class="ap-note">“Also credited” is other wording the CCEA mark schemes accept.</p><div class="ap-tv"></div>`;
+    const v = box.querySelector('.ap-tv');
+    const topic = document.createElement('dl'); topic.className = 'kt-l ap-topic'; topic.innerHTML = all.map(g => termRow(g, cur)).join('');
+    if (pageKt) { pageKt = pageKt.cloneNode(true); pageKt.open = true; pageKt.classList.remove('act-hid', 'rv'); v.append(pageKt); }
+    v.append(topic);
+    const pick = w => { box.querySelectorAll('[data-v]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === w))); if (pageKt) pageKt.hidden = w !== 'page'; topic.hidden = w !== 'topic'; };
+    box.addEventListener('click', e => { const b = e.target.closest('[data-v]'); if (b) pick(b.dataset.v); });
+    pick(nPage ? 'page' : 'topic');
+    return box;
+  }
+  function tipsNode(P) {
+    const box = document.createElement('div'); box.className = 'ap-tips';
+    const ks = tipsFor(P), card = k => `<section class="tip"><h3>${esc(HOW[k].t)}</h3><p class="tip-w">${esc(HOW[k].why)}</p><ol>${HOW[k].steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol></section>`;
+    box.innerHTML = `<p class="ap-note">The best ways to revise this page, from Mr Butler’s How to Revise sheet:</p>${ks.map(card).join('')}
+      <details class="tip-all"><summary>All six ways to revise</summary>${Object.keys(HOW).filter(k => !ks.includes(k)).map(card).join('')}</details>
+      <p class="ap-note"><a href="${ON_WEB ? '../' : ''}how-to-revise.pdf" target="_blank" rel="noopener">Mr Butler’s How to Revise sheet (PDF)</a></p>`;
+    return box;
+  }
   function build() {
     pop = null; document.documentElement.classList.remove('act-open');
     const main = document.getElementById('main'), art = main && main.querySelector('article'); if (!art || !art.querySelector('.ncard')) return;
+    const P = (typeof onCover !== 'undefined' && onCover) ? null : PAGES[cur]; if (!P) return;
+    DROP.forEach(sl => art.querySelectorAll(':scope > ' + sl).forEach(x => x.classList.add('act-hid')));
     const found = [];
     KINDS.forEach(K => art.querySelectorAll(':scope > ' + K.sel).forEach(el => found.push([K, el])));
-    if (!found.length) return;
-    found.sort((a, b) => KINDS.indexOf(a[0]) - KINDS.indexOf(b[0]));
-    const lp = found.find(([K]) => K.k === 'learn');
+    const ids = (P.p.lessons || []).filter(Boolean), hub = ids.length && typeof EMBED_ON === 'function' && EMBED_ON();
+    const pageKt = art.querySelector(':scope > details.kt:not(.kt-ch)');
+    if (pageKt) pageKt.classList.add('act-hid');
     const box = document.createElement('section'); box.className = 'acts'; box.setAttribute('aria-label', 'Activities for this page');
     box.innerHTML = '<h2 class="acts-h">Activities <small>tap to open</small></h2><div class="acts-g"></div>';
     const g = box.querySelector('.acts-g');
-    found.forEach(([K, el]) => {
-      const sub = (() => { try { return K.sub(el); } catch (e) { return ''; } })(), kick = K.kick ? K.kick(el) : '';
-      const b = document.createElement('button'); b.type = 'button'; b.className = 'act k-' + K.k;
-      b.innerHTML = `<span class="act-i">${IC[K.k]}</span><span class="act-t"><b></b><small></small></span>`;
-      b.querySelector('b').textContent = K.t; if (kick) b.title = kick; b.querySelector('small').textContent = sub;
-      b.setAttribute('aria-haspopup', 'dialog');
-      if (K.via === 'lp' && lp) b.addEventListener('click', () => { const btn = el.querySelector('[data-lv-tab]'); openPop(lp[0], lp[1], b); if (btn) btn.click(); });
-      else b.addEventListener('click', () => openPop(K, el, b));
-      g.append(b);
-      el.classList.add('act-hid');
-    });
+    const tile = (k, t, sub, open, extra) => {
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'act k-' + k + (extra || '');
+      b.innerHTML = `<span class="act-i">${IC[k]}</span><span class="act-t"><b></b><small></small></span>`;
+      b.querySelector('b').textContent = t; b.querySelector('small').textContent = sub || ''; b.setAttribute('aria-haspopup', 'dialog');
+      b.addEventListener('click', () => open(b)); g.append(b); return b;
+    };
+    /* 1 the topic PowerPoint (appears once the deck is found) */
+    if (typeof svShow === 'function') {
+      const t = tile('ppt', 'PowerPoint', 'This topic’s slides', () => svShow(true)); t.removeAttribute('aria-haspopup'); t.hidden = true;
+      const sync = () => { const sw = document.getElementById('sv-sw'), h = !sw || sw.hidden; if (t.hidden !== h) t.hidden = h; };
+      sync(); const sw = document.getElementById('sv-sw'); if (sw) new MutationObserver(sync).observe(sw, { attributes: true, attributeFilter: ['hidden'] }); setTimeout(sync, 800); setTimeout(sync, 2500);
+    }
+    if (hub) tile('sheet', 'Revision Summary Sheet', ids.length > 1 ? `${ids.length} lessons` : 'Lesson ' + ids[0], b => openPop({ k: 'sheet', t: 'Revision Summary Sheet' }, hubNode('notes', 'Revision Summary Sheet', ids), b));
+    const add = K => found.filter(([k]) => k === K).forEach(([K2, el]) => { const sub = (() => { try { return K2.sub(el); } catch (e) { return ''; } })(), kick = K2.kick ? K2.kick(el) : ''; const b = tile(K2.k, K2.t, sub, bb => openPop(K2, el, bb)); if (kick) b.title = kick; el.classList.add('act-hid'); });
+    add(KINDS[0]); add(KINDS[1]);
+    if (hub) tile('prac', 'Activities & worksheet', 'Self-marking', b => openPop({ k: 'prac', t: 'Activities & worksheet' }, hubNode('practice', 'Activities & worksheet', ids), b));
+    add(KINDS[2]);
+    const nPage = pageKt ? pageKt.querySelectorAll('.kt-l > div').length : 0, nAll = ((typeof CH_TERMS !== 'undefined' && CH_TERMS.get(P.ch.id)) || []).length;
+    if (nPage || nAll) tile('terms', 'Key terms', nPage ? `${nPage} on this page · ${nAll} in topic` : `${nAll} in this topic`, b => openPop({ k: 'terms', t: 'Key terms' }, termsNode(P, pageKt), b));
+    if (hub) tile('pod', 'Podcast', 'Listen', b => openPop({ k: 'pod', t: 'Podcast' }, hubNode('podcast', 'Podcast', ids), b));
+    add(KINDS[3]);
+    tile('tips', 'How to revise this', tipsFor(P).map(k => HOW[k].t).join(' · '), b => openPop({ k: 'tips', t: 'How to revise this' }, tipsNode(P), b));
     const head = art.querySelector(':scope > header.phero') || art.querySelector(':scope > header');
     if (head) head.after(box); else art.prepend(box);
     const first = art.querySelector(':scope > .ncard');
@@ -10243,7 +10338,7 @@ try {
   const LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg>';
   const TICK = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>';
   const here = () => (typeof onCover !== 'undefined' && onCover) || (typeof onCredits !== 'undefined' && onCredits) ? null : PAGES[cur];
-  const ok = () => { try { return !localStorage.getItem('notes-nocount') || !!localStorage.getItem('mrb-viewas'); } catch (e) { return true; } };   /* a staff device viewing as a pupil behaves as the pupil (nothing is sent) */
+  const ok = () => { try { return !localStorage.getItem('notes-nocount') || !!localStorage.getItem('mrb-viewas') || !!localStorage.getItem('mrb-pupilmode'); } catch (e) { return true; } };   /* a staff device viewing as a pupil behaves as the pupil (nothing is sent) */
   const staff = () => !ok();
   const mins = s => { const m = Math.round((s || 0) / 60); return m < 1 ? (s ? 'under 1 min' : '0 min') : m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')}`; };
   const pqOf = id => (state.pq && state.pq[id]) || null;

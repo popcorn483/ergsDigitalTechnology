@@ -118,8 +118,8 @@
   function notebookSection(onlyUnit) {
     var have = UIDS.filter(function (u) { return nbOf(u) && (!onlyUnit || u === onlyUnit); });
     var h = '<section class="stack nb-home" id="notebooks"><div class="stack" style="gap:6px"><span class="eyebrow">Start here</span><h2>Revision notebooks</h2><p class="muted">' +
-      (have.length ? "Your notes for each unit, set out by specification point. Read a chapter, then use each lesson's slides, videos, activities, worksheet and quiz to test yourself." : "The revision notebook" + (onlyUnit ? " for " + esc(USHORT[onlyUnit]) + " is" : "s are") + " on the way. Until then, start with the fact file in each lesson.") + "</p></div>";
-    if (!have.length) return h + '<div class="row"><a class="btn" href="#unit">Go to the lessons</a><a class="btn" href="#factfiles">Fact files</a></div></section>';
+      (have.length ? "Your notes for each unit, set out by specification point. Read a chapter, then use each lesson's slides, videos, activities, worksheet and quiz to test yourself." : "The revision notebook" + (onlyUnit ? " for " + esc(USHORT[onlyUnit]) + " is" : "s are") + " on the way. Until then, start with the Revision Summary Sheet in each lesson.") + "</p></div>";
+    if (!have.length) return h + '<div class="row"><a class="btn" href="#unit">Go to the lessons</a><a class="btn" href="#factfiles">Revision Summary Sheets</a></div></section>';
     h += '<div class="grid2">' + have.map(function (u) { var n = nbOf(u); return '<a class="panel nb-card" href="' + esc(n.url) + '" target="_blank" rel="noopener"><span class="n">' + esc(USHORT[u]) + " notebook</span><h3>" + esc(n.title || UNAME[u]) + '</h3><span class="btn primary sm">Open the notebook →</span></a>'; }).join("") + "</div>";
     h += have.map(function (u) {
       var n = nbOf(u), pg = n.pages || {};
@@ -261,11 +261,11 @@
       '<a class="panel hub-card" href="#quiz"><b>Quiz Zone</b><span>Build a quiz from any topics in practice or timed mode.</span></a>' +
       '<a class="panel hub-card" href="#mindmaps"><b>Mind maps</b><span>Unit and topic maps with hide-and-recall.</span></a>' +
       '<a class="panel hub-card" href="#media"><b>Videos, podcasts and diagrams</b><span>Narrated lessons, revision podcasts and the diagram library.</span></a>' +
-      '<a class="panel hub-card" href="#revise"><b>Revise</b><span>Fact files, glossary, flashcards and your weakest spec points.</span></a>' +
+      '<a class="panel hub-card" href="#revise"><b>Revise</b><span>Revision Summary Sheets, glossary, flashcards and your weakest spec points.</span></a>' +
       '<a class="panel hub-card" href="#assess"><b>Exams</b><span>Topic tests and practice papers with mark schemes, plus the past-paper map.</span></a>' +
       '<a class="panel hub-card" href="#links"><b>Useful websites</b><span>Checked links for every topic.</span></a>' +
       ((C.tutorials || []).length ? '<a class="panel hub-card" href="#tutorials"><b>Tutorials</b><span>' + C.tutorials.length + " step-by-step tutorials: " + esc((C.tutorialSeries || []).map(function (x) { return x.short || x.name; }).join(", ")) + ".</span></a>" : "") +
-      '</section><section class="grid2"><div class="panel stack"><h3>Inside every lesson</h3><ol class="steps"><li><b>Read the notes</b> – opens the lesson\'s pages in your unit revision notebook.</li><li><b>Video</b> – a narrated walk-through of the slides and diagram with captions and a quick check.</li><li><b>Podcast</b> – Aoife and Conor talk through the topic, quiz the key terms and cover the exam angle.</li><li><b>Slides</b> – click through in the browser or download the PowerPoint. ' + esc(USHORT[HUB.prog]) + ' code runs in the page.</li><li><b>Fact file</b> – a one-to-two page summary: diagram, spec, notes, mark-scheme terms, exam focus and check questions. Download it as a PDF.</li><li><b>Activities</b> – sorting, sequencing, spot-the-mistake, practice generators and coding challenges.</li><li><b>Worksheet</b> – key-term match, gap fill and true/false that mark themselves, plus exam-style questions with mark schemes.</li><li><b>Quiz</b> – multiple choice, matching, gap fill and true/false.</li><li><b>Past papers</b> – every past question on this topic, with links to CCEA\'s paper and mark scheme.</li></ol></div>' +
+      '</section><section class="grid2"><div class="panel stack"><h3>Inside every lesson</h3><ol class="steps"><li><b>Read the notes</b> – opens the lesson\'s pages in your unit revision notebook.</li><li><b>Video</b> – a narrated walk-through of the slides and diagram with captions and a quick check.</li><li><b>Podcast</b> – Aoife and Conor talk through the topic, quiz the key terms and cover the exam angle.</li><li><b>Slides</b> – click through in the browser or download the PowerPoint. ' + esc(USHORT[HUB.prog]) + ' code runs in the page.</li><li><b>Revision Summary Sheet</b> – a one-to-two page summary: diagram, spec, notes, mark-scheme terms, exam focus and check questions. Download it as a PDF.</li><li><b>Activities</b> – sorting, sequencing, spot-the-mistake, practice generators and coding challenges.</li><li><b>Worksheet</b> – key-term match, gap fill and true/false that mark themselves, plus exam-style questions with mark schemes.</li><li><b>Quiz</b> – multiple choice, matching, gap fill and true/false.</li><li><b>Past papers</b> – every past question on this topic, with links to CCEA\'s paper and mark scheme.</li></ol></div>' +
       '<div class="panel stack"><h3>How to revise with this site</h3><ol class="steps"><li>Read the notebook chapter for a lesson.</li><li>Watch the video or listen to the podcast.</li><li>Do the worksheet and quiz without looking, then press <b>Show mark scheme</b> to check each answer.</li><li>Try the topic tests and practice papers under <b>Exams</b>, timed.</li><li>Rate yourself in the <b>Tracker</b> and go back to anything red or amber.</li></ol><p class="muted small">Answers you type, quiz scores and tracker ratings are saved in your own browser only.</p>' +
       '<p class="muted small">Past-paper questions and mark schemes belong to CCEA. This site maps and links to them; notes and definitions are written for this site. <a href="' + C.ccea.pastPage + '" target="_blank" rel="noopener">CCEA past papers</a> · <a href="' + C.ccea.support + '" target="_blank" rel="noopener">CCEA fact files</a> · <a href="' + C.ccea.spec + '" target="_blank" rel="noopener">Specification</a></p></div></section></div>';
     app.innerHTML = h;
@@ -310,7 +310,8 @@
     var u = unitOf(l);
     if (unit !== u) { unit = u; store.set("unit", u); applyChrome(); }
     Speech.stop();
-    var tabs = [["video", "Video"], ["podcast", "Podcast"], ["slides", "Slides"], ["notes", "Fact file"], ["activities", "Activities"], ["worksheet", "Worksheet"], ["quiz", "Quiz"], ["papers", "Past papers"], ["terms", "Key terms"]];
+    var tabs = [["video", "Video"], ["podcast", "Podcast"], ["slides", "Slides"], ["notes", "Revision Summary Sheet"], ["activities", "Activities"], ["worksheet", "Worksheet"], ["quiz", "Quiz"], ["papers", "Past papers"], ["terms", "Key terms"]];
+    if (EMBED) tabs.push(["practice", "Activities & worksheet"]);   /* the revision workbooks' "Activities & worksheet": both on one page */
     if (!tabs.some(function (t) { return t[0] === tab; })) tab = null;
     tab = tab || "slides";
     var ls = lessonsOf(u), idx = ls.indexOf(l), prev = ls[idx - 1], next = ls[idx + 1];
@@ -321,7 +322,7 @@
     var lt = (C.tutorials || []).filter(function (x) { return x.l === l.id; });
     if (lt.length) h += '<div class="panel row tstrip"><b class="small">Step-by-step tutorials for this lesson:</b>' + lt.map(function (x) { var p = Tutorials.progress({ store: store }, x); return '<a class="btn sm" href="#tut-' + x.id + '">' + esc(x.title) + (p.done === p.total ? " ✓" : "") + "</a>"; }).join("") + "</div>";
     h += '<div class="tabs lv-tabs" role="tablist">' + tabs.map(function (t) { return '<button role="tab" aria-selected="' + (t[0] === tab) + '" data-tab="' + t[0] + '">' + t[1] + "</button>"; }).join("") + "</div>";
-    h += '<div id="tabbody" class="stack">' + ({ activities: lessonActsHTML, video: videoHTML, podcast: podcastHTML, slides: slidesHTML, notes: notesHTML, worksheet: wsHTML, quiz: quizHTML, papers: lessonPapersHTML, terms: lessonTermsHTML })[tab](l) + "</div>";
+    h += '<div id="tabbody" class="stack">' + ({ activities: lessonActsHTML, practice: function (x) { return '<section class="stack"><h2 class="pr-h">Activities</h2>' + lessonActsHTML(x) + '</section><section class="stack"><h2 class="pr-h">Worksheet <small>marks itself as you go</small></h2>' + wsHTML(x) + "</section>"; }, video: videoHTML, podcast: podcastHTML, slides: slidesHTML, notes: notesHTML, worksheet: wsHTML, quiz: quizHTML, papers: lessonPapersHTML, terms: lessonTermsHTML })[tab](l) + "</div>";
     h += '<div class="row lv-nav" style="justify-content:space-between;border-top:1px solid var(--line);padding-top:16px">' +
       (prev ? '<a class="btn" href="#' + prev.id + '">← ' + esc(prev.title) + "</a>" : "<span></span>") +
       (next ? '<a class="btn" href="#' + next.id + '">' + esc(next.title) + " →</a>" : '<a class="btn primary" href="#assess">Tests →</a>') + "</div></div></div>";
@@ -329,7 +330,8 @@
     app.querySelectorAll("[data-tab]").forEach(function (b) { b.onclick = function () { slideIdx = 0; location.hash = l.id + "-" + b.dataset.tab; }; });
     document.getElementById("mj").onchange = function (e) { location.hash = e.target.value; };
     if (tab === "slides") wireSlides(l);
-    if (tab === "worksheet") wireWS(l);
+    if (tab === "worksheet" || tab === "practice") wireWS(l);
+    if (tab === "practice") wireActs(app);
     if (tab === "quiz") wireQuizTab(l);
     if (tab === "activities") wireActs(app);
     if (tab === "video") wireVideo(l);
@@ -728,7 +730,7 @@
   // ---------- Fact file ----------
   function notesHTML(l) {
     var terms = C.print.lessonTerms(l), notes = (l.notes || []).filter(function (n) { return !/exam/i.test(n.h); }), exam = (l.notes || []).filter(function (n) { return /exam/i.test(n.h); })[0], pp = ppFor(l.id);
-    var h = '<div class="panel stack factfile"><div class="sheet-head"><div class="row" style="justify-content:space-between;align-items:flex-start"><div><span class="eyebrow">Fact file · ' + USHORT[unitOf(l)] + " · " + l.id + '</span><h2 style="margin-top:4px">' + esc(l.title) + '</h2></div><div class="row"><button class="btn sm" id="dlff">Download fact file (PDF)</button>' + (terms.length ? '<button class="btn sm" id="toflash">Revise as flashcards</button>' : "") + '</div></div></div>';
+    var h = '<div class="panel stack factfile"><div class="sheet-head"><div class="row" style="justify-content:space-between;align-items:flex-start"><div><span class="eyebrow">Revision Summary Sheet · ' + USHORT[unitOf(l)] + " · " + l.id + '</span><h2 style="margin-top:4px">' + esc(l.title) + '</h2></div><div class="row"><button class="btn sm" id="dlff">Download as PDF</button>' + (terms.length ? '<button class="btn sm" id="toflash">Revise as flashcards</button>' : "") + '</div></div></div>';
     if (nbLesson(l)) h += '<p class="nb-line">This fact file is a summary. <a href="' + esc(nbLesson(l)) + '" target="_blank" rel="noopener"><b>Read the full notes for this lesson in the ' + esc(USHORT[unitOf(l)]) + " revision notebook →</b></a></p>";
     h += '<div class="ff-top"><div class="stack" style="gap:10px"><h3>Specification</h3><ul class="spec-list small">' + l.spec.map(function (o) { return "<li>" + esc(o) + "</li>"; }).join("") + "</ul>" + ffHTML(l) + "</div>" + diagram(l.id) + "</div>";
     h += '<div class="ff-body">';
@@ -756,8 +758,8 @@
     });
     h += '<p class="muted small">' + USHORT[u] + ": about " + tv + " minutes of video and " + tp + " minutes of podcast.</p>";
     h += '<section class="stack" id="images"><h2>Diagram library</h2><p class="muted">One diagram per lesson, also used in the fact files, worksheets and PowerPoints. Download any as a PNG for your own revision notes.</p><div class="dgrid">' +
-      lessonsOf(u).filter(function (l) { return window.Diagrams && Diagrams.has(l.id); }).map(function (l) { return '<figure class="diagram">' + diagramSVG(l.id) + '<figcaption><b class="mono">' + l.id + "</b> " + esc(Diagrams.caption(l.id)) + '</figcaption><div class="row"><button class="btn sm" data-png="' + l.id + '">Download PNG</button><a class="btn sm" href="#' + l.id + '-notes">Fact file</a></div></figure>'; }).join("") + "</div></section>";
-    h += '<section class="panel stack"><h3>Printable packs</h3><div class="row"><button class="btn sm" data-pdf="factfiles/' + u + '-factfiles.pdf">All ' + USHORT[u] + ' fact files (PDF)</button><button class="btn sm" data-pdf="pdf/' + u + '-workbook.pdf">Workbook (PDF)</button><button class="btn sm" data-pdf="pdf/' + u + '-workbook-answers.pdf">Workbook answers (PDF)</button><button class="btn sm" data-pdf="pdf/' + u + '-flashcards.pdf">Flashcards (PDF)</button></div></section>';
+      lessonsOf(u).filter(function (l) { return window.Diagrams && Diagrams.has(l.id); }).map(function (l) { return '<figure class="diagram">' + diagramSVG(l.id) + '<figcaption><b class="mono">' + l.id + "</b> " + esc(Diagrams.caption(l.id)) + '</figcaption><div class="row"><button class="btn sm" data-png="' + l.id + '">Download PNG</button><a class="btn sm" href="#' + l.id + '-notes">Revision Summary Sheet</a></div></figure>'; }).join("") + "</div></section>";
+    h += '<section class="panel stack"><h3>Printable packs</h3><div class="row"><button class="btn sm" data-pdf="factfiles/' + u + '-factfiles.pdf">All ' + USHORT[u] + ' Revision Summary Sheets (PDF)</button><button class="btn sm" data-pdf="pdf/' + u + '-workbook.pdf">Workbook (PDF)</button><button class="btn sm" data-pdf="pdf/' + u + '-workbook-answers.pdf">Workbook answers (PDF)</button><button class="btn sm" data-pdf="pdf/' + u + '-flashcards.pdf">Flashcards (PDF)</button></div></section>';
     app.innerHTML = h + "</div>";
     app.querySelectorAll("[data-png]").forEach(function (b) { b.onclick = function () { saveFile("diagrams/" + b.dataset.png + ".png", b.dataset.png + "-diagram.png"); }; });
     app.querySelectorAll("[data-pdf]").forEach(function (b) { b.onclick = function () { saveFile(b.dataset.pdf, b.dataset.pdf.split("/")[1]); }; });
@@ -814,8 +816,9 @@
     l.ws.forEach(function (w, i) {
       h += '<div class="q"><div class="q-head"><span class="q-num">' + (i + 1) + '</span><div class="q-text">' + esc(w.q) + '</div><span class="marks">[' + w.m + "]</span></div>" +
         '<textarea id="ws-' + l.id + "-" + i + '" aria-label="Answer to question ' + (i + 1) + '"' + (w.m >= 6 ? ' style="min-height:170px"' : "") + "></textarea>" +
-        msBlock("ms-" + i, w.a) + "</div>";
+        msBlock("ms-" + i, w.a) + '<div class="selfm" data-sm="' + i + '"><span>Check the mark scheme, then give yourself a mark:</span>' + Array.apply(null, Array(w.m + 1)).map(function (_, k) { return '<button type="button" data-v="' + k + '">' + k + "</button>"; }).join("") + "</div></div>";
     });
+    h += '<div class="score" id="wstotal"><b>– / ' + (auto + wsm) + '</b><span class="muted">Your total: sections A–C marked for you, D marked by you</span></div>';
     return h + "</div>";
   }
   function wireWS(l) {
@@ -831,6 +834,19 @@
         b.onclick = function () { saved["t" + i] = b.dataset.v; store.set(key, saved); g.querySelectorAll("button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); x.className = ""; }); };
       });
     });
+    var markD = function () {
+      var d = 0, any = false;
+      app.querySelectorAll("[data-sm]").forEach(function (g) { var v = saved["d" + g.dataset.sm]; g.querySelectorAll("button").forEach(function (b) { b.setAttribute("aria-pressed", v === b.dataset.v); }); if (v != null && v !== "") { d += +v; any = true; } });
+      return any ? d : null;
+    };
+    var total = function (abc) {
+      var d = markD(), t = document.querySelector("#wstotal b"), wsm = l.ws.reduce(function (a, b) { return a + b.m; }, 0), autoN = app.querySelectorAll("[data-wm],[data-cz],[data-tf]").length;
+      if (t) t.textContent = ((abc == null ? 0 : abc) + (d || 0)) + " / " + (autoN + wsm);
+    };
+    app.querySelectorAll("[data-sm]").forEach(function (g) {
+      g.querySelectorAll("button").forEach(function (b) { b.onclick = function () { saved["d" + g.dataset.sm] = b.dataset.v; store.set(key, saved); total(lastABC); }; });
+    });
+    var lastABC = null;
     document.getElementById("wscheck").onclick = function () {
       var got = 0, tot = 0;
       app.querySelectorAll("[data-wm]").forEach(function (s) { tot++; var ok = s.value === s.dataset.ans; if (ok) got++; s.style.borderColor = ok ? "var(--ok)" : "var(--bad)"; });
@@ -840,12 +856,18 @@
         if (picked === right) got++;
         g.querySelectorAll("button").forEach(function (b) { b.className = b.dataset.v === right ? "r" : (b.dataset.v === picked ? "w" : ""); });
       });
-      document.querySelector("#wsscore b").textContent = got + " / " + tot;
+      document.querySelector("#wsscore b").textContent = got + " / " + tot; lastABC = got; total(got);
       document.querySelector("#wsscore .muted").textContent = got === tot ? "All correct" : "Red items are wrong – gaps show the answer when you hover or long-press";
     };
     document.getElementById("wsreset").onclick = function () {
-      Object.keys(saved).forEach(function (k) { if (/^[mct]/.test(k)) delete saved[k]; }); store.set(key, saved); lessonView(l, "worksheet");
+      Object.keys(saved).forEach(function (k) { if (/^[mctd]/.test(k)) delete saved[k]; }); store.set(key, saved); lessonView(l, EMBED && /-practice$/.test(location.hash) ? "practice" : "worksheet");
     };
+    /* marks itself: every answer in A–C is checked as soon as it is given (gaps when you leave the box) */
+    var live = function () { var c = document.getElementById("wscheck"); if (c) c.onclick(); };
+    app.querySelectorAll("[data-wm]").forEach(function (x) { x.addEventListener("change", live); });
+    app.querySelectorAll("[data-cz]").forEach(function (x) { x.addEventListener("change", live); });
+    app.querySelectorAll("[data-tf] button").forEach(function (x) { x.addEventListener("click", function () { setTimeout(live, 0); }); });
+    if (Object.keys(saved).some(function (k) { return /^[mct]/.test(k); })) live(); else total(null);
     wireMS(app);
     document.getElementById("dlws").onclick = function () { save(l.id + "-worksheet.html", C.print.worksheet([l], { screen: true })); };
     document.getElementById("dlwsa").onclick = function () { save(l.id + "-worksheet-answers.html", C.print.worksheet([l], { answers: true, screen: true })); };
@@ -1266,7 +1288,7 @@
     h += '<nav class="toc row small"><a href="#' + t.id + '" data-jump="t-flow">Lesson flow</a><a href="#' + t.id + '" data-jump="t-spec">Specification checklist</a><a href="#' + t.id + '" data-jump="t-map">Mind map</a><a href="#' + t.id + '" data-jump="t-acts">Activities</a><a href="#' + t.id + '" data-jump="t-pp">Past papers</a><a href="#' + t.id + '" data-jump="t-links">Websites</a><a href="#' + t.id + '" data-jump="t-gloss">Glossary</a></nav>';
     // flow
     h += '<section class="stack" id="t-flow"><h2>Lesson flow</h2><ol class="flow">' + ls.map(function (l, i) {
-      return '<li class="panel flow-step"><div class="flow-n">' + (i + 1) + '</div><div class="stack" style="gap:6px"><div class="row" style="justify-content:space-between"><a href="#' + l.id + '"><b>' + l.id + " · " + esc(l.title) + '</b></a><span class="muted small">' + C.media.videoMinutes(l) + " min video · " + Acts.forLesson(l.id).length + ' activities</span></div><p class="small muted">' + esc(l.obj.join(" · ")) + '</p><div class="row flow-links"><a class="btn sm" href="#' + l.id + '-video">▶ Video</a><a class="btn sm" href="#' + l.id + '-slides">Slides</a><a class="btn sm" href="#' + l.id + '-notes">Fact file</a><a class="btn sm" href="#' + l.id + '-activities">Activities</a><a class="btn sm" href="#' + l.id + '-worksheet">Worksheet</a><a class="btn sm" href="#' + l.id + '-quiz">Quiz</a><a class="btn sm" href="#' + l.id + '-podcast">🎧 Podcast</a></div></div></li>';
+      return '<li class="panel flow-step"><div class="flow-n">' + (i + 1) + '</div><div class="stack" style="gap:6px"><div class="row" style="justify-content:space-between"><a href="#' + l.id + '"><b>' + l.id + " · " + esc(l.title) + '</b></a><span class="muted small">' + C.media.videoMinutes(l) + " min video · " + Acts.forLesson(l.id).length + ' activities</span></div><p class="small muted">' + esc(l.obj.join(" · ")) + '</p><div class="row flow-links"><a class="btn sm" href="#' + l.id + '-video">▶ Video</a><a class="btn sm" href="#' + l.id + '-slides">Slides</a><a class="btn sm" href="#' + l.id + '-notes">Revision Summary Sheet</a><a class="btn sm" href="#' + l.id + '-activities">Activities</a><a class="btn sm" href="#' + l.id + '-worksheet">Worksheet</a><a class="btn sm" href="#' + l.id + '-quiz">Quiz</a><a class="btn sm" href="#' + l.id + '-podcast">🎧 Podcast</a></div></div></li>';
     }).join("") + "</ol></section>";
     // spec checklist (+ build a PowerPoint from chosen spec points)
     h += '<section class="panel stack" id="t-spec"><div class="row" style="justify-content:space-between"><h2>Specification checklist</h2><span class="muted small">Rate yourself: red = not yet, amber = nearly, green = confident.</span></div><div class="spec-tbl">' + sp.map(function (p, i) {
@@ -1456,7 +1478,7 @@
     var u = unit;
     var h = '<div class="stack"><span class="eyebrow">Revise · ' + USHORT[u] + '</span><h1>Revise</h1><p class="lead">Everything for revision in one place.</p><div class="hub-cards">' +
       '<a class="panel hub-card" href="#mindmaps"><b>Mind maps</b><span>Unit and topic maps with a hide-and-recall mode.</span></a>' +
-      '<a class="panel hub-card" href="#factfiles"><b>Fact files</b><span>A one-to-two page summary for every lesson, with diagrams.</span></a>' +
+      '<a class="panel hub-card" href="#factfiles"><b>Revision Summary Sheets</b><span>A one-to-two page Revision Summary Sheet for every lesson, with diagrams.</span></a>' +
       '<a class="panel hub-card" href="#glossary"><b>Glossary</b><span>' + C.gloss.length + ' key terms taken from the mark schemes.</span></a>' +
       '<a class="panel hub-card" href="#flashcards"><b>Flashcards</b><span>Make printable cards or revise on screen.</span></a>' +
       '<a class="panel hub-card" href="#media"><b>Videos and podcasts</b><span>Narrated lessons and two-host revision episodes.</span></a>' +
@@ -1472,7 +1494,7 @@
   }
   function factfilesPage() {
     var u = unit;
-    var h = '<div class="stack"><span class="eyebrow">Revise · ' + USHORT[u] + '</span><h1>Fact files</h1><p class="lead">Open a fact file on screen or download it as a PDF. Every one has a diagram, the specification, notes, mark-scheme terms and exam focus.</p><div class="row"><button class="btn" data-pdf="factfiles/' + u + '-factfiles.pdf">Download all ' + USHORT[u] + " fact files (PDF)</button></div>";
+    var h = '<div class="stack"><span class="eyebrow">Revise · ' + USHORT[u] + '</span><h1>Revision Summary Sheets</h1><p class="lead">Open a Revision Summary Sheet on screen or download it as a PDF. Every one has a diagram, the specification, notes, mark-scheme terms and exam focus.</p><div class="row"><button class="btn" data-pdf="factfiles/' + u + '-factfiles.pdf">Download all ' + USHORT[u] + " Revision Summary Sheets (PDF)</button></div>";
     topicsOf(u).forEach(function (t) { h += '<section class="panel stack"><h3>' + topicNum(t) + ". " + esc(t.name) + '</h3><div class="media-list">' + topicLessons(t).map(function (l) { return '<div class="media-row"><span class="mono small muted">' + l.id + '</span><a class="grow" href="#' + l.id + '-notes">' + esc(l.title) + '</a><button class="btn sm" data-pdf="factfiles/' + l.id + '.pdf">PDF</button></div>'; }).join("") + "</div></section>"; });
     app.innerHTML = h + "</div>";
     app.querySelectorAll("[data-pdf]").forEach(function (b) { b.onclick = function () { saveFile(b.dataset.pdf, b.dataset.pdf.split("/")[1].replace(".pdf", "") + "-fact-file.pdf"); }; });
