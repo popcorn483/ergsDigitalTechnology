@@ -2421,6 +2421,12 @@ html.act-open{overflow:hidden}html.act-open .pbar,html.act-open .sv-sw{display:n
 .ap-terms details.kt > summary{display:none}.ap-terms .kt,.ap-terms .ap-topic{background:var(--paper);border:1px solid var(--line);border-radius:12px;margin:0}.ap-terms .kt-l,.ap-terms .ap-topic{padding:4px 14px}
 .ap-tips .tip{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--k);border-radius:12px;padding:12px 14px;margin:0 0 10px;font-family:var(--sans)}.ap-tips .tip h3{margin:0 0 2px;font:800 16px var(--sans);text-transform:none;letter-spacing:0}.ap-tips .tip-w{margin:0 0 6px;color:var(--ink-3);font-size:13px;font-weight:600}.ap-tips ol{margin:0;padding-left:20px;font-size:14.5px;line-height:1.5}.ap-tips li{margin:2px 0}
 .tip-all{margin:4px 0 10px}.tip-all > summary{font:800 14px var(--sans);cursor:pointer;margin:0 0 8px;color:var(--k)}
+/* PAST-PAPER DEFINITIONS: terms CCEA has asked pupils to define */
+.term.term-pp{background:linear-gradient(transparent 52%,color-mix(in srgb,#F5C518 55%,transparent) 52%);border-bottom-color:#C77A00!important;border-bottom-style:solid!important;font-weight:inherit}
+.term.term-pp::after{content:"★";font-size:.62em;vertical-align:super;margin-left:1px;color:#C77A00;font-family:var(--sans)}
+.notes-k{flex-wrap:wrap}.notes-pp{flex:1 1 100%;font:600 12.5px/1.4 var(--sans);letter-spacing:0;text-transform:none;color:var(--ink-3);margin-top:4px}.notes-pp .term{font-style:normal;cursor:default;color:var(--ink)}
+.pp-def{display:inline-block;vertical-align:middle;margin-left:6px;padding:1px 8px;border-radius:999px;font:800 11px/1.5 var(--sans);background:color-mix(in srgb,#F5C518 35%,var(--paper));color:#8A5300;border:1px solid color-mix(in srgb,#C77A00 45%,transparent)}
+@media (prefers-color-scheme:dark){.term.term-pp{background:linear-gradient(transparent 52%,color-mix(in srgb,#F5C518 30%,transparent) 52%)}}
 /* PAGE BAR (phones): ‹ · Mark as covered · Next › fixed at the bottom; the "Before you move on" sheet */
 .pbar{display:none}
 #b-ppt{display:none}
@@ -10282,6 +10288,7 @@ try {
     const pick = w => { box.querySelectorAll('[data-v]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === w))); if (pageKt) pageKt.hidden = w !== 'page'; topic.hidden = w !== 'topic'; };
     box.addEventListener('click', e => { const b = e.target.closest('[data-v]'); if (b) pick(b.dataset.v); });
     pick(nPage ? 'page' : 'topic');
+    markDefs(box);
     return box;
   }
   function tipsNode(P) {
@@ -10292,6 +10299,24 @@ try {
       <p class="ap-note"><a href="${ON_WEB ? '../' : ''}how-to-revise.pdf" target="_blank" rel="noopener">Mr Butler’s How to Revise sheet (PDF)</a></p>`;
     return box;
   }
+  /* key terms CCEA has asked pupils to define: highlighted where they appear in the notes and in the key-term lists */
+  const DEF_RX = /\bdefin|what is meant by|meaning of|\bstate what\b|what (is|are) (a|an|the)\b|explain (the term|what)|\bthe term\b|which (statement|term|one|of these)( best)? (describes|is|defines|means)|(identify|name|give) the term|stands? for/i;   /* questions that ask for a definition (including "match the terms to definitions" and multiple choice) */
+  const defHits = g => { try { return g && typeof PP_USES !== 'undefined' ? (PP_USES.get(g) || []).filter(x => DEF_RX.test(x.text || x.e.summary || '')) : []; } catch (e) { return []; } };
+  const refs = hs => hs.slice(0, 3).map(x => { try { return examRef(x.e); } catch (e) { return ''; } }).filter(Boolean).join(', ') + (hs.length > 3 ? ` and ${hs.length - 3} more` : '');
+  function markDefs(root) {
+    let n = 0;
+    root.querySelectorAll('button.term[data-term]').forEach(b => {
+      const g = typeof findTerm === 'function' ? findTerm(b.dataset.term) : null, hs = defHits(g); if (!hs.length) return;
+      b.classList.add('term-pp'); b.title = `Asked as a definition in past papers: ${refs(hs)}`; n++;
+    });
+    root.querySelectorAll('.kt-l > div > dt').forEach(dt => {
+      if (dt.querySelector('.pp-def')) return;
+      const g = typeof findTerm === 'function' ? findTerm(dt.textContent.trim()) : null, hs = defHits(g); if (!hs.length) return;
+      dt.insertAdjacentHTML('beforeend', ` <span class="pp-def" title="${esc(refs(hs))}">Asked as a definition ×${hs.length}</span>`);
+    });
+    return n;
+  }
+  window.MRB_MARK_DEFS = markDefs;
   function build() {
     pop = null; document.documentElement.classList.remove('act-open');
     const main = document.getElementById('main'), art = main && main.querySelector('article'); if (!art || !art.querySelector('.ncard')) return;
@@ -10330,7 +10355,8 @@ try {
     const head = art.querySelector(':scope > header.phero') || art.querySelector(':scope > header');
     if (head) head.after(box); else art.prepend(box);
     const first = art.querySelector(':scope > .ncard');
-    if (first) { const k = document.createElement('div'); k.className = 'notes-k'; k.innerHTML = `${IC.notes}<span>Notes</span>`; first.before(k); }
+    const nDef = markDefs(art);
+    if (first) { const k = document.createElement('div'); k.className = 'notes-k'; k.innerHTML = `${IC.notes}<span>Notes</span>${nDef ? '<small class="notes-pp"><i class="term term-pp">Highlighted</i> terms have been asked as definitions in CCEA past papers</small>' : ''}`; first.before(k); }
   }
   const rp = renderPage;
   renderPage = function () { const r = rp.apply(this, arguments); try { build(); } catch (e) { } return r; };
