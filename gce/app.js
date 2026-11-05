@@ -658,7 +658,7 @@
       '<div class="pctl"><button class="btn sm" id="pprev" aria-label="Previous line">⏮</button><button class="btn primary" id="pplay">▶ Play</button><button class="btn sm" id="pnext" aria-label="Next line">⏭</button><span class="mono small muted" id="ppos"></span><span class="grow"></span>' +
       '<label class="small">Speed <select id="prate"><option value="0.85">0.85×</option><option value="1">1×</option><option value="1.15">1.15×</option><option value="1.3">1.3×</option></select></label>' +
       '<label class="small">' + H[0] + ' <select id="pva"></select></label><label class="small">' + H[1] + ' <select id="pvb"></select></label></div>' +
-      '<div class="plines" id="plines"></div><div class="row"><button class="btn sm" id="pcopy">Copy transcript</button></div></div>';
+      '<div class="row"><button class="btn sm" id="ptr" aria-expanded="false" onclick="var p=document.getElementById(\'plines\'),c=document.getElementById(\'pcopy\');p.hidden=!p.hidden;c.hidden=p.hidden;this.setAttribute(\'aria-expanded\',String(!p.hidden));this.textContent=p.hidden?\'Show transcript ▾\':\'Hide transcript ▴\'">Show transcript ▾</button></div><div class="plines" id="plines" hidden></div><div class="row"><button class="btn sm" id="pcopy" hidden>Copy transcript</button></div></div>';
   }
   function wirePodcast(l) {
     loadAudio(l.id).then(function (A) { if (!document.getElementById("plines")) return; if (A) wirePodcastAudio(l, A); else wirePodcastSpeech(l); });
