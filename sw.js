@@ -1,14 +1,15 @@
 /* Service worker for the CCEA Digital Technology site (built by notes/app/build_app.py; do not edit by hand).
-   Precache (stale-while-revalidate): front page, workbooks, fonts, icons, the hubs' core files.
-   Network-first: notes/slides/manifest.json, papers/*.json, version.json. A new worker waits for the page's "Update now" (SKIP_WAITING). Cache on first use (capped): PowerPoints, PDFs, audio, diagrams and images.
+   Pages (front page, workbooks): network first, the precached copy offline. Precache (stale-while-revalidate): fonts, icons, the hubs' core files.
+   Network-first: notes/slides/manifest.json, papers/*.json, version.json. A new worker takes over at once (skipWaiting). Cache on first use (capped): PowerPoints, PDFs, audio, diagrams and images.
    Never cached: anything from another site (YouTube, Wikimedia, Google Fonts...). */
-const VERSION = 'a8ade6d29dfd';
+const VERSION = '88f23d8ee0aa';
 const PRE = 'dt-pre-' + VERSION, RT = 'dt-rt-v1', RT_MAX = 150;
 const PRECACHE = ["./","index.html","manifest.webmanifest","notes/A21.html","notes/A22.html","notes/AS1.html","notes/AS2.html","notes/U1.html","notes/U4.html","notes/U5.html","notes/_t.html","qrcode.js","fonts/lemonmilk-bold.woff","fonts/lemonmilk-light.woff","fonts/lemonmilk-medium.woff","fonts/lemonmilk-regular.woff","fonts/saira-hero.woff","fonts/AtkinsonHyperlegible-Bold.woff2","fonts/AtkinsonHyperlegible-Italic.woff2","fonts/AtkinsonHyperlegible-Regular.woff2","icons/T1.png","icons/T10.png","icons/T2.png","icons/T3.png","icons/T4.png","icons/T41.png","icons/T42.png","icons/T43.png","icons/T44.png","icons/T45.png","icons/T46.png","icons/T47.png","icons/T5.png","icons/T6.png","icons/T7.png","icons/T8.png","icons/T9.png","gce/icons/G1.png","gce/icons/G10.png","gce/icons/G11.png","gce/icons/G12.png","gce/icons/G13.png","gce/icons/G14.png","gce/icons/G15.png","gce/icons/G16.png","gce/icons/G17.png","gce/icons/G18.png","gce/icons/G19.png","gce/icons/G2.png","gce/icons/G20.png","gce/icons/G21.png","gce/icons/G22.png","gce/icons/G23.png","gce/icons/G24.png","gce/icons/G3.png","gce/icons/G4.png","gce/icons/G5.png","gce/icons/G6.png","gce/icons/G7.png","gce/icons/G8.png","gce/icons/G9.png","app-icons/apple-touch-icon.png","app-icons/favicon-32.png","app-icons/icon-192.png","app-icons/icon-512.png","app-icons/maskable-192.png","app-icons/maskable-512.png","hub.html","acts.js","animate.js","app.js","course.js","csharp.js","deckcore.js","diagrams.js","links.js","print.js","scripts.js","tutorials.js","gce/hub.html","gce/index.html","gce/acts.js","gce/animate.js","gce/app.js","gce/course.js","gce/csharp.js","gce/deckcore.js","gce/diagrams-extra.js","gce/diagrams.js","gce/links.js","gce/print.js","gce/scripts.js","gce/tutorials.js","teacher.html","lib/pdf-lib.min.js","papers/topics.json","papers/folders.json","papers/manifest.json","papers/crops.json","papers/pages.json","papers/reports.json","papers/exam-dates.json"];
 const BASE = new URL('./', self.location).href;
 const PRE_SET = new Set(PRECACHE.map(p => new URL(p, BASE).href));
 self.addEventListener('install', e => {
-  e.waitUntil(caches.open(PRE).then(c => Promise.all(PRECACHE.map(p => c.add(new Request(new URL(p, BASE).href, { cache: 'reload' })).catch(() => null)))));   /* waits until the page says Update now (SKIP_WAITING) */
+  self.skipWaiting();   /* a new version takes over straight away (the installed app never stays on an old copy) */
+  e.waitUntil(caches.open(PRE).then(c => Promise.all(PRECACHE.map(p => c.add(new Request(new URL(p, BASE).href, { cache: 'reload' })).catch(() => null)))));
 });
 self.addEventListener('activate', e => {
   e.waitUntil(caches.keys().then(ks => Promise.all(ks.filter(k => k.startsWith('dt-') && k !== PRE && k !== RT).map(k => caches.delete(k)))).then(() => self.clients.claim()));
@@ -19,6 +20,12 @@ async function swr(req, key) {
   const c = await caches.open(PRE), hit = await c.match(key);
   const net = fetch(req).then(r => { if (r && r.ok && r.type === 'basic') c.put(key, r.clone()); return r; }).catch(() => null);
   return hit || (await net) || Response.error();
+}
+/* pages (the front page, the workbooks): always the latest from the web, the saved copy only when offline */
+async function pageFirst(req, key) {
+  const c = await caches.open(PRE);
+  try { const r = await fetch(req, { cache: 'no-cache' }); if (r && r.ok && r.type === 'basic') c.put(key, r.clone()); return r; }
+  catch (e) { return (await c.match(key)) || (await caches.match(key)) || (await caches.match(new URL('index.html', BASE).href)) || Response.error(); }
 }
 async function netFirst(req) {
   const c = await caches.open(RT);
@@ -43,6 +50,7 @@ self.addEventListener('fetch', e => {
   if (req.headers.has('range')) return;                                          /* audio/video seeking: let the browser stream */
   const key = clean(req.url);
   if (/\/notes\/slides\/manifest\.json$|\/papers\/(manifest|folders|pages|crops|reports|topics|exam-dates|worksheets)\.json$|\/(version|activity)\.json$/.test(url.pathname)) { e.respondWith(netFirst(req)); return; }
+  if (req.mode === 'navigate' || /\.html$|\/$/.test(url.pathname)) { e.respondWith(pageFirst(req, key)); return; }
   if (PRE_SET.has(key)) { e.respondWith(swr(req, key)); return; }
   if (req.mode === 'navigate') { e.respondWith(fetch(req).catch(async () => (await caches.match(key)) || (await caches.match(new URL('index.html', BASE).href)) || Response.error())); return; }
   if (/\.(pptx?|pdf|mp3|m4a|ogg|wav|png|jpe?g|webp|gif|svg)$/i.test(url.pathname)) { e.respondWith(onUse(req)); return; }

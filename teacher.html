@@ -475,6 +475,17 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     };
     if (document.body) put(); else document.addEventListener('DOMContentLoaded', put);
   }
+  /* a phone running the site in Chrome's "Desktop site" mode (often saved with the installed app) gets the computer layout,
+     shrunk: say how to fix it, until dismissed */
+  try {
+    const desk = matchMedia('(pointer:coarse)').matches && Math.min(screen.width, screen.height) < 700 && innerWidth >= 900;
+    if (desk && !LS.get('mrb-desk-tip')) {
+      const tip = () => { const d = document.createElement('div'); d.id = 'mrb-desk';
+        d.innerHTML = `<style>#mrb-desk{position:fixed;left:16px;right:16px;top:16px;z-index:2147482500;background:#16213A;color:#fff;border-radius:18px;padding:22px 24px;font:600 30px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;box-shadow:0 20px 50px rgba(0,0,0,.4)}#mrb-desk b{display:block;font-size:34px;margin-bottom:6px}#mrb-desk ol{margin:10px 0 14px;padding-left:40px}#mrb-desk button{font:inherit;font-weight:800;border:0;border-radius:12px;padding:14px 22px;background:#fff;color:#16213A}</style><b>This is showing the computer layout</b>Your phone has the site in “Desktop site” mode, so everything is small. To fix it:<ol><li>In Chrome, open the site, tap ⋮ and untick <b style="display:inline;font-size:inherit">Desktop site</b>.</li><li>Remove the app from your home screen, then add it again (⋮ › Add to Home screen / Install app).</li></ol><button type="button">OK</button>`;
+        d.querySelector('button').addEventListener('click', () => { LS.set('mrb-desk-tip', '1'); d.remove(); }); document.body.append(d); };
+      if (document.body) tip(); else document.addEventListener('DOMContentLoaded', tip);
+    }
+  } catch (e) { }
   window.MRB_VIEWAS = { start, exit, who: () => { try { return JSON.parse(LS.get('mrb-viewas') || 'null'); } catch (e) { return null; } } };
   const who = window.MRB_VIEWAS.who();
   if (!who) { if (LS.get('mrb-va-backup')) exit(location.href); return; }   /* a view left half-way: put the teacher's progress back */
