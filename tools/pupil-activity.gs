@@ -161,9 +161,53 @@ function dropAccess_(ids) { const sh = acc_(), r = rows_(sh); for (let i = r.len
 function mailTo_() { let to = NOTIFY_EMAIL; try { to = to || Session.getEffectiveUser().getEmail(); } catch (e) { } try { to = to || Session.getActiveUser().getEmail(); } catch (e) { } return to || ''; }
 function mailNote_(err) { try { const pr = PropertiesService.getScriptProperties(); if (err) pr.setProperty('mail:err', new Date().toISOString() + ' ' + String(err && err.message || err).slice(0, 300)); else { pr.deleteProperty('mail:err'); pr.setProperty('mail:ok', new Date().toISOString()); } } catch (e) { } }
 function mailState_() { try { const pr = PropertiesService.getScriptProperties(); return { to: mailTo_(), err: pr.getProperty('mail:err') || '', ok: pr.getProperty('mail:ok') || '' }; } catch (e) { return { to: '', err: String(e), ok: '' }; } }
+/* EMAIL LAYOUT: every email uses this one branded design (site blue header, white card, button, small footer).
+   Built from tables and inline styles so it looks the same in Gmail, Outlook and phone mail apps. */
+const BRAND = { name: "Mr B's Digital Technology Revision", blue: '#1F5FBF', ink: '#172033', muted: '#5A6478', line: '#D3D9E2', bg: '#E6EAF0', soft: '#EEF3FB' };
+const esc_ = x => String(x == null ? '' : x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+/* o: { title, preheader, body (HTML), button: [text, url], foot (HTML), wide } */
+function mailHtml_(o) {
+  const f = 'font-family:Arial,Helvetica,sans-serif', w = o.wide ? 760 : 600;
+  const btn = o.button ? `<table role="presentation" cellpadding="0" cellspacing="0" style="margin:22px 0 4px"><tr><td style="background:${BRAND.blue};border-radius:6px">
+      <a href="${o.button[1]}" style="display:inline-block;padding:12px 22px;${f};font-size:15px;font-weight:bold;color:#FFFFFF;text-decoration:none">${esc_(o.button[0])}</a></td></tr></table>` : '';
+  return `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${esc_(o.title)}</title></head>
+<body style="margin:0;padding:0;background:${BRAND.bg}">
+<div style="display:none;max-height:0;overflow:hidden;opacity:0">${esc_(o.preheader || '')}</div>
+<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:${BRAND.bg}"><tr><td align="center" style="padding:24px 12px">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:${w}px;background:#FFFFFF;border-radius:10px;overflow:hidden;border:1px solid ${BRAND.line}">
+    <tr><td style="background:${BRAND.ink};padding:18px 24px">
+      <table role="presentation" cellpadding="0" cellspacing="0"><tr>
+        <td style="padding-right:12px;vertical-align:middle"><img src="${SITE}app-icons/icon-192.png" width="40" height="40" alt="" style="display:block;border-radius:8px;border:0"></td>
+        <td style="vertical-align:middle;${f}"><div style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#A9C4F2;font-weight:bold">Mr Butler's</div>
+          <div style="font-size:17px;color:#FFFFFF;font-weight:bold;letter-spacing:.5px">Digital Technology Revision</div></td>
+      </tr></table></td></tr>
+    <tr><td style="height:4px;background:${BRAND.blue};font-size:0;line-height:0">&nbsp;</td></tr>
+    <tr><td style="padding:26px 24px 24px;${f};color:${BRAND.ink};font-size:15px;line-height:1.55">
+      <h1 style="margin:0 0 12px;font-size:21px;line-height:1.3;color:${BRAND.ink}">${esc_(o.title)}</h1>
+      ${o.body}${btn}
+    </td></tr>
+    <tr><td style="padding:14px 24px 18px;border-top:1px solid ${BRAND.line};background:#F7F9FC;${f};font-size:12px;line-height:1.5;color:${BRAND.muted}">
+      ${o.foot ? o.foot + '<br>' : ''}Sent automatically by ${esc_(BRAND.name)} · <a href="${SITE}" style="color:${BRAND.blue}">${SITE.replace(/^https:\/\//, '').replace(/\/$/, '')}</a>
+    </td></tr>
+  </table>
+</td></tr></table></body></html>`;
+}
+/* a label / value table for details (name, class, time…) */
+function mailFacts_(rows) {
+  return `<table role="presentation" cellpadding="0" cellspacing="0" width="100%" style="margin:14px 0;border:1px solid ${BRAND.line};border-radius:8px;background:${BRAND.soft}">` +
+    rows.map((r, i) => `<tr><td style="padding:10px 14px;${i ? 'border-top:1px solid ' + BRAND.line + ';' : ''}font-size:13px;color:${BRAND.muted};width:38%;vertical-align:top">${esc_(r[0])}</td>
+      <td style="padding:10px 14px;${i ? 'border-top:1px solid ' + BRAND.line + ';' : ''}font-size:15px;color:${BRAND.ink};font-weight:bold;vertical-align:top">${r[2] ? r[1] : esc_(r[1])}</td></tr>`).join('') + '</table>';
+}
+const when_ = () => Utilities.formatDate(new Date(), 'Europe/London', "EEEE d MMMM yyyy 'at' HH:mm");
 function testEmail() {   /* run this once from the editor (it asks for permission to send email) */
   const to = mailTo_(); if (!to) throw new Error('No email address: set NOTIFY_EMAIL at the top of the script.');
-  MailApp.sendEmail(to, "Mr B's Revision Guide: test email", 'Emails from the Revision Guide are working. Sign-up requests, staff details and the weekly report come to this address.\n\n' + SITE + 'teacher.html#visits');
+  MailApp.sendEmail({ to, name: BRAND.name, subject: "Mr B's Revision: email is working",
+    htmlBody: mailHtml_({ title: 'Emails are set up', preheader: 'Sign-up requests, staff details and the weekly report will arrive here.',
+      body: `<p style="margin:0 0 10px">Good news: the revision site can send email to this address.</p>
+        <p style="margin:0">You'll receive:</p>
+        <ul style="margin:6px 0 0;padding-left:20px"><li>new pupil sign-up requests</li><li>staff details, when requested from the sign-in box</li><li>the weekly report, every Monday morning</li></ul>`,
+      button: ['Open the Teacher area', SITE + 'teacher.html#visits'] }),
+    body: 'Emails from the Revision Guide are working. Sign-up requests, staff details and the weekly report come to this address.\n\n' + SITE + 'teacher.html#visits' });
   mailNote_(null); Logger.log('Test email sent to ' + to);
   return to;
 }
@@ -173,20 +217,33 @@ function notify_(what, name, cls, more) {
     const pr = PropertiesService.getScriptProperties(), day = Utilities.formatDate(new Date(), 'Europe/London', 'yyyy-MM-dd');
     let n = +(pr.getProperty('mails:' + day) || 0); if (n >= 90 || MailApp.getRemainingDailyQuota() < 5) return;
     const to = mailTo_(); if (!to) { mailNote_('no email address (set NOTIFY_EMAIL)'); return; }
-    const who = `${String(name || '').replace(/^'/, '')} (${String(cls || '').replace(/^'/, '')})`;
-    MailApp.sendEmail(to, `Revision Guide: ${what}: ${who}`, `${what}: ${who}\n${more}\n\n${new Date().toLocaleString('en-GB')}\n${SITE}teacher.html#visits\nSee everyone in the Teacher area › Pupils. To stop these emails, set EMAIL_SIGNINS to false in the Apps Script and deploy a new version.`);
+    const nm = String(name || '').replace(/^'/, ''), cl = String(cls || '').replace(/^'/, ''), who = `${nm} (${cl})`;
+    MailApp.sendEmail({ to, name: BRAND.name, subject: `${what}: ${who}`,
+      htmlBody: mailHtml_({ title: REQUIRE_APPROVAL ? 'A pupil is waiting for approval' : 'A new pupil has signed up', preheader: `${who} ${REQUIRE_APPROVAL ? 'is waiting for you to approve them' : 'has signed up'}.`,
+        body: `<p style="margin:0">${esc_(more)}</p>` + mailFacts_([['Pupil', nm], ['Class', cl || '–'], ['Signed up', when_()]]),
+        button: [REQUIRE_APPROVAL ? 'Review the request' : 'See all pupils', SITE + 'teacher.html#visits'],
+        foot: 'To stop these emails, set EMAIL_SIGNINS to false in the Apps Script and deploy a new version.' }),
+      body: `${what}: ${who}\n${more}\n\n${when_()}\n${SITE}teacher.html#visits\nTo stop these emails, set EMAIL_SIGNINS to false in the Apps Script and deploy a new version.` });
     pr.setProperty('mails:' + day, String(n + 1)); mailNote_(null);
   } catch (e) { mailNote_(e); }
 }
 function staffMail_() {
   const c = CacheService.getScriptCache(); if (c.get('staffmail')) return { ok: true, again: true };   // at most one email every 10 minutes
   const to = mailTo_(); if (!to) { mailNote_('no email address (set NOTIFY_EMAIL)'); return { ok: false }; }
-  try { MailApp.sendEmail(to, "Mr B's Revision Guide: staff details",
-    "Staff details for Mr B's Digital Technology Revision Guide\n\n" +
-    'Teacher area key (Teacher area › Pupils): ' + TEACHER_KEY + '\n' +
-    'Staff PIN (type it in the sign-in box to mark a device as staff): ' + STAFF_PIN + '\n\n' +
-    'Either one typed in the sign-in box (name or PIN field) marks a device as staff: it is never asked to sign in and never counted.\n' +
-    'Someone pressed "Send me staff details" on the sign-in box at ' + new Date().toLocaleString('en-GB') + '.'); mailNote_(null); } catch (e) { mailNote_(e); return { ok: false }; }
+  const code = v => `<span style="font-family:Consolas,Menlo,monospace;font-size:17px;letter-spacing:1px;background:#FFFFFF;border:1px solid ${BRAND.line};border-radius:4px;padding:2px 8px">${esc_(v)}</span>`;
+  try { MailApp.sendEmail({ to, name: BRAND.name, subject: "Mr B's Revision: staff details",
+    htmlBody: mailHtml_({ title: 'Your staff details', preheader: 'The Teacher area key and staff PIN for the revision site.',
+      body: `<p style="margin:0">Here are the staff details for the revision site. Keep this email private: don't forward it to pupils.</p>` +
+        mailFacts_([['Teacher area key', code(TEACHER_KEY) + `<div style="font-size:12px;font-weight:normal;color:${BRAND.muted};margin-top:6px">Teacher area › Pupils</div>`, true],
+                    ['Staff PIN', code(STAFF_PIN) + `<div style="font-size:12px;font-weight:normal;color:${BRAND.muted};margin-top:6px">Marks a device as staff</div>`, true]]) +
+        `<p style="margin:0;font-size:14px;color:${BRAND.muted}">Typing either one in the sign-in box (name or PIN field) marks that device as staff: it is never asked to sign in and never counted.</p>`,
+      button: ['Open the Teacher area', SITE + 'teacher.html#visits'],
+      foot: `Requested from the sign-in box on ${esc_(when_())}. If that wasn't you, it was only sent to this address.` }),
+    body: "Staff details for Mr B's Digital Technology Revision\n\n" +
+      'Teacher area key (Teacher area › Pupils): ' + TEACHER_KEY + '\n' +
+      'Staff PIN (type it in the sign-in box to mark a device as staff): ' + STAFF_PIN + '\n\n' +
+      'Either one typed in the sign-in box (name or PIN field) marks a device as staff: it is never asked to sign in and never counted.\n' +
+      'Requested from the sign-in box on ' + when_() + '.' }); mailNote_(null); } catch (e) { mailNote_(e); return { ok: false }; }
   c.put('staffmail', '1', 600);
   return { ok: true };
 }
@@ -360,32 +417,41 @@ function ensureWeekly_() {   /* the Monday email: its trigger is made the first 
 function weeklyEmail() {   /* runs every Monday about 7am: last week's report (you can also run it by hand from the editor) */
   if (!WEEKLY_EMAIL) return;
   const w = week_(addDays_(mondayOf_(new Date()), -7)), to = mailTo_(); if (!to) return;
-  const esc = x => String(x == null ? '' : x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const esc = esc_, B = BRAND;
   const hm = s => { const m = Math.round(s / 60); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0'); };
   const nice = ds => Utilities.formatDate(new Date(ds + 'T12:00:00Z'), 'Europe/London', 'EEE d MMM');
   const all = w.pupils.slice().sort((a, b) => a.cls.localeCompare(b.cls) || b.secs - a.secs || a.name.localeCompare(b.name));
   const active = all.filter(p => p.secs > 0), tot = active.reduce((a, p) => a + p.secs, 0), prevTot = all.reduce((a, p) => a + p.prev, 0);
   const classes = [...new Set(all.map(p => p.cls))];
-  const th = 'style="text-align:left;padding:6px 8px;border-bottom:2px solid #16213A;font-size:12px;color:#4A5468"', td = 'style="padding:6px 8px;border-bottom:1px solid #DCE2EA;vertical-align:top;font-size:13px"';
-  let h = `<div style="font-family:Arial,Helvetica,sans-serif;color:#16213A;max-width:760px"><h2 style="margin:0 0 4px">Revision Guide: weekly report</h2>
-    <p style="margin:0 0 14px;color:#4A5468">${nice(w.start)} to ${nice(w.end)} · ${active.length} of ${all.length} pupils revised · ${hm(tot)} in all (week before: ${hm(prevTot)})</p>`;
+  const tile = (big, small) => `<td width="33%" style="padding:4px"><div style="background:${B.soft};border:1px solid ${B.line};border-radius:8px;padding:12px 10px;text-align:center">
+      <div style="font-size:22px;font-weight:bold;color:${B.blue}">${big}</div><div style="font-size:12px;color:${B.muted};margin-top:2px">${small}</div></div></td>`;
+  const diff = tot - prevTot, dTxt = prevTot ? (diff >= 0 ? `▲ ${hm(diff)} on the week before` : `▼ ${hm(-diff)} on the week before`) : 'no data for the week before';
+  const th = `style="text-align:left;padding:8px;background:${B.ink};color:#FFFFFF;font-size:12px;font-weight:bold"`, td = `style="padding:8px;border-bottom:1px solid ${B.line};vertical-align:top;font-size:13px;color:${B.ink}"`;
+  let h = `<p style="margin:0 0 6px;color:${B.muted}">${nice(w.start)} to ${nice(w.end)}</p>
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin:8px 0 4px"><tr>
+      ${tile(`${active.length}<span style="font-size:14px;color:${B.muted}"> / ${all.length}</span>`, 'pupils revised')}${tile(hm(tot), 'revision in all')}${tile(active.length ? hm(tot / active.length) : '–', 'average per pupil')}
+    </tr></table><p style="margin:4px 0 0;font-size:13px;color:${diff >= 0 ? '#127A3A' : '#B42318'}">${dTxt}</p>`;
   classes.forEach(c => {
     const ps = all.filter(p => p.cls === c), act = ps.filter(p => p.secs > 0), idle = ps.filter(p => !p.secs);
-    h += `<h3 style="margin:18px 0 6px">${esc(c || 'No class')} <span style="font-weight:normal;color:#4A5468;font-size:13px">· ${act.length} of ${ps.length} revised · ${hm(act.reduce((a, p) => a + p.secs, 0))}</span></h3>`;
+    h += `<h2 style="margin:26px 0 8px;font-size:17px;color:${B.ink};border-left:4px solid ${B.blue};padding-left:10px">${esc(c || 'No class')}
+      <span style="font-weight:normal;color:${B.muted};font-size:13px"> · ${act.length} of ${ps.length} revised · ${hm(act.reduce((a, p) => a + p.secs, 0))}</span></h2>`;
     if (act.length) {
-      h += `<table style="border-collapse:collapse;width:100%"><tr><th ${th}>Pupil</th><th ${th}>Time</th><th ${th}>Days</th><th ${th}>Worked on</th><th ${th}>Quizzes</th></tr>`;
-      act.forEach(p => {
-        const d = p.secs - p.prev, trend = p.prev ? (d >= 0 ? `<span style="color:#127A3A">▲ ${hm(d)}</span>` : `<span style="color:#B42318">▼ ${hm(-d)}</span>`) : '<span style="color:#4A5468">new</span>';
-        const work = p.chapters.slice(0, 3).map(x => { const [b, ch] = x[0].split('|'); return `${esc(UNIT_NAMES[b] || b)} ch ${+ch.replace(/\D/g, '')}${x[1] ? ' ' + esc(x[1]) : ''} (${hm(x[2])})`; }).join('<br>') || 'Home page only';
-        const qz = p.quizzes.map(q => { const [cid, pp] = q[1].split('|'); return `${esc(UNIT_NAMES[q[0]] || q[0])} ch ${+cid.replace(/\D/g, '')}${pp ? ' (past papers)' : ''}: ${q[2]}/${q[3]}`; }).join('<br>') || '–';
-        h += `<tr><td ${td}><b>${esc(p.name)}</b></td><td ${td}>${hm(p.secs)}<br><small>${trend}</small></td><td ${td}>${p.days}</td><td ${td}>${work}</td><td ${td}>${qz}</td></tr>`;
+      h += `<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:100%;border:1px solid ${B.line}"><tr><th ${th}>Pupil</th><th ${th}>Time</th><th ${th}>Days</th><th ${th}>Worked on</th><th ${th}>Quizzes</th></tr>`;
+      act.forEach((p, i) => {
+        const d = p.secs - p.prev, trend = p.prev ? (d >= 0 ? `<span style="color:#127A3A">▲ ${hm(d)}</span>` : `<span style="color:#B42318">▼ ${hm(-d)}</span>`) : `<span style="color:${B.muted}">new</span>`;
+        const work = p.chapters.slice(0, 3).map(x => { const [b, ch] = x[0].split('|'); return `${esc(UNIT_NAMES[b] || b)} ch ${+ch.replace(/\D/g, '')}${x[1] ? ' ' + esc(x[1]) : ''} <span style="color:${B.muted}">(${hm(x[2])})</span>`; }).join('<br>') || `<span style="color:${B.muted}">Home page only</span>`;
+        const qz = p.quizzes.map(q => { const [cid, pp] = q[1].split('|'); return `${esc(UNIT_NAMES[q[0]] || q[0])} ch ${+cid.replace(/\D/g, '')}${pp ? ' (past papers)' : ''}: <b>${q[2]}/${q[3]}</b>`; }).join('<br>') || `<span style="color:${B.muted}">–</span>`;
+        h += `<tr style="background:${i % 2 ? '#F7F9FC' : '#FFFFFF'}"><td ${td}><b>${esc(p.name)}</b></td><td ${td} nowrap><span style="white-space:nowrap">${hm(p.secs)}</span><br><small>${trend}</small></td><td ${td}>${p.days}</td><td ${td}>${work}</td><td ${td}>${qz}</td></tr>`;
       });
       h += '</table>';
     }
-    if (idle.length) h += `<p style="margin:6px 0 0;font-size:13px;color:#B42318">No revision this week: ${idle.map(p => esc(p.name)).join(', ')}</p>`;
+    if (idle.length) h += `<p style="margin:8px 0 0;font-size:13px;color:#B42318;background:#FDF0EF;border-radius:6px;padding:8px 10px"><b>No revision this week:</b> ${idle.map(p => esc(p.name)).join(', ')}</p>`;
   });
-  h += `<p style="margin:20px 0 0;font-size:12px;color:#4A5468">Every pupil in detail: <a href="${SITE}teacher.html#visits">Teacher area › Pupils</a>. To stop this email, set WEEKLY_EMAIL to false in the Apps Script and deploy a new version.</p></div>`;
-  try { MailApp.sendEmail({ to, subject: `Revision Guide weekly report: ${nice(w.start)} to ${nice(w.end)}`, htmlBody: h, body: `${active.length} of ${all.length} pupils revised, ${hm(tot)} in all. Open the email in HTML view, or see ${SITE}teacher.html#visits` }); mailNote_(null); } catch (e) { mailNote_(e); }
+  if (!all.length) h += `<p style="margin:18px 0 0">No pupils have used the site yet.</p>`;
+  const html = mailHtml_({ title: 'Weekly revision report', wide: true, preheader: `${active.length} of ${all.length} pupils revised, ${hm(tot)} in all (${nice(w.start)} to ${nice(w.end)}).`,
+    body: h, button: ['See every pupil in detail', SITE + 'teacher.html#visits'],
+    foot: 'To stop this email, set WEEKLY_EMAIL to false in the Apps Script and deploy a new version.' });
+  try { MailApp.sendEmail({ to, name: B.name, subject: `Weekly revision report: ${nice(w.start)} to ${nice(w.end)}`, htmlBody: html, body: `${active.length} of ${all.length} pupils revised, ${hm(tot)} in all. Open the email in HTML view, or see ${SITE}teacher.html#visits` }); mailNote_(null); } catch (e) { mailNote_(e); }
 }
 /* teacher marks: Awards sheet [When, Pupil ID, Unit, Page, 1 = covered / 0 = not covered] */
 const awards_ = () => tab_('Awards', ['When', 'Pupil ID', 'Unit', 'Page', 'Covered (1) / not (0)']);
