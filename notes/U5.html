@@ -10838,6 +10838,7 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
     }, 60);
   }, true);
   function offer(P) {
+    if (window.MRB_GUIDED) return;   /* guide.js: the bottom button says "Do the page quiz" instead */
     const n = document.querySelectorAll('#cyk fieldset[data-q]').length, d = document.createElement('div');
     d.id = 'mrb-fin'; d.className = 'mrb-fin'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'pq-h');
     d.innerHTML = `<div class="mf-s"><div class="mf-g" aria-hidden="true"></div><h2 id="pq-h">Page covered ✓</h2><p>Now check what you remember with the page quiz${n ? ` (${n} quick question${n === 1 ? '' : 's'})` : ''}. Your mark is saved.</p>
@@ -10984,6 +10985,137 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
   };
   setTimeout(() => { try { quizNag(); } catch (e) { } }, 2500);   /* after the sign-in and access checks have had their turn */
   if (typeof onCover !== 'undefined' && !onCover) setTimeout(() => { const P = here(); pid = P ? P.p.id : null; if (!document.querySelector('#main .tsteps')) try { steps(); lockQuiz(); paintTile(); } catch (e) { } }, 0);
+})();
+/* ---------- GUIDED PAGES (source notes/app/guide.js), revision workbooks, pupils only (and a teacher in pupil view).
+   Every page shows the same four steps, with the one to do now highlighted:  1 Read (a one-minute timer)  2 Tick it off
+   3 Page quiz  4 Next page. The bottom bar's big button always does the next step ("Mark as covered" → "Do the page quiz" →
+   "Next page", or "Topic quiz" at the end of a topic), with small ‹ › arrows to move about freely. The activities shrink to a
+   row of "Extra help" icons. Teachers keep the full layout. ---------- */
+(function () {
+  if (typeof BK === 'undefined' || !BK || !BK.id || typeof PAGES === 'undefined' || typeof renderPage !== 'function' || (typeof TUT !== 'undefined' && TUT) || typeof cqUnlocked !== 'function') return;
+  const pupil = () => { try { return !localStorage.getItem('notes-nocount') || !!localStorage.getItem('mrb-viewas') || !!localStorage.getItem('mrb-pupilmode'); } catch (e) { return true; } };
+  if (!pupil()) return;
+  window.MRB_GUIDED = true;
+  document.documentElement.classList.add('guided');
+  const NEED = 60;
+  const here = () => (typeof onCover !== 'undefined' && onCover) || (typeof onCredits !== 'undefined' && onCredits) ? null : PAGES[cur];
+  const readS = id => (typeof window.MRB_READ === 'function' ? window.MRB_READ(id) : 0);
+  const quizTile = () => document.querySelector('#main .act.k-quiz');
+  const clock = s => { s = Math.max(0, Math.ceil(s)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+  function stepOf(P) {
+    const id = P.p.id, cov = !!state.done[id], hasQ = !!quizTile(), qd = !!(state.pq && state.pq[id]), left = NEED - readS(id);
+    const ch = P.ch, ps = ch.pages || [], last = ps.length && ps[ps.length - 1].id === id;
+    const nq = typeof cqItems === 'function' ? cqItems(ch).length : 0, best = typeof cqState === 'function' ? cqState().best[ch.id] : null;
+    if (!cov) return { k: 'cover', left };
+    if (hasQ && !qd) return { k: left > 0 ? 'wait' : 'quiz', left };
+    if (last && nq && !best && cqUnlocked(ch)) return { k: 'topic', left };
+    return { k: cur >= PAGES.length - 1 ? 'end' : 'next', left };
+  }
+  function act(k) {
+    const P = here(); if (!P) return;
+    if (k === 'cover') { const b = document.getElementById('donebtn'); if (b && b.getAttribute('aria-pressed') !== 'true') b.click(); setTimeout(paint, 80); return; }
+    if (k === 'wait') { say(`Keep reading: the page quiz opens in <b>${clock(NEED - readS(P.p.id))}</b>.`); const n = document.querySelector('#main article > .ncard'); if (n) n.scrollIntoView({ behavior: 'smooth', block: 'start' }); return; }
+    if (k === 'quiz') { const t = quizTile(); if (t) t.click(); return; }
+    if (k === 'topic') { location.hash = 'quiz-' + P.ch.id; return; }
+    if (k === 'next' && cur < PAGES.length - 1) go(cur + 1);
+  }
+  let sayT = 0;
+  function say(html) {
+    let m = document.getElementById('gd-say'); if (!m) { m = document.createElement('div'); m.id = 'gd-say'; m.setAttribute('role', 'status'); document.body.append(m); }
+    m.innerHTML = html; m.classList.add('on'); clearTimeout(sayT); sayT = setTimeout(() => m.classList.remove('on'), 3200);
+  }
+  /* ---- the four steps, under the page heading ---- */
+  const ICS = { read: '📖', cover: '✓', quiz: '★', next: '→' };
+  function strip() {
+    const main = document.getElementById('main'), art = main && main.querySelector('article'), P = here();
+    const old = document.querySelector('#main .gd-steps'); if (old) old.remove();
+    if (!art || !P || !art.querySelector('.ncard')) return;
+    const box = document.createElement('ol'); box.className = 'gd-steps'; box.setAttribute('aria-label', 'Your steps for this page');
+    const head = art.querySelector(':scope > header.phero') || art.querySelector(':scope > header');
+    if (head) head.after(box); else art.prepend(box);
+    paintStrip();
+  }
+  function paintStrip() {
+    const box = document.querySelector('#main .gd-steps'), P = here(); if (!box || !P) return;
+    const s = stepOf(P), id = P.p.id, read = readS(id) >= NEED, cov = !!state.done[id], hasQ = !!quizTile(), qd = !!(state.pq && state.pq[id]);
+    const pq = state.pq && state.pq[id];
+    const items = [
+      ['read', read ? 'done' : (s.k === 'cover' || s.k === 'wait') ? 'now' : '', 'Read', read ? '1 min ✓' : clock(NEED - readS(id)) + ' left', null],
+      ['cover', cov ? 'done' : 'now', 'Tick it off', cov ? 'Covered' : 'Mark covered', 'cover'],
+      hasQ ? ['quiz', qd ? 'done' : cov && (s.k === 'quiz' || s.k === 'wait') ? (s.k === 'quiz' ? 'now' : 'wait') : '', 'Page quiz', qd ? `${pq.s}/${pq.m}` : s.k === 'wait' ? `in ${clock(s.left)}` : 'Quick check', qd || s.k === 'quiz' ? 'quiz' : s.k === 'wait' ? 'wait' : null] : null,
+      s.k === 'topic' ? ['next', 'now', 'Topic quiz', 'Unlocked!', 'topic'] : ['next', s.k === 'next' ? 'now' : '', 'Next page', s.k === 'end' ? 'All done' : 'When ready', s.k === 'end' ? null : 'next'],
+    ].filter(Boolean);
+    /* only one "now": the first */
+    let seenNow = false; items.forEach(x => { if (x[1] === 'now') { if (seenNow) x[1] = ''; seenNow = true; } });
+    const key = JSON.stringify(items.map(x => x.slice(0, 4)));
+    if (box.dataset.k === key) return; box.dataset.k = key;
+    box.innerHTML = items.map(([k, st, t, sub, a], i) => `<li class="gd-s ${st}"><button type="button"${a ? ` data-gd="${a}"` : ' disabled'}><i>${st === 'done' ? '✓' : k === 'read' && st === 'now' ? '<svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" pathLength="100"/><circle class="p" cx="18" cy="18" r="15" pathLength="100" style="stroke-dasharray:' + Math.min(100, Math.round(readS(id) / NEED * 100)) + ' 100"/></svg><em>' + (i + 1) + '</em>' : i + 1}</i><span><b>${t}</b><small>${sub}</small></span></button></li>`).join('');
+  }
+  document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-gd]'); if (!b) return; e.preventDefault(); act(b.dataset.gd); });
+  /* ---- the bottom bar: one big "do this next" button ---- */
+  const LBL = { cover: ['✓', 'Mark as covered'], wait: ['⏳', 'Page quiz in '], quiz: ['★', 'Do the page quiz'], topic: ['🏆', 'Topic quiz'], next: ['', 'Next page'], end: ['🎉', 'Finished!'] };
+  function paintBar() {
+    const bar = document.getElementById('pbar'); if (!bar) return;
+    let g = bar.querySelector('.pb-g');
+    if (!g) { g = document.createElement('button'); g.type = 'button'; g.className = 'pb-g'; bar.querySelector('.pb-c').after(g); g.addEventListener('click', () => act(g.dataset.k)); }
+    const P = here(); if (!P) return;
+    const s = stepOf(P), [ic, t] = LBL[s.k];
+    const txt = s.k === 'wait' ? t + clock(s.left) : t;
+    if (g.dataset.k !== s.k || g.dataset.t !== txt) { g.dataset.k = s.k; g.dataset.t = txt; g.className = 'pb-g k-' + s.k; g.innerHTML = `${ic ? `<span class="gi" aria-hidden="true">${ic}</span>` : ''}<span>${txt}</span>${s.k === 'next' ? '<span class="gi" aria-hidden="true">→</span>' : ''}`; g.disabled = s.k === 'end'; }
+    bar.classList.toggle('gd-next', s.k === 'next');
+  }
+  function paint() { paintStrip(); paintBar(); }
+  const rp = renderPage;
+  renderPage = function () { const r = rp.apply(this, arguments); try { setTimeout(() => { strip(); paintBar(); }, 0); } catch (e) { } return r; };
+  setInterval(() => { if (document.visibilityState === 'visible') paint(); }, 1000);
+  document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#donebtn,#cyk,.pb-c')) setTimeout(paint, 120); }, true);
+  if (typeof onCover !== 'undefined' && !onCover) setTimeout(() => { strip(); paintBar(); }, 50);
+  /* the guided bar replaces the "page covered: do the quiz?" pop-up */
+  const css = document.createElement('style'); css.textContent = `
+html.guided .gd-steps{list-style:none;margin:0 0 12px;padding:6px;display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:4px;background:var(--paper);border:1px solid var(--line);border-radius:14px}
+.gd-s button{width:100%;height:100%;display:flex;align-items:center;gap:8px;padding:7px 8px;border:0;border-radius:10px;background:none;font:inherit;color:var(--ink-3);text-align:left;cursor:pointer;min-width:0}
+.gd-s button:disabled{cursor:default}
+.gd-s i{flex:none;position:relative;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:800 13px/1 var(--sans,system-ui);font-style:normal;background:var(--paper-2,#EEF1F5);color:var(--ink-3)}
+.gd-s i svg{position:absolute;inset:0;width:28px;height:28px;transform:rotate(-90deg)}.gd-s i svg circle{fill:none;stroke:var(--line);stroke-width:4}.gd-s i svg .p{stroke:var(--accent);stroke-linecap:round;transition:stroke-dasharray .9s linear}
+.gd-s i em{position:relative;font-style:normal}
+.gd-s span{display:flex;flex-direction:column;min-width:0}
+.gd-s b{font:800 13px/1.15 var(--sans,system-ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gd-s small{font:600 11.5px/1.2 var(--sans,system-ui);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;opacity:.85}
+.gd-s.done button{color:var(--good,#1E8E4E)}.gd-s.done i{background:var(--good,#1E8E4E);color:#fff}
+.gd-s.now button{background:color-mix(in srgb,var(--accent) 10%,var(--paper));color:var(--ink);box-shadow:inset 0 0 0 2px var(--accent)}
+.gd-s.now i{background:var(--accent);color:#fff}.gd-s.now i:has(svg){background:var(--paper)}.gd-s.now i:has(svg) em{color:var(--accent)}
+.gd-s.wait button{color:#9A6A00}
+@media (max-width:520px){html.guided .gd-steps{gap:2px;padding:4px}.gd-s button{flex-direction:column;gap:3px;padding:6px 2px;text-align:center}.gd-s span{align-items:center}.gd-s b{font-size:11.5px}.gd-s small{font-size:10.5px}}
+html.guided .pbar .pb-c{display:none!important}
+html.guided .pbar:not([hidden]){grid-template-columns:50px 1fr 50px!important}
+html.guided .pbar .pb-n{padding:0!important}html.guided .pbar .pb-n span{display:none}
+html.guided .pbar.gd-next{grid-template-columns:50px 1fr!important}html.guided .pbar.gd-next .pb-n{display:none!important}
+.pb-g{font-family:var(--sans);font-weight:800;font-size:16px;min-height:50px;border-radius:14px;border:0;display:flex;align-items:center;justify-content:center;gap:8px;cursor:pointer;color:#fff;background:var(--accent);min-width:0;white-space:nowrap;-webkit-tap-highlight-color:transparent}
+.pb-g span{overflow:hidden;text-overflow:ellipsis}.pb-g .gi{flex:none}
+.pb-g.k-cover{background:var(--good,#1E8E4E)}
+.pb-g.k-wait{background:var(--paper-2,#EEF1F5);color:var(--ink-2);border:1.5px dashed var(--line)}
+.pb-g.k-quiz{background:#6E47C2;animation:gdpulse 1.6s ease-in-out infinite}
+.pb-g.k-topic{background:#B7650F;animation:gdpulse 1.6s ease-in-out infinite}
+.pb-g.k-end{background:var(--good,#1E8E4E)}
+@keyframes gdpulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,#6E47C2 25%,transparent)}}
+@media (prefers-reduced-motion:reduce){.pb-g{animation:none!important}}
+#gd-say{position:fixed;left:50%;bottom:calc(84px + env(safe-area-inset-bottom,0px));transform:translate(-50%,10px);opacity:0;z-index:70;max-width:calc(100vw - 32px);background:#16213A;color:#fff;border-radius:12px;padding:10px 14px;font:600 14.5px/1.35 var(--sans,system-ui);pointer-events:none;transition:opacity .2s,transform .2s;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+#gd-say.on{opacity:1;transform:translate(-50%,0)}
+/* Extra help: the activities as one row of icons */
+html.guided #main .acts{padding:10px 10px 8px}
+html.guided #main .acts-h{font-size:11.5px;margin-bottom:8px}
+html.guided #main .acts-g{display:flex!important;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px;-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 22px),transparent)}
+html.guided #main .acts-g::-webkit-scrollbar{display:none}
+html.guided #main .act{flex:0 0 74px;flex-direction:column;justify-content:flex-start;gap:5px;min-height:0;padding:8px 4px 7px;text-align:center}
+html.guided #main .act .act-t small{display:none}
+html.guided #main .act .act-t b{font-size:11.5px;line-height:1.15;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+html.guided #main .act.k-quiz{display:none}
+html.guided #main .act:last-child{margin-right:16px}
+html.guided #b-ppt{display:none!important}
+html.guided .notes-k{margin-top:4px}
+`; document.head.append(css);
+  /* rename the activities heading once built */
+  new MutationObserver(() => { const h = document.querySelector('#main .acts-h'); if (h && !h.dataset.gd) { h.dataset.gd = 1; h.innerHTML = 'Extra help <small>slides, videos, practice and more</small>'; } }).observe(document.getElementById('main') || document.body, { childList: true, subtree: true });
 })();
 /* ================= APP: END ================= */
 /* ================= boot ================= */
