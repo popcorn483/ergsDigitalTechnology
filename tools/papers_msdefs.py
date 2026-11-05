@@ -1,4 +1,6 @@
-"""Find the key terms that CCEA mark schemes define. For every past-paper question with a mark-scheme crop (papers/crops.json
+"""Find the key terms that CCEA mark schemes use: the term (or the wording the glossary says is also credited) appears in the
+mark-scheme answer for a question (the question's own mark-scheme crop, so not the general marking instructions). Earlier
+this looked only for definitions ("X is …"), which found too few. For every past-paper question with a mark-scheme crop (papers/crops.json
 "ms" segments), read the mark-scheme text in that region and look for each workbook glossary term (or the wording the
 glossary says is also credited) used as a definition: "<term> is/are/means/refers to …", "<term> – …", "<term>: …",
 "definition of <term>", or a term on its own line followed by its meaning. Writes papers/msdefs.json:
@@ -88,7 +90,7 @@ def main():
             b, s, q = k.split("|", 2)
             if b not in gl:
                 gl[b] = [(g["term"].lower(), names(g)) for g in book_gloss(b) if g.get("term")]
-                gl[b] = [(t, [re.compile(DEF_BEFORE + re.escape(n).replace(r"\ ", r"[\s-]+") + DEF_AFTER, re.I) for n in ns]
+                gl[b] = [(t, [re.compile(r"(?<![a-z0-9-])" + re.escape(n).replace(r"\ ", r"[\s-]+") + r"(?:s|es)?(?![a-z0-9-])", re.I) for n in ns]   # the term (or its credited wording) in the question's mark-scheme answer
                           + [re.compile(r"definition of (?:an? |the )?" + re.escape(n), re.I) for n in ns]) for t, ns in gl[b]]
             fn = (manifest.get(folders.get(b + "|" + s, ""), {}) or {}).get("ms")
             if not fn or not os.path.exists(os.path.join(ROOT, fn)):
@@ -115,7 +117,7 @@ def main():
     with open(os.path.join(P, "msdefs.json"), "w", encoding="utf-8") as fh:
         json.dump(out, fh, ensure_ascii=False, separators=(",", ":"), sort_keys=True)
     for b in sorted(out):
-        print("%-4s %d terms defined in mark schemes (%d question links)" % (b, len(out[b]), sum(len(x) for x in out[b].values())))
+        print("%-4s %d terms used in mark schemes (%d question links)" % (b, len(out[b]), sum(len(x) for x in out[b].values())))
 
 
 if __name__ == "__main__":

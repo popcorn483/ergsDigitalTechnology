@@ -10302,9 +10302,9 @@ try {
     /* "Mark-scheme terms only": just the terms CCEA has asked pupils to define or defined in a mark scheme */
     const nMs = sel => box.querySelectorAll(sel + ' .kt-l > div .pp-def, ' + sel + '.kt-l > div .pp-def').length;
     const f = document.createElement('label'); f.className = 'ap-ms';
-    f.innerHTML = `<input type="checkbox"> Mark-scheme definitions only <small></small>`;
+    f.innerHTML = `<input type="checkbox"> Past-paper key terms only <small></small>`;
     const cnt = () => { const vis = pageKt && !pageKt.hidden ? pageKt : topic; f.querySelector('small').textContent = `(${vis.querySelectorAll('.pp-def').length})`; };
-    const apply = () => { const on = f.querySelector('input').checked; box.classList.toggle('only-ms', on); box.querySelectorAll('.kt-l > div').forEach(r => { r.hidden = on && !r.querySelector('.pp-def'); }); let none = box.querySelector('.ap-none'); if (!none) { none = document.createElement('p'); none.className = 'ap-note ap-none'; none.textContent = 'No mark-scheme definitions here yet: try Whole topic.'; v.append(none); } const vis = pageKt && !pageKt.hidden ? pageKt : topic; none.hidden = !on || !!vis.querySelector('.kt-l > div:not([hidden]), :scope > div:not([hidden])'); cnt(); };
+    const apply = () => { const on = f.querySelector('input').checked; box.classList.toggle('only-ms', on); box.querySelectorAll('.kt-l > div').forEach(r => { r.hidden = on && !r.querySelector('.pp-def'); }); let none = box.querySelector('.ap-none'); if (!none) { none = document.createElement('p'); none.className = 'ap-note ap-none'; none.textContent = 'None on this page yet: try Whole topic.'; v.append(none); } const vis = pageKt && !pageKt.hidden ? pageKt : topic; none.hidden = !on || !!vis.querySelector('.kt-l > div:not([hidden]), :scope > div:not([hidden])'); cnt(); };
     f.querySelector('input').addEventListener('change', apply);
     box.addEventListener('click', e => { if (e.target.closest('[data-v]')) setTimeout(apply, 0); });
     box.querySelector('.ap-sw').after(f); void nMs; cnt();
@@ -10334,17 +10334,17 @@ try {
     return [...out.keys()];
   };
   const refs = hs => hs.slice(0, 3).join(', ') + (hs.length > 3 ? ` and ${hs.length - 3} more` : '');
-  const NOTE_PP = '<small class="notes-pp"><i class="term term-pp">Highlighted</i> terms have been asked as definitions in CCEA past papers or are defined in their mark schemes</small>';
+  const NOTE_PP = '<small class="notes-pp"><i class="term term-pp">Highlighted</i> terms have come up in CCEA past papers: asked for, or used in the mark schemes</small>';
   function markDefs(root) {
     let n = 0;
     root.querySelectorAll('button.term[data-term]').forEach(b => {
       const g = typeof findTerm === 'function' ? findTerm(b.dataset.term) : null, hs = defHits(g); if (!hs.length) return;
-      b.classList.add('term-pp'); b.title = `A definition CCEA has asked for or credited: ${refs(hs)}`; n++;
+      b.classList.add('term-pp'); b.title = `In CCEA past papers (asked for or used in the mark scheme): ${refs(hs)}`; n++;
     });
     root.querySelectorAll('.kt-l > div > dt').forEach(dt => {
       const old = dt.querySelector('.pp-def'); if (old) old.remove();
       const g = typeof findTerm === 'function' ? findTerm(dt.textContent.trim()) : null, hs = defHits(g); if (!hs.length) return;
-      dt.insertAdjacentHTML('beforeend', ` <span class="pp-def" title="${esc(refs(hs))}">Asked as a definition ×${hs.length}</span>`);
+      dt.insertAdjacentHTML('beforeend', ` <span class="pp-def" title="${esc(refs(hs))}">Past-paper key term ×${hs.length}</span>`);
     });
     return n;
   }
