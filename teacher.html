@@ -200,7 +200,30 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 .vs-g th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);padding-top:14px}
 #vs-t .tr-open b{font-size:14px;min-width:3.6em}
 .vs-ch{font-size:13.5px}.vs-ch th{font-weight:400} .vs-ch a{text-decoration:none}
-@media (max-width:720px){.wrap{padding:12px 12px 32px}.card{padding:12px;border-radius:12px}.steps{padding:2px 12px}.tp-reps{grid-template-columns:1fr}.tp-dl{font-size:14px;padding:6px}.tp-dl svg{display:none}.tp-opts.tp-topics{grid-template-columns:1fr}.hrow h2{font-size:17px}.tabs a{padding:8px 10px;font-size:15px}.u{padding:12px}}
+/* Pupil tracking: clean list */
+.tabs a.t-pup{display:inline-flex;align-items:center;gap:6px}.t-badge{display:inline-grid;place-items:center;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#E8A33D;color:#16213A;font-size:12px;font-weight:800;box-sizing:border-box}
+.ac-qrow{display:flex;gap:8px;flex:1 1 100%;min-width:0}.ac-qrow input{flex:1;min-width:0;font:inherit;padding:9px 12px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:inherit}#ac-sel[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+#ac-tools{flex-wrap:wrap}#ac-tools select{flex:1 1 0;min-width:0}
+.ac-wrap,.card.ac-wrap{padding:0;overflow:hidden}.ac-sum{display:flex;flex-wrap:wrap;gap:4px 14px;padding:12px 14px;border-bottom:1px solid var(--line);font-size:13px;color:var(--ink-3)}.ac-sum b{color:var(--ink);font-size:15px}
+.ac-row2{display:grid;grid-template-columns:auto 1fr;align-items:center;border-bottom:1px solid var(--line)}.ac-row2:last-child{border-bottom:0}
+.ac-pk{display:none;padding:0 0 0 14px}.ac-pk input{width:20px;height:20px;margin:0}.ac-wrap.picking .ac-pk{display:block}.ac-row2.sel{background:color-mix(in srgb,var(--accent) 8%,transparent)}.ac-row2.open{background:var(--paper-2)}
+.ac-main{grid-column:2;display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;width:100%;text-align:left;font:inherit;color:inherit;background:none;border:0;padding:12px 14px;cursor:pointer;min-width:0}
+.ac-main:hover{background:var(--paper-2)}.ac-who{display:flex;flex-direction:column;min-width:0}.ac-nmr{display:flex;align-items:center;gap:6px;min-width:0}.ac-nmr b{font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-cl{flex:none;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--paper-2);border:1px solid var(--line);color:var(--ink-2)}
+.ac-who small{font-size:12.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ac-who small.ac-last{font-size:12px}
+.ac-time{text-align:right;display:flex;flex-direction:column;align-items:flex-end}.ac-time b{font-size:15px;white-space:nowrap}.ac-time small{font-size:12px;color:var(--ink-3);white-space:nowrap}.ac-time small.on{color:#1E8E4E;font-weight:700}
+.ac-ring{position:relative;width:44px;height:44px;display:block}.ac-ring svg{width:44px;height:44px;transform:rotate(-90deg)}.ac-ring circle{fill:none;stroke-width:4;stroke:var(--line)}.ac-ring circle+circle{stroke:#C0392B;stroke-linecap:round}.ac-ring.mid circle+circle{stroke:#E8A33D}.ac-ring.hi circle+circle{stroke:#1E8E4E}
+.ac-ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}.ac-ring b small{font-size:8px;font-weight:700;margin-left:0}
+.ac-tags{grid-column:2;display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px 70px;margin-top:-6px}.ac-tag{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:#FFF4E0;color:#8A5300}.ac-tags .ac-acc{display:inline;font-size:11.5px;padding:2px 8px;border-radius:999px;background:#FDECEA}
+.ac-list .ac-pd{margin:0;border:0;border-radius:0;box-shadow:none;border-bottom:1px solid var(--line);padding:4px 10px 12px;background:var(--paper-2)}.ac-list .ac-d{max-width:none;position:static;background:var(--paper)}
+.ac-none{padding:14px;margin:0}.ac-panel .ac-row input+input{flex:0 0 84px}
+.ac-bar{position:sticky;top:0;z-index:5;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:8px 10px;box-shadow:0 4px 14px rgba(10,16,30,.08)}.ac-bsp{flex:1}.ac-bar .tp-mini:disabled{opacity:.45}
+@media (max-width:720px){
+ .tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;border:0;overflow:visible}.tabs a{border:1px solid var(--line);border-radius:10px;margin:0;text-align:center;justify-content:center;padding:9px 6px;font-size:14px;white-space:normal;line-height:1.2;background:var(--paper)}
+ .tabs a[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}.tabs a.t-pup{grid-column:1/-1;font-size:15px}
+ .ac-main{gap:10px;padding:11px 12px}.ac-tags{padding-left:66px}
+}
+@media (max-width:720px){.wrap{padding:12px 12px 32px}.card{padding:12px;border-radius:12px}.steps{padding:2px 12px}.tp-reps{grid-template-columns:1fr}.tp-dl{font-size:14px;padding:6px}.tp-dl svg{display:none}.tp-opts.tp-topics{grid-template-columns:1fr}.hrow h2{font-size:17px}.u{padding:12px}}
 @media (max-width:640px){.u th:nth-child(3),.u td:nth-child(3){display:none}.pr{margin-left:0}#bt-list li{grid-template-columns:2em minmax(0,1fr) auto}.bt-act{grid-column:2/-1}#tr-bars li{grid-template-columns:minmax(0,1fr) 5.5em}.tr-bt{grid-column:1/-1;grid-row:2}}
 @media print{body{background:#fff;color:#000} .bar,.back,.tabs,.cd,.lead,.brand,h1,.noprint{display:none!important} .wrap{padding:0;max-width:none} .u{border:0;padding:0;break-inside:auto} .u[hidden]{display:none} a{color:#000}
  .card{box-shadow:none;border:0;padding:0} #tr-print-h{display:block;font-size:18px;margin:0 0 8px} .tr-scroll{overflow:visible} #tr-grid{min-width:0;font-size:10px} .tr-tn{min-width:0} .tr-open::after{display:none}
@@ -220,7 +243,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
   <p style="margin:8px 0 0"><button type="button" class="tp-mini" id="cd-reset">Reset to CCEA’s dates</button></p>
  </details>
 </section>
-<nav class="tabs" role="tablist" aria-label="Teacher area sections"><a href="#packs" role="tab" id="t-packs" aria-controls="packs" aria-selected="true">Topic packs</a><a href="#test" role="tab" id="t-test" aria-controls="test" aria-selected="false">Build a test</a><a href="#trends" role="tab" id="t-trends" aria-controls="trends" aria-selected="false">Exam trends</a><a href="#sow" role="tab" id="t-sow" aria-controls="sow" aria-selected="false">Scheme of work</a><a href="#visits" role="tab" id="t-visits" aria-controls="visits" aria-selected="false">Pupils</a></nav>
+<nav class="tabs" role="tablist" aria-label="Teacher area sections"><a href="#visits" role="tab" id="t-visits" aria-controls="visits" aria-selected="true" class="t-pup">Pupil tracking<span class="t-badge" id="t-badge" hidden></span></a><a href="#packs" role="tab" id="t-packs" aria-controls="packs" aria-selected="false">Topic packs</a><a href="#test" role="tab" id="t-test" aria-controls="test" aria-selected="false">Build a test</a><a href="#trends" role="tab" id="t-trends" aria-controls="trends" aria-selected="false">Exam trends</a><a href="#sow" role="tab" id="t-sow" aria-controls="sow" aria-selected="false">Scheme of work</a></nav>
 
 <section id="packs" role="tabpanel" aria-labelledby="t-packs">
  <div class="hrow"><h2>CCEA questions by topic</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-packs" aria-label="About topic packs" title="About topic packs"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
@@ -347,19 +370,19 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 
 <section id="visits" role="tabpanel" aria-labelledby="t-visits" hidden>
  <div id="activity">
- <div class="hrow"><h2>Pupil activity</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-ac" aria-label="About pupil activity" title="About pupil activity"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+ <div class="hrow"><h2>Pupil tracking</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-ac" aria-label="About pupil tracking" title="About pupil tracking"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
  <div class="ip" id="i-ac" hidden><p>Pupils must enter their first name, surname, form class and a 4-digit PIN before using the Revision Guide (they can change it under About on the home page). If that name and form class are already in your sheet and the PIN matches, the device joins that pupil and pulls in their saved progress (five wrong PINs locks it for 15 minutes; <b>Reset PIN</b> lets them choose a new one). PINs are stored only as a scrambled hash. Their <b>active</b> time is then sent per page, along with each workbook’s pages covered and opened, best chapter-quiz scores and trophies, and their progress is saved online under their name. Names are not checked. Devices that have opened the Teacher area are never asked and never counted.</p><p>The data is in your Google Sheet (the Log tab). Your key stays on this device.</p></div>
  <div id="ac-setup" hidden><p class="small">Not set up yet. Make a Google Sheet, paste in the Apps Script from <code>tools/pupil-activity.gs</code> (its first lines are the steps), deploy it as a web app, then paste its URL into <code>activity.json</code> in the GitHub repo.</p></div>
  <div id="ac-on" hidden>
   <div class="hrow" id="ac-keyrow" hidden><input type="password" id="ac-key" placeholder="Teacher key" aria-label="Teacher key (TEACHER_KEY in the Apps Script)" autocomplete="off" style="font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:9px;min-width:0;flex:1;max-width:260px"><button type="button" class="tp-mini" id="ac-save">Show activity</button></div>
-  <div class="tp-tools" id="ac-tools" hidden><select id="ac-yr" aria-label="Year group"></select><select id="ac-cls" aria-label="Class"></select><select id="ac-sort" aria-label="Sort"><option value="total">Most time</option><option value="week">Most this week</option><option value="last">Last active</option><option value="name">Name</option></select><details class="ac-more"><summary class="tp-mini" aria-label="More">⋯</summary><div class="ac-menu"><button type="button" id="ac-refresh">Refresh</button><button type="button" id="ac-csv">Download CSV</button><button type="button" id="ac-forget">Forget key on this device</button></div></details></div>
+  <div class="tp-tools" id="ac-tools" hidden><div class="ac-qrow" id="ac-qrow"><input type="search" id="ac-q" placeholder="Find a pupil" aria-label="Find a pupil by name or class" autocomplete="off"><button type="button" class="tp-mini" id="ac-sel" aria-pressed="false">Select</button></div><select id="ac-yr" aria-label="Year group"></select><select id="ac-cls" aria-label="Class"></select><select id="ac-sort" aria-label="Sort"><option value="total">Most time</option><option value="week">Most this week</option><option value="last">Last active</option><option value="name">Name</option></select><details class="ac-more"><summary class="tp-mini" aria-label="More">⋯</summary><div class="ac-menu"><button type="button" id="ac-refresh">Refresh</button><button type="button" id="ac-csv">Download CSV</button><button type="button" id="ac-forget">Forget key on this device</button></div></details></div>
   <div class="ac-view" id="ac-view" role="tablist" aria-label="Show" hidden><button type="button" role="tab" data-v="pupils" aria-selected="true">Pupils</button><button type="button" role="tab" data-v="week" aria-selected="false">Weekly report</button></div>
   <p class="tp-status" id="ac-status" role="status" aria-live="polite" hidden></p>
   <div class="ac-req card" id="ac-req" hidden></div>
-  <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-pin">Reset PIN</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Clear</button></div>
+  <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><span class="ac-bsp"></span><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-pin">Reset PIN</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Done</button></div>
   <div class="ac-panel card" id="ac-panel" hidden></div>
   <div class="card wk" id="wk-wrap" hidden><div class="wk-h"><h3>Weekly report</h3><span class="wk-nav"><button type="button" class="tp-mini" id="wk-prev" aria-label="Previous week">‹</button><b id="wk-range"></b><button type="button" class="tp-mini" id="wk-next" aria-label="Next week">›</button><button type="button" class="tp-mini" id="wk-print">Print</button></span></div><p class="small" id="wk-sum"></p><div id="wk-body"></div></div>
-  <div class="card" id="ac-wrap" hidden><p class="small" id="ac-sum" style="margin:0 0 8px"></p><div style="overflow-x:auto"><table id="ac-t"><thead><tr><th class="ac-cb"><span class="sr-only">Select</span></th><th>Pupil</th><th>Class</th><th class="vs-n">Total</th><th class="vs-n">7 days</th><th class="vs-n">Days</th><th class="vs-n">Last</th></tr></thead><tbody id="ac-body"></tbody></table></div></div>
+  <div class="card ac-wrap" id="ac-wrap" hidden><div class="ac-sum" id="ac-sum"></div><div class="ac-list" id="ac-list"></div></div>
   <div class="card ac-pd" id="ac-pd" hidden></div>
  </div>
  </div>
@@ -381,7 +404,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 (function(){
   /* tabs: #packs (default) and #sow */
   var tabs=document.querySelectorAll('.tabs a');
-  function show(id){if(['sow','test','trends','visits'].indexOf(id)<0)id='packs';tabs.forEach(function(t){var on=t.getAttribute('aria-controls')===id;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on})}
+  function show(id){if(['sow','test','trends','packs'].indexOf(id)<0)id='visits';tabs.forEach(function(t){var on=t.getAttribute('aria-controls')===id;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on})}
   tabs.forEach(function(t,i){t.addEventListener('click',function(e){e.preventDefault();var id=t.getAttribute('aria-controls');history.replaceState(null,'','#'+id);show(id)});
     t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){var n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];n.focus();n.click()}})});
   show(location.hash.slice(1)); window.addEventListener('hashchange',function(){show(location.hash.slice(1))});
@@ -1792,7 +1815,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   'use strict';
   const $ = (s, r) => (r || document).querySelector(s);
   const $$ = (s, r) => [...(r || document).querySelectorAll(s)];
-  const el = (t, a, ...kids) => { const e = document.createElement(t); for (const k in a || {}) { if (k === 'class') e.className = a[k]; else if (k === 'text') e.textContent = a[k]; else if (k.startsWith('on')) e.addEventListener(k.slice(2), a[k]); else e.setAttribute(k, a[k]); } kids.forEach(c => c != null && e.append(c)); return e; };
+  const el = (t, a, ...kids) => { const e = document.createElement(t); for (const k in a || {}) { if (k === 'class') e.className = a[k]; else if (k === 'html') e.innerHTML = a[k]; else if (k === 'text') e.textContent = a[k]; else if (k.startsWith('on')) e.addEventListener(k.slice(2), a[k]); else e.setAttribute(k, a[k]); } kids.forEach(c => c != null && e.append(c)); return e; };
   const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
   const UNIT = { home: 'Home', U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
   const hm = s => { const m = Math.round(s / 60); return m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')}`; };
@@ -1817,7 +1840,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
      (time, last opened) with its pages (time, visits, last opened) */
   function detail(p) {
     const box = el('div', { class: 'ac-d' }), pr = p.prog || {}, D = DET[p.id], full = D && D.topics;
-    const act = kind => () => { SEL.clear(); SEL.add(p.id); bar(); panel(kind); const pn = $('#ac-panel'); if (pn) pn.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
+    const act = kind => () => { SEL.clear(); SEL.add(p.id); SELMODE = true; bar(); panel(kind); const pn = $('#ac-panel'); if (pn) pn.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
     const menu = el('details', { class: 'ac-more' }, el('summary', { class: 'tp-mini', 'aria-label': 'Manage this pupil', text: '⋯' }), el('div', { class: 'ac-menu' },
       el('button', { type: 'button', text: 'Edit name or class', onclick: act('rename') }), el('button', { type: 'button', text: 'Reset PIN', onclick: act('pin') }), el('button', { type: 'button', class: 'danger', text: 'Delete pupil', onclick: act('delete') })));
     box.append(el('div', { class: 'pd-head' }, el('div', {}, el('h3', { text: p.name }), el('p', { class: 'small', text: `${p.cls}${p.pin === false ? ' · no PIN yet' : ''} · last active ${when(p.last)}` })),
@@ -1923,7 +1946,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       if (!D) api({ action: 'detail', to: p.id }).then(r => { if (r && r.ok) { DET[p.id] = r; if (OPEN === p.id) render(); } else st.textContent = 'Topic-by-topic detail needs the updated Apps Script (deploy it as a new version).'; }).catch(() => { st.textContent = 'Couldn’t load the detail.'; }); }
     return box;
   }
-  let URL0 = '', DATA = null, sortBy = LS.get('teacher.actsort') || 'total', cls = LS.get('teacher.actcls') || '', yr = LS.get('teacher.actyr') || '';
+  let QRY = '', SELMODE = false; let URL0 = '', DATA = null, sortBy = LS.get('teacher.actsort') || 'total', cls = LS.get('teacher.actcls') || '', yr = LS.get('teacher.actyr') || '';
   const yearOf = c => { const m = /^(\d{1,2})/.exec(String(c || '')); return m ? m[1] : ''; };   /* 11B → 11 */
   const keep = p => (!yr || yearOf(p.cls) === yr) && (!cls || p.cls === cls);
 
@@ -1976,35 +1999,51 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const classes = [...new Set(DATA.filter(p => !yr || yearOf(p.cls) === yr).map(p => p.cls).filter(Boolean))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
     const sel = $('#ac-cls'); sel.innerHTML = ''; sel.append(el('option', { value: '', text: yr ? `All Year ${yr}` : 'All classes' }), ...classes.map(c => el('option', { value: c, text: c }))); if (!classes.includes(cls)) cls = ''; sel.value = cls;
     const rows = DATA.filter(keep).sort((a, b) => sortBy === 'name' ? a.name.localeCompare(b.name) : sortBy === 'last' ? b.last - a.last : sortBy === 'week' ? b.week - a.week : b.total - a.total);
-    const tb = $('#ac-body'); tb.innerHTML = '';
-    const max = Math.max(1, ...rows.map(p => p.total));
-    rows.forEach(p => {
-      const top = Object.entries(p.units || {}).filter(([u]) => u !== 'home').sort((a, b) => b[1] - a[1]).slice(0, 2).map(([u, s]) => `${UNIT[u] || u} ${hm(s)}`).join(', ');
-      const cb = el('input', { type: 'checkbox', 'aria-label': `Select ${p.name}` }); cb.checked = SEL.has(p.id);
-      cb.addEventListener('change', () => { cb.checked ? SEL.add(p.id) : SEL.delete(p.id); bar(); });
+    const q = QRY.toLowerCase().replace(/\s+/g, ' ').trim();
+    const shown = q ? rows.filter(p => (p.name + ' ' + p.cls).toLowerCase().includes(q)) : rows;
+    const list = $('#ac-list'), pd = $('#ac-pd'); if (pd) wrap.append(pd); list.innerHTML = '';
+    $('#ac-wrap').classList.toggle('picking', SELMODE);
+    const ring = v => { const r = 15, c = 2 * Math.PI * r; return el('span', { class: 'ac-ring' + (v >= 70 ? ' hi' : v >= 30 ? ' mid' : ''), 'aria-hidden': 'true', html: `<svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="${r}"/><circle cx="18" cy="18" r="${r}" stroke-dasharray="${c * v / 100} ${c}"/></svg><b>${v}<small>%</small></b>` }); };
+    shown.forEach(p => {
+      const pr = p.prog || {}, main = Object.keys(pr).filter(u => pr[u].total).sort((a, b) => ((p.units || {})[b] || 0) - ((p.units || {})[a] || 0) || pr[b].cov - pr[a].cov)[0];
+      const cov = main ? pct(pr[main].cov, pr[main].total) : 0;
       const typed = (p.typed || []).filter(t => t !== `${p.name} (${p.cls})`);
-      const nameBtn = el('button', { type: 'button', class: 'ac-nm', 'aria-expanded': String(OPEN === p.id), text: p.name, onclick: () => { const was = OPEN === p.id; OPEN = was ? null : p.id; PICK = null; render(); if (!was) setTimeout(() => { const b = $('#ac-pd'); if (b && !b.hidden) b.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 50); } });
-      const pr = progLine(p);
-      tb.append(el('tr', { class: SEL.has(p.id) ? 'sel' : '' }, el('td', { class: 'ac-cb' }, cb), el('td', {}, nameBtn, el('small', { class: 'ac-pr', text: pr || top || '' }), typed.length ? el('small', { class: 'ac-typed', text: 'Also typed: ' + typed.slice(0, 3).join(', ') }) : null, p.pin === false ? el('small', { class: 'ac-typed', text: 'No PIN yet' }) : null, accTag(p)), el('td', { text: p.cls }),
-        el('td', { class: 'vs-n' }, document.createTextNode(hm(p.total)), el('span', { class: 'vs-bar', 'aria-hidden': 'true' }, el('i', { style: `width:${p.total / max * 100}%` }))),
-        el('td', { class: 'vs-n', text: hm(p.week) }), el('td', { class: 'vs-n', text: String(p.days) }), el('td', { class: 'vs-n', text: when(p.last) })));
-
+      const cb = el('input', { type: 'checkbox', 'aria-label': `Select ${p.name}` }); cb.checked = SEL.has(p.id);
+      cb.addEventListener('change', () => { cb.checked ? SEL.add(p.id) : SEL.delete(p.id); row.classList.toggle('sel', cb.checked); bar(); });
+      const open = () => { if (SELMODE) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); return; } const was = OPEN === p.id; OPEN = was ? null : p.id; PICK = null; render(); if (!was) setTimeout(() => { const r = list.querySelector(`[data-id="${p.id}"]`); if (r) r.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60); };
+      const tags = [p.pin === false ? el('span', { class: 'ac-tag', text: 'No PIN' }) : null, typed.length ? el('span', { class: 'ac-tag', title: 'Also typed: ' + typed.join(', '), text: 'Also typed: ' + typed.slice(0, 2).join(', ') }) : null, accTag(p)].filter(Boolean);
+      const btn = el('button', { type: 'button', class: 'ac-main', 'aria-expanded': String(OPEN === p.id) },
+        ring(cov),
+        el('span', { class: 'ac-who' }, el('span', { class: 'ac-nmr' }, el('b', { text: p.name }), el('span', { class: 'ac-cl', text: p.cls })),
+          el('small', { text: main ? `${UNIT[main] || main}: ${cov}% covered` + (() => { let a = 0, m = 0; Object.values(pr[main].quiz || {}).forEach(x => { a += x[0]; m += x[1]; }); return m ? ` · quiz ${pct(a, m)}%` : ''; })() : 'Nothing covered yet' }),
+          el('small', { class: 'ac-last', text: p.last ? 'Last active ' + when(p.last) : 'Not used yet' })),
+        el('span', { class: 'ac-time' }, el('b', { text: hm(p.total) }), el('small', { class: p.week ? 'on' : '', text: p.week ? hm(p.week) + ' this week' : 'none this week' })));
+      btn.addEventListener('click', open);
+      const row = el('div', { class: 'ac-row2' + (SEL.has(p.id) ? ' sel' : '') + (OPEN === p.id ? ' open' : ''), 'data-id': p.id }, el('label', { class: 'ac-pk' }, cb), btn, tags.length ? el('div', { class: 'ac-tags' }, ...tags) : null);
+      list.append(row);
+      if (OPEN === p.id && pd) list.append(pd);
     });
+    if (!shown.length && DATA.length) list.append(el('p', { class: 'small ac-none', text: q ? `No pupil matches “${QRY}”.` : 'No pupils in this class yet.' }));
     [...SEL].forEach(id => { if (!DATA.some(p => p.id === id)) SEL.delete(id); }); bar();
     const tot = rows.reduce((a, p) => a + p.total, 0), wk = rows.reduce((a, p) => a + p.week, 0), act = rows.filter(p => p.week > 0).length;
-    const pd = $('#ac-pd'), op = OPEN && DATA.find(x => x.id === OPEN);
+    const op = OPEN && DATA.find(x => x.id === OPEN && shown.includes(x));
     if (pd) { pd.innerHTML = ''; pd.hidden = !op || VIEW === 'week'; if (op) pd.append(detail(op)); }
-    $('#ac-sum').textContent = rows.length ? `${rows.length} pupil${rows.length === 1 ? '' : 's'} · ${act} active this week · ${hm(wk)} this week · ${hm(tot)} in all` : 'No pupils yet: activity appears once pupils add their name.';
+    const sm = $('#ac-sum'); sm.innerHTML = '';
+    if (rows.length) [[rows.length, rows.length === 1 ? 'pupil' : 'pupils'], [act, 'active this week'], [hm(wk), 'this week'], [hm(tot), 'in all']].forEach(([v, k]) => sm.append(el('span', {}, el('b', { text: String(v) }), document.createTextNode(' ' + k))));
+    else sm.append(el('span', { text: 'No pupils yet: they appear here once they sign in.' }));
+    const tb = $('#t-badge'); if (tb) { tb.textContent = REQ.length ? String(REQ.length) : ''; tb.hidden = !REQ.length; }
     requests();
   }
   /* merge / rename / delete the ticked pupils */
   function bar() {
-    const n = SEL.size, b = $('#ac-bar'); b.hidden = !n; if (!n) { $('#ac-panel').hidden = true; return; }
+    const n = SEL.size, b = $('#ac-bar'); b.hidden = !SELMODE; const sb = $('#ac-sel'); if (sb) { sb.textContent = SELMODE ? 'Done' : 'Select'; sb.setAttribute('aria-pressed', String(SELMODE)); }
+    $$('#ac-bar .tp-mini:not(#ac-clear)').forEach(x => { x.disabled = !n; });
+    if (!n) { $('#ac-panel').hidden = true; $('#ac-n').textContent = SELMODE ? 'Tick pupils to merge, rename or delete' : ''; return; }
     $('#ac-n').textContent = `${n} selected`; $('#ac-merge').hidden = n < 2; $('#ac-rename').hidden = n !== 1; $('#ac-pin').hidden = n !== 1;
   }
   function panel(kind) {
     const ps = DATA.filter(p => SEL.has(p.id)), box = $('#ac-panel'); box.innerHTML = ''; box.hidden = false;
-    const busy = (btn, f) => async () => { btn.disabled = true; try { const r = await f(); if (!r || !r.ok) throw new Error(r && r.error || 'failed'); SEL.clear(); box.hidden = true; await load(); status(kind === 'delete' ? 'Deleted.' : kind === 'merge' ? 'Merged.' : kind === 'pin' ? 'PIN reset.' : 'Renamed.', 'ok'); }
+    const busy = (btn, f) => async () => { btn.disabled = true; try { const r = await f(); if (!r || !r.ok) throw new Error(r && r.error || 'failed'); SEL.clear(); SELMODE = false; box.hidden = true; await load(); status(kind === 'delete' ? 'Deleted.' : kind === 'merge' ? 'Merged.' : kind === 'pin' ? 'PIN reset.' : 'Renamed.', 'ok'); }
       catch (e) { status('That didn’t work: ' + e.message + '. If you’ve just updated the Apps Script, check you deployed it as a new version.', 'warn'); btn.disabled = false; } };
     const cancel = el('button', { type: 'button', class: 'tp-mini', text: 'Cancel', onclick: () => { box.hidden = true; } });
     if (kind === 'pin') {
@@ -2037,7 +2076,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   let VIEW = LS.get('teacher.actview') || 'pupils';
   function view() {
     $$('#ac-view [data-v]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === VIEW)));
-    const wk = VIEW === 'week'; $('#ac-wrap').hidden = wk; $('#ac-pd').hidden = wk || !OPEN; $('#wk-wrap').hidden = !wk; $('#ac-sort').hidden = wk;
+    const wk = VIEW === 'week'; $('#ac-wrap').hidden = wk; $('#ac-pd').hidden = wk || !OPEN; $('#wk-wrap').hidden = !wk; $('#ac-sort').hidden = wk; $('#ac-qrow').hidden = wk;
     if (wk) week();
     requests();
   }
@@ -2094,7 +2133,9 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     $('#ac-forget').addEventListener('click', () => { LS.set('teacher.actkey', null); DATA = null; load(); });
     $('#ac-refresh').addEventListener('click', () => { Object.keys(DET).forEach(k => delete DET[k]); load(); });
     $('#ac-merge').addEventListener('click', () => panel('merge')); $('#ac-rename').addEventListener('click', () => panel('rename')); $('#ac-pin').addEventListener('click', () => panel('pin')); $('#ac-del').addEventListener('click', () => panel('delete'));
-    $('#ac-clear').addEventListener('click', () => { SEL.clear(); render(); }); $('#ac-csv').addEventListener('click', csv);
+    $('#ac-clear').addEventListener('click', () => { SEL.clear(); SELMODE = false; render(); });
+    $('#ac-sel').addEventListener('click', () => { SELMODE = !SELMODE; if (!SELMODE) SEL.clear(); else { OPEN = null; } render(); });
+    $('#ac-q').addEventListener('input', e => { QRY = e.target.value; render(); }); $('#ac-csv').addEventListener('click', csv);
     $('#ac-cls').addEventListener('change', e => { cls = e.target.value; LS.set('teacher.actcls', cls); render(); week(); });
     $$('#ac-view [data-v]').forEach(b => b.addEventListener('click', () => { VIEW = b.dataset.v; LS.set('teacher.actview', VIEW); view(); }));
     document.addEventListener('click', e => { document.querySelectorAll('details.ac-more[open]').forEach(d => { if (!d.contains(e.target) || e.target.closest('.ac-menu button')) d.open = false; }); });
