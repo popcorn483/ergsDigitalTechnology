@@ -9701,7 +9701,7 @@ try {
     let later = false; try { later = !!sessionStorage.getItem('mrb-pin-later'); } catch (x) { }
     addEventListener('online', () => { if (me() && !LS.get('mrb-pin-ok') && !LS.get('notes-nocount')) { try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } ask(); } });   /* signed in offline: PIN checked as soon as it is back online */
     if (!me() || (!LS.get('mrb-pin-ok') && !later)) setTimeout(ask, 600);
-    else { if (blocked()) setTimeout(gate, 300); checkAccess(); }
+    else { if (blocked()) gate(); checkAccess(); }
     track();
     setTimeout(syncAwards, 3000); setInterval(syncAwards, 5 * 60000);
   }
@@ -9743,15 +9743,20 @@ try {
     }
     return n;
   }
-  /* ACCESS: new pupils wait until Mr Butler approves them (Teacher area › Pupils › Requests). 'mrb-access' holds 'pending' or
-     'declined' while they wait; anything else (approved, an older Apps Script, offline) lets them in, so nobody is locked out by a fault */
-  const blocked = () => /^(pending|declined)$/.test(LS.get('mrb-access') || '');
+  /* ACCESS: a signed-in pupil uses the guide only once Mr Butler has approved them (Teacher area › Pupil tracking). 'mrb-access'
+     is 'ok' once the Apps Script has confirmed it; 'pending' / 'declined' while not; anything else (not checked yet) keeps the
+     page covered until it is checked, so a slow or failed check never lets a new pupil in. Once 'ok', the device works offline
+     and is re-checked in the background each visit (a decline takes effect next time). An older Apps Script with no approvals
+     answers without a status: that counts as approved. */
+  const blocked = () => !!me() && !LS.get('notes-nocount') && LS.get('mrb-access') !== 'ok';
+  const unGate = () => { const g = document.getElementById('mrb-gate'); if (g) g.remove(); document.documentElement.style.overflow = ''; clearInterval(gateT); };
   async function checkAccess() {
     const p = me(); if (!p || !URL0 || LS.get('notes-nocount')) return;
-    let j; try { j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=access&id=' + encodeURIComponent(p.id), { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); } catch (e) { return; }
-    const st = j && j.ok && typeof j.status === 'string' ? j.status : '';
+    let j = null; try { const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000); j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=access&id=' + encodeURIComponent(p.id), { cache: 'no-store', credentials: 'omit', signal: ctl.signal }).then(r => r.json()); clearTimeout(t); } catch (e) { j = null; }
+    if (!j) { if (blocked()) { if (!/^(pending|declined)$/.test(LS.get('mrb-access') || '')) LS.set('mrb-access', 'check'); gate(); } return; }   /* couldn't reach it: stay as we were */
+    const st = j.ok && typeof j.status === 'string' ? j.status : '';
     if (/^(pending|declined)$/.test(st)) { LS.set('mrb-access', st); gate(); }
-    else if (j && j.ok) { const was = blocked(); LS.set('mrb-access', null); if (was) { const g = document.getElementById('mrb-gate'); if (g) { g.remove(); document.documentElement.style.overflow = ''; } } }
+    else { LS.set('mrb-access', 'ok'); unGate(); }   /* approved (or an Apps Script without approvals) */
   }
   let gateT = 0;
   function gate() {
@@ -9763,14 +9768,15 @@ try {
       const css = `#mrb-gate{position:fixed;inset:0;z-index:2147483001;display:grid;place-items:center;background:rgba(10,16,30,.72);padding:16px}#mrb-gate .b{background:#fff;color:#16213A;border-radius:14px;max-width:380px;width:100%;padding:22px 20px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;text-align:center}#mrb-gate .i{font-size:34px;line-height:1;margin-bottom:8px}#mrb-gate h2{margin:0 0 6px;font-size:19px}#mrb-gate p{margin:0 0 10px;color:#4A5468;font-size:14px}#mrb-gate .r{display:flex;gap:8px;margin-top:14px}#mrb-gate button{font:inherit;font-weight:700;border-radius:9px;padding:10px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer;flex:1}#mrb-gate button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff}#mrb-gate .m{font-size:13px;min-height:1em;margin:10px 0 0}@media (prefers-color-scheme:dark){#mrb-gate .b{background:#1B2233;color:#E8ECF4}#mrb-gate p{color:#AEB8CA}#mrb-gate button:not(.p){background:#121826;color:#E8ECF4;border-color:#3A4458}}`;
       g.innerHTML = `<style>${css}</style><div class="b"><div class="i" aria-hidden="true"></div><h2 id="mrb-gate-h"></h2><p class="t"></p><div class="r"><button type="button" class="o">Sign out</button><button type="button" class="p">Check again</button></div><p class="m" aria-live="polite"></p></div>`;
       document.body.append(g); document.documentElement.style.overflow = 'hidden';
-      g.querySelector('.p').addEventListener('click', async ev => { const bt = ev.currentTarget; bt.disabled = true; g.querySelector('.m').textContent = 'Checking…'; await checkAccess(); bt.disabled = false; if (document.getElementById('mrb-gate')) g.querySelector('.m').textContent = blocked() && LS.get('mrb-access') === 'pending' ? 'Not approved yet. This page will open by itself once you are.' : ''; });
+      g.querySelector('.p').addEventListener('click', async ev => { const bt = ev.currentTarget; bt.disabled = true; g.querySelector('.m').textContent = 'Checking…'; await checkAccess(); bt.disabled = false; if (document.getElementById('mrb-gate')) g.querySelector('.m').textContent = LS.get('mrb-access') === 'pending' ? 'Not approved yet. This page will open by itself once you are.' : LS.get('mrb-access') === 'check' ? 'Couldn’t check just now. Are you online?' : ''; });
       g.querySelector('.o').addEventListener('click', () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && /^mrb-(pupil|pin-ok|access|save-|snap:)/.test(k)) localStorage.removeItem(k); } } catch (e) { } location.reload(); });
       g.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); } }, true);
     }
-    const dec = st === 'declined';
-    g.querySelector('.i').textContent = dec ? '⛔' : '⏳';
-    g.querySelector('h2').textContent = dec ? 'Access not approved' : 'Waiting for approval';
+    const dec = st === 'declined', chk = !/^(pending|declined)$/.test(st || '');
+    g.querySelector('.i').textContent = dec ? '⛔' : chk ? '🔄' : '⏳';
+    g.querySelector('h2').textContent = dec ? 'Access not approved' : chk ? 'Checking your access…' : 'Waiting for approval';
     g.querySelector('.t').textContent = dec ? `Mr Butler hasn’t approved access for ${p.name || 'this name'}${p.cls ? ' (' + p.cls + ')' : ''}. If you think this is a mistake, speak to him.`
+      : chk ? `Hi ${(p.name || '').split(' ')[0] || 'there'}! Checking that Mr Butler has approved you. You need to be online for this the first time.`
       : `Thanks, ${(p.name || '').split(' ')[0] || 'you'}! Mr Butler needs to approve you before you can use the Revision Guide. This page opens by itself as soon as he does.`;
     g.querySelector('.p').hidden = dec;
     clearInterval(gateT); if (!dec) gateT = setInterval(() => { if (!document.getElementById('mrb-gate')) return clearInterval(gateT); if (!document.hidden) checkAccess(); }, 20000);
@@ -9812,10 +9818,10 @@ try {
       }
       if (!/^[A-Z0-9]{1,12}$/.test(cls)) { m.textContent = 'Please enter your form class, e.g. 11B.'; c.focus(); return; }
       const pin = pinI.value.trim(); if (!/^\d{4}$/.test(pin)) { m.textContent = 'Please enter a 4-digit PIN.'; pinI.focus(); return; }
-      go.disabled = true; m.textContent = 'Checking…';
+      go.disabled = true; m.textContent = 'Checking… (this can take a few seconds)';
       let found = null, offline = false; const devId = p.id || (Math.random().toString(36).slice(2) + Date.now().toString(36)).slice(0, 16);
       try {
-        const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 8000);
+        const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000);
         const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=whois&name=' + encodeURIComponent(name) + '&cls=' + encodeURIComponent(cls) + '&pin=' + pin + '&id=' + encodeURIComponent(devId), { cache: 'no-store', credentials: 'omit', signal: ctl.signal }).then(r => r.json());
         clearTimeout(t);
         if (j && j.error === 'pin') { go.disabled = false; pinI.value = ''; pinI.focus(); m.textContent = `That PIN doesn’t match the one for ${name}.${j.left != null ? ` ${j.left} ${j.left === 1 ? 'try' : 'tries'} left.` : ''} Forgotten it? Ask Mr Butler to reset it.`; return; }
@@ -9823,13 +9829,15 @@ try {
         if (j && j.ok && j.id) found = j;
         /* anything else (an older Apps Script, a server error): let them in now and check the PIN again next time, so nobody is ever locked out */
       } catch (x) { offline = true; }
+      /* couldn't reach the sign-in check (offline, slow, a server error): not in until it can be checked */
+      if (offline) { go.disabled = false; m.textContent = 'Couldn’t check your name just now. Check you are online, then press Continue again.'; return; }
       const id = found ? found.id : devId;
       if (found) LS.set('mrb-pin-ok', '1'); else { LS.set('mrb-pin-ok', null); try { sessionStorage.setItem('mrb-pin-later', '1'); } catch (x) { } }
       void offline;
       LS.set('mrb-pupil', JSON.stringify({ id, name: found && found.name ? found.name : name, cls: found && found.cls ? found.cls : cls }));
       let pulled = 0; if (found && found.data && !found.fresh) { try { pulled = mergeInto(JSON.parse(found.data)); } catch (x) { } }
       LS.set('mrb-save-hash', null);
-      LS.set('mrb-access', found && /^(pending|declined)$/.test(found.status || '') ? found.status : null);
+      LS.set('mrb-access', found && /^(pending|declined)$/.test(found.status || '') ? found.status : 'ok');   /* approved, or an Apps Script without approvals */
       if (blocked()) { close(); gate(); return; }
       if (pulled) { m.textContent = 'Welcome back! Loading your progress…'; setTimeout(() => location.reload(), 600); return; }
       close();

@@ -26,7 +26,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 13;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 14;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -83,7 +83,7 @@ function dropPins_(ids) { const sh = pins_(), r = rows_(sh); for (let i = r.leng
 function whois_(name, cls, pin, devId) {
   const want = norm_(name, cls); if (want.length < 4) return { ok: false };
   if (!/^\d{4}$/.test(String(pin || ''))) return { ok: false, error: 'pin' };
-  const hits = summary_().pupils.filter(p => norm_(p.name, p.cls) === want || (p.typed || []).some(t => { const m = /^(.*) \(([^)]*)\)$/.exec(t); return m && norm_(m[1], m[2]) === want; }));
+  const hits = roster_().filter(p => norm_(p.name, p.cls) === want || (p.typed || []).some(t => { const m = /^(.*) \(([^)]*)\)$/.exec(t); return m && norm_(m[1], m[2]) === want; }));
   if (!hits.length) {
     /* signed up but not used yet (still waiting, or declined): that same request, not a second one */
     const req = REQUIRE_APPROVAL ? rows_(acc_()).find(x => norm_(x[2], x[3]) === want) : null;
@@ -102,6 +102,16 @@ function whois_(name, cls, pin, devId) {
   cache.remove(fk);
   const sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + p.id);
   return { ok: true, status: access_(p.id), id: p.id, name: p.name, cls: p.cls, updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' };
+}
+/* who is in the sheet (for signing in): id, name, class, the names they typed and total time. Much quicker than summary_. */
+function roster_() {
+  const A = aliases_(), N = names_(), P = {};
+  const get = (id, name, cls) => P[id] || (P[id] = { id, name: String(name || ''), cls: String(cls || ''), typed: {}, total: 0, last: 0 });
+  const lg = log_(), n = lg.getLastRow() - 1;
+  if (n > 0) lg.getRange(2, 1, n, 7).getValues().forEach(r => { const id = resolve_(String(r[1]), A); if (!id) return; const p = get(id, r[2], r[3]), t = +new Date(r[0]) || 0;
+    if (t >= p.last) { p.name = String(r[2]); p.cls = String(r[3]); p.last = t; } p.typed[String(r[2]) + ' (' + String(r[3]) + ')'] = 1; p.total += +r[6] || 0; });
+  rows_(prog_()).forEach(r => { const id = resolve_(String(r[1]), A); if (id && !P[id]) get(id, r[2], r[3]); });
+  return Object.keys(P).map(k => { const p = P[k]; if (N[k]) { p.name = N[k][0] || p.name; p.cls = N[k][1] || p.cls; } p.typed = Object.keys(p.typed); return p; });
 }
 function load_(code) {
   if (!CODE_RE.test(code)) return { ok: false, error: 'code' };
