@@ -2132,6 +2132,15 @@ body:has(#sv-sw:not([hidden])) #main{padding-bottom:72px}
 @media (prefers-reduced-motion: reduce){ .sv{transition:none} .sv-sw.hint [data-sv="slides"]{animation:none} }
 @media print{ .sv,.sv-sw{display:none!important} }
 /* ---------- NOTES ⇄ POWERPOINT css: END ---------- */
+
+/* several PowerPoints for one topic: the deck tabs get their own scrolling row under the header, numbered */
+.sv-h.multi{flex-wrap:wrap;row-gap:6px}
+.sv-h.multi .sv-tabs{order:10;flex:1 0 100%;padding:2px 0 2px;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 18px),transparent);mask-image:linear-gradient(90deg,transparent 0,#000 10px,#000 calc(100% - 18px),transparent);padding-left:6px;padding-right:18px}
+.sv-tabs button{display:inline-flex;align-items:center;gap:6px;max-width:min(70vw,320px);overflow:hidden;text-overflow:ellipsis}
+.sv-tabs button i{flex:none;font-style:normal;display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--paper-2,#EEF1F5);color:var(--ink-2);font-size:11.5px}
+.sv-tabs button[aria-selected="true"] i{background:var(--accent);color:#fff}
+/* the PowerPoint tile opens the slides now, so the floating Notes | PowerPoint switch only shows while the slides are open */
+body:not(.sv-on) .sv-sw{display:none!important}
 /* ================= APP: END ================= */
 
 
@@ -9605,7 +9614,9 @@ function svBuild() {
 function svPaint() {
   const d = SV.decks[SV.i]; if (!d || !SV.el) return;
   const tabs = SV.el.querySelector('.sv-tabs');
-  tabs.innerHTML = SV.decks.length > 1 ? SV.decks.map((x, k) => `<button type="button" role="tab" aria-selected="${k === SV.i}" data-sv-i="${k}">${esc(svTitle(x.name))}</button>`).join('') : `<b class="sv-one">${esc(svTitle(d.name))}${d.temp ? ' <span class="sv-tmp">Temporary</span>' : ''}</b>`;
+  SV.el.querySelector('.sv-h').classList.toggle('multi', SV.decks.length > 1);
+  tabs.innerHTML = SV.decks.length > 1 ? SV.decks.map((x, k) => `<button type="button" role="tab" aria-selected="${k === SV.i}" data-sv-i="${k}" title="${esc(svTitle(x.name))}"><i>${k + 1}</i>${esc(svTitle(x.name))}</button>`).join('') : `<b class="sv-one">${esc(svTitle(d.name))}${d.temp ? ' <span class="sv-tmp">Temporary</span>' : ''}</b>`;
+  const selT = tabs.querySelector('[aria-selected="true"]'); if (selT) requestAnimationFrame(() => { try { selT.scrollIntoView({ block: 'nearest', inline: 'center' }); } catch (e) { } });
   const f = SV.el.querySelector('.sv-f'), msg = SV.el.querySelector('.sv-msg'), nw = SV.el.querySelector('.sv-new'), dl = SV.el.querySelector('.sv-dl');
   dl.hidden = !d.rel; if (d.rel) dl.href = d.rel;
   if (d.link) { nw.href = d.link; nw.hidden = false; f.hidden = true; msg.hidden = false; msg.innerHTML = `<p>This PowerPoint is stored online.</p><a class="sv-btn" href="${esc(d.link)}" target="_blank" rel="noopener">Open the PowerPoint</a>`; return; }
@@ -10722,7 +10733,7 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
     /* 1 the topic PowerPoint (appears once the deck is found) */
     if (typeof svShow === 'function') {
       const t = tile('ppt', 'PowerPoint', 'This topic’s slides', () => svShow(true)); t.removeAttribute('aria-haspopup'); t.hidden = true;
-      const sync = () => { const sw = document.getElementById('sv-sw'), h = !sw || sw.hidden; if (t.hidden !== h) t.hidden = h; };
+      const sync = () => { const sw = document.getElementById('sv-sw'), h = !sw || sw.hidden; if (t.hidden !== h) t.hidden = h; const n = typeof SV !== 'undefined' && SV.decks ? SV.decks.length : 0, sm = t.querySelector('small'), want = n > 1 ? `${n} PowerPoints` : 'This topic’s slides'; if (sm && sm.textContent !== want) sm.textContent = want; };
       sync(); const sw = document.getElementById('sv-sw'); if (sw) new MutationObserver(sync).observe(sw, { attributes: true, attributeFilter: ['hidden'] }); setTimeout(sync, 800); setTimeout(sync, 2500);
     }
     if (hub) tile('sheet', 'Revision Summary Sheet', ids.length > 1 ? `${ids.length} lessons` : 'Lesson ' + ids[0], b => openPop({ k: 'sheet', t: 'Revision Summary Sheet' }, hubNode('notes', 'Revision Summary Sheet', ids), b));
