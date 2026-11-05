@@ -1972,7 +1972,7 @@ body.ppv-on{overflow:hidden}
 @keyframes mrbNudge{0%,100%{transform:none}8%{transform:scale(1.03)}16%{transform:none}}
 @media (prefers-reduced-motion:reduce){.foot .donebtn{animation:none!important}}
 .foot .pg-link{align-self:center}
-.foot .nextprev{grid-template-columns:minmax(0,1fr)!important;gap:8px}
+.foot .nextprev{grid-template-columns:minmax(0,1fr)!important;gap:8px}.foot .nextprev .np{grid-column:1!important}
 .foot .np.nx{order:-1;text-align:left;align-items:flex-start;background:var(--cc);border-color:var(--cc);color:#fff;padding:14px 18px;border-radius:14px;position:relative;padding-right:46px}
 .foot .np.nx small{color:#fff;opacity:.9;font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.06em}
 .foot .np.nx span{font-size:15.5px;font-weight:700}
@@ -10430,12 +10430,7 @@ try {
     const step = (k, cls, href, ic, t, sub) => `<li class="ts-s ${cls}"><a href="${href}" data-ts="${k}"><i class="ts-n">${ic}</i><span><b>${t}</b><small>${sub}</small></span></a></li>`;
     const box = document.createElement('section'); box.className = 'tsteps'; box.setAttribute('aria-label', 'Your steps');
     const secs = (state.ptime && state.ptime[P.p.id]) || 0;
-    box.innerHTML = `<div class="ts-h"><b>This page</b><span>${mins(secs)} revising${r ? ` · quiz ${r.s}/${r.m}` : ''}</span></div>
-      <ol class="ts-l">
-        ${step('read', me ? 'done' : 'now', '#', me ? TICK : '1', 'Read and cover', me ? 'Covered' : 'Then mark it covered')}
-        ${hasPq ? step('pq', !me && !staff() ? 'locked' : r ? 'done' : 'now', '#', !me && !staff() ? LOCK : r ? TICK : '2', 'Page quiz', !me && !staff() ? 'After covering' : r ? `${r.s}/${r.m}${r.bs > r.s ? ` · best ${r.bs}` : ''}` : 'Ready') : ''}
-      </ol>
-      <div class="ts-h ts-h2"><b>Topic · ${esc(ch.title)}</b><span>${cov}/${n} covered</span></div><span class="ts-m" aria-hidden="true"><i style="width:${Math.round(cov / n * 100)}%"></i></span>
+    box.innerHTML = `<div class="ts-h"><b>Topic · ${esc(ch.title)}</b><span>${cov}/${n} covered</span></div><span class="ts-m" aria-hidden="true"><i style="width:${Math.round(cov / n * 100)}%"></i></span>
       ${nq || np ? `<ol class="ts-l">
         ${nq ? step('quiz', open ? (best ? 'done' : 'now') : 'locked', '#quiz-' + esc(ch.id), open ? (best ? TICK : '★') : LOCK, 'Topic quiz', open ? (best ? `Best ${best.pc}%` : `${nq} questions`) : `${left.length} page${left.length === 1 ? '' : 's'} to cover`) : ''}
         ${np ? step('pp', open ? 'now' : 'locked', '#pp-' + esc(ch.id), open ? '★' : LOCK, 'Past papers', open ? `${np} question${np === 1 ? '' : 's'}` : 'After the topic') : ''}
