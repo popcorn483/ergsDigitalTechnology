@@ -216,7 +216,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 .ac-ring b{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800}.ac-ring b small{font-size:8px;font-weight:700;margin-left:0}
 .ac-tags{grid-column:2;display:flex;flex-wrap:wrap;gap:6px;padding:0 14px 10px 70px;margin-top:-6px}.ac-tag{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:#FFF4E0;color:#8A5300}.ac-tags .ac-acc{display:inline;font-size:11.5px;padding:2px 8px;border-radius:999px;background:#FDECEA}
 .ac-list .ac-pd{margin:0;border:0;border-radius:0;box-shadow:none;border-bottom:1px solid var(--line);padding:4px 10px 12px;background:var(--paper-2)}.ac-list .ac-d{max-width:none;position:static;background:var(--paper)}
-.ac-none{padding:14px;margin:0}.ac-panel .ac-row input+input{flex:0 0 84px}
+.ac-none{padding:14px;margin:0}.pd-t{position:relative}.pd-t.q-hi::after,.pd-t.q-mid::after,.pd-t.q-lo::after{content:"";position:absolute;top:-3px;right:-3px;width:9px;height:9px;border-radius:50%;border:1.5px solid var(--paper);background:#1E8E4E}.pd-t.q-mid::after{background:#E8A33D}.pd-t.q-lo::after{background:#C0392B}.ac-panel .ac-row input+input{flex:0 0 84px}
 .ac-bar{position:sticky;top:0;z-index:5;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:8px 10px;box-shadow:0 4px 14px rgba(10,16,30,.08)}.ac-bsp{flex:1}.ac-bar .tp-mini:disabled{opacity:.45}
 @media (max-width:720px){
  .tabs{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;border:0;overflow:visible}.tabs a{border:1px solid var(--line);border-radius:10px;margin:0;text-align:center;justify-content:center;padding:9px 6px;font-size:14px;white-space:normal;line-height:1.2;background:var(--paper)}
@@ -1889,10 +1889,10 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         tabs.append(el('button', { type: 'button', role: 'tab', 'aria-selected': String(u === tabU), class: 'pd-tab', onclick: () => { UTAB[p.id] = u; PICK = null; render(); } }, el('b', { text: UNIT[u] || u }), el('small', { text: `${pct(c, t)}%` }), el('span', { class: 'pd-tbar', 'aria-hidden': 'true' }, el('i', { style: `width:${pct(c, t)}%` })))); });
       box.append(tabs);
     }
-    const legend = (el('p', { class: 'pd-key small' }, el('span', { class: 'pd-t ok', text: '✓' }), document.createTextNode('covered'), el('span', { class: 'pd-t ok awd', text: '✓' }), document.createTextNode('marked by you'), el('span', { class: 'pd-t ret', text: '↩' }), document.createTextNode('come back to'), el('span', { class: 'pd-t seen', text: '•' }), document.createTextNode('opened, not covered'), el('span', { class: 'pd-t' }), document.createTextNode('not started')));
+    const legend = (el('p', { class: 'pd-key small' }, el('span', { class: 'pd-t ok', text: '✓' }), document.createTextNode('covered'), el('span', { class: 'pd-t ok awd', text: '✓' }), document.createTextNode('marked by you'), el('span', { class: 'pd-t ret', text: '↩' }), document.createTextNode('come back to'), el('span', { class: 'pd-t seen', text: '•' }), document.createTextNode('opened, not covered'), el('span', { class: 'pd-t' }), document.createTextNode('not started'), el('span', { class: 'pd-t ok q-hi', text: '✓' }), document.createTextNode('dot: page quiz mark (green 70%+, amber 40%+, red below)')));
     unitsSeen.filter(u => u === tabU).forEach(u => {
       const g = pr[u], vu = VU.find(x => x.id === u), sec = el('div', { class: 'ac-u' }), st = full && D.state && D.state[u];
-      const done = new Set((st && st.done) || []), seen = new Set((st && st.seen) || []), lat = new Set((st && st.later) || []), quiz = (g && g.quiz) || {};
+      const pqm = (st && st.pq) || {}, done = new Set((st && st.done) || []), seen = new Set((st && st.seen) || []), lat = new Set((st && st.later) || []), quiz = (g && g.quiz) || {};
       const allPages = Object.keys(vu.pages || {}), cov = st ? done.size : (g ? g.cov : 0), total = allPages.length || (g && g.total) || 0;
       sec.append(el('div', { class: 'pd-uh' }, el('h4', { text: `${UNIT[u] || u}: ${vu.title}` }), el('span', { class: 'small', text: `${cov}/${total} covered · ${hm((p.units || {})[u] || 0)}${g ? ` · ${g.tr} troph${g.tr === 1 ? 'y' : 'ies'}` : ''}` })));
       sec.append(el('span', { class: 'vs-bar ac-cov', 'aria-hidden': 'true' }, el('i', { style: `width:${pct(cov, total)}%` })));
@@ -1917,15 +1917,17 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         const tiles = el('div', { class: 'pd-tiles' });
         ids.forEach((id, k) => {
           const pv = (full && D.pages[u + '|' + id]) || null, isDone = done.has(id), isSeen = !isDone && (seen.has(id) || !!pv), awd = full && D.marked && D.marked[u + '|' + id] === 1 && isDone, isRet = !isDone && lat.has(id);
-          const tip = `${vu.pages[id] || id}${awd ? ' · marked covered by you' : isDone ? ' · covered' : isRet ? ' · they need to come back to it' : isSeen ? ' · opened, not covered yet' : ' · not started'}${pv ? ` · ${hm(pv[0])} · ${pv[2]} visit${pv[2] === 1 ? '' : 's'} · last ${when(pv[1])}` : ''}`;
-          const t = el('button', { type: 'button', class: 'pd-t' + (isDone ? ' ok' : isRet ? ' ret' : isSeen ? ' seen' : '') + (awd ? ' awd' : '') + (picking && PICK.set.has(id) ? ' picked' : ''), title: tip, 'aria-label': tip, text: isDone ? '✓' : isRet ? '↩' : isSeen ? '•' : '' });
+          const pq = pqm[id], pqc = pq && pq[1] ? (pq[0] / pq[1] >= .7 ? ' q-hi' : pq[0] / pq[1] >= .4 ? ' q-mid' : ' q-lo') : '';
+          const tip = `${vu.pages[id] || id}${awd ? ' · marked covered by you' : isDone ? ' · covered' : isRet ? ' · they need to come back to it' : isSeen ? ' · opened, not covered yet' : ' · not started'}${pv ? ` · revised ${hm(pv[0])} · ${pv[2]} visit${pv[2] === 1 ? '' : 's'} · last ${when(pv[1])}` : ''}${pq ? ` · page quiz ${pq[0]}/${pq[1]}${pq[2] > pq[0] ? ` (best ${pq[2]}/${pq[1]})` : ''}${pq[3] > 1 ? `, ${pq[3]} attempts` : ''}` : ' · page quiz not done'}`;
+          const t = el('button', { type: 'button', class: 'pd-t' + (isDone ? ' ok' : isRet ? ' ret' : isSeen ? ' seen' : '') + (awd ? ' awd' : '') + (picking && PICK.set.has(id) ? ' picked' : '') + pqc, title: tip, 'aria-label': tip, text: isDone ? '✓' : isRet ? '↩' : isSeen ? '•' : '' });
           t.addEventListener('click', () => {
             if (picking) { PICK.set.has(id) ? PICK.set.delete(id) : PICK.set.add(id); t.classList.toggle('picked'); const b = sec.querySelector('.pd-pick b'); if (b) b.textContent = `${PICK.set.size} selected`; return; }
             info.hidden = false; info.textContent = `Ch ${c.n} page ${k + 1}: ${tip}`;
           });
           tiles.append(t);
         });
-        const qs = [q ? `quiz ${pct(q[0], q[1])}%` : '', qp ? `PP ${pct(qp[0], qp[1])}%` : ''].filter(Boolean).join(' · ');
+        const pqs = ids.map(id => pqm[id]).filter(x => x && x[1]), pqa = pqs.length ? pct(pqs.reduce((a, x) => a + x[0], 0), pqs.reduce((a, x) => a + x[1], 0)) : null;
+        const qs = [pqa != null ? `page quizzes ${pqa}% (${pqs.length})` : '', q ? `topic quiz ${pct(q[0], q[1])}%` : '', qp ? `PP ${pct(qp[0], qp[1])}%` : ''].filter(Boolean).join(' · ');
         cats.append(el('div', { class: 'pd-cat' }, el('div', { class: 'pd-cath' }, el('span', { text: `Ch ${c.n} ${c.title}` }), el('small', { text: `${dn}/${ids.length}${tv[0] ? ' · ' + hm(tv[0]) : ''}${qs ? ' · ' + qs : ''}` })), tiles));
       });
       sec.append(legend, info, cats);
@@ -1961,7 +1963,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const r = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'key=' + encodeURIComponent(key), { cache: 'no-store', credentials: 'omit' });
       const j = await r.json();
       if (j.error === 'key') { LS.set('teacher.actkey', null); status('That key doesn’t match TEACHER_KEY in the Apps Script. Type it again.', 'warn'); $('#ac-keyrow').hidden = false; $('#ac-tools').hidden = true; return; }
-      DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; status((+j.v || 0) < 10 ? 'Your Google Apps Script is an older version, so approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 10 ? 'warn' : ''); $('#ac-view').hidden = false; view(); render(); requests();
+      DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; status((+j.v || 0) < 11 ? 'Your Google Apps Script is an older version, so page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 11 ? 'warn' : ''); $('#ac-view').hidden = false; view(); render(); requests();
     } catch (e) { status('Couldn’t load pupil activity. Check you’re online and that the Apps Script is deployed for “Anyone”.', 'warn'); }
   }
   const accTag = p => {

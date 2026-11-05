@@ -24,7 +24,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 10;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 11;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -33,7 +33,7 @@ const REQUIRE_APPROVAL = true;   // new pupils wait until you approve them in th
 const EMAIL_SIGNINS = true;   // email the script's owner each time a new pupil signs up (false to stop)   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
 const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
 const LOG_HEAD = ['When', 'Pupil ID', 'Name', 'Class', 'Unit', 'Topic', 'Active seconds', 'Page'];
-const PROG_HEAD = ['Updated', 'Pupil ID', 'Name', 'Class', 'Unit', 'Pages covered', 'Pages opened', 'Pages in unit', 'Trophies', 'Best quiz scores', 'Pages covered / opened'];
+const PROG_HEAD = ['Updated', 'Pupil ID', 'Name', 'Class', 'Unit', 'Pages covered', 'Pages opened', 'Pages in unit', 'Trophies', 'Best quiz scores', 'Pages covered / opened', 'Page quiz marks'];
 
 function clean_(v, n) {
   let s = String(v == null ? '' : v).replace(/[\u0000-\u001f]/g, ' ').trim().slice(0, n);
@@ -47,7 +47,7 @@ function tab_(name, head) {
   return sh;
 }
 const log_ = () => { const sh = tab_('Log', LOG_HEAD); if (sh.getRange(1, 8).getValue() !== 'Page') sh.getRange(1, 8).setValue('Page'); return sh; };
-const prog_ = () => tab_('Progress', PROG_HEAD);
+const prog_ = () => { const sh = tab_('Progress', PROG_HEAD); if (sh.getRange(1, 12).getValue() !== 'Page quiz marks') sh.getRange(1, 12).setValue('Page quiz marks'); return sh; };
 const rows_ = sh => sh.getLastRow() > 1 ? sh.getRange(2, 1, sh.getLastRow() - 1, sh.getLastColumn()).getValues() : [];
 function aliases_() { const m = {}; rows_(tab_('Aliases', ['Old ID', 'Kept ID'])).forEach(r => { m[String(r[0])] = String(r[1]); }); return m; }
 function names_() { const m = {}; rows_(tab_('Names', ['Pupil ID', 'Name', 'Class'])).forEach(r => { m[String(r[0])] = [String(r[1]), String(r[2])]; }); return m; }
@@ -116,8 +116,9 @@ function doPost(e) {
     Object.keys(d.quiz || {}).slice(0, 80).forEach(k => { const v = d.quiz[k]; if (/^c\d{1,2}(\|pp)?$/.test(k) && Array.isArray(v)) q[k] = [n(v[0]), n(v[1]), clean_(v[2], 10)]; });
     locked_(() => { const id = resolve_(String(d.id), aliases_()), sh = prog_(), r = rows_(sh), i = r.findIndex(x => String(x[1]) === id && String(x[4]) === book);
       const ok = x => /^c\d{1,2}-p\d{1,3}$/.test(String(x)), done = (Array.isArray(d.done) ? d.done : []).filter(ok).slice(0, 600), seen = (Array.isArray(d.seenIds) ? d.seenIds : []).filter(ok).slice(0, 600), later = (Array.isArray(d.laterIds) ? d.laterIds : []).filter(ok).slice(0, 600);
+      const pq = {}; Object.keys(d.pq || {}).slice(0, 600).forEach(k => { const v = d.pq[k]; if (ok(k) && Array.isArray(v)) pq[k] = [n(v[0]), n(v[1]), n(v[2]), n(v[3])]; });
       const fixed = applyAwards_(id, book, done);   /* the teacher's marks win, even before the pupil's device has picked them up */
-      const row = [new Date(), id, name, clean_(d.cls, 12).toUpperCase(), book, fixed.length, n(d.seen), n(d.total), n(d.tr), JSON.stringify(q), fixed.join(',') + '|' + seen.filter(x => fixed.indexOf(x) < 0).join(',') + '|' + later.filter(x => fixed.indexOf(x) < 0).join(',')];
+      const row = [new Date(), id, name, clean_(d.cls, 12).toUpperCase(), book, fixed.length, n(d.seen), n(d.total), n(d.tr), JSON.stringify(q), fixed.join(',') + '|' + seen.filter(x => fixed.indexOf(x) < 0).join(',') + '|' + later.filter(x => fixed.indexOf(x) < 0).join(',') , JSON.stringify(pq)];
       if (i >= 0) sh.getRange(i + 2, 1, 1, row.length).setValues([row]); else sh.appendRow(row); });
     return out_({ ok: true });
   }
@@ -220,7 +221,7 @@ function act_(q) {
     const ses = sessions.slice(-40).reverse().map(x => [x[0], x[1], x[2], Object.keys(x[3]), Object.keys(x[4]).sort((a, b) => x[4][b] - x[4][a]).slice(0, 3)]);
     const state = {};   /* per workbook: the pages covered and opened (from the latest progress snapshot) */
     rows_(prog_()).forEach(r => { if (resolve_(String(r[1]), A) !== to) return; const b = String(r[4]), [dn, sn, ln] = String(r[10] || '|').split('|');
-      if (!state[b] || +r[5] >= state[b].cov) state[b] = { cov: +r[5], done: dn ? dn.split(',') : [], seen: sn ? sn.split(',') : [], later: ln ? ln.split(',') : [], at: new Date(r[0]).getTime() }; });
+      if (!state[b] || +r[5] >= state[b].cov) state[b] = { cov: +r[5], done: dn ? dn.split(',') : [], seen: sn ? sn.split(',') : [], later: ln ? ln.split(',') : [], pq: (() => { try { return JSON.parse(r[11] || '{}'); } catch (e) { return {}; } })(), at: new Date(r[0]).getTime() }; });
     const marked = {};   /* pages the teacher has marked: the latest mark per page (1 covered, 0 not) */
     rows_(awards_()).forEach(r => { if (String(r[1]) === to) marked[String(r[2]) + '|' + String(r[3])] = +r[4]; });
     return { ok: true, pages, topics, days, first, last, devices: Object.keys(devs).length, sessions: ses, state, marked };
@@ -248,7 +249,7 @@ function act_(q) {
     if (keep.length) sh.getRange(2, 1, keep.length, LOG_HEAD.length).setValues(keep);
     const ps = prog_(), pk = rows_(ps).filter(r => ids.indexOf(String(r[1])) < 0), pn = ps.getLastRow() - 1;
     if (pn > 0) ps.getRange(2, 1, pn, PROG_HEAD.length).clearContent();
-    if (pk.length) ps.getRange(2, 1, pk.length, PROG_HEAD.length).setValues(pk);
+    if (pk.length) ps.getRange(2, 1, pk.length, PROG_HEAD.length).setValues(pk.map(x => x.slice(0, PROG_HEAD.length)));
     dropPins_(ids); dropAccess_(ids);
     const aws = awards_(), awr = rows_(aws); for (let i = awr.length - 1; i >= 0; i--) if (ids.indexOf(String(awr[i][1])) >= 0) aws.deleteRow(i + 2);
     const sv = saves_(), sr = rows_(sv); for (let i = sr.length - 1; i >= 0; i--) if (ids.indexOf(String(sr[i][0]).replace(/^P-/, '')) >= 0 && /^P-/.test(String(sr[i][0]))) sv.deleteRow(i + 2);
@@ -272,7 +273,7 @@ function relabelProg_(from, to) {   /* keep one row per workbook: the one with m
   r.forEach(x => { if (!String(x[1])) return; if (from.indexOf(String(x[1])) >= 0) x[1] = to; const k = x[1] + '|' + x[4]; if (!best[k] || +x[5] > +best[k][5]) best[k] = x; });
   r.forEach(x => { const k = x[1] + '|' + x[4]; if (best[k] === x) keep.push(x); });
   sh.getRange(2, 1, r.length, PROG_HEAD.length).clearContent();
-  if (keep.length) sh.getRange(2, 1, keep.length, PROG_HEAD.length).setValues(keep);
+  if (keep.length) sh.getRange(2, 1, keep.length, PROG_HEAD.length).setValues(keep.map(x => x.slice(0, PROG_HEAD.length)));
 }
 function setName_(id, name, cls) {
   const sh = tab_('Names', ['Pupil ID', 'Name', 'Class']), r = rows_(sh), i = r.findIndex(x => String(x[0]) === id);

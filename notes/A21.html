@@ -2353,6 +2353,35 @@ html.act-open{overflow:hidden}html.act-open .pbar,html.act-open .sv-sw{display:n
   .ap-x span{display:none}.ap-x{padding:8px}
 }
 @media (prefers-reduced-motion:no-preference){.act-pop{animation:mfFade .16s ease-out}.act-pop .ap-box{animation:mfUp .22s cubic-bezier(.2,.8,.2,1)}}
+/* TOPIC STEPS: Read the pages → Topic quiz → Past papers (2 and 3 locked until every page is opened or covered) */
+.tsteps{margin:0 0 14px;padding:12px 14px;background:var(--paper);border:1px solid var(--line);border-radius:14px;font-family:var(--sans)}
+.ts-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin:0 0 8px}.ts-h b{font-size:14px;font-weight:800;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.ts-h span{font-size:12.5px;font-weight:700;color:var(--ink-3);white-space:nowrap}
+.ts-m{display:block;height:6px;border-radius:6px;background:var(--line-2,var(--line));overflow:hidden;margin:0 0 10px}.ts-m i{display:block;height:100%;background:var(--cc,var(--accent));border-radius:6px}
+.ts-l{list-style:none;margin:0;padding:0;display:grid;grid-auto-flow:column;grid-auto-columns:1fr;gap:8px;counter-reset:none}
+.ts-s a{display:flex;align-items:center;gap:8px;height:100%;box-sizing:border-box;padding:8px 10px;border-radius:12px;border:1.5px solid var(--line);text-decoration:none;color:var(--ink);background:var(--paper);min-width:0}
+.ts-n{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font:800 13px/1 var(--sans);font-style:normal;background:var(--paper-2);color:var(--ink-2);border:1.5px solid var(--line)}.ts-n svg{width:15px;height:15px}
+.ts-s a > span{display:flex;flex-direction:column;min-width:0}.ts-s b{font-size:13.5px;font-weight:800;line-height:1.2}.ts-s small{font-size:11.5px;font-weight:600;color:var(--ink-3);line-height:1.25}
+.ts-s.now a{border-color:var(--cc,var(--accent));background:color-mix(in srgb,var(--cc,var(--accent)) 7%,var(--paper))}.ts-s.now .ts-n{background:var(--cc,var(--accent));border-color:var(--cc,var(--accent));color:#fff}
+.ts-s.done .ts-n{background:var(--good);border-color:var(--good);color:#fff}
+.ts-s.locked a{border-style:dashed;color:var(--ink-3)}.ts-s.locked .ts-n{color:var(--ink-3)}
+.ts-msg{display:flex;gap:8px;align-items:flex-start;margin:10px 0 0;padding:9px 11px;border-radius:10px;background:color-mix(in srgb,#C77A00 10%,var(--paper));color:var(--ink);font-size:13.5px;line-height:1.4}.ts-msg svg{width:18px;height:18px;flex:none;color:#C77A00;margin-top:1px}.ts-msg a{font-weight:800;white-space:nowrap}
+.ts-lk{display:inline-flex;font-style:normal}.ts-lk svg{width:13px;height:13px}.cyk-tab.ts-locked{opacity:.75}
+.ts-lockp{margin:4px 0}.cq-left{margin:12px 0 0;padding-left:18px;font-size:14px;line-height:1.5}.cq-left a{color:inherit}
+@media (max-width:699px){
+  .tsteps{padding:10px;border-radius:12px}
+  .ts-l{gap:6px}
+  .ts-s a{flex-direction:column;align-items:flex-start;gap:5px;padding:8px}
+  .ts-s b{font-size:12.5px}.ts-s small{font-size:11px}
+  .ts-n{width:24px;height:24px;font-size:12px}
+}
+.pq-hid{display:none!important}
+.pq-lock{margin:4px 0;display:flex;gap:12px;align-items:flex-start}.pq-lock > svg{width:30px;height:30px;flex:none;color:var(--ink-3)}.pq-lock p{margin:0 0 10px}.pq-lock .btn{display:inline-flex;align-items:center;gap:6px}.pq-lock .btn svg{width:15px;height:15px}
+.pq-res{margin:0 0 10px;padding:9px 12px;border-radius:10px;font:600 14px/1.4 var(--sans);background:var(--paper-2)}.pq-res.hi{background:color-mix(in srgb,var(--good) 12%,var(--paper))}.pq-res.mid{background:color-mix(in srgb,#C77A00 12%,var(--paper))}.pq-res.lo{background:color-mix(in srgb,#C0392B 10%,var(--paper))}
+.act{position:relative}.act.locked{border-style:dashed;background:var(--paper)}.act.locked .act-i{background:color-mix(in srgb,var(--k) 45%,#9AA3B2)}
+.act-lk{position:absolute;top:6px;right:7px;font-style:normal;color:var(--ink-3)}.act-lk svg{width:14px;height:14px}
+.ts-h2{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
+.ts-l + .ts-h2{margin-top:10px}
+.pg-rec{display:block;margin-top:2px;font:700 11.5px/1.3 var(--sans);color:var(--ink-3)}.pg-rec.hi{color:var(--good)}.pg-rec.mid{color:#B26A00}.pg-rec.lo{color:#B42318}
 /* PAGE BAR (phones): ‹ · Mark as covered · Next › fixed at the bottom; the "Before you move on" sheet */
 .pbar{display:none}
 #b-ppt{display:none}
@@ -8422,7 +8451,7 @@ function renderProgress(focus) {
       const ps = ch.pages, d = ps.filter(p => state.done[p.id]).length;
       const on = typeof isTrk !== 'function' || isTrk(ch);
       return `<section class="lib-cat chs pg-ch${on ? '' : ' off'}" style="${chVars(ch)}"><h2><span>${esc(pad2(ch.n))}</span>${esc(ch.title)}<small>${on ? `${d}/${ps.length}` : 'Not tracking'}</small></h2>${on ? `<span class="meter"><i style="width:${Math.round(d / ps.length * 100)}%"></i></span>` : ''}<div class="pg-chx">${typeof cqCardHTML === 'function' ? cqCardHTML(ch) : ''}${typeof trkBtn === 'function' ? trkBtn(ch) : ''}</div>
-        <ul class="pg-l">${ps.map(p => { const st = on ? pageStatus(p.id) : 'off'; return `<li data-st="${st}"><a href="#${esc(p.id)}"><span class="pg-k ${st}">${esc(ST_NAME[st])}</span><span>${esc(plain(p.spec))}</span></a></li>`; }).join('')}</ul></section>`;
+        <ul class="pg-l">${ps.map(p => { const st = on ? pageStatus(p.id) : 'off', tm = (state.ptime && state.ptime[p.id]) || 0, q = state.pq && state.pq[p.id], m = Math.round(tm / 60); const rec = [tm ? (m < 1 ? '<1 min' : m + ' min') : '', q ? `quiz ${q.s}/${q.m}` : ''].filter(Boolean).join(' · '); return `<li data-st="${st}"><a href="#${esc(p.id)}"><span class="pg-k ${st}">${esc(ST_NAME[st])}</span><span>${esc(plain(p.spec))}${rec ? `<small class="pg-rec${q ? (q.s / q.m >= .7 ? ' hi' : q.s / q.m >= .4 ? ' mid' : ' lo') : ''}">${rec}</small>` : ''}</span></a></li>`; }).join('')}</ul></section>`;
     }).join('')}<p class="lib-none" id="pg-none" hidden>Nothing here.</p></section>
     <section class="card lib-body pg-bks"><h2>Back up or move your progress</h2><p class="pg-note">Your progress is saved in this browser only. Download it to keep a copy or to move it to another device, then load it there.</p>${backupHTML()}<div data-mrb-cloud hidden></div><p class="pg-note" data-mrb-who hidden></p></section>
   </article>`;
@@ -8583,7 +8612,7 @@ document.addEventListener('click', e => {
 });
 
 /* ---------- Chapter quiz (revision workbooks only): every quick check, exam-style practice and past-paper item in a chapter.
-   Unlocks when every page of the chapter is covered (or "Unlock anyway"). Route #quiz-cNN. Best score per chapter in
+   Unlocks when every page of the chapter is marked covered (staff devices: always). Route #quiz-cNN. Best score per chapter in
    localStorage 'notes-chquiz:<book>' { best: { cNN: { s, m, pc, date } }, open: { cNN: 1 } }. CCEA text is never reproduced:
    past-paper items show our summary and link to (or, when the teacher has uploaded them, display) CCEA's own PDFs. */
 const CQ_KEY = 'notes-chquiz:' + (BK.id || BK.title || 'book');
@@ -8591,7 +8620,10 @@ const CQ_ON = !TUT;
 function cqState() { try { const o = JSON.parse(localStorage.getItem(CQ_KEY)) || {}; o.best = o.best || {}; o.open = o.open || {}; return o; } catch (e) { return { best: {}, open: {} }; } }
 function cqSave(o) { try { localStorage.setItem(CQ_KEY, JSON.stringify(o)); } catch (e) { } }
 const chDone = ch => (ch.pages || []).length && ch.pages.every(p => state.done[p.id]);
-const cqUnlocked = ch => chDone(ch) || !!cqState().open[ch.id];
+/* the topic quiz and past papers unlock once every page of the topic is marked covered; staff devices always */
+const chLeft = ch => (ch.pages || []).filter(p => !state.done[p.id]);
+const cqStaff = () => { try { return !!localStorage.getItem('notes-nocount'); } catch (e) { return false; } };
+const cqUnlocked = ch => !chLeft(ch).length || cqStaff();
 function cqItems(ch) {
   const out = [];
   (ch.pages || []).forEach(p => (p.check || []).forEach((q, i) => { if (q && q.q && Array.isArray(q.o)) out.push({ t: 'mcq', q, p, max: 1, key: `${p.id}:k${i}` }); }));
@@ -8639,10 +8671,11 @@ function cqChoose(ch) {
   $$('[data-mode]', main).forEach(a => a.addEventListener('click', ev => { ev.preventDefault(); renderChQuiz(ch, null, a.dataset.mode); }));
   tutViewDone(true, '#cq-h');
 }
-/* every past-paper question on the topic on one page (route #pp-cNN); not locked: it is revision material */
+/* every past-paper question on the topic on one page (route #pp-cNN); unlocks with the topic quiz */
 function renderChPast(ch) {
   tutView('pp-' + ch.id, 'Past-paper questions');
   setHue(ch);
+  if (!cqUnlocked(ch)) { cqLocked(ch, 'Past-paper questions'); return; }
   const pp = cqPast(ch), marks = pp.reduce((s, x) => s + (x.max || 0), 0);
   main.innerHTML = `<article class="sheet lib-v cq-v cq-all" aria-labelledby="cq-h" style="${chVars(ch)}"><header class="lib-hero card cq-hero"><small class="lib-k">${icon('exam')}Chapter ${esc(ch.n)} · ${esc(ch.title)}</small><h1 id="cq-h" tabindex="-1">Past-paper questions on this topic</h1>
     <p>${pp.length} question${pp.length === 1 ? '' : 's'}${marks ? ` · ${marks} marks` : ''}, newest first. ${PP_VIEW ? 'Each shows the question from the CCEA paper; open the mark scheme under it.' : 'Open each one in the CCEA paper and mark scheme.'}</p>
@@ -8664,12 +8697,12 @@ function renderChPast(ch) {
   });
   tutViewDone(true, '#cq-h');
 }
-function cqLocked(ch) {
-  const n = (ch.pages || []).length, d = ch.pages.filter(p => state.done[p.id]).length;
-  main.innerHTML = `<article class="sheet lib-v cq-v" aria-labelledby="cq-h" style="${chVars(ch)}"><header class="lib-hero card cq-hero"><small class="lib-k">${icon('exam')}Chapter ${esc(ch.n)} · ${esc(ch.title)}</small><h1 id="cq-h" tabindex="-1">Chapter quiz</h1>
-    <div class="cq-lock">${CQ_LOCK}<div><p><b>Mark all ${n} pages covered to unlock.</b> ${d} of ${n} done so far.</p>
-    <div class="cq-acts">${(() => { const nx = ch.pages.find(p => !state.done[p.id]); return nx ? `<a class="btn pri" href="#${esc(nx.id)}">Next page to cover →</a>` : ''; })()}<button type="button" class="cq-any" data-cq-any="${esc(ch.id)}">Unlock anyway</button></div></div></div></header></article>`;
-  $('[data-cq-any]', main).addEventListener('click', () => { const o = cqState(); o.open[ch.id] = 1; cqSave(o); renderChQuiz(ch); });
+function cqLocked(ch, what) {
+  const n = (ch.pages || []).length, left = chLeft(ch), d = n - left.length;
+  main.innerHTML = `<article class="sheet lib-v cq-v" aria-labelledby="cq-h" style="${chVars(ch)}"><header class="lib-hero card cq-hero"><small class="lib-k">${icon('exam')}Chapter ${esc(ch.n)} · ${esc(ch.title)}</small><h1 id="cq-h" tabindex="-1">${esc(what || 'Topic quiz')}</h1>
+    <div class="cq-lock">${CQ_LOCK}<div><p><b>Not unlocked yet.</b> Mark every page in this topic as covered first, then the topic quiz and past papers unlock. You have covered <b>${d} of ${n}</b> pages.</p>
+    <div class="cq-acts">${left.length ? `<a class="btn pri" href="#${esc(left[0].id)}">Next page to cover →</a>` : ''}</div>
+    ${left.length && left.length <= 12 ? `<ul class="cq-left">${left.map(p => `<li><a href="#${esc(p.id)}">${esc(plain(p.spec))}</a></li>`).join('')}</ul>` : ''}</div></div></header></article>`;
   tutViewDone(true, '#cq-h');
 }
 const CQ_LOCK = '<svg class="cq-lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg>';
@@ -8744,9 +8777,10 @@ function cqCardHTML(ch) {
   if (!CQ_ON) return '';
   const n = cqItems(ch).length; if (!n) return '';
   const b = cqState().best[ch.id], np = (ch.pages || []).length;
-  const np2 = cqPast(ch).length, ppChip = np2 ? `<a class="cq-chip cq-chip2" href="#pp-${esc(ch.id)}">${icon('terms')}<span><b>Past-paper questions</b><small>${np2} on this topic, all at once</small></span></a>` : '';
-  return cqUnlocked(ch) ? `<a class="cq-chip" href="#quiz-${esc(ch.id)}">${icon('exam')}<span><b>Chapter quiz</b><small>${n} questions${b ? ` · best ${b.pc}%` : ''}</small></span></a>${ppChip}`
-    : `<span class="cq-chip locked">${CQ_LOCK}<span><b>Chapter quiz</b><small>Mark all ${np} pages covered to unlock</small></span><button type="button" class="cq-any" data-cq-any="${esc(ch.id)}">Unlock anyway</button></span>${ppChip}`;
+  const np2 = cqPast(ch).length, left = chLeft(ch).length;
+  if (!cqUnlocked(ch)) return `<a class="cq-chip locked" href="#quiz-${esc(ch.id)}">${CQ_LOCK}<span><b>Topic quiz${np2 ? ' and past papers' : ''}</b><small>Cover ${left} more page${left === 1 ? '' : 's'} to unlock (${np - left}/${np} covered)</small></span></a>`;
+  const ppChip = np2 ? `<a class="cq-chip cq-chip2" href="#pp-${esc(ch.id)}">${icon('terms')}<span><b>Past-paper questions</b><small>${np2} on this topic, all at once</small></span></a>` : '';
+  return `<a class="cq-chip" href="#quiz-${esc(ch.id)}">${icon('exam')}<span><b>Topic quiz</b><small>${n} questions${b ? ` · best ${b.pc}%` : ''}</small></span></a>${ppChip}`;
 }
 document.addEventListener('click', e => {
   const b = e.target.closest('[data-cq-any]'); if (!b || b.closest('.cq-lock')) return;
@@ -9818,7 +9852,7 @@ try {
         let quiz = {}; try { quiz = (JSON.parse(localStorage.getItem('notes-chquiz:' + BK.id) || '{}').best) || {}; } catch (e) { }
         let tr = 0; try { tr = Object.keys((typeof TR !== 'undefined' && TR && TR.earned) || {}).length; } catch (e) { }
         const q = {}; Object.keys(quiz).forEach(k => { const b = quiz[k]; if (b && b.m) q[k] = [b.s, b.m, b.date || '']; });
-        o = { cov, seen, total: ids.length, tr, quiz: q, done: ids.filter(i => state.done[i]), seenIds: ids.filter(i => (state.seen[i] || state.done[i]) && !state.done[i]), laterIds: ids.filter(i => state.later && state.later[i] && !state.done[i]) };
+        o = { cov, seen, total: ids.length, tr, quiz: q, done: ids.filter(i => state.done[i]), seenIds: ids.filter(i => (state.seen[i] || state.done[i]) && !state.done[i]), laterIds: ids.filter(i => state.later && state.later[i] && !state.done[i]), pq: (() => { const o = {}; ids.forEach(i => { const r = state.pq && state.pq[i]; if (r && r.m) o[i] = [r.s, r.m, r.bs != null ? r.bs : r.s, r.n || 1]; }); return o; })() };
       } catch (e) { return; }
       const sig = JSON.stringify(o) + p.id + p.name + p.cls; if (sig === lastSnap) return;
       const body = JSON.stringify(Object.assign({ kind: 'snap', id: p.id, name: p.name, cls: p.cls, book: BK.id }, o));
@@ -10047,7 +10081,7 @@ try {
     { sel: '.lchips', k: 'lesson', t: 'Lesson video', sub: e => txt(e, '.lchip b'), via: 'lp' },
     { sel: 'section.s-vid', k: 'video', t: 'Videos', sub: e => txt(e, 'h2 small').replace(/,.*$/, '') || 'Watch' },
     { sel: 'figure.dg', k: 'anim', t: 'Interactive', sub: e => txt(e, '.dg-head h3') || txt(e, '.dg-kicker'), kick: e => txt(e, '.dg-kicker').replace(/^Interactive\s*·\s*/i, '') },
-    { sel: 'section.cyk', k: 'quiz', t: 'Check your knowledge', sub: e => { const n = (txt(e, '.cyk-tt small').match(/\d+/g) || []).reduce((a, b) => a + +b, 0); return n ? `${n} questions` : 'Questions'; }, start: e => { const b = e.querySelector('.cyk-h'); if (b && b.getAttribute('aria-expanded') !== 'true') b.click(); } },
+    { sel: 'section.cyk', k: 'quiz', t: 'Page quiz', sub: e => { const n = (txt(e, '.cyk-tt small').match(/\d+/g) || []).reduce((a, b) => a + +b, 0); return n ? `${n} questions` : 'Questions'; }, start: e => { const b = e.querySelector('.cyk-h'); if (b && b.getAttribute('aria-expanded') !== 'true') b.click(); } },
     { sel: 'details.kt:not(.kt-ch)', k: 'terms', t: 'Key terms', sub: e => txt(e, 'summary > span') || 'This page', start: e => { e.open = true; } },
     { sel: 'section.lp-sec', k: 'learn', t: 'Learn and practise', sub: e => { const m = /lesson\s+([A-Z]\d+)/i.exec(txt(e, 'h2 small')); return m ? 'Lesson ' + m[1].toUpperCase() + ': podcast, slides, quiz…' : 'Podcast, slides, quiz…'; } },
     { sel: 'section.chcard', k: 'test', t: 'Topic test', sub: e => txt(e, 'h2, h3, b').replace(/^Topic test\s*/i, '') || 'Whole topic' },
@@ -10110,6 +10144,142 @@ try {
   const rp = renderPage;
   renderPage = function () { const r = rp.apply(this, arguments); try { build(); } catch (e) { } return r; };
   if (typeof onCover !== 'undefined' && !onCover) setTimeout(() => { if (!document.querySelector('#main .acts')) try { build(); } catch (e) { } }, 0);
+})();
+/* ---------- PUPIL WORKFLOW (source notes/app/workflow.js), revision workbooks only.
+   For each page: read the notes → mark it covered → the page quiz (Check your knowledge) unlocks → next page.
+   For each topic: once every page is covered, the topic quiz and its past-paper questions unlock (chLeft / cqUnlocked in
+   chquiz.js). A "Your steps" card on every page shows where the pupil is.
+   Records, kept in the workbook's progress (state.ptime / state.pq, so they follow cloud saves and the teacher's sheet):
+   - active revising time per page in seconds (the page on screen and used in the last 90 seconds, or a video playing);
+   - the page quiz mark: quick-check questions right first time, last and best attempt { s, m, at, bs }. ---------- */
+(function () {
+  if (typeof BK === 'undefined' || !BK || !BK.id || typeof PAGES === 'undefined' || typeof renderPage !== 'function' || (typeof TUT !== 'undefined' && TUT) || typeof cqUnlocked !== 'function') return;
+  const LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg>';
+  const TICK = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 8.5l3 3 6-7"/></svg>';
+  const here = () => (typeof onCover !== 'undefined' && onCover) || (typeof onCredits !== 'undefined' && onCredits) ? null : PAGES[cur];
+  const ok = () => { try { return !localStorage.getItem('notes-nocount'); } catch (e) { return true; } };
+  const staff = () => !ok();
+  const mins = s => { const m = Math.round((s || 0) / 60); return m < 1 ? (s ? 'under 1 min' : '0 min') : m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')}`; };
+  const pqOf = id => (state.pq && state.pq[id]) || null;
+  window.MRB_PAGE_REC = id => ({ secs: (state.ptime && state.ptime[id]) || 0, quiz: pqOf(id) });
+
+  /* ---- active time on the page ---- */
+  let lastUse = Date.now(), acc = 0, pid = null;
+  const used = () => { lastUse = Date.now(); };
+  ['pointerdown', 'keydown', 'wheel', 'touchstart', 'scroll'].forEach(ev => addEventListener(ev, used, { passive: true, capture: true }));
+  const playing = () => [...document.querySelectorAll('video,audio')].some(v => !v.paused && !v.ended);
+  const bank = () => { if (pid && acc >= 1) { state.ptime = state.ptime || {}; state.ptime[pid] = Math.round((state.ptime[pid] || 0) + acc); save(); } acc = 0; };
+  setInterval(() => { const P = here(); if (!P || P.p.id !== pid) return; if (document.visibilityState === 'visible' && (Date.now() - lastUse < 90000 || playing() || document.querySelector('.act-pop iframe'))) { acc += 5; if (acc >= 30) bank(); } }, 5000);
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') bank(); });
+  addEventListener('pagehide', bank);
+
+  /* ---- the page quiz: quick-check questions, first answer to each counts; a full attempt is recorded ---- */
+  let attempt = {};
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('#cyk fieldset[data-q] .opt'); if (!b) return;
+    const P = here(); if (!P) return;
+    setTimeout(() => {
+      const fs = b.closest('fieldset'), k = fs.dataset.q; if (k in attempt) return;
+      attempt[k] = b.classList.contains('wrong') ? 0 : 1;
+      const all = [...document.querySelectorAll('#cyk fieldset[data-q]')]; if (Object.keys(attempt).length < all.length) return;
+      const s = Object.values(attempt).reduce((a, v) => a + v, 0), m = all.length, old = pqOf(P.p.id);
+      state.pq = state.pq || {}; state.pq[P.p.id] = { s, m, at: Date.now(), bs: Math.max(s, old ? (old.bs != null ? old.bs : old.s) : 0), n: (old && old.n || 0) + 1 }; save();
+      attempt = {};
+      const card = document.getElementById('cyk'); if (card) { const r = card.querySelector('.pq-res'); if (r) r.remove(); card.querySelector('.cyk-b').insertAdjacentHTML('afterbegin', `<p class="pq-res ${s / m >= .7 ? 'hi' : s / m >= .4 ? 'mid' : 'lo'}"><b>Page quiz: ${s}/${m}</b> right first time${state.pq[P.p.id].bs > s ? ` · best ${state.pq[P.p.id].bs}/${m}` : ''}. Saved to your progress.</p>`); }
+      paintTile(); repaintSteps();
+      setTimeout(() => { const r = document.querySelector('#cyk .pq-res'); if (r) r.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 900);
+    }, 0);
+  }, false);
+  /* "Try again" resets that question only: it can't change this attempt's mark */
+
+  /* ---- after covering a page: offer the page quiz ---- */
+  document.addEventListener('click', e => {
+    if (!(e.target.closest && e.target.closest('#donebtn'))) return;
+    setTimeout(() => {
+      const P = here(); if (!P || !state.done[P.p.id]) { lockQuiz(); paintTile(); repaintSteps(); return; }
+      unlockQuiz(); paintTile(); repaintSteps();
+      if (document.getElementById('mrb-fin') || document.querySelector('.act-pop') || !document.querySelector('#main .act.k-quiz') || !ok() || (!chLeft(P.ch).length && cqItems(P.ch).length)) return;   /* last page of the topic: chquiz.js offers the topic quiz instead */
+      offer(P);
+    }, 60);
+  }, true);
+  function offer(P) {
+    const n = document.querySelectorAll('#cyk fieldset[data-q]').length, d = document.createElement('div');
+    d.id = 'mrb-fin'; d.className = 'mrb-fin'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'pq-h');
+    d.innerHTML = `<div class="mf-s"><div class="mf-g" aria-hidden="true"></div><h2 id="pq-h">Page covered ✓</h2><p>Now check what you remember with the page quiz${n ? ` (${n} quick question${n === 1 ? '' : 's'})` : ''}. Your mark is saved.</p>
+      <button type="button" class="mf-y">Do the page quiz</button>${cur < PAGES.length - 1 ? '<button type="button" class="mf-n">Skip it: next page</button>' : ''}<button type="button" class="mf-x">Not now</button></div>`;
+    document.body.append(d); document.documentElement.classList.add('mf-open');
+    const close = () => { d.remove(); document.documentElement.classList.remove('mf-open'); };
+    d.addEventListener('click', e => { if (e.target === d) close(); });
+    d.querySelector('.mf-y').addEventListener('click', () => { close(); const t = document.querySelector('#main .act.k-quiz'); if (t) t.click(); });
+    const nx = d.querySelector('.mf-n'); if (nx) nx.addEventListener('click', () => { close(); go(cur + 1); });
+    d.querySelector('.mf-x').addEventListener('click', close);
+    setTimeout(() => d.querySelector('.mf-y').focus({ preventScroll: true }), 30);
+  }
+
+  /* ---- the page quiz is locked until the page is covered ---- */
+  function lockQuiz() {
+    const P = here(), card = document.getElementById('cyk'); if (!P || !card || staff()) return;
+    const body = card.querySelector('.cyk-b'); if (!body || body.querySelector('.pq-lock')) return;
+    [...body.children].forEach(c => c.classList.add('pq-hid'));
+    body.insertAdjacentHTML('afterbegin', `<div class="cq-lock pq-lock">${LOCK}<div><p><b>Read the notes on this page, then mark it as covered</b> to unlock the page quiz.</p><button type="button" class="btn pri pq-cov">${TICK}Mark this page as covered</button></div></div>`);
+    body.querySelector('.pq-cov').addEventListener('click', () => { const b = document.getElementById('donebtn'); if (b && b.getAttribute('aria-pressed') !== 'true') b.click(); });
+  }
+  function unlockQuiz() {
+    const card = document.getElementById('cyk'); if (!card) return;
+    const l = card.querySelector('.pq-lock'); if (l) l.remove();
+    card.querySelectorAll('.pq-hid').forEach(c => c.classList.remove('pq-hid'));
+  }
+  function paintTile() {
+    const P = here(), t = document.querySelector('#main .act.k-quiz'); if (!P || !t) return;
+    const covered = !!state.done[P.p.id] || staff(), r = pqOf(P.p.id), sm = t.querySelector('small'), b = t.querySelector('b'); if (sm && !sm.dataset.q) sm.dataset.q = sm.textContent;
+    t.classList.toggle('locked', !covered);
+    if (b) b.textContent = 'Page quiz';
+    if (sm) sm.textContent = !covered ? 'Mark the page covered first' : r ? `Last ${r.s}/${r.m}${r.bs > r.s ? ` · best ${r.bs}/${r.m}` : ''}` : sm.dataset.q;
+    let lk = t.querySelector('.act-lk'); if (!covered && !lk) t.insertAdjacentHTML('beforeend', `<i class="act-lk">${LOCK}</i>`); else if (covered && lk) lk.remove();
+  }
+
+  /* ---- "Your steps" card ---- */
+  function steps() {
+    const main = document.getElementById('main'), art = main && main.querySelector('article'), P = here();
+    if (!art || !P || !art.querySelector('.ncard')) return;
+    const ch = P.ch, ps = ch.pages || [], n = ps.length; if (!n) return;
+    const left = chLeft(ch), cov = n - left.length, open = cqUnlocked(ch), me = !!state.done[P.p.id], r = pqOf(P.p.id);
+    const nq = cqItems(ch).length, np = cqPast(ch).length, best = cqState().best[ch.id], hasPq = !!(document.getElementById('cyk') || art.querySelector('.act.k-quiz'));
+    const nextCov = left.find(p => p.id !== P.p.id);
+    const step = (k, cls, href, ic, t, sub) => `<li class="ts-s ${cls}"><a href="${href}" data-ts="${k}"><i class="ts-n">${ic}</i><span><b>${t}</b><small>${sub}</small></span></a></li>`;
+    const box = document.createElement('section'); box.className = 'tsteps'; box.setAttribute('aria-label', 'Your steps');
+    const secs = (state.ptime && state.ptime[P.p.id]) || 0;
+    box.innerHTML = `<div class="ts-h"><b>This page</b><span>${mins(secs)} revising${r ? ` · quiz ${r.s}/${r.m}` : ''}</span></div>
+      <ol class="ts-l">
+        ${step('read', me ? 'done' : 'now', '#', me ? TICK : '1', 'Read and cover', me ? 'Covered' : 'Then mark it covered')}
+        ${hasPq ? step('pq', !me && !staff() ? 'locked' : r ? 'done' : 'now', '#', !me && !staff() ? LOCK : r ? TICK : '2', 'Page quiz', !me && !staff() ? 'After covering' : r ? `${r.s}/${r.m}${r.bs > r.s ? ` · best ${r.bs}` : ''}` : 'Ready') : ''}
+      </ol>
+      <div class="ts-h ts-h2"><b>Topic · ${esc(ch.title)}</b><span>${cov}/${n} covered</span></div><span class="ts-m" aria-hidden="true"><i style="width:${Math.round(cov / n * 100)}%"></i></span>
+      ${nq || np ? `<ol class="ts-l">
+        ${nq ? step('quiz', open ? (best ? 'done' : 'now') : 'locked', '#quiz-' + esc(ch.id), open ? (best ? TICK : '★') : LOCK, 'Topic quiz', open ? (best ? `Best ${best.pc}%` : `${nq} questions`) : `${left.length} page${left.length === 1 ? '' : 's'} to cover`) : ''}
+        ${np ? step('pp', open ? 'now' : 'locked', '#pp-' + esc(ch.id), open ? '★' : LOCK, 'Past papers', open ? `${np} question${np === 1 ? '' : 's'}` : 'After the topic') : ''}
+      </ol>` : ''}<p class="ts-msg" hidden></p>`;
+    box.addEventListener('click', e => {
+      const a = e.target.closest('[data-ts]'); if (!a) return;
+      const k = a.dataset.ts, m = box.querySelector('.ts-msg');
+      if (k === 'read') { e.preventDefault(); if (!state.done[P.p.id]) { const b = document.getElementById('donebtn'); const f = art.querySelector(':scope > .ncard'); if (f) f.scrollIntoView({ behavior: 'smooth', block: 'start' }); m.hidden = false; m.innerHTML = `${TICK}<span>Read the notes below, then tap <b>Mark as covered</b>${b ? ' (at the bottom of the screen)' : ''}.</span>`; } return; }
+      if (k === 'pq') { e.preventDefault(); if (state.done[P.p.id] || staff()) { const t = document.querySelector('#main .act.k-quiz'); if (t) t.click(); } else { m.hidden = false; m.innerHTML = `${LOCK}<span>Mark this page as covered first, then the page quiz unlocks.</span>`; } return; }
+      if (open) return;
+      e.preventDefault();
+      m.hidden = false; m.innerHTML = `${LOCK}<span>The topic quiz and past papers unlock when every page in this topic is marked covered. <b>${left.length} to go.</b> ${nextCov ? `<a href="#${esc(nextCov.id)}">Next page to cover →</a>` : ''}</span>`;
+    }, true);
+    const at = art.querySelector(':scope > .acts') || art.querySelector(':scope > .notes-k');
+    if (at) at.before(box); else { const h = art.querySelector(':scope > header.phero') || art.querySelector(':scope > header'); if (h) h.after(box); else art.prepend(box); }
+  }
+  function repaintSteps() { const old = document.querySelector('#main .tsteps'); if (old) old.remove(); try { steps(); } catch (e) { } }
+  const rp = renderPage;
+  renderPage = function () {
+    bank();
+    const r = rp.apply(this, arguments);
+    try { const P = here(); pid = P ? P.p.id : null; attempt = {}; lastUse = Date.now(); steps(); const Q = here(); if (Q && !state.done[Q.p.id]) lockQuiz(); paintTile(); } catch (e) { }
+    return r;
+  };
+  if (typeof onCover !== 'undefined' && !onCover) setTimeout(() => { const P = here(); pid = P ? P.p.id : null; if (!document.querySelector('#main .tsteps')) try { steps(); if (P && !state.done[P.p.id]) lockQuiz(); paintTile(); } catch (e) { } }, 0);
 })();
 /* ================= APP: END ================= */
 /* ================= boot ================= */
