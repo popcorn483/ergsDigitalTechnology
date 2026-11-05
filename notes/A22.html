@@ -2383,6 +2383,36 @@ html.act-open{overflow:hidden}html.act-open .pbar,html.act-open .sv-sw{display:n
 .ts-h2{margin-top:12px;padding-top:10px;border-top:1px solid var(--line)}
 .ts-l + .ts-h2{margin-top:10px}
 .pg-rec{display:block;margin-top:2px;font:700 11.5px/1.3 var(--sans);color:var(--ink-3)}.pg-rec.hi{color:var(--good)}.pg-rec.mid{color:#B26A00}.pg-rec.lo{color:#B42318}
+/* GLOSSARY: compact controls (one-row A–Z, chapter + "Past papers only" side by side), each term = term, definition and
+   one small line of links; the long specification text under each link is dropped */
+#d-gloss .gv-count{display:none}
+#d-gloss .gv-ctl{display:grid!important;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+#d-gloss .gv-ctl #gf{grid-column:1/-1}
+#d-gloss .gv-ctl select.field{min-width:0}
+#d-gloss .gv-pp{display:inline-flex;align-items:center;gap:6px;margin:0;padding:0 12px;border:1px solid var(--line);border-radius:999px;font:700 13px/1 var(--sans);white-space:nowrap;cursor:pointer;background:var(--paper)}
+#d-gloss .gv-pp:has(input:checked){background:var(--accent);border-color:var(--accent);color:#fff}
+#d-gloss .gv-pp input{margin:0;accent-color:#fff}
+#d-gloss .az{flex-wrap:nowrap!important;overflow-x:auto;gap:2px!important;scrollbar-width:none;margin:2px -4px 0;padding:0 4px}
+#d-gloss .az::-webkit-scrollbar{display:none}
+#d-gloss .az button{flex:none;width:30px;height:30px;font-size:13.5px}
+#d-gloss .az button[disabled]{display:none}
+.gl-e{padding:12px 0!important}
+.gl-e dt{font-size:16.5px!important;font-weight:800!important;color:var(--ink)}
+.gl-e dd{margin-top:3px!important}
+.gl-e .alt{font-size:12.5px!important}
+.gl-e .gl-m{margin-top:6px!important;gap:6px 10px!important}
+.gl-e .gl-m small{display:none!important}
+.gl-e .gl-m a{display:inline-flex;align-items:center;font-size:12.5px!important;padding:3px 10px;border-radius:999px;background:var(--accent-soft,color-mix(in srgb,var(--accent) 10%,var(--paper)));text-decoration:none}
+.gl-e details.pp{margin-top:6px}
+.gl-e details.pp > summary{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:3px 10px;border-radius:999px;background:color-mix(in srgb,#B42318 9%,var(--paper));color:#9F1D14;cursor:pointer;list-style:none}
+.gl-e details.pp > summary::-webkit-details-marker{display:none}
+.gl-e details.pp > summary span{font-size:0}.gl-e details.pp > summary span b{font-size:12.5px}
+.gl-e details.pp > summary svg{width:14px;height:14px}
+@media (max-width:699px){
+  #d-gloss .mb-wm{display:none!important}
+  #d-gloss .gv-modes button{min-height:40px;font-size:14.5px}
+  #d-gloss .dr-h h2{font-size:22px}
+}
 /* PAGE BAR (phones): ‹ · Mark as covered · Next › fixed at the bottom; the "Before you move on" sheet */
 .pbar{display:none}
 #b-ppt{display:none}
@@ -9703,7 +9733,7 @@ try {
     if (LS.get('notes-nocount')) return;
     let later = false; try { later = !!sessionStorage.getItem('mrb-pin-later'); } catch (x) { }
     addEventListener('online', () => { if (me() && !LS.get('mrb-pin-ok') && !LS.get('notes-nocount')) { try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } ask(); } });   /* signed in offline: PIN checked as soon as it is back online */
-    if (!me() || (!LS.get('mrb-pin-ok') && !later)) setTimeout(ask, 600);
+    if (!me() || !LS.get('mrb-pin-ok')) setTimeout(ask, 600);   /* a PIN is always needed */
     else { if (blocked()) gate(); checkAccess(); }
     track();
     setTimeout(syncAwards, 3000); setInterval(syncAwards, 5 * 60000);
@@ -9757,6 +9787,7 @@ try {
     const p = me(); if (!p || !URL0 || LS.get('notes-nocount')) return;
     let j = null; try { const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000); j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=access&id=' + encodeURIComponent(p.id), { cache: 'no-store', credentials: 'omit', signal: ctl.signal }).then(r => r.json()); clearTimeout(t); } catch (e) { j = null; }
     if (!j) { if (blocked()) { if (!/^(pending|declined)$/.test(LS.get('mrb-access') || '')) LS.set('mrb-access', 'check'); gate(); } return; }   /* couldn't reach it: stay as we were */
+    if (j.ok && j.pin === false) { LS.set('mrb-pin-ok', null); try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } unGate(); ask(); return; }   /* no PIN on record (never set, or Mr Butler reset it): sign in again and choose one */
     const st = j.ok && typeof j.status === 'string' ? j.status : '';
     if (/^(pending|declined)$/.test(st)) { LS.set('mrb-access', st); gate(); }
     else { LS.set('mrb-access', 'ok'); unGate(); }   /* approved (or an Apps Script without approvals) */
@@ -10198,6 +10229,8 @@ try {
   renderPage = function () { const r = rp.apply(this, arguments); try { build(); } catch (e) { } return r; };
   if (typeof onCover !== 'undefined' && !onCover) setTimeout(() => { if (!document.querySelector('#main .acts')) try { build(); } catch (e) { } }, 0);
 })();
+/* glossary: shorter label for the past-papers filter */
+(function () { const l = document.getElementById('gpp-l'); if (!l) return; [...l.childNodes].forEach(n => { if (n.nodeType === 3 && /past papers/i.test(n.textContent)) n.textContent = ' Past papers only'; }); l.title = 'Only terms that came up in past papers'; })();
 /* ---------- PUPIL WORKFLOW (source notes/app/workflow.js), revision workbooks only.
    For each page: read the notes → mark it covered → the page quiz (Check your knowledge) unlocks → next page.
    For each topic: once every page is covered, the topic quiz and its past-paper questions unlock (chLeft / cqUnlocked in

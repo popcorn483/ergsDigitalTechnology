@@ -26,7 +26,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 14;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 15;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -195,7 +195,7 @@ function doGet(e) {
   const q = (e && e.parameter) || {};
   if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
   if (q.action === 'whois') return out_(whois_(q.name, q.cls, q.pin, q.id));
-  if (q.action === 'access') return out_(okId(q.id) ? { ok: true, status: access_(resolve_(String(q.id), aliases_())) } : { ok: false });   /* a pupil's device: approved yet? */
+  if (q.action === 'access') { if (!okId(q.id)) return out_({ ok: false }); const id = resolve_(String(q.id), aliases_()); return out_({ ok: true, status: access_(id), pin: !!getPin_(id) }); }   /* a pupil's device: approved yet? has a PIN? */
   if (q.action === 'awards') return out_(awardsFor_(q.id, +q.since || 0));   /* a pupil's device: pages the teacher marked or unmarked */   /* pupils signing in: find them by name and form class */
   if (q.action === 'staff') {   /* the sign-in box: staff password check (TEACHER_KEY or STAFF_PIN) */
     const k = String(q.key || ''), ok = (k === TEACHER_KEY && TEACHER_KEY !== 'change-me') || (k === STAFF_PIN && STAFF_PIN !== 'change-me');
