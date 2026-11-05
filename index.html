@@ -2079,6 +2079,32 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 .ia-i svg{width:20px;height:20px}
 .ia-n{font-weight:700;font-size:15px}
 .ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
 .ios-add .btn{width:100%;justify-content:center}
 /* ================= WELCOME: BEGIN (splash + welcome screen + "← Home"; source notes/app/front_welcome.css) ================= */
 /* splash: full screen, hero navy, once per browser session and on app launch; never blocks the page underneath */
@@ -2298,6 +2324,116 @@ html:not(.wl-on) #welcome{display:none}
 .wl-who .mrb-ch{font:inherit;font-weight:700;color:var(--accent,#1F5FBF);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
 .mrb-whoslot .mrb-ch{font:inherit;font-weight:700;color:var(--accent,#1F5FBF);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
 /* ================= WELCOME: END ================= */
+
+/* SET UP (first visit) and NEXT UP */
+html.su-on,html.su-on body{overflow:hidden}
+#mrb-setup{position:fixed;inset:0;z-index:2147481000;background:color-mix(in srgb,var(--bg,#E6EAF0) 92%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:max(24px,env(safe-area-inset-top)) 16px 32px;box-sizing:border-box}
+.su-box{width:min(560px,100%);background:var(--paper);border-radius:22px;box-shadow:0 24px 60px rgba(10,16,30,.18);outline:1px solid var(--card-line,var(--line));padding:26px 22px 22px;box-sizing:border-box;margin:auto 0}
+.su-box h2{margin:10px 0 6px;font-size:clamp(22px,5.4vw,28px);line-height:1.15}
+.su-box > p{margin:0 0 16px;color:var(--ink-2);font-size:15.5px}
+.su-dots{display:flex;gap:6px}.su-dots i{width:26px;height:6px;border-radius:6px;background:var(--line-2,#e3e7ee)}.su-dots i.on{background:var(--accent)}.su-dots i.was{background:color-mix(in srgb,var(--accent) 45%,var(--line-2,#e3e7ee))}
+.su-cs{display:flex;flex-direction:column;gap:10px}
+.su-c{display:flex;align-items:center;gap:14px;width:100%;text-align:left;font:inherit;color:inherit;background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:14px;cursor:pointer}
+.su-c:hover,.su-c.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 5%,var(--paper))}
+.su-c > span:nth-child(2){flex:1;min-width:0;display:flex;flex-direction:column}.su-c b{font-size:20px}.su-c small{color:var(--ink-3);font-size:13.5px}
+.su-ci{flex:none;width:48px;height:48px;border-radius:13px;display:grid;place-items:center;color:#fff;background:#1F5FBF}.su-ci.gce{background:#6E47C2}.su-ci svg{width:26px;height:26px}
+.su-ar{flex:none;font-size:20px;color:var(--accent)}
+.su-us{display:flex;flex-direction:column;gap:10px}
+.su-u{display:flex;align-items:flex-start;gap:12px;border:1.5px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;background:var(--paper)}
+.su-u.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,var(--paper))}
+.su-u input{position:absolute;opacity:0;pointer-events:none}
+.su-u:focus-within{outline:3px solid color-mix(in srgb,var(--accent) 40%,transparent);outline-offset:2px}
+.su-tk{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;margin-top:1px}
+.su-u.on .su-tk{background:var(--accent);border-color:var(--accent)}.su-u.on .su-tk::after{content:"✓";color:#fff;font-weight:800;font-size:15px}
+.su-u > span:last-child{display:flex;flex-direction:column;gap:1px;min-width:0}.su-u b{font-size:17px}.su-u small{color:var(--ink-3);font-size:13px}
+.su-acts{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px}
+.su-go{font:inherit;font-weight:800;font-size:16px;border:0;border-radius:12px;padding:13px 26px;background:var(--accent);color:#fff;cursor:pointer}.su-go:disabled{opacity:.45;cursor:default}
+.su-back,.su-x{font:inherit;font-weight:700;font-size:14.5px;border:0;background:none;color:var(--accent);cursor:pointer;padding:8px 4px}
+.su-x{display:block;margin:14px auto 0}
+.su-how{list-style:none;counter-reset:su;margin:6px 0 18px;padding:0;display:flex;flex-direction:column;gap:12px}
+.su-how li{counter-increment:su;display:grid;grid-template-columns:34px 1fr;column-gap:12px;align-items:start}
+.su-how li::before{content:counter(su);grid-row:span 2;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;background:var(--accent)}
+.su-how b{font-size:16px}.su-how span{color:var(--ink-2);font-size:14.5px}
+.su-start{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:#fff;background:#18744A;border-radius:16px;padding:16px 18px;box-shadow:0 10px 24px rgba(24,116,74,.25)}
+.su-start small{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;opacity:.85}.su-start b{font-size:18px}
+.nextup{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;background:var(--paper);border-radius:20px;padding:14px 16px;margin:0 0 14px;box-shadow:var(--card-shadow);outline:1px solid var(--card-line,var(--line));border-left:6px solid var(--wcd,var(--accent))}
+.nextup .tp-ring{flex:none;width:46px;height:46px}
+.nu-t{flex:1;min-width:0;display:flex;flex-direction:column}.nu-t small{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--wcd,var(--accent))}.nu-t b{font-size:17px;line-height:1.25}.nu-t span{font-size:13px;color:var(--ink-3)}
+.nu-go{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-size:20px;font-weight:800}
+html.mc-set #hero,html.mc-set .seg{display:none}
+.chip.chip-chg{margin-left:auto;color:var(--accent)!important;font-weight:700}
+/* My progress, tidied */
+.mp-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;margin:10px 0 4px;font-size:14px;font-weight:700;color:var(--ink-2)}
+.mp-chg{font:inherit;font-size:13.5px;font-weight:700;border:0;background:none;color:var(--accent);cursor:pointer;padding:4px 0;text-decoration:underline}
+.mp-ut{font-size:15px;font-weight:800;color:var(--ink);text-decoration:none}.mp-ut:hover{text-decoration:underline}
+.mp-go2{flex:none}
+ol.mp-t{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.mp-t li{display:flex;align-items:center;gap:8px;min-width:0}
+.mp-t li > a{flex:1;min-width:0}
+.mp-t li.full .mp-c{color:#18744A;font-weight:700}
+.mp-q{flex:none;white-space:nowrap;font-size:11.5px;font-weight:800;text-decoration:none;border-radius:999px;padding:3px 9px;color:#fff;background:#18744A}
+.mp-q.mid{background:#B7791F}.mp-q.lo{background:#B42318}.mp-q.go{background:var(--accent)}
+details.mp-bk{display:block}
+details.mp-bk > summary{cursor:pointer;font-weight:700;color:var(--ink-2);font-size:13.5px;list-style:none}
+details.mp-bk > summary::-webkit-details-marker{display:none}
+details.mp-bk > summary::before{content:"▸ ";color:var(--ink-3)}details.mp-bk[open] > summary::before{content:"▾ "}
+details.mp-bk > span{display:block;margin-top:6px}
+@media (max-width:520px){ .su-box{padding:22px 16px 18px;border-radius:18px} .nextup{padding:12px;gap:10px} .nu-t b{font-size:16px} ol.mp-t{grid-template-columns:1fr} .mp-bar{width:44px} }
+
+/* SET UP (first visit) and NEXT UP */
+html.su-on,html.su-on body{overflow:hidden}
+#mrb-setup{position:fixed;inset:0;z-index:2147481000;background:color-mix(in srgb,var(--bg,#E6EAF0) 92%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:max(24px,env(safe-area-inset-top)) 16px 32px;box-sizing:border-box}
+.su-box{width:min(560px,100%);background:var(--paper);border-radius:22px;box-shadow:0 24px 60px rgba(10,16,30,.18);outline:1px solid var(--card-line,var(--line));padding:26px 22px 22px;box-sizing:border-box;margin:auto 0}
+.su-box h2{margin:10px 0 6px;font-size:clamp(22px,5.4vw,28px);line-height:1.15}
+.su-box > p{margin:0 0 16px;color:var(--ink-2);font-size:15.5px}
+.su-dots{display:flex;gap:6px}.su-dots i{width:26px;height:6px;border-radius:6px;background:var(--line-2,#e3e7ee)}.su-dots i.on{background:var(--accent)}.su-dots i.was{background:color-mix(in srgb,var(--accent) 45%,var(--line-2,#e3e7ee))}
+.su-cs{display:flex;flex-direction:column;gap:10px}
+.su-c{display:flex;align-items:center;gap:14px;width:100%;text-align:left;font:inherit;color:inherit;background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:14px;cursor:pointer}
+.su-c:hover,.su-c.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 5%,var(--paper))}
+.su-c > span:nth-child(2){flex:1;min-width:0;display:flex;flex-direction:column}.su-c b{font-size:20px}.su-c small{color:var(--ink-3);font-size:13.5px}
+.su-ci{flex:none;width:48px;height:48px;border-radius:13px;display:grid;place-items:center;color:#fff;background:#1F5FBF}.su-ci.gce{background:#6E47C2}.su-ci svg{width:26px;height:26px}
+.su-ar{flex:none;font-size:20px;color:var(--accent)}
+.su-us{display:flex;flex-direction:column;gap:10px}
+.su-u{display:flex;align-items:flex-start;gap:12px;border:1.5px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;background:var(--paper)}
+.su-u.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,var(--paper))}
+.su-u input{position:absolute;opacity:0;pointer-events:none}
+.su-u:focus-within{outline:3px solid color-mix(in srgb,var(--accent) 40%,transparent);outline-offset:2px}
+.su-tk{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;margin-top:1px}
+.su-u.on .su-tk{background:var(--accent);border-color:var(--accent)}.su-u.on .su-tk::after{content:"✓";color:#fff;font-weight:800;font-size:15px}
+.su-u > span:last-child{display:flex;flex-direction:column;gap:1px;min-width:0}.su-u b{font-size:17px}.su-u small{color:var(--ink-3);font-size:13px}
+.su-acts{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px}
+.su-go{font:inherit;font-weight:800;font-size:16px;border:0;border-radius:12px;padding:13px 26px;background:var(--accent);color:#fff;cursor:pointer}.su-go:disabled{opacity:.45;cursor:default}
+.su-back,.su-x{font:inherit;font-weight:700;font-size:14.5px;border:0;background:none;color:var(--accent);cursor:pointer;padding:8px 4px}
+.su-x{display:block;margin:14px auto 0}
+.su-how{list-style:none;counter-reset:su;margin:6px 0 18px;padding:0;display:flex;flex-direction:column;gap:12px}
+.su-how li{counter-increment:su;display:grid;grid-template-columns:34px 1fr;column-gap:12px;align-items:start}
+.su-how li::before{content:counter(su);grid-row:span 2;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;background:var(--accent)}
+.su-how b{font-size:16px}.su-how span{color:var(--ink-2);font-size:14.5px}
+.su-start{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:#fff;background:#18744A;border-radius:16px;padding:16px 18px;box-shadow:0 10px 24px rgba(24,116,74,.25)}
+.su-start small{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;opacity:.85}.su-start b{font-size:18px}
+.nextup{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;background:var(--paper);border-radius:20px;padding:14px 16px;margin:0 0 14px;box-shadow:var(--card-shadow);outline:1px solid var(--card-line,var(--line));border-left:6px solid var(--wcd,var(--accent))}
+.nextup .tp-ring{flex:none;width:46px;height:46px}
+.nu-t{flex:1;min-width:0;display:flex;flex-direction:column}.nu-t small{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--wcd,var(--accent))}.nu-t b{font-size:17px;line-height:1.25}.nu-t span{font-size:13px;color:var(--ink-3)}
+.nu-go{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-size:20px;font-weight:800}
+html.mc-set #hero,html.mc-set .seg{display:none}
+.chip.chip-chg{margin-left:auto;color:var(--accent)!important;font-weight:700}
+/* My progress, tidied */
+.mp-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;margin:10px 0 4px;font-size:14px;font-weight:700;color:var(--ink-2)}
+.mp-chg{font:inherit;font-size:13.5px;font-weight:700;border:0;background:none;color:var(--accent);cursor:pointer;padding:4px 0;text-decoration:underline}
+.mp-ut{font-size:15px;font-weight:800;color:var(--ink);text-decoration:none}.mp-ut:hover{text-decoration:underline}
+.mp-go2{flex:none}
+ol.mp-t{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.mp-t li{display:flex;align-items:center;gap:8px;min-width:0}
+.mp-t li > a{flex:1;min-width:0}
+.mp-t li.full .mp-c{color:#18744A;font-weight:700}
+.mp-q{flex:none;white-space:nowrap;font-size:11.5px;font-weight:800;text-decoration:none;border-radius:999px;padding:3px 9px;color:#fff;background:#18744A}
+.mp-q.mid{background:#B7791F}.mp-q.lo{background:#B42318}.mp-q.go{background:var(--accent)}
+details.mp-bk{display:block}
+details.mp-bk > summary{cursor:pointer;font-weight:700;color:var(--ink-2);font-size:13.5px;list-style:none}
+details.mp-bk > summary::-webkit-details-marker{display:none}
+details.mp-bk > summary::before{content:"▸ ";color:var(--ink-3)}details.mp-bk[open] > summary::before{content:"▾ "}
+details.mp-bk > span{display:block;margin-top:6px}
+@media (max-width:520px){ .su-box{padding:22px 16px 18px;border-radius:18px} .nextup{padding:12px;gap:10px} .nu-t b{font-size:16px} ol.mp-t{grid-template-columns:1fr} .mp-bar{width:44px} }
 
 /* SET UP (first visit) and NEXT UP */
 html.su-on,html.su-on body{overflow:hidden}
@@ -4248,6 +4384,62 @@ try {
   setTimeout(() => { paintRail(); paintBar(); }, 500);
 })();
 /* ---------- VISITS: END ---------- */
+/* ---------- ACHIEVEMENT POP (source notes/app/achieve.js; in the workbooks and on the home page).
+   A retro games-console "Achievement unlocked" in the top right: a glowing medal spins in, a dark pill slides out of it with
+   the trophy's name and tier, a shine sweeps across, then it folds back away. One at a time from a queue.
+   window.MRB_ACH({ head, name, tier: 'bronze'|'silver'|'gold'|'platinum'|'egg', icon (HTML), href, sub }) ---------- */
+(function () {
+  if (window.MRB_ACH) return;
+  const RM = () => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const TIER = { bronze: ['#E39B5B', '#8A4B1E', 15], silver: ['#E8EEF5', '#8C98A6', 30], gold: ['#FFE27A', '#C98A00', 90], platinum: ['#C9F3FF', '#4AA8D8', 180], egg: ['#FFF3C4', '#E0A526', 5] };
+  function css() {
+    if (document.getElementById('ach-css')) return;
+    const s = document.createElement('style'); s.id = 'ach-css'; s.textContent = `
+.ach{position:fixed;top:calc(64px + env(safe-area-inset-top,0px));right:12px;z-index:2147482990;display:flex;align-items:center;height:64px;text-decoration:none;color:#fff;font:600 14px/1.25 system-ui,-apple-system,Segoe UI,sans-serif;filter:drop-shadow(0 10px 24px rgba(0,0,0,.35));-webkit-tap-highlight-color:transparent}
+html.va-on .ach{top:calc(100px + env(safe-area-inset-top,0px))}
+.ach-pill{position:relative;height:56px;margin-right:-30px;padding:0 44px 0 18px;border-radius:999px;background:linear-gradient(180deg,#3A3F4A,#16181D 55%,#0C0D10);border:2px solid #5A606C;box-sizing:border-box;display:flex;align-items:center;overflow:hidden;max-width:0;opacity:0;animation:achpill 5.6s cubic-bezier(.2,.9,.25,1) forwards}
+.ach-pill::after{content:"";position:absolute;top:0;bottom:0;width:60px;left:-80px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:achshine 1s 1.25s ease-out forwards}
+.ach-tx{display:flex;flex-direction:column;white-space:nowrap;min-width:0;opacity:0;animation:achtx 5.6s ease forwards}
+.ach-tx small{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ach-a)}
+.ach-tx b{font-size:15px;font-weight:800;overflow:hidden;text-overflow:ellipsis;max-width:min(250px,calc(100vw - 150px))}
+.ach-tx em{font-style:normal;font-size:12px;color:#B9C0CC}
+.ach-ring{position:relative;flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(from 0deg,var(--ach-a),var(--ach-b),var(--ach-a),var(--ach-b),var(--ach-a));box-shadow:0 0 0 3px #16181D,0 0 22px var(--ach-a);animation:achring 5.6s cubic-bezier(.3,1.5,.5,1) forwards}
+.ach-ring::before{content:"";position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#4A505C,#121418 70%)}
+.ach-ic{position:relative;display:grid;place-items:center;font-size:26px;line-height:1;animation:achic 5.6s ease forwards}
+.ach-ic svg,.ach-ic .tr-ic{width:32px;height:32px}
+.ach-glow{position:absolute;inset:-6px;border-radius:50%;border:3px solid var(--ach-a);opacity:0;animation:achpulse 1.2s .35s ease-out 2}
+.ach-sp{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:var(--ach-a);opacity:0;animation:achsp .9s .3s ease-out forwards}
+.ach-pts{position:absolute;right:-2px;top:-2px;font:900 12px/1 system-ui,sans-serif;color:#16181D;background:var(--ach-a);border-radius:999px;padding:3px 6px;opacity:0;animation:achpts 5.6s ease forwards}
+@keyframes achring{0%{transform:scale(0) rotate(-200deg)}8%{transform:scale(1.15) rotate(10deg)}12%{transform:scale(1) rotate(0)}88%{transform:scale(1)}96%{transform:scale(1.1)}100%{transform:scale(0) rotate(160deg)}}
+@keyframes achic{0%,8%{transform:rotateY(0)}10%{transform:rotateY(180deg)}14%{transform:rotateY(360deg)}100%{transform:rotateY(360deg)}}
+@keyframes achpill{0%,12%{max-width:0;opacity:0}13%{opacity:1}24%{max-width:420px;opacity:1}82%{max-width:420px;opacity:1}92%{max-width:0;opacity:1}93%,100%{max-width:0;opacity:0}}
+@keyframes achtx{0%,20%{opacity:0;transform:translateY(8px)}26%{opacity:1;transform:none}78%{opacity:1}84%,100%{opacity:0}}
+@keyframes achshine{to{left:calc(100% + 80px)}}
+@keyframes achpulse{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.7)}}
+@keyframes achsp{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.3)}}
+@keyframes achpts{0%,24%{opacity:0;transform:scale(0)}28%{opacity:1;transform:scale(1.3)}31%{transform:scale(1)}80%{opacity:1}86%,100%{opacity:0}}
+.ach.rm .ach-pill,.ach.rm .ach-tx,.ach.rm .ach-ring,.ach.rm .ach-ic,.ach.rm .ach-pts{animation:none;max-width:420px;opacity:1}.ach.rm .ach-pill::after,.ach.rm .ach-sp,.ach.rm .ach-glow{display:none}
+@media (max-width:520px){.ach{right:8px}.ach-tx b{font-size:14px}}
+@media print{.ach{display:none!important}}`;
+    document.head.append(s);
+  }
+  const Q = []; let busy = false;
+  function next() {
+    const o = Q.shift(); if (!o) { busy = false; return; } busy = true; css();
+    const t = TIER[o.tier] || TIER.bronze, rm = RM();
+    const a = document.createElement(o.href ? 'a' : 'div'); a.className = 'ach' + (rm ? ' rm' : ''); if (o.href) a.href = o.href;
+    a.setAttribute('role', 'status'); a.setAttribute('aria-live', 'polite'); a.style.setProperty('--ach-a', t[0]); a.style.setProperty('--ach-b', t[1]);
+    const sparks = rm ? '' : Array.from({ length: 10 }, (_, i) => { const an = i / 10 * Math.PI * 2, r = 44 + (i % 3) * 8; return `<i class="ach-sp" style="--dx:${Math.round(Math.cos(an) * r)}px;--dy:${Math.round(Math.sin(an) * r)}px"></i>`; }).join('');
+    const pts = o.tier === 'egg' ? '🥚' : `+${t[2]}G`;
+    a.innerHTML = `<span class="ach-pill"><span class="ach-tx"><small>${esc(o.head || 'Achievement unlocked')}</small><b>${esc(o.name)}</b>${o.sub ? `<em>${esc(o.sub)}</em>` : ''}</span></span><span class="ach-ring"><span class="ach-glow"></span>${sparks}<span class="ach-ic">${o.icon || '🏆'}</span><span class="ach-pts">${pts}</span></span>`;
+    a.addEventListener('click', () => { setTimeout(done, 50); });
+    document.body.append(a);
+    let over = false; const done = () => { if (over) return; over = true; a.remove(); setTimeout(next, 250); };
+    setTimeout(done, rm ? 4500 : 5700);
+  }
+  window.MRB_ACH = o => { if (!o || !o.name) return; Q.push(o); if (!busy) next(); };
+})();
 /* ---------- EASTER EGGS (source notes/app/eggs.js; in the workbooks and on the home page).
    Typed anywhere outside a text box (a keyboard), or typed into any search box (phones): hack, sudo, matrix, binary,
    hello world, barrel roll, 42, 404, mr b. The Konami code (keys, or swipes ↑↑↓↓←→←→ then two taps). Five quick taps on a
@@ -4262,7 +4454,7 @@ try {
   const first = () => String(me().name || '').trim().split(/\s+/)[0] || '';
   const HUNT = ['konami', 'hack', 'sudo', 'matrix', 'binary', 'hello', 'roll', '42', '404', 'mrb', 'ring', 'bug'];   /* the ones you can hunt for */
   const found = () => { try { return JSON.parse(LS.get('mrb-eggs') || '[]') || []; } catch (e) { return []; } };
-  function mark(id) { const f = found(); if (HUNT.includes(id) && !f.includes(id)) { f.push(id); LS.set('mrb-eggs', JSON.stringify(f)); } const n = found().filter(x => HUNT.includes(x)).length; return HUNT.includes(id) ? `🥚 Easter egg ${n} of ${HUNT.length} found${n === HUNT.length ? ' – you found them all! 🏆' : ''}` : ''; }
+  function mark(id) { const f = found(); if (HUNT.includes(id) && !f.includes(id)) { f.push(id); LS.set('mrb-eggs', JSON.stringify(f)); const k = f.filter(x => HUNT.includes(x)).length; if (window.MRB_ACH) MRB_ACH({ head: 'Secret found', name: k === HUNT.length ? 'Egg hunter: all ' + HUNT.length + ' found!' : `Easter egg ${k} of ${HUNT.length}`, tier: k === HUNT.length ? 'platinum' : 'egg', icon: k === HUNT.length ? '🏆' : '🥚' }); } const n = found().filter(x => HUNT.includes(x)).length; return HUNT.includes(id) ? `🥚 Easter egg ${n} of ${HUNT.length} found${n === HUNT.length ? ' – you found them all! 🏆' : ''}` : ''; }
   const css = () => { if (document.getElementById('egg-css')) return; const s = document.createElement('style'); s.id = 'egg-css'; s.textContent = `
 #egg-t{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;z-index:2147483000;max-width:min(440px,calc(100vw - 32px));box-sizing:border-box;background:#16213A;color:#fff;border-radius:16px;padding:12px 16px;font:600 15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;box-shadow:0 14px 40px rgba(0,0,0,.35);transition:opacity .25s,transform .25s;pointer-events:none;cursor:pointer}
 #egg-t.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}#egg-t small{display:block;margin-top:6px;font-weight:700;font-size:12.5px;color:#FFD66B}#egg-t code{font:600 13px/1.4 ui-monospace,Menlo,Consolas,monospace;color:#7CF29A;word-break:break-all}
@@ -4695,6 +4887,64 @@ function nextUp() {
   setTimeout(go, 700);
 })();
 /* ================= WELCOME: END ================= */
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
 
 /* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
 function wlShare() {

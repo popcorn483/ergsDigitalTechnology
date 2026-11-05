@@ -9485,6 +9485,12 @@ function trToast(list) {
     const one = L[0], t1 = !TR_CW && trTheoryTier(one.id);
     const head = L.length > 1 ? `${L.length} trophies earned` : TR_CW ? 'Trophy earned' : t1.n > 1 ? `Trophy upgraded to ${t1.tier}` : 'Trophy earned';
     const body = L.length > 1 ? L.slice(0, 2).map(lab).join(', ') + (L.length > 2 ? ` and ${L.length - 2} more` : '') : TR_CW ? `${one.name} (${one.tier})` : t1.n > 1 ? one.name : `${one.name} (bronze)`;
+    if (window.MRB_ACH) {   /* the retro "Achievement unlocked" pop, top right, one per trophy (three at most) */
+      TR_Q = [];
+      L.slice(0, 3).forEach((d, i) => { const t = TR_CW ? { tier: d.tier, n: 1 } : trTheoryTier(d.id), tier = String(TR_CW ? d.tier : (t.tier || 'bronze')).toLowerCase();
+        MRB_ACH({ head: !TR_CW && t.n > 1 ? `Trophy upgraded: ${tier}` : `Trophy unlocked: ${tier}`, name: d.name, sub: i === 2 && L.length > 3 ? `and ${L.length - 3} more` : '', tier, icon: trIcon(tier, d.cup), href: '#trophies' }); });
+      return;
+    }
     let el = $('#tr-toast');
     if (!el) { document.body.insertAdjacentHTML('beforeend', `<div class="tr-toast" id="tr-toast" role="status" aria-live="polite"></div>`); el = $('#tr-toast'); }
     el.innerHTML = `${trIcon(TR_CW ? one.tier : (t1.tier || 'bronze'), one.cup)}<span class="tr-tx"><b>${esc(head)}:</b> ${esc(body)}</span><a class="tr-tv" href="#trophies">View</a><button type="button" class="tr-tc" aria-label="Dismiss">×</button>`;
@@ -10227,6 +10233,62 @@ try {
   setTimeout(() => { paintRail(); paintBar(); }, 500);
 })();
 /* ---------- VISITS: END ---------- */
+/* ---------- ACHIEVEMENT POP (source notes/app/achieve.js; in the workbooks and on the home page).
+   A retro games-console "Achievement unlocked" in the top right: a glowing medal spins in, a dark pill slides out of it with
+   the trophy's name and tier, a shine sweeps across, then it folds back away. One at a time from a queue.
+   window.MRB_ACH({ head, name, tier: 'bronze'|'silver'|'gold'|'platinum'|'egg', icon (HTML), href, sub }) ---------- */
+(function () {
+  if (window.MRB_ACH) return;
+  const RM = () => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
+  const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const TIER = { bronze: ['#E39B5B', '#8A4B1E', 15], silver: ['#E8EEF5', '#8C98A6', 30], gold: ['#FFE27A', '#C98A00', 90], platinum: ['#C9F3FF', '#4AA8D8', 180], egg: ['#FFF3C4', '#E0A526', 5] };
+  function css() {
+    if (document.getElementById('ach-css')) return;
+    const s = document.createElement('style'); s.id = 'ach-css'; s.textContent = `
+.ach{position:fixed;top:calc(64px + env(safe-area-inset-top,0px));right:12px;z-index:2147482990;display:flex;align-items:center;height:64px;text-decoration:none;color:#fff;font:600 14px/1.25 system-ui,-apple-system,Segoe UI,sans-serif;filter:drop-shadow(0 10px 24px rgba(0,0,0,.35));-webkit-tap-highlight-color:transparent}
+html.va-on .ach{top:calc(100px + env(safe-area-inset-top,0px))}
+.ach-pill{position:relative;height:56px;margin-right:-30px;padding:0 44px 0 18px;border-radius:999px;background:linear-gradient(180deg,#3A3F4A,#16181D 55%,#0C0D10);border:2px solid #5A606C;box-sizing:border-box;display:flex;align-items:center;overflow:hidden;max-width:0;opacity:0;animation:achpill 5.6s cubic-bezier(.2,.9,.25,1) forwards}
+.ach-pill::after{content:"";position:absolute;top:0;bottom:0;width:60px;left:-80px;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-20deg);animation:achshine 1s 1.25s ease-out forwards}
+.ach-tx{display:flex;flex-direction:column;white-space:nowrap;min-width:0;opacity:0;animation:achtx 5.6s ease forwards}
+.ach-tx small{font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ach-a)}
+.ach-tx b{font-size:15px;font-weight:800;overflow:hidden;text-overflow:ellipsis;max-width:min(250px,calc(100vw - 150px))}
+.ach-tx em{font-style:normal;font-size:12px;color:#B9C0CC}
+.ach-ring{position:relative;flex:none;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(from 0deg,var(--ach-a),var(--ach-b),var(--ach-a),var(--ach-b),var(--ach-a));box-shadow:0 0 0 3px #16181D,0 0 22px var(--ach-a);animation:achring 5.6s cubic-bezier(.3,1.5,.5,1) forwards}
+.ach-ring::before{content:"";position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#4A505C,#121418 70%)}
+.ach-ic{position:relative;display:grid;place-items:center;font-size:26px;line-height:1;animation:achic 5.6s ease forwards}
+.ach-ic svg,.ach-ic .tr-ic{width:32px;height:32px}
+.ach-glow{position:absolute;inset:-6px;border-radius:50%;border:3px solid var(--ach-a);opacity:0;animation:achpulse 1.2s .35s ease-out 2}
+.ach-sp{position:absolute;left:50%;top:50%;width:6px;height:6px;margin:-3px;border-radius:50%;background:var(--ach-a);opacity:0;animation:achsp .9s .3s ease-out forwards}
+.ach-pts{position:absolute;right:-2px;top:-2px;font:900 12px/1 system-ui,sans-serif;color:#16181D;background:var(--ach-a);border-radius:999px;padding:3px 6px;opacity:0;animation:achpts 5.6s ease forwards}
+@keyframes achring{0%{transform:scale(0) rotate(-200deg)}8%{transform:scale(1.15) rotate(10deg)}12%{transform:scale(1) rotate(0)}88%{transform:scale(1)}96%{transform:scale(1.1)}100%{transform:scale(0) rotate(160deg)}}
+@keyframes achic{0%,8%{transform:rotateY(0)}10%{transform:rotateY(180deg)}14%{transform:rotateY(360deg)}100%{transform:rotateY(360deg)}}
+@keyframes achpill{0%,12%{max-width:0;opacity:0}13%{opacity:1}24%{max-width:420px;opacity:1}82%{max-width:420px;opacity:1}92%{max-width:0;opacity:1}93%,100%{max-width:0;opacity:0}}
+@keyframes achtx{0%,20%{opacity:0;transform:translateY(8px)}26%{opacity:1;transform:none}78%{opacity:1}84%,100%{opacity:0}}
+@keyframes achshine{to{left:calc(100% + 80px)}}
+@keyframes achpulse{0%{opacity:.9;transform:scale(1)}100%{opacity:0;transform:scale(1.7)}}
+@keyframes achsp{0%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(var(--dx),var(--dy)) scale(.3)}}
+@keyframes achpts{0%,24%{opacity:0;transform:scale(0)}28%{opacity:1;transform:scale(1.3)}31%{transform:scale(1)}80%{opacity:1}86%,100%{opacity:0}}
+.ach.rm .ach-pill,.ach.rm .ach-tx,.ach.rm .ach-ring,.ach.rm .ach-ic,.ach.rm .ach-pts{animation:none;max-width:420px;opacity:1}.ach.rm .ach-pill::after,.ach.rm .ach-sp,.ach.rm .ach-glow{display:none}
+@media (max-width:520px){.ach{right:8px}.ach-tx b{font-size:14px}}
+@media print{.ach{display:none!important}}`;
+    document.head.append(s);
+  }
+  const Q = []; let busy = false;
+  function next() {
+    const o = Q.shift(); if (!o) { busy = false; return; } busy = true; css();
+    const t = TIER[o.tier] || TIER.bronze, rm = RM();
+    const a = document.createElement(o.href ? 'a' : 'div'); a.className = 'ach' + (rm ? ' rm' : ''); if (o.href) a.href = o.href;
+    a.setAttribute('role', 'status'); a.setAttribute('aria-live', 'polite'); a.style.setProperty('--ach-a', t[0]); a.style.setProperty('--ach-b', t[1]);
+    const sparks = rm ? '' : Array.from({ length: 10 }, (_, i) => { const an = i / 10 * Math.PI * 2, r = 44 + (i % 3) * 8; return `<i class="ach-sp" style="--dx:${Math.round(Math.cos(an) * r)}px;--dy:${Math.round(Math.sin(an) * r)}px"></i>`; }).join('');
+    const pts = o.tier === 'egg' ? '🥚' : `+${t[2]}G`;
+    a.innerHTML = `<span class="ach-pill"><span class="ach-tx"><small>${esc(o.head || 'Achievement unlocked')}</small><b>${esc(o.name)}</b>${o.sub ? `<em>${esc(o.sub)}</em>` : ''}</span></span><span class="ach-ring"><span class="ach-glow"></span>${sparks}<span class="ach-ic">${o.icon || '🏆'}</span><span class="ach-pts">${pts}</span></span>`;
+    a.addEventListener('click', () => { setTimeout(done, 50); });
+    document.body.append(a);
+    let over = false; const done = () => { if (over) return; over = true; a.remove(); setTimeout(next, 250); };
+    setTimeout(done, rm ? 4500 : 5700);
+  }
+  window.MRB_ACH = o => { if (!o || !o.name) return; Q.push(o); if (!busy) next(); };
+})();
 /* ---------- EASTER EGGS (source notes/app/eggs.js; in the workbooks and on the home page).
    Typed anywhere outside a text box (a keyboard), or typed into any search box (phones): hack, sudo, matrix, binary,
    hello world, barrel roll, 42, 404, mr b. The Konami code (keys, or swipes ↑↑↓↓←→←→ then two taps). Five quick taps on a
@@ -10241,7 +10303,7 @@ try {
   const first = () => String(me().name || '').trim().split(/\s+/)[0] || '';
   const HUNT = ['konami', 'hack', 'sudo', 'matrix', 'binary', 'hello', 'roll', '42', '404', 'mrb', 'ring', 'bug'];   /* the ones you can hunt for */
   const found = () => { try { return JSON.parse(LS.get('mrb-eggs') || '[]') || []; } catch (e) { return []; } };
-  function mark(id) { const f = found(); if (HUNT.includes(id) && !f.includes(id)) { f.push(id); LS.set('mrb-eggs', JSON.stringify(f)); } const n = found().filter(x => HUNT.includes(x)).length; return HUNT.includes(id) ? `🥚 Easter egg ${n} of ${HUNT.length} found${n === HUNT.length ? ' – you found them all! 🏆' : ''}` : ''; }
+  function mark(id) { const f = found(); if (HUNT.includes(id) && !f.includes(id)) { f.push(id); LS.set('mrb-eggs', JSON.stringify(f)); const k = f.filter(x => HUNT.includes(x)).length; if (window.MRB_ACH) MRB_ACH({ head: 'Secret found', name: k === HUNT.length ? 'Egg hunter: all ' + HUNT.length + ' found!' : `Easter egg ${k} of ${HUNT.length}`, tier: k === HUNT.length ? 'platinum' : 'egg', icon: k === HUNT.length ? '🏆' : '🥚' }); } const n = found().filter(x => HUNT.includes(x)).length; return HUNT.includes(id) ? `🥚 Easter egg ${n} of ${HUNT.length} found${n === HUNT.length ? ' – you found them all! 🏆' : ''}` : ''; }
   const css = () => { if (document.getElementById('egg-css')) return; const s = document.createElement('style'); s.id = 'egg-css'; s.textContent = `
 #egg-t{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;z-index:2147483000;max-width:min(440px,calc(100vw - 32px));box-sizing:border-box;background:#16213A;color:#fff;border-radius:16px;padding:12px 16px;font:600 15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;box-shadow:0 14px 40px rgba(0,0,0,.35);transition:opacity .25s,transform .25s;pointer-events:none;cursor:pointer}
 #egg-t.on{opacity:1;transform:translate(-50%,0);pointer-events:auto}#egg-t small{display:block;margin-top:6px;font-weight:700;font-size:12.5px;color:#FFD66B}#egg-t code{font:600 13px/1.4 ui-monospace,Menlo,Consolas,monospace;color:#7CF29A;word-break:break-all}
