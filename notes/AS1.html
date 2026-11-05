@@ -10227,6 +10227,149 @@ try {
   setTimeout(() => { paintRail(); paintBar(); }, 500);
 })();
 /* ---------- VISITS: END ---------- */
+/* ---------- EASTER EGGS (source notes/app/eggs.js; in the workbooks and on the home page).
+   Typed anywhere outside a text box (a keyboard), or typed into any search box (phones): hack, sudo, matrix, binary,
+   hello world, barrel roll, 42, 404, mr b. The Konami code (keys, or swipes ↑↑↓↓←→←→ then two taps). Five quick taps on a
+   progress ring. A ladybird that sometimes walks across a workbook page. Date surprises (Pi Day, Ada Lovelace Day,
+   Turing's birthday, Halloween, December snow) and a late-night nudge to sleep. Found eggs are counted on this device only
+   ('mrb-eggs'); nothing is sent or recorded for the teacher, and nothing here changes progress or locks. ---------- */
+(function () {
+  if (window.MRB_EGGS) return;
+  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { localStorage.setItem(k, v); } catch (e) { } } };
+  const RM = () => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
+  const me = () => { try { return JSON.parse(LS.get('mrb-pupil') || 'null') || {}; } catch (e) { return {}; } };
+  const first = () => String(me().name || '').trim().split(/\s+/)[0] || '';
+  const HUNT = ['konami', 'hack', 'sudo', 'matrix', 'binary', 'hello', 'roll', '42', '404', 'mrb', 'ring', 'bug'];   /* the ones you can hunt for */
+  const found = () => { try { return JSON.parse(LS.get('mrb-eggs') || '[]') || []; } catch (e) { return []; } };
+  function mark(id) { const f = found(); if (HUNT.includes(id) && !f.includes(id)) { f.push(id); LS.set('mrb-eggs', JSON.stringify(f)); } const n = found().filter(x => HUNT.includes(x)).length; return HUNT.includes(id) ? `🥚 Easter egg ${n} of ${HUNT.length} found${n === HUNT.length ? ' – you found them all! 🏆' : ''}` : ''; }
+  const css = () => { if (document.getElementById('egg-css')) return; const s = document.createElement('style'); s.id = 'egg-css'; s.textContent = `
+#egg-t{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,20px);opacity:0;z-index:2147483000;max-width:min(440px,calc(100vw - 32px));box-sizing:border-box;background:#16213A;color:#fff;border-radius:16px;padding:12px 16px;font:600 15px/1.4 system-ui,-apple-system,Segoe UI,sans-serif;box-shadow:0 14px 40px rgba(0,0,0,.35);transition:opacity .25s,transform .25s;pointer-events:auto;cursor:pointer}
+#egg-t.on{opacity:1;transform:translate(-50%,0)}#egg-t small{display:block;margin-top:6px;font-weight:700;font-size:12.5px;color:#FFD66B}#egg-t code{font:600 13px/1.4 ui-monospace,Menlo,Consolas,monospace;color:#7CF29A;word-break:break-all}
+html.pbar-on #egg-t{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
+.egg-cv{position:fixed;inset:0;width:100vw;height:100vh;z-index:2147482900;pointer-events:none}
+#egg-term{position:fixed;inset:0;z-index:2147482950;background:rgba(0,8,2,.96);color:#33FF66;font:600 15px/1.6 ui-monospace,Menlo,Consolas,monospace;padding:max(24px,env(safe-area-inset-top)) 20px 24px;box-sizing:border-box;overflow:auto;cursor:pointer}
+#egg-term p{margin:0;white-space:pre-wrap}#egg-term .r{color:#FF5C5C;font-weight:800}#egg-term .w{color:#fff}#egg-term i{display:inline-block;width:.6em;height:1.1em;vertical-align:-2px;background:#33FF66;animation:eggb 1s steps(1) infinite}
+@keyframes eggb{50%{opacity:0}}
+#egg-bug{position:fixed;bottom:calc(10px + env(safe-area-inset-bottom,0px));left:-40px;z-index:64;font-size:26px;line-height:1;border:0;background:none;padding:4px;cursor:pointer;animation:eggw 22s linear forwards}
+html.pbar-on #egg-bug{bottom:calc(80px + env(safe-area-inset-bottom,0px))}
+@keyframes eggw{0%{left:-40px;transform:rotate(90deg) translateY(0)}25%{transform:rotate(90deg) translateY(-6px)}50%{transform:rotate(90deg) translateY(0)}75%{transform:rotate(90deg) translateY(-6px)}100%{left:calc(100vw + 40px);transform:rotate(90deg)}}
+.egg-spin{animation:eggs .8s ease-in-out}@keyframes eggs{to{transform:rotate(720deg)}}
+@media (prefers-reduced-motion:reduce){#egg-bug{animation-duration:60s}}`; document.head.append(s); };
+  let tT = 0;
+  function toast(html, id, ms) {
+    css(); let t = document.getElementById('egg-t'); if (!t) { t = document.createElement('div'); t.id = 'egg-t'; t.setAttribute('role', 'status'); t.addEventListener('click', () => t.classList.remove('on')); document.body.append(t); }
+    const c = id ? mark(id) : ''; t.innerHTML = html + (c ? `<small>${c}</small>` : '');
+    requestAnimationFrame(() => t.classList.add('on')); clearTimeout(tT); tT = setTimeout(() => t.classList.remove('on'), ms || 5200);
+  }
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  function canvas(ms, draw) {   /* a full-screen canvas for a few seconds */
+    css(); const cv = document.createElement('canvas'); cv.className = 'egg-cv'; const dpr = Math.min(2, devicePixelRatio || 1);
+    cv.width = innerWidth * dpr; cv.height = innerHeight * dpr; document.body.append(cv); const g = cv.getContext('2d'); g.scale(dpr, dpr);
+    const t0 = performance.now(); let raf = 0; const step = now => { const t = now - t0; if (t > ms) { cv.remove(); return; } draw(g, t, innerWidth, innerHeight); raf = requestAnimationFrame(step); }; raf = requestAnimationFrame(step);
+  }
+  const COLS = ['#2F6FDB', '#0F8A7A', '#7B4FD6', '#C23B6E', '#B7650F', '#2E8B3C', '#4652C2', '#0B7C93', '#D2431C', '#9B3DB0'];
+  function confetti() {
+    if (RM()) return;
+    const P = Array.from({ length: 140 }, () => ({ x: innerWidth / 2, y: innerHeight * .6, vx: (Math.random() - .5) * 14, vy: -Math.random() * 15 - 6, s: 6 + Math.random() * 6, c: COLS[Math.random() * 10 | 0], r: Math.random() * 6 }));
+    canvas(3200, (g, t, w, h) => { g.clearRect(0, 0, w, h); P.forEach(p => { p.vy += .35; p.x += p.vx; p.y += p.vy; p.r += .1; g.save(); g.translate(p.x, p.y); g.rotate(p.r); g.fillStyle = p.c; g.fillRect(-p.s / 2, -p.s / 2, p.s, p.s); g.restore(); }); });   /* square "pixels", 8-bit style */
+  }
+  function matrix() {
+    if (RM()) return;
+    const cols = Math.ceil(innerWidth / 16), y = Array.from({ length: cols }, () => Math.random() * -40), words = '01アイウエオカキクケコ<>{}=+;DATA BIT BYTE CPU RAM SQL HTML';
+    canvas(7000, (g, t, w, h) => { g.fillStyle = t > 6000 ? 'rgba(0,0,0,.25)' : 'rgba(0,10,0,.12)'; g.fillRect(0, 0, w, h); g.font = '600 15px ui-monospace,Menlo,monospace';
+      y.forEach((v, i) => { g.fillStyle = Math.random() < .05 ? '#CFFFD8' : '#33FF66'; g.fillText(words[Math.random() * words.length | 0], i * 16, v * 16); y[i] = v * 16 > h && Math.random() > .975 ? 0 : v + 1; }); });
+  }
+  function terminal() {
+    css(); const old = document.getElementById('egg-term'); if (old) old.remove();
+    const d = document.createElement('div'); d.id = 'egg-term'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-label', 'Hacking (not really)'); document.body.append(d);
+    const who = first() || 'pupil', L = [['> ssh ' + who.toLowerCase() + '@mrbutler-markbook', ''], ['Connecting to 10.0.0.42 …', ''], ['Bypassing firewall ████████████ 100%', ''], ['Downloading Mr Butler’s mark book …', ''], ['ACCESS DENIED', 'r'], ['', ''], ['Firewall: 1   ' + who + ': 0', 'w'],
+      ['Unauthorised access to computer material is an offence under the Computer Misuse Act 1990 (that’s Unit 1, Topic 7 😉).', 'w'], ['', ''], ['Tap anywhere to go back to revising.', '']];
+    let i = 0; const go = () => { if (!d.isConnected) return; const p = document.createElement('p'); p.className = L[i][1]; p.textContent = L[i][0]; d.querySelector('i') && d.querySelector('i').remove(); d.append(p); p.insertAdjacentHTML('beforeend', '<i></i>'); i++; if (i < L.length) setTimeout(go, i < 4 ? 650 : 380); };
+    go(); d.addEventListener('click', () => d.remove()); setTimeout(() => { if (d.isConnected) d.remove(); }, 14000);
+    mark('hack');
+  }
+  const bin = s => [...s.toUpperCase()].map(ch => ch.charCodeAt(0).toString(2).padStart(8, '0')).join(' ');
+  const EGGS = {
+    konami: () => { confetti(); toast('🎮 <b>Cheat mode on: +30 lives.</b><br>(Sadly cheat codes don’t work in the exam.)', 'konami'); },
+    hack: () => terminal(),
+    sudo: () => toast('🔒 <code>sudo: permission denied</code><br>Nice try. Only Mr Butler has root access here.', 'sudo'),
+    matrix: () => { matrix(); toast('🟩 Wake up, ' + esc(first() || 'Neo') + '… the Matrix has you. (So does Unit 1.)', 'matrix', 6500); },
+    binary: () => { const n = first() || 'MR B'; toast(`💾 <b>${esc(n.toUpperCase())}</b> in binary (ASCII):<br><code>${bin(n.slice(0, 10))}</code><br>That’s ${n.slice(0, 10).length} byte${n.length === 1 ? '' : 's'}: ${n.slice(0, 10).length * 8} bits.`, 'binary', 8000); },
+    hello: () => toast(`<code>&gt;&gt;&gt; print("Hello, ${esc(first() || 'World')}!")</code><br><code>Hello, ${esc(first() || 'World')}!</code><br>Every programmer’s first program.`, 'hello'),
+    roll: () => { if (!RM()) document.documentElement.animate([{ transform: 'rotate(0)' }, { transform: 'rotate(360deg)' }], { duration: 1100, easing: 'ease-in-out' }); toast('🛩️ Do a barrel roll!', 'roll', 3500); },
+    '42': () => toast('🌌 42: the answer to life, the universe and everything.<br>Not the answer to question 4(b), though.', '42'),
+    '404': () => toast('🔎 <b>404: Revision Not Found.</b><br>Only kidding, it’s all still here. Keep going!', '404'),
+    mrb: () => toast(`👋 Mr Butler says: “${['Keep going, you’re doing great.', 'Little and often beats one big cram.', 'Have you done today’s page quiz?', 'Define the key term, then give an example.', 'Read the question twice. Answer it once.'][Math.random() * 5 | 0]}”`, 'mrb'),
+  };
+  const WORDS = { hack: 'hack', hacker: 'hack', sudo: 'sudo', matrix: 'matrix', binary: 'binary', helloworld: 'hello', barrelroll: 'roll', doabarrelroll: 'roll', '42': '42', '404': '404', mrb: 'mrb', mrbutler: 'mrb' };
+  /* typed on a keyboard, outside text boxes */
+  const KON = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  let buf = '', keys = [];
+  document.addEventListener('keydown', e => {
+    if (e.ctrlKey || e.metaKey || e.altKey) return;
+    const t = e.target, typing = t && (t.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName));
+    keys.push(e.key.length === 1 ? e.key.toLowerCase() : e.key); keys = keys.slice(-10);
+    if (keys.join() === KON.join() && !typing) { keys = []; EGGS.konami(); return; }
+    /* part-way through the code (↑ ↑ ↓ ↓ then ← →): don't let ← / → turn the page */
+    if (!typing && /^Arrow(Left|Right)$/.test(e.key)) { const n = keys.length; for (let k = 5; k <= 8; k++) if (n >= k && keys.slice(n - k).join() === KON.slice(0, k).join()) { e.preventDefault(); e.stopImmediatePropagation(); break; } }
+    if (typing || e.key.length !== 1) return;
+    buf = (buf + e.key.toLowerCase()).replace(/[^a-z0-9]/g, '').slice(-16);
+    for (const w in WORDS) if (buf.endsWith(w) && !(w === 'mrb' && buf.endsWith('mrbutler'))) { const id = WORDS[w]; if (w === 'mrb' && /mrbu?$/.test(buf)) { /* wait: they may be typing "mrbutler" */ clearTimeout(EGGS._mt); EGGS._mt = setTimeout(() => { if (buf.endsWith('mrb')) { buf = ''; EGGS.mrb(); } }, 900); return; } buf = ''; EGGS[id](); return; }
+  }, true);
+  /* typed into a search box (phones have no keyboard outside a text box) */
+  let sT = 0;
+  document.addEventListener('input', e => {
+    const t = e.target; if (!t || t.tagName !== 'INPUT' || !(t.type === 'search' || /search/i.test(t.placeholder || ''))) return;
+    clearTimeout(sT); sT = setTimeout(() => { const v = String(t.value || '').toLowerCase().replace(/[^a-z0-9]/g, ''); if (WORDS[v]) EGGS[WORDS[v]](); else if (v === 'konami' || v === 'uuddlrlrba') EGGS.konami(); }, 700);
+  }, true);
+  /* the Konami code by swipes on a phone: ↑ ↑ ↓ ↓ ← → ← → then two taps */
+  let sw = [], tx = 0, ty = 0;
+  document.addEventListener('touchstart', e => { const p = e.touches[0]; tx = p.clientX; ty = p.clientY; }, { passive: true });
+  document.addEventListener('touchend', e => {
+    const p = e.changedTouches[0], dx = p.clientX - tx, dy = p.clientY - ty, ax = Math.abs(dx), ay = Math.abs(dy);
+    const d = ax < 12 && ay < 12 ? 'T' : ax > 50 && ax > ay * 1.5 ? (dx > 0 ? 'R' : 'L') : ay > 50 && ay > ax * 1.5 ? (dy > 0 ? 'D' : 'U') : '?';
+    sw.push(d); sw = sw.slice(-10); if (sw.join('') === 'UUDDLRLRTT') { sw = []; EGGS.konami(); }
+  }, { passive: true });
+  /* five quick taps on any progress ring */
+  let rn = 0, rT = 0;
+  document.addEventListener('click', e => {
+    const r = e.target.closest && e.target.closest('.tp-ring,.mp-ring,.pg-ring,.ring'); if (!r) { rn = 0; return; }
+    rn++; clearTimeout(rT); rT = setTimeout(() => { rn = 0; }, 1200);
+    if (rn >= 5) { rn = 0; if (!RM()) { r.classList.remove('egg-spin'); void r.offsetWidth; r.classList.add('egg-spin'); } toast('🌀 Wheee! Progress rings are for filling, not spinning.', 'ring', 3800); }
+  }, true);
+  /* a ladybird that sometimes walks along the bottom of a workbook page (and always on Halloween) */
+  const day = new Date(), md = (day.getMonth() + 1) * 100 + day.getDate();
+  function bug() {
+    css(); if (document.getElementById('egg-bug')) return;
+    const b = document.createElement('button'); b.type = 'button'; b.id = 'egg-bug'; b.textContent = md === 1031 ? '🕷️' : '🐞'; b.setAttribute('aria-label', 'A bug! Tap it');
+    b.addEventListener('click', () => { b.remove(); toast('🐞 <b>You squashed a bug!</b><br>Debugging: finding and fixing errors. Half of programming is this.', 'bug'); });
+    b.addEventListener('animationend', () => b.remove()); document.body.append(b);
+  }
+  const inBook = /\/notes\/[^/]+\.html$/.test(location.pathname);
+  setTimeout(() => { if (inBook && (md === 1031 || Math.random() < 1 / 25)) bug(); }, 9000 + Math.random() * 20000);
+  /* special days and late nights: once a day each, a few seconds after the page settles */
+  const today = day.toISOString().slice(0, 10), once = k => { const key = 'mrb-egg-day:' + k; if (LS.get(key) === today) return false; LS.set(key, today); return true; };
+  const tue2Oct = day.getMonth() === 9 && day.getDay() === 2 && day.getDate() >= 8 && day.getDate() <= 14;
+  setTimeout(() => {
+    if (document.querySelector('#mrb-who,#mrb-gate,#mrb-msg,#mrb-setup')) return;   /* never on top of sign-in, messages or set-up */
+    const h = day.getHours();
+    if (md === 314 && once('pi')) toast('🥧 Happy Pi Day! π = 3.14159265358979… (only 3 s.f. needed for the exam).');
+    else if (tue2Oct && once('ada')) toast('💡 It’s Ada Lovelace Day. In 1843 Ada wrote what many call the first computer program.');
+    else if (md === 623 && once('turing')) toast('🧠 Happy birthday, Alan Turing (born 23 June 1912), a founder of computer science.');
+    else if (md === 1031 && once('halloween')) toast('🎃 Happy Halloween! Watch out for bugs today…');
+    else if (md === 101 && once('newyear')) toast('🎆 Happy New Year! A new year, a fresh page quiz.');
+    else if (md === 1225 && once('xmas')) toast('🎄 Happy Christmas! Revising on Christmas Day? Mr Butler is impressed (and says take a break).');
+    else if ((h >= 23 || h < 4) && once('late')) toast('🦉 Revising late? Sleep is when your brain stores what you’ve learned. Get some rest soon.');
+    if (day.getMonth() === 11 && day.getDate() <= 26 && !RM() && !inBook) snow();
+  }, 4000);
+  function snow() {   /* a light December snowfall on the home page, for ten seconds */
+    const F = Array.from({ length: 70 }, () => ({ x: Math.random() * innerWidth, y: Math.random() * -innerHeight, r: 1.5 + Math.random() * 2.5, v: .6 + Math.random() * 1.2, w: Math.random() * 6 }));
+    canvas(10000, (g, t, w, h) => { g.clearRect(0, 0, w, h); g.fillStyle = 'rgba(255,255,255,.9)'; g.globalAlpha = t > 8500 ? (10000 - t) / 1500 : 1; F.forEach(f => { f.y += f.v; f.w += .02; f.x += Math.sin(f.w) * .4; if (f.y > h) f.y = -5; g.beginPath(); g.arc(f.x, f.y, f.r, 0, 7); g.fill(); }); });
+  }
+  /* for anyone who opens the browser's developer tools */
+  try { console.log('%c  MR B’S DIGITAL TECHNOLOGY  \n%cInspecting the page? That’s the spirit.\nThere are ' + HUNT.length + ' easter eggs hidden in this site. Hint: try typing something only a hacker would type…', 'font:800 16px system-ui;color:#fff;background:#16213A;padding:6px 10px;border-radius:6px', 'font:600 13px system-ui;color:#2F6FDB'); } catch (e) { }
+  window.MRB_EGGS = { found: () => found().filter(x => HUNT.includes(x)), total: HUNT.length, run: id => EGGS[id] && EGGS[id]() };
+})();
 /* ---------- ACTIVITIES (source notes/app/activities.js): a workbook page keeps only its notes in the flow. Videos,
    interactive diagrams, Check your knowledge, key terms, Learn and practise and the topic test become a row of icon tiles
    under the page heading ("Activities"); a tile opens that activity in a pop-up (full screen on a phone). The activity's
