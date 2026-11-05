@@ -26,7 +26,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 16;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 17;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -124,6 +124,13 @@ function doPost(e) {
   if (d.kind === 'psave') { if (!okId(d.id)) return out_({ ok: false }); return out_(save_('P-' + resolve_(String(d.id), aliases_()), d.data)); }
   const s = Math.round(+d.s || 0), book = String(d.book || ''), name = clean_(d.name, 40);
   if (BOOKS.indexOf(book) < 0 || !okId(d.id) || !name) return out_({ ok: false });
+  if (d.kind === 'ping') {   /* "revising now": who is using the guide this minute (kept for a few minutes in the script's cache) */
+    const id = resolve_(String(d.id), aliases_()), c = CacheService.getScriptCache();
+    locked_(() => { let m = {}; try { m = JSON.parse(c.get('live') || '{}') || {}; } catch (x) { m = {}; } const now = Date.now();
+      Object.keys(m).forEach(k => { if (now - m[k][0] > 10 * 60000) delete m[k]; });
+      m[id] = [now, name, clean_(d.cls, 12).toUpperCase(), book, clean_(d.ch, 8), clean_(d.pg, 12)]; c.put('live', JSON.stringify(m), 1800); });
+    return out_({ ok: true });
+  }
   if (d.kind === 'snap') {   /* progress snapshot: replace this pupil's row for this workbook */
     const n = v => Math.max(0, Math.min(9999, Math.round(+v || 0))), q = {};
     Object.keys(d.quiz || {}).slice(0, 80).forEach(k => { const v = d.quiz[k]; if (/^c\d{1,2}(\|pp)?$/.test(k) && Array.isArray(v)) q[k] = [n(v[0]), n(v[1]), clean_(v[2], 10)]; });
@@ -158,6 +165,11 @@ function dropAccess_(ids) { const sh = acc_(), r = rows_(sh); for (let i = r.len
 /* EMAILS: if none arrive, open the Apps Script, choose testEmail in the function list at the top and press Run. Google asks
    you to allow "Send email as you" the first time; allow it, then Deploy › Manage deployments › pencil › New version.
    The Teacher area › Pupil tracking › ⋯ › "Send a test email" shows what went wrong, if anything. */
+function live_() {   /* pupils active in the last 3 minutes, newest first */
+  let m = {}; try { m = JSON.parse(CacheService.getScriptCache().get('live') || '{}') || {}; } catch (e) { m = {}; }
+  const now = Date.now(), N = names_(), live = Object.keys(m).filter(k => now - m[k][0] < 3 * 60000).map(k => { const v = m[k]; return { id: k, at: v[0], name: (N[k] && N[k][0]) || v[1], cls: (N[k] && N[k][1]) || v[2], book: v[3], ch: v[4], pg: v[5] }; }).sort((a, b) => b.at - a.at);
+  return { ok: true, live, now };
+}
 function mailTo_() { let to = NOTIFY_EMAIL; try { to = to || Session.getEffectiveUser().getEmail(); } catch (e) { } try { to = to || Session.getActiveUser().getEmail(); } catch (e) { } return to || ''; }
 function mailNote_(err) { try { const pr = PropertiesService.getScriptProperties(); if (err) pr.setProperty('mail:err', new Date().toISOString() + ' ' + String(err && err.message || err).slice(0, 300)); else { pr.deleteProperty('mail:err'); pr.setProperty('mail:ok', new Date().toISOString()); } } catch (e) { } }
 function mailState_() { try { const pr = PropertiesService.getScriptProperties(); return { to: mailTo_(), err: pr.getProperty('mail:err') || '', ok: pr.getProperty('mail:ok') || '' }; } catch (e) { return { to: '', err: String(e), ok: '' }; } }
@@ -322,6 +334,7 @@ function act_(q) {
     ids.forEach(id => setAccess_(id, q.action === 'approve' ? 'approved' : 'declined'));
     return { ok: true };
   }
+  if (q.action === 'live') return live_();
   if (q.action === 'testmail') { try { return { ok: true, to: testEmail() }; } catch (e) { mailNote_(e); return { ok: false, to: mailTo_(), error: String(e && e.message || e) }; } }
   if (q.action === 'pdata') {   /* "View as this pupil": their saved progress (the same copy their devices load) */
     if (!okId(to)) return { ok: false, error: 'bad request' };
@@ -489,5 +502,5 @@ function summary_() {
   pupils.forEach(p => { p.access = AC[p.id] ? String(AC[p.id][1]) : 'approved'; });
   const known = {}; pupils.forEach(p => { known[p.id] = 1; });
   const requests = Object.keys(AC).filter(id => String(AC[id][1]) === 'pending').map(id => ({ id, name: String(AC[id][2]), cls: String(AC[id][3]), at: new Date(AC[id][4]).getTime() }));
-  return { pupils, requests, updated: now, v: SCRIPT_VERSION, mail: EMAIL_SIGNINS ? mailState_() : null };
+  return { pupils, requests, live: live_().live, updated: now, v: SCRIPT_VERSION, mail: EMAIL_SIGNINS ? mailState_() : null };
 }
