@@ -2431,6 +2431,7 @@ html.act-open{overflow:hidden}html.act-open .pbar,html.act-open .sv-sw{display:n
 /* the pupil's last page-quiz answers */
 .opt.pq-pick{outline:3px solid #7B4FD6;outline-offset:2px}.opt.pq-right{border-color:var(--good)!important;background:color-mix(in srgb,var(--good) 12%,var(--paper))!important}.opt.pq-wrong{background:color-mix(in srgb,#C0392B 10%,var(--paper))!important}.pq-mk{margin-left:8px;font:800 15px var(--sans)}.pq-mk.ok{color:var(--good)}.pq-mk.no{color:#C0392B}html.va-on .act-pop{top:calc(36px + env(safe-area-inset-top,0px))}.pq-picks{margin:0 0 10px;padding:9px 12px;border-radius:10px;background:color-mix(in srgb,#7B4FD6 10%,var(--paper));font:600 13.5px/1.4 var(--sans)}
 .tr-l{margin:0 0 6px;padding-left:20px;font:600 14px/1.45 var(--sans)}.tr-l small{color:var(--ink-3);font-weight:700}.mrb-fin a.mf-y{display:flex;align-items:center;justify-content:center;text-decoration:none;min-height:52px;border-radius:14px;font:800 16px var(--sans)}
+.pg-work h2{margin:0 0 8px}.pg-work ul{list-style:none;margin:0;padding:0}.pg-work li a{display:flex;flex-direction:column;gap:2px;padding:10px 12px;margin:0 0 8px;border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:10px;text-decoration:none;color:inherit;font-family:var(--sans)}.pg-work li.ok a{border-left-color:var(--good)}.pg-work li.late a{border-left-color:#C0392B}.pg-work small{color:var(--ink-3);font-size:13px}
 /* PAGE BAR (phones): ‹ · Mark as covered · Next › fixed at the bottom; the "Before you move on" sheet */
 .pbar{display:none}
 #b-ppt{display:none}
@@ -8498,6 +8499,10 @@ function renderProgress(focus) {
       ${nextNot ? `<a class="btn pri" href="#${esc(nextNot.p.id)}">Next ${APP_REV ? 'not-covered' : 'unfinished'} page →</a>` : '<p><b>Everything is marked. Brilliant.</b></p>'}</div></div>
       ${extra.length ? `<div class="pg-xs">${extra.join('')}</div>` : ''}
       <div class="lib-chips pg-f" role="group" aria-label="Show">${[['all', 'All pages'], ['ret', 'Come back to'], ['not', ST_NAME.not], ['vis', 'Visited, not marked'], ['cov', ST_NAME.cov]].map(([k, l]) => `<button type="button" class="lib-chip" data-pgf="${k}" aria-pressed="${PG_F === k}">${esc(l)}</button>`).join('')}</div></header>
+    ${(() => { let w = []; try { w = JSON.parse(localStorage.getItem('mrb-mywork') || '[]').filter(x => x.book === BK.id); } catch (e) { } if (!w.length) return '';   /* work Mr Butler has set (from the Apps Script) */
+      const due = d => { const x = new Date(d + 'T12:00:00'); return isNaN(x) ? d : x.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }); };
+      return `<section class="card lib-body pg-work"><h2>Set by Mr Butler</h2><ul>${w.map(x => { const ch = CH_BY_ID.get(x.ch); if (!ch) return ''; const ps = ch.pages || [], d = ps.filter(p => state.done[p.id]).length, b = typeof cqState === 'function' ? cqState().best[ch.id] : null, late = x.due && x.due < new Date().toISOString().slice(0, 10) && (d < ps.length || !b);
+        return `<li class="${d === ps.length && b ? 'ok' : late ? 'late' : ''}"><a href="#${esc(ps[0] ? ps[0].id : '')}"><b>Topic ${esc(ch.n)} · ${esc(ch.title)}</b><small>${d}/${ps.length} pages covered · topic quiz ${b ? b.pc + '%' : 'not done'}${x.due ? ` · due ${esc(due(x.due))}${late ? ' (overdue)' : ''}` : ''}</small>${x.note ? `<small>${esc(x.note)}</small>` : ''}</a></li>`; }).join('')}</ul></section>`; })()}
     <section class="card lib-body" id="pg-list">${B.chapters.filter(ch => (ch.pages || []).length).map(ch => {
       const ps = ch.pages, d = ps.filter(p => state.done[p.id]).length;
       const on = typeof isTrk !== 'function' || isTrk(ch);
@@ -9840,7 +9845,35 @@ try {
     if (j.ok && j.pin === false) { LS.set('mrb-pin-ok', null); try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } unGate(); ask(); return; }   /* no PIN on record (never set, or Mr Butler reset it): sign in again and choose one */
     const st = j.ok && typeof j.status === 'string' ? j.status : '';
     if (/^(pending|declined)$/.test(st)) { LS.set('mrb-access', st); gate(); }
-    else { LS.set('mrb-access', 'ok'); unGate(); }   /* approved (or an Apps Script without approvals) */
+    else { LS.set('mrb-access', 'ok'); unGate(); myWork(); }   /* approved (or an Apps Script without approvals) */
+  }
+  /* SET WORK and MESSAGES from Mr Butler: messages show once (then marked read); set work shows once a visit, and is kept
+     ('mrb-mywork') for My progress and the workbook's cover */
+  async function myWork() {
+    const p = me(); if (!p || !URL0 || LS.get('notes-nocount') || window.__mrbWork) return; window.__mrbWork = 1;
+    let j; try { j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=mywork&id=' + encodeURIComponent(p.id) + '&cls=' + encodeURIComponent(p.cls || ''), { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); } catch (e) { return; }
+    if (!j || !j.ok) return;
+    LS.set('mrb-mywork', JSON.stringify(j.work || []));
+    const msgs = j.msgs || [], work = (j.work || []).filter(w => !w.due || w.due >= new Date(Date.now() - 864e5).toISOString().slice(0, 10));
+    let seenWork = false; try { seenWork = sessionStorage.getItem('mrb-work-shown') === '1'; } catch (e) { }
+    if (!msgs.length && (seenWork || !work.length)) return;
+    try { sessionStorage.setItem('mrb-work-shown', '1'); } catch (e) { }
+    const UN = { U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+    const base = /\/notes\/[^/]*$/.test(location.pathname) ? '' : 'notes/';
+    const due = d => { if (!d) return ''; const x = new Date(d + 'T12:00:00'); return isNaN(x) ? d : x.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }); };
+    const show = () => {
+      if (document.getElementById('mrb-who') || document.getElementById('mrb-gate') || document.getElementById('mrb-fin')) { setTimeout(show, 1500); return; }
+      const d = document.createElement('div'); d.id = 'mrb-msg';
+      d.innerHTML = `<style>#mrb-msg{position:fixed;inset:0;z-index:2147482900;display:grid;place-items:center;background:rgba(10,16,30,.55);padding:16px}#mrb-msg .b{background:#fff;color:#16213A;border-radius:16px;max-width:420px;width:100%;max-height:85vh;overflow:auto;padding:20px;font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.35)}#mrb-msg h2{margin:0 0 10px;font-size:19px}#mrb-msg .m{background:#EEF3FB;border-left:4px solid #1F5FBF;border-radius:10px;padding:10px 12px;margin:0 0 10px;white-space:pre-wrap}#mrb-msg .m small{display:block;color:#5A6478;font-size:12px;margin-top:4px}#mrb-msg ul{list-style:none;margin:0 0 12px;padding:0}#mrb-msg li{border:1px solid #DCE2EA;border-radius:10px;padding:9px 12px;margin:0 0 8px}#mrb-msg li a{font-weight:800;color:#1F5FBF;text-decoration:none}#mrb-msg li small{display:block;color:#5A6478;font-size:12.5px}#mrb-msg button{width:100%;font:inherit;font-weight:800;border:0;border-radius:12px;padding:12px;background:#1F5FBF;color:#fff;cursor:pointer}@media (prefers-color-scheme:dark){#mrb-msg .b{background:#1B2233;color:#E8ECF4}#mrb-msg .m{background:#22304A}#mrb-msg li{border-color:#3A4458}}</style>
+        <div class="b" role="dialog" aria-modal="true" aria-labelledby="mm-h">${msgs.length ? `<h2 id="mm-h">${msgs.length === 1 ? 'A message from Mr Butler' : 'Messages from Mr Butler'}</h2>${msgs.map(m => `<div class="m"></div>`).join('')}` : ''}
+        ${work.length ? `<h2${msgs.length ? '' : ' id="mm-h"'}>Work set for you</h2><ul>${work.map(w => `<li><a href="${base}${w.book}.html#${w.ch}-p01">${UN[w.book] || w.book} · Topic ${+w.ch.slice(1)}</a>${w.due ? `<small>Due ${due(w.due)}</small>` : ''}${w.note ? `<small class="wn"></small>` : ''}</li>`).join('')}</ul>` : ''}<button type="button">OK</button></div>`;
+      d.querySelectorAll('.m').forEach((el, i) => { el.textContent = msgs[i].text; el.insertAdjacentHTML('beforeend', `<small>${new Date(msgs[i].at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</small>`); });
+      d.querySelectorAll('.wn').forEach((el, i) => { el.textContent = work.filter(w => w.note)[i].note; });
+      const done = () => { d.remove(); msgs.forEach(m => { const body = JSON.stringify({ kind: 'msgread', id: p.id, name: p.name, cls: p.cls, book: 'home', mid: m.id }); try { if (!(navigator.sendBeacon && navigator.sendBeacon(URL0, new Blob([body], { type: 'text/plain' })))) fetch(URL0, { method: 'POST', mode: 'no-cors', body }); } catch (e) { } }); };
+      d.querySelector('button').addEventListener('click', done); d.querySelectorAll('a').forEach(a => a.addEventListener('click', done));
+      document.body.append(d);
+    };
+    show();
   }
   let gateT = 0;
   function gate() {
@@ -9989,7 +10022,7 @@ try {
         let quiz = {}; try { quiz = (JSON.parse(localStorage.getItem('notes-chquiz:' + BK.id) || '{}').best) || {}; } catch (e) { }
         let tr = 0; try { tr = Object.keys((typeof TR !== 'undefined' && TR && TR.earned) || {}).length; } catch (e) { }
         const q = {}; Object.keys(quiz).forEach(k => { const b = quiz[k]; if (b && b.m) q[k] = [b.s, b.m, b.date || '']; });
-        o = { cov, seen, total: ids.length, tr, quiz: q, done: ids.filter(i => state.done[i]), seenIds: ids.filter(i => (state.seen[i] || state.done[i]) && !state.done[i]), laterIds: ids.filter(i => state.later && state.later[i] && !state.done[i]), pq: (() => { const o = {}; ids.forEach(i => { const r = state.pq && state.pq[i]; if (r && r.m) o[i] = [r.s, r.m, r.bs != null ? r.bs : r.s, r.n || 1, r.a || '']; }); return o; })() };
+        o = { cov, seen, total: ids.length, tr, quiz: q, done: ids.filter(i => state.done[i]), seenIds: ids.filter(i => (state.seen[i] || state.done[i]) && !state.done[i]), laterIds: ids.filter(i => state.later && state.later[i] && !state.done[i]), pq: (() => { const o = {}; ids.forEach(i => { const r = state.pq && state.pq[i]; if (r && r.m) o[i] = [r.s, r.m, r.bs != null ? r.bs : r.s, r.n || 1, r.a || '', r.c || '']; }); return o; })() };
       } catch (e) { return; }
       const sig = JSON.stringify(o) + p.id + p.name + p.cls; if (sig === lastSnap) return;
       const body = JSON.stringify(Object.assign({ kind: 'snap', id: p.id, name: p.name, cls: p.cls, book: BK.id }, o));
@@ -10459,7 +10492,7 @@ try {
       attempt[k] = b.classList.contains('wrong') ? 0 : 1; picks[k] = 'ABCD'[+b.dataset.o] || '?';
       const all = [...document.querySelectorAll('#cyk fieldset[data-q]')]; if (Object.keys(attempt).length < all.length) return;
       const s = Object.values(attempt).reduce((a, v) => a + v, 0), m = all.length, old = pqOf(P.p.id);
-      state.pq = state.pq || {}; state.pq[P.p.id] = { s, m, at: Date.now(), bs: Math.max(s, old ? (old.bs != null ? old.bs : old.s) : 0), n: (old && old.n || 0) + 1, a: all.map(f => picks[f.dataset.q] || '-').join('') }; save();
+      state.pq = state.pq || {}; state.pq[P.p.id] = { s, m, at: Date.now(), bs: Math.max(s, old ? (old.bs != null ? old.bs : old.s) : 0), n: (old && old.n || 0) + 1, a: all.map(f => picks[f.dataset.q] || '-').join(''), c: all.map(f => f.dataset.q in attempt ? String(attempt[f.dataset.q]) : '-').join('') }; save();
       attempt = {}; picks = {};
       const card = document.getElementById('cyk'); if (card) { const r = card.querySelector('.pq-res'); if (r) r.remove(); card.querySelector('.cyk-b').insertAdjacentHTML('afterbegin', `<p class="pq-res ${s / m >= .7 ? 'hi' : s / m >= .4 ? 'mid' : 'lo'}"><b>Page quiz: ${s}/${m}</b> right first time${state.pq[P.p.id].bs > s ? ` · best ${state.pq[P.p.id].bs}/${m}` : ''}. Saved to your progress.</p>`); }
       paintTile(); repaintSteps();

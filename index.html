@@ -1936,6 +1936,45 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 .ia-i svg{width:20px;height:20px}
 .ia-n{font-weight:700;font-size:15px}
 .ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
+.ios-add .ia-ok{display:flex;width:100%;justify-content:center;align-items:center;min-height:46px;border:0;border-radius:12px;background:var(--accent,#1F5FBF);color:var(--accent-ink,#fff);font:700 15px/1 var(--sans);cursor:pointer}
+.ios-add .ia-ok:focus-visible{outline:3px solid var(--accent,#1F5FBF);outline-offset:3px}
+
+/* iPhone/iPad "Add to Home Screen" dialog */
+.ios-add{border:0;padding:24px 22px 20px;border-radius:20px;width:min(420px,calc(100vw - 32px));box-sizing:border-box;background:var(--paper);color:var(--ink);font-family:var(--sans);box-shadow:0 30px 70px -20px rgba(0,0,0,.5)}
+.ios-add::backdrop{background:rgba(10,16,30,.55)}
+.ios-add h2{margin:0 0 14px;font-size:19px;line-height:1.25}
+.ios-add ol{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.ios-add li{display:flex;gap:12px;align-items:flex-start;font-size:15px;line-height:1.45}
+.ia-i{flex:none;display:inline-grid;place-items:center;width:34px;height:34px;border-radius:10px;background:var(--accent-soft,#E4ECFA);color:var(--accent,#1F5FBF)}
+.ia-i svg{width:20px;height:20px}
+.ia-n{font-weight:700;font-size:15px}
+.ia-s{margin:14px 0 16px;font-size:13px;color:var(--ink-3)}
 .ios-add .btn{width:100%;justify-content:center}
 /* ================= WELCOME: BEGIN (splash + welcome screen + "← Home"; source notes/app/front_welcome.css) ================= */
 /* splash: full screen, hero navy, once per browser session and on app launch; never blocks the page underneath */
@@ -2155,6 +2194,116 @@ html:not(.wl-on) #welcome{display:none}
 .wl-who .mrb-ch{font:inherit;font-weight:700;color:var(--accent,#1F5FBF);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
 .mrb-whoslot .mrb-ch{font:inherit;font-weight:700;color:var(--accent,#1F5FBF);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
 /* ================= WELCOME: END ================= */
+
+/* SET UP (first visit) and NEXT UP */
+html.su-on,html.su-on body{overflow:hidden}
+#mrb-setup{position:fixed;inset:0;z-index:2147481000;background:color-mix(in srgb,var(--bg,#E6EAF0) 92%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:max(24px,env(safe-area-inset-top)) 16px 32px;box-sizing:border-box}
+.su-box{width:min(560px,100%);background:var(--paper);border-radius:22px;box-shadow:0 24px 60px rgba(10,16,30,.18);outline:1px solid var(--card-line,var(--line));padding:26px 22px 22px;box-sizing:border-box;margin:auto 0}
+.su-box h2{margin:10px 0 6px;font-size:clamp(22px,5.4vw,28px);line-height:1.15}
+.su-box > p{margin:0 0 16px;color:var(--ink-2);font-size:15.5px}
+.su-dots{display:flex;gap:6px}.su-dots i{width:26px;height:6px;border-radius:6px;background:var(--line-2,#e3e7ee)}.su-dots i.on{background:var(--accent)}.su-dots i.was{background:color-mix(in srgb,var(--accent) 45%,var(--line-2,#e3e7ee))}
+.su-cs{display:flex;flex-direction:column;gap:10px}
+.su-c{display:flex;align-items:center;gap:14px;width:100%;text-align:left;font:inherit;color:inherit;background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:14px;cursor:pointer}
+.su-c:hover,.su-c.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 5%,var(--paper))}
+.su-c > span:nth-child(2){flex:1;min-width:0;display:flex;flex-direction:column}.su-c b{font-size:20px}.su-c small{color:var(--ink-3);font-size:13.5px}
+.su-ci{flex:none;width:48px;height:48px;border-radius:13px;display:grid;place-items:center;color:#fff;background:#1F5FBF}.su-ci.gce{background:#6E47C2}.su-ci svg{width:26px;height:26px}
+.su-ar{flex:none;font-size:20px;color:var(--accent)}
+.su-us{display:flex;flex-direction:column;gap:10px}
+.su-u{display:flex;align-items:flex-start;gap:12px;border:1.5px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;background:var(--paper)}
+.su-u.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,var(--paper))}
+.su-u input{position:absolute;opacity:0;pointer-events:none}
+.su-u:focus-within{outline:3px solid color-mix(in srgb,var(--accent) 40%,transparent);outline-offset:2px}
+.su-tk{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;margin-top:1px}
+.su-u.on .su-tk{background:var(--accent);border-color:var(--accent)}.su-u.on .su-tk::after{content:"✓";color:#fff;font-weight:800;font-size:15px}
+.su-u > span:last-child{display:flex;flex-direction:column;gap:1px;min-width:0}.su-u b{font-size:17px}.su-u small{color:var(--ink-3);font-size:13px}
+.su-acts{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px}
+.su-go{font:inherit;font-weight:800;font-size:16px;border:0;border-radius:12px;padding:13px 26px;background:var(--accent);color:#fff;cursor:pointer}.su-go:disabled{opacity:.45;cursor:default}
+.su-back,.su-x{font:inherit;font-weight:700;font-size:14.5px;border:0;background:none;color:var(--accent);cursor:pointer;padding:8px 4px}
+.su-x{display:block;margin:14px auto 0}
+.su-how{list-style:none;counter-reset:su;margin:6px 0 18px;padding:0;display:flex;flex-direction:column;gap:12px}
+.su-how li{counter-increment:su;display:grid;grid-template-columns:34px 1fr;column-gap:12px;align-items:start}
+.su-how li::before{content:counter(su);grid-row:span 2;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;background:var(--accent)}
+.su-how b{font-size:16px}.su-how span{color:var(--ink-2);font-size:14.5px}
+.su-start{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:#fff;background:#18744A;border-radius:16px;padding:16px 18px;box-shadow:0 10px 24px rgba(24,116,74,.25)}
+.su-start small{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;opacity:.85}.su-start b{font-size:18px}
+.nextup{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;background:var(--paper);border-radius:20px;padding:14px 16px;margin:0 0 14px;box-shadow:var(--card-shadow);outline:1px solid var(--card-line,var(--line));border-left:6px solid var(--wcd,var(--accent))}
+.nextup .tp-ring{flex:none;width:46px;height:46px}
+.nu-t{flex:1;min-width:0;display:flex;flex-direction:column}.nu-t small{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--wcd,var(--accent))}.nu-t b{font-size:17px;line-height:1.25}.nu-t span{font-size:13px;color:var(--ink-3)}
+.nu-go{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-size:20px;font-weight:800}
+html.mc-set #hero,html.mc-set .seg{display:none}
+.chip.chip-chg{margin-left:auto;color:var(--accent)!important;font-weight:700}
+/* My progress, tidied */
+.mp-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;margin:10px 0 4px;font-size:14px;font-weight:700;color:var(--ink-2)}
+.mp-chg{font:inherit;font-size:13.5px;font-weight:700;border:0;background:none;color:var(--accent);cursor:pointer;padding:4px 0;text-decoration:underline}
+.mp-ut{font-size:15px;font-weight:800;color:var(--ink);text-decoration:none}.mp-ut:hover{text-decoration:underline}
+.mp-go2{flex:none}
+ol.mp-t{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.mp-t li{display:flex;align-items:center;gap:8px;min-width:0}
+.mp-t li > a{flex:1;min-width:0}
+.mp-t li.full .mp-c{color:#18744A;font-weight:700}
+.mp-q{flex:none;white-space:nowrap;font-size:11.5px;font-weight:800;text-decoration:none;border-radius:999px;padding:3px 9px;color:#fff;background:#18744A}
+.mp-q.mid{background:#B7791F}.mp-q.lo{background:#B42318}.mp-q.go{background:var(--accent)}
+details.mp-bk{display:block}
+details.mp-bk > summary{cursor:pointer;font-weight:700;color:var(--ink-2);font-size:13.5px;list-style:none}
+details.mp-bk > summary::-webkit-details-marker{display:none}
+details.mp-bk > summary::before{content:"▸ ";color:var(--ink-3)}details.mp-bk[open] > summary::before{content:"▾ "}
+details.mp-bk > span{display:block;margin-top:6px}
+@media (max-width:520px){ .su-box{padding:22px 16px 18px;border-radius:18px} .nextup{padding:12px;gap:10px} .nu-t b{font-size:16px} ol.mp-t{grid-template-columns:1fr} .mp-bar{width:44px} }
+
+/* SET UP (first visit) and NEXT UP */
+html.su-on,html.su-on body{overflow:hidden}
+#mrb-setup{position:fixed;inset:0;z-index:2147481000;background:color-mix(in srgb,var(--bg,#E6EAF0) 92%,transparent);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:max(24px,env(safe-area-inset-top)) 16px 32px;box-sizing:border-box}
+.su-box{width:min(560px,100%);background:var(--paper);border-radius:22px;box-shadow:0 24px 60px rgba(10,16,30,.18);outline:1px solid var(--card-line,var(--line));padding:26px 22px 22px;box-sizing:border-box;margin:auto 0}
+.su-box h2{margin:10px 0 6px;font-size:clamp(22px,5.4vw,28px);line-height:1.15}
+.su-box > p{margin:0 0 16px;color:var(--ink-2);font-size:15.5px}
+.su-dots{display:flex;gap:6px}.su-dots i{width:26px;height:6px;border-radius:6px;background:var(--line-2,#e3e7ee)}.su-dots i.on{background:var(--accent)}.su-dots i.was{background:color-mix(in srgb,var(--accent) 45%,var(--line-2,#e3e7ee))}
+.su-cs{display:flex;flex-direction:column;gap:10px}
+.su-c{display:flex;align-items:center;gap:14px;width:100%;text-align:left;font:inherit;color:inherit;background:var(--paper);border:1.5px solid var(--line);border-radius:16px;padding:14px;cursor:pointer}
+.su-c:hover,.su-c.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 5%,var(--paper))}
+.su-c > span:nth-child(2){flex:1;min-width:0;display:flex;flex-direction:column}.su-c b{font-size:20px}.su-c small{color:var(--ink-3);font-size:13.5px}
+.su-ci{flex:none;width:48px;height:48px;border-radius:13px;display:grid;place-items:center;color:#fff;background:#1F5FBF}.su-ci.gce{background:#6E47C2}.su-ci svg{width:26px;height:26px}
+.su-ar{flex:none;font-size:20px;color:var(--accent)}
+.su-us{display:flex;flex-direction:column;gap:10px}
+.su-u{display:flex;align-items:flex-start;gap:12px;border:1.5px solid var(--line);border-radius:16px;padding:14px;cursor:pointer;background:var(--paper)}
+.su-u.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 6%,var(--paper))}
+.su-u input{position:absolute;opacity:0;pointer-events:none}
+.su-u:focus-within{outline:3px solid color-mix(in srgb,var(--accent) 40%,transparent);outline-offset:2px}
+.su-tk{flex:none;width:26px;height:26px;border-radius:8px;border:2px solid var(--line);display:grid;place-items:center;margin-top:1px}
+.su-u.on .su-tk{background:var(--accent);border-color:var(--accent)}.su-u.on .su-tk::after{content:"✓";color:#fff;font-weight:800;font-size:15px}
+.su-u > span:last-child{display:flex;flex-direction:column;gap:1px;min-width:0}.su-u b{font-size:17px}.su-u small{color:var(--ink-3);font-size:13px}
+.su-acts{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:18px}
+.su-go{font:inherit;font-weight:800;font-size:16px;border:0;border-radius:12px;padding:13px 26px;background:var(--accent);color:#fff;cursor:pointer}.su-go:disabled{opacity:.45;cursor:default}
+.su-back,.su-x{font:inherit;font-weight:700;font-size:14.5px;border:0;background:none;color:var(--accent);cursor:pointer;padding:8px 4px}
+.su-x{display:block;margin:14px auto 0}
+.su-how{list-style:none;counter-reset:su;margin:6px 0 18px;padding:0;display:flex;flex-direction:column;gap:12px}
+.su-how li{counter-increment:su;display:grid;grid-template-columns:34px 1fr;column-gap:12px;align-items:start}
+.su-how li::before{content:counter(su);grid-row:span 2;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:800;color:#fff;background:var(--accent)}
+.su-how b{font-size:16px}.su-how span{color:var(--ink-2);font-size:14.5px}
+.su-start{display:flex;flex-direction:column;gap:2px;text-decoration:none;color:#fff;background:#18744A;border-radius:16px;padding:16px 18px;box-shadow:0 10px 24px rgba(24,116,74,.25)}
+.su-start small{font-size:12.5px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;opacity:.85}.su-start b{font-size:18px}
+.nextup{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit;background:var(--paper);border-radius:20px;padding:14px 16px;margin:0 0 14px;box-shadow:var(--card-shadow);outline:1px solid var(--card-line,var(--line));border-left:6px solid var(--wcd,var(--accent))}
+.nextup .tp-ring{flex:none;width:46px;height:46px}
+.nu-t{flex:1;min-width:0;display:flex;flex-direction:column}.nu-t small{font-size:12px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--wcd,var(--accent))}.nu-t b{font-size:17px;line-height:1.25}.nu-t span{font-size:13px;color:var(--ink-3)}
+.nu-go{flex:none;width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-size:20px;font-weight:800}
+html.mc-set #hero,html.mc-set .seg{display:none}
+.chip.chip-chg{margin-left:auto;color:var(--accent)!important;font-weight:700}
+/* My progress, tidied */
+.mp-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px;margin:10px 0 4px;font-size:14px;font-weight:700;color:var(--ink-2)}
+.mp-chg{font:inherit;font-size:13.5px;font-weight:700;border:0;background:none;color:var(--accent);cursor:pointer;padding:4px 0;text-decoration:underline}
+.mp-ut{font-size:15px;font-weight:800;color:var(--ink);text-decoration:none}.mp-ut:hover{text-decoration:underline}
+.mp-go2{flex:none}
+ol.mp-t{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+.mp-t li{display:flex;align-items:center;gap:8px;min-width:0}
+.mp-t li > a{flex:1;min-width:0}
+.mp-t li.full .mp-c{color:#18744A;font-weight:700}
+.mp-q{flex:none;white-space:nowrap;font-size:11.5px;font-weight:800;text-decoration:none;border-radius:999px;padding:3px 9px;color:#fff;background:#18744A}
+.mp-q.mid{background:#B7791F}.mp-q.lo{background:#B42318}.mp-q.go{background:var(--accent)}
+details.mp-bk{display:block}
+details.mp-bk > summary{cursor:pointer;font-weight:700;color:var(--ink-2);font-size:13.5px;list-style:none}
+details.mp-bk > summary::-webkit-details-marker{display:none}
+details.mp-bk > summary::before{content:"▸ ";color:var(--ink-3)}details.mp-bk[open] > summary::before{content:"▾ "}
+details.mp-bk > span{display:block;margin-top:6px}
+@media (max-width:520px){ .su-box{padding:22px 16px 18px;border-radius:18px} .nextup{padding:12px;gap:10px} .nu-t b{font-size:16px} ol.mp-t{grid-template-columns:1fr} .mp-bar{width:44px} }
 /* ================= DESIGN: BEGIN (front page calm-down layer; source notes/app/front_design.css) =================
    Loaded last on the front page. Fewer shadows and borders, one radius scale (10 / 14 / 18), no decorative rainbow strips,
    the hero's circuit traces faded right back. Headings and buttons are the sans in sentence case; Lemon Milk is the wordmark only. */
@@ -2559,25 +2708,28 @@ function writeHash() {
   try { history.replaceState(null, '', '#' + [course, ...ex].join('&')); } catch (e) { }
 }
 const fchips = document.getElementById('fchips');
+/* SET UP: a pupil who has chosen their units sees only those (the tabs too); "Change units" goes back to the choice */
+function mineSet() { try { const sc = myScope(); return sc && sc.set && sc.course === course && sc.units.length ? new Set(sc.units) : null; } catch (e) { return null; } }
 function chipsFor() {
-  const us = UNITS.filter(u => u.course === course);
+  const mine = mineSet(), us = UNITS.filter(u => u.course === course && (!mine || mine.has(u.id)));
   [...F.units].forEach(u => { if (!us.some(x => x.id === u)) F.units.delete(u); });
-  fchips.innerHTML = `<button type="button" class="chip" data-u="" aria-pressed="${!F.units.size}">All</button>` + us.map(u => `<button type="button" class="chip" data-u="${esc(u.id)}" aria-pressed="${F.units.has(u.id)}">${esc(u.short)}</button>`).join('');
+  fchips.innerHTML = `<button type="button" class="chip" data-u="" aria-pressed="${!F.units.size}">All</button>` + us.map(u => `<button type="button" class="chip" data-u="${esc(u.id)}" aria-pressed="${F.units.has(u.id)}">${esc(u.short)}</button>`).join('') + (mine ? `<button type="button" class="chip chip-chg" data-setup="2">Change units</button>` : '');
+  if (mine && us.length === 1) fchips.querySelectorAll('.chip[data-u]').forEach(c => c.hidden = true);
 }
 fchips.addEventListener('click', e => {
-  const b = e.target.closest('.chip'); if (!b) return;
+  const b = e.target.closest('.chip'); if (!b || b.dataset.setup) return;
   const u = b.dataset.u;
   if (!u) F.units.clear(); else if (F.units.has(u)) F.units.delete(u); else F.units.add(u);
-  const all = UNITS.filter(x => x.course === course).every(x => F.units.has(x.id)); if (all) F.units.clear();
+  const mine = mineSet(), all = UNITS.filter(x => x.course === course && (!mine || mine.has(x.id))).every(x => F.units.has(x.id)); if (all) F.units.clear();
   fchips.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c.dataset.u ? F.units.has(c.dataset.u) : !F.units.size)));
   applyFilter(true); writeHash();
 });
 const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const PPT_OK = new Map();
 function applyFilter(anim) {
-  let shown = 0, total = 0;
+  let shown = 0, total = 0; const mine = mineSet();
   box.querySelectorAll('.unit').forEach(sec => {
-    const u = UNITS.find(x => x.id === sec.dataset.unit), unitOn = !F.units.size || F.units.has(u.id);
+    const u = UNITS.find(x => x.id === sec.dataset.unit), unitOn = (!mine || mine.has(u.id)) && (!F.units.size || F.units.has(u.id));
     let vis = 0;
     sec.querySelectorAll('.tp').forEach(li => {
       total++;
@@ -2712,22 +2864,20 @@ function progPanel() {
   const body = document.getElementById('mp-body'); if (!body) return;
   const sc = myScope();
   const again = () => { progPanel(); appRings(); if (typeof wlPaint === 'function') wlPaint(); };
-  if (!sc) {
-    body.innerHTML = `<p class="mp-sc">Your progress is shown for your own course only.</p><div class="mc-slot" id="mp-mc"></div>`;
-    mcPicker(document.getElementById('mp-mc'), again, { skip: 'Cancel' });
+  if (!sc || !sc.set) {   /* not set up yet: send them through choosing their units */
+    body.innerHTML = `<div class="mp-head"><span>Choose your course and units to see your progress here.</span><button type="button" class="btn pri" data-setup="1">Choose my units</button></div>`;
     return;
   }
-  const t = scopeCount(sc);
-  body.innerHTML = `<div class="mp-sc"><span>Showing <b>${esc(scopeTxt(sc))}</b>${sc.set ? '' : ' (the course you opened last)'}</span><button type="button" class="btn mp-mcb" aria-expanded="false">My course</button></div><div class="mc-slot" id="mp-mc" hidden></div>
-    <div class="mp-u mp-all"><div class="mp-uh">${ringSVG(t.d, t.n, 'mp-ring')}<div><b>${esc(CN[sc.course])}: your units</b><span>${t.d} of ${t.n} pages covered</span></div>${t.next ? `<a class="btn pri" href="${esc(t.next.u.file)}#${esc(t.next.pid)}">Next not-covered page</a>` : '<span class="mp-ok">All covered</span>'}</div></div>` + sc.units.map(id => {
+  /* one line saying what is shown, then one block per unit: ring, title, Continue; a list of topics with a bar and the topic quiz */
+  body.innerHTML = `<div class="mp-head"><span>${esc(CN[sc.course])} · ${esc(sc.units.map(id => (UNITS.find(u => u.id === id) || {}).short || id).join(', '))}</span><button type="button" class="mp-chg" data-setup="2">Change units</button></div>` + sc.units.map(id => {
       const u = UNITS.find(x => x.id === id); if (!u) return '';
       const st = unitState(u.id), all = trackedPids(u), d = all.filter(x => st.done[x]).length, nT = u.chapters.filter(c => isTracked(u.id, c.id)).length;
-      const next = all.find(x => !st.done[x]);
-      return `<div class="mp-u"><div class="mp-uh">${ringSVG(d, all.length, 'mp-ring')}<div><b>${esc(u.short)}: ${esc(u.title)}</b><span>${d} of ${all.length} pages ${u.mode === 'tutorial' ? 'done' : 'covered'}${nT < u.chapters.length ? ` · tracking ${nT} of ${u.chapters.length} sections` : ''}</span></div>${next ? `<a class="btn" href="${esc(u.file)}#${esc(next)}">Next in ${esc(u.short)}</a>` : (all.length ? '<span class="mp-ok">All covered</span>' : '')}<a class="btn" href="${esc(u.file)}#progress">Details</a></div>
-        <ul class="mp-t">${u.chapters.map(c => { const on = isTracked(u.id, c.id), n = (c.pids || []).length, dd = (c.pids || []).filter(x => st.done[x]).length, nx = (c.pids || []).find(x => !st.done[x]); return `<li class="${on ? '' : 'off'}"><a href="${esc(u.file)}#${esc(nx || c.page)}"><span class="mp-n">${esc(pad2(c.n))}</span><span class="mp-tt">${esc(c.title)}</span>${on ? `<span class="mp-bar"><i style="width:${n ? Math.round(dd / n * 100) : 0}%"></i></span><span class="mp-c">${dd}/${n}</span>` : '<span class="mp-nt">Not tracking</span>'}</a>${(() => { const b = cqBest(u.id)[c.id]; return b ? `<a class="mp-q" href="${esc(u.file)}#quiz-${esc(c.id)}" title="Chapter quiz: best ${b.pc}% on ${esc(b.date)}">Quiz ${b.pc}%</a>` : (u.mode !== 'tutorial' && n && dd === n ? `<a class="mp-q" href="${esc(u.file)}#quiz-${esc(c.id)}">Quiz</a>` : ''); })()}<button type="button" class="mp-tr" data-trk="${esc(u.id)}|${esc(c.id)}" aria-pressed="${on}" title="${on ? 'Tracking this section: tap to stop' : 'Track this section'}">${on ? '✓' : 'Track'}</button></li>`; }).join('')}</ul></div>`;
+      const next = all.find(x => !st.done[x]), best = cqBest(u.id);
+      return `<div class="mp-u"><div class="mp-uh">${ringSVG(d, all.length, 'mp-ring')}<div><a class="mp-ut" href="${esc(u.file)}#progress">${esc(u.short)}: ${esc(u.title)}</a><span>${d} of ${all.length} pages ${u.mode === 'tutorial' ? 'done' : 'covered'}${nT < u.chapters.length ? ` · ${nT} of ${u.chapters.length} sections` : ''}</span></div>${next ? `<a class="btn pri mp-go2" href="${esc(u.file)}#${esc(next)}">${d ? 'Continue' : 'Start'} <span aria-hidden="true">→</span></a>` : (all.length ? '<span class="mp-ok">All covered ✓</span>' : '')}</div>
+        <ol class="mp-t">${u.chapters.filter(c => isTracked(u.id, c.id)).map(c => { const n = (c.pids || []).length, dd = (c.pids || []).filter(x => st.done[x]).length, nx = (c.pids || []).find(x => !st.done[x]), b = best[c.id], full = n && dd === n;
+          const q = u.mode === 'tutorial' ? '' : b ? `<a class="mp-q ${b.pc >= 70 ? 'hi' : b.pc >= 40 ? 'mid' : 'lo'}" href="${esc(u.file)}#quiz-${esc(c.id)}" title="Topic quiz: best ${b.pc}% on ${esc(b.date)}">Quiz ${b.pc}%</a>` : full ? `<a class="mp-q go" href="${esc(u.file)}#quiz-${esc(c.id)}">Do the quiz</a>` : '';
+          return `<li class="${full ? 'full' : dd ? 'part' : ''}"><a href="${esc(u.file)}#${esc(nx || c.page)}"><span class="mp-n">${esc(pad2(c.n))}</span><span class="mp-tt">${esc(c.title)}</span><span class="mp-bar"><i style="width:${n ? Math.round(dd / n * 100) : 0}%"></i></span><span class="mp-c">${dd}/${n}</span></a>${q}</li>`; }).join('')}</ol></div>`;
     }).join('');
-  const b = body.querySelector('.mp-mcb'), slot = document.getElementById('mp-mc');
-  b.addEventListener('click', () => { if (!slot.hidden) { slot.hidden = true; slot.innerHTML = ''; b.setAttribute('aria-expanded', 'false'); return; } b.setAttribute('aria-expanded', 'true'); mcPicker(slot, again, { skip: 'Cancel' }); });
 }
 /* backup: every notes-* key */
 const pKeys = () => { const ks = []; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && /^notes-/.test(k)) ks.push(k); } } catch (e) { } return ks.sort(); };
@@ -2772,7 +2922,7 @@ function iosInstallModal() {
   const filt = document.querySelector('.filt');
   if (filt) filt.insertAdjacentHTML('beforebegin', `<details class="myprog" id="myprog"><summary><span class="mp-i" aria-hidden="true">✓</span><span><b>My progress</b><span id="mp-sum"></span></span><span class="mp-go">Show</span></summary>
     <div id="mp-body"></div>
-    <div class="mp-bk"><b>Back up or move your progress</b><span>It is saved in this browser only.</span><div><button type="button" class="btn pri" id="mp-dl">Download my progress</button><label class="btn mp-ld">Load progress from file<input type="file" id="mp-ld" accept="application/json,.json" hidden></label><button type="button" class="btn" id="mp-rs">Reset progress</button><span id="mp-msg" aria-live="polite"></span></div><div data-mrb-cloud hidden></div><p data-mrb-who hidden style="margin:10px 0 0;font-size:14px"></p></div></details>`);
+    <details class="mp-bk"><summary>Saving, backing up and signing out</summary><span>Your progress is kept in this browser, and saved online when you are signed in.</span><div><button type="button" class="btn pri" id="mp-dl">Download my progress</button><label class="btn mp-ld">Load progress from file<input type="file" id="mp-ld" accept="application/json,.json" hidden></label><button type="button" class="btn" id="mp-rs">Reset progress</button><span id="mp-msg" aria-live="polite"></span></div><div data-mrb-cloud hidden></div><p data-mrb-who hidden style="margin:10px 0 0;font-size:14px"></p></details></details>`);
   const mp = document.getElementById('myprog');
   if (mp) {
     mp.addEventListener('toggle', () => { if (mp.open) progPanel(); mp.querySelector('.mp-go').textContent = mp.open ? 'Hide' : 'Show'; const p = document.getElementById('mp-pill'); if (p) p.setAttribute('aria-expanded', String(mp.open)); });
@@ -2987,7 +3137,7 @@ function trStrip() {
   const seg = document.querySelector('.seg'); if (!seg) return;
   const fu = document.querySelector('#units .unit[data-unit]'), uu = fu && UNITS.find(u => u.id === fu.dataset.unit), on = seg.querySelector('[aria-pressed="true"]');
   const course = uu ? uu.course : on && on.dataset.course === 'gce' ? 'gce' : 'gcse', C = TR_COURSE[course];
-  const cab = trCabinet(course), units = cab.scope.concat(C.cw).map(id => UNITS.find(u => u.id === id)).filter(Boolean);
+  const cab = trCabinet(course), sc0 = (typeof myScope === 'function' && myScope()) || null, units = cab.scope.concat(C.cw).filter(id => !(sc0 && sc0.set && sc0.course === course) || sc0.units.includes(id)).map(id => UNITS.find(u => u.id === id)).filter(Boolean);
   const nx = trNext(course), go = (nx && UNITS.find(u => u.id === nx.id)) || units[0];
   const tiers = ['platinum', 'gold', 'silver', 'bronze'].filter(k => cab.tiers[k]);
   const old = document.getElementById('tr-strip'); if (old) old.remove();
@@ -3172,7 +3322,35 @@ try {
     if (j.ok && j.pin === false) { LS.set('mrb-pin-ok', null); try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } unGate(); ask(); return; }   /* no PIN on record (never set, or Mr Butler reset it): sign in again and choose one */
     const st = j.ok && typeof j.status === 'string' ? j.status : '';
     if (/^(pending|declined)$/.test(st)) { LS.set('mrb-access', st); gate(); }
-    else { LS.set('mrb-access', 'ok'); unGate(); }   /* approved (or an Apps Script without approvals) */
+    else { LS.set('mrb-access', 'ok'); unGate(); myWork(); }   /* approved (or an Apps Script without approvals) */
+  }
+  /* SET WORK and MESSAGES from Mr Butler: messages show once (then marked read); set work shows once a visit, and is kept
+     ('mrb-mywork') for My progress and the workbook's cover */
+  async function myWork() {
+    const p = me(); if (!p || !URL0 || LS.get('notes-nocount') || window.__mrbWork) return; window.__mrbWork = 1;
+    let j; try { j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=mywork&id=' + encodeURIComponent(p.id) + '&cls=' + encodeURIComponent(p.cls || ''), { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); } catch (e) { return; }
+    if (!j || !j.ok) return;
+    LS.set('mrb-mywork', JSON.stringify(j.work || []));
+    const msgs = j.msgs || [], work = (j.work || []).filter(w => !w.due || w.due >= new Date(Date.now() - 864e5).toISOString().slice(0, 10));
+    let seenWork = false; try { seenWork = sessionStorage.getItem('mrb-work-shown') === '1'; } catch (e) { }
+    if (!msgs.length && (seenWork || !work.length)) return;
+    try { sessionStorage.setItem('mrb-work-shown', '1'); } catch (e) { }
+    const UN = { U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+    const base = /\/notes\/[^/]*$/.test(location.pathname) ? '' : 'notes/';
+    const due = d => { if (!d) return ''; const x = new Date(d + 'T12:00:00'); return isNaN(x) ? d : x.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }); };
+    const show = () => {
+      if (document.getElementById('mrb-who') || document.getElementById('mrb-gate') || document.getElementById('mrb-fin')) { setTimeout(show, 1500); return; }
+      const d = document.createElement('div'); d.id = 'mrb-msg';
+      d.innerHTML = `<style>#mrb-msg{position:fixed;inset:0;z-index:2147482900;display:grid;place-items:center;background:rgba(10,16,30,.55);padding:16px}#mrb-msg .b{background:#fff;color:#16213A;border-radius:16px;max-width:420px;width:100%;max-height:85vh;overflow:auto;padding:20px;font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.35)}#mrb-msg h2{margin:0 0 10px;font-size:19px}#mrb-msg .m{background:#EEF3FB;border-left:4px solid #1F5FBF;border-radius:10px;padding:10px 12px;margin:0 0 10px;white-space:pre-wrap}#mrb-msg .m small{display:block;color:#5A6478;font-size:12px;margin-top:4px}#mrb-msg ul{list-style:none;margin:0 0 12px;padding:0}#mrb-msg li{border:1px solid #DCE2EA;border-radius:10px;padding:9px 12px;margin:0 0 8px}#mrb-msg li a{font-weight:800;color:#1F5FBF;text-decoration:none}#mrb-msg li small{display:block;color:#5A6478;font-size:12.5px}#mrb-msg button{width:100%;font:inherit;font-weight:800;border:0;border-radius:12px;padding:12px;background:#1F5FBF;color:#fff;cursor:pointer}@media (prefers-color-scheme:dark){#mrb-msg .b{background:#1B2233;color:#E8ECF4}#mrb-msg .m{background:#22304A}#mrb-msg li{border-color:#3A4458}}</style>
+        <div class="b" role="dialog" aria-modal="true" aria-labelledby="mm-h">${msgs.length ? `<h2 id="mm-h">${msgs.length === 1 ? 'A message from Mr Butler' : 'Messages from Mr Butler'}</h2>${msgs.map(m => `<div class="m"></div>`).join('')}` : ''}
+        ${work.length ? `<h2${msgs.length ? '' : ' id="mm-h"'}>Work set for you</h2><ul>${work.map(w => `<li><a href="${base}${w.book}.html#${w.ch}-p01">${UN[w.book] || w.book} · Topic ${+w.ch.slice(1)}</a>${w.due ? `<small>Due ${due(w.due)}</small>` : ''}${w.note ? `<small class="wn"></small>` : ''}</li>`).join('')}</ul>` : ''}<button type="button">OK</button></div>`;
+      d.querySelectorAll('.m').forEach((el, i) => { el.textContent = msgs[i].text; el.insertAdjacentHTML('beforeend', `<small>${new Date(msgs[i].at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</small>`); });
+      d.querySelectorAll('.wn').forEach((el, i) => { el.textContent = work.filter(w => w.note)[i].note; });
+      const done = () => { d.remove(); msgs.forEach(m => { const body = JSON.stringify({ kind: 'msgread', id: p.id, name: p.name, cls: p.cls, book: 'home', mid: m.id }); try { if (!(navigator.sendBeacon && navigator.sendBeacon(URL0, new Blob([body], { type: 'text/plain' })))) fetch(URL0, { method: 'POST', mode: 'no-cors', body }); } catch (e) { } }); };
+      d.querySelector('button').addEventListener('click', done); d.querySelectorAll('a').forEach(a => a.addEventListener('click', done));
+      document.body.append(d);
+    };
+    show();
   }
   let gateT = 0;
   function gate() {
@@ -3321,7 +3499,7 @@ try {
         let quiz = {}; try { quiz = (JSON.parse(localStorage.getItem('notes-chquiz:' + BK.id) || '{}').best) || {}; } catch (e) { }
         let tr = 0; try { tr = Object.keys((typeof TR !== 'undefined' && TR && TR.earned) || {}).length; } catch (e) { }
         const q = {}; Object.keys(quiz).forEach(k => { const b = quiz[k]; if (b && b.m) q[k] = [b.s, b.m, b.date || '']; });
-        o = { cov, seen, total: ids.length, tr, quiz: q, done: ids.filter(i => state.done[i]), seenIds: ids.filter(i => (state.seen[i] || state.done[i]) && !state.done[i]), laterIds: ids.filter(i => state.later && state.later[i] && !state.done[i]), pq: (() => { const o = {}; ids.forEach(i => { const r = state.pq && state.pq[i]; if (r && r.m) o[i] = [r.s, r.m, r.bs != null ? r.bs : r.s, r.n || 1, r.a || '']; }); return o; })() };
+        o = { cov, seen, total: ids.length, tr, quiz: q, done: ids.filter(i => state.done[i]), seenIds: ids.filter(i => (state.seen[i] || state.done[i]) && !state.done[i]), laterIds: ids.filter(i => state.later && state.later[i] && !state.done[i]), pq: (() => { const o = {}; ids.forEach(i => { const r = state.pq && state.pq[i]; if (r && r.m) o[i] = [r.s, r.m, r.bs != null ? r.bs : r.s, r.n || 1, r.a || '', r.c || '']; }); return o; })() };
       } catch (e) { return; }
       const sig = JSON.stringify(o) + p.id + p.name + p.cls; if (sig === lastSnap) return;
       const body = JSON.stringify(Object.assign({ kind: 'snap', id: p.id, name: p.name, cls: p.cls, book: BK.id }, o));
@@ -3610,10 +3788,8 @@ function route() {
   const p0 = decodeURIComponent(h).split('&')[0].toLowerCase(), c = parseHash(), sc = myScope();
   const cs = p0 === 'gce' || p0 === 'gcse' ? c : ((sc && sc.course) || c);
   /* the topic list opens on My course with the enrolled units preset (a plain #gcse / #gce); "All" still shows everything */
-  let preset = false;
-  if ((p0 === 'gce' || p0 === 'gcse') && h.toLowerCase() === p0 && sc && sc.set && sc.course === cs && sc.units.length < unitsOf(cs).length) { F.units = new Set(sc.units); preset = true; }
-  show(cs, true);
-  if (preset) writeHash();
+  show(cs, true);   /* SET UP: units the pupil did not choose are left out of the list (chipsFor / applyFilter) */
+  nextUp();
   if (/(^|&)progress(&|$)/.test(h)) { const mp = document.getElementById('myprog'); if (mp) { mp.open = true; progPanel(); setTimeout(() => mp.scrollIntoView({ block: 'start', behavior: 'auto' }), 0); } }
   else if (was === 'wl') window.scrollTo(0, 0);
 }
@@ -3644,7 +3820,172 @@ function route() {
   if (wrap) wrap.dataset.welcome = '1';
   if (!WEB) { const v = document.querySelector('.wl-ver'); if (v) v.remove(); }   /* updates: web host only */
 })();
+/* ---------- SET UP (first visit): a pupil is taken through 1. their course, 2. the units they want, 3. how revising works,
+   then straight to their first page. Saved in 'notes-mycourse' (the same as "My course"); [data-setup] buttons reopen it. ---------- */
+const suPupil = () => { try { return !(localStorage.getItem('mrb-staff-ok') && localStorage.getItem('notes-nocount') && !localStorage.getItem('mrb-pupilmode')); } catch (e) { return true; } };
+const suFirst = () => { try { return JSON.parse(localStorage.getItem('mrb-pupil') || 'null'); } catch (e) { return null; } };
+function setupFlow(step) {
+  const old = document.getElementById('mrb-setup'); if (old) old.remove();
+  const cur = mcGet(); let course = cur ? cur.course : (step === 2 ? lastCourse() : null), picked = new Set(cur && cur.units ? cur.units : []);
+  if (step === 2 && !course) step = 1;
+  const d = document.createElement('div'); d.id = 'mrb-setup'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'su-h');
+  document.body.append(d); document.documentElement.classList.add('su-on');
+  const close = () => { d.remove(); document.documentElement.classList.remove('su-on'); };
+  const first = (suFirst() || {}).name ? String(suFirst().name).split(' ')[0] : '';
+  const dots = n => `<div class="su-dots" aria-label="Step ${n} of 3">${[1, 2, 3].map(i => `<i class="${i === n ? 'on' : i < n ? 'was' : ''}"></i>`).join('')}</div>`;
+  const pages = u => u.chapters.reduce((s, c) => s + (c.pids || []).length, 0);
+  const save = () => {
+    const o = mcRaw(); o.course = course; o.units = unitsOf(course).map(u => u.id).filter(id => picked.has(id)); mcSave(o);
+    try { const f = JSON.parse(localStorage.getItem('notes-front')) || {}; f.course = course; f.asked = 1; f.setup = 1; localStorage.setItem('notes-front', JSON.stringify(f)); } catch (e) { }
+  };
+  const paint = n => {
+    if (n === 1) {
+      d.innerHTML = `<div class="su-box">${dots(1)}<h2 id="su-h">${first ? `Hi ${esc(first)}! ` : ''}Let’s set up your revision</h2><p>Which course are you studying?</p>
+        <div class="su-cs">${['gcse', 'gce'].map(c => `<button type="button" class="su-c${course === c ? ' on' : ''}" data-c="${c}"><span class="su-ci ${c}">${WL_I[c] || ''}</span><span><b>${CN[c]}</b><small>${esc(unitsOf(c).map(u => u.short).join(' · '))}</small></span><span class="su-ar" aria-hidden="true">→</span></button>`).join('')}</div>
+        ${cur ? '<button type="button" class="su-x">Cancel</button>' : ''}</div>`;
+      d.querySelectorAll('.su-c').forEach(b => b.addEventListener('click', () => { if (course !== b.dataset.c) picked = new Set(); course = b.dataset.c; paint(2); }));
+    } else if (n === 2) {
+      const us = unitsOf(course);
+      d.innerHTML = `<div class="su-box">${dots(2)}<h2 id="su-h">Which units do you want to revise?</h2><p>Tick one or more. You will only see these, and you can change them at any time.</p>
+        <div class="su-us">${us.map(u => `<label class="su-u${picked.has(u.id) ? ' on' : ''}"><input type="checkbox" value="${esc(u.id)}"${picked.has(u.id) ? ' checked' : ''}><span class="su-tk" aria-hidden="true"></span><span><b>${esc(u.short)}</b><span>${esc(u.title)}</span><small>${u.chapters.length} ${u.mode === 'tutorial' ? 'sections' : 'topics'} · ${pages(u)} pages</small></span></label>`).join('')}</div>
+        <div class="su-acts"><button type="button" class="su-back">← ${esc(CN[course])}</button><button type="button" class="su-go"${picked.size ? '' : ' disabled'}>Continue</button></div></div>`;
+      d.querySelectorAll('.su-u input').forEach(x => x.addEventListener('change', () => { if (x.checked) picked.add(x.value); else picked.delete(x.value); x.closest('.su-u').classList.toggle('on', x.checked); d.querySelector('.su-go').disabled = !picked.size; }));
+      d.querySelector('.su-back').addEventListener('click', () => paint(1));
+      d.querySelector('.su-go').addEventListener('click', () => { save(); if (cur && step === 2) { close(); suDone(); } else paint(3); });
+    } else {
+      const sc = myScope(), t = scopeCount(sc), u = t.next && t.next.u, c = u && u.chapters.find(x => (x.pids || []).includes(t.next.pid));
+      d.innerHTML = `<div class="su-box">${dots(3)}<h2 id="su-h">How it works</h2>
+        <ol class="su-how"><li><b>Open a topic</b><span>Read each page. Spend at least a minute on it.</span></li><li><b>Tick the page off</b><span>Then try its quick page quiz.</span></li><li><b>Finish the topic</b><span>When every page is done, the topic quiz and past-paper questions open.</span></li><li><b>Keep going</b><span>The home page always shows where to pick up.</span></li></ol>
+        ${u ? `<a class="su-start" href="${esc(u.file)}#${esc(t.next.pid)}"><small>Start here</small><b>${esc(u.short)} · ${u.mode === 'tutorial' ? 'Section' : 'Topic'} ${esc(c ? c.n : '')}: ${esc(c ? c.title : '')}</b></a>` : ''}
+        <button type="button" class="su-x su-see">See all my topics</button></div>`;
+      const st = d.querySelector('.su-start'); if (st) st.addEventListener('click', () => { document.documentElement.classList.remove('su-on'); });
+      d.querySelector('.su-see').addEventListener('click', () => { close(); suDone(); });
+    }
+    const x = d.querySelector('.su-x:not(.su-see)'); if (x) x.addEventListener('click', close);
+    const f = d.querySelector('.su-c, .su-u input, .su-start, button'); if (f) setTimeout(() => f.focus(), 30);
+  };
+  paint(step || 1);
+}
+function suDone() {
+  const sc = myScope(); if (!sc) return;
+  F.units.clear();
+  if ((location.hash || '').slice(1).split('&')[0].toLowerCase() === sc.course) { show(sc.course, true); nextUp(); writeHash(); }
+  else location.hash = sc.course;
+  if (typeof progPanel === 'function' && document.getElementById('myprog') && document.getElementById('myprog').open) progPanel();
+  if (typeof wlPaint === 'function') wlPaint();
+}
+document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('[data-setup]'); if (!b) return; e.preventDefault(); setupFlow(+b.dataset.setup || 1); });
+/* NEXT UP: one clear card at the top of the topic list: where to carry on (or start) in the pupil's own units */
+function nextUp() {
+  const old = document.getElementById('nextup'); if (old) old.remove();
+  const sc = myScope(), seg = document.querySelector('.seg'); document.documentElement.classList.toggle('mc-set', !!(sc && sc.set && suPupil()));
+  if (!sc || !sc.set || sc.course !== course || !seg) return;
+  const L = wlLast(), t = scopeCount(sc);
+  let u, pid, label, title;
+  if (L && L.u.course === sc.course) { u = L.u; pid = L.page; label = 'Continue'; title = L.title || L.c.title; }
+  else if (t.next) { u = t.next.u; pid = t.next.pid; label = t.d ? 'Next page' : 'Start here'; const c = u.chapters.find(x => (x.pids || []).includes(pid)); title = c ? c.title : ''; }
+  if (!u) return;
+  const c = u.chapters.find(x => (x.pids || []).includes(pid)), hn = c ? (u.chapters.indexOf(c) % 10 + 1) : 1;
+  seg.insertAdjacentHTML('beforebegin', `<a class="nextup" id="nextup" href="${esc(u.file)}#${esc(pid)}" style="--wcd:var(--h${hn}d)">${ringSVG(t.d, t.n, 'tp-ring')}<span class="nu-t"><small>${label}</small><b>${esc(title)}</b><span>${esc(u.short)}${c ? ` · ${u.mode === 'tutorial' ? 'Section' : 'Topic'} ${esc(c.n)}${title !== c.title ? ': ' + esc(c.title) : ''}` : ''}</span></span><span class="nu-go" aria-hidden="true">→</span></a>`);
+}
+(function () {
+  const go = () => {   /* wait for the sign-in, PIN and approval screens, then ask once */
+    if (!suPupil() || mcGet()) return;
+    if (document.querySelector('#mrb-who, #mrb-gate, #mrb-msg, #mrb-fin')) { setTimeout(go, 600); return; }
+    if (!suFirst()) return;
+    try { if (localStorage.getItem('mrb-access') && localStorage.getItem('mrb-access') !== 'ok') { setTimeout(go, 1500); return; } } catch (e) { }
+    setupFlow(1);
+  };
+  setTimeout(go, 700);
+})();
 /* ================= WELCOME: END ================= */
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
+
+/* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
+function wlShare() {
+  const url = location.origin + location.pathname.replace(/index\.html$/, '');
+  const old = document.getElementById('wl-share'); if (old) old.remove();
+  const d = document.createElement('dialog'); d.id = 'wl-share'; d.className = 'wl-share'; d.setAttribute('aria-labelledby', 'wl-share-t');
+  d.innerHTML = `<button type="button" class="ws-x" aria-label="Close">✕</button><h2 id="wl-share-t">Share the app</h2>
+    <p>Scan the QR code or open the link to jump straight in: no login, nothing to install.</p>
+    <div class="ws-qr" role="img" aria-label="QR code for ${esc(url)}"><span class="ws-load">Making the QR code…</span></div>
+    <p class="ws-url">${esc(url)}</p>
+    <div class="ws-b"><button type="button" class="ws-btn ws-pri" data-ws="copy">Copy link</button>${navigator.share ? '<button type="button" class="ws-btn" data-ws="share">Share…</button>' : ''}</div>
+    <p class="ws-msg" aria-live="polite"></p>`;
+  document.body.append(d);
+  const close = () => { try { d.close(); } catch (e) { } d.remove(); }, msg = d.querySelector('.ws-msg');
+  d.querySelector('.ws-x').addEventListener('click', close);
+  d.addEventListener('click', e => { if (e.target === d) close(); });
+  d.addEventListener('close', () => d.remove());
+  d.querySelector('[data-ws="copy"]').addEventListener('click', async () => {
+    try { await navigator.clipboard.writeText(url); msg.textContent = 'Link copied.'; }
+    catch (e) { const r = document.createRange(); r.selectNodeContents(d.querySelector('.ws-url')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); msg.textContent = 'Press Ctrl+C (or Copy) to copy the selected link.'; }
+  });
+  const sh = d.querySelector('[data-ws="share"]'); if (sh) sh.addEventListener('click', () => { navigator.share({ title: "Mr B's Digital Technology Revision", url }).catch(() => { }); });
+  const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); d.querySelector('.ws-qr').innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { d.querySelector('.ws-qr').hidden = true; } };
+  if (typeof qrcode === 'function') draw();
+  else { const s = document.createElement('script'); s.src = 'qrcode.js'; s.onload = draw; s.onerror = () => { d.querySelector('.ws-qr').hidden = true; }; document.head.append(s); }
+  try { d.showModal(); } catch (e) { d.setAttribute('open', ''); }
+  d.querySelector('[data-ws="copy"]').focus();
+}
+document.addEventListener('click', e => { if (e.target.closest && e.target.closest('#wl-share-b')) wlShare(); });
 
 /* Share the site: a dialog with a QR code (qrcode.js, MIT, loaded only when needed), the link, Copy and the phone's own share sheet */
 function wlShare() {

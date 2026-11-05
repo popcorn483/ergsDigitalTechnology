@@ -26,7 +26,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 17;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 18;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -124,6 +124,11 @@ function doPost(e) {
   if (d.kind === 'psave') { if (!okId(d.id)) return out_({ ok: false }); return out_(save_('P-' + resolve_(String(d.id), aliases_()), d.data)); }
   const s = Math.round(+d.s || 0), book = String(d.book || ''), name = clean_(d.name, 40);
   if (BOOKS.indexOf(book) < 0 || !okId(d.id) || !name) return out_({ ok: false });
+  if (d.kind === 'msgread') {   /* a pupil has seen a message */
+    const id = resolve_(String(d.id), aliases_()), sh = msgs_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === String(d.mid));
+    if (i >= 0) locked_(() => { const rd = String(r[i][4] || '').split(',').filter(Boolean); if (rd.indexOf(id) < 0) { rd.push(id); sh.getRange(i + 2, 5).setValue(rd.join(',')); } });
+    return out_({ ok: true });
+  }
   if (d.kind === 'ping') {   /* "revising now": who is using the guide this minute (kept for a few minutes in the script's cache) */
     const id = resolve_(String(d.id), aliases_()), c = CacheService.getScriptCache();
     locked_(() => { let m = {}; try { m = JSON.parse(c.get('live') || '{}') || {}; } catch (x) { m = {}; } const now = Date.now();
@@ -136,7 +141,7 @@ function doPost(e) {
     Object.keys(d.quiz || {}).slice(0, 80).forEach(k => { const v = d.quiz[k]; if (/^c\d{1,2}(\|pp)?$/.test(k) && Array.isArray(v)) q[k] = [n(v[0]), n(v[1]), clean_(v[2], 10)]; });
     locked_(() => { const id = resolve_(String(d.id), aliases_()), sh = prog_(), r = rows_(sh), i = r.findIndex(x => String(x[1]) === id && String(x[4]) === book);
       const ok = x => /^c\d{1,2}-p\d{1,3}$/.test(String(x)), done = (Array.isArray(d.done) ? d.done : []).filter(ok).slice(0, 600), seen = (Array.isArray(d.seenIds) ? d.seenIds : []).filter(ok).slice(0, 600), later = (Array.isArray(d.laterIds) ? d.laterIds : []).filter(ok).slice(0, 600);
-      const pq = {}; Object.keys(d.pq || {}).slice(0, 600).forEach(k => { const v = d.pq[k]; if (ok(k) && Array.isArray(v)) pq[k] = [n(v[0]), n(v[1]), n(v[2]), n(v[3]), String(v[4] || '').replace(/[^A-D?-]/g, '').slice(0, 30)]; });   /* score, out of, best, attempts, the answers chosen (A–D per question) */
+      const pq = {}; Object.keys(d.pq || {}).slice(0, 600).forEach(k => { const v = d.pq[k]; if (ok(k) && Array.isArray(v)) pq[k] = [n(v[0]), n(v[1]), n(v[2]), n(v[3]), String(v[4] || '').replace(/[^A-D?-]/g, '').slice(0, 30), String(v[5] || '').replace(/[^01-]/g, '').slice(0, 30)]; });   /* … and right (1) / wrong (0) per question */   /* score, out of, best, attempts, the answers chosen (A–D per question) */
       const fixed = applyAwards_(id, book, done);   /* the teacher's marks win, even before the pupil's device has picked them up */
       const row = [new Date(), id, name, clean_(d.cls, 12).toUpperCase(), book, fixed.length, n(d.seen), n(d.total), n(d.tr), JSON.stringify(q), fixed.join(',') + '|' + seen.filter(x => fixed.indexOf(x) < 0).join(',') + '|' + later.filter(x => fixed.indexOf(x) < 0).join(',') , JSON.stringify(pq)];
       if (i >= 0) sh.getRange(i + 2, 1, 1, row.length).setValues([row]); else sh.appendRow(row); });
@@ -165,6 +170,25 @@ function dropAccess_(ids) { const sh = acc_(), r = rows_(sh); for (let i = r.len
 /* EMAILS: if none arrive, open the Apps Script, choose testEmail in the function list at the top and press Run. Google asks
    you to allow "Send email as you" the first time; allow it, then Deploy › Manage deployments › pencil › New version.
    The Teacher area › Pupil tracking › ⋯ › "Send a test email" shows what went wrong, if anything. */
+/* SET WORK and MESSAGES */
+const work_ = () => tab_('Set work', ['ID', 'For (class, Y11 or ALL)', 'Unit', 'Topic', 'Due', 'Note', 'Set']);
+const msgs_ = () => tab_('Messages', ['ID', 'To (pupil ID, class, Y11 or ALL)', 'Message', 'Sent', 'Read by']);
+function forMe_(who, id, cls) { const c = String(cls || '').toUpperCase().replace(/[^A-Z0-9]/g, ''), y = (c.match(/^\d{1,2}/) || [''])[0]; who = String(who).toUpperCase(); return who === 'ALL' || who === String(id).toUpperCase() || (c && who === c) || (y && who === 'Y' + y); }
+function myWork_(rawId, cls) {
+  if (!okId(rawId)) return { ok: false };
+  const id = resolve_(String(rawId), aliases_());
+  const work = rows_(work_()).filter(r => r[0] && forMe_(String(r[1]), id, cls)).map(r => ({ id: String(r[0]), book: String(r[2]), ch: String(r[3]), due: String(r[4]).slice(0, 10), note: String(r[5] || '') }));
+  const msgs = rows_(msgs_()).filter(r => r[0] && forMe_(String(r[1]), id, cls) && String(r[4] || '').split(',').indexOf(id) < 0).slice(-10).map(r => ({ id: String(r[0]), text: String(r[2]), at: new Date(r[3]).getTime() }));
+  return { ok: true, work, msgs };
+}
+/* QUESTION ANALYSIS: for every page quiz, how many pupils got each question right first time (from their best-recorded attempt) */
+function qstats_() {
+  const out = {};
+  rows_(prog_()).forEach(r => { let pq = {}; try { pq = JSON.parse(r[11] || '{}'); } catch (x) { } const b = String(r[4]);
+    Object.keys(pq).forEach(pg => { const c = String((pq[pg] || [])[5] || ''), a = String((pq[pg] || [])[4] || ''); if (!c) return; const k = b + '|' + pg, o = out[k] = out[k] || { n: 0, q: [] }; o.n++;
+      c.split('').forEach((x, i) => { const q = o.q[i] = o.q[i] || [0, 0, {}]; if (x === '-') return; q[1]++; if (x === '1') q[0]++; else if (a[i]) q[2][a[i]] = (q[2][a[i]] || 0) + 1; }); }); });
+  return { ok: true, pages: out };
+}
 function live_() {   /* pupils active in the last 3 minutes, newest first */
   let m = {}; try { m = JSON.parse(CacheService.getScriptCache().get('live') || '{}') || {}; } catch (e) { m = {}; }
   const now = Date.now(), N = names_(), live = Object.keys(m).filter(k => now - m[k][0] < 3 * 60000).map(k => { const v = m[k]; return { id: k, at: v[0], name: (N[k] && N[k][0]) || v[1], cls: (N[k] && N[k][1]) || v[2], book: v[3], ch: v[4], pg: v[5] }; }).sort((a, b) => b.at - a.at);
@@ -270,7 +294,8 @@ function doGet(e) {
     const k = String(q.key || ''), ok = (k === TEACHER_KEY && TEACHER_KEY !== 'change-me') || (k === STAFF_PIN && STAFF_PIN !== 'change-me');
     return out_(ok ? { ok: true, teacher: k === TEACHER_KEY } : { error: 'key' });
   }
-  if (q.action === 'staffmail') return out_(staffMail_());   /* "Send me staff details": only ever to the script's owner */
+  if (q.action === 'staffmail') return out_(staffMail_());
+  if (q.action === 'mywork') return out_(myWork_(q.id, q.cls));   /* a pupil's device: work set for their class, and messages for them */   /* "Send me staff details": only ever to the script's owner */
   if (q.key !== TEACHER_KEY || TEACHER_KEY === 'change-me') return out_({ error: 'key' });
   ensureWeekly_();
   if (q.action === 'week') return out_(week_(q.start));   /* the Teacher area's weekly report */
@@ -335,6 +360,20 @@ function act_(q) {
     return { ok: true };
   }
   if (q.action === 'live') return live_();
+  if (q.action === 'qstats') return qstats_();
+  if (q.action === 'work') return { ok: true, work: rows_(work_()).filter(r => r[0]).map(r => ({ id: String(r[0]), who: String(r[1]), book: String(r[2]), ch: String(r[3]), due: String(r[4]).slice(0, 10), note: String(r[5] || ''), at: new Date(r[6]).getTime() })),
+    msgs: rows_(msgs_()).filter(r => r[0]).slice(-200).map(r => ({ id: String(r[0]), to: String(r[1]), text: String(r[2]), at: new Date(r[3]).getTime(), read: String(r[4] || '').split(',').filter(Boolean) })) };
+  if (q.action === 'setwork') {   /* who: a form class (11B), a year (Y11) or all */
+    const who = String(q.who || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12), book = String(q.book || ''), ch = String(q.ch || '');
+    if (!who || BOOKS.indexOf(book) < 1 || !/^c\d{1,2}$/.test(ch)) return { ok: false, error: 'bad request' };
+    const id = 'W' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); work_().appendRow([id, who, book, ch, String(q.due || '').slice(0, 10), clean_(q.note, 200), new Date()]); return { ok: true, id };
+  }
+  if (q.action === 'delwork') { const sh = work_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (String(r[i][0]) === String(q.wid)) sh.deleteRow(i + 2); return { ok: true }; }
+  if (q.action === 'sendmsg') {   /* to: a pupil ID, a form class, a year (Y11) or ALL */
+    const t = String(q.to || ''), text = clean_(q.text, 500); if (!t || !text) return { ok: false, error: 'bad request' };
+    const id = 'M' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); msgs_().appendRow([id, t.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 24), text, new Date(), '']); return { ok: true, id };
+  }
+  if (q.action === 'delmsg') { const sh = msgs_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (String(r[i][0]) === String(q.mid)) sh.deleteRow(i + 2); return { ok: true }; }
   if (q.action === 'testmail') { try { return { ok: true, to: testEmail() }; } catch (e) { mailNote_(e); return { ok: false, to: mailTo_(), error: String(e && e.message || e) }; } }
   if (q.action === 'pdata') {   /* "View as this pupil": their saved progress (the same copy their devices load) */
     if (!okId(to)) return { ok: false, error: 'bad request' };
@@ -494,7 +533,13 @@ function summary_() {
     const id = resolve_(String(r[1]), A); if (!id) continue;
     const p = P[id] || (P[id] = { id, name: String(r[2]), cls: String(r[3]), typed: {}, total: 0, week: 0, last: 0, first: 0, days: {}, units: {} });
     p.prog = p.prog || {}; const u = String(r[4]), old = p.prog[u];
-    if (!old || +r[5] >= old.cov) { let q = {}; try { q = JSON.parse(r[9] || '{}'); } catch (x) { } p.prog[u] = { cov: +r[5], seen: +r[6], total: +r[7], tr: +r[8], quiz: q, at: new Date(r[0]).getTime() }; }
+    if (!old || +r[5] >= old.cov) { let q = {}; try { q = JSON.parse(r[9] || '{}'); } catch (x) { } p.prog[u] = { cov: +r[5], seen: +r[6], total: +r[7], tr: +r[8], quiz: q, at: new Date(r[0]).getTime() };
+      /* per topic: pages covered, page quizzes done and their average best % (for the topic grid, set work and "needs attention") */
+      const [dn, , ln] = String(r[10] || '|').split('|'), ch = {}; let pq = {}; try { pq = JSON.parse(r[11] || '{}'); } catch (x) { }
+      (dn ? dn.split(',') : []).forEach(pg => { const c = pg.split('-')[0]; (ch[c] = ch[c] || [0, 0, 0])[0]++; });
+      Object.keys(pq).forEach(pg => { const v = pq[pg], c = pg.split('-')[0]; if (!v || !v[1]) return; const x = ch[c] = ch[c] || [0, 0, 0]; x[1]++; x[2] += Math.round((v[2] != null ? v[2] : v[0]) / v[1] * 100); });
+      Object.keys(ch).forEach(c => { if (ch[c][1]) ch[c][2] = Math.round(ch[c][2] / ch[c][1]); });
+      p.prog[u].ch = ch; p.prog[u].later = ln ? ln.split(',').length : 0; }
   }
   const pupils = Object.keys(P).map(k => { const p = P[k]; p.days = Object.keys(p.days).length; p.typed = Object.keys(p.typed);
     if (N[k]) { p.name = N[k][0] || p.name; p.cls = N[k][1] || p.cls; p.fixed = true; } p.pin = !!PN[k]; return p; });
