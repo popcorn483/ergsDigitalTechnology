@@ -2430,6 +2430,7 @@ html.act-open{overflow:hidden}html.act-open .pbar,html.act-open .sv-sw{display:n
 @media (prefers-color-scheme:dark){.term.term-pp{background:linear-gradient(transparent 52%,color-mix(in srgb,#F5C518 30%,transparent) 52%)}}
 /* the pupil's last page-quiz answers */
 .opt.pq-pick{outline:3px solid #7B4FD6;outline-offset:2px}.opt.pq-right{border-color:var(--good)!important;background:color-mix(in srgb,var(--good) 12%,var(--paper))!important}.opt.pq-wrong{background:color-mix(in srgb,#C0392B 10%,var(--paper))!important}.pq-mk{margin-left:8px;font:800 15px var(--sans)}.pq-mk.ok{color:var(--good)}.pq-mk.no{color:#C0392B}html.va-on .act-pop{top:calc(36px + env(safe-area-inset-top,0px))}.pq-picks{margin:0 0 10px;padding:9px 12px;border-radius:10px;background:color-mix(in srgb,#7B4FD6 10%,var(--paper));font:600 13.5px/1.4 var(--sans)}
+.tr-l{margin:0 0 6px;padding-left:20px;font:600 14px/1.45 var(--sans)}.tr-l small{color:var(--ink-3);font-weight:700}.mrb-fin a.mf-y{display:flex;align-items:center;justify-content:center;text-decoration:none;min-height:52px;border-radius:14px;font:800 16px var(--sans)}
 /* PAGE BAR (phones): ‹ · Mark as covered · Next › fixed at the bottom; the "Before you move on" sheet */
 .pbar{display:none}
 #b-ppt{display:none}
@@ -8674,7 +8675,11 @@ const chDone = ch => (ch.pages || []).length && ch.pages.every(p => state.done[p
 const chLeft = ch => (ch.pages || []).filter(p => !state.done[p.id]);
 const cqStaff = () => { try { return !!localStorage.getItem('notes-nocount') && !localStorage.getItem('mrb-viewas') && !localStorage.getItem('mrb-pupilmode'); } catch (e) { return false; } };   /* viewing as a pupil: their locks */
 const chShort = ch => (ch.pages || []).filter(p => (typeof window.MRB_READ === 'function' ? window.MRB_READ(p.id) : ((state.ptime && state.ptime[p.id]) || 0)) < 60);   /* read for less than a minute */
-const cqUnlocked = ch => (!chLeft(ch).length && !chShort(ch).length) || cqStaff();
+/* page quizzes not done yet, or not at amber (40%) or green (70%) yet: needed before the topic quiz */
+const PQ_PASS = 0.4;
+const pqBest = id => { const r = state.pq && state.pq[id]; return r && r.m ? (r.bs != null ? r.bs : r.s) / r.m : null; };
+const chQuiz = ch => (ch.pages || []).filter(p => (p.check || []).length && !(pqBest(p.id) >= PQ_PASS));
+const cqUnlocked = ch => (!chLeft(ch).length && !chShort(ch).length && !chQuiz(ch).length) || cqStaff();
 function cqItems(ch) {
   const out = [];
   (ch.pages || []).forEach(p => (p.check || []).forEach((q, i) => { if (q && q.q && Array.isArray(q.o)) out.push({ t: 'mcq', q, p, max: 1, key: `${p.id}:k${i}` }); }));
@@ -8749,11 +8754,12 @@ function renderChPast(ch) {
   tutViewDone(true, '#cq-h');
 }
 function cqLocked(ch, what) {
-  const n = (ch.pages || []).length, left = chLeft(ch), short = chShort(ch).filter(p => !left.includes(p)), d = n - left.length, todo = left.concat(short);
+  const n = (ch.pages || []).length, left = chLeft(ch), short = chShort(ch).filter(p => !left.includes(p)), quiz = chQuiz(ch).filter(p => !left.includes(p) && !short.includes(p)), d = n - left.length, todo = left.concat(short, quiz);
+  const why = p => left.includes(p) ? '' : short.includes(p) ? ' <small>(read a little longer)</small>' : pqBest(p.id) == null ? ' <small>(do the page quiz)</small>' : ` <small>(page quiz ${Math.round(pqBest(p.id) * 100)}%: get amber, 40%+)</small>`;
   main.innerHTML = `<article class="sheet lib-v cq-v" aria-labelledby="cq-h" style="${chVars(ch)}"><header class="lib-hero card cq-hero"><small class="lib-k">${icon('exam')}Chapter ${esc(ch.n)} · ${esc(ch.title)}</small><h1 id="cq-h" tabindex="-1">${esc(what || 'Topic quiz')}</h1>
-    <div class="cq-lock">${CQ_LOCK}<div><p><b>Finish the revision first.</b> The topic quiz and past papers open when every page in this topic is covered and you have spent at least a minute reading each one. You have covered <b>${d} of ${n}</b> pages.</p>
-    <div class="cq-acts">${todo.length ? `<a class="btn pri" href="#${esc(todo[0].id)}">${left.length ? 'Next page to cover' : 'Next page to read'} →</a>` : ''}</div>
-    ${todo.length && todo.length <= 14 ? `<ul class="cq-left">${todo.map(p => `<li><a href="#${esc(p.id)}">${esc(plain(p.spec))}</a>${left.includes(p) ? '' : ' <small>(read a little longer)</small>'}</li>`).join('')}</ul>` : ''}</div></div></header></article>`;
+    <div class="cq-lock">${CQ_LOCK}<div><p><b>Finish the revision first.</b> The topic quiz and past papers open when every page in this topic is covered, read for at least a minute, and its page quiz is amber or green (40% or more). You have covered <b>${d} of ${n}</b> pages.</p>
+    <div class="cq-acts">${todo.length ? `<a class="btn pri" href="#${esc(todo[0].id)}">${left.length ? 'Next page to cover' : short.length ? 'Next page to read' : 'Next page quiz to do'} →</a>` : ''}</div>
+    ${todo.length && todo.length <= 14 ? `<ul class="cq-left">${todo.map(p => `<li><a href="#${esc(p.id)}">${esc(plain(p.spec))}</a>${why(p)}</li>`).join('')}</ul>` : ''}</div></div></header></article>`;
   tutViewDone(true, '#cq-h');
 }
 const CQ_LOCK = '<svg class="cq-lk" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="10" rx="2"/><path d="M8 10.5V7.5a4 4 0 018 0v3"/></svg>';
@@ -8829,7 +8835,7 @@ function cqCardHTML(ch) {
   const n = cqItems(ch).length; if (!n) return '';
   const b = cqState().best[ch.id], np = (ch.pages || []).length;
   const np2 = cqPast(ch).length, left = chLeft(ch).length;
-  if (!cqUnlocked(ch)) return `<a class="cq-chip locked" href="#quiz-${esc(ch.id)}">${CQ_LOCK}<span><b>Topic quiz${np2 ? ' and past papers' : ''}</b><small>${left ? `Cover ${left} more page${left === 1 ? '' : 's'} to unlock (${np - left}/${np} covered)` : 'Read every page for a minute to unlock'}</small></span></a>`;
+  if (!cqUnlocked(ch)) return `<a class="cq-chip locked" href="#quiz-${esc(ch.id)}">${CQ_LOCK}<span><b>Topic quiz${np2 ? ' and past papers' : ''}</b><small>${left ? `Cover ${left} more page${left === 1 ? '' : 's'} to unlock (${np - left}/${np} covered)` : chShort(ch).length ? 'Read every page for a minute to unlock' : 'Get amber or green in every page quiz to unlock'}</small></span></a>`;
   const ppChip = np2 ? `<a class="cq-chip cq-chip2" href="#pp-${esc(ch.id)}">${icon('terms')}<span><b>Past-paper questions</b><small>${np2} on this topic, all at once</small></span></a>` : '';
   return `<a class="cq-chip" href="#quiz-${esc(ch.id)}">${icon('exam')}<span><b>Topic quiz</b><small>${n} questions${b ? ` · best ${b.pc}%` : ''}</small></span></a>${ppChip}`;
 }
@@ -10531,7 +10537,7 @@ try {
     const main = document.getElementById('main'), art = main && main.querySelector('article'), P = here();
     if (!art || !P || !art.querySelector('.ncard')) return;
     const ch = P.ch, ps = ch.pages || [], n = ps.length; if (!n || ps[n - 1].id !== P.p.id) return;   /* only at the end of the topic */
-    const short = typeof chShort === 'function' ? chShort(ch) : [], left = chLeft(ch), cov = n - left.length, open = cqUnlocked(ch), me = !!state.done[P.p.id], r = pqOf(P.p.id);
+    const short = typeof chShort === 'function' ? chShort(ch) : [], quizL = typeof chQuiz === 'function' ? chQuiz(ch) : [], left = chLeft(ch), cov = n - left.length, open = cqUnlocked(ch), me = !!state.done[P.p.id], r = pqOf(P.p.id);
     const nq = cqItems(ch).length, np = cqPast(ch).length, best = cqState().best[ch.id], hasPq = !!(document.getElementById('cyk') || art.querySelector('.act.k-quiz'));
     const nextCov = left.find(p => p.id !== P.p.id);
     const step = (k, cls, href, ic, t, sub) => `<li class="ts-s ${cls}"><a href="${href}" data-ts="${k}"><i class="ts-n">${ic}</i><span><b>${t}</b><small>${sub}</small></span></a></li>`;
@@ -10539,7 +10545,7 @@ try {
     const secs = (state.ptime && state.ptime[P.p.id]) || 0;
     box.innerHTML = `<div class="ts-h"><b>End of topic · ${esc(ch.title)}</b><span>${cov}/${n} covered</span></div><span class="ts-m" aria-hidden="true"><i style="width:${Math.round(cov / n * 100)}%"></i></span>
       ${nq || np ? `<ol class="ts-l">
-        ${nq ? step('quiz', open ? (best ? 'done' : 'now') : 'locked', '#quiz-' + esc(ch.id), open ? (best ? TICK : '★') : LOCK, 'Topic quiz', open ? (best ? `Best ${best.pc}%` : `${nq} questions`) : (left.length ? `${left.length} page${left.length === 1 ? '' : 's'} to cover` : `${short.length} page${short.length === 1 ? '' : 's'} to read longer`)) : ''}
+        ${nq ? step('quiz', open ? (best ? 'done' : 'now') : 'locked', '#quiz-' + esc(ch.id), open ? (best ? TICK : '★') : LOCK, 'Topic quiz', open ? (best ? `Best ${best.pc}%` : `${nq} questions`) : (left.length ? `${left.length} page${left.length === 1 ? '' : 's'} to cover` : short.length ? `${short.length} page${short.length === 1 ? '' : 's'} to read longer` : `${quizL.length} page quiz${quizL.length === 1 ? '' : 'zes'} to pass`)) : ''}
         ${np ? step('pp', open ? 'now' : 'locked', '#pp-' + esc(ch.id), open ? '★' : LOCK, 'Past papers', open ? `${np} question${np === 1 ? '' : 's'}` : 'After the topic') : ''}
       </ol>` : ''}<p class="ts-msg" hidden></p>`;
     box.addEventListener('click', e => {
@@ -10549,19 +10555,71 @@ try {
       if (k === 'pq') { e.preventDefault(); if (state.done[P.p.id] || staff()) { const t = document.querySelector('#main .act.k-quiz'); if (t) t.click(); } else { m.hidden = false; m.innerHTML = `${LOCK}<span>Mark this page as covered first, then the page quiz unlocks.</span>`; } return; }
       if (open) return;
       e.preventDefault();
-      const nx = nextCov || short.find(p => p.id !== P.p.id) || short[0];
-      m.hidden = false; m.innerHTML = `${LOCK}<span>The topic quiz and past papers unlock when every page in this topic is covered and you have spent at least a minute reading each one.${left.length ? ` <b>${left.length} page${left.length === 1 ? '' : 's'} to cover.</b>` : ''}${short.length ? ` <b>${short.length} need${short.length === 1 ? 's' : ''} more reading time.</b>` : ''} ${nx ? `<a href="#${esc(nx.id)}">Go to the next one →</a>` : ''}</span>`;
+      const nx = nextCov || short.find(p => p.id !== P.p.id) || short[0] || quizL[0];
+      m.hidden = false; m.innerHTML = `${LOCK}<span>The topic quiz and past papers unlock when every page in this topic is covered, read for at least a minute, and its page quiz is amber or green.${left.length ? ` <b>${left.length} page${left.length === 1 ? '' : 's'} to cover.</b>` : ''}${short.length ? ` <b>${short.length} need${short.length === 1 ? 's' : ''} more reading time.</b>` : ''}${quizL.length ? ` <b>${quizL.length} page quiz${quizL.length === 1 ? '' : 'zes'} to do or improve.</b>` : ''} ${nx ? `<a href="#${esc(nx.id)}">Go to the next one →</a>` : ''}</span>`;
     }, true);
     const ft = art.querySelector(':scope > .foot'); if (ft) ft.before(box); else art.append(box);
+  }
+  /* leaving a topic (from its last page to another topic) with page quizzes not at amber/green, or the topic quiz not done:
+     a reminder first, once per topic per visit */
+  const remindedT = new Set();
+  function topicGaps(ch) {
+    const quizL = typeof chQuiz === 'function' ? chQuiz(ch) : [], best = cqState().best[ch.id], open = cqUnlocked(ch);
+    return { quizL, needTopic: !!cqItems(ch).length && !best, open };
+  }
+  function topicSheet(P, onward) {
+    const ch = P.ch, g = topicGaps(ch); remindedT.add(ch.id);
+    const d = document.createElement('div'); d.id = 'mrb-fin'; d.className = 'mrb-fin'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'tr-h');
+    const rows = g.quizL.slice(0, 6).map(p => { const b = typeof pqBest === 'function' ? pqBest(p.id) : null; return `<li><a href="#${esc(p.id)}">${esc(String(p.spec || '').replace(/\*\*|\[\[|\]\]/g, '').slice(0, 70))}</a> <small>${b == null ? 'not done' : Math.round(b * 100) + '%'}</small></li>`; }).join('');
+    d.innerHTML = `<div class="mf-s"><div class="mf-g" aria-hidden="true"></div><h2 id="tr-h">Before you leave ${esc(ch.title)}…</h2>
+      ${g.quizL.length ? `<p>Get <b>amber or green</b> (40%+) in these page quizzes first:</p><ul class="tr-l">${rows}</ul>${g.quizL.length > 6 ? `<p>…and ${g.quizL.length - 6} more.</p>` : ''}` : ''}
+      ${g.needTopic ? `<p>${g.open ? 'Then take the <b>end of topic quiz</b>.' : 'Then the <b>end of topic quiz</b> unlocks.'}</p>` : ''}
+      ${g.open && g.needTopic ? `<a class="mf-y" href="#quiz-${esc(ch.id)}">Take the end of topic quiz</a>` : g.quizL.length ? `<a class="mf-y" href="#${esc(g.quizL[0].id)}">Do the next page quiz</a>` : ''}
+      <button type="button" class="mf-x">Move on anyway</button></div>`;
+    document.body.append(d); document.documentElement.classList.add('mf-open');
+    const close = () => { d.remove(); document.documentElement.classList.remove('mf-open'); };
+    d.addEventListener('click', e => { if (e.target === d) close(); if (e.target.closest('a')) close(); });
+    d.querySelector('.mf-x').addEventListener('click', () => { close(); onward(); });
+  }
+  const goT = go;
+  go = function (i) {
+    const P = here(), to = PAGES[Math.max(0, Math.min(PAGES.length - 1, i))];
+    if (P && to && ok() && to.ch.id !== P.ch.id && !remindedT.has(P.ch.id) && (P.ch.pages || []).slice(-1)[0].id === P.p.id) {
+      const g = topicGaps(P.ch); if (g.quizL.length || g.needTopic) { topicSheet(P, () => goT(i)); return; }
+    }
+    goT(i);
+  };
+  /* opening the workbook: page quizzes not done on pages already marked covered → ask them to do those first (once a visit) */
+  function quizNag() {
+    if (!ok()) return;
+    try { if (sessionStorage.getItem('mrb-pq-nag:' + BK.id)) return; sessionStorage.setItem('mrb-pq-nag:' + BK.id, '1'); } catch (e) { return; }
+    const miss = PAGES.filter(P => state.done[P.p.id] && (P.p.check || []).length && !pqOf(P.p.id));
+    if (!miss.length || document.getElementById('mrb-fin') || document.getElementById('mrb-who') || document.getElementById('mrb-gate')) return;
+    const d = document.createElement('div'); d.id = 'mrb-fin'; d.className = 'mrb-fin'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'nag-h');
+    d.innerHTML = `<div class="mf-s"><div class="mf-g" aria-hidden="true"></div><h2 id="nag-h">${miss.length === 1 ? 'A page quiz to do' : `${miss.length} page quizzes to do`}</h2>
+      <p>You marked ${miss.length === 1 ? 'this page' : 'these pages'} as covered but haven’t done ${miss.length === 1 ? 'its' : 'their'} page quiz yet:</p>
+      <ul class="tr-l">${miss.slice(0, 5).map(P => `<li><a href="#${esc(P.p.id)}" data-pq="${esc(P.p.id)}">${esc(String(P.p.spec || '').replace(/\*\*|\[\[|\]\]/g, '').slice(0, 70))}</a> <small>Ch ${esc(P.ch.n)}</small></li>`).join('')}</ul>${miss.length > 5 ? `<p>…and ${miss.length - 5} more.</p>` : ''}
+      <a class="mf-y" href="#${esc(miss[0].p.id)}" data-pq="${esc(miss[0].p.id)}">Do ${miss.length === 1 ? 'it' : 'the first one'} now</a><button type="button" class="mf-x">Later</button></div>`;
+    document.body.append(d); document.documentElement.classList.add('mf-open');
+    const close = () => { d.remove(); document.documentElement.classList.remove('mf-open'); };
+    d.addEventListener('click', e => { const a = e.target.closest('[data-pq]'); if (a) { try { sessionStorage.setItem('mrb-open-pq', a.dataset.pq); } catch (x) { } close(); return; } if (e.target === d || e.target.closest('.mf-x')) close(); });
+  }
+  /* arriving from that reminder: open the page quiz */
+  function openPending() {
+    let id = null; try { id = sessionStorage.getItem('mrb-open-pq'); } catch (e) { }
+    const P = here(); if (!id || !P || P.p.id !== id) return;
+    try { sessionStorage.removeItem('mrb-open-pq'); } catch (e) { }
+    setTimeout(() => { const t = document.querySelector('#main .act.k-quiz'); if (t) t.click(); }, 400);
   }
   function repaintSteps() { const old = document.querySelector('#main .tsteps'); if (old) old.remove(); try { steps(); } catch (e) { } }
   const rp = renderPage;
   renderPage = function () {
     bank();
     const r = rp.apply(this, arguments);
-    try { const P = here(); pid = P ? P.p.id : null; attempt = {}; picks = {}; lastUse = Date.now(); steps(); lockQuiz(); paintTile(); showPicks(); } catch (e) { }
+    try { const P = here(); pid = P ? P.p.id : null; attempt = {}; picks = {}; lastUse = Date.now(); steps(); lockQuiz(); paintTile(); showPicks(); openPending(); } catch (e) { }
     return r;
   };
+  setTimeout(() => { try { quizNag(); } catch (e) { } }, 2500);   /* after the sign-in and access checks have had their turn */
   if (typeof onCover !== 'undefined' && !onCover) setTimeout(() => { const P = here(); pid = P ? P.p.id : null; if (!document.querySelector('#main .tsteps')) try { steps(); lockQuiz(); paintTile(); } catch (e) { } }, 0);
 })();
 /* ================= APP: END ================= */
