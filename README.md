@@ -15,6 +15,10 @@ The full lesson hubs are still there for teachers: `hub.html` (GCSE) and `gce/hu
 
 Years 8, 9 and 10. Each topic is a folder: `ks3/Year 8/01 Topic name/`. Upload files into it, named like `1 - LESSON - Under the Hood.pptx` or `3 - WORKSHEET - Binary.docx` (the number sets the order, the word sets the type). A GitHub Action lists them in `ks3/manifest.json` and makes PDF copies in `_view/` so pupils can view PowerPoint, Word and Excel files in the browser. Titles, summaries and "What you'll learn" are in `ks3/topics.json`. The page is built from `tools/ks3_page.src.html` by `python3 tools/ks3_build.py` (it copies in the sign-in and tracking code from `index.html`).
 
+### KS3 notes books (`notes/Y8.html`, `Y9.html`, `Y10.html`)
+
+The same reader as the GCSE workbooks (pages, progress, quick checks, topic quizzes, glossary, flashcards, trophies), with the content in `ks3/books/Y8.json` etc. Chapter *n* of a year's book is topic *n* in `ks3/`, and its PowerPoint comes from that topic folder. After editing a book's JSON (or after the GCSE template `notes/U1.html` changes) run `python3 tools/ks3_books.py`, which also updates `ks3/books/index.json`, the Teacher area's KS3 chapter list and the chapter names in `tools/pupil-activity.gs`.
+
 ## Classes and zones (Teacher area › Pupil tracking › Classes & zones)
 
 Add each class with its teacher; pupils pick their class from a list when they sign in. Zones are the units and years a pupil can open (Year 8/9/10, Unit 1/4/5, AS 1/2, A2 1/2): a class's zones, or a pupil's own (several at once is fine). Anything else shows a lock with an "Ask to open" button; requests appear in Pupil tracking. Needs Apps Script v20 (`tools/pupil-activity.gs`).

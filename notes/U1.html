@@ -9780,7 +9780,7 @@ if (ON_WEB) {
   const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
   const MINE = k => /^notes-/.test(k) && !/^notes-(nocount|counted)/.test(k);
   const root = /\/(notes|gce)\/[^/]*$/.test(location.pathname) ? '../' : '';
-  const BOOKS = { U1: 'notes/U1.html', U4: 'notes/U4.html', U5: 'notes/U5.html', AS1: 'notes/AS1.html', AS2: 'notes/AS2.html', A21: 'notes/A21.html', A22: 'notes/A22.html' };
+  const BOOKS = { Y8: 'notes/Y8.html', Y9: 'notes/Y9.html', Y10: 'notes/Y10.html', U1: 'notes/U1.html', U4: 'notes/U4.html', U5: 'notes/U5.html', AS1: 'notes/AS1.html', AS2: 'notes/AS2.html', A21: 'notes/A21.html', A22: 'notes/A22.html' };
   function keysNow() { const o = {}; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && MINE(k)) o[k] = localStorage.getItem(k); } } catch (e) { } return o; }
   function clearMine() { Object.keys(keysNow()).forEach(k => LS.set(k, null)); }
   function start(who, keys, book, page) {
@@ -9966,7 +9966,7 @@ try {
     document.body.append(d); document.documentElement.style.overflow = 'hidden'; go.focus();
   }
   /* which zone a link or this page belongs to: notes/U1.html → U1; ks3.html#y8 (or a page that sets window.MRB_PAGE_ZONE) → Y8 */
-  const zoneOfHref = h => { const m = /(?:^|\/)notes\/(U1|U4|U5|AS1|AS2|A21|A22)\.html/i.exec(h || '') || /ks3\.html#y(8|9|10)\b/i.exec(h || ''); return m ? (/^\d/.test(m[1]) ? 'Y' + m[1] : m[1].toUpperCase()) : ''; };
+  const zoneOfHref = h => { const m = /(?:^|\/)notes\/(Y8|Y9|Y10|U1|U4|U5|AS1|AS2|A21|A22)\.html/i.exec(h || '') || /ks3\.html#y(8|9|10)\b/i.exec(h || ''); return m ? (/^\d/.test(m[1]) ? 'Y' + m[1] : m[1].toUpperCase()) : ''; };
   const pageZone = () => typeof window.MRB_PAGE_ZONE === 'function' ? window.MRB_PAGE_ZONE() : (inBook && ZN[BK.id] ? BK.id : '');
   function zoneLock() {
     const z = pageZone(), cov = document.querySelector('#mrb-zl[data-cover]');

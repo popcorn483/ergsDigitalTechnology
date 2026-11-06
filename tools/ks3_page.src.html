@@ -65,6 +65,17 @@ main{max-width:980px;margin:0 auto;padding:18px 16px 60px}
 .learn h3{margin:0 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
 .learn ul{margin:0;padding-left:20px;columns:2 260px;column-gap:28px}.learn li{break-inside:avoid;margin:0 0 3px}
 .prog{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:14px;color:var(--ink-2)}
+.nb{display:flex;flex-wrap:wrap;align-items:center;gap:14px 18px;background:var(--navy);color:#fff;border-radius:18px;padding:18px;box-shadow:var(--card-shadow);margin:0 0 16px;text-decoration:none;position:relative;overflow:hidden}
+.nb::before{content:"";position:absolute;inset:0 auto 0 0;width:6px;background:var(--yc)}
+.nb .ring{flex:none;width:58px;height:58px}
+.nb .tx{flex:1 1 220px;min-width:0}
+.nb small{display:block;font-family:var(--brand);font-weight:700;font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#A9C4F2}
+.nb b{display:block;font-family:var(--brand);font-size:19px;letter-spacing:.01em;margin-top:2px}
+.nb span.s{display:block;font-size:13.5px;color:#C9D7F2;margin-top:2px}
+.nb .go{flex:none;display:inline-flex;align-items:center;gap:6px;background:#fff;color:var(--navy);border-radius:10px;padding:10px 16px;font-weight:700}
+.nb:hover .go{background:#E4ECFA}
+.nb:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.tc .nm{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-3)}
 .lesson{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;background:linear-gradient(120deg,color-mix(in srgb,var(--yc) 14%,var(--paper)),var(--paper));border-radius:16px;padding:16px;box-shadow:var(--card-shadow);margin:0 0 14px}
 .lesson .ic{flex:none;width:52px;height:52px;border-radius:14px;background:var(--yc);color:#fff;display:grid;place-items:center}
 .lesson .tx{flex:1 1 200px;min-width:0}
@@ -141,6 +152,15 @@ main{max-width:980px;margin:0 auto;padding:18px 16px 60px}
   const saveSt = () => LS.set('notes-ks3', JSON.stringify(st));
   const key = f => f.path || f.url;
   let M = null, Y = null, T = null;   /* manifest, the year shown (e.g. 'Year 8'), the topic open */
+  /* the KS3 notes books (notes/Y8.html …): ks3/books/index.json lists their chapters and pages; a pupil's progress in one is
+     localStorage 'notes-reader:Y8' { done: {pageId: 1} }. Topic n of a year is chapter n of its book. */
+  let NB = {};
+  const bookOf = y => NB['Y' + y.n] || null;
+  const bookDone = y => { try { return (JSON.parse(LS.get('notes-reader:Y' + y.n) || '{}') || {}).done || {}; } catch (e) { return {}; } };
+  const chOf = (y, t) => { const b = bookOf(y); return b ? b.chapters[y.topics.indexOf(t)] || null : null; };
+  const chProg = (y, c) => { const d = bookDone(y); return [c.pages.filter(p => d[p]).length, c.pages.length]; };
+  const ring = (d, n) => { const r = 24, C = 2 * Math.PI * r, f = n ? d / n : 0; return `<svg class="ring" viewBox="0 0 58 58" aria-hidden="true"><circle cx="29" cy="29" r="${r}" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="6"/><circle cx="29" cy="29" r="${r}" fill="none" stroke="var(--yc)" stroke-width="6" stroke-linecap="round" stroke-dasharray="${(C * f).toFixed(1)} ${C.toFixed(1)}" transform="rotate(-90 29 29)"/><text x="29" y="33.5" text-anchor="middle" fill="#fff" font-size="13" font-weight="700" font-family="Atkinson Hyperlegible,sans-serif">${Math.round(f * 100)}%</text></svg>`; };
+  const nextPage = (y, pages) => { const d = bookDone(y); return pages.find(p => !d[p]) || pages[0]; };
   const yZone = y => 'Y' + y.n;
   const zOk = z => !window.MRB_ZONES || window.MRB_ZONES.ok(z);
   const done = t => t.files.filter(f => st.done[key(f)]).length;
@@ -171,9 +191,11 @@ main{max-width:980px;margin:0 auto;padding:18px 16px 60px}
   function wireTabs() { document.querySelectorAll('.years [data-y]').forEach(b => b.addEventListener('click', () => { const y = M.years.find(x => x.n === +b.dataset.y); if (!zOk(yZone(y))) { window.MRB_ZONES.box(yZone(y), false); return; } go('y' + y.n); })); }
   function year(y) {
     const tot = y.topics.length;
+    const bk = bookOf(y), all = bk ? bk.chapters.flatMap(c => c.pages) : [], bd = bookDone(y), bn = all.filter(p => bd[p]).length;
     $('#app').innerHTML = tabs(y.year) + `<div class="y-h"><h2>${H(y.year)}</h2><span>${tot ? `${tot} topic${tot === 1 ? '' : 's'}, in the order you study them` : ''}</span></div>` +
-      (tot ? `<div class="grid">${y.topics.map((t, i) => { const d = done(t), n = t.files.length;
-        return `<button type="button" class="tc" data-t="${H(t.id)}"><span class="n">Topic ${i + 1}</span><h3>${H(t.title)}${t.temporary ? '<span class="tmp">This year only</span>' : ''}</h3><p>${H(t.summary)}</p><span class="meta">${n ? `<span class="bar" aria-hidden="true"><i style="width:${Math.round(d / n * 100)}%"></i></span>${d}/${n} done` : 'Resources coming soon'}</span></button>`; }).join('')}</div>`
+      (bk ? `<a class="nb" href="${H(bk.file)}#${H(nextPage(y, all))}">${ring(bn, all.length)}<span class="tx"><small>Your notes book</small><b>${H(y.year)} notes</b><span class="s">${bn} of ${all.length} pages covered · ${bk.chapters.length} chapters, quick checks, quizzes, glossary and trophies</span></span><span class="go">${bn ? 'Carry on' : 'Start reading'} →</span></a>` : '') +
+      (tot ? `<div class="grid">${y.topics.map((t, i) => { const d = done(t), n = t.files.length, c = chOf(y, t), cp = c ? chProg(y, c) : null;
+        return `<button type="button" class="tc" data-t="${H(t.id)}"><span class="n">Topic ${i + 1}</span><h3>${H(t.title)}${t.temporary ? '<span class="tmp">This year only</span>' : ''}</h3><p>${H(t.summary)}</p>${cp ? `<span class="meta"><span class="bar" aria-hidden="true"><i style="width:${Math.round(cp[0] / cp[1] * 100)}%"></i></span>Notes: ${cp[0]}/${cp[1]} pages</span>` : ''}<span class="meta" style="${cp ? 'padding-top:0;margin-top:0' : ''}">${n ? `<span class="bar" aria-hidden="true"><i style="width:${Math.round(d / n * 100)}%"></i></span>Resources: ${d}/${n} done` : 'Resources coming soon'}</span></button>`; }).join('')}</div>`
         : '<div class="soon">Topics for this year are coming soon.</div>');
     wireTabs();
     document.querySelectorAll('.tc[data-t]').forEach(b => b.addEventListener('click', () => go('t' + b.dataset.t)));
@@ -194,7 +216,9 @@ main{max-width:980px;margin:0 auto;padding:18px 16px 60px}
     $('#app').innerHTML = tabs(y.year) + `<button type="button" class="back" data-back><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>All ${H(y.year)} topics</button>
       <section class="th"><span class="n">${H(y.year)} · Topic ${i + 1}</span><h2>${H(t.title)}${t.temporary ? '<span class="tmp">This year only</span>' : ''}</h2><p>${H(t.summary)}</p>
       ${t.learn && t.learn.length ? `<div class="learn"><h3>What you’ll learn</h3><ul>${t.learn.map(x => `<li>${H(x)}</li>`).join('')}</ul></div>` : ''}
-      ${n ? `<div class="prog"><span class="bar" aria-hidden="true"><i style="width:${Math.round(d / n * 100)}%"></i></span><span>${d} of ${n} done</span></div>` : ''}</section>
+      ${n ? `<div class="prog"><span class="bar" aria-hidden="true"><i style="width:${Math.round(d / n * 100)}%"></i></span><span>Resources: ${d} of ${n} done</span></div>` : ''}</section>
+      ${(() => { const c = chOf(y, t), b = bookOf(y); if (!c) return ''; const [cd, cn] = chProg(y, c);
+        return `<a class="nb" href="${H(b.file)}#${H(nextPage(y, c.pages))}">${ring(cd, cn)}<span class="tx"><small>Notes · Chapter ${c.n}</small><b>${H(c.title)}</b><span class="s">${cd} of ${cn} pages covered · each page has a quick check, and the chapter has a topic quiz</span></span><span class="go">${cd ? (cd === cn ? 'Revise' : 'Carry on') : 'Read the notes'} →</span></a>`; })()}
       ${lessons.map(f => row(f, true)).join('')}
       ${secs.map(([h, fs]) => `<section class="sec"><h3>${H(h)}</h3>${fs.map(f => row(f)).join('')}</section>`).join('')}
       ${!n ? '<div class="soon">Resources for this topic are coming soon.</div>' : '<p class="hint">Worksheets open as a PDF to read. To fill one in, press Download and open it in Word or Excel.</p>'}
@@ -202,10 +226,12 @@ main{max-width:980px;margin:0 auto;padding:18px 16px 60px}
     wireTabs();
     $('[data-back]').addEventListener('click', () => go('y' + y.n));
     document.querySelectorAll('main [data-t]').forEach(b => b.addEventListener('click', () => go('t' + b.dataset.t)));
-    document.querySelectorAll('input[data-k]').forEach(cb => cb.addEventListener('change', () => { if (cb.checked) st.done[cb.dataset.k] = Date.now(); else delete st.done[cb.dataset.k]; saveSt(); const r = cb.closest('.it'); if (r) r.classList.toggle('done', cb.checked); const pr = $('.prog'); if (pr) { const dd = done(t); pr.innerHTML = `<span class="bar" aria-hidden="true"><i style="width:${Math.round(dd / n * 100)}%"></i></span><span>${dd} of ${n} done</span>`; } }));
+    document.querySelectorAll('input[data-k]').forEach(cb => cb.addEventListener('change', () => { if (cb.checked) st.done[cb.dataset.k] = Date.now(); else delete st.done[cb.dataset.k]; saveSt(); const r = cb.closest('.it'); if (r) r.classList.toggle('done', cb.checked); const pr = $('.prog'); if (pr) { const dd = done(t); pr.innerHTML = `<span class="bar" aria-hidden="true"><i style="width:${Math.round(dd / n * 100)}%"></i></span><span>Resources: ${dd} of ${n} done</span>`; } }));
     scrollTo(0, 0);
   }
   addEventListener('hashchange', route);
+  fetch('ks3/books/index.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : {}).then(j => { NB = j || {}; if (M) route(); }).catch(() => { });
+  addEventListener('pageshow', e => { if (e.persisted && M) route(); });   /* back from a notes book: fresh progress */
   fetch('ks3/manifest.json', { cache: 'no-cache' }).then(r => { if (!r.ok) throw 0; return r.json(); }).then(j => { M = j; M.years = (M.years || []).filter(y => y.n >= 7 && y.n <= 10); route(); })
     .catch(() => { $('#app').innerHTML = '<p class="err">Couldn’t load the KS3 topics. Check you are online and try again.</p>'; });
   /* zones arrive a moment after the page opens: redraw the tabs when they do */

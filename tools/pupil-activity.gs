@@ -36,7 +36,7 @@ const SITE = 'https://popcorn483.github.io/ergsdigitaltechnology/';
 const REQUIRE_APPROVAL = true;   // new pupils wait until you approve them in the Teacher area › Pupils (false: anyone can sign up)
 const NOTIFY_EMAIL = '';   // where the emails go (sign-up requests, staff details, weekly report); empty: the Google account that owns this script
 const EMAIL_SIGNINS = true;   // email the script's owner each time a new pupil signs up (false to stop)   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
-const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22', 'KS3'];
+const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22', 'KS3', 'Y8', 'Y9', 'Y10'];
 /* ZONES: what a pupil may open. Year 8 / 9 / 10 are the KS3 years; the rest are the GCSE and A level workbooks.
    A pupil's own zones (Zones sheet) win; otherwise their class's zones (Classes sheet); with neither, everything is open. */
 const ZONES = ['Y8', 'Y9', 'Y10', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
@@ -203,7 +203,8 @@ function dropAccess_(ids) { const sh = acc_(), r = rows_(sh); for (let i = r.len
 /* SET WORK and MESSAGES */
 const work_ = () => tab_('Set work', ['ID', 'For (class, Y11 or ALL)', 'Unit', 'Topic', 'Due', 'Note', 'Set']);
 const msgs_ = () => tab_('Messages', ['ID', 'To (pupil ID, class, Y11 or ALL)', 'Message', 'Sent', 'Read by']);
-function forMe_(who, id, cls) { const c = String(cls || '').toUpperCase().replace(/[^A-Z0-9]/g, ''), y = (c.match(/^\d{1,2}/) || [''])[0]; who = String(who).toUpperCase(); return who === 'ALL' || who === String(id).toUpperCase() || (c && who === c) || (y && who === 'Y' + y); }
+function forMe_(who, id, cls) { const c = String(cls || '').toUpperCase().replace(/[^A-Z0-9]/g, ''), y = (c.match(/^\d{1,2}/) || [''])[0], me = String(id).toUpperCase();   /* who may be a list: 'ID1,ID2' (pupils picked in the Teacher area) */
+  return String(who).toUpperCase().split(',').some(w => w === 'ALL' || w === me || (c && w === c) || (y && w === 'Y' + y)); }
 function myWork_(rawId, cls) {
   if (!okId(rawId)) return { ok: false };
   const id = resolve_(String(rawId), aliases_());
@@ -429,7 +430,15 @@ function act_(q) {
   }
   if (q.action === 'setzones') {   /* set the zones for pupils (zones empty + clear=1: back to their class's zones) */
     if (!ids.length) return { ok: false, error: 'bad request' };
-    if (q.clear === '1') dropZones_(ids); else ids.forEach(id => setZones_(id, zl_(q.zones)));
+    /* mode: set (these exactly), add (open these on top of what each has), remove (lock these). A pupil with no limits
+       stays with no limits on add; on remove they get every zone except the ones locked. */
+    const mode = ['add', 'remove'].indexOf(q.mode) >= 0 ? q.mode : 'set', want = zl_(q.zones);
+    if (q.clear === '1') dropZones_(ids);
+    else if (mode === 'set') ids.forEach(id => setZones_(id, want));
+    else { const PZ0 = pzones_(), CL0 = classes_(), N0 = names_(), R0 = {}; roster_().forEach(p => { R0[p.id] = p; });
+      ids.forEach(id => { const cur = effZones_(id, (N0[id] || [])[1] || (R0[id] || {}).cls, PZ0, CL0);
+        if (mode === 'add') { if (cur) setZones_(id, [...new Set(cur.concat(want))]); }
+        else setZones_(id, (cur || ZONES).filter(z => want.indexOf(z) < 0)); }); }
     const PZ = pzones_(), CL = classes_(), N = names_(), sh = zreqSh_(), r = rows_(sh), now = new Date();   /* requests now covered are answered */
     r.forEach((x, i) => { if (String(x[6]) !== 'pending' || ids.indexOf(String(x[1])) < 0) return; const z = effZones_(String(x[1]), (N[String(x[1])] || [])[1] || String(x[3]), PZ, CL); if (!z || z.indexOf(String(x[4])) >= 0) sh.getRange(i + 2, 7, 1, 2).setValues([['allowed', now]]); });
     return { ok: true };
@@ -450,9 +459,10 @@ function act_(q) {
     const id = 'W' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); work_().appendRow([id, who, book, ch, String(q.due || '').slice(0, 10), clean_(q.note, 200), new Date()]); return { ok: true, id };
   }
   if (q.action === 'delwork') { const sh = work_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (String(r[i][0]) === String(q.wid)) sh.deleteRow(i + 2); return { ok: true }; }
-  if (q.action === 'sendmsg') {   /* to: a pupil ID, a form class, a year (Y11) or ALL */
-    const t = String(q.to || ''), text = clean_(q.text, 500); if (!t || !text) return { ok: false, error: 'bad request' };
-    const id = 'M' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); msgs_().appendRow([id, t.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 24), text, new Date(), '']); return { ok: true, id };
+  if (q.action === 'sendmsg') {   /* to: a pupil ID, a form class, a year (Y11) or ALL; or ids: several pupils picked in the Teacher area (one message, each sees it) */
+    const text = clean_(q.text, 500), list = ids.map(x => x.toUpperCase().replace(/[^A-Z0-9]/g, '')).filter(Boolean);
+    const t = list.length ? [...new Set(list)].join(',').slice(0, 45000) : String(q.to || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 24); if (!t || !text) return { ok: false, error: 'bad request' };
+    const id = 'M' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); msgs_().appendRow([id, t, text, new Date(), '']); return { ok: true, id };
   }
   if (q.action === 'delmsg') { const sh = msgs_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (String(r[i][0]) === String(q.mid)) sh.deleteRow(i + 2); return { ok: true }; }
   if (q.action === 'testmail') { try { return { ok: true, to: testEmail() }; } catch (e) { mailNote_(e); return { ok: false, to: mailTo_(), error: String(e && e.message || e) }; } }
@@ -511,8 +521,8 @@ function dropNames_(ids) {
 const CHAPTERS = {"U1|c01":"Digital data","U1|c02":"Software","U1|c03":"Database applications","U1|c04":"Spreadsheet applications","U1|c05":"Computer hardware","U1|c06":"Network technologies","U1|c07":"Cyberspace, network security and data transfer","U1|c08":"Cloud technology","U1|c09":"Ethical, legal and environmental impact","U1|c10":"Digital applications","U4|c01":"Contemporary trends in software development","U4|c02":"Digital data","U4|c03":"Digital design principles","U4|c04":"Programming constructs","U4|c05":"Simple error handling techniques","U4|c06":"Developing test plans and testing a solution","U4|c07":"Evaluation of digitally authored systems","U5|c01":"Getting set up","U5|c02":"Design","U5|c03":"Building it in Visual Studio","U5|c04":"Testing","U5|c05":"Evaluation","U5|c06":"Before you submit","AS1|c01":"Reasons for systems development","AS1|c02":"Analysis","AS1|c03":"System design, development and testing","AS1|c04":"System implementation","AS1|c05":"Alternative development approaches","AS1|c06":"Software projects","AS1|c07":"Security issues","AS1|c08":"Algorithms","AS1|c09":"Fundamentals of programming","AS1|c10":"Object-oriented programming","AS2|c01":"Data representation","AS2|c02":"Data and information","AS2|c03":"Architecture","AS2|c04":"User interface and data compression","AS2|c05":"Software","AS2|c06":"Web applications","AS2|c07":"Website development","A21|c01":"Network resources","A21|c02":"Protocols, transmission media and errors","A21|c03":"Databases","A21|c04":"AI, expert systems and robotics","A21|c05":"Mobile technology, data mining and the cloud","A21|c06":"Legislation and ethics","A22|c01":"Choose your project","A22|c02":"Design your database","A22|c03":"Getting started with Access","A22|c04":"Tables and relationships","A22|c05":"Queries","A22|c06":"Forms","A22|c07":"Reports","A22|c08":"VBA basics","A22|c09":"VBA task tutorials","A22|c10":"Booking system: tables, relationships and forms","A22|c11":"Booking system: the booking logic in VBA","A22|c12":"Booking system: reports, menu and finishing touches","A22|c13":"Your coursework: setting up the write-up","A22|c14":"Your coursework: the Analysis chapter","A22|c15":"Your coursework: the Design chapter","A22|c16":"Your coursework: the Testing and Evaluation chapter","A22|c17":"Your coursework: the User Guide, Appendix and Bibliography","A22|c18":"Tables and keys","A22|c19":"Relationships","A22|c20":"Queries","A22|c21":"Forms","A22|c22":"Reports","A22|c23":"Macros","A22|c24":"VBA quick recipes"};
 // CHAPTERS:END
 /* KS3 topics (from ks3/manifest.json; a new topic still works, it just shows its code) */
-const KS3_TOPICS = {"KS3|8-01": "Year 8: Introduction & MySchool", "KS3|8-02": "Year 8: Safety in the Classroom", "KS3|8-03": "Year 8: Hardware & Software", "KS3|8-04": "Year 8: Online Safety", "KS3|9-01": "Year 9: Computer Graphics", "KS3|9-02": "Year 9: Web Design", "KS3|9-03": "Year 9: Micro:bits", "KS3|10-01": "Year 10: Under the Hood", "KS3|10-02": "Year 10: Game Design", "KS3|10-03": "Year 10: Programming"};
-const UNIT_NAMES = { home: 'Home', KS3: 'KS3', U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+const KS3_TOPICS = {"KS3|8-01": "Year 8: Introduction & MySchool", "KS3|8-02": "Year 8: Safety in the Classroom", "KS3|8-03": "Year 8: Hardware & Software", "KS3|8-04": "Year 8: Online Safety", "KS3|9-01": "Year 9: Computer Graphics", "KS3|9-02": "Year 9: Web Design", "KS3|9-03": "Year 9: Micro:bits", "KS3|10-01": "Year 10: Under the Hood", "KS3|10-02": "Year 10: Game Design", "KS3|10-03": "Year 10: Programming", "Y8|c01": "Introduction & MySchool", "Y8|c02": "Safety in the Classroom", "Y8|c03": "Hardware & Software", "Y8|c04": "Online Safety", "Y9|c01": "Computer Graphics", "Y9|c02": "Web Design", "Y9|c03": "Micro:bits", "Y10|c01": "Under the Hood", "Y10|c02": "Game Design", "Y10|c03": "Programming"};
+const UNIT_NAMES = { home: 'Home', KS3: 'KS3', Y8: 'Year 8', Y9: 'Year 9', Y10: 'Year 10', U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
 function dayOf_(t) { return Utilities.formatDate(new Date(t), 'Europe/London', 'yyyy-MM-dd'); }
 function addDays_(ds, n) { const d = new Date(ds + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
 function mondayOf_(t) { const ds = dayOf_(t), d = new Date(ds + 'T12:00:00Z'); return addDays_(ds, -((d.getUTCDay() + 6) % 7)); }
