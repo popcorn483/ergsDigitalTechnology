@@ -300,7 +300,7 @@ h1{font-family:var(--brand);font-weight:700;letter-spacing:.015em;font-size:clam
 .trc-n{margin:8px 0 0 46px;font-size:12.5px;color:var(--ink-3);max-width:70ch}
 @media (max-width:520px){ .trc-us,.trc-n{margin-left:0} }
 /* the home-page trophy strip */
-.tr-fab{position:fixed;right:16px;bottom:calc(88px + env(safe-area-inset-bottom,0px));transition:bottom .25s ease,right .25s ease;z-index:61;width:58px;height:58px;border-radius:50%;border:0;background:linear-gradient(145deg,#F7C948,#D99A06);color:#3B2A00;box-shadow:0 8px 22px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;-webkit-tap-highlight-color:transparent;font-family:var(--sans)}
+.tr-fab{position:fixed;right:16px;bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:61;width:58px;height:58px;border-radius:50%;border:0;background:linear-gradient(145deg,#F7C948,#D99A06);color:#3B2A00;box-shadow:0 8px 22px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;-webkit-tap-highlight-color:transparent;font-family:var(--sans)}
 .tr-fab svg{width:24px;height:24px}.tr-fab small{font:800 11px/1 system-ui,sans-serif}.tr-fab:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
 html.wl-on .tr-fab,html.wl-on .tr-pop,html.su-on .tr-fab{display:none}
 .tr-pop{position:fixed;right:16px;bottom:calc(158px + env(safe-area-inset-bottom,0px));z-index:62;width:min(380px,calc(100vw - 32px));max-height:calc(100vh - 190px);overflow:auto;border-radius:16px;box-shadow:0 18px 50px rgba(0,0,0,.35);background:var(--paper)}
@@ -10417,7 +10417,11 @@ document.getElementById('upl-l').innerHTML = UNITS.filter(u => u.mode !== 'tutor
     const r = g && g.getBoundingClientRect(), off = !g || g.hidden || !r.width || getComputedStyle(g).display === 'none' || getComputedStyle(g).visibility === 'hidden';
     if (off) { t.style.visibility = 'hidden'; return; }
     t.style.visibility = ''; t.style.width = t.style.height = Math.round(r.width) + 'px';
-    t.style.bottom = Math.round(innerHeight - r.top + 12) + 'px'; t.style.right = Math.round(innerWidth - r.right) + 'px';
+    /* measure and correct (works with scrollbars, zoom and phone toolbars): line its centre up with Glossary's, 12px above it */
+    const cs = getComputedStyle(t), q = t.getBoundingClientRect();
+    const dx = (q.left + q.width / 2) - (r.left + r.width / 2), dy = q.bottom - (r.top - 12);
+    if (Math.abs(dx) > .5) t.style.right = Math.round((parseFloat(cs.right) || 0) + dx) + 'px';
+    if (Math.abs(dy) > .5) t.style.bottom = Math.round((parseFloat(cs.bottom) || 0) + dy) + 'px';
   };
   let raf = 0; const kick = () => { if (!raf) raf = requestAnimationFrame(() => { raf = 0; sync(); }); };
   ['resize', 'scroll', 'hashchange', 'popstate'].forEach(e => addEventListener(e, kick, { passive: true }));
