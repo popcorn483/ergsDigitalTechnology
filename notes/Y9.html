@@ -2495,6 +2495,8 @@ html.act-open{overflow:hidden}html.act-open .pbar,html.act-open .sv-sw{display:n
 .term.term-pp{background:none!important}.term.term-pp::after{content:none!important}
 
 /* floating glossary button */
+.tip-best{display:inline-block;margin:0 8px 0 0;padding:2px 8px;border-radius:999px;background:#E1F3EA;color:#18744A;font-size:11.5px;font-weight:800;letter-spacing:.02em;vertical-align:2px}.tip-sec{margin:18px 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3,#687386)}
+.tr-fab{position:fixed;right:16px;bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:61;width:58px;height:58px;border-radius:50%;background:linear-gradient(145deg,#F7C948,#D99A06);color:#3B2A00;box-shadow:0 8px 22px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;text-decoration:none;-webkit-tap-highlight-color:transparent}.tr-fab svg,.tr-fab .tr-ic{width:24px;height:24px}.tr-fab small{font:800 11px/1 system-ui,sans-serif}.tr-fab:focus-visible{outline:3px solid #1F5FBF;outline-offset:3px}html.pbar-on .tr-fab{bottom:calc(158px + env(safe-area-inset-bottom,0px))}@media print{.tr-fab{display:none!important}}
 .mrb-gl-fab{position:fixed;right:14px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:61;width:56px;height:56px;border-radius:50%;border:0;background:#0E7C86;color:#fff;box-shadow:0 8px 22px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;font-family:var(--sans);-webkit-tap-highlight-color:transparent}
 .mrb-gl-fab span{font:800 19px/1 Georgia,serif}.mrb-gl-fab small{font:700 9px/1 var(--sans);letter-spacing:.02em}
 .mrb-gl-fab:hover{transform:scale(1.06)}
@@ -10903,8 +10905,17 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
   function tipsNode(P) {
     const box = document.createElement('div'); box.className = 'ap-tips';
     const ks = tipsFor(P), card = k => `<section class="tip"><h3>${esc(HOW[k].t)}</h3><p class="tip-w">${esc(HOW[k].why)}</p><ol>${HOW[k].steps.map(x => `<li>${esc(x)}</li>`).join('')}</ol></section>`;
-    box.innerHTML = `<p class="ap-note">The best ways to revise this page, from Mr Butler’s How to Revise sheet:</p>${ks.map(card).join('')}
-      <details class="tip-all"><summary>All six ways to revise</summary>${Object.keys(HOW).filter(k => !ks.includes(k)).map(card).join('')}</details>
+    /* every way to revise, not just two: the ones that suit this page first (marked), then the rest of Mr Butler's sheet, then the revision tools on this site */
+    const isK = typeof KS3 !== 'undefined' && KS3, all = Object.keys(HOW).filter(k => !(isK && k === 'past')), rest = all.filter(k => !ks.includes(k));
+    const best = k => card(k).replace('<h3>', '<h3><span class="tip-best">Best for this page</span>');
+    const SITE = [['Page quiz', 'Instant feedback on this page.', ['Open Page quiz (above) without looking at the notes.', 'Read the explanation for anything you got wrong, then re-read that part of the notes.', 'Try it again tomorrow: spacing it out helps you remember.']],
+      ['Topic quiz', 'Test the whole topic at once.', ['When you have covered every page in the topic, take the topic quiz (Activities › Topic test).', 'Note the questions you got wrong and revisit those pages.', 'Retake it until you score 80% or more.']],
+      ['Flashcards and the glossary quiz', 'Learn the key terms until you know them by heart.', ['Open Key terms or the Glossary and turn on flashcards.', 'Say the definition out loud before you flip the card; tap “I knew it” only if you really did.', 'Do five new terms a day, and go back over yesterday’s.']],
+      ['Listen and watch', 'Good for a bus journey or a short break.', ['Play the Podcast and follow along with the notes, or listen on the way to school.', 'Watch the Videos for this page, pausing to jot down one new thing from each.', 'Afterwards, write three things you learned without looking.']],
+      ['Interactives and worked examples', 'Learn by doing.', ['Open the Interactive and try it before reading the answer.', 'For worked examples, press Show step 1 and try the next step yourself before revealing it.', 'Make up your own example and work it through the same way.']]];
+    const scard = ([t, w, st]) => `<section class="tip"><h3>${esc(t)}</h3><p class="tip-w">${esc(w)}</p><ol>${st.map(x => `<li>${esc(x)}</li>`).join('')}</ol></section>`;
+    box.innerHTML = `<p class="ap-note">Every way to revise this page. The ones that suit it best come first. From Mr Butler’s How to Revise sheet:</p>${ks.map(best).join('')}${rest.map(card).join('')}
+      <h3 class="tip-sec">Using this site</h3>${SITE.map(scard).join('')}
       <p class="ap-note"><a href="${ON_WEB ? '../' : ''}how-to-revise.pdf" target="_blank" rel="noopener">Mr Butler’s How to Revise sheet (PDF)</a></p>`;
     return box;
   }
@@ -11272,6 +11283,10 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
     const b = document.createElement('button'); b.type = 'button'; b.className = 'mrb-gl-fab'; b.setAttribute('aria-label', 'Glossary: key terms for this page');
     b.innerHTML = '<span aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg></span><small>Glossary</small>';
     b.addEventListener('click', () => gb.click()); document.body.append(b);
+    /* a floating trophy button above it: this book's trophies (count earned here) */
+    const t = document.createElement('a'); t.className = 'tr-fab'; t.href = '#trophies';
+    const paint = () => { let n = 0; try { n = Object.keys((typeof TR !== 'undefined' && TR.earned) || {}).length; } catch (e) { } t.innerHTML = `${typeof trIcon === 'function' ? trIcon(n ? 'gold' : '', true) : '🏆'}<small>${n}</small>`; t.setAttribute('aria-label', `Trophies: ${n} of 100 earned in this book`); };
+    paint(); setInterval(paint, 4000); document.body.append(t);
   })();
   const pupil = () => { try { return !localStorage.getItem('notes-nocount') || !!localStorage.getItem('mrb-viewas') || !!localStorage.getItem('mrb-pupilmode'); } catch (e) { return true; } };
   if (!pupil()) return;
