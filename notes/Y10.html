@@ -10466,7 +10466,7 @@ html.va-on .ach{top:calc(100px + env(safe-area-inset-top,0px))}
   const RM = () => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) { return false; } };
   const me = () => { try { return JSON.parse(LS.get('mrb-pupil') || 'null') || {}; } catch (e) { return {}; } };
   const first = () => String(me().name || '').trim().split(/\s+/)[0] || '';
-  const HUNT = ['konami', 'hack', 'sudo', 'matrix', 'binary', 'hello', 'roll', '42', '404', 'mrb', 'ring', 'bug'];   /* the ones you can hunt for */
+  const HUNT = ['konami', 'hack', 'sudo', 'matrix', 'binary', 'hello', 'roll', '42', '404', 'mrb', 'ring', 'bug', 'pong', 'snake', 'tetris', 'enigma', 'turing', 'lovelace', 'colossus', 'babbage', 'pixel', 'teapot', 'ping', 'undo', 'cookie', 'firewall', 'virus', 'gameover', 'levelup', 'invaders', 'pacman', 'minecraft', 'microbit', 'html', 'css', 'qwerty', 'gravity', 'enniskillen', 'ergs', 'dino', 'trophy', 'books'];   /* the ones you can hunt for */
   const found = () => { try { return JSON.parse(LS.get('mrb-eggs') || '[]') || []; } catch (e) { return []; } };
   function mark(id) { const f = found(); if (HUNT.includes(id) && !f.includes(id)) { f.push(id); LS.set('mrb-eggs', JSON.stringify(f)); const k = f.filter(x => HUNT.includes(x)).length; if (window.MRB_ACH) MRB_ACH({ head: 'Secret found', name: k === HUNT.length ? 'Egg hunter: all ' + HUNT.length + ' found!' : `Easter egg ${k} of ${HUNT.length}`, tier: k === HUNT.length ? 'platinum' : 'egg', icon: k === HUNT.length ? '🏆' : '🥚' }); } const n = found().filter(x => HUNT.includes(x)).length; return HUNT.includes(id) ? `🥚 Easter egg ${n} of ${HUNT.length} found${n === HUNT.length ? ' – you found them all! 🏆' : ''}` : ''; }
   const css = () => { if (document.getElementById('egg-css')) return; const s = document.createElement('style'); s.id = 'egg-css'; s.textContent = `
@@ -10698,6 +10698,80 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
   const CLUES = { konami: 'Up, up, down, down, left, right, left, right, B, A. On a phone: swipe it, then tap twice.', hack: 'Press and hold a padlock. (Or search for what a hacker does.)', sudo: 'Press and hold Mr Butler’s name.', matrix: 'Press and hold a topic’s big number.',
     binary: 'Tap a topic’s big number three times.', hello: 'Wave at a topic’s icon: tap it three times.', roll: 'Shake your phone, or tap with three fingers.', '42': 'The colour stripe on the home screen knows the answer to everything.',
     '404': 'At the very bottom of a page, tap Mr Butler’s name until the page goes missing.', mrb: 'Tap Mr Butler’s name five times.', ring: 'Progress rings look very spinnable.', bug: 'Every so often something crawls across a workbook page.' };
+  /* ---- MORE EGGS (30 more: 42 in all). Typed anywhere outside a text box, or into a search box; two are press-and-hold. ---- */
+  const once5 = (el, ms) => setTimeout(() => el.remove(), ms);
+  const styleFor = (css, ms) => { const s = document.createElement('style'); s.textContent = css; document.head.append(s); once5(s, ms); };
+  const caesar = (t, k) => t.toUpperCase().replace(/[A-Z]/g, c => String.fromCharCode((c.charCodeAt(0) - 65 + k) % 26 + 65));
+  const after = (fn, ms) => setTimeout(fn, RM0() ? 0 : ms);
+  function pong() {   /* a rally: two paddles and a ball, for four seconds */
+    let x = innerWidth / 2, y = innerHeight / 2, vx = 9, vy = 5;
+    canvas(4200, (g, t, w, h) => { g.fillStyle = 'rgba(0,0,0,.82)'; g.fillRect(0, 0, w, h); g.fillStyle = '#fff'; g.setLineDash([10, 14]); g.strokeStyle = 'rgba(255,255,255,.5)'; g.beginPath(); g.moveTo(w / 2, 0); g.lineTo(w / 2, h); g.stroke(); g.setLineDash([]);
+      x += vx; y += vy; if (y < 10 || y > h - 10) vy = -vy; if (x < 40 || x > w - 40) vx = -vx;
+      const py = Math.max(0, Math.min(h - 90, y - 45)); g.fillRect(20, py, 12, 90); g.fillRect(w - 32, py, 12, 90); g.fillRect(x - 8, y - 8, 16, 16);
+      g.font = '800 48px ui-monospace,Menlo,monospace'; g.textAlign = 'center'; g.fillText('4   2', w / 2, 70); });
+  }
+  function blocks() {   /* falling tetrominoes */
+    const C = ['#00F0F0', '#F0F000', '#A000F0', '#00F000', '#F00000', '#0000F0', '#F0A000'], S = [[[0, 0], [1, 0], [2, 0], [3, 0]], [[0, 0], [1, 0], [0, 1], [1, 1]], [[1, 0], [0, 1], [1, 1], [2, 1]], [[1, 0], [2, 0], [0, 1], [1, 1]], [[0, 0], [1, 0], [1, 1], [2, 1]], [[0, 0], [0, 1], [1, 1], [2, 1]], [[2, 0], [0, 1], [1, 1], [2, 1]]];
+    const P = Array.from({ length: 26 }, () => { const k = Math.random() * 7 | 0; return { s: S[k], c: C[k], x: Math.random() * innerWidth, y: -Math.random() * innerHeight, v: 2 + Math.random() * 3, z: 16 + Math.random() * 12 }; });
+    canvas(4500, (g, t, w, h) => { g.clearRect(0, 0, w, h); P.forEach(p => { p.y += p.v; g.fillStyle = p.c; p.s.forEach(([a, b]) => { g.fillRect(p.x + a * p.z, p.y + b * p.z, p.z - 2, p.z - 2); }); }); });
+  }
+  function ledHeart() {   /* a micro:bit's 5 x 5 LEDs showing a heart */
+    const H = [0, 1, 0, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 0, 1, 0, 0];
+    stage(`<div style="background:#111;border-radius:22px;padding:22px;display:grid;grid-template-columns:repeat(5,1fr);gap:14px;box-shadow:0 20px 60px rgba(0,0,0,.5)" class="egg-pop">${H.map((v, i) => `<i style="display:block;width:clamp(26px,8vw,46px);aspect-ratio:1;border-radius:6px;background:${v ? '#FF2D2D' : '#3A1414'};box-shadow:${v ? '0 0 18px #FF2D2D' : 'none'};animation:eggpop .4s ${(i % 5) * .06 + (i / 5 | 0) * .06}s both"></i>`).join('')}</div>`, 3200, true);
+  }
+  const MORE = {
+    pong: () => { if (!RM0()) pong(); after(() => toast('🏓 <b>Pong</b> (1972): one of the first arcade video games. Two paddles, one ball, endless rallies.', 'pong'), 3800); },
+    snake: () => { if (!RM0()) particles(['🐍', '🍎', '🟩'], 3600, 'fly', 22); after(() => toast('🐍 <b>Snake</b>: eat the apple, grow longer, don’t bite your own tail. Every old Nokia phone had it.', 'snake'), 2400); },
+    tetris: () => { if (!RM0()) blocks(); after(() => toast('🧱 <b>Tetris</b> (1984), made by Alexey Pajitnov in Moscow. Fill a row and it disappears… like your worries after revising.', 'tetris'), 3800); },
+    enigma: () => { const n = (first() || 'Enigma').slice(0, 12); if (!RM0()) particles(['⚙️', '🔤', '🔐'], 3200, 'burst', 30);
+      after(() => toast(`🔐 Encrypted: <code>${esc(caesar(n, 3))}</code> (each letter moved on 3, a Caesar cipher).<br>The real Enigma changed its code with every key press. Bletchley Park cracked it anyway.`, 'enigma', 7000), 1800); },
+    turing: () => { if (!RM0()) stage('<div class="egg-col"><div class="egg-big egg-pop">🧠</div><div class="egg-hi">Human or machine?</div></div>', 2800, true);
+      after(() => toast('🧠 <b>Alan Turing</b> designed the Bombe that helped crack Enigma, and asked: can a machine think? (The Turing test.)', 'turing', 6500), 2300); },
+    lovelace: () => { if (!RM0()) particles(['💡', '⚙️', '📜', '✨'], 3400, 'rise', 40); after(() => toast('📜 <b>Ada Lovelace</b> wrote a program for Charles Babbage’s Analytical Engine in 1843, before computers even existed.', 'lovelace', 6500), 2000); },
+    colossus: () => { if (!RM0()) particles(['💡', '💡', '🔌', '📼'], 3400, 'rain', 50); after(() => toast('📼 <b>Colossus</b> (1944), built by Tommy Flowers to break the Lorenz code: the first programmable electronic computer. It used thousands of glass valves.', 'colossus', 7000), 2000); },
+    babbage: () => { if (!RM0()) particles(['⚙️', '⚙️', '🔩'], 3200, 'burst', 40); after(() => toast('⚙️ <b>Charles Babbage</b> designed the Difference Engine and the Analytical Engine in the 1800s: computers made of cogs.', 'babbage', 6500), 1800); },
+    pixel: () => { if (!RM0()) particles(['🟥', '🟧', '🟨', '🟩', '🟦', '🟪'], 3200, 'burst', 70); after(() => toast('🟦 A <b>pixel</b> is one tiny dot of colour. This screen has millions of them. Zoom in far enough and everything is squares.', 'pixel'), 2000); },
+    teapot: () => { if (!RM0()) stage('<div class="egg-col"><div class="egg-big egg-pop">☕</div><div class="egg-g" data-t="418" style="font-size:clamp(60px,20vw,140px)">418</div></div>', 2800, true);
+      after(() => toast('☕ <b>HTTP 418: I’m a teapot.</b> A real (joke) web error code: the server refuses to brew coffee because it is a teapot.', 'teapot', 6500), 2400); },
+    ping: () => { if (!RM0()) particles(['📡', '📶', '🏓'], 2200, 'fly', 10); toast(`📡 <code>ping mrbutler.ergs</code><br><code>Reply: bytes=32 time=4ms TTL=64</code><br>Ping checks whether another computer on the network answers, and how quickly.`, 'ping', 6500); },
+    undo: () => { if (!RM0()) document.documentElement.animate([{ transform: 'none' }, { transform: 'scaleX(-1)' }, { transform: 'none' }], { duration: 900, easing: 'ease-in-out' }); toast('↩️ <b>Ctrl + Z</b>: undo! If only it worked on real life (and on exam answers once you’ve handed them in).', 'undo'); },
+    cookie: () => { if (!RM0()) particles(['🍪', '🍪', '🥛'], 3400, 'rain', 45); after(() => toast('🍪 A <b>cookie</b> is a small file a website saves on your device to remember you. This site uses local storage instead… and no actual biscuits.', 'cookie', 6500), 1600); },
+    firewall: () => { if (!RM0()) particles(['🔥', '🧱', '🔥', '🧱'], 3200, 'rise', 60); after(() => toast('🧱 A <b>firewall</b> checks traffic coming into a network and blocks anything that breaks its rules. Nothing gets past this one.', 'firewall', 6500), 2000); },
+    virus: () => { if (!RM0()) { particles(['🦠', '🦠', '👾'], 2600, 'fly', 16); setTimeout(() => particles(['🛡️', '✅'], 1800, 'burst', 24), 2000); }
+      after(() => toast('🛡️ <b>Antivirus scan complete: 0 threats found.</b> A virus is malware that copies itself into other files. Keep your antivirus up to date.', 'virus', 6500), 3000); },
+    gameover: () => { if (!RM0()) stage('<div class="egg-col"><div class="egg-g" data-t="GAME OVER" style="font-size:clamp(46px,14vw,120px)">GAME OVER</div><div class="egg-hi" style="font-size:clamp(16px,4.5vw,26px)">INSERT COIN TO CONTINUE</div></div>', 3000, true);
+      after(() => toast('🕹️ <b>Continue?</b> 10… 9… 8… Good news: revision has infinite continues.', 'gameover'), 2600); },
+    levelup: () => { if (!RM0()) { confetti(); stage('<div class="egg-col"><div class="egg-big egg-pop">⬆️</div><div class="egg-big egg-pop" style="font-size:clamp(40px,12vw,96px);animation-delay:.2s">LEVEL UP!</div></div>', 2600, true); }
+      after(() => toast(`⬆️ <b>${esc(first() || 'You')} reached level 99 in Digital Technology.</b> (Unofficially. Do a page quiz to make it official.)`, 'levelup'), 2200); },
+    invaders: () => { if (!RM0()) particles(['👾', '👾', '👽', '🛸'], 3800, 'fly', 26); after(() => toast('👾 <b>Space Invaders</b> (1978, Taito): shoot the aliens before they land. It was one of the first games to keep a high score.', 'invaders', 7000), 2600); },
+    pacman: () => { if (!RM0()) particles(['🟡', '🍒', '👻', '•'], 3400, 'fly', 30); after(() => toast('🟡 <b>Pac-Man</b> (1980): eat the dots, avoid the ghosts. Each ghost has its own way of chasing you: Blinky, Pinky, Inky and Clyde.', 'pacman', 7000), 2200); },
+    minecraft: () => { if (!RM0()) particles(['⛏️', '🟫', '🟩', '💎'], 3400, 'rain', 55); after(() => toast('⛏️ <b>Minecraft</b>: the best-selling video game ever. Fun fact from Year 10: it is not really a VR game, but it does have a VR mode.', 'minecraft', 7000), 2000); },
+    microbit: () => { if (!RM0()) ledHeart(); after(() => toast('❤️ <b>BBC micro:bit</b>: 25 red LEDs, two buttons, and sensors for light, temperature and movement. <code>basic.showIcon(IconNames.Heart)</code>', 'microbit', 7000), 2600); },
+    html: () => { if (!RM0()) styleFor('body *{outline:1px solid rgba(255,45,85,.55)!important;outline-offset:-1px}', 5000); toast('🧩 <b>&lt;html&gt;</b> Every web page is made of boxes. For five seconds you can see every element’s box.', 'html', 5500); },
+    css: () => { if (!RM0()) styleFor('body,body *{font-family:"Comic Sans MS","Comic Sans","Chalkboard SE",cursive!important}', 5000); toast('🎨 <b>CSS</b> controls how a page looks: one rule changed every font on this page. (Don’t worry, it changes back in five seconds.)', 'css', 5500); },
+    qwerty: () => { if (!RM0()) particles(['⌨️', 'Q', 'W', 'E', 'R', 'T', 'Y'], 3000, 'rain', 50); after(() => toast('⌨️ <b>QWERTY</b>: the keyboard layout was designed for typewriters in the 1870s, and we still use it today.', 'qwerty', 6500), 1600); },
+    gravity: () => { if (!RM0()) { particles(['🍎', '🍎', '🍏'], 3200, 'rain', 30); document.documentElement.animate([{ transform: 'none' }, { transform: 'translateY(14px) rotate(1.5deg)' }, { transform: 'none' }], { duration: 1200, easing: 'cubic-bezier(.3,1.6,.5,1)' }); }
+      after(() => toast('🍎 <b>Gravity</b> switched on. Isaac Newton would be proud. (Gravity isn’t on the spec, but falling grades are avoidable.)', 'gravity'), 1800); },
+    enniskillen: () => { if (!RM0()) particles(['🏰', '🦢', '🌊', '🚣'], 3600, 'rise', 34); after(() => toast('🏰 <b>Enniskillen</b>: the island town on Lough Erne, with its castle and Watergate. Home of ERGS.', 'enniskillen', 6500), 2000); },
+    ergs: () => { if (!RM0()) { confetti(); particles(['🎓', '⭐', '💙'], 3200, 'burst', 40); } after(() => toast(`🎓 <b>ERGS!</b> Enniskillen Royal Grammar School. ${esc(first() || 'You')} is flying the flag.`, 'ergs'), 1800); },
+    dino: () => { if (!RM0()) particles(['🦖', '🌵', '🌵', '☁️'], 3400, 'fly', 12); after(() => toast('🦖 No internet? Chrome’s offline dinosaur game starts with the space bar. This site works offline too, so no excuse.', 'dino', 6500), 2400); },
+    trophy: () => { if (!RM0()) particles(['🏆', '🥇', '🥈', '🥉', '⭐'], 3200, 'rain', 50); after(() => toast('🏆 <b>Trophy polisher.</b> Holding it won’t earn more… but page quizzes will.', 'trophy'), 1600); },
+    books: () => { if (!RM0()) particles(['📚', '📖', '📘', '📗', '📕'], 3200, 'burst', 40); after(() => toast('📚 <b>Bookworm!</b> The glossary has every key term, with flashcards and a quiz. Learn five a day.', 'books'), 1800); },
+  };
+  Object.assign(EGGS, MORE);
+  Object.assign(WORDS, { pong: 'pong', snake: 'snake', tetris: 'tetris', enigma: 'enigma', turing: 'turing', alanturing: 'turing', lovelace: 'lovelace', adalovelace: 'lovelace', colossus: 'colossus', babbage: 'babbage',
+    pixel: 'pixel', teapot: 'teapot', '418': 'teapot', ping: 'ping', undo: 'undo', ctrlz: 'undo', cookie: 'cookie', cookies: 'cookie', firewall: 'firewall', virus: 'virus', antivirus: 'virus', gameover: 'gameover',
+    levelup: 'levelup', spaceinvaders: 'invaders', invaders: 'invaders', pacman: 'pacman', minecraft: 'minecraft', microbit: 'microbit', html: 'html', css: 'css', qwerty: 'qwerty', gravity: 'gravity',
+    enniskillen: 'enniskillen', ergs: 'ergs', dino: 'dino', trex: 'dino' });
+  HOLDS.push(['#tr-fab,.tr-flink,.tr-pgx,.tr-ml', 'trophy'], ['.mrb-gl-fab', 'books']);
+  Object.assign(CLUES, { pong: 'Type the name of an early arcade tennis game (1972).', snake: 'Type the game every old Nokia phone had.', tetris: 'Type the falling-blocks game from 1984.',
+    enigma: 'Type the name of the German cipher machine cracked at Bletchley Park.', turing: 'Type the surname of the codebreaker who designed the Bombe.', lovelace: 'Type the surname of Ada, the first computer programmer.',
+    colossus: 'Type the name of the first programmable electronic computer (1944).', babbage: 'Type the surname of the man who designed the Analytical Engine.', pixel: 'Type the name of the smallest dot in a bitmap image.',
+    teapot: 'Type what HTTP error 418 says the server is.', ping: 'Type the command that checks if another computer answers.', undo: 'Type what Ctrl + Z does.', cookie: 'Type the small file a website leaves on your device.',
+    firewall: 'Type what guards the edge of a network.', virus: 'Type a kind of malware that copies itself.', gameover: 'Type what you see when you run out of lives (two words).', levelup: 'Type what happens when you finish a level (two words).',
+    invaders: 'Type the 1978 alien-shooting arcade game (two words).', pacman: 'Type the name of the yellow, dot-eating hero.', minecraft: 'Type the blocky game that isn’t really VR.', microbit: 'Type the name of the little BBC computer from Year 9.',
+    html: 'Type the language every web page is written in.', css: 'Type the language that styles web pages.', qwerty: 'Type the first six letters on a keyboard.', gravity: 'Type what made the apple fall on Newton.',
+    enniskillen: 'Type the name of the island town where your school is.', ergs: 'Type your school’s initials.', dino: 'Type the name of the game Chrome shows when you’re offline.', trophy: 'Press and hold a trophy.', books: 'Press and hold the Glossary button.' });
   function card() {   /* in My progress, once the first egg is found: how many, and clues for the rest */
     const f = found().filter(x => HUNT.includes(x)); if (!f.length) return '';
     return `<details class="egg-card"><summary>🥚 Easter eggs: <b>${f.length} of ${HUNT.length}</b> found${f.length === HUNT.length ? ' 🏆' : ''}</summary><ul>${HUNT.map(id => `<li class="${f.includes(id) ? 'got' : ''}">${f.includes(id) ? '✅' : '❔'} ${esc(CLUES[id])}</li>`).join('')}</ul></details>`;
