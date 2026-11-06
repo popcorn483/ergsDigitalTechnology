@@ -27,13 +27,20 @@ def esc_script(s):
 
 
 def build(yid, data, tpl, manifest):
+    lessons = {}
     ytopics = next((y['topics'] for y in manifest.get('years', []) if y['year'] == YEARS[yid]), [])
     for i, ch in enumerate(data['chapters']):
         if i < len(ytopics):
             ch['ks3'] = ytopics[i]['id']   # the topic id in ks3/manifest.json, e.g. 8-01
         ch.setdefault('links', {})
+        ch['topic'] = f"K{yid[1:]}-{ch['n']}"   # icons/K8-1.png
+        pod = f"K{yid[1:]}C{ch['n']}"
+        if os.path.exists(os.path.join(ROOT, 'notes', 'podcasts', pod + '.json')):
+            lessons[pod] = ch['title']
+            for p in ch['pages']:
+                p['lessons'] = [pod]
     book = {'book': {'id': yid, 'title': f'{YEARS[yid]}: Digital Technology', 'qual': 'KS3 Digital Technology', 'hub': '',
-                     'edition': '2026–27', 'mode': 'notes', 'blurb': BLURB[yid], 'lessonNames': {}},
+                     'edition': '2026–27', 'mode': 'notes', 'blurb': BLURB[yid], 'lessonNames': lessons},
             'chapters': data['chapters'], 'glossary': sorted(data['glossary'], key=lambda g: g['term'].lower())}
     lines = tpl.split('\n')
     i = next(n for n, l in enumerate(lines) if l.startswith('const BOOK = '))
@@ -54,7 +61,7 @@ PATCHES = [
     ("const COURSE = /GCE/.test(BK.qual || '') || /^(AS|A2)/.test(BK.id || '') ? 'gce' : 'gcse';",
      "const COURSE = /^Y\\d+$/.test(BK.id || '') ? 'ks3' : /GCE/.test(BK.qual || '') || /^(AS|A2)/.test(BK.id || '') ? 'gce' : 'gcse';" + KS3_JS),
     ("  a.href = (ON_WEB ? '../index.html' : FRONT_WEB) + '#' + COURSE;",
-     "  a.href = COURSE === 'ks3' ? '../ks3.html#y' + String(BK.id).slice(1) : (ON_WEB ? '../index.html' : FRONT_WEB) + '#' + COURSE;"),
+     "  a.href = COURSE === 'ks3' ? '../index.html#ks3' : (ON_WEB ? '../index.html' : FRONT_WEB) + '#' + COURSE;"),
     ("a.setAttribute('aria-label', `Topics: back to the ${COURSE === 'gce' ? 'A level' : 'GCSE'} topic list`);",
      "a.setAttribute('aria-label', `Topics: back to the ${COURSE === 'gce' ? 'A level' : COURSE === 'ks3' ? 'KS3' : 'GCSE'} topic list`);"),
     # trophies: a KS3 cabinet shared by Years 8, 9 and 10 (no coursework book)
@@ -68,6 +75,13 @@ PATCHES = [
     ("  const cwMissing = !TR_CW && !cwDefs.length;", "  const cwMissing = !TR_CW && !cwDefs.length && !!C.cw;"),
     ("${sc.concat(C.cw).map(u => `<span class=\"tr-pu", "${sc.concat(C.cw ? [C.cw] : []).map(u => `<span class=\"tr-pu"),
     (" ${esc(TR_SHORT[C.cw])} has its own 100 coursework trophies.`}", "${C.cw ? ` ${esc(TR_SHORT[C.cw])} has its own 100 coursework trophies.` : ''}`}"),
+    # podcasts: one episode per chapter (notes/podcasts/K8C1.json …), a Podcast tile on every page of the chapter;
+    # no GCSE lesson diagrams or hub links for KS3 lesson ids
+    ("function lessonHTML(p) {\n  if (ACCESS_BOOK) return '';", "function lessonHTML(p) {\n  if (ACCESS_BOOK || KS3) return '';"),
+    ("    if (hub) tile('pod', 'Podcast', 'Listen', b =>", "    if (hub || (KS3 && ids.length)) tile('pod', 'Podcast', KS3 ? 'Listen to this topic' : 'Listen', b =>"),
+    # "How to revise this": no past papers in KS3
+    ("    try { if (typeof cqUnlocked === 'function' && cqUnlocked(P.ch)) out.push('past'); } catch (e) { }",
+     "    try { if (!KS3 && typeof cqUnlocked === 'function' && cqUnlocked(P.ch)) out.push('past'); } catch (e) { }"),
     # PowerPoints: from the topic's ks3/ folder
     ("function findSlides(ch) {\n",
      """function findSlides(ch) {
@@ -125,6 +139,26 @@ def lists():
         for c in d['chapters']:
             names[f"{yid}|{c['id']}"] = c['title']
     open(os.path.join(ROOT, 'ks3', 'books', 'index.json'), 'w', encoding='utf-8').write(json.dumps(idx, ensure_ascii=False, indent=1) + '\n')
+    # the home page: Year 8/9/10 as the KS3 course's units, in the same shape as the GCSE units (UNITS in index.html)
+    fu = []
+    for yid, yname in YEARS.items():
+        src = os.path.join(ROOT, 'ks3', 'books', yid + '.json')
+        if not os.path.exists(src):
+            continue
+        d = json.load(open(src, encoding='utf-8'))
+        chs = []
+        for c in d['chapters']:
+            pids = [p['id'] for p in c['pages']]
+            tn = sorted({g['term'] for g in d['glossary'] if g.get('page') in pids}, key=str.lower)
+            chs.append({'n': c['n'], 'id': c['id'], 'title': c['title'], 'topic': f"K{yid[1:]}-{c['n']}", 'page': pids[0], 'pages': len(pids), 'pids': pids,
+                        'terms': len(tn), 'tn': tn, 'vids': sum(len(p.get('videos') or []) for p in c['pages'])})
+        fu.append({'mode': None, 'parts': None, 'lib': None, 'terms': len(d['glossary']), 'id': yid, 'course': 'ks3', 'short': yname, 'title': 'Digital Technology', 'file': f'notes/{yid}.html', 'chapters': chs})
+    ix = os.path.join(ROOT, 'index.html'); h = open(ix, encoding='utf-8').read()
+    m = re.search(r'\nconst UNITS = (\[.*?\]);\n', h)
+    if m:
+        U = [u for u in json.loads(m.group(1)) if u.get('course') != 'ks3'] + fu
+        h2 = h[:m.start(1)] + json.dumps(U, ensure_ascii=False, separators=(',', ':')) + h[m.end(1):]
+        if h2 != h: open(ix, 'w', encoding='utf-8').write(h2)
     t = os.path.join(ROOT, 'teacher.html'); h = open(t, encoding='utf-8').read()
     h2 = re.sub(r'\nwindow\.KS3_UNITS=.*?;\n', lambda m: '\nwindow.KS3_UNITS=' + json.dumps(units, ensure_ascii=False, separators=(',', ':')) + ';\n', h, count=1)
     if h2 != h: open(t, 'w', encoding='utf-8').write(h2)

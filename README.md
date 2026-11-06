@@ -11,9 +11,9 @@ The front door lists every unit for **GCSE** and **A level (GCE)**. Each topic h
 
 The full lesson hubs are still there for teachers: `hub.html` (GCSE) and `gce/hub.html` (GCE). `gce/index.html` redirects to the GCE section of the front door. The workbooks show hub pages through `hub.html?embed=1#<route>`, which hides the hub's header and menus.
 
-## KS3 (`ks3.html`)
+## KS3 (home page › KS3)
 
-Years 8, 9 and 10. Each topic is a folder: `ks3/Year 8/01 Topic name/`. Upload files into it, named like `1 - LESSON - Under the Hood.pptx` or `3 - WORKSHEET - Binary.docx` (the number sets the order, the word sets the type). A GitHub Action lists them in `ks3/manifest.json` and makes PDF copies in `_view/` so pupils can view PowerPoint, Word and Excel files in the browser. Titles, summaries and "What you'll learn" are in `ks3/topics.json`. The page is built from `tools/ks3_page.src.html` by `python3 tools/ks3_build.py` (it copies in the sign-in and tracking code from `index.html`).
+KS3 is a course on the home page like GCSE and A level: Year 8, Year 9 and Year 10 are its units, each a notes book (below). Lesson PowerPoints live in topic folders, `ks3/Year 8/01 Topic name/`, named like `1 - LESSON - Under the Hood.pptx`; a GitHub Action lists them in `ks3/manifest.json` and makes a PDF copy in `_view/` for viewing in the browser. Topic *n* of a year is chapter *n* of its book. (`ks3.html` now just redirects to the home page.)
 
 ### KS3 notes books (`notes/Y8.html`, `Y9.html`, `Y10.html`)
 
