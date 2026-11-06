@@ -2495,6 +2495,7 @@ html.act-open{overflow:hidden}html.act-open .pbar,html.act-open .sv-sw{display:n
 .term.term-pp{background:none!important}.term.term-pp::after{content:none!important}
 
 /* floating glossary button */
+.acts-sec+.acts-sec{margin-top:12px}.acts-sh{margin:0 0 7px;font:800 11.5px/1.2 var(--sans);letter-spacing:.07em;text-transform:uppercase;color:var(--ink-2)}.acts-unl .acts-sh{color:#18744A}.acts-unl .acts-sh::before{content:"🔓 "}.acts-sec:not(:has(.act:not([hidden]))){display:none}
 .tip-best{display:inline-block;margin:0 8px 0 0;padding:2px 8px;border-radius:999px;background:#E1F3EA;color:#18744A;font-size:11.5px;font-weight:800;letter-spacing:.02em;vertical-align:2px}.tip-sec{margin:18px 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3,#687386)}
 .tr-fab{position:fixed;right:16px;bottom:calc(88px + env(safe-area-inset-bottom,0px));z-index:61;width:58px;height:58px;border-radius:50%;background:linear-gradient(145deg,#F7C948,#D99A06);color:#3B2A00;box-shadow:0 8px 22px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;text-decoration:none;-webkit-tap-highlight-color:transparent}.tr-fab svg,.tr-fab .tr-ic{width:24px;height:24px}.tr-fab small{font:800 11px/1 system-ui,sans-serif}.tr-fab:focus-visible{outline:3px solid #1F5FBF;outline-offset:3px}html.pbar-on .tr-fab{bottom:calc(158px + env(safe-area-inset-bottom,0px))}@media print{.tr-fab{display:none!important}}
 .mrb-gl-fab{position:fixed;right:14px;bottom:calc(18px + env(safe-area-inset-bottom,0px));z-index:61;width:56px;height:56px;border-radius:50%;border:0;background:#0E7C86;color:#fff;box-shadow:0 8px 22px rgba(0,0,0,.25);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;font-family:var(--sans);-webkit-tap-highlight-color:transparent}
@@ -10800,7 +10801,7 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
   ];
   /* gone from the page: the lesson video (the topic PowerPoint replaces it), "Learn and practise" (its parts are tiles now)
      and the chapter's separate key-terms box (the Key terms tile switches between this page and the whole topic) */
-  const DROP = ['.lvs', '.lchips', 'section.lp-sec', 'details.kt-ch'];
+  const DROP = ['.lvs', '.lchips', 'section.lp-sec', 'details.kt-ch', 'section.chcard'];   /* the topic box: its test is the unlocked Topic test tile */
   /* HOW TO REVISE (Mr Butler's sheet): the ways to revise, and which suit this page */
   const HOW = {
     gloss: { t: 'Glossary definitions', why: 'Around 60–70% of CCEA marks come from key-term definitions.', steps: ['Make a clear list of the key terms. Write them by hand: don’t type them.', 'Write each specialist term in RED pen as you go (don’t just highlight it afterwards) and its definition in BLACK.'] },
@@ -10971,16 +10972,22 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
       const sync = () => { const sw = document.getElementById('sv-sw'), h = !sw || sw.hidden; if (t.hidden !== h) t.hidden = h; const n = typeof SV !== 'undefined' && SV.decks ? SV.decks.length : 0, sm = t.querySelector('small'), want = n > 1 ? `${n} PowerPoints` : 'This topic’s slides'; if (sm && sm.textContent !== want) sm.textContent = want; };
       sync(); const sw = document.getElementById('sv-sw'); if (sw) new MutationObserver(sync).observe(sw, { attributes: true, attributeFilter: ['hidden'] }); setTimeout(sync, 800); setTimeout(sync, 2500);
     }
-    if (hub) tile('sheet', 'Revision Summary Sheet', ids.length > 1 ? `${ids.length} lessons` : 'Lesson ' + ids[0], b => openPop({ k: 'sheet', t: 'Revision Summary Sheet' }, hubNode('notes', 'Revision Summary Sheet', ids), b));
+    if (hub && typeof cqUnlocked === 'function' && cqUnlocked(P.ch)) tile('sheet', 'Revision Summary Sheet', ids.length > 1 ? `${ids.length} lessons` : 'Lesson ' + ids[0], b => openPop({ k: 'sheet', t: 'Revision Summary Sheet' }, hubNode('notes', 'Revision Summary Sheet', ids), b));
     const add = K => found.filter(([k]) => k === K).forEach(([K2, el]) => { const sub = (() => { try { return K2.sub(el); } catch (e) { return ''; } })(), kick = K2.kick ? K2.kick(el) : ''; const b = tile(K2.k, K2.t, sub, bb => openPop(K2, el, bb)); if (kick) b.title = kick; el.classList.add('act-hid'); });
     add(KINDS[0]); add(KINDS[1]);
     if (hub) tile('prac', 'Activities & worksheet', 'Self-marking', b => openPop({ k: 'prac', t: 'Activities & worksheet' }, hubNode('practice', 'Activities & worksheet', ids), b));
     add(KINDS[2]);
     const nPage = pageKt ? pageKt.querySelectorAll('.kt-l > div').length : 0, nAll = ((typeof CH_TERMS !== 'undefined' && CH_TERMS.get(P.ch.id)) || []).length;
-    if (nPage || nAll) tile('terms', 'Key terms', nPage ? `${nPage} on this page · ${nAll} in topic` : `${nAll} in this topic`, b => openPop({ k: 'terms', t: 'Key terms' }, termsNode(P, pageKt), b));
+    if (false && (nPage || nAll)) tile('terms', 'Key terms', nPage ? `${nPage} on this page · ${nAll} in topic` : `${nAll} in this topic`, b => openPop({ k: 'terms', t: 'Key terms' }, termsNode(P, pageKt), b));
     if (hub) tile('pod', 'Podcast', 'Listen', b => { if (window.MRB_POD) window.MRB_POD.open(ids); else openPop({ k: 'pod', t: 'Podcast' }, hubNode('podcast', 'Podcast', ids), b); });
-    add(KINDS[3]);
+    /* the topic test only once it is unlocked (every page covered, page quizzes passed); not on every page before then */
+    if (typeof cqUnlocked === 'function' && cqUnlocked(P.ch) && !TUT) { const tb = tile('test', 'Topic test', 'The whole topic: check your answers', () => { location.hash = 'quiz-' + P.ch.id; }); tb.removeAttribute('aria-haspopup'); }
     tile('tips', 'How to revise this', tipsFor(P).map(k => HOW[k].t).join(' · '), b => openPop({ k: 'tips', t: 'How to revise this' }, tipsNode(P), b));
+    /* EXTRA HELP in sections: Learn, Practise, (the topic test once unlocked), Revise */
+    { const SEC = [['Learn', ['ppt', 'video', 'pod']], ['Practise', ['anim', 'prac', 'quiz']], ['Unlocked: you’ve covered the whole topic', ['sheet', 'test']], ['Revise', ['tips']]];
+      const tiles = [...g.children], used = new Set(); g.remove();
+      SEC.forEach(([h, ks], si) => { const mine = tiles.filter(b => !used.has(b) && (ks.some(k => b.classList.contains('k-' + k)) || (si === 3 && !SEC.some(([, kk]) => kk.some(k => b.classList.contains('k-' + k)))))); if (!mine.length) return; mine.forEach(b => used.add(b));
+        const s = document.createElement('div'); s.className = 'acts-sec' + (ks.includes('test') ? ' acts-unl' : ''); s.innerHTML = `<h3 class="acts-sh">${h}</h3><div class="acts-g"></div>`; s.querySelector('.acts-g').append(...mine); box.append(s); }); }
     const head = art.querySelector(':scope > header.phero') || art.querySelector(':scope > header');
     if (head) head.after(box); else art.prepend(box);
     const first = art.querySelector(':scope > .ncard');
