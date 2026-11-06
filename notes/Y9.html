@@ -2032,7 +2032,7 @@ body.ppv-on{overflow:hidden}
 .tr-per{display:flex;flex-wrap:wrap;gap:6px;margin:0}
 .tr-pu{padding:2px 9px;border-radius:999px;background:var(--paper-2);border:1px solid var(--line-2);font-size:12.5px;color:var(--ink-2)}
 .tr-pu.me{border-color:var(--ink-3);color:var(--ink);font-weight:600}
-.tr-v .lib-hero > p.tr-note{font-family:var(--sans);font-size:14px;color:var(--ink-2);margin:10px 0 0;max-width:72ch}
+.tr-v .lib-hero > p.tr-egg{margin:10px 0 0;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,#F5B301 14%,transparent);font-size:14px;line-height:1.45}.tr-note{font-family:var(--sans);font-size:14px;color:var(--ink-2);margin:10px 0 0;max-width:72ch}
 .tr-next{margin-top:14px;padding:18px 22px;font-family:var(--sans)}
 .tr-next h2,.tr-ups h3{margin:0 0 10px;font-size:16px;font-weight:700}
 .tr-nxl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
@@ -9660,7 +9660,7 @@ function renderTrophies(focus) {
     <header class="lib-hero card tr-hero"><small class="lib-k">${trIcon('gold', true)}${esc(BK.title || '')}</small><h1 id="tr-h" tabindex="-1">${esc(C.name)} trophies</h1>
       <div class="tr-sum"><div class="tr-here"><span class="tr-big"><b>${nHere}</b>/100</span><span class="tr-hl">earned in ${esc(here)}</span><span class="tr-bar big" role="progressbar" aria-label="Trophies earned in ${esc(here)}" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${nHere}"><i style="width:${nHere}%"></i></span></div>
       <div class="tr-cabs"><b>Your ${esc(C.name)} cabinet</b><p class="tr-tl">${trTierLine(cab.tiers)}</p><p class="tr-per">${sc.concat(C.cw ? [C.cw] : []).map(u => `<span class="tr-pu${u === TR_ID ? ' me' : ''}">${esc(TR_SHORT[u])}: ${u === TR_ID ? nHere : cab.per[u]}/100</span>`).join('')}</p></div></div>
-      <p class="tr-note">${TR_CW ? `These 100 trophies belong to ${esc(here)}, each with a fixed tier from bronze to platinum. The theory trophies in this cabinet are shared by ${esc(scLab)} and upgrade each time one is earned in another unit (${esc(maxTier)} is the top level for ${esc(C.name)}).` : `The 100 theory trophies are shared by ${esc(scLab)}. Earn one in one unit for bronze${sc.length > 1 ? `, in two for silver${sc.length > 2 ? ', in three for gold' : ''}` : ''}. ${esc(TR_TN[maxTier])} is the top level for ${esc(C.name)}${sc.length < C.theory.length ? ' with the units you take' : ''}.${C.cw ? ` ${esc(TR_SHORT[C.cw])} has its own 100 coursework trophies.` : ''}`}</p></header>
+      <p class="tr-note">${TR_CW ? `These 100 trophies belong to ${esc(here)}, each with a fixed tier from bronze to platinum. The theory trophies in this cabinet are shared by ${esc(scLab)} and upgrade each time one is earned in another unit (${esc(maxTier)} is the top level for ${esc(C.name)}).` : `The 100 theory trophies are shared by ${esc(scLab)}. Earn one in one unit for bronze${sc.length > 1 ? `, in two for silver${sc.length > 2 ? ', in three for gold' : ''}` : ''}. ${esc(TR_TN[maxTier])} is the top level for ${esc(C.name)}${sc.length < C.theory.length ? ' with the units you take' : ''}.${C.cw ? ` ${esc(TR_SHORT[C.cw])} has its own 100 coursework trophies.` : ''}`}</p>${window.MRB_EGGS ? (() => { const n = window.MRB_EGGS.found().length, t = window.MRB_EGGS.total; return `<p class="tr-egg"><span aria-hidden="true">🥚</span> <b>Psst…</b> there are ${t} easter eggs hidden around this site${n ? `, and you’ve found ${n}` : ''}. Try tapping, holding and even typing things you wouldn’t normally… ${n ? 'Clues for the rest are in My progress.' : 'Find one and clues for the rest appear in My progress.'}</p>`; })() : ''}</header>
     <section class="card tr-next" aria-labelledby="tr-nh"><h2 id="tr-nh">Next to earn in ${esc(here)}</h2>${nx ? `<ul class="tr-nxl">${nx}</ul>` : '<p>Every trophy in this unit is yours. Brilliant.</p>'}
       ${ups.length ? `<div class="tr-ups"><h3>Upgrades</h3><ul>${ups.map(x => `<li>${trIcon(x.t, x.r.d.cup)}<span>Earn <b>${esc(x.r.d.name)}</b> in ${esc(TR_SHORT[x.u])} to make it ${x.t}</span><a href="${esc(x.u)}.html#trophies">Open ${esc(TR_SHORT[x.u])}</a></li>`).join('')}</ul></div>` : ''}</section>
     <section class="card lib-body tr-all" aria-label="All trophies">
@@ -11196,7 +11196,7 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
   (function fab() {
     const gb = document.getElementById('b-gloss'); if (!gb) return;
     const b = document.createElement('button'); b.type = 'button'; b.className = 'mrb-gl-fab'; b.setAttribute('aria-label', 'Glossary: key terms for this page');
-    b.innerHTML = '<span aria-hidden="true">Aa</span><small>Glossary</small>';
+    b.innerHTML = '<span aria-hidden="true"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/></svg></span><small>Glossary</small>';
     b.addEventListener('click', () => gb.click()); document.body.append(b);
   })();
   const pupil = () => { try { return !localStorage.getItem('notes-nocount') || !!localStorage.getItem('mrb-viewas') || !!localStorage.getItem('mrb-pupilmode'); } catch (e) { return true; } };
