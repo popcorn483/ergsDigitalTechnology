@@ -28,7 +28,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 20;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 21;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -61,7 +61,7 @@ function zoneAsk_(rawId, zone, name, cls) {
   const id = resolve_(String(rawId), aliases_());
   if (zreqs_('pending').some(r => r.id === id && r.zone === zone)) return { ok: true, again: true };
   const N = names_(), nm = (N[id] && N[id][0]) || clean_(name, 40), cl = (N[id] && N[id][1]) || clean_(cls, 12).toUpperCase();
-  locked_(() => zreqSh_().appendRow(['Z' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), id, nm, cl, zone, new Date(), 'pending', '']));
+  sumClear_(); locked_(() => zreqSh_().appendRow(['Z' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), id, nm, cl, zone, new Date(), 'pending', '']));
   notify_('Access request', nm, cl, `${nm} is asking to open ${ZONE_NAMES[zone] || zone}: Teacher area › Pupil tracking › Requests.`, 'A pupil is asking to open ' + (ZONE_NAMES[zone] || zone));
   return { ok: true };
 }
@@ -85,7 +85,13 @@ const rows_ = sh => sh.getLastRow() > 1 ? sh.getRange(2, 1, sh.getLastRow() - 1,
 function aliases_() { const m = {}; rows_(tab_('Aliases', ['Old ID', 'Kept ID'])).forEach(r => { m[String(r[0])] = String(r[1]); }); return m; }
 function names_() { const m = {}; rows_(tab_('Names', ['Pupil ID', 'Name', 'Class'])).forEach(r => { m[String(r[0])] = [String(r[1]), String(r[2])]; }); return m; }
 function resolve_(id, A) { let k = 0; while (A[id] && k++ < 20) id = A[id]; return id; }
-function out_(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
+function out_(o) { return ContentService.createTextOutput(typeof o === 'string' ? o : JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
+/* SPEED: the Teacher area's summary (every pupil, from the whole Log) is kept for 2 minutes in the script cache, in 90 KB
+   pieces (the cache's limit is 100 KB a value). Any teacher change clears it; ?fresh=1 skips it. */
+const SUM_TTL = 120;
+function sumGet_() { try { const c = CacheService.getScriptCache(), n = +(c.get('sum:n') || 0); if (!n) return null; const k = []; for (let i = 0; i < n; i++) k.push('sum:' + i); const m = c.getAll(k), parts = k.map(x => m[x]); return parts.every(x => typeof x === 'string') ? parts.join('') : null; } catch (e) { return null; } }
+function sumPut_(json) { try { const c = CacheService.getScriptCache(), o = {}, n = Math.ceil(json.length / 90000); if (n > 80) return; for (let i = 0; i < n; i++) o['sum:' + i] = json.slice(i * 90000, (i + 1) * 90000); c.putAll(o, SUM_TTL); c.put('sum:n', String(n), SUM_TTL); } catch (e) { } }
+function sumClear_() { try { CacheService.getScriptCache().remove('sum:n'); } catch (e) { } }
 function locked_(fn) { const l = LockService.getScriptLock(); l.waitLock(20000); try { return fn(); } finally { l.releaseLock(); } }
 const okId = id => /^[a-z0-9]{6,24}$/i.test(String(id || ''));
 
@@ -191,7 +197,7 @@ function access_(id) {
   if (!REQUIRE_APPROVAL) return 'approved';
   const r = rows_(acc_()).find(x => String(x[0]) === id); return r ? String(r[1]) : 'approved';
 }
-function setAccess_(id, status, name, cls) {
+function setAccess_(id, status, name, cls) { sumClear_();
   const sh = acc_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === id), now = new Date();
   if (i >= 0) { sh.getRange(i + 2, 2).setValue(status); if (status !== 'pending') sh.getRange(i + 2, 6).setValue(now); }
   else sh.appendRow([id, status, clean_(name || '', 40), clean_(cls || '', 12).toUpperCase(), now, status === 'pending' ? '' : now]);
@@ -335,8 +341,9 @@ function doGet(e) {
   if (q.key !== TEACHER_KEY || TEACHER_KEY === 'change-me') return out_({ error: 'key' });
   ensureWeekly_();
   if (q.action === 'week') return out_(week_(q.start));   /* the Teacher area's weekly report */
-  if (q.action) return out_(locked_(() => act_(q)));
-  return out_(summary_());
+  if (q.action) { const r = locked_(() => act_(q)); sumClear_(); return out_(r); }
+  if (q.fresh !== '1') { const hit = sumGet_(); if (hit) return out_(hit); }
+  const json = JSON.stringify(summary_()); sumPut_(json); return out_(json);
 }
 function act_(q) {
   const ids = String(q.ids || '').split(',').filter(okId), to = String(q.to || '');
@@ -555,6 +562,7 @@ function week_(start) {
 }
 function ensureWeekly_() {   /* the Monday email: its trigger is made the first time the Teacher area opens after this code is deployed */
   try {
+    const c = CacheService.getScriptCache(); if (c.get('wk-ok')) return; c.put('wk-ok', '1', 21600);   /* checked at most every 6 hours (it's slow) */
     const has = ScriptApp.getProjectTriggers().some(t => t.getHandlerFunction() === 'weeklyEmail');
     if (WEEKLY_EMAIL && !has) ScriptApp.newTrigger('weeklyEmail').timeBased().onWeekDay(ScriptApp.WeekDay.MONDAY).atHour(7).inTimezone('Europe/London').create();
   } catch (e) { }

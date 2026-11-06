@@ -2117,14 +2117,24 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const key = LS.get('teacher.actkey');
     $('#ac-keyrow').hidden = !!key; $('#ac-tools').hidden = !key;
     if (!key) { $('#ac-wrap').hidden = true; $('#wk-wrap').hidden = true; return; }
-    status('Loading…');
+    /* SPEED: show the last copy straight away (kept on this device), then refresh in the background */
+    let fromCache = false;
+    if (!DATA) try { const c = JSON.parse(LS.get('teacher.actcache') || 'null'); if (c && c.j && c.j.pupils) { fromCache = true; applySummary(c.j, true); status(`Showing pupils from ${when(c.t)}. Updating…`); } } catch (e) { }
+    if (!fromCache) status('Loading…');
     try {
       const r = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'key=' + encodeURIComponent(key), { cache: 'no-store', credentials: 'omit' });
       const j = await r.json();
+      if (j.error !== 'key' && j.pupils) { try { LS.set('teacher.actcache', JSON.stringify({ t: Date.now(), j })); } catch (e) { } }
+      applySummary(j, false);
+    } catch (e) { status(fromCache ? 'Couldn’t refresh: showing the last copy on this device. Check you’re online.' : 'Couldn’t load pupil activity. Check you’re online and that the Apps Script is deployed for “Anyone”.', 'warn'); }
+  }
+  function applySummary(j, cached) {
+    const key = LS.get('teacher.actkey');
+    {
       if (j.error === 'key') { LS.set('teacher.actkey', null); status('That key doesn’t match TEACHER_KEY in the Apps Script. Type it again.', 'warn'); $('#ac-keyrow').hidden = false; $('#ac-tools').hidden = true; return; }
       DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; CLASSES = Array.isArray(j.classes) ? j.classes : []; ZREQ = Array.isArray(j.zreqs) ? j.zreqs : []; LIVE = Array.isArray(j.live) ? j.live : []; status((+j.v || 0) < 19 ? 'Your Google Apps Script is an older version, so reports, set work, messages, the topic grid, “revising now”, page-quiz answers, PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 19 ? 'warn' : ''); $('#ac-view').hidden = false; if ((+j.v || 0) >= 19 && (+j.v || 0) < 20) status('Classes, teachers and zones need the latest Apps Script (v20): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); view(); render(); requests();
       const ml = j.mail; if ((+j.v || 0) >= 13 && ml && (ml.err || !ml.to)) status(`Emails aren’t being sent${ml.err ? ': ' + ml.err.replace(/^\S+\s/, '') : ''}. In the Apps Script, choose testEmail in the function list and press Run, allow “Send email as you”, then deploy a new version. ⋯ › Send a test email checks it.`, 'warn');
-    } catch (e) { status('Couldn’t load pupil activity. Check you’re online and that the Apps Script is deployed for “Anyone”.', 'warn'); }
+    }
   }
   const accTag = p => {
     if (p.access !== 'declined' && p.access !== 'pending') return null;
