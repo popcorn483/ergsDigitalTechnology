@@ -4025,6 +4025,7 @@ details.mp-bk > span{display:block;margin-top:6px}
 .ib svg{width:20px;height:20px}
 .ib:hover{background:color-mix(in srgb,var(--cc-d,var(--accent)) 10%,var(--paper));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--cc-d,var(--accent)) 45%,transparent)}
 .ib:focus-visible{outline:2px solid var(--cc-d,var(--accent));outline-offset:2px}
+.tp-open{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:9px 16px 9px 13px;border-radius:12px;background:var(--cc-d,var(--accent));color:#fff;font-weight:700;font-size:15.5px;text-decoration:none;box-shadow:0 2px 8px -3px var(--cc-d,var(--accent));transition:transform .15s,filter .15s}.tp-open svg{width:20px;height:20px;flex:none}.tp-open .tp-arr{margin-left:2px;transition:transform .15s}.tp-open:hover{filter:brightness(1.08)}.tp-open:hover .tp-arr{transform:translateX(3px)}.tp-open:focus-visible{outline:3px solid var(--accent);outline-offset:2px}:root[data-theme="dark"] .tp-open{color:#fff}@media (prefers-reduced-motion:reduce){.tp-open,.tp-open .tp-arr{transition:none}}
 .ib-pri{background:var(--cc-d,var(--accent));color:#fff;box-shadow:none}
 .ib-pri:hover{background:color-mix(in srgb,var(--cc-d,var(--accent)) 85%,#000);box-shadow:none}
 :root[data-theme="dark"] .ib{color:var(--cc,var(--accent))}
@@ -4291,7 +4292,7 @@ function tutUnitHTML(u, next, course) {
   const row = i => { const c = u.chapters[i], n = hue(i); return `<li class="tp" data-tut="1" data-ci="${i}" data-topic="" data-ch="${esc(c.id)}" data-folder="" data-hub="${course}" style="--cc:var(--h${n});--cc-d:var(--h${n}d);--i:${next()}">
       <span class="ic" aria-hidden="true"><b>${esc(pad2(c.n))}</b></span>
       <div class="tp-t"><small>Chapter ${esc(c.n)}</small><b>${esc(c.title)}</b></div>
-      <div class="acts"><a class="ib ib-pri" href="${esc(u.file)}#${esc(c.page)}" title="Open tutorial" aria-label="Open tutorial: ${esc(c.title)}">${I_TOOL}</a></div></li>`; };
+      <div class="acts"><a class="tp-open" href="${esc(u.file)}#${esc(c.page)}" aria-label="Open the tutorial: ${esc(c.title)}">${I_TOOL}<span>Open tutorial</span><span class="tp-arr" aria-hidden="true">→</span></a></div></li>`; };
   return `<section class="unit u-tut" data-unit="${esc(u.id)}" aria-labelledby="h-${esc(u.id)}">
     <div class="spec" aria-hidden="true">${u.chapters.map((c, i) => `<i style="background:var(--h${hue(i)}d)"></i>`).join('')}</div>
     <div class="unit-h" style="--i:${next()}"><div><span class="unit-k">${esc(u.short)}</span><span class="tut-b">${I_TOOL}Tutorial book</span><h2 id="h-${esc(u.id)}">${esc(u.title)}</h2></div><div class="unit-l"><a href="${esc(u.file)}">Whole tutorial book →</a></div></div>
@@ -4312,10 +4313,9 @@ function render(course) {
     <ol class="topics">${u.chapters.map((c, i) => { const im = IMG(course, c.topic), n = hue(i); return `<li class="tp" data-ci="${i}" data-topic="${esc(c.topic || '')}" data-ch="${esc(c.id)}" data-folder="${esc(c.folder || '')}" data-hub="${course}" style="--cc:var(--h${n});--cc-d:var(--h${n}d);--i:${k++}">
       <span class="ic" aria-hidden="true">${im ? `<img src="${esc(im)}" alt="" width="30" height="30" loading="lazy">` : ''}<b>${esc(pad2(c.n))}</b></span>
       <div class="tp-t"><small>Chapter ${esc(c.n)}</small><b>${esc(c.title)}</b></div>
-      <div class="acts"><a class="ib ib-pri" href="${esc(u.file)}#${esc(c.page)}" title="Workbook" aria-label="Workbook: ${esc(c.title)}">${I_BOOK}</a><span class="ppt-slot"></span>${c.terms ? `<a class="ib" href="${esc(u.file)}#glossary-${esc(c.id)}" title="Glossary (${esc(c.terms)} key terms)" aria-label="Glossary for ${esc(c.title)}: ${esc(c.terms)} key terms">${I_GL}</a>` : ''}</div>
+      <div class="acts"><a class="tp-open" href="${esc(u.file)}#${esc(c.page)}" aria-label="Open the workbook: ${esc(c.title)}">${I_BOOK}<span>Open workbook</span><span class="tp-arr" aria-hidden="true">→</span></a></div>
     </li>`; }).join('')}</ol></section>`).join('');
-  guard(box);
-  mountPpt();
+  guard(box);   /* no topic PowerPoint / glossary icons in the list any more: the workbook has both */
 }
 /* temporary decks: manifest._temporary = {"<hub topic id>": "_temporary/<topic id>.pptx"}; shown only when the chapter's
    own folder has nothing (manifest, then the API). The teacher's file always replaces it, badge and line included. */
