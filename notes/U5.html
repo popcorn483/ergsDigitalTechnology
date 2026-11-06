@@ -9937,14 +9937,61 @@ try {
      page covered until it is checked, so a slow or failed check never lets a new pupil in. Once 'ok', the device works offline
      and is re-checked in the background each visit (a decline takes effect next time). An older Apps Script with no approvals
      answers without a status: that counts as approved. */
+  /* ZONES: Mr Butler sets which units / years each pupil can open (a pupil can have several). Anything else is locked here,
+     with a button to ask him to open it. 'mrb-zones' is the list from the Apps Script (null: no limits set). */
+  const ZN = { Y8: 'Year 8', Y9: 'Year 9', Y10: 'Year 10', U1: 'GCSE Unit 1', U4: 'GCSE Unit 4', U5: 'GCSE Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+  const zones = () => { try { const z = JSON.parse(LS.get('mrb-zones') || 'null'); return Array.isArray(z) ? z : null; } catch (e) { return null; } };
+  const asked = () => { try { return JSON.parse(LS.get('mrb-asked') || '[]') || []; } catch (e) { return []; } };
+  const zoneOk = z => !z || !ZN[z] || !!LS.get('notes-nocount') || !me() || !zones() || zones().indexOf(z) >= 0;
+  async function askZone(z) {
+    const p = me(); if (!p || !URL0) return false;
+    try { const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=zonereq&id=' + encodeURIComponent(p.id) + '&zone=' + encodeURIComponent(z) + '&name=' + encodeURIComponent(p.name || '') + '&cls=' + encodeURIComponent(p.cls || ''), { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
+      if (j && j.ok) { const a = asked(); if (a.indexOf(z) < 0) a.push(z); LS.set('mrb-asked', JSON.stringify(a)); return true; } } catch (e) { }
+    return false;
+  }
+  /* the locked box: on a locked workbook it covers the page (with a way home); elsewhere it is a pop-up */
+  function zoneBox(z, cover) {
+    if (document.getElementById('mrb-zl')) return;
+    const d = document.createElement('div'); d.id = 'mrb-zl'; if (cover) d.dataset.cover = '1'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'mrb-zl-h');
+    const home = /\/notes\/[^/]*$/.test(location.pathname) ? '../index.html' : 'index.html', mine = (zones() || []).map(x => ZN[x] || x).join(', ');
+    d.innerHTML = `<style>#mrb-zl{position:fixed;inset:0;z-index:2147482950;display:grid;place-items:center;background:rgba(10,16,30,${cover ? '.86' : '.6'});padding:16px}#mrb-zl .b{background:#fff;color:#16213A;border-radius:16px;max-width:400px;width:100%;padding:22px 20px;text-align:center;font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.35)}#mrb-zl .i{font-size:34px;line-height:1;margin-bottom:6px}#mrb-zl h2{margin:0 0 6px;font-size:19px}#mrb-zl p{margin:0 0 10px;color:#4A5468;font-size:14px}#mrb-zl .r{display:flex;flex-direction:column;gap:8px;margin-top:12px}#mrb-zl button,#mrb-zl a{font:inherit;font-weight:700;border-radius:10px;padding:11px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer;text-decoration:none;display:block}#mrb-zl .p{background:#1F5FBF;border-color:#1F5FBF;color:#fff}#mrb-zl .p:disabled{opacity:.6;cursor:default}#mrb-zl .m{font-size:13px;min-height:1em;margin:8px 0 0}@media (prefers-color-scheme:dark){#mrb-zl .b{background:#1B2233;color:#E8ECF4}#mrb-zl p{color:#AEB8CA}#mrb-zl button:not(.p),#mrb-zl a{background:#121826;color:#E8ECF4;border-color:#3A4458}}</style>
+      <div class="b"><div class="i" aria-hidden="true">🔒</div><h2 id="mrb-zl-h"></h2><p class="t"></p><div class="r"><button type="button" class="p"></button>${cover ? `<a href="${home}">Back to the home page</a>` : '<button type="button" class="x">Not now</button>'}</div><p class="m" aria-live="polite"></p></div>`;
+    d.querySelector('h2').textContent = `${ZN[z] || z} isn’t open for you yet`;
+    d.querySelector('.t').textContent = mine ? `Mr Butler has opened ${mine} for you. Ask him if you’d like to look at ${ZN[z] || z} too.` : `Ask Mr Butler if you’d like to look at ${ZN[z] || z}.`;
+    const go = d.querySelector('.p'), m = d.querySelector('.m'), was = asked().indexOf(z) >= 0;
+    go.textContent = was ? 'Asked: waiting for Mr Butler' : `Ask to open ${ZN[z] || z}`; go.disabled = was;
+    go.addEventListener('click', async () => { go.disabled = true; m.textContent = 'Sending…'; const ok = await askZone(z); go.textContent = ok ? 'Asked: waiting for Mr Butler' : `Ask to open ${ZN[z] || z}`; go.disabled = ok; m.textContent = ok ? 'Sent. It opens by itself once he says yes.' : 'Couldn’t send just now. Are you online?'; });
+    const x = d.querySelector('.x'); if (x) x.addEventListener('click', () => { d.remove(); document.documentElement.style.overflow = ''; });
+    d.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); if (!cover) { d.remove(); document.documentElement.style.overflow = ''; } } }, true);
+    document.body.append(d); document.documentElement.style.overflow = 'hidden'; go.focus();
+  }
+  /* which zone a link or this page belongs to: notes/U1.html → U1; ks3.html#y8 (or a page that sets window.MRB_PAGE_ZONE) → Y8 */
+  const zoneOfHref = h => { const m = /(?:^|\/)notes\/(U1|U4|U5|AS1|AS2|A21|A22)\.html/i.exec(h || '') || /ks3\.html#y(8|9|10)\b/i.exec(h || ''); return m ? (/^\d/.test(m[1]) ? 'Y' + m[1] : m[1].toUpperCase()) : ''; };
+  const pageZone = () => typeof window.MRB_PAGE_ZONE === 'function' ? window.MRB_PAGE_ZONE() : (inBook && ZN[BK.id] ? BK.id : '');
+  function zoneLock() {
+    const z = pageZone(), cov = document.querySelector('#mrb-zl[data-cover]');
+    if (z && !zoneOk(z)) { if (!cov && !document.getElementById('mrb-zl') && !document.getElementById('mrb-who') && !document.getElementById('mrb-gate')) zoneBox(z, true); }
+    else if (cov) { cov.remove(); document.documentElement.style.overflow = ''; }
+    document.querySelectorAll('a[href]').forEach(a => { const zz = zoneOfHref(a.getAttribute('href')); a.classList.toggle('mrb-locked', !!zz && !zoneOk(zz)); });
+    if (!document.getElementById('mrb-zl-css')) { const st = document.createElement('style'); st.id = 'mrb-zl-css'; st.textContent = 'a.mrb-locked{opacity:.55;filter:grayscale(.6);position:relative}a.mrb-locked::after{content:"🔒";position:absolute;top:6px;right:8px;font-size:15px;line-height:1;filter:none}'; document.head.append(st); }
+  }
+  document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('a[href]'); if (!a) return; const z = zoneOfHref(a.getAttribute('href')); if (z && !zoneOk(z)) { e.preventDefault(); e.stopPropagation(); zoneBox(z, false); } }, true);
+  window.MRB_ZONES = { ok: zoneOk, ask: askZone, box: zoneBox, lock: zoneLock, names: ZN, list: zones };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', zoneLock); else setTimeout(zoneLock, 0);
+  new MutationObserver(() => { clearTimeout(window.__mrbZT); window.__mrbZT = setTimeout(zoneLock, 150); }).observe(document.documentElement, { childList: true, subtree: true });
   const blocked = () => !!me() && !LS.get('notes-nocount') && LS.get('mrb-access') !== 'ok';
   const unGate = () => { const g = document.getElementById('mrb-gate'); if (g) g.remove(); document.documentElement.style.overflow = ''; clearInterval(gateT); };
   async function checkAccess() {
     const p = me(); if (!p || !URL0 || LS.get('notes-nocount')) return;
-    let j = null; try { const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000); j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=access&id=' + encodeURIComponent(p.id), { cache: 'no-store', credentials: 'omit', signal: ctl.signal }).then(r => r.json()); clearTimeout(t); } catch (e) { j = null; }
+    let j = null; try { const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000); j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=access&id=' + encodeURIComponent(p.id) + '&cls=' + encodeURIComponent(p.cls || ''), { cache: 'no-store', credentials: 'omit', signal: ctl.signal }).then(r => r.json()); clearTimeout(t); } catch (e) { j = null; }
     if (!j) { if (blocked()) { if (!/^(pending|declined)$/.test(LS.get('mrb-access') || '')) LS.set('mrb-access', 'check'); gate(); } return; }   /* couldn't reach it: stay as we were */
     if (j.ok && j.pin === false) { LS.set('mrb-pin-ok', null); try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } unGate(); ask(); return; }   /* no PIN on record (never set, or Mr Butler reset it): sign in again and choose one */
     const st = j.ok && typeof j.status === 'string' ? j.status : '';
+    if (j.ok) {   /* the class (and name) Mr Butler set, the zones this pupil can open, and what they have asked for */
+      const cur = me(); if (cur && ((j.cls && j.cls !== cur.cls) || (j.name && j.name !== cur.name))) { LS.set('mrb-pupil', JSON.stringify(Object.assign(cur, j.cls ? { cls: j.cls } : {}, j.name ? { name: j.name } : {}))); paintWho(); }
+      if ('zones' in j) LS.set('mrb-zones', JSON.stringify(Array.isArray(j.zones) ? j.zones : null)); if (Array.isArray(j.asked)) LS.set('mrb-asked', JSON.stringify(j.asked));
+      try { zoneLock(); } catch (e) { }
+    }
     if (/^(pending|declined)$/.test(st)) { LS.set('mrb-access', st); gate(); }
     else { LS.set('mrb-access', 'ok'); unGate(); myWork(); }   /* approved (or an Apps Script without approvals) */
   }
@@ -9987,7 +10034,7 @@ try {
       g.innerHTML = `<style>${css}</style><div class="b"><div class="i" aria-hidden="true"></div><h2 id="mrb-gate-h"></h2><p class="t"></p><div class="r"><button type="button" class="o">Sign out</button><button type="button" class="p">Check again</button></div><p class="m" aria-live="polite"></p></div>`;
       document.body.append(g); document.documentElement.style.overflow = 'hidden';
       g.querySelector('.p').addEventListener('click', async ev => { const bt = ev.currentTarget; bt.disabled = true; g.querySelector('.m').textContent = 'Checking…'; await checkAccess(); bt.disabled = false; if (document.getElementById('mrb-gate')) g.querySelector('.m').textContent = LS.get('mrb-access') === 'pending' ? 'Not approved yet. This page will open by itself once you are.' : LS.get('mrb-access') === 'check' ? 'Couldn’t check just now. Are you online?' : ''; });
-      g.querySelector('.o').addEventListener('click', () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && /^mrb-(pupil|pin-ok|access|save-|snap:)/.test(k)) localStorage.removeItem(k); } } catch (e) { } location.reload(); });
+      g.querySelector('.o').addEventListener('click', () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && /^mrb-(pupil|pin-ok|access|save-|snap:|zones|asked)/.test(k)) localStorage.removeItem(k); } } catch (e) { } location.reload(); });
       g.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); } }, true);
     }
     const dec = st === 'declined', chk = !/^(pending|declined)$/.test(st || '');
@@ -10006,10 +10053,18 @@ try {
     const p = me() || {}, editing = !!me() && !!LS.get('mrb-pin-ok');
     const css = `#mrb-who{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:rgba(10,16,30,.62);padding:16px}#mrb-who form{background:#fff;color:#16213A;border-radius:14px;max-width:380px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}#mrb-who h2{margin:0 0 4px;font-size:19px}#mrb-who p{margin:0 0 12px;color:#4A5468;font-size:13.5px}#mrb-who label{display:block;font-weight:700;font-size:13px;margin:8px 0 4px}#mrb-who input{width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px}#mrb-who .r{display:flex;gap:8px;margin-top:14px}#mrb-who button{font:inherit;font-weight:700;border-radius:9px;padding:10px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer}#mrb-who button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff;flex:1}#mrb-who button:disabled{opacity:.6}#mrb-who .m{margin:10px 0 0;font-size:13px;color:#4A5468;min-height:1em}#mrb-who button.sd{display:block;margin:6px auto 0;padding:4px 6px;border:0;background:none;color:#8A93A6;font-size:12px;font-weight:600;text-decoration:underline}@media (prefers-color-scheme:dark){#mrb-who form{background:#1B2233;color:#E8ECF4}#mrb-who p,#mrb-who .m{color:#AEB8CA}#mrb-who input,#mrb-who button:not(.p){background:#121826;color:#E8ECF4;border-color:#3A4458}}`;
     const d = document.createElement('div'); d.id = 'mrb-who'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'mrb-who-h');
-    d.innerHTML = `<style>${css}</style><form novalidate><h2 id="mrb-who-h">Who’s using the Revision Guide?</h2><p>Enter your name, form class and a 4-digit PIN. Your progress is saved under your name, so it follows you to any device.</p><label for="mrb-n">First name and surname</label><input id="mrb-n" autocomplete="name" maxlength="40"><label for="mrb-c">Form class</label><input id="mrb-c" maxlength="12" placeholder="e.g. 11B or 13D" autocomplete="off"><label for="mrb-p">PIN</label><input id="mrb-p" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="4 digits"><small style="display:block;margin-top:4px;color:#687386;font-size:12.5px">First time? Choose one you’ll remember. Use the same PIN on every device.</small><div class="r">${editing ? '<button type="button" class="l">Cancel</button>' : ''}<button class="p">Continue</button></div><p class="m" aria-live="polite"></p><button type="button" class="sd">Send me staff details</button></form>`;
+    d.innerHTML = `<style>${css}</style><form novalidate><h2 id="mrb-who-h">Who’s using the Revision Guide?</h2><p>Enter your name, form class and a 4-digit PIN. Your progress is saved under your name, so it follows you to any device.</p><label for="mrb-n">First name and surname</label><input id="mrb-n" autocomplete="name" maxlength="40"><label for="mrb-c">Class</label><select id="mrb-cs" hidden style="width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px;background:inherit;color:inherit"></select><input id="mrb-c" maxlength="12" placeholder="e.g. 11B or 13D" autocomplete="off"><label for="mrb-p">PIN</label><input id="mrb-p" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="4 digits"><small style="display:block;margin-top:4px;color:#687386;font-size:12.5px">First time? Choose one you’ll remember. Use the same PIN on every device.</small><div class="r">${editing ? '<button type="button" class="l">Cancel</button>' : ''}<button class="p">Continue</button></div><p class="m" aria-live="polite"></p><button type="button" class="sd">Send me staff details</button></form>`;
     document.body.append(d);
     const n = d.querySelector('#mrb-n'), c = d.querySelector('#mrb-c'), pinI = d.querySelector('#mrb-p'), m = d.querySelector('.m'), go = d.querySelector('.p'); n.value = p.name || ''; c.value = p.cls || '';
-    const close = () => { d.remove(); document.documentElement.style.overflow = ''; paintWho(); };
+    /* the class list from Mr Butler (cached for offline): pick one, or "Not listed" to type it */
+    const cs = d.querySelector('#mrb-cs'), fillCls = list => { if (!Array.isArray(list) || !list.length) return; const cur = (c.value || '').toUpperCase();
+      cs.innerHTML = '<option value="">Choose your class…</option>' + list.map(x => `<option></option>`).join('') + '<option value="~">My class isn’t listed</option>';
+      list.forEach((x, i) => { const o = cs.options[i + 1]; o.value = x.cls; o.textContent = x.cls + (x.teacher ? ' · ' + x.teacher : ''); });
+      const hit = list.some(x => x.cls === cur); cs.value = hit ? cur : cur ? '~' : ''; cs.hidden = false; c.hidden = cs.value !== '~'; };
+    cs.addEventListener('change', () => { c.hidden = cs.value !== '~'; if (cs.value === '~') { c.value = ''; c.focus(); } else c.value = cs.value; });
+    try { fillCls(JSON.parse(LS.get('mrb-classes') || 'null')); } catch (x) { }
+    if (URL0) fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=classes', { cache: 'no-store', credentials: 'omit' }).then(r => r.json()).then(j => { if (j && j.ok && Array.isArray(j.classes)) { LS.set('mrb-classes', JSON.stringify(j.classes)); fillCls(j.classes); } }).catch(() => { });
+    const close = () => { d.remove(); document.documentElement.style.overflow = ''; paintWho(); try { zoneLock(); } catch (e) { } };
     document.documentElement.style.overflow = 'hidden';
     d.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); if (editing) close(); } }, true);
     const cancel = d.querySelector('.l'); if (cancel) cancel.addEventListener('click', close);
@@ -10018,7 +10073,7 @@ try {
       catch (x) { m.textContent = 'Couldn’t send just now. Check you are online.'; } bt.disabled = false; });
     d.querySelector('form').addEventListener('submit', async e => {
       e.preventDefault();
-      const name = n.value.replace(/\s+/g, ' ').trim(), cls = c.value.replace(/\s+/g, '').toUpperCase();
+      const name = n.value.replace(/\s+/g, ' ').trim(), cls = (!cs.hidden && cs.value && cs.value !== '~' ? cs.value : c.value).replace(/\s+/g, '').toUpperCase();
       const pinV = pinI.value.trim();
       if (name.split(' ').length < 2) {
         /* staff: the staff password or staff PIN typed in the name box (or the PIN box, name left empty), checked by the Apps Script
@@ -10034,7 +10089,7 @@ try {
         }
         m.textContent = 'Please enter your first name and surname.'; n.focus(); return;
       }
-      if (!/^[A-Z0-9]{1,12}$/.test(cls)) { m.textContent = 'Please enter your form class, e.g. 11B.'; c.focus(); return; }
+      if (!/^[A-Z0-9]{1,12}$/.test(cls)) { m.textContent = cs.hidden ? 'Please enter your form class, e.g. 11B.' : 'Please choose your class.'; (cs.hidden || cs.value === '~' ? c : cs).focus(); return; }
       const pin = pinI.value.trim(); if (!/^\d{4}$/.test(pin)) { m.textContent = 'Please enter a 4-digit PIN.'; pinI.focus(); return; }
       go.disabled = true; m.textContent = 'Checking… (this can take a few seconds)';
       let found = null, offline = false; const devId = p.id || (Math.random().toString(36).slice(2) + Date.now().toString(36)).slice(0, 16);
@@ -10058,7 +10113,7 @@ try {
       LS.set('mrb-access', found && /^(pending|declined)$/.test(found.status || '') ? found.status : 'ok');   /* approved, or an Apps Script without approvals */
       if (blocked()) { close(); gate(); return; }
       if (pulled) { m.textContent = 'Welcome back! Loading your progress…'; setTimeout(() => location.reload(), 600); return; }
-      close();
+      close(); checkAccess();
     });
     setTimeout(() => (p.name ? c : n).focus(), 50);
   }
@@ -10079,7 +10134,7 @@ try {
   /* signing out: a pupil's progress is saved online first, then this device forgets them and their progress (so the next person
      on a shared device starts fresh and signs in); a staff device goes back to asking for a name */
   async function signOut(staff, btn) {
-    const clear = () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && (/^notes-/.test(k) || /^mrb-(pupil|pin-ok|access|save-|snap:)/.test(k))) localStorage.removeItem(k); } } catch (e) { } try { sessionStorage.clear(); } catch (e) { } };
+    const clear = () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && (/^notes-/.test(k) || /^mrb-(pupil|pin-ok|access|save-|snap:|zones|asked)/.test(k))) localStorage.removeItem(k); } } catch (e) { } try { sessionStorage.clear(); } catch (e) { } };
     if (staff) {
       if (!confirm('Sign out of this staff device? It will ask for a name again and count visits.')) return;
       ['notes-nocount', 'teacher.nocount-set', 'teacher.actkey', 'mrb-staff-ok'].forEach(k => LS.set(k, null)); location.reload(); return;
@@ -10101,7 +10156,7 @@ try {
     const used = () => { lastUse = Date.now(); };
     ['pointerdown', 'keydown', 'wheel', 'touchstart', 'scroll'].forEach(ev => addEventListener(ev, used, { passive: true, capture: true }));
     let mm = 0; addEventListener('mousemove', () => { const t = Date.now(); if (t - mm > 5000) { mm = t; used(); } }, { passive: true });
-    const where = () => { if (!inBook) return ['home', '', '']; let ch = '', pg = ''; try { const P = PAGES[cur]; if (!onCover) { ch = P && P.ch && P.ch.id || ''; pg = P && P.p && P.p.id || ''; } } catch (e) { } if (!pg) { const h = location.hash.slice(1); if (/^(quiz|pp)-c\d+$/.test(h)) { ch = h.split('-')[1]; pg = h; } } return [BK.id, ch, pg]; };
+    const where = () => { if (typeof window.MRB_WHERE === 'function') { const w = window.MRB_WHERE(); if (w) return w; } if (!inBook) return ['home', '', '']; let ch = '', pg = ''; try { const P = PAGES[cur]; if (!onCover) { ch = P && P.ch && P.ch.id || ''; pg = P && P.p && P.p.id || ''; } } catch (e) { } if (!pg) { const h = location.hash.slice(1); if (/^(quiz|pp)-c\d+$/.test(h)) { ch = h.split('-')[1]; pg = h; } } return [BK.id, ch, pg]; };
     const playing = () => [...document.querySelectorAll('video,audio')].some(v => !v.paused && !v.ended);
     function send(k, s) {
       const p = me(); if (!p || !s || !URL0 || blocked()) return;

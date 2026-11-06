@@ -1,0 +1,636 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>KS3 Digital Technology</title>
+<meta name="description" content="Mr Butler's KS3 Digital Technology: lesson PowerPoints, notes, worksheets and homework for Years 8, 9 and 10.">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#16213A"><link rel="apple-touch-icon" href="app-icons/apple-touch-icon.png"><link rel="icon" href="app-icons/favicon-32.png" sizes="32x32">
+<link rel="preload" href="fonts/lemonmilk-bold.woff" as="font" type="font/woff" crossorigin>
+<!-- Built from tools/ks3_page.src.html by tools/ks3_build.py (it copies in the sign-in and tracking code from index.html). Edit the source, then run: python3 tools/ks3_build.py -->
+<style>
+@font-face{font-family:'Atkinson Hyperlegible';src:url('fonts/AtkinsonHyperlegible-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Atkinson Hyperlegible';src:url('fonts/AtkinsonHyperlegible-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Lemon Milk';src:url('fonts/lemonmilk-regular.woff') format('woff');font-weight:400;font-display:swap}
+@font-face{font-family:'Lemon Milk';src:url('fonts/lemonmilk-bold.woff') format('woff');font-weight:700;font-display:swap}
+:root{
+  --desk:#E6EAF0;--paper:#FFFFFF;--paper-2:#F4F6F9;--ink:#172033;--ink-2:#465063;--ink-3:#687386;--line:#D3D9E2;--accent:#1F5FBF;--accent-soft:#E4ECFA;
+  --ok:#18744A;--ok-soft:#E1F3EA;--warn:#8E5300;--warn-soft:#FFF0D6;--card-shadow:0 1px 2px rgba(20,30,50,.05),0 10px 30px -14px rgba(20,30,50,.22);
+  --y8:#0B7A70;--y9:#6A45C2;--y10:#B5306A;--navy:#16213A;
+  --sans:'Atkinson Hyperlegible','Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif;
+  --brand:'Lemon Milk','Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;--ease:cubic-bezier(.2,.7,.2,1)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--desk:#0E1117;--paper:#181C24;--paper-2:#1F2430;--ink:#E5E8EE;--ink-2:#B2B9C6;--ink-3:#8A93A3;--line:#2F3644;--accent:#8AB6FF;--accent-soft:#232C4C;--ok:#7FD6A4;--ok-soft:#173226;--warn:#F1B44E;--warn-soft:#382B13;--card-shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -12px rgba(0,0,0,.5);--y8:#4FD6C6;--y9:#BDA2FF;--y10:#FF8FBC;color-scheme:dark}}
+:root[data-theme="dark"]{--desk:#0E1117;--paper:#181C24;--paper-2:#1F2430;--ink:#E5E8EE;--ink-2:#B2B9C6;--ink-3:#8A93A3;--line:#2F3644;--accent:#8AB6FF;--accent-soft:#232C4C;--ok:#7FD6A4;--ok-soft:#173226;--warn:#F1B44E;--warn-soft:#382B13;--card-shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -12px rgba(0,0,0,.5);--y8:#4FD6C6;--y9:#BDA2FF;--y10:#FF8FBC;color-scheme:dark}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--desk);color:var(--ink);font:16px/1.5 var(--sans)}
+a{color:var(--accent)}
+button{font:inherit}
+.top{background:var(--navy);color:#fff;padding:14px 16px 0;position:relative}
+.top::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:linear-gradient(90deg,#0B7A70 0 33.3%,#6A45C2 33.3% 66.6%,#B5306A 66.6%)}
+.top-in{max-width:980px;margin:0 auto;padding-bottom:20px}
+.home{display:inline-flex;align-items:center;gap:6px;color:#C9D7F2;text-decoration:none;font-weight:700;font-size:14px}
+.home:hover{color:#fff}
+.wm{display:block;margin-top:10px;font-family:var(--brand);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#A9C4F2}
+.top h1{margin:2px 0 0;font-family:var(--brand);font-weight:700;font-size:clamp(24px,5vw,38px);line-height:1.1;letter-spacing:.01em}
+.top p{margin:6px 0 0;color:#C9D7F2;max-width:60ch}
+.who{margin:10px 0 0;font-size:13.5px;color:#C9D7F2}.who b{color:#fff}.who .mrb-ch{font:inherit;font-weight:700;color:#fff;background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}
+main{max-width:980px;margin:0 auto;padding:18px 16px 60px}
+.years{display:flex;gap:6px;background:var(--paper);border-radius:14px;padding:5px;box-shadow:var(--card-shadow);margin:0 0 18px;overflow-x:auto}
+.years button{flex:1;min-width:max-content;border:0;background:none;border-radius:10px;padding:10px 14px;font-family:var(--brand);font-weight:700;font-size:15px;letter-spacing:.03em;color:var(--ink-2);cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}
+.years button[aria-selected="true"]{background:var(--yc);color:#fff}
+.years button .lk{font-size:13px}
+.years button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.y-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 12px;margin:0 0 12px}
+.y-h h2{margin:0;font-family:var(--brand);font-size:22px;color:var(--yc)}
+.y-h span{color:var(--ink-3);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.tc{display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--paper);border:0;border-radius:16px;padding:16px;box-shadow:var(--card-shadow);cursor:pointer;color:inherit;position:relative;border-top:5px solid var(--yc);transition:transform .15s var(--ease)}
+.tc:hover{transform:translateY(-2px)}
+.tc:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.tc .n{font-family:var(--brand);font-weight:700;font-size:12px;letter-spacing:.12em;color:var(--yc);text-transform:uppercase}
+.tc h3{margin:0;font-family:var(--brand);font-size:19px;line-height:1.2}
+.tc p{margin:0;color:var(--ink-2);font-size:14.5px}
+.tc .meta{margin-top:auto;padding-top:8px;display:flex;align-items:center;gap:8px;font-size:13px;color:var(--ink-3)}
+.bar{flex:1;height:6px;border-radius:99px;background:var(--paper-2);overflow:hidden}.bar i{display:block;height:100%;background:var(--yc)}
+.tmp{display:inline-block;font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:999px;background:var(--warn-soft);color:var(--warn);margin-left:6px;vertical-align:middle;font-family:var(--sans);letter-spacing:0}
+.soon{background:var(--paper);border-radius:16px;padding:22px;box-shadow:var(--card-shadow);color:var(--ink-2)}
+/* topic */
+.back{display:inline-flex;align-items:center;gap:6px;border:0;background:none;color:var(--accent);font-weight:700;cursor:pointer;padding:4px 0;margin:0 0 8px}
+.th{background:var(--paper);border-radius:18px;padding:20px;box-shadow:var(--card-shadow);border-top:6px solid var(--yc);margin:0 0 14px}
+.th .n{font-family:var(--brand);font-weight:700;font-size:12px;letter-spacing:.12em;color:var(--yc);text-transform:uppercase}
+.th h2{margin:2px 0 6px;font-family:var(--brand);font-size:clamp(22px,4.5vw,30px);line-height:1.15}
+.th p{margin:0;color:var(--ink-2)}
+.learn{margin:14px 0 0;padding:12px 14px;border-radius:12px;background:var(--paper-2)}
+.learn h3{margin:0 0 6px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.learn ul{margin:0;padding-left:20px;columns:2 260px;column-gap:28px}.learn li{break-inside:avoid;margin:0 0 3px}
+.prog{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:14px;color:var(--ink-2)}
+.lesson{display:flex;flex-wrap:wrap;align-items:center;gap:12px 16px;background:linear-gradient(120deg,color-mix(in srgb,var(--yc) 14%,var(--paper)),var(--paper));border-radius:16px;padding:16px;box-shadow:var(--card-shadow);margin:0 0 14px}
+.lesson .ic{flex:none;width:52px;height:52px;border-radius:14px;background:var(--yc);color:#fff;display:grid;place-items:center}
+.lesson .tx{flex:1 1 200px;min-width:0}
+.lesson .tx small{display:block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--yc)}
+.lesson .tx b{display:block;font-size:17px}
+.lesson .tx span{font-size:13px;color:var(--ink-3)}
+.sec{background:var(--paper);border-radius:16px;padding:6px 16px;box-shadow:var(--card-shadow);margin:0 0 14px}
+.sec h3{margin:10px 0 2px;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.it{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;padding:12px 0;border-top:1px solid var(--line)}
+.sec h3+.it{border-top:0}
+.it .ic{flex:none;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--paper-2);color:var(--yc)}
+.it .tx{flex:1 1 180px;min-width:0}
+.it .tx b{display:block;font-size:15.5px;line-height:1.3}
+.it .tx span{font-size:12.5px;color:var(--ink-3)}
+.it.done .tx b{color:var(--ink-3)}
+.acts{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:7px 13px;border-radius:10px;border:1px solid var(--line);background:var(--paper);color:var(--ink);font-weight:700;font-size:14px;text-decoration:none;cursor:pointer}
+.btn:hover{border-color:var(--yc)}
+.btn.pri{background:var(--yc);border-color:var(--yc);color:#fff}
+.btn:focus-visible,.tick:focus-within{outline:3px solid var(--accent);outline-offset:2px}
+.tick{display:inline-flex;align-items:center;gap:6px;min-height:38px;padding:6px 10px;border-radius:10px;border:1px solid var(--line);font-size:13.5px;font-weight:700;cursor:pointer;color:var(--ink-2);user-select:none}
+.tick input{width:18px;height:18px;accent-color:var(--ok);margin:0}
+.tick:has(input:checked){background:var(--ok-soft);border-color:transparent;color:var(--ok)}
+.hint{font-size:13px;color:var(--ink-3);margin:8px 0 0}
+.empty{color:var(--ink-3);padding:14px 0}
+.foot{max-width:980px;margin:0 auto;padding:0 16px 40px;font-size:13px;color:var(--ink-3)}
+.foot details{background:var(--paper);border-radius:12px;padding:10px 14px}
+.foot summary{cursor:pointer;font-weight:700}
+.foot code{font-size:12px;background:var(--paper-2);padding:1px 5px;border-radius:5px}
+.err{background:var(--warn-soft);color:var(--warn);border-radius:12px;padding:12px 14px}
+@media (max-width:560px){.it .acts{width:100%}.it .acts .btn,.it .acts .tick{flex:1;justify-content:center}.lesson .acts{width:100%}.lesson .acts .btn{flex:1;justify-content:center}}
+@media (prefers-reduced-motion:reduce){.tc{transition:none}.tc:hover{transform:none}}
+</style>
+</head>
+<body>
+<header class="top"><div class="top-in">
+  <a class="home" href="index.html"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>Home</a>
+  <span class="wm">Mr Butler’s</span>
+  <h1>KS3 Digital Technology</h1>
+  <p>Lesson PowerPoints, notes, worksheets and homework for Years 8, 9 and 10. Tick things off as you finish them.</p>
+  <p class="who" data-mrb-who hidden></p>
+</div></header>
+<main id="app"><p class="empty">Loading…</p></main>
+<div class="foot"><details><summary>Teacher: adding KS3 resources</summary>
+<p>Each topic is a folder in the GitHub repo: <code>ks3/Year 8/01 Topic name/</code>. Upload files into it and they appear here a minute or two later (a GitHub Action lists them and makes a PDF copy of PowerPoint, Word and Excel files so pupils can view them in the browser). Name files like <code>1 - LESSON - Under the Hood.pptx</code> or <code>3 - WORKSHEET - Binary.docx</code>: the number sets the order and the word sets the type (LESSON, NOTES, WORKSHEET, HOMEWORK, ACTIVITY, PRACTICAL, ASSIGNMENT, HELPSHEET). A new topic is a new numbered folder. Titles, summaries and “What you’ll learn” are in <code>ks3/topics.json</code>. Over 25 MB? Put a OneDrive or Google Drive share link in a <code>.txt</code> file in the folder instead.</p>
+</details></div>
+<script>
+(function () {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
+  const H = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const enc = p => p.split('/').map(encodeURIComponent).join('/');
+  const ICON = {
+    LESSON: '<path d="M3.5 4.5h17v11.5h-17zM8 20h8M12 16v4"/><path d="M10 8l4 2.25L10 12.5z"/>',
+    NOTES: '<path d="M12 6.5C10 5 7 4.5 4 5v13c3-.5 6 0 8 1.5 2-1.5 5-2 8-1.5V5c-3-.5-6 0-8 1.5zM12 6.5v13"/>',
+    WORKSHEET: '<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M8.5 8h7M8.5 11.5h7M8.5 15h4"/>',
+    HOMEWORK: '<path d="M4 11l8-6.5 8 6.5M6 9.5V20h12V9.5M10 20v-5h4v5"/>',
+    ACTIVITY: '<path d="M12 3.5l2.4 5 5.4.6-4 3.7 1.1 5.4L12 15.5l-4.9 2.7 1.1-5.4-4-3.7 5.4-.6z"/>',
+    HELPSHEET: '<circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.4a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2-2.4 3.7M12 16.8v.1"/>',
+    LINK: '<path d="M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1"/>'
+  };
+  const icon = k => `<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k] || ICON.WORKSHEET}</svg>`;
+  const GROUPS = [['Notes', ['NOTES', 'HELPSHEET']], ['Worksheets and activities', ['WORKSHEET', 'ACTIVITY', 'PRACTICAL', 'ASSIGNMENT', 'TASK', 'QUIZ', '']], ['Homework', ['HOMEWORK']], ['Answers', ['ANSWERS']]];
+  const KIND = { LESSON: 'Lesson PowerPoint', NOTES: 'Notes', WORKSHEET: 'Worksheet', HOMEWORK: 'Homework', ACTIVITY: 'Activity', PRACTICAL: 'Practical', ASSIGNMENT: 'Assignment', HELPSHEET: 'Help sheet', TASK: 'Task', QUIZ: 'Quiz', ANSWERS: 'Answers' };
+  const TYPE = n => { const e = (n.split('.').pop() || '').toLowerCase(); return { pptx: 'PowerPoint', ppt: 'PowerPoint', docx: 'Word', doc: 'Word', xlsx: 'Excel', xls: 'Excel', pdf: 'PDF', png: 'Image', jpg: 'Image', jpeg: 'Image', gif: 'Image', mp4: 'Video', zip: 'Zip', html: 'Web page' }[e] || e.toUpperCase(); };
+  const MB = b => b >= 1e6 ? (b / 1e6).toFixed(b >= 1e7 ? 0 : 1) + ' MB' : Math.max(1, Math.round(b / 1e3)) + ' KB';
+  const OFFICE = /\.(pptx?|docx?|xlsx?)$/i;
+  /* view: our PDF copy, a PDF, or (an Office file under 10 MB with no copy yet) Microsoft's online viewer */
+  const viewUrl = f => { if (f.url) return f.url; if (f.view) return 'ks3/' + enc(f.view); if (/\.pdf$/i.test(f.path) || /\.(png|jpe?g|gif|mp4|html)$/i.test(f.path)) return 'ks3/' + enc(f.path);
+    if (OFFICE.test(f.path) && f.size < 1e7 && /^https?:$/.test(location.protocol)) return 'https://view.officeapps.live.com/op/view.aspx?src=' + encodeURIComponent(new URL('ks3/' + enc(f.path), location.href).href); return ''; };
+  /* ticks: 'notes-ks3' (saved online with the rest of the pupil's progress) */
+  const st = (() => { try { return JSON.parse(LS.get('notes-ks3') || '{}') || {}; } catch (e) { return {}; } })(); st.done = st.done || {};
+  const saveSt = () => LS.set('notes-ks3', JSON.stringify(st));
+  const key = f => f.path || f.url;
+  let M = null, Y = null, T = null;   /* manifest, the year shown (e.g. 'Year 8'), the topic open */
+  const yZone = y => 'Y' + y.n;
+  const zOk = z => !window.MRB_ZONES || window.MRB_ZONES.ok(z);
+  const done = t => t.files.filter(f => st.done[key(f)]).length;
+  /* where the pupil is, for Mr Butler's tracking: ['KS3', topic id, ''] */
+  window.MRB_WHERE = () => ['KS3', T ? T.id : '', ''];
+  /* the zone of this page; if it is locked but another KS3 year is open to them, go there instead */
+  window.MRB_PAGE_ZONE = () => { if (!M || !Y) return ''; const y = M.years.find(x => x.year === Y); if (!y) return ''; const z = yZone(y);
+    if (!zOk(z)) { const alt = M.years.find(x => zOk(yZone(x))); if (alt) { setTimeout(() => go('y' + alt.n), 0); return yZone(alt); } } return z; };
+  function go(h) { if (location.hash.slice(1) !== h) location.hash = h; else route(); }
+  function route() {
+    if (!M) return;
+    const h = decodeURIComponent(location.hash.slice(1));
+    let m = /^t(\d+)-(\d+)$/.exec(h), y = null, t = null;
+    if (m) { y = M.years.find(x => x.n === +m[1]); t = y && y.topics.find(x => x.id === m[1] + '-' + m[2]); }
+    else { m = /^y(\d+)$/.exec(h); if (m) y = M.years.find(x => x.n === +m[1]); }
+    if (!y) { const last = M.years.find(x => x.year === LS.get('ks3-year')); y = (last && zOk(yZone(last)) ? last : null) || M.years.find(x => zOk(yZone(x)) && x.topics.length) || M.years[0]; }
+    if (!zOk(yZone(y))) { const alt = M.years.find(x => zOk(yZone(x))); if (alt && alt !== y) { if (window.MRB_ZONES) window.MRB_ZONES.box(yZone(y), false); y = alt; t = null; history.replaceState(null, '', '#y' + alt.n); } }
+    Y = y.year; T = t; LS.set('ks3-year', Y);
+    document.documentElement.style.setProperty('--yc', `var(--y${y.n})`);
+    if (window.MRB_ACTIVITY) try { window.MRB_ACTIVITY.flush(); } catch (e) { }
+    t ? topic(y, t) : year(y);
+    document.title = (t ? t.title + ' · ' : '') + y.year + ' · KS3 Digital Technology';
+    if (window.MRB_ZONES) window.MRB_ZONES.lock();
+  }
+  function tabs(sel) {
+    return `<div class="years" role="tablist" aria-label="Year group">${M.years.map(y => { const lk = !zOk(yZone(y)); return `<button type="button" role="tab" data-y="${y.n}" aria-selected="${y.year === sel}" style="--yc:var(--y${y.n})">${H(y.year)}${lk ? '<span class="lk" aria-label="locked">🔒</span>' : ''}</button>`; }).join('')}</div>`;
+  }
+  function wireTabs() { document.querySelectorAll('.years [data-y]').forEach(b => b.addEventListener('click', () => { const y = M.years.find(x => x.n === +b.dataset.y); if (!zOk(yZone(y))) { window.MRB_ZONES.box(yZone(y), false); return; } go('y' + y.n); })); }
+  function year(y) {
+    const tot = y.topics.length;
+    $('#app').innerHTML = tabs(y.year) + `<div class="y-h"><h2>${H(y.year)}</h2><span>${tot ? `${tot} topic${tot === 1 ? '' : 's'}, in the order you study them` : ''}</span></div>` +
+      (tot ? `<div class="grid">${y.topics.map((t, i) => { const d = done(t), n = t.files.length;
+        return `<button type="button" class="tc" data-t="${H(t.id)}"><span class="n">Topic ${i + 1}</span><h3>${H(t.title)}${t.temporary ? '<span class="tmp">This year only</span>' : ''}</h3><p>${H(t.summary)}</p><span class="meta">${n ? `<span class="bar" aria-hidden="true"><i style="width:${Math.round(d / n * 100)}%"></i></span>${d}/${n} done` : 'Resources coming soon'}</span></button>`; }).join('')}</div>`
+        : '<div class="soon">Topics for this year are coming soon.</div>');
+    wireTabs();
+    document.querySelectorAll('.tc[data-t]').forEach(b => b.addEventListener('click', () => go('t' + b.dataset.t)));
+  }
+  function row(f, lesson) {
+    const v = viewUrl(f), dl = f.path ? 'ks3/' + enc(f.path) : '', k = key(f), on = !!st.done[k];
+    const sub = f.url ? 'Link' : `${TYPE(f.name)} · ${MB(f.size)}`;
+    const acts = `${v ? `<a class="btn${lesson ? ' pri' : ''}" href="${H(v)}" target="_blank" rel="noopener" data-open="${H(k)}">${lesson ? 'View the slides' : 'View'}</a>` : ''}${dl ? `<a class="btn" href="${H(dl)}" download="${H(f.name)}" data-open="${H(k)}">Download</a>` : ''}<label class="tick"><input type="checkbox" data-k="${H(k)}"${on ? ' checked' : ''}> Done</label>`;
+    if (lesson) return `<div class="lesson"><span class="ic">${icon('LESSON')}</span><span class="tx"><small>${H(KIND[f.kind] || 'Lesson')}</small><b>${H(f.title)}</b><span>${H(sub)}</span></span><span class="acts">${acts}</span></div>`;
+    return `<div class="it${on ? ' done' : ''}"><span class="ic">${icon(f.url ? 'LINK' : f.kind)}</span><span class="tx"><b>${H(f.title)}</b><span>${H(KIND[f.kind] || 'Resource')} · ${H(sub)}</span></span><span class="acts">${acts}</span></div>`;
+  }
+  function topic(y, t) {
+    const i = y.topics.indexOf(t), d = done(t), n = t.files.length;
+    const lessons = t.files.filter(f => f.kind === 'LESSON'), rest = t.files.filter(f => f.kind !== 'LESSON');
+    const secs = GROUPS.map(([h, ks]) => [h, rest.filter(f => ks.includes(f.kind))]).filter(([, fs]) => fs.length);
+    const other = rest.filter(f => !GROUPS.some(([, ks]) => ks.includes(f.kind))); if (other.length) secs.push(['More', other]);
+    const nxt = y.topics[i + 1];
+    $('#app').innerHTML = tabs(y.year) + `<button type="button" class="back" data-back><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>All ${H(y.year)} topics</button>
+      <section class="th"><span class="n">${H(y.year)} · Topic ${i + 1}</span><h2>${H(t.title)}${t.temporary ? '<span class="tmp">This year only</span>' : ''}</h2><p>${H(t.summary)}</p>
+      ${t.learn && t.learn.length ? `<div class="learn"><h3>What you’ll learn</h3><ul>${t.learn.map(x => `<li>${H(x)}</li>`).join('')}</ul></div>` : ''}
+      ${n ? `<div class="prog"><span class="bar" aria-hidden="true"><i style="width:${Math.round(d / n * 100)}%"></i></span><span>${d} of ${n} done</span></div>` : ''}</section>
+      ${lessons.map(f => row(f, true)).join('')}
+      ${secs.map(([h, fs]) => `<section class="sec"><h3>${H(h)}</h3>${fs.map(f => row(f)).join('')}</section>`).join('')}
+      ${!n ? '<div class="soon">Resources for this topic are coming soon.</div>' : '<p class="hint">Worksheets open as a PDF to read. To fill one in, press Download and open it in Word or Excel.</p>'}
+      ${nxt ? `<p style="margin-top:18px"><button type="button" class="btn" data-t="${H(nxt.id)}">Next topic: ${H(nxt.title)} →</button></p>` : ''}`;
+    wireTabs();
+    $('[data-back]').addEventListener('click', () => go('y' + y.n));
+    document.querySelectorAll('main [data-t]').forEach(b => b.addEventListener('click', () => go('t' + b.dataset.t)));
+    document.querySelectorAll('input[data-k]').forEach(cb => cb.addEventListener('change', () => { if (cb.checked) st.done[cb.dataset.k] = Date.now(); else delete st.done[cb.dataset.k]; saveSt(); const r = cb.closest('.it'); if (r) r.classList.toggle('done', cb.checked); const pr = $('.prog'); if (pr) { const dd = done(t); pr.innerHTML = `<span class="bar" aria-hidden="true"><i style="width:${Math.round(dd / n * 100)}%"></i></span><span>${dd} of ${n} done</span>`; } }));
+    scrollTo(0, 0);
+  }
+  addEventListener('hashchange', route);
+  fetch('ks3/manifest.json', { cache: 'no-cache' }).then(r => { if (!r.ok) throw 0; return r.json(); }).then(j => { M = j; M.years = (M.years || []).filter(y => y.n >= 7 && y.n <= 10); route(); })
+    .catch(() => { $('#app').innerHTML = '<p class="err">Couldn’t load the KS3 topics. Check you are online and try again.</p>'; });
+  /* zones arrive a moment after the page opens: redraw the tabs when they do */
+  let zs = LS.get('mrb-zones'); setInterval(() => { const z = LS.get('mrb-zones'); if (z !== zs) { zs = z; route(); } }, 1500);
+})();
+</script>
+<script>
+/* ---------- PUPIL ACTIVITY: the pupil types their name and class once; their ACTIVE time (page on screen and used in the
+   last 90 seconds) is sent, per unit and topic, to Mr Butler's Google Sheet (the Apps Script in tools/pupil-activity.gs,
+   its URL in activity.json). Nothing is sent before a name is given, nor from a teacher's device ('notes-nocount'),
+   offline, or in the claude.ai preview. ---------- */
+(function () {
+  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
+  const inBook = typeof BK !== 'undefined' && BK && BK.id && typeof PAGES !== 'undefined';
+  const isTeacherPage = /teacher\.html$/i.test(location.pathname);
+  try { if (localStorage.getItem('mrb-staff-ok') && !localStorage.getItem('mrb-pupilmode')) document.documentElement.classList.add('is-staff'); } catch (e) { }
+  if (isTeacherPage || !/^https?:$/.test(location.protocol) || /(^|\.)claude\.ai$|claudeusercontent/i.test(location.hostname)) return;
+  const me = () => { try { return JSON.parse(LS.get('mrb-pupil') || 'null'); } catch (e) { return null; } };
+  let URL0 = LS.get('mrb-act-url') || '';
+  fetch((inBook ? '../' : '') + 'activity.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).then(j => { if (j && typeof j.url === 'string') { URL0 = j.url.trim(); LS.set('mrb-act-url', URL0); } start(); }).catch(start);
+  let started = false;
+  function start() {
+    if (started) return; started = true;
+    if (!/^https:\/\/script\.google(usercontent)?\.com\//.test(URL0)) return;
+    /* a device marked as staff without the staff password (e.g. a pupil who once opened the Teacher area) is a pupil device again */
+    if (LS.get('notes-nocount') && !LS.get('mrb-staff-ok') && !LS.get('mrb-viewas')) { ['notes-nocount', 'teacher.nocount-set', 'teacher.actkey'].forEach(k => LS.set(k, null)); }
+    if (LS.get('notes-nocount')) return;
+    let later = false; try { later = !!sessionStorage.getItem('mrb-pin-later'); } catch (x) { }
+    addEventListener('online', () => { if (me() && !LS.get('mrb-pin-ok') && !LS.get('notes-nocount')) { try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } ask(); } });   /* signed in offline: PIN checked as soon as it is back online */
+    if (!me() || !LS.get('mrb-pin-ok')) setTimeout(ask, 600);   /* a PIN is always needed */
+    else { if (blocked()) gate(); checkAccess(); }
+    track();
+    setTimeout(syncAwards, 3000); setInterval(syncAwards, 5 * 60000);
+  }
+  /* pages the teacher marked (or unmarked) as covered for this pupil, applied to this device's progress */
+  async function syncAwards() {
+    const p = me(); if (!p || !URL0 || LS.get('notes-nocount')) return;
+    const since = +LS.get('mrb-awards-at') || 0;
+    let j; try { j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=awards&id=' + encodeURIComponent(p.id) + '&since=' + since, { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); } catch (e) { return; }
+    if (!j || !j.ok || !Array.isArray(j.awards) || !j.awards.length) return;
+    let mx = since, here = false;
+    j.awards.sort((a, b) => a[0] - b[0]).forEach(([t, b, pg, on]) => {
+      if (inBook && BK.id === b && typeof state !== 'undefined' && state && state.done) { if (on) { state.done[pg] = 1; state.seen[pg] = 1; } else delete state.done[pg]; here = true; }
+      else { const k = 'notes-reader:' + b; let o = {}; try { o = JSON.parse(LS.get(k) || '{}') || {}; } catch (e) { o = {}; } o.done = o.done || {}; o.seen = o.seen || {}; if (on) { o.done[pg] = 1; o.seen[pg] = 1; } else delete o.done[pg]; LS.set(k, JSON.stringify(o)); }
+      mx = Math.max(mx, t);
+    });
+    if (here && typeof save === 'function') save();
+    LS.set('mrb-awards-at', String(mx));
+  }
+  /* the name dialog (also opened from "Change" in About / My progress) */
+  /* combine progress from the online copy with this browser's (a pupil on a second device keeps both) */
+  function mergeInto(remote) {
+    const J = v => { try { return JSON.parse(v); } catch (e) { return null; } };
+    let n = 0;
+    for (const k of Object.keys(remote || {})) {
+      if (!/^notes-/.test(k) || /^notes-(nocount|counted)/.test(k) || typeof remote[k] !== 'string') continue;
+      const loc = LS.get(k); if (loc == null) { LS.set(k, remote[k]); n++; continue; }
+      const a = J(loc), b = J(remote[k]); if (!a || !b || typeof a !== 'object' || typeof b !== 'object') continue;
+      if (/^notes-reader:/.test(k)) {
+        ['done', 'seen'].forEach(f => { a[f] = Object.assign({}, b[f] || {}, a[f] || {}); });
+        a.steps = a.steps || {}; Object.keys(b.steps || {}).forEach(s => { a.steps[s] = [...new Set([...(a.steps[s] || []), ...(b.steps[s] || [])])]; });
+        if (!a.last && b.last) a.last = b.last;
+      } else if (/^notes-chquiz:/.test(k)) {
+        a.best = a.best || {}; Object.keys(b.best || {}).forEach(q => { if (!a.best[q] || (b.best[q] && b.best[q].pc > a.best[q].pc)) a.best[q] = b.best[q]; });
+        a.open = Object.assign({}, b.open || {}, a.open || {});
+      } else if (/^notes-trophy:/.test(k)) {
+        a.earned = Object.assign({}, b.earned || {}, a.earned || {});
+      } else continue;
+      LS.set(k, JSON.stringify(a)); n++;
+    }
+    return n;
+  }
+  /* ACCESS: a signed-in pupil uses the guide only once Mr Butler has approved them (Teacher area › Pupil tracking). 'mrb-access'
+     is 'ok' once the Apps Script has confirmed it; 'pending' / 'declined' while not; anything else (not checked yet) keeps the
+     page covered until it is checked, so a slow or failed check never lets a new pupil in. Once 'ok', the device works offline
+     and is re-checked in the background each visit (a decline takes effect next time). An older Apps Script with no approvals
+     answers without a status: that counts as approved. */
+  /* ZONES: Mr Butler sets which units / years each pupil can open (a pupil can have several). Anything else is locked here,
+     with a button to ask him to open it. 'mrb-zones' is the list from the Apps Script (null: no limits set). */
+  const ZN = { Y8: 'Year 8', Y9: 'Year 9', Y10: 'Year 10', U1: 'GCSE Unit 1', U4: 'GCSE Unit 4', U5: 'GCSE Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+  const zones = () => { try { const z = JSON.parse(LS.get('mrb-zones') || 'null'); return Array.isArray(z) ? z : null; } catch (e) { return null; } };
+  const asked = () => { try { return JSON.parse(LS.get('mrb-asked') || '[]') || []; } catch (e) { return []; } };
+  const zoneOk = z => !z || !ZN[z] || !!LS.get('notes-nocount') || !me() || !zones() || zones().indexOf(z) >= 0;
+  async function askZone(z) {
+    const p = me(); if (!p || !URL0) return false;
+    try { const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=zonereq&id=' + encodeURIComponent(p.id) + '&zone=' + encodeURIComponent(z) + '&name=' + encodeURIComponent(p.name || '') + '&cls=' + encodeURIComponent(p.cls || ''), { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
+      if (j && j.ok) { const a = asked(); if (a.indexOf(z) < 0) a.push(z); LS.set('mrb-asked', JSON.stringify(a)); return true; } } catch (e) { }
+    return false;
+  }
+  /* the locked box: on a locked workbook it covers the page (with a way home); elsewhere it is a pop-up */
+  function zoneBox(z, cover) {
+    if (document.getElementById('mrb-zl')) return;
+    const d = document.createElement('div'); d.id = 'mrb-zl'; if (cover) d.dataset.cover = '1'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'mrb-zl-h');
+    const home = /\/notes\/[^/]*$/.test(location.pathname) ? '../index.html' : 'index.html', mine = (zones() || []).map(x => ZN[x] || x).join(', ');
+    d.innerHTML = `<style>#mrb-zl{position:fixed;inset:0;z-index:2147482950;display:grid;place-items:center;background:rgba(10,16,30,${cover ? '.86' : '.6'});padding:16px}#mrb-zl .b{background:#fff;color:#16213A;border-radius:16px;max-width:400px;width:100%;padding:22px 20px;text-align:center;font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.35)}#mrb-zl .i{font-size:34px;line-height:1;margin-bottom:6px}#mrb-zl h2{margin:0 0 6px;font-size:19px}#mrb-zl p{margin:0 0 10px;color:#4A5468;font-size:14px}#mrb-zl .r{display:flex;flex-direction:column;gap:8px;margin-top:12px}#mrb-zl button,#mrb-zl a{font:inherit;font-weight:700;border-radius:10px;padding:11px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer;text-decoration:none;display:block}#mrb-zl .p{background:#1F5FBF;border-color:#1F5FBF;color:#fff}#mrb-zl .p:disabled{opacity:.6;cursor:default}#mrb-zl .m{font-size:13px;min-height:1em;margin:8px 0 0}@media (prefers-color-scheme:dark){#mrb-zl .b{background:#1B2233;color:#E8ECF4}#mrb-zl p{color:#AEB8CA}#mrb-zl button:not(.p),#mrb-zl a{background:#121826;color:#E8ECF4;border-color:#3A4458}}</style>
+      <div class="b"><div class="i" aria-hidden="true">🔒</div><h2 id="mrb-zl-h"></h2><p class="t"></p><div class="r"><button type="button" class="p"></button>${cover ? `<a href="${home}">Back to the home page</a>` : '<button type="button" class="x">Not now</button>'}</div><p class="m" aria-live="polite"></p></div>`;
+    d.querySelector('h2').textContent = `${ZN[z] || z} isn’t open for you yet`;
+    d.querySelector('.t').textContent = mine ? `Mr Butler has opened ${mine} for you. Ask him if you’d like to look at ${ZN[z] || z} too.` : `Ask Mr Butler if you’d like to look at ${ZN[z] || z}.`;
+    const go = d.querySelector('.p'), m = d.querySelector('.m'), was = asked().indexOf(z) >= 0;
+    go.textContent = was ? 'Asked: waiting for Mr Butler' : `Ask to open ${ZN[z] || z}`; go.disabled = was;
+    go.addEventListener('click', async () => { go.disabled = true; m.textContent = 'Sending…'; const ok = await askZone(z); go.textContent = ok ? 'Asked: waiting for Mr Butler' : `Ask to open ${ZN[z] || z}`; go.disabled = ok; m.textContent = ok ? 'Sent. It opens by itself once he says yes.' : 'Couldn’t send just now. Are you online?'; });
+    const x = d.querySelector('.x'); if (x) x.addEventListener('click', () => { d.remove(); document.documentElement.style.overflow = ''; });
+    d.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); if (!cover) { d.remove(); document.documentElement.style.overflow = ''; } } }, true);
+    document.body.append(d); document.documentElement.style.overflow = 'hidden'; go.focus();
+  }
+  /* which zone a link or this page belongs to: notes/U1.html → U1; ks3.html#y8 (or a page that sets window.MRB_PAGE_ZONE) → Y8 */
+  const zoneOfHref = h => { const m = /(?:^|\/)notes\/(U1|U4|U5|AS1|AS2|A21|A22)\.html/i.exec(h || '') || /ks3\.html#y(8|9|10)\b/i.exec(h || ''); return m ? (/^\d/.test(m[1]) ? 'Y' + m[1] : m[1].toUpperCase()) : ''; };
+  const pageZone = () => typeof window.MRB_PAGE_ZONE === 'function' ? window.MRB_PAGE_ZONE() : (inBook && ZN[BK.id] ? BK.id : '');
+  function zoneLock() {
+    const z = pageZone(), cov = document.querySelector('#mrb-zl[data-cover]');
+    if (z && !zoneOk(z)) { if (!cov && !document.getElementById('mrb-zl') && !document.getElementById('mrb-who') && !document.getElementById('mrb-gate')) zoneBox(z, true); }
+    else if (cov) { cov.remove(); document.documentElement.style.overflow = ''; }
+    document.querySelectorAll('a[href]').forEach(a => { const zz = zoneOfHref(a.getAttribute('href')); a.classList.toggle('mrb-locked', !!zz && !zoneOk(zz)); });
+    if (!document.getElementById('mrb-zl-css')) { const st = document.createElement('style'); st.id = 'mrb-zl-css'; st.textContent = 'a.mrb-locked{opacity:.55;filter:grayscale(.6);position:relative}a.mrb-locked::after{content:"🔒";position:absolute;top:6px;right:8px;font-size:15px;line-height:1;filter:none}'; document.head.append(st); }
+  }
+  document.addEventListener('click', e => { const a = e.target.closest && e.target.closest('a[href]'); if (!a) return; const z = zoneOfHref(a.getAttribute('href')); if (z && !zoneOk(z)) { e.preventDefault(); e.stopPropagation(); zoneBox(z, false); } }, true);
+  window.MRB_ZONES = { ok: zoneOk, ask: askZone, box: zoneBox, lock: zoneLock, names: ZN, list: zones };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', zoneLock); else setTimeout(zoneLock, 0);
+  new MutationObserver(() => { clearTimeout(window.__mrbZT); window.__mrbZT = setTimeout(zoneLock, 150); }).observe(document.documentElement, { childList: true, subtree: true });
+  const blocked = () => !!me() && !LS.get('notes-nocount') && LS.get('mrb-access') !== 'ok';
+  const unGate = () => { const g = document.getElementById('mrb-gate'); if (g) g.remove(); document.documentElement.style.overflow = ''; clearInterval(gateT); };
+  async function checkAccess() {
+    const p = me(); if (!p || !URL0 || LS.get('notes-nocount')) return;
+    let j = null; try { const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000); j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=access&id=' + encodeURIComponent(p.id) + '&cls=' + encodeURIComponent(p.cls || ''), { cache: 'no-store', credentials: 'omit', signal: ctl.signal }).then(r => r.json()); clearTimeout(t); } catch (e) { j = null; }
+    if (!j) { if (blocked()) { if (!/^(pending|declined)$/.test(LS.get('mrb-access') || '')) LS.set('mrb-access', 'check'); gate(); } return; }   /* couldn't reach it: stay as we were */
+    if (j.ok && j.pin === false) { LS.set('mrb-pin-ok', null); try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } unGate(); ask(); return; }   /* no PIN on record (never set, or Mr Butler reset it): sign in again and choose one */
+    const st = j.ok && typeof j.status === 'string' ? j.status : '';
+    if (j.ok) {   /* the class (and name) Mr Butler set, the zones this pupil can open, and what they have asked for */
+      const cur = me(); if (cur && ((j.cls && j.cls !== cur.cls) || (j.name && j.name !== cur.name))) { LS.set('mrb-pupil', JSON.stringify(Object.assign(cur, j.cls ? { cls: j.cls } : {}, j.name ? { name: j.name } : {}))); paintWho(); }
+      if ('zones' in j) LS.set('mrb-zones', JSON.stringify(Array.isArray(j.zones) ? j.zones : null)); if (Array.isArray(j.asked)) LS.set('mrb-asked', JSON.stringify(j.asked));
+      try { zoneLock(); } catch (e) { }
+    }
+    if (/^(pending|declined)$/.test(st)) { LS.set('mrb-access', st); gate(); }
+    else { LS.set('mrb-access', 'ok'); unGate(); myWork(); }   /* approved (or an Apps Script without approvals) */
+  }
+  /* SET WORK and MESSAGES from Mr Butler: messages show once (then marked read); set work shows once a visit, and is kept
+     ('mrb-mywork') for My progress and the workbook's cover */
+  async function myWork() {
+    const p = me(); if (!p || !URL0 || LS.get('notes-nocount') || window.__mrbWork) return; window.__mrbWork = 1;
+    let j; try { j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=mywork&id=' + encodeURIComponent(p.id) + '&cls=' + encodeURIComponent(p.cls || ''), { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); } catch (e) { return; }
+    if (!j || !j.ok) return;
+    LS.set('mrb-mywork', JSON.stringify(j.work || []));
+    const msgs = j.msgs || [], work = (j.work || []).filter(w => !w.due || w.due >= new Date(Date.now() - 864e5).toISOString().slice(0, 10));
+    let seenWork = false; try { seenWork = sessionStorage.getItem('mrb-work-shown') === '1'; } catch (e) { }
+    if (!msgs.length && (seenWork || !work.length)) return;
+    try { sessionStorage.setItem('mrb-work-shown', '1'); } catch (e) { }
+    const UN = { U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+    const base = /\/notes\/[^/]*$/.test(location.pathname) ? '' : 'notes/';
+    const due = d => { if (!d) return ''; const x = new Date(d + 'T12:00:00'); return isNaN(x) ? d : x.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }); };
+    const show = () => {
+      if (document.getElementById('mrb-who') || document.getElementById('mrb-gate') || document.getElementById('mrb-fin')) { setTimeout(show, 1500); return; }
+      const d = document.createElement('div'); d.id = 'mrb-msg';
+      d.innerHTML = `<style>#mrb-msg{position:fixed;inset:0;z-index:2147482900;display:grid;place-items:center;background:rgba(10,16,30,.55);padding:16px}#mrb-msg .b{background:#fff;color:#16213A;border-radius:16px;max-width:420px;width:100%;max-height:85vh;overflow:auto;padding:20px;font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.35)}#mrb-msg h2{margin:0 0 10px;font-size:19px}#mrb-msg .m{background:#EEF3FB;border-left:4px solid #1F5FBF;border-radius:10px;padding:10px 12px;margin:0 0 10px;white-space:pre-wrap}#mrb-msg .m small{display:block;color:#5A6478;font-size:12px;margin-top:4px}#mrb-msg ul{list-style:none;margin:0 0 12px;padding:0}#mrb-msg li{border:1px solid #DCE2EA;border-radius:10px;padding:9px 12px;margin:0 0 8px}#mrb-msg li a{font-weight:800;color:#1F5FBF;text-decoration:none}#mrb-msg li small{display:block;color:#5A6478;font-size:12.5px}#mrb-msg button{width:100%;font:inherit;font-weight:800;border:0;border-radius:12px;padding:12px;background:#1F5FBF;color:#fff;cursor:pointer}@media (prefers-color-scheme:dark){#mrb-msg .b{background:#1B2233;color:#E8ECF4}#mrb-msg .m{background:#22304A}#mrb-msg li{border-color:#3A4458}}</style>
+        <div class="b" role="dialog" aria-modal="true" aria-labelledby="mm-h">${msgs.length ? `<h2 id="mm-h">${msgs.length === 1 ? 'A message from Mr Butler' : 'Messages from Mr Butler'}</h2>${msgs.map(m => `<div class="m"></div>`).join('')}` : ''}
+        ${work.length ? `<h2${msgs.length ? '' : ' id="mm-h"'}>Work set for you</h2><ul>${work.map(w => `<li><a href="${base}${w.book}.html#${w.ch}-p01">${UN[w.book] || w.book} · Topic ${+w.ch.slice(1)}</a>${w.due ? `<small>Due ${due(w.due)}</small>` : ''}${w.note ? `<small class="wn"></small>` : ''}</li>`).join('')}</ul>` : ''}<button type="button">OK</button></div>`;
+      d.querySelectorAll('.m').forEach((el, i) => { el.textContent = msgs[i].text; el.insertAdjacentHTML('beforeend', `<small>${new Date(msgs[i].at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</small>`); });
+      d.querySelectorAll('.wn').forEach((el, i) => { el.textContent = work.filter(w => w.note)[i].note; });
+      const done = () => { d.remove(); msgs.forEach(m => { const body = JSON.stringify({ kind: 'msgread', id: p.id, name: p.name, cls: p.cls, book: 'home', mid: m.id }); try { if (!(navigator.sendBeacon && navigator.sendBeacon(URL0, new Blob([body], { type: 'text/plain' })))) fetch(URL0, { method: 'POST', mode: 'no-cors', body }); } catch (e) { } }); };
+      d.querySelector('button').addEventListener('click', done); d.querySelectorAll('a').forEach(a => a.addEventListener('click', done));
+      document.body.append(d);
+    };
+    show();
+  }
+  let gateT = 0;
+  function gate() {
+    if (!blocked() || LS.get('notes-nocount')) return;
+    const st = LS.get('mrb-access'), p = me() || {};
+    let g = document.getElementById('mrb-gate');
+    if (!g) {
+      g = document.createElement('div'); g.id = 'mrb-gate'; g.setAttribute('role', 'dialog'); g.setAttribute('aria-modal', 'true'); g.setAttribute('aria-labelledby', 'mrb-gate-h');
+      const css = `#mrb-gate{position:fixed;inset:0;z-index:2147483001;display:grid;place-items:center;background:rgba(10,16,30,.72);padding:16px}#mrb-gate .b{background:#fff;color:#16213A;border-radius:14px;max-width:380px;width:100%;padding:22px 20px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;text-align:center}#mrb-gate .i{font-size:34px;line-height:1;margin-bottom:8px}#mrb-gate h2{margin:0 0 6px;font-size:19px}#mrb-gate p{margin:0 0 10px;color:#4A5468;font-size:14px}#mrb-gate .r{display:flex;gap:8px;margin-top:14px}#mrb-gate button{font:inherit;font-weight:700;border-radius:9px;padding:10px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer;flex:1}#mrb-gate button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff}#mrb-gate .m{font-size:13px;min-height:1em;margin:10px 0 0}@media (prefers-color-scheme:dark){#mrb-gate .b{background:#1B2233;color:#E8ECF4}#mrb-gate p{color:#AEB8CA}#mrb-gate button:not(.p){background:#121826;color:#E8ECF4;border-color:#3A4458}}`;
+      g.innerHTML = `<style>${css}</style><div class="b"><div class="i" aria-hidden="true"></div><h2 id="mrb-gate-h"></h2><p class="t"></p><div class="r"><button type="button" class="o">Sign out</button><button type="button" class="p">Check again</button></div><p class="m" aria-live="polite"></p></div>`;
+      document.body.append(g); document.documentElement.style.overflow = 'hidden';
+      g.querySelector('.p').addEventListener('click', async ev => { const bt = ev.currentTarget; bt.disabled = true; g.querySelector('.m').textContent = 'Checking…'; await checkAccess(); bt.disabled = false; if (document.getElementById('mrb-gate')) g.querySelector('.m').textContent = LS.get('mrb-access') === 'pending' ? 'Not approved yet. This page will open by itself once you are.' : LS.get('mrb-access') === 'check' ? 'Couldn’t check just now. Are you online?' : ''; });
+      g.querySelector('.o').addEventListener('click', () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && /^mrb-(pupil|pin-ok|access|save-|snap:|zones|asked)/.test(k)) localStorage.removeItem(k); } } catch (e) { } location.reload(); });
+      g.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); } }, true);
+    }
+    const dec = st === 'declined', chk = !/^(pending|declined)$/.test(st || '');
+    g.querySelector('.i').textContent = dec ? '⛔' : chk ? '🔄' : '⏳';
+    g.querySelector('h2').textContent = dec ? 'Access not approved' : chk ? 'Checking your access…' : 'Waiting for approval';
+    g.querySelector('.t').textContent = dec ? `Mr Butler hasn’t approved access for ${p.name || 'this name'}${p.cls ? ' (' + p.cls + ')' : ''}. If you think this is a mistake, speak to him.`
+      : chk ? `Hi ${(p.name || '').split(' ')[0] || 'there'}! Checking that Mr Butler has approved you. You need to be online for this the first time.`
+      : `Thanks, ${(p.name || '').split(' ')[0] || 'you'}! Mr Butler needs to approve you before you can use the Revision Guide. This page opens by itself as soon as he does.`;
+    g.querySelector('.p').hidden = dec;
+    clearInterval(gateT); if (!dec) gateT = setInterval(() => { if (!document.getElementById('mrb-gate')) return clearInterval(gateT); if (!document.hidden) checkAccess(); }, 20000);
+  }
+  /* "Who's using the Revision Guide?": name and form class, required (it cannot be skipped). If that name and class are
+     already in Mr Butler's sheet, this device joins that pupil and their saved progress is pulled in. */
+  function ask() {
+    if (document.getElementById('mrb-who')) return;
+    const p = me() || {}, editing = !!me() && !!LS.get('mrb-pin-ok');
+    const css = `#mrb-who{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:rgba(10,16,30,.62);padding:16px}#mrb-who form{background:#fff;color:#16213A;border-radius:14px;max-width:380px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}#mrb-who h2{margin:0 0 4px;font-size:19px}#mrb-who p{margin:0 0 12px;color:#4A5468;font-size:13.5px}#mrb-who label{display:block;font-weight:700;font-size:13px;margin:8px 0 4px}#mrb-who input{width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px}#mrb-who .r{display:flex;gap:8px;margin-top:14px}#mrb-who button{font:inherit;font-weight:700;border-radius:9px;padding:10px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer}#mrb-who button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff;flex:1}#mrb-who button:disabled{opacity:.6}#mrb-who .m{margin:10px 0 0;font-size:13px;color:#4A5468;min-height:1em}#mrb-who button.sd{display:block;margin:6px auto 0;padding:4px 6px;border:0;background:none;color:#8A93A6;font-size:12px;font-weight:600;text-decoration:underline}@media (prefers-color-scheme:dark){#mrb-who form{background:#1B2233;color:#E8ECF4}#mrb-who p,#mrb-who .m{color:#AEB8CA}#mrb-who input,#mrb-who button:not(.p){background:#121826;color:#E8ECF4;border-color:#3A4458}}`;
+    const d = document.createElement('div'); d.id = 'mrb-who'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'mrb-who-h');
+    d.innerHTML = `<style>${css}</style><form novalidate><h2 id="mrb-who-h">Who’s using the Revision Guide?</h2><p>Enter your name, form class and a 4-digit PIN. Your progress is saved under your name, so it follows you to any device.</p><label for="mrb-n">First name and surname</label><input id="mrb-n" autocomplete="name" maxlength="40"><label for="mrb-c">Class</label><select id="mrb-cs" hidden style="width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px;background:inherit;color:inherit"></select><input id="mrb-c" maxlength="12" placeholder="e.g. 11B or 13D" autocomplete="off"><label for="mrb-p">PIN</label><input id="mrb-p" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="4 digits"><small style="display:block;margin-top:4px;color:#687386;font-size:12.5px">First time? Choose one you’ll remember. Use the same PIN on every device.</small><div class="r">${editing ? '<button type="button" class="l">Cancel</button>' : ''}<button class="p">Continue</button></div><p class="m" aria-live="polite"></p><button type="button" class="sd">Send me staff details</button></form>`;
+    document.body.append(d);
+    const n = d.querySelector('#mrb-n'), c = d.querySelector('#mrb-c'), pinI = d.querySelector('#mrb-p'), m = d.querySelector('.m'), go = d.querySelector('.p'); n.value = p.name || ''; c.value = p.cls || '';
+    /* the class list from Mr Butler (cached for offline): pick one, or "Not listed" to type it */
+    const cs = d.querySelector('#mrb-cs'), fillCls = list => { if (!Array.isArray(list) || !list.length) return; const cur = (c.value || '').toUpperCase();
+      cs.innerHTML = '<option value="">Choose your class…</option>' + list.map(x => `<option></option>`).join('') + '<option value="~">My class isn’t listed</option>';
+      list.forEach((x, i) => { const o = cs.options[i + 1]; o.value = x.cls; o.textContent = x.cls + (x.teacher ? ' · ' + x.teacher : ''); });
+      const hit = list.some(x => x.cls === cur); cs.value = hit ? cur : cur ? '~' : ''; cs.hidden = false; c.hidden = cs.value !== '~'; };
+    cs.addEventListener('change', () => { c.hidden = cs.value !== '~'; if (cs.value === '~') { c.value = ''; c.focus(); } else c.value = cs.value; });
+    try { fillCls(JSON.parse(LS.get('mrb-classes') || 'null')); } catch (x) { }
+    if (URL0) fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=classes', { cache: 'no-store', credentials: 'omit' }).then(r => r.json()).then(j => { if (j && j.ok && Array.isArray(j.classes)) { LS.set('mrb-classes', JSON.stringify(j.classes)); fillCls(j.classes); } }).catch(() => { });
+    const close = () => { d.remove(); document.documentElement.style.overflow = ''; paintWho(); try { zoneLock(); } catch (e) { } };
+    document.documentElement.style.overflow = 'hidden';
+    d.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); if (editing) close(); } }, true);
+    const cancel = d.querySelector('.l'); if (cancel) cancel.addEventListener('click', close);
+    d.querySelector('.sd').addEventListener('click', async ev => { const bt = ev.currentTarget; bt.disabled = true; m.textContent = 'Sending…';
+      try { const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=staffmail', { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); m.textContent = j && j.ok ? 'The staff details have been emailed to Mr Butler.' : 'Couldn’t send just now.'; }
+      catch (x) { m.textContent = 'Couldn’t send just now. Check you are online.'; } bt.disabled = false; });
+    d.querySelector('form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const name = n.value.replace(/\s+/g, ' ').trim(), cls = (!cs.hidden && cs.value && cs.value !== '~' ? cs.value : c.value).replace(/\s+/g, '').toUpperCase();
+      const pinV = pinI.value.trim();
+      if (name.split(' ').length < 2) {
+        /* staff: the staff password or staff PIN typed in the name box (or the PIN box, name left empty), checked by the Apps Script
+           (never stored in the site), marks this device as staff: never asked again, never counted */
+        const tryK = name || pinV;
+        if (tryK.length >= 4) {
+          go.disabled = true; m.textContent = 'Checking…';
+          try {
+            const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=staff&key=' + encodeURIComponent(tryK), { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
+            if (j && j.ok) { LS.set('notes-nocount', '1'); LS.set('teacher.nocount-set', '1'); LS.set('mrb-staff-ok', '1'); if (j.teacher) LS.set('teacher.actkey', tryK); LS.set('mrb-pupil', null); LS.set('mrb-access', null); const gg = document.getElementById('mrb-gate'); if (gg) gg.remove(); m.textContent = 'Staff device: you won’t be asked again or counted.'; setTimeout(close, 900); return; }
+          } catch (x) { }
+          go.disabled = false;
+        }
+        m.textContent = 'Please enter your first name and surname.'; n.focus(); return;
+      }
+      if (!/^[A-Z0-9]{1,12}$/.test(cls)) { m.textContent = cs.hidden ? 'Please enter your form class, e.g. 11B.' : 'Please choose your class.'; (cs.hidden || cs.value === '~' ? c : cs).focus(); return; }
+      const pin = pinI.value.trim(); if (!/^\d{4}$/.test(pin)) { m.textContent = 'Please enter a 4-digit PIN.'; pinI.focus(); return; }
+      go.disabled = true; m.textContent = 'Checking… (this can take a few seconds)';
+      let found = null, offline = false; const devId = p.id || (Math.random().toString(36).slice(2) + Date.now().toString(36)).slice(0, 16);
+      try {
+        const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000);
+        const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=whois&name=' + encodeURIComponent(name) + '&cls=' + encodeURIComponent(cls) + '&pin=' + pin + '&id=' + encodeURIComponent(devId), { cache: 'no-store', credentials: 'omit', signal: ctl.signal }).then(r => r.json());
+        clearTimeout(t);
+        if (j && j.error === 'pin') { go.disabled = false; pinI.value = ''; pinI.focus(); m.textContent = `That PIN doesn’t match the one for ${name}.${j.left != null ? ` ${j.left} ${j.left === 1 ? 'try' : 'tries'} left.` : ''} Forgotten it? Ask Mr Butler to reset it.`; return; }
+        if (j && j.error === 'locked') { go.disabled = false; m.textContent = 'Too many wrong PINs. Try again in 15 minutes, or ask Mr Butler to reset your PIN.'; return; }
+        if (j && j.ok && j.id) found = j;
+        /* anything else (an older Apps Script, a server error): let them in now and check the PIN again next time, so nobody is ever locked out */
+      } catch (x) { offline = true; }
+      /* couldn't reach the sign-in check (offline, slow, a server error): not in until it can be checked */
+      if (offline) { go.disabled = false; m.textContent = 'Couldn’t check your name just now. Check you are online, then press Continue again.'; return; }
+      const id = found ? found.id : devId;
+      if (found) LS.set('mrb-pin-ok', '1'); else { LS.set('mrb-pin-ok', null); try { sessionStorage.setItem('mrb-pin-later', '1'); } catch (x) { } }
+      void offline;
+      LS.set('mrb-pupil', JSON.stringify({ id, name: found && found.name ? found.name : name, cls: found && found.cls ? found.cls : cls }));
+      let pulled = 0; if (found && found.data && !found.fresh) { try { pulled = mergeInto(JSON.parse(found.data)); } catch (x) { } }
+      LS.set('mrb-save-hash', null);
+      LS.set('mrb-access', found && /^(pending|declined)$/.test(found.status || '') ? found.status : 'ok');   /* approved, or an Apps Script without approvals */
+      if (blocked()) { close(); gate(); return; }
+      if (pulled) { m.textContent = 'Welcome back! Loading your progress…'; setTimeout(() => location.reload(), 600); return; }
+      close(); checkAccess();
+    });
+    setTimeout(() => (p.name ? c : n).focus(), 50);
+  }
+  window.MRB_WHO = ask;
+  /* "Revising as … · Change" wherever a [data-mrb-who] slot is on the page */
+  /* "Using the Revision Guide as … · Change · Sign out" (or "Staff device · Sign out") wherever a [data-mrb-who] slot is */
+  function paintWho() {
+    document.querySelectorAll('[data-mrb-who]').forEach(el => {
+      const p = me(), staff = !!LS.get('notes-nocount'); el.hidden = false; el.classList.add('mrb-whoslot');
+      el.innerHTML = staff ? `<b>Staff device</b>: not asked to sign in, not counted · <button type="button" class="mrb-ch" data-w="out">Sign out</button>`
+        : p ? `Using the Revision Guide as <b></b> (<span></span>) · <button type="button" class="mrb-ch" data-w="ch">Change</button> · <button type="button" class="mrb-ch" data-w="out">Sign out</button>`
+        : `<button type="button" class="mrb-ch" data-w="ch">Enter your name</button> to save your progress.`;
+      if (p && !staff) { el.querySelector('b').textContent = p.name; el.querySelector('span').textContent = p.cls; }
+      const ch = el.querySelector('[data-w="ch"]'); if (ch) ch.addEventListener('click', ask);
+      const out = el.querySelector('[data-w="out"]'); if (out) out.addEventListener('click', () => signOut(staff, out));
+    });
+  }
+  /* signing out: a pupil's progress is saved online first, then this device forgets them and their progress (so the next person
+     on a shared device starts fresh and signs in); a staff device goes back to asking for a name */
+  async function signOut(staff, btn) {
+    const clear = () => { try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && (/^notes-/.test(k) || /^mrb-(pupil|pin-ok|access|save-|snap:|zones|asked)/.test(k))) localStorage.removeItem(k); } } catch (e) { } try { sessionStorage.clear(); } catch (e) { } };
+    if (staff) {
+      if (!confirm('Sign out of this staff device? It will ask for a name again and count visits.')) return;
+      ['notes-nocount', 'teacher.nocount-set', 'teacher.actkey', 'mrb-staff-ok'].forEach(k => LS.set(k, null)); location.reload(); return;
+    }
+    if (!confirm('Sign out? Your progress is saved online first, then removed from this device. Sign in again with your name, form class and PIN to get it back.')) return;
+    btn.disabled = true; btn.textContent = 'Saving…';
+    let ok = false;
+    try { ok = !!(window.MRB_CLOUD && await Promise.race([window.MRB_CLOUD.save(true), new Promise(r => setTimeout(() => r(false), 8000))])); } catch (e) { }
+    if (!ok && !confirm('Your progress couldn’t be saved online just now (are you offline?). Sign out anyway? Anything not saved will be lost from this device.')) { btn.disabled = false; btn.textContent = 'Sign out'; return; }
+    clear();
+    try { const set0 = Storage.prototype.setItem; Storage.prototype.setItem = function (k, v) { if (this === localStorage && /^notes-/.test(String(k))) return; return set0.call(this, k, v); }; } catch (e) { }   /* nothing on this page writes the old progress back before the reload */
+    location.reload();
+  }
+  window.MRB_PAINT_WHO = paintWho;
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', paintWho); else paintWho();
+  /* active time: 5-second ticks while the page is visible and was used in the last 90 s (or a video is playing) */
+  function track() {
+    let lastUse = Date.now(), acc = 0, key = null;
+    const used = () => { lastUse = Date.now(); };
+    ['pointerdown', 'keydown', 'wheel', 'touchstart', 'scroll'].forEach(ev => addEventListener(ev, used, { passive: true, capture: true }));
+    let mm = 0; addEventListener('mousemove', () => { const t = Date.now(); if (t - mm > 5000) { mm = t; used(); } }, { passive: true });
+    const where = () => { if (typeof window.MRB_WHERE === 'function') { const w = window.MRB_WHERE(); if (w) return w; } if (!inBook) return ['home', '', '']; let ch = '', pg = ''; try { const P = PAGES[cur]; if (!onCover) { ch = P && P.ch && P.ch.id || ''; pg = P && P.p && P.p.id || ''; } } catch (e) { } if (!pg) { const h = location.hash.slice(1); if (/^(quiz|pp)-c\d+$/.test(h)) { ch = h.split('-')[1]; pg = h; } } return [BK.id, ch, pg]; };
+    const playing = () => [...document.querySelectorAll('video,audio')].some(v => !v.paused && !v.ended);
+    function send(k, s) {
+      const p = me(); if (!p || !s || !URL0 || blocked()) return;
+      const body = JSON.stringify({ id: p.id, name: p.name, cls: p.cls, book: k[0], ch: k[1], pg: k[2] || '', s: Math.round(s) });
+      try { if (navigator.sendBeacon && navigator.sendBeacon(URL0, new Blob([body], { type: 'text/plain' }))) return; } catch (e) { }
+      try { fetch(URL0, { method: 'POST', mode: 'no-cors', body, keepalive: true }); } catch (e) { }
+    }
+    const flush = () => { if (key && acc >= 5) send(key, acc); acc = 0; snap(); };
+    let lastPing = 0;
+    const ping = k => { const p = me(); if (!p || !URL0 || blocked()) return; lastPing = Date.now(); const body = JSON.stringify({ kind: 'ping', id: p.id, name: p.name, cls: p.cls, book: k[0], ch: k[1], pg: k[2] || '' });
+      try { if (navigator.sendBeacon && navigator.sendBeacon(URL0, new Blob([body], { type: 'text/plain' }))) return; } catch (e) { } try { fetch(URL0, { method: 'POST', mode: 'no-cors', body, keepalive: true }); } catch (e) { } };
+    /* progress snapshot for this workbook (pages covered and opened, best chapter-quiz scores, trophies), sent when it changes */
+    let lastSnap = LS.get('mrb-snap:' + (inBook ? BK.id : '')) || '';
+    function snap() {
+      const p = me(); if (!p || !inBook || !URL0) return;
+      let o;
+      try {
+        const ids = PAGES.map(P => P.p.id), cov = ids.filter(i => state.done[i]).length, seen = ids.filter(i => state.seen[i] || state.done[i]).length;
+        let quiz = {}; try { quiz = (JSON.parse(localStorage.getItem('notes-chquiz:' + BK.id) || '{}').best) || {}; } catch (e) { }
+        let tr = 0; try { tr = Object.keys((typeof TR !== 'undefined' && TR && TR.earned) || {}).length; } catch (e) { }
+        const q = {}; Object.keys(quiz).forEach(k => { const b = quiz[k]; if (b && b.m) q[k] = [b.s, b.m, b.date || '']; });
+        o = { cov, seen, total: ids.length, tr, quiz: q, done: ids.filter(i => state.done[i]), seenIds: ids.filter(i => (state.seen[i] || state.done[i]) && !state.done[i]), laterIds: ids.filter(i => state.later && state.later[i] && !state.done[i]), pq: (() => { const o = {}; ids.forEach(i => { const r = state.pq && state.pq[i]; if (r && r.m) o[i] = [r.s, r.m, r.bs != null ? r.bs : r.s, r.n || 1, r.a || '', r.c || '']; }); return o; })() };
+      } catch (e) { return; }
+      const sig = JSON.stringify(o) + p.id + p.name + p.cls; if (sig === lastSnap) return;
+      const body = JSON.stringify(Object.assign({ kind: 'snap', id: p.id, name: p.name, cls: p.cls, book: BK.id }, o));
+      let sent = false;
+      try { sent = !!(navigator.sendBeacon && navigator.sendBeacon(URL0, new Blob([body], { type: 'text/plain' }))); } catch (e) { }
+      if (!sent) try { fetch(URL0, { method: 'POST', mode: 'no-cors', body, keepalive: true }); sent = true; } catch (e) { }
+      if (sent) { lastSnap = sig; LS.set('mrb-snap:' + BK.id, sig); }
+    }
+    setTimeout(snap, 4000);
+    setInterval(() => {
+      if (document.visibilityState !== 'visible' || (Date.now() - lastUse > 90000 && !playing())) return;
+      const k = where(); if (!key || k[0] !== key[0] || k[1] !== key[1] || k[2] !== key[2]) { flush(); key = k; }
+      acc += 5; if (acc >= 180) flush();   /* at most one row every 3 minutes of use */
+      if (Date.now() - lastPing > 60000) ping(k);   /* "revising now" in the Teacher area */
+    }, 5000);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); });
+    addEventListener('pagehide', flush);
+    window.MRB_ACTIVITY = { flush, state: () => ({ acc, key, idle: Date.now() - lastUse }) };
+  }
+})();
+/* ---------- SAVE ONLINE: any pupil (no name needed) can save their progress (every notes-* item, as in "Download my
+   progress") to Mr Butler's Google Sheet under a save code like K7P4-QX9M, and load it on another device with the code.
+   Once saved, it saves again by itself whenever the progress changes. Shown wherever a [data-mrb-cloud] slot appears
+   (My progress on the home page and in the workbooks). ---------- */
+(function () {
+  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
+  const inBook = typeof BK !== 'undefined' && BK && BK.id;
+  if (!/^https?:$/.test(location.protocol)) return;
+  const url = () => { const u = LS.get('mrb-act-url') || ''; return /^https:\/\/script\.google(usercontent)?\.com\//.test(u) ? u : ''; };
+  const ABC = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+  const newCode = () => { const a = new Uint32Array(8); crypto.getRandomValues(a); const c = [...a].map(x => ABC[x % ABC.length]).join(''); return c.slice(0, 4) + '-' + c.slice(4); };
+  const SKIP = /^notes-(nocount|counted)/;
+  const payload = () => { const d = {}; try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && /^notes-/.test(k) && !SKIP.test(k)) d[k] = localStorage.getItem(k); } } catch (e) { } return JSON.stringify(d); };
+  const hash = s => { let h = 0; for (let i = 0; i < s.length; i++) h = (Math.imul(h, 31) + s.charCodeAt(i)) | 0; return String(h) + ':' + s.length; };
+  const ago = t => { if (!t) return ''; const m = Math.round((Date.now() - t) / 6e4); return m < 1 ? 'just now' : m < 60 ? `${m} min ago` : m < 1440 ? `${Math.round(m / 60)} h ago` : new Date(t).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }); };
+  const who = () => { try { return JSON.parse(LS.get('mrb-pupil') || 'null'); } catch (e) { return null; } };
+  let busy = false;
+  async function save(force) {
+    const pu = who(), code = LS.get('mrb-save-code'), u = url(); if ((!pu && !code) || !u || busy) return false;
+    const data = payload(), h = hash(data); if (!force && h === LS.get('mrb-save-hash')) return true;
+    busy = true;
+    try {
+      const body = JSON.stringify(pu ? { kind: 'psave', id: pu.id, name: pu.name, cls: pu.cls, data } : { kind: 'save', code, data });   /* named pupils: saved under their name */
+      let ok = false;
+      try { const r = await fetch(u, { method: 'POST', body, headers: { 'Content-Type': 'text/plain' } }); const j = await r.json(); ok = !!(j && j.ok); }
+      catch (e) { await fetch(u, { method: 'POST', mode: 'no-cors', body }); ok = true; }   /* could not read the reply: assume it went */
+      if (ok) { LS.set('mrb-save-hash', h); LS.set('mrb-save-at', String(Date.now())); }
+      return ok;
+    } catch (e) { return false; } finally { busy = false; paint(); }
+  }
+  async function load(code, msg) {
+    const u = url(); code = String(code || '').toUpperCase().replace(/[^A-Z0-9]/g, ''); if (code.length === 8) code = code.slice(0, 4) + '-' + code.slice(4);
+    if (!/^[A-HJ-NP-Z2-9]{4}-[A-HJ-NP-Z2-9]{4}$/.test(code)) { msg('That doesn’t look like a save code: it is 8 letters and numbers, like K7P4-QX9M.'); return; }
+    if (!u) { msg('Saving online isn’t switched on yet.'); return; }
+    msg('Loading…');
+    try {
+      const j = await fetch(u + (u.includes('?') ? '&' : '?') + 'action=load&code=' + encodeURIComponent(code), { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
+      if (!j || !j.ok) { msg('No progress is saved with that code. Check it and try again.'); return; }
+      let d; try { d = JSON.parse(j.data); } catch (e) { d = null; }
+      const ks = d ? Object.keys(d).filter(k => /^notes-/.test(k) && !SKIP.test(k) && typeof d[k] === 'string') : [];
+      if (!confirm(`Load the progress saved ${ago(j.updated)} with ${code}? It replaces the progress in this browser.`)) { msg(''); return; }
+      try { for (let i = localStorage.length - 1; i >= 0; i--) { const k = localStorage.key(i); if (k && /^notes-/.test(k) && !SKIP.test(k)) localStorage.removeItem(k); } ks.forEach(k => localStorage.setItem(k, d[k])); } catch (e) { msg('This browser would not save the progress.'); return; }
+      LS.set('mrb-save-code', code); LS.set('mrb-save-hash', hash(payload())); LS.set('mrb-save-at', String(j.updated || Date.now()));
+      location.reload();
+    } catch (e) { msg('Couldn’t reach the save. Check you are online and try again.'); }
+  }
+  const CSS = `.mrb-cloud{margin-top:12px;padding-top:12px;border-top:1px solid var(--line,#DCE2EA);font-size:14px}.mrb-cloud b.k{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:17px;letter-spacing:.06em;background:var(--paper-2,#F1F4F8);padding:2px 8px;border-radius:6px}.mrb-cloud p{margin:0 0 8px}.mrb-cloud .r{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.mrb-cloud input{font:inherit;text-transform:uppercase;padding:8px 10px;border:1px solid var(--line,#C9D2DE);border-radius:9px;width:11em;background:var(--paper,#fff);color:inherit}.mrb-cloud .m{display:block;margin-top:6px;color:var(--ink-3,#687386);font-size:13px}.mrb-cloud .lk{font:inherit;background:none;border:0;padding:0;color:var(--accent,#1F5FBF);text-decoration:underline;cursor:pointer}.mrb-whoslot .mrb-ch{font:inherit;font-weight:700;color:var(--accent,#1F5FBF);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline}`;
+  function paintOne(el) {
+    const u = url(), code = LS.get('mrb-save-code'), pu = who();
+    if (!u) { el.hidden = true; return; }
+    el.hidden = false; el.classList.add('mrb-cloud');
+    if (!document.getElementById('mrb-cloud-css')) { const st = document.createElement('style'); st.id = 'mrb-cloud-css'; st.textContent = CSS; document.head.append(st); }
+    if (pu) {   /* named pupil: saved online under their name, automatically */
+      el.innerHTML = `<p><b>Saved online</b> under <b class="nm"></b>: sign in with the same name and form class on any device to carry on. It saves by itself as you go.</p><div class="r"><button type="button" class="btn" data-c="save">Save now</button></div><span class="m" data-c="msg"></span>`;
+      el.querySelector('.nm').textContent = `${pu.name} (${pu.cls})`;
+      const msg = t => { el.querySelector('[data-c="msg"]').textContent = t; }, at = +LS.get('mrb-save-at'); if (at) msg(`Last saved ${ago(at)}.`);
+      el.querySelector('[data-c="save"]').addEventListener('click', async () => { msg('Saving…'); const ok = await save(true); msg(ok ? 'Saved.' : 'Couldn’t save just now. Check you are online and try again.'); });
+      return;
+    }
+    el.innerHTML = code
+      ? `<p><b>Saved online</b> with code <b class="k"></b>. Keep the code safe: use it to load your progress on another device. It saves again by itself as you go.</p><div class="r"><button type="button" class="btn" data-c="save">Save now</button><button type="button" class="lk" data-c="stop">Stop saving online on this device</button></div><span class="m" data-c="msg"></span>`
+      : `<p><b>Save online</b> and get a save code: load your progress on any device with it. No name or email needed.</p><div class="r"><button type="button" class="btn pri" data-c="new">Save my progress online</button></div><span class="m" data-c="msg"></span>`;
+    el.insertAdjacentHTML('beforeend', `<div class="r" style="margin-top:8px"><input data-c="code" placeholder="Save code" aria-label="Save code" maxlength="9" autocomplete="off"><button type="button" class="btn" data-c="load">Load with a code</button></div>`);
+    if (code) el.querySelector('b.k').textContent = code;
+    const msg = t => { el.querySelector('[data-c="msg"]').textContent = t; };
+    const at = +LS.get('mrb-save-at'); if (code && at) msg(`Last saved ${ago(at)}.`);
+    const q = s => el.querySelector(`[data-c="${s}"]`);
+    if (q('new')) q('new').addEventListener('click', async () => { LS.set('mrb-save-code', newCode()); LS.set('mrb-save-hash', null); msg('Saving…'); const ok = await save(true); if (!ok) { LS.set('mrb-save-code', null); msg('Couldn’t save just now. Check you are online and try again.'); } });
+    if (q('save')) q('save').addEventListener('click', async () => { msg('Saving…'); const ok = await save(true); msg(ok ? 'Saved.' : 'Couldn’t save just now. Check you are online and try again.'); });
+    if (q('stop')) q('stop').addEventListener('click', () => { if (confirm('Stop saving online on this device? Your saved copy stays online: load it any time with your code.')) { LS.set('mrb-save-code', null); paint(); } });
+    q('load').addEventListener('click', () => load(q('code').value, msg));
+    q('code').addEventListener('keydown', e => { if (e.key === 'Enter') load(q('code').value, msg); });
+  }
+  function paint() { document.querySelectorAll('[data-mrb-cloud]').forEach(paintOne); if (window.MRB_PAINT_WHO) window.MRB_PAINT_WHO(); }
+  window.MRB_CLOUD = { save, load, paint };
+  const boot = () => {
+    paint();
+    new MutationObserver(ms => { for (const m of ms) for (const n of m.addedNodes) if (n.nodeType === 1 && (n.matches('[data-mrb-cloud],[data-mrb-who]') || n.querySelector('[data-mrb-cloud],[data-mrb-who]'))) { paint(); return; } }).observe(document.body, { childList: true, subtree: true });
+    /* the activity.json URL may arrive a moment later (first visit) */
+    setTimeout(paint, 2500);
+    setInterval(() => { if (document.visibilityState === 'visible') save(false); }, 60000);
+    document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') save(false); });
+  };
+  void inBook;
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+})();
+</script>
+</body>
+</html>

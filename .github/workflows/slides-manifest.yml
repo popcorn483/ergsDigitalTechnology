@@ -1,4 +1,4 @@
-name: Update topic PowerPoint and past-paper lists
+name: Update topic PowerPoint, past-paper and KS3 lists
 
 on:
   push:
@@ -7,6 +7,9 @@ on:
       - "notes/slides/**"
       - "!notes/slides/manifest.json"
       - "papers/**"
+      - "ks3/**"
+      - "!ks3/manifest.json"
+      - "!ks3/**/_view/**"
       - "!papers/manifest.json"
       - "!papers/crops.json"
       - "!papers/reports.json"
@@ -24,6 +27,14 @@ jobs:
       - uses: actions/checkout@v4
       - name: List uploaded PowerPoints
         run: python3 tools/slides_manifest.py
+      - name: KS3 - make PDF copies of new Office files so pupils can view them in the browser
+        run: |
+          if find ks3 -type f \( -iname "*.pptx" -o -iname "*.ppt" -o -iname "*.docx" -o -iname "*.doc" -o -iname "*.xlsx" -o -iname "*.xls" \) -not -path "*/_view/*" | while read -r f; do v="$(dirname "$f")/_view/$(basename "${f%.*}").pdf"; [ -f "$v" ] || echo x; done | grep -q x; then
+            sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends libreoffice-impress libreoffice-writer libreoffice-calc >/dev/null || echo "couldn't install LibreOffice"
+            bash tools/ks3_views.sh || echo "PDF copies failed"
+          fi
+      - name: KS3 - list the topics and files
+        run: python3 tools/ks3_manifest.py
       - name: List uploaded past papers
         run: python3 tools/papers_manifest.py
       - name: Find each question on its page (so the app can show just that question)
@@ -37,7 +48,7 @@ jobs:
           python3 tools/report_crops.py || echo "report finder failed; keeping the previous reports.json"
       - name: Commit the list if it changed
         run: |
-          git add notes/slides/manifest.json papers/manifest.json papers/crops.json papers/reports.json papers/topics.json
+          git add ks3/manifest.json ks3 notes/slides/manifest.json papers/manifest.json papers/crops.json papers/reports.json papers/topics.json
           if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898283+github-actions[bot]@users.noreply.github.com"

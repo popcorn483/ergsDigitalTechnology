@@ -18,6 +18,8 @@
    STAFF: typing TEACHER_KEY or STAFF_PIN in the sign-in box's name or PIN field marks that device as staff (never asked,
    never counted). Its "Send me staff details" link emails both to the Google account that owns this script.
 
+   CLASSES and ZONES (v20): Teacher area › Pupil tracking › Classes: add each class with its teacher and what it studies
+   (its zones). Pupils sign in by picking their class; you can move them between classes and set their own zones there.
    UPDATING this code later: paste the new version over the old one (keep your TEACHER_KEY line), save, then
    Deploy › Manage deployments › pencil (Edit) › Version: New version › Deploy. The URL stays the same.
 
@@ -26,7 +28,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 19;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 20;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -34,7 +36,35 @@ const SITE = 'https://popcorn483.github.io/ergsdigitaltechnology/';
 const REQUIRE_APPROVAL = true;   // new pupils wait until you approve them in the Teacher area › Pupils (false: anyone can sign up)
 const NOTIFY_EMAIL = '';   // where the emails go (sign-up requests, staff details, weekly report); empty: the Google account that owns this script
 const EMAIL_SIGNINS = true;   // email the script's owner each time a new pupil signs up (false to stop)   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
-const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
+const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22', 'KS3'];
+/* ZONES: what a pupil may open. Year 8 / 9 / 10 are the KS3 years; the rest are the GCSE and A level workbooks.
+   A pupil's own zones (Zones sheet) win; otherwise their class's zones (Classes sheet); with neither, everything is open. */
+const ZONES = ['Y8', 'Y9', 'Y10', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
+const ZONE_NAMES = { Y8: 'Year 8', Y9: 'Year 9', Y10: 'Year 10', U1: 'GCSE Unit 1', U4: 'GCSE Unit 4', U5: 'GCSE Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+const zl_ = v => [...new Set(String(v || '').toUpperCase().split(/[\s,]+/).filter(z => ZONES.indexOf(z) >= 0))];
+/* CLASSES: Classes sheet [Class, Teacher, Course, Zones, Updated]: each teaching class, who teaches it and what it studies */
+const classesSh_ = () => tab_('Classes', ['Class', 'Teacher', 'Course', 'Zones', 'Updated']);
+const ncls_ = c => String(c || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
+function classes_() { return rows_(classesSh_()).filter(r => ncls_(r[0])).map(r => ({ cls: ncls_(r[0]), teacher: String(r[1] || '').trim(), course: String(r[2] || '').trim(), zones: zl_(r[3]) })); }
+const zonesSh_ = () => tab_('Zones', ['Pupil ID', 'Zones', 'Updated']);
+function pzones_() { const m = {}; rows_(zonesSh_()).forEach(r => { if (String(r[0])) m[String(r[0])] = zl_(r[1]); }); return m; }
+function setZones_(id, zones) { const sh = zonesSh_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === id), row = [id, zl_(zones.join(',')).join(','), new Date()];
+  if (i >= 0) sh.getRange(i + 2, 1, 1, 3).setValues([row]); else sh.appendRow(row); }
+function dropZones_(ids) { const sh = zonesSh_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (ids.indexOf(String(r[i][0])) >= 0) sh.deleteRow(i + 2); }
+/* the zones that apply: the pupil's own, else their class's, else null (no limits) */
+function effZones_(id, cls, PZ, CL) { PZ = PZ || pzones_(); CL = CL || classes_(); if (PZ[id]) return PZ[id]; const c = CL.find(x => x.cls === ncls_(cls)); return c && c.zones.length ? c.zones : null; }
+/* ZONE REQUESTS: a pupil asks to open a unit or year outside their zones. Zone requests sheet [ID, Pupil ID, Name, Class, Zone, Asked, Status, Decided] */
+const zreqSh_ = () => tab_('Zone requests', ['ID', 'Pupil ID', 'Name', 'Class', 'Zone', 'Asked', 'Status', 'Decided']);
+function zreqs_(status) { return rows_(zreqSh_()).filter(r => String(r[0]) && (!status || String(r[6]) === status)).map(r => ({ rid: String(r[0]), id: String(r[1]), name: String(r[2]), cls: String(r[3]), zone: String(r[4]), at: new Date(r[5]).getTime(), status: String(r[6]) })); }
+function zoneAsk_(rawId, zone, name, cls) {
+  if (!okId(rawId) || ZONES.indexOf(String(zone)) < 0) return { ok: false };
+  const id = resolve_(String(rawId), aliases_());
+  if (zreqs_('pending').some(r => r.id === id && r.zone === zone)) return { ok: true, again: true };
+  const N = names_(), nm = (N[id] && N[id][0]) || clean_(name, 40), cl = (N[id] && N[id][1]) || clean_(cls, 12).toUpperCase();
+  locked_(() => zreqSh_().appendRow(['Z' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), id, nm, cl, zone, new Date(), 'pending', '']));
+  notify_('Access request', nm, cl, `${nm} is asking to open ${ZONE_NAMES[zone] || zone}: Teacher area › Pupil tracking › Requests.`, 'A pupil is asking to open ' + (ZONE_NAMES[zone] || zone));
+  return { ok: true };
+}
 const LOG_HEAD = ['When', 'Pupil ID', 'Name', 'Class', 'Unit', 'Topic', 'Active seconds', 'Page'];
 const PROG_HEAD = ['Updated', 'Pupil ID', 'Name', 'Class', 'Unit', 'Pages covered', 'Pages opened', 'Pages in unit', 'Trophies', 'Best quiz scores', 'Pages covered / opened', 'Page quiz marks'];
 
@@ -247,7 +277,7 @@ function testEmail() {   /* run this once from the editor (it asks for permissio
   mailNote_(null); Logger.log('Test email sent to ' + to);
   return to;
 }
-function notify_(what, name, cls, more) {
+function notify_(what, name, cls, more, title) {
   if (!EMAIL_SIGNINS) return;
   try {
     const pr = PropertiesService.getScriptProperties(), day = Utilities.formatDate(new Date(), 'Europe/London', 'yyyy-MM-dd');
@@ -255,9 +285,9 @@ function notify_(what, name, cls, more) {
     const to = mailTo_(); if (!to) { mailNote_('no email address (set NOTIFY_EMAIL)'); return; }
     const nm = String(name || '').replace(/^'/, ''), cl = String(cls || '').replace(/^'/, ''), who = `${nm} (${cl})`;
     MailApp.sendEmail({ to, name: BRAND.name, subject: `${what}: ${who}`,
-      htmlBody: mailHtml_({ title: REQUIRE_APPROVAL ? 'A pupil is waiting for approval' : 'A new pupil has signed up', preheader: `${who} ${REQUIRE_APPROVAL ? 'is waiting for you to approve them' : 'has signed up'}.`,
+      htmlBody: mailHtml_({ title: title || (REQUIRE_APPROVAL ? 'A pupil is waiting for approval' : 'A new pupil has signed up'), preheader: title ? more : `${who} ${REQUIRE_APPROVAL ? 'is waiting for you to approve them' : 'has signed up'}.`,
         body: `<p style="margin:0">${esc_(more)}</p>` + mailFacts_([['Pupil', nm], ['Class', cl || '–'], ['Signed up', when_()]]),
-        button: [REQUIRE_APPROVAL ? 'Review the request' : 'See all pupils', SITE + 'teacher.html#visits'],
+        button: [title || REQUIRE_APPROVAL ? 'Review the request' : 'See all pupils', SITE + 'teacher.html#visits'],
         foot: 'To stop these emails, set EMAIL_SIGNINS to false in the Apps Script and deploy a new version.' }),
       body: `${what}: ${who}\n${more}\n\n${when_()}\n${SITE}teacher.html#visits\nTo stop these emails, set EMAIL_SIGNINS to false in the Apps Script and deploy a new version.` });
     pr.setProperty('mails:' + day, String(n + 1)); mailNote_(null);
@@ -288,14 +318,19 @@ function doGet(e) {
   const q = (e && e.parameter) || {};
   if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
   if (q.action === 'whois') return out_(whois_(q.name, q.cls, q.pin, q.id));
-  if (q.action === 'access') { if (!okId(q.id)) return out_({ ok: false }); const id = resolve_(String(q.id), aliases_()); return out_({ ok: true, status: access_(id), pin: !!getPin_(id) }); }   /* a pupil's device: approved yet? has a PIN? */
+  if (q.action === 'access') {   /* a pupil's device: approved yet? has a PIN? their class (as the teacher set it), zones and open zone requests */
+    if (!okId(q.id)) return out_({ ok: false }); const id = resolve_(String(q.id), aliases_()), N = names_(), cls = (N[id] && N[id][1]) || ncls_(q.cls);
+    return out_({ ok: true, status: access_(id), pin: !!getPin_(id), id, name: N[id] ? N[id][0] : undefined, cls: N[id] ? N[id][1] : undefined, zones: effZones_(id, cls), asked: zreqs_('pending').filter(r => r.id === id).map(r => r.zone) });
+  }
+  if (q.action === 'classes') return out_({ ok: true, classes: classes_().map(c => ({ cls: c.cls, teacher: c.teacher, course: c.course })) });   /* the sign-in box: the class list */
+  if (q.action === 'zonereq') return out_(zoneAsk_(q.id, String(q.zone || '').toUpperCase(), q.name, q.cls));   /* a pupil's device: approved yet? has a PIN? */
   if (q.action === 'awards') return out_(awardsFor_(q.id, +q.since || 0));   /* a pupil's device: pages the teacher marked or unmarked */   /* pupils signing in: find them by name and form class */
   if (q.action === 'staff') {   /* the sign-in box: staff password check (TEACHER_KEY or STAFF_PIN) */
     const k = String(q.key || ''), ok = (k === TEACHER_KEY && TEACHER_KEY !== 'change-me') || (k === STAFF_PIN && STAFF_PIN !== 'change-me');
     return out_(ok ? { ok: true, teacher: k === TEACHER_KEY } : { error: 'key' });
   }
   if (q.action === 'staffmail') return out_(staffMail_());
-  if (q.action === 'mywork') return out_(myWork_(q.id, q.cls));   /* a pupil's device: work set for their class, and messages for them */   /* "Send me staff details": only ever to the script's owner */
+  if (q.action === 'mywork') { const N = names_(), id = okId(q.id) ? resolve_(String(q.id), aliases_()) : ''; return out_(myWork_(q.id, (N[id] && N[id][1]) || q.cls)); }   /* a pupil's device: work set for their class, and messages for them */   /* "Send me staff details": only ever to the script's owner */
   if (q.key !== TEACHER_KEY || TEACHER_KEY === 'change-me') return out_({ error: 'key' });
   ensureWeekly_();
   if (q.action === 'week') return out_(week_(q.start));   /* the Teacher area's weekly report */
@@ -373,9 +408,39 @@ function act_(q) {
   if (q.action === 'approve' || q.action === 'decline') {   /* the teacher answers sign-up requests */
     if (!ids.length) return { ok: false, error: 'bad request' };
     ids.forEach(id => setAccess_(id, q.action === 'approve' ? 'approved' : 'declined'));
+    if (q.action === 'approve' && ncls_(q.cls)) { const AC = {}; rows_(acc_()).forEach(r => { AC[String(r[0])] = r; }); ids.forEach(id => { if (AC[id]) setName_(id, String(AC[id][2]), ncls_(q.cls)); }); }
     return { ok: true };
   }
   if (q.action === 'live') return live_();
+  if (q.action === 'saveclass') {   /* add or change a class: cls, teacher, course, zones; old = its code before (renaming moves its pupils) */
+    const c = ncls_(q.cls), old = ncls_(q.old || q.cls); if (!c) return { ok: false, error: 'give the class a code, e.g. 10A' };
+    const sh = classesSh_(), r = rows_(sh), i = r.findIndex(x => ncls_(x[0]) === old), row = [c, clean_(q.teacher, 40), clean_(q.course, 20), zl_(q.zones).join(','), new Date()];
+    if (old !== c && r.some(x => ncls_(x[0]) === c)) return { ok: false, error: c + ' already exists' };
+    if (i >= 0) sh.getRange(i + 2, 1, 1, 5).setValues([row]); else sh.appendRow(row);
+    if (old !== c) roster_().filter(p => ncls_(p.cls) === old).forEach(p => setName_(p.id, p.name, c));
+    return { ok: true };
+  }
+  if (q.action === 'delclass') { const c = ncls_(q.cls), sh = classesSh_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (ncls_(r[i][0]) === c) sh.deleteRow(i + 2); return { ok: true }; }
+  if (q.action === 'allocate') {   /* move pupils into a class (their name stays as it is) */
+    const c = ncls_(q.cls); if (!c || !ids.length) return { ok: false, error: 'bad request' };
+    const R = {}; roster_().forEach(p => { R[p.id] = p; }); const AC = {}; rows_(acc_()).forEach(r => { AC[String(r[0])] = r; });
+    ids.forEach(id => { const nm = (R[id] && R[id].name) || (AC[id] && String(AC[id][2])) || ''; if (nm) setName_(id, nm, c); });
+    return { ok: true };
+  }
+  if (q.action === 'setzones') {   /* set the zones for pupils (zones empty + clear=1: back to their class's zones) */
+    if (!ids.length) return { ok: false, error: 'bad request' };
+    if (q.clear === '1') dropZones_(ids); else ids.forEach(id => setZones_(id, zl_(q.zones)));
+    const PZ = pzones_(), CL = classes_(), N = names_(), sh = zreqSh_(), r = rows_(sh), now = new Date();   /* requests now covered are answered */
+    r.forEach((x, i) => { if (String(x[6]) !== 'pending' || ids.indexOf(String(x[1])) < 0) return; const z = effZones_(String(x[1]), (N[String(x[1])] || [])[1] || String(x[3]), PZ, CL); if (!z || z.indexOf(String(x[4])) >= 0) sh.getRange(i + 2, 7, 1, 2).setValues([['allowed', now]]); });
+    return { ok: true };
+  }
+  if (q.action === 'zonedecide') {   /* allow (ok=1) or decline a zone request; allowing adds the zone to the pupil's own zones */
+    const sh = zreqSh_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === String(q.rid)); if (i < 0) return { ok: false, error: 'not found' };
+    const id = String(r[i][1]), zone = String(r[i][4]), ok = q.ok === '1';
+    if (ok) { const N = names_(), cur = effZones_(id, (N[id] || [])[1] || String(r[i][3])); if (cur && cur.indexOf(zone) < 0) setZones_(id, cur.concat([zone])); }
+    sh.getRange(i + 2, 7, 1, 2).setValues([[ok ? 'allowed' : 'declined', new Date()]]);
+    return { ok: true };
+  }
   if (q.action === 'qstats') return qstats_();
   if (q.action === 'work') return { ok: true, work: rows_(work_()).filter(r => r[0]).map(r => ({ id: String(r[0]), who: String(r[1]), book: String(r[2]), ch: String(r[3]), due: String(r[4]).slice(0, 10), note: String(r[5] || ''), at: new Date(r[6]).getTime() })),
     msgs: rows_(msgs_()).filter(r => r[0]).slice(-200).map(r => ({ id: String(r[0]), to: String(r[1]), text: String(r[2]), at: new Date(r[3]).getTime(), read: String(r[4] || '').split(',').filter(Boolean) })) };
@@ -406,7 +471,7 @@ function act_(q) {
     const ps = prog_(), pk = rows_(ps).filter(r => ids.indexOf(String(r[1])) < 0), pn = ps.getLastRow() - 1;
     if (pn > 0) ps.getRange(2, 1, pn, PROG_HEAD.length).clearContent();
     if (pk.length) ps.getRange(2, 1, pk.length, PROG_HEAD.length).setValues(pk.map(x => x.slice(0, PROG_HEAD.length)));
-    dropPins_(ids); dropAccess_(ids);
+    dropPins_(ids); dropAccess_(ids); dropZones_(ids);
     const aws = awards_(), awr = rows_(aws); for (let i = awr.length - 1; i >= 0; i--) if (ids.indexOf(String(awr[i][1])) >= 0) aws.deleteRow(i + 2);
     const sv = saves_(), sr = rows_(sv); for (let i = sr.length - 1; i >= 0; i--) if (ids.indexOf(String(sr[i][0]).replace(/^P-/, '')) >= 0 && /^P-/.test(String(sr[i][0]))) sv.deleteRow(i + 2);
     dropNames_(ids);
@@ -445,7 +510,9 @@ function dropNames_(ids) {
 // CHAPTERS:BEGIN (topic titles, refreshed by notes/front/worksheets.py)
 const CHAPTERS = {"U1|c01":"Digital data","U1|c02":"Software","U1|c03":"Database applications","U1|c04":"Spreadsheet applications","U1|c05":"Computer hardware","U1|c06":"Network technologies","U1|c07":"Cyberspace, network security and data transfer","U1|c08":"Cloud technology","U1|c09":"Ethical, legal and environmental impact","U1|c10":"Digital applications","U4|c01":"Contemporary trends in software development","U4|c02":"Digital data","U4|c03":"Digital design principles","U4|c04":"Programming constructs","U4|c05":"Simple error handling techniques","U4|c06":"Developing test plans and testing a solution","U4|c07":"Evaluation of digitally authored systems","U5|c01":"Getting set up","U5|c02":"Design","U5|c03":"Building it in Visual Studio","U5|c04":"Testing","U5|c05":"Evaluation","U5|c06":"Before you submit","AS1|c01":"Reasons for systems development","AS1|c02":"Analysis","AS1|c03":"System design, development and testing","AS1|c04":"System implementation","AS1|c05":"Alternative development approaches","AS1|c06":"Software projects","AS1|c07":"Security issues","AS1|c08":"Algorithms","AS1|c09":"Fundamentals of programming","AS1|c10":"Object-oriented programming","AS2|c01":"Data representation","AS2|c02":"Data and information","AS2|c03":"Architecture","AS2|c04":"User interface and data compression","AS2|c05":"Software","AS2|c06":"Web applications","AS2|c07":"Website development","A21|c01":"Network resources","A21|c02":"Protocols, transmission media and errors","A21|c03":"Databases","A21|c04":"AI, expert systems and robotics","A21|c05":"Mobile technology, data mining and the cloud","A21|c06":"Legislation and ethics","A22|c01":"Choose your project","A22|c02":"Design your database","A22|c03":"Getting started with Access","A22|c04":"Tables and relationships","A22|c05":"Queries","A22|c06":"Forms","A22|c07":"Reports","A22|c08":"VBA basics","A22|c09":"VBA task tutorials","A22|c10":"Booking system: tables, relationships and forms","A22|c11":"Booking system: the booking logic in VBA","A22|c12":"Booking system: reports, menu and finishing touches","A22|c13":"Your coursework: setting up the write-up","A22|c14":"Your coursework: the Analysis chapter","A22|c15":"Your coursework: the Design chapter","A22|c16":"Your coursework: the Testing and Evaluation chapter","A22|c17":"Your coursework: the User Guide, Appendix and Bibliography","A22|c18":"Tables and keys","A22|c19":"Relationships","A22|c20":"Queries","A22|c21":"Forms","A22|c22":"Reports","A22|c23":"Macros","A22|c24":"VBA quick recipes"};
 // CHAPTERS:END
-const UNIT_NAMES = { home: 'Home', U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+/* KS3 topics (from ks3/manifest.json; a new topic still works, it just shows its code) */
+const KS3_TOPICS = {"KS3|8-01": "Year 8: Introduction & MySchool", "KS3|8-02": "Year 8: Safety in the Classroom", "KS3|8-03": "Year 8: Hardware & Software", "KS3|8-04": "Year 8: Online Safety", "KS3|9-01": "Year 9: Computer Graphics", "KS3|9-02": "Year 9: Web Design", "KS3|9-03": "Year 9: Micro:bits", "KS3|10-01": "Year 10: Under the Hood", "KS3|10-02": "Year 10: Game Design", "KS3|10-03": "Year 10: Programming"};
+const UNIT_NAMES = { home: 'Home', KS3: 'KS3', U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
 function dayOf_(t) { return Utilities.formatDate(new Date(t), 'Europe/London', 'yyyy-MM-dd'); }
 function addDays_(ds, n) { const d = new Date(ds + 'T12:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10); }
 function mondayOf_(t) { const ds = dayOf_(t), d = new Date(ds + 'T12:00:00Z'); return addDays_(ds, -((d.getUTCDay() + 6) % 7)); }
@@ -472,7 +539,7 @@ function week_(start) {
   }
   const pupils = Object.keys(P).map(id => { const p = P[id]; if (N[id]) { p.name = N[id][0] || p.name; p.cls = N[id][1] || p.cls; }
     p.days = Object.keys(p.days).length;
-    p.chapters = Object.keys(p.chapters).map(k => [k, CHAPTERS[k] || '', p.chapters[k]]).sort((a, b) => b[2] - a[2]);
+    p.chapters = Object.keys(p.chapters).map(k => [k, CHAPTERS[k] || KS3_TOPICS[k] || '', p.chapters[k]]).sort((a, b) => b[2] - a[2]);
     delete p.at; return p; }).filter(p => p.name);
   return { ok: true, start: mon, end: sun, pupils };
 }
@@ -490,6 +557,8 @@ function weeklyEmail() {   /* runs every Monday about 7am: last week's report (y
   const nice = ds => Utilities.formatDate(new Date(ds + 'T12:00:00Z'), 'Europe/London', 'EEE d MMM');
   const all = w.pupils.slice().sort((a, b) => a.cls.localeCompare(b.cls) || b.secs - a.secs || a.name.localeCompare(b.name));
   const active = all.filter(p => p.secs > 0), tot = active.reduce((a, p) => a + p.secs, 0), prevTot = all.reduce((a, p) => a + p.prev, 0);
+  const CLS = classes_(), tOf = c => (CLS.find(x => x.cls === ncls_(c)) || {}).teacher || '';
+  all.sort((a, b) => (tOf(a.cls) || '~').localeCompare(tOf(b.cls) || '~') || a.cls.localeCompare(b.cls, undefined, { numeric: true }) || b.secs - a.secs || a.name.localeCompare(b.name));
   const classes = [...new Set(all.map(p => p.cls))];
   const tile = (big, small) => `<td width="33%" style="padding:4px"><div style="background:${B.soft};border:1px solid ${B.line};border-radius:8px;padding:12px 10px;text-align:center">
       <div style="font-size:22px;font-weight:bold;color:${B.blue}">${big}</div><div style="font-size:12px;color:${B.muted};margin-top:2px">${small}</div></div></td>`;
@@ -501,13 +570,13 @@ function weeklyEmail() {   /* runs every Monday about 7am: last week's report (y
     </tr></table><p style="margin:4px 0 0;font-size:13px;color:${diff >= 0 ? '#127A3A' : '#B42318'}">${dTxt}</p>`;
   classes.forEach(c => {
     const ps = all.filter(p => p.cls === c), act = ps.filter(p => p.secs > 0), idle = ps.filter(p => !p.secs);
-    h += `<h2 style="margin:26px 0 8px;font-size:17px;color:${B.ink};border-left:4px solid ${B.blue};padding-left:10px">${esc(c || 'No class')}
+    h += `<h2 style="margin:26px 0 8px;font-size:17px;color:${B.ink};border-left:4px solid ${B.blue};padding-left:10px">${esc(c || 'No class')}${tOf(c) ? ' · ' + esc(tOf(c)) : ''}
       <span style="font-weight:normal;color:${B.muted};font-size:13px"> · ${act.length} of ${ps.length} revised · ${hm(act.reduce((a, p) => a + p.secs, 0))}</span></h2>`;
     if (act.length) {
       h += `<table cellpadding="0" cellspacing="0" style="border-collapse:collapse;width:100%;border:1px solid ${B.line}"><tr><th ${th}>Pupil</th><th ${th}>Time</th><th ${th}>Days</th><th ${th}>Worked on</th><th ${th}>Quizzes</th></tr>`;
       act.forEach((p, i) => {
         const d = p.secs - p.prev, trend = p.prev ? (d >= 0 ? `<span style="color:#127A3A">▲ ${hm(d)}</span>` : `<span style="color:#B42318">▼ ${hm(-d)}</span>`) : `<span style="color:${B.muted}">new</span>`;
-        const work = p.chapters.slice(0, 3).map(x => { const [b, ch] = x[0].split('|'); return `${esc(UNIT_NAMES[b] || b)} ch ${+ch.replace(/\D/g, '')}${x[1] ? ' ' + esc(x[1]) : ''} <span style="color:${B.muted}">(${hm(x[2])})</span>`; }).join('<br>') || `<span style="color:${B.muted}">Home page only</span>`;
+        const work = p.chapters.slice(0, 3).map(x => { const [b, ch] = x[0].split('|'); return `${b === 'KS3' ? 'KS3 ' + esc(x[1] || ch) : `${esc(UNIT_NAMES[b] || b)} ch ${+ch.replace(/\D/g, '')}${x[1] ? ' ' + esc(x[1]) : ''}`} <span style="color:${B.muted}">(${hm(x[2])})</span>`; }).join('<br>') || `<span style="color:${B.muted}">Home page only</span>`;
         const qz = p.quizzes.map(q => { const [cid, pp] = q[1].split('|'); return `${esc(UNIT_NAMES[q[0]] || q[0])} ch ${+cid.replace(/\D/g, '')}${pp ? ' (past papers)' : ''}: <b>${q[2]}/${q[3]}</b>`; }).join('<br>') || `<span style="color:${B.muted}">–</span>`;
         h += `<tr style="background:${i % 2 ? '#F7F9FC' : '#FFFFFF'}"><td ${td}><b>${esc(p.name)}</b></td><td ${td} nowrap><span style="white-space:nowrap">${hm(p.secs)}</span><br><small>${trend}</small></td><td ${td}>${p.days}</td><td ${td}>${work}</td><td ${td}>${qz}</td></tr>`;
       });
@@ -563,5 +632,7 @@ function summary_() {
   pupils.forEach(p => { p.access = AC[p.id] ? String(AC[p.id][1]) : 'approved'; });
   const known = {}; pupils.forEach(p => { known[p.id] = 1; });
   const requests = Object.keys(AC).filter(id => String(AC[id][1]) === 'pending').map(id => ({ id, name: String(AC[id][2]), cls: String(AC[id][3]), at: new Date(AC[id][4]).getTime() }));
-  return { pupils, requests, live: live_().live, updated: now, v: SCRIPT_VERSION, mail: EMAIL_SIGNINS ? mailState_() : null };
+  const CL = classes_(), PZ = pzones_();
+  pupils.forEach(p => { p.zones = PZ[p.id] || null; p.ezones = effZones_(p.id, p.cls, PZ, CL); });
+  return { pupils, requests, classes: CL, zreqs: zreqs_('pending'), zones: ZONES, live: live_().live, updated: now, v: SCRIPT_VERSION, mail: EMAIL_SIGNINS ? mailState_() : null };
 }

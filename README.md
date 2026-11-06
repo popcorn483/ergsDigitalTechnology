@@ -11,6 +11,14 @@ The front door lists every unit for **GCSE** and **A level (GCE)**. Each topic h
 
 The full lesson hubs are still there for teachers: `hub.html` (GCSE) and `gce/hub.html` (GCE). `gce/index.html` redirects to the GCE section of the front door. The workbooks show hub pages through `hub.html?embed=1#<route>`, which hides the hub's header and menus.
 
+## KS3 (`ks3.html`)
+
+Years 8, 9 and 10. Each topic is a folder: `ks3/Year 8/01 Topic name/`. Upload files into it, named like `1 - LESSON - Under the Hood.pptx` or `3 - WORKSHEET - Binary.docx` (the number sets the order, the word sets the type). A GitHub Action lists them in `ks3/manifest.json` and makes PDF copies in `_view/` so pupils can view PowerPoint, Word and Excel files in the browser. Titles, summaries and "What you'll learn" are in `ks3/topics.json`. The page is built from `tools/ks3_page.src.html` by `python3 tools/ks3_build.py` (it copies in the sign-in and tracking code from `index.html`).
+
+## Classes and zones (Teacher area › Pupil tracking › Classes & zones)
+
+Add each class with its teacher; pupils pick their class from a list when they sign in. Zones are the units and years a pupil can open (Year 8/9/10, Unit 1/4/5, AS 1/2, A2 1/2): a class's zones, or a pupil's own (several at once is fine). Anything else shows a lock with an "Ask to open" button; requests appear in Pupil tracking. Needs Apps Script v20 (`tools/pupil-activity.gs`).
+
 ## Topic PowerPoints
 
 Each workbook chapter has its own folder under `notes/slides/`, for example `notes/slides/GCSE/Unit 1/01 Digital data/` or `notes/slides/A level/A2 2/07 VBA task tutorials/`. Upload a PowerPoint with **any file name** into the chapter's folder (a `.pdf` also works). A GitHub Action then lists it in `notes/slides/manifest.json`, and the front door and the topic's first workbook page show View and Download for it. Until the Action has run, the pages check that one folder through the GitHub API, so the file usually appears within a minute or two.

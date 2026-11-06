@@ -209,6 +209,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 .ac-pk{display:none;padding:0 0 0 14px}.ac-pk input{width:20px;height:20px;margin:0}.ac-wrap.picking .ac-pk{display:block}.ac-row2.sel{background:color-mix(in srgb,var(--accent) 8%,transparent)}.ac-row2.open{background:var(--paper-2)}
 .ac-main{grid-column:2;display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center;width:100%;text-align:left;font:inherit;color:inherit;background:none;border:0;padding:12px 14px;cursor:pointer;min-width:0}
 .ac-main:hover{background:var(--paper-2)}.ac-who{display:flex;flex-direction:column;min-width:0}.ac-nmr{display:flex;align-items:center;gap:6px;min-width:0}.ac-nmr b{font-size:15.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-zr{border-left-color:#6A45C2}.zc{display:inline-block;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:999px;background:#EEE8FB;color:#4B2E9A;margin:0 3px 3px 0}.zc.cls{background:var(--paper-2);color:var(--ink-2);border:1px dashed var(--line)}:root[data-theme="dark"] .zc{background:#2E2650;color:#CBB8FF}.ac-tch{flex:none;font-size:11.5px;color:var(--ink-3)}.ac-grp{margin:0;padding:12px 14px 6px;font-size:13px;font-weight:800;letter-spacing:.02em;color:var(--ink-2);border-top:1px solid var(--line);display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}.ac-grp small{font-weight:400;color:var(--ink-3)}.ac-grp:first-child{border-top:0}.cl-w .card{padding:12px 14px;margin:0 0 12px}.cl-w h3{margin:0 0 8px;font-size:16px}.cl-w h4{margin:12px 0 6px;font-size:14px}.cl-me{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px}.cl-me select,.cl-f select,.cl-f input,.cl-mv{font:inherit;font-size:14px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:inherit;min-width:0}.cl-t{width:100%;border-collapse:collapse;font-size:14px}.cl-t th,.cl-t td{text-align:left;padding:7px 6px;border-top:1px solid var(--line);vertical-align:top}.cl-t thead th{border-top:0;font-size:12px;color:var(--ink-3)}.cl-t td.n{white-space:nowrap}.cl-f{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;align-items:end}.cl-f label{display:flex;flex-direction:column;gap:3px;font-size:13px;font-weight:700}.zp{display:flex;flex-wrap:wrap;gap:6px;margin:4px 0 8px}.zp label{display:inline-flex;align-items:center;gap:5px;font-size:13.5px;font-weight:600;padding:5px 9px;border:1px solid var(--line);border-radius:999px;background:var(--paper-2);cursor:pointer}.zp label:has(input:checked){background:#EEE8FB;border-color:#B9A5EC;color:#4B2E9A}:root[data-theme="dark"] .zp label:has(input:checked){background:#2E2650;color:#CBB8FF}.zp .g{flex-basis:100%;font-size:12px;font-weight:700;color:var(--ink-3);margin-top:2px}.cl-un li{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;padding:7px 0;border-top:1px solid var(--line);font-size:14px}.cl-un{list-style:none;margin:0;padding:0}.cl-un li>span{flex:1 1 180px}.cl-un small{color:var(--ink-3)}.rq-l select{font:inherit;font-size:13px;padding:5px 6px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:inherit;max-width:9em}
 .ac-cl{flex:none;font-size:11.5px;font-weight:700;padding:1px 7px;border-radius:999px;background:var(--paper-2);border:1px solid var(--line);color:var(--ink-2)}
 .ac-who small{font-size:12.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.ac-who small.ac-last{font-size:12px}
 .ac-time{text-align:right;display:flex;flex-direction:column;align-items:flex-end}.ac-time b{font-size:15px;white-space:nowrap}.ac-time small{font-size:12px;color:var(--ink-3);white-space:nowrap}.ac-time small.on{color:#1E8E4E;font-weight:700}
@@ -371,21 +372,23 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 <section id="visits" role="tabpanel" aria-labelledby="t-visits" hidden>
  <div id="activity">
  <div class="hrow"><h2>Pupil tracking</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-ac" aria-label="About pupil tracking" title="About pupil tracking"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
- <div class="ip" id="i-ac" hidden><p>Pupils must enter their first name, surname, form class and a 4-digit PIN before using the Revision Guide (they can change it under About on the home page). If that name and form class are already in your sheet and the PIN matches, the device joins that pupil and pulls in their saved progress (five wrong PINs locks it for 15 minutes; <b>Reset PIN</b> lets them choose a new one). PINs are stored only as a scrambled hash. Their <b>active</b> time is then sent per page, along with each workbook’s pages covered and opened, best chapter-quiz scores and trophies, and their progress is saved online under their name. Names are not checked. Devices that have opened the Teacher area are never asked and never counted.</p><p>The data is in your Google Sheet (the Log tab). Your key stays on this device.</p></div>
+ <div class="ip" id="i-ac" hidden><p>Pupils must enter their first name, surname, form class and a 4-digit PIN before using the Revision Guide (they can change it under About on the home page). If that name and form class are already in your sheet and the PIN matches, the device joins that pupil and pulls in their saved progress (five wrong PINs locks it for 15 minutes; <b>Reset PIN</b> lets them choose a new one). PINs are stored only as a scrambled hash. Their <b>active</b> time is then sent per page, along with each workbook’s pages covered and opened, best chapter-quiz scores and trophies, and their progress is saved online under their name. Names are not checked. Devices that have opened the Teacher area are never asked and never counted.</p><p><b>Classes &amp; zones</b>: add each class with its teacher; pupils then pick their class from a list when they sign in, and the Teacher filter shows just your classes. <b>Zones</b> are the units and years a pupil can open (a class’s zones, or a pupil’s own, which can be several at once). Anything else shows a lock and a button to ask you; requests appear here to open or decline.</p><p>The data is in your Google Sheet (the Log tab). Your key stays on this device.</p></div>
  <div id="ac-setup" hidden><p class="small">Not set up yet. Make a Google Sheet, paste in the Apps Script from <code>tools/pupil-activity.gs</code> (its first lines are the steps), deploy it as a web app, then paste its URL into <code>activity.json</code> in the GitHub repo.</p></div>
  <div id="ac-on" hidden>
   <div class="hrow" id="ac-keyrow" hidden><input type="password" id="ac-key" placeholder="Teacher key" aria-label="Teacher key (TEACHER_KEY in the Apps Script)" autocomplete="off" style="font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:9px;min-width:0;flex:1;max-width:260px"><button type="button" class="tp-mini" id="ac-save">Show activity</button></div>
-  <div class="tp-tools" id="ac-tools" hidden><div class="ac-qrow" id="ac-qrow"><input type="search" id="ac-q" placeholder="Find a pupil" aria-label="Find a pupil by name or class" autocomplete="off"><button type="button" class="tp-mini" id="ac-sel" aria-pressed="false">Select</button></div><select id="ac-yr" aria-label="Year group"></select><select id="ac-cls" aria-label="Class"></select><select id="ac-sort" aria-label="Sort"><option value="total">Most time</option><option value="week">Most this week</option><option value="last">Last active</option><option value="name">Name</option></select><details class="ac-more"><summary class="tp-mini" aria-label="More">⋯</summary><div class="ac-menu"><button type="button" id="ac-refresh">Refresh</button><button type="button" id="ac-csv">Download CSV</button><button type="button" id="ac-forget">Forget key on this device</button><button type="button" id="ac-mailtest">Send a test email</button><button type="button" id="ac-staffout">Sign out of staff mode on this device</button></div></details></div>
-  <div class="ac-view" id="ac-view" role="tablist" aria-label="Show" hidden><button type="button" role="tab" data-v="pupils" aria-selected="true">Pupils</button><button type="button" role="tab" data-v="topics" aria-selected="false">Topics</button><button type="button" role="tab" data-v="work" aria-selected="false">Set work &amp; messages</button><button type="button" role="tab" data-v="reports" aria-selected="false">Reports</button><button type="button" role="tab" data-v="week" aria-selected="false">Weekly report</button></div>
+  <div class="tp-tools" id="ac-tools" hidden><div class="ac-qrow" id="ac-qrow"><input type="search" id="ac-q" placeholder="Find a pupil" aria-label="Find a pupil by name or class" autocomplete="off"><button type="button" class="tp-mini" id="ac-sel" aria-pressed="false">Select</button></div><select id="ac-tch" aria-label="Teacher"></select><select id="ac-yr" aria-label="Year group"></select><select id="ac-cls" aria-label="Class"></select><select id="ac-sort" aria-label="Sort"><option value="class">By class</option><option value="total">Most time</option><option value="week">Most this week</option><option value="last">Last active</option><option value="name">Name</option></select><details class="ac-more"><summary class="tp-mini" aria-label="More">⋯</summary><div class="ac-menu"><button type="button" id="ac-refresh">Refresh</button><button type="button" id="ac-csv">Download CSV</button><button type="button" id="ac-forget">Forget key on this device</button><button type="button" id="ac-mailtest">Send a test email</button><button type="button" id="ac-staffout">Sign out of staff mode on this device</button></div></details></div>
+  <div class="ac-view" id="ac-view" role="tablist" aria-label="Show" hidden><button type="button" role="tab" data-v="pupils" aria-selected="true">Pupils</button><button type="button" role="tab" data-v="classes" aria-selected="false">Classes &amp; zones<span class="t-badge" id="cl-badge" hidden></span></button><button type="button" role="tab" data-v="topics" aria-selected="false">Topics</button><button type="button" role="tab" data-v="work" aria-selected="false">Set work &amp; messages</button><button type="button" role="tab" data-v="reports" aria-selected="false">Reports</button><button type="button" role="tab" data-v="week" aria-selected="false">Weekly report</button></div>
   <p class="tp-status" id="ac-status" role="status" aria-live="polite" hidden></p>
   <div class="ac-live card" id="ac-live" hidden></div>
   <div class="ac-req card" id="ac-req" hidden></div>
+  <div class="ac-req ac-zr card" id="ac-zr" hidden></div>
   <div class="ac-att card" id="ac-att" hidden></div>
-  <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><span class="ac-bsp"></span><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-pin">Reset PIN</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Done</button></div>
+  <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><span class="ac-bsp"></span><button type="button" class="tp-mini" id="ac-move">Move to class</button><button type="button" class="tp-mini" id="ac-zones">Zones</button><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-pin">Reset PIN</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Done</button></div>
   <div class="ac-panel card" id="ac-panel" hidden></div>
   <div class="card tg-w" id="tg-wrap" hidden><h3>Topics</h3><div id="tg-body"></div></div>
   <div class="sw-w" id="sw-wrap" hidden><div id="sw-body"></div></div>
   <div class="card rp-w" id="rp-wrap" hidden><div id="rp-body"></div></div>
+  <div class="cl-w" id="cl-wrap" hidden><div id="cl-body"></div></div>
   <div class="card wk" id="wk-wrap" hidden><div class="wk-h"><h3>Weekly report</h3><span class="wk-nav"><button type="button" class="tp-mini" id="wk-prev" aria-label="Previous week">‹</button><b id="wk-range"></b><button type="button" class="tp-mini" id="wk-next" aria-label="Next week">›</button><button type="button" class="tp-mini" id="wk-print">Print</button></span></div><p class="small" id="wk-sum"></p><div id="wk-body"></div></div>
   <div class="card ac-wrap" id="ac-wrap" hidden><div class="ac-sum" id="ac-sum"></div><div class="ac-list" id="ac-list"></div></div>
   <div class="card ac-pd" id="ac-pd" hidden></div>
@@ -1928,7 +1931,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   const $$ = (s, r) => [...(r || document).querySelectorAll(s)];
   const el = (t, a, ...kids) => { const e = document.createElement(t); for (const k in a || {}) { if (k === 'class') e.className = a[k]; else if (k === 'html') e.innerHTML = a[k]; else if (k === 'text') e.textContent = a[k]; else if (k.startsWith('on')) e.addEventListener(k.slice(2), a[k]); else e.setAttribute(k, a[k]); } kids.forEach(c => c != null && e.append(c)); return e; };
   const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
-  const UNIT = { home: 'Home', U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+  const UNIT = { home: 'Home', KS3: 'KS3', U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
   const hm = s => { const m = Math.round(s / 60); return m < 60 ? `${m} min` : `${Math.floor(m / 60)} h ${String(m % 60).padStart(2, '0')}`; };
   /* a date with the time: "Today 20:16", "Yesterday 19:40", "Mon 2 Nov 18:05", "12 Oct 09:30" */
   const when = t => { if (!t) return '–'; const x = new Date(t), now = new Date(), hhmm = x.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit' });
@@ -1953,8 +1956,8 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const box = el('div', { class: 'ac-d' }), pr = p.prog || {}, D = DET[p.id], full = D && D.topics;
     const act = kind => () => { SEL.clear(); SEL.add(p.id); SELMODE = true; bar(); panel(kind); const pn = $('#ac-panel'); if (pn) pn.scrollIntoView({ behavior: 'smooth', block: 'center' }); };
     const menu = el('details', { class: 'ac-more' }, el('summary', { class: 'tp-mini', 'aria-label': 'Manage this pupil', text: '⋯' }), el('div', { class: 'ac-menu' },
-      el('button', { type: 'button', text: 'View the site as this pupil', onclick: () => viewAs(p) }), el('button', { type: 'button', text: 'Send a message', onclick: () => { MSG_TO = p.id; VIEW = 'work'; LS.set('teacher.actview', VIEW); view(); } }), el('button', { type: 'button', text: 'Edit name or class', onclick: act('rename') }), el('button', { type: 'button', text: 'Reset PIN', onclick: act('pin') }), el('button', { type: 'button', class: 'danger', text: 'Delete pupil', onclick: act('delete') })));
-    box.append(el('div', { class: 'pd-head' }, el('div', {}, el('h3', { text: p.name }), el('p', { class: 'small', text: `${p.cls}${p.pin === false ? ' · no PIN yet' : ''} · last active ${when(p.last)}` })),
+      el('button', { type: 'button', text: 'View the site as this pupil', onclick: () => viewAs(p) }), el('button', { type: 'button', text: 'Send a message', onclick: () => { MSG_TO = p.id; VIEW = 'work'; LS.set('teacher.actview', VIEW); view(); } }), el('button', { type: 'button', text: 'Move to class', onclick: act('move') }), el('button', { type: 'button', text: 'Set zones', onclick: act('zones') }), el('button', { type: 'button', text: 'Edit name or class', onclick: act('rename') }), el('button', { type: 'button', text: 'Reset PIN', onclick: act('pin') }), el('button', { type: 'button', class: 'danger', text: 'Delete pupil', onclick: act('delete') })));
+    box.append(el('div', { class: 'pd-head' }, el('div', {}, el('h3', { text: p.name }), el('p', { class: 'small', text: `${p.cls}${teacherOf(p.cls) ? ' · ' + teacherOf(p.cls) : ''}${p.pin === false ? ' · no PIN yet' : ''} · last active ${when(p.last)}` }), el('p', { class: 'small' }, document.createTextNode('Zones: '), zoneChips(p) || document.createTextNode('no limits (set zones to lock the rest)'), el('button', { type: 'button', class: 'ac-ap', text: ' Change', onclick: act('zones') }))),
       el('div', { class: 'pd-btns' }, el('button', { type: 'button', class: 'tp-mini pd-va', text: '👁 View as pupil', onclick: () => viewAs(p) }), menu, el('button', { type: 'button', class: 'tp-mini', 'aria-label': 'Close', text: '✕', onclick: () => { OPEN = null; PICK = null; render(); } }))));
     /* overview: four numbers */
     const ov = el('dl', { class: 'ac-ov' }), fact = (k, v) => ov.append(el('div', {}, el('dt', { text: k }), el('dd', { text: v })));
@@ -2093,7 +2096,19 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   }
   let QRY = '', SELMODE = false; let URL0 = '', DATA = null, sortBy = LS.get('teacher.actsort') || 'total', cls = LS.get('teacher.actcls') || '', yr = LS.get('teacher.actyr') || '';
   const yearOf = c => { const m = /^(\d{1,2})/.exec(String(c || '')); return m ? m[1] : ''; };   /* 11B → 11 */
-  const keep = p => (!yr || yearOf(p.cls) === yr) && (!cls || p.cls === cls);
+  /* CLASSES & ZONES (Apps Script v20): each class has a teacher and its zones; a pupil's own zones win over their class's */
+  let CLASSES = [], ZREQ = [], tch = LS.get('teacher.acttch') != null ? LS.get('teacher.acttch') : (LS.get('teacher.me') || '');
+  const ZONES = ['Y8', 'Y9', 'Y10', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
+  const ZN = { Y8: 'Year 8', Y9: 'Year 9', Y10: 'Year 10', U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+  const ZG = [['KS3', ['Y8', 'Y9', 'Y10']], ['GCSE', ['U1', 'U4', 'U5']], ['A level', ['AS1', 'AS2', 'A21', 'A22']]];
+  const ncl = c => String(c || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+  const classOf = c => CLASSES.find(x => x.cls === ncl(c)), teacherOf = c => (classOf(c) || {}).teacher || '';
+  const teachers = () => [...new Set(CLASSES.map(c => c.teacher).filter(Boolean))].sort((a, b) => a.localeCompare(b));
+  const keep = p => (!yr || yearOf(p.cls) === yr) && (!cls || p.cls === cls) && (!tch || (tch === '~' ? !classOf(p.cls) : teacherOf(p.cls) === tch));
+  const zoneChips = p => { const z = p.zones || p.ezones; if (!z) return null; return el('span', {}, ...z.map(x => el('span', { class: 'zc' + (p.zones ? '' : ' cls'), title: p.zones ? 'Set for this pupil' : 'From their class', text: ZN[x] || x }))); };
+  /* zone tick boxes, grouped KS3 / GCSE / A level */
+  const zonePick = sel => { const box = el('div', { class: 'zp' }); ZG.forEach(([g, zs]) => { box.append(el('span', { class: 'g', text: g })); zs.forEach(z => { const cb = el('input', { type: 'checkbox', value: z }); cb.checked = (sel || []).includes(z); box.append(el('label', {}, cb, document.createTextNode(ZN[z]))); }); }); box.value = () => [...box.querySelectorAll('input:checked')].map(i => i.value); return box; };
+  const classSel = (val, first) => { const s = el('select', { class: 'cl-mv', 'aria-label': 'Class' }); s.append(el('option', { value: '', text: first || 'Choose a class…' })); teachers().concat(['']).forEach(t => { const cs = CLASSES.filter(c => c.teacher === t); if (!cs.length) return; const g = el('optgroup', { label: t || 'No teacher' }); cs.forEach(c => g.append(el('option', { value: c.cls, text: c.cls + (c.course ? ' · ' + c.course : '') }))); s.append(g); }); s.value = classOf(val) ? ncl(val) : ''; return s; };
 
   function status(msg, kind) { const s = $('#ac-status'); s.hidden = !msg; s.className = 'tp-status' + (kind ? ' ' + kind : ''); s.textContent = msg || ''; }
   const api = (params) => { const key = LS.get('teacher.actkey'), u = new URLSearchParams(Object.assign({ key }, params)); return fetch(URL0 + (URL0.includes('?') ? '&' : '?') + u, { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); };
@@ -2106,7 +2121,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const r = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'key=' + encodeURIComponent(key), { cache: 'no-store', credentials: 'omit' });
       const j = await r.json();
       if (j.error === 'key') { LS.set('teacher.actkey', null); status('That key doesn’t match TEACHER_KEY in the Apps Script. Type it again.', 'warn'); $('#ac-keyrow').hidden = false; $('#ac-tools').hidden = true; return; }
-      DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; LIVE = Array.isArray(j.live) ? j.live : []; status((+j.v || 0) < 19 ? 'Your Google Apps Script is an older version, so reports, set work, messages, the topic grid, “revising now”, page-quiz answers, PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 19 ? 'warn' : ''); $('#ac-view').hidden = false; view(); render(); requests();
+      DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; CLASSES = Array.isArray(j.classes) ? j.classes : []; ZREQ = Array.isArray(j.zreqs) ? j.zreqs : []; LIVE = Array.isArray(j.live) ? j.live : []; status((+j.v || 0) < 19 ? 'Your Google Apps Script is an older version, so reports, set work, messages, the topic grid, “revising now”, page-quiz answers, PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 19 ? 'warn' : ''); $('#ac-view').hidden = false; if ((+j.v || 0) >= 19 && (+j.v || 0) < 20) status('Classes, teachers and zones need the latest Apps Script (v20): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); view(); render(); requests();
       const ml = j.mail; if ((+j.v || 0) >= 13 && ml && (ml.err || !ml.to)) status(`Emails aren’t being sent${ml.err ? ': ' + ml.err.replace(/^\S+\s/, '') : ''}. In the Apps Script, choose testEmail in the function list and press Run, allow “Send email as you”, then deploy a new version. ⋯ › Send a test email checks it.`, 'warn');
     } catch (e) { status('Couldn’t load pupil activity. Check you’re online and that the Apps Script is deployed for “Anyone”.', 'warn'); }
   }
@@ -2117,7 +2132,9 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   };
   /* REVISING NOW: pupils active in the last 3 minutes (from their devices' once-a-minute ping), refreshed every 45 s */
   let LIVE = [], liveT = 0;
-  const pageName = (b, pg, ch) => { const vu = VU.find(v => v.id === b); if (b === 'home') return 'Home page'; const t = vu && vu.pages && vu.pages[pg]; const c = vu && vu.chapters && vu.chapters.find(x => x.id === ch); return t ? t : c ? `Ch ${c.n} ${c.title}` : /^quiz-/.test(pg) ? 'Topic quiz' : /^pp-/.test(pg) ? 'Past papers' : 'Contents'; };
+  /* KS3 topic names (ks3/manifest.json): '10-01' → 'Year 10: Under the Hood' */
+  const KS3T = {}; fetch('ks3/manifest.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).then(j => { ((j && j.years) || []).forEach(y => y.topics.forEach(t => { KS3T[t.id] = `${y.year}: ${t.title}`; })); }).catch(() => { });
+  const pageName = (b, pg, ch) => { const vu = VU.find(v => v.id === b); if (b === 'home') return 'Home page'; if (b === 'KS3') return KS3T[ch] || (ch ? 'KS3 ' + ch : 'KS3 home'); const t = vu && vu.pages && vu.pages[pg]; const c = vu && vu.chapters && vu.chapters.find(x => x.id === ch); return t ? t : c ? `Ch ${c.n} ${c.title}` : /^quiz-/.test(pg) ? 'Topic quiz' : /^pp-/.test(pg) ? 'Past papers' : 'Contents'; };
   function live() {
     const box = $('#ac-live'); if (!box) return;
     const list = LIVE.filter(r => keep({ cls: r.cls }));
@@ -2141,9 +2158,9 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   }
   /* sign-up requests waiting for approval (new pupils can't use the guide until approved) */
   let REQ = [];
-  async function decide(action, ids, btns) {
+  async function decide(action, ids, btns, toCls) {
     btns.forEach(b => { b.disabled = true; }); status(action === 'approve' ? 'Approving…' : 'Declining…');
-    try { const j = await api({ action, ids: ids.join(',') }); if (!j || !j.ok) throw 0; status(''); await load(); }
+    try { const j = await api(Object.assign({ action, ids: ids.join(',') }, toCls ? { cls: toCls } : {})); if (!j || !j.ok) throw 0; status(''); await load(); }
     catch (e) { btns.forEach(b => { b.disabled = false; }); status('Couldn’t update that just now. Try again.', 'warn'); }
   }
   function requests() {
@@ -2156,9 +2173,30 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const ul = el('ul', { class: 'rq-l' });
     list.sort((a, b) => (a.at || 0) - (b.at || 0)).forEach(r => {
       const ok = el('button', { type: 'button', class: 'tp-mini pri', text: 'Approve' }), no = el('button', { type: 'button', class: 'tp-mini', text: 'Decline' });
-      ok.addEventListener('click', () => decide('approve', [r.id], [ok, no]));
+      const pick = CLASSES.length ? classSel(r.cls, 'Class…') : null;
+      ok.addEventListener('click', () => decide('approve', [r.id], [ok, no], pick && pick.value));
       no.addEventListener('click', () => { if (confirm(`Decline ${r.name}? They won’t be able to use the Revision Guide under this name. You can approve them later from their row.`)) decide('decline', [r.id], [ok, no]); });
-      ul.append(el('li', {}, el('span', {}, el('b', { text: r.name }), document.createTextNode(` ${r.cls || ''}`), el('small', { text: 'Asked ' + when(r.at) })), el('span', { class: 'rq-b' }, no, ok)));
+      ul.append(el('li', {}, el('span', {}, el('b', { text: r.name }), document.createTextNode(` ${r.cls || ''}`), el('small', { text: 'Asked ' + when(r.at) })), el('span', { class: 'rq-b' }, pick, no, ok)));
+    });
+    box.append(ul);
+  }
+  /* ZONE REQUESTS: pupils asking to open a unit or year outside their zones */
+  async function zdecide(rid, ok, btns) {
+    btns.forEach(b => { b.disabled = true; }); status(ok ? 'Opening it…' : 'Declining…');
+    try { const j = await api({ action: 'zonedecide', rid, ok: ok ? '1' : '0' }); if (!j || !j.ok) throw 0; status(''); await load(); }
+    catch (e) { btns.forEach(b => { b.disabled = false; }); status('Couldn’t update that just now. Try again.', 'warn'); }
+  }
+  function zreqs() {
+    const box = $('#ac-zr'); if (!box) return; box.innerHTML = '';
+    const list = ZREQ.filter(r => keep({ cls: r.cls }));
+    box.hidden = !list.length || VIEW !== 'pupils'; if (!list.length) return;
+    box.append(el('div', { class: 'rq-h' }, el('b', { text: `${list.length} asking to open a unit or year` })));
+    const ul = el('ul', { class: 'rq-l' });
+    list.sort((a, b) => (a.at || 0) - (b.at || 0)).forEach(r => {
+      const ok = el('button', { type: 'button', class: 'tp-mini pri', text: 'Open it' }), no = el('button', { type: 'button', class: 'tp-mini', text: 'Not yet' });
+      ok.addEventListener('click', () => zdecide(r.rid, true, [ok, no])); no.addEventListener('click', () => zdecide(r.rid, false, [ok, no]));
+      const p = DATA.find(x => x.id === r.id), now = p && (p.zones || p.ezones);
+      ul.append(el('li', {}, el('span', {}, el('b', { text: r.name }), document.createTextNode(` ${r.cls || ''} wants `), el('span', { class: 'zc', text: ZN[r.zone] || r.zone }), el('small', { text: `Asked ${when(r.at)}${now ? ' · has ' + now.map(z => ZN[z] || z).join(', ') : ''}` })), el('span', { class: 'rq-b' }, no, ok)));
     });
     box.append(ul);
   }
@@ -2168,13 +2206,19 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const ys = $('#ac-yr'); ys.innerHTML = ''; ys.append(el('option', { value: '', text: 'All years' }), ...years.map(y => el('option', { value: y, text: 'Year ' + y }))); if (!years.includes(yr)) yr = ''; ys.value = yr;
     const classes = [...new Set(DATA.filter(p => !yr || yearOf(p.cls) === yr).map(p => p.cls).filter(Boolean))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
     const sel = $('#ac-cls'); sel.innerHTML = ''; sel.append(el('option', { value: '', text: yr ? `All Year ${yr}` : 'All classes' }), ...classes.map(c => el('option', { value: c, text: c }))); if (!classes.includes(cls)) cls = ''; sel.value = cls;
-    const rows = DATA.filter(keep).sort((a, b) => sortBy === 'name' ? a.name.localeCompare(b.name) : sortBy === 'last' ? b.last - a.last : sortBy === 'week' ? b.week - a.week : b.total - a.total);
+    const ts = $('#ac-tch'), tl = teachers(); ts.hidden = !CLASSES.length; ts.innerHTML = '';
+    ts.append(el('option', { value: '', text: 'All teachers' }), ...tl.map(t => el('option', { value: t, text: t })), el('option', { value: '~', text: 'Not in a class' })); if (tch && tch !== '~' && !tl.includes(tch)) tch = ''; ts.value = tch;
+    const gk = p => { const c = classOf(p.cls); return c ? ['1' + (c.teacher || '~'), c.cls] : ['2', p.cls || '']; };
+    const rows = DATA.filter(keep).sort((a, b) => sortBy === 'class' ? (gk(a)[0].localeCompare(gk(b)[0]) || gk(a)[1].localeCompare(gk(b)[1], undefined, { numeric: true }) || a.name.localeCompare(b.name)) : sortBy === 'name' ? a.name.localeCompare(b.name) : sortBy === 'last' ? b.last - a.last : sortBy === 'week' ? b.week - a.week : b.total - a.total);
     const q = QRY.toLowerCase().replace(/\s+/g, ' ').trim();
     const shown = q ? rows.filter(p => (p.name + ' ' + p.cls).toLowerCase().includes(q)) : rows;
     const list = $('#ac-list'), pd = $('#ac-pd'); if (pd) wrap.append(pd); list.innerHTML = '';
     $('#ac-wrap').classList.toggle('picking', SELMODE);
     const ring = v => { const r = 15, c = 2 * Math.PI * r; return el('span', { class: 'ac-ring' + (v >= 70 ? ' hi' : v >= 30 ? ' mid' : ''), 'aria-hidden': 'true', html: `<svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="${r}"/><circle cx="18" cy="18" r="${r}" stroke-dasharray="${c * v / 100} ${c}"/></svg><b>${v}<small>%</small></b>` }); };
+    let lastG = null;
     shown.forEach(p => {
+      if (sortBy === 'class') { const g = gk(p), key = g.join('|'); if (key !== lastG) { lastG = key; const n = shown.filter(x => gk(x).join('|') === key).length, c = classOf(p.cls);
+        list.append(el('h4', { class: 'ac-grp' }, document.createTextNode(c ? `${c.cls}${c.teacher ? ' · ' + c.teacher : ''}` : `Not in a class${p.cls ? ' (typed ' + p.cls + ')' : ''}`), el('small', { text: `${n} pupil${n === 1 ? '' : 's'}${c && c.course ? ' · ' + c.course : ''}` }))); } }
       const pr = p.prog || {}, main = Object.keys(pr).filter(u => pr[u].total).sort((a, b) => ((p.units || {})[b] || 0) - ((p.units || {})[a] || 0) || pr[b].cov - pr[a].cov)[0];
       const cov = main ? pct(pr[main].cov, pr[main].total) : 0;
       const typed = (p.typed || []).filter(t => t !== `${p.name} (${p.cls})`);
@@ -2184,7 +2228,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const tags = [p.pin === false ? el('span', { class: 'ac-tag', text: 'No PIN' }) : null, typed.length ? el('span', { class: 'ac-tag', title: 'Also typed: ' + typed.join(', '), text: 'Also typed: ' + typed.slice(0, 2).join(', ') }) : null, accTag(p)].filter(Boolean);
       const btn = el('button', { type: 'button', class: 'ac-main', 'aria-expanded': String(OPEN === p.id) },
         ring(cov),
-        el('span', { class: 'ac-who' }, el('span', { class: 'ac-nmr' }, LIVE.some(r => r.id === p.id) ? el('span', { class: 'lv-dot', title: 'Revising now' }) : null, el('b', { text: p.name }), el('span', { class: 'ac-cl', text: p.cls })),
+        el('span', { class: 'ac-who' }, el('span', { class: 'ac-nmr' }, LIVE.some(r => r.id === p.id) ? el('span', { class: 'lv-dot', title: 'Revising now' }) : null, el('b', { text: p.name }), el('span', { class: 'ac-cl', title: teacherOf(p.cls) ? 'Taught by ' + teacherOf(p.cls) : CLASSES.length ? 'Not in one of your classes' : '', text: p.cls + (CLASSES.length && !classOf(p.cls) ? ' ?' : '') })),
           el('small', { text: main ? `${UNIT[main] || main}: ${cov}% covered` + (() => { let a = 0, m = 0; Object.values(pr[main].quiz || {}).forEach(x => { a += x[0]; m += x[1]; }); return m ? ` · quiz ${pct(a, m)}%` : ''; })() : 'Nothing covered yet' }),
           el('small', { class: 'ac-last', text: p.last ? 'Last active ' + when(p.last) : 'Not used yet' })),
         el('span', { class: 'ac-time' }, el('b', { text: hm(p.total) }), el('small', { class: p.week ? 'on' : '', text: p.week ? hm(p.week) + ' this week' : 'none this week' })));
@@ -2203,8 +2247,10 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     else sm.append(el('span', { text: 'No pupils yet: they appear here once they sign in.' }));
     live(); if (!liveT) liveT = setTimeout(pollLive, 45000);
     const tb = $('#t-badge'); if (tb) { tb.textContent = REQ.length ? String(REQ.length) : ''; tb.hidden = !REQ.length; }
-    requests(); attention();
-    if (VIEW !== 'pupils') ['#ac-live', '#ac-req', '#ac-att'].forEach(q => { const x = $(q); if (x) x.hidden = true; });
+    requests(); zreqs(); attention();
+    const cb = $('#cl-badge'); if (cb) { const nz = ZREQ.length + (CLASSES.length ? DATA.filter(p => !classOf(p.cls)).length : 0); cb.textContent = nz ? String(nz) : ''; cb.hidden = !nz; }
+    if (VIEW === 'classes') classesView();
+    if (VIEW !== 'pupils') ['#ac-live', '#ac-req', '#ac-zr', '#ac-att'].forEach(q => { const x = $(q); if (x) x.hidden = true; });
     if (VIEW === 'topics') topics();
     if (VIEW === 'reports') reports();
   }
@@ -2212,14 +2258,30 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   function bar() {
     const n = SEL.size, b = $('#ac-bar'); b.hidden = !SELMODE; const sb = $('#ac-sel'); if (sb) { sb.textContent = SELMODE ? 'Done' : 'Select'; sb.setAttribute('aria-pressed', String(SELMODE)); }
     $$('#ac-bar .tp-mini:not(#ac-clear)').forEach(x => { x.disabled = !n; });
-    if (!n) { $('#ac-panel').hidden = true; $('#ac-n').textContent = SELMODE ? 'Tick pupils to merge, rename or delete' : ''; return; }
+    if (!n) { $('#ac-panel').hidden = true; $('#ac-n').textContent = SELMODE ? 'Tick pupils to move, set zones, merge, rename or delete' : ''; return; }
     $('#ac-n').textContent = `${n} selected`; $('#ac-merge').hidden = n < 2; $('#ac-rename').hidden = n !== 1; $('#ac-pin').hidden = n !== 1;
   }
   function panel(kind) {
     const ps = DATA.filter(p => SEL.has(p.id)), box = $('#ac-panel'); box.innerHTML = ''; box.hidden = false;
-    const busy = (btn, f) => async () => { btn.disabled = true; try { const r = await f(); if (!r || !r.ok) throw new Error(r && r.error || 'failed'); SEL.clear(); SELMODE = false; box.hidden = true; await load(); status(kind === 'delete' ? 'Deleted.' : kind === 'merge' ? 'Merged.' : kind === 'pin' ? 'PIN reset.' : 'Renamed.', 'ok'); }
+    const busy = (btn, f) => async () => { btn.disabled = true; try { const r = await f(); if (!r || !r.ok) throw new Error(r && r.error || 'failed'); SEL.clear(); SELMODE = false; box.hidden = true; await load(); status(kind === 'delete' ? 'Deleted.' : kind === 'merge' ? 'Merged.' : kind === 'pin' ? 'PIN reset.' : kind === 'move' ? 'Moved.' : kind === 'zones' ? 'Zones saved.' : 'Renamed.', 'ok'); }
       catch (e) { status('That didn’t work: ' + e.message + '. If you’ve just updated the Apps Script, check you deployed it as a new version.', 'warn'); btn.disabled = false; } };
     const cancel = el('button', { type: 'button', class: 'tp-mini', text: 'Cancel', onclick: () => { box.hidden = true; } });
+    if (kind === 'move') {
+      if (!CLASSES.length) { box.append(el('p', { text: 'Add your classes first: Classes & zones › Add a class.' }), el('div', { class: 'ac-row' }, cancel)); return; }
+      const pick = classSel(ps.length === 1 ? ps[0].cls : ''), go = el('button', { type: 'button', class: 'tp-mini pri', text: 'Move' });
+      go.addEventListener('click', busy(go, () => { if (!pick.value) throw new Error('choose a class'); return api({ action: 'allocate', ids: ps.map(p => p.id).join(','), cls: pick.value }); }));
+      box.append(el('p', { text: `Move ${ps.length === 1 ? ps[0].name : ps.length + ' pupils'} into:` }), el('div', { class: 'ac-row' }, pick, go, cancel));
+      return;
+    }
+    if (kind === 'zones') {
+      const own = ps.every(p => p.zones), zp = zonePick(ps.length === 1 ? (ps[0].zones || ps[0].ezones || []) : []), go = el('button', { type: 'button', class: 'tp-mini pri', text: 'Save zones' });
+      const back = el('button', { type: 'button', class: 'tp-mini', text: 'Use their class’s zones' });
+      go.addEventListener('click', busy(go, () => api({ action: 'setzones', ids: ps.map(p => p.id).join(','), zones: zp.value().join(',') })));
+      back.addEventListener('click', busy(back, () => api({ action: 'setzones', ids: ps.map(p => p.id).join(','), clear: '1' })));
+      box.append(el('p', { text: `What can ${ps.length === 1 ? ps[0].name : 'these ' + ps.length + ' pupils'} open? Tick every unit or year they are studying (more than one is fine). Anything else is locked, with a button to ask you.` }), zp,
+        el('div', { class: 'ac-row' }, go, own || ps.length > 1 ? back : null, cancel));
+      return;
+    }
     if (kind === 'pin') {
       const go = el('button', { type: 'button', class: 'tp-mini pri', text: 'Reset PIN' });
       go.addEventListener('click', busy(go, () => api({ action: 'resetpin', to: ps[0].id })));
@@ -2252,13 +2314,70 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     $$('#ac-view [data-v]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === VIEW)));
     const wk = VIEW === 'week', pu = VIEW === 'pupils';
     $('#ac-wrap').hidden = !pu; $('#ac-pd').hidden = !pu || !OPEN; $('#wk-wrap').hidden = !wk; $('#ac-sort').hidden = !pu; $('#ac-qrow').hidden = !pu;
-    $('#tg-wrap').hidden = VIEW !== 'topics'; $('#sw-wrap').hidden = VIEW !== 'work'; $('#rp-wrap').hidden = VIEW !== 'reports';
+    $('#tg-wrap').hidden = VIEW !== 'topics'; $('#sw-wrap').hidden = VIEW !== 'work'; $('#rp-wrap').hidden = VIEW !== 'reports'; $('#cl-wrap').hidden = VIEW !== 'classes';
+    const zr = $('#ac-zr'); if (zr && !pu) zr.hidden = true; if (VIEW === 'classes') classesView();
     const lv = $('#ac-live'); if (lv && !pu) lv.hidden = true; const at = $('#ac-att'); if (at && !pu) at.hidden = true; const rq = $('#ac-req'); if (rq && !pu) rq.hidden = true;
     if (wk) week();
     if (VIEW === 'topics') topics();
     if (VIEW === 'work') work();
     if (VIEW === 'reports') reports();
-    if (pu) { requests(); live(); attention(); }
+    if (pu) { requests(); zreqs(); live(); attention(); }
+  }
+  /* ---------- CLASSES & ZONES: your classes (teacher, course, zones), who is in each, and pupils not in one yet ---------- */
+  let CL_EDIT = null;
+  async function clDo(params, btn, msg) { if (btn) btn.disabled = true; try { const j = await api(params); if (!j || !j.ok) throw new Error(j && j.error || 'failed'); await load(); status(msg, 'ok'); } catch (e) { status('That didn’t work: ' + e.message + '. If you’ve just updated the Apps Script, check you deployed it as a new version.', 'warn'); if (btn) btn.disabled = false; } }
+  function classesView() {
+    const box = $('#cl-body'); if (!box || !DATA) return; box.innerHTML = '';
+    /* whose device is this? sets the teacher filter on this device */
+    const me = el('select', {}); me.append(el('option', { value: '', text: 'Everyone (all classes)' }), ...teachers().map(t => el('option', { value: t, text: t }))); me.value = LS.get('teacher.me') || '';
+    me.addEventListener('change', () => { LS.set('teacher.me', me.value || null); tch = me.value; LS.set('teacher.acttch', tch); render(); });
+    box.append(el('div', { class: 'card' }, el('div', { class: 'cl-me' }, el('b', { text: 'On this device, show me' }), me, el('small', { class: 'small', text: 'The Teacher filter above starts on this.' }))));
+    /* the class list */
+    const card = el('div', { class: 'card' }, el('h3', { text: 'Classes' }));
+    if (CLASSES.length) {
+      const t = el('table', { class: 'cl-t' }, el('thead', {}, el('tr', {}, el('th', { text: 'Class' }), el('th', { text: 'Teacher' }), el('th', { text: 'Zones' }), el('th', { text: 'Pupils' }), el('th', {}))));
+      const tb = el('tbody'); t.append(tb);
+      CLASSES.slice().sort((a, b) => (a.teacher || '~').localeCompare(b.teacher || '~') || a.cls.localeCompare(b.cls, undefined, { numeric: true })).forEach(c => {
+        const n = DATA.filter(p => ncl(p.cls) === c.cls).length;
+        tb.append(el('tr', {}, el('th', {}, document.createTextNode(c.cls), c.course ? el('small', { class: 'small', style: 'display:block;font-weight:400', text: c.course }) : null), el('td', { text: c.teacher || '–' }),
+          el('td', {}, ...(c.zones.length ? c.zones.map(z => el('span', { class: 'zc', text: ZN[z] || z })) : [el('small', { class: 'small', text: 'no limits' })])),
+          el('td', { class: 'n' }, el('button', { type: 'button', class: 'ac-ap', text: String(n), title: 'Show these pupils', onclick: () => { cls = c.cls; LS.set('teacher.actcls', cls); yr = ''; tch = ''; VIEW = 'pupils'; LS.set('teacher.actview', VIEW); view(); render(); } })),
+          el('td', { class: 'n' }, el('button', { type: 'button', class: 'tp-mini', text: 'Edit', onclick: () => { CL_EDIT = c.cls; classesView(); setTimeout(() => { const f = $('#cl-form'); if (f) f.scrollIntoView({ behavior: 'smooth', block: 'center' }); }, 50); } }))));
+      });
+      card.append(el('div', { style: 'overflow-x:auto' }, t));
+    } else card.append(el('p', { class: 'small', text: 'No classes yet. Add each class you teach (e.g. 8A, 10C, 11B) with its teacher and zones. Pupils then pick their class from a list when they sign in, and only the zones you tick are open to them.' }));
+    /* add / edit */
+    const ed = CL_EDIT ? CLASSES.find(c => c.cls === CL_EDIT) : null;
+    const code = el('input', { type: 'text', maxlength: '12', placeholder: 'e.g. 10A' }), who = el('input', { type: 'text', maxlength: '40', placeholder: 'e.g. Mr Butler', list: 'cl-tl' }), course = el('select', {});
+    ['', 'KS3', 'GCSE', 'A level'].forEach(v => course.append(el('option', { value: v, text: v || '–' })));
+    const tl = el('datalist', { id: 'cl-tl' }, ...teachers().map(t => el('option', { value: t })));
+    const zp = zonePick(ed ? ed.zones : []);
+    if (ed) { code.value = ed.cls; who.value = ed.teacher; course.value = ['KS3', 'GCSE', 'A level'].includes(ed.course) ? ed.course : ''; } else who.value = LS.get('teacher.me') || '';
+    const save = el('button', { type: 'button', class: 'tp-mini pri', text: ed ? 'Save class' : 'Add class' });
+    save.addEventListener('click', () => { const c = ncl(code.value); if (!c) { status('Give the class a code, e.g. 10A.', 'warn'); code.focus(); return; } CL_EDIT = null; clDo({ action: 'saveclass', cls: c, old: ed ? ed.cls : c, teacher: who.value.trim(), course: course.value, zones: zp.value().join(',') }, save, ed ? 'Class saved.' : 'Class added.'); });
+    const del = ed ? el('button', { type: 'button', class: 'tp-mini danger', text: 'Delete class' }) : null;
+    if (del) del.addEventListener('click', () => { if (confirm(`Delete ${ed.cls}? Its pupils keep the class code but show as “Not in a class” until you move them.`)) { CL_EDIT = null; clDo({ action: 'delclass', cls: ed.cls }, del, 'Class deleted.'); } });
+    const cancel = ed ? el('button', { type: 'button', class: 'tp-mini', text: 'Cancel', onclick: () => { CL_EDIT = null; classesView(); } }) : null;
+    card.append(el('div', { id: 'cl-form' }, el('h4', { text: ed ? `Edit ${ed.cls}` : 'Add a class' }), tl,
+      el('div', { class: 'cl-f' }, el('label', {}, document.createTextNode('Class'), code), el('label', {}, document.createTextNode('Teacher'), who), el('label', {}, document.createTextNode('Course'), course)),
+      el('p', { class: 'small', style: 'margin:10px 0 0', text: 'Zones for this class: what its pupils can open. Leave all unticked for no limits. A pupil’s own zones (set on their row) win.' }), zp,
+      el('div', { class: 'ac-row' }, save, del, cancel)));
+    if (ed && ncl(code.value) !== ed.cls) { }
+    box.append(card);
+    /* pupils not in a class */
+    if (CLASSES.length) {
+      const un = DATA.filter(p => !classOf(p.cls)).sort((a, b) => a.cls.localeCompare(b.cls, undefined, { numeric: true }) || a.name.localeCompare(b.name));
+      const uc = el('div', { class: 'card' }, el('h3', { text: un.length ? `Not in a class yet (${un.length})` : 'Everyone is in a class 🎉' }));
+      if (un.length) {
+        uc.append(el('p', { class: 'small', text: 'Pupils whose class isn’t one of yours (usually a typo, or they signed in before you added classes). Pick their class and press Move.' }));
+        const ul = el('ul', { class: 'cl-un' });
+        un.forEach(p => { const pick = classSel(p.cls), go = el('button', { type: 'button', class: 'tp-mini pri', text: 'Move' });
+          go.addEventListener('click', () => { if (!pick.value) { status('Choose a class for ' + p.name + '.', 'warn'); return; } clDo({ action: 'allocate', ids: p.id, cls: pick.value }, go, `${p.name} moved to ${pick.value}.`); });
+          ul.append(el('li', {}, el('span', {}, el('b', { text: p.name }), el('small', { text: ` typed ${p.cls || 'no class'}${p.last ? ' · last active ' + when(p.last) : ''}` })), pick, go)); });
+        uc.append(ul);
+      }
+      box.append(uc);
+    }
   }
   /* ---------- NEEDS ATTENTION: not revising lately, weak page quizzes, lots to come back to, no PIN ---------- */
   function attention() {
@@ -2360,7 +2479,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   const today = () => { const d = new Date(); return new Date(d.getTime() - d.getTimezoneOffset() * 6e4).toISOString().slice(0, 10); };
   const monOf = ds => { const d = new Date(ds + 'T12:00:00Z'); return addD(ds, -((d.getUTCDay() + 6) % 7)); };
   let RP = { type: LS.get('teacher.rptype') || 'usage', from: '', till: '', pupil: '' }, RPD = null, RPK = '';
-  const chTitle = k => { const [b, c] = k.split('|'), vu = VU.find(v => v.id === b), ch = vu && vu.chapters.find(x => x.id === c); return ch ? `${UNIT[b] || b} T${ch.n}: ${ch.title}` : k; };
+  const chTitle = k => { const [b, c] = k.split('|'); if (b === 'KS3') return 'KS3 ' + (KS3T[c] || c); const vu = VU.find(v => v.id === b), ch = vu && vu.chapters.find(x => x.id === c); return ch ? `${UNIT[b] || b} T${ch.n}: ${ch.title}` : k; };
   const mins = s => Math.round((s || 0) / 60);
   const daysIn = (a, b) => { const o = []; for (let d = a; d <= b && o.length < 40; d = addD(d, 1)) o.push(d); return o; };
   function rpPreset(k) { const t = today(), m = monOf(t);
@@ -2510,6 +2629,8 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     $('#ac-mailtest').addEventListener('click', async () => { status('Sending a test email…'); try { const r = await api({ action: 'testmail' }); if (r && r.ok) status(`Test email sent to ${r.to}. Check that inbox (and Spam).`, 'ok'); else if (r && r.error === 'unknown action') status('Deploy the latest Apps Script first (Deploy › Manage deployments › pencil › New version).', 'warn'); else status(`The test email didn’t send${r && r.error ? ': ' + r.error : ''}. In the Apps Script, choose testEmail in the function list and press Run, allow “Send email as you”, then deploy a new version.`, 'warn'); } catch (e) { status('Couldn’t reach the Apps Script.', 'warn'); } });
     $('#ac-staffout').addEventListener('click', () => { if (!confirm('Sign this device out of staff mode? It will ask for the staff password to open the Teacher area, and pupils signing in here will be counted.')) return; ['mrb-staff-ok', 'notes-nocount', 'teacher.nocount-set', 'teacher.actkey'].forEach(k => LS.set(k, null)); location.href = 'index.html'; });
     $('#ac-refresh').addEventListener('click', () => { Object.keys(DET).forEach(k => delete DET[k]); load(); });
+    $('#ac-move').addEventListener('click', () => panel('move')); $('#ac-zones').addEventListener('click', () => panel('zones'));
+    $('#ac-tch').addEventListener('change', e => { tch = e.target.value; LS.set('teacher.acttch', tch); cls = ''; LS.set('teacher.actcls', ''); render(); week(); });
     $('#ac-merge').addEventListener('click', () => panel('merge')); $('#ac-rename').addEventListener('click', () => panel('rename')); $('#ac-pin').addEventListener('click', () => panel('pin')); $('#ac-del').addEventListener('click', () => panel('delete'));
     $('#ac-clear').addEventListener('click', () => { SEL.clear(); SELMODE = false; render(); });
     $('#ac-sel').addEventListener('click', () => { SELMODE = !SELMODE; if (!SELMODE) SEL.clear(); else { OPEN = null; } render(); });
