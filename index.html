@@ -4295,7 +4295,7 @@ function tutUnitHTML(u, next, course) {
       <div class="acts"><a class="tp-open" href="${esc(u.file)}#${esc(c.page)}" aria-label="Open the tutorial: ${esc(c.title)}">${I_TOOL}<span>Open tutorial</span><span class="tp-arr" aria-hidden="true">→</span></a></div></li>`; };
   return `<section class="unit u-tut" data-unit="${esc(u.id)}" aria-labelledby="h-${esc(u.id)}">
     <div class="spec" aria-hidden="true">${u.chapters.map((c, i) => `<i style="background:var(--h${hue(i)}d)"></i>`).join('')}</div>
-    <div class="unit-h" style="--i:${next()}"><div><span class="unit-k">${esc(u.short)}</span><span class="tut-b">${I_TOOL}Tutorial book</span><h2 id="h-${esc(u.id)}">${esc(u.title)}</h2></div><div class="unit-l"><a href="${esc(u.file)}">Whole tutorial book →</a></div></div>
+    <div class="unit-h" style="--i:${next()}"><div><span class="unit-k">${esc(u.short)}</span><span class="tut-b">${I_TOOL}Tutorial book</span><h2 id="h-${esc(u.id)}">${esc(u.title)}</h2></div><div class="unit-l"></div></div>
     ${u.lib && u.lib.count ? `<a class="tlib" href="${esc(u.file)}#library"><span class="tlib-i" aria-hidden="true">${I_TOOL}</span><span><b>${esc(u.lib.title)}</b><span>Search ${u.lib.count} step-by-step recipes and build your own list</span></span><span class="tlib-go" aria-hidden="true">→</span></a>` : ''}
     ${groups.map((g, gi) => `<div class="tpart">${g.title ? `<h3 class="tpart-h"><span>Part ${gi + 1}</span>${esc(g.title)}</h3>` : ''}<ol class="topics">${g.ids.map(id => row(idx.get(id))).join('')}</ol></div>`).join('')}</section>`;
 }
@@ -4309,7 +4309,7 @@ function render(course) {
   box.classList.toggle('anim-in', !RM());
   box.innerHTML = UNITS.filter(u => u.course === course).map(u => u.mode === 'tutorial' ? tutUnitHTML(u, () => k++, course) : `<section class="unit" data-unit="${esc(u.id)}" aria-labelledby="h-${esc(u.id)}">
     <div class="spec" aria-hidden="true">${u.chapters.map((c, i) => `<i style="background:var(--h${hue(i)}d)"></i>`).join('')}</div>
-    <div class="unit-h" style="--i:${k++}"><div><span class="unit-k">${esc(u.short)}</span><h2 id="h-${esc(u.id)}">${esc(u.title)}</h2></div><div class="unit-l">${u.terms ? `<a href="${esc(u.file)}#glossary" title="All ${esc(u.terms)} key terms, with flashcards and a quiz">${I_GL}Glossary</a>` : ''}<a href="${esc(u.file)}">Whole workbook →</a></div></div>
+    <div class="unit-h" style="--i:${k++}"><div><span class="unit-k">${esc(u.short)}</span><h2 id="h-${esc(u.id)}">${esc(u.title)}</h2></div><div class="unit-l">${u.terms ? `<a href="${esc(u.file)}#glossary" title="All ${esc(u.terms)} key terms, with flashcards and a quiz">${I_GL}Glossary</a>` : ''}</div></div>
     <ol class="topics">${u.chapters.map((c, i) => { const im = IMG(course, c.topic), n = hue(i); return `<li class="tp" data-ci="${i}" data-topic="${esc(c.topic || '')}" data-ch="${esc(c.id)}" data-folder="${esc(c.folder || '')}" data-hub="${course}" style="--cc:var(--h${n});--cc-d:var(--h${n}d);--i:${k++}">
       <span class="ic" aria-hidden="true">${im ? `<img src="${esc(im)}" alt="" width="30" height="30" loading="lazy">` : ''}<b>${esc(pad2(c.n))}</b></span>
       <div class="tp-t"><small>Chapter ${esc(c.n)}</small><b>${esc(c.title)}</b></div>
