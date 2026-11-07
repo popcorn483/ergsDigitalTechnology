@@ -1,0 +1,2709 @@
+{
+ "title": "Computational Thinking and Algorithms",
+ "summary": "Solving problems like a computer scientist: breaking them down, spotting patterns, removing detail and writing algorithms as flowcharts and pseudocode, then tracing, searching, sorting and debugging them.",
+ "learn": [
+  "The four parts of computational thinking",
+  "What an algorithm is and how to draw it as a flowchart",
+  "Pseudocode with sequence, selection and iteration",
+  "Variables and tracing an algorithm with a trace table",
+  "Searching and sorting: linear search, binary search and bubble sort",
+  "Comparing algorithms and debugging broken ones"
+ ],
+ "temporary": false,
+ "intro": "How computer scientists think about problems before they write any code: decomposition, pattern recognition, abstraction and algorithms, then flowcharts, pseudocode, trace tables, searching, sorting and debugging.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Explain what computational thinking is and name its four parts",
+   "summary": "Computational thinking is a way of solving problems so that a person or a computer could carry out the solution. It has four parts: decomposition, pattern recognition, abstraction and algorithms.",
+   "diagram": {
+    "kind": "cycle",
+    "title": "The four parts of computational thinking",
+    "caption": "Click each part. Real problem solving often goes round more than once.",
+    "items": [
+     {
+      "label": "Decomposition",
+      "detail": "Break a big problem into smaller problems that are easier to solve, e.g. a school trip becomes transport, money, permission slips and lunch."
+     },
+     {
+      "label": "Pattern recognition",
+      "detail": "Spot what the smaller problems have in common, so one solution can be reused, e.g. every class needs a room, a teacher and a subject."
+     },
+     {
+      "label": "Abstraction",
+      "detail": "Ignore the detail that does not matter and keep only what you need, e.g. the London Underground map shows stations and lines, not streets."
+     },
+     {
+      "label": "Algorithms",
+      "detail": "Write clear, step-by-step instructions that solve the problem, e.g. a flowchart or pseudocode for making toast."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Computers are very fast, but they cannot think for themselves. They only do exactly what they are told. **[[Computational thinking]]** is the skill of working out a problem so clearly that the steps could be handed to a computer (or to another person) and carried out without any guessing."
+    },
+    {
+     "t": "p",
+     "text": "It is not about thinking *like* a computer. It is about thinking like a **computer scientist**: being organised, logical and precise. You already do it every day when you plan your homework, pack your PE bag or work out the quickest way to the canteen."
+    },
+    {
+     "t": "h",
+     "text": "The four parts"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "What it means",
+      "Making toast"
+     ],
+     "rows": [
+      [
+       "**[[Decomposition]]**",
+       "Breaking a big problem into smaller, more manageable parts.",
+       "Get the bread, toast it, butter it, serve it."
+      ],
+      [
+       "**[[Pattern recognition]]**",
+       "Spotting similarities, so you can reuse a solution you already have.",
+       "Toasting a bagel or a crumpet works in the same way as toasting bread."
+      ],
+      [
+       "**[[Abstraction]]**",
+       "Removing detail that does not matter so you can focus on what does.",
+       "The brand of bread and the colour of the toaster do not matter. How long to toast it does."
+      ],
+      [
+       "**Algorithms**",
+       "Writing precise step-by-step instructions to solve the problem.",
+       "1. Put bread in toaster. 2. Push lever down. 3. Wait until golden. 4. Butter it."
+      ]
+     ],
+     "caption": "Computational thinking applied to making toast"
+    },
+    {
+     "t": "tip",
+     "text": "Remember the four parts with **D-P-A-A**: \"**D**ogs **P**lay **A**ll **A**fternoon\" (Decomposition, Pattern recognition, Abstraction, Algorithms)."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: planning a class party",
+     "context": "Your form class wants to hold an end-of-term party in the form room. Use computational thinking to plan it.",
+     "steps": [
+      "**Decomposition:** split the job into smaller problems: food, music, decorations, permission from the form tutor, tidying up.",
+      "**Pattern recognition:** food, music and decorations all follow the same pattern: decide what is needed, find out who can bring it, make a list. Solve that once and reuse it.",
+      "**Abstraction:** ignore detail that does not matter right now (the exact colour of the balloons) and keep what does (how many pupils, what time the party is, any allergies).",
+      "**Algorithm:** write the plan as clear, ordered steps that anyone in the class could follow on the day."
+     ],
+     "answer": "Each part of computational thinking makes a big, messy job smaller and clearer, until it becomes a set of steps that anyone could follow."
+    },
+    {
+     "t": "note",
+     "text": "The four parts are not always used in a strict order. You might decompose a problem, spot a pattern, then go back and decompose one part further. What matters is that you end up with a clear algorithm."
+    },
+    {
+     "t": "h",
+     "text": "Why does it matter?"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Programmers use it before they write a single line of code. In Year 10 you will turn algorithms into C# programs.",
+      "It works for problems that have nothing to do with computers: planning a sports day, revising for exams or organising a fundraiser.",
+      "Employers value people who can break problems down and explain solutions clearly."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Computational thinking is a way of solving problems clearly enough that a computer or person could follow the solution.",
+      "Decomposition: break a problem into smaller parts.",
+      "Pattern recognition: spot similarities and reuse solutions.",
+      "Abstraction: remove unnecessary detail.",
+      "Algorithms: write precise, step-by-step instructions."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which part of computational thinking means breaking a problem into smaller parts?",
+     "o": [
+      "Abstraction",
+      "Algorithms",
+      "Pattern recognition",
+      "Decomposition"
+     ],
+     "a": 3,
+     "why": "Decomposition breaks a big problem into smaller, more manageable ones."
+    },
+    {
+     "q": "Ignoring the brand of bread when writing instructions for making toast is an example of...",
+     "o": [
+      "abstraction",
+      "an algorithm",
+      "decomposition",
+      "pattern recognition"
+     ],
+     "a": 0,
+     "why": "Abstraction removes detail that does not matter to the problem."
+    },
+    {
+     "q": "Which statement about computational thinking is true?",
+     "o": [
+      "It only matters when you use a computer",
+      "It means thinking as fast as a computer",
+      "It is a way of solving problems clearly and logically",
+      "It is a programming language"
+     ],
+     "a": 2,
+     "why": "It is a problem-solving approach, useful with or without a computer."
+    },
+    {
+     "q": "Realising that toasting a crumpet is the same process as toasting bread is...",
+     "o": [
+      "abstraction",
+      "pattern recognition",
+      "decomposition",
+      "debugging"
+     ],
+     "a": 1,
+     "why": "You spotted a similarity so you can reuse a solution."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name the **four** parts of computational thinking.",
+     "m": 4,
+     "a": "Decomposition (1); pattern recognition (1); abstraction (1); algorithms / algorithmic thinking (1)."
+    },
+    {
+     "q": "Your Year 8 class is organising a cake sale for charity. Explain how **decomposition** and **abstraction** could help with the planning.",
+     "m": 4,
+     "a": "Decomposition: break the cake sale into smaller tasks (1), e.g. baking, pricing, posters, setting up the table (1). Abstraction: ignore details that do not matter (1), e.g. focus on how many cakes and the price, not the colour of the plates (1)."
+    },
+    {
+     "q": "Explain what is meant by an **algorithm**.",
+     "m": 2,
+     "a": "A set of step-by-step instructions (1) to solve a problem or complete a task (1)."
+    }
+   ],
+   "terms": [
+    "Computational thinking"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "spec": "Use decomposition to break down a problem and pattern recognition to spot similarities",
+   "summary": "Decomposition breaks a big problem into smaller sub-problems that can each be solved on their own. Pattern recognition spots what those sub-problems have in common, so one solution can be reused.",
+   "diagram": {
+    "kind": "flow",
+    "title": "Decomposing the school timetable",
+    "caption": "Click each box. Each sub-problem can be broken down again until it is easy to solve.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "t",
+      "label": "Make the school timetable",
+      "detail": "A huge problem: hundreds of pupils, dozens of teachers and rooms, and every period of the week.",
+      "shape": "start"
+     },
+     {
+      "id": "y",
+      "label": "Year groups",
+      "detail": "Split the school into Years 8 to 14. Each year group is a smaller problem.",
+      "shape": "process"
+     },
+     {
+      "id": "s",
+      "label": "Subjects",
+      "detail": "Each year needs a set number of periods of English, Maths, Digital Technology and so on.",
+      "shape": "process"
+     },
+     {
+      "id": "r",
+      "label": "Rooms and teachers",
+      "detail": "Each lesson needs a free room of the right type (a computer room for Digital Technology, a lab for Science) and a free teacher.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "One class, one week",
+      "detail": "Small enough to solve: fill every period of the week for 8A without clashes.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "t",
+      "y"
+     ],
+     [
+      "t",
+      "s"
+     ],
+     [
+      "t",
+      "r"
+     ],
+     [
+      "y",
+      "c"
+     ],
+     [
+      "s",
+      "c"
+     ],
+     [
+      "r",
+      "c"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Decomposition"
+    },
+    {
+     "t": "p",
+     "text": "**[[Decomposition]]** means breaking a large, complex problem into smaller parts called **[[Sub-problem]]s**. Each sub-problem is easier to understand, solve and check than the whole thing. If a sub-problem is still too big, you break it down again."
+    },
+    {
+     "t": "p",
+     "text": "Think about the school timetable. Making it in one go would be impossible: hundreds of pupils, dozens of teachers and rooms, and not a single clash allowed. Decomposed, it becomes a set of much smaller jobs that can be tackled one at a time."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: decomposing a Year 8 trip to the Ulster Museum",
+     "context": "Your form tutor asks the class to help plan a day trip to Belfast. Break the problem down.",
+     "steps": [
+      "**Transport:** book a bus, work out the leaving and return times.",
+      "**Money:** find the cost of the bus and entry, divide by the number of pupils.",
+      "**Permission:** write a consent letter, collect the replies, keep a list.",
+      "**On the day:** register pupils on the bus, plan groups and a meeting point, pack lunches.",
+      "Any part that is still too big is decomposed again, e.g. **Permission** becomes: write letter, print copies, hand out, collect, chase missing replies."
+     ],
+     "answer": "Five smaller problems that could be shared out between different people and solved separately."
+    },
+    {
+     "t": "tip",
+     "text": "Decomposition makes teamwork easy: different people can work on different sub-problems at the same time. Large software such as a video game is built this way by teams of hundreds."
+    },
+    {
+     "t": "h",
+     "text": "Pattern recognition"
+    },
+    {
+     "t": "p",
+     "text": "**[[Pattern recognition]]** means looking for similarities, or **patterns**, between problems or within a problem. Once you spot a pattern you can reuse the same solution instead of starting from scratch every time."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Situation",
+      "The pattern",
+      "How it helps"
+     ],
+     "rows": [
+      [
+       "School timetable",
+       "Every lesson needs a class, a teacher, a room and a period.",
+       "One method for placing a lesson works for every lesson in the school."
+      ],
+      [
+       "The trip letters",
+       "Every pupil gets the same letter with only the name changed.",
+       "Write one letter and change the name, rather than writing 28 letters."
+      ],
+      [
+       "Making sandwiches for the trip",
+       "Every sandwich is: two slices of bread, butter, filling, cut in half.",
+       "Learn the steps once and repeat them for each sandwich."
+      ],
+      [
+       "Number sequence 3, 6, 9, 12, ...",
+       "Add 3 each time.",
+       "You can predict the next value (15) without being told."
+      ]
+     ],
+     "caption": "Spotting patterns"
+    },
+    {
+     "t": "note",
+     "text": "Patterns lead straight to **loops** in algorithms. If the same steps are repeated for every sandwich, an algorithm can say \"repeat these steps 28 times\" instead of writing them out 28 times."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Decomposition breaks a big problem into smaller sub-problems.",
+      "Sub-problems can be broken down again until each is easy to solve.",
+      "Decomposition lets different people work on different parts.",
+      "Pattern recognition spots similarities so a solution can be reused.",
+      "Repeated patterns often become loops in an algorithm."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a sub-problem?",
+     "o": [
+      "A problem with no solution",
+      "A problem about submarines",
+      "A mistake in an algorithm",
+      "A smaller part of a bigger problem"
+     ],
+     "a": 3,
+     "why": "Decomposition produces sub-problems."
+    },
+    {
+     "q": "Every lesson needs a teacher, a room, a class and a period. Noticing this is...",
+     "o": [
+      "pattern recognition",
+      "abstraction",
+      "decomposition",
+      "debugging"
+     ],
+     "a": 0,
+     "why": "It is a similarity shared by every lesson."
+    },
+    {
+     "q": "Why is decomposition useful for a team?",
+     "o": [
+      "It removes the need to test",
+      "It makes the problem bigger",
+      "Different people can work on different parts at the same time",
+      "It means only one person does the work"
+     ],
+     "a": 2,
+     "why": "Sub-problems can be shared out."
+    },
+    {
+     "q": "What comes next in 4, 8, 12, 16, ...?",
+     "o": [
+      "18",
+      "20",
+      "24",
+      "32"
+     ],
+     "a": 1,
+     "why": "The pattern is add 4, so 16 + 4 = 20."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Define **decomposition** and give **one** benefit of using it.",
+     "m": 2,
+     "a": "Breaking a problem down into smaller sub-problems (1). Benefit: each part is easier to solve / parts can be shared between a team / easier to test (1)."
+    },
+    {
+     "q": "The PE department is organising sports day. Decompose this problem into **four** sub-problems.",
+     "m": 4,
+     "a": "Any four sensible sub-problems (1 each), e.g. choosing events; entering pupils into events; timing and recording results; awarding points to houses; equipment and staff; first aid."
+    },
+    {
+     "q": "Explain how **pattern recognition** could save time when writing reports for every pupil in a class.",
+     "m": 2,
+     "a": "Every report follows the same structure / has the same sections (1), so one template can be reused and only the details changed for each pupil (1)."
+    }
+   ],
+   "terms": [
+    "Decomposition",
+    "Sub-problem",
+    "Pattern recognition"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "spec": "Use abstraction to remove unnecessary detail, using the London Underground map as an example",
+   "summary": "Abstraction means hiding or removing detail that is not needed, so you can focus on what matters. The London Underground map is a famous abstraction: it shows the order of stations and where lines meet, not real distances.",
+   "diagram": {
+    "kind": "compare",
+    "title": "Street map or Tube map?",
+    "caption": "Two ways to show the same city. Which one would you use to get from King's Cross to Oxford Circus?",
+    "states": [
+     {
+      "label": "Real street map",
+      "points": [
+       "Every street, building and park",
+       "Real distances and real directions",
+       "Curvy, accurate railway lines",
+       "Great for walking, too detailed for planning a Tube journey"
+      ],
+      "art": null
+     },
+     {
+      "label": "Tube map (abstraction)",
+      "points": [
+       "Only stations, lines and interchanges",
+       "Straight lines at neat angles",
+       "Stations spaced evenly, not by real distance",
+       "Perfect for planning which train to take and where to change"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**[[Abstraction]]** means removing (or hiding) detail that is not needed to solve a problem, so you can concentrate on the detail that is. What you are left with is a simpler **[[model]]** of the real thing."
+    },
+    {
+     "t": "h",
+     "text": "The London Underground map"
+    },
+    {
+     "t": "p",
+     "text": "Early maps of the London Underground were drawn to scale on top of the streets. In the centre the stations were crammed together and hard to read; at the edges they were miles apart. In **1931** an electrical draughtsman called **Harry Beck** had an idea: passengers underground do not care about the streets above them. They only need to know **which line to take, the order of the stops, and where to change**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Kept (needed)",
+      "Removed (not needed)"
+     ],
+     "rows": [
+      [
+       "The names of the stations",
+       "Streets, buildings and parks"
+      ],
+      [
+       "The order of stations on each line",
+       "The real distance between stations"
+      ],
+      [
+       "Where lines meet (interchanges)",
+       "The real shape and bends of each line"
+      ],
+      [
+       "Each line in its own colour",
+       "Real compass directions (they are only roughly right)"
+      ]
+     ],
+     "caption": "What Harry Beck kept and removed"
+    },
+    {
+     "t": "p",
+     "text": "His map was printed in 1933 and was an instant success. The same idea is still used for metro maps all over the world. Only one real feature survived: a simplified River Thames, to help people get their bearings."
+    },
+    {
+     "t": "warn",
+     "text": "Abstraction does not mean making something up. Everything left on the Tube map is **true**: the stations, their order and the connections. Only the unnecessary detail has gone."
+    },
+    {
+     "t": "h",
+     "text": "Abstraction around school"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**The school timetable** is an abstraction of your week: it shows subject, room and teacher, not what you will learn or who you sit beside.",
+      "**A fire exit plan** on the classroom wall shows corridors, doors and exits, not desks, displays or the colour of the walls.",
+      "**A football game** such as EA FC turns a real player into a few numbers (pace, shooting, passing) instead of every detail of their life.",
+      "**A satnav** shows roads and your route, but not every house you pass."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: an abstraction for a bus timetable app",
+     "context": "The school wants an app that tells pupils when their bus leaves. Decide what to keep and what to remove.",
+     "steps": [
+      "Ask: what problem is the app solving? Pupils need to know **which bus** and **when it leaves**.",
+      "Keep: bus number, departure time, bay number, destination.",
+      "Remove: the driver's name, the colour of the bus, the registration plate, the exact route through every village.",
+      "Check: could a pupil still catch the right bus with only the kept details? Yes."
+     ],
+     "answer": "Bus number, bay, destination and time: four details instead of dozens."
+    },
+    {
+     "t": "tip",
+     "text": "A good test for abstraction: \"Would removing this detail stop the problem being solved?\" If not, it can go."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Abstraction removes unnecessary detail to focus on what matters.",
+      "The result is a simpler model of the real thing.",
+      "Harry Beck's 1931 Tube map kept stations, order and interchanges, and removed real distances and streets.",
+      "What you keep depends on the problem you are trying to solve.",
+      "Timetables, fire exit plans and satnavs are everyday abstractions."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does abstraction mean?",
+     "o": [
+      "Breaking a problem into parts",
+      "Removing detail that is not needed",
+      "Repeating a set of steps",
+      "Putting a list in order"
+     ],
+     "a": 1,
+     "why": "Abstraction hides or removes unnecessary detail."
+    },
+    {
+     "q": "Which detail is **kept** on the London Underground map?",
+     "o": [
+      "Real distances between stations",
+      "The streets above",
+      "The exact bends of each tunnel",
+      "The order of stations on each line"
+     ],
+     "a": 3,
+     "why": "Passengers need the order of stops, not real distances."
+    },
+    {
+     "q": "Who designed the famous Tube map in 1931?",
+     "o": [
+      "Harry Beck",
+      "Tim Berners-Lee",
+      "Alan Turing",
+      "Ada Lovelace"
+     ],
+     "a": 0,
+     "why": "Harry Beck, an electrical draughtsman."
+    },
+    {
+     "q": "An app tells pupils when their bus leaves. Which detail is best removed?",
+     "o": [
+      "The departure time",
+      "The bus number",
+      "The driver's favourite colour",
+      "The bay number"
+     ],
+     "a": 2,
+     "why": "It does not help anyone catch the bus."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why the London Underground map is a good example of **abstraction**.",
+     "m": 3,
+     "a": "It removes unnecessary detail such as streets / real distances / real bends (1); it keeps only what passengers need: stations, the order of stops, lines and interchanges (1); this makes it simpler and easier to use for planning a journey (1)."
+    },
+    {
+     "q": "A game designer is creating a racing game. State **two** details about a real car that should be kept and **two** that could be removed.",
+     "m": 4,
+     "a": "Kept (any two, 1 each): top speed, acceleration, handling/steering, braking. Removed (any two, 1 each): the radio, seat fabric, the glovebox, cup holders, the owner's manual, etc."
+    },
+    {
+     "q": "Your school map for new Year 8 pupils is an abstraction. Describe what it should show and what it should leave out.",
+     "m": 2,
+     "a": "Show: buildings/corridors, room numbers, key places such as the canteen, office and toilets (1). Leave out: furniture, displays, car parking spaces or other detail new pupils do not need (1)."
+    }
+   ],
+   "terms": [
+    "Abstraction",
+    "Model"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "spec": "Define an algorithm and represent one as a flowchart using the standard symbols",
+   "summary": "An algorithm is a precise, ordered set of steps that solves a problem. A flowchart shows an algorithm as a diagram using standard symbols: terminator, process, decision, input/output and arrows.",
+   "diagram": {
+    "kind": "flow",
+    "title": "Flowchart: making toast",
+    "caption": "Click each symbol. The decision loops back until the toast is golden.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "s",
+      "label": "Start",
+      "detail": "Terminator: every flowchart begins here.",
+      "shape": "start"
+     },
+     {
+      "id": "a",
+      "label": "Put bread in toaster",
+      "detail": "Process: an action to carry out.",
+      "shape": "process"
+     },
+     {
+      "id": "b",
+      "label": "Push lever down",
+      "detail": "Process: another action.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "Wait 30 seconds",
+      "detail": "Process: an action that involves waiting.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Is the toast golden?",
+      "detail": "Decision: a Yes/No question. No: go back and wait again. Yes: carry on.",
+      "shape": "decision"
+     },
+     {
+      "id": "e",
+      "label": "Butter the toast",
+      "detail": "Process: the toast is ready to butter.",
+      "shape": "process"
+     },
+     {
+      "id": "f",
+      "label": "Stop",
+      "detail": "Terminator: the algorithm ends here.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "s",
+      "a"
+     ],
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "c",
+      "No"
+     ],
+     [
+      "d",
+      "e",
+      "Yes"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is an algorithm?"
+    },
+    {
+     "t": "p",
+     "text": "An **[[algorithm]]** is a precise, step-by-step set of instructions for solving a problem or completing a task. A recipe, the instructions for a flat-pack wardrobe and the directions to the sports hall are all algorithms. A computer program is an algorithm written in a programming language."
+    },
+    {
+     "t": "p",
+     "text": "A good algorithm must be:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Precise and unambiguous:** each step has only one possible meaning. \"Add some milk\" is vague; \"add 100 ml of milk\" is precise.",
+      "**In the correct order:** \"butter the toast\" before \"toast the bread\" gives a very different result.",
+      "**Finite:** it must finish. Instructions that go on forever are not a useful algorithm."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "note",
+     "text": "Algorithms come before programs. You plan the algorithm first (as a flowchart or in pseudocode), then turn it into code in any language: C#, Python or micro:bit blocks."
+    },
+    {
+     "t": "h",
+     "text": "Flowchart symbols"
+    },
+    {
+     "t": "p",
+     "text": "A **[[flowchart]]** shows an algorithm as a diagram. Everyone uses the same shapes, so anyone can read anyone else's flowchart."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Symbol",
+      "Shape",
+      "Used for",
+      "Example"
+     ],
+     "rows": [
+      [
+       "**[[Terminator]]**",
+       "Rounded rectangle (oval ends)",
+       "The start and end of the algorithm",
+       "Start, Stop"
+      ],
+      [
+       "**[[Process symbol]]**",
+       "Rectangle",
+       "An action or calculation",
+       "total = total + 1"
+      ],
+      [
+       "**[[Decision symbol]]**",
+       "Diamond",
+       "A Yes/No (True/False) question with two exits",
+       "Is mark >= 50?"
+      ],
+      [
+       "**[[Input/output symbol]]**",
+       "Parallelogram (slanted rectangle)",
+       "Data going in (from the user) or coming out (to the screen)",
+       "INPUT name, OUTPUT \"Hello\""
+      ],
+      [
+       "**[[Flow line]]**",
+       "Arrow",
+       "Joins the symbols and shows the direction to follow",
+       "From Start down to the first step"
+      ]
+     ],
+     "caption": "The standard flowchart symbols"
+    },
+    {
+     "t": "warn",
+     "text": "A decision diamond must have **two** arrows coming out of it, labelled **Yes** and **No** (or True and False). A process box has only **one** arrow out."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a flowchart for the Year 10 trip",
+     "context": "Pupils can only go on the trip if they are 14 or older. Describe a flowchart that asks for a pupil's age and says whether they can go.",
+     "steps": [
+      "**Terminator:** Start.",
+      "**Input/output** (parallelogram): INPUT age.",
+      "**Decision** (diamond): Is age >= 14?",
+      "**Yes** arrow to an **output** parallelogram: OUTPUT \"You can go on the trip\".",
+      "**No** arrow to an **output** parallelogram: OUTPUT \"Sorry, you are too young\".",
+      "Both arrows join up and lead to the **terminator**: Stop."
+     ],
+     "answer": "Start, input, one decision, two outputs, Stop: five kinds of symbol used correctly."
+    },
+    {
+     "t": "tip",
+     "text": "Draw flowcharts from top to bottom, use a ruler for arrows, and keep the wording inside each shape short."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "An algorithm is a precise, ordered, finite set of steps to solve a problem.",
+      "Terminator (rounded rectangle): Start and Stop.",
+      "Process (rectangle): an action or calculation.",
+      "Decision (diamond): a Yes/No question with two labelled exits.",
+      "Input/output (parallelogram): data in or out. Arrows show the direction of flow."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which flowchart symbol is a diamond?",
+     "o": [
+      "Process",
+      "Decision",
+      "Terminator",
+      "Input/output"
+     ],
+     "a": 1,
+     "why": "A decision asks a Yes/No question."
+    },
+    {
+     "q": "Which symbol would you use for OUTPUT \"Well done\"?",
+     "o": [
+      "Rounded rectangle",
+      "Rectangle",
+      "Diamond",
+      "Parallelogram"
+     ],
+     "a": 3,
+     "why": "Input and output both use the parallelogram."
+    },
+    {
+     "q": "Which instruction is the most precise?",
+     "o": [
+      "Bake for 20 minutes at 180 °C",
+      "Cook it for a while",
+      "Add a bit of sugar",
+      "Make it look nice"
+     ],
+     "a": 0,
+     "why": "It has only one possible meaning."
+    },
+    {
+     "q": "How many arrows should leave a decision symbol?",
+     "o": [
+      "One",
+      "Three",
+      "Two",
+      "As many as you like"
+     ],
+     "a": 2,
+     "why": "One for Yes and one for No."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Define the term **algorithm**.",
+     "m": 2,
+     "a": "A set of precise / step-by-step instructions (1) to solve a problem or complete a task (1)."
+    },
+    {
+     "q": "Name the flowchart symbol used for each of the following: (a) Start (b) Is score > 100? (c) INPUT password (d) total = total + 5",
+     "m": 4,
+     "a": "(a) Terminator (1). (b) Decision (1). (c) Input/output (1). (d) Process (1)."
+    },
+    {
+     "q": "Draw a flowchart for an algorithm that asks the user for a number and outputs \"Even\" if it can be divided by 2 exactly, or \"Odd\" if not.",
+     "m": 5,
+     "a": "Start and Stop terminators (1); INPUT number in a parallelogram (1); decision diamond asking whether the number divides by 2 exactly (1); Yes and No labelled exits (1); two output parallelograms: \"Even\" on Yes, \"Odd\" on No, both leading to Stop (1)."
+    }
+   ],
+   "terms": [
+    "Algorithm",
+    "Flowchart",
+    "Terminator",
+    "Process symbol",
+    "Decision symbol",
+    "Input/output symbol",
+    "Flow line"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "spec": "Write simple pseudocode using sequence, selection and iteration",
+   "summary": "Pseudocode writes an algorithm in structured, code-like English that is not tied to any one language. Every algorithm is built from three building blocks: sequence, selection and iteration.",
+   "diagram": {
+    "kind": "match",
+    "title": "Which building block?",
+    "caption": "Match each piece of pseudocode to the building block it shows.",
+    "pairs": [
+     [
+      "`IF age >= 14 THEN`",
+      "Selection"
+     ],
+     [
+      "`FOR i ← 1 TO 10`",
+      "Iteration (count-controlled)"
+     ],
+     [
+      "`WHILE lives > 0`",
+      "Iteration (condition-controlled)"
+     ],
+     [
+      "`INPUT name` then `OUTPUT \"Hi \", name`",
+      "Sequence"
+     ],
+     [
+      "`ELSE`",
+      "Selection (the other path)"
+     ],
+     [
+      "`NEXT i`",
+      "End of a FOR loop"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is pseudocode?"
+    },
+    {
+     "t": "p",
+     "text": "**[[Pseudocode]]** (say *soo-doh-code*) is a way of writing an algorithm that looks a bit like a program but is written in simple, structured English. It is not a real programming language, so it will not run on a computer, and it does not matter if you make a tiny spelling slip. It lets you plan the logic before you worry about the exact rules of C#, Python or blocks."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Pseudocode",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "`INPUT name`",
+       "Get a value from the user and store it in `name`."
+      ],
+      [
+       "`OUTPUT \"Hello \", name`",
+       "Display text and values on the screen."
+      ],
+      [
+       "`score ← 0`",
+       "Store 0 in `score`. Read the arrow as *becomes*."
+      ],
+      [
+       "`=` `<>` `<` `>` `<=` `>=`",
+       "Equal to, not equal to, less than, greater than, less than or equal to, greater than or equal to."
+      ],
+      [
+       "`IF ... THEN ... ELSE ... ENDIF`",
+       "Selection: choose between paths."
+      ],
+      [
+       "`WHILE ... ENDWHILE`",
+       "Repeat while a condition is true."
+      ],
+      [
+       "`FOR i ← 1 TO 5 ... NEXT i`",
+       "Repeat a set number of times."
+      ],
+      [
+       "`// comment`",
+       "A note for humans; it is ignored when the algorithm runs."
+      ]
+     ],
+     "caption": "The pseudocode used in this topic"
+    },
+    {
+     "t": "tip",
+     "text": "Indent (move in) the lines inside an IF or a loop. It shows clearly which lines belong to it."
+    },
+    {
+     "t": "h",
+     "text": "1. Sequence"
+    },
+    {
+     "t": "p",
+     "text": "**[[Sequence]]** means the steps are carried out one after another, in order, from top to bottom."
+    },
+    {
+     "t": "code",
+     "lang": "ps",
+     "title": "Sequence: area of a rectangle",
+     "code": "// Work out the area of a rectangle\nINPUT length\nINPUT width\narea ← length * width\nOUTPUT \"The area is \", area",
+     "output": "If the user enters 6 and 4:\nThe area is 24"
+    },
+    {
+     "t": "h",
+     "text": "2. Selection"
+    },
+    {
+     "t": "p",
+     "text": "**[[Selection]]** means the algorithm makes a choice. It checks a **[[condition]]** (something that is either true or false) and follows a different path depending on the answer. In a flowchart, selection is a decision diamond."
+    },
+    {
+     "t": "code",
+     "lang": "ps",
+     "title": "Selection: pass or try again",
+     "code": "INPUT mark\nIF mark >= 50 THEN\n    OUTPUT \"Pass\"\nELSE\n    OUTPUT \"Try again\"\nENDIF",
+     "output": "Mark 63: Pass\nMark 50: Pass\nMark 49: Try again"
+    },
+    {
+     "t": "p",
+     "text": "For more than two paths, use `ELSEIF`. The conditions are checked from the top, and only the **first** true one runs:"
+    },
+    {
+     "t": "code",
+     "lang": "ps",
+     "title": "Selection with ELSEIF: house points",
+     "code": "INPUT points\nIF points >= 100 THEN\n    OUTPUT \"Gold award\"\nELSEIF points >= 50 THEN\n    OUTPUT \"Silver award\"\nELSE\n    OUTPUT \"Keep going!\"\nENDIF",
+     "output": "120 points: Gold award\n75 points: Silver award\n30 points: Keep going!"
+    },
+    {
+     "t": "h",
+     "text": "3. Iteration"
+    },
+    {
+     "t": "p",
+     "text": "**[[Iteration]]** means repeating steps, also called **looping**. There are two kinds:"
+    },
+    {
+     "t": "code",
+     "lang": "ps",
+     "title": "Count-controlled: the 3 times table",
+     "code": "FOR i ← 1 TO 5\n    OUTPUT i * 3\nNEXT i",
+     "output": "3\n6\n9\n12\n15"
+    },
+    {
+     "t": "code",
+     "lang": "ps",
+     "title": "Condition-controlled: keep asking for the password",
+     "code": "password ← \"\"\nWHILE password <> \"Dragon\"\n    INPUT password\nENDWHILE\nOUTPUT \"Welcome\"",
+     "output": "Keeps asking until the user types Dragon, then shows Welcome."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "FOR loop",
+      "WHILE loop"
+     ],
+     "rows": [
+      [
+       "Type",
+       "[[Count-controlled loop]]",
+       "[[Condition-controlled loop]]"
+      ],
+      [
+       "Repeats",
+       "A fixed number of times",
+       "While a condition is true"
+      ],
+      [
+       "Use when",
+       "You know how many times, e.g. 5 times table rows",
+       "You do not know how many times, e.g. password attempts"
+      ],
+      [
+       "Ends with",
+       "`NEXT i`",
+       "`ENDWHILE`"
+      ]
+     ]
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Pseudocode is structured English for planning algorithms; it is not a real language.",
+      "Sequence: steps run in order, one after another.",
+      "Selection: IF ... THEN ... ELSE ... ENDIF chooses a path using a condition.",
+      "Iteration: FOR ... NEXT repeats a set number of times; WHILE ... ENDWHILE repeats while a condition is true.",
+      "Read ← as \"becomes\"; = means \"is equal to\" and <> means \"is not equal to\"."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does `FOR i ← 1 TO 4` followed by `OUTPUT i * 2` and `NEXT i` output?",
+     "o": [
+      "1 2 3 4",
+      "2 4 6 8",
+      "2 4 6 8 10",
+      "4 8"
+     ],
+     "a": 1,
+     "why": "i is 1, 2, 3, 4 and each is doubled."
+    },
+    {
+     "q": "Which building block makes a choice?",
+     "o": [
+      "Sequence",
+      "Selection",
+      "Iteration",
+      "Abstraction"
+     ],
+     "a": 1,
+     "why": "Selection uses IF to choose a path."
+    },
+    {
+     "q": "You do not know how many guesses a user will need. Which loop is best?",
+     "o": [
+      "FOR loop",
+      "An IF statement",
+      "No loop",
+      "WHILE loop"
+     ],
+     "a": 3,
+     "why": "A condition-controlled loop repeats until the condition changes."
+    },
+    {
+     "q": "Using the house points pseudocode, what is output for 50 points?",
+     "o": [
+      "Silver award",
+      "Gold award",
+      "Keep going!",
+      "Nothing"
+     ],
+     "a": 0,
+     "why": "50 is not >= 100, but it is >= 50."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name and describe the **three** basic building blocks of an algorithm.",
+     "m": 6,
+     "a": "Sequence (1): instructions carried out one after another in order (1). Selection (1): a decision/condition decides which path is followed, e.g. IF (1). Iteration (1): steps are repeated / a loop, e.g. FOR or WHILE (1)."
+    },
+    {
+     "q": "Write pseudocode that asks for the temperature and outputs \"Wear a coat\" if it is below 10, otherwise outputs \"No coat needed\".",
+     "m": 4,
+     "a": "INPUT temperature (1); IF temperature < 10 THEN (1); OUTPUT \"Wear a coat\" (1); ELSE OUTPUT \"No coat needed\" ENDIF (1)."
+    },
+    {
+     "q": "Explain the difference between a **count-controlled** loop and a **condition-controlled** loop.",
+     "m": 2,
+     "a": "A count-controlled loop (FOR) repeats a fixed / known number of times (1). A condition-controlled loop (WHILE) repeats until a condition changes / while a condition is true, so the number of repeats may not be known (1)."
+    }
+   ],
+   "terms": [
+    "Pseudocode",
+    "Sequence",
+    "Selection",
+    "Condition",
+    "Iteration",
+    "Count-controlled loop",
+    "Condition-controlled loop"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "spec": "Use variables in algorithms and trace an algorithm with a trace table",
+   "summary": "A variable is a named store for a value that can change while the algorithm runs. A trace table records the value of every variable step by step, so you can work out exactly what an algorithm does.",
+   "diagram": {
+    "kind": "flow",
+    "title": "The adding-up loop",
+    "caption": "Click each step, then follow it round the loop four times with the trace table below.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "s",
+      "label": "Start",
+      "detail": "The algorithm begins.",
+      "shape": "start"
+     },
+     {
+      "id": "a",
+      "label": "total ← 0, count ← 1",
+      "detail": "Both variables are given a starting value (initialised).",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Is count <= 4?",
+      "detail": "The condition is checked before every pass of the loop.",
+      "shape": "decision"
+     },
+     {
+      "id": "b",
+      "label": "total ← total + count",
+      "detail": "Add the current count onto the running total.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "count ← count + 1",
+      "detail": "Move count on by 1, or the loop would never end.",
+      "shape": "process"
+     },
+     {
+      "id": "o",
+      "label": "OUTPUT total",
+      "detail": "Shows 10 on the screen.",
+      "shape": "io"
+     },
+     {
+      "id": "e",
+      "label": "Stop",
+      "detail": "The algorithm ends.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "s",
+      "a"
+     ],
+     [
+      "a",
+      "d"
+     ],
+     [
+      "d",
+      "b",
+      "Yes"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "o",
+      "No"
+     ],
+     [
+      "o",
+      "e"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Variables"
+    },
+    {
+     "t": "p",
+     "text": "A **[[variable]]** is a named store (like a labelled box) that holds a value while the algorithm runs. It is called a variable because the value can **vary**: a game's `score` starts at 0 and goes up every time you collect a coin."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Give variables **meaningful names**: `score`, `total`, `pupilName`, not `x` or `thing`.",
+      "No spaces in a name. Join words together, e.g. `highScore`.",
+      "A variable holds **one value at a time**. Putting a new value in replaces the old one."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "p",
+     "text": "Putting a value into a variable is called **[[assignment]]**. In our pseudocode it uses the arrow `←`, read as *becomes*:"
+    },
+    {
+     "t": "code",
+     "lang": "ps",
+     "title": "Assignment",
+     "code": "score ← 0          // score becomes 0\nscore ← score + 5  // score becomes 0 + 5, so 5\nscore ← score + 5  // score becomes 5 + 5, so 10\nOUTPUT score",
+     "output": "10"
+    },
+    {
+     "t": "warn",
+     "text": "`score ← score + 5` looks strange in maths, but it is not an equation. Work out the right-hand side **first** using the old value, then store the answer back in `score`."
+    },
+    {
+     "t": "h",
+     "text": "Trace tables"
+    },
+    {
+     "t": "p",
+     "text": "A **[[trace table]]** is a table with a column for each variable (plus conditions and output). You work through the algorithm by hand, one line at a time, writing down every value. This is called a **[[dry run]]**. It shows exactly what the algorithm does and helps you find mistakes."
+    },
+    {
+     "t": "code",
+     "lang": "ps",
+     "title": "Algorithm to trace: adding up 1 to 4",
+     "code": "total ← 0\ncount ← 1\nWHILE count <= 4\n    total ← total + count\n    count ← count + 1\nENDWHILE\nOUTPUT total",
+     "output": "10"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Pass",
+      "count (at check)",
+      "count <= 4?",
+      "total becomes",
+      "count becomes",
+      "OUTPUT"
+     ],
+     "rows": [
+      [
+       "Start",
+       "",
+       "",
+       "0",
+       "1",
+       ""
+      ],
+      [
+       "1",
+       "1",
+       "True",
+       "0 + 1 = 1",
+       "2",
+       ""
+      ],
+      [
+       "2",
+       "2",
+       "True",
+       "1 + 2 = 3",
+       "3",
+       ""
+      ],
+      [
+       "3",
+       "3",
+       "True",
+       "3 + 3 = 6",
+       "4",
+       ""
+      ],
+      [
+       "4",
+       "4",
+       "True",
+       "6 + 4 = 10",
+       "5",
+       ""
+      ],
+      [
+       "End",
+       "5",
+       "False",
+       "",
+       "",
+       "10"
+      ]
+     ],
+     "caption": "Trace table: the loop runs 4 times and outputs 10"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: tracing a FOR loop",
+     "context": "Trace this algorithm: `score ← 0`, then `FOR i ← 1 TO 3`, `score ← score + i * 2`, `NEXT i`, then `OUTPUT score`.",
+     "steps": [
+      "Before the loop: score = 0.",
+      "i = 1: score = 0 + 1 × 2 = **2**.",
+      "i = 2: score = 2 + 2 × 2 = **6**.",
+      "i = 3: score = 6 + 3 × 2 = **12**.",
+      "The loop has run 3 times, so it ends. OUTPUT 12."
+     ],
+     "answer": "The output is **12**."
+    },
+    {
+     "t": "tip",
+     "text": "Double-check every row: use the **old** value on the right-hand side, and only update one thing at a time. Most trace table mistakes come from rushing ahead."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A variable is a named store whose value can change.",
+      "Assignment (←) puts a value into a variable, replacing the old value.",
+      "Work out the right-hand side first, then store the result.",
+      "A trace table records every variable's value as you dry run an algorithm by hand.",
+      "Trace tables show what an algorithm outputs and help find errors."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "score is 7. After `score ← score + 3`, what is score?",
+     "o": [
+      "3",
+      "7",
+      "10",
+      "73"
+     ],
+     "a": 2,
+     "why": "7 + 3 = 10, which replaces the old value."
+    },
+    {
+     "q": "What is a trace table used for?",
+     "o": [
+      "Drawing flowcharts",
+      "Sorting a list",
+      "Recording variable values step by step while dry running an algorithm",
+      "Storing passwords"
+     ],
+     "a": 2,
+     "why": "It tracks every value as you work through by hand."
+    },
+    {
+     "q": "How many times does the loop body run in `WHILE count <= 4` if count starts at 1 and goes up by 1 each pass?",
+     "o": [
+      "3",
+      "4",
+      "5",
+      "Forever"
+     ],
+     "a": 1,
+     "why": "count = 1, 2, 3, 4 pass; 5 fails."
+    },
+    {
+     "q": "Which is the best variable name for a pupil's test mark?",
+     "o": [
+      "x",
+      "test mark",
+      "1mark",
+      "testMark"
+     ],
+     "a": 3,
+     "why": "Meaningful, no spaces, does not start with a number."
+    }
+   ],
+   "practice": [
+    {
+     "q": "What is a **variable**? Give an example of a variable that a quiz game might use.",
+     "m": 2,
+     "a": "A named store / location in memory that holds a value which can change while the algorithm runs (1). Example: score, lives, questionNumber, playerName (1)."
+    },
+    {
+     "q": "Complete a trace table for this algorithm and state the output.\n\n`x ← 3`\n`y ← 10`\n`WHILE y > x`\n`    y ← y - 2`\n`    x ← x + 1`\n`ENDWHILE`\n`OUTPUT x, y`",
+     "m": 4,
+     "a": "Start: x = 3, y = 10. Pass 1: 10 > 3 True, y = 8, x = 4 (1). Pass 2: 8 > 4 True, y = 6, x = 5 (1). Pass 3: 6 > 5 True, y = 4, x = 6 (1). Check: 4 > 6 False, loop ends; OUTPUT 6, 4 (1)."
+    },
+    {
+     "q": "Explain why a programmer would dry run an algorithm using a trace table.",
+     "m": 2,
+     "a": "To check what the algorithm does / what it outputs (1) and to find logic errors before (or without) running it on a computer (1)."
+    }
+   ],
+   "terms": [
+    "Variable",
+    "Assignment",
+    "Trace table",
+    "Dry run"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p07",
+   "spec": "Describe and carry out a linear search and a binary search",
+   "summary": "A linear search checks each item in turn from the start and works on any list. A binary search repeatedly checks the middle item and throws away half of the list each time, but the list must be sorted first.",
+   "diagram": {
+    "kind": "flow",
+    "title": "How a binary search works",
+    "caption": "Click each step. Every time round the loop, half of the remaining list is thrown away.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "s",
+      "label": "Start",
+      "detail": "The list must already be sorted. low = 1, high = the last position.",
+      "shape": "start"
+     },
+     {
+      "id": "d1",
+      "label": "Is low <= high?",
+      "detail": "If low has passed high, there is nothing left to search.",
+      "shape": "decision"
+     },
+     {
+      "id": "m",
+      "label": "mid ← (low + high) DIV 2",
+      "detail": "Find the middle position. DIV divides and throws away any remainder, so (7 + 8) DIV 2 = 7.",
+      "shape": "process"
+     },
+     {
+      "id": "d2",
+      "label": "Is list[mid] the target?",
+      "detail": "Check the middle item.",
+      "shape": "decision"
+     },
+     {
+      "id": "f",
+      "label": "Found!",
+      "detail": "Output the position and stop.",
+      "shape": "end"
+     },
+     {
+      "id": "d3",
+      "label": "Is list[mid] < target?",
+      "detail": "Is the target bigger than the middle item?",
+      "shape": "decision"
+     },
+     {
+      "id": "l",
+      "label": "low ← mid + 1",
+      "detail": "Throw away the lower half, including mid.",
+      "shape": "process"
+     },
+     {
+      "id": "h",
+      "label": "high ← mid - 1",
+      "detail": "Throw away the upper half, including mid.",
+      "shape": "process"
+     },
+     {
+      "id": "n",
+      "label": "Not found",
+      "detail": "The target is not in the list.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "s",
+      "d1"
+     ],
+     [
+      "d1",
+      "m",
+      "Yes"
+     ],
+     [
+      "d1",
+      "n",
+      "No"
+     ],
+     [
+      "m",
+      "d2"
+     ],
+     [
+      "d2",
+      "f",
+      "Yes"
+     ],
+     [
+      "d2",
+      "d3",
+      "No"
+     ],
+     [
+      "d3",
+      "l",
+      "Yes"
+     ],
+     [
+      "d3",
+      "h",
+      "No"
+     ],
+     [
+      "l",
+      "d1"
+     ],
+     [
+      "h",
+      "d1"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Searching means finding whether an item is in a **[[list]]** and, if so, where. Computers search all the time: finding your name in the register, a song in a playlist or a product on a shop's website. Two well-known searching algorithms are **linear search** and **binary search**."
+    },
+    {
+     "t": "note",
+     "text": "In this topic the first item in a list is at **position 1**. (Many programming languages, including C#, count from 0. The idea is the same.)"
+    },
+    {
+     "t": "h",
+     "text": "Linear search"
+    },
+    {
+     "t": "p",
+     "text": "A **[[linear search]]** starts at the first item and checks each one in turn until it finds the target or reaches the end of the list. It is simple and works on **any** list, sorted or not."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: linear search for 19",
+     "context": "List: 12, 5, 31, 8, 19, 44, 27. Find 19.",
+     "steps": [
+      "Position 1: 12. Not 19, move on.",
+      "Position 2: 5. Not 19, move on.",
+      "Position 3: 31. Not 19, move on.",
+      "Position 4: 8. Not 19, move on.",
+      "Position 5: 19. Found!"
+     ],
+     "answer": "19 is at **position 5**, found after **5** checks. Searching for 50 would check all 7 items and then report \"Not found\"."
+    },
+    {
+     "t": "code",
+     "lang": "ps",
+     "title": "Linear search",
+     "code": "found ← FALSE\nposition ← 1\nWHILE found = FALSE AND position <= LENGTH(list)\n    IF list[position] = target THEN\n        found ← TRUE\n    ELSE\n        position ← position + 1\n    ENDIF\nENDWHILE\nIF found = TRUE THEN\n    OUTPUT \"Found at position \", position\nELSE\n    OUTPUT \"Not found\"\nENDIF",
+     "output": "Searching 12, 5, 31, 8, 19, 44, 27 for 19:\nFound at position 5"
+    },
+    {
+     "t": "h",
+     "text": "Binary search"
+    },
+    {
+     "t": "p",
+     "text": "A **[[binary search]]** only works on a **sorted** list. It checks the **middle** item. If that is the target, it stops. If the target is bigger, it throws away the lower half; if smaller, it throws away the upper half. It keeps halving until it finds the target or runs out of items. It is how you find a word in a dictionary: open in the middle, then decide which half to look in."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: binary search for 42",
+     "context": "Sorted list (positions 1 to 11): 3, 7, 12, 18, 24, 31, 36, 42, 50, 57, 63. Find 42.",
+     "steps": [
+      "low = 1, high = 11. mid = (1 + 11) DIV 2 = **6**. Item 6 is **31**. 42 > 31, so throw away positions 1 to 6: low = 7.",
+      "low = 7, high = 11. mid = (7 + 11) DIV 2 = **9**. Item 9 is **50**. 42 < 50, so throw away positions 9 to 11: high = 8.",
+      "low = 7, high = 8. mid = (7 + 8) DIV 2 = **7** (15 ÷ 2 = 7.5, round down). Item 7 is **36**. 42 > 36, so low = 8.",
+      "low = 8, high = 8. mid = (8 + 8) DIV 2 = **8**. Item 8 is **42**. Found!"
+     ],
+     "answer": "42 is at **position 8**, found after **4** checks. A linear search would have needed 8 checks."
+    },
+    {
+     "t": "warn",
+     "text": "Binary search **only works on a sorted list**. On an unsorted list it could throw away the half that contains the target. Sort the list first, or use a linear search."
+    },
+    {
+     "t": "tip",
+     "text": "If there is an even number of items there are two middles. Our rule `(low + high) DIV 2` always picks the **left** one. Stick to one rule throughout a question."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Linear search checks every item in turn from the start.",
+      "Linear search works on sorted or unsorted lists but can be slow on long lists.",
+      "Binary search checks the middle item and throws away half the list each time.",
+      "Binary search only works on a sorted list.",
+      "mid = (low + high) DIV 2, rounding down."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What must be true about a list before you use a binary search?",
+     "o": [
+      "It must be sorted",
+      "It must have fewer than 100 items",
+      "It must contain only numbers",
+      "It must be unsorted"
+     ],
+     "a": 0,
+     "why": "Halving only works if the items are in order."
+    },
+    {
+     "q": "A linear search for 8 in 4, 9, 8, 2 checks how many items?",
+     "o": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "a": 2,
+     "why": "It checks 4, then 9, then finds 8 at the third check."
+    },
+    {
+     "q": "In a binary search, low = 1 and high = 10. Which position is checked first?",
+     "o": [
+      "1",
+      "5",
+      "6",
+      "10"
+     ],
+     "a": 1,
+     "why": "(1 + 10) DIV 2 = 11 DIV 2 = 5."
+    },
+    {
+     "q": "Which search works on an unsorted list?",
+     "o": [
+      "Binary search only",
+      "Both",
+      "Linear search only",
+      "Neither"
+     ],
+     "a": 2,
+     "why": "Binary search needs a sorted list; linear search does not."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe how a **linear search** finds an item in a list.",
+     "m": 3,
+     "a": "Start at the first item (1); compare each item with the target in turn / move to the next item if it does not match (1); stop when the item is found, or report not found when the end of the list is reached (1)."
+    },
+    {
+     "q": "Show the steps of a binary search for **20** in this sorted list: 3, 7, 12, 18, 24, 31, 36, 42, 50, 57, 63.",
+     "m": 4,
+     "a": "mid = (1 + 11) DIV 2 = 6, item 31, 20 < 31 so high = 5 (1). mid = (1 + 5) DIV 2 = 3, item 12, 20 > 12 so low = 4 (1). mid = (4 + 5) DIV 2 = 4, item 18, 20 > 18 so low = 5; mid = 5, item 24, 20 < 24 so high = 4 (1). low (5) > high (4), so 20 is not in the list (1)."
+    },
+    {
+     "q": "Give **one** advantage and **one** disadvantage of binary search compared with linear search.",
+     "m": 2,
+     "a": "Advantage: much faster / fewer checks on a long list, because half is removed each time (1). Disadvantage: the list must be sorted first / more complicated to write (1)."
+    }
+   ],
+   "terms": [
+    "List",
+    "Linear search",
+    "Binary search"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p08",
+   "spec": "Carry out a bubble sort on a list, pass by pass",
+   "summary": "A bubble sort compares each pair of neighbouring items and swaps them if they are in the wrong order. It repeats these passes through the list until a whole pass makes no swaps.",
+   "diagram": {
+    "kind": "timeline",
+    "title": "Bubble sort: 5, 2, 8, 1, 4",
+    "caption": "Click each pass to see the list after it. The largest unsorted item bubbles to the end each time.",
+    "items": [
+     {
+      "label": "Start",
+      "detail": "5, 2, 8, 1, 4: unsorted."
+     },
+     {
+      "label": "Pass 1: 3 swaps",
+      "detail": "2, 5, 1, 4, **8**. The 8 has bubbled to the end."
+     },
+     {
+      "label": "Pass 2: 2 swaps",
+      "detail": "2, 1, 4, **5, 8**. The 5 is now in place."
+     },
+     {
+      "label": "Pass 3: 1 swap",
+      "detail": "1, 2, 4, 5, 8. It looks sorted, but the algorithm does not know yet."
+     },
+     {
+      "label": "Pass 4: 0 swaps",
+      "detail": "1, 2, 4, 5, 8. No swaps in a whole pass, so the list is sorted. Stop."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Sorting means putting items into order. **[[Ascending order]]** goes from smallest to largest (1, 2, 3 or A to Z); descending order goes from largest to smallest. Sorted lists are easier for people to read (a class register in alphabetical order) and they let computers use a fast binary search."
+    },
+    {
+     "t": "h",
+     "text": "How a bubble sort works"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Start at the beginning of the list.",
+      "Compare the first two items. If they are in the wrong order, **[[swap]]** them.",
+      "Move along one place and compare the next pair. Keep going to the end of the list. That is one **[[pass]]**.",
+      "After each pass, the largest unsorted item has \"bubbled\" up to its correct place at the end.",
+      "Repeat passes until a whole pass makes **no swaps**. The list is then sorted."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "p",
+     "text": "It is called a **[[bubble sort]]** because the big values rise to the end of the list like bubbles rising to the top of a fizzy drink."
+    },
+    {
+     "t": "h",
+     "text": "Worked example, pass by pass"
+    },
+    {
+     "t": "p",
+     "text": "Sort **5, 2, 8, 1, 4** into ascending order. Each pass makes 4 comparisons (a list of 5 items has 4 neighbouring pairs)."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Pass",
+      "Compare",
+      "Swap?",
+      "List after"
+     ],
+     "rows": [
+      [
+       "1",
+       "5 and 2",
+       "Yes",
+       "2, 5, 8, 1, 4"
+      ],
+      [
+       "1",
+       "5 and 8",
+       "No",
+       "2, 5, 8, 1, 4"
+      ],
+      [
+       "1",
+       "8 and 1",
+       "Yes",
+       "2, 5, 1, 8, 4"
+      ],
+      [
+       "1",
+       "8 and 4",
+       "Yes",
+       "2, 5, 1, 4, **8**"
+      ],
+      [
+       "2",
+       "2 and 5",
+       "No",
+       "2, 5, 1, 4, 8"
+      ],
+      [
+       "2",
+       "5 and 1",
+       "Yes",
+       "2, 1, 5, 4, 8"
+      ],
+      [
+       "2",
+       "5 and 4",
+       "Yes",
+       "2, 1, 4, **5, 8**"
+      ],
+      [
+       "2",
+       "5 and 8",
+       "No",
+       "2, 1, 4, 5, 8"
+      ],
+      [
+       "3",
+       "2 and 1",
+       "Yes",
+       "1, 2, 4, 5, 8"
+      ],
+      [
+       "3",
+       "2 and 4",
+       "No",
+       "1, 2, 4, 5, 8"
+      ],
+      [
+       "3",
+       "4 and 5",
+       "No",
+       "1, 2, 4, 5, 8"
+      ],
+      [
+       "3",
+       "5 and 8",
+       "No",
+       "1, 2, 4, 5, 8"
+      ],
+      [
+       "4",
+       "All four pairs",
+       "No swaps",
+       "1, 2, 4, 5, 8: sorted, stop"
+      ]
+     ],
+     "caption": "Bubble sort of 5, 2, 8, 1, 4: 4 passes, 6 swaps in total"
+    },
+    {
+     "t": "warn",
+     "text": "After pass 3 the list *looks* sorted, but the algorithm only knows it is finished when a **whole pass makes no swaps**. That is why pass 4 is needed."
+    },
+    {
+     "t": "h",
+     "text": "Swapping two values"
+    },
+    {
+     "t": "p",
+     "text": "To swap two items you need a **temporary** variable. Imagine swapping the drinks in two full cups: you need an empty third cup to pour one into first."
+    },
+    {
+     "t": "code",
+     "lang": "ps",
+     "title": "Bubble sort",
+     "code": "swapped ← TRUE\nWHILE swapped = TRUE\n    swapped ← FALSE\n    FOR i ← 1 TO LENGTH(list) - 1\n        IF list[i] > list[i + 1] THEN\n            temp ← list[i]           // empty cup\n            list[i] ← list[i + 1]\n            list[i + 1] ← temp\n            swapped ← TRUE\n        ENDIF\n    NEXT i\nENDWHILE",
+     "output": "5, 2, 8, 1, 4 becomes 1, 2, 4, 5, 8"
+    },
+    {
+     "t": "tip",
+     "text": "In an exam, write the whole list out again after **every pass** (or every swap if asked). Tick off each pair as you compare it so you do not skip one."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A bubble sort compares neighbouring pairs and swaps them if they are in the wrong order.",
+      "One trip through the whole list is a pass.",
+      "After each pass the largest unsorted item is in its correct place at the end.",
+      "The sort stops when a whole pass makes no swaps.",
+      "Swapping needs a temporary variable."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In a bubble sort, what happens to the largest item in pass 1?",
+     "o": [
+      "It stays where it is",
+      "It moves to the end of the list",
+      "It moves to the start",
+      "It is deleted"
+     ],
+     "a": 1,
+     "why": "It is swapped along every time until it reaches the end."
+    },
+    {
+     "q": "When does a bubble sort stop?",
+     "o": [
+      "After one pass",
+      "After exactly 10 passes",
+      "When the first item is the smallest",
+      "When a whole pass makes no swaps"
+     ],
+     "a": 3,
+     "why": "No swaps in a pass means everything is in order."
+    },
+    {
+     "q": "What is 3, 1, 2 after one pass of a bubble sort (ascending)?",
+     "o": [
+      "1, 2, 3",
+      "1, 3, 2",
+      "3, 2, 1",
+      "2, 1, 3"
+     ],
+     "a": 0,
+     "why": "3 and 1 swap (1, 3, 2), then 3 and 2 swap (1, 2, 3)."
+    },
+    {
+     "q": "Why is a temporary variable needed to swap two values?",
+     "o": [
+      "So one value is not lost when it is overwritten",
+      "To make the algorithm slower",
+      "To count the passes",
+      "To sort in descending order"
+     ],
+     "a": 0,
+     "why": "Like the empty cup when swapping two drinks."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Show the list after **each pass** of a bubble sort to put **6, 3, 9, 2** into ascending order.",
+     "m": 4,
+     "a": "Pass 1: 3, 6, 2, 9 (1). Pass 2: 3, 2, 6, 9 (1). Pass 3: 2, 3, 6, 9 (1). Pass 4: 2, 3, 6, 9 with no swaps, so the sort stops (1)."
+    },
+    {
+     "q": "Explain how a bubble sort knows that a list is sorted.",
+     "m": 2,
+     "a": "It makes a full pass through the list (1) without making any swaps (1)."
+    },
+    {
+     "q": "Describe how a bubble sort works.",
+     "m": 3,
+     "a": "Compare the first two / each pair of neighbouring items (1); swap them if they are in the wrong order (1); repeat passes through the list until a pass makes no swaps (1)."
+    }
+   ],
+   "terms": [
+    "Ascending order",
+    "Swap",
+    "Pass",
+    "Bubble sort"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p09",
+   "spec": "Compare algorithms that solve the same problem in terms of efficiency",
+   "summary": "Different algorithms can solve the same problem, but some take far fewer steps. Efficiency is about how much time (number of steps) and memory an algorithm needs, especially as the amount of data grows.",
+   "diagram": {
+    "kind": "calc",
+    "title": "How many checks does binary search need?",
+    "caption": "Change the number of items in a sorted list. A linear search could need to check every one of them.",
+    "inputs": [
+     {
+      "id": "n",
+      "label": "Items in the sorted list",
+      "value": 1000
+     }
+    ],
+    "formula": "Math.floor(Math.log2(n)) + 1",
+    "result": {
+     "label": "Most checks binary search needs",
+     "unit": "checks"
+    }
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "There is often more than one algorithm that solves a problem. They might all give the right answer, but one might take a second and another might take an hour. Computer scientists compare algorithms by their **[[efficiency]]**: how much **time** (number of steps) and **memory** they need."
+    },
+    {
+     "t": "h",
+     "text": "Counting steps"
+    },
+    {
+     "t": "p",
+     "text": "We do not time algorithms with a stopwatch, because a faster computer would give a different answer. Instead we count the **steps**, such as the number of comparisons. We usually look at the **[[worst case]]**: the most steps the algorithm could ever need."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Items in sorted list",
+      "Linear search (worst case)",
+      "Binary search (worst case)"
+     ],
+     "rows": [
+      [
+       "10",
+       "10 checks",
+       "4 checks"
+      ],
+      [
+       "100",
+       "100 checks",
+       "7 checks"
+      ],
+      [
+       "1,000",
+       "1,000 checks",
+       "10 checks"
+      ],
+      [
+       "1,000,000",
+       "1,000,000 checks",
+       "20 checks"
+      ]
+     ],
+     "caption": "Doubling the list adds only one extra check to a binary search"
+    },
+    {
+     "t": "p",
+     "text": "Every check in a binary search halves what is left, so doubling the size of the list adds just **one** more check. A linear search on a list twice as long could take **twice** as many checks."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Linear search",
+      "Binary search"
+     ],
+     "rows": [
+      [
+       "List must be sorted?",
+       "No",
+       "Yes"
+      ],
+      [
+       "Speed on a long list",
+       "Slow: may check every item",
+       "Fast: halves the list each time"
+      ],
+      [
+       "Best case",
+       "1 check (target is first)",
+       "1 check (target is in the middle)"
+      ],
+      [
+       "Easy to write?",
+       "Very",
+       "Harder"
+      ],
+      [
+       "Best for",
+       "Short or unsorted lists",
+       "Long sorted lists"
+      ]
+     ]
+    },
+    {
+     "t": "note",
+     "text": "Binary search is not always the winner. If the list is not sorted you would have to sort it first, which takes time. For a short list, or one you only search once, a linear search is perfectly sensible."
+    },
+    {
+     "t": "h",
+     "text": "Two algorithms, one problem"
+    },
+    {
+     "t": "p",
+     "text": "Problem: add up all the whole numbers from 1 to 100. Both algorithms below are correct."
+    },
+    {
+     "t": "code",
+     "lang": "ps",
+     "title": "Algorithm A: loop",
+     "code": "total ← 0\nFOR i ← 1 TO 100\n    total ← total + i\nNEXT i\nOUTPUT total",
+     "output": "5050 (after 100 additions)"
+    },
+    {
+     "t": "code",
+     "lang": "ps",
+     "title": "Algorithm B: formula",
+     "code": "n ← 100\ntotal ← n * (n + 1) / 2\nOUTPUT total",
+     "output": "5050 (one calculation)"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: which is more efficient?",
+     "context": "Compare algorithms A and B for adding 1 to n.",
+     "steps": [
+      "Algorithm A does **one addition for every number**: 100 additions for n = 100, a million for n = 1,000,000.",
+      "Algorithm B does **the same small calculation** whatever n is: 100 × 101 ÷ 2 = 5050.",
+      "Both give the correct answer, so compare the steps.",
+      "As n gets bigger, A gets slower and slower but B stays the same."
+     ],
+     "answer": "Algorithm B is more efficient. Algorithm A is easier to understand, but its number of steps grows with n."
+    },
+    {
+     "t": "p",
+     "text": "Sorting algorithms differ too. **Bubble sort** is easy to understand but slow on big lists, because it keeps passing through the whole list. Faster methods, such as **merge sort**, are used for big jobs like sorting every pupil in Northern Ireland by exam result."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Efficiency is how much time (steps) and memory an algorithm uses.",
+      "Compare algorithms by counting steps, often in the worst case.",
+      "Binary search needs far fewer checks than linear search on a long sorted list.",
+      "The most efficient algorithm is not always best: binary search needs a sorted list.",
+      "Bubble sort is simple but slow on large lists."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does the efficiency of an algorithm describe?",
+     "o": [
+      "How nice the code looks",
+      "Which language it is written in",
+      "How much time and memory it uses",
+      "How many comments it has"
+     ],
+     "a": 2,
+     "why": "Efficient algorithms use fewer steps and less memory."
+    },
+    {
+     "q": "A sorted list has 1,000 items. What is the most checks a binary search needs?",
+     "o": [
+      "10",
+      "100",
+      "500",
+      "1,000"
+     ],
+     "a": 0,
+     "why": "Halving 1,000 repeatedly takes at most 10 checks."
+    },
+    {
+     "q": "When might a linear search be the better choice?",
+     "o": [
+      "The list is huge and sorted",
+      "The list is short or unsorted",
+      "Never",
+      "When the target is in the middle"
+     ],
+     "a": 1,
+     "why": "No sorting needed, and on a short list the difference is tiny."
+    },
+    {
+     "q": "What is the worst case for a linear search on a list of 50 items?",
+     "o": [
+      "1 check",
+      "25 checks",
+      "6 checks",
+      "50 checks"
+     ],
+     "a": 3,
+     "why": "The target is last, or missing, so every item is checked."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by the **efficiency** of an algorithm.",
+     "m": 2,
+     "a": "How much time / how many steps it takes (1) and how much memory it uses (1) to solve a problem."
+    },
+    {
+     "q": "A library has 100,000 books sorted by title. Explain why a binary search would be more efficient than a linear search for finding a book.",
+     "m": 3,
+     "a": "Linear search might have to check every one of the 100,000 titles (1). Binary search halves the number of books left with each check (1), so it needs at most about 17 checks (1)."
+    },
+    {
+     "q": "Algorithm A uses a loop to add the numbers 1 to n. Algorithm B uses the formula n × (n + 1) ÷ 2. Which is more efficient for large values of n? Explain your answer.",
+     "m": 2,
+     "a": "Algorithm B (1). It does the same small number of steps whatever n is, while A needs one addition for every number, so it gets slower as n grows (1)."
+    }
+   ],
+   "terms": [
+    "Efficiency",
+    "Worst case"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p10",
+   "spec": "Find and fix errors in an algorithm using tracing and test data",
+   "summary": "A bug is an error that stops an algorithm working correctly. Debugging means testing, tracing to find the bug, fixing it and testing again; logic errors are the hardest to spot because the algorithm still runs.",
+   "diagram": {
+    "kind": "cycle",
+    "title": "The debugging cycle",
+    "caption": "Click each stage. Keep going round until the tests all pass.",
+    "items": [
+     {
+      "label": "Test",
+      "detail": "Run the algorithm with test data where you already know the correct answer."
+     },
+     {
+      "label": "Spot",
+      "detail": "Compare the actual output with the expected output. Different? There is a bug."
+     },
+     {
+      "label": "Find",
+      "detail": "Use a trace table to dry run the algorithm line by line and see where the values first go wrong."
+     },
+     {
+      "label": "Fix",
+      "detail": "Change the faulty line. Change one thing at a time."
+     },
+     {
+      "label": "Retest",
+      "detail": "Run all the tests again, to check the fix worked and has not broken anything else."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Almost no algorithm works perfectly first time. An error in an algorithm or program is called a **[[bug]]**, and finding and fixing bugs is called **[[debugging]]**. Good programmers expect bugs and test carefully to find them."
+    },
+    {
+     "t": "h",
+     "text": "Two kinds of error"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Syntax error",
+      "Logic error"
+     ],
+     "rows": [
+      [
+       "What it is",
+       "Breaks the rules (grammar) of the language, e.g. a spelling mistake in a keyword or a missing bracket",
+       "Follows the rules but gives the wrong result"
+      ],
+      [
+       "Does it run?",
+       "No: the program will not run until it is fixed",
+       "Yes, but the output is wrong"
+      ],
+      [
+       "Example",
+       "`OUPTUT score` or `IF mark >= 50` with no `THEN`",
+       "`total ← mark` instead of `total ← total + mark`"
+      ],
+      [
+       "How to find it",
+       "The editor or translator points to the line",
+       "Testing and tracing with a trace table"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A **[[syntax error]]** is usually easy to find. A **[[logic error]]** is harder, because nothing tells you it is there. You only notice when the answer is wrong, which is why we test."
+    },
+    {
+     "t": "h",
+     "text": "Common bugs"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Bug",
+      "Example",
+      "Fix"
+     ],
+     "rows": [
+      [
+       "Wrong comparison",
+       "`IF mark > 50` (a mark of 50 fails)",
+       "`IF mark >= 50`"
+      ],
+      [
+       "[[Off-by-one error]]",
+       "`WHILE count < 10` outputs 1 to 9, not 1 to 10",
+       "`WHILE count <= 10`"
+      ],
+      [
+       "[[Infinite loop]]",
+       "A WHILE loop where count never changes",
+       "Add `count ← count + 1` inside the loop"
+      ],
+      [
+       "Steps in the wrong order",
+       "OUTPUT total before the loop that adds it up",
+       "Move the OUTPUT after ENDWHILE or NEXT"
+      ],
+      [
+       "Variable not updated correctly",
+       "`total ← mark` loses the earlier marks",
+       "`total ← total + mark`"
+      ]
+     ],
+     "caption": "Bugs to look out for"
+    },
+    {
+     "t": "h",
+     "text": "Worked example: fixing a broken average"
+    },
+    {
+     "t": "p",
+     "text": "This algorithm should read in five test marks and output the average. Testing with the marks 6, 8, 10, 7 and 9 (total 40, so the average should be **8**) gives **1.8**. Something is wrong."
+    },
+    {
+     "t": "code",
+     "lang": "ps",
+     "title": "Broken algorithm",
+     "code": "total ← 0\nFOR i ← 1 TO 5\n    INPUT mark\n    total ← mark\nNEXT i\naverage ← total / 5\nOUTPUT average",
+     "output": "Marks 6, 8, 10, 7, 9 give 1.8 (expected 8)"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: trace, find, fix",
+     "context": "Trace the broken algorithm with marks 6, 8, 10, 7, 9.",
+     "steps": [
+      "i = 1: mark = 6, total = **6**.",
+      "i = 2: mark = 8, total = **8**. The 6 has gone! The total should be 14.",
+      "This is where it first goes wrong: `total ← mark` **replaces** the total instead of adding to it.",
+      "Carry on: after i = 5, total = 9, so average = 9 / 5 = 1.8. That matches the wrong output.",
+      "Fix: change the line to `total ← total + mark`. Retest: total = 6 + 8 + 10 + 7 + 9 = 40, average = 40 / 5 = **8**. Correct."
+     ],
+     "answer": "The bug was a logic error on line 4. The fixed line is `total ← total + mark`."
+    },
+    {
+     "t": "h",
+     "text": "Choosing test data"
+    },
+    {
+     "t": "p",
+     "text": "Good **[[test data]]** checks more than just the obvious. For \"pass if the mark is 50 or more\" (marks out of 100):"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Type",
+      "Example",
+      "Why"
+     ],
+     "rows": [
+      [
+       "Normal",
+       "72, 31",
+       "Typical values the algorithm should handle easily."
+      ],
+      [
+       "Boundary",
+       "49, 50",
+       "Values right at the edge, where `>` and `>=` bugs show up."
+      ],
+      [
+       "Erroneous (invalid)",
+       "\"abc\", -5, 150",
+       "Values that should be rejected."
+      ]
+     ],
+     "caption": "Normal, boundary and erroneous test data"
+    },
+    {
+     "t": "tip",
+     "text": "Work out the **expected** output before you test. If you do not know what the right answer is, you cannot tell whether the algorithm got it wrong."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A bug is an error; debugging is finding and fixing it.",
+      "Syntax errors break the language rules and stop it running.",
+      "Logic errors run but give the wrong result, so testing and tracing are needed.",
+      "Common bugs: wrong comparison, off-by-one, infinite loops, wrong order, variables not updated.",
+      "Test with normal, boundary and erroneous data, then retest after every fix."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "An algorithm runs but gives the wrong answer. What type of error is this?",
+     "o": [
+      "Logic error",
+      "Syntax error",
+      "Spelling error",
+      "Hardware error"
+     ],
+     "a": 0,
+     "why": "It follows the rules but the logic is wrong."
+    },
+    {
+     "q": "`count ← 1`, then `WHILE count <= 3` with `OUTPUT count` inside and nothing else. What happens?",
+     "o": [
+      "Outputs 1 2 3",
+      "Outputs nothing",
+      "Outputs 1 forever",
+      "Outputs 3"
+     ],
+     "a": 2,
+     "why": "count never changes, so it is an infinite loop."
+    },
+    {
+     "q": "The rule is \"pass if 50 or more\". Which pair is boundary test data?",
+     "o": [
+      "72 and 31",
+      "49 and 50",
+      "\"abc\" and -5",
+      "0 and 100 only"
+     ],
+     "a": 1,
+     "why": "They sit either side of the edge of the rule."
+    },
+    {
+     "q": "`WHILE count < 10` should output 1 to 10 but stops at 9. What kind of bug is this?",
+     "o": [
+      "Infinite loop",
+      "Swap error",
+      "Syntax error",
+      "Off-by-one error"
+     ],
+     "a": 3,
+     "why": "It runs one time too few; `<=` fixes it."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between a **syntax error** and a **logic error**.",
+     "m": 2,
+     "a": "Syntax error: breaks the rules/grammar of the language, so the program will not run (1). Logic error: the program runs but produces the wrong result / does not do what was intended (1)."
+    },
+    {
+     "q": "This algorithm should output the numbers 1 to 5, but it never stops. Identify the bug and write the corrected algorithm.\n\n`count ← 1`\n`WHILE count <= 5`\n`    OUTPUT count`\n`ENDWHILE`",
+     "m": 3,
+     "a": "count is never increased, so count <= 5 is always true / infinite loop (1). Add `count ← count + 1` (1) inside the loop, after `OUTPUT count` and before `ENDWHILE` (1)."
+    },
+    {
+     "q": "An algorithm gives a cinema discount to anyone **aged 12 or under**. Give **one** normal, **one** boundary and **one** erroneous test value, and the expected result for each.",
+     "m": 3,
+     "a": "Normal, e.g. 8: discount / 30: no discount (1). Boundary, e.g. 12: discount or 13: no discount (1). Erroneous, e.g. -4 or \"ten\": rejected / error message (1)."
+    }
+   ],
+   "terms": [
+    "Bug",
+    "Debugging",
+    "Syntax error",
+    "Logic error",
+    "Off-by-one error",
+    "Infinite loop",
+    "Test data"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Computational thinking",
+   "def": "A way of solving problems clearly and logically so that a computer or a person could carry out the solution. It has four parts: decomposition, pattern recognition, abstraction and algorithms.",
+   "alt": "CT",
+   "page": "p01"
+  },
+  {
+   "term": "Decomposition",
+   "def": "Breaking a large, complex problem down into smaller, more manageable sub-problems.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Sub-problem",
+   "def": "A smaller part of a bigger problem, produced by decomposition, that can be solved on its own.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Pattern recognition",
+   "def": "Spotting similarities within or between problems so that an existing solution can be reused.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Abstraction",
+   "def": "Removing or hiding detail that is not needed, to focus on what matters for solving the problem.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Model",
+   "def": "A simplified version of something real, made by abstraction, e.g. the London Underground map.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Algorithm",
+   "def": "A precise, ordered, finite set of step-by-step instructions for solving a problem or completing a task.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Flowchart",
+   "def": "A diagram that shows an algorithm using standard symbols joined by arrows.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Terminator",
+   "def": "The flowchart symbol (a rounded rectangle) used for Start and Stop.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Process symbol",
+   "def": "The flowchart symbol (a rectangle) used for an action or a calculation.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Decision symbol",
+   "def": "The flowchart symbol (a diamond) used for a Yes/No question. It has two labelled exits.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Input/output symbol",
+   "def": "The flowchart symbol (a parallelogram) used when data goes in from the user or out to the screen.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Flow line",
+   "def": "An arrow in a flowchart that joins the symbols and shows the order to follow them in.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Pseudocode",
+   "def": "Structured, code-like English used to plan an algorithm. It is not a real programming language.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Sequence",
+   "def": "Instructions carried out one after another, in order.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Selection",
+   "def": "Choosing which path to follow depending on a condition, e.g. IF ... THEN ... ELSE ... ENDIF.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Condition",
+   "def": "A question or comparison that is either true or false, e.g. mark >= 50.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Iteration",
+   "def": "Repeating a set of instructions; looping.",
+   "alt": "Loop",
+   "page": "p05"
+  },
+  {
+   "term": "Count-controlled loop",
+   "def": "A loop that repeats a set number of times, e.g. FOR i ← 1 TO 10 ... NEXT i.",
+   "alt": "FOR loop",
+   "page": "p05"
+  },
+  {
+   "term": "Condition-controlled loop",
+   "def": "A loop that repeats while a condition is true, e.g. WHILE ... ENDWHILE.",
+   "alt": "WHILE loop",
+   "page": "p05"
+  },
+  {
+   "term": "Variable",
+   "def": "A named store that holds a value which can change while an algorithm runs.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Assignment",
+   "def": "Putting a value into a variable, replacing any value it held before, e.g. score ← 10.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Trace table",
+   "def": "A table used to record the value of each variable, condition and output, line by line, as an algorithm is worked through by hand.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Dry run",
+   "def": "Working through an algorithm by hand, step by step, usually with a trace table.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "List",
+   "def": "A collection of items stored in order under one name, each at its own position.",
+   "alt": "Array",
+   "page": "p07"
+  },
+  {
+   "term": "Linear search",
+   "def": "A search that checks each item in a list in turn, from the start, until the target is found or the list ends.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Binary search",
+   "def": "A search on a sorted list that checks the middle item and throws away half of the remaining list each time.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Ascending order",
+   "def": "Smallest to largest, or A to Z. The opposite is descending order.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Swap",
+   "def": "Exchanging the positions of two items, using a temporary variable so neither value is lost.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Pass",
+   "def": "One trip through the whole list in a bubble sort, comparing each neighbouring pair.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Bubble sort",
+   "def": "A sorting algorithm that compares neighbouring pairs, swaps them if they are in the wrong order, and repeats passes until a pass makes no swaps.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Efficiency",
+   "def": "How much time (number of steps) and memory an algorithm needs to solve a problem.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Worst case",
+   "def": "The greatest number of steps an algorithm could ever need, e.g. a linear search when the target is last or missing.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Bug",
+   "def": "An error in an algorithm or program that stops it working correctly.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Debugging",
+   "def": "Finding and fixing bugs: test, trace, fix, then retest.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Syntax error",
+   "def": "An error that breaks the rules (grammar) of a language, so the program will not run.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Logic error",
+   "def": "An error that lets the algorithm run but makes it give the wrong result.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Off-by-one error",
+   "def": "A logic error where a loop runs one time too many or too few, often from using < instead of <=.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Infinite loop",
+   "def": "A loop that never ends because its condition never becomes false.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Test data",
+   "def": "Values chosen to test an algorithm: normal, boundary (at the edge) and erroneous (invalid).",
+   "alt": "",
+   "page": "p10"
+  }
+ ]
+}

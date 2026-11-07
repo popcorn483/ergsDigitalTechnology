@@ -1,0 +1,2441 @@
+{
+ "title": "Artificial Intelligence",
+ "summary": "What AI really is, how machines learn from data, how chatbots write, and how to use AI tools honestly, safely and well.",
+ "learn": [
+  "What AI is (and isn't), and key moments in its history",
+  "The difference between narrow AI and general AI",
+  "Where you meet AI every day",
+  "How machine learning uses training data, labels and testing",
+  "How chatbots predict the next word, and why they can be wrong or biased",
+  "Using AI responsibly: honesty, privacy, deepfakes and good prompts"
+ ],
+ "temporary": false,
+ "intro": "From Alan Turing to today's chatbots: what artificial intelligence is, how machine learning and large language models work, their limits and biases, and how to use AI tools honestly and well.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Describe what artificial intelligence is, and what it is not",
+   "summary": "Artificial intelligence (AI) is computer systems doing tasks that normally need human intelligence, such as recognising faces, understanding speech or making predictions. Today's AI is clever at specific tasks, but it does not think, feel or understand like a person.",
+   "diagram": {
+    "kind": "compare",
+    "title": "Film AI vs real AI",
+    "caption": "What the films show compared with what AI really does today.",
+    "states": [
+     {
+      "label": "AI in films",
+      "points": [
+       "Thinks and feels like a person",
+       "Has its own goals and plans",
+       "Can do absolutely anything",
+       "Usually a walking, talking robot"
+      ],
+      "art": null
+     },
+     {
+      "label": "AI in real life",
+      "points": [
+       "Spots patterns in data and makes predictions",
+       "Has no feelings or wishes of its own",
+       "Very good at one kind of task",
+       "Usually software on a phone, laptop or server"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Your phone unlocks when it sees your face. Your music app seems to know which song you want next. Your email quietly moves junk into a spam folder. None of these were programmed line by line for *your* face, *your* taste or *that* email. They use **[[Artificial intelligence|artificial intelligence]]**, usually shortened to **AI**."
+    },
+    {
+     "t": "h",
+     "text": "So what is AI?"
+    },
+    {
+     "t": "p",
+     "text": "**Artificial intelligence** is the name for computer systems that can do tasks that would normally need human intelligence. These tasks include:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Recognising** things: faces, voices, handwriting, objects in a photo.",
+      "**Understanding and producing language**: answering questions, translating, summarising.",
+      "**Making predictions**: what you might buy, how long a journey will take, whether it will rain.",
+      "**Making decisions**: which move to play in a chess game, which route to drive."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "p",
+     "text": "Like any program, AI follows an **[[Algorithm|algorithm]]** (a set of step-by-step instructions). The big difference is *where the rules come from*. In a normal program a person writes every rule. In most modern AI, the computer works out its own rules by spotting **patterns** in huge amounts of **[[Data|data]]**."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Traditional program",
+      "AI system (machine learning)"
+     ],
+     "rows": [
+      [
+       "Who makes the rules?",
+       "A programmer writes every rule",
+       "The computer learns rules from examples"
+      ],
+      [
+       "Example",
+       "A calculator: 2 + 2 always gives 4",
+       "Face unlock: learns what your face looks like"
+      ],
+      [
+       "New situations",
+       "Only does exactly what it was told",
+       "Can make a good guess about things it has not seen before"
+      ],
+      [
+       "Can it be wrong?",
+       "Only if the programmer made a mistake",
+       "Yes: its guesses are based on probability, so it can be wrong"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "What AI is NOT"
+    },
+    {
+     "t": "p",
+     "text": "Films are full of robots that think, feel and want to take over the world. Real AI is very different. It is worth being clear about what AI is *not*:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Not alive or conscious.** AI does not have feelings, wishes or opinions, even if it writes as though it does.",
+      "**Not magic.** It is maths and statistics running on very powerful computers.",
+      "**Not always a robot.** Most AI is software running on phones, laptops and servers. Many robots in factories have no AI at all.",
+      "**Not always right.** AI makes mistakes, sometimes very confidently."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "warn",
+     "text": "A chatbot that says *\"I feel happy to help!\"* is producing words that fit the conversation. It does **not** actually feel happy. Do not mistake fluent language for real understanding."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: AI or not AI?",
+     "context": "Which of these use AI? (a) A school bell that rings at 8:50 every morning. (b) A phone camera that blurs the background behind your face. (c) A calculator app.",
+     "steps": [
+      "(a) A timer follows one fixed rule written by a person: **not AI**.",
+      "(b) The camera has to recognise which pixels are *you* and which are background, in any photo, in any light: **AI**.",
+      "(c) A calculator follows exact maths rules programmed by a person: **not AI**."
+     ],
+     "answer": "Only (b) uses AI, because it has to recognise something in new, unpredictable situations."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "AI = computer systems doing tasks that normally need human intelligence.",
+      "Most modern AI learns patterns from data instead of following rules written by a person.",
+      "AI recognises, predicts, decides and produces language.",
+      "AI is not alive, not conscious and not always right.",
+      "Most AI is software, not a robot."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is the best description of artificial intelligence?",
+     "o": [
+      "Any computer with a screen",
+      "Computer systems that do tasks normally needing human intelligence",
+      "A robot that has feelings",
+      "A very fast calculator"
+     ],
+     "a": 1,
+     "why": "AI is about doing tasks like recognising, predicting and understanding language."
+    },
+    {
+     "q": "Which of these is most likely to use AI?",
+     "o": [
+      "A light switch",
+      "A microwave timer",
+      "Face unlock on a phone",
+      "A digital clock"
+     ],
+     "a": 2,
+     "why": "Face unlock has to recognise your face in new situations."
+    },
+    {
+     "q": "Where do the rules in most modern AI come from?",
+     "o": [
+      "They are typed in by the user every time",
+      "The computer learns them from patterns in data",
+      "They are copied from films",
+      "There are no rules at all"
+     ],
+     "a": 1,
+     "why": "Modern AI learns its rules from examples."
+    },
+    {
+     "q": "A chatbot writes \"I'm so excited!\" What does this tell you?",
+     "o": [
+      "The chatbot has real feelings",
+      "The chatbot is alive",
+      "The words fit the conversation, but it does not feel anything",
+      "The chatbot is broken"
+     ],
+     "a": 2,
+     "why": "AI produces words that fit; it has no feelings."
+    }
+   ],
+   "practice": [
+    {
+     "q": "What is meant by **artificial intelligence**?",
+     "m": 2,
+     "a": "Computer systems/programs (1) that can perform tasks that normally require human intelligence, e.g. recognising faces, understanding speech, making predictions (1)."
+    },
+    {
+     "q": "Explain **one** difference between a traditional program and an AI system that uses machine learning.",
+     "m": 2,
+     "a": "In a traditional program a programmer writes every rule (1); in machine learning the computer learns its own rules/patterns from data/examples (1). OR: a traditional program only does exactly what it is told (1) whereas AI can make a guess about new situations it has not seen before (1)."
+    },
+    {
+     "q": "State **two** things that AI is *not*, according to this page.",
+     "m": 2,
+     "a": "Any two: not alive/conscious/has no feelings (1); not magic, it is maths/statistics (1); not always a robot (1); not always right (1)."
+    }
+   ],
+   "terms": [
+    "Artificial intelligence",
+    "Algorithm",
+    "Data"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "spec": "Outline key moments in the history of AI, from Alan Turing to today's chatbots",
+   "summary": "AI ideas go back to Alan Turing, who proposed the Turing test in 1950. Milestones include the 1956 Dartmouth workshop, Deep Blue beating Kasparov at chess in 1997, AlphaGo beating Lee Sedol at Go in 2016, and chatbots becoming widely used from late 2022.",
+   "diagram": {
+    "kind": "timeline",
+    "title": "A short history of AI",
+    "caption": "Click each event to read more.",
+    "items": [
+     {
+      "label": "1950: the Turing test",
+      "detail": "Alan Turing asks \"Can machines think?\" and proposes the imitation game."
+     },
+     {
+      "label": "1956: AI gets its name",
+      "detail": "Scientists meet at Dartmouth College, USA; the term artificial intelligence is used."
+     },
+     {
+      "label": "1966: ELIZA",
+      "detail": "An early chatbot that followed simple rules but seemed to understand people."
+     },
+     {
+      "label": "1997: Deep Blue",
+      "detail": "IBM's chess computer beats world champion Garry Kasparov."
+     },
+     {
+      "label": "2016: AlphaGo",
+      "detail": "DeepMind's AI beats Lee Sedol at Go by 4 games to 1."
+     },
+     {
+      "label": "Late 2022: chatbots for everyone",
+      "detail": "AI chatbots that write fluent text become free and widely used."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "AI can feel brand new, but people have been working on it for over 70 years. The story starts with a British mathematician who also helped to win the Second World War."
+    },
+    {
+     "t": "h",
+     "text": "Alan Turing and the Turing test"
+    },
+    {
+     "t": "p",
+     "text": "**Alan Turing** (1912 to 1954) was a mathematician who worked at **Bletchley Park** during the Second World War, helping to break secret German codes. He is often called the father of computer science."
+    },
+    {
+     "t": "p",
+     "text": "In **1950** he wrote a famous paper that asked: *\"Can machines think?\"* Because \"thinking\" is so hard to define, he suggested a game instead, which he called the *imitation game*. Today it is known as the **[[Turing test]]**."
+    },
+    {
+     "t": "example",
+     "title": "How the Turing test works",
+     "context": "A human judge has typed conversations with two hidden partners: one is a person and one is a computer. The judge cannot see or hear them.",
+     "steps": [
+      "The judge types questions to both partners.",
+      "Both partners type back their answers.",
+      "The judge has to decide which partner is the computer.",
+      "If the judge cannot reliably tell them apart, the computer is said to have **passed** the test."
+     ],
+     "answer": "The test checks whether a machine's conversation can pass as human. It does not prove the machine really understands or thinks."
+    },
+    {
+     "t": "note",
+     "text": "Many experts now say the Turing test is not a good measure of intelligence. Modern chatbots can often fool people in short conversations, yet they still make basic mistakes and do not understand the world the way you do."
+    },
+    {
+     "t": "h",
+     "text": "Key milestones"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Year",
+      "Milestone",
+      "Why it mattered"
+     ],
+     "rows": [
+      [
+       "1950",
+       "Turing's paper and the Turing test",
+       "Asked the big question: can machines think?"
+      ],
+      [
+       "1956",
+       "Dartmouth workshop, USA",
+       "The term **artificial intelligence** was used for this meeting of scientists (coined by John McCarthy). AI became a field of study."
+      ],
+      [
+       "1966",
+       "ELIZA",
+       "One of the first **[[chatbots|Chatbot]]**. It followed simple rules to reply like a counsellor, but some users believed it understood them."
+      ],
+      [
+       "1997",
+       "Deep Blue beats Garry Kasparov",
+       "IBM's chess computer beat the world chess champion in a six-game match."
+      ],
+      [
+       "2011",
+       "Voice assistants on phones",
+       "Talking to your phone became normal for millions of people."
+      ],
+      [
+       "2016",
+       "AlphaGo beats Lee Sedol",
+       "DeepMind's AI beat one of the world's best players at **Go**, a game far more complex than chess, by 4 games to 1."
+      ],
+      [
+       "2020",
+       "AlphaFold",
+       "DeepMind's AI predicted the 3D shapes of proteins, helping medical research. Its creators shared the 2024 Nobel Prize in Chemistry."
+      ],
+      [
+       "Late 2022 onwards",
+       "AI chatbots go mainstream",
+       "Free chatbots that write fluent text were used by millions of people within weeks."
+      ]
+     ],
+     "caption": "AI milestones"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Deep Blue (1997)",
+      "AlphaGo (2016)"
+     ],
+     "rows": [
+      [
+       "Game",
+       "Chess",
+       "Go (an ancient board game from China)"
+      ],
+      [
+       "How it worked",
+       "Searched through around 200 million chess positions per second, using rules written by experts",
+       "Learned by studying human games, then playing millions of games against itself"
+      ],
+      [
+       "Type of AI",
+       "Mostly brute force and hand-written rules",
+       "Machine learning"
+      ],
+      [
+       "Lesson",
+       "Computers can beat humans at one specific game",
+       "Computers can *learn* strategies that even experts had not thought of"
+      ]
+     ]
+    },
+    {
+     "t": "tip",
+     "text": "DeepMind, the company behind AlphaGo and AlphaFold, is based in **London**. The UK has a long history in AI, from Turing onwards."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Alan Turing proposed the Turing test in 1950.",
+      "The term \"artificial intelligence\" dates from the 1956 Dartmouth workshop.",
+      "Deep Blue beat chess champion Garry Kasparov in 1997.",
+      "AlphaGo beat Go champion Lee Sedol in 2016, using machine learning.",
+      "AI chatbots became widely used from late 2022."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What did the Turing test try to find out?",
+     "o": [
+      "How fast a computer is",
+      "Whether a computer's conversation could pass as human",
+      "Whether a computer could play chess",
+      "How much memory a computer has"
+     ],
+     "a": 1,
+     "why": "The judge tries to tell which hidden partner is the computer."
+    },
+    {
+     "q": "In which year did Deep Blue beat Garry Kasparov at chess?",
+     "o": [
+      "1950",
+      "1966",
+      "1997",
+      "2016"
+     ],
+     "a": 2,
+     "why": "IBM's Deep Blue won the match in 1997."
+    },
+    {
+     "q": "Why was AlphaGo's win in 2016 seen as a big step forward?",
+     "o": [
+      "Go is much simpler than chess",
+      "It learned strategies using machine learning, in a far more complex game",
+      "It was the first computer ever built",
+      "It could talk to the players"
+     ],
+     "a": 1,
+     "why": "Go has far more possible positions than chess, and AlphaGo learned rather than relying only on expert rules."
+    },
+    {
+     "q": "Where did Alan Turing famously work during the Second World War?",
+     "o": [
+      "CERN",
+      "Bletchley Park",
+      "Silicon Valley",
+      "Dartmouth"
+     ],
+     "a": 1,
+     "why": "He helped break German codes at Bletchley Park."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe how the **Turing test** works.",
+     "m": 3,
+     "a": "A human judge has (typed) conversations with a hidden person and a hidden computer (1); the judge asks questions and must decide which is the computer (1); if the judge cannot reliably tell them apart, the computer passes (1)."
+    },
+    {
+     "q": "Compare how **Deep Blue** and **AlphaGo** worked.",
+     "m": 2,
+     "a": "Deep Blue searched huge numbers of chess positions using rules written by experts / brute force (1); AlphaGo used machine learning, learning from human games and by playing itself (1)."
+    },
+    {
+     "q": "Give **one** reason why some experts think the Turing test is not a good measure of intelligence.",
+     "m": 1,
+     "a": "Any one: a program can fool people without understanding anything (1); modern chatbots can pass short conversations but still make basic mistakes (1); it only tests conversation, not other kinds of intelligence (1)."
+    }
+   ],
+   "terms": [
+    "Turing test",
+    "Chatbot"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "spec": "Explain the difference between narrow AI and general AI",
+   "summary": "Narrow AI is very good at one specific task, like playing chess or recognising faces. General AI would be able to learn and do any intellectual task a human can. All AI that exists today is narrow AI; general AI does not exist yet.",
+   "diagram": {
+    "kind": "compare",
+    "title": "Narrow AI vs general AI",
+    "caption": "Which one do you use every day?",
+    "states": [
+     {
+      "label": "Narrow AI",
+      "points": [
+       "Does one task very well",
+       "Exists today, all around you",
+       "Cannot switch to a different task",
+       "E.g. face unlock, spam filter, chess AI"
+      ],
+      "art": null
+     },
+     {
+      "label": "General AI",
+      "points": [
+       "Could do any task a human can",
+       "Does not exist yet",
+       "Would learn new tasks like a person",
+       "Only found in science fiction so far"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Deep Blue could beat the best chess player in the world. But could it tie a shoelace, tell a joke or play noughts and crosses? No. It could only play chess. This is the key idea behind **narrow** and **general** AI."
+    },
+    {
+     "t": "h",
+     "text": "Narrow AI"
+    },
+    {
+     "t": "p",
+     "text": "**[[Narrow AI]]** (also called *weak AI*) is designed to do **one specific task**, or a small set of related tasks. It can be extremely good at that task, often better than any human, but it cannot transfer its skill to something different."
+    },
+    {
+     "t": "list",
+     "items": [
+      "A spam filter is brilliant at sorting emails, but cannot drive a car.",
+      "A sat nav finds the quickest route, but cannot recognise your face.",
+      "A chess AI beats grandmasters, but cannot answer a Geography question."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "General AI"
+    },
+    {
+     "t": "p",
+     "text": "**[[General AI]]** (also called *artificial general intelligence* or *AGI*) would be a system that could learn and carry out **any** intellectual task a human can: switch from doing your Maths homework to writing a poem to planning a school trip, and genuinely understand all of it."
+    },
+    {
+     "t": "warn",
+     "text": "General AI **does not exist yet**. Experts strongly disagree about whether or when it might be built: some think it is decades away, some think it may never happen. Be cautious of headlines that claim it has arrived."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Narrow AI",
+      "General AI"
+     ],
+     "rows": [
+      [
+       "Does it exist?",
+       "Yes: all AI today",
+       "No, not yet"
+      ],
+      [
+       "What can it do?",
+       "One task, or a small group of related tasks",
+       "Any intellectual task a human can do"
+      ],
+      [
+       "Can it switch tasks?",
+       "No: a chess AI cannot drive a car",
+       "Yes: it would learn new tasks like a person"
+      ],
+      [
+       "Examples",
+       "Face unlock, spam filters, sat navs, chess AI",
+       "Only in science fiction so far"
+      ]
+     ]
+    },
+    {
+     "t": "note",
+     "text": "Chatbots can talk about almost any subject, so they can *seem* general. But they are still narrow in an important way: they are trained to produce likely text. They do not reliably reason, plan or understand the world, and they cannot, by themselves, ride a bike or make you a cup of tea."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: narrow or general?",
+     "context": "A school buys a new AI system that reads pupils' handwritten Maths answers and marks them. A teacher says: \"This AI is so clever it could teach the whole Maths department!\" Is she right?",
+     "steps": [
+      "The system does one job: recognising handwriting and checking answers. That is **narrow AI**.",
+      "Teaching needs many different skills: explaining, noticing when a pupil is upset, planning lessons, managing a class.",
+      "The marking AI cannot transfer its skill to any of these."
+     ],
+     "answer": "No: it is narrow AI. It is useful for one task, but it could not replace a teacher."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Narrow AI does one specific task very well.",
+      "All AI that exists today is narrow AI.",
+      "General AI would be able to do any intellectual task a human can.",
+      "General AI does not exist yet, and experts disagree about when, or if, it will.",
+      "Chatbots may seem general, but they are still narrow in important ways."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is an example of narrow AI?",
+     "o": [
+      "A robot that can do any job a human can",
+      "A spam filter",
+      "A computer that feels emotions",
+      "A machine that understands everything"
+     ],
+     "a": 1,
+     "why": "A spam filter does one specific task."
+    },
+    {
+     "q": "Does general AI exist today?",
+     "o": [
+      "Yes, in every smartphone",
+      "Yes, but only in schools",
+      "No, not yet",
+      "Yes, it was invented in 1956"
+     ],
+     "a": 2,
+     "why": "All AI today is narrow AI."
+    },
+    {
+     "q": "What is another name for general AI?",
+     "o": [
+      "Weak AI",
+      "AGI (artificial general intelligence)",
+      "A spam filter",
+      "A sat nav"
+     ],
+     "a": 1,
+     "why": "AGI stands for artificial general intelligence."
+    },
+    {
+     "q": "A chess AI cannot drive a car. This shows that it is…",
+     "o": [
+      "general AI",
+      "narrow AI",
+      "broken",
+      "not a computer"
+     ],
+     "a": 1,
+     "why": "It can only do the task it was built for."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between **narrow AI** and **general AI**.",
+     "m": 2,
+     "a": "Narrow AI is designed to do one specific task (very well) (1); general AI would be able to learn/do any intellectual task a human can (1)."
+    },
+    {
+     "q": "Give **two** examples of narrow AI that a pupil might use in a normal day.",
+     "m": 2,
+     "a": "Any two, e.g. face unlock (1); spam filter (1); music/video recommendations (1); voice assistant (1); sat nav/maps app (1); predictive text (1)."
+    },
+    {
+     "q": "A news headline says: *\"Robots now smarter than humans at everything!\"* Explain why this claim is misleading.",
+     "m": 2,
+     "a": "All current AI is narrow, i.e. only good at specific tasks (1); general AI that can do any task a human can does not exist yet (1)."
+    }
+   ],
+   "terms": [
+    "Narrow AI",
+    "General AI"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "spec": "Identify where AI is used in everyday life and describe what it does in each case",
+   "summary": "You meet AI every day: recommendation systems suggest videos and songs, voice assistants turn speech into actions, face unlock recognises you, spam filters sort email and sat navs predict the quickest route. Each one learns patterns from data.",
+   "diagram": {
+    "kind": "match",
+    "title": "What does the AI do?",
+    "caption": "Match each everyday AI to what it does.",
+    "pairs": [
+     [
+      "Recommendation system",
+      "Suggests the next video or song"
+     ],
+     [
+      "Voice assistant",
+      "Turns speech into actions"
+     ],
+     [
+      "Face unlock",
+      "Checks your face matches the owner's"
+     ],
+     [
+      "Spam filter",
+      "Moves junk email out of your inbox"
+     ],
+     [
+      "Sat nav",
+      "Predicts the quickest route"
+     ],
+     [
+      "Predictive text",
+      "Guesses your next word"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Think about the first hour after you wake up. Did you check your phone? Watch a video? Ask a smart speaker for the weather? You have probably used AI several times before you even reach school."
+    },
+    {
+     "t": "h",
+     "text": "AI you use every day"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Where",
+      "What the AI does",
+      "What data it learns from"
+     ],
+     "rows": [
+      [
+       "**[[Recommendations|Recommendation system]]** (YouTube, Netflix, Spotify, online shops)",
+       "Predicts what you will want to watch, listen to or buy next",
+       "What you and millions of similar users clicked, watched, skipped or bought"
+      ],
+      [
+       "**[[Voice assistants|Voice assistant]]** and smart speakers",
+       "Uses **[[Speech recognition|speech recognition]]** to turn your voice into text, works out what you want, then replies",
+       "Thousands of hours of recorded speech in different accents"
+      ],
+      [
+       "**[[Face unlock|Facial recognition]]**",
+       "Checks whether the face in front of the camera matches the owner's",
+       "The owner's face, plus training on huge numbers of other faces"
+      ],
+      [
+       "**[[Spam filters|Spam filter]]**",
+       "Decides whether each email is spam or genuine and moves spam to a junk folder",
+       "Millions of emails that people have marked as spam or not spam"
+      ],
+      [
+       "**Sat navs and maps apps**",
+       "Predicts how long each route will take and picks the quickest",
+       "Live and past traffic data from millions of phones"
+      ],
+      [
+       "**Predictive text and autocorrect**",
+       "Guesses the next word you are likely to type",
+       "Huge amounts of written text, plus what you usually type"
+      ],
+      [
+       "**Photo apps**",
+       "Groups photos by person, finds pictures of \"dogs\" or \"beach\"",
+       "Millions of labelled images"
+      ]
+     ],
+     "caption": "Everyday AI"
+    },
+    {
+     "t": "h",
+     "text": "Recommendation systems in more detail"
+    },
+    {
+     "t": "p",
+     "text": "Recommendation systems are probably the AI you meet most. They look for patterns like this: *people who watched the same videos as you also watched this one*. The more you use the app, the more data it has about you, and the more personal its suggestions become."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: why did it recommend that?",
+     "context": "Caoimhe watches three videos about Gaelic football skills and one about a GAA final. The next day her home page is full of Gaelic football videos, including a channel she has never seen before.",
+     "steps": [
+      "The app records what Caoimhe watched and for how long.",
+      "It finds other users with similar viewing histories.",
+      "Those users often watched the new channel too.",
+      "It predicts Caoimhe will probably like it, so it recommends it."
+     ],
+     "answer": "The AI spotted a pattern between Caoimhe's viewing and other people's. It does not \"know\" she likes Gaelic football; it predicts it from data."
+    },
+    {
+     "t": "note",
+     "text": "Recommendation systems are designed to keep you watching for as long as possible. That can be useful, but it can also mean you only see more and more of the same kind of thing. This is sometimes called a **filter bubble**. It is worth choosing to look outside it now and again."
+    },
+    {
+     "t": "h",
+     "text": "AI behind the scenes"
+    },
+    {
+     "t": "p",
+     "text": "Some AI you never see directly. Banks use AI to spot unusual card payments that might be fraud. Hospitals are testing AI that helps doctors spot signs of disease in scans. Farmers use AI with cameras and drones to check crops. In each case, the AI is spotting patterns in data faster than a person could."
+    },
+    {
+     "t": "tip",
+     "text": "For an exam-style answer, give the **use** *and* say **what the AI does**: for example, \"A spam filter uses AI to *predict whether an email is spam* and moves it to a junk folder.\""
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Recommendation systems predict what you will want next from your history and other users'.",
+      "Voice assistants use speech recognition to turn speech into text and actions.",
+      "Face unlock uses facial recognition to match your face.",
+      "Spam filters predict whether each email is spam or not.",
+      "Sat navs predict journey times from traffic data.",
+      "All of these are narrow AI that learn patterns from data."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does a recommendation system do?",
+     "o": [
+      "Deletes old videos",
+      "Predicts what you might want to watch, listen to or buy next",
+      "Charges your battery",
+      "Blocks all adverts"
+     ],
+     "a": 1,
+     "why": "It uses patterns in your and other users' data."
+    },
+    {
+     "q": "What is speech recognition?",
+     "o": [
+      "Turning spoken words into text the computer can use",
+      "Recording music",
+      "Translating text into pictures",
+      "Making a computer louder"
+     ],
+     "a": 0,
+     "why": "Voice assistants use it to understand what you say."
+    },
+    {
+     "q": "Where does a spam filter get its training data from?",
+     "o": [
+      "Weather forecasts",
+      "Emails that people have marked as spam or not spam",
+      "Photos of food",
+      "Football results"
+     ],
+     "a": 1,
+     "why": "Labelled emails teach it what spam looks like."
+    },
+    {
+     "q": "Which everyday AI predicts how long a journey will take?",
+     "o": [
+      "Face unlock",
+      "Spam filter",
+      "Sat nav / maps app",
+      "Autocorrect"
+     ],
+     "a": 2,
+     "why": "It uses live and past traffic data."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe how a **spam filter** uses AI.",
+     "m": 2,
+     "a": "It learns from (large numbers of) emails labelled spam/not spam (1); it predicts whether a new email is spam and moves it to the junk folder (1)."
+    },
+    {
+     "q": "Name **three** places where a Year 9 pupil might meet AI in a normal day, and for each say what the AI does.",
+     "m": 3,
+     "a": "One mark for each correct use with what it does, e.g. video app recommends videos you might like (1); face unlock recognises your face to open the phone (1); voice assistant understands spoken questions (1); sat nav predicts quickest route (1); predictive text suggests the next word (1); spam filter sorts junk email (1)."
+    },
+    {
+     "q": "Explain **one** disadvantage of recommendation systems.",
+     "m": 2,
+     "a": "You may only see more of the same kind of content / a filter bubble (1) so you miss other views or interests (1). OR: they are designed to keep you watching (1) so you may spend more time on screens than you meant to (1). OR: they collect lots of data about you (1) which affects your privacy (1)."
+    }
+   ],
+   "terms": [
+    "Recommendation system",
+    "Voice assistant",
+    "Speech recognition",
+    "Facial recognition",
+    "Spam filter"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "spec": "Describe how machine learning works using training data, labels, patterns and testing",
+   "summary": "Machine learning is a way of building AI where the computer learns from examples instead of being given rules. It is trained on labelled data, finds patterns, builds a model, and is then tested on new data it has not seen to check how accurate it is.",
+   "diagram": {
+    "kind": "flow",
+    "title": "How machine learning works",
+    "caption": "Click each stage. If testing goes badly, go back and improve the data.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Collect data",
+      "detail": "Gather thousands of examples, e.g. photos of cats and dogs.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Label it",
+      "detail": "Each example is tagged with the right answer: cat or dog.",
+      "shape": "io"
+     },
+     {
+      "id": "c",
+      "label": "Train",
+      "detail": "The computer finds patterns linking each photo to its label, producing a model.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Test",
+      "detail": "Show the model new labelled photos it has never seen. How many does it get right?",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Use",
+      "detail": "If it is accurate enough, use it for real. If not, go back for more or better data.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "a"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "How did you learn what a dog is? Nobody gave you a list of rules like *\"four legs, fur, tail, barks\"* (a cat has four legs, fur and a tail too!). You just saw lots of dogs, and people said \"dog\". Eventually you could recognise dogs you had never met. **Machine learning** works in a surprisingly similar way."
+    },
+    {
+     "t": "h",
+     "text": "What is machine learning?"
+    },
+    {
+     "t": "p",
+     "text": "**[[Machine learning]]** is a type of AI where a computer **learns from examples** instead of following rules written by a programmer. It finds **[[patterns|Pattern]]** in data and uses them to make predictions about new data."
+    },
+    {
+     "t": "h",
+     "text": "Why not just write the rules?"
+    },
+    {
+     "t": "p",
+     "text": "For some problems, writing rules is almost impossible. Try writing rules to spot spam:"
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "A rule-based spam filter (the old way)",
+     "code": "function isSpam(email) {\n    if (email.includes(\"FREE MONEY\")) return true;\n    if (email.includes(\"You have won\")) return true;\n    if (email.includes(\"click here now\")) return true;\n    return false;\n}",
+     "output": "Catches a few obvious spam emails, but spammers simply write \"FR3E M0NEY\" and it fails. A programmer would need to write thousands of rules, forever."
+    },
+    {
+     "t": "p",
+     "text": "A machine learning spam filter is shown millions of real emails and works out for itself which words, links, senders and patterns usually mean spam. When spammers change tactics, it can be **retrained** on new examples."
+    },
+    {
+     "t": "h",
+     "text": "The machine learning process"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Collect data.** Gather lots of examples, e.g. thousands of photos or emails.",
+      "**Label the data.** Each example is given the correct answer, called a **[[Label|label]]**: *cat* or *dog*, *spam* or *not spam*.",
+      "**Train.** The computer studies the **[[Training data|training data]]** and finds patterns that link the examples to their labels. The result is a **[[Model|model]]**.",
+      "**Test.** The model is given **[[Testing data|testing data]]**: new labelled examples it has *never seen*. We compare its answers with the real labels to measure its **[[Accuracy|accuracy]]**.",
+      "**Use (and improve).** If it is accurate enough, it is used for real. If not, collect more or better data and train again."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "warn",
+     "text": "The testing data must be **different** from the training data. If you test a model on the same examples it learned from, it is like giving pupils the exact exam questions the day before: a high score proves nothing about whether they really learned."
+    },
+    {
+     "t": "h",
+     "text": "Features: what the computer looks at"
+    },
+    {
+     "t": "p",
+     "text": "The details a model uses to make its decision are called **[[features|Feature]]**. For an email, features might be the words used, the number of links, or whether the sender is in your contacts. For a photo, features could be shapes, edges, colours and textures."
+    },
+    {
+     "t": "h",
+     "text": "Neural networks"
+    },
+    {
+     "t": "p",
+     "text": "Many modern AI systems use a **[[Neural network|neural network]]**: a type of model loosely inspired by the brain, made of layers of simple connected units. During training, the strength of each connection is adjusted bit by bit until the network gives the right answers for the training examples. A neural network with many layers is called **[[Deep learning|deep learning]]**."
+    },
+    {
+     "t": "tip",
+     "text": "Remember the process as **C-L-T-T-U**: **C**ollect, **L**abel, **T**rain, **T**est, **U**se."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Machine learning = computers learning from examples, not hand-written rules.",
+      "Training data is labelled with the correct answers.",
+      "Training finds patterns and produces a model.",
+      "The model is tested on new data it has not seen, to measure accuracy.",
+      "Features are the details the model uses to decide.",
+      "Neural networks are models made of layers of connected units; many layers = deep learning."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a label in machine learning?",
+     "o": [
+      "A sticker on the computer",
+      "The correct answer attached to a training example",
+      "The name of the programmer",
+      "A type of virus"
+     ],
+     "a": 1,
+     "why": "E.g. each photo is labelled cat or dog."
+    },
+    {
+     "q": "Why must testing data be different from training data?",
+     "o": [
+      "To save storage space",
+      "To check the model works on examples it has never seen",
+      "Because training data is secret",
+      "It does not need to be different"
+     ],
+     "a": 1,
+     "why": "Otherwise a high score proves nothing."
+    },
+    {
+     "q": "What is produced when a computer is trained on data?",
+     "o": [
+      "A model",
+      "A printer",
+      "A spreadsheet",
+      "A website"
+     ],
+     "a": 0,
+     "why": "The model is what makes predictions."
+    },
+    {
+     "q": "Which is the correct order?",
+     "o": [
+      "Test, label, train, collect",
+      "Collect, label, train, test",
+      "Train, collect, test, label",
+      "Label, test, collect, train"
+     ],
+     "a": 1,
+     "why": "Collect, Label, Train, Test, then Use."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe the stages of training and testing a machine learning model.",
+     "m": 4,
+     "a": "Collect lots of data/examples (1); label the data with the correct answers (1); train the model so it finds patterns in the training data (1); test it on new/unseen data and compare its answers with the labels to measure accuracy (1)."
+    },
+    {
+     "q": "Explain why machine learning is often better than writing rules for a spam filter.",
+     "m": 2,
+     "a": "There are too many possible spam emails to write rules for / spammers change their wording to get round rules (1); machine learning finds patterns itself from many examples and can be retrained on new examples (1)."
+    },
+    {
+     "q": "What is meant by **training data**?",
+     "m": 1,
+     "a": "The (labelled) examples a machine learning model learns patterns from (1)."
+    }
+   ],
+   "terms": [
+    "Machine learning",
+    "Pattern",
+    "Label",
+    "Training data",
+    "Model",
+    "Testing data",
+    "Accuracy",
+    "Feature",
+    "Neural network",
+    "Deep learning"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "spec": "Work through a classifier example and calculate a model's accuracy",
+   "summary": "A classifier is a model that sorts things into groups, such as cat or dog, or spam or not spam. We judge it by its accuracy: the percentage of test examples it gets right. Mistakes often come from training data that was too small or not varied enough.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Test yourself: cat/dog classifier",
+    "caption": "Click a hidden cell to check the answer.",
+    "head": [
+     "Question",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "What are the two classes?",
+      "Cat and dog"
+     ],
+     [
+      "Why keep 200 photos aside?",
+      "To test on photos the model has never seen"
+     ],
+     [
+      "180 right out of 200: accuracy?",
+      "90%"
+     ],
+     [
+      "Why were night photos wrong?",
+      "Hardly any night photos in the training data"
+     ],
+     [
+      "Why was the fox called a dog?",
+      "It only had two classes, so it had to pick one"
+     ],
+     [
+      "Best way to improve it?",
+      "More, and more varied, labelled training data"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Year 8 have been asked to help the school's Eco Club build an AI that sorts photos from the school wildlife camera into **cat** or **dog**. Let's follow it step by step."
+    },
+    {
+     "t": "h",
+     "text": "What is a classifier?"
+    },
+    {
+     "t": "p",
+     "text": "A **[[Classifier|classifier]]** is a machine learning model that sorts each input into one of a fixed set of groups, called **classes**. A spam filter is a classifier with two classes (*spam*, *not spam*). The wildlife camera classifier has two classes too (*cat*, *dog*)."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: training a cat/dog classifier",
+     "context": "The Eco Club has 1,000 photos from the camera. 500 show cats and 500 show dogs.",
+     "steps": [
+      "**Label:** pupils tag each photo as *cat* or *dog*.",
+      "**Split:** they keep 800 photos for training and put 200 aside for testing (so the model never sees them while learning).",
+      "**Train:** the model studies the 800 training photos. It finds features that tend to go with each label, e.g. ear shape, snout length, eye shape and size.",
+      "**Test:** the model is shown the 200 test photos and gives a prediction for each one.",
+      "**Check:** compare each prediction with the real label. It gets 180 right and 20 wrong."
+     ],
+     "answer": "Accuracy = 180 ÷ 200 × 100 = **90%**."
+    },
+    {
+     "t": "h",
+     "text": "Calculating accuracy"
+    },
+    {
+     "t": "p",
+     "text": "**Accuracy** is the percentage of test examples the model classified correctly:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Step",
+      "Calculation"
+     ],
+     "rows": [
+      [
+       "Number correct",
+       "180"
+      ],
+      [
+       "Total number tested",
+       "200"
+      ],
+      [
+       "Divide",
+       "180 ÷ 200 = 0.9"
+      ],
+      [
+       "Turn into a percentage",
+       "0.9 × 100 = **90%**"
+      ]
+     ],
+     "caption": "Accuracy = correct ÷ total × 100"
+    },
+    {
+     "t": "tip",
+     "text": "Accuracy is never a guarantee. A model that is 90% accurate will still get about **1 in every 10** examples wrong. For important decisions (like medicine), a human should check."
+    },
+    {
+     "t": "h",
+     "text": "Why did it get some wrong?"
+    },
+    {
+     "t": "p",
+     "text": "The pupils looked at the 20 mistakes. They noticed a pattern:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Most wrong answers were photos taken **at night**, but nearly all the training photos were taken in daylight.",
+      "A small fluffy dog was called a *cat*: there were very few small, fluffy dogs in the training data.",
+      "One photo showed **a fox**. The model had only two classes, so it *had* to say cat or dog. It said dog."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "note",
+     "text": "A model can only learn from the data it is given. If a type of example is missing or rare in the training data, the model will be poor at it. This is the same problem that causes **bias**, which you will meet later."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: improving the model",
+     "context": "How could the Eco Club make the classifier more accurate?",
+     "steps": [
+      "Add more night-time photos to the training data.",
+      "Add more variety: different breeds, sizes, colours and angles.",
+      "Add a third class, *other animal*, so foxes and badgers are not forced into the wrong group.",
+      "Retrain, then test again on new photos it has never seen."
+     ],
+     "answer": "More, and more varied, training data usually leads to a more accurate model."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A classifier sorts inputs into groups called classes.",
+      "Data is split into training data and testing data.",
+      "Accuracy = number correct ÷ number tested × 100.",
+      "Even an accurate model still makes mistakes.",
+      "More, and more varied, training data usually improves accuracy."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "A classifier gets 45 out of 50 test photos right. What is its accuracy?",
+     "o": [
+      "45%",
+      "50%",
+      "90%",
+      "95%"
+     ],
+     "a": 2,
+     "why": "45 ÷ 50 × 100 = 90%."
+    },
+    {
+     "q": "What is a classifier?",
+     "o": [
+      "A model that sorts inputs into groups",
+      "A type of keyboard",
+      "A list of passwords",
+      "A website"
+     ],
+     "a": 0,
+     "why": "E.g. cat or dog, spam or not spam."
+    },
+    {
+     "q": "The model gets most night-time photos wrong. What is the most likely reason?",
+     "o": [
+      "The camera was broken",
+      "There were very few night-time photos in the training data",
+      "Cats only come out in the day",
+      "Accuracy cannot be measured at night"
+     ],
+     "a": 1,
+     "why": "A model is poor at things that are missing from its training data."
+    },
+    {
+     "q": "Which change is most likely to improve the classifier?",
+     "o": [
+      "Use fewer training photos",
+      "Test it on the training photos",
+      "Add more varied training photos",
+      "Delete the labels"
+     ],
+     "a": 2,
+     "why": "More and more varied data usually helps."
+    }
+   ],
+   "practice": [
+    {
+     "q": "A spam filter is tested on 400 emails and classifies 380 correctly. Calculate its accuracy. Show your working.",
+     "m": 2,
+     "a": "380 ÷ 400 = 0.95 (1); × 100 = 95% (1)."
+    },
+    {
+     "q": "A classifier trained to recognise dogs keeps getting photos of small, fluffy dogs wrong. Explain why this might happen and how to fix it.",
+     "m": 3,
+     "a": "There were few/no small fluffy dogs in the training data (1) so the model did not learn their features/patterns (1); fix by adding more (labelled) photos of small fluffy dogs and retraining (1)."
+    },
+    {
+     "q": "Explain why a classifier that is 90% accurate should not be fully trusted.",
+     "m": 2,
+     "a": "It will still get about 1 in 10 examples wrong (1); for important decisions a human should check the result (1)."
+    }
+   ],
+   "terms": [
+    "Classifier"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p07",
+   "spec": "Explain in simple terms how generative AI and large language models produce text",
+   "summary": "Generative AI creates new content such as text, images or music. A large language model is trained on huge amounts of text and writes by repeatedly predicting a likely next word. This makes it fluent, but it does not check facts or understand like a person.",
+   "diagram": {
+    "kind": "cycle",
+    "title": "How a chatbot writes, one word at a time",
+    "caption": "The loop repeats until the answer is complete.",
+    "items": [
+     {
+      "label": "Read the text so far",
+      "detail": "Your prompt plus every word the chatbot has already written."
+     },
+     {
+      "label": "Score every possible next word",
+      "detail": "Patterns from training give each word a probability: tea is likely, giraffe is not."
+     },
+     {
+      "label": "Choose a likely word",
+      "detail": "Pick one of the most likely words. A little randomness means answers vary each time."
+     },
+     {
+      "label": "Add it and go again",
+      "detail": "The new word becomes part of the text, and the loop repeats."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The AI you have met so far mostly *sorts* or *predicts*: spam or not spam, cat or dog, which video next. **[[Generative AI|Generative AI]]** goes further: it **creates new content**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Generative AI can make…",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Text",
+       "A chatbot writes a story, an email or an explanation"
+      ],
+      [
+       "Images",
+       "A picture created from a description, e.g. *\"a dragon reading a book in Enniskillen castle\"*"
+      ],
+      [
+       "Audio and music",
+       "A song in a certain style, or a voice reading text aloud"
+      ],
+      [
+       "Video",
+       "Short video clips made from a written description"
+      ],
+      [
+       "Computer code",
+       "A program written from an instruction"
+      ]
+     ],
+     "caption": "Types of generative AI"
+    },
+    {
+     "t": "h",
+     "text": "Large language models"
+    },
+    {
+     "t": "p",
+     "text": "AI chatbots are powered by a **[[Large language model|large language model]]** (**LLM**). It is *large* because it is a huge neural network trained on an enormous amount of text: books, websites, articles and more, far more than any human could read in many lifetimes."
+    },
+    {
+     "t": "p",
+     "text": "At its heart, an LLM does something that sounds very simple: **it predicts the next word**."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: predicting the next word",
+     "context": "You type: *\"After school I went home and had my…\"*",
+     "steps": [
+      "The model looks at all the words so far.",
+      "From patterns in its training text, it gives each possible next word a probability: *tea* (high), *dinner* (high), *homework* (lower), *giraffe* (almost zero).",
+      "It picks a likely word, say *tea*, and adds it to the text.",
+      "It then repeats the whole process to predict the word after *tea*, and so on, one word at a time."
+     ],
+     "answer": "By predicting one likely word after another, very quickly, it builds whole sentences and paragraphs."
+    },
+    {
+     "t": "note",
+     "text": "Strictly, LLMs predict **tokens**, which are words or parts of words, but \"next word\" is a good way to picture it. Your phone's predictive text does a very small version of the same thing."
+    },
+    {
+     "t": "h",
+     "text": "How chatbots are trained"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Pre-training:** the model reads huge amounts of text and learns to predict the next word. This is where it picks up grammar, facts and styles of writing.",
+      "**Fine-tuning:** people rate and correct its answers so that it becomes more helpful, follows instructions and avoids harmful replies.",
+      "**Your prompt:** when you type a **[[Prompt|prompt]]**, the model continues the conversation by predicting the most suitable reply."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "h",
+     "text": "What this means for you"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "What an LLM is good at",
+      "What an LLM does NOT do"
+     ],
+     "rows": [
+      [
+       "Language",
+       "Writes fluent, well-structured text in many styles",
+       "Does not understand meaning the way you do"
+      ],
+      [
+       "Facts",
+       "Often repeats common facts correctly",
+       "Does not automatically check facts against a trusted source"
+      ],
+      [
+       "Confidence",
+       "Always sounds confident",
+       "Does not reliably know when it is wrong"
+      ],
+      [
+       "Up to date?",
+       "Knows a lot about what was in its training text",
+       "May not know about recent events unless it can search the web"
+      ]
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "Because an LLM predicts *likely* words, not *true* ones, it can produce answers that sound perfect but are completely wrong. You will learn more about this on the next page."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Generative AI creates new content: text, images, audio, video and code.",
+      "A large language model is trained on huge amounts of text.",
+      "It writes by repeatedly predicting a likely next word.",
+      "Fine-tuning with human feedback makes it more helpful.",
+      "It sounds fluent and confident, but does not check facts or truly understand."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What makes generative AI different from a spam filter?",
+     "o": [
+      "It is slower",
+      "It creates new content",
+      "It only works offline",
+      "It never uses data"
+     ],
+     "a": 1,
+     "why": "A spam filter sorts; generative AI generates."
+    },
+    {
+     "q": "At its simplest, what does a large language model do?",
+     "o": [
+      "Searches a dictionary",
+      "Predicts the next word, again and again",
+      "Copies whole web pages",
+      "Translates into binary"
+     ],
+     "a": 1,
+     "why": "It builds text one likely word at a time."
+    },
+    {
+     "q": "What is a prompt?",
+     "o": [
+      "The instruction or question you give an AI tool",
+      "A type of virus",
+      "A computer screen",
+      "The AI's training data"
+     ],
+     "a": 0,
+     "why": "The model replies to your prompt."
+    },
+    {
+     "q": "Why can an LLM give a confident answer that is wrong?",
+     "o": [
+      "It predicts likely words, not checked facts",
+      "It is lazy",
+      "Someone hacked it",
+      "It always lies on purpose"
+     ],
+     "a": 0,
+     "why": "Likely is not the same as true."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain, in simple terms, how a large language model produces an answer.",
+     "m": 3,
+     "a": "It has been trained on huge amounts of text (1); it predicts the most likely next word based on patterns (1); it adds that word and repeats the process to build sentences (1)."
+    },
+    {
+     "q": "Give **two** types of content that generative AI can create.",
+     "m": 2,
+     "a": "Any two: text (1); images (1); music/audio/voices (1); video (1); computer code (1)."
+    },
+    {
+     "q": "Explain why predictive text on a phone is like a large language model.",
+     "m": 2,
+     "a": "Both predict the next (likely) word (1) based on patterns learned from text (1)."
+    }
+   ],
+   "terms": [
+    "Generative AI",
+    "Large language model",
+    "Prompt"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p08",
+   "spec": "Describe the limitations of AI, including hallucinations and bias in training data",
+   "summary": "AI can hallucinate: it can make up facts, quotes and sources that sound real. It can also be biased, because it learns from data that may be unbalanced or reflect unfair decisions from the past. AI output must always be checked.",
+   "diagram": {
+    "kind": "match",
+    "title": "Limitation or not?",
+    "caption": "Match each situation to the problem it shows.",
+    "pairs": [
+     [
+      "A chatbot invents a book that does not exist",
+      "Hallucination"
+     ],
+     [
+      "Face recognition works worse for some skin tones",
+      "Bias"
+     ],
+     [
+      "A job AI prefers men because past staff were men",
+      "Bias"
+     ],
+     [
+      "A fake web link in an AI answer",
+      "Hallucination"
+     ],
+     [
+      "Nobody can explain why the AI decided",
+      "Black box"
+     ],
+     [
+      "A muffin is labelled as a dog",
+      "No common sense"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "AI can be impressive, but it has real weaknesses. Knowing them is what makes you a smart user rather than a fooled one."
+    },
+    {
+     "t": "h",
+     "text": "Hallucinations"
+    },
+    {
+     "t": "p",
+     "text": "A **[[Hallucination|hallucination]]** is when an AI tool produces information that is **false or made up**, but presents it as though it were true. Remember: an LLM predicts *likely-sounding* words. If it does not have the right information, it may still produce something that *sounds* right."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the made-up book",
+     "context": "Oisín asks a chatbot for three books about the history of Enniskillen, with authors, for his History homework.",
+     "steps": [
+      "The chatbot gives three titles with authors and dates. They look completely believable.",
+      "Oisín searches the library catalogue and the internet for each one.",
+      "One is real. The other two do not exist: the chatbot invented titles that *sound* like real local history books."
+     ],
+     "answer": "This is a hallucination. Oisín was right to check before putting them in his bibliography."
+    },
+    {
+     "t": "list",
+     "items": [
+      "AI can invent facts, dates, quotes, statistics, web links and references.",
+      "It can get Maths wrong while showing confident-looking working.",
+      "It may not know about recent events.",
+      "It rarely says \"I don't know\" unless it has been designed to."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "warn",
+     "text": "**Never** copy facts, quotes or references from an AI tool into your work without checking them in a reliable source."
+    },
+    {
+     "t": "h",
+     "text": "Bias"
+    },
+    {
+     "t": "p",
+     "text": "**[[Bias|Bias]]** in AI is when a system gives results that are **unfair** to certain groups of people. AI is not biased on purpose. It learns patterns from its training data, so **if the data is unbalanced or unfair, the AI will be too**. People sometimes sum this up as *\"bias in, bias out\"*."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Example",
+      "What happened",
+      "Why"
+     ],
+     "rows": [
+      [
+       "Recruitment AI",
+       "In 2018 it was reported that a large tech company had scrapped an experimental AI for sorting job applications, because it marked down CVs that included the word \"women's\" (as in \"women's chess club\").",
+       "It had learned from ten years of past CVs, most of which came from men, so it learned to prefer male applicants."
+      ],
+      [
+       "Facial recognition",
+       "A 2018 study (*Gender Shades*, by researcher Joy Buolamwini) found that some commercial face-analysis systems were far less accurate for darker-skinned women than for lighter-skinned men.",
+       "The training photos contained far more lighter-skinned faces, especially men's."
+      ],
+      [
+       "Image generators",
+       "When asked for a picture of \"a doctor\" or \"a CEO\", some image generators have mostly shown men, and for \"a nurse\" mostly women.",
+       "The images they learned from reflected stereotypes."
+      ]
+     ],
+     "caption": "Real examples of AI bias"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: spot the bias",
+     "context": "A school builds an AI to recommend which pupils should be invited to an advanced Maths club. It is trained on records of who joined the club over the last 20 years. In the past, mostly boys were invited.",
+     "steps": [
+      "The training data shows mostly boys in the club.",
+      "The AI learns the pattern *\"club members are usually boys\"*.",
+      "It is likely to recommend more boys than girls, even when girls have equal or better Maths results."
+     ],
+     "answer": "The AI has copied past unfairness from its data. To reduce bias, use balanced data, base the decision on the right features (like Maths results), test the results for each group, and keep a teacher in charge of the final decision."
+    },
+    {
+     "t": "h",
+     "text": "Other limitations"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**No common sense:** AI can make mistakes no person would make, e.g. labelling a picture of a muffin as a dog.",
+      "**Black box:** with large neural networks it is often hard to explain *why* the AI made a decision.",
+      "**Energy and water:** training and running large AI models uses a lot of electricity in data centres, and water to cool them."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A hallucination is when AI makes up false information that sounds real.",
+      "Always check AI facts, quotes and references in a reliable source.",
+      "Bias means AI treats some groups unfairly.",
+      "Bias usually comes from unbalanced or unfair training data: bias in, bias out.",
+      "Reduce bias with balanced data, testing on different groups and human oversight."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is an AI hallucination?",
+     "o": [
+      "When the computer overheats",
+      "When AI makes up false information that sounds true",
+      "When a robot dreams",
+      "When AI refuses to answer"
+     ],
+     "a": 1,
+     "why": "It sounds confident but is wrong."
+    },
+    {
+     "q": "Where does bias in AI usually come from?",
+     "o": [
+      "The colour of the computer",
+      "Unbalanced or unfair training data",
+      "Slow internet",
+      "The keyboard"
+     ],
+     "a": 1,
+     "why": "Bias in, bias out."
+    },
+    {
+     "q": "A chatbot gives you a quote from a famous scientist for your project. What should you do?",
+     "o": [
+      "Use it straight away",
+      "Check it in a reliable source first",
+      "Make up a different quote",
+      "Ask the chatbot if it is sure, then use it"
+     ],
+     "a": 1,
+     "why": "The chatbot could have made it up; asking it again is not real checking."
+    },
+    {
+     "q": "Which is the best way to reduce bias in an AI system?",
+     "o": [
+      "Use less data",
+      "Train it on more balanced data and test results for different groups",
+      "Hide how it works",
+      "Let it make all decisions on its own"
+     ],
+     "a": 1,
+     "why": "Balanced data, testing and human oversight all help."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by **bias** in AI and how it can happen.",
+     "m": 3,
+     "a": "Bias is when an AI gives results that are unfair to certain groups (1); AI learns patterns from its training data (1); if the data is unbalanced/reflects past unfairness, the AI copies it (1)."
+    },
+    {
+     "q": "Describe **one** real example of AI bias.",
+     "m": 2,
+     "a": "e.g. recruitment AI trained on mostly men's CVs (1) marked down CVs mentioning women (1). OR: facial recognition trained mostly on lighter-skinned faces (1) was less accurate for darker-skinned women (1). OR: image generators (1) showing stereotypes such as doctors as men (1)."
+    },
+    {
+     "q": "A pupil uses a chatbot to find statistics for a Geography project. Give **two** pieces of advice.",
+     "m": 2,
+     "a": "Any two: the chatbot may hallucinate/make up figures (1); check each statistic in a reliable source, e.g. a government or official website (1); record the real source, not the chatbot (1); be aware the data may be out of date (1)."
+    }
+   ],
+   "terms": [
+    "Hallucination",
+    "Bias"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p09",
+   "spec": "Discuss ethical issues in AI, including honesty in schoolwork, privacy, deepfakes and jobs",
+   "summary": "Using AI raises ethical questions. Passing off AI work as your own is cheating; personal data you type in may be stored; deepfakes can spread lies and hurt people; and AI will change many jobs, removing some tasks and creating new ones.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Test yourself: right or wrong?",
+    "caption": "Decide, then click a hidden cell to check.",
+    "head": [
+     "Situation",
+     "Verdict"
+    ],
+    "rows": [
+     [
+      "Ask AI to quiz you on French vocabulary",
+      "Fine: it helps you learn"
+     ],
+     [
+      "Hand in an AI-written story as your own",
+      "Plagiarism: dishonest"
+     ],
+     [
+      "Upload a friend's photo to an AI app without asking",
+      "Wrong: it breaks their privacy"
+     ],
+     [
+      "Make a fake video of a teacher for a laugh",
+      "Harmful deepfake: could be bullying"
+     ],
+     [
+      "Use AI to brainstorm ideas, then tell your teacher you used it",
+      "Usually fine, if your teacher allows it"
+     ],
+     [
+      "Type your school password into a chatbot",
+      "Never: keep personal data private"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Just because AI *can* do something does not mean it *should*. **[[Ethics]]** is about deciding what is right and wrong. With AI, there are big ethical questions that affect you directly."
+    },
+    {
+     "t": "h",
+     "text": "Honesty in schoolwork"
+    },
+    {
+     "t": "p",
+     "text": "Handing in work written by AI as if it were your own is a form of **[[Plagiarism|plagiarism]]**: presenting someone else's work as yours. It is dishonest, and it also means *you* don't learn, which shows up in exams where there is no AI to help."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Using AI to help you learn",
+      "Using AI to cheat"
+     ],
+     "rows": [
+      [
+       "Example",
+       "Asking it to explain photosynthesis a different way, then writing notes in your own words",
+       "Asking it to write your English essay, then handing it in"
+      ],
+      [
+       "Who does the thinking?",
+       "You",
+       "The AI"
+      ],
+      [
+       "Honest?",
+       "Yes, if your teacher allows it and you say you used it",
+       "No: it is plagiarism"
+      ],
+      [
+       "Result in exams",
+       "You understand the topic",
+       "You are stuck, because you never learned it"
+      ]
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "For GCSE and A-level coursework, exam boards treat submitting AI-generated work as your own as **malpractice**. Penalties can include losing marks or being disqualified. Always follow your teacher's and school's rules on AI."
+    },
+    {
+     "t": "h",
+     "text": "Privacy"
+    },
+    {
+     "t": "p",
+     "text": "Many AI tools store what you type, and some use it to train future models. Protect your **[[Personal data|personal data]]**:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Never type your full name, address, phone number, passwords or school login into an AI chatbot.",
+      "Don't upload photos of friends or family without their permission.",
+      "Don't share other people's private information, including friends' messages.",
+      "Many AI tools have a minimum age (often 13, sometimes 18). Check the rules and use only tools your school or parents allow."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Deepfakes"
+    },
+    {
+     "t": "p",
+     "text": "A **[[Deepfake|deepfake]]** is a fake image, video or audio clip, made using AI, that shows a real person saying or doing something they never said or did. Some are made as obvious jokes, but deepfakes can be used to:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "spread false news, e.g. a fake video of a politician before an election;",
+      "scam people, e.g. a cloned voice of a family member asking for money;",
+      "bully or humiliate someone, e.g. a fake embarrassing image of a classmate."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: what should Ellie do?",
+     "context": "Ellie sees a fake, embarrassing image of a girl in her year being shared in a group chat. Someone says it was \"just made with an AI app for a laugh\".",
+     "steps": [
+      "It is not a joke: it is harmful to the girl, and making or sharing it is a form of **cyberbullying**.",
+      "Making or sharing a fake sexual image of anyone under 18 is a serious crime, even if it was made with an AI app.",
+      "Ellie should not share it or react to it, should keep evidence if she can do so safely, and tell a trusted adult."
+     ],
+     "answer": "Don't share, tell a trusted adult. Deepfakes of real people can cause serious harm."
+    },
+    {
+     "t": "tip",
+     "text": "To spot a possible deepfake: look for odd details (hands, teeth, earrings, blurred edges, strange lighting), check whether trusted news sources are reporting it, and ask: *who posted this, and why?*"
+    },
+    {
+     "t": "h",
+     "text": "Jobs"
+    },
+    {
+     "t": "p",
+     "text": "AI will change many jobs. Some tasks, such as sorting documents or answering simple customer questions, are already being done by AI. But history shows that new technology also **creates** jobs: people are needed to build, test, check and manage AI systems. Many jobs will change rather than disappear, with people using AI as a tool. Skills like creativity, teamwork, caring for others and good judgement remain very valuable."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Ethics is about what is right and wrong.",
+      "Passing off AI work as your own is plagiarism, and in coursework it is malpractice.",
+      "Never type personal data into AI tools; check age limits.",
+      "Deepfakes are AI-made fakes of real people; they can spread lies, scam and bully.",
+      "AI will replace some tasks, change many jobs and create new ones."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is an honest use of AI for homework (if your teacher allows it)?",
+     "o": [
+      "Copying an AI essay and handing it in",
+      "Asking AI to explain a topic, then writing it in your own words",
+      "Getting AI to do your test",
+      "Changing a few words in an AI essay so it looks like yours"
+     ],
+     "a": 1,
+     "why": "You do the thinking and the writing."
+    },
+    {
+     "q": "What is a deepfake?",
+     "o": [
+      "A broken video file",
+      "An AI-made fake image, video or audio of a real person",
+      "A deep-sea photo",
+      "A type of password"
+     ],
+     "a": 1,
+     "why": "It shows someone saying or doing something they never did."
+    },
+    {
+     "q": "Which should you NEVER type into an AI chatbot?",
+     "o": [
+      "A question about volcanoes",
+      "Your home address and password",
+      "A request for revision tips",
+      "A spelling question"
+     ],
+     "a": 1,
+     "why": "Protect your personal data."
+    },
+    {
+     "q": "What is the most likely effect of AI on jobs?",
+     "o": [
+      "Every job will disappear",
+      "Nothing will change",
+      "Some tasks will be automated, many jobs will change and new jobs will be created",
+      "Only teachers will lose jobs"
+     ],
+     "a": 2,
+     "why": "A balanced view: change, not simply loss."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why handing in AI-generated work as your own is wrong.",
+     "m": 2,
+     "a": "It is dishonest/plagiarism, as you are claiming work that is not yours (1); you don't learn the topic, so you struggle in exams / it can be malpractice with penalties (1)."
+    },
+    {
+     "q": "Describe **two** ways deepfakes can cause harm.",
+     "m": 2,
+     "a": "Any two: spreading false news/misinformation (1); scams, e.g. cloned voices asking for money (1); bullying or humiliating someone (1); damaging someone's reputation (1)."
+    },
+    {
+     "q": "Discuss how AI might affect jobs in the future. Give a balanced answer.",
+     "m": 3,
+     "a": "Some tasks/jobs may be done by AI, e.g. simple customer service or sorting documents (1); new jobs will be created building, testing or managing AI (1); many jobs will change, with people using AI as a tool / human skills like creativity and care stay valuable (1)."
+    }
+   ],
+   "terms": [
+    "Ethics",
+    "Plagiarism",
+    "Personal data",
+    "Deepfake"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p10",
+   "spec": "Use AI tools well by writing clear prompts, checking facts and citing AI use",
+   "summary": "To use AI tools well, write clear prompts that give context, a task and a format; check every fact in a reliable source; and be honest by saying when and how you used AI. AI should support your thinking, not replace it.",
+   "diagram": {
+    "kind": "cycle",
+    "title": "Using AI well",
+    "caption": "A good habit to follow every time.",
+    "items": [
+     {
+      "label": "Prompt",
+      "detail": "Give context, a clear task, a format and limits."
+     },
+     {
+      "label": "Read critically",
+      "detail": "Does it make sense? Is it at the right level?"
+     },
+     {
+      "label": "Check",
+      "detail": "Confirm facts, quotes and links in reliable sources."
+     },
+     {
+      "label": "Refine",
+      "detail": "Ask a better follow-up question if the answer wasn't right."
+     },
+     {
+      "label": "Write and cite",
+      "detail": "Put it in your own words and say how you used AI."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Used well, AI can be a brilliant study partner: it can explain things in a new way, quiz you and help you plan. Used badly, it gives you wrong answers that you don't notice. The difference is **how** you use it."
+    },
+    {
+     "t": "h",
+     "text": "Writing good prompts"
+    },
+    {
+     "t": "p",
+     "text": "A good **prompt** gives the AI enough information to give you a useful answer. Try including:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part of the prompt",
+      "What it means",
+      "Example"
+     ],
+     "rows": [
+      [
+       "**Role or context**",
+       "Who you are and what you need it for",
+       "\"I'm a Year 9 pupil in Northern Ireland revising for a Geography test.\""
+      ],
+      [
+       "**Task**",
+       "Exactly what you want it to do",
+       "\"Explain how a volcano forms.\""
+      ],
+      [
+       "**Format**",
+       "How you want the answer laid out",
+       "\"Use 5 bullet points with simple words.\""
+      ],
+      [
+       "**Limits**",
+       "Length, level or things to avoid",
+       "\"Keep it under 100 words.\""
+      ]
+     ],
+     "caption": "The parts of a good prompt"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: improving a prompt",
+     "context": "Niall types: *\"volcanoes\"*. He gets a long, complicated essay he can't use.",
+     "steps": [
+      "Add context: *\"I'm in Year 9 revising for a Geography test.\"*",
+      "Add a clear task: *\"Explain how a volcano forms and why some erupt explosively.\"*",
+      "Add a format: *\"Use 5 short bullet points.\"*",
+      "Ask it to help him learn: *\"Then give me 3 quiz questions to test myself, without the answers.\"*"
+     ],
+     "answer": "The improved prompt gets a short, useful answer at the right level, plus a quick self-test."
+    },
+    {
+     "t": "tip",
+     "text": "If the first answer isn't right, don't give up: **refine** your prompt. Ask for it to be simpler, shorter, or to give an example."
+    },
+    {
+     "t": "h",
+     "text": "Checking facts"
+    },
+    {
+     "t": "p",
+     "text": "Remember hallucinations. Before you use anything an AI tool tells you:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Check** important facts, dates, figures and quotes in at least one reliable source, such as a textbook, your class notes, BBC Bitesize or an official website.",
+      "**Look for real sources.** If the AI gives a link or book, open it or find it yourself to make sure it exists and says what the AI claims.",
+      "**Ask yourself:** does this make sense with what I already know?",
+      "**Ask a teacher** if two sources disagree."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "h",
+     "text": "Citing AI use"
+    },
+    {
+     "t": "p",
+     "text": "Being honest about AI use is part of good **[[Citation|citation]]**: saying where information came from. If your teacher allows AI for a task, record:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "the AI tool you used (a general description is fine, e.g. \"an AI chatbot\" plus its name);",
+      "the date you used it;",
+      "the prompt(s) you typed;",
+      "what you used it for, e.g. \"to help plan my essay\" or \"to explain a topic\"."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: an AI acknowledgement",
+     "context": "Saoirse used an AI chatbot to help plan her ICT project on renewable energy, with her teacher's permission.",
+     "steps": [
+      "She keeps a copy of her prompts and the replies.",
+      "She checks every fact she uses in reliable sources and cites *those* sources in her bibliography.",
+      "At the end she adds a note."
+     ],
+     "answer": "*\"I used an AI chatbot on 12 March to suggest headings for my project plan. Prompt: 'Suggest five headings for a Year 10 project on renewable energy in Northern Ireland.' All facts were checked and are referenced from the sources listed.\"*"
+    },
+    {
+     "t": "note",
+     "text": "Think of AI as a **study partner**, not a ghostwriter. If you could not explain your work to your teacher without the AI, you have let it do too much."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A good prompt gives context, a clear task, a format and limits.",
+      "Refine your prompt if the first answer is not useful.",
+      "Check every important fact in a reliable source.",
+      "Record the tool, date, prompts and what you used AI for.",
+      "Use AI to support your learning, not to replace your thinking."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is the best prompt?",
+     "o": [
+      "volcanoes",
+      "tell me stuff",
+      "I'm in Year 9. Explain how volcanoes form in 5 short bullet points.",
+      "VOLCANO NOW"
+     ],
+     "a": 2,
+     "why": "It gives context, a task and a format."
+    },
+    {
+     "q": "An AI tool gives you a website link as a source. What should you do?",
+     "o": [
+      "Copy it straight into your bibliography",
+      "Open it to check it exists and says what the AI claims",
+      "Ignore all sources",
+      "Ask the AI to promise it is real"
+     ],
+     "a": 1,
+     "why": "AI can hallucinate links."
+    },
+    {
+     "q": "Which of these should you record when citing AI use?",
+     "o": [
+      "Your password",
+      "The tool, the date and the prompts you used",
+      "Your home address",
+      "Nothing, AI never needs citing"
+     ],
+     "a": 1,
+     "why": "This shows honestly how you used it."
+    },
+    {
+     "q": "What should you do if the AI's first answer is too complicated?",
+     "o": [
+      "Give up",
+      "Refine the prompt, e.g. ask for simpler words",
+      "Copy it anyway",
+      "Restart the computer"
+     ],
+     "a": 1,
+     "why": "Refining prompts gets better answers."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Rewrite the prompt *\"tell me about Northern Ireland\"* to make it more useful for a Year 8 History homework. Explain **two** improvements you made.",
+     "m": 3,
+     "a": "Improved prompt including at least context and a clear task (1), e.g. \"I'm in Year 8 doing History homework. Explain three reasons why the Giant's Causeway is important, in simple bullet points.\" Explanation: added context so the answer is at the right level (1); added a specific task/format/length so the answer is focused and usable (1)."
+    },
+    {
+     "q": "Explain **two** ways to check whether information from an AI chatbot is accurate.",
+     "m": 2,
+     "a": "Any two: check it against a reliable source, e.g. textbook/BBC Bitesize/official website (1); open any links/find any books to make sure they exist (1); compare with what you already know/class notes (1); ask a teacher (1)."
+    },
+    {
+     "q": "State **three** things a pupil should record when acknowledging AI use in a piece of work.",
+     "m": 3,
+     "a": "Any three: the AI tool used (1); the date (1); the prompts typed (1); what it was used for / which part of the work (1)."
+    }
+   ],
+   "terms": [
+    "Citation"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Artificial intelligence",
+   "def": "Computer systems that can do tasks that would normally need human intelligence, such as recognising faces, understanding speech or making predictions.",
+   "alt": "AI",
+   "page": "p01"
+  },
+  {
+   "term": "Algorithm",
+   "def": "A set of step-by-step instructions for solving a problem or completing a task.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Data",
+   "def": "Facts, figures, text, images or sounds that a computer can store and process.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Turing test",
+   "def": "A test proposed by Alan Turing in 1950 in which a judge has typed conversations with a hidden person and a hidden computer and tries to tell which is the computer.",
+   "alt": "imitation game",
+   "page": "p02"
+  },
+  {
+   "term": "Chatbot",
+   "def": "A program that holds a conversation with a person using text or speech.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Narrow AI",
+   "def": "AI designed to do one specific task, or a small set of related tasks, very well. All AI today is narrow AI.",
+   "alt": "weak AI",
+   "page": "p03"
+  },
+  {
+   "term": "General AI",
+   "def": "A possible future AI that could learn and do any intellectual task a human can. It does not exist yet.",
+   "alt": "AGI",
+   "page": "p03"
+  },
+  {
+   "term": "Recommendation system",
+   "def": "AI that predicts what a user will want next (a video, song or product) from their history and that of similar users.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Voice assistant",
+   "def": "AI software that listens to spoken requests and carries them out, often on a phone or smart speaker.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Speech recognition",
+   "def": "Technology that turns spoken words into text a computer can use.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Facial recognition",
+   "def": "AI that identifies or checks a person from an image of their face, e.g. face unlock.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Spam filter",
+   "def": "AI that predicts whether an email is junk (spam) and moves it out of the inbox.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Machine learning",
+   "def": "A type of AI in which a computer learns patterns from examples (data) instead of following rules written by a programmer.",
+   "alt": "ML",
+   "page": "p05"
+  },
+  {
+   "term": "Pattern",
+   "def": "Something that repeats or links examples together, which a machine learning model can learn and use to make predictions.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Label",
+   "def": "The correct answer attached to a training example, e.g. cat or dog, spam or not spam.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Training data",
+   "def": "The labelled examples a machine learning model learns from.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Model",
+   "def": "What machine learning produces after training: the learned patterns used to make predictions about new data.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Testing data",
+   "def": "New labelled examples, not used in training, that are used to check how accurate a model is.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Accuracy",
+   "def": "The percentage of test examples a model gets right: number correct ÷ number tested × 100.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Feature",
+   "def": "A detail or measurable property the model uses to make a decision, e.g. the words in an email or the shape of an ear in a photo.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Neural network",
+   "def": "A type of machine learning model loosely inspired by the brain, made of layers of simple connected units.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Deep learning",
+   "def": "Machine learning that uses neural networks with many layers.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Classifier",
+   "def": "A machine learning model that sorts each input into one of a set of groups (classes), e.g. spam or not spam.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Generative AI",
+   "def": "AI that creates new content, such as text, images, music, video or code.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Large language model",
+   "def": "A very large neural network trained on huge amounts of text that writes by repeatedly predicting a likely next word. It powers AI chatbots.",
+   "alt": "LLM",
+   "page": "p07"
+  },
+  {
+   "term": "Prompt",
+   "def": "The instruction or question you give to an AI tool.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Hallucination",
+   "def": "When an AI tool produces false or made-up information but presents it as true.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Bias",
+   "def": "When an AI system gives results that are unfair to certain groups of people, usually because of unbalanced or unfair training data.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Ethics",
+   "def": "Deciding what is morally right and wrong, e.g. whether and how AI should be used.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Plagiarism",
+   "def": "Presenting someone else's work (including work written by AI) as your own.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Personal data",
+   "def": "Information that identifies you, such as your name, address, phone number, photos or passwords.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Deepfake",
+   "def": "A fake image, video or audio clip made with AI that shows a real person saying or doing something they never said or did.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Citation",
+   "def": "A note saying where information came from, including when and how an AI tool was used.",
+   "alt": "",
+   "page": "p10"
+  }
+ ]
+}

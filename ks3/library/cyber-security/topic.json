@@ -1,0 +1,2573 @@
+{
+ "title": "Cyber Security",
+ "summary": "How to protect computers, networks and accounts: spotting malware and scams, strong passwords and 2FA, encryption, everyday defences, the law and careers in cyber.",
+ "learn": [
+  "Why data and systems are valuable, and the CIA triad",
+  "Types of malware and social engineering scams",
+  "How to spot a phishing message",
+  "Strong passwords, passphrases and two-factor authentication",
+  "Encryption, firewalls, updates and backups",
+  "The law, ethical hacking and cyber careers"
+ ],
+ "temporary": false,
+ "intro": "Learn how criminals try to attack computers and accounts, and, more importantly, how to stop them: from spotting phishing and building strong passwords to encryption, firewalls, backups, the law and careers in cyber security.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Explain why data and computer systems are valuable and describe the CIA triad",
+   "summary": "Cyber security protects computers, networks, accounts and data. Good security keeps data Confidential, keeps it correct (Integrity) and keeps it Available when it is needed: the CIA triad.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Which part of CIA is broken?",
+    "caption": "Decide which part of the CIA triad each attack damages, then click to check.",
+    "head": [
+     "What happened",
+     "CIA part",
+     "Why"
+    ],
+    "rows": [
+     [
+      "A pupil reads the teacher's markbook over their shoulder",
+      "Confidentiality",
+      "Someone saw data they were not allowed to see"
+     ],
+     [
+      "Someone changes their own test score from 45% to 95%",
+      "Integrity",
+      "The data has been altered, so it can no longer be trusted"
+     ],
+     [
+      "Ransomware locks every file on the school server",
+      "Availability",
+      "Staff and pupils cannot get to the data when they need it"
+     ],
+     [
+      "A hacker posts the school's pupil addresses online",
+      "Confidentiality",
+      "Private personal data has been exposed"
+     ],
+     [
+      "The online homework site is flooded with fake traffic and crashes",
+      "Availability",
+      "The system is down, so nobody can use it"
+     ],
+     [
+      "Malware swaps the bank details on a supplier's invoice",
+      "Integrity",
+      "Data was secretly changed so money goes to the wrong place"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Think about everything stored about you in school: your name, address, date of birth, medical notes, attendance, reports and exam results. Now think about your phone: photos, messages, game accounts and saved passwords. All of this is **data**, and to the wrong person it is worth a lot."
+    },
+    {
+     "t": "p",
+     "text": "**[[Cyber security]]** is the set of methods, tools and habits used to protect computers, networks, accounts and data from being attacked, damaged or accessed without permission."
+    },
+    {
+     "t": "h",
+     "text": "Why is data so valuable?"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Who wants it?",
+      "What they might do with it"
+     ],
+     "rows": [
+      [
+       "Criminals",
+       "Sell stolen passwords and personal details, steal money, or use your identity to open accounts."
+      ],
+      [
+       "Ransomware gangs",
+       "Lock an organisation's files and demand payment to unlock them."
+      ],
+      [
+       "Companies",
+       "Use data about what you like to target adverts (legally, if they follow the rules)."
+      ],
+      [
+       "Pranksters and bullies",
+       "Take over a social media or game account to embarrass the owner."
+      ],
+      [
+       "Other countries",
+       "Spy on governments and businesses, or disrupt hospitals, power and transport."
+      ]
+     ],
+     "caption": "Why people want your data and systems"
+    },
+    {
+     "t": "p",
+     "text": "Systems are valuable too. If a hospital's computers stop working, operations are cancelled. If a school's network is down, registers, lessons and exams are disrupted. Attacking the **system** can do as much harm as stealing the **data**."
+    },
+    {
+     "t": "h",
+     "text": "The CIA triad"
+    },
+    {
+     "t": "p",
+     "text": "Security experts describe what they are protecting using three ideas, called the **[[CIA triad]]** (nothing to do with the American spy agency!)."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Letter",
+      "Meaning",
+      "School example"
+     ],
+     "rows": [
+      [
+       "**C**: [[Confidentiality]]",
+       "Only the right people can **see** the data.",
+       "Only your teachers and parents can see your report."
+      ],
+      [
+       "**I**: [[Integrity]]",
+       "The data is **correct** and has not been changed without permission.",
+       "Nobody can secretly change your exam marks."
+      ],
+      [
+       "**A**: [[Availability]]",
+       "The data and systems **work** when the right people need them.",
+       "The register system works at 9 am every morning."
+      ]
+     ],
+     "caption": "The three parts of the CIA triad"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a stolen teacher password",
+     "context": "Someone guesses a teacher's password and logs in to the school's management system. Which parts of the CIA triad are at risk?",
+     "steps": [
+      "They can **see** pupils' private details: confidentiality is broken.",
+      "They could **change** marks or attendance: integrity is at risk.",
+      "They could **delete** records or lock the account: availability is at risk."
+     ],
+     "answer": "One weak password can put all three parts of the triad at risk, which is why accounts need strong protection."
+    },
+    {
+     "t": "note",
+     "text": "Not every threat is a criminal. A spilled drink, a fire, a power cut or simply deleting the wrong folder can also destroy data. Good cyber security plans for accidents as well as attacks."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Cyber security protects computers, networks, accounts and data.",
+      "Data is valuable to criminals, companies and even other countries.",
+      "Confidentiality: only the right people can see it.",
+      "Integrity: it is correct and has not been tampered with.",
+      "Availability: it works when it is needed."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does the **I** in the CIA triad stand for?",
+     "o": [
+      "Information",
+      "Integrity",
+      "Internet",
+      "Identity"
+     ],
+     "a": 1,
+     "why": "Integrity means the data is correct and has not been changed without permission."
+    },
+    {
+     "q": "A hacker reads private emails but changes nothing. Which part of the CIA triad is broken?",
+     "o": [
+      "Confidentiality",
+      "Integrity",
+      "Availability",
+      "None of them"
+     ],
+     "a": 0,
+     "why": "Someone has seen data they should not see."
+    },
+    {
+     "q": "The school website is knocked offline for a day. Which part of the triad is affected?",
+     "o": [
+      "Confidentiality",
+      "Integrity",
+      "Availability",
+      "Encryption"
+     ],
+     "a": 2,
+     "why": "Availability means systems work when people need them."
+    },
+    {
+     "q": "Which of these is the best description of cyber security?",
+     "o": [
+      "Making computers run faster",
+      "Protecting systems, networks, accounts and data from attack or damage",
+      "Building websites",
+      "Fixing broken printers"
+     ],
+     "a": 1,
+     "why": "Cyber security is all about protection."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name the **three** parts of the CIA triad.",
+     "m": 3,
+     "a": "Confidentiality (1); Integrity (1); Availability (1)."
+    },
+    {
+     "q": "Give **two** reasons why a criminal might want to steal personal data from a school.",
+     "m": 2,
+     "a": "Any two: to sell it (1); to commit identity theft / pretend to be someone (1); to demand a ransom from the school (1); to steal money / use for scams (1)."
+    },
+    {
+     "q": "A pupil logs in to the school system and changes their attendance record. Explain which part of the CIA triad has been broken.",
+     "m": 2,
+     "a": "Integrity (1) because the data has been changed without permission so it is no longer accurate/trustworthy (1)."
+    }
+   ],
+   "terms": [
+    "Cyber security",
+    "CIA triad",
+    "Confidentiality",
+    "Integrity",
+    "Availability"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "spec": "Describe different types of malware and the harm each one can do",
+   "summary": "Malware is any software written to cause harm. Viruses, worms, trojans, ransomware, spyware and adware differ in how they spread and what damage they do.",
+   "diagram": {
+    "kind": "match",
+    "title": "Match the malware",
+    "caption": "Click a type of malware, then the description that matches it.",
+    "pairs": [
+     [
+      "Virus",
+      "Attaches itself to a file and spreads when that file is opened or shared"
+     ],
+     [
+      "Worm",
+      "Spreads across a network by itself, with no help from a user"
+     ],
+     [
+      "Trojan",
+      "Looks like a useful program but hides something harmful inside"
+     ],
+     [
+      "Ransomware",
+      "Locks or encrypts your files and demands payment"
+     ],
+     [
+      "Spyware",
+      "Secretly watches what you do and sends it to someone else"
+     ],
+     [
+      "Adware",
+      "Floods you with pop-up adverts and may track your browsing"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**[[Malware]]** is short for **mal**icious soft**ware**: any program written on purpose to cause harm. You met some types of malware in e-safety. Here we look more closely at **how each one spreads** and **what it does**, so you can recognise the signs."
+    },
+    {
+     "t": "h",
+     "text": "Six types of malware"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Type",
+      "How it spreads",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "**[[Virus]]**",
+       "Attaches to a normal file or program. It needs a **person** to open or share the file.",
+       "Copies itself into other files; can delete or corrupt data and slow the computer."
+      ],
+      [
+       "**[[Worm]]**",
+       "Spreads **on its own** across a network, looking for computers with security holes.",
+       "Copies itself very fast, using up bandwidth and slowing whole networks."
+      ],
+      [
+       "**[[Trojan]]**",
+       "Disguised as something you want, like a free game, a cheat or a fake app.",
+       "Once installed, it can open a 'back door' that lets an attacker control the computer."
+      ],
+      [
+       "**[[Ransomware]]**",
+       "Often arrives through a phishing email attachment or a trojan.",
+       "Encrypts (scrambles) your files and demands money, usually in cryptocurrency, to unlock them."
+      ],
+      [
+       "**[[Spyware]]**",
+       "Hidden inside free downloads or installed by a trojan.",
+       "Secretly records your activity. A *keylogger* records every key you press, including passwords."
+      ],
+      [
+       "**[[Adware]]**",
+       "Bundled with free software or browser extensions.",
+       "Shows unwanted adverts and pop-ups, and may track the sites you visit."
+      ]
+     ],
+     "caption": "Types of malware"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Virus",
+      "Worm"
+     ],
+     "rows": [
+      [
+       "Needs a person to help it spread?",
+       "Yes: someone must open or share an infected file",
+       "No: it spreads by itself"
+      ],
+      [
+       "Attaches to another file?",
+       "Yes",
+       "No: it is a standalone program"
+      ],
+      [
+       "How fast can it spread?",
+       "As fast as people share files",
+       "Very fast: thousands of computers in minutes"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the WannaCry attack (2017)",
+     "context": "In May 2017 a piece of ransomware called WannaCry spread around the world. It hit many NHS hospitals and GP surgeries in the UK, and some appointments and operations had to be cancelled.",
+     "steps": [
+      "It behaved like a **worm**: it spread by itself between computers on a network.",
+      "It was **ransomware**: it encrypted files and demanded payment to unlock them.",
+      "It only worked on computers that had **not installed a security update** that Microsoft had released two months earlier.",
+      "Organisations with up-to-date computers and good **backups** recovered much more quickly."
+     ],
+     "answer": "Malware types can be combined. Keeping software updated and keeping backups are two of the best defences."
+    },
+    {
+     "t": "h",
+     "text": "Warning signs that a device may be infected"
+    },
+    {
+     "t": "list",
+     "items": [
+      "The computer suddenly becomes very slow or crashes often.",
+      "Lots of pop-ups appear, even when no browser is open.",
+      "Your browser home page or search engine changes by itself.",
+      "Friends receive messages from your account that you did not send.",
+      "Files will not open, or have strange new file extensions, and a ransom note appears."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "warn",
+     "text": "If you see a ransom message on a school computer, **do not** click anything or try to pay. Stop, unplug nothing yourself, and tell your teacher straight away so the technicians can isolate the machine."
+    },
+    {
+     "t": "tip",
+     "text": "Most malware needs **you** to let it in: by opening an attachment, clicking a link or installing something. Thinking before you click stops most of it."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Malware is any software designed to cause harm.",
+      "A virus needs a person to spread it; a worm spreads by itself.",
+      "A trojan pretends to be something useful.",
+      "Ransomware locks your files and demands payment.",
+      "Spyware secretly watches you; adware floods you with adverts."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which type of malware can spread across a network **without** anyone opening a file?",
+     "o": [
+      "Virus",
+      "Worm",
+      "Adware",
+      "Trojan"
+     ],
+     "a": 1,
+     "why": "A worm is standalone and spreads by itself."
+    },
+    {
+     "q": "A free 'Robux generator' app secretly lets someone control your laptop. What type of malware is it?",
+     "o": [
+      "Adware",
+      "Worm",
+      "Trojan",
+      "Virus"
+     ],
+     "a": 2,
+     "why": "It is disguised as something you want: a trojan horse."
+    },
+    {
+     "q": "What does ransomware do?",
+     "o": [
+      "Shows adverts",
+      "Encrypts your files and demands payment",
+      "Speeds up your computer",
+      "Only deletes your browser history"
+     ],
+     "a": 1,
+     "why": "It holds your files to ransom."
+    },
+    {
+     "q": "A keylogger is a type of:",
+     "o": [
+      "Spyware",
+      "Firewall",
+      "Adware",
+      "Backup"
+     ],
+     "a": 0,
+     "why": "It secretly records your key presses, so it is spyware."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe **one** difference between a virus and a worm.",
+     "m": 2,
+     "a": "A virus attaches itself to another file/program (1) whereas a worm is a standalone program (1). OR A virus needs a person to open/share a file to spread (1) whereas a worm spreads by itself across a network (1)."
+    },
+    {
+     "q": "Explain what ransomware is and **one** way an organisation can reduce the damage it causes.",
+     "m": 3,
+     "a": "Malware that encrypts/locks files (1) and demands a payment to unlock them (1). Keep regular backups so files can be restored without paying / keep software updated / use anti-malware (1)."
+    },
+    {
+     "q": "Give **two** signs that a computer might be infected with malware.",
+     "m": 2,
+     "a": "Any two: runs very slowly / crashes (1); unexpected pop-ups (1); home page changes by itself (1); messages sent from your account that you did not send (1); files will not open / ransom note (1)."
+    }
+   ],
+   "terms": [
+    "Malware",
+    "Virus",
+    "Worm",
+    "Trojan",
+    "Ransomware",
+    "Spyware",
+    "Adware"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "spec": "Describe social engineering techniques, including phishing, smishing, vishing, pretexting and shoulder surfing",
+   "summary": "Social engineering tricks people rather than computers. Attackers use fake emails, texts, phone calls, made-up stories and simply looking over your shoulder to get passwords and information.",
+   "diagram": {
+    "kind": "hotspot",
+    "title": "Anatomy of a phishing email",
+    "caption": "Click each part of this fake email to see the warning sign.",
+    "rows": [
+     [
+      {
+       "label": "From: support@micros0ft-security.co",
+       "detail": "The sender address is wrong: a zero instead of an 'o' and a strange domain. Always check the real address, not just the display name.",
+       "span": 2
+      },
+      {
+       "label": "Subject: URGENT!!! Account suspended",
+       "detail": "Capitals and panic words are used to rush you so you do not stop and think.",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "Dear Student,",
+       "detail": "A generic greeting. A real organisation that holds your account would normally use your name.",
+       "span": 1
+      },
+      {
+       "label": "Your account will be deleted in 2 hours",
+       "detail": "A threat with a short deadline. Real organisations do not give you two hours to save your account.",
+       "span": 2
+      }
+     ],
+     [
+      {
+       "label": "Click here to verfy your pasword",
+       "detail": "Spelling mistakes and a request for your password. Genuine companies never ask for your password by email.",
+       "span": 2
+      },
+      {
+       "label": "Attachment: Account_Form.zip",
+       "detail": "An unexpected attachment, especially a .zip or .exe file, could contain malware.",
+       "span": 1
+      }
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "You can buy the best security software in the world, but if someone simply **tells you their password**, the software cannot help. **[[Social engineering]]** means tricking or manipulating people into giving away information or access. It attacks the *human*, often called the weakest link."
+    },
+    {
+     "t": "p",
+     "text": "Social engineers rely on feelings: **fear** (\"your account will be closed\"), **urgency** (\"act now\"), **curiosity** (\"see who viewed your profile\"), **greed** (\"you've won\") and **trust** (\"this is IT support\")."
+    },
+    {
+     "t": "h",
+     "text": "Five techniques to know"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Technique",
+      "How it works",
+      "Example"
+     ],
+     "rows": [
+      [
+       "**[[Phishing]]**",
+       "Fake **emails** that pretend to be from a trusted organisation, to get you to click a link, open an attachment or type in your details.",
+       "An email 'from Netflix' saying your payment failed, with a link to a fake login page."
+      ],
+      [
+       "**[[Smishing]]**",
+       "Phishing by **SMS text message** (or messaging app).",
+       "A text 'from Royal Mail' asking you to pay a small fee to redeliver a parcel."
+      ],
+      [
+       "**[[Vishing]]**",
+       "Phishing by **voice**: a phone call or voicemail.",
+       "A caller claiming to be from your bank's fraud team asking for a code sent to your phone."
+      ],
+      [
+       "**[[Pretexting]]**",
+       "Inventing a believable **story** (a pretext) to get someone to help.",
+       "Someone phones the school office pretending to be a parent who 'forgot' a pupil's login."
+      ],
+      [
+       "**[[Shoulder surfing]]**",
+       "Watching someone type a password or PIN, in person or with a camera.",
+       "A classmate watches you type your password at the start of a lesson."
+      ]
+     ],
+     "caption": "Social engineering techniques"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the fake technician",
+     "context": "During lunch a friendly adult in a high-vis vest walks into the computer room and says to a Year 9 pupil: \"I'm from the IT company, I need to check the network. Can you log in for me? Your teacher said it's fine.\"",
+     "steps": [
+      "**Pretexting:** the person has invented a story to seem trustworthy.",
+      "**Authority:** the vest and the mention of the teacher make it feel official.",
+      "**Pressure:** it is lunchtime, so there is no teacher to check with.",
+      "**The right response:** politely say no, do not log in, and tell a member of staff straight away."
+     ],
+     "answer": "Real technicians never need *your* password. Anyone asking for it is a warning sign."
+    },
+    {
+     "t": "tip",
+     "text": "To beat shoulder surfing: shield the keyboard or PIN pad with your hand, lock your screen when you walk away (**Windows key + L**), and never type a password while someone is watching."
+    },
+    {
+     "t": "note",
+     "text": "Phishing messages are getting more convincing. Some are sent to one specific person using details found online (this is called *spear phishing*), and AI tools now help criminals write messages without spelling mistakes."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Social engineering tricks people, not computers.",
+      "Phishing = email; smishing = SMS text; vishing = voice call.",
+      "Pretexting uses a made-up story to win trust.",
+      "Shoulder surfing means watching someone type a password or PIN.",
+      "Attackers use fear, urgency, curiosity, greed and trust."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "A text message claims to be from a delivery company and asks you to pay a redelivery fee. This is:",
+     "o": [
+      "Vishing",
+      "Smishing",
+      "Shoulder surfing",
+      "A worm"
+     ],
+     "a": 1,
+     "why": "SMS + phishing = smishing."
+    },
+    {
+     "q": "What is shoulder surfing?",
+     "o": [
+      "Browsing the web on a tablet",
+      "Watching someone type their password or PIN",
+      "Sending fake emails",
+      "Hacking a Wi-Fi network"
+     ],
+     "a": 1,
+     "why": "It is simply looking over someone's shoulder."
+    },
+    {
+     "q": "Someone rings pretending to be a parent and makes up a story to get a pupil's login. This is:",
+     "o": [
+      "Pretexting",
+      "Adware",
+      "Encryption",
+      "Smishing"
+     ],
+     "a": 0,
+     "why": "A pretext is an invented story."
+    },
+    {
+     "q": "Why is social engineering often successful?",
+     "o": [
+      "It uses very expensive equipment",
+      "It plays on human feelings like fear and trust",
+      "It only works on old computers",
+      "It needs no internet connection"
+     ],
+     "a": 1,
+     "why": "It targets people, who can be rushed or tricked."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between **phishing** and **vishing**.",
+     "m": 2,
+     "a": "Phishing uses fake emails / messages to trick people into giving details (1); vishing uses phone calls / voice messages (1)."
+    },
+    {
+     "q": "What is **social engineering**? Give **one** example.",
+     "m": 2,
+     "a": "Tricking/manipulating people into giving away information or access (1). Any valid example, e.g. phishing email, smishing text, pretexting phone call, shoulder surfing (1)."
+    },
+    {
+     "q": "Describe **two** ways a pupil could protect themselves against shoulder surfing.",
+     "m": 2,
+     "a": "Any two: cover the keyboard/keypad when typing (1); check nobody is watching before typing (1); lock the screen when leaving the computer (1); use a privacy screen filter (1)."
+    }
+   ],
+   "terms": [
+    "Social engineering",
+    "Phishing",
+    "Smishing",
+    "Vishing",
+    "Pretexting",
+    "Shoulder surfing"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "spec": "Spot the warning signs of a phishing message and know what to do if you receive one",
+   "summary": "Phishing messages share common warning signs: wrong sender addresses, urgency, generic greetings, odd links and requests for passwords. If in doubt, don't click: check another way and report it.",
+   "diagram": {
+    "kind": "flow",
+    "title": "I've received a suspicious message",
+    "caption": "Follow the steps whenever a message makes you unsure.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Suspicious message arrives",
+      "detail": "An email, text, DM or call that asks you to click, pay, log in or share something.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Stop and check the signs",
+      "detail": "Sender address, urgency, greeting, spelling, links and attachments.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "Is it genuine?",
+      "detail": "If anything feels wrong, treat it as suspicious.",
+      "shape": "decision"
+     },
+     {
+      "id": "d",
+      "label": "Check another way",
+      "detail": "Go to the real app or website yourself, or ask the person using a contact you already have.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Report and delete",
+      "detail": "Tell a teacher or parent. Forward scam emails to report@phishing.gov.uk and scam texts to 7726, then delete.",
+      "shape": "end"
+     },
+     {
+      "id": "f",
+      "label": "Clicked by mistake?",
+      "detail": "Tell an adult at once, change your password from a safe device and turn on 2FA.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "not sure"
+     ],
+     [
+      "c",
+      "e",
+      "clearly fake"
+     ],
+     [
+      "c",
+      "f",
+      "already clicked"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Phishing is the most common way that accounts are stolen and malware gets into organisations. The good news: most phishing messages have **warning signs** if you know where to look."
+    },
+    {
+     "t": "h",
+     "text": "The warning signs"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Warning sign",
+      "What to look for"
+     ],
+     "rows": [
+      [
+       "**Sender address**",
+       "The display name says 'PayPal' but the actual address is *paypa1-alerts@mail-secure.xyz*. Look for misspellings and odd endings."
+      ],
+      [
+       "**Urgency or threats**",
+       "\"Act within 24 hours or your account will be deleted!\""
+      ],
+      [
+       "**Generic greeting**",
+       "\"Dear Customer\" or \"Dear User\" instead of your name."
+      ],
+      [
+       "**Spelling and grammar**",
+       "Mistakes, odd wording or strange capital letters (although some scams are now perfectly written)."
+      ],
+      [
+       "**Suspicious links**",
+       "Hover over (or press and hold) a link to see where it really goes before clicking."
+      ],
+      [
+       "**Requests for information**",
+       "Asking for your password, a security code, or bank details."
+      ],
+      [
+       "**Too good to be true**",
+       "\"You've won a free PS5!\" or \"Claim 10,000 free V-Bucks\"."
+      ],
+      [
+       "**Unexpected attachments**",
+       "Files you were not expecting, especially .zip, .exe or documents asking you to 'enable content'."
+      ]
+     ],
+     "caption": "How to spot a phishing message"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: spot the signs",
+     "context": "Ciarán gets this text: *\"HMRC: You are due a tax refund of £248.50. Claim before midnight tonight at hmrc-refund-uk.com/claim\"*. He is 13 and does not pay tax.",
+     "steps": [
+      "**Unexpected:** Ciarán does not pay tax, so a refund makes no sense.",
+      "**Too good to be true:** free money.",
+      "**Urgency:** 'before midnight tonight'.",
+      "**Suspicious link:** the real HMRC website ends in **gov.uk**, not *hmrc-refund-uk.com*.",
+      "**Action:** don't click; forward the text to **7726** and delete it."
+     ],
+     "answer": "Four warning signs: this is a smishing scam designed to steal bank details."
+    },
+    {
+     "t": "h",
+     "text": "Checking links safely"
+    },
+    {
+     "t": "p",
+     "text": "A link's visible text can say anything. What matters is the **real web address**. In a web address, the most important part is the bit just before the first single forward slash, such as `www.bbc.co.uk` in `https://www.bbc.co.uk/news`. Scammers try tricks like `bbc.co.uk.news-login.com`: here the real website is **news-login.com**, not the BBC."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Genuine",
+      "Fake"
+     ],
+     "rows": [
+      [
+       "Web address",
+       "`https://www.gov.uk/...`",
+       "`https://gov-uk-refund.com/...`"
+      ],
+      [
+       "Greeting",
+       "Uses your name",
+       "\"Dear Customer\""
+      ],
+      [
+       "Asks for password?",
+       "Never",
+       "Yes, on a page linked from the message"
+      ],
+      [
+       "Tone",
+       "Calm and informative",
+       "Panicky, threatening or overexcited"
+      ]
+     ]
+    },
+    {
+     "t": "tip",
+     "text": "**Don't use the link in the message.** If you think it might be real, open the app or type the website address yourself and log in from there. If there's a real problem, you will see it."
+    },
+    {
+     "t": "note",
+     "text": "In the UK you can report scam emails to the National Cyber Security Centre by forwarding them to **report@phishing.gov.uk**, and scam texts by forwarding them to **7726** (it spells SPAM on an old phone keypad)."
+    },
+    {
+     "t": "warn",
+     "text": "If you have already clicked a link or typed in a password, **don't hide it out of embarrassment**. Tell an adult immediately. The faster a password is changed, the less damage can be done."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Check the real sender address, not just the display name.",
+      "Urgency, threats and 'too good to be true' offers are big red flags.",
+      "Hover over links to see the real address before clicking.",
+      "Never give a password or code in reply to a message.",
+      "Report scam emails to report@phishing.gov.uk and texts to 7726."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which of these is the **most** reliable sign that an email is phishing?",
+     "o": [
+      "It has a logo",
+      "It asks you to type your password into a linked page",
+      "It was sent in the morning",
+      "It is short"
+     ],
+     "a": 1,
+     "why": "Genuine companies never ask for your password via a link in an email."
+    },
+    {
+     "q": "What should you do to see where a link really goes?",
+     "o": [
+      "Click it quickly",
+      "Hover over it (or press and hold) to see the real address",
+      "Reply to the sender",
+      "Forward it to friends"
+     ],
+     "a": 1,
+     "why": "Hovering reveals the true web address."
+    },
+    {
+     "q": "In `https://login.steam.com.free-skins.net/offer`, what is the real website?",
+     "o": [
+      "steam.com",
+      "login.steam.com",
+      "free-skins.net",
+      "offer"
+     ],
+     "a": 2,
+     "why": "The real domain is the part just before the first single slash: free-skins.net."
+    },
+    {
+     "q": "Where can you forward a scam text message in the UK?",
+     "o": [
+      "999",
+      "7726",
+      "101",
+      "111"
+     ],
+     "a": 1,
+     "why": "7726 is the free scam text reporting number."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Give **three** features of an email that might suggest it is a phishing attempt.",
+     "m": 3,
+     "a": "Any three: suspicious/misspelled sender address (1); urgent tone or threats (1); generic greeting e.g. Dear Customer (1); spelling/grammar errors (1); link to a strange web address (1); asks for password/personal/bank details (1); unexpected attachment (1); offer too good to be true (1)."
+    },
+    {
+     "q": "Aoife receives an email saying her school account will be locked unless she logs in using the link. Describe what she should do.",
+     "m": 3,
+     "a": "Do not click the link / do not enter details (1); check another way, e.g. go to the school login page directly or ask a teacher (1); report it to a teacher / IT team (1); delete the email (1). Max 3."
+    },
+    {
+     "q": "Explain why the advice is to go to a website yourself rather than clicking a link in a message.",
+     "m": 2,
+     "a": "The link could lead to a fake website that copies the real one (1) and captures your login details / installs malware (1)."
+    }
+   ],
+   "terms": [],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "spec": "Explain what makes a password strong and how passphrases and password managers help",
+   "summary": "Length matters most. Long passphrases made of three random words are hard to crack but easy to remember, and a password manager lets you have a different strong password for every account.",
+   "diagram": {
+    "kind": "calc",
+    "title": "How many possible passwords?",
+    "caption": "Change the number of possible characters (10 = digits only, 26 = lowercase letters, 62 = upper, lower and digits, 94 = all keyboard characters) and the length, and watch the number of combinations grow.",
+    "inputs": [
+     {
+      "id": "c",
+      "label": "Possible characters",
+      "value": 26
+     },
+     {
+      "id": "n",
+      "label": "Password length",
+      "value": 8
+     }
+    ],
+    "formula": "Math.pow(c, n)",
+    "result": {
+     "label": "Possible passwords",
+     "unit": "combinations"
+    },
+    "show": []
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Passwords are the front door key to your accounts. Criminals don't usually guess them one at a time by hand: they use software that can try **billions of guesses a second**. This is called a **[[Brute force attack]]**. They also try lists of the most common passwords first, like `123456`, `password` and `qwerty`."
+    },
+    {
+     "t": "h",
+     "text": "Why length beats complexity"
+    },
+    {
+     "t": "p",
+     "text": "Each extra character **multiplies** the number of possible passwords. Try the calculator above: going from 8 to 12 characters makes a much bigger difference than adding a symbol."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: how long to try every password?",
+     "context": "Imagine a computer that can try **10 billion** (10,000,000,000) passwords a second. How long would it take to try every possible password?",
+     "steps": [
+      "4-digit PIN: 10⁴ = 10,000 combinations, so less than a millisecond.",
+      "8 lowercase letters: 26⁸ ≈ 209 billion, so about **21 seconds**.",
+      "8 characters using upper, lower and digits: 62⁸ ≈ 218 trillion, so about **6 hours**.",
+      "20 lowercase letters (e.g. three random words): 26²⁰ is so big it would take about **63 billion years**."
+     ],
+     "answer": "Length wins. A long passphrase of lowercase words is far stronger than a short, complicated password."
+    },
+    {
+     "t": "h",
+     "text": "Use a passphrase"
+    },
+    {
+     "t": "p",
+     "text": "A **[[Passphrase]]** is a password made of several words. The UK's National Cyber Security Centre recommends using **three random words**, such as `CactusTrumpetHarbour`. It is long, so it is hard to crack, but it is easy to picture and remember."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Weak",
+      "Why it is weak",
+      "Better"
+     ],
+     "rows": [
+      [
+       "`liverpool1`",
+       "A football team plus a number: in every hacker's word list.",
+       "`OrangeKettleGalaxy`"
+      ],
+      [
+       "`Patrick2012`",
+       "Your name and birth year can be found on social media.",
+       "`ThreeOwlsSkating!`"
+      ],
+      [
+       "`P@ssw0rd`",
+       "Swapping letters for symbols is a trick the software already knows.",
+       "`BusyPenguinHoliday`"
+      ]
+     ],
+     "caption": "Making passwords stronger"
+    },
+    {
+     "t": "h",
+     "text": "One password per account"
+    },
+    {
+     "t": "p",
+     "text": "If you use the same password everywhere and **one** website is hacked, criminals will try that email and password on every other site. This is why every account needs a **different** password."
+    },
+    {
+     "t": "p",
+     "text": "A **[[Password manager]]** is an app (or part of your browser) that creates and stores a different strong password for every account. You only need to remember **one** strong master password, which unlocks the rest."
+    },
+    {
+     "t": "tip",
+     "text": "Your **email** password is the most important of all, because it can be used to reset every other password. Make it long and unique, and protect it with two-factor authentication."
+    },
+    {
+     "t": "warn",
+     "text": "Never share your password, even with a best friend. Friendships change, and anything done from your account will look like it was done by **you**."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Attackers use software to try billions of guesses: a brute force attack.",
+      "Length matters more than complexity.",
+      "Three random words make a strong, memorable passphrase.",
+      "Use a different password for every account.",
+      "A password manager stores them all behind one master password."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which password is strongest?",
+     "o": [
+      "Tr0ub!e",
+      "liverpool2014",
+      "WaffleCometLighthouse",
+      "123456789"
+     ],
+     "a": 2,
+     "why": "It is the longest and made of random words."
+    },
+    {
+     "q": "What is a brute force attack?",
+     "o": [
+      "Physically smashing a computer",
+      "Software trying every possible password until one works",
+      "A virus that deletes files",
+      "Shouting at a help desk"
+     ],
+     "a": 1,
+     "why": "It tries combinations very quickly until it finds the right one."
+    },
+    {
+     "q": "Why should you use a different password for each account?",
+     "o": [
+      "It is the law",
+      "If one site is hacked, your other accounts stay safe",
+      "Websites charge for reused passwords",
+      "It makes logging in faster"
+     ],
+     "a": 1,
+     "why": "Criminals try stolen passwords on other sites."
+    },
+    {
+     "q": "What does a password manager do?",
+     "o": [
+      "Creates and stores strong passwords, unlocked by one master password",
+      "Deletes old accounts",
+      "Blocks viruses",
+      "Encrypts your hard drive"
+     ],
+     "a": 0,
+     "why": "You only remember the master password."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why `CactusTrumpetHarbour` is a stronger password than `C@t5!`.",
+     "m": 2,
+     "a": "It is much longer (1), so there are far more possible combinations / it would take much longer to brute force (1)."
+    },
+    {
+     "q": "Describe **two** benefits of using a password manager.",
+     "m": 2,
+     "a": "Any two: you only need to remember one master password (1); it can generate long, strong random passwords (1); it allows a different password for every account (1); it can autofill so you avoid typing on fake sites (1)."
+    },
+    {
+     "q": "Give **three** pieces of advice for creating a secure password.",
+     "m": 3,
+     "a": "Any three: make it long, e.g. 12+ characters (1); use three random words / a passphrase (1); do not use personal information like names, pets or birthdays (1); avoid common passwords/words (1); use a different password for each account (1); never share it (1)."
+    }
+   ],
+   "terms": [
+    "Brute force attack",
+    "Passphrase",
+    "Password manager"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "spec": "Explain how two-factor and multi-factor authentication protect accounts",
+   "summary": "Authentication proves you are who you say you are. Two-factor authentication (2FA) asks for a second proof, such as a code on your phone, so a stolen password alone is not enough.",
+   "diagram": {
+    "kind": "compare",
+    "title": "Password only vs password + 2FA",
+    "caption": "A criminal has stolen your password. What happens next?",
+    "states": [
+     {
+      "label": "Password only",
+      "points": [
+       "The criminal types in your username and password",
+       "The website lets them straight in",
+       "They can read messages, change your password and lock you out",
+       "You may not find out until it is too late"
+      ],
+      "art": null
+     },
+     {
+      "label": "Password + 2FA",
+      "points": [
+       "The criminal types in your username and password",
+       "The website asks for a code from your phone",
+       "They do not have your phone, so they are stuck",
+       "You get an alert and can change your password"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**[[Authentication]]** means proving you are who you say you are. When you type your username and password, the system checks they match before letting you in. But if someone has stolen your password, the system cannot tell them apart from you."
+    },
+    {
+     "t": "h",
+     "text": "The three types of factor"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Factor",
+      "Meaning",
+      "Examples"
+     ],
+     "rows": [
+      [
+       "**Something you know**",
+       "A secret only you should know.",
+       "Password, PIN, passphrase"
+      ],
+      [
+       "**Something you have**",
+       "An object only you should have.",
+       "Your phone, a code-generating app, a security key, a bank card"
+      ],
+      [
+       "**Something you are**",
+       "A part of your body (biometrics).",
+       "Fingerprint, face recognition, voice"
+      ]
+     ],
+     "caption": "Authentication factors"
+    },
+    {
+     "t": "p",
+     "text": "**[[Two-factor authentication]]** (2FA) uses **two different types** of factor, for example a password (something you know) and a code sent to your phone (something you have). **[[Multi-factor authentication]]** (MFA) is the general name for using two or more factors."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: is it really 2FA?",
+     "context": "Which of these logins use two-factor authentication?",
+     "steps": [
+      "**Password + PIN:** both are *something you know*, so this is **not** true 2FA.",
+      "**Password + code from an authenticator app:** know + have, so **yes**.",
+      "**Bank card + PIN at a cash machine:** have + know, so **yes**.",
+      "**Phone unlocked with your face, then a banking app password:** are + know, so **yes**."
+     ],
+     "answer": "2FA needs two *different types* of factor, not just two things."
+    },
+    {
+     "t": "h",
+     "text": "Common ways to get the second factor"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Text message (SMS) code:** easy to set up, but the weakest option because texts can sometimes be redirected.",
+      "**Authenticator app:** an app on your phone that shows a new 6-digit code every 30 seconds.",
+      "**Push notification:** your phone asks \"Is this you trying to sign in?\" and you tap Yes or No.",
+      "**Security key or passkey:** a physical key or your device's fingerprint/face unlock that proves it is you."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "warn",
+     "text": "**Never share a 2FA code**, with anyone, ever. A common scam is a message or call saying \"I sent you a code by mistake, can you send it to me?\" They are trying to log in to **your** account."
+    },
+    {
+     "t": "tip",
+     "text": "If your phone asks you to approve a sign-in that you did not start, tap **No** (or Deny) and change your password. Someone else knows it."
+    },
+    {
+     "t": "note",
+     "text": "Turn on 2FA for your email, games console account, and social media first. Most popular services have it in the **Security** or **Privacy** settings."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Authentication means proving who you are.",
+      "Factors: something you know, something you have, something you are.",
+      "2FA uses two different types of factor; MFA is two or more.",
+      "A stolen password alone is not enough to get past 2FA.",
+      "Never share a 2FA code with anyone."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which pair is **true** two-factor authentication?",
+     "o": [
+      "Password and PIN",
+      "Password and a code from an authenticator app",
+      "Two different passwords",
+      "Username and password"
+     ],
+     "a": 1,
+     "why": "Something you know + something you have."
+    },
+    {
+     "q": "A fingerprint is an example of:",
+     "o": [
+      "Something you know",
+      "Something you have",
+      "Something you are",
+      "Something you want"
+     ],
+     "a": 2,
+     "why": "Biometrics are 'something you are'."
+    },
+    {
+     "q": "A stranger messages you: \"Oops, I sent my login code to your number, please send it back.\" What should you do?",
+     "o": [
+      "Send it, to be helpful",
+      "Never share it: they are trying to get into your account",
+      "Post it online",
+      "Reply asking who they are, then send it"
+     ],
+     "a": 1,
+     "why": "This is a classic account takeover scam."
+    },
+    {
+     "q": "What does MFA stand for?",
+     "o": [
+      "Many Fast Accounts",
+      "Multi-factor authentication",
+      "Main firewall access",
+      "Malware filter app"
+     ],
+     "a": 1,
+     "why": "Two or more factors."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name the **three** types of authentication factor and give an example of each.",
+     "m": 3,
+     "a": "Something you know, e.g. password/PIN (1); something you have, e.g. phone/security key/bank card (1); something you are, e.g. fingerprint/face (1)."
+    },
+    {
+     "q": "Explain how two-factor authentication protects an account if the password has been stolen.",
+     "m": 2,
+     "a": "The attacker also needs the second factor, e.g. a code from the owner's phone (1), which they do not have, so they cannot log in (1)."
+    },
+    {
+     "q": "Explain why a password and a PIN together is **not** two-factor authentication.",
+     "m": 2,
+     "a": "Both are 'something you know' (1); 2FA needs two different types of factor (1)."
+    }
+   ],
+   "terms": [
+    "Authentication",
+    "Two-factor authentication",
+    "Multi-factor authentication"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p07",
+   "spec": "Explain what encryption is, use a Caesar cipher, and explain why the HTTPS padlock matters",
+   "summary": "Encryption scrambles data with a key so only someone with the right key can read it. The Caesar cipher is a simple historical example; HTTPS uses far stronger encryption to protect data sent to websites.",
+   "diagram": {
+    "kind": "flow",
+    "title": "Encrypting a message",
+    "caption": "Click each stage to follow the message from sender to receiver.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Plaintext",
+      "detail": "The readable message: MEET AT LUNCH",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Encrypt with key",
+      "detail": "Each letter is shifted 3 places forward in the alphabet.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "Ciphertext sent",
+      "detail": "PHHW DW OXQFK: anyone who intercepts it just sees nonsense.",
+      "shape": "io"
+     },
+     {
+      "id": "d",
+      "label": "Decrypt with key",
+      "detail": "The receiver shifts each letter 3 places back.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Plaintext again",
+      "detail": "MEET AT LUNCH",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "When you send a message or log in to a website, your data travels through many other computers on the way. **[[Encryption]]** scrambles the data so that, even if someone intercepts it, they cannot read it. **[[Decryption]]** turns it back into readable data."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Term",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "[[Plaintext]]",
+       "The original, readable message."
+      ],
+      [
+       "[[Ciphertext]]",
+       "The scrambled, unreadable version."
+      ],
+      [
+       "Key",
+       "The secret information used to encrypt and decrypt, such as 'shift by 3'."
+      ],
+      [
+       "Cipher",
+       "The method used to encrypt the message."
+      ]
+     ],
+     "caption": "Encryption vocabulary"
+    },
+    {
+     "t": "h",
+     "text": "The Caesar cipher"
+    },
+    {
+     "t": "p",
+     "text": "The **[[Caesar cipher]]** is named after Julius Caesar, who used it over 2,000 years ago to send secret military messages. Each letter is **shifted** a fixed number of places along the alphabet. The number of places is the **key**."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: encrypt MEET AT LUNCH with a key of 3",
+     "context": "Shift every letter 3 places forward. After Z, wrap round to the start (X→A, Y→B, Z→C).",
+     "steps": [
+      "Write the alphabet with the shifted alphabet underneath: A→D, B→E, C→F ... W→Z, X→A, Y→B, Z→C.",
+      "MEET: M→P, E→H, E→H, T→W gives **PHHW**.",
+      "AT: A→D, T→W gives **DW**.",
+      "LUNCH: L→O, U→X, N→Q, C→F, H→K gives **OXQFK**.",
+      "To decrypt, the receiver shifts each letter **back** 3 places."
+     ],
+     "answer": "MEET AT LUNCH becomes PHHW DW OXQFK."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Caesar.cs: a Caesar cipher in C#",
+     "code": "string message = \"MEET AT LUNCH\";\nint key = 3;\nstring result = \"\";\nforeach (char letter in message)\n{\n    if (char.IsLetter(letter))\n    {\n        int position = letter - 'A';\n        int newPosition = (position + key) % 26;\n        result = result + (char)(newPosition + 'A');\n    }\n    else\n    {\n        result = result + letter;\n    }\n}\nConsole.WriteLine(result);",
+     "output": "PHHW DW OXQFK"
+    },
+    {
+     "t": "warn",
+     "text": "The Caesar cipher is **not secure**. There are only 25 possible keys, so anyone can try them all in a few minutes. Modern encryption uses keys so long that trying every one would take longer than the age of the universe."
+    },
+    {
+     "t": "h",
+     "text": "HTTPS and the padlock"
+    },
+    {
+     "t": "p",
+     "text": "**[[HTTPS]]** (HyperText Transfer Protocol **Secure**) is the encrypted version of HTTP, the rules for sending web pages. When a site uses HTTPS, your browser shows a **padlock** or similar icon, and the address starts with `https://`."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "HTTP",
+      "HTTPS"
+     ],
+     "rows": [
+      [
+       "Is the data encrypted?",
+       "No: sent as plaintext",
+       "Yes: encrypted between your browser and the website"
+      ],
+      [
+       "Could someone on the same Wi-Fi read it?",
+       "Possibly, including passwords",
+       "They would only see ciphertext"
+      ],
+      [
+       "Safe for logging in or paying?",
+       "No",
+       "Yes, as long as the website itself is genuine"
+      ]
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "The padlock means the connection is **encrypted**, not that the website is **honest**. Many phishing sites have a padlock too. Always check the web address as well."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Encryption scrambles plaintext into ciphertext using a key.",
+      "Only someone with the key can decrypt it.",
+      "The Caesar cipher shifts each letter a fixed number of places.",
+      "Caesar is easy to crack: there are only 25 keys.",
+      "HTTPS encrypts data sent to websites; the padlock does not prove the site is genuine."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Using a Caesar cipher with a key of 3, what does CAT become?",
+     "o": [
+      "DBU",
+      "FDW",
+      "ZXQ",
+      "CAT"
+     ],
+     "a": 1,
+     "why": "C→F, A→D, T→W."
+    },
+    {
+     "q": "What is ciphertext?",
+     "o": [
+      "The readable message",
+      "The scrambled, encrypted message",
+      "The key",
+      "A type of malware"
+     ],
+     "a": 1,
+     "why": "Ciphertext is what an interceptor would see."
+    },
+    {
+     "q": "Why is the Caesar cipher easy to crack?",
+     "o": [
+      "It uses numbers",
+      "There are only 25 possible keys to try",
+      "It only works in Latin",
+      "It needs the internet"
+     ],
+     "a": 1,
+     "why": "You can try every shift quickly."
+    },
+    {
+     "q": "What does the padlock next to a web address tell you?",
+     "o": [
+      "The website is definitely genuine",
+      "The connection between you and the site is encrypted",
+      "The site has no adverts",
+      "The site is run by the government"
+     ],
+     "a": 1,
+     "why": "It shows HTTPS encryption, not honesty."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Encrypt the word `HELLO` using a Caesar cipher with a key of 3. Show your working.",
+     "m": 2,
+     "a": "Working showing each letter shifted 3 places, e.g. H→K, E→H, L→O (1); answer KHOOR (1)."
+    },
+    {
+     "q": "Explain what is meant by **encryption** and why it is used.",
+     "m": 2,
+     "a": "Scrambling data/converting plaintext to ciphertext using a key (1) so that if it is intercepted it cannot be understood without the key (1)."
+    },
+    {
+     "q": "A pupil says: \"The site has a padlock, so it must be safe to enter my password.\" Explain why the pupil may be wrong.",
+     "m": 2,
+     "a": "The padlock only shows the connection is encrypted/HTTPS (1); a fake/phishing website can also have a padlock, so you must check the web address too (1)."
+    }
+   ],
+   "terms": [
+    "Encryption",
+    "Decryption",
+    "Plaintext",
+    "Ciphertext",
+    "Caesar cipher",
+    "HTTPS"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p08",
+   "spec": "Describe how firewalls, anti-malware, updates and backups protect computer systems",
+   "summary": "No single defence stops everything, so systems use layers: firewalls control network traffic, anti-malware finds harmful software, updates patch security holes, and backups let you recover.",
+   "diagram": {
+    "kind": "layers",
+    "title": "Layers of defence",
+    "caption": "Like a castle with walls, a moat and guards, good security has several layers. If one fails, the next can still stop the attack. Click each layer.",
+    "items": [
+     {
+      "label": "You: careful, aware users",
+      "detail": "Spotting phishing, not sharing passwords and reporting problems stops many attacks before they start."
+     },
+     {
+      "label": "Strong passwords and 2FA",
+      "detail": "Stop criminals getting into accounts even if they try."
+     },
+     {
+      "label": "Anti-malware software",
+      "detail": "Scans files and blocks known malware."
+     },
+     {
+      "label": "Updates and patches",
+      "detail": "Fix the security holes that malware such as worms tries to use."
+     },
+     {
+      "label": "Firewall",
+      "detail": "Checks network traffic coming in and going out and blocks anything not allowed."
+     },
+     {
+      "label": "Backups",
+      "detail": "The last line of defence: if everything else fails, you can restore your data."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Organisations like schools, banks and hospitals use several layers of protection at the same time. This is sometimes called **defence in depth**. You can use the same ideas at home."
+    },
+    {
+     "t": "h",
+     "text": "Firewalls"
+    },
+    {
+     "t": "p",
+     "text": "A **[[Firewall]]** sits between a computer (or a whole network) and the internet. It checks the data travelling in and out against a set of **rules** and blocks anything that is not allowed, a bit like a security guard checking passes at the school gate."
+    },
+    {
+     "t": "list",
+     "items": [
+      "A firewall can be **software** (built into Windows and macOS) or **hardware** (a separate box, or part of your home router).",
+      "It can block unknown programs from sending data out of your computer.",
+      "It can stop outside computers connecting to your computer without permission.",
+      "It does **not** stop you choosing to download malware or type your password into a phishing site."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Anti-malware software"
+    },
+    {
+     "t": "p",
+     "text": "**[[Anti-malware software]]** (often still called antivirus) scans files, downloads and emails for malware. It compares them against a huge list of known malware **signatures** and watches for suspicious **behaviour**, such as a program suddenly encrypting hundreds of files. Infected files are **quarantined** (locked away) or deleted."
+    },
+    {
+     "t": "tip",
+     "text": "Anti-malware can only recognise new threats if it is **kept up to date**. Most programs update themselves automatically, so don't turn this off."
+    },
+    {
+     "t": "h",
+     "text": "Updates and patches"
+    },
+    {
+     "t": "p",
+     "text": "Software often contains mistakes that attackers can use to get in. When the company finds one, it releases a **[[Patch]]**: an update that fixes the hole. Installing updates promptly is one of the most effective things anyone can do. Remember WannaCry: it only infected computers that had not installed a patch released two months earlier."
+    },
+    {
+     "t": "h",
+     "text": "Backups"
+    },
+    {
+     "t": "p",
+     "text": "A **[[Backup]]** is a separate copy of your data. If files are deleted, corrupted, stolen or locked by ransomware, you can restore them from the backup. A popular rule is **3-2-1**:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**3** copies of your important data,",
+      "on **2** different types of storage (e.g. laptop and external drive),",
+      "with **1** copy kept somewhere else (e.g. in the cloud or at a different building)."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "example",
+     "title": "Worked example: protecting a family computer",
+     "context": "The Murphy family's laptop is used for homework, photos and online banking. What layers of protection should they use?",
+     "steps": [
+      "Turn on the built-in **firewall** and the router's firewall.",
+      "Keep the built-in **anti-malware** switched on and updating.",
+      "Set **automatic updates** for the operating system, browser and apps.",
+      "Back up photos and homework to the **cloud** and an **external drive** (3-2-1).",
+      "Give each person their own account with a strong passphrase and **2FA** on email and banking."
+     ],
+     "answer": "Several layers together, so that if one fails another still protects them."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Defence in depth means using several layers of protection.",
+      "A firewall filters network traffic using rules.",
+      "Anti-malware scans for and quarantines harmful software.",
+      "Patches fix security holes, so install updates promptly.",
+      "Backups (3-2-1 rule) let you recover from ransomware, accidents and hardware failure."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does a firewall do?",
+     "o": [
+      "Cools down the processor",
+      "Checks and filters network traffic using rules",
+      "Creates backups",
+      "Makes passwords stronger"
+     ],
+     "a": 1,
+     "why": "It controls what data can come in and go out."
+    },
+    {
+     "q": "Why should you install software updates promptly?",
+     "o": [
+      "They change the colours",
+      "They often patch security holes attackers could use",
+      "They delete old files",
+      "They are required by law"
+     ],
+     "a": 1,
+     "why": "Unpatched holes are how worms like WannaCry spread."
+    },
+    {
+     "q": "In the 3-2-1 backup rule, what does the '1' stand for?",
+     "o": [
+      "One password",
+      "One copy stored off-site",
+      "One day between backups",
+      "One firewall"
+     ],
+     "a": 1,
+     "why": "Keeping one copy elsewhere protects against fire, theft and ransomware."
+    },
+    {
+     "q": "What happens to a file when anti-malware quarantines it?",
+     "o": [
+      "It is emailed to your friends",
+      "It is locked away so it cannot run",
+      "It is made faster",
+      "It is encrypted with a Caesar cipher"
+     ],
+     "a": 1,
+     "why": "Quarantine isolates the suspicious file."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe how a firewall helps protect a school network.",
+     "m": 2,
+     "a": "It checks/monitors data coming into and leaving the network (1) and blocks traffic that does not meet its rules / unauthorised access (1)."
+    },
+    {
+     "q": "Explain why keeping backups is a good defence against ransomware.",
+     "m": 2,
+     "a": "The organisation can restore its files from the backup (1) so it does not need to pay the ransom / loses little data (1)."
+    },
+    {
+     "q": "Give **three** different methods a home user could use to protect their computer from malware and explain each briefly.",
+     "m": 3,
+     "a": "Any three with brief explanation: anti-malware software scans and removes malware (1); firewall blocks unauthorised network traffic (1); install updates/patches to fix security holes (1); avoid suspicious links/downloads (1); regular backups to recover files (1)."
+    }
+   ],
+   "terms": [
+    "Firewall",
+    "Anti-malware software",
+    "Patch",
+    "Backup"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p09",
+   "spec": "Describe, in simple terms, the Computer Misuse Act 1990 and data protection law (UK GDPR and the Data Protection Act 2018)",
+   "summary": "The Computer Misuse Act 1990 makes it a crime to access or damage computers without permission. UK GDPR and the Data Protection Act 2018 set rules for how organisations must collect, use and protect personal data.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Is it against the Computer Misuse Act?",
+    "caption": "Decide whether each action breaks the law, then click to check.",
+    "head": [
+     "Action",
+     "Illegal?",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Logging into a friend's game account with their password, without asking",
+      "Yes",
+      "Unauthorised access: knowing the password is not the same as having permission"
+     ],
+     [
+      "Reading a teacher's files on a computer they forgot to lock",
+      "Yes",
+      "Unauthorised access to computer material"
+     ],
+     [
+      "Logging into your own school account",
+      "No",
+      "You are authorised to use it"
+     ],
+     [
+      "Writing and spreading a virus 'as a joke'",
+      "Yes",
+      "Deliberately impairing computers is a serious offence"
+     ],
+     [
+      "A company paying an ethical hacker to test its own website",
+      "No",
+      "The owner has given written permission"
+     ],
+     [
+      "Guessing a classmate's password to change their profile picture",
+      "Yes",
+      "Unauthorised access and changing data"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Laws help protect computer systems and personal data. In the UK there are two main laws you need to know about for cyber security."
+    },
+    {
+     "t": "h",
+     "text": "The Computer Misuse Act 1990"
+    },
+    {
+     "t": "p",
+     "text": "The **[[Computer Misuse Act 1990]]** was passed after two people hacked into a British Telecom system in the 1980s and could not be properly charged, because no law covered hacking at the time. The Act makes the following illegal:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Offence",
+      "In simple terms",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Unauthorised access to computer material",
+       "Getting into a computer, account or files you do not have permission to use.",
+       "Logging in as a friend using a password you saw them type."
+      ],
+      [
+       "Unauthorised access with intent to commit or help with further crimes",
+       "Getting in, **in order to** commit another crime.",
+       "Accessing someone's account in order to steal money from them."
+      ],
+      [
+       "Unauthorised acts that impair a computer",
+       "Deliberately damaging, deleting or stopping a computer or data from working.",
+       "Spreading malware, or flooding a website so it crashes."
+      ],
+      [
+       "Making, supplying or obtaining tools for computer misuse",
+       "Creating or handing out programs meant to be used for these crimes.",
+       "Selling malware online."
+      ]
+     ],
+     "caption": "Offences under the Computer Misuse Act 1990 (as updated)"
+    },
+    {
+     "t": "p",
+     "text": "The Act has been updated since 1990 (for example in 2006 and 2015) to cover newer threats. Penalties range from fines to long prison sentences for the most serious offences."
+    },
+    {
+     "t": "warn",
+     "text": "\"I was only messing about\" is not a defence. Using someone else's login without permission, even as a joke and even if they told you their password ages ago, can break the Computer Misuse Act."
+    },
+    {
+     "t": "h",
+     "text": "Data protection: UK GDPR and the Data Protection Act 2018"
+    },
+    {
+     "t": "p",
+     "text": "**[[Personal data]]** is any information that can identify a living person: your name, address, photo, email, date of birth, and so on. Organisations that hold personal data, like your school, doctor or a games company, must follow the **[[UK GDPR]]** (UK General Data Protection Regulation) and the **[[Data Protection Act 2018]]**. Together they set the rules for how personal data must be handled."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Principle (simplified)",
+      "What it means"
+     ],
+     "rows": [
+      [
+       "Lawful, fair and transparent",
+       "Be honest about what data you collect and why."
+      ],
+      [
+       "Purpose limitation",
+       "Only use it for the reason you collected it."
+      ],
+      [
+       "Data minimisation",
+       "Only collect what you actually need."
+      ],
+      [
+       "Accuracy",
+       "Keep it correct and up to date."
+      ],
+      [
+       "Storage limitation",
+       "Don't keep it for longer than needed."
+      ],
+      [
+       "Integrity and confidentiality (security)",
+       "Keep it safe from loss, theft and hackers."
+      ],
+      [
+       "Accountability",
+       "Be able to show that you follow the rules."
+      ]
+     ],
+     "caption": "The data protection principles"
+    },
+    {
+     "t": "p",
+     "text": "You also have **rights** over your data. For example, you can ask an organisation for a copy of the data it holds about you (a *subject access request*), ask for mistakes to be corrected, and in some cases ask for it to be deleted. The law is enforced by the **Information Commissioner's Office (ICO)**, which can fine organisations that break the rules, sometimes by millions of pounds."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a school data breach",
+     "context": "A teacher leaves an unencrypted memory stick containing pupils' names, addresses and medical notes on a bus. Which principle has been broken, and what should the school do?",
+     "steps": [
+      "The data was not kept secure: the **integrity and confidentiality (security)** principle has been broken.",
+      "The school must assess the risk and, if it is serious, report the breach to the **ICO** (normally within 72 hours).",
+      "It may need to tell the families affected.",
+      "To stop it happening again: encrypt devices and use secure cloud storage instead of memory sticks."
+     ],
+     "answer": "Data protection law means organisations must protect personal data, not just collect it."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "The Computer Misuse Act 1990 makes unauthorised access to computers illegal.",
+      "It also covers accessing computers to commit further crimes, and damaging or impairing them.",
+      "UK GDPR and the Data Protection Act 2018 control how personal data is used and protected.",
+      "Organisations must collect only what they need and keep it secure.",
+      "The ICO enforces data protection law in the UK."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which law makes hacking into someone's account illegal?",
+     "o": [
+      "Copyright, Designs and Patents Act 1988",
+      "Computer Misuse Act 1990",
+      "Health and Safety at Work Act 1974",
+      "Online Safety Act 2023"
+     ],
+     "a": 1,
+     "why": "Unauthorised access is the first offence under the Computer Misuse Act."
+    },
+    {
+     "q": "Which of these is **personal data**?",
+     "o": [
+      "The school's opening hours",
+      "Your home address",
+      "The capital of France",
+      "The price of a laptop"
+     ],
+     "a": 1,
+     "why": "It can identify a living person."
+    },
+    {
+     "q": "Which organisation enforces data protection law in the UK?",
+     "o": [
+      "The ICO",
+      "The BBC",
+      "The NHS",
+      "Ofcom"
+     ],
+     "a": 0,
+     "why": "The Information Commissioner's Office."
+    },
+    {
+     "q": "A club collects members' blood type when it only needs their name and email. Which principle is broken?",
+     "o": [
+      "Accuracy",
+      "Data minimisation",
+      "Accountability",
+      "Storage limitation"
+     ],
+     "a": 1,
+     "why": "Only collect what you need."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe **two** offences under the Computer Misuse Act 1990.",
+     "m": 2,
+     "a": "Any two: unauthorised access to computer material (1); unauthorised access with intent to commit further offences (1); unauthorised acts that impair/damage a computer or data, e.g. spreading malware (1); making/supplying tools for computer misuse (1)."
+    },
+    {
+     "q": "Give **three** rules (principles) that organisations must follow under UK GDPR / the Data Protection Act 2018.",
+     "m": 3,
+     "a": "Any three: processed lawfully, fairly and transparently (1); used only for the stated purpose (1); only collect data that is needed (1); kept accurate and up to date (1); not kept longer than necessary (1); kept secure (1); organisation is accountable (1)."
+    },
+    {
+     "q": "Sam uses a password he saw his friend type to log in to her social media account and post a message. Explain whether Sam has broken the law.",
+     "m": 2,
+     "a": "Yes, under the Computer Misuse Act 1990 (1) because he accessed the account without permission / unauthorised access, even though he knew the password (1)."
+    }
+   ],
+   "terms": [
+    "Computer Misuse Act 1990",
+    "Personal data",
+    "UK GDPR",
+    "Data Protection Act 2018"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p10",
+   "spec": "Explain what ethical hacking is and describe careers and competitions in cyber security",
+   "summary": "Ethical hackers are paid, with permission, to find weaknesses before criminals do. Cyber security is a fast-growing career, and competitions like CyberFirst let you try it while still at school.",
+   "diagram": {
+    "kind": "timeline",
+    "title": "A pathway into cyber security",
+    "caption": "One possible route from KS3 to a cyber career. There are many others!",
+    "items": [
+     {
+      "label": "Years 8 to 10: KS3",
+      "detail": "Learn the basics, try coding, enter competitions such as the CyberFirst Girls Competition."
+     },
+     {
+      "label": "Years 11 to 12: GCSE",
+      "detail": "GCSE Digital Technology (or Computer Science) builds programming and networking skills."
+     },
+     {
+      "label": "Years 13 to 14: A level or BTEC",
+      "detail": "Software Systems Development, Digital Technology, maths or physics; CyberFirst courses in the holidays."
+     },
+     {
+      "label": "University or apprenticeship",
+      "detail": "A cyber security or computing degree, or a degree apprenticeship where you earn while you learn."
+     },
+     {
+      "label": "First job",
+      "detail": "Security analyst, penetration tester, digital forensics, security engineer..."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Not all hackers are criminals. Organisations **pay** skilled people to try to break into their own systems, so that weaknesses can be fixed before a real attacker finds them. This is called **[[Ethical hacking]]**."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Ethical (white hat) hacker",
+      "Criminal (black hat) hacker"
+     ],
+     "rows": [
+      [
+       "Permission?",
+       "Yes: written permission from the owner",
+       "No"
+      ],
+      [
+       "Aim",
+       "Find and fix weaknesses",
+       "Steal, damage or cause disruption"
+      ],
+      [
+       "What happens to what they find?",
+       "Reported privately to the owner so it can be fixed",
+       "Used or sold"
+      ],
+      [
+       "Legal?",
+       "Yes",
+       "No: breaks the Computer Misuse Act 1990"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A **[[Penetration testing]]** job (a 'pen test') is a planned, agreed test where an ethical hacker attacks a system within agreed rules and then writes a report explaining what they found and how to fix it. Some companies also run *bug bounty* programmes, paying rewards to people who report security flaws responsibly."
+    },
+    {
+     "t": "warn",
+     "text": "Permission is everything. Testing a website, a school network or a friend's account **without** written permission is a crime, even if you mean well. Practise only on legal training sites and competitions designed for it."
+    },
+    {
+     "t": "h",
+     "text": "Careers in cyber security"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Job",
+      "What they do"
+     ],
+     "rows": [
+      [
+       "Security analyst",
+       "Watches an organisation's systems for signs of attack and responds when something happens."
+      ],
+      [
+       "Penetration tester",
+       "Tests systems, with permission, to find weaknesses before criminals do."
+      ],
+      [
+       "Digital forensics investigator",
+       "Examines computers and phones after a crime to find evidence, often working with the police."
+      ],
+      [
+       "Security engineer",
+       "Designs and builds secure networks and software."
+      ],
+      [
+       "Security awareness trainer",
+       "Teaches staff how to spot phishing and keep data safe."
+      ]
+     ],
+     "caption": "Some cyber security jobs"
+    },
+    {
+     "t": "p",
+     "text": "There are not enough trained people to fill all the cyber security jobs, so skills are in high demand. Northern Ireland, and Belfast in particular, has a large and growing cyber security industry with many international companies."
+    },
+    {
+     "t": "h",
+     "text": "Competitions and programmes"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**[[CyberFirst]]** is run by the **National Cyber Security Centre (NCSC)**, part of GCHQ. It includes the **CyberFirst Girls Competition** for teams of girls (in Northern Ireland it is aimed at Year 9), free courses for young people, and bursaries for university students.",
+      "**Capture the Flag (CTF)** competitions give you safe, legal puzzles to solve, such as cracking a cipher or finding a hidden clue in a file.",
+      "Many universities and companies run cyber summer schools and work experience for school pupils."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: is it ethical hacking?",
+     "context": "Decide whether each person is acting ethically and legally.",
+     "steps": [
+      "**Niamh** is hired by a bank, signs an agreement, tests its app and reports a flaw: **ethical and legal**.",
+      "**Jack** finds a way to see other pupils' files on the school network and tries it 'to see if it works': **not ethical, not legal**. He should have told IT staff without testing it.",
+      "**Priya** solves cipher puzzles in a CyberFirst competition: **ethical and legal**, it is designed for that.",
+      "**Tom** guesses a gaming site's admin password to prove it is weak, then emails them: **illegal**, because he had no permission first."
+     ],
+     "answer": "Ethical hacking always starts with permission and ends with a private report."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Ethical hackers test systems with permission so weaknesses can be fixed.",
+      "Penetration testing is an agreed, planned attack followed by a report.",
+      "Without permission it is a crime under the Computer Misuse Act 1990.",
+      "Cyber security skills are in high demand, including in Northern Ireland.",
+      "CyberFirst (run by the NCSC) offers competitions, courses and bursaries."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is the main difference between an ethical hacker and a criminal hacker?",
+     "o": [
+      "Ethical hackers use better computers",
+      "Ethical hackers have permission from the system owner",
+      "Criminal hackers only work at night",
+      "There is no difference"
+     ],
+     "a": 1,
+     "why": "Permission makes it legal."
+    },
+    {
+     "q": "What is penetration testing?",
+     "o": [
+      "Testing how strong a screen is",
+      "An agreed, planned attack on a system to find weaknesses",
+      "Installing a firewall",
+      "A type of malware"
+     ],
+     "a": 1,
+     "why": "It is followed by a report to fix the weaknesses."
+    },
+    {
+     "q": "Who runs CyberFirst?",
+     "o": [
+      "The National Cyber Security Centre (NCSC)",
+      "Google",
+      "The BBC",
+      "Microsoft"
+     ],
+     "a": 0,
+     "why": "The NCSC is part of GCHQ."
+    },
+    {
+     "q": "A pupil discovers a way to see other pupils' files on the school network. What should they do?",
+     "o": [
+      "Look at the files to check",
+      "Tell everyone in class",
+      "Report it privately to a teacher or IT staff without testing it",
+      "Post it online"
+     ],
+     "a": 2,
+     "why": "Reporting responsibly, without accessing data, is the right thing to do."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by **ethical hacking**.",
+     "m": 2,
+     "a": "Legally attempting to break into/find weaknesses in a system (1) with the owner's permission so they can be fixed (1)."
+    },
+    {
+     "q": "Describe **two** jobs in cyber security.",
+     "m": 2,
+     "a": "Any two with description: security analyst monitors systems for attacks (1); penetration tester tests systems for weaknesses with permission (1); digital forensics investigator finds evidence on devices (1); security engineer designs secure systems (1); awareness trainer teaches staff (1)."
+    },
+    {
+     "q": "Explain why it is illegal for a pupil to test the school network for weaknesses even if they intend to report what they find.",
+     "m": 2,
+     "a": "They do not have permission/authorisation from the owner (1), so it is unauthorised access under the Computer Misuse Act 1990 (1)."
+    }
+   ],
+   "terms": [
+    "Ethical hacking",
+    "Penetration testing",
+    "CyberFirst"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Cyber security",
+   "def": "The methods, tools and habits used to protect computers, networks, accounts and data from attack, damage or unauthorised access.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "CIA triad",
+   "def": "The three goals of security: Confidentiality, Integrity and Availability.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Confidentiality",
+   "def": "Making sure only authorised people can see data.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Integrity",
+   "def": "Making sure data is accurate and has not been changed without permission.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Availability",
+   "def": "Making sure data and systems work and can be accessed when authorised people need them.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Malware",
+   "def": "Malicious software: any program designed to cause harm to a computer, its data or its user.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Virus",
+   "def": "Malware that attaches itself to a file or program and spreads when that file is opened or shared.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Worm",
+   "def": "Standalone malware that spreads across networks by itself, without a user opening a file.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Trojan",
+   "def": "Malware disguised as a useful or wanted program, which hides something harmful inside.",
+   "alt": "Trojan horse",
+   "page": "p02"
+  },
+  {
+   "term": "Ransomware",
+   "def": "Malware that encrypts or locks files and demands payment to release them.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Spyware",
+   "def": "Malware that secretly monitors what a user does and sends the information to someone else.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Adware",
+   "def": "Software that shows unwanted adverts and may track browsing.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Social engineering",
+   "def": "Tricking or manipulating people into giving away information or access.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Phishing",
+   "def": "Fake emails or messages pretending to be from a trusted organisation, sent to steal details or spread malware.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Smishing",
+   "def": "Phishing using SMS text messages.",
+   "alt": "SMS phishing",
+   "page": "p03"
+  },
+  {
+   "term": "Vishing",
+   "def": "Phishing using voice calls or voicemail.",
+   "alt": "voice phishing",
+   "page": "p03"
+  },
+  {
+   "term": "Pretexting",
+   "def": "Inventing a believable story to persuade someone to give information or access.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Shoulder surfing",
+   "def": "Watching someone enter a password, PIN or other details.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Brute force attack",
+   "def": "Using software to try every possible password until the right one is found.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Passphrase",
+   "def": "A long password made of several words, such as three random words.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Password manager",
+   "def": "An app that creates and stores strong, unique passwords, unlocked with one master password.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Authentication",
+   "def": "Proving that a user is who they claim to be.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Two-factor authentication",
+   "def": "Logging in using two different types of factor, such as a password and a code from your phone.",
+   "alt": "2FA",
+   "page": "p06"
+  },
+  {
+   "term": "Multi-factor authentication",
+   "def": "Logging in using two or more different types of factor.",
+   "alt": "MFA",
+   "page": "p06"
+  },
+  {
+   "term": "Encryption",
+   "def": "Scrambling data using a key so it cannot be understood without the key.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Decryption",
+   "def": "Turning ciphertext back into readable plaintext using the key.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Plaintext",
+   "def": "The original, readable message before encryption.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Ciphertext",
+   "def": "The scrambled, unreadable message after encryption.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Caesar cipher",
+   "def": "A simple cipher that shifts every letter a fixed number of places along the alphabet.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "HTTPS",
+   "def": "HyperText Transfer Protocol Secure: the encrypted way of sending web pages, shown by a padlock in the browser.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Firewall",
+   "def": "Hardware or software that checks network traffic in and out against rules and blocks anything not allowed.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Anti-malware software",
+   "def": "Software that scans for, detects and removes or quarantines malware.",
+   "alt": "antivirus",
+   "page": "p08"
+  },
+  {
+   "term": "Patch",
+   "def": "A software update that fixes a bug or security weakness.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Backup",
+   "def": "A separate copy of data that can be used to restore it if the original is lost or damaged.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Computer Misuse Act 1990",
+   "def": "UK law that makes unauthorised access to computers, and impairing or damaging them, a crime.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Personal data",
+   "def": "Any information that can identify a living person.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "UK GDPR",
+   "def": "The UK General Data Protection Regulation: rules on how organisations must collect, use and protect personal data.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Data Protection Act 2018",
+   "def": "UK law that works alongside UK GDPR to control how personal data is used.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Ethical hacking",
+   "def": "Legally testing a system for weaknesses, with the owner's permission, so they can be fixed.",
+   "alt": "white hat hacking",
+   "page": "p10"
+  },
+  {
+   "term": "Penetration testing",
+   "def": "A planned, agreed attack on a system by an ethical hacker, followed by a report.",
+   "alt": "pen test",
+   "page": "p10"
+  },
+  {
+   "term": "CyberFirst",
+   "def": "A National Cyber Security Centre programme of competitions, courses and bursaries for young people.",
+   "alt": "",
+   "page": "p10"
+  }
+ ]
+}

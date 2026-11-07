@@ -1,0 +1,2658 @@
+{
+ "title": "Networks and the Internet",
+ "summary": "How computers connect and communicate: network hardware, wired and wireless links, topologies, packets, IP addresses, DNS, download speeds, the cloud and the Internet of Things.",
+ "learn": [
+  "What a network is, why we use them, and LAN vs WAN",
+  "Network hardware, cables, Wi-Fi and Bluetooth",
+  "Star, bus and mesh topologies; client-server and peer-to-peer",
+  "How data travels in packets, and what IP and MAC addresses are",
+  "What DNS does when you type a URL, and how to calculate download times",
+  "The cloud and the Internet of Things"
+ ],
+ "temporary": false,
+ "intro": "Find out what really happens when you send a message, open a website or download a game: the hardware, layouts, addresses and rules that make networks and the internet work.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Explain what a network is, why computers are networked, and the difference between a LAN and a WAN",
+   "summary": "A network is two or more devices connected so they can share data and resources. A LAN covers a small area like a school; a WAN covers a large area and the internet is the biggest WAN of all.",
+   "diagram": {
+    "kind": "compare",
+    "title": "Stand-alone vs networked",
+    "caption": "What changes when you join computers together?",
+    "states": [
+     {
+      "label": "Stand-alone computer",
+      "points": [
+       "Files only on that computer",
+       "Needs its own printer",
+       "Software installed one machine at a time",
+       "Viruses cannot spread to other machines"
+      ],
+      "art": null
+     },
+     {
+      "label": "Networked computer",
+      "points": [
+       "Log on anywhere and open your files",
+       "Shares printers and the internet connection",
+       "Updates installed on every machine at once",
+       "Needs security to stop viruses and hackers"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "When you log on in the computer room, your work is not saved on the computer in front of you. It is saved on a **server** somewhere else in the school, and you can open it from any computer in the building. That only works because the computers are joined together in a **[[Network]]**."
+    },
+    {
+     "t": "p",
+     "text": "A network is **two or more computers or devices connected together** so that they can communicate and share data and resources. The connection can be a cable or a wireless signal. A computer that is not connected to anything is called a **[[Stand-alone computer]]**."
+    },
+    {
+     "t": "h",
+     "text": "Why do we network computers?"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Share files:** pupils and teachers can save work centrally and open it on any computer.",
+      "**Share hardware:** thirty pupils can use one printer instead of needing thirty printers.",
+      "**Share an internet connection:** every device uses the same connection to the outside world.",
+      "**Communicate:** email, Teams messages and video calls all travel over networks.",
+      "**Central management:** the technician can install software or updates on every computer at once, and back up everyone's work in one go.",
+      "**Security and logins:** each user has their own username and password, and can only see the files they are allowed to."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Are there any drawbacks?"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Drawback",
+      "Why it matters"
+     ],
+     "rows": [
+      [
+       "Cost of equipment",
+       "Servers, switches, cables and wireless access points all cost money to buy and install."
+      ],
+      [
+       "Need for expertise",
+       "Large networks need a trained technician or network manager to run them."
+      ],
+      [
+       "Viruses can spread",
+       "Malware on one computer can travel across the network to others."
+      ],
+      [
+       "Single point of failure",
+       "If the main server goes down, nobody can get to their files."
+      ],
+      [
+       "Hackers",
+       "A network that is connected to the internet can be attacked from outside, so it needs security such as a firewall."
+      ]
+     ],
+     "caption": "Disadvantages of networking"
+    },
+    {
+     "t": "h",
+     "text": "LAN or WAN?"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "LAN",
+      "WAN"
+     ],
+     "rows": [
+      [
+       "Stands for",
+       "Local Area Network",
+       "Wide Area Network"
+      ],
+      [
+       "Area covered",
+       "Small: one building or site",
+       "Large: towns, countries, the whole world"
+      ],
+      [
+       "Who owns the equipment?",
+       "The organisation itself, e.g. the school",
+       "Usually rented from telecoms companies"
+      ],
+      [
+       "Typical example",
+       "The school network; your home Wi-Fi",
+       "The internet; a bank linking all its branches"
+      ],
+      [
+       "Speed",
+       "Usually very fast",
+       "Usually slower over long distances"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Worked example: LAN or WAN?",
+     "context": "A supermarket chain has a network in each of its 40 shops. The tills in every shop send sales data to head office in Belfast each night. Which networks are LANs and which is a WAN?",
+     "steps": [
+      "Inside a single shop, the tills, office PCs and printer are all on one site, so each shop has a **LAN**.",
+      "The shops are spread across Northern Ireland, so the connections linking all 40 LANs to head office cover a large area.",
+      "A network linking LANs across a large area is a **WAN**."
+     ],
+     "answer": "Each shop is a LAN; the network joining the shops to head office is a WAN."
+    },
+    {
+     "t": "p",
+     "text": "The **[[Internet]]** is a giant WAN: millions of LANs (homes, schools, businesses) joined together all over the world. When you browse from school, your request leaves the school LAN and travels across the internet."
+    },
+    {
+     "t": "note",
+     "text": "In Year 8 you met the difference between the internet and the World Wide Web. In this topic we look under the bonnet at **how** networks actually move data around."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A network is two or more connected devices that can share data and resources.",
+      "Networks let us share files, printers and an internet connection, and manage computers centrally.",
+      "Drawbacks include cost, the spread of viruses and dependence on the server.",
+      "LAN = small area (one site); WAN = large area, often linking LANs.",
+      "The internet is the largest WAN in the world."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a network?",
+     "o": [
+      "A single computer with lots of storage",
+      "Two or more devices connected so they can share data and resources",
+      "A type of web browser",
+      "A program that removes viruses"
+     ],
+     "a": 1,
+     "why": "A network needs at least two connected devices."
+    },
+    {
+     "q": "Which of these is a LAN?",
+     "o": [
+      "The internet",
+      "A bank linking branches in five countries",
+      "The computers in your school",
+      "Satellite TV"
+     ],
+     "a": 2,
+     "why": "One school site is a small area, so it is a LAN."
+    },
+    {
+     "q": "Which is a **disadvantage** of networking computers?",
+     "o": [
+      "Printers can be shared",
+      "Viruses can spread from one computer to others",
+      "Work can be backed up centrally",
+      "Users can log on anywhere"
+     ],
+     "a": 1,
+     "why": "Being connected means malware can travel between computers."
+    },
+    {
+     "q": "What is the largest WAN in the world?",
+     "o": [
+      "The school network",
+      "Bluetooth",
+      "The internet",
+      "Wi-Fi"
+     ],
+     "a": 2,
+     "why": "The internet links millions of networks worldwide."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State **three** advantages of connecting the computers in a school to a network.",
+     "m": 3,
+     "a": "Any three: share files / log on and open work from any computer (1); share printers or other hardware (1); share one internet connection (1); communicate, e.g. email/messages (1); install software or updates centrally (1); back up all users' work centrally (1); individual logins control who can access what (1)."
+    },
+    {
+     "q": "Explain the difference between a LAN and a WAN. Give an example of each.",
+     "m": 4,
+     "a": "LAN covers a small geographical area / one site (1); e.g. a school or home network (1). WAN covers a large geographical area / links LANs together (1); e.g. the internet or a company linking branches (1)."
+    },
+    {
+     "q": "Give **two** disadvantages of a network.",
+     "m": 2,
+     "a": "Any two: cost of hardware/cabling (1); need a technician to manage it (1); viruses can spread across it (1); if the server fails users cannot access files (1); risk of hacking (1)."
+    }
+   ],
+   "terms": [
+    "Network",
+    "Stand-alone computer",
+    "LAN",
+    "WAN",
+    "Internet"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "spec": "Identify the main pieces of network hardware and describe what each one does",
+   "summary": "Every device needs a NIC to join a network. Switches connect devices inside a LAN, routers connect networks together, wireless access points add Wi-Fi, and modems convert signals. Data travels through Ethernet or fibre optic cables.",
+   "diagram": {
+    "kind": "match",
+    "title": "Match the hardware",
+    "caption": "Click to match each device with its job.",
+    "pairs": [
+     [
+      "NIC",
+      "Lets a device connect to a network; has a MAC address built in"
+     ],
+     [
+      "Switch",
+      "Connects devices inside a LAN and sends data only to the right one"
+     ],
+     [
+      "Router",
+      "Connects different networks, such as a LAN and the internet"
+     ],
+     [
+      "Wireless access point",
+      "Lets laptops and phones join a wired network by Wi-Fi"
+     ],
+     [
+      "Modem",
+      "Converts digital data into signals for a phone line or cable"
+     ],
+     [
+      "Fibre optic cable",
+      "Carries data as pulses of light over long distances"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A network needs more than just computers. Special hardware connects the devices and moves data between them. If you look in the cupboard in the corner of a computer room you will often find a **cabinet** full of flashing lights and cables: that is network hardware at work."
+    },
+    {
+     "t": "h",
+     "text": "The main devices"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Hardware",
+      "What it does",
+      "Where you might see it"
+     ],
+     "rows": [
+      [
+       "**[[NIC]]** (Network Interface Card)",
+       "Lets a device connect to a network. Every NIC has a unique **MAC address** built in. It can be wired (with an Ethernet socket) or wireless.",
+       "Built into every laptop, phone, games console and smart TV"
+      ],
+      [
+       "**[[Switch]]**",
+       "Connects lots of devices together **inside a LAN**. It reads where each piece of data is going and sends it **only to the device it is meant for**.",
+       "The network cabinet in school, with dozens of cables plugged in"
+      ],
+      [
+       "**[[Router]]**",
+       "Connects **different networks together**, for example the school LAN to the internet. It forwards packets towards their destination using **IP addresses**.",
+       "Your broadband box at home; the school's link to the outside world"
+      ],
+      [
+       "**[[Wireless access point]]** (WAP)",
+       "Lets wireless devices join a wired network using Wi-Fi.",
+       "White boxes on classroom ceilings or corridor walls"
+      ],
+      [
+       "**[[Modem]]**",
+       "Converts the computer's digital data into signals that can travel along a phone line or cable, and converts incoming signals back. (Short for **mo**dulator **dem**odulator.)",
+       "Usually built into a home broadband router"
+      ]
+     ],
+     "caption": "Network hardware"
+    },
+    {
+     "t": "tip",
+     "text": "A quick way to remember: a **switch** works **within** one network; a **router** works **between** networks."
+    },
+    {
+     "t": "h",
+     "text": "Your home router is several devices in one"
+    },
+    {
+     "t": "p",
+     "text": "The box your internet provider sends you is usually called a router, but it actually contains a **router**, a **switch** (the yellow Ethernet sockets on the back), a **wireless access point** (for Wi-Fi) and often a **modem** (to talk to the phone line or fibre). In a school these are separate, bigger devices because there are hundreds of users."
+    },
+    {
+     "t": "h",
+     "text": "Cables"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Ethernet (copper)",
+      "Fibre optic"
+     ],
+     "rows": [
+      [
+       "How data travels",
+       "Electrical signals along twisted pairs of copper wire",
+       "Pulses of light along thin strands of glass"
+      ],
+      [
+       "Speed",
+       "Fast (often up to 1 Gbps)",
+       "Very fast (many Gbps)"
+      ],
+      [
+       "Distance",
+       "Up to about 100 metres",
+       "Many kilometres"
+      ],
+      [
+       "Interference",
+       "Can be affected by electrical interference",
+       "Not affected by electrical interference"
+      ],
+      [
+       "Cost",
+       "Cheap and easy to fit",
+       "More expensive and harder to fit"
+      ],
+      [
+       "Typical use",
+       "Connecting PCs to the switch in a classroom",
+       "Linking buildings on a school site; broadband to homes and streets"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Worked example: following the journey out of school",
+     "context": "You click a link in a lesson. Which pieces of hardware does your request pass through to get from your PC to the internet?",
+     "steps": [
+      "The **NIC** in your PC turns the request into signals and sends them down the **Ethernet cable**.",
+      "The cable runs to a **switch** in the network cabinet, which passes the data on towards the school router.",
+      "The **router** sees the data is for a computer outside the school and forwards it onto the internet (often via a **fibre optic** link)."
+     ],
+     "answer": "NIC, Ethernet cable, switch, router, then out onto the internet."
+    },
+    {
+     "t": "note",
+     "text": "You may also hear of a **hub**. It is an older, simpler device that sends every piece of data to every device connected to it. Switches replaced hubs because they are cleverer and cause less wasted traffic."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A NIC lets a device connect to a network and holds its MAC address.",
+      "A switch connects devices within a LAN and sends data only to the right device.",
+      "A router connects networks together and forwards data using IP addresses.",
+      "A wireless access point adds Wi-Fi to a wired network; a modem converts signals for phone lines or cables.",
+      "Ethernet uses copper and electricity; fibre optic uses glass and light, and is faster over longer distances."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which device connects a school LAN to the internet?",
+     "o": [
+      "Switch",
+      "Router",
+      "NIC",
+      "Monitor"
+     ],
+     "a": 1,
+     "why": "Routers connect different networks together."
+    },
+    {
+     "q": "What does a switch do?",
+     "o": [
+      "Converts light into electricity",
+      "Connects devices within a LAN and sends data to the correct device",
+      "Stores everyone's files",
+      "Gives each device a MAC address"
+     ],
+     "a": 1,
+     "why": "A switch works inside one network."
+    },
+    {
+     "q": "How does a fibre optic cable carry data?",
+     "o": [
+      "As radio waves",
+      "As electrical signals in copper",
+      "As pulses of light in glass",
+      "As sound waves"
+     ],
+     "a": 2,
+     "why": "Fibre uses light, so it is fast and unaffected by electrical interference."
+    },
+    {
+     "q": "Which piece of hardware must every networked device have?",
+     "o": [
+      "A NIC",
+      "A modem",
+      "A printer",
+      "A fibre optic cable"
+     ],
+     "a": 0,
+     "why": "Without a NIC, a device cannot connect to any network."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe the purpose of a **router** and a **switch**.",
+     "m": 4,
+     "a": "Router: connects different networks together / connects the LAN to the internet (1); forwards packets towards their destination using IP addresses (1). Switch: connects devices together within a LAN (1); sends data only to the device it is intended for (1)."
+    },
+    {
+     "q": "A school is linking its main building to a new sports hall 400 metres away. Explain why fibre optic cable would be chosen instead of Ethernet cable.",
+     "m": 3,
+     "a": "Any three: Ethernet only works up to about 100 m (1); fibre works over many kilometres (1); fibre is faster / higher bandwidth (1); fibre is not affected by electrical interference (1)."
+    },
+    {
+     "q": "What is the job of a wireless access point?",
+     "m": 1,
+     "a": "It allows wireless devices to connect to a wired network using Wi-Fi (1)."
+    }
+   ],
+   "terms": [
+    "NIC",
+    "Switch",
+    "Router",
+    "Wireless access point",
+    "Modem",
+    "Ethernet cable",
+    "Fibre optic cable"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "spec": "Compare wired and wireless connections, including Wi-Fi and Bluetooth, and choose a suitable one for a task",
+   "summary": "Wired connections are faster, more reliable and more secure. Wireless connections (Wi-Fi and Bluetooth) give freedom to move and need no cables, but are slower, have limited range and can suffer from interference.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Which connection?",
+    "caption": "Decide, then click to check.",
+    "head": [
+     "Situation",
+     "Best connection",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Desktop PCs in the computer room",
+      "Wired (Ethernet)",
+      "They never move and need speed and reliability"
+     ],
+     [
+      "Smartwatch sending steps to a phone",
+      "Bluetooth",
+      "Close together and needs very little battery power"
+     ],
+     [
+      "Pupils using laptops in the library",
+      "Wi-Fi",
+      "They move around and need internet access"
+     ],
+     [
+      "Linking two school buildings 500 m apart",
+      "Wired (fibre optic)",
+      "Too far for Ethernet or Wi-Fi; fibre is fast over long distances"
+     ],
+     [
+      "Game controller for a console",
+      "Bluetooth",
+      "Short range, low power, two devices"
+     ],
+     [
+      "The school's main file server",
+      "Wired (Ethernet or fibre)",
+      "Must be as fast, reliable and secure as possible"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Devices can connect to a network in two ways: with a **cable** (wired) or using **radio waves** (wireless). Most schools use both. The desktop PCs in the computer room are wired, while laptops, iPads and phones connect wirelessly."
+    },
+    {
+     "t": "h",
+     "text": "Wired vs wireless"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Wired (e.g. Ethernet)",
+      "Wireless (e.g. Wi-Fi)"
+     ],
+     "rows": [
+      [
+       "Speed",
+       "Usually faster and steady",
+       "Usually slower; drops as you move away or more people join"
+      ],
+      [
+       "Reliability",
+       "Very reliable",
+       "Affected by walls, distance and **interference**"
+      ],
+      [
+       "Security",
+       "Harder to intercept: someone needs to plug in",
+       "Signals travel through the air, so must be encrypted and password protected"
+      ],
+      [
+       "Freedom to move",
+       "Stuck where the cable reaches",
+       "Move around freely within range"
+      ],
+      [
+       "Installation",
+       "Cables must be run through walls and ceilings",
+       "Quick to set up; no trailing cables"
+      ],
+      [
+       "Devices",
+       "Desktops, servers, printers, games consoles",
+       "Laptops, tablets, phones, smart devices"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Wi-Fi"
+    },
+    {
+     "t": "p",
+     "text": "**[[Wi-Fi]]** uses radio waves to connect devices to a wireless access point or home router. A typical indoor range is **a few tens of metres**, and the signal gets weaker through thick walls and floors. To join a Wi-Fi network you usually need its name and a password (the **key**), which also **encrypts** the data so people nearby cannot read it."
+    },
+    {
+     "t": "h",
+     "text": "Bluetooth"
+    },
+    {
+     "t": "p",
+     "text": "**[[Bluetooth]]** is also wireless, but it is designed for **short-range** connections (usually up to about **10 metres**) directly between two devices. It uses very little power, which makes it perfect for small battery-powered gadgets. Devices are **paired** once and then reconnect automatically."
+    },
+    {
+     "t": "table",
+     "head": [
+      "",
+      "Wi-Fi",
+      "Bluetooth"
+     ],
+     "rows": [
+      [
+       "Typical range",
+       "Tens of metres",
+       "About 10 metres"
+      ],
+      [
+       "Speed",
+       "Fast enough to stream films and games",
+       "Much slower"
+      ],
+      [
+       "Power used",
+       "More",
+       "Very little"
+      ],
+      [
+       "Typical uses",
+       "Laptops and phones on the school or home network; internet access",
+       "Wireless earbuds, game controllers, smartwatches, sending a photo to a friend's phone"
+      ]
+     ],
+     "caption": "Wi-Fi compared with Bluetooth"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: choosing a connection",
+     "context": "The school is setting up three things: (a) a new server in the network cabinet, (b) iPads for a geography field trip around the school grounds, (c) a wireless speaker for the PE department's phone. Which connection suits each?",
+     "steps": [
+      "(a) A server must be fast and reliable and it never moves, so use a **wired Ethernet** (or fibre) connection.",
+      "(b) Pupils will walk around, so the iPads need **Wi-Fi**, with access points covering the grounds.",
+      "(c) A phone and a speaker a few metres apart only need a short-range, low-power link, so use **Bluetooth**."
+     ],
+     "answer": "Server: wired. iPads: Wi-Fi. Speaker: Bluetooth."
+    },
+    {
+     "t": "warn",
+     "text": "Free public Wi-Fi in cafés is often **not encrypted**. Avoid logging in to anything important, such as a bank account, on it."
+    },
+    {
+     "t": "tip",
+     "text": "If your games console keeps lagging online, try plugging it straight into the router with an Ethernet cable. A wired link is usually faster and steadier than Wi-Fi."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Wired connections are faster, more reliable and more secure, but you cannot move around.",
+      "Wireless connections give freedom to move and need no cables, but are slower and can suffer interference.",
+      "Wi-Fi connects devices to a network over tens of metres.",
+      "Bluetooth connects two devices directly over about 10 metres using very little power.",
+      "Wireless data should be encrypted with a password so others cannot read it."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is an advantage of a wired connection over Wi-Fi?",
+     "o": [
+      "You can walk around with your device",
+      "It is usually faster and more reliable",
+      "It needs no cables",
+      "It works on phones only"
+     ],
+     "a": 1,
+     "why": "Cables give a steady, fast connection."
+    },
+    {
+     "q": "What is the typical range of Bluetooth?",
+     "o": [
+      "About 10 metres",
+      "About 1 kilometre",
+      "About 100 kilometres",
+      "Unlimited"
+     ],
+     "a": 0,
+     "why": "Bluetooth is designed for short-range links."
+    },
+    {
+     "q": "Which would be the best use of Bluetooth?",
+     "o": [
+      "Connecting a school server",
+      "Connecting wireless earbuds to a phone",
+      "Linking two schools together",
+      "Streaming 4K video to 30 laptops"
+     ],
+     "a": 1,
+     "why": "Short range, low power, two devices: ideal for Bluetooth."
+    },
+    {
+     "q": "Why should a Wi-Fi network have a password?",
+     "o": [
+      "To make it faster",
+      "To increase the range",
+      "To stop strangers joining and to encrypt the data",
+      "So that Bluetooth works"
+     ],
+     "a": 2,
+     "why": "The key controls who can join and scrambles the data."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Give **two** advantages and **two** disadvantages of using Wi-Fi rather than cables in a classroom.",
+     "m": 4,
+     "a": "Advantages, any two: pupils can move around / use laptops anywhere (1); no trailing cables / safer (1); cheaper and quicker to install (1); easy to add new devices (1). Disadvantages, any two: slower (1); less reliable / interference from walls or other devices (1); limited range (1); less secure / signals can be intercepted (1)."
+    },
+    {
+     "q": "Describe **two** differences between Wi-Fi and Bluetooth.",
+     "m": 2,
+     "a": "Any two: Bluetooth has a shorter range (about 10 m) than Wi-Fi (tens of metres) (1); Bluetooth uses less power (1); Bluetooth is slower (1); Bluetooth connects two devices directly while Wi-Fi connects devices to a network/the internet (1)."
+    }
+   ],
+   "terms": [
+    "Wi-Fi",
+    "Bluetooth"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "spec": "Describe star, bus and mesh network topologies and give an advantage and a disadvantage of each",
+   "summary": "A topology is the layout of a network. In a star, every device connects to a central switch. In a bus, every device shares one backbone cable. In a mesh, devices connect to many others so there are lots of routes.",
+   "diagram": {
+    "kind": "compare",
+    "title": "Star, bus and mesh",
+    "caption": "Click each layout to compare them.",
+    "states": [
+     {
+      "label": "Star",
+      "points": [
+       "Every device cabled to a central switch",
+       "One broken cable affects only one device",
+       "Switch fails = whole network fails",
+       "Used in most schools and offices"
+      ],
+      "art": null
+     },
+     {
+      "label": "Bus",
+      "points": [
+       "All devices on one backbone cable",
+       "Cheap: needs little cable",
+       "Backbone breaks = whole network fails",
+       "Data can collide when two devices send at once"
+      ],
+      "art": null
+     },
+     {
+      "label": "Mesh",
+      "points": [
+       "Devices connected to several others",
+       "Many routes, so very reliable",
+       "Lots of cable: expensive to set up",
+       "The internet and mesh Wi-Fi work this way"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A **[[Topology]]** is the **shape or layout** of a network: how the devices are connected to each other. Different layouts suit different jobs, and each has strengths and weaknesses."
+    },
+    {
+     "t": "h",
+     "text": "Star topology"
+    },
+    {
+     "t": "p",
+     "text": "In a **[[Star topology]]**, every computer has **its own cable to a central switch**. This is how most school and office networks are built, including the computer rooms in our school."
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Advantage:** if one cable breaks, only that one computer loses its connection; everyone else carries on.",
+      "**Advantage:** it is fast, because the switch sends data only to the computer it is meant for.",
+      "**Advantage:** it is easy to add a new computer: just plug another cable into the switch.",
+      "**Disadvantage:** if the central switch fails, the whole network goes down.",
+      "**Disadvantage:** it needs a lot of cable, because every device has its own."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Bus topology"
+    },
+    {
+     "t": "p",
+     "text": "In a **[[Bus topology]]**, every device is connected to **one main cable**, called the **backbone**, with a **terminator** at each end to stop signals bouncing back. Data sent by one device travels along the whole backbone, and each device checks whether it is meant for them. Bus networks are rarely used today, but they help explain why star networks took over."
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Advantage:** cheap and simple, because it needs less cable.",
+      "**Disadvantage:** if the backbone cable breaks, the **whole network fails**.",
+      "**Disadvantage:** only one device can send at a time. If two send at once their data **collides**, so it gets slower as more devices are added.",
+      "**Disadvantage:** every device can see all the data, which is less secure."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Mesh topology"
+    },
+    {
+     "t": "p",
+     "text": "In a **[[Mesh topology]]**, devices are connected to **several other devices**. In a **full mesh** every device connects to every other one; in a **partial mesh** some do. Because there are lots of routes, if one link breaks the data simply takes another path. **The internet is a giant partial mesh** of routers. Many homes now use **mesh Wi-Fi**, where several small units around the house pass data between each other to cover every room."
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Advantage:** very reliable: there is no single point of failure.",
+      "**Advantage:** data can take the quickest or least busy route.",
+      "**Disadvantage:** a wired mesh needs huge amounts of cable and is expensive to set up and manage."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: how much cable does a full mesh need?",
+     "context": "A full mesh network has 5 computers, each connected directly to every other one. How many cables are needed? How many would a star network with 5 computers need?",
+     "steps": [
+      "Each computer connects to the other 4, so 5 x 4 = 20 connection ends.",
+      "Each cable has two ends (it joins two computers), so divide by 2: 20 / 2 = **10 cables**.",
+      "A star needs one cable from each computer to the switch: **5 cables**.",
+      "Check: with 6 computers a full mesh needs 6 x 5 / 2 = 15 cables, while a star needs 6. The mesh grows much faster."
+     ],
+     "answer": "Full mesh: 10 cables. Star: 5 cables. This is why wired full meshes are rare in schools."
+    },
+    {
+     "t": "tip",
+     "text": "Exam questions often ask: *what happens if one cable fails?* Star: only that device is affected. Bus: the whole network if it is the backbone. Mesh: data takes another route."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Topology = the layout of a network.",
+      "Star: each device connects to a central switch; one cable failing only affects one device, but the switch is a single point of failure.",
+      "Bus: all devices share one backbone; cheap, but a break stops everything and data can collide.",
+      "Mesh: many connections and routes; very reliable but expensive. The internet is a mesh.",
+      "Most school networks use a star topology."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In a star topology, what is at the centre?",
+     "o": [
+      "A printer",
+      "A switch",
+      "A terminator",
+      "A Bluetooth speaker"
+     ],
+     "a": 1,
+     "why": "Every device has its own cable to the central switch."
+    },
+    {
+     "q": "What happens in a bus network if the backbone cable breaks?",
+     "o": [
+      "Only one computer is affected",
+      "Data takes another route",
+      "The whole network fails",
+      "Nothing at all"
+     ],
+     "a": 2,
+     "why": "Every device relies on the single backbone."
+    },
+    {
+     "q": "Why is a mesh network very reliable?",
+     "o": [
+      "It uses only one cable",
+      "There are many routes, so data can go around a broken link",
+      "It has no devices",
+      "It only works with Bluetooth"
+     ],
+     "a": 1,
+     "why": "No single point of failure."
+    },
+    {
+     "q": "Which topology is most like the internet?",
+     "o": [
+      "Bus",
+      "Star",
+      "Mesh",
+      "None of them"
+     ],
+     "a": 2,
+     "why": "The internet is a huge partial mesh of routers."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe a star topology and give **one** advantage and **one** disadvantage of it.",
+     "m": 3,
+     "a": "Each device has its own cable to a central switch (1). Advantage, any one: if one cable fails only that device is affected / fast / easy to add devices (1). Disadvantage, any one: if the switch fails the whole network fails / uses a lot of cable, so more expensive (1)."
+    },
+    {
+     "q": "Explain why a mesh topology is more reliable than a bus topology.",
+     "m": 2,
+     "a": "In a mesh, devices have several connections / there are many routes, so if one link fails data takes another route (1). In a bus, all devices rely on one backbone cable, so if it breaks the whole network fails (1)."
+    },
+    {
+     "q": "A full mesh network has 4 computers. How many cables are needed? Show your working.",
+     "m": 2,
+     "a": "4 x 3 = 12 connection ends, divided by 2 (1) = 6 cables (1)."
+    }
+   ],
+   "terms": [
+    "Topology",
+    "Star topology",
+    "Bus topology",
+    "Mesh topology"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "spec": "Compare client-server and peer-to-peer networks and decide which is suitable for a given situation",
+   "summary": "In a client-server network, clients ask central servers for files, logins and services, so it is easy to manage and secure. In a peer-to-peer network every computer is equal and shares directly, which is cheap and simple but harder to manage.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Client-server or peer-to-peer?",
+    "caption": "Decide, then click to check.",
+    "head": [
+     "Situation",
+     "Best model",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "A school with 900 pupils who log on anywhere",
+      "Client-server",
+      "Central logins, files and backups"
+     ],
+     [
+      "Two friends swapping photos with AirDrop",
+      "Peer-to-peer",
+      "Two equal devices sharing directly"
+     ],
+     [
+      "A family sharing a printer between two laptops",
+      "Peer-to-peer",
+      "Tiny network, no server needed"
+     ],
+     [
+      "A bank with thousands of staff",
+      "Client-server",
+      "Security must be tightly controlled"
+     ],
+     [
+      "Watching a video on a website",
+      "Client-server",
+      "Your browser is a client asking a web server"
+     ],
+     [
+      "A small shop with one till and one office PC",
+      "Peer-to-peer",
+      "Cheap and simple for two computers"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "As well as a physical layout, every network has a way of **organising who does what**. There are two main models: **client-server** and **peer-to-peer**."
+    },
+    {
+     "t": "h",
+     "text": "Client-server"
+    },
+    {
+     "t": "p",
+     "text": "In a **[[Client-server network]]**, one or more powerful computers called **[[servers|Server]]** provide services, and the other computers, called **[[clients|Client]]**, request them. The school network (C2k) is client-server: when you log on, your PC (the client) asks a server to check your username and password, and then loads your files from a file server."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Type of server",
+      "What it does",
+      "School example"
+     ],
+     "rows": [
+      [
+       "File server",
+       "Stores users' files and controls who can open them",
+       "Your documents and the shared Year 9 folder"
+      ],
+      [
+       "Print server",
+       "Manages a queue of print jobs for shared printers",
+       "Choosing a printer in the computer room"
+      ],
+      [
+       "Web server",
+       "Stores web pages and sends them to browsers that ask for them",
+       "The school website"
+      ],
+      [
+       "Email server",
+       "Stores, sends and receives email",
+       "Your school email account"
+      ],
+      [
+       "Authentication server",
+       "Checks usernames and passwords when people log on",
+       "Logging on at the start of the lesson"
+      ]
+     ],
+     "caption": "Common types of server"
+    },
+    {
+     "t": "h",
+     "text": "Peer-to-peer"
+    },
+    {
+     "t": "p",
+     "text": "In a **[[Peer-to-peer network]]** (P2P) there is **no central server**. Every computer, called a **peer**, is equal. Each one stores its own files and can share them directly with the others. Sending a photo to a friend's phone with Bluetooth or AirDrop, or connecting two laptops to swap a file, are simple examples. Some online games and file-sharing apps also use P2P."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Client-server",
+      "Peer-to-peer"
+     ],
+     "rows": [
+      [
+       "Central server?",
+       "Yes",
+       "No: all computers are equal"
+      ],
+      [
+       "Where files are stored",
+       "Centrally on the server",
+       "On each individual computer"
+      ],
+      [
+       "Backups",
+       "Done centrally by the technician",
+       "Each user must back up their own computer"
+      ],
+      [
+       "Security",
+       "Central logins and permissions; easier to control",
+       "Harder to control; each user sets their own sharing"
+      ],
+      [
+       "Cost",
+       "Expensive: servers and a technician",
+       "Cheap: no server needed"
+      ],
+      [
+       "If one computer fails",
+       "Clients are fine unless it is the server",
+       "Only that computer's files are lost to others"
+      ],
+      [
+       "Best for",
+       "Schools, businesses, large networks",
+       "Homes, very small offices, sharing between friends"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Worked example: which model?",
+     "context": "A hairdresser has two computers: one at the reception desk for bookings and one in the back office for accounts. A grammar school has 600 computers and 1,000 users. Which model suits each?",
+     "steps": [
+      "The hairdresser only has two computers and probably no IT technician. Buying a server would be expensive and unnecessary, so **peer-to-peer** is suitable: the two computers can share files and a printer directly.",
+      "The school has hundreds of users who need to log on anywhere, have their work backed up and be kept out of each other's files. This needs central control, so **client-server** is suitable."
+     ],
+     "answer": "Hairdresser: peer-to-peer. School: client-server."
+    },
+    {
+     "t": "note",
+     "text": "When you visit a website, your browser is acting as a **client** and the computer storing the website is a **web server**. So the internet itself relies on the client-server model millions of times every second."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Client-server: clients request services from central servers.",
+      "Servers can store files, manage printing, host websites, handle email and check logins.",
+      "Peer-to-peer: no server; every computer is equal and shares directly.",
+      "Client-server is easier to secure, back up and manage, but costs more.",
+      "Peer-to-peer is cheap and simple, so suits homes and very small businesses."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a client?",
+     "o": [
+      "A computer that provides services to others",
+      "A computer that requests services from a server",
+      "A type of cable",
+      "A network with no server"
+     ],
+     "a": 1,
+     "why": "Clients ask; servers provide."
+    },
+    {
+     "q": "Which network model has no central server?",
+     "o": [
+      "Client-server",
+      "Star",
+      "Peer-to-peer",
+      "WAN"
+     ],
+     "a": 2,
+     "why": "In P2P every computer is equal."
+    },
+    {
+     "q": "Why does a school use a client-server network?",
+     "o": [
+      "It is the cheapest option",
+      "It needs no technician",
+      "Logins, security and backups can be managed centrally",
+      "It only works with Bluetooth"
+     ],
+     "a": 2,
+     "why": "Central control suits hundreds of users."
+    },
+    {
+     "q": "Which server checks your username and password when you log on?",
+     "o": [
+      "Print server",
+      "Authentication server",
+      "Web server",
+      "Email server"
+     ],
+     "a": 1,
+     "why": "Authentication means checking who you are."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe **two** differences between a client-server network and a peer-to-peer network.",
+     "m": 4,
+     "a": "Any two differences, each explained for both sides (2 marks each, max 4): client-server has a central server, P2P has none / all computers equal (2); client-server stores files centrally, P2P stores files on each computer (2); client-server is backed up centrally, P2P each user backs up their own (2); client-server security controlled centrally, P2P harder to control (2); client-server more expensive, P2P cheaper (2)."
+    },
+    {
+     "q": "State **three** types of server and what each does.",
+     "m": 3,
+     "a": "Any three, 1 mark each for type with correct job: file server, stores users' files (1); print server, manages print jobs/queue (1); web server, stores and sends web pages (1); email server, sends/receives/stores email (1); authentication server, checks usernames and passwords (1)."
+    }
+   ],
+   "terms": [
+    "Server",
+    "Client",
+    "Client-server network",
+    "Peer-to-peer network"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "spec": "Explain how data is split into packets and sent across a network using packet switching",
+   "summary": "Data is split into small packets. Each packet has a header with the sender's and receiver's addresses and a packet number. Routers send each packet by the best route available, and the receiving computer puts them back in order and asks for any missing ones again.",
+   "diagram": {
+    "kind": "flow",
+    "title": "A packet's journey",
+    "caption": "Click each step to follow a file across the internet.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Split",
+      "detail": "The sender's computer splits the file into numbered packets and adds a header to each.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Send",
+      "detail": "Packets leave through the router onto the internet.",
+      "shape": "io"
+     },
+     {
+      "id": "c",
+      "label": "Route",
+      "detail": "Each router reads the destination address and sends each packet by the best route at that moment.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Reorder",
+      "detail": "Packets arrive, possibly out of order; they are sorted using their packet numbers.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Check and rebuild",
+      "detail": "Any missing or damaged packet is requested again, then the file is put back together.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "When you send a photo to a friend, it is not sent as one big lump. It is chopped into lots of small pieces called **[[packets|Packet]]**. Each packet travels across the internet on its own, and the pieces are put back together at the other end."
+    },
+    {
+     "t": "h",
+     "text": "What is in a packet?"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "What it contains",
+      "Like on a parcel..."
+     ],
+     "rows": [
+      [
+       "**Header**",
+       "The sender's IP address, the destination IP address, the packet number (e.g. 3 of 50) and the protocol being used",
+       "The address label and return address"
+      ],
+      [
+       "**Payload**",
+       "The actual piece of data: part of your photo, message or web page",
+       "The contents of the box"
+      ],
+      [
+       "**Trailer**",
+       "A check value used to spot if the data was damaged on the way, and a marker for the end of the packet",
+       "A seal showing it has not been tampered with"
+      ]
+     ],
+     "caption": "The parts of a packet"
+    },
+    {
+     "t": "h",
+     "text": "Packet switching"
+    },
+    {
+     "t": "p",
+     "text": "The internet uses **[[Packet switching]]**. Each packet is sent separately. At every **router** it reaches, the router reads the destination address in the header and sends the packet onwards along whichever route is **best at that moment**. If one route is busy or broken, the next packet can be sent a different way. This means packets from the same file can travel by **different routes** and arrive **out of order**."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: sending a photo from Enniskillen to Australia",
+     "context": "Orla emails a 2 MB photo to her cousin in Sydney. To keep it simple, imagine it is split into just 6 packets. Packet 4 goes missing on the way. What happens?",
+     "steps": [
+      "Orla's computer splits the photo into packets 1 to 6 and adds a **header** to each one with her IP address, her cousin's mail server's IP address and the packet number.",
+      "The packets leave through her router. Routers along the way send each packet by the best route at that moment: packets 1, 2 and 5 go via London and New York; 3 and 6 go via Amsterdam and Singapore.",
+      "They arrive in the order 1, 3, 2, 6, 5. The receiving computer uses the **packet numbers** to put them back in order: 1, 2, 3, 5, 6.",
+      "It notices packet 4 is missing, so it asks for packet 4 to be **sent again**.",
+      "Packet 4 arrives, the photo is reassembled perfectly, and an acknowledgement is sent back."
+     ],
+     "answer": "The packets travel separately, are reordered using their numbers, and any missing packet is resent, so the photo arrives complete."
+    },
+    {
+     "t": "h",
+     "text": "Why use packets?"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Reliable:** if a route breaks, packets simply go another way, and lost packets can be resent.",
+      "**Efficient:** many people share the same cables at once, because packets from different users take turns.",
+      "**Only damaged parts are resent:** if one packet is damaged, only that small packet is sent again, not the whole file.",
+      "**Fast:** packets can avoid busy routes."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Protocols"
+    },
+    {
+     "t": "p",
+     "text": "For this to work, every device in the world must follow the same rules. A set of rules for communicating is called a **[[Protocol]]**. **TCP/IP** is the main set of protocols for the internet: **TCP** splits data into packets, numbers them and checks they all arrive; **IP** handles the addressing and routing. **HTTP** and **HTTPS** are the protocols for sending web pages."
+    },
+    {
+     "t": "tip",
+     "text": "Think of a jigsaw sent through the post in several envelopes. Each envelope is numbered, they may arrive on different days, but you can still build the picture using the numbers."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Data is split into small packets before it is sent.",
+      "Each packet has a header (sender and destination addresses, packet number), a payload and a trailer.",
+      "Routers send each packet by the best available route, so packets may arrive out of order.",
+      "The receiver reorders packets using their numbers and asks for missing ones to be resent.",
+      "A protocol is a set of rules for communication; TCP/IP is the main one for the internet."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which part of a packet contains the destination address?",
+     "o": [
+      "The payload",
+      "The header",
+      "The trailer",
+      "The router"
+     ],
+     "a": 1,
+     "why": "The header is like the address label on a parcel."
+    },
+    {
+     "q": "Why might packets arrive in the wrong order?",
+     "o": [
+      "They are sent by different routes",
+      "The computer is broken",
+      "Packets have no numbers",
+      "Wi-Fi reverses them"
+     ],
+     "a": 0,
+     "why": "Each packet may take a different route, some quicker than others."
+    },
+    {
+     "q": "What happens if a packet goes missing?",
+     "o": [
+      "The whole file is deleted",
+      "The receiver asks for that packet to be sent again",
+      "The router stores it forever",
+      "The other packets are thrown away"
+     ],
+     "a": 1,
+     "why": "Only the missing packet needs resending."
+    },
+    {
+     "q": "What is a protocol?",
+     "o": [
+      "A type of cable",
+      "A set of rules for how devices communicate",
+      "A fast router",
+      "A virus"
+     ],
+     "a": 1,
+     "why": "Everyone follows the same rules, so devices can understand each other."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State **three** items of information found in the header of a packet.",
+     "m": 3,
+     "a": "Any three: sender's/source IP address (1); destination IP address (1); packet number / sequence number (1); total number of packets (1); protocol used (1)."
+    },
+    {
+     "q": "Describe how a file is sent across the internet using packet switching.",
+     "m": 4,
+     "a": "Any four: the file is split into packets (1); each packet is given a header with addresses and a packet number (1); routers send each packet by the best route available / packets can take different routes (1); packets may arrive out of order (1); the receiver reassembles them in order using the packet numbers (1); missing or damaged packets are requested again (1)."
+    }
+   ],
+   "terms": [
+    "Packet",
+    "Packet switching",
+    "Protocol"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p07",
+   "spec": "Explain what IP addresses and MAC addresses are and the difference between them",
+   "summary": "An IP address identifies a device on a network so data can be routed to it, and it can change. A MAC address is a unique, permanent address built into a device's NIC when it is made.",
+   "diagram": {
+    "kind": "match",
+    "title": "IP or MAC?",
+    "caption": "Click to match each address fact with its description.",
+    "pairs": [
+     [
+      "IPv4 address",
+      "Four numbers from 0 to 255, e.g. 172.16.0.8"
+     ],
+     [
+      "IPv6 address",
+      "A much longer address created because IPv4 ran out"
+     ],
+     [
+      "MAC address",
+      "12 hexadecimal digits fixed in the NIC by the manufacturer"
+     ],
+     [
+      "Router",
+      "Uses IP addresses to send packets between networks"
+     ],
+     [
+      "Switch",
+      "Uses MAC addresses to send data within a LAN"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "For a packet to reach the right device, every device needs an **address**, just as every house needs an address for the post to arrive. Networked devices actually have **two** kinds: an **IP address** and a **MAC address**."
+    },
+    {
+     "t": "h",
+     "text": "IP addresses"
+    },
+    {
+     "t": "p",
+     "text": "An **[[IP address]]** (Internet Protocol address) identifies a device on a network so that data can be **routed** to it. Routers use IP addresses to decide where to send packets."
+    },
+    {
+     "t": "list",
+     "items": [
+      "**IPv4** addresses are four numbers, each from **0 to 255**, separated by dots, e.g. `192.168.1.25`. That gives about 4.3 billion different addresses.",
+      "There are now far more devices than that, so **IPv6** was created. IPv6 addresses are much longer and written in hexadecimal, e.g. `2001:0db8:85a3:0000:0000:8a2e:0370:7334`. There are enough for every grain of sand on Earth to have many.",
+      "IP addresses are usually given out automatically by the router when a device joins a network, so **they can change**. Your phone gets a different IP address at home, at school and in a café."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: is this a valid IPv4 address?",
+     "context": "Which of these are valid IPv4 addresses? (a) 10.0.15.200 (b) 192.168.1.256 (c) 172.16.4 (d) 8.8.8.8",
+     "steps": [
+      "Rule: exactly **four** numbers separated by dots, each from **0 to 255**.",
+      "(a) 10, 0, 15, 200: four numbers, all 0 to 255, so **valid**.",
+      "(b) 256 is bigger than 255, so **not valid**.",
+      "(c) Only three numbers, so **not valid**.",
+      "(d) 8, 8, 8, 8: four numbers, all in range, so **valid**."
+     ],
+     "answer": "(a) and (d) are valid; (b) and (c) are not."
+    },
+    {
+     "t": "h",
+     "text": "MAC addresses"
+    },
+    {
+     "t": "p",
+     "text": "A **[[MAC address]]** (Media Access Control address) is **built into the NIC** of a device when it is manufactured. It is **unique** in the world and **does not normally change**. It is written as **12 hexadecimal digits** in pairs, e.g. `3C:22:FB:9A:41:07`. Switches use MAC addresses to send data to the right device **within a LAN**."
+    },
+    {
+     "t": "h",
+     "text": "IP vs MAC"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "IP address",
+      "MAC address"
+     ],
+     "rows": [
+      [
+       "What it identifies",
+       "A device's location on a network",
+       "The NIC of one particular device"
+      ],
+      [
+       "Can it change?",
+       "Yes: it changes when you join a different network",
+       "No: fixed when the NIC is made"
+      ],
+      [
+       "Who gives it out?",
+       "The router or network",
+       "The manufacturer"
+      ],
+      [
+       "Example",
+       "192.168.1.25",
+       "3C:22:FB:9A:41:07"
+      ],
+      [
+       "Used by",
+       "Routers, to send data between networks",
+       "Switches, to send data within a LAN"
+      ]
+     ]
+    },
+    {
+     "t": "tip",
+     "text": "Think of a MAC address as your **name**: it stays with you wherever you go. An IP address is like your **postal address**: if you move house, it changes."
+    },
+    {
+     "t": "note",
+     "text": "Devices on a home or school LAN usually have **private** IP addresses (often starting 192.168 or 10). The router has one **public** IP address that the rest of the internet sees, and it keeps track of which device inside asked for what."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "An IP address identifies a device on a network so data can be routed to it.",
+      "IPv4 = four numbers 0 to 255 separated by dots; IPv6 is longer and has far more addresses.",
+      "IP addresses are usually assigned by the router and can change.",
+      "A MAC address is unique, set in the NIC when it is made, and does not change.",
+      "Routers use IP addresses; switches use MAC addresses."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is a valid IPv4 address?",
+     "o": [
+      "192.168.1.300",
+      "10.20.30.40",
+      "1.2.3",
+      "A1:B2:C3:D4:E5:F6"
+     ],
+     "a": 1,
+     "why": "Four numbers, each 0 to 255."
+    },
+    {
+     "q": "Where is a MAC address stored?",
+     "o": [
+      "In the router's memory",
+      "In the NIC, when it is made",
+      "On a web server",
+      "In your password"
+     ],
+     "a": 1,
+     "why": "The manufacturer builds it into the network interface card."
+    },
+    {
+     "q": "Why was IPv6 introduced?",
+     "o": [
+      "IPv4 was too slow",
+      "The world was running out of IPv4 addresses",
+      "To replace MAC addresses",
+      "To make Wi-Fi work"
+     ],
+     "a": 1,
+     "why": "IPv4 only has about 4.3 billion addresses."
+    },
+    {
+     "q": "Your phone connects to Wi-Fi at school, then at home. What happens?",
+     "o": [
+      "Its MAC address changes",
+      "Its IP address will probably change but its MAC address stays the same",
+      "Both addresses stay the same",
+      "It loses both addresses"
+     ],
+     "a": 1,
+     "why": "IP addresses depend on the network; MAC addresses are fixed."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe **two** differences between an IP address and a MAC address.",
+     "m": 4,
+     "a": "Any two differences, each explained for both sides (2 marks each, max 4): IP can change / MAC is permanent (2); IP is assigned by the router/network / MAC is set by the manufacturer (2); IP is used to route data between networks / MAC is used to identify a device within a LAN (2); IPv4 is four denary numbers / MAC is 12 hexadecimal digits (2)."
+    },
+    {
+     "q": "Explain why 192.168.0.260 is not a valid IPv4 address.",
+     "m": 1,
+     "a": "Each number in an IPv4 address must be between 0 and 255, and 260 is greater than 255 (1)."
+    }
+   ],
+   "terms": [
+    "IP address",
+    "MAC address"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p08",
+   "spec": "Describe, step by step, what happens when you type a URL into a browser, including the role of DNS",
+   "summary": "Computers find each other using IP addresses, but people remember names. When you type a URL, a DNS server looks up the IP address for the domain name, then the browser contacts the web server at that address and the page arrives as packets.",
+   "diagram": {
+    "kind": "flow",
+    "title": "Typing a URL: step by step",
+    "caption": "Click each step to see what happens.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Type the URL",
+      "detail": "You type www.bbc.co.uk and press Enter.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "IP address in cache?",
+      "detail": "The browser checks whether it already knows the IP address from a recent visit.",
+      "shape": "io"
+     },
+     {
+      "id": "c",
+      "label": "Ask a DNS server",
+      "detail": "If not, a DNS server (usually your ISP's) looks it up, asking other DNS servers if needed.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "IP address returned",
+      "detail": "The matching IP address is sent back and cached for next time.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Request the page",
+      "detail": "The browser asks the web server at that IP address for the page.",
+      "shape": "process"
+     },
+     {
+      "id": "f",
+      "label": "Page arrives and displays",
+      "detail": "The page comes back as packets, which the browser reassembles and shows.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "e"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "f"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Every website lives on a **[[Web server]]** with an IP address. But nobody wants to type a number like `151.101.0.81` to read the news. We use **[[domain names|Domain name]]** like `bbc.co.uk` instead. Something has to translate the name into the number, and that something is **[[DNS]]**."
+    },
+    {
+     "t": "h",
+     "text": "Parts of a URL"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "Example",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "Protocol",
+       "`https://`",
+       "The rules for sending the page; the **s** means it is secure (encrypted)"
+      ],
+      [
+       "Subdomain",
+       "`www.`",
+       "Part of the website, often www for World Wide Web"
+      ],
+      [
+       "Domain name",
+       "`bbc.co.uk`",
+       "The name of the website, which DNS turns into an IP address"
+      ],
+      [
+       "Path",
+       "`/sport/football`",
+       "The particular page or folder on the web server"
+      ]
+     ],
+     "caption": "Breaking down https://www.bbc.co.uk/sport/football"
+    },
+    {
+     "t": "p",
+     "text": "The whole address is called a **[[URL]]** (Uniform Resource Locator)."
+    },
+    {
+     "t": "h",
+     "text": "DNS: the internet's phone book"
+    },
+    {
+     "t": "p",
+     "text": "The **Domain Name System** is a huge network of **DNS servers** around the world. Together they hold a directory that matches domain names to IP addresses, just as your phone's contacts match names to phone numbers. No single server knows everything, so they ask each other."
+    },
+    {
+     "t": "h",
+     "text": "What happens when you type a URL"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: visiting www.bbc.co.uk/sport",
+     "context": "You type https://www.bbc.co.uk/sport into Chrome and press Enter. What happens before the page appears?",
+     "steps": [
+      "The browser checks its own **cache** (memory) to see if it already knows the IP address from a recent visit. If it does, it skips to step 5.",
+      "If not, your computer sends a request to a **DNS server**, usually one run by your **[[ISP]]** (or the school's network): *What is the IP address of www.bbc.co.uk?*",
+      "If that DNS server does not know, it asks other DNS servers, working from the top: one that knows about **.uk**, then one that knows about **bbc.co.uk**.",
+      "The IP address is found and sent back to your computer. It is also remembered (cached) to make the next visit quicker.",
+      "Your browser sends a request to the **web server** at that IP address: *Please send me the page /sport*.",
+      "The web server sends the page back, split into **packets**.",
+      "Your browser reassembles the packets and displays the page. Images and videos on the page may each need further requests."
+     ],
+     "answer": "DNS turns the domain name into an IP address; the browser then requests the page from the web server at that address, and it arrives in packets."
+    },
+    {
+     "t": "warn",
+     "text": "If a DNS server is not working, websites will not load by name even though your internet connection is fine. It can look as though *the internet is down* when only DNS is broken."
+    },
+    {
+     "t": "tip",
+     "text": "All of this usually happens in **less than a second**. Caching is the reason a website you visit often loads faster than a brand-new one."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Computers use IP addresses; people use domain names.",
+      "A URL is made of a protocol, domain name and path.",
+      "DNS servers translate domain names into IP addresses, like a phone book.",
+      "Steps: check cache, ask DNS server, get IP address, request page from web server, page arrives in packets, browser displays it.",
+      "If DNS fails, sites cannot be found by name."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does DNS do?",
+     "o": [
+      "Stores all the web pages in the world",
+      "Translates domain names into IP addresses",
+      "Speeds up your Wi-Fi",
+      "Gives devices MAC addresses"
+     ],
+     "a": 1,
+     "why": "It is the internet's phone book."
+    },
+    {
+     "q": "In https://www.ergs.org/sport, which part is the path?",
+     "o": [
+      "https://",
+      "www.",
+      "ergs.org",
+      "/sport"
+     ],
+     "a": 3,
+     "why": "The path picks the page on the web server."
+    },
+    {
+     "q": "What does the browser do **after** it receives the IP address?",
+     "o": [
+      "Asks the DNS server again",
+      "Sends a request for the page to the web server at that IP address",
+      "Turns off Wi-Fi",
+      "Deletes its cache"
+     ],
+     "a": 1,
+     "why": "Now it knows where the website lives, it can ask for the page."
+    },
+    {
+     "q": "Why does a website you visit often load faster?",
+     "o": [
+      "The IP address is cached, so DNS lookup can be skipped",
+      "The website likes you",
+      "Your MAC address changes",
+      "It uses Bluetooth"
+     ],
+     "a": 0,
+     "why": "Caching saves the lookup step."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why the Domain Name System (DNS) is needed.",
+     "m": 2,
+     "a": "Computers find each other using IP addresses (1), but people find domain names easier to remember than numbers, so DNS translates the name into the IP address (1)."
+    },
+    {
+     "q": "Describe the steps that take place when a user types a URL into a web browser until the page is displayed.",
+     "m": 5,
+     "a": "Any five, in a sensible order: browser checks its cache for the IP address (1); request sent to a DNS server (1); DNS server looks up the domain name / asks other DNS servers if it does not know (1); IP address returned to the computer (1); browser sends a request to the web server at that IP address (1); web server sends the page back in packets (1); browser reassembles and displays the page (1)."
+    },
+    {
+     "q": "Name the **three** main parts of the URL https://www.example.co.uk/news.",
+     "m": 3,
+     "a": "Protocol: https (1); domain name: www.example.co.uk or example.co.uk (1); path: /news (1)."
+    }
+   ],
+   "terms": [
+    "Domain name",
+    "DNS",
+    "ISP",
+    "URL",
+    "Web server"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p09",
+   "spec": "Explain bandwidth and network speed units, and calculate how long a file will take to download",
+   "summary": "Bandwidth is how much data a connection can carry each second, measured in bits per second (usually Mbps). To find a download time, convert the file size into megabits (multiply MB by 8) and divide by the speed in Mbps.",
+   "diagram": {
+    "kind": "calc",
+    "title": "How long will it take to download?",
+    "caption": "Change the file size (MB) and the connection speed (Mbps) to see the download time.",
+    "inputs": [
+     {
+      "id": "s",
+      "label": "File size (MB)",
+      "value": 400
+     },
+     {
+      "id": "m",
+      "label": "Speed (Mbps)",
+      "value": 50
+     }
+    ],
+    "formula": "s*8/m",
+    "result": {
+     "label": "Download time",
+     "unit": "seconds"
+    },
+    "show": []
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Broadband adverts boast about speeds like *up to 500 Mb*. But what does that actually mean, and how long will that new game take to download?"
+    },
+    {
+     "t": "h",
+     "text": "Bandwidth"
+    },
+    {
+     "t": "p",
+     "text": "**[[Bandwidth]]** is the **maximum amount of data that can be sent each second** across a connection. Think of it like the number of lanes on a motorway: more lanes means more cars (data) can travel at once. If lots of people share the same connection, such as a whole family streaming at the same time, each gets a smaller share."
+    },
+    {
+     "t": "h",
+     "text": "Speed units: bits, not bytes"
+    },
+    {
+     "t": "p",
+     "text": "Network speed, or **bit rate**, is measured in **bits per second**, not bytes. Watch the letter **b**: a small **b** means **bits**, a capital **B** means **bytes**. There are **8 bits in a byte**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Unit",
+      "Stands for",
+      "Bits per second"
+     ],
+     "rows": [
+      [
+       "bps",
+       "bits per second",
+       "1"
+      ],
+      [
+       "Kbps",
+       "kilobits per second",
+       "1,000"
+      ],
+      [
+       "**[[Mbps]]**",
+       "megabits per second",
+       "1,000,000 (one million)"
+      ],
+      [
+       "Gbps",
+       "gigabits per second",
+       "1,000,000,000 (one billion)"
+      ]
+     ],
+     "caption": "Network speed units go up in thousands"
+    },
+    {
+     "t": "warn",
+     "text": "File sizes are usually in **megabytes (MB)** but speeds are in **megabits per second (Mbps)**. You must **multiply the file size by 8** to turn megabytes into megabits before dividing by the speed."
+    },
+    {
+     "t": "h",
+     "text": "Calculating download time"
+    },
+    {
+     "t": "p",
+     "text": "Download time (seconds) = **file size in megabits / speed in Mbps**. So the method is:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Make sure the file size is in **MB** (to keep things simple in speed questions, use 1 GB = 1000 MB).",
+      "Multiply by **8** to get **megabits** (Mb).",
+      "Divide by the speed in **Mbps** to get the time in **seconds**.",
+      "If needed, divide by **60** to turn seconds into minutes."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1: downloading a film",
+     "context": "A film is 400 MB. Your broadband speed is 50 Mbps. How long will it take to download?",
+     "steps": [
+      "Convert to megabits: 400 MB x 8 = **3,200 Mb**.",
+      "Divide by the speed: 3,200 / 50 = **64 seconds**.",
+      "In minutes: 64 seconds = **1 minute 4 seconds**.",
+      "Check: 50 Mbps x 64 s = 3,200 Mb, and 3,200 / 8 = 400 MB. Correct."
+     ],
+     "answer": "64 seconds (1 minute 4 seconds)."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2: downloading a game",
+     "context": "A game update is 2 GB. The school connection gives you 100 Mbps. How long will it take?",
+     "steps": [
+      "Convert to MB: 2 GB = 2 x 1000 = **2,000 MB**.",
+      "Convert to megabits: 2,000 x 8 = **16,000 Mb**.",
+      "Divide by the speed: 16,000 / 100 = **160 seconds**.",
+      "In minutes: 160 / 60 = 2 remainder 40, so **2 minutes 40 seconds**.",
+      "Check: 100 Mbps x 160 s = 16,000 Mb, and 16,000 / 8 = 2,000 MB = 2 GB. Correct."
+     ],
+     "answer": "160 seconds (2 minutes 40 seconds)."
+    },
+    {
+     "t": "note",
+     "text": "Real downloads usually take a bit longer than the calculation says. The connection may be shared with others, the server sending the file may be busy, and every packet carries extra header information as well as your data."
+    },
+    {
+     "t": "h",
+     "text": "Speed is not just bandwidth"
+    },
+    {
+     "t": "p",
+     "text": "**[[Latency]]** (often called **ping** or **lag**) is the **delay** before data starts to arrive, measured in milliseconds (ms). For downloading a film, bandwidth matters most. For online gaming or video calls, **low latency** matters more, because you need each action to reach the server instantly."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Bandwidth = the maximum amount of data a connection can carry per second.",
+      "Speeds are measured in bits per second: bps, Kbps, Mbps, Gbps (each 1,000 times bigger).",
+      "Small b = bits, capital B = bytes; 1 byte = 8 bits.",
+      "Download time (s) = file size in MB x 8 / speed in Mbps.",
+      "Latency is the delay before data arrives; low latency matters for gaming."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does Mbps stand for?",
+     "o": [
+      "Megabytes per second",
+      "Megabits per second",
+      "Million bytes per screen",
+      "Maximum bits per signal"
+     ],
+     "a": 1,
+     "why": "Small b = bits."
+    },
+    {
+     "q": "A 100 MB file is downloaded at 20 Mbps. How long does it take?",
+     "o": [
+      "5 seconds",
+      "20 seconds",
+      "40 seconds",
+      "80 seconds"
+     ],
+     "a": 2,
+     "why": "100 x 8 = 800 Mb; 800 / 20 = 40 seconds."
+    },
+    {
+     "q": "Why do you multiply a file size in MB by 8?",
+     "o": [
+      "To turn megabytes into megabits",
+      "To turn seconds into minutes",
+      "Because there are 8 routers",
+      "To add the packet headers"
+     ],
+     "a": 0,
+     "why": "There are 8 bits in every byte."
+    },
+    {
+     "q": "Which matters most for a fast-paced online game?",
+     "o": [
+      "Large storage",
+      "Low latency",
+      "A big monitor",
+      "A MAC address"
+     ],
+     "a": 1,
+     "why": "Low latency means actions reach the server with little delay."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Define the term **bandwidth**.",
+     "m": 1,
+     "a": "The maximum amount of data that can be transmitted across a network/connection per second (1)."
+    },
+    {
+     "q": "A pupil wants to download a 600 MB video. Their connection speed is 40 Mbps. Calculate how long the download will take. Show your working.",
+     "m": 3,
+     "a": "600 x 8 = 4,800 Mb (1); 4,800 / 40 (1) = 120 seconds / 2 minutes (1)."
+    },
+    {
+     "q": "Give **two** reasons why a download might take longer than the calculated time.",
+     "m": 2,
+     "a": "Any two: connection shared with other users/devices (1); server sending the file is busy or slow (1); packets carry extra header data (1); Wi-Fi signal weak or interference (1); lost packets have to be resent (1)."
+    }
+   ],
+   "terms": [
+    "Bandwidth",
+    "Mbps",
+    "Latency"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p10",
+   "spec": "Explain what the cloud and the Internet of Things are, and evaluate their benefits and risks",
+   "summary": "The cloud means using storage and software on servers in data centres over the internet, such as OneDrive. The Internet of Things is everyday objects with sensors that connect to the internet, such as smart speakers and fitness trackers. Both are convenient but raise security and privacy concerns.",
+   "diagram": {
+    "kind": "hotspot",
+    "title": "A smart home",
+    "caption": "Click each device to see how it uses the Internet of Things, and the risk to watch for.",
+    "rows": [
+     [
+      {
+       "label": "Smart speaker",
+       "detail": "Sends your voice to the cloud to answer questions. Risk: it is always listening for its wake word.",
+       "span": 2
+      },
+      {
+       "label": "Video doorbell",
+       "detail": "Streams video to your phone. Risk: weak passwords let strangers watch.",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "Smart thermostat",
+       "detail": "Turn the heating on from the bus home. Risk: shows when nobody is in.",
+       "span": 1
+      },
+      {
+       "label": "Router",
+       "detail": "Connects every smart device to the internet. Keep its admin password strong.",
+       "span": 1
+      },
+      {
+       "label": "Smart lights",
+       "detail": "Switch on by voice or timer to save energy. Risk: stop working if the app's servers go down.",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "Fitness tracker",
+       "detail": "Syncs steps and heart rate to the cloud. Risk: location and health data shared with the company.",
+       "span": 2
+      },
+      {
+       "label": "Smart TV",
+       "detail": "Streams from cloud services. Risk: may collect data on what you watch.",
+       "span": 1
+      }
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is the cloud?"
+    },
+    {
+     "t": "p",
+     "text": "**[[The cloud]]** is not really in the sky. It means using storage, software and services that run on **servers in [[data centres|Data centre]]** owned by big companies, which you reach **over the internet**. When you open a file in OneDrive, write in Google Docs, stream on Netflix or play a game saved online, you are using the cloud."
+    },
+    {
+     "t": "h",
+     "text": "Cloud storage"
+    },
+    {
+     "t": "p",
+     "text": "**[[Cloud storage]]** means saving your files on someone else's servers rather than on your own device. Examples include **OneDrive**, **Google Drive**, **iCloud** and **Dropbox**. Your school Microsoft 365 account gives you OneDrive, so you can start homework in school and finish it at home."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Advantages",
+      "Disadvantages"
+     ],
+     "rows": [
+      [
+       "Access",
+       "Open files from any device, anywhere with internet",
+       "No internet = no access to your files"
+      ],
+      [
+       "Backup",
+       "Files are safe even if your laptop is lost or broken",
+       "You rely on the company not to lose or delete them"
+      ],
+      [
+       "Sharing",
+       "Easy to share and work on the same file with others",
+       "Shared links can be sent on to the wrong people"
+      ],
+      [
+       "Cost and space",
+       "Free or cheap; no need to buy extra hard drives",
+       "Large amounts of storage need a monthly subscription"
+      ],
+      [
+       "Security",
+       "Big companies have strong security and encryption",
+       "Accounts can be hacked if the password is weak; data may be stored in another country"
+      ]
+     ]
+    },
+    {
+     "t": "tip",
+     "text": "Turn on **two-factor authentication** for your cloud accounts. Even if someone guesses your password, they still need the code from your phone."
+    },
+    {
+     "t": "h",
+     "text": "The Internet of Things"
+    },
+    {
+     "t": "p",
+     "text": "The **[[Internet of Things]]** (IoT) is the huge number of **everyday objects** that now contain **sensors** and a **network connection**, so they can collect data and share it over the internet. These are often called **[[smart devices|Smart device]]**. Experts estimate there are now **more IoT devices than people** on Earth."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Smart device",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "Smart speaker",
+       "Listens for a wake word, sends your question to the cloud and plays the answer"
+      ],
+      [
+       "Fitness tracker or smartwatch",
+       "Counts steps and heart rate and syncs them to an app"
+      ],
+      [
+       "Smart thermostat",
+       "Lets you turn the heating on from your phone on the way home"
+      ],
+      [
+       "Video doorbell",
+       "Sends a live video to your phone when someone rings"
+      ],
+      [
+       "Smart lights and plugs",
+       "Turn on and off on a timer or by voice"
+      ],
+      [
+       "Sensors in farming and cities",
+       "Measure soil moisture for Fermanagh farmers or show free parking spaces"
+      ]
+     ],
+     "caption": "Examples of the Internet of Things"
+    },
+    {
+     "t": "h",
+     "text": "Benefits and risks of IoT"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Benefits",
+      "Risks"
+     ],
+     "rows": [
+      [
+       "Convenience",
+       "Control your home from anywhere",
+       "Stops working if the internet or the company's servers go down"
+      ],
+      [
+       "Saving energy",
+       "Heating and lights only on when needed",
+       "Many devices left on standby still use power"
+      ],
+      [
+       "Health and safety",
+       "Trackers can alert you to health problems; doorbells deter burglars",
+       "Devices with **default passwords** can be hacked and used to spy or attack others"
+      ],
+      [
+       "Data",
+       "Useful data helps you make decisions",
+       "Devices collect lots of personal data: who is home, what you say, where you go"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Worked example: securing a new smart camera",
+     "context": "Your family buys a wireless smart camera for the front of the house. Give three things you should do to keep it secure.",
+     "steps": [
+      "**Change the default password** straight away to a strong, unique one, because default passwords are published online.",
+      "**Install updates** when they appear, because they fix security weaknesses.",
+      "**Check the privacy settings** so that video is not shared publicly, and turn on two-factor authentication for the app."
+     ],
+     "answer": "Change the default password, keep it updated, and check privacy and sharing settings."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "The cloud = storage and services on remote servers in data centres, used over the internet.",
+      "Cloud storage lets you access, back up and share files anywhere, but needs internet and a trustworthy provider.",
+      "The Internet of Things = everyday objects with sensors and internet connections.",
+      "IoT brings convenience and energy saving but risks hacking and loss of privacy.",
+      "Always change default passwords and keep smart devices updated."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which of these is an example of cloud storage?",
+     "o": [
+      "A USB memory stick",
+      "OneDrive",
+      "The hard drive in your PC",
+      "A DVD"
+     ],
+     "a": 1,
+     "why": "OneDrive stores your files on Microsoft's servers."
+    },
+    {
+     "q": "What is the main disadvantage of cloud storage?",
+     "o": [
+      "You can open files anywhere",
+      "You need an internet connection to access your files",
+      "Files are backed up",
+      "It is easy to share"
+     ],
+     "a": 1,
+     "why": "No connection, no files."
+    },
+    {
+     "q": "Which is part of the Internet of Things?",
+     "o": [
+      "A paper diary",
+      "A smart thermostat controlled from your phone",
+      "A pencil",
+      "A printed book"
+     ],
+     "a": 1,
+     "why": "It has sensors and an internet connection."
+    },
+    {
+     "q": "Why is it risky to leave a smart device on its default password?",
+     "o": [
+      "It makes the device slower",
+      "Default passwords are widely known, so hackers can get in",
+      "It uses more electricity",
+      "It stops Bluetooth working"
+     ],
+     "a": 1,
+     "why": "Change it to a strong, unique password."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by **cloud storage** and give **one** example.",
+     "m": 2,
+     "a": "Files are stored on remote servers / in data centres owned by a company and accessed over the internet (1); example: OneDrive, Google Drive, iCloud, Dropbox (1)."
+    },
+    {
+     "q": "Give **two** advantages and **two** disadvantages of a pupil storing their homework in the cloud.",
+     "m": 4,
+     "a": "Advantages, any two: access from any device/anywhere (1); backed up if laptop lost or broken (1); easy to share/collaborate with others (1); no need to carry a memory stick (1). Disadvantages, any two: needs an internet connection (1); account could be hacked (1); relies on the provider / service could go down (1); may have to pay for more space (1)."
+    },
+    {
+     "q": "Describe what the Internet of Things is and give **two** examples.",
+     "m": 3,
+     "a": "Everyday objects with sensors/network connections that collect and share data over the internet (1). Any two examples: smart speaker, fitness tracker, smart thermostat, video doorbell, smart lights, smart fridge (1 each, max 2)."
+    }
+   ],
+   "terms": [
+    "The cloud",
+    "Cloud storage",
+    "Data centre",
+    "Internet of Things",
+    "Smart device"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Network",
+   "def": "Two or more computers or devices connected together so they can communicate and share data and resources.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Stand-alone computer",
+   "def": "A computer that is not connected to any network.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "LAN",
+   "def": "Local Area Network: a network covering a small area, such as one school, home or office building.",
+   "alt": "Local Area Network",
+   "page": "p01"
+  },
+  {
+   "term": "WAN",
+   "def": "Wide Area Network: a network covering a large geographical area, often linking LANs together. The internet is the largest WAN.",
+   "alt": "Wide Area Network",
+   "page": "p01"
+  },
+  {
+   "term": "Internet",
+   "def": "A global WAN made of millions of smaller networks joined together.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "NIC",
+   "def": "Network Interface Card: the hardware inside a device that lets it connect to a network, by cable or wirelessly.",
+   "alt": "Network Interface Card",
+   "page": "p02"
+  },
+  {
+   "term": "Switch",
+   "def": "A device that connects devices together within a LAN and sends data only to the device it is meant for.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Router",
+   "def": "A device that connects different networks together (e.g. a LAN to the internet) and forwards packets towards their destination.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Wireless access point",
+   "def": "A device that lets wireless devices connect to a wired network using Wi-Fi.",
+   "alt": "WAP",
+   "page": "p02"
+  },
+  {
+   "term": "Modem",
+   "def": "A device that converts digital data from a computer into signals that can travel along a phone line or cable, and back again.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Ethernet cable",
+   "def": "A copper cable with twisted pairs of wires, used to connect devices in a wired LAN.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Fibre optic cable",
+   "def": "A cable that carries data as pulses of light along thin strands of glass; very fast and works over long distances.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Wi-Fi",
+   "def": "A wireless technology that uses radio waves to connect devices to a LAN and the internet, usually over tens of metres.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Bluetooth",
+   "def": "A short-range, low-power wireless technology for connecting devices directly to each other, usually within about 10 metres.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Topology",
+   "def": "The layout of a network: how the devices are connected to each other.",
+   "alt": "Network topology",
+   "page": "p04"
+  },
+  {
+   "term": "Star topology",
+   "def": "A network layout where every device has its own connection to a central switch.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Bus topology",
+   "def": "A network layout where all devices are connected to one main cable called the backbone.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Mesh topology",
+   "def": "A network layout where devices are connected to several other devices, so data has many possible routes.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Server",
+   "def": "A powerful computer that provides a service (such as storing files, printing or hosting websites) to other computers on a network.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Client",
+   "def": "A computer or device that requests and uses services from a server.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Client-server network",
+   "def": "A network where clients request services from one or more central servers, which manage files, logins and security.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Peer-to-peer network",
+   "def": "A network with no central server, where every computer is equal and shares its own files and resources directly with the others.",
+   "alt": "P2P",
+   "page": "p05"
+  },
+  {
+   "term": "Packet",
+   "def": "A small chunk of data sent across a network, with a header containing information such as the sender's and receiver's addresses and the packet number.",
+   "alt": "Data packet",
+   "page": "p06"
+  },
+  {
+   "term": "Packet switching",
+   "def": "A way of sending data where it is split into packets that may take different routes and are put back in order when they arrive.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Protocol",
+   "def": "A set of rules that devices follow so they can communicate with each other, e.g. TCP/IP or HTTP.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "IP address",
+   "def": "A number that identifies a device on a network so data can be sent to it, e.g. 192.168.1.25. It can change if the device moves to another network.",
+   "alt": "Internet Protocol address",
+   "page": "p07"
+  },
+  {
+   "term": "MAC address",
+   "def": "A unique, permanent address built into every NIC when it is made, written as 12 hexadecimal digits, e.g. 3C:22:FB:9A:41:07.",
+   "alt": "Media Access Control address",
+   "page": "p07"
+  },
+  {
+   "term": "Domain name",
+   "def": "The human-friendly name of a website, such as bbc.co.uk, that is easier to remember than an IP address.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "DNS",
+   "def": "Domain Name System: a system of servers that translates domain names such as bbc.co.uk into IP addresses.",
+   "alt": "Domain Name System",
+   "page": "p08"
+  },
+  {
+   "term": "ISP",
+   "def": "Internet Service Provider: a company that connects homes and businesses to the internet, e.g. BT or Virgin Media.",
+   "alt": "Internet Service Provider",
+   "page": "p08"
+  },
+  {
+   "term": "URL",
+   "def": "Uniform Resource Locator: the full web address of a page, e.g. https://www.bbc.co.uk/sport.",
+   "alt": "Web address",
+   "page": "p08"
+  },
+  {
+   "term": "Web server",
+   "def": "A server that stores web pages and sends them to browsers that request them.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Bandwidth",
+   "def": "The maximum amount of data that can be sent across a network connection each second.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Mbps",
+   "def": "Megabits per second: one million bits per second. The usual unit for broadband speeds.",
+   "alt": "Megabits per second",
+   "page": "p09"
+  },
+  {
+   "term": "Latency",
+   "def": "The delay between data being sent and it arriving, measured in milliseconds; also called lag or ping.",
+   "alt": "Ping",
+   "page": "p09"
+  },
+  {
+   "term": "The cloud",
+   "def": "Services, software and storage provided over the internet from servers in data centres, instead of on your own device.",
+   "alt": "Cloud computing",
+   "page": "p10"
+  },
+  {
+   "term": "Cloud storage",
+   "def": "Saving files on servers owned by a company and accessed over the internet, e.g. OneDrive or Google Drive.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Data centre",
+   "def": "A large building full of servers that store data and run online services.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Internet of Things",
+   "def": "Everyday objects with sensors and network connections that let them collect and share data over the internet.",
+   "alt": "IoT",
+   "page": "p10"
+  },
+  {
+   "term": "Smart device",
+   "def": "An everyday device, such as a speaker, doorbell or thermostat, that connects to the internet and can be controlled remotely.",
+   "alt": "",
+   "page": "p10"
+  }
+ ]
+}

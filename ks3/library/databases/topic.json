@@ -1,0 +1,2983 @@
+{
+ "title": "Databases",
+ "summary": "Storing, checking and searching data with Microsoft Access: tables, records and fields, validation, queries, forms and reports.",
+ "learn": [
+  "What a database is and where databases are used",
+  "Tables, records, fields, data types and primary keys",
+  "Validation and verification: keeping data accurate",
+  "Searching with queries using AND, OR, wildcards and operators",
+  "Sorting, forms and reports",
+  "Linking tables with a foreign key to avoid repeated data"
+ ],
+ "temporary": false,
+ "intro": "Databases run your school, your supermarket and your GP surgery. Learn how to design a table in Microsoft Access, keep the data accurate with validation and verification, and find exactly what you need with queries, forms and reports.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Explain what a database is, give examples of where databases are used and describe the difference between data and information",
+   "summary": "A database is an organised collection of related data that can be searched, sorted and updated quickly. Databases are everywhere: in school, in shops, in libraries and in hospitals. Data is raw facts; information is data with meaning.",
+   "diagram": {
+    "kind": "match",
+    "title": "Who uses this data?",
+    "caption": "Click to match each organisation with what its database is used for.",
+    "pairs": [
+     [
+      "School MIS",
+      "Printing registers and contacting parents"
+     ],
+     [
+      "Supermarket",
+      "Reordering products when stock runs low"
+     ],
+     [
+      "Library",
+      "Sending reminders about overdue books"
+     ],
+     [
+      "GP surgery",
+      "Checking a patient's allergies before prescribing"
+     ],
+     [
+      "Sports club",
+      "Chasing members who have not paid their fees"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Every time you are marked present at registration, scan a library book or buy something with a loyalty card, data is being saved in a **[[database]]**. A database is an **organised collection of related data**, stored so that it can be found, sorted and changed quickly."
+    },
+    {
+     "t": "p",
+     "text": "In this topic you will use **Microsoft Access**, a **[[database management system (DBMS)|Database management system]]**. A DBMS is the software that lets you build the database, enter data, search it and print results."
+    },
+    {
+     "t": "h",
+     "text": "Where are databases used?"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Organisation",
+      "What the database stores",
+      "What it is used for"
+     ],
+     "rows": [
+      [
+       "Your school",
+       "Pupil names, addresses, tutor groups, attendance, timetables, behaviour points, exam results",
+       "The school's **[[MIS|Management information system]]** (for example SIMS, used in many schools) prints registers, reports and timetables and lets staff contact parents"
+      ],
+      [
+       "Supermarket",
+       "Products, prices, stock levels, loyalty card customers",
+       "Updating stock at the till, reordering when stock is low, sending money-off vouchers"
+      ],
+      [
+       "Library (e.g. Libraries NI)",
+       "Books, members, loans and return dates",
+       "Finding a book, checking who has it, sending overdue reminders"
+      ],
+      [
+       "Hospital or GP surgery (Health and Social Care in NI)",
+       "Patients, appointments, medicines, allergies, test results",
+       "Any doctor can quickly see a patient's history and allergies"
+      ],
+      [
+       "Sports club",
+       "Members, fees paid, teams, fixtures",
+       "Picking teams, chasing unpaid fees, contacting players"
+      ]
+     ],
+     "caption": "Some everyday databases"
+    },
+    {
+     "t": "h",
+     "text": "Why not just use paper?"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Paper records (filing cabinet)",
+      "Electronic database"
+     ],
+     "rows": [
+      [
+       "Searching",
+       "Slow: someone has to look through every card",
+       "Very fast: a query searches thousands of records in a second"
+      ],
+      [
+       "Sorting",
+       "Must be done by hand",
+       "One click sorts A to Z or by date"
+      ],
+      [
+       "Updating",
+       "Crossing out and rewriting gets messy",
+       "Change the data once and it is updated everywhere"
+      ],
+      [
+       "Space",
+       "Needs rooms full of cabinets",
+       "Stored on a server or in the cloud"
+      ],
+      [
+       "Security",
+       "Anyone with the key can read it; fire or flood destroys it",
+       "Passwords and access levels; backups can be kept"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Data or information?"
+    },
+    {
+     "t": "p",
+     "text": "**[[Data]]** is raw facts and figures with no meaning on their own. **[[Information]]** is data that has been processed and given **context**, so it means something."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: turning data into information",
+     "context": "You find this on a scrap of paper: `BT74 7HN   14   87`",
+     "steps": [
+      "On its own it is just **data**: a postcode, a number and another number. We do not know what they mean.",
+      "Add context: *Pupil's postcode*, *Age*, *Maths test score (%)*.",
+      "Now it becomes **information**: a 14-year-old pupil living in BT74 7HN scored 87% in a Maths test."
+     ],
+     "answer": "Data + context (meaning) = information."
+    },
+    {
+     "t": "note",
+     "text": "Because databases hold personal data, organisations must follow the **Data Protection Act 2018** (UK GDPR). Data must be kept secure, accurate and only used for the reason it was collected."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A database is an organised collection of related data.",
+      "A DBMS such as Microsoft Access is used to create and search a database.",
+      "Schools, shops, libraries and hospitals all rely on databases.",
+      "Databases are faster to search, sort and update than paper records.",
+      "Data = raw facts; information = data with context and meaning."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a database?",
+     "o": [
+      "A program for drawing graphs",
+      "An organised collection of related data",
+      "A type of spreadsheet formula",
+      "A list of websites"
+     ],
+     "a": 1,
+     "why": "A database stores related data in an organised way so it can be searched and sorted."
+    },
+    {
+     "q": "Which of these is **information** rather than data?",
+     "o": [
+      "42",
+      "BT74",
+      "Ellie is in tutor group 9C",
+      "07/09/2025"
+     ],
+     "a": 2,
+     "why": "It has context: we know what the data means."
+    },
+    {
+     "q": "Which software is a database management system?",
+     "o": [
+      "Microsoft Access",
+      "Microsoft PowerPoint",
+      "Google Chrome",
+      "Scratch"
+     ],
+     "a": 0,
+     "why": "Access is used to create and manage databases."
+    },
+    {
+     "q": "Which is an advantage of an electronic database over paper records?",
+     "o": [
+      "It never needs electricity",
+      "It can be searched far more quickly",
+      "It cannot be hacked",
+      "It never contains mistakes"
+     ],
+     "a": 1,
+     "why": "Queries search thousands of records in seconds. Electronic data can still be wrong or hacked."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State **two** places that use a database and, for each, give one item of data it would store.",
+     "m": 4,
+     "a": "Any two places (1 each), each with a suitable data item (1 each), e.g. school (1) stores pupils' attendance (1); library (1) stores loan return dates (1); supermarket (1) stores stock levels (1); hospital/GP (1) stores patient allergies (1)."
+    },
+    {
+     "q": "Explain the difference between data and information, using an example.",
+     "m": 3,
+     "a": "Data is raw facts/figures with no meaning (1). Information is data that has been processed/given context so it has meaning (1). Suitable example, e.g. '15' is data; 'Sam is 15 years old' is information (1)."
+    },
+    {
+     "q": "Give **two** advantages of a library storing its records in a database instead of on paper cards.",
+     "m": 2,
+     "a": "Any two (1 each): faster to search for a book; easy to sort; easy to update/change details; takes up less space; can be backed up; can be password protected; overdue reminders can be produced automatically."
+    }
+   ],
+   "terms": [
+    "Database",
+    "Data",
+    "Information",
+    "Management information system",
+    "Database management system"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "spec": "Identify tables, records and fields in a database",
+   "summary": "Data in Access is stored in tables. Each row is a record (one person or thing) and each column is a field (one item of data about every record).",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Field, record or table?",
+    "caption": "Decide which each item is, then click to check.",
+    "head": [
+     "Item",
+     "Answer",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Surname",
+      "Field",
+      "One item of data stored about every pupil"
+     ],
+     [
+      "1002, Jack, Graham, 9B, 27/11/2011, Lisnaskea",
+      "Record",
+      "All the data about one pupil"
+     ],
+     [
+      "Pupils",
+      "Table",
+      "The whole collection of pupil records"
+     ],
+     [
+      "TutorGroup",
+      "Field",
+      "A column heading (field name)"
+     ],
+     [
+      "All the data about one library book",
+      "Record",
+      "One row in the Books table"
+     ],
+     [
+      "Books",
+      "Table",
+      "Stores records about one type of thing"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A database is made of one or more **[[tables|Table]]**. Each table stores data about **one type of thing**: pupils, books, products or patients. A small database might have only one table; a school MIS has hundreds."
+    },
+    {
+     "t": "table",
+     "head": [
+      "PupilID",
+      "FirstName",
+      "Surname",
+      "TutorGroup",
+      "DateOfBirth",
+      "Town"
+     ],
+     "rows": [
+      [
+       "1001",
+       "Aoife",
+       "McCann",
+       "9A",
+       "14/03/2012",
+       "Enniskillen"
+      ],
+      [
+       "1002",
+       "Jack",
+       "Graham",
+       "9B",
+       "27/11/2011",
+       "Lisnaskea"
+      ],
+      [
+       "1003",
+       "Niamh",
+       "Maguire",
+       "9A",
+       "02/06/2012",
+       "Enniskillen"
+      ],
+      [
+       "1004",
+       "Ryan",
+       "Armstrong",
+       "9C",
+       "19/01/2012",
+       "Irvinestown"
+      ]
+     ],
+     "caption": "The Pupils table, shown in Datasheet view"
+    },
+    {
+     "t": "h",
+     "text": "Records and fields"
+    },
+    {
+     "t": "list",
+     "items": [
+      "A **[[record]]** is **one row**: all the data about one pupil. The table above has **4 records**.",
+      "A **[[field]]** is **one column**: one item of data stored about every pupil. The table above has **6 fields**.",
+      "The **[[field name]]** is the heading at the top of each column, e.g. `Surname`.",
+      "Each **cell** holds one item of data, e.g. *Lisnaskea* is the Town for record 1002."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "tip",
+     "text": "Remember: **R**ecord = **R**ow (going across). **F**ield = the column that goes **f**rom top to bottom."
+    },
+    {
+     "t": "h",
+     "text": "Naming fields"
+    },
+    {
+     "t": "p",
+     "text": "Good field names are **short, clear and meaningful**. Avoid spaces and odd symbols: they can cause problems later in queries. Many people write names in *CamelCase*, e.g. `DateOfBirth`, `TutorGroup`."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Good field name",
+      "Poor field name"
+     ],
+     "rows": [
+      [
+       "Pupil's surname",
+       "`Surname`",
+       "`Field3` (meaningless)"
+      ],
+      [
+       "Date of birth",
+       "`DateOfBirth`",
+       "`the date that the pupil was born` (far too long)"
+      ],
+      [
+       "Mobile number",
+       "`MobileNo`",
+       "`Mobile #` (space and symbol)"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Views in Access"
+    },
+    {
+     "t": "p",
+     "text": "Access shows a table in two main ways. **[[Datasheet view]]** shows the data in rows and columns, like a spreadsheet; you use it to type in and look at records. **Design view** shows the structure of the table (the field names and their data types). You will use Design view on page 4."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: counting records and fields",
+     "context": "A sports club table has the field names MemberID, FirstName, Surname, Team and FeesPaid. There are 38 members.",
+     "steps": [
+      "Each member is one row, so there are **38 records**.",
+      "Each field name is one column, so there are **5 fields**.",
+      "The data about *all* members is held in **one table**, e.g. *Members*."
+     ],
+     "answer": "38 records, 5 fields, 1 table."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A table stores data about one type of thing.",
+      "A record is one row: everything about one person or thing.",
+      "A field is one column: one item of data about every record.",
+      "Field names should be short, clear and have no spaces.",
+      "Datasheet view shows the data; Design view shows the structure."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In a table of pupils, what is a **record**?",
+     "o": [
+      "One column, such as Surname",
+      "All the data about one pupil",
+      "The whole database",
+      "The name of the table"
+     ],
+     "a": 1,
+     "why": "A record is a row: all the data about one person or thing."
+    },
+    {
+     "q": "In the Pupils table on this page, how many **fields** are there?",
+     "o": [
+      "4",
+      "5",
+      "6",
+      "24"
+     ],
+     "a": 2,
+     "why": "PupilID, FirstName, Surname, TutorGroup, DateOfBirth, Town."
+    },
+    {
+     "q": "Which is the best field name for a pupil's home phone number?",
+     "o": [
+      "`Field7`",
+      "`HomePhone`",
+      "`Home Phone Number Of Pupil`",
+      "`Phone#`"
+     ],
+     "a": 1,
+     "why": "Short, meaningful and no spaces or symbols."
+    },
+    {
+     "q": "Which view in Access shows the data in rows and columns like a spreadsheet?",
+     "o": [
+      "Design view",
+      "Datasheet view",
+      "Print preview",
+      "Layout view"
+     ],
+     "a": 1,
+     "why": "Datasheet view shows the records."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Using the Pupils table on this page, identify **one** record and **one** field.",
+     "m": 2,
+     "a": "Record: any one full row, e.g. 1003, Niamh, Maguire, 9A, 02/06/2012, Enniskillen (1). Field: any one column/field name, e.g. Town (1)."
+    },
+    {
+     "q": "Explain the difference between a record and a field.",
+     "m": 2,
+     "a": "A record is all the data about one person/thing / one row (1). A field is one item/category of data stored about each record / one column (1)."
+    },
+    {
+     "q": "A library stores details of its books. Suggest **three** suitable field names for its Books table.",
+     "m": 3,
+     "a": "Any three sensible, well-formed names (1 each), e.g. BookID, Title, Author, ISBN, Genre, DatePublished, OnLoan."
+    }
+   ],
+   "terms": [
+    "Table",
+    "Record",
+    "Field",
+    "Field name",
+    "Datasheet view"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "spec": "Choose a suitable data type for each field in a table",
+   "summary": "Every field has a data type that controls what can be stored in it. Choosing the right data type stops wrong data being entered and lets Access sort and calculate correctly.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Pick the data type",
+    "caption": "Choose a data type for each field, then click to check.",
+    "head": [
+     "Field",
+     "Data type",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Postcode (e.g. BT74 6JT)",
+      "Short Text",
+      "Mix of letters and numbers"
+     ],
+     [
+      "DateOfBirth",
+      "Date/Time",
+      "Lets Access sort by age"
+     ],
+     [
+      "TicketPrice",
+      "Currency",
+      "A money value"
+     ],
+     [
+      "GoalsScored",
+      "Number",
+      "May be added up for a season total"
+     ],
+     [
+      "HasPaidForTrip",
+      "Yes/No",
+      "Only two possible answers"
+     ],
+     [
+      "MemberID (added automatically)",
+      "AutoNumber",
+      "Unique number made by Access"
+     ],
+     [
+      "HomePhone",
+      "Short Text",
+      "Keeps the leading zero"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      1
+     ],
+     [
+      6,
+      2
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "When you create a field in Access you must choose its **[[data type]]**. This tells Access what *kind* of data the field will hold. Getting it right means Access can stop silly mistakes (like typing *abc* into an age field), sort the data properly and do calculations."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Access data type",
+      "What it stores",
+      "Example fields"
+     ],
+     "rows": [
+      [
+       "Short Text",
+       "Letters, numbers and symbols, up to 255 characters",
+       "Surname, Postcode, TutorGroup, PhoneNumber"
+      ],
+      [
+       "Long Text",
+       "Large amounts of text (more than 255 characters)",
+       "Medical notes, Book description"
+      ],
+      [
+       "Number",
+       "Numbers you might do calculations with",
+       "Age, MarkOutOf50, StockLevel"
+      ],
+      [
+       "Date/Time",
+       "Dates and/or times",
+       "DateOfBirth, DateJoined, AppointmentTime"
+      ],
+      [
+       "Currency",
+       "Money values, shown with a £ sign and 2 decimal places",
+       "Price, FeesOwed"
+      ],
+      [
+       "[[AutoNumber]]",
+       "A unique number Access adds automatically for each new record",
+       "PupilID, OrderNo"
+      ],
+      [
+       "[[Yes/No]]",
+       "Only two possible values: Yes/No, True/False, On/Off",
+       "FreeSchoolMeals, FeesPaid, OnLoan"
+      ]
+     ],
+     "caption": "The main data types in Microsoft Access"
+    },
+    {
+     "t": "warn",
+     "text": "**Phone numbers are Short Text, not Number!** A Number field would remove the leading zero, so `02866 322 112` would become `2866322112`, and the spaces would not be allowed. You never do maths with a phone number, so store it as text. The same goes for postcodes and house numbers like *12A*."
+    },
+    {
+     "t": "tip",
+     "text": "A quick test: *Would I ever add, subtract or average this?* If not, it probably should not be a Number field."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: choosing data types for a tuck shop table",
+     "context": "The school tuck shop wants a Products table with the fields ProductID, ProductName, Price, StockLevel, DateLastOrdered and Vegetarian.",
+     "steps": [
+      "**ProductID**: AutoNumber, so every product automatically gets its own unique number.",
+      "**ProductName**: Short Text, e.g. *Tayto Cheese and Onion*.",
+      "**Price**: Currency, e.g. £0.80.",
+      "**StockLevel**: Number, because we subtract each time one is sold.",
+      "**DateLastOrdered**: Date/Time, so Access can sort the dates in order.",
+      "**Vegetarian**: Yes/No, because the answer can only be yes or no."
+     ],
+     "answer": "AutoNumber, Short Text, Currency, Number, Date/Time, Yes/No."
+    },
+    {
+     "t": "h",
+     "text": "Why does the data type matter?"
+    },
+    {
+     "t": "list",
+     "items": [
+      "It acts as a **type check**: Access rejects data of the wrong type (you cannot enter *twelve* into a Number field).",
+      "Dates stored as Date/Time **sort correctly** (by year, month, day) instead of alphabetically.",
+      "Number and Currency fields can be used in **calculations** such as totals and averages.",
+      "A Yes/No field shows as a simple **tick box**, which is quick to fill in."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "note",
+     "text": "In your GCSE course you may see these described with general names: *text/string*, *integer*, *real/float*, *date*, *Boolean*. Access's Number field can hold whole numbers (integers) or decimals (real numbers)."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Every field must have a data type.",
+      "Main Access types: Short Text, Long Text, Number, Date/Time, Currency, AutoNumber, Yes/No.",
+      "Phone numbers and postcodes are Short Text.",
+      "Use Currency for money and Yes/No for two-option answers.",
+      "The right data type stops wrong data and allows correct sorting and calculations."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which data type should be used for a pupil's mobile number?",
+     "o": [
+      "Number",
+      "Currency",
+      "Short Text",
+      "Yes/No"
+     ],
+     "a": 2,
+     "why": "The leading zero must be kept and no calculations are done on it."
+    },
+    {
+     "q": "Which data type is best for the price of a school dinner?",
+     "o": [
+      "Currency",
+      "Short Text",
+      "Date/Time",
+      "AutoNumber"
+     ],
+     "a": 0,
+     "why": "Currency shows £ and two decimal places."
+    },
+    {
+     "q": "A field records whether a library book is currently on loan. Which data type is best?",
+     "o": [
+      "Number",
+      "Long Text",
+      "Yes/No",
+      "Date/Time"
+     ],
+     "a": 2,
+     "why": "There are only two possible values."
+    },
+    {
+     "q": "What does an AutoNumber field do?",
+     "o": [
+      "Adds up all the numbers in a column",
+      "Gives each new record a unique number automatically",
+      "Rounds numbers to whole numbers",
+      "Counts the number of fields"
+     ],
+     "a": 1,
+     "why": "Access fills it in for you: 1, 2, 3..."
+    }
+   ],
+   "practice": [
+    {
+     "q": "A dentist stores PatientID, Surname, DateOfLastVisit, AmountOwed and NeedsReminder. State the most suitable data type for **each** field.",
+     "m": 5,
+     "a": "PatientID: AutoNumber (or Number/Short Text) (1). Surname: Short Text (1). DateOfLastVisit: Date/Time (1). AmountOwed: Currency (1). NeedsReminder: Yes/No (1)."
+    },
+    {
+     "q": "Explain why a phone number should be stored as Short Text and not as a Number.",
+     "m": 2,
+     "a": "A Number field would remove the leading zero / cannot store spaces or + symbols (1). No calculations are ever done on a phone number (1)."
+    },
+    {
+     "q": "Give **one** reason why choosing the correct data type is important.",
+     "m": 1,
+     "a": "Any one (1): stops data of the wrong type being entered / acts as a type check; allows correct sorting (e.g. dates); allows calculations; saves storage space."
+    }
+   ],
+   "terms": [
+    "Data type",
+    "AutoNumber",
+    "Yes/No"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "spec": "Explain what a primary key is and design a table with suitable field names, data types and a primary key",
+   "summary": "A primary key is a field that is different for every record, so each record can be identified. A good table design lists every field with its name, data type, a description and any validation.",
+   "diagram": {
+    "kind": "flow",
+    "title": "Creating a table in Access",
+    "caption": "The steps to build a table from your design.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Create",
+      "detail": "Create tab, then Table Design.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Enter fields",
+      "detail": "Type each field name and choose its data type from the drop-down list.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "Set properties",
+      "detail": "In Field Properties at the bottom, set field size, format, validation rule and validation text.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Primary key",
+      "detail": "Click the ID field and press Primary Key on the ribbon.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Save and enter data",
+      "detail": "Save the table with a sensible name, e.g. tblBooks, then switch to Datasheet view to type in records.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Why do we need a primary key?"
+    },
+    {
+     "t": "p",
+     "text": "Imagine a school with two pupils called **Conor Kelly** in Year 9. If a teacher records a detention for 'Conor Kelly', which one gets it? A **[[primary key]]** solves this. It is a field whose value is **unique** for every record, so no two records can ever be confused."
+    },
+    {
+     "t": "table",
+     "head": [
+      "PupilID",
+      "FirstName",
+      "Surname",
+      "TutorGroup"
+     ],
+     "rows": [
+      [
+       "1027",
+       "Conor",
+       "Kelly",
+       "9B"
+      ],
+      [
+       "1058",
+       "Conor",
+       "Kelly",
+       "9D"
+      ]
+     ],
+     "caption": "Same name, different PupilID: no confusion"
+    },
+    {
+     "t": "list",
+     "items": [
+      "A primary key must be **unique**: no two records share the same value.",
+      "It must **never be empty**: every record needs one.",
+      "It should **not change** over time.",
+      "Names, dates of birth and towns are **not** good primary keys, because they can be shared.",
+      "Good examples: PupilID, ISBN (for books), NHS/Health and Care Number, ProductCode, OrderNo."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "tip",
+     "text": "If there is no natural unique field, add an **ID** field with the **AutoNumber** data type. Access will then give each record a unique number for you."
+    },
+    {
+     "t": "p",
+     "text": "In Access, the primary key is shown by a small **key symbol** next to the field name in **[[Design view]]**. To set one, click the field and press the **Primary Key** button on the Design ribbon."
+    },
+    {
+     "t": "h",
+     "text": "Designing a table"
+    },
+    {
+     "t": "p",
+     "text": "Before building a table on the computer, it is good practice to plan it on paper in a **table design** (sometimes called a data dictionary). This is exactly the information you type into Design view."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Field name",
+      "Data type",
+      "Description",
+      "Validation / notes"
+     ],
+     "rows": [
+      [
+       "BookID",
+       "AutoNumber",
+       "Unique number for each book",
+       "Primary key"
+      ],
+      [
+       "Title",
+       "Short Text",
+       "Title of the book",
+       "Presence check"
+      ],
+      [
+       "Author",
+       "Short Text",
+       "Author's full name",
+       "Field size 50"
+      ],
+      [
+       "Genre",
+       "Short Text",
+       "Type of book",
+       "Lookup: Adventure, Fantasy, Horror, Non-fiction, Sport"
+      ],
+      [
+       "Pages",
+       "Number",
+       "Number of pages",
+       "Range check: between 1 and 2000"
+      ],
+      [
+       "DateAdded",
+       "Date/Time",
+       "Date the book joined the library",
+       "Format: dd/mm/yyyy"
+      ],
+      [
+       "OnLoan",
+       "Yes/No",
+       "Is the book borrowed at the moment?",
+       "Default value: No"
+      ]
+     ],
+     "caption": "Table design for a school library Books table"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: choosing the primary key",
+     "context": "A rugby club's Players table has the fields FirstName, Surname, DateOfBirth, Position and IrishRugbyNo (each registered player has their own unique Irish Rugby registration number).",
+     "steps": [
+      "FirstName or Surname: not unique, two players could share a name.",
+      "DateOfBirth: two players could be born on the same day.",
+      "Position: lots of players are props or wingers.",
+      "IrishRugbyNo: unique to each player and never changes."
+     ],
+     "answer": "IrishRugbyNo is the best primary key."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A primary key uniquely identifies each record.",
+      "It must be unique, never empty and should not change.",
+      "Names and dates of birth make poor primary keys.",
+      "An AutoNumber ID field is an easy way to create one.",
+      "A table design lists each field's name, data type, description and validation."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Why is Surname a poor choice of primary key?",
+     "o": [
+      "It is too long",
+      "Two people can have the same surname",
+      "It is stored as text",
+      "It changes every day"
+     ],
+     "a": 1,
+     "why": "A primary key must be unique for every record."
+    },
+    {
+     "q": "Which would make the best primary key for a table of books?",
+     "o": [
+      "Title",
+      "Author",
+      "ISBN",
+      "Genre"
+     ],
+     "a": 2,
+     "why": "Every published edition of a book has its own unique ISBN."
+    },
+    {
+     "q": "How is the primary key shown in Access Design view?",
+     "o": [
+      "In bold red text",
+      "With a key symbol next to the field",
+      "It is always the last field",
+      "With a tick box"
+     ],
+     "a": 1,
+     "why": "A small key icon appears beside the field name."
+    },
+    {
+     "q": "Which of these is **not** a rule for a primary key?",
+     "o": [
+      "It must be unique",
+      "It must not be empty",
+      "It must be a Currency field",
+      "It should not change"
+     ],
+     "a": 2,
+     "why": "A primary key can be any suitable data type, often AutoNumber or Short Text."
+    }
+   ],
+   "practice": [
+    {
+     "q": "What is a primary key? Give an example from a school database.",
+     "m": 2,
+     "a": "A field that holds a unique value for each record / uniquely identifies each record (1). Example, e.g. PupilID / StaffCode / ExamCandidateNumber (1)."
+    },
+    {
+     "q": "A cinema stores films with the fields Title, Certificate, RunningTime and ReleaseDate. Explain why none of these would make a good primary key and suggest a field to add.",
+     "m": 3,
+     "a": "Titles can be repeated (e.g. remakes) / certificate, running time and date can be shared by many films, so none is guaranteed unique (1). Add a field such as FilmID (1) with the AutoNumber data type / a unique code (1)."
+    },
+    {
+     "q": "Complete a table design for a Members table for a school chess club with **four** fields. For each give a field name and data type, and identify the primary key.",
+     "m": 5,
+     "a": "Four sensible fields with correct data types, e.g. MemberID AutoNumber, FirstName Short Text, TutorGroup Short Text, DateJoined Date/Time (1 per correct field name + data type, max 4). Primary key correctly identified as the ID field (1)."
+    }
+   ],
+   "terms": [
+    "Primary key",
+    "Design view"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "spec": "Describe and apply validation checks: range, presence, length, type, format (input mask) and lookup",
+   "summary": "Validation is an automatic check by the computer that data entered is sensible. Access can carry out range, presence, length, type, format and lookup checks. Validation cannot prove data is correct.",
+   "diagram": {
+    "kind": "match",
+    "title": "Match the validation check",
+    "caption": "Click to match each check with an example rule.",
+    "pairs": [
+     [
+      "Range check",
+      "A test mark must be between 0 and 50"
+     ],
+     [
+      "Presence check",
+      "The Surname field cannot be left empty"
+     ],
+     [
+      "Length check",
+      "A username must be exactly 8 characters"
+     ],
+     [
+      "Type check",
+      "Only numbers can go in the Age field"
+     ],
+     [
+      "Format check",
+      "A postcode must follow the pattern LL09 0LL"
+     ],
+     [
+      "Lookup check",
+      "Tutor group must be chosen from 9A, 9B, 9C or 9D"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A database is only useful if its data is accurate. People make typing mistakes all the time: an age of **140** instead of 14, or a blank surname. **[[Validation]]** is an **automatic check made by the computer** when data is entered, to make sure it is **sensible and reasonable**. If the data breaks the rule, Access refuses it and shows an error message."
+    },
+    {
+     "t": "p",
+     "text": "In Access, validation is set in **Design view** using the **Field Properties** at the bottom of the screen. A **[[validation rule]]** is the condition the data must meet, and **validation text** is the friendly error message the user sees."
+    },
+    {
+     "t": "h",
+     "text": "The six validation checks"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Check",
+      "What it checks",
+      "Example in Access"
+     ],
+     "rows": [
+      [
+       "**[[Range check]]**",
+       "The value is between a lowest and highest limit",
+       "YearGroup: Validation Rule `Between 8 And 14`; Mark: `>=0 And <=50`"
+      ],
+      [
+       "**[[Presence check]]**",
+       "The field is not left empty",
+       "Surname: set **Required** to *Yes* (or Validation Rule `Is Not Null`)"
+      ],
+      [
+       "**[[Length check]]**",
+       "The number of characters is not too many or too few",
+       "Surname: Field Size `30`, or Validation Rule `Len([Surname])<=30`"
+      ],
+      [
+       "**[[Type check]]**",
+       "The data is the right data type",
+       "Done automatically: a Number field will not accept *fourteen*"
+      ],
+      [
+       "**[[Format check]]**",
+       "The data follows a set pattern",
+       "Postcode: **[[Input mask]]** `>LL09 0LL`"
+      ],
+      [
+       "**[[Lookup check]]**",
+       "The value matches one from a list of allowed values",
+       "TutorGroup: drop-down list of 9A, 9B, 9C, 9D made with the **Lookup Wizard**"
+      ]
+     ],
+     "caption": "Validation checks and how to set them up in Access"
+    },
+    {
+     "t": "h",
+     "text": "Input masks: a closer look"
+    },
+    {
+     "t": "p",
+     "text": "An input mask is a pattern made of special characters. Each character tells Access what is allowed in that position."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Mask character",
+      "Means"
+     ],
+     "rows": [
+      [
+       "`L`",
+       "A letter must be entered"
+      ],
+      [
+       "`0`",
+       "A digit (0 to 9) must be entered"
+      ],
+      [
+       "`9`",
+       "A digit may be entered (optional)"
+      ],
+      [
+       "`A`",
+       "A letter or digit must be entered"
+      ],
+      [
+       "`>`",
+       "Turns the following letters into CAPITALS"
+      ]
+     ],
+     "caption": "Some input mask characters"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a mask for Northern Ireland postcodes",
+     "context": "Postcodes such as BT74 6JT and BT1 5GS need to be checked.",
+     "steps": [
+      "`>` makes every letter a capital, so *bt74* becomes *BT74*.",
+      "`LL` means two letters must come first (BT).",
+      "`09` means one digit is needed and a second is optional (1 or 74).",
+      "The space is kept, then `0LL` means a digit followed by two letters (6JT)."
+     ],
+     "answer": "Input mask: `>LL09 0LL`"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: choosing the right check",
+     "context": "A PE department records each pupil's 100 m sprint time in seconds. Times under 10 or over 30 seconds are almost certainly typing errors.",
+     "steps": [
+      "The time must lie between two limits, so a **range check** is needed.",
+      "Validation rule: `Between 10 And 30`.",
+      "Validation text: *Please enter a time between 10 and 30 seconds.*"
+     ],
+     "answer": "Range check, with a helpful validation text message."
+    },
+    {
+     "t": "warn",
+     "text": "Validation only checks that data is **sensible**, not that it is **correct**. If Aoife is 13 but someone types 14, a range check of `Between 11 And 16` will happily accept it. To catch that kind of mistake you need **verification** (next page)."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Validation is an automatic check by the computer that data is sensible.",
+      "Range, presence, length, type, format and lookup are the six main checks.",
+      "Set them in Design view using Field Properties.",
+      "An input mask carries out a format check; the Lookup Wizard creates a lookup check.",
+      "Always add validation text so users know what went wrong.",
+      "Validation cannot prove that data is correct."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "A field must not be left blank. Which check is needed?",
+     "o": [
+      "Range check",
+      "Presence check",
+      "Length check",
+      "Format check"
+     ],
+     "a": 1,
+     "why": "A presence check makes sure something has been entered."
+    },
+    {
+     "q": "Which validation rule would allow only year groups 8 to 14?",
+     "o": [
+      "`>8 And <14`",
+      "`Between 8 And 14`",
+      "`Is Not Null`",
+      "`Len([YearGroup])=2`"
+     ],
+     "a": 1,
+     "why": "Between is inclusive, so 8 and 14 are both allowed. `>8 And <14` would reject 8 and 14."
+    },
+    {
+     "q": "A drop-down list lets the user choose only Red, Blue or Green house. What check is this?",
+     "o": [
+      "Lookup check",
+      "Type check",
+      "Range check",
+      "Visual check"
+     ],
+     "a": 0,
+     "why": "The value must match one of a list of allowed values."
+    },
+    {
+     "q": "A pupil's age is entered as 15 instead of 13. Both are within the range check. What does this show?",
+     "o": [
+      "Validation is broken",
+      "Validation cannot check that data is correct",
+      "A presence check is needed",
+      "The data type is wrong"
+     ],
+     "a": 1,
+     "why": "Validation checks data is sensible, not that it is true."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name **three** different validation checks and give an example of where each could be used in a school database.",
+     "m": 6,
+     "a": "Three checks named (1 each) with a suitable example each (1 each), e.g. range check (1) mark between 0 and 100 (1); presence check (1) surname must be entered (1); lookup check (1) tutor group from a list (1); length check (1) surname no more than 30 characters (1); format check (1) postcode pattern (1); type check (1) only numbers in Age (1)."
+    },
+    {
+     "q": "A sports centre stores members' postcodes. Explain how an input mask could validate the postcode.",
+     "m": 2,
+     "a": "An input mask forces data to be entered in a set pattern / is a format check (1). E.g. `>LL09 0LL` means letters and digits must be in the correct positions, so a postcode in the wrong format is rejected (1)."
+    },
+    {
+     "q": "Explain why data that passes validation may still be incorrect.",
+     "m": 2,
+     "a": "Validation only checks data is sensible/reasonable/within rules (1). A wrong but sensible value, e.g. typing 14 instead of 13 for an age, would still be accepted (1)."
+    }
+   ],
+   "terms": [
+    "Validation",
+    "Validation rule",
+    "Range check",
+    "Presence check",
+    "Length check",
+    "Type check",
+    "Format check",
+    "Input mask",
+    "Lookup check"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "spec": "Describe verification (double entry and visual check) and explain how it differs from validation",
+   "summary": "Verification checks that data has been entered exactly as it appears on the original source. The two methods are double entry and a visual check. Validation checks data is sensible; verification checks it was copied correctly.",
+   "diagram": {
+    "kind": "compare",
+    "title": "Validation vs verification",
+    "caption": "Switch between the two to compare them.",
+    "states": [
+     {
+      "label": "Validation",
+      "points": [
+       "Asks: is the data sensible?",
+       "Done automatically by the computer",
+       "Range, presence, length, type, format, lookup",
+       "Rejects an age of 140",
+       "Cannot tell that 14 should have been 13"
+      ],
+      "art": null
+     },
+     {
+      "label": "Verification",
+      "points": [
+       "Asks: does it match the original?",
+       "Double entry or a visual check",
+       "Catches typing and copying mistakes",
+       "Spots McCan instead of McCann",
+       "Cannot fix a mistake on the original form"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Data is often copied from a paper form into a database: for example, the data collection sheet your parents filled in when you joined the school. Even with validation, typing mistakes can slip through. **[[Verification]]** is checking that data has been **entered accurately**, exactly matching the **original source**."
+    },
+    {
+     "t": "h",
+     "text": "Method 1: double entry"
+    },
+    {
+     "t": "p",
+     "text": "With **[[double entry]]** the data is typed in **twice**. The computer compares the two versions. If they are different, the user is asked to enter it again."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: creating a new password",
+     "context": "When you set a new password on your school account you are asked to type it into a *New password* box and a *Confirm password* box.",
+     "steps": [
+      "You type `Fermanagh!2025` in the first box.",
+      "You slip and type `Fermangh!2025` in the second box.",
+      "The computer compares them: they do not match.",
+      "You are told to try again, so the mistake never gets saved."
+     ],
+     "answer": "This is verification by double entry. It is also used when typing an email address twice."
+    },
+    {
+     "t": "h",
+     "text": "Method 2: visual check"
+    },
+    {
+     "t": "p",
+     "text": "With a **[[visual check]]** a person **reads the data on screen** and compares it with the **original document**, looking for mistakes. For example, the school office might print each pupil's details and send them home so parents can check them, or a receptionist reads back your details to you over the phone."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Double entry",
+      "Visual check"
+     ],
+     "rows": [
+      [
+       "How it works",
+       "Data typed twice; the computer compares the two",
+       "A person compares the screen with the source document"
+      ],
+      [
+       "Good for",
+       "Short, important data: passwords, email addresses, bank details",
+       "Checking a whole record or form"
+      ],
+      [
+       "Drawback",
+       "Takes twice as long to type",
+       "People get tired or bored and can miss mistakes"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Validation vs verification"
+    },
+    {
+     "t": "table",
+     "head": [
+      "",
+      "Validation",
+      "Verification"
+     ],
+     "rows": [
+      [
+       "Question it asks",
+       "Is the data **sensible / reasonable**?",
+       "Is the data **the same as the original**?"
+      ],
+      [
+       "Who or what does it",
+       "Always done automatically by the computer",
+       "By the user and computer together (double entry) or by a person (visual check)"
+      ],
+      [
+       "Methods",
+       "Range, presence, length, type, format, lookup",
+       "Double entry, visual check"
+      ],
+      [
+       "Example of what it catches",
+       "Age entered as 140",
+       "Surname *McCann* typed as *McCan*"
+      ]
+     ],
+     "caption": "Comparing validation and verification"
+    },
+    {
+     "t": "tip",
+     "text": "A memory trick: **Ver**ification checks the data is **ver**batim, exactly as on the original. **Val**idation checks the data is a **val**id, sensible value."
+    },
+    {
+     "t": "note",
+     "text": "Neither method is perfect. If the paper form itself was filled in wrongly (a parent wrote the wrong phone number), both validation and verification will let the wrong data through. The data will still be inaccurate."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Verification checks data has been entered exactly as on the original source.",
+      "Double entry: type it twice and the computer compares.",
+      "Visual check: a person compares the screen with the source.",
+      "Validation = sensible; verification = copied correctly.",
+      "Using both together greatly reduces errors, but cannot remove them all."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "You type your email address twice when signing up to a website. What is this?",
+     "o": [
+      "A range check",
+      "Verification by double entry",
+      "A lookup check",
+      "A visual check"
+     ],
+     "a": 1,
+     "why": "Typing data twice so the computer can compare is double entry."
+    },
+    {
+     "q": "What does verification check?",
+     "o": [
+      "That data is within a sensible range",
+      "That data matches the original source",
+      "That a field is not empty",
+      "That data is the correct data type"
+     ],
+     "a": 1,
+     "why": "Verification checks the data was copied accurately."
+    },
+    {
+     "q": "Which mistake would a visual check catch that validation might miss?",
+     "o": [
+      "A surname left blank",
+      "Letters typed into a Number field",
+      "Maguire typed as Mcguire",
+      "An age of 250"
+     ],
+     "a": 2,
+     "why": "Mcguire is sensible text, so it passes validation; comparing with the form spots it."
+    },
+    {
+     "q": "Which statement is true?",
+     "o": [
+      "Validation proves data is correct",
+      "Verification is only done by the computer",
+      "Validation is automatic and checks data is sensible",
+      "Visual checks never miss mistakes"
+     ],
+     "a": 2,
+     "why": "Validation is automatic, but only checks data is reasonable."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe **two** methods of verification.",
+     "m": 4,
+     "a": "Double entry (1): data is entered twice and the computer compares the two versions; if different it must be re-entered (1). Visual check (1): a person compares the data on screen with the original source document to spot errors (1)."
+    },
+    {
+     "q": "Explain the difference between validation and verification.",
+     "m": 2,
+     "a": "Validation is an automatic computer check that data is sensible/reasonable/follows rules (1). Verification checks that data has been entered/copied accurately and matches the original source (1)."
+    },
+    {
+     "q": "A school office types pupils' details from paper forms into the MIS. Suggest **one** validation check and **one** verification method they could use, and explain why both are needed.",
+     "m": 3,
+     "a": "Suitable validation check with example, e.g. presence check on Surname (1). Suitable verification method, e.g. visual check against the form / send printout home for parents to check (1). Both needed because validation cannot catch data that is sensible but wrong, while verification catches copying errors (1)."
+    }
+   ],
+   "terms": [
+    "Verification",
+    "Double entry",
+    "Visual check"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p07",
+   "spec": "Search a database using a query with a single criterion, comparison operators and wildcards",
+   "summary": "A query searches a table and shows only the records that match the criteria. Criteria can use comparison operators (=, <>, <, >, <=, >=) and wildcards (* and ?).",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Will it match?",
+    "caption": "Predict the records each query returns from the results table, then click to check.",
+    "head": [
+     "Field and criteria",
+     "Records found",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Town: \"Enniskillen\"",
+      "Aoife, Niamh, Cara",
+      "Exact match on the town"
+     ],
+     [
+      "MathsScore: >85",
+      "Aoife, Ryan",
+      "87 and 91 are over 85"
+     ],
+     [
+      "MathsScore: <=45",
+      "Cara",
+      "45 is included by <="
+     ],
+     [
+      "Surname: Like \"M*\"",
+      "McCann, Maguire, McKeown, Moore",
+      "Every surname starting with M"
+     ],
+     [
+      "TutorGroup: <>\"9A\"",
+      "Jack, Ryan, Cara, Ben",
+      "Everyone not in 9A"
+     ],
+     [
+      "FirstName: Like \"????\"",
+      "Jack, Ryan, Cara",
+      "Exactly four characters"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Scrolling through 900 pupils to find everyone in 9A would take ages. Instead, we ask the database a question called a **[[query]]**. Access searches every record and shows only those that match the **[[criteria]]** (the conditions)."
+    },
+    {
+     "t": "table",
+     "head": [
+      "PupilID",
+      "FirstName",
+      "Surname",
+      "TutorGroup",
+      "Town",
+      "MathsScore"
+     ],
+     "rows": [
+      [
+       "1001",
+       "Aoife",
+       "McCann",
+       "9A",
+       "Enniskillen",
+       "87"
+      ],
+      [
+       "1002",
+       "Jack",
+       "Graham",
+       "9B",
+       "Lisnaskea",
+       "54"
+      ],
+      [
+       "1003",
+       "Niamh",
+       "Maguire",
+       "9A",
+       "Enniskillen",
+       "72"
+      ],
+      [
+       "1004",
+       "Ryan",
+       "Armstrong",
+       "9C",
+       "Irvinestown",
+       "91"
+      ],
+      [
+       "1005",
+       "Cara",
+       "McKeown",
+       "9B",
+       "Enniskillen",
+       "45"
+      ],
+      [
+       "1006",
+       "Ben",
+       "Moore",
+       "9C",
+       "Belcoo",
+       "68"
+      ]
+     ],
+     "caption": "Results table used in the query examples"
+    },
+    {
+     "t": "h",
+     "text": "Building a query in Access"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Click **Create** then **Query Design** and add the table.",
+      "Double-click the fields you want to see so they appear in the **design grid**.",
+      "Type the criteria in the **Criteria** row under the right field.",
+      "Click **Run** (the red exclamation mark) to see the results.",
+      "Save the query with a meaningful name, e.g. *qryEnniskillenPupils*."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "table",
+     "head": [
+      "Field:",
+      "FirstName",
+      "Surname",
+      "Town"
+     ],
+     "rows": [
+      [
+       "Table:",
+       "Pupils",
+       "Pupils",
+       "Pupils"
+      ],
+      [
+       "Show:",
+       "Yes (ticked)",
+       "Yes (ticked)",
+       "Yes (ticked)"
+      ],
+      [
+       "Criteria:",
+       "",
+       "",
+       "\"Enniskillen\""
+      ]
+     ],
+     "caption": "Query design grid: find pupils who live in Enniskillen"
+    },
+    {
+     "t": "p",
+     "text": "Result: **Aoife McCann, Niamh Maguire and Cara McKeown**. Text criteria go inside speech marks (Access adds them for you if you forget). Criteria are **not** case sensitive, so *enniskillen* works too."
+    },
+    {
+     "t": "h",
+     "text": "Comparison operators"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Operator",
+      "Meaning",
+      "Example criteria",
+      "Matches in the table above"
+     ],
+     "rows": [
+      [
+       "`=`",
+       "Equal to",
+       "`=\"9A\"` in TutorGroup",
+       "Aoife, Niamh"
+      ],
+      [
+       "`<>`",
+       "Not equal to",
+       "`<>\"Enniskillen\"` in Town",
+       "Jack, Ryan, Ben"
+      ],
+      [
+       "`>`",
+       "Greater than",
+       "`>80` in MathsScore",
+       "Aoife (87), Ryan (91)"
+      ],
+      [
+       "`<`",
+       "Less than",
+       "`<50` in MathsScore",
+       "Cara (45)"
+      ],
+      [
+       "`>=`",
+       "Greater than or equal to",
+       "`>=72` in MathsScore",
+       "Aoife, Niamh, Ryan"
+      ],
+      [
+       "`<=`",
+       "Less than or equal to",
+       "`<=54` in MathsScore",
+       "Jack, Cara"
+      ]
+     ],
+     "caption": "Comparison operators in Access criteria"
+    },
+    {
+     "t": "warn",
+     "text": "Watch the boundary! `>72` does **not** include 72, but `>=72` does. Many exam marks are lost here."
+    },
+    {
+     "t": "h",
+     "text": "Wildcards"
+    },
+    {
+     "t": "p",
+     "text": "A **[[wildcard]]** stands in for characters you do not know. In Access you use them with the word **Like**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Criteria",
+      "Meaning",
+      "Matches"
+     ],
+     "rows": [
+      [
+       "`Like \"Mc*\"` in Surname",
+       "Starts with Mc, followed by anything",
+       "McCann, McKeown"
+      ],
+      [
+       "`Like \"*a\"` in FirstName",
+       "Ends with a",
+       "Cara"
+      ],
+      [
+       "`Like \"*ar*\"` in Surname",
+       "Contains ar anywhere",
+       "Armstrong (Access ignores capitals)"
+      ],
+      [
+       "`Like \"B?n\"` in FirstName",
+       "B, then exactly one character, then n",
+       "Ben (also Bin, Bun)"
+      ]
+     ],
+     "caption": "* = any number of characters; ? = exactly one character"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: writing a query",
+     "context": "The Maths teacher wants the first name and surname of every pupil who scored less than 60.",
+     "steps": [
+      "Fields to show: FirstName, Surname (and MathsScore so the teacher can see it).",
+      "Field to search: MathsScore.",
+      "Criteria: `<60`.",
+      "Run the query: Jack Graham (54) and Cara McKeown (45)."
+     ],
+     "answer": "Criteria `<60` in the MathsScore field returns 2 records."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A query finds records that match criteria.",
+      "Type criteria in the Criteria row under the correct field.",
+      "Text criteria go in speech marks, e.g. \"Enniskillen\".",
+      "Comparison operators: =, <>, <, >, <=, >=.",
+      "Wildcards: * means any characters, ? means one character, used with Like."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which criteria in the MathsScore field finds scores of 70 **or more**?",
+     "o": [
+      "`>70`",
+      "`<70`",
+      "`>=70`",
+      "`<>70`"
+     ],
+     "a": 2,
+     "why": ">= means greater than or equal to, so 70 is included."
+    },
+    {
+     "q": "What does `<>\"9C\"` find in the TutorGroup field?",
+     "o": [
+      "Only pupils in 9C",
+      "Every pupil not in 9C",
+      "Pupils in 9A to 9C",
+      "Nobody"
+     ],
+     "a": 1,
+     "why": "<> means not equal to."
+    },
+    {
+     "q": "Which criteria finds every surname beginning with **Mc**?",
+     "o": [
+      "`Like \"*Mc\"`",
+      "`Like \"Mc*\"`",
+      "`=\"Mc\"`",
+      "`Like \"Mc?\"`"
+     ],
+     "a": 1,
+     "why": "Mc followed by * (any number of characters)."
+    },
+    {
+     "q": "Using the results table on this page, how many records match `>=68` in MathsScore?",
+     "o": [
+      "2",
+      "3",
+      "4",
+      "5"
+     ],
+     "a": 2,
+     "why": "Aoife 87, Niamh 72, Ryan 91, Ben 68: 4 records."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Using the results table on this page, write the criteria and name the field to find all pupils from Lisnaskea, and state who would be found.",
+     "m": 3,
+     "a": "Field: Town (1). Criteria: \"Lisnaskea\" / =\"Lisnaskea\" (1). Result: Jack Graham (1)."
+    },
+    {
+     "q": "What is a wildcard? Give an example of a criterion that uses one.",
+     "m": 2,
+     "a": "A symbol that stands for unknown/any characters in a search (1). Example, e.g. Like \"S*\" finds every value beginning with S (1)."
+    },
+    {
+     "q": "Explain the difference between the criteria `>50` and `>=50`.",
+     "m": 2,
+     "a": ">50 finds values greater than 50, so 50 itself is not included (1). >=50 finds values greater than or equal to 50, so 50 is included (1)."
+    }
+   ],
+   "terms": [
+    "Query",
+    "Criteria",
+    "Comparison operator",
+    "Wildcard"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p08",
+   "spec": "Search a database using multiple criteria with AND and OR, and sort the results",
+   "summary": "AND finds records that meet all the criteria (fewer results). OR finds records that meet any one of them (more results). Sorting puts records in ascending or descending order.",
+   "diagram": {
+    "kind": "compare",
+    "title": "AND vs OR",
+    "caption": "Switch to compare the two ways of joining criteria.",
+    "states": [
+     {
+      "label": "AND",
+      "points": [
+       "Every condition must be true",
+       "Criteria on the SAME row",
+       "Narrows the search: fewer records",
+       "Town \"Enniskillen\" AND MathsScore >70: Aoife, Niamh"
+      ],
+      "art": null
+     },
+     {
+      "label": "OR",
+      "points": [
+       "At least one condition must be true",
+       "Criteria on DIFFERENT rows (or use Or)",
+       "Widens the search: more records",
+       "TutorGroup \"9B\" OR \"9C\": Jack, Ryan, Cara, Ben"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Often one condition is not enough. The PE department might want *girls in Year 9 who play hockey*. We combine criteria using **[[AND]]** and **[[OR]]**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "PupilID",
+      "FirstName",
+      "Surname",
+      "TutorGroup",
+      "Town",
+      "MathsScore"
+     ],
+     "rows": [
+      [
+       "1001",
+       "Aoife",
+       "McCann",
+       "9A",
+       "Enniskillen",
+       "87"
+      ],
+      [
+       "1002",
+       "Jack",
+       "Graham",
+       "9B",
+       "Lisnaskea",
+       "54"
+      ],
+      [
+       "1003",
+       "Niamh",
+       "Maguire",
+       "9A",
+       "Enniskillen",
+       "72"
+      ],
+      [
+       "1004",
+       "Ryan",
+       "Armstrong",
+       "9C",
+       "Irvinestown",
+       "91"
+      ],
+      [
+       "1005",
+       "Cara",
+       "McKeown",
+       "9B",
+       "Enniskillen",
+       "45"
+      ],
+      [
+       "1006",
+       "Ben",
+       "Moore",
+       "9C",
+       "Belcoo",
+       "68"
+      ]
+     ],
+     "caption": "Results table used in the query examples"
+    },
+    {
+     "t": "h",
+     "text": "AND: every condition must be true"
+    },
+    {
+     "t": "p",
+     "text": "In the Access design grid, criteria typed on the **same Criteria row** are joined with AND. A record is only found if it meets **all** of them, so AND gives **fewer** results."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Field:",
+      "FirstName",
+      "Town",
+      "MathsScore"
+     ],
+     "rows": [
+      [
+       "Criteria:",
+       "",
+       "\"Enniskillen\"",
+       ">70"
+      ]
+     ],
+     "caption": "Town is Enniskillen AND MathsScore > 70"
+    },
+    {
+     "t": "p",
+     "text": "Result: **Aoife (87) and Niamh (72)**. Cara lives in Enniskillen but scored 45, so she is not found."
+    },
+    {
+     "t": "h",
+     "text": "OR: at least one condition must be true"
+    },
+    {
+     "t": "p",
+     "text": "Criteria typed on **different rows** (the **Criteria** row and the **or** row underneath) are joined with OR. A record is found if it meets **any** of them, so OR gives **more** results."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Field:",
+      "FirstName",
+      "TutorGroup"
+     ],
+     "rows": [
+      [
+       "Criteria:",
+       "",
+       "\"9B\""
+      ],
+      [
+       "or:",
+       "",
+       "\"9C\""
+      ]
+     ],
+     "caption": "TutorGroup is 9B OR 9C"
+    },
+    {
+     "t": "p",
+     "text": "Result: **Jack, Ryan, Cara and Ben**. You could also type `\"9B\" Or \"9C\"` in a single criteria box."
+    },
+    {
+     "t": "h",
+     "text": "Ranges with Between"
+    },
+    {
+     "t": "p",
+     "text": "To find values inside a range you can use AND in one box, e.g. `>=50 And <=75`, or the shortcut `Between 50 And 75`. **Between includes both end values.** Result: Jack (54), Niamh (72) and Ben (68)."
+    },
+    {
+     "t": "tip",
+     "text": "AND makes the search **narrower** (fewer records). OR makes it **wider** (more records). If your query finds nothing, check you have not used AND when you meant OR."
+    },
+    {
+     "t": "warn",
+     "text": "A common mistake: to find pupils from Enniskillen or Lisnaskea, `\"Enniskillen\" And \"Lisnaskea\"` finds **nobody**, because no one can live in both towns at once. You need OR."
+    },
+    {
+     "t": "h",
+     "text": "Sorting"
+    },
+    {
+     "t": "p",
+     "text": "To **[[sort]]** records is to put them in order. **Ascending** order goes A to Z, smallest to largest, oldest date to newest. **Descending** order goes Z to A, largest to smallest, newest to oldest. In a query, set the **Sort** row under a field. Fields are sorted from **left to right**, so put the main sort field on the left."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a sorted multi-criteria query",
+     "context": "The Head of Year wants pupils in 9A or 9C who scored over 60, listed with the highest score first.",
+     "steps": [
+      "TutorGroup: `\"9A\" Or \"9C\"`.",
+      "MathsScore: `>60`, on the same row, so it is ANDed with the tutor group condition.",
+      "Sort row under MathsScore: **Descending**.",
+      "Results: Ryan 91, Aoife 87, Niamh 72, Ben 68."
+     ],
+     "answer": "4 records, highest score first."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "AND: all criteria must be met; criteria go on the same row; fewer results.",
+      "OR: any criterion can be met; criteria go on different rows; more results.",
+      "Between 50 And 75 includes 50 and 75.",
+      "Ascending = A to Z, 0 to 9, oldest first; descending is the reverse.",
+      "Multiple sort fields are applied from left to right."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In the Access design grid, how are two criteria joined with AND?",
+     "o": [
+      "They are typed on different rows",
+      "They are typed on the same Criteria row",
+      "They are typed in the Sort row",
+      "They must be in separate queries"
+     ],
+     "a": 1,
+     "why": "Same row = AND; different rows = OR."
+    },
+    {
+     "q": "Which usually returns **more** records?",
+     "o": [
+      "AND",
+      "OR",
+      "They always return the same",
+      "Neither returns records"
+     ],
+     "a": 1,
+     "why": "OR only needs one condition to be true."
+    },
+    {
+     "q": "Using the results table, which pupils match TutorGroup `\"9B\"` AND MathsScore `<50`?",
+     "o": [
+      "Jack",
+      "Cara",
+      "Jack and Cara",
+      "Ben"
+     ],
+     "a": 1,
+     "why": "Jack is 9B but scored 54; only Cara is 9B and under 50."
+    },
+    {
+     "q": "Which list is sorted in **descending** order?",
+     "o": [
+      "Armstrong, Graham, Maguire",
+      "45, 54, 68",
+      "91, 87, 72",
+      "01/09/2010, 01/09/2011"
+     ],
+     "a": 2,
+     "why": "Largest to smallest is descending."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Using the results table, write the criteria to find pupils who live in Irvinestown **or** Belcoo, and name the pupils found.",
+     "m": 3,
+     "a": "Field Town (1); criteria \"Irvinestown\" Or \"Belcoo\" / on separate criteria rows (1). Ryan Armstrong and Ben Moore (1)."
+    },
+    {
+     "q": "Explain the difference between using AND and OR in a query.",
+     "m": 2,
+     "a": "AND: a record must meet all of the criteria to be found / narrows the search (1). OR: a record only needs to meet one of the criteria / widens the search (1)."
+    },
+    {
+     "q": "A shop wants a list of products that cost less than £2 **and** have a stock level of 10 or fewer, with the lowest stock first. Describe the query design.",
+     "m": 4,
+     "a": "Criteria <2 in the Price field (1). Criteria <=10 in the StockLevel field (1). Both criteria on the same row (AND) (1). Sort StockLevel in ascending order (1)."
+    }
+   ],
+   "terms": [
+    "AND",
+    "OR",
+    "Sort"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p09",
+   "spec": "Describe the purpose of forms and reports and what makes a good one",
+   "summary": "A form is an easy-to-use screen for entering and viewing data one record at a time. A report presents the results of a table or query in a clear, printable layout.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Most people who use a database never see its tables. The school office uses **[[forms|Form]]** to type in data, and teachers receive **[[reports|Report]]** such as class lists and attendance summaries. Access can make both using a **wizard**."
+    },
+    {
+     "t": "h",
+     "text": "Forms: getting data in"
+    },
+    {
+     "t": "p",
+     "text": "A form is a screen designed to make **entering, viewing and editing** records easy, usually **one record at a time**. It is based on a table (or a query)."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Clear **title** and instructions so users know what to do.",
+      "Fields in a **sensible order**, matching the paper data collection sheet.",
+      "**Drop-down lists** (lookups), tick boxes and calendar pickers to reduce typing errors.",
+      "**Buttons** for actions such as *Add new pupil*, *Next record* and *Close*.",
+      "A consistent, readable font and colour scheme; perhaps the school logo.",
+      "Validation still works: the rules are set on the table, so they apply in the form too."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "tip",
+     "text": "A form can hide fields a user should not see or change. A receptionist might be able to update a pupil's address but not see their exam results."
+    },
+    {
+     "t": "h",
+     "text": "Reports: getting information out"
+    },
+    {
+     "t": "p",
+     "text": "A report presents data in a **professional, printable** layout. It is usually based on a **query**, so it only shows the records needed, e.g. *Pupils with attendance below 90%*."
+    },
+    {
+     "t": "list",
+     "items": [
+      "A clear **title** and the **date** it was printed.",
+      "Only the **fields that are needed**, with sensible column headings.",
+      "Records **sorted** and often **grouped**, e.g. pupils grouped by tutor group.",
+      "**Summary calculations** such as counts, totals or averages.",
+      "**Page numbers** in the footer for long reports."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Form",
+      "Report"
+     ],
+     "rows": [
+      [
+       "Main purpose",
+       "Entering, viewing and editing data",
+       "Presenting and printing information"
+      ],
+      [
+       "Usually used",
+       "On screen",
+       "Printed or saved as a PDF"
+      ],
+      [
+       "Shows",
+       "One record at a time",
+       "Many records, often grouped"
+      ],
+      [
+       "Can change data?",
+       "Yes",
+       "No"
+      ],
+      [
+       "School example",
+       "Office enters a new pupil's details",
+       "Teacher prints a class list for a trip"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Worked example: planning a report for a school trip",
+     "context": "Mrs Allen is taking 9B to the Marble Arch Caves. She needs a list to take on the bus, showing who has paid and who has a medical condition.",
+     "steps": [
+      "Build a query: TutorGroup `\"9B\"`, fields FirstName, Surname, TripPaid, MedicalNotes, EmergencyContact.",
+      "Create a report from the query using the Report Wizard.",
+      "Sort by Surname ascending so names are easy to find.",
+      "Title: *9B Marble Arch Caves Trip*, with the date and a count of pupils at the bottom."
+     ],
+     "answer": "A clear, printable report built on a query."
+    },
+    {
+     "t": "note",
+     "text": "Reports containing personal data (such as medical notes) must be kept safe and shredded afterwards, to follow data protection law."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A form is for entering, viewing and editing data, one record at a time.",
+      "Good forms use drop-downs, tick boxes and buttons to make entry easy and accurate.",
+      "A report presents data in a printable layout, usually based on a query.",
+      "Good reports have a title, only the needed fields, sorting, grouping and totals.",
+      "Forms put data in; reports get information out."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is the main purpose of a form?",
+     "o": [
+      "To print a summary of data",
+      "To make it easy to enter and view records",
+      "To link two tables",
+      "To sort a table"
+     ],
+     "a": 1,
+     "why": "Forms are for entering, viewing and editing data."
+    },
+    {
+     "q": "A teacher wants a printed list of all pupils who have not paid for a trip. What should be created?",
+     "o": [
+      "A form based on the table",
+      "A report based on a query",
+      "A new table",
+      "An input mask"
+     ],
+     "a": 1,
+     "why": "A query finds the right pupils; a report presents them for printing."
+    },
+    {
+     "q": "Which feature on a form helps to reduce typing errors?",
+     "o": [
+      "A drop-down list",
+      "A long title",
+      "A bright background",
+      "Page numbers"
+     ],
+     "a": 0,
+     "why": "Choosing from a list stops spelling mistakes."
+    },
+    {
+     "q": "Which is a feature of a report rather than a form?",
+     "o": [
+      "Buttons to add new records",
+      "Shows one record at a time for editing",
+      "Records grouped with totals, ready for printing",
+      "Calendar pickers for entering dates"
+     ],
+     "a": 2,
+     "why": "Reports group and summarise data for presentation."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State the difference between a form and a report.",
+     "m": 2,
+     "a": "A form is used to enter/view/edit data (on screen, one record at a time) (1). A report is used to present/print data/information from a table or query (1)."
+    },
+    {
+     "q": "Describe **three** features of a well-designed data entry form.",
+     "m": 3,
+     "a": "Any three (1 each): clear title/instructions; fields in a logical order; drop-down lists/lookups; tick boxes; date pickers; navigation/action buttons; consistent readable fonts and colours; only relevant fields shown."
+    },
+    {
+     "q": "A sports club wants a report of all members who owe fees. Describe how this report should be produced and **two** features it should include.",
+     "m": 4,
+     "a": "Create a query with criteria to select members who owe fees, e.g. FeesPaid = No (1). Build the report from the query (e.g. using the Report Wizard) (1). Any two features (1 each): title; date; relevant fields only; sorted e.g. by surname; total amount owed/count; page numbers."
+    }
+   ],
+   "terms": [
+    "Form",
+    "Report"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p10",
+   "spec": "Explain why flat files cause data redundancy and how linking two tables with a foreign key solves this",
+   "summary": "A flat file stores everything in one table, which repeats data (redundancy) and can lead to mismatches (inconsistency). A relational database splits data into linked tables, joined using a foreign key.",
+   "diagram": {
+    "kind": "flow",
+    "title": "From flat file to linked tables",
+    "caption": "Why and how we split one big table into two.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Flat file",
+      "detail": "One table: tutor name and room repeated for every pupil.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Problems",
+      "detail": "Data redundancy, typing errors and data inconsistency when a room changes.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "Split",
+      "detail": "Tutors table (one record per tutor group) and Pupils table.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Link",
+      "detail": "TutorGroup is the primary key in Tutors and a foreign key in Pupils.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Result",
+      "detail": "Each fact stored once: change it in one place and it is right everywhere.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "So far every example has used **one table**. A database with just one table is called a **[[flat file]]**. That works for small jobs, but look what happens when we store each pupil's tutor details in the same table."
+    },
+    {
+     "t": "table",
+     "head": [
+      "PupilID",
+      "FirstName",
+      "Surname",
+      "TutorGroup",
+      "TutorName",
+      "TutorRoom"
+     ],
+     "rows": [
+      [
+       "1001",
+       "Aoife",
+       "McCann",
+       "9A",
+       "Mr Elliott",
+       "B12"
+      ],
+      [
+       "1003",
+       "Niamh",
+       "Maguire",
+       "9A",
+       "Mr Elliott",
+       "B12"
+      ],
+      [
+       "1007",
+       "Owen",
+       "Little",
+       "9A",
+       "Mr Eliott",
+       "B21"
+      ],
+      [
+       "1002",
+       "Jack",
+       "Graham",
+       "9B",
+       "Mrs Allen",
+       "C04"
+      ],
+      [
+       "1005",
+       "Cara",
+       "McKeown",
+       "9B",
+       "Mrs Allen",
+       "C04"
+      ]
+     ],
+     "caption": "A flat file: the tutor's details are repeated for every pupil"
+    },
+    {
+     "t": "h",
+     "text": "The problems with flat files"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**[[Data redundancy]]**: Mr Elliott's name and room are typed again for every pupil in 9A. With 28 pupils that is 28 copies, wasting time and storage.",
+      "**Typing errors creep in**: look at Owen's row, *Mr Eliott* (missing a *t*) in room *B21*.",
+      "**[[Data inconsistency]]**: if 9A moves to room B14, every one of those 28 records must be changed. Miss one and the data no longer matches. Which room is correct?",
+      "If the last pupil in 9B leaves and is deleted, we lose all record of Mrs Allen's tutor group."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "The solution: link two tables"
+    },
+    {
+     "t": "p",
+     "text": "A **[[relational database]]** splits the data into separate tables, one for each type of thing, and **links** them. Each tutor's details are stored **once** in a Tutors table."
+    },
+    {
+     "t": "table",
+     "head": [
+      "TutorGroup",
+      "TutorName",
+      "TutorRoom"
+     ],
+     "rows": [
+      [
+       "9A",
+       "Mr Elliott",
+       "B12"
+      ],
+      [
+       "9B",
+       "Mrs Allen",
+       "C04"
+      ],
+      [
+       "9C",
+       "Ms Doherty",
+       "A07"
+      ]
+     ],
+     "caption": "Tutors table (primary key: TutorGroup)"
+    },
+    {
+     "t": "table",
+     "head": [
+      "PupilID",
+      "FirstName",
+      "Surname",
+      "TutorGroup"
+     ],
+     "rows": [
+      [
+       "1001",
+       "Aoife",
+       "McCann",
+       "9A"
+      ],
+      [
+       "1003",
+       "Niamh",
+       "Maguire",
+       "9A"
+      ],
+      [
+       "1007",
+       "Owen",
+       "Little",
+       "9A"
+      ],
+      [
+       "1002",
+       "Jack",
+       "Graham",
+       "9B"
+      ],
+      [
+       "1005",
+       "Cara",
+       "McKeown",
+       "9B"
+      ]
+     ],
+     "caption": "Pupils table (primary key: PupilID; foreign key: TutorGroup)"
+    },
+    {
+     "t": "p",
+     "text": "**TutorGroup** is the **primary key** of the Tutors table. It also appears in the Pupils table, where it is called a **[[foreign key]]**: a field in one table that is the primary key of another. It is the link between the two tables. Now if 9A moves room, we change **one** record and every pupil in 9A is automatically correct."
+    },
+    {
+     "t": "note",
+     "text": "In Access you link tables in the **Relationships** window (Database Tools tab) by dragging the primary key onto the matching foreign key. This is a **one-to-many** relationship: **one** tutor group has **many** pupils. You will study relationships in more detail at GCSE."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: spotting the keys",
+     "context": "A library has a Members table (MemberID, Name, Phone) and a Loans table (LoanID, BookID, MemberID, DateDue).",
+     "steps": [
+      "Primary key of Members: **MemberID**.",
+      "Primary key of Loans: **LoanID** (each loan is unique).",
+      "MemberID also appears in Loans, so in that table it is a **foreign key**.",
+      "One member can have many loans: a one-to-many relationship."
+     ],
+     "answer": "MemberID links the two tables: primary key in Members, foreign key in Loans."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A flat file stores all the data in one table.",
+      "Flat files repeat data (data redundancy) and this leads to errors and data inconsistency.",
+      "A relational database stores data in linked tables, so each fact is stored once.",
+      "A foreign key is a field in one table that is the primary key of another table.",
+      "One tutor group has many pupils: a one-to-many relationship."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is data redundancy?",
+     "o": [
+      "Data that has been deleted",
+      "The same data stored more than once unnecessarily",
+      "Data that fails validation",
+      "Data stored in a report"
+     ],
+     "a": 1,
+     "why": "Repeated data wastes space and causes errors."
+    },
+    {
+     "q": "What is a foreign key?",
+     "o": [
+      "A key used to lock the database",
+      "A field in one table that is the primary key of another table",
+      "Any field containing text",
+      "The first field in every table"
+     ],
+     "a": 1,
+     "why": "It links the two tables together."
+    },
+    {
+     "q": "In the linked tables on this page, why is it easier to change 9A's room number?",
+     "o": [
+      "It is stored only once, in the Tutors table",
+      "Access changes room numbers on its own",
+      "Room numbers are AutoNumbers",
+      "The Pupils table is deleted"
+     ],
+     "a": 0,
+     "why": "Change one record and every linked pupil is up to date."
+    },
+    {
+     "q": "What is a flat file?",
+     "o": [
+      "A database with all its data in one table",
+      "A database stored on paper",
+      "A database with no primary key",
+      "A report printed on one page"
+     ],
+     "a": 0,
+     "why": "Flat = one single table."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Using an example, explain what is meant by data redundancy and **one** problem it can cause.",
+     "m": 3,
+     "a": "Same data stored more than once / repeated unnecessarily (1). Example, e.g. a tutor's name and room repeated for every pupil (1). Problem, any one: wastes storage/time; typing errors; data inconsistency when one copy is updated but not others (1)."
+    },
+    {
+     "q": "A shop has a Customers table (CustomerID, Name, Town) and an Orders table (OrderNo, CustomerID, OrderDate, Total). Identify the primary key of each table and the foreign key.",
+     "m": 3,
+     "a": "Customers primary key: CustomerID (1). Orders primary key: OrderNo (1). Foreign key: CustomerID in the Orders table (1)."
+    },
+    {
+     "q": "Give **two** advantages of storing data in linked tables rather than a flat file.",
+     "m": 2,
+     "a": "Any two (1 each): less data redundancy/data stored once; less storage needed; fewer typing errors; updates made once, so data stays consistent; data is not lost when a related record is deleted."
+    }
+   ],
+   "terms": [
+    "Flat file",
+    "Data redundancy",
+    "Data inconsistency",
+    "Relational database",
+    "Foreign key"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Database",
+   "def": "An organised collection of related data, stored so that it can be easily searched, sorted and updated.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Data",
+   "def": "Raw facts and figures with no context, e.g. 14, Smith, 07/09/2025.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Information",
+   "def": "Data that has been processed and given context so that it has meaning, e.g. 'Ben Smith is 14'.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Management information system",
+   "def": "Software that a school or business uses to store and manage information about its people and activities, e.g. pupils, attendance and timetables.",
+   "alt": "MIS",
+   "page": "p01"
+  },
+  {
+   "term": "Database management system",
+   "def": "Software used to create, manage and search a database, e.g. Microsoft Access.",
+   "alt": "DBMS",
+   "page": "p01"
+  },
+  {
+   "term": "Table",
+   "def": "A collection of records about one type of thing (e.g. Pupils or Books), organised in rows and columns.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Record",
+   "def": "All the data about one person or thing in a table; one row.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Field",
+   "def": "One item of data stored about every record, e.g. Surname; one column.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Field name",
+   "def": "The heading of a field, e.g. DateOfBirth. It should be short, clear and unique within the table.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Datasheet view",
+   "def": "The view in Access that shows a table's data in rows and columns, like a spreadsheet, for entering and viewing records.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Data type",
+   "def": "The kind of data a field will hold (e.g. Short Text, Number, Date/Time, Currency, Yes/No), which controls what can be entered and what can be done with it.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "AutoNumber",
+   "def": "An Access data type that gives each new record a unique number automatically (1, 2, 3...). Often used for the primary key.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Yes/No",
+   "def": "A data type that can only hold one of two values, e.g. Yes/No or True/False. Also called Boolean.",
+   "alt": "Boolean",
+   "page": "p03"
+  },
+  {
+   "term": "Primary key",
+   "def": "A field that holds a unique value for every record in a table, so each record can be identified, e.g. PupilID.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Design view",
+   "def": "The view in Access used to set up a table's structure: field names, data types, descriptions and field properties such as validation.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Validation",
+   "def": "An automatic check made by the computer when data is entered, to make sure the data is sensible and reasonable. It cannot check that data is correct.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Validation rule",
+   "def": "The condition set on a field in Access that data must meet, e.g. Between 8 And 14.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Range check",
+   "def": "A validation check that data is between a lowest and highest value, e.g. a year group between 8 and 14.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Presence check",
+   "def": "A validation check that a field has not been left empty.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Length check",
+   "def": "A validation check on the number of characters entered, e.g. a surname of no more than 30 characters.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Type check",
+   "def": "A validation check that data is of the correct data type, e.g. only numbers in a Number field.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Format check",
+   "def": "A validation check that data follows a set pattern, e.g. a postcode of letters and digits in the right places.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Input mask",
+   "def": "An Access field property that forces data to be typed in a set pattern, used to carry out a format check.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Lookup check",
+   "def": "A validation check that data matches one of a list of allowed values, often chosen from a drop-down list.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Verification",
+   "def": "Checking that data has been copied or entered accurately from its original source, e.g. by double entry or a visual check.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Double entry",
+   "def": "A verification method where data is typed in twice and the computer compares the two versions; if they do not match, the user must re-enter it.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Visual check",
+   "def": "A verification method where a person compares the data on screen with the original source document to spot mistakes.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Query",
+   "def": "A question you ask a database to find all the records that match certain criteria. In Access a query shows only the matching records and chosen fields.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Criteria",
+   "def": "The conditions a record must meet to be included in the results of a query, e.g. \"Enniskillen\" or >50.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Comparison operator",
+   "def": "A symbol used to compare values in criteria: = (equal to), <> (not equal to), < (less than), > (greater than), <= and >=.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Wildcard",
+   "def": "A symbol that stands in for unknown characters in a search: in Access * means any number of characters and ? means exactly one character.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "AND",
+   "def": "A logical operator used in a query when a record must meet all of the criteria to be found. It narrows a search.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "OR",
+   "def": "A logical operator used in a query when a record only has to meet one of the criteria to be found. It widens a search.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Sort",
+   "def": "To put records into order using one or more fields, either ascending or descending.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Form",
+   "def": "A user-friendly screen for entering, viewing and editing records, usually one record at a time.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Report",
+   "def": "A professional, printable layout of data from a table or query, often grouped and with totals.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Flat file",
+   "def": "A database that stores all its data in one single table.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Data redundancy",
+   "def": "When the same data is stored more than once unnecessarily, wasting space and causing extra work.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Data inconsistency",
+   "def": "When copies of the same data do not match, e.g. a teacher's room number is updated in one record but not in another.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Relational database",
+   "def": "A database that stores data in two or more tables linked together by key fields.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Foreign key",
+   "def": "A field in one table that is the primary key of another table, used to link the two tables.",
+   "alt": "",
+   "page": "p10"
+  }
+ ]
+}

@@ -1,0 +1,2718 @@
+{
+ "title": "Spreadsheets",
+ "summary": "Using Microsoft Excel to store, calculate and present data: formulas, functions, cell references, charts and 'what if' models.",
+ "learn": [
+  "What spreadsheets are for, and cells, rows, columns and ranges",
+  "Data types and formatting",
+  "Writing formulas and using functions such as SUM, AVERAGE, IF and COUNTIF",
+  "Relative and absolute cell references",
+  "Sorting, filtering, conditional formatting and charts",
+  "Building and testing a 'what if' model"
+ ],
+ "temporary": false,
+ "intro": "How to use Microsoft Excel to store and calculate data: cells and ranges, formatting, formulas and functions, relative and absolute references, sorting and filtering, charts, and building a tested 'what if' model for a school tuck shop and trip.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Describe what a spreadsheet is used for and identify cells, rows, columns and ranges",
+   "summary": "A spreadsheet is a grid of cells used to store, calculate and present numbers. Each cell has a cell reference made of its column letter and row number, such as B3, and a block of cells is a range, such as A1:D6.",
+   "diagram": {
+    "kind": "hotspot",
+    "title": "The Excel window",
+    "caption": "Click each part of the Excel screen to find out what it does.",
+    "rows": [
+     [
+      {
+       "label": "Ribbon",
+       "detail": "The tabs (Home, Insert, Formulas, Data) holding every tool, e.g. Bold, AutoSum, Sort and Insert Chart.",
+       "span": 3
+      }
+     ],
+     [
+      {
+       "label": "Name Box",
+       "detail": "Shows the cell reference of the active cell, e.g. B3. You can type a reference here to jump to it.",
+       "span": 1
+      },
+      {
+       "label": "Formula bar (fx)",
+       "detail": "Shows what is really inside the active cell: the number, text or formula. Edit formulas here.",
+       "span": 2
+      }
+     ],
+     [
+      {
+       "label": "Column headings A, B, C",
+       "detail": "Columns run down the sheet and are labelled with letters. Click a heading to select the whole column.",
+       "span": 2
+      },
+      {
+       "label": "Row headings 1, 2, 3",
+       "detail": "Rows run across the sheet and are labelled with numbers. Click a heading to select the whole row.",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "Active cell",
+       "detail": "The selected cell, with a thick green border. Whatever you type goes in here.",
+       "span": 1
+      },
+      {
+       "label": "Fill handle",
+       "detail": "The small square at the bottom right of the active cell. Drag it to copy (replicate) a formula.",
+       "span": 1
+      },
+      {
+       "label": "Range",
+       "detail": "Drag across several cells to select a block, e.g. A1:D6. It is shaded grey-green.",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "Sheet tabs",
+       "detail": "Each tab is a worksheet in the workbook. Double-click to rename, click + to add one.",
+       "span": 2
+      },
+      {
+       "label": "Status bar",
+       "detail": "Select some numbers and it shows their Average, Count and Sum without a formula.",
+       "span": 1
+      }
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A **[[spreadsheet]]** is a program that stores data in a grid and does calculations on it automatically. In school you will use **Microsoft Excel**, but Google Sheets and Apple Numbers work in almost exactly the same way."
+    },
+    {
+     "t": "h",
+     "text": "What are spreadsheets used for?"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "**Budgets and money**: a family's weekly shopping, a school trip, the tuck shop's takings.",
+      "**Results and marks**: teachers work out averages and grades for a whole class in seconds.",
+      "**Sport**: league tables for the Ulster Schools' Cup, or a club's goals per player.",
+      "**Science**: recording experiment readings and turning them into a graph.",
+      "**Modelling**: asking *what if?* questions, like *what if we charge 10p more for crisps?*"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "The parts of a spreadsheet"
+    },
+    {
+     "t": "p",
+     "text": "An Excel file is called a **[[workbook]]**. Each workbook holds one or more **[[worksheets|worksheet]]** (the tabs along the bottom). A worksheet is a grid made of **[[columns|column]]** (labelled with letters A, B, C, and so on) and **[[rows|row]]** (labelled with numbers 1, 2, 3, and so on). Where a column and row meet is a **[[cell]]**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "What it is",
+      "Example"
+     ],
+     "rows": [
+      [
+       "[[Cell reference]]",
+       "The address of a cell: column letter first, then row number",
+       "B3 is column B, row 3"
+      ],
+      [
+       "[[Range]]",
+       "A rectangular block of cells, written as first cell : last cell",
+       "A1:D6 (24 cells)"
+      ],
+      [
+       "[[Active cell]]",
+       "The cell you have selected, shown with a thick green border",
+       "Its reference appears in the Name Box"
+      ],
+      [
+       "[[Formula bar]]",
+       "The long bar above the grid that shows what is really inside the active cell",
+       "Shows `=B2*C2` while the cell shows £15.00"
+      ]
+     ],
+     "caption": "Key words for finding your way around a sheet"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: reading the tuck shop sheet",
+     "context": "The sheet below records Monday's sales at the school tuck shop. Use it to answer: what is in C4, and how many cells are in the range A2:A6?",
+     "steps": [
+      "C4 means column C, row 4. Column C is **Sold** and row 4 is **Water**, so C4 holds **30**.",
+      "A2:A6 runs down column A from row 2 to row 6.",
+      "That is rows 2, 3, 4, 5 and 6, so **5 cells**."
+     ],
+     "answer": "C4 = 30; the range A2:A6 contains 5 cells (the five item names)."
+    },
+    {
+     "t": "table",
+     "head": [
+      "",
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "rows": [
+      [
+       "**1**",
+       "**Item**",
+       "**Price**",
+       "**Sold**",
+       "**Takings**"
+      ],
+      [
+       "**2**",
+       "Crisps",
+       "£0.60",
+       "25",
+       "£15.00"
+      ],
+      [
+       "**3**",
+       "Chocolate bar",
+       "£0.85",
+       "18",
+       "£15.30"
+      ],
+      [
+       "**4**",
+       "Water",
+       "£0.75",
+       "30",
+       "£22.50"
+      ],
+      [
+       "**5**",
+       "Toast",
+       "£0.50",
+       "40",
+       "£20.00"
+      ],
+      [
+       "**6**",
+       "Fruit juice",
+       "£0.90",
+       "12",
+       "£10.80"
+      ],
+      [
+       "**7**",
+       "",
+       "",
+       "**Total**",
+       "**£83.60**"
+      ]
+     ],
+     "caption": "The tuck shop sheet: Monday's sales (column letters across the top, row numbers down the side)"
+    },
+    {
+     "t": "tip",
+     "text": "To count the cells in a range like **A1:D6**, multiply the number of columns by the number of rows: A to D is 4 columns, 1 to 6 is 6 rows, so 4 × 6 = **24 cells**."
+    },
+    {
+     "t": "warn",
+     "text": "Always write the **letter first**: B3, never 3B. Excel will not understand 3B."
+    },
+    {
+     "t": "note",
+     "text": "One Excel worksheet has **1,048,576 rows** and **16,384 columns** (the last column is XFD). You will never run out of space!"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A spreadsheet stores data in a grid and calculates automatically.",
+      "Columns are letters, rows are numbers; a cell is where they meet.",
+      "A cell reference is column then row, e.g. D7.",
+      "A range is written first:last, e.g. B2:B6.",
+      "A workbook is the file; a worksheet is one tab inside it."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which of these is a correctly written cell reference?",
+     "o": [
+      "C4",
+      "4C",
+      "C-4",
+      "Row 4 C"
+     ],
+     "a": 0,
+     "why": "Column letter first, then row number."
+    },
+    {
+     "q": "What is a range?",
+     "o": [
+      "A single cell",
+      "The name of a worksheet",
+      "A type of chart",
+      "A block of cells such as A1:C5"
+     ],
+     "a": 3,
+     "why": "A range is a rectangular block of cells, written first:last."
+    },
+    {
+     "q": "How many cells are in the range B2:C4?",
+     "o": [
+      "4",
+      "5",
+      "6",
+      "8"
+     ],
+     "a": 2,
+     "why": "2 columns (B, C) × 3 rows (2, 3, 4) = 6 cells."
+    },
+    {
+     "q": "What is an Excel file called?",
+     "o": [
+      "A worksheet",
+      "A workbook",
+      "A cell",
+      "A range"
+     ],
+     "a": 1,
+     "why": "The file is a workbook; it contains worksheets."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between a **row** and a **column** in a spreadsheet.",
+     "m": 2,
+     "a": "A row runs across/horizontally and is labelled with a number (1). A column runs down/vertically and is labelled with a letter (1)."
+    },
+    {
+     "q": "Give **two** examples of how a spreadsheet could be used in a school.",
+     "m": 2,
+     "a": "Any two, e.g. recording/averaging pupils' test marks (1); a school trip budget (1); tuck shop sales and profit (1); sports day results/league table (1); recording science experiment results (1)."
+    },
+    {
+     "q": "Using the tuck shop sheet, state the cell reference of the cell holding the number of chocolate bars sold, and state how many cells are in the range A1:D7.",
+     "m": 2,
+     "a": "C3 (1). 4 columns × 7 rows = 28 cells (1)."
+    }
+   ],
+   "terms": [
+    "Spreadsheet",
+    "Workbook",
+    "Worksheet",
+    "Cell",
+    "Row",
+    "Column",
+    "Cell reference",
+    "Range",
+    "Active cell",
+    "Formula bar"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "spec": "Enter different types of data and format cells so a spreadsheet is clear to read",
+   "summary": "Cells can hold text, numbers, currency, percentages and dates. Formatting (bold, borders, number formats, column width) changes how data looks, not its value, and makes a sheet easier to read.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Which data type?",
+    "caption": "Decide the best data type for each item, then click to check.",
+    "head": [
+     "Data",
+     "Data type"
+    ],
+    "rows": [
+     [
+      "Pupil's first name: Niamh",
+      "Text"
+     ],
+     [
+      "Number of crisps sold: 25",
+      "Number"
+     ],
+     [
+      "Price of a bottle of water: £0.75",
+      "Currency"
+     ],
+     [
+      "Date of the trip: 14/03/2027",
+      "Date"
+     ],
+     [
+      "Discount: 10%",
+      "Percentage"
+     ],
+     [
+      "Form class: 9B",
+      "Text"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Every cell holds one piece of data. Excel works out its **[[data type]]** from what you type, and that decides what you can do with it: you can add numbers, but you cannot add names!"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Data type",
+      "Example",
+      "Notes"
+     ],
+     "rows": [
+      [
+       "Text (a label)",
+       "Crisps, Item, 9B",
+       "Lines up on the **left** of the cell. Used for headings and names."
+      ],
+      [
+       "Number",
+       "25, 3.5",
+       "Lines up on the **right**. Can be used in calculations."
+      ],
+      [
+       "Currency",
+       "£0.85",
+       "A number shown with a £ sign and 2 decimal places."
+      ],
+      [
+       "Percentage",
+       "20%",
+       "Excel stores 20% as 0.2, so =50*20% gives 10."
+      ],
+      [
+       "Date",
+       "07/11/2026",
+       "Stored as a number (days since 1 Jan 1900), so you can work out the days between two dates."
+      ]
+     ],
+     "caption": "Common data types in Excel"
+    },
+    {
+     "t": "tip",
+     "text": "Quick test: if Excel puts your number on the **left** of the cell, it has treated it as text and will not calculate with it. This often happens if you type a space or a letter O instead of a zero."
+    },
+    {
+     "t": "h",
+     "text": "Formatting"
+    },
+    {
+     "t": "p",
+     "text": "**[[Formatting]]** changes how a cell *looks* without changing what is stored in it. Most tools are on the **Home** tab."
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "**Bold, font size and fill colour** for headings, so they stand out.",
+      "**Borders** to show where the table starts and ends.",
+      "**[[Currency format]]** (the £ button, or Format Cells > Currency) to show money with 2 decimal places.",
+      "**Increase/Decrease Decimal** to control how many decimal places are shown.",
+      "**Merge & Center** to put a title across the top of several columns.",
+      "**Wrap Text** and **column width** so that long labels fit."
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Worked example: formatting does not change the value",
+     "context": "Cell B2 holds the number 0.6. It is formatted as currency so it shows £0.60. Cell C2 holds 25. What does =B2*C2 give?",
+     "steps": [
+      "The formatting only adds the £ and the extra 0; the value stored is still 0.6.",
+      "0.6 × 25 = 15.",
+      "If D2 is also formatted as currency it shows £15.00."
+     ],
+     "answer": "=B2*C2 gives 15, shown as £15.00."
+    },
+    {
+     "t": "warn",
+     "text": "If a cell shows **#####**, the number is too wide for the column. Nothing is wrong with your data: double-click the line between the column headings to widen it."
+    },
+    {
+     "t": "warn",
+     "text": "Never type the £ sign or units like *kg* as part of a number (e.g. *25kg*). Excel will treat it as text. Type 25 and use formatting instead."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Data types include text, number, currency, percentage and date.",
+      "Text lines up left; numbers line up right.",
+      "Formatting changes how a value looks, not the value itself.",
+      "Use currency format for money, not a typed £ sign.",
+      "##### means the column is too narrow."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "A cell shows £0.75. What value is actually stored?",
+     "o": [
+      "£0.75 as text",
+      "0.75",
+      "75",
+      "0.750000 as text"
+     ],
+     "a": 1,
+     "why": "Currency is just a format; the stored value is the number 0.75."
+    },
+    {
+     "q": "What does ##### in a cell usually mean?",
+     "o": [
+      "The formula is wrong",
+      "The file is corrupted",
+      "The column is too narrow",
+      "The number is negative"
+     ],
+     "a": 2,
+     "why": "Widen the column and the number appears."
+    },
+    {
+     "q": "Which would Excel treat as text, not a number?",
+     "o": [
+      "42",
+      "3.5",
+      "15 pupils",
+      "0.2"
+     ],
+     "a": 2,
+     "why": "Adding a word makes the whole entry text."
+    },
+    {
+     "q": "Excel stores 25% as…",
+     "o": [
+      "25",
+      "0.25",
+      "2.5",
+      "\"25%\" as text"
+     ],
+     "a": 1,
+     "why": "A percentage is stored as a decimal: 25% = 0.25."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe **two** ways of formatting a spreadsheet to make it easier to read.",
+     "m": 2,
+     "a": "Any two, e.g. bold/larger headings (1); borders around the table (1); fill/background colour for headings (1); currency format for money (1); widening columns so data fits (1); merge and centre a title (1)."
+    },
+    {
+     "q": "A pupil types **£2.50** into a cell as the letters and symbols on the keyboard, but later finds another pupil's sheet shows 2.5 with a currency format. Explain why the second method is better.",
+     "m": 2,
+     "a": "If typed as text, it may not be used in calculations (1). With currency format the cell stores a number, so formulas work, and it is still displayed as £2.50 (1)."
+    },
+    {
+     "q": "State the most suitable data type for: (a) a pupil's surname (b) the cost of a school trip (c) the date of the trip.",
+     "m": 3,
+     "a": "(a) Text (1). (b) Currency (1). (c) Date (1)."
+    }
+   ],
+   "terms": [
+    "Data type",
+    "Formatting",
+    "Currency format"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "spec": "Explain what a formula is and write formulas using arithmetic operators",
+   "summary": "A formula is a calculation that always starts with =. It can use numbers and cell references with the operators + - * / and ^, and Excel works it out using BODMAS. If a value changes, the formula recalculates automatically.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Predict the result",
+    "caption": "Work out each formula using BODMAS, then click to check.",
+    "head": [
+     "Formula",
+     "Result"
+    ],
+    "rows": [
+     [
+      "=6+4*3",
+      "18"
+     ],
+     [
+      "=(6+4)*3",
+      "30"
+     ],
+     [
+      "=20-8/4",
+      "18"
+     ],
+     [
+      "=(20-8)/4",
+      "3"
+     ],
+     [
+      "=5^2+1",
+      "26"
+     ],
+     [
+      "=10/(2+3)",
+      "2"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A **[[formula]]** tells Excel to calculate something. Every formula **starts with an equals sign (=)**. Without the =, Excel thinks you have typed text."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Operator",
+      "Meaning",
+      "Example",
+      "Result"
+     ],
+     "rows": [
+      [
+       "+",
+       "Add",
+       "=12+8",
+       "20"
+      ],
+      [
+       "-",
+       "Subtract",
+       "=12-8",
+       "4"
+      ],
+      [
+       "*",
+       "Multiply",
+       "=12*8",
+       "96"
+      ],
+      [
+       "/",
+       "Divide",
+       "=12/8",
+       "1.5"
+      ],
+      [
+       "^",
+       "To the power of",
+       "=2^3",
+       "8"
+      ]
+     ],
+     "caption": "Arithmetic operators in Excel"
+    },
+    {
+     "t": "p",
+     "text": "These symbols are called **[[operators|operator]]**. Notice that Excel uses `*` for multiply (not ×) and `/` for divide (not ÷)."
+    },
+    {
+     "t": "h",
+     "text": "Use cell references, not numbers"
+    },
+    {
+     "t": "p",
+     "text": "You *could* type `=0.6*25`, but a good formula uses **cell references** instead. Then, if the price or the number sold changes, the answer updates by itself. This is called **[[automatic recalculation]]**."
+    },
+    {
+     "t": "code",
+     "lang": "excel",
+     "title": "Takings for crisps, in cell D2",
+     "code": "=B2*C2",
+     "output": "Multiplies the price in B2 (0.60) by the number sold in C2 (25) and shows 15, formatted as £15.00."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the tuck shop changes a price",
+     "context": "D2 contains =B2*C2 and shows £15.00. The tuck shop raises the price of crisps in B2 from £0.60 to £0.70. What happens?",
+     "steps": [
+      "The formula in D2 has not changed: it still says =B2*C2.",
+      "Excel recalculates straight away using the new value: 0.70 × 25 = 17.50.",
+      "Any other formula that uses D2 (such as the total in D7) also updates: 83.60 + 2.50 = 86.10."
+     ],
+     "answer": "D2 changes to £17.50 and the total to £86.10, without retyping anything."
+    },
+    {
+     "t": "h",
+     "text": "Order of operations (BODMAS)"
+    },
+    {
+     "t": "p",
+     "text": "Excel follows **[[BODMAS]]**, just like in Maths: **B**rackets, **O**rders (powers), **D**ivision and **M**ultiplication, then **A**ddition and **S**ubtraction."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Formula",
+      "Working",
+      "Result"
+     ],
+     "rows": [
+      [
+       "=3+4*2",
+       "Multiply first: 4 × 2 = 8, then 3 + 8",
+       "11"
+      ],
+      [
+       "=(3+4)*2",
+       "Brackets first: 7, then × 2",
+       "14"
+      ],
+      [
+       "=10-6/2",
+       "Divide first: 6 ÷ 2 = 3, then 10 − 3",
+       "7"
+      ],
+      [
+       "=2*3^2",
+       "Power first: 3² = 9, then × 2",
+       "18"
+      ]
+     ],
+     "caption": "BODMAS in action"
+    },
+    {
+     "t": "warn",
+     "text": "To find the average of two marks in B2 and C2, `=B2+C2/2` is **wrong**: it divides only C2 by 2. You need brackets: `=(B2+C2)/2`."
+    },
+    {
+     "t": "tip",
+     "text": "Press **Ctrl + `** (the key above Tab) to switch between seeing the results and seeing the formulas in every cell. Great for checking your work."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A formula always starts with =.",
+      "Operators: + - * / and ^.",
+      "Use cell references so the answer recalculates automatically.",
+      "Excel uses BODMAS: use brackets to control the order.",
+      "The cell shows the result; the formula bar shows the formula."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is a correctly written Excel formula to multiply B2 by C2?",
+     "o": [
+      "B2*C2",
+      "=B2xC2",
+      "=B2*C2",
+      "=B2×C2"
+     ],
+     "a": 2,
+     "why": "Start with = and use * for multiply."
+    },
+    {
+     "q": "What is the result of =20+10/2?",
+     "o": [
+      "15",
+      "25",
+      "30",
+      "5"
+     ],
+     "a": 1,
+     "why": "Divide first: 10 ÷ 2 = 5, then 20 + 5 = 25."
+    },
+    {
+     "q": "Why is it better to use cell references than typed numbers in a formula?",
+     "o": [
+      "The result updates automatically when the data changes",
+      "It looks neater",
+      "Excel runs faster",
+      "Numbers are not allowed"
+     ],
+     "a": 0,
+     "why": "This is automatic recalculation."
+    },
+    {
+     "q": "Which symbol means 'to the power of'?",
+     "o": [
+      "*",
+      "%",
+      "/",
+      "^"
+     ],
+     "a": 3,
+     "why": "=2^3 means 2³ = 8."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Cell B4 holds the price of a pizza (£8.50) and C4 holds how many were ordered. Write a formula for D4 to calculate the total cost.",
+     "m": 2,
+     "a": "=B4*C4 (2). Award (1) for B4*C4 without the = sign, or for a correct formula using the number 8.50 instead of B4."
+    },
+    {
+     "q": "A pupil wants the average of two scores in E2 and F2. They write =E2+F2/2. Explain why this gives the wrong answer and write the correct formula.",
+     "m": 3,
+     "a": "Excel uses BODMAS / division is done before addition (1), so only F2 is halved (1). Correct formula: =(E2+F2)/2 (1)."
+    },
+    {
+     "q": "Explain what is meant by **automatic recalculation** and why it is useful.",
+     "m": 2,
+     "a": "When a value in a cell changes, every formula that uses that cell is worked out again automatically (1). This saves time / avoids mistakes, as nothing has to be recalculated by hand (1)."
+    }
+   ],
+   "terms": [
+    "Formula",
+    "Operator",
+    "Automatic recalculation",
+    "BODMAS"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "spec": "Use the functions SUM, AVERAGE, MIN, MAX and COUNT on a range of cells",
+   "summary": "A function is a ready-made formula with a name, such as SUM or AVERAGE. You give it a range in brackets, e.g. =SUM(B2:B9), and it does the work. Functions are quicker and less error-prone than long formulas.",
+   "diagram": {
+    "kind": "match",
+    "title": "Match the function",
+    "caption": "Match each function to what it does.",
+    "pairs": [
+     [
+      "SUM",
+      "Adds up the numbers in a range"
+     ],
+     [
+      "AVERAGE",
+      "Finds the mean of the numbers"
+     ],
+     [
+      "MIN",
+      "Finds the smallest value"
+     ],
+     [
+      "MAX",
+      "Finds the largest value"
+     ],
+     [
+      "COUNT",
+      "Counts the cells that contain numbers"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Adding up 8 test scores with `=B2+B3+B4+B5+B6+B7+B8+B9` works, but it is slow to type and easy to get wrong. A **[[function]]** is a built-in formula with a name that does the job for you."
+    },
+    {
+     "t": "p",
+     "text": "Every function has the same shape: **=NAME(what to use)**. The part in the brackets is called the **[[argument]]**, and it is usually a range."
+    },
+    {
+     "t": "table",
+     "head": [
+      "",
+      "A",
+      "B"
+     ],
+     "rows": [
+      [
+       "**1**",
+       "**Pupil**",
+       "**Test score**"
+      ],
+      [
+       "**2**",
+       "Aoife",
+       "72"
+      ],
+      [
+       "**3**",
+       "Ciarán",
+       "85"
+      ],
+      [
+       "**4**",
+       "Niamh",
+       "64"
+      ],
+      [
+       "**5**",
+       "Jack",
+       "90"
+      ],
+      [
+       "**6**",
+       "Erin",
+       "58"
+      ],
+      [
+       "**7**",
+       "Oisín",
+       "77"
+      ],
+      [
+       "**8**",
+       "Grace",
+       "81"
+      ],
+      [
+       "**9**",
+       "Ryan",
+       "69"
+      ]
+     ],
+     "caption": "Class 9B's Digital Technology test scores (cells A1:B9)"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Function",
+      "What it does",
+      "Formula for 9B",
+      "Result"
+     ],
+     "rows": [
+      [
+       "[[SUM]]",
+       "Adds up all the numbers",
+       "=SUM(B2:B9)",
+       "596"
+      ],
+      [
+       "[[AVERAGE]]",
+       "Finds the mean (total ÷ how many)",
+       "=AVERAGE(B2:B9)",
+       "74.5"
+      ],
+      [
+       "MIN",
+       "Finds the smallest number",
+       "=MIN(B2:B9)",
+       "58"
+      ],
+      [
+       "MAX",
+       "Finds the largest number",
+       "=MAX(B2:B9)",
+       "90"
+      ],
+      [
+       "[[COUNT]]",
+       "Counts how many cells contain **numbers**",
+       "=COUNT(B2:B9)",
+       "8"
+      ]
+     ],
+     "caption": "The five functions you need first"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: check the AVERAGE",
+     "context": "Show that =AVERAGE(B2:B9) gives 74.5 for class 9B.",
+     "steps": [
+      "SUM: 72 + 85 + 64 + 90 + 58 + 77 + 81 + 69 = 596.",
+      "COUNT: there are 8 scores.",
+      "AVERAGE = SUM ÷ COUNT = 596 ÷ 8 = 74.5."
+     ],
+     "answer": "74.5, so AVERAGE is really SUM divided by COUNT."
+    },
+    {
+     "t": "h",
+     "text": "AutoSum: the quick way"
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "Click the empty cell just below your numbers (B10).",
+      "On the **Home** tab, click **AutoSum (Σ)**. Excel guesses the range: `=SUM(B2:B9)`.",
+      "Check the range is right, then press **Enter**.",
+      "Click the small arrow next to Σ for Average, Count Numbers, Max and Min."
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "**COUNT** only counts cells with numbers in them. If Jack's score was typed as *Absent*, =COUNT(B2:B9) would give **7**, not 8."
+    },
+    {
+     "t": "h",
+     "text": "Spotting errors"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Error",
+      "Usual cause"
+     ],
+     "rows": [
+      [
+       "#NAME?",
+       "A misspelt function, e.g. =SUMM(B2:B9) or =AVERGE(B2:B9)"
+      ],
+      [
+       "#DIV/0!",
+       "Dividing by zero or by an empty cell"
+      ],
+      [
+       "#VALUE!",
+       "Trying to do maths with text, e.g. =B2*A2 where A2 says *Aoife*"
+      ]
+     ],
+     "caption": "Common error messages"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A function is a ready-made formula: =NAME(argument).",
+      "SUM adds, AVERAGE finds the mean, MIN smallest, MAX largest.",
+      "COUNT counts cells containing numbers only.",
+      "Write ranges with a colon: B2:B9.",
+      "#NAME? usually means a typing mistake in the function name."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which formula adds up every number from C2 to C20?",
+     "o": [
+      "=ADD(C2:C20)",
+      "=SUM(C2:C20)",
+      "=SUM(C2-C20)",
+      "=TOTAL(C2,C20)"
+     ],
+     "a": 1,
+     "why": "SUM with a colon range."
+    },
+    {
+     "q": "Cells A1:A4 hold 10, 20, 30 and 40. What does =AVERAGE(A1:A4) give?",
+     "o": [
+      "25",
+      "100",
+      "40",
+      "4"
+     ],
+     "a": 0,
+     "why": "100 ÷ 4 = 25."
+    },
+    {
+     "q": "Cells A1:A5 hold 4, 9, Absent, 7, 2. What does =COUNT(A1:A5) give?",
+     "o": [
+      "5",
+      "4",
+      "3",
+      "22"
+     ],
+     "a": 1,
+     "why": "COUNT ignores the text 'Absent', so 4."
+    },
+    {
+     "q": "A cell shows #NAME?. What is the most likely cause?",
+     "o": [
+      "The function name is misspelt",
+      "Dividing by zero",
+      "Column too narrow",
+      "The number is too big"
+     ],
+     "a": 0,
+     "why": "Excel does not recognise the name, e.g. =AVRAGE."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Using class 9B's sheet, write formulas to find (a) the highest score (b) the lowest score.",
+     "m": 2,
+     "a": "(a) =MAX(B2:B9) (1). (b) =MIN(B2:B9) (1)."
+    },
+    {
+     "q": "Explain **one** advantage of using =SUM(B2:B9) instead of =B2+B3+B4+B5+B6+B7+B8+B9.",
+     "m": 1,
+     "a": "Any one: quicker to type (1); less chance of missing a cell / typing mistakes (1); easier to read/check (1)."
+    },
+    {
+     "q": "A teacher's sheet shows #DIV/0! in the cell meant to show the average. Suggest why.",
+     "m": 2,
+     "a": "The formula is dividing by zero / by an empty cell (1), e.g. no marks have been entered yet so the count is 0 (1)."
+    }
+   ],
+   "terms": [
+    "Function",
+    "Argument",
+    "SUM",
+    "AVERAGE",
+    "COUNT"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "spec": "Use IF and COUNTIF to make decisions and count values that meet a condition",
+   "summary": "IF checks a condition and shows one result if it is true and another if it is false, e.g. =IF(B2>=70,\"Pass\",\"Fail\"). COUNTIF counts the cells in a range that meet a condition, e.g. =COUNTIF(C2:C9,\"Pass\").",
+   "diagram": {
+    "kind": "flow",
+    "title": "How =IF(B2>=70,\"Pass\",\"Fail\") decides",
+    "caption": "Only one of the two results is ever shown.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Read B2",
+      "detail": "Excel looks up the score in B2, e.g. 72.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "B2 >= 70?",
+      "detail": "The condition is either TRUE or FALSE.",
+      "shape": "io"
+     },
+     {
+      "id": "c",
+      "label": "Show \"Pass\"",
+      "detail": "Value if true: 72 is 70 or more.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Show \"Fail\"",
+      "detail": "Value if false, e.g. for Niamh's 64.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Done",
+      "detail": "If B2 changes, the IF is checked again automatically.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "e"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Sometimes a spreadsheet has to make a **decision**: has this pupil passed? Does this order get free delivery? The **[[IF]]** function does this."
+    },
+    {
+     "t": "code",
+     "lang": "excel",
+     "title": "The IF function",
+     "code": "=IF(condition, value if true, value if false)"
+    },
+    {
+     "t": "p",
+     "text": "The **[[condition]]** is a test that is either TRUE or FALSE. It uses a **[[comparison operator]]**:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Operator",
+      "Meaning",
+      "Example",
+      "TRUE when…"
+     ],
+     "rows": [
+      [
+       "=",
+       "Equal to",
+       "C2=\"Yes\"",
+       "C2 contains Yes"
+      ],
+      [
+       "<>",
+       "Not equal to",
+       "C2<>\"Yes\"",
+       "C2 is anything except Yes"
+      ],
+      [
+       ">",
+       "Greater than",
+       "B2>50",
+       "B2 is more than 50"
+      ],
+      [
+       "<",
+       "Less than",
+       "B2<50",
+       "B2 is under 50"
+      ],
+      [
+       ">=",
+       "Greater than or equal to",
+       "B2>=70",
+       "B2 is 70 or more"
+      ],
+      [
+       "<=",
+       "Less than or equal to",
+       "B2<=10",
+       "B2 is 10 or less"
+      ]
+     ],
+     "caption": "Comparison operators"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: pass or fail?",
+     "context": "Class 9B's pass mark is 70. Write a formula for C2 that shows Pass or Fail for Aoife (score in B2), then copy it down to C9.",
+     "steps": [
+      "Condition: is the score 70 or more? `B2>=70`.",
+      "Value if true: \"Pass\". Value if false: \"Fail\". Text must go in **speech marks**.",
+      "C2: `=IF(B2>=70,\"Pass\",\"Fail\")`. Aoife has 72, so C2 shows **Pass**.",
+      "Copied down, Niamh (64), Erin (58) and Ryan (69) get **Fail**; the other five get **Pass**."
+     ],
+     "answer": "=IF(B2>=70,\"Pass\",\"Fail\")"
+    },
+    {
+     "t": "tip",
+     "text": "IF can give back numbers or calculations too. A tuck shop pre-order sheet could charge £2.50 delivery only on small orders: `=IF(B10>=20,0,2.50)` gives 0 if the order total in B10 is £20 or more, and 2.50 if it is less."
+    },
+    {
+     "t": "h",
+     "text": "COUNTIF: count the ones that match"
+    },
+    {
+     "t": "p",
+     "text": "**[[COUNTIF]]** counts how many cells in a range meet a condition. It has two arguments: the range, and the condition in speech marks."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Formula",
+      "What it counts",
+      "Result for 9B"
+     ],
+     "rows": [
+      [
+       "=COUNTIF(C2:C9,\"Pass\")",
+       "Cells in C2:C9 that say Pass",
+       "5"
+      ],
+      [
+       "=COUNTIF(C2:C9,\"Fail\")",
+       "Cells in C2:C9 that say Fail",
+       "3"
+      ],
+      [
+       "=COUNTIF(B2:B9,\">=80\")",
+       "Scores of 80 or more (Ciarán 85, Jack 90, Grace 81)",
+       "3"
+      ],
+      [
+       "=COUNTIF(B2:B9,\"<60\")",
+       "Scores under 60 (Erin 58)",
+       "1"
+      ]
+     ],
+     "caption": "COUNTIF examples using class 9B"
+    },
+    {
+     "t": "warn",
+     "text": "Watch the speech marks. `=IF(B2>=70,Pass,Fail)` gives a **#NAME?** error because Excel thinks Pass and Fail are names of something. In COUNTIF, a condition with an operator also needs speech marks: `\">=80\"`."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "IF has three parts: condition, value if true, value if false.",
+      "Conditions use = <> > < >= <=.",
+      "Text results go in speech marks.",
+      "COUNTIF(range,condition) counts cells that meet a condition.",
+      "IF decides for one cell; COUNTIF counts across a range."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "B2 holds 65. What does =IF(B2>=70,\"Pass\",\"Fail\") show?",
+     "o": [
+      "Pass",
+      "Fail",
+      "65",
+      "TRUE"
+     ],
+     "a": 1,
+     "why": "65 is not 70 or more, so the false value is shown."
+    },
+    {
+     "q": "Which operator means 'not equal to' in Excel?",
+     "o": [
+      "!=",
+      "><",
+      "=/=",
+      "<>"
+     ],
+     "a": 3,
+     "why": "Excel uses <>."
+    },
+    {
+     "q": "Cells A1:A6 hold Yes, No, Yes, Yes, No, Yes. What does =COUNTIF(A1:A6,\"Yes\") give?",
+     "o": [
+      "2",
+      "3",
+      "4",
+      "6"
+     ],
+     "a": 2,
+     "why": "Four cells say Yes."
+    },
+    {
+     "q": "Why does =IF(B2>50,Good,Poor) give an error?",
+     "o": [
+      "It needs a SUM",
+      "The text values need speech marks",
+      "> is not allowed",
+      "IF only works with numbers"
+     ],
+     "a": 1,
+     "why": "Text must be written as \"Good\" and \"Poor\"."
+    }
+   ],
+   "practice": [
+    {
+     "q": "A school charges £5 for a club, but pupils with a sibling in the club (C2 = \"Yes\") pay £3. Write an IF formula for D2.",
+     "m": 3,
+     "a": "=IF(C2=\"Yes\",3,5): correct condition C2=\"Yes\" (1); correct true/false values 3 and 5 in the right order (1); correct syntax with = and commas (1). Accept =IF(C2<>\"Yes\",5,3)."
+    },
+    {
+     "q": "Column D (D2:D30) holds each pupil's house: Erne, Lough or Castle. Write a formula to count how many pupils are in Erne.",
+     "m": 2,
+     "a": "=COUNTIF(D2:D30,\"Erne\"): correct range (1); correct condition in speech marks (1)."
+    },
+    {
+     "q": "Explain the difference between the IF function and the COUNTIF function.",
+     "m": 2,
+     "a": "IF tests a condition and returns one of two results for a single cell (1). COUNTIF counts how many cells in a range meet a condition (1)."
+    }
+   ],
+   "terms": [
+    "IF",
+    "COUNTIF",
+    "Condition",
+    "Comparison operator"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "spec": "Explain the difference between relative and absolute cell references when replicating formulas",
+   "summary": "Replicating (copying) a formula with the fill handle changes relative references, so =B2*C2 becomes =B3*C3 on the next row. An absolute reference such as $F$1 has dollar signs and never changes when copied.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "What does it become?",
+    "caption": "Each formula is copied from row 2 down to row 5. Predict the new formula, then click to check.",
+    "head": [
+     "Formula in row 2",
+     "After copying to row 5"
+    ],
+    "rows": [
+     [
+      "=B2*C2",
+      "=B5*C5"
+     ],
+     [
+      "=SUM(B2:D2)",
+      "=SUM(B5:D5)"
+     ],
+     [
+      "=B2*$F$1",
+      "=B5*$F$1"
+     ],
+     [
+      "=B2-$G$2",
+      "=B5-$G$2"
+     ],
+     [
+      "=IF(B2>=$E$1,\"Pass\",\"Fail\")",
+      "=IF(B5>=$E$1,\"Pass\",\"Fail\")"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "You do not need to type the same formula 30 times. Write it once, then **replicate** it: drag the **[[fill handle]]** (the small square at the bottom right of the cell) down the column. This is called **[[replication]]**."
+    },
+    {
+     "t": "h",
+     "text": "Relative references"
+    },
+    {
+     "t": "p",
+     "text": "Normal cell references are **[[relative|relative reference]]**: when you copy the formula, they change to match the new position. That is usually exactly what you want."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Cell",
+      "Formula after copying",
+      "Result"
+     ],
+     "rows": [
+      [
+       "D2",
+       "=B2*C2",
+       "£15.00"
+      ],
+      [
+       "D3",
+       "=B3*C3",
+       "£15.30"
+      ],
+      [
+       "D4",
+       "=B4*C4",
+       "£22.50"
+      ],
+      [
+       "D5",
+       "=B5*C5",
+       "£20.00"
+      ],
+      [
+       "D6",
+       "=B6*C6",
+       "£10.80"
+      ]
+     ],
+     "caption": "The tuck shop takings formula copied down from D2 to D6"
+    },
+    {
+     "t": "h",
+     "text": "Absolute references"
+    },
+    {
+     "t": "p",
+     "text": "Sometimes every formula must use the **same** cell, such as one exchange rate or one pass mark. An **[[absolute reference]]** has a **$ sign** before the column letter and row number, e.g. **$F$1**. It stays fixed however far you copy it."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the Dublin trip in euros",
+     "context": "Year 10 are going to Dublin. Prices in pounds are in B2:B5 (£20, £8, £14, £5). The exchange rate, 1.15 euros to the pound, is in F1. Write a formula for C2 that can be copied down to C5.",
+     "steps": [
+      "C2 needs £20 × 1.15, so start with `=B2*F1`.",
+      "If copied down, C3 would become `=B3*F2`. F2 is empty (worth 0), so the answer would be **0**. Wrong!",
+      "Fix F1 with dollar signs: `=B2*$F$1`.",
+      "Copied down: C3 = `=B3*$F$1` = 8 × 1.15 = **€9.20**; C4 = 14 × 1.15 = **€16.10**; C5 = 5 × 1.15 = **€5.75**."
+     ],
+     "answer": "=B2*$F$1 in C2 gives €23.00, and copies down correctly."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Relative reference",
+      "Absolute reference"
+     ],
+     "rows": [
+      [
+       "Looks like",
+       "B2",
+       "$F$1"
+      ],
+      [
+       "When copied",
+       "Changes to match the new position",
+       "Never changes"
+      ],
+      [
+       "Use it for",
+       "Data that is different on every row",
+       "One value used by every formula (a rate, price or pass mark)"
+      ],
+      [
+       "Example",
+       "=B2*C2 → =B3*C3",
+       "=B2*$F$1 → =B3*$F$1"
+      ]
+     ]
+    },
+    {
+     "t": "tip",
+     "text": "Click on a reference in the formula bar and press **F4** to add the dollar signs automatically."
+    },
+    {
+     "t": "note",
+     "text": "You may also see *mixed* references such as $A1 or A$1, where only the column or only the row is fixed. You will meet these again at GCSE."
+    },
+    {
+     "t": "warn",
+     "text": "A tell-tale sign of a missing $: the first answer is right, but the copied cells show **0** or **#VALUE!**. Click a copied cell and look at the formula bar to see which reference moved."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Replication means copying a formula, usually with the fill handle.",
+      "Relative references (B2) change when copied.",
+      "Absolute references ($F$1) stay fixed when copied.",
+      "Use absolute for a single value every row needs.",
+      "Press F4 to add $ signs."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "D2 contains =B2+C2. It is copied to D3. What is in D3?",
+     "o": [
+      "=B2+C2",
+      "=C2+D2",
+      "=B3+C3",
+      "=$B$3+$C$3"
+     ],
+     "a": 2,
+     "why": "Relative references move down one row."
+    },
+    {
+     "q": "Which is an absolute reference?",
+     "o": [
+      "F1",
+      "F$",
+      "$F$1",
+      "#F1"
+     ],
+     "a": 2,
+     "why": "Dollar signs before the column and row."
+    },
+    {
+     "q": "C2 contains =B2*$H$1. It is copied to C6. What is in C6?",
+     "o": [
+      "=B6*$H$1",
+      "=B2*$H$1",
+      "=B6*$H$6",
+      "=B6*H5"
+     ],
+     "a": 0,
+     "why": "B2 is relative (becomes B6); $H$1 is absolute (stays)."
+    },
+    {
+     "q": "What is the fill handle used for?",
+     "o": [
+      "Changing the font",
+      "Sorting data",
+      "Deleting a row",
+      "Copying a formula into neighbouring cells"
+     ],
+     "a": 3,
+     "why": "Drag the small square to replicate."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between a **relative** and an **absolute** cell reference.",
+     "m": 2,
+     "a": "A relative reference changes/adjusts when the formula is copied to a new cell (1). An absolute reference (with $ signs) stays the same when copied (1)."
+    },
+    {
+     "q": "Cell E1 holds the pass mark, 70. A teacher writes =IF(B2>=E1,\"Pass\",\"Fail\") in C2 and copies it down. Every pupil from row 3 onwards shows Pass, even those with low marks. Explain why and correct the formula.",
+     "m": 3,
+     "a": "E1 is relative, so it changes to E2, E3 and so on when copied (1); those cells are empty (0), so every score is >= 0 / passes (1). Correct formula: =IF(B2>=$E$1,\"Pass\",\"Fail\") (1)."
+    },
+    {
+     "q": "Give **one** advantage of replicating a formula instead of typing it into every cell.",
+     "m": 1,
+     "a": "Any one: quicker (1); fewer typing mistakes / consistent formulas (1)."
+    }
+   ],
+   "terms": [
+    "Fill handle",
+    "Replication",
+    "Relative reference",
+    "Absolute reference"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p07",
+   "spec": "Sort and filter data and use conditional formatting to highlight important values",
+   "summary": "Sorting puts rows in order (ascending A to Z, smallest to largest, or descending). Filtering hides the rows you do not need. Conditional formatting changes a cell's colour automatically when it meets a rule, such as scores under 60.",
+   "diagram": {
+    "kind": "compare",
+    "title": "Sort or filter?",
+    "caption": "Two ways of making a big table easier to use.",
+    "states": [
+     {
+      "label": "Sort",
+      "points": [
+       "Every row is still shown",
+       "Rows are rearranged into order",
+       "Ascending (A to Z, 1 to 9) or descending",
+       "Great for rankings, e.g. top scorer first"
+      ],
+      "art": null
+     },
+     {
+      "label": "Filter",
+      "points": [
+       "Only matching rows are shown",
+       "Other rows are hidden, not deleted",
+       "Choose values or a rule, e.g. greater than 80",
+       "Great for finding, e.g. only form 9B"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "When a sheet has lots of rows, you need ways to find what matters quickly. Excel gives you three tools: **sort**, **filter** and **conditional formatting**."
+    },
+    {
+     "t": "h",
+     "text": "Sorting"
+    },
+    {
+     "t": "p",
+     "text": "To **[[sort]]** means to put the rows in order of one column. **Ascending** is A to Z or smallest to largest; **descending** is Z to A or largest to smallest."
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "Click any cell in the column you want to sort by (e.g. B2 for test scores).",
+      "On the **Home** tab, click **Sort & Filter**, or use the **Data** tab.",
+      "Choose **Sort Largest to Smallest** to put the top score first.",
+      "For more than one level (e.g. by form class, then by surname), use **Custom Sort**."
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "Never select **just one column** and sort it. The names would stay put while the scores moved, so every pupil gets the wrong mark! Click one cell inside the table and Excel sorts whole rows together."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: ranking class 9B",
+     "context": "Sort class 9B's scores (A1:B9) from largest to smallest. Who is first, who is last, and what position is Aoife?",
+     "steps": [
+      "Descending order of scores: 90, 85, 81, 77, 72, 69, 64, 58.",
+      "Matching names: Jack, Ciarán, Grace, Oisín, Aoife, Ryan, Niamh, Erin.",
+      "Aoife's 72 is the 5th value."
+     ],
+     "answer": "Jack is first (90), Erin is last (58), Aoife is 5th."
+    },
+    {
+     "t": "h",
+     "text": "Filtering"
+    },
+    {
+     "t": "p",
+     "text": "A **[[filter]]** hides the rows that do not match what you want, without deleting them. Click **Sort & Filter > Filter**: a drop-down arrow appears on each heading. Untick values, or use **Number Filters** such as *Greater Than…*."
+    },
+    {
+     "t": "tip",
+     "text": "A funnel symbol on a heading shows a filter is switched on. If data seems to be missing, check for one and choose **Clear Filter**."
+    },
+    {
+     "t": "h",
+     "text": "Conditional formatting"
+    },
+    {
+     "t": "p",
+     "text": "**[[Conditional formatting]]** changes how a cell looks (fill colour, font colour, icons) **automatically** when its value meets a rule. If the value changes, the colour updates too. Find it on the **Home** tab."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Rule",
+      "Example use"
+     ],
+     "rows": [
+      [
+       "Highlight Cells Rules > Less Than 60",
+       "Score cells turn light red so the teacher spots who needs help"
+      ],
+      [
+       "Highlight Cells Rules > Text that Contains \"Fail\"",
+       "Every Fail in column C is shown in red"
+      ],
+      [
+       "Data Bars",
+       "A bar inside each cell, longer for bigger numbers, like a mini chart"
+      ],
+      [
+       "Color Scales",
+       "Green for high takings, red for low takings at the tuck shop"
+      ]
+     ],
+     "caption": "Useful conditional formatting rules"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Sort puts whole rows in order: ascending or descending.",
+      "Click one cell in the table before sorting so rows stay together.",
+      "Filter hides rows that do not match; nothing is deleted.",
+      "Conditional formatting colours cells automatically by a rule.",
+      "All three are on the Home tab."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Sorting names from Z to A is…",
+     "o": [
+      "Ascending",
+      "Descending",
+      "Filtering",
+      "Replicating"
+     ],
+     "a": 1,
+     "why": "Z to A (or largest to smallest) is descending."
+    },
+    {
+     "q": "What happens to rows hidden by a filter?",
+     "o": [
+      "They are hidden but still there",
+      "They are moved to a new sheet",
+      "They are deleted",
+      "They are sorted to the bottom"
+     ],
+     "a": 0,
+     "why": "Clear the filter and they come back."
+    },
+    {
+     "q": "A teacher wants marks below 40 to turn red automatically. Which tool should she use?",
+     "o": [
+      "Sort",
+      "Filter",
+      "Merge & Center",
+      "Conditional formatting"
+     ],
+     "a": 3,
+     "why": "A rule such as Less Than 40 with a red fill."
+    },
+    {
+     "q": "Why should you not select only the scores column before sorting?",
+     "o": [
+      "It is slower",
+      "The scores would no longer line up with the right names",
+      "Excel will not allow it",
+      "It deletes the headings"
+     ],
+     "a": 1,
+     "why": "Rows must move together."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe how conditional formatting could be used in a spreadsheet of tuck shop stock levels.",
+     "m": 2,
+     "a": "e.g. a rule that turns the stock cell red (1) when it falls below a set number, e.g. less than 10, so staff know to reorder (1)."
+    },
+    {
+     "q": "Explain the difference between **sorting** and **filtering** data.",
+     "m": 2,
+     "a": "Sorting rearranges all the rows into an order, e.g. ascending/descending (1). Filtering hides the rows that do not meet a condition so only matching rows are shown (1)."
+    },
+    {
+     "q": "A spreadsheet lists 200 pupils with their form class. Describe how a teacher could show only the pupils in 9B.",
+     "m": 2,
+     "a": "Turn on Filter (Home > Sort & Filter > Filter / Data > Filter) (1). Use the drop-down arrow on the Form class heading and tick only 9B (1)."
+    }
+   ],
+   "terms": [
+    "Sort",
+    "Filter",
+    "Conditional formatting"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p08",
+   "spec": "Create a chart from spreadsheet data and choose the right type of chart",
+   "summary": "A chart turns numbers into a picture. Column or bar charts compare categories, line graphs show change over time and pie charts show parts of a whole. A good chart has a title, axis titles and, if needed, a legend.",
+   "diagram": {
+    "kind": "match",
+    "title": "Match the data to the chart",
+    "caption": "Match each set of data to the best chart.",
+    "pairs": [
+     [
+      "Takings for each tuck shop item",
+      "Column chart"
+     ],
+     [
+      "Temperature each hour of a school day",
+      "Line graph"
+     ],
+     [
+      "How Year 8 travel to school (%)",
+      "Pie chart"
+     ],
+     [
+      "Hours of revision v test score",
+      "Scatter graph"
+     ],
+     [
+      "Goals scored by each player",
+      "Bar chart"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A **[[chart]]** makes patterns in data easy to see at a glance. A head of year would much rather look at one chart than read 200 numbers!"
+    },
+    {
+     "t": "h",
+     "text": "Choosing the right chart"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Chart",
+      "Best for",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Column / bar chart",
+       "Comparing separate categories",
+       "Takings for each tuck shop item"
+      ],
+      [
+       "Line graph",
+       "Showing how something changes over time",
+       "Temperature in Enniskillen each day for a week"
+      ],
+      [
+       "Pie chart",
+       "Showing parts of a whole (adds up to 100%)",
+       "How pupils travel to school: bus, car, walk, cycle"
+      ],
+      [
+       "Scatter graph",
+       "Seeing if two sets of numbers are linked",
+       "Hours of revision against test score"
+      ]
+     ],
+     "caption": "Which chart should I use?"
+    },
+    {
+     "t": "warn",
+     "text": "A pie chart only makes sense if the parts add up to one whole. Never use a pie chart for things like monthly temperatures, and do not use one with lots of tiny slices."
+    },
+    {
+     "t": "h",
+     "text": "Making a chart"
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "Select the data **including the headings**, e.g. A1:A6 and D1:D6 for item and takings.",
+      "To select two columns that are not next to each other, select the first, then hold **Ctrl** and select the second.",
+      "On the **Insert** tab, choose a chart, e.g. **Clustered Column**.",
+      "Click the **+** (Chart Elements) next to the chart to add a **chart title**, **axis titles** and **data labels**.",
+      "Drag the chart so it does not cover your data."
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Parts of a chart"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "Job"
+     ],
+     "rows": [
+      [
+       "Chart title",
+       "Says what the chart shows, e.g. *Tuck shop takings, Monday*"
+      ],
+      [
+       "[[Axis]] titles",
+       "Label the x-axis (across) and y-axis (up), with units, e.g. *Takings (£)*"
+      ],
+      [
+       "[[Legend]]",
+       "A key showing which colour is which data series; needed when there is more than one series"
+      ],
+      [
+       "Data labels",
+       "The actual values written on the bars or slices"
+      ]
+     ],
+     "caption": "What a good chart needs"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: choosing a chart for the tuck shop",
+     "context": "The tuck shop manager wants (a) to compare Monday's takings for the five items and (b) to see how total takings changed from September to June. Which charts should she use?",
+     "steps": [
+      "(a) Five separate items being compared: a **column chart**, one column per item. Water (£22.50) will be the tallest column and fruit juice (£10.80) the shortest.",
+      "(b) The same thing measured over time: a **line graph**, months along the x-axis and takings (£) up the y-axis.",
+      "Both need a title and axis titles with units."
+     ],
+     "answer": "(a) Column chart; (b) line graph."
+    },
+    {
+     "t": "tip",
+     "text": "Charts are linked to their data. Change a number in the sheet and the chart redraws itself instantly."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Column/bar: compare categories.",
+      "Line: change over time.",
+      "Pie: parts of a whole.",
+      "Always add a title and labelled axes with units.",
+      "Use Ctrl to select columns that are not next to each other."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which chart is best for showing how a plant's height changed each day over a month?",
+     "o": [
+      "Pie chart",
+      "Column chart of plant names",
+      "Line graph",
+      "Table"
+     ],
+     "a": 2,
+     "why": "Change over time suits a line graph."
+    },
+    {
+     "q": "Which chart best shows the percentage of pupils who walk, cycle, take the bus or come by car?",
+     "o": [
+      "Pie chart",
+      "Line graph",
+      "Scatter graph",
+      "None"
+     ],
+     "a": 0,
+     "why": "Parts of one whole: a pie chart."
+    },
+    {
+     "q": "What is a legend?",
+     "o": [
+      "The chart title",
+      "The x-axis",
+      "A key that explains the colours or series",
+      "A type of chart"
+     ],
+     "a": 2,
+     "why": "It shows which colour is which series."
+    },
+    {
+     "q": "Which key do you hold to select two columns that are not next to each other?",
+     "o": [
+      "Ctrl",
+      "Alt",
+      "Shift",
+      "Tab"
+     ],
+     "a": 0,
+     "why": "Hold Ctrl while selecting the second range."
+    }
+   ],
+   "practice": [
+    {
+     "q": "A pupil has recorded how many goals each of six players scored this season. Name the most suitable chart and give a reason.",
+     "m": 2,
+     "a": "Column/bar chart (1), because it compares separate categories / players (1)."
+    },
+    {
+     "q": "State **three** features that should be added to a chart to make it easy to understand.",
+     "m": 3,
+     "a": "Any three: chart title (1); x-axis title (1); y-axis title with units (1); legend (if more than one series) (1); data labels (1); sensible scale (1)."
+    },
+    {
+     "q": "Explain why a pie chart would **not** be suitable for showing a town's rainfall each month over a year.",
+     "m": 2,
+     "a": "A pie chart shows parts of a whole (1); monthly rainfall is change over time, so a line or column chart would show the pattern better (1)."
+    }
+   ],
+   "terms": [
+    "Chart",
+    "Axis",
+    "Legend"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p09",
+   "spec": "Use a spreadsheet model to answer 'what if' questions",
+   "summary": "A spreadsheet model uses formulas to represent a real situation, such as a school trip budget. Changing the input values (what if more pupils go?) instantly shows the effect on the outputs, which helps people make decisions.",
+   "diagram": {
+    "kind": "calc",
+    "title": "Try it: the trip budget model",
+    "caption": "Change the inputs to answer your own what-if questions about the W5 trip.",
+    "inputs": [
+     {
+      "id": "c",
+      "label": "Coach hire (£)",
+      "value": 450
+     },
+     {
+      "id": "n",
+      "label": "Number of pupils",
+      "value": 30
+     },
+     {
+      "id": "t",
+      "label": "Entry ticket per pupil (£)",
+      "value": 18
+     }
+    ],
+    "formula": "c/n+t",
+    "result": {
+     "label": "Total cost per pupil (£)",
+     "unit": ""
+    },
+    "show": []
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A **[[model]]** is a spreadsheet that represents a real-life situation using **inputs** (values you can change), **formulas** (the rules) and **outputs** (the answers). Because Excel recalculates automatically, you can try out ideas without any risk. This is called asking **[[what if questions|what-if question]]**."
+    },
+    {
+     "t": "h",
+     "text": "Example: the Year 9 trip to the W5 science centre"
+    },
+    {
+     "t": "table",
+     "head": [
+      "",
+      "A",
+      "B"
+     ],
+     "rows": [
+      [
+       "**1**",
+       "**Coach hire (£)**",
+       "450"
+      ],
+      [
+       "**2**",
+       "**Number of pupils**",
+       "30"
+      ],
+      [
+       "**3**",
+       "**Entry ticket per pupil (£)**",
+       "18"
+      ],
+      [
+       "**4**",
+       "**Coach cost per pupil (£)**",
+       "=B1/B2 → 15.00"
+      ],
+      [
+       "**5**",
+       "**Total cost per pupil (£)**",
+       "=B4+B3 → 33.00"
+      ]
+     ],
+     "caption": "A simple trip budget model. Inputs in B1:B3, outputs in B4:B5."
+    },
+    {
+     "t": "p",
+     "text": "The coach costs the same however many pupils go, so it is shared between them. More pupils means a cheaper trip for everyone."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: what if more pupils go?",
+     "context": "The teacher wants the trip to cost less than £30 per pupil. What if 45 pupils go instead of 30?",
+     "steps": [
+      "Change only the input B2 from 30 to 45.",
+      "B4 recalculates: 450 ÷ 45 = £10.00 coach cost per pupil.",
+      "B5 recalculates: 10 + 18 = **£28.00**, which is under £30.",
+      "What if only 25 go? 450 ÷ 25 = 18, so 18 + 18 = £36.00."
+     ],
+     "answer": "With 45 pupils the trip costs £28.00 each, so it meets the target; with 25 it rises to £36.00."
+    },
+    {
+     "t": "h",
+     "text": "Example: tuck shop profit"
+    },
+    {
+     "t": "p",
+     "text": "The tuck shop buys crisps for **£0.35** a packet and sells them for **£0.60**. Profit per packet = `=B2-B1` = £0.25. If 25 packets are sold, profit = `=B3*B4` = 25 × 0.25 = **£6.25**. What if the price goes up to £0.70? Profit per packet becomes £0.35, but would pupils still buy as many? A model only answers the maths; people still have to make the judgement."
+    },
+    {
+     "t": "h",
+     "text": "Why use a model?"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "**Fast**: try lots of ideas in seconds.",
+      "**Cheap and safe**: no money is spent until the best plan is found.",
+      "**Accurate**: the formulas never make arithmetic mistakes.",
+      "**Limitation**: a model is only as good as its data and rules. If the coach company puts its price up, or pupils drop out, the real answer will be different."
+     ]
+    },
+    {
+     "t": "note",
+     "text": "Excel also has a tool called **Goal Seek** (Data > What-If Analysis) that works backwards: *how many pupils are needed to make the trip cost exactly £30?* (Answer: 450 ÷ 12 = 37.5, so 38 pupils.)"
+    },
+    {
+     "t": "tip",
+     "text": "Keep all your **inputs together** in one clearly labelled area and colour them, so it is obvious which cells people are allowed to change."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A model uses inputs, formulas and outputs to represent a real situation.",
+      "What-if: change an input and see the outputs update.",
+      "Models are fast, cheap and safe for testing ideas.",
+      "A model is only as accurate as its data and formulas.",
+      "Goal Seek works backwards from the answer you want."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In the trip model, which cell is an input?",
+     "o": [
+      "B4",
+      "B5",
+      "B2",
+      "None of them"
+     ],
+     "a": 2,
+     "why": "B2 (number of pupils) is a value you change; B4 and B5 are calculated."
+    },
+    {
+     "q": "Coach hire is £450 and 50 pupils go. What is the coach cost per pupil?",
+     "o": [
+      "£9",
+      "£45",
+      "£50",
+      "£22.50"
+     ],
+     "a": 0,
+     "why": "450 ÷ 50 = 9."
+    },
+    {
+     "q": "What is a 'what if' question?",
+     "o": [
+      "A question Excel asks you",
+      "A type of chart",
+      "An error message",
+      "Changing input values to see the effect on the results"
+     ],
+     "a": 3,
+     "why": "Try different inputs and watch the outputs."
+    },
+    {
+     "q": "Which is a limitation of a spreadsheet model?",
+     "o": [
+      "It is slow",
+      "It can only be as accurate as the data and rules put into it",
+      "It cannot be changed",
+      "It needs a printer"
+     ],
+     "a": 1,
+     "why": "Real life may not match the model."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by a **spreadsheet model**.",
+     "m": 2,
+     "a": "A spreadsheet that represents a real-life situation (1) using formulas so that inputs can be changed to predict/see what happens (1)."
+    },
+    {
+     "q": "Using the trip model, calculate the total cost per pupil if 36 pupils go. Show your working.",
+     "m": 2,
+     "a": "450 ÷ 36 = £12.50 coach cost per pupil (1). 12.50 + 18 = £30.50 (1)."
+    },
+    {
+     "q": "Give **two** advantages of using a spreadsheet model to plan a school event instead of working it out on paper.",
+     "m": 2,
+     "a": "Any two: results recalculate automatically when values change (1); quick to try many what-if options (1); fewer calculation errors (1); can be saved/shared and reused (1); can produce charts (1)."
+    }
+   ],
+   "terms": [
+    "Model",
+    "What-if question"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p10",
+   "spec": "Plan, build and test a spreadsheet so that it is accurate and easy for others to use",
+   "summary": "A good spreadsheet is planned first, built with clear labels and formulas, then tested with data whose answers you already know. Data validation, such as a drop-down list or a number range, stops users typing in impossible data.",
+   "diagram": {
+    "kind": "cycle",
+    "title": "Plan, build, test, improve",
+    "caption": "Good spreadsheets are made in a cycle.",
+    "items": [
+     {
+      "label": "Plan",
+      "detail": "Decide the outputs, the inputs and the formulas that link them."
+     },
+     {
+      "label": "Build",
+      "detail": "Enter headings, data and formulas; format it clearly; add validation."
+     },
+     {
+      "label": "Test",
+      "detail": "Try normal, boundary and invalid data and compare with the answers you expected."
+     },
+     {
+      "label": "Improve",
+      "detail": "Fix any formula that gave a wrong result, then test again."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Real spreadsheets are used by other people: the tuck shop volunteers, a teacher, a parent. They need to be **accurate** and **hard to break**. Good spreadsheet designers follow a cycle: **plan, build, test, improve**."
+    },
+    {
+     "t": "h",
+     "text": "1. Plan"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "What **outputs** are needed? (e.g. total takings, profit, best-selling item)",
+      "What **inputs** must be typed in? (e.g. price, cost, quantity sold)",
+      "What **formulas** link them? Write them down before you start."
+     ]
+    },
+    {
+     "t": "h",
+     "text": "2. Build"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "Give the sheet a **title** and every column a clear **heading**.",
+      "Keep inputs in one area; use **cell references**, never typed numbers, in formulas.",
+      "Use **absolute references** for single values like a pass mark.",
+      "**Format** money as currency and widen columns so nothing shows #####.",
+      "**Rename** the worksheet tab, e.g. *Monday*, and save with a sensible file name."
+     ]
+    },
+    {
+     "t": "h",
+     "text": "3. Test"
+    },
+    {
+     "t": "p",
+     "text": "Use **[[test data]]**: values where you already know the right answer, so you can check the formula is correct. Test three kinds:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Type of test data",
+      "Meaning",
+      "Example for a test score out of 100"
+     ],
+     "rows": [
+      [
+       "Normal",
+       "Sensible data that should be accepted",
+       "64"
+      ],
+      [
+       "Boundary (extreme)",
+       "Values right at the edge of what is allowed",
+       "0 and 100, and 69/70 either side of the pass mark"
+      ],
+      [
+       "Invalid (erroneous)",
+       "Data that should be rejected",
+       "150, -5, or the word *Absent* in a number column"
+      ]
+     ],
+     "caption": "Three kinds of test data"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: testing the pass/fail formula",
+     "context": "C2 contains =IF(B2>=70,\"Pass\",\"Fail\"). Choose boundary test data and give the expected results.",
+     "steps": [
+      "The boundary is the pass mark, 70, so test either side of it.",
+      "B2 = 69: expected **Fail**.",
+      "B2 = 70: expected **Pass** (this checks >= was used, not >).",
+      "If 70 shows Fail, the formula wrongly uses `>` and must be fixed."
+     ],
+     "answer": "69 → Fail, 70 → Pass. Testing exactly 70 catches the most common mistake."
+    },
+    {
+     "t": "h",
+     "text": "Data validation"
+    },
+    {
+     "t": "p",
+     "text": "**[[Data validation]]** (Data tab > Data Validation) checks what a user types **before** it is accepted, and shows an error message if it breaks the rule."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Validation rule",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Whole number between 0 and 100",
+       "Test scores: 150 is rejected"
+      ],
+      [
+       "List (drop-down)",
+       "Form class: choose 9A, 9B or 9C from a list, so nobody types *9 b*"
+      ],
+      [
+       "Decimal greater than 0",
+       "Prices: a negative price is rejected"
+      ],
+      [
+       "Date between two dates",
+       "Trip date must be in this school year"
+      ]
+     ],
+     "caption": "Useful data validation rules"
+    },
+    {
+     "t": "warn",
+     "text": "Validation stops *impossible* data, not *wrong* data. If a pupil scored 64 but 46 is typed, validation will still accept it, because 46 is between 0 and 100."
+    },
+    {
+     "t": "tip",
+     "text": "To stop people overwriting your formulas, you can **lock** those cells and **Protect Sheet** (Review tab), leaving only the input cells unlocked."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Plan outputs, inputs and formulas before building.",
+      "Use clear headings, cell references and sensible formatting.",
+      "Test with normal, boundary and invalid data.",
+      "Data validation rejects impossible data as it is typed.",
+      "Protect formula cells so they are not overwritten."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is boundary test data for a mark that must be 0 to 100?",
+     "o": [
+      "50",
+      "100",
+      "250",
+      "Absent"
+     ],
+     "a": 1,
+     "why": "100 is right at the edge of the allowed range."
+    },
+    {
+     "q": "A drop-down list of form classes is an example of…",
+     "o": [
+      "Data validation",
+      "Conditional formatting",
+      "A function",
+      "A chart"
+     ],
+     "a": 0,
+     "why": "It restricts what can be entered."
+    },
+    {
+     "q": "Why test with data where you already know the answer?",
+     "o": [
+      "It is quicker to type",
+      "To make a chart",
+      "Excel needs it",
+      "So you can check the formula's result is correct"
+     ],
+     "a": 3,
+     "why": "Compare the expected result with the actual result."
+    },
+    {
+     "q": "A score of 46 is typed instead of 64. Will validation 'whole number between 0 and 100' stop it?",
+     "o": [
+      "Yes",
+      "No, because 46 is still within the allowed range",
+      "Only if it is red",
+      "Only in a pie chart"
+     ],
+     "a": 1,
+     "why": "Validation checks data is sensible, not that it is correct."
+    }
+   ],
+   "practice": [
+    {
+     "q": "A spreadsheet records pupils' ages in Years 8 to 10 (11 to 15). Give an example of normal, boundary and invalid test data for the age column.",
+     "m": 3,
+     "a": "Normal, e.g. 13 (1). Boundary, e.g. 11 or 15 (1). Invalid, e.g. 30 / -2 / text such as 'twelve' (1)."
+    },
+    {
+     "q": "Describe how **data validation** could be used on the form class column of a pupil spreadsheet, and explain one benefit.",
+     "m": 2,
+     "a": "Use a List validation rule / drop-down with the allowed form classes, e.g. 9A, 9B, 9C (1). Benefit: stops spelling/typing mistakes so data is consistent / can be sorted, filtered and counted correctly (1)."
+    },
+    {
+     "q": "Explain why a spreadsheet designer should use cell references rather than typing numbers into formulas.",
+     "m": 2,
+     "a": "If an input value changes, the formula recalculates automatically (1), so the designer does not have to edit every formula and errors are avoided (1)."
+    }
+   ],
+   "terms": [
+    "Test data",
+    "Data validation"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Spreadsheet",
+   "def": "A program that stores data in a grid of cells and carries out calculations on it automatically, e.g. Microsoft Excel.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Workbook",
+   "def": "An Excel file. It can contain one or more worksheets.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Worksheet",
+   "def": "One page (tab) of a workbook, made of rows, columns and cells.",
+   "alt": "Sheet",
+   "page": "p01"
+  },
+  {
+   "term": "Cell",
+   "def": "A single box in a spreadsheet, where a column and a row meet. It holds one item of data or one formula.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Row",
+   "def": "A horizontal line of cells, labelled with a number.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Column",
+   "def": "A vertical line of cells, labelled with a letter.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Cell reference",
+   "def": "The address of a cell: its column letter followed by its row number, e.g. B3.",
+   "alt": "Cell address",
+   "page": "p01"
+  },
+  {
+   "term": "Range",
+   "def": "A rectangular block of cells, written as first cell:last cell, e.g. A1:D6.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Active cell",
+   "def": "The currently selected cell, shown with a thick border. Its reference appears in the Name Box.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Formula bar",
+   "def": "The bar above the grid that shows the real contents (value or formula) of the active cell.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Data type",
+   "def": "The kind of data in a cell, such as text, number, currency, percentage or date.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Formatting",
+   "def": "Changing how a cell looks (font, colour, borders, number of decimal places) without changing the value stored.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Currency format",
+   "def": "A number format that shows a value as money, e.g. 0.6 is shown as £0.60.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Formula",
+   "def": "A calculation in a cell. It always begins with =, e.g. =B2*C2.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Operator",
+   "def": "A symbol that tells Excel which calculation to do: + - * / or ^.",
+   "alt": "Arithmetic operator",
+   "page": "p03"
+  },
+  {
+   "term": "Automatic recalculation",
+   "def": "When a value changes, every formula that uses it is worked out again straight away.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "BODMAS",
+   "def": "The order Excel works out a calculation: Brackets, Orders (powers), Division and Multiplication, Addition and Subtraction.",
+   "alt": "Order of operations",
+   "page": "p03"
+  },
+  {
+   "term": "Function",
+   "def": "A ready-made formula with a name, such as SUM or AVERAGE, e.g. =SUM(B2:B9).",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Argument",
+   "def": "The value or range given to a function inside its brackets, e.g. B2:B9 in =SUM(B2:B9).",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "SUM",
+   "def": "A function that adds up all the numbers in a range.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "AVERAGE",
+   "def": "A function that finds the mean of the numbers in a range (total divided by how many).",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "COUNT",
+   "def": "A function that counts how many cells in a range contain numbers.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "IF",
+   "def": "A function that tests a condition and gives one result if it is true and another if it is false.",
+   "alt": "IF function",
+   "page": "p05"
+  },
+  {
+   "term": "COUNTIF",
+   "def": "A function that counts how many cells in a range meet a condition, e.g. =COUNTIF(C2:C9,\"Pass\").",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Condition",
+   "def": "A test that is either TRUE or FALSE, e.g. B2>=70.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Comparison operator",
+   "def": "A symbol used to compare two values: = <> > < >= <=.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Fill handle",
+   "def": "The small square at the bottom right of the active cell, dragged to copy its contents into neighbouring cells.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Replication",
+   "def": "Copying a formula into other cells so the same calculation is done on each row or column.",
+   "alt": "Replicate",
+   "page": "p06"
+  },
+  {
+   "term": "Relative reference",
+   "def": "A cell reference such as B2 that changes to match the new position when a formula is copied.",
+   "alt": "Relative cell reference",
+   "page": "p06"
+  },
+  {
+   "term": "Absolute reference",
+   "def": "A cell reference with $ signs, such as $F$1, that does not change when a formula is copied.",
+   "alt": "Absolute cell reference",
+   "page": "p06"
+  },
+  {
+   "term": "Sort",
+   "def": "To put the rows of data in order of one column, ascending (A to Z, smallest first) or descending.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Filter",
+   "def": "To show only the rows that match a condition, hiding the others without deleting them.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Conditional formatting",
+   "def": "Formatting that is applied automatically when a cell's value meets a rule, e.g. red fill for scores under 60.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Chart",
+   "def": "A visual display of spreadsheet data, such as a column chart, line graph or pie chart.",
+   "alt": "Graph",
+   "page": "p08"
+  },
+  {
+   "term": "Axis",
+   "def": "One of the two lines of a chart: the x-axis runs across and the y-axis runs up.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Legend",
+   "def": "The key on a chart that shows which colour or symbol represents each data series.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Model",
+   "def": "A spreadsheet that represents a real-life situation using inputs, formulas and outputs.",
+   "alt": "Spreadsheet model",
+   "page": "p09"
+  },
+  {
+   "term": "What-if question",
+   "def": "Changing one or more input values in a model to see the effect on the results.",
+   "alt": "What-if analysis",
+   "page": "p09"
+  },
+  {
+   "term": "Test data",
+   "def": "Data with known expected results used to check a spreadsheet works: normal, boundary and invalid.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Data validation",
+   "def": "Rules that check data as it is entered and reject values that break them, e.g. a whole number between 0 and 100.",
+   "alt": "Validation",
+   "page": "p10"
+  }
+ ]
+}
