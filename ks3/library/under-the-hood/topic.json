@@ -1,0 +1,2435 @@
+{
+ "title": "Under the Hood",
+ "summary": "What happens inside a computer: input, output, storage and memory devices, the CPU, the codebreakers of Bletchley Park, and how computers use binary.",
+ "learn": [
+  "Input, output, storage and memory devices",
+  "The central processing unit (CPU)",
+  "Enigma, Lorenz, Colossus and the Manchester Baby",
+  "Decimal and binary numbers",
+  "Bits, bytes, kilobytes and megabytes"
+ ],
+ "temporary": false,
+ "intro": "What is inside a computer and how it works: input, output, storage and memory, the CPU, the Bletchley Park codebreakers, binary numbers and units of storage.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Know what hardware, software, data and information are, and what 'to compute' means",
+   "summary": "A computer system is hardware (the parts you can touch) plus software (the programs). Computers turn raw data into information that has meaning.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Every computer system, from the PCs in the ICT suite to the phone in your blazer pocket, is made of two things working together: **hardware** and **software**."
+    },
+    {
+     "t": "h",
+     "text": "Hardware"
+    },
+    {
+     "t": "p",
+     "text": "[[Hardware]] is the physical parts of a computer system. In other words, it is the parts of the computer you can **touch**: the processor, the keyboard, the monitor, the hard drive, the cables. Hardware can be grouped into input devices, output devices, storage devices, memory and the processor."
+    },
+    {
+     "t": "h",
+     "text": "Software"
+    },
+    {
+     "t": "p",
+     "text": "[[Software]] is the set of instructions, or programs, that control the hardware and make it do a useful job. You cannot touch software. Without software, hardware is useless: a laptop with no programs on it is just an expensive paperweight."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "System software",
+      "Application software"
+     ],
+     "rows": [
+      [
+       "What it does",
+       "Tells the computer what to do and keeps it running",
+       "Lets **you** do your work or have fun"
+      ],
+      [
+       "Examples",
+       "Operating system (OS) such as Windows; utilities such as antivirus; the user interface",
+       "Word processor (Microsoft Word), spreadsheet (Microsoft Excel), database (Microsoft Access), games"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Data and information"
+    },
+    {
+     "t": "p",
+     "text": "[[Data]] is raw facts and figures with no meaning or context attached, such as values or measurements. On its own, data is ambiguous: `A+` or `16` could mean almost anything."
+    },
+    {
+     "t": "p",
+     "text": "[[Information]] is data that has been processed and given meaning and context, so it is no longer open to interpretation."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Data (no context)",
+      "Information (meaning added)"
+     ],
+     "rows": [
+      [
+       "A+",
+       "Joe Bloggs' blood group is A+."
+      ],
+      [
+       "16",
+       "Alex has just turned 16."
+      ],
+      [
+       "3-1",
+       "Enniskillen Royal Grammar won the rugby match 3-1 on tries."
+      ]
+     ],
+     "caption": "The same data becomes information once you know what it refers to."
+    },
+    {
+     "t": "h",
+     "text": "What does 'compute' mean?"
+    },
+    {
+     "t": "p",
+     "text": "The verb [[compute]] means to carry out mathematical calculations. It comes from the Latin word *computare*, meaning 'to count up', 'to sum up' or 'to reckon together'. The Romans certainly did not have computers, so 'to compute' does not have to mean using a computer: you compute every time you work out a sum in Maths. Today the word is more commonly used to mean using computers to solve problems."
+    },
+    {
+     "t": "p",
+     "text": "People have always needed to compute. The ancient Egyptians used mathematics to build their pyramids and the ancient Greeks used geometry to study the stars. Great mathematicians became famous all over the world, such as Pythagoras (ancient Greece), Liu Hui (3rd-century China), Muhammad al-Khwarizmi (9th-century Persia, whose name gives us the word *algorithm*) and Bhaskara (12th-century India). For centuries they invented tools, like the abacus, to calculate faster and more accurately. The electronic computer is just the latest of these tools."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Hardware = the physical parts you can touch.",
+      "Software = the programs and instructions that make the hardware do useful work.",
+      "System software runs the computer; application software lets you do tasks.",
+      "Data is raw facts with no context; information is processed data with meaning.",
+      "'To compute' means to calculate; it comes from the Latin *computare*."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which of these is an example of **software**?",
+     "o": [
+      "A keyboard",
+      "A hard drive",
+      "Microsoft Excel",
+      "A monitor"
+     ],
+     "a": 2,
+     "why": "Excel is a program; the others are physical parts you can touch."
+    },
+    {
+     "q": "Which of these is **information** rather than data?",
+     "o": [
+      "Ciara scored 72% in her Maths test.",
+      "72",
+      "A+",
+      "11/04"
+     ],
+     "a": 0,
+     "why": "It has context, so it has meaning."
+    },
+    {
+     "q": "The word 'compute' comes from a Latin word meaning…",
+     "o": [
+      "to switch on",
+      "to remember",
+      "to send a message",
+      "to count up"
+     ],
+     "a": 3,
+     "why": "Computare means to count up or sum up."
+    },
+    {
+     "q": "Which is **system** software?",
+     "o": [
+      "A word processor",
+      "An operating system",
+      "A database",
+      "A video game"
+     ],
+     "a": 1,
+     "why": "The OS tells the computer what to do; the others are applications."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between hardware and software. Give one example of each.",
+     "m": 4,
+     "a": "Hardware is the physical parts of a computer you can touch (1), e.g. a mouse/monitor/CPU (1). Software is the programs/instructions that control the hardware (1), e.g. Microsoft Word/Windows (1)."
+    },
+    {
+     "q": "Using an example, explain the difference between data and information.",
+     "m": 3,
+     "a": "Data is raw facts and figures with no context/meaning (1). Information is data that has been processed and given meaning/context (1). Example: '16' is data, but 'Alex has just turned 16' is information (1)."
+    }
+   ],
+   "terms": [
+    "Hardware",
+    "Software",
+    "Data",
+    "Information",
+    "Compute",
+    "Operating system"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How Computers Work: Hardware and Software",
+     "source": "YouTube – Code.org (CodeAI)",
+     "url": "https://www.youtube.com/watch?v=xnyFYiK2rSY",
+     "yt": "xnyFYiK2rSY"
+    },
+    {
+     "title": "How Computers Work: What Makes a Computer, a Computer?",
+     "source": "YouTube – Code.org (CodeAI)",
+     "url": "https://www.youtube.com/watch?v=mCq8-xTH7jA",
+     "yt": "mCq8-xTH7jA"
+    }
+   ]
+  },
+  {
+   "id": "p02",
+   "spec": "Know what input and output devices are and give examples of each",
+   "summary": "Input devices let you put data into a computer; output devices let the computer give information back to you in a form humans can understand.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A computer is no use if you cannot get data in or results out. That is the job of input and output devices."
+    },
+    {
+     "t": "h",
+     "text": "Input devices"
+    },
+    {
+     "t": "p",
+     "text": "An [[input device]] is a piece of hardware that lets the user put data into a computer system. It converts things humans understand (key presses, movement, sound, light) into the coded electrical signals the computer can process."
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Keyboard**: typing text and numbers, e.g. writing your English essay.",
+      "**Mouse**: pointing and clicking on screen.",
+      "**Joystick / game controller**: controlling a character in a game.",
+      "**Touch screen**: tapping and swiping on a phone or tablet (it is input *and* output).",
+      "**Scanner**: turning a paper document or photo into a digital image.",
+      "**Microphone**: recording your voice for a podcast or a video call.",
+      "**Sensor**: measuring things such as temperature or light automatically.",
+      "**Digital camera / webcam**: capturing photos and video."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Output devices"
+    },
+    {
+     "t": "p",
+     "text": "An [[output device]] is a piece of hardware that lets the user receive information from a computer system. It converts the computer's signals back into a form humans can see, hear or touch."
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Monitor** (screen): shows text, images and video.",
+      "**Printer**: puts text and images onto paper.",
+      "**Speakers / headphones**: play sound.",
+      "**Plotter**: draws large, precise line drawings such as building plans.",
+      "**LEDs** (light emitting diodes): small lights, e.g. the power light on a console or the display on a BBC micro:bit."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "warn",
+     "text": "A **scanner** is an **input** device, not an output device: it takes a picture of paper and puts it *into* the computer. Some old notes list it under output by mistake."
+    },
+    {
+     "t": "h",
+     "text": "Name the device"
+    },
+    {
+     "t": "p",
+     "text": "Here are the devices from the homework sheet, sorted into input, output and storage:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Device",
+      "Type",
+      "What it is used for"
+     ],
+     "rows": [
+      [
+       "Keyboard",
+       "Input",
+       "Typing letters, numbers and commands"
+      ],
+      [
+       "Mouse",
+       "Input",
+       "Moving the pointer and clicking"
+      ],
+      [
+       "Microphone",
+       "Input",
+       "Capturing sound"
+      ],
+      [
+       "Webcam",
+       "Input",
+       "Capturing live video"
+      ],
+      [
+       "Scanner",
+       "Input",
+       "Digitising paper documents and photos"
+      ],
+      [
+       "Joystick",
+       "Input",
+       "Controlling games or simulators"
+      ],
+      [
+       "Monitor",
+       "Output",
+       "Displaying images and text"
+      ],
+      [
+       "Printer",
+       "Output",
+       "Producing paper copies"
+      ],
+      [
+       "Speakers",
+       "Output",
+       "Playing sound"
+      ],
+      [
+       "Headphones",
+       "Output",
+       "Playing sound privately"
+      ],
+      [
+       "Projector",
+       "Output",
+       "Showing the screen on a whiteboard"
+      ],
+      [
+       "USB pen",
+       "Storage",
+       "Carrying files between computers"
+      ],
+      [
+       "Hard disk drive",
+       "Storage",
+       "Storing programs and files permanently"
+      ],
+      [
+       "CD / DVD / Blu-ray",
+       "Storage",
+       "Storing music, films or backups"
+      ]
+     ],
+     "caption": "Input = data in, output = information out, storage = kept for later."
+    },
+    {
+     "t": "tip",
+     "text": "Ask yourself which way the data is flowing. **Into** the computer? Input. **Out of** the computer to a person? Output. **Kept** for later? Storage."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Input devices put data into the computer, e.g. keyboard, mouse, scanner, microphone, sensor.",
+      "Output devices give information back to the user, e.g. monitor, printer, speakers, plotter, LEDs.",
+      "A monitor is an output device; a scanner is an input device.",
+      "A touch screen is both input and output."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Input or output?",
+    "caption": "Click each hidden cell to check your answer.",
+    "head": [
+     "Device",
+     "Type"
+    ],
+    "rows": [
+     [
+      "Keyboard",
+      "Input"
+     ],
+     [
+      "Monitor",
+      "Output"
+     ],
+     [
+      "Scanner",
+      "Input"
+     ],
+     [
+      "Plotter",
+      "Output"
+     ],
+     [
+      "Microphone",
+      "Input"
+     ],
+     [
+      "Speakers",
+      "Output"
+     ],
+     [
+      "Sensor",
+      "Input"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What type of device is a **monitor**?",
+     "o": [
+      "Input",
+      "Storage",
+      "Output",
+      "Memory"
+     ],
+     "a": 2,
+     "why": "It shows information to the user."
+    },
+    {
+     "q": "What type of device is a **scanner**?",
+     "o": [
+      "Input",
+      "Output",
+      "Storage",
+      "Processor"
+     ],
+     "a": 0,
+     "why": "It puts an image into the computer."
+    },
+    {
+     "q": "Which is an output device?",
+     "o": [
+      "Microphone",
+      "Sensor",
+      "Joystick",
+      "Plotter"
+     ],
+     "a": 3,
+     "why": "A plotter draws output on paper."
+    },
+    {
+     "q": "Which device is both input **and** output?",
+     "o": [
+      "Printer",
+      "Touch screen",
+      "Keyboard",
+      "Webcam"
+     ],
+     "a": 1,
+     "why": "You tap it (input) and it displays (output)."
+    }
+   ],
+   "practice": [
+    {
+     "q": "What is an input device? Give two examples.",
+     "m": 3,
+     "a": "A piece of hardware that allows the user to put/enter data into a computer system (1). Any two from keyboard, mouse, scanner, microphone, sensor, joystick, touch screen, digital camera (1 each)."
+    },
+    {
+     "q": "What is an output device? Give two examples.",
+     "m": 3,
+     "a": "A piece of hardware that allows the user to receive information from a computer system (1). Any two from monitor, printer, speakers, headphones, plotter, LEDs (1 each)."
+    }
+   ],
+   "terms": [
+    "Input device",
+    "Output device"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How Computers Work: CPU, Memory, Input & Output",
+     "source": "YouTube – Code.org (CodeAI)",
+     "url": "https://www.youtube.com/watch?v=DKGZlaPlVLY",
+     "yt": "DKGZlaPlVLY"
+    },
+    {
+     "title": "How Computers Work: What Makes a Computer, a Computer?",
+     "source": "YouTube – Code.org (CodeAI)",
+     "url": "https://www.youtube.com/watch?v=mCq8-xTH7jA",
+     "yt": "mCq8-xTH7jA"
+    }
+   ]
+  },
+  {
+   "id": "p03",
+   "spec": "Know the three categories of storage device and the difference between storage and memory",
+   "summary": "Storage devices keep data permanently, even with the power off; they are magnetic, optical or solid state. Memory (RAM) only holds data while the computer is on.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Storage devices"
+    },
+    {
+     "t": "p",
+     "text": "A [[storage device]] lets you install programs and save your files on a computer so you can use them later. It keeps (retains) the data when the power is switched off, so it is **permanent** storage. Storage devices are sometimes called **secondary storage**: external memory used to store programs and data not currently in use."
+    },
+    {
+     "t": "p",
+     "text": "There are three categories of storage device:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Category",
+      "How it works",
+      "Examples"
+     ],
+     "rows": [
+      [
+       "Magnetic",
+       "[[Magnetic storage]] magnetises and demagnetises tiny areas on the surface of a spinning disk (or a tape).",
+       "Hard disk drive (HDD), magnetic tape"
+      ],
+      [
+       "[[Optical storage|Optical]]",
+       "A laser beam reads the disc; parts of the disc either reflect the laser or do not.",
+       "CD, DVD, Blu-ray"
+      ],
+      [
+       "[[Solid state storage|Solid state]]",
+       "Uses flash memory chips and has **no moving parts**.",
+       "USB stick (memory pen), SD card, solid state drive (SSD)"
+      ]
+     ],
+     "caption": "The three categories of storage device"
+    },
+    {
+     "t": "tip",
+     "text": "Think **M-O-S**: Magnetic spins, Optical uses a laser, Solid state has no moving parts."
+    },
+    {
+     "t": "h",
+     "text": "Memory is not storage"
+    },
+    {
+     "t": "p",
+     "text": "[[Memory]], such as [[RAM]] (Random Access Memory), holds the instructions, programs and data that the computer is using **right now**. It does not keep anything long term. RAM is [[volatile]]: when the power is switched off, everything in it is lost."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Memory (RAM)",
+      "Storage (e.g. HDD, SSD)"
+     ],
+     "rows": [
+      [
+       "How long it keeps data",
+       "Short term, only while in use",
+       "Long term, until you delete it"
+      ],
+      [
+       "Power off?",
+       "Data is lost (volatile)",
+       "Data is kept (non-volatile)"
+      ],
+      [
+       "Holds",
+       "Programs and files currently open",
+       "All installed programs and saved files"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "This is why you must **save** your work. If the school computer crashes while your Word document is only in RAM, it is gone; once it is saved to a storage device you can get it back."
+    },
+    {
+     "t": "h",
+     "text": "Assessment questions: answers"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Question",
+      "Answer"
+     ],
+     "rows": [
+      [
+       "Q1. What is hardware?",
+       "The physical parts of a computer system that you can touch."
+      ],
+      [
+       "Q2. What is an input device?",
+       "Hardware that allows the user to put data into a computer system."
+      ],
+      [
+       "Q3. What is an output device?",
+       "Hardware that allows the user to receive information from a computer system."
+      ],
+      [
+       "Q4. What is a storage device?",
+       "Hardware that saves programs and files permanently, keeping them when the power is off."
+      ],
+      [
+       "Q5. What type of device is a monitor?",
+       "Output"
+      ],
+      [
+       "Q6. What type of device is a scanner?",
+       "Input"
+      ],
+      [
+       "Q7. What are the three categories of storage device? [3]",
+       "Magnetic, optical and solid state"
+      ],
+      [
+       "Q8. What category of storage device is a hard disk drive?",
+       "Magnetic"
+      ]
+     ],
+     "caption": "Total: 10 marks"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: recommending devices for a new school building",
+     "context": "A school in Fermanagh is opening a new building. Recommend **three input**, **two output** and **two storage** devices. For each, give a reason and an example of how it would be used.",
+     "steps": [
+      "**Input 1 – Keyboard.** Reason: the fastest, most accurate way to enter lots of text. Use: pupils typing coursework in the ICT suite.",
+      "**Input 2 – Webcam and microphone.** Reason: lets people be seen and heard remotely. Use: a class video call with a partner school in Donegal.",
+      "**Input 3 – Scanner.** Reason: turns paper into digital files that can be shared. Use: the office scanning signed trip permission slips.",
+      "**Output 1 – Interactive projector / large monitor.** Reason: the whole class can see the same image. Use: the teacher demonstrating a program at the front of the room.",
+      "**Output 2 – Printer.** Reason: some things are still needed on paper. Use: printing the programme for the school prize-giving.",
+      "**Storage 1 – Solid state drives (SSDs) in the PCs and server.** Reason: fast with no moving parts, so they start quickly and are hard-wearing. Use: storing pupils' saved work on the school network.",
+      "**Storage 2 – USB memory pen.** Reason: small, cheap and portable. Use: a teacher carrying a presentation from home to school."
+     ],
+     "answer": "3 input (keyboard, webcam/microphone, scanner), 2 output (projector/monitor, printer), 2 storage (SSD, USB pen), each with a reason and a use."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Storage devices keep data permanently, even when the power is off.",
+      "The three categories are magnetic (HDD), optical (CD/DVD/Blu-ray) and solid state (USB stick, SD card, SSD).",
+      "Solid state storage has no moving parts.",
+      "RAM is memory: it holds what is in use now and is volatile, so it loses data when the power goes off.",
+      "Always save work to storage so it is not lost."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What category of storage device is a hard disk drive?",
+     "o": [
+      "Optical",
+      "Solid state",
+      "Magnetic",
+      "Volatile"
+     ],
+     "a": 2,
+     "why": "An HDD magnetises a spinning disk."
+    },
+    {
+     "q": "Which storage device uses a laser?",
+     "o": [
+      "Blu-ray disc",
+      "USB stick",
+      "SD card",
+      "Magnetic tape"
+     ],
+     "a": 0,
+     "why": "CDs, DVDs and Blu-rays are optical."
+    },
+    {
+     "q": "What does 'volatile' mean?",
+     "o": [
+      "It is very fast",
+      "It has no moving parts",
+      "It can only be read, not written",
+      "It loses its data when the power is switched off"
+     ],
+     "a": 3,
+     "why": "RAM is volatile."
+    },
+    {
+     "q": "Which has **no moving parts**?",
+     "o": [
+      "Hard disk drive",
+      "SD card",
+      "DVD drive",
+      "Magnetic tape"
+     ],
+     "a": 1,
+     "why": "SD cards use flash memory, which is solid state."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name the three categories of storage device and give an example of each.",
+     "m": 6,
+     "a": "Magnetic (1), e.g. hard disk drive/magnetic tape (1); optical (1), e.g. CD/DVD/Blu-ray (1); solid state (1), e.g. USB stick/SD card/SSD (1)."
+    },
+    {
+     "q": "Explain why work in RAM should be saved to a storage device.",
+     "m": 2,
+     "a": "RAM is volatile, so its contents are lost when the power is switched off (1). A storage device keeps data permanently, so the work can be retrieved later (1)."
+    },
+    {
+     "q": "Select one input, one output and one storage device and explain how you would use it in school.",
+     "m": 3,
+     "a": "e.g. Input: a keyboard to type my English essay (1). Output: a printer to print my homework (1). Storage: a USB pen to carry my project between home and school (1)."
+    }
+   ],
+   "terms": [
+    "Storage device",
+    "Magnetic storage",
+    "Optical storage",
+    "Solid state storage",
+    "Memory",
+    "RAM",
+    "Volatile"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "10. OCR GCSE (J277) 1.2 Common types of storage",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=qIy_wgo03Oo",
+     "yt": "qIy_wgo03Oo"
+    },
+    {
+     "title": "Memory & Storage: Crash Course Computer Science #19",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=TQCr9RV7twk",
+     "yt": "TQCr9RV7twk"
+    }
+   ]
+  },
+  {
+   "id": "p04",
+   "spec": "Know the main components inside a computer and what each one does",
+   "summary": "A computer can be split into input, process, output, storage and communications. Inside the case are parts like the motherboard, CPU, RAM, power supply and graphics card.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Every computer, big or small, does the same five jobs:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Job",
+      "What happens"
+     ],
+     "rows": [
+      [
+       "Input",
+       "The computer accepts data for processing. Input devices convert what humans understand into coded electrical signals."
+      ],
+      [
+       "Process",
+       "The computer calculates, sorts data and makes decisions using the program being run, e.g. running a spell check."
+      ],
+      [
+       "Output",
+       "The computer sends out information after processing. Output devices convert signals back into human-readable form."
+      ],
+      [
+       "Storage",
+       "The computer keeps data. Secondary storage holds programs and data not currently in use."
+      ],
+      [
+       "Data communications",
+       "The computer sends data over a long distance, e.g. over telephone lines, cables, Wi-Fi or satellites."
+      ]
+     ],
+     "caption": "The five things a computer can do"
+    },
+    {
+     "t": "h",
+     "text": "Computer Breakdown Service: what's inside?"
+    },
+    {
+     "t": "p",
+     "text": "When your teacher takes a computer apart, you see how the components work together. Some are inside the case; others are external (outside the case)."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Component",
+      "Function"
+     ],
+     "rows": [
+      [
+       "Keyboard",
+       "External input device for typing text, numbers and commands."
+      ],
+      [
+       "Mouse",
+       "External input device that moves the on-screen pointer and selects things by clicking."
+      ],
+      [
+       "Hard disk drive",
+       "Storage: keeps the operating system, programs and saved files permanently, even when switched off."
+      ],
+      [
+       "CPU",
+       "The processor: fetches, decodes and executes instructions, doing all the calculations. The 'brain' of the computer."
+      ],
+      [
+       "RAM",
+       "Memory: holds the programs and data in use right now. Volatile, so emptied when the power goes off."
+      ],
+      [
+       "Power supply",
+       "Converts mains electricity from the wall socket into the low voltages the components need."
+      ],
+      [
+       "Graphics card",
+       "Processes images and video and sends the picture to the monitor; important for games."
+      ],
+      [
+       "Sound card",
+       "Converts digital sound into signals for speakers or headphones (and back again for a microphone)."
+      ],
+      [
+       "Webcam",
+       "External input device that captures live video, e.g. for video calls."
+      ],
+      [
+       "Microphone",
+       "Input device that captures sound such as your voice."
+      ],
+      [
+       "Headphones",
+       "Output device that plays sound privately."
+      ],
+      [
+       "Monitor",
+       "Output device that displays the computer's information as images and text."
+      ],
+      [
+       "Motherboard",
+       "The main circuit board: everything plugs into it, and it connects all the components so they can communicate."
+      ],
+      [
+       "Fan unit / heat sink",
+       "Keeps the CPU and other parts cool. The heat sink draws heat away from the chip and the fan blows it out; without them the CPU would overheat."
+      ]
+     ],
+     "caption": "Answers to the Computer Breakdown Service worksheet"
+    },
+    {
+     "t": "h",
+     "text": "Key terms"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Input devices** let the user put data into a computer, e.g. keyboard, mouse.",
+      "**Memory** keeps the data that has been input, the software applications and the results of processing for the **short term**; it is lost when the computer is off, e.g. RAM.",
+      "**Storage devices** keep created files and installed software for the **longer term**, e.g. HDD, USB pen.",
+      "The **processor** processes data according to the instructions it has been given, giving the user information, e.g. CPU, GPU (graphics processing unit).",
+      "**Output devices** let the user receive information from the computer, e.g. printer, plotter."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "The Raspberry Pi"
+    },
+    {
+     "t": "p",
+     "text": "Computers are getting smaller and faster. The [[Raspberry Pi]] is a credit-card-sized computer you can plug into a TV and a keyboard. It can browse the internet, play HD video, run spreadsheets and games, and is popular for learning to program in Scratch and Python. Its pins let it interact with the outside world, so people build weather stations, music machines and birdhouses with infra-red cameras."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: find the parts on a Raspberry Pi",
+     "context": "Can you locate the processor, the memory, the storage and the input and output?",
+     "steps": [
+      "**Processor**: the main square chip in the middle of the board (a system-on-a-chip that contains the CPU and graphics processor).",
+      "**Memory**: the RAM chip, next to or built into the processor package.",
+      "**Storage**: the micro SD card slot underneath; the card holds the operating system and your files.",
+      "**Input and output**: USB ports (keyboard, mouse), HDMI port (to a monitor or TV), audio jack, Ethernet port (network) and the row of GPIO pins (sensors, LEDs, buttons)."
+     ],
+     "answer": "Processor = main chip; memory = RAM; storage = micro SD card; input/output = USB, HDMI, audio, Ethernet and GPIO pins."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A computer does five jobs: input, process, output, storage and data communications.",
+      "The motherboard connects every component together.",
+      "The power supply converts mains electricity; the fan and heat sink stop the CPU overheating.",
+      "The graphics card makes the picture for the monitor; the sound card handles sound.",
+      "A Raspberry Pi has all the same parts as a big computer, just on a tiny board."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "match",
+    "title": "Match the component",
+    "caption": "Match each component to its job.",
+    "pairs": [
+     [
+      "Motherboard",
+      "Connects every component together"
+     ],
+     [
+      "RAM",
+      "Holds programs and data in use right now"
+     ],
+     [
+      "Power supply",
+      "Converts mains electricity for the components"
+     ],
+     [
+      "Heat sink and fan",
+      "Stop the CPU from overheating"
+     ],
+     [
+      "Graphics card",
+      "Sends the picture to the monitor"
+     ],
+     [
+      "Hard disk drive",
+      "Keeps files when the power is off"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "Which component connects all the other parts together?",
+     "o": [
+      "Power supply",
+      "Heat sink",
+      "Motherboard",
+      "Sound card"
+     ],
+     "a": 2,
+     "why": "Everything plugs into the motherboard."
+    },
+    {
+     "q": "What is the job of the heat sink and fan?",
+     "o": [
+      "Keep the CPU cool",
+      "Store files",
+      "Produce sound",
+      "Convert mains electricity"
+     ],
+     "a": 0,
+     "why": "The CPU gets hot and would overheat without them."
+    },
+    {
+     "q": "Running a spell check is an example of which job?",
+     "o": [
+      "Input",
+      "Output",
+      "Storage",
+      "Process"
+     ],
+     "a": 3,
+     "why": "The computer is checking data using a program."
+    },
+    {
+     "q": "Where is the operating system stored on a Raspberry Pi?",
+     "o": [
+      "The HDMI port",
+      "The micro SD card",
+      "The GPIO pins",
+      "The USB port"
+     ],
+     "a": 1,
+     "why": "The SD card is its storage."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State the function of the power supply and the graphics card.",
+     "m": 2,
+     "a": "Power supply converts mains electricity into the low voltages the components need (1). Graphics card processes images/video and sends the picture to the monitor (1)."
+    },
+    {
+     "q": "Describe the difference between memory and storage.",
+     "m": 2,
+     "a": "Memory (RAM) holds data/programs in use for the short term and loses it when the power is off (1). Storage keeps files and installed software for the long term, even with the power off (1)."
+    }
+   ],
+   "terms": [
+    "Motherboard",
+    "Power supply",
+    "Graphics card",
+    "Raspberry Pi"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How Computers Work: CPU, Memory, Input & Output",
+     "source": "YouTube – Code.org (CodeAI)",
+     "url": "https://www.youtube.com/watch?v=DKGZlaPlVLY",
+     "yt": "DKGZlaPlVLY"
+    },
+    {
+     "title": "Computer architecture (KS3 lesson with video)",
+     "source": "Oak National Academy",
+     "url": "https://www.thenational.academy/teachers/programmes/computing-secondary-ks3/units/computer-systems-and-data-science/lessons/computer-architecture"
+    },
+    {
+     "title": "How Computers Work: Hardware and Software",
+     "source": "YouTube – Code.org (CodeAI)",
+     "url": "https://www.youtube.com/watch?v=xnyFYiK2rSY",
+     "yt": "xnyFYiK2rSY"
+    }
+   ]
+  },
+  {
+   "id": "p05",
+   "spec": "Understand what the CPU does and describe the fetch–decode–execute cycle",
+   "summary": "The CPU is the part that interprets and executes instructions. It repeats the fetch–decode–execute cycle billions of times a second, and its speed is measured in gigahertz.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The [[CPU]] (Central Processing Unit) is the part of the computer that interprets and executes instructions. It is sometimes called the computer's **brain**, and it is usually a single integrated circuit (a chip). It isn't nearly as complicated as a human brain, though. It thinks more like a **function machine** from Maths."
+    },
+    {
+     "t": "h",
+     "text": "The CPU as a function machine"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Input**: the CPU needs data to process. It is often typed on a keyboard or touch screen and held in **memory**. Here, the number `4` has been entered.",
+      "**Process**: the CPU must be told what to do with the data. Instructions come from software (computer programs). Here there are two instructions: **multiply by 3**, then **add 7**.",
+      "**Output**: the result is sent to an output device, usually a monitor or VDU (visual display unit) or a data projector, so the user can see it."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the function machine",
+     "context": "The input is 4 and the instructions are '× 3' then '+ 7'. What is the output? What happens if the instructions are done in the wrong order?",
+     "steps": [
+      "Correct order: 4 × 3 = 12.",
+      "12 + 7 = **19**.",
+      "Wrong order: 4 + 7 = 11.",
+      "11 × 3 = **33**."
+     ],
+     "answer": "The output is 19. Doing the instructions in the wrong order gives 33, so instructions must be processed in the correct sequence."
+    },
+    {
+     "t": "h",
+     "text": "The fetch–decode–execute cycle"
+    },
+    {
+     "t": "p",
+     "text": "When a teacher asks you to do something, you listen (**fetch**), work out what you are being asked (**decode**) and then do it (**execute**). A CPU works the same way. It:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Fetches** the next instruction from memory.",
+      "**Decodes** the instruction to find out what processing to do.",
+      "**Executes** the instruction (carries it out).",
+      "Then goes back and fetches the next one."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "p",
+     "text": "This is called the [[fetch-decode-execute cycle]], and it repeats over and over for as long as the computer is switched on."
+    },
+    {
+     "t": "h",
+     "text": "Clock speed"
+    },
+    {
+     "t": "p",
+     "text": "An advert might say a laptop runs at '3 GHz'. GHz stands for [[gigahertz]] and refers to the CPU's processor speed: 1 GHz is one thousand million (a billion) cycles per second. The higher the gigahertz, the faster the processor."
+    },
+    {
+     "t": "h",
+     "text": "Do you think like a computer?"
+    },
+    {
+     "t": "p",
+     "text": "A computer only does exactly what it is told, in exactly the order it is told. Try writing every step to make a banana sandwich using only a table, bread, knife, banana, butter and a plate. It is harder than it sounds!"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a banana sandwich algorithm",
+     "context": "Write precise steps a 'computer' could follow to make a banana sandwich.",
+     "steps": [
+      "Pick up the plate and place it on the table in front of you.",
+      "Open the bread bag and take out two slices. Place them side by side on the plate.",
+      "Pick up the knife by its handle.",
+      "Use the knife to scoop a small amount of butter.",
+      "Spread the butter over one side of each slice. Put the knife down.",
+      "Peel the banana and throw the skin away.",
+      "Pick up the knife and cut the banana into thin slices onto one buttered slice of bread.",
+      "Place the second slice of bread, buttered side down, on top.",
+      "Put the knife down. The sandwich is ready."
+     ],
+     "answer": "A clear sequence of precise steps in the right order. Missing or reordered steps (e.g. cutting the banana before peeling it) give the wrong result, just as with a CPU."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "The CPU interprets and executes instructions; it is often called the 'brain'.",
+      "It works like a function machine: input, process, output.",
+      "Instructions must be carried out in the correct order (4 × 3 + 7 = 19, not 33).",
+      "The CPU repeats fetch → decode → execute.",
+      "Processor speed is measured in gigahertz (GHz); higher is faster."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "cycle",
+    "title": "The fetch–decode–execute cycle",
+    "caption": "The CPU repeats this cycle billions of times a second.",
+    "items": [
+     {
+      "label": "Fetch",
+      "detail": "Get the next instruction from memory."
+     },
+     {
+      "label": "Decode",
+      "detail": "Work out what the instruction means and what processing to do."
+     },
+     {
+      "label": "Execute",
+      "detail": "Carry out the instruction, e.g. add two numbers."
+     }
+    ]
+   },
+   "check": [
+    {
+     "q": "What are the three stages of the CPU cycle, in order?",
+     "o": [
+      "Decode, fetch, execute",
+      "Fetch, execute, decode",
+      "Fetch, decode, execute",
+      "Input, output, store"
+     ],
+     "a": 2,
+     "why": "Fetch the instruction, decode it, execute it."
+    },
+    {
+     "q": "Where does the CPU fetch instructions from?",
+     "o": [
+      "Memory",
+      "The monitor",
+      "The keyboard",
+      "The printer"
+     ],
+     "a": 0,
+     "why": "Instructions are held in memory."
+    },
+    {
+     "q": "What does GHz measure?",
+     "o": [
+      "Storage size",
+      "Screen size",
+      "Internet speed",
+      "Processor speed"
+     ],
+     "a": 3,
+     "why": "Gigahertz is the clock speed of the CPU."
+    },
+    {
+     "q": "Input 5, instructions '× 2' then '+ 1'. What is the output?",
+     "o": [
+      "12",
+      "11",
+      "7",
+      "10"
+     ],
+     "a": 1,
+     "why": "5 × 2 = 10, 10 + 1 = 11."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe the fetch–decode–execute cycle.",
+     "m": 3,
+     "a": "The CPU fetches the next instruction from memory (1), decodes it to work out what to do (1), then executes/carries out the instruction, before repeating the cycle (1)."
+    },
+    {
+     "q": "A function machine has input 4 and instructions '× 3' then '+ 7'. Explain why the order of instructions matters.",
+     "m": 2,
+     "a": "In the correct order 4 × 3 + 7 = 19 (1); in the wrong order (4 + 7) × 3 = 33, a different/wrong result, so the CPU must process instructions in sequence (1)."
+    }
+   ],
+   "terms": [
+    "CPU",
+    "Fetch-decode-execute cycle",
+    "Gigahertz"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "1. OCR GCSE (J277) 1.1 The purpose of the CPU - The fetch-execute cycle",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=7Up7DIPkTzo",
+     "yt": "7Up7DIPkTzo"
+    },
+    {
+     "title": "Computer architecture (KS3 lesson with video)",
+     "source": "Oak National Academy",
+     "url": "https://www.thenational.academy/teachers/programmes/computing-secondary-ks3/units/computer-systems-and-data-science/lessons/computer-architecture"
+    },
+    {
+     "title": "The Central Processing Unit (CPU): Crash Course Computer Science #7",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=FZGugFqdr60",
+     "yt": "FZGugFqdr60"
+    }
+   ]
+  },
+  {
+   "id": "p06",
+   "spec": "Know how codebreaking at Bletchley Park led to the first electronic computers",
+   "summary": "In the Second World War, codebreakers at Bletchley Park broke Enigma and Lorenz messages. Colossus did one job very fast; the Manchester Baby was the first computer to store and run a program.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Enigma and the Lorenz machine"
+    },
+    {
+     "t": "p",
+     "text": "During the Second World War, vital supplies were shipped to Britain from the United States, but Nazi submarines (U-boats) were sinking huge numbers of the ships crossing the Atlantic. Winston Churchill knew that **intelligence** was crucial to winning the war, and he put his faith in the codebreakers at **[[Bletchley Park]]** in Buckinghamshire. Their task was to decrypt (unscramble) Nazi communications."
+    },
+    {
+     "t": "p",
+     "text": "The Nazis enciphered (scrambled) their messages with machines. The **[[Enigma]]** machine was used by the army, navy and air force. The German High Command used an even more complex teleprinter cipher machine, the **[[Lorenz cipher|Lorenz]]** machine, for its most secret messages, believing it to be the most secure way of sending messages at the time. If the Allies could break the codes, they could stay one step ahead."
+    },
+    {
+     "t": "h",
+     "text": "Alan Turing and the Bombe"
+    },
+    {
+     "t": "p",
+     "text": "**[[Alan Turing]]** was a brilliant mathematician who led the team (Hut 8) breaking German naval Enigma messages. Building on earlier work by Polish codebreakers, he designed the **Bombe**, an electro-mechanical machine that found the daily Enigma settings far faster than people could. Breaking naval Enigma helped convoys avoid U-boats."
+    },
+    {
+     "t": "h",
+     "text": "Colossus"
+    },
+    {
+     "t": "p",
+     "text": "Codebreaking needs vast numbers of calculations done extremely quickly, and humans were simply too slow. To attack the Lorenz cipher, the Post Office engineer **Tommy Flowers** designed and built **[[Colossus]]**, using ideas from the Bletchley mathematicians. The first Colossus was working by early 1944, and it is often called the world's first programmable electronic digital computer."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Colossus read the intercepted messages from paper tape at **5,000 characters per second**.",
+      "Analysis that took weeks by hand could be done in **hours**.",
+      "It took the enciphered input, processed it and, after many repetitions, produced output that helped reveal the deciphered message.",
+      "It was really a **function machine**: it was built to do just one kind of task."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "note",
+     "text": "Older notes say Turing built Colossus. In fact Turing's great machine was the Bombe (for Enigma); Colossus was designed by Tommy Flowers for Lorenz, although Turing's ideas influenced the work."
+    },
+    {
+     "t": "h",
+     "text": "The Manchester Baby"
+    },
+    {
+     "t": "p",
+     "text": "A true general-purpose computer uses **stored programs**, so it must have writeable memory to store, load and run them. The **[[Manchester Baby]]**, built at the University of Manchester, ran its first program on 21 June 1948. It was the world's first **stored-program** computer. The ability to store and run different programs turned the special-purpose function machine into a general-purpose computer, like the ones we use today."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Colossus (1944)",
+      "Manchester Baby (1948)"
+     ],
+     "rows": [
+      [
+       "Purpose",
+       "Special purpose: one job (analysing Lorenz messages)",
+       "General purpose: could run different programs"
+      ],
+      [
+       "Program",
+       "Set up with switches and plugs",
+       "Stored in its own memory"
+      ],
+      [
+       "Type",
+       "A 'function machine'",
+       "The first stored-program computer"
+      ]
+     ]
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Bletchley Park codebreakers decrypted Nazi messages in the Second World War.",
+      "Enigma was broken with help from Alan Turing's Bombe.",
+      "Colossus, built by Tommy Flowers, attacked the Lorenz cipher at 5,000 characters per second.",
+      "Colossus was a special-purpose 'function machine'.",
+      "The Manchester Baby (1948) was the first computer to store and run a program."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "timeline",
+    "title": "From codebreaking to computers",
+    "caption": "Click each event for more.",
+    "items": [
+     {
+      "label": "1932 – Polish codebreakers",
+      "detail": "Marian Rejewski and colleagues first break Enigma and later share their work with Britain."
+     },
+     {
+      "label": "1940 – The Bombe",
+      "detail": "Alan Turing's machine starts finding Enigma settings at Bletchley Park."
+     },
+     {
+      "label": "1944 – Colossus",
+      "detail": "Tommy Flowers' Colossus attacks Lorenz messages at 5,000 characters per second."
+     },
+     {
+      "label": "1948 – Manchester Baby",
+      "detail": "The first computer to store and run its own program."
+     }
+    ]
+   },
+   "check": [
+    {
+     "q": "Where did Britain's wartime codebreakers work?",
+     "o": [
+      "Dollis Hill",
+      "Manchester",
+      "Bletchley Park",
+      "Cambridge"
+     ],
+     "a": 2,
+     "why": "Bletchley Park in Buckinghamshire."
+    },
+    {
+     "q": "How many characters per second could Colossus read?",
+     "o": [
+      "5,000",
+      "50",
+      "500",
+      "5 million"
+     ],
+     "a": 0,
+     "why": "5,000 characters per second from paper tape."
+    },
+    {
+     "q": "Why is the Manchester Baby important?",
+     "o": [
+      "It broke Enigma",
+      "It was the first calculator",
+      "It was the first laptop",
+      "It was the first stored-program computer"
+     ],
+     "a": 3,
+     "why": "It stored and ran its own program in 1948."
+    },
+    {
+     "q": "Colossus is described as a 'function machine' because…",
+     "o": [
+      "it could run any program",
+      "it was designed to do just one task",
+      "it had a keyboard",
+      "it used binary"
+     ],
+     "a": 1,
+     "why": "It was built for one job: analysing Lorenz messages."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why the codebreakers at Bletchley Park needed a machine such as Colossus.",
+     "m": 2,
+     "a": "Codebreaking needed vast numbers of calculations done very quickly and humans were too slow (1). Colossus could read 5,000 characters per second, cutting analysis from weeks to hours (1)."
+    },
+    {
+     "q": "Explain the difference between a special-purpose computer like Colossus and a general-purpose computer like the Manchester Baby.",
+     "m": 2,
+     "a": "A special-purpose computer/function machine does only one task (1); a general-purpose computer stores programs in memory and can load and run different programs (1)."
+    }
+   ],
+   "terms": [
+    "Bletchley Park",
+    "Enigma",
+    "Lorenz cipher",
+    "Alan Turing",
+    "Colossus",
+    "Manchester Baby"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Colossus & Bletchley Park - Computerphile",
+     "source": "YouTube – Computerphile",
+     "url": "https://www.youtube.com/watch?v=9HH-asvLAj4",
+     "yt": "9HH-asvLAj4"
+    },
+    {
+     "title": "158,962,555,217,826,360,000 (Enigma Machine) - Numberphile",
+     "source": "YouTube – Numberphile",
+     "url": "https://www.youtube.com/watch?v=G2_Q9FoD-oQ",
+     "yt": "G2_Q9FoD-oQ"
+    },
+    {
+     "title": "Early Computing: Crash Course Computer Science #1",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=O5nskjZ_GoI",
+     "yt": "O5nskjZ_GoI"
+    }
+   ]
+  },
+  {
+   "id": "p07",
+   "spec": "Understand why computers use binary and convert between binary and denary",
+   "summary": "Computers use binary (base 2): just 0 and 1, like a switch off or on. Each extra bit doubles the number of patterns, and you convert using place values 128, 64, 32, 16, 8, 4, 2, 1.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Decimal and binary"
+    },
+    {
+     "t": "p",
+     "text": "At school you use the [[denary]] (decimal) number system: units, tens, hundreds and thousands. It is also called **base 10** because it uses ten digits, 0 to 9, to make any number. Computers are electronic devices that can only tell the difference between a high voltage and a low voltage. A high voltage represents **1** and a low voltage represents **0**. Using just two values is called [[binary]] or **base 2**. All data in a computer (numbers, words, sounds, images) must be converted into a series of 1s and 0s."
+    },
+    {
+     "t": "tip",
+     "text": "Think of a light switch: it can only be **ON** (1) or **OFF** (0). This idea of two options is the foundation of all computing."
+    },
+    {
+     "t": "h",
+     "text": "Circuit semaphore: how many patterns?"
+    },
+    {
+     "t": "p",
+     "text": "Imagine a circuit with some lights, each with its own switch. Each pattern of lights could stand for a number, and each number could stand for a message in a code book."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Number of lights (bits)",
+      "All possible patterns",
+      "Number of patterns",
+      "Largest number"
+     ],
+     "rows": [
+      [
+       "1",
+       "0, 1",
+       "2",
+       "1"
+      ],
+      [
+       "2",
+       "00, 01, 10, 11",
+       "4",
+       "3"
+      ],
+      [
+       "3",
+       "000, 001, 010, 011, 100, 101, 110, 111",
+       "8",
+       "7"
+      ],
+      [
+       "4",
+       "0000, 0001, 0010, 0011, 0100, 0101, 0110, 0111, 1000, 1001, 1010, 1011, 1100, 1101, 1110, 1111",
+       "16",
+       "15"
+      ]
+     ],
+     "caption": "Each extra bit doubles the number of patterns."
+    },
+    {
+     "t": "p",
+     "text": "**The pattern:** every extra bit doubles the number of combinations. With *n* bits there are 2ⁿ patterns, and the largest number is 2ⁿ − 1 (one less than the number of patterns, because we start counting at 0). So 8 bits give 256 patterns, from 0 to 255."
+    },
+    {
+     "t": "h",
+     "text": "Binary to denary"
+    },
+    {
+     "t": "p",
+     "text": "In an 8-bit binary number, each column has a place value. Write the place values above the bits and **add up the columns that have a 1**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Place value",
+      "128",
+      "64",
+      "32",
+      "16",
+      "8",
+      "4",
+      "2",
+      "1"
+     ],
+     "rows": [
+      [
+       "Bit",
+       "0",
+       "0",
+       "0",
+       "0",
+       "1",
+       "1",
+       "1",
+       "1"
+      ],
+      [
+       "Add",
+       "",
+       "",
+       "",
+       "",
+       "8",
+       "4",
+       "2",
+       "1"
+      ]
+     ],
+     "caption": "00001111 = 8 + 4 + 2 + 1 = 15"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: binary to denary (worksheet Q1)",
+     "context": "Convert each binary number into a denary number.",
+     "steps": [
+      "A) 00001111 → 8 + 4 + 2 + 1 = **15**",
+      "B) 10101010 → 128 + 32 + 8 + 2 = **170**",
+      "C) 01010101 → 64 + 16 + 4 + 1 = **85**",
+      "D) 11001100 → 128 + 64 + 8 + 4 = **204**",
+      "E) 10010011 → 128 + 16 + 2 + 1 = **147**",
+      "F) 11111111 → 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = **255**"
+     ],
+     "answer": "15, 170, 85, 204, 147, 255"
+    },
+    {
+     "t": "h",
+     "text": "Denary to binary"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: denary to 8-bit binary (worksheet Q2)",
+     "context": "Convert each denary number into an 8-bit binary number. Method: Start at the biggest place value (128). If it fits into your number, write 1 and subtract it; if not, write 0. Move to the next column and repeat until you reach 1.",
+     "steps": [
+      "A) 12 = 8 + 4 → **00001100**",
+      "B) 31 = 16 + 8 + 4 + 2 + 1 → **00011111**",
+      "C) 86 = 64 + 16 + 4 + 2 → **01010110**",
+      "D) 32 → **00100000**",
+      "E) 64 → **01000000**",
+      "F) 128 → **10000000**",
+      "**Q3. What do you notice about parts D, E and F?** Each one has only a single 1, because 32, 64 and 128 are exact place values (powers of 2). Each number is double the one before, and doubling moves the 1 one place to the left."
+     ],
+     "answer": "00001100, 00011111, 01010110, 00100000, 01000000, 10000000"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Computers use binary (base 2): 1 = high voltage/on, 0 = low voltage/off.",
+      "Denary (decimal) is base 10 and uses the digits 0–9.",
+      "n bits give 2ⁿ patterns; the largest number is 2ⁿ − 1 (8 bits: 0–255).",
+      "8-bit place values: 128, 64, 32, 16, 8, 4, 2, 1.",
+      "To convert binary to denary, add the place values with a 1 under them."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "bits",
+    "title": "Try it: an 8-bit byte",
+    "caption": "Click the bits to turn them on and off and watch the denary value change.",
+    "n": 8,
+    "modes": [
+     "unsigned"
+    ],
+    "start": "00001111"
+   },
+   "check": [
+    {
+     "q": "What is 00010101 in denary?",
+     "o": [
+      "25",
+      "37",
+      "21",
+      "11"
+     ],
+     "a": 2,
+     "why": "16 + 4 + 1 = 21."
+    },
+    {
+     "q": "What is 40 as an 8-bit binary number?",
+     "o": [
+      "00101000",
+      "00100100",
+      "01000000",
+      "00010100"
+     ],
+     "a": 0,
+     "why": "32 + 8 = 40."
+    },
+    {
+     "q": "How many different patterns can 4 bits make?",
+     "o": [
+      "4",
+      "8",
+      "15",
+      "16"
+     ],
+     "a": 3,
+     "why": "2 × 2 × 2 × 2 = 16."
+    },
+    {
+     "q": "Why do computers use binary?",
+     "o": [
+      "It is easier for humans",
+      "Circuits can only detect two states: high and low voltage",
+      "It uses less electricity than denary",
+      "It was invented by Alan Turing"
+     ],
+     "a": 1,
+     "why": "Two voltage levels map to 1 and 0."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Convert 01100100 into denary. Show your working.",
+     "m": 2,
+     "a": "64 + 32 + 4 (1) = 100 (1)."
+    },
+    {
+     "q": "Convert 99 into an 8-bit binary number. Show your working.",
+     "m": 2,
+     "a": "99 = 64 + 32 + 2 + 1 (1) = 01100011 (1)."
+    },
+    {
+     "q": "Explain what happens to the number of possible patterns each time a bit is added.",
+     "m": 1,
+     "a": "It doubles (e.g. 1 bit = 2, 2 bits = 4, 3 bits = 8) (1)."
+    }
+   ],
+   "terms": [
+    "Binary",
+    "Denary"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How Computers Work: Binary & Data",
+     "source": "YouTube – Code.org (CodeAI)",
+     "url": "https://www.youtube.com/watch?v=USCBCmwMCDA",
+     "yt": "USCBCmwMCDA"
+    },
+    {
+     "title": "Representing Numbers and Letters with Binary: Crash Course Computer Science #4",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=1GSjbWt0c9M",
+     "yt": "1GSjbWt0c9M"
+    }
+   ]
+  },
+  {
+   "id": "p08",
+   "spec": "Add binary numbers, recognise overflow, and use binary to decode a message",
+   "summary": "Binary addition follows four simple rules and carries 1s to the left. If the answer needs a ninth bit, an overflow has happened. Binary numbers can also stand for letters, as in the 007 code.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Binary addition rules"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Sum",
+      "Answer",
+      "Write down",
+      "Carry"
+     ],
+     "rows": [
+      [
+       "0 + 0",
+       "0",
+       "0",
+       "0"
+      ],
+      [
+       "0 + 1",
+       "1",
+       "1",
+       "0"
+      ],
+      [
+       "1 + 1",
+       "2 (binary 10)",
+       "0",
+       "1"
+      ],
+      [
+       "1 + 1 + 1",
+       "3 (binary 11)",
+       "1",
+       "1"
+      ]
+     ],
+     "caption": "Work from right to left, just like column addition in Maths."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: binary addition (worksheet Q4 A)",
+     "context": "Add 00001011 and 00101010.",
+     "steps": [
+      "Write one number above the other and start at the right-hand column.",
+      "Column 1: 1 + 0 = 1. Column 2: 1 + 1 = 10, write 0 carry 1.",
+      "Column 3: 0 + 0 + carry 1 = 1. Column 4: 1 + 1 = 10, write 0 carry 1.",
+      "Column 5: 0 + 0 + carry 1 = 1. Column 6: 0 + 1 = 1. Columns 7 and 8: 0.",
+      "Check in denary: 11 + 42 = 53, and 00110101 = 32 + 16 + 4 + 1 = 53. ✓"
+     ],
+     "answer": "00110101"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: binary addition (worksheet Q4 B)",
+     "context": "Add 11100101 and 00110101.",
+     "steps": [
+      "In denary: 11100101 = 229 and 00110101 = 53, so the total should be 282.",
+      "Add column by column with carries: the result is 1 00011010.",
+      "That is **9 bits**, but a byte only has room for 8.",
+      "The leftmost 1 does not fit, so the byte holds only 00011010 (= 26), which is wrong."
+     ],
+     "answer": "1 00011010 (282). In an 8-bit byte this is an overflow error: only 00011010 is kept."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: binary addition (worksheet Q4 C)",
+     "context": "Add 00001111 and 11110001.",
+     "steps": [
+      "In denary: 15 + 241 = 256.",
+      "Column 1: 1 + 1 = 10, write 0 carry 1. Every column after that is 1 + 0 + carry 1 or 0 + 1 + carry 1 = 10, so write 0 and carry 1 each time.",
+      "The result is 1 00000000, which needs 9 bits.",
+      "256 is too big for 8 bits (the largest is 255), so the byte holds 00000000."
+     ],
+     "answer": "1 00000000 (256). Another overflow error: the byte would show 00000000."
+    },
+    {
+     "t": "h",
+     "text": "Overflow"
+    },
+    {
+     "t": "p",
+     "text": "**Q5. When adding binary numbers, what is it called when a further place value is required to store the extra digit?** It is called an **[[overflow]]** (an overflow error). The answer is too large to fit in the number of bits available, so the extra carry bit is lost and the stored answer is wrong."
+    },
+    {
+     "t": "h",
+     "text": "The 007 Codebreaker"
+    },
+    {
+     "t": "p",
+     "text": "Binary is just a code. In the 007 Codebreaker, each letter is given a number (A = 1, B = 2 … Z = 26), and each number is written as a **5-bit** binary number using the place values **16, 8, 4, 2, 1**. Five bits give 32 patterns, which is enough for all 26 letters."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Letter",
+      "Number",
+      "Letter",
+      "Number",
+      "Letter",
+      "Number"
+     ],
+     "rows": [
+      [
+       "A",
+       "1",
+       "J",
+       "10",
+       "S",
+       "19"
+      ],
+      [
+       "B",
+       "2",
+       "K",
+       "11",
+       "T",
+       "20"
+      ],
+      [
+       "C",
+       "3",
+       "L",
+       "12",
+       "U",
+       "21"
+      ],
+      [
+       "D",
+       "4",
+       "M",
+       "13",
+       "V",
+       "22"
+      ],
+      [
+       "E",
+       "5",
+       "N",
+       "14",
+       "W",
+       "23"
+      ],
+      [
+       "F",
+       "6",
+       "O",
+       "15",
+       "X",
+       "24"
+      ],
+      [
+       "G",
+       "7",
+       "P",
+       "16",
+       "Y",
+       "25"
+      ],
+      [
+       "H",
+       "8",
+       "Q",
+       "17",
+       "Z",
+       "26"
+      ],
+      [
+       "I",
+       "9",
+       "R",
+       "18",
+       "",
+       ""
+      ]
+     ],
+     "caption": "The code book"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: crack the code for 007",
+     "context": "Decode the five binary words to find the code that unlocks James Bond's safe.",
+     "steps": [
+      "Word 1: 10100 = 16 + 4 = 20 = **T**; 01000 = 8 = **H**; 00101 = 4 + 1 = 5 = **E** → THE",
+      "Word 2: 10011 = 19 = **S**; 00101 = 5 = **E**; 00011 = 3 = **C**; 10010 = 18 = **R**; 00101 = **E**; 10100 = 20 = **T** → SECRET",
+      "Word 3: 10000 = 16 = **P**; 00001 = 1 = **A**; 10011 = **S**; 10011 = **S**; 00011 = **C**; 01111 = 15 = **O**; 00100 = 4 = **D**; 00101 = **E** → PASSCODE",
+      "Word 4: 01001 = 9 = **I**; 10011 = **S** → IS",
+      "Word 5: 10011 = **S**; 01011 = 11 = **K**; 11001 = 25 = **Y**; 00110 = 6 = **F**; 00001 = **A**; 01100 = 12 = **L**; 01100 = **L** → SKYFALL"
+     ],
+     "answer": "THE SECRET PASSCODE IS SKYFALL. The code to unlock the safe is SKYFALL."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Binary addition: 0+0=0, 0+1=1, 1+1=10 (write 0 carry 1), 1+1+1=11 (write 1 carry 1).",
+      "Always check a binary sum by converting to denary.",
+      "An overflow happens when the answer needs more bits than are available.",
+      "8 bits can hold at most 255, so 229 + 53 = 282 overflows.",
+      "Letters can be coded as binary numbers: 5 bits are enough for A–Z."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Decode the 007 message",
+    "caption": "Work out each word, then click to check.",
+    "head": [
+     "Binary",
+     "Word"
+    ],
+    "rows": [
+     [
+      "10100 01000 00101",
+      "THE"
+     ],
+     [
+      "10011 00101 00011 10010 00101 10100",
+      "SECRET"
+     ],
+     [
+      "10000 00001 10011 10011 00011 01111 00100 00101",
+      "PASSCODE"
+     ],
+     [
+      "01001 10011",
+      "IS"
+     ],
+     [
+      "10011 01011 11001 00110 00001 01100 01100",
+      "SKYFALL"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What is 1 + 1 in binary?",
+     "o": [
+      "2",
+      "11",
+      "10",
+      "01"
+     ],
+     "a": 2,
+     "why": "Write 0, carry 1, giving 10."
+    },
+    {
+     "q": "What is it called when the result of a binary addition is too big for the bits available?",
+     "o": [
+      "Overflow",
+      "Underflow",
+      "Carry",
+      "Volatile"
+     ],
+     "a": 0,
+     "why": "An overflow error."
+    },
+    {
+     "q": "In the 007 code, what letter is 01101?",
+     "o": [
+      "L",
+      "N",
+      "K",
+      "M"
+     ],
+     "a": 3,
+     "why": "8 + 4 + 1 = 13 = M."
+    },
+    {
+     "q": "What is 00000110 + 00000011?",
+     "o": [
+      "00001010",
+      "00001001",
+      "00000111",
+      "00001000"
+     ],
+     "a": 1,
+     "why": "6 + 3 = 9 = 00001001."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Add 00010110 and 00001111 in binary. Show your working and check your answer in denary.",
+     "m": 3,
+     "a": "Correct column addition with carries (1). Answer 00100101 (1). Check: 22 + 15 = 37 = 32 + 4 + 1 (1)."
+    },
+    {
+     "q": "Explain what an overflow error is and when it happens with 8-bit numbers.",
+     "m": 2,
+     "a": "An overflow is when the result of a calculation needs more bits than are available to store it, so the extra bit is lost and the answer is wrong (1). With 8 bits it happens when the answer is greater than 255 (1)."
+    },
+    {
+     "q": "Using the 007 code (A = 1 … Z = 26, 5 bits), write the word BOND in binary.",
+     "m": 2,
+     "a": "B = 00010, O = 01111, N = 01110, D = 00100 (2 for all four correct, 1 for two or three)."
+    }
+   ],
+   "terms": [
+    "Overflow"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "16. OCR GCSE (J277) 1.2 Adding two 8 bit binary integers",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=3K_Nw_pDzUQ",
+     "yt": "3K_Nw_pDzUQ"
+    },
+    {
+     "title": "Binary Addition & Overflow - Computerphile",
+     "source": "YouTube – Computerphile",
+     "url": "https://www.youtube.com/watch?v=WN8i5cwjkSE",
+     "yt": "WN8i5cwjkSE"
+    },
+    {
+     "title": "Representing Numbers and Letters with Binary: Crash Course Computer Science #4",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=1GSjbWt0c9M",
+     "yt": "1GSjbWt0c9M"
+    }
+   ]
+  },
+  {
+   "id": "p09",
+   "spec": "Know the units of storage from bit to petabyte and convert file sizes into bits",
+   "summary": "A bit is one binary digit. 8 bits make a byte, and each bigger unit is 1024 of the one before: KB, MB, GB, TB, PB.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Bits and bytes"
+    },
+    {
+     "t": "p",
+     "text": "Computers use electrical circuits that need data in a **digital** form: a string of binary digits. A [[bit]] is one binary digit (a 1 or a 0) and is the smallest piece of data a computer can process. All data stored or processed by a computer is just a long series of bits. To give you an idea of scale, a single letter of text, such as `a`, is represented by **eight bits**, which is one [[byte]]. Sound is digitised by sampling it at intervals, and images are digitised by representing each coloured dot (pixel) with a binary number."
+    },
+    {
+     "t": "h",
+     "text": "Units of storage"
+    },
+    {
+     "t": "p",
+     "text": "The terms kilobyte and megabyte describe the size of storage space or memory, and the size of the files we save. 'Kilo' means thousand and 'mega' means million, but because computers work in binary, each unit is usually counted as **1024** (2¹⁰) of the unit below."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Unit",
+      "Size"
+     ],
+     "rows": [
+      [
+       "Bit",
+       "A binary digit, 1 or 0"
+      ],
+      [
+       "[[Nibble]]",
+       "4 bits"
+      ],
+      [
+       "Byte",
+       "8 bits"
+      ],
+      [
+       "[[Kilobyte]] (KB)",
+       "1024 bytes"
+      ],
+      [
+       "[[Megabyte]] (MB)",
+       "1024 KB"
+      ],
+      [
+       "[[Gigabyte]] (GB)",
+       "1024 MB"
+      ],
+      [
+       "[[Terabyte]] (TB)",
+       "1024 GB"
+      ],
+      [
+       "[[Petabyte]] (PB)",
+       "1024 TB"
+      ]
+     ],
+     "caption": "Smallest to largest"
+    },
+    {
+     "t": "note",
+     "text": "You will sometimes see 1 KB = 1000 bytes (for example on hard drive boxes). Strictly, 1024 bytes is a *kibibyte* (KiB). In this course, use 1024."
+    },
+    {
+     "t": "p",
+     "text": "**Worksheet Q6 – the hierarchy from smallest to largest:** Bit → Nibble → Byte → Kilobyte → Megabyte → Gigabyte → Terabyte."
+    },
+    {
+     "t": "h",
+     "text": "Converting file sizes into bits"
+    },
+    {
+     "t": "p",
+     "text": "To go to a **smaller** unit, **multiply**: KB → bytes × 1024, then bytes → bits × 8. For MB, multiply by 1024 twice to get bytes."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: file sizes into bits",
+     "context": "Convert 7 KB, 29 KB, 279 KB, 1 MB and 2 MB into bits. Show your working.",
+     "steps": [
+      "7 KB = 7 × 1024 = 7,168 bytes; × 8 = **57,344 bits**",
+      "29 KB = 29 × 1024 = 29,696 bytes; × 8 = **237,568 bits**",
+      "279 KB = 279 × 1024 = 285,696 bytes; × 8 = **2,285,568 bits**",
+      "1 MB = 1024 KB = 1024 × 1024 = 1,048,576 bytes; × 8 = **8,388,608 bits**",
+      "2 MB = 2 × 1,048,576 = 2,097,152 bytes; × 8 = **16,777,216 bits**"
+     ],
+     "answer": "57,344; 237,568; 2,285,568; 8,388,608; 16,777,216 bits"
+    },
+    {
+     "t": "tip",
+     "text": "Going **down** to a smaller unit? Multiply. Going **up** to a bigger unit? Divide."
+    },
+    {
+     "t": "h",
+     "text": "Dots and dashes: Samuel Morse"
+    },
+    {
+     "t": "p",
+     "text": "Binary is not the first two-symbol code. From 1836, the American inventor **Samuel Morse** worked on the electric telegraph, which sent messages along wires as electrical pulses. With Alfred Vail he developed **Morse code**, where every letter is a pattern of just two signals: a short **dot** and a long **dash** (e.g. SOS is · · · – – – · · ·). Like binary, it shows that two symbols are enough to send any message."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A bit is a single 1 or 0; a nibble is 4 bits; a byte is 8 bits (about one character).",
+      "KB, MB, GB, TB and PB each = 1024 of the unit before.",
+      "Order: bit, nibble, byte, KB, MB, GB, TB, PB.",
+      "Bigger to smaller unit: multiply. Smaller to bigger: divide.",
+      "Morse code (dot/dash) was an early two-symbol code, like binary."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "calc",
+    "title": "Kilobytes to bits",
+    "caption": "Change the number of kilobytes to see the size in bytes and bits.",
+    "inputs": [
+     {
+      "id": "k",
+      "label": "Kilobytes",
+      "value": 7
+     }
+    ],
+    "formula": "k*1024",
+    "result": {
+     "label": "Size",
+     "unit": "bytes"
+    },
+    "show": [
+     "bytes",
+     "KB",
+     "MB"
+    ]
+   },
+   "check": [
+    {
+     "q": "How many bits are in a byte?",
+     "o": [
+      "4",
+      "16",
+      "8",
+      "1024"
+     ],
+     "a": 2,
+     "why": "A byte is 8 bits."
+    },
+    {
+     "q": "Which is the largest?",
+     "o": [
+      "Terabyte",
+      "Gigabyte",
+      "Megabyte",
+      "Kilobyte"
+     ],
+     "a": 0,
+     "why": "TB = 1024 GB."
+    },
+    {
+     "q": "How many bytes are in 3 KB?",
+     "o": [
+      "3000",
+      "24",
+      "384",
+      "3072"
+     ],
+     "a": 3,
+     "why": "3 × 1024 = 3072."
+    },
+    {
+     "q": "What is a nibble?",
+     "o": [
+      "8 bits",
+      "4 bits",
+      "1024 bytes",
+      "Half a kilobyte"
+     ],
+     "a": 1,
+     "why": "Half a byte: 4 bits."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Convert 5 KB into bits. Show your working.",
+     "m": 2,
+     "a": "5 × 1024 = 5,120 bytes (1); 5,120 × 8 = 40,960 bits (1)."
+    },
+    {
+     "q": "Put these in order from smallest to largest: gigabyte, nibble, kilobyte, bit, terabyte, megabyte, byte.",
+     "m": 2,
+     "a": "Bit, nibble, byte, kilobyte, megabyte, gigabyte, terabyte (2 for fully correct; 1 for one item out of place)."
+    }
+   ],
+   "terms": [
+    "Bit",
+    "Byte",
+    "Nibble",
+    "Kilobyte",
+    "Megabyte",
+    "Gigabyte",
+    "Terabyte",
+    "Petabyte"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "12. OCR GCSE (J277) 1.2 Units of data storage",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=jBXWZbHPLWI",
+     "yt": "jBXWZbHPLWI"
+    },
+    {
+     "title": "Measurements of storage (lesson with video)",
+     "source": "Oak National Academy",
+     "url": "https://www.thenational.academy/pupils/lessons/measurements-of-storage/video"
+    }
+   ]
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Hardware",
+   "def": "The physical parts of a computer system that you can touch.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Software",
+   "def": "The programs and instructions that control the hardware and make it do useful work.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Data",
+   "def": "Raw facts and figures with no meaning or context, such as 16 or A+.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Information",
+   "def": "Data that has been processed and given meaning and context.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Compute",
+   "def": "To carry out mathematical calculations; today it usually means using computers to solve problems.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Operating system",
+   "def": "System software, such as Windows, that controls the hardware and runs other programs.",
+   "alt": "OS",
+   "page": "p01"
+  },
+  {
+   "term": "Input device",
+   "def": "Hardware that lets the user put data into a computer, such as a keyboard or scanner.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Output device",
+   "def": "Hardware that lets the user receive information from a computer, such as a monitor or printer.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Storage device",
+   "def": "Hardware that keeps programs and files permanently, even when the power is switched off.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Magnetic storage",
+   "def": "Storage that magnetises areas of a spinning disk or tape, such as a hard disk drive.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Optical storage",
+   "def": "Storage read by a laser, such as a CD, DVD or Blu-ray disc.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Solid state storage",
+   "def": "Storage that uses flash memory chips and has no moving parts, such as a USB stick or SD card.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Memory",
+   "def": "Where the computer holds the programs and data it is using right now, for the short term.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "RAM",
+   "def": "Random Access Memory: the computer's main memory, which is volatile.",
+   "alt": "Random Access Memory",
+   "page": "p03"
+  },
+  {
+   "term": "Volatile",
+   "def": "Loses its contents when the power is switched off, like RAM.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Motherboard",
+   "def": "The main circuit board that connects all of a computer's components together.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Power supply",
+   "def": "The component that converts mains electricity into the low voltages the computer needs.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Graphics card",
+   "def": "The component that processes images and sends the picture to the monitor.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Raspberry Pi",
+   "def": "A cheap, credit-card-sized computer used for learning to program and for maker projects.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "CPU",
+   "def": "Central Processing Unit: the part of the computer that interprets and executes instructions.",
+   "alt": "Central Processing Unit, processor",
+   "page": "p05"
+  },
+  {
+   "term": "Fetch-decode-execute cycle",
+   "def": "The cycle the CPU repeats: fetch an instruction from memory, decode it, then execute it.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Gigahertz",
+   "def": "The unit for processor speed: 1 GHz is a billion cycles per second.",
+   "alt": "GHz",
+   "page": "p05"
+  },
+  {
+   "term": "Bletchley Park",
+   "def": "The site in England where codebreakers decrypted enemy messages during the Second World War.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Enigma",
+   "def": "The cipher machine the German forces used to scramble their messages in the Second World War.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Lorenz cipher",
+   "def": "A complex teleprinter cipher machine used by the German High Command for its most secret messages.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Alan Turing",
+   "def": "The mathematician who led work on breaking naval Enigma at Bletchley Park and designed the Bombe.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Colossus",
+   "def": "The electronic machine built by Tommy Flowers to help break the Lorenz cipher; it read 5,000 characters per second.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Manchester Baby",
+   "def": "The first computer to store and run its own program, in 1948.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Binary",
+   "def": "A number system (base 2) that uses only the digits 0 and 1.",
+   "alt": "base 2",
+   "page": "p07"
+  },
+  {
+   "term": "Denary",
+   "def": "The everyday number system (base 10) that uses the digits 0 to 9; also called decimal.",
+   "alt": "decimal, base 10",
+   "page": "p07"
+  },
+  {
+   "term": "Overflow",
+   "def": "An error when the result of a calculation needs more bits than are available to store it.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Bit",
+   "def": "A single binary digit, 1 or 0: the smallest unit of data.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Byte",
+   "def": "A group of 8 bits; enough to store one character.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Nibble",
+   "def": "A group of 4 bits (half a byte).",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Kilobyte",
+   "def": "1024 bytes.",
+   "alt": "KB",
+   "page": "p09"
+  },
+  {
+   "term": "Megabyte",
+   "def": "1024 kilobytes.",
+   "alt": "MB",
+   "page": "p09"
+  },
+  {
+   "term": "Gigabyte",
+   "def": "1024 megabytes.",
+   "alt": "GB",
+   "page": "p09"
+  },
+  {
+   "term": "Terabyte",
+   "def": "1024 gigabytes.",
+   "alt": "TB",
+   "page": "p09"
+  },
+  {
+   "term": "Petabyte",
+   "def": "1024 terabytes.",
+   "alt": "PB",
+   "page": "p09"
+  }
+ ]
+}

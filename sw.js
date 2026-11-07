@@ -49,7 +49,7 @@ self.addEventListener('fetch', e => {
   if (url.origin !== self.location.origin || !req.url.startsWith(BASE)) return;   /* other sites: straight to the network */
   if (req.headers.has('range')) return;                                          /* audio/video seeking: let the browser stream */
   const key = clean(req.url);
-  if (/\/notes\/slides\/manifest\.json$|\/ks3\/manifest\.json$|\/ks3\/books\/index\.json$|\/papers\/(manifest|folders|pages|crops|reports|topics|exam-dates|worksheets|msdefs)\.json$|\/(version|activity)\.json$/.test(url.pathname)) { e.respondWith(netFirst(req)); return; }
+  if (/\/notes\/slides\/manifest\.json$|\/ks3\/manifest\.json$|\/ks3\/books\/index\.json$|\/papers\/(manifest|folders|pages|crops|reports|topics|exam-dates|worksheets|msdefs)\.json$|\/(version|activity)\.json$|\/icons\/K\d+-\d+\.png$/.test(url.pathname)) { e.respondWith(netFirst(req)); return; }
   if (req.mode === 'navigate' || /\.html$|\/$/.test(url.pathname)) { e.respondWith(pageFirst(req, key)); return; }
   if (PRE_SET.has(key)) { e.respondWith(swr(req, key)); return; }
   if (req.mode === 'navigate') { e.respondWith(fetch(req).catch(async () => (await caches.match(key)) || (await caches.match(new URL('index.html', BASE).href)) || Response.error())); return; }

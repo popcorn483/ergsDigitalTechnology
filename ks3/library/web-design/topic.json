@@ -1,0 +1,2145 @@
+{
+ "title": "Web Design",
+ "summary": "Building web pages with HTML: how websites work, page structure, the tags you use, and styling with CSS.",
+ "learn": [
+  "What HTML is, and the first website",
+  "Good and bad website design, and navigation",
+  "How a browser knows what to display",
+  "Page structure and HTML tags",
+  "Styling tags and CSS selectors"
+ ],
+ "temporary": false,
+ "intro": "How the web began, what makes a website well or badly designed, and how to build your own pages with HTML tags, links, a navbar and CSS styling.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Describe the internet, the World Wide Web and how the first website was made",
+   "summary": "The internet is the hardware network; the World Wide Web is the collection of websites on it. Tim Berners-Lee made the first website on 6 August 1991 using HTML.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The starter puzzle showed a jumble of text full of angle brackets like `<TITLE>` and `<A HREF=…>`. It is the code of the **very first website**. Your browser turns code like this into the pages you see."
+    },
+    {
+     "t": "h",
+     "text": "Key terms"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Key term",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "Internet",
+       "A global network of interconnected computers. It is the **hardware**: the computers, cables and wireless links that communicate with one another."
+      ],
+      [
+       "World Wide Web (WWW)",
+       "A huge collection of websites that we access through the internet. It holds web pages and web resources such as images and videos. It is the **software/content** hosted on the internet."
+      ],
+      [
+       "Web page",
+       "Each website has multiple screens, each one called a web page."
+      ],
+      [
+       "Hyperlink",
+       "A word or image you click to take you to another web page."
+      ],
+      [
+       "Internet browser",
+       "A program that reads and displays HTML documents, e.g. Chrome, Firefox, Safari or Edge. It does not show the HTML tags but uses them to display the page."
+      ],
+      [
+       "URL",
+       "The unique address of a web page, e.g. https://www.bbc.co.uk/news."
+      ]
+     ],
+     "caption": "Key terms used in websites"
+    },
+    {
+     "t": "warn",
+     "text": "The internet and the World Wide Web are **not** the same thing. Email and online gaming use the internet but are not part of the web."
+    },
+    {
+     "t": "h",
+     "text": "The first website"
+    },
+    {
+     "t": "p",
+     "text": "The first website went live on **6 August 1991**. It was made by **Tim Berners-Lee**, a British computer scientist working at CERN, a science laboratory in Switzerland. He saw a huge demand for universities around the world to share information automatically."
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "**1989** – Berners-Lee starts the World Wide Web project.",
+      "He writes the rules for **HTTP** (how pages are sent) and **HTML** (how pages are written), so every computer shares pages the same way.",
+      "**1991** – the first website goes live.",
+      "**1994** – he founds the **World Wide Web Consortium (W3C)**, which sets web standards and helped the web grow into social media, online shopping and streaming."
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "first-site.html (tidied up into modern HTML)",
+     "code": "<!DOCTYPE html>\n<html>\n  <head>\n    <title>The World Wide Web project</title>\n  </head>\n  <body>\n    <h1>World Wide Web</h1>\n    <p>The WorldWideWeb (W3) is a wide-area\n    <a href=\"WhatIs.html\">hypermedia</a> information retrieval\n    initiative aiming to give universal access to a large\n    universe of documents.</p>\n  </body>\n</html>",
+     "output": "A large heading ‘World Wide Web’, then a paragraph with the word ‘hypermedia’ as a clickable link."
+    },
+    {
+     "t": "note",
+     "text": "It might not look like much, but this was not just a Word document: it could be opened and read by anyone, anywhere in the world, and linked to other pages. That is what made it revolutionary."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Internet = hardware network; WWW = websites hosted on it.",
+      "A website is made of web pages linked by hyperlinks.",
+      "A browser reads HTML and displays the page.",
+      "Tim Berners-Lee made the first website on 6 August 1991.",
+      "He founded the W3C in 1994."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "timeline",
+    "title": "How the web began",
+    "caption": "Key dates in Tim Berners-Lee's web.",
+    "items": [
+     {
+      "label": "1989 – the idea",
+      "detail": "Berners-Lee proposes a way for scientists to share linked documents."
+     },
+     {
+      "label": "1990 – HTTP and HTML",
+      "detail": "He writes the rules for sending and writing web pages, and the first browser."
+     },
+     {
+      "label": "6 Aug 1991 – first website",
+      "detail": "The World Wide Web project page goes live."
+     },
+     {
+      "label": "1994 – W3C",
+      "detail": "The World Wide Web Consortium is founded to set web standards."
+     }
+    ]
+   },
+   "check": [
+    {
+     "q": "Which is the best description of the internet?",
+     "o": [
+      "A collection of websites",
+      "A global network of interconnected computers",
+      "A web browser",
+      "A programming language"
+     ],
+     "a": 1,
+     "why": "The internet is the hardware network."
+    },
+    {
+     "q": "Who created the first website?",
+     "o": [
+      "Tim Berners-Lee",
+      "Bill Gates",
+      "Steve Jobs",
+      "Ada Lovelace"
+     ],
+     "a": 0,
+     "why": "Tim Berners-Lee, in 1991."
+    },
+    {
+     "q": "What does a browser do with HTML tags?",
+     "o": [
+      "Shows them on screen",
+      "Uses them to display the page, without showing them",
+      "Deletes them",
+      "Emails them"
+     ],
+     "a": 1,
+     "why": "The tags are instructions, not content."
+    },
+    {
+     "q": "When did the first website go live?",
+     "o": [
+      "1969",
+      "1985",
+      "1991",
+      "2001"
+     ],
+     "a": 2,
+     "why": "6 August 1991."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between the internet and the World Wide Web.",
+     "m": 2,
+     "a": "The internet is a global network of interconnected computers / the hardware (1). The WWW is the collection of websites/web pages accessed over the internet / the software (1)."
+    },
+    {
+     "q": "What is a hyperlink?",
+     "m": 1,
+     "a": "A word or image you click on to go to another web page (1)."
+    }
+   ],
+   "terms": [
+    "Internet",
+    "World Wide Web",
+    "Web page",
+    "Hyperlink",
+    "Browser",
+    "URL"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "What is the Internet?",
+     "source": "YouTube – CodeAI",
+     "url": "https://www.youtube.com/watch?v=Dxcc6ycZ73M",
+     "yt": "Dxcc6ycZ73M"
+    },
+    {
+     "title": "A brief history of the World Wide Web",
+     "source": "YouTube – CERN",
+     "url": "https://www.youtube.com/watch?v=sSqZ_hJu9zA",
+     "yt": "sSqZ_hJu9zA"
+    }
+   ]
+  },
+  {
+   "id": "p02",
+   "spec": "Identify common website design mistakes and how to fix them",
+   "summary": "Bad websites use too many colours and fonts, are hard to navigate and read, and have unclear pictures. Good websites are clean, consistent, readable, with clear images and a 3–5 colour scheme.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Websites differ in their fonts, colours and interactive features. When building one it is easy to get carried away, and your site ends up looking a mess. The usual problems are:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Colour schemes with too many colours",
+      "Layout that is hard to navigate",
+      "Text that is difficult to read",
+      "Eyes drawn all over the place, with no order to where you should look",
+      "Pictures that are not clear (pixelated)",
+      "No alignment of text and text boxes"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Spot the mistakes: the ‘worst website’ example"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Mistake on the example site",
+      "Why it is bad / the fix"
+     ],
+     "rows": [
+      [
+       "Too many fonts, including Brush Script and Word Art; some not web-safe",
+       "Looks messy and may not display on every computer. Use one or two clear fonts."
+      ],
+      [
+       "Blue on red, red on blue, blue or red on black",
+       "Very hard to read. Use strong contrast, e.g. dark text on a light background."
+      ],
+      [
+       "Repeating, coloured or bevelled backgrounds",
+       "Distracting and unprofessional. Keep backgrounds plain."
+      ],
+      [
+       "Animated stars, flashing ‘New’ icons, animated email icons, scrolling text",
+       "Pull your eyes everywhere. Use animation rarely, if at all."
+      ],
+      [
+       "‘Under construction’ notices, page counter, ‘last updated’ script",
+       "Make the site look unfinished. Leave them off."
+      ],
+      [
+       "Spellings like ‘kewl’, ‘u’, ‘1’, and words like ‘sight’ for ‘site’",
+       "Unprofessional. Proofread everything."
+      ],
+      [
+       "Inconsistent menu, a link that does not work, link text that does not match the page title",
+       "Confuses users. Test every link and keep the menu identical on every page."
+      ],
+      [
+       "Mouse-over that makes text bigger or bold",
+       "The layout jumps. Change colour only."
+      ],
+      [
+       "A big photo shrunk with HTML; a small photo stretched bigger",
+       "The first is a huge slow download; the second is pixelated. Resize images properly before uploading."
+      ],
+      [
+       "Sunset photo saved as a GIF",
+       "GIFs only have 256 colours, so photos look grainy. Use JPEG for photos."
+      ],
+      [
+       "Text written inside an image",
+       "Cannot be searched or read by screen readers. Use real HTML text."
+      ],
+      [
+       "Table too wide, causing a horizontal scrollbar; text touching borders",
+       "Fit the page to the screen and add padding."
+      ],
+      [
+       "Background music that loops forever and cannot be turned off",
+       "Very annoying. Avoid sound, or give a quick way to turn it off."
+      ],
+      [
+       "Page saved as ‘new_page_1.htm’",
+       "Poor file naming. Give files meaningful names, e.g. hobbies.html."
+      ]
+     ],
+     "caption": "Some of the things wrong with a deliberately bad website"
+    },
+    {
+     "t": "h",
+     "text": "How to fix most of these"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Keep your website **clean and clear** (balanced).",
+      "Make the **navigation** easy to use.",
+      "Keep your **page layout consistent**.",
+      "Make images **clear, appropriate and a suitable size**.",
+      "Make text **readable and consistent**.",
+      "Use a well-thought-out **colour scheme of 3–5 colours**."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "tip",
+     "text": "Test your site by asking someone else, e.g. a younger sibling, to find a page on it. If they get lost, your navigation needs work."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Too many colours and fonts make a site hard to use.",
+      "Use a 3–5 colour scheme and readable, consistent text.",
+      "Keep the layout and menu consistent on every page.",
+      "Images must be clear and correctly sized.",
+      "Avoid flashing, animated or noisy extras."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "How many colours should a good website colour scheme usually have?",
+     "o": [
+      "1",
+      "As many as possible",
+      "8–10",
+      "3–5"
+     ],
+     "a": 3,
+     "why": "3–5 colours keeps a site clear and consistent."
+    },
+    {
+     "q": "Why is red text on a blue background a bad idea?",
+     "o": [
+      "It is very hard to read",
+      "It is too cheap",
+      "Browsers cannot show it",
+      "It makes the page load slowly"
+     ],
+     "a": 0,
+     "why": "Poor contrast makes text difficult to read."
+    },
+    {
+     "q": "A small photo has been stretched to fill the page. What will it look like?",
+     "o": [
+      "Pixelated",
+      "Sharper",
+      "Exactly the same",
+      "Black and white"
+     ],
+     "a": 0,
+     "why": "Enlarging a small bitmap makes it pixelated."
+    },
+    {
+     "q": "Which of these is good design?",
+     "o": [
+      "The same menu on every page",
+      "An ‘Under construction’ notice",
+      "Background music that loops",
+      "Flashing ‘New’ icons"
+     ],
+     "a": 0,
+     "why": "Consistent navigation is good design."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State **three** common problems with badly designed websites.",
+     "m": 3,
+     "a": "Any three: too many colours (1); hard to navigate (1); text hard to read (1); eyes drawn all over the place (1); pictures not clear/pixelated (1); no alignment of text (1)."
+    },
+    {
+     "q": "Give **three** ways to make a website well designed.",
+     "m": 3,
+     "a": "Any three: clean and clear layout (1); easy navigation (1); consistent layout (1); clear, suitably sized images (1); readable, consistent text (1); 3–5 colour scheme (1)."
+    }
+   ],
+   "terms": [
+    "Colour scheme"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "50 Website Design Mistakes (And Why)",
+     "source": "YouTube – The Website Architect",
+     "url": "https://www.youtube.com/watch?v=JiY9ZroekRk",
+     "yt": "JiY9ZroekRk"
+    }
+   ]
+  },
+  {
+   "id": "p03",
+   "spec": "Explain why good navigation matters and describe features of a good navigation bar",
+   "summary": "Users leave sites that are hard to navigate. A good menu is the same on every page, clearly identifiable, with clearly named buttons and subtle rollover effects.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "[[Navigation]] means how users move around a website. It is a key part of design and must be easy for your **target audience** (the people the site is made for) to use."
+    },
+    {
+     "t": "p",
+     "text": "Research shows users will simply leave a website if it is difficult to navigate. Think how quickly you give up on a slow, confusing app."
+    },
+    {
+     "t": "h",
+     "text": "Rules for good navigation"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Consistency** in menus and buttons is super important.",
+      "The **menu should be the same on every page** of the website.",
+      "The **main menu should be clearly identifiable**.",
+      "Each button (hyperlink) should be **clearly named**, so the user knows exactly what to expect when they press it.",
+      "**Rollover effects** on buttons (e.g. changing colour when the mouse is over them) add interactivity, as long as they do not distract the user."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "What do navigation bars have in common?"
+    },
+    {
+     "t": "p",
+     "text": "Look at the navigation bars of Facebook, X (Twitter), Apple and Google. They use very different colour schemes but share very similar qualities:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Similarity",
+      "Why"
+     ],
+     "rows": [
+      [
+       "A horizontal bar across the top of the page",
+       "Where users expect to look first"
+      ],
+      [
+       "Logo or site name at the left",
+       "Shows whose site it is; often links back to the home page"
+      ],
+      [
+       "Short, clear one- or two-word labels (Home, Profile, Store)",
+       "Users know where each link goes"
+      ],
+      [
+       "Same position and style on every page",
+       "Users never get lost"
+      ],
+      [
+       "Strong contrast between bar and text",
+       "Easy to read"
+      ],
+      [
+       "Current page or hovered link highlighted",
+       "Shows where you are"
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "example",
+     "title": "Worked example: which sites follow the rules?",
+     "context": "Think of other websites. Do they follow these rules?",
+     "steps": [
+      "BBC Bitesize: bar along the top, logo on the left, clear subject links, the same on every page – follows the rules.",
+      "Amazon: logo on the left, search in the middle, account and basket on the right on every page – follows the rules.",
+      "A site where the menu moves around or uses unlabelled icons only – breaks the rules, because users cannot predict where links go."
+     ],
+     "answer": "Most big, successful sites follow the same navigation rules because users expect them."
+    },
+    {
+     "t": "tip",
+     "text": "Label buttons with what the user gets (‘Fixtures’, ‘Contact us’), not clever names (‘The Zone’). Nobody clicks a mystery button."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Navigation = how users move around a site.",
+      "Users leave sites that are hard to navigate.",
+      "Keep the menu the same on every page and easy to spot.",
+      "Name every button clearly.",
+      "Rollover effects are fine if they do not distract."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Why is navigation so important?",
+     "o": [
+      "It makes the site load faster",
+      "Users will leave a website that is hard to navigate",
+      "It is required by law",
+      "It adds more colours"
+     ],
+     "a": 1,
+     "why": "Research shows people abandon hard-to-navigate sites."
+    },
+    {
+     "q": "Where should the main menu appear?",
+     "o": [
+      "Only on the home page",
+      "In the same place on every page",
+      "In a different place on each page",
+      "Only at the bottom"
+     ],
+     "a": 1,
+     "why": "Consistency means the same menu on every page."
+    },
+    {
+     "q": "What is a rollover effect?",
+     "o": [
+      "A broken link",
+      "A page that scrolls by itself",
+      "A button that changes when the mouse moves over it",
+      "A spinning logo"
+     ],
+     "a": 2,
+     "why": "Rollovers react to the mouse pointer."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe **three** features of good website navigation.",
+     "m": 3,
+     "a": "Menu is the same/consistent on every page (1); main menu is clearly identifiable (1); buttons clearly named so user knows where they go (1); rollover effects that do not distract (1). Any three."
+    },
+    {
+     "q": "Explain why a website designer should keep the menu consistent on every page.",
+     "m": 2,
+     "a": "Users always know where to find the menu/links (1) so they do not get lost or confused and leave the site (1)."
+    }
+   ],
+   "terms": [
+    "Navigation",
+    "Target audience"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Best practices for your website's main navigation",
+     "source": "YouTube – Podia",
+     "url": "https://www.youtube.com/watch?v=t6l8RoLwOj8",
+     "yt": "t6l8RoLwOj8"
+    },
+    {
+     "title": "How to create a CSS navigation bar in 6 minutes! 🧭",
+     "source": "YouTube – Bro Code",
+     "url": "https://www.youtube.com/watch?v=f3uCSh6LIY0",
+     "yt": "f3uCSh6LIY0"
+    }
+   ]
+  },
+  {
+   "id": "p04",
+   "spec": "Explain what HTML is and how tags, closing tags and attributes work",
+   "summary": "HTML (HyperText Markup Language) uses tags in angle brackets to label content. Tags usually come in pairs; the closing tag has a forward slash. Tags can have attributes and can be nested.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "[[HTML]] stands for **HyperText Markup Language**. It is the language used to create web pages on the World Wide Web. It describes the **content** and **structure** of a page. The latest version is **HTML5**."
+    },
+    {
+     "t": "p",
+     "text": "Web developers (the people who make websites) do not make websites in Microsoft Word or by dragging boxes around in a website builder like Wix. Even a big site like Miniclip is really made of HTML tags that you never see."
+    },
+    {
+     "t": "p",
+     "text": "When you visit a website, your browser loads a **plain text file** full of tags. The browser ‘reads’ the tags and draws the headings, images and buttons. It is like reading a book: the page is only words, but your imagination creates the pictures. With websites, the browser creates the picture."
+    },
+    {
+     "t": "h",
+     "text": "It is not as complicated as it looks!"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Tags** are used throughout an HTML document.",
+      "Tags use **angled brackets**: `<` and `>`.",
+      "Tags nearly always come in **pairs**. If you open a tag you must close it. The closing tag has a **forward slash** `/`.",
+      "Tags can have **attributes** that change their appearance or what they do.",
+      "Tags can be **embedded (nested)** inside each other."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "Nesting: the title tag is inside the head tag",
+     "code": "<head>\n    <title>My Website</title>\n</head>"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Line",
+      "What is happening"
+     ],
+     "rows": [
+      [
+       "`<head>`",
+       "Opening the head tag"
+      ],
+      [
+       "`<title>My Website</title>`",
+       "The title tag is opened and closed **inside** the head tag"
+      ],
+      [
+       "`</head>`",
+       "Closing the head tag"
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "h",
+     "text": "Anatomy of an element"
+    },
+    {
+     "t": "p",
+     "text": "An [[element]] is an opening tag, some content, and a closing tag:"
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "The pattern for most tags",
+     "code": "<tagname>Content to be displayed can go here…</tagname>"
+    },
+    {
+     "t": "list",
+     "items": [
+      "`<tagname>` – the **starting (opening) tag**, surrounded by angled brackets.",
+      "The content between the tags is what is actually displayed on screen.",
+      "`</tagname>` – the **closing tag**: just like the opening tag but with a forward slash before the name."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "warn",
+     "text": "Close tags in the reverse order you opened them: `<p><b>Hi</b></p>` is right; `<p><b>Hi</p></b>` is wrong."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "HTML = HyperText Markup Language; latest version HTML5.",
+      "A web page is a text file of tags that the browser reads.",
+      "Tags use < and >, usually in pairs; closing tags have /.",
+      "Attributes go inside the opening tag.",
+      "Tags can be nested inside each other."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does HTML stand for?",
+     "o": [
+      "HyperText Markup Language",
+      "High Text Making Language",
+      "Hyperlink Text Main Language",
+      "Home Tool Markup Language"
+     ],
+     "a": 0,
+     "why": "HyperText Markup Language."
+    },
+    {
+     "q": "Which is a correct closing tag?",
+     "o": [
+      "</p>",
+      "<p/>",
+      "<\\p>",
+      "<p>"
+     ],
+     "a": 0,
+     "why": "The closing tag puts a forward slash before the tag name."
+    },
+    {
+     "q": "What is the latest version of HTML?",
+     "o": [
+      "HTML2",
+      "HTML5",
+      "HTML4",
+      "XHTML9"
+     ],
+     "a": 1,
+     "why": "HTML5."
+    },
+    {
+     "q": "In `<head><title>Hi</title></head>`, which tag is nested inside which?",
+     "o": [
+      "title inside head",
+      "head inside title",
+      "They are not nested",
+      "Both inside body"
+     ],
+     "a": 0,
+     "why": "The title opens and closes inside the head."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what HTML is and how a browser uses it.",
+     "m": 3,
+     "a": "HTML is HyperText Markup Language, the language used to create web pages (1). A web page is a text file of tags (1). The browser reads/interprets the tags and displays the content without showing the tags (1)."
+    },
+    {
+     "q": "State **three** rules about HTML tags.",
+     "m": 3,
+     "a": "Use angled brackets < > (1); usually come in pairs / must be closed (1); closing tag has a forward slash (1); can have attributes (1); can be nested (1). Any three."
+    }
+   ],
+   "terms": [
+    "HTML",
+    "Tag",
+    "Element",
+    "Attribute"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "HTML & CSS for Absolute Beginners: What is HTML?",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=X4sClFRMJ00",
+     "yt": "X4sClFRMJ00"
+    },
+    {
+     "title": "HTML and CSS for Beginners Part 2: Building your first web page!",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=V8UAEoOvqFg",
+     "yt": "V8UAEoOvqFg"
+    }
+   ]
+  },
+  {
+   "id": "p05",
+   "spec": "Describe the structure of an HTML page and what each main tag does",
+   "summary": "Every page has <!DOCTYPE html>, then <html> containing a <head> (information for the browser, including the <title>) and a <body> (everything visible).",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "HTML tags label pieces of content such as a ‘heading’, ‘paragraph’ or ‘table’. Browsers do not display the tags; they use them to render (draw) the content. Here is a very simple HTML file:"
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "index.html",
+     "code": "<!DOCTYPE html>\n<html>\n    <head>\n        <title>Page Title</title>\n    </head>\n    <body>\n        <h1>My First Heading</h1>\n        <p>My first paragraph.</p>\n    </body>\n</html>",
+     "output": "The browser tab says ‘Page Title’. The page shows a big bold heading ‘My First Heading’ and below it the text ‘My first paragraph.’"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Tag",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "`<!DOCTYPE html>`",
+       "Declares the document is HTML5, so the browser knows it is a web page."
+      ],
+      [
+       "`<html>`",
+       "The **root element**. EVERY other tag goes inside it; it tells the browser this is the website content."
+      ],
+      [
+       "`<head>`",
+       "Holds **meta information** about the page: things the browser needs to know but that do not appear on the page itself."
+      ],
+      [
+       "`<title>`",
+       "The title of the page, shown in the browser **tab**."
+      ],
+      [
+       "`<body>`",
+       "Contains all the **visible** content of the page."
+      ],
+      [
+       "`<h1>`",
+       "‘Heading 1’, a large heading. There are smaller ones: `<h2>`, `<h3>` … `<h6>`."
+      ],
+      [
+       "`<p>`",
+       "A **paragraph** of text."
+      ]
+     ],
+     "caption": "The key tags in a simple page"
+    },
+    {
+     "t": "h",
+     "text": "Indenting your code"
+    },
+    {
+     "t": "p",
+     "text": "Use the **Tab** key to indent nested tags. If a tag is ‘inside’ another, tab it in. This makes it very clear what is inside what. Above, the `<h1>` and `<p>` are inside `<body>` because they both start and end inside it."
+    },
+    {
+     "t": "h",
+     "text": "What is displayed?"
+    },
+    {
+     "t": "p",
+     "text": "Only what is inside the `<body>` is shown on the page (plus the `<title>`, in the tab). The other tags must still be there because the browser uses them."
+    },
+    {
+     "t": "warn",
+     "text": "All content you want to display must go inside `<body>`. Text typed into the `<head>` will not appear properly on the page."
+    },
+    {
+     "t": "tip",
+     "text": "Think of a person: the **head** holds information you cannot see (thoughts), the **body** is what everyone sees."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "<!DOCTYPE html> says ‘this is HTML5’.",
+      "<html> is the root element: everything goes inside it.",
+      "<head> holds information for the browser; <title> appears in the tab.",
+      "<body> holds everything visible.",
+      "Indent nested tags with Tab to keep code readable."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "layers",
+    "title": "Structure of an HTML page",
+    "caption": "Each box sits inside the one above it.",
+    "items": [
+     {
+      "label": "<!DOCTYPE html>",
+      "detail": "First line: this is an HTML5 document."
+     },
+     {
+      "label": "<html>",
+      "detail": "Root element: wraps everything else."
+     },
+     {
+      "label": "<head> … </head>",
+      "detail": "Information for the browser, including <title> (shown in the tab). Not displayed on the page."
+     },
+     {
+      "label": "<body> … </body>",
+      "detail": "Everything the user sees: headings, paragraphs, images, links, lists."
+     }
+    ]
+   },
+   "check": [
+    {
+     "q": "Which tag's content appears in the browser tab?",
+     "o": [
+      "<title>",
+      "<body>",
+      "<h1>",
+      "<p>"
+     ],
+     "a": 0,
+     "why": "The title appears on the tab."
+    },
+    {
+     "q": "Where must all visible content go?",
+     "o": [
+      "<head>",
+      "<!DOCTYPE>",
+      "<title>",
+      "<body>"
+     ],
+     "a": 3,
+     "why": "Only body content is displayed on the page."
+    },
+    {
+     "q": "What does <!DOCTYPE html> do?",
+     "o": [
+      "Makes a heading",
+      "Tells the browser the document is HTML5",
+      "Adds a link",
+      "Closes the page"
+     ],
+     "a": 1,
+     "why": "It declares the document type."
+    },
+    {
+     "q": "Which is the root element that every other tag goes inside?",
+     "o": [
+      "<div>",
+      "<head>",
+      "<body>",
+      "<html>"
+     ],
+     "a": 3,
+     "why": "<html> is the root element."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe the purpose of the `<head>` and `<body>` sections of an HTML page.",
+     "m": 2,
+     "a": "<head> contains information about the page for the browser (meta information, title) that is not displayed on the page (1). <body> contains all the visible content of the page (1)."
+    },
+    {
+     "q": "Write the HTML for a page with the tab title ‘Rugby’ and a heading ‘Fixtures’.",
+     "m": 4,
+     "a": "<!DOCTYPE html> and <html> tags (1); <head><title>Rugby</title></head> (1); <body> … </body> (1); <h1>Fixtures</h1> inside the body (1)."
+    }
+   ],
+   "terms": [
+    "Head",
+    "Body",
+    "Indentation"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "HTML and CSS for Beginners Part 2: Building your first web page!",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=V8UAEoOvqFg",
+     "yt": "V8UAEoOvqFg"
+    },
+    {
+     "title": "HTML & CSS for Absolute Beginners: What is HTML?",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=X4sClFRMJ00",
+     "yt": "X4sClFRMJ00"
+    }
+   ]
+  },
+  {
+   "id": "p06",
+   "spec": "Use HTML tags for headings, paragraphs, lists and images",
+   "summary": "Use <h1>–<h6> for headings, <p> for paragraphs, <ol>/<ul> with <li> for numbered and bulleted lists, and the self-closing <img> tag with src, alt, width and height attributes for images.",
+   "blocks": [
+    {
+     "t": "table",
+     "head": [
+      "Tag",
+      "Example",
+      "Use"
+     ],
+     "rows": [
+      [
+       "Headings",
+       "`<h1>This is my heading</h1>` `<h2>Slightly smaller</h2>` `<h3>Smaller again</h3>`",
+       "Big titles at the top of a page or section. `<h1>` is biggest, down to `<h6>`."
+      ],
+      [
+       "Paragraphs",
+       "`<p>This is a paragraph tag, which can contain lots of text</p>`",
+       "Blocks of text, just like paragraphs in a book."
+      ],
+      [
+       "Ordered list",
+       "`<ol>` with `<li>` items inside",
+       "A numbered list (1, 2, 3…)."
+      ],
+      [
+       "Unordered list",
+       "`<ul>` with `<li>` items inside",
+       "A bullet-point list. `<li>` means **list item**."
+      ],
+      [
+       "Images",
+       "`<img src=\"myimage.jpg\" alt=\"My Logo\" width=\"64\" height=\"32\" />`",
+       "Shows a picture. Self-closing: no closing tag."
+      ]
+     ],
+     "caption": "Tags we can use"
+    },
+    {
+     "t": "h",
+     "text": "Images and attributes"
+    },
+    {
+     "t": "p",
+     "text": "Images make websites informative and engaging. The `<img>` tag is a [[self-closing tag]]: it has no content between tags, so there is no closing tag. Instead it uses attributes, and we end it with `/>`:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Attribute",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "`src`",
+       "The **source**: where the image file is saved, e.g. `myimage.jpg`."
+      ],
+      [
+       "`alt`",
+       "**Alternative text** shown if the image cannot be found or is corrupt. Screen readers read it aloud for blind users."
+      ],
+      [
+       "`width` / `height`",
+       "Set the size of the image on screen, in pixels."
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "example",
+     "title": "Worked example: editing the paragraphs",
+     "context": "Open your website in Notepad (File > Open). Change the first paragraph so it displays “This is a tagline”, and add a third paragraph about your name, family and favourite sports team.",
+     "steps": [
+      "Find the first `<p>` and replace its text: `<p>This is a tagline</p>`.",
+      "Below the second paragraph, still inside `<body>`, add a new paragraph: `<p>My name is Sam. I live in Enniskillen with my mum, dad and two sisters. My favourite team is Ulster Rugby.</p>`.",
+      "Save (Ctrl + S) and refresh the browser to see the change."
+     ],
+     "answer": "Three `<p>` elements inside the body, the first reading ‘This is a tagline’."
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "aboutme.html",
+     "code": "<!DOCTYPE html>\n<html>\n    <head>\n        <title>About Me</title>\n    </head>\n    <body>\n        <h1>About Me</h1>\n        <p>This is a tagline</p>\n        <h2>My favourite foods</h2>\n        <ul>\n            <li>Apples</li>\n            <li>Oranges</li>\n            <li>Bananas</li>\n        </ul>\n        <h2>Top three teams</h2>\n        <ol>\n            <li>Ulster Rugby</li>\n            <li>Fermanagh GAA</li>\n            <li>Enniskillen Rangers</li>\n        </ol>\n        <img src=\"logo.jpg\" alt=\"My Logo\" width=\"64\" height=\"32\" />\n    </body>\n</html>",
+     "output": "Heading ‘About Me’; text ‘This is a tagline’; a bulleted list of three fruits; a numbered list 1. Ulster Rugby 2. Fermanagh GAA 3. Enniskillen Rangers; then the logo image (or the words ‘My Logo’ if logo.jpg is missing)."
+    },
+    {
+     "t": "warn",
+     "text": "Copying code from Word or PowerPoint can turn straight quotes \" into curly quotes “ ”. Browsers do not understand curly quotes in attributes, so your image or link will break. Type quotes in Notepad."
+    },
+    {
+     "t": "h",
+     "text": "Points to remember"
+    },
+    {
+     "t": "list",
+     "items": [
+      "An HTML element is a start tag, some content and an end tag.",
+      "A start tag may contain attributes that act as instructions for the browser.",
+      "Some tags, like `<img>`, have no closing tag and are called self-closing.",
+      "Tags can be embedded inside each other.",
+      "All content displayed on the page must be inside the `<body>` tag.",
+      "Some tags need certain attributes, e.g. `href` in an `<a>` tag."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "<h1> to <h6> make headings; <p> makes paragraphs.",
+      "<ol> = numbered list, <ul> = bullet list; items use <li>.",
+      "<img> is self-closing and uses src, alt, width and height.",
+      "alt text helps when an image is missing and helps screen readers.",
+      "Use straight quotes around attribute values."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "match",
+    "title": "Match the tag",
+    "caption": "Match each tag to what it does.",
+    "pairs": [
+     [
+      "<h1>",
+      "Biggest heading"
+     ],
+     [
+      "<p>",
+      "Paragraph"
+     ],
+     [
+      "<ol>",
+      "Numbered list"
+     ],
+     [
+      "<ul>",
+      "Bulleted list"
+     ],
+     [
+      "<li>",
+      "One list item"
+     ],
+     [
+      "<img />",
+      "Image (self-closing)"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "Which tag makes a bullet-point list?",
+     "o": [
+      "<ul>",
+      "<ol>",
+      "<li>",
+      "<bl>"
+     ],
+     "a": 0,
+     "why": "<ul> = unordered (bulleted) list."
+    },
+    {
+     "q": "What does the alt attribute do?",
+     "o": [
+      "Sets the image size",
+      "Adds a border",
+      "Says where the image is saved",
+      "Gives text shown if the image is missing, read by screen readers"
+     ],
+     "a": 3,
+     "why": "alt = alternative text."
+    },
+    {
+     "q": "Why is <img> called a self-closing tag?",
+     "o": [
+      "It closes the browser",
+      "It has no closing tag because no text goes between tags",
+      "It deletes itself",
+      "It must be the last tag"
+     ],
+     "a": 1,
+     "why": "It has attributes but no content."
+    },
+    {
+     "q": "Which heading tag gives the biggest heading?",
+     "o": [
+      "<h1>",
+      "<h3>",
+      "<h6>",
+      "<head>"
+     ],
+     "a": 0,
+     "why": "<h1> is the largest heading."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write the HTML for a numbered list of three school subjects.",
+     "m": 3,
+     "a": "<ol> … </ol> used (1); three <li> items (1); each <li> correctly closed with </li> (1). e.g. <ol><li>Maths</li><li>English</li><li>Digital Technology</li></ol>"
+    },
+    {
+     "q": "Explain the purpose of the `src` and `alt` attributes in an `<img>` tag.",
+     "m": 2,
+     "a": "src gives the location/file name of the image (1); alt gives alternative text displayed if the image cannot load / read by screen readers (1)."
+    }
+   ],
+   "terms": [
+    "Self-closing tag",
+    "List item"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "HTML & CSS for Beginners Part 3: Paragraphs and Headings",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=yqcd-XkxZNM",
+     "yt": "yqcd-XkxZNM"
+    },
+    {
+     "title": "HTML & CSS for Beginners Part 17: How to Create and Style HTML Lists",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=kcHKFZBVtf4",
+     "yt": "kcHKFZBVtf4"
+    },
+    {
+     "title": "HTML & CSS for Absolute Beginners: Images",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=t-G8GgRA5Yw",
+     "yt": "t-G8GgRA5Yw"
+    }
+   ]
+  },
+  {
+   "id": "p07",
+   "spec": "Create hyperlinks between pages and organise website files into folders",
+   "summary": "Links use the anchor tag <a> with an href attribute giving the destination. Pages in the same folder link by file name; pages in a subfolder need the folder name in the path.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "HTML links (hyperlinks) are made with the **anchor** tag, `<a>`. It uses the [[href]] attribute, inside the opening tag, to say where the link goes."
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "A link to Google",
+     "code": "<a href=\"https://www.google.com\">Click Here to go to Google</a>",
+     "output": "The words ‘Click Here to go to Google’ appear as a clickable link."
+    },
+    {
+     "t": "list",
+     "items": [
+      "`<a …>` is the opening tag.",
+      "`href=\"…\"` is the **destination**: where you go when you click. It is not displayed.",
+      "The text between the tags is what you see and click on.",
+      "`</a>` is the closing tag."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Setting up folders for a full website"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Open your **Year 9** folder, then your **ICT** folder.",
+      "Create a subfolder called **HTML** (if you have not already).",
+      "Inside it create a folder called **MyWebsite**.",
+      "Make two HTML files inside MyWebsite: **Index.html** and **Hobbies.html**.",
+      "Check with the person beside you that the files really end in .html (not .html.txt)."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "p",
+     "text": "**Index.html** is the [[home page]]: it is universally treated as the first page of a website, and web servers open it automatically."
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "MyWebsite/Index.html",
+     "code": "<!DOCTYPE html>\n<html>\n    <head>\n        <title>HOME</title>\n    </head>\n    <body>\n        <p>This is going to be your homepage of your website</p>\n        <a href=\"Hobbies.html\">My hobbies</a>\n        <a href=\"Contact/contact.html\">Link to Contact page</a>\n        <a href=\"https://www.google.com\">Click Here to go to Google</a>\n    </body>\n</html>"
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "MyWebsite/Hobbies.html",
+     "code": "<!DOCTYPE html>\n<html>\n    <head>\n        <title>HOBBIES</title>\n    </head>\n    <body>\n        <p>This is going to be your Hobby page</p>\n        <a href=\"Index.html\">Back to Home</a>\n    </body>\n</html>"
+    },
+    {
+     "t": "h",
+     "text": "Absolute and relative links"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Link to another website",
+      "Link to a page in your site"
+     ],
+     "rows": [
+      [
+       "Example",
+       "`href=\"https://www.google.com\"`",
+       "`href=\"Hobbies.html\"`"
+      ],
+      [
+       "Called",
+       "An absolute link (full address)",
+       "A relative link (where the file is compared with this page)"
+      ],
+      [
+       "When",
+       "Going to a different site",
+       "Same folder: just the file name"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Because Index.html and Hobbies.html are in the **same folder** (MyWebsite), the link only needs `Hobbies.html`, not a full path like `C:/HTML/Hobbies.html`. If contact.html is in a subfolder called **Contact** inside MyWebsite, you tell the browser where it is compared with your index page: `Contact/contact.html`."
+    },
+    {
+     "t": "warn",
+     "text": "Avoid paths like `C:/myimage.jpg`. They only work on your own computer; once the site is uploaded, the image breaks. Keep images in your website folder and use relative paths such as `images/logo.jpg`."
+    },
+    {
+     "t": "tip",
+     "text": "To link from contact.html back up to the home page, use `../Index.html`. Two dots mean ‘go up one folder’."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Links use <a href=\"destination\">text</a>.",
+      "href is required and is not displayed.",
+      "Same folder: just the file name; subfolder: folder/file.html.",
+      "Index.html is the home page.",
+      "Good folder organisation makes links work."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "Folder structure for MyWebsite",
+    "caption": "How the files are organised inside your area.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "y",
+      "label": "Year 9",
+      "detail": "Your year folder.",
+      "shape": "start"
+     },
+     {
+      "id": "i",
+      "label": "ICT",
+      "detail": "Subject folder (also holds Graphics).",
+      "shape": "process"
+     },
+     {
+      "id": "h",
+      "label": "HTML",
+      "detail": "All your web work.",
+      "shape": "process"
+     },
+     {
+      "id": "m",
+      "label": "MyWebsite",
+      "detail": "Index.html and Hobbies.html live here.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "Contact",
+      "detail": "Subfolder holding contact.html – link with Contact/contact.html.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "y",
+      "i"
+     ],
+     [
+      "i",
+      "h"
+     ],
+     [
+      "h",
+      "m"
+     ],
+     [
+      "m",
+      "c"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "Which attribute gives a link's destination?",
+     "o": [
+      "src",
+      "href",
+      "alt",
+      "link"
+     ],
+     "a": 1,
+     "why": "href = hypertext reference."
+    },
+    {
+     "q": "Index.html and Hobbies.html are in the same folder. What href links to Hobbies?",
+     "o": [
+      "C:/Hobbies.html",
+      "Hobbies.html",
+      "MyWebsite.html",
+      "www.Hobbies.com"
+     ],
+     "a": 1,
+     "why": "Same folder: just the file name."
+    },
+    {
+     "q": "contact.html is in a folder called Contact inside MyWebsite. What href from Index.html?",
+     "o": [
+      "Contact/contact.html",
+      "contact.html",
+      "../contact.html",
+      "Contact.html/contact"
+     ],
+     "a": 0,
+     "why": "Folder name, slash, file name."
+    },
+    {
+     "q": "Which file is the home page of a website?",
+     "o": [
+      "Index.html",
+      "home.txt",
+      "Hobbies.html",
+      "style.css"
+     ],
+     "a": 0,
+     "why": "index.html is the standard first page."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write the HTML to make the words ‘BBC Bitesize’ link to https://www.bbc.co.uk/bitesize.",
+     "m": 2,
+     "a": "<a href=\"https://www.bbc.co.uk/bitesize\"> (1) BBC Bitesize</a> with correct closing tag (1)."
+    },
+    {
+     "q": "Explain why a link to a page in the same folder does not need a full file path.",
+     "m": 2,
+     "a": "The browser looks for the file relative to the current page’s location (1); because both are in the same folder, the file name alone is enough (1)."
+    }
+   ],
+   "terms": [
+    "href",
+    "Home page",
+    "Relative link"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "HTML & CSS for Beginners Part 5: Links",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=tsEQgGjSmkM",
+     "yt": "tsEQgGjSmkM"
+    },
+    {
+     "title": "HTML & CSS for Beginners Part 7: File Structure",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=ta3Oxx7Yqbo",
+     "yt": "ta3Oxx7Yqbo"
+    }
+   ]
+  },
+  {
+   "id": "p08",
+   "spec": "Use the div tag as a container to build a navigation bar",
+   "summary": "A <div> (division) is a container that groups other elements into a section. Putting all your links inside one div creates a navbar that can be styled as one block.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The `<div>` (**division**) tag is a really versatile element. It is a **container** for other HTML elements: it defines a section of the page. On its own it does not look like anything, but it lets you group things and style them together."
+    },
+    {
+     "t": "p",
+     "text": "We use a div to build a **navigation bar** (navbar) along the top of the screen by nesting the hyperlinks inside it."
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "Index.html with a navbar",
+     "code": "<!DOCTYPE html>\n<html>\n    <head>\n        <title>HOME</title>\n    </head>\n    <body>\n        <div>\n            <a href=\"Index.html\">Home Page</a>\n            <a href=\"Hobbies.html\">Hobbies</a>\n            <a href=\"Contact/contact.html\">Contact</a>\n        </div>\n        <p>This is going to be your homepage of your website</p>\n    </body>\n</html>",
+     "output": "Three links, ‘Home Page’, ‘Hobbies’ and ‘Contact’, in a row at the top, then the paragraph underneath."
+    },
+    {
+     "t": "list",
+     "items": [
+      "The `<div>` opens before the first link and closes after the last one.",
+      "The three `<a>` tags are **nested** inside the div, so they are tabbed in one more level.",
+      "Copy the same div onto every page so the menu is identical everywhere (consistent navigation)."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "tip",
+     "text": "Remember to use the **Tab** key to indent your tags, so you can see at a glance which links are inside the div."
+    },
+    {
+     "t": "note",
+     "text": "Modern HTML5 also has a `<nav>` tag made specially for navigation bars. It works just like a div but tells browsers and screen readers ‘this is the menu’."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: linking all the pages",
+     "context": "Create and link all of your pages together (Index, Hobbies, Contact) so you can get from any page to any other.",
+     "steps": [
+      "Put the same navbar div at the top of Index.html and Hobbies.html (same folder, so hrefs are Index.html, Hobbies.html, Contact/contact.html).",
+      "contact.html is one folder deeper, so its navbar must go up a level: `../Index.html`, `../Hobbies.html`, and `contact.html` for itself.",
+      "Open each page in the browser and click every link to test it."
+     ],
+     "answer": "Every page has a working navbar; contact.html uses ../ to reach the pages in the folder above."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "<div> = division: a container that groups elements.",
+      "Nesting links inside a div makes a navbar.",
+      "The same navbar should be on every page.",
+      "Indent nested tags with Tab.",
+      "Test every link after building the navbar."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is the div tag used for?",
+     "o": [
+      "Dividing numbers",
+      "Making images",
+      "A container that groups elements into a section",
+      "Ending a page"
+     ],
+     "a": 2,
+     "why": "div = division, a container."
+    },
+    {
+     "q": "To build a navbar we put the ___ tags inside a div.",
+     "o": [
+      "<img>",
+      "<a>",
+      "<title>",
+      "<head>"
+     ],
+     "a": 1,
+     "why": "The hyperlinks are nested inside the div."
+    },
+    {
+     "q": "Why copy the same navbar to every page?",
+     "o": [
+      "To make files bigger",
+      "Browsers require it",
+      "So navigation is consistent",
+      "To hide the links"
+     ],
+     "a": 2,
+     "why": "Consistent menus are key to good navigation."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write a `<div>` containing links to ‘Index.html’ (text Home) and ‘Hobbies.html’ (text Hobbies).",
+     "m": 3,
+     "a": "<div> … </div> (1); <a href=\"Index.html\">Home</a> (1); <a href=\"Hobbies.html\">Hobbies</a> (1)."
+    },
+    {
+     "q": "Explain why the div tag is useful when building a navigation bar.",
+     "m": 2,
+     "a": "It groups all the links into one section/container (1) so they can be positioned and styled together as one bar (1)."
+    }
+   ],
+   "terms": [
+    "Div",
+    "Navigation bar"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "HTML & CSS for Absolute Beginners: Divs and Spans",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=z_5F2fopvlA",
+     "yt": "z_5F2fopvlA"
+    },
+    {
+     "title": "How to create a CSS navigation bar in 6 minutes! 🧭",
+     "source": "YouTube – Bro Code",
+     "url": "https://www.youtube.com/watch?v=f3uCSh6LIY0",
+     "yt": "f3uCSh6LIY0"
+    }
+   ]
+  },
+  {
+   "id": "p09",
+   "spec": "Compare inline styling, the style tag and external style sheets",
+   "summary": "CSS controls how a page looks. You can style one tag inline, style one page with a <style> tag in the head, or style a whole site with an external .css file linked in the head.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Styling is why websites look so different from each other even though they use the same tags. It changes colours and fonts, adds shadows and can even add hover effects and animations. Styling is written in [[CSS]] (Cascading Style Sheets)."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Method",
+      "Where the CSS goes",
+      "Best for"
+     ],
+     "rows": [
+      [
+       "1. Inline styling",
+       "In a `style` attribute on one tag",
+       "Tiny one-off changes; **not** recommended for large projects"
+      ],
+      [
+       "2. `<style>` tag",
+       "Inside the `<head>` of the page",
+       "Small sites, or styling used on only one page"
+      ],
+      [
+       "3. External style sheet",
+       "A separate **.css** file linked from the `<head>`",
+       "Large projects: one file styles every page"
+      ]
+     ],
+     "caption": "Three ways to add styling"
+    },
+    {
+     "t": "h",
+     "text": "1. Inline styling"
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "Inline style",
+     "code": "<h1 style=\"color: green; background: yellow\">Heading Text</h1>",
+     "output": "‘Heading Text’ in green on a yellow background."
+    },
+    {
+     "t": "p",
+     "text": "It fits on one line, which seems handy, but it is one of the worst ways to style: you would have to repeat it on every heading on every page. Only use it for small styling that is not repeated anywhere else."
+    },
+    {
+     "t": "h",
+     "text": "2. The style tag"
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "Styling with a <style> tag",
+     "code": "<!DOCTYPE html>\n<html>\n    <head>\n        <title>My Website</title>\n        <style>\n            h1 {\n                color: green;\n                background: yellow;\n            }\n        </style>\n    </head>\n    <body>\n        <h1>Heading Text</h1>\n        <p>Some text about the topic.</p>\n        <h1>Another Heading</h1>\n        <p>Another paragraph on a new topic.</p>\n    </body>\n</html>",
+     "output": "Both ‘Heading Text’ and ‘Another Heading’ are green on yellow."
+    },
+    {
+     "t": "p",
+     "text": "The style applies to **all** `<h1>` tags on that page, not just one. But to style other pages you would have to copy it into each one."
+    },
+    {
+     "t": "h",
+     "text": "3. External style sheet"
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "myWebsite.html",
+     "code": "<!DOCTYPE html>\n<html>\n    <head>\n        <title>My Website</title>\n        <link rel=\"stylesheet\" href=\"myFancyStylesheet.css\">\n    </head>\n    <body>\n        <h1>Heading Text</h1>\n        <p>Some text about the topic.</p>\n        <h1>Another Heading</h1>\n        <p>Another paragraph on a new topic.</p>\n    </body>\n</html>"
+    },
+    {
+     "t": "code",
+     "lang": "css",
+     "title": "myFancyStylesheet.css",
+     "code": "h1 {\n    color: green;\n    background: yellow;\n}"
+    },
+    {
+     "t": "list",
+     "items": [
+      "A `<link>` tag in the `<head>` tells the browser where to find the styling.",
+      "The CSS is laid out just as in the `<style>` tag, but saved as a **.css** file (not .txt).",
+      "With `href=\"myFancyStylesheet.css\"` the CSS file must be saved **in the same folder** as the HTML page (or you must give the path to it).",
+      "Change one line in the .css file and every linked page updates. This is how professional websites are made."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "CSS (Cascading Style Sheets) controls how a page looks.",
+      "Inline: style attribute on one tag – avoid for big projects.",
+      "<style> tag in the head styles one whole page.",
+      "External .css linked with <link rel=\"stylesheet\" href=\"…\"> styles every page.",
+      "External style sheets are used for professional sites."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "compare",
+    "title": "Three ways to style",
+    "caption": "Where the CSS lives and when to use it.",
+    "states": [
+     {
+      "label": "Inline",
+      "points": [
+       "style=\"…\" attribute on one tag",
+       "Affects only that tag",
+       "Quick but messy",
+       "Avoid in big projects"
+      ],
+      "art": null
+     },
+     {
+      "label": "<style> tag",
+      "points": [
+       "Inside the <head>",
+       "Affects every matching tag on that page",
+       "Fine for one-page sites"
+      ],
+      "art": null
+     },
+     {
+      "label": "External .css",
+      "points": [
+       "Separate file, linked in <head>",
+       "Styles every page that links to it",
+       "Change once, updates everywhere",
+       "Used by professionals"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "check": [
+    {
+     "q": "Which styling method is recommended for large websites?",
+     "o": [
+      "An external style sheet",
+      "A <style> tag",
+      "Inline styling",
+      "Word Art"
+     ],
+     "a": 0,
+     "why": "One .css file styles every page."
+    },
+    {
+     "q": "Where does the <style> tag go?",
+     "o": [
+      "In the <head>",
+      "In the <body>",
+      "After </html>",
+      "Inside <title>"
+     ],
+     "a": 0,
+     "why": "Style and link tags go in the head."
+    },
+    {
+     "q": "Which tag connects an HTML page to an external CSS file?",
+     "o": [
+      "<style>",
+      "<css>",
+      "<a>",
+      "<link>"
+     ],
+     "a": 3,
+     "why": "<link rel=\"stylesheet\" href=\"file.css\">."
+    },
+    {
+     "q": "What does CSS stand for?",
+     "o": [
+      "Computer Style System",
+      "Cascading Style Sheets",
+      "Coloured Screen Styles",
+      "Creative Site Software"
+     ],
+     "a": 1,
+     "why": "Cascading Style Sheets."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe the **three** ways to add CSS styling to a web page.",
+     "m": 3,
+     "a": "Inline styling using a style attribute in a tag (1); a <style> tag in the head of the page (1); an external .css style sheet linked using a <link> tag (1)."
+    },
+    {
+     "q": "Give **two** advantages of using an external style sheet.",
+     "m": 2,
+     "a": "Can be used across all the pages of a website (1); to change a style you only change it in one place (1); keeps HTML tidy (1). Any two."
+    }
+   ],
+   "terms": [
+    "CSS",
+    "Inline styling",
+    "External style sheet"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "HTML & CSS for Absolute Beginners: Inline CSS and Internal stylesheets",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=5vf7rtzil9M",
+     "yt": "5vf7rtzil9M"
+    },
+    {
+     "title": "HTML & CSS for Beginners Part 9: External CSS",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=JVsI0fspik8",
+     "yt": "JVsI0fspik8"
+    },
+    {
+     "title": "HTML & CSS for Absolute Beginners: Intro to CSS",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=QhMTPAbea_k",
+     "yt": "QhMTPAbea_k"
+    }
+   ]
+  },
+  {
+   "id": "p10",
+   "spec": "Use tag and class selectors in CSS to style chosen elements",
+   "summary": "A CSS selector chooses which tags to style. A tag selector (h1) styles every tag of that type; a comma lists several; a class selector (.name) styles only elements with that class.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A [[CSS selector]] is the part of a CSS rule that chooses **which tags you want to style**. After it come curly brackets `{ }` holding the **properties** and **values**, each ending in a semicolon."
+    },
+    {
+     "t": "code",
+     "lang": "css",
+     "title": "The pattern of a CSS rule",
+     "code": "selector {\n    property: value;\n}"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Selector",
+      "Example",
+      "What it styles"
+     ],
+     "rows": [
+      [
+       "Tag selector",
+       "`h1 { color: red; }`",
+       "Every `<h1>` on the page"
+      ],
+      [
+       "Different tag",
+       "`h2 { color: red; }`",
+       "Every `<h2>` instead"
+      ],
+      [
+       "More than one selector",
+       "`h1, h2 { color: red; }`",
+       "Every `<h1>` **and** every `<h2>` (separate with a comma)"
+      ],
+      [
+       "Class selector",
+       "`.house { color: white; }`",
+       "Only elements with `class=\"house\"` (starts with a full stop)"
+      ]
+     ],
+     "caption": "Tag and class selectors"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: styling your John Smith page",
+     "context": "Link the stylesheet into the head of your John Smith page and add the rule h2 { background: gold; color: tomato; }. What does the page look like now?",
+     "steps": [
+      "Add `<link rel=\"stylesheet\" href=\"myFancyStylesheet.css\">` inside the `<head>`.",
+      "In myFancyStylesheet.css add the h2 rule and save it as .css in the same folder.",
+      "Refresh the browser: every `<h2>` heading now has a gold background with tomato-red text. Nothing else changes, because the selector only picks `<h2>` tags."
+     ],
+     "answer": "All h2 headings appear tomato-red on gold. (Does it look great? Red on gold is bright but not very easy to read: remember the colour-scheme rules!)"
+    },
+    {
+     "t": "code",
+     "lang": "css",
+     "title": "myFancyStylesheet.css",
+     "code": "h1 {\n    color: red;\n}\n\nh2 {\n    background: gold;\n    color: tomato;\n}\n\nh1, h2 {\n    font-family: Arial, sans-serif;\n}\n\n.house {\n    color: white;\n    background: navy;\n}"
+    },
+    {
+     "t": "code",
+     "lang": "html",
+     "title": "JohnSmith.html",
+     "code": "<!DOCTYPE html>\n<html>\n    <head>\n        <title>John Smith</title>\n        <link rel=\"stylesheet\" href=\"myFancyStylesheet.css\">\n    </head>\n    <body>\n        <h1>John Smith</h1>\n        <h2>My Hobbies</h2>\n        <p class=\"house\">I am in the blue house.</p>\n        <p>This paragraph has no class, so it keeps the normal style.</p>\n    </body>\n</html>",
+     "output": "‘John Smith’ in red (Arial); ‘My Hobbies’ tomato on gold (Arial); the first paragraph white on navy; the second paragraph plain."
+    },
+    {
+     "t": "warn",
+     "text": "CSS uses American spelling: `color`, not `colour`. If you write `colour: red;` the browser ignores the line."
+    },
+    {
+     "t": "tip",
+     "text": "Forgot a semicolon or curly bracket? The rule after it may stop working. If styling suddenly breaks, check your punctuation first."
+    },
+    {
+     "t": "note",
+     "text": "Your unit assessment is a test based on an **ERGS houses website**. You can open and edit the site in Notepad or Notepad++ during the test, but you write answers on paper and cannot use the internet, so make sure you know these tags and selectors."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A selector chooses which elements a CSS rule styles.",
+      "Tag selector: h1 { } styles every h1.",
+      "Separate several selectors with commas: h1, h2 { }.",
+      "Class selector starts with a dot: .house { } styles class=\"house\".",
+      "Properties end with semicolons; spell color the American way."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "What does this CSS select?",
+    "caption": "Click to reveal which elements each selector styles.",
+    "head": [
+     "Selector",
+     "Styles…"
+    ],
+    "rows": [
+     [
+      "h1",
+      "Every <h1> heading"
+     ],
+     [
+      "p",
+      "Every paragraph"
+     ],
+     [
+      "h1, h2",
+      "Every <h1> and every <h2>"
+     ],
+     [
+      ".house",
+      "Only elements with class=\"house\""
+     ],
+     [
+      "a",
+      "Every hyperlink"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "Which CSS rule styles every <h2> on the page?",
+     "o": [
+      "#h2 { }",
+      "h2 { }",
+      ".h2 { }",
+      "<h2> { }"
+     ],
+     "a": 1,
+     "why": "A tag selector is just the tag name."
+    },
+    {
+     "q": "How do you style both h1 and h2 with one rule?",
+     "o": [
+      "h1, h2 { }",
+      "h1 + h2 { }",
+      "h1 h2 h3 { }",
+      "h1 & h2 { }"
+     ],
+     "a": 0,
+     "why": "Separate selectors with a comma."
+    },
+    {
+     "q": "Which selector targets elements with class=\"house\"?",
+     "o": [
+      "house { }",
+      "#house { }",
+      ".house { }",
+      "class.house { }"
+     ],
+     "a": 2,
+     "why": "Class selectors start with a full stop."
+    },
+    {
+     "q": "Which line correctly makes text red?",
+     "o": [
+      "color: red;",
+      "color = red",
+      "colour: red;",
+      "text: red;"
+     ],
+     "a": 0,
+     "why": "Property, colon, value, semicolon; American spelling."
+    }
+   ],
+   "practice": [
+    {
+     "q": "What is a CSS selector? Give an example.",
+     "m": 2,
+     "a": "The part of a CSS rule that chooses which tags/elements to style (1). e.g. h1 { color: red; } selects all h1 tags (1)."
+    },
+    {
+     "q": "Write a CSS rule that makes every paragraph have navy text on a white background.",
+     "m": 3,
+     "a": "p selector (1); { color: navy; (1) background: white; } with correct colons/semicolons/brackets (1)."
+    }
+   ],
+   "terms": [
+    "CSS selector",
+    "Class selector"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "HTML & CSS for Beginners Part 16: CSS selectors and Specificity",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=Oh0TplG4nYw",
+     "yt": "Oh0TplG4nYw"
+    },
+    {
+     "title": "HTML & CSS for Absolute Beginners: CSS syntax / formatting CSS",
+     "source": "YouTube – Kevin Powell",
+     "url": "https://www.youtube.com/watch?v=bRY-8INPVJQ",
+     "yt": "bRY-8INPVJQ"
+    }
+   ]
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Internet",
+   "def": "A global network of interconnected computers: the hardware that lets them communicate.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "World Wide Web",
+   "def": "The huge collection of websites, web pages and resources that we access through the internet.",
+   "alt": "WWW",
+   "page": "p01"
+  },
+  {
+   "term": "Web page",
+   "def": "One screen or document of a website.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Hyperlink",
+   "def": "A word or image you click on to go to another web page.",
+   "alt": "Link",
+   "page": "p01"
+  },
+  {
+   "term": "Browser",
+   "def": "A program such as Chrome or Firefox that reads HTML files and displays them as web pages.",
+   "alt": "Internet browser",
+   "page": "p01"
+  },
+  {
+   "term": "URL",
+   "def": "The unique address of a web page, e.g. https://www.bbc.co.uk.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Colour scheme",
+   "def": "The small set of colours (usually 3–5) used consistently throughout a design.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Navigation",
+   "def": "How users move around a website, mainly using menus and links.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Target audience",
+   "def": "The group of people a website or product is designed for.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "HTML",
+   "def": "HyperText Markup Language: the language of tags used to create web pages.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Tag",
+   "def": "An HTML instruction written in angle brackets, e.g. <p>; most come in opening and closing pairs.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Element",
+   "def": "An opening tag, its content and its closing tag together, e.g. <p>Hello</p>.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Attribute",
+   "def": "Extra information inside an opening tag that changes what the tag does, e.g. href or src.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Head",
+   "def": "The <head> section of an HTML page, holding information for the browser such as the title; it is not displayed.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Body",
+   "def": "The <body> section of an HTML page, holding everything that is displayed.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Indentation",
+   "def": "Using the Tab key to push nested tags in, so it is clear which tags are inside which.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Self-closing tag",
+   "def": "A tag with no closing tag because it has no content, e.g. <img />.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "List item",
+   "def": "An <li> element: one item in an ordered (<ol>) or unordered (<ul>) list.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "href",
+   "def": "The attribute in an <a> tag that gives the link's destination.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Home page",
+   "def": "The first page of a website, usually saved as index.html.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Relative link",
+   "def": "A link that gives a file's location compared with the current page, e.g. Contact/contact.html.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Div",
+   "def": "The <div> (division) tag: a container that groups elements into a section of the page.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Navigation bar",
+   "def": "A row of links, usually across the top of every page, used to move around a site; a navbar.",
+   "alt": "Navbar",
+   "page": "p08"
+  },
+  {
+   "term": "CSS",
+   "def": "Cascading Style Sheets: the language that controls how web pages look, e.g. colours and fonts.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Inline styling",
+   "def": "CSS written in a style attribute on a single tag.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "External style sheet",
+   "def": "A separate .css file of styling, linked from the head of each page so one file styles the whole site.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "CSS selector",
+   "def": "The part of a CSS rule that chooses which elements to style, e.g. h1 or .house.",
+   "alt": "Selector",
+   "page": "p10"
+  },
+  {
+   "term": "Class selector",
+   "def": "A CSS selector starting with a full stop, e.g. .house, that styles only elements with that class.",
+   "alt": "",
+   "page": "p10"
+  }
+ ]
+}

@@ -9,6 +9,7 @@ on:
       - "papers/**"
       - "ks3/**"
       - "!ks3/manifest.json"
+      - "!ks3/books/**"
       - "!ks3/**/_view/**"
       - "!papers/manifest.json"
       - "!papers/crops.json"
@@ -19,6 +20,11 @@ on:
 
 permissions:
   contents: write
+
+# one run at a time, so two quick saves from the Teacher area don't race each other
+concurrency:
+  group: lists
+  cancel-in-progress: false
 
 jobs:
   manifest:
@@ -33,8 +39,12 @@ jobs:
             sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends libreoffice-impress libreoffice-writer libreoffice-calc >/dev/null || echo "couldn't install LibreOffice"
             bash tools/ks3_views.sh || echo "PDF copies failed"
           fi
+      - name: KS3 - put the year books together from the topic library and the plan (ks3/plan.json)
+        run: python3 tools/ks3_plan.py
       - name: KS3 - list the topics and files
         run: python3 tools/ks3_manifest.py
+      - name: KS3 - rebuild the Year 8, 9 and 10 notes books
+        run: python3 tools/ks3_books.py
       - name: List uploaded past papers
         run: python3 tools/papers_manifest.py
       - name: Find each question on its page (so the app can show just that question)
@@ -48,10 +58,11 @@ jobs:
           python3 tools/report_crops.py || echo "report finder failed; keeping the previous reports.json"
       - name: Commit the list if it changed
         run: |
-          git add ks3/manifest.json ks3 notes/slides/manifest.json papers/manifest.json papers/crops.json papers/reports.json papers/topics.json
+          git add ks3/manifest.json ks3 'notes/Y*.html' notes/podcasts icons index.html teacher.html tools/pupil-activity.gs notes/slides/manifest.json papers/manifest.json papers/crops.json papers/reports.json papers/topics.json
           if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
             git commit -m "Update topic PowerPoint and past-paper lists"
+            git pull --rebase --autostash origin main || true
             git push
           fi

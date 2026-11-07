@@ -13,11 +13,25 @@ The full lesson hubs are still there for teachers: `hub.html` (GCSE) and `gce/hu
 
 ## KS3 (home page › KS3)
 
-KS3 is a course on the home page like GCSE and A level: Year 8, Year 9 and Year 10 are its units, each a notes book (below). Lesson PowerPoints live in topic folders, `ks3/Year 8/01 Topic name/`, named like `1 - LESSON - Under the Hood.pptx`; a GitHub Action lists them in `ks3/manifest.json` and makes a PDF copy in `_view/` for viewing in the browser. Topic *n* of a year is chapter *n* of its book. (`ks3.html` now just redirects to the home page.)
+KS3 is a course on the home page like GCSE and A level: Year 8, Year 9 and Year 10 are its units, each a notes book (below).
+
+### Topics, the library and the plan (Teacher area › KS3 topics)
+
+Every KS3 topic is a folder in the **topic library**, `ks3/library/<topic>/` (for example `ks3/library/web-design/`), whichever year teaches it, or none. A folder holds:
+
+- the topic's files, named like `1 - LESSON - HTML.pptx` or `3 - WORKSHEET - Binary.docx` (the number sets the order, the word sets the type: LESSON, NOTES, WORKSHEET, HOMEWORK, ACTIVITY, PRACTICAL, ASSIGNMENT, HELPSHEET). A `.txt` file holding a OneDrive / SharePoint / Google Drive link stands in for a file over 25 MB. The GitHub Action makes a PDF copy of each Office file in `_view/` for viewing in the browser;
+- `topic.json`: the title, summary, what pupils will learn, "temporary", and the notes pages and glossary (pages `p01`, `p02`…);
+- optionally `icon.png` (else `_default-icon.png`) and `podcast.json`.
+
+`ks3/plan.json` lists which topics each year teaches, in order. Change it in **Teacher area › KS3 topics**: swap a topic for one from the library, add, remove, reorder or move a topic between years, or **build a new topic** (title, summary, what pupils learn, and upload its PowerPoint and resources). **Save to the site** commits everything to GitHub in one go, using a fine-grained GitHub token kept in that browser only (Contents: Read and write on this repository; Actions: Read to see the rebuild).
+
+A topic with no notes pages yet shows a "notes on the way" page with its summary, what pupils will learn and its PowerPoint. To get its notes written, upload its resources and ask Claude to write the notes for `ks3/library/<topic>/topic.json`.
+
+On every change the GitHub Action runs `tools/ks3_plan.py` (plan + library → `ks3/books/Y8.json` etc., the chapter icons `icons/K9-2.png` and podcasts `notes/podcasts/K9C2.json`), `tools/ks3_manifest.py` (`ks3/manifest.json`) and `tools/ks3_books.py` (the books). Topics in the library that no year teaches go in a teacher preview book, `notes/Y0.html` (the **Preview notes** button on a library card). Chapter *n* of a year's book is that year's topic *n*, and pupil progress is kept by position, so swap or reorder topics between school years. Don't edit `ks3/books/`, `ks3/manifest.json` or the `K…` icons and podcasts by hand: they are rebuilt.
 
 ### KS3 notes books (`notes/Y8.html`, `Y9.html`, `Y10.html`)
 
-The same reader as the GCSE workbooks (pages, progress, quick checks, topic quizzes, glossary, flashcards, trophies), with the content in `ks3/books/Y8.json` etc. Chapter *n* of a year's book is topic *n* in `ks3/`, and its PowerPoint comes from that topic folder. After editing a book's JSON (or after the GCSE template `notes/U1.html` changes) run `python3 tools/ks3_books.py`, which also updates `ks3/books/index.json`, the Teacher area's KS3 chapter list and the chapter names in `tools/pupil-activity.gs`.
+The same reader as the GCSE workbooks (pages, progress, quick checks, topic quizzes, glossary, flashcards, trophies). Each chapter's PowerPoint comes from its topic folder. To run the build by hand: `python3 tools/ks3_plan.py && python3 tools/ks3_manifest.py && python3 tools/ks3_books.py` (the last also updates `ks3/books/index.json`, the Teacher area's KS3 chapter list and the chapter names in `tools/pupil-activity.gs`). (`ks3.html` now just redirects to the home page.)
 
 ## Classes and zones (Teacher area › Pupil tracking › Classes & zones)
 

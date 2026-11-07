@@ -1,0 +1,1920 @@
+{
+ "title": "Game Design",
+ "summary": "Designing and making your own game in GameMaker: the history of gaming, sprites, objects, rooms and sounds, game genres, scoring, audiences and storyboarding.",
+ "learn": [
+  "The history of gaming and the first video game",
+  "Sprites, objects, instances, rooms, sounds and backgrounds",
+  "Game genres and gaming platforms, including VR and AR",
+  "Scoring and your target audience",
+  "Storyboarding your own game"
+ ],
+ "temporary": false,
+ "intro": "How video games began, how they are played and designed, and how to build your own 2D game in GameMaker using sprites, objects, rooms, events and actions.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Know the main gaming platforms, how gaming has changed and how games can support learning",
+   "summary": "Games are played on consoles, mobile phones and computers. Gaming has moved from discs and single player to cloud and online multiplayer, and educational games use features like leader boards and levels to help people learn.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Electronic games can be played on lots of devices, including **game consoles**, **mobile phones** and **computers**. The device or system a game runs on is called its [[game platform]]."
+    },
+    {
+     "t": "p",
+     "text": "Platforms have been developed over many generations. Gaming has moved from installing games from discs on a console and playing alone, to downloading games, using **cloud** technology and playing **online multiplayer** games with friends across Fermanagh or across the world."
+    },
+    {
+     "t": "h",
+     "text": "Educational gaming"
+    },
+    {
+     "t": "p",
+     "text": "Educational games let you apply your knowledge and support your learning inside a virtual world. Think of maths games in primary school, typing tutors or language apps."
+    },
+    {
+     "t": "list",
+     "items": [
+      "**[[Leader board|Leader boards]]** motivate players to improve their scores and climb above their classmates.",
+      "**Roles**: you can take on different roles in the game and reflect on what happened in certain situations, which deepens learning.",
+      "**Rules and levels**: games have rules and increasing levels of difficulty. You must follow the rules and cannot move to the next level before completing the one before, so you build skills step by step."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "What makes a good game?"
+    },
+    {
+     "t": "p",
+     "text": "There is no single right answer, but most good games share some features:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Feature",
+      "Why it matters"
+     ],
+     "rows": [
+      [
+       "Clear aim",
+       "You know what you are trying to do, e.g. collect the key to reach the next level."
+      ],
+      [
+       "Good controls",
+       "Moving and acting feel responsive and easy to learn."
+      ],
+      [
+       "Right level of challenge",
+       "Not too easy, not impossible; it gets harder gradually."
+      ],
+      [
+       "Rewards and feedback",
+       "Points, lives, sounds and messages tell you how well you are doing."
+      ],
+      [
+       "Consistent theme",
+       "Graphics, sound and story fit together and suit the target audience."
+      ],
+      [
+       "Replay value",
+       "High scores, secrets or multiplayer make you want to play again."
+      ]
+     ],
+     "caption": "Features of a good game"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A game platform is the device a game is played on: console, mobile phone or computer.",
+      "Gaming has moved from discs and single player to cloud and online multiplayer.",
+      "Educational games use leader boards, roles, rules and levels to support learning.",
+      "Good games have a clear aim, good controls, the right challenge, feedback and a consistent theme."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which of these is a game platform?",
+     "o": [
+      "A genre",
+      "A sprite",
+      "A mobile phone",
+      "A leader board"
+     ],
+     "a": 2,
+     "why": "A platform is the device a game runs on."
+    },
+    {
+     "q": "How do leader boards help in educational games?",
+     "o": [
+      "They motivate players to improve their scores",
+      "They make the game load faster",
+      "They stop players cheating",
+      "They add sound effects"
+     ],
+     "a": 0,
+     "why": "Competing for a higher place is motivating."
+    },
+    {
+     "q": "In many educational games, why can't you skip to the next level?",
+     "o": [
+      "The game would crash",
+      "Levels cost money",
+      "There is only one level",
+      "You must complete the previous level first, building skills step by step"
+     ],
+     "a": 3,
+     "why": "Rules and rising difficulty build skills gradually."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe two features of educational games that help people learn.",
+     "m": 4,
+     "a": "Leader boards (1) motivate individuals to improve their scores (1). Taking on different roles (1) lets players reflect on what happened in situations (1). (Or: rules and increasing levels of difficulty (1), so players must master one level before moving on (1).)"
+    },
+    {
+     "q": "Describe how gaming has changed over time.",
+     "m": 2,
+     "a": "Games used to be installed from discs on consoles and mostly played alone/single player (1); now many use cloud technology/downloads and online multiplayer (1)."
+    }
+   ],
+   "terms": [
+    "Game platform",
+    "Leader board"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Microsoft and Connected Consoles: Crash Course Games #10",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=eE8Jac43RBo",
+     "yt": "eE8Jac43RBo"
+    },
+    {
+     "title": "Casual Gaming: Crash Course Games #11",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=fa-TFvPKpog",
+     "yt": "fa-TFvPKpog"
+    }
+   ]
+  },
+  {
+   "id": "p02",
+   "spec": "Know the key events in the history of video games and profile the first video game",
+   "summary": "Video games began in the 1950s in universities and laboratories. Tennis for Two (1958) is usually called the first video game made purely for fun; gaming went mainstream with arcades and consoles in the 1970s and 1980s.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Where it all began"
+    },
+    {
+     "t": "p",
+     "text": "The history of video games goes back to the early **1950s**, when academic computer scientists began designing simple games and simulations as part of their research, or just for fun. In the 1960s, professors and students at M.I.T. (Massachusetts Institute of Technology) played games such as 3D tic-tac-toe and moon landing games on huge university computers. Programs and moves were often fed in using **[[punched card|punched cards]]**: cards with holes in them that the computer could read."
+    },
+    {
+     "t": "p",
+     "text": "Video gaming did not become popular with the general public until the **1970s and 1980s**, when arcade games, home consoles with joysticks, buttons and other controllers, and home computer games arrived."
+    },
+    {
+     "t": "note",
+     "text": "Some old slides show an 'IBM 1560' made on 12 August 1981 with 16–640 KB of memory and IBM BASIC/PC DOS. Those details actually describe the **IBM Personal Computer (model 5150)**, released on 12 August 1981. It was a home and office PC from the 1980s, not one of the 1960s university machines."
+    },
+    {
+     "t": "h",
+     "text": "Profile: the first video game"
+    },
+    {
+     "t": "p",
+     "text": "Historians argue about which game was 'first', because it depends on what you count as a *video* game. The one most often named is **Tennis for Two**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Profile",
+      "Tennis for Two"
+     ],
+     "rows": [
+      [
+       "Name of game",
+       "Tennis for Two"
+      ],
+      [
+       "Date of birth",
+       "October 1958"
+      ],
+      [
+       "Who created it?",
+       "William Higinbotham, a physicist at Brookhaven National Laboratory in New York, USA, with technician Robert Dvorak, who built it."
+      ],
+      [
+       "Why was it created?",
+       "Not to make money! It was made to entertain visitors at the laboratory's annual open day and show that science could be fun. Higinbotham never patented it."
+      ],
+      [
+       "How did players interact with it?",
+       "It ran on an analogue computer and showed a side view of a tennis court on a small round **oscilloscope** screen. Each player had a controller box with a **knob** to set the angle of their shot and a **button** to hit the ball."
+      ],
+      [
+       "How did you win?",
+       "There was no score on screen. You won a rally by hitting the ball so that your opponent could not return it over the net; players kept score themselves."
+      ],
+      [
+       "Key facts",
+       "Hundreds of visitors queued to play it. It is seen as one of the first games made purely for entertainment."
+      ]
+     ],
+     "caption": "Answers for the 'first game' profile page"
+    },
+    {
+     "t": "p",
+     "text": "Other early contenders you might find in your research:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**OXO (1952)**: noughts and crosses against the computer, written by A. S. (Sandy) Douglas on the EDSAC computer at Cambridge University as part of his PhD research on how humans and computers interact. Players chose squares with a **rotary telephone dial**.",
+      "**Spacewar! (1962)**: a two-player spaceship battle made by Steve Russell and friends at M.I.T. on a PDP-1 computer; it was copied to many universities.",
+      "**Pong (1972)**: Atari's table-tennis arcade game, the first big commercial hit, which helped start today's multibillion-pound games industry."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "warn",
+     "text": "Be careful with 'why it was created': none of the very first games were made to sell. They were experiments, research projects or demonstrations. The money came later with arcades and consoles."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Video games began in the 1950s in universities and laboratories.",
+      "Early computer moves were often entered with punched cards.",
+      "Tennis for Two (1958, William Higinbotham) was made to entertain visitors; players used a knob and a button.",
+      "OXO (1952) and Spacewar! (1962) are other early games.",
+      "Gaming went mainstream in the 1970s and 1980s with arcades and home consoles."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "timeline",
+    "title": "Early video games",
+    "caption": "Click each event to read more.",
+    "items": [
+     {
+      "label": "1952 – OXO",
+      "detail": "Noughts and crosses on Cambridge's EDSAC computer, made for research."
+     },
+     {
+      "label": "1958 – Tennis for Two",
+      "detail": "William Higinbotham's tennis game on an oscilloscope, for a lab open day."
+     },
+     {
+      "label": "1962 – Spacewar!",
+      "detail": "Two-player space battle made at M.I.T. on a PDP-1."
+     },
+     {
+      "label": "1972 – Pong",
+      "detail": "Atari's arcade hit; the start of commercial gaming."
+     },
+     {
+      "label": "1981 – IBM PC",
+      "detail": "The IBM Personal Computer brings computing, and games, into homes and offices."
+     }
+    ]
+   },
+   "check": [
+    {
+     "q": "Who created Tennis for Two?",
+     "o": [
+      "Steve Russell",
+      "William Higinbotham",
+      "Alan Turing",
+      "Nolan Bushnell"
+     ],
+     "a": 1,
+     "why": "A physicist at Brookhaven National Laboratory, in 1958."
+    },
+    {
+     "q": "Why was Tennis for Two made?",
+     "o": [
+      "To sell in shops",
+      "For a PhD thesis",
+      "To entertain visitors at a laboratory open day",
+      "To train pilots"
+     ],
+     "a": 2,
+     "why": "It was a demonstration for the public."
+    },
+    {
+     "q": "When did video gaming become mainstream?",
+     "o": [
+      "1970s and 1980s",
+      "1950s",
+      "1960s",
+      "2000s"
+     ],
+     "a": 0,
+     "why": "Arcades and home consoles arrived."
+    },
+    {
+     "q": "How did players of Tennis for Two control the game?",
+     "o": [
+      "Keyboard and mouse",
+      "A touch screen",
+      "Punched cards",
+      "A knob and a button"
+     ],
+     "a": 3,
+     "why": "The knob set the angle; the button hit the ball."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Complete a short profile of Tennis for Two: when it was created, who created it, and why.",
+     "m": 3,
+     "a": "October 1958 (1); William Higinbotham (and Robert Dvorak) at Brookhaven National Laboratory (1); to entertain visitors at the laboratory's open day (1)."
+    },
+    {
+     "q": "Explain why gaming did not become popular with the public until the 1970s and 1980s.",
+     "m": 2,
+     "a": "Early games ran on huge, expensive university/laboratory computers the public could not access (1). In the 1970s/80s arcade machines, home consoles and home computers made games available to ordinary people (1)."
+    }
+   ],
+   "terms": [
+    "Punched card"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "When Games Went Click: The Story of Tennis for Two",
+     "source": "YouTube – Stony Brook University",
+     "url": "https://www.youtube.com/watch?v=6QSHZ20MQfE",
+     "yt": "6QSHZ20MQfE"
+    },
+    {
+     "title": "The Dawn of Video Games: Crash Course Games #3",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=IGLdlkZozpI",
+     "yt": "IGLdlkZozpI"
+    }
+   ]
+  },
+  {
+   "id": "p03",
+   "spec": "Know what GameMaker is and what a sprite is, and how to create one",
+   "summary": "GameMaker is a 2D game engine with drag-and-drop actions. A sprite is an image (or set of images for an animation) that represents something in the game.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "GameMaker"
+    },
+    {
+     "t": "p",
+     "text": "**[[GameMaker]]** is a [[game engine]] that lets you design, build and play your own **2D** games. Instead of typing code, you use **drag and drop** actions, so you can develop a working game without writing the code behind those features yourself. In school you open it from **My Apps → ICT tab → GameMaker** and choose **Continue using the Lite Edition**."
+    },
+    {
+     "t": "p",
+     "text": "GameMaker splits game creation into several resources (categories):"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Resource",
+      "What it is"
+     ],
+     "rows": [
+      [
+       "Sprites",
+       "The pictures of things in the game"
+      ],
+      [
+       "Sounds",
+       "Music and sound effects"
+      ],
+      [
+       "Backgrounds",
+       "The scenery behind the action"
+      ],
+      [
+       "Objects",
+       "Things in the game that can do something; they use sprites"
+      ],
+      [
+       "Rooms",
+       "The levels and screens where objects are placed"
+      ]
+     ],
+     "caption": "The main resources in GameMaker"
+    },
+    {
+     "t": "h",
+     "text": "Sprites"
+    },
+    {
+     "t": "p",
+     "text": "A [[sprite]] is an image, or a number of images, that represents something in the game. If the sprite is **not animated** (for example, a tree in an RPG), it is one picture. If it **is animated**, it has a number of **sub-images** shown one after another, like a flip-book."
+    },
+    {
+     "t": "p",
+     "text": "Many games use several sprites for one character, each with its own animation: walking, jumping and falling, for example."
+    },
+    {
+     "t": "h",
+     "text": "How to create a sprite"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Right-click **Sprites** and choose **Create Sprite**.",
+      "Give it a name. Start sprite names with `spr`, e.g. `sprPlayer`. Click **Edit Sprite**.",
+      "Click the sheet-of-paper icon to make a new image. Leave the width and height at **32** pixels and click OK.",
+      "Click the pen to edit the image, and use the magnifying glass (+) to zoom in.",
+      "Draw your player with the toolbox. Fill the area: it will look very small on screen!",
+      "Click the green tick to confirm, check the preview, then click the green tick again to save."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "p",
+     "text": "You then make the other sprites the same way: a square wall (`sprWall`), a bad guy (`sprEnemy`) and a collectible key (`sprKey`). Don't spend ages perfecting them; you can improve them at the end."
+    },
+    {
+     "t": "tip",
+     "text": "Use a **[[naming convention]]**: a short prefix that says what type of resource it is. `spr` for sprites, `obj` for objects, `rm` for rooms. Then `sprPlayer` and `objPlayer` are easy to tell apart."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "GameMaker is a 2D game engine that uses drag-and-drop actions.",
+      "A sprite is an image (or animated set of sub-images) representing something in the game.",
+      "An animated sprite has several sub-images.",
+      "Sprites in school are 32 × 32 pixels by default.",
+      "Use prefixes like spr, obj and rm to name resources clearly."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a sprite?",
+     "o": [
+      "A sound effect",
+      "An image that represents something in the game",
+      "A level of the game",
+      "A type of event"
+     ],
+     "a": 1,
+     "why": "Sprites are the pictures."
+    },
+    {
+     "q": "An animated sprite has…",
+     "o": [
+      "one image",
+      "no image",
+      "a number of sub-images",
+      "a sound attached"
+     ],
+     "a": 2,
+     "why": "Sub-images play in sequence."
+    },
+    {
+     "q": "Which is the best name for the enemy's sprite?",
+     "o": [
+      "sprEnemy",
+      "enemy",
+      "objEnemy",
+      "rmEnemy"
+     ],
+     "a": 0,
+     "why": "spr is the prefix for sprites."
+    },
+    {
+     "q": "What does it mean that GameMaker is 'drag and drop'?",
+     "o": [
+      "You must type all code",
+      "It only works with a touch screen",
+      "Games are dragged from the internet",
+      "You build games by dragging action blocks instead of typing code"
+     ],
+     "a": 3,
+     "why": "Actions are dragged into place."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between an animated and a non-animated sprite. Give an example of each.",
+     "m": 3,
+     "a": "A non-animated sprite is one single image (1), e.g. a tree/wall (1). An animated sprite has several sub-images shown in sequence, e.g. a character walking (1)."
+    },
+    {
+     "q": "Why do programmers use naming conventions such as sprPlayer and objPlayer?",
+     "m": 2,
+     "a": "So you can tell at a glance what type of resource it is (sprite/object/room) (1) and avoid mixing up resources with similar names (1)."
+    }
+   ],
+   "terms": [
+    "GameMaker",
+    "Game engine",
+    "Sprite",
+    "Naming convention"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How to Make a Video Game in 15 Minutes! | GameMaker Platformer Tutorial",
+     "source": "YouTube – GameMaker",
+     "url": "https://www.youtube.com/watch?v=a9f4QdHGM4k",
+     "yt": "a9f4QdHGM4k"
+    },
+    {
+     "title": "How To Make A Classic Arcade Game in GameMaker",
+     "source": "YouTube – GameMaker",
+     "url": "https://www.youtube.com/watch?v=nwlvT-L9vFg",
+     "yt": "nwlvT-L9vFg"
+    },
+    {
+     "title": "How to Get Started with GameMaker in 2026",
+     "source": "GameMaker",
+     "url": "https://gamemaker.io/tutorials/get-started-gamemaker-2026"
+    }
+   ]
+  },
+  {
+   "id": "p04",
+   "spec": "Understand objects, instances, events and actions, and use them to make a player move",
+   "summary": "An object is a template that uses a sprite and has events and actions; an instance is a copy of it placed in a room. Events (like a key press) trigger actions (like Move Fixed).",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Objects and instances"
+    },
+    {
+     "t": "p",
+     "text": "To see a sprite in the game or interact with it, you need to make it into an [[object]]. An object can be moved, act on other things and be seen on screen. Not every object needs a sprite: some objects are invisible and just control the game."
+    },
+    {
+     "t": "p",
+     "text": "The object itself is not placed into the game. It acts as a **template**. An [[instance]] is a copy of the object placed in a room (level). So you could make one tree object and place one hundred instances of it in a room, or one wall object and use 100 instances to build a maze."
+    },
+    {
+     "t": "tip",
+     "text": "Think of a cookie cutter. The cutter is the **object**; every cookie you cut out is an **instance**."
+    },
+    {
+     "t": "h",
+     "text": "Events and actions"
+    },
+    {
+     "t": "p",
+     "text": "Each object can have several [[event|events]]. An event is something that happens in the game, like a key being pressed, two objects colliding or the object being created. Inside each event you drag in [[action|actions]]: what the object should do when that event happens."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Event",
+      "Example action"
+     ],
+     "rows": [
+      [
+       "Keyboard → Left",
+       "Move Fixed: left, speed 5"
+      ],
+      [
+       "Keyboard → <No key>",
+       "Move Fixed: centre square (stop), speed 0"
+      ],
+      [
+       "Collision with objWall",
+       "Move Fixed: stop the *other* object (the player)"
+      ],
+      [
+       "Create",
+       "Set lives to 3; start moving"
+      ]
+     ],
+     "caption": "Events trigger actions"
+    },
+    {
+     "t": "h",
+     "text": "Making the player move"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Right-click **Objects → Create Object** and name it `objPlayer`.",
+      "Click the icon next to `<no sprite>` and choose `sprPlayer`. Tick **Solid**.",
+      "Click **Add Event → Keyboard → Left**.",
+      "From the **Move** tab, drag in **Move Fixed** (the red arrows). Click the left arrow and set the speed to **5**. Click OK.",
+      "Repeat for Up, Down and Right, then click OK to save."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "example",
+     "title": "Worked example: why won't my player stop?",
+     "context": "After adding Left, Right, Up and Down events, you test the game. What happens if no key is pressed, and how do you fix it?",
+     "steps": [
+      "The player keeps moving, because nothing tells it to stop.",
+      "Open `objPlayer` and choose **Add Event → Keyboard → <No key>**.",
+      "Add **Move Fixed**, click the **centre square** (no direction) and set the speed to **0**.",
+      "Run the game (green arrow) and press **Esc** to exit."
+     ],
+     "answer": "With no key event, the player keeps moving. A <No key> event with Move Fixed at speed 0 makes it stop."
+    },
+    {
+     "t": "h",
+     "text": "Walls and collisions"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Create `objWall` using `sprWall` and tick **Solid**.",
+      "Add **Event → Collision** with `objPlayer`. A [[collision]] event runs when two instances touch.",
+      "Add **Move Fixed** set to stop (speed 0), applied to the **Other** object, which is the player.",
+      "Put walls around the whole room and some in the middle, then test."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the player won't fit through the gap",
+     "context": "The player is 32 × 32 pixels and the gaps between walls are also 32 pixels, so the player gets stuck. How do you fix it?",
+     "steps": [
+      "Exit the game with Esc. Double-click `sprPlayer` and click **Edit Sprite**.",
+      "Choose **Transform → Scale…**",
+      "Set the percentage to **80**, with both **Horizontal** and **Vertical** ticked so the sprite isn't stretched.",
+      "Test again, then do the same for `sprEnemy`."
+     ],
+     "answer": "Scale the sprite to 80% so it is smaller than the gaps."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "An object is a template; an instance is a copy of it placed in a room.",
+      "One object can have many instances (one tree object, 100 trees).",
+      "Events are things that happen (key press, collision, create); actions are what the object does.",
+      "Move Fixed with speed 0 stops an object.",
+      "Scale a sprite to 80% (both directions) if it won't fit through gaps."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "How an event triggers an action",
+    "caption": "Each frame, GameMaker checks for events and runs their actions.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Game running",
+      "detail": "GameMaker checks each instance every step.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Left key pressed?",
+      "detail": "A Keyboard → Left event.",
+      "shape": "io"
+     },
+     {
+      "id": "c",
+      "label": "Move Fixed left, speed 5",
+      "detail": "The action inside the event.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Player moves",
+      "detail": "The instance moves left on screen.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What is an instance?",
+     "o": [
+      "A sprite with no image",
+      "A copy of an object placed in a room",
+      "A sound effect",
+      "A type of room"
+     ],
+     "a": 1,
+     "why": "Objects are templates; instances are placed copies."
+    },
+    {
+     "q": "Which event makes the player stop when nothing is pressed?",
+     "o": [
+      "Keyboard → Space",
+      "Create",
+      "Keyboard → <No key>",
+      "Collision → objKey"
+     ],
+     "a": 2,
+     "why": "<No key> runs when no key is pressed."
+    },
+    {
+     "q": "A key press or a collision is an example of…",
+     "o": [
+      "an event",
+      "an action",
+      "a sprite",
+      "a room"
+     ],
+     "a": 0,
+     "why": "Events are things that happen."
+    },
+    {
+     "q": "Why should Horizontal and Vertical both be ticked when scaling?",
+     "o": [
+      "To make the game faster",
+      "To add animation",
+      "To make it solid",
+      "So the sprite is not stretched"
+     ],
+     "a": 3,
+     "why": "Scaling only one direction squashes the sprite."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between an object and an instance in GameMaker.",
+     "m": 2,
+     "a": "An object is a template that defines how something looks (sprite) and behaves (events/actions) (1). An instance is a copy of that object placed in a room; one object can have many instances (1)."
+    },
+    {
+     "q": "Describe how to make objPlayer move left at speed 5.",
+     "m": 3,
+     "a": "Open objPlayer and Add Event → Keyboard → Left (1). Drag in the Move Fixed action from the Move tab (1). Select the left arrow and set the speed to 5, then OK (1)."
+    }
+   ],
+   "terms": [
+    "Object",
+    "Instance",
+    "Event",
+    "Action",
+    "Collision"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How to Move and Collide in GameMaker",
+     "source": "YouTube – GameMaker",
+     "url": "https://www.youtube.com/watch?v=wmPOjMBo_N8",
+     "yt": "wmPOjMBo_N8"
+    },
+    {
+     "title": "How To Move And Collide In GameMaker (GML Visual or Code)",
+     "source": "GameMaker",
+     "url": "https://gamemaker.io/tutorials/easy-move-collide"
+    },
+    {
+     "title": "How To Make A Classic Arcade Game in GameMaker",
+     "source": "YouTube – GameMaker",
+     "url": "https://www.youtube.com/watch?v=nwlvT-L9vFg",
+     "yt": "nwlvT-L9vFg"
+    }
+   ]
+  },
+  {
+   "id": "p05",
+   "spec": "Understand rooms and use them to build levels, a key that moves you on, and a win screen",
+   "summary": "A room is where you place instances; every game needs at least one. Rooms are used for levels, title screens, help pages and end screens, and a collision with a key can send you to the next room.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Rooms"
+    },
+    {
+     "t": "p",
+     "text": "A [[room]] is the area where you place your objects. You **must** have at least one room for a game to run, but you will usually need many more: one for **each level**, plus rooms for the **opening screen**, **help pages** and **credits/end screens**. The room is the design of what the player sees, so make it aesthetically pleasing (attractive to look at) to make players want to play your game."
+    },
+    {
+     "t": "h",
+     "text": "Making your first room"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Create a room, go to the **Settings** tab and give it a meaningful name, e.g. `rmPractise`. You can also add a caption.",
+      "Go to the **Objects** tab, select `objPlayer` at the bottom and click in the room to place an instance.",
+      "Click the green tick to save."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "h",
+     "text": "A key to the next level"
+    },
+    {
+     "t": "p",
+     "text": "In our game, collecting the key takes you to the next level."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Create `objKey` with `sprKey` and tick Solid. Place an instance in your room.",
+      "Test: the player runs straight over the key, because no event tells the key what to do.",
+      "In `objKey`, choose **Add Event → Collision → objPlayer**.",
+      "From the **main1** tab, under Rooms, drag **Next Room** into the Actions. You can choose a transition effect too."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "example",
+     "title": "Worked example: FATAL ERROR!",
+     "context": "You collect the key and the game crashes with a FATAL ERROR. Why, and how do you fix it?",
+     "steps": [
+      "The Next Room action tries to go to the next room in the list.",
+      "There is only one room, so there is no next room to go to.",
+      "Create a second room called `rmLevelOne`.",
+      "Add a player and a key to the new room and save it."
+     ],
+     "answer": "The error happened because there was no next room. Adding rmLevelOne fixes it."
+    },
+    {
+     "t": "h",
+     "text": "Score, lives and a win screen"
+    },
+    {
+     "t": "p",
+     "text": "Some objects have **no sprite**, because they only control the game. They appear as a **?** in the room editor because there is no image to show, and they are invisible when you play."
+    },
+    {
+     "t": "list",
+     "items": [
+      "**SetScore** object: in its **Create** event, use the Score tab to show the score and lives in the window caption, and **Set Lives** to 3. Place it once in the first room.",
+      "**finishGame** object: in its Create event, **Display a Message** ('You Win!'), **Show Highscore**, then **Restart Game**.",
+      "Create a room called `YouWin` and place `finishGame` in it. It must be the **last** room."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "warn",
+     "text": "Rooms run in the order they appear in the list. Any new levels must go **between** the practice room and `YouWin`, or players will win before playing them."
+    },
+    {
+     "t": "tip",
+     "text": "Extensions: add a front page ('Press space to start') and coins. When the player collides with a coin: **Destroy Instance** and **Set Score** to 10, ticking **Relative** so 10 is added to the score."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A room is where instances are placed; every game needs at least one.",
+      "Use rooms for levels, title, help and credits screens.",
+      "A collision with a key + Next Room moves the player on.",
+      "Next Room with no next room causes a fatal error.",
+      "Controller objects with no sprite appear as ? in the room editor."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "Order of rooms",
+    "caption": "Rooms run from top of the list to the bottom.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "rmPractise",
+      "detail": "First level; contains the SetScore object.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "rmLevelOne",
+      "detail": "Reached by collecting the key.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "More levels",
+      "detail": "New levels go here, before YouWin.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "YouWin",
+      "detail": "Shows 'You Win!', the high score table, then restarts.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What is the minimum number of rooms a game needs to run?",
+     "o": [
+      "0",
+      "1",
+      "2",
+      "3"
+     ],
+     "a": 1,
+     "why": "At least one room."
+    },
+    {
+     "q": "Why did the game show a FATAL ERROR when the key was collected?",
+     "o": [
+      "The key had no sprite",
+      "The player was not solid",
+      "There was no next room to go to",
+      "The sound was missing"
+     ],
+     "a": 2,
+     "why": "Next Room needs another room."
+    },
+    {
+     "q": "Why does finishGame appear as a ? in the room?",
+     "o": [
+      "It has no sprite",
+      "It is broken",
+      "It is a sound",
+      "It is hidden by a wall"
+     ],
+     "a": 0,
+     "why": "No sprite means no image to show."
+    },
+    {
+     "q": "What does ticking **Relative** do when setting the score to 10?",
+     "o": [
+      "Sets the score to exactly 10",
+      "Subtracts 10",
+      "Doubles the score",
+      "Adds 10 to the current score"
+     ],
+     "a": 3,
+     "why": "Relative changes the value by that amount."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Give three different kinds of room a finished game might need.",
+     "m": 3,
+     "a": "Any three: a room for each level (1), an opening/title screen (1), a help page (1), a credits/end/You Win screen (1), a main menu (1)."
+    },
+    {
+     "q": "Describe how to make the player go to the next level when they touch the key.",
+     "m": 3,
+     "a": "In objKey add a Collision event with objPlayer (1). Add the Next Room action (from main1) (1). Make sure another room exists after the current one (1)."
+    }
+   ],
+   "terms": [
+    "Room"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How to Make a Video Game in 15 Minutes! | GameMaker Platformer Tutorial",
+     "source": "YouTube – GameMaker",
+     "url": "https://www.youtube.com/watch?v=a9f4QdHGM4k",
+     "yt": "a9f4QdHGM4k"
+    },
+    {
+     "title": "Make Your Own Action-Adventure Game (GML Visual)",
+     "source": "GameMaker",
+     "url": "https://gamemaker.io/tutorials/heros-trail-dnd-2"
+    }
+   ]
+  },
+  {
+   "id": "p06",
+   "spec": "Add enemies, lives and game-over logic in GameMaker",
+   "summary": "Enemies use a Create event to start moving and bounce off walls. When an enemy hits the player, a life is lost; if lives reach 0, the high score is shown and the game restarts.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Making the enemy"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Create `objEnemy`, set the sprite to `sprEnemy`, and tick **Visible** and **Solid**.",
+      "**Add Event → Create**. Add **Move Fixed** with the up, down, left and right arrows selected, speed **5**. (With several directions selected, GameMaker picks one of them at random.)",
+      "**Add Event → Collision → objWall**. Add another **Move Fixed** with up, down, left and right at speed 5, so the enemy heads off in a new direction when it hits a wall.",
+      "Place a few enemies in your room (not too many!) and test."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "h",
+     "text": "When the enemy hits you"
+    },
+    {
+     "t": "p",
+     "text": "In `objEnemy`, add **Event → Collision → objPlayer**, then build this list of actions. Together they make up the game's logic:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Destroy the Instance** (the enemy disappears).",
+      "**Display a Message** (main2 tab), e.g. 'Ouch! You lost a life'.",
+      "**Set Lives** to **−1** with **Relative** ticked, so one life is taken away.",
+      "**Test Lives**: value **0**, operation **equal to**.",
+      "**Start Block** (Control tab).",
+      "**Show Highscore** (Score tab).",
+      "**Restart Game** (main2 tab).",
+      "**End Block**.",
+      "**Else**, followed by the actions for when lives are *not* 0 (e.g. carry on playing)."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "p",
+     "text": "This is the same **IF … ELSE** idea you will use in programming: *if* lives equal 0, show the high score and restart; *else* keep playing."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Test Lives is TRUE (lives = 0)",
+      "Test Lives is FALSE (lives > 0)"
+     ],
+     "rows": [
+      [
+       "What happens",
+       "Show the high score table, then restart the game",
+       "Skip the block and keep playing"
+      ],
+      [
+       "Actions run",
+       "Everything between Start Block and End Block",
+       "The actions after Else"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Setting up lives"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Create an object called `SetScore` (no sprite).",
+      "**Add Event → Create**. From the Score tab, drag in the score caption action (shown as SLH: score, lives, health) and set **Show Score** and **Show Lives** to *Show*.",
+      "Drag in **Set Lives** and set it to **3**.",
+      "Place one `SetScore` in the first room. It appears as a **?**.",
+      "Run the game: the score and lives appear in the window's caption bar."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Enemies start moving in a Create event and change direction in a Collision with the wall.",
+      "Set Lives −1 with Relative ticked takes one life away.",
+      "Test Lives = 0 is a condition: if true, show the high score and restart; else keep playing.",
+      "Start and End Blocks group the actions that belong to the IF.",
+      "A SetScore object with no sprite sets lives to 3 and shows score and lives."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "Enemy hits the player",
+    "caption": "The logic inside objEnemy's collision event.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Enemy hits player",
+      "detail": "Collision event with objPlayer.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Destroy enemy, show message",
+      "detail": "Destroy the Instance, then Display a Message.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "Lives − 1",
+      "detail": "Set Lives to −1 with Relative ticked.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Lives = 0?",
+      "detail": "Test Lives: value 0, equal to.",
+      "shape": "io"
+     },
+     {
+      "id": "e",
+      "label": "High score + restart",
+      "detail": "If true: Show Highscore, then Restart Game.",
+      "shape": "end"
+     },
+     {
+      "id": "f",
+      "label": "Keep playing",
+      "detail": "Else: the game carries on.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "d",
+      "f"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What does **Set Lives −1 (Relative)** do?",
+     "o": [
+      "Sets lives to −1",
+      "Takes one life away",
+      "Adds one life",
+      "Restarts the game"
+     ],
+     "a": 1,
+     "why": "Relative changes the current value by −1."
+    },
+    {
+     "q": "Which event makes the enemy start moving when the game begins?",
+     "o": [
+      "Keyboard",
+      "<No key>",
+      "Create",
+      "Collision with objKey"
+     ],
+     "a": 2,
+     "why": "Create runs when the instance first appears."
+    },
+    {
+     "q": "Test Lives with value 0 and 'equal to' is an example of…",
+     "o": [
+      "a condition (IF)",
+      "a sprite",
+      "a room",
+      "a sound"
+     ],
+     "a": 0,
+     "why": "It checks whether lives = 0."
+    },
+    {
+     "q": "What are Start Block and End Block used for?",
+     "o": [
+      "Drawing walls",
+      "Adding music",
+      "Naming rooms",
+      "Grouping actions that run together if the condition is true"
+     ],
+     "a": 3,
+     "why": "Like { and } in code."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe what should happen when the enemy collides with the player.",
+     "m": 4,
+     "a": "The enemy instance is destroyed (1). A message is displayed (1). One life is taken away (Set Lives −1 relative) (1). If lives equal 0, show the high score table and restart the game; otherwise carry on (1)."
+    },
+    {
+     "q": "Why does the enemy need a collision event with objWall?",
+     "m": 2,
+     "a": "Without it the enemy would get stuck on or pass the walls (1); the event gives it a new direction/speed so it keeps moving around the room (1)."
+    }
+   ],
+   "terms": [],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Make Your First RPG | Movement & Enemies",
+     "source": "YouTube – GameMaker",
+     "url": "https://www.youtube.com/watch?v=1J5EydrnIPs",
+     "yt": "1J5EydrnIPs"
+    },
+    {
+     "title": "How To Make A Classic Arcade Game in GameMaker",
+     "source": "YouTube – GameMaker",
+     "url": "https://www.youtube.com/watch?v=nwlvT-L9vFg",
+     "yt": "nwlvT-L9vFg"
+    },
+    {
+     "title": "Make Your Own Arcade Space Shooter (GML Visual or Code)",
+     "source": "GameMaker",
+     "url": "https://gamemaker.io/tutorials/make-arcade-space-shooter"
+    }
+   ]
+  },
+  {
+   "id": "p07",
+   "spec": "Explain how sound and backgrounds affect a game, and describe the main game genres",
+   "summary": "Sound (music and SFX) and backgrounds set the mood and must suit the genre and audience. A genre groups games by their challenges and gameplay: action, adventure, RPG, simulation, strategy and sports.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Sound"
+    },
+    {
+     "t": "p",
+     "text": "Sound, also called audio, is an important part of making a game engaging and keeping players interested in the gameplay. There are two main types:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Background music**, which plays throughout a level and sets the mood.",
+      "**[[Sound effect|SFX]]** (sound effects), which play when something happens: losing a life, collecting a coin, finishing a level."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "p",
+     "text": "Sound can change the mood very quickly. A scream could darken the mood, while a hand-clap could celebrate completing a level. Sounds also tell you whether you are playing successfully, without you having to read anything."
+    },
+    {
+     "t": "h",
+     "text": "Backgrounds"
+    },
+    {
+     "t": "p",
+     "text": "Like sound, the **background** can drastically change the mood or feeling of a game. A dark background can make a game seem scary; a bright, light background makes it more child-friendly. The background should reflect the game's genre: mismatched elements make a game feel clunky and unsuitable for its target audience."
+    },
+    {
+     "t": "h",
+     "text": "Genres"
+    },
+    {
+     "t": "p",
+     "text": "A [[genre]] identifies the style or category of a piece of work, like a book, film or poem. Games fall into genres too. Games are not usually grouped by their content (what they're about), but by the **challenges, story and gameplay** they contain."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Genre",
+      "What it involves",
+      "Examples"
+     ],
+     "rows": [
+      [
+       "Action",
+       "Physical challenges needing hand–eye coordination and motor skill. The player controls most of the action. Many of the earliest video games were action games. Subgenres include platform, fighting and shooter games (shooters have been one of the dominant genres since the 1990s).",
+       "Super Mario Bros. (platform), Street Fighter (fighting)"
+      ],
+      [
+       "Adventure",
+       "Not defined by story, but by gameplay **without** reflex or action challenges. You solve puzzles by interacting with people or the environment, usually in a non-confrontational way. A 'purist' genre that avoids action beyond mini-games.",
+       "Monkey Island, Myst"
+      ],
+      [
+       "Role playing (RPG)",
+       "You play one or more 'adventurers' who specialise in skills (e.g. melee combat or casting spells) while following a storyline, often travelling an overworld full of monsters to reach towns, dungeons and castles.",
+       "Pokémon, The Legend of Zelda, Final Fantasy"
+      ],
+      [
+       "Simulation",
+       "A diverse super-category designed to closely simulate parts of a real or fictional reality.",
+       "The Sims, Microsoft Flight Simulator, Farming Simulator"
+      ],
+      [
+       "Strategy",
+       "Careful, skilful thinking and planning to win; the scale ranges from world domination to squad tactics.",
+       "Civilization, Age of Empires, chess games"
+      ],
+      [
+       "Sports",
+       "Simulate real sports. Opponents can be real people or artificial intelligence (AI).",
+       "EA Sports FC, Rocket League, Mario Kart (racing)"
+      ]
+     ],
+     "caption": "The main game genres"
+    },
+    {
+     "t": "tip",
+     "text": "When describing a game's genre, explain **how** it fits: e.g. 'Pokémon is an RPG because you control a trainer whose team gains skills as you follow a storyline through an overworld.'"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Game audio has two main parts: background music and SFX.",
+      "Sound and backgrounds set the mood and must suit the genre and target audience.",
+      "A genre groups games by their challenges, story and gameplay, not just content.",
+      "Main genres: action, adventure, RPG, simulation, strategy and sports.",
+      "Platform and fighting games are subgenres of action."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "match",
+    "title": "Match the genre",
+    "caption": "Match each genre to its description.",
+    "pairs": [
+     [
+      "Action",
+      "Physical challenges needing hand–eye coordination"
+     ],
+     [
+      "Adventure",
+      "Puzzle-solving without reflex challenges"
+     ],
+     [
+      "Role playing",
+      "Adventurers with special skills follow a storyline"
+     ],
+     [
+      "Simulation",
+      "Closely copies real or fictional reality"
+     ],
+     [
+      "Strategy",
+      "Careful planning and thinking to win"
+     ],
+     [
+      "Sports",
+      "Simulates real sports against people or AI"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "Which genre relies most on hand–eye coordination?",
+     "o": [
+      "Adventure",
+      "Action",
+      "Strategy",
+      "Simulation"
+     ],
+     "a": 1,
+     "why": "Action games are physical challenges."
+    },
+    {
+     "q": "What does SFX stand for?",
+     "o": [
+      "Super frame exchange",
+      "Sound file extension",
+      "Special effects (sound effects)",
+      "Sprite effects"
+     ],
+     "a": 2,
+     "why": "Sounds that play when something happens."
+    },
+    {
+     "q": "A puzzle game where you talk to characters and explore without fighting is…",
+     "o": [
+      "Adventure",
+      "Sports",
+      "Action",
+      "Strategy"
+     ],
+     "a": 0,
+     "why": "Adventure games are non-confrontational puzzle-solving."
+    },
+    {
+     "q": "Why should the background match the genre?",
+     "o": [
+      "It makes the file smaller",
+      "GameMaker requires it",
+      "It makes the game run faster",
+      "Mismatched elements make the game clunky and unsuitable for its audience"
+     ],
+     "a": 3,
+     "why": "Consistency suits the target audience."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how sound can change the mood of a game. Use an example.",
+     "m": 2,
+     "a": "Sounds/music create an atmosphere that can change quickly (1), e.g. a scream makes it scary/darker while a hand-clap celebrates finishing a level (1)."
+    },
+    {
+     "q": "Choose two genres. Describe each and give an example game for each.",
+     "m": 4,
+     "a": "e.g. RPG: the player plays an adventurer with special skills following a storyline through an overworld (1); example Pokémon (1). Strategy: careful planning and thinking needed to win (1); example Civilization (1)."
+    }
+   ],
+   "terms": [
+    "Sound effect",
+    "Genre"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "PC Gaming: Crash Course Games #20",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=ADTTXRxVUcY",
+     "yt": "ADTTXRxVUcY"
+    },
+    {
+     "title": "Casual Gaming: Crash Course Games #11",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=fa-TFvPKpog",
+     "yt": "fa-TFvPKpog"
+    }
+   ]
+  },
+  {
+   "id": "p08",
+   "spec": "Describe how games are played on consoles and mobiles, and explain VR and AR",
+   "summary": "Most games are played on consoles, computers or phones, bought in shops, downloaded or by subscription. VR puts you inside a computer-made 3D world with a headset; AR adds computer images onto the real world.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "How do we play games?"
+    },
+    {
+     "t": "p",
+     "text": "Think about **what** you use (hardware and software), **where** you are (at home, on the bus to Enniskillen, in an arcade) and **how** you pay."
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Game consoles** such as PlayStation and Xbox are the platform for many games. Games may be bought in a shop on a disc and inserted, bought and downloaded online, or played through a **monthly subscription**.",
+      "**Mobile gaming** is more and more popular, with games bought or downloaded free from the app stores on phones and tablets. Many are played in a similar way: navigating levels to collect credit and eventually win.",
+      "**Computers**: PCs and laptops, with games from online stores."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "p",
+     "text": "Newer, less common technologies are emerging and their popularity is increasing rapidly: **VR** and **AR**."
+    },
+    {
+     "t": "h",
+     "text": "Virtual reality (VR)"
+    },
+    {
+     "t": "p",
+     "text": "[[VR]] stands for **Virtual Reality**. It is a world that doesn't exist: it has been created by a computer and lets users experience and interact with a 3D world using a **VR headset**. The headset shows a 360° view of the computer-generated world, which changes as you turn your head. Extra technology can add sound and movement, such as hand controllers."
+    },
+    {
+     "t": "p",
+     "text": "Well-known VR games include **Beat Saber** and **Half-Life: Alyx**, played on headsets like the Meta Quest and PlayStation VR."
+    },
+    {
+     "t": "note",
+     "text": "Older notes call Minecraft 'the most well-known example of VR'. Minecraft is a 3D block-building game in a procedurally generated world (built by the computer as you explore) and is the best-selling video game of all time, with over 300 million copies sold. It has had VR versions on some headsets, but it is normally played on an ordinary screen, so it is not a true example of a VR game."
+    },
+    {
+     "t": "h",
+     "text": "Augmented reality (AR)"
+    },
+    {
+     "t": "p",
+     "text": "[[AR]] stands for **Augmented Reality**. It means adding computer-generated images on top of real life, usually seen through a phone or tablet camera. For example, some furniture shops have apps that let you see how a sofa would look in your own living room. AR uses the device's **camera** and often its **internet connection** and **GPS**."
+    },
+    {
+     "t": "p",
+     "text": "The biggest example is **Pokémon Go**, released for Android and iOS devices in **2016**. It uses the phone's GPS to locate, capture, battle and train virtual creatures that appear as if they are in the player's real location. By the end of 2016 it had been downloaded more than **500 million** times. As well as using AR, it encouraged physical activity, and some businesses said it increased profits because more people walked past their shops."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "VR",
+      "AR"
+     ],
+     "rows": [
+      [
+       "Stands for",
+       "Virtual Reality",
+       "Augmented Reality"
+      ],
+      [
+       "What you see",
+       "A completely computer-generated 3D world",
+       "The real world with computer images added"
+      ],
+      [
+       "Hardware",
+       "VR headset (often with controllers)",
+       "Phone/tablet camera, GPS, or AR glasses"
+      ],
+      [
+       "Example",
+       "Beat Saber",
+       "Pokémon Go; furniture-shop apps"
+      ]
+     ]
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Games are played on consoles, mobiles and computers; bought on disc, downloaded or by subscription.",
+      "VR = Virtual Reality: a computer-made 3D world seen through a headset.",
+      "AR = Augmented Reality: computer images added on top of the real world.",
+      "Pokémon Go (2016) is the best-known AR game, with 500 million downloads in 2016.",
+      "Minecraft is the best-selling game ever, but it is not really a VR game."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does AR stand for?",
+     "o": [
+      "Artificial Reality",
+      "Augmented Reality",
+      "Advanced Rendering",
+      "Actual Reality"
+     ],
+     "a": 1,
+     "why": "It adds to (augments) the real world."
+    },
+    {
+     "q": "Which needs a headset that replaces your view of the real world?",
+     "o": [
+      "AR",
+      "Mobile gaming",
+      "VR",
+      "Cloud gaming"
+     ],
+     "a": 2,
+     "why": "VR is a fully virtual 3D world."
+    },
+    {
+     "q": "Which features of a phone does Pokémon Go use?",
+     "o": [
+      "Camera and GPS",
+      "Printer and scanner",
+      "Only the speaker",
+      "Only Bluetooth"
+     ],
+     "a": 0,
+     "why": "GPS places creatures; the camera shows them in the real world."
+    },
+    {
+     "q": "A furniture app that shows a sofa in your own room is an example of…",
+     "o": [
+      "VR",
+      "A simulation genre",
+      "A console",
+      "AR"
+     ],
+     "a": 3,
+     "why": "Computer images on the real world."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between VR and AR, giving an example of each.",
+     "m": 4,
+     "a": "VR is a completely computer-generated 3D world (1), experienced through a headset, e.g. Beat Saber (1). AR adds computer-generated images on top of the real world (1), e.g. Pokémon Go/a furniture app (1)."
+    },
+    {
+     "q": "Give two benefits of Pokémon Go other than entertainment.",
+     "m": 2,
+     "a": "It encouraged physical activity as players walk around (1); it increased foot traffic and profits for some businesses (1)."
+    }
+   ],
+   "terms": [
+    "VR",
+    "AR"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "The Future of Virtual Reality: Crash Course Games #21",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=BfcBjJ3c9lg",
+     "yt": "BfcBjJ3c9lg"
+    },
+    {
+     "title": "Microsoft and Connected Consoles: Crash Course Games #10",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=eE8Jac43RBo",
+     "yt": "eE8Jac43RBo"
+    }
+   ]
+  },
+  {
+   "id": "p09",
+   "spec": "Explain scoring and target audience, and plan a game with a storyboard",
+   "summary": "Scores are a way of measuring success, but not every game uses them. Games must suit their target audience. Storyboards plan every screen before you build the game, as in the Magic Amusements brief.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Scoring"
+    },
+    {
+     "t": "p",
+     "text": "[[Scoring]] refers to an abstract quantity (usually **points**) linked to a player or team. Events in the game can raise or lower the score. Most games use score as a measure of success, and in competitive games the goal is often to get a better score than your opponents."
+    },
+    {
+     "t": "list",
+     "items": [
+      "Scoring is very different from game to game and is often seen as the 'way to win'.",
+      "**Fortnite** and **Apex Legends** have no high score table; they use a **'last man standing'** approach instead.",
+      "Some games have **no score at all**, yet you can still win. **Solitaire** (the card game) is a good example: you win by clearing the cards."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Target audience"
+    },
+    {
+     "t": "p",
+     "text": "The [[target audience]] is the particular group of people that a product, such as a film, advert or game, is aimed at. When developing a game, keep the target audience in mind all the time, because they are the people who will play it."
+    },
+    {
+     "t": "p",
+     "text": "For example, Fortnite is aimed mainly at young teens, while Chess is aimed at logical thinkers and often an older generation of gamer."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: deciding the target audience",
+     "context": "How do you decide who a game is aimed at from a picture of it?",
+     "steps": [
+      "Look at the **colour scheme**: bright, cartoon colours suggest young children; dark, realistic colours suggest teenagers or adults.",
+      "Look at the **icons and characters**: cute animals point to young players; soldiers or monsters to older players.",
+      "Think about the **gameplay**: simple tapping suits young children; complex strategy or fast reactions suits older players.",
+      "Check the **age rating** (PEGI 3, 7, 12, 16 or 18)."
+     ],
+     "answer": "e.g. A bright, cartoon puzzle game with big buttons and a PEGI 3 rating is aimed at young children; a dark, realistic shooter rated PEGI 18 is aimed at adults."
+    },
+    {
+     "t": "h",
+     "text": "Practical assessment: Magic Amusements"
+    },
+    {
+     "t": "p",
+     "text": "**Magic Amusements** is an up-and-coming game development company in Belfast. It specialises in 3D games, but wants to expand by developing a **2D game aimed at teenagers aged 10–14**, made in GameMaker with a continuous theme throughout and a title suitable for the target audience. The game must have:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "An introductory **title screen** with a company logo and instructions for reaching the main menu.",
+      "A **main menu** that lets the user start the game, access a help feature, view the high scores, load the previously saved game and view the credits.",
+      "At least **three levels**, each slightly harder, all possible to complete.",
+      "A **scoring system**.",
+      "**Collectables**."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Storyboarding"
+    },
+    {
+     "t": "p",
+     "text": "A [[storyboard]] is a set of sketches planning each screen before you build it, labelled with the **colours**, **fonts** and **layout** you will use. For the brief, storyboard your opening/front page, loading screen, each level, help page and final/end credits screen."
+    },
+    {
+     "t": "warn",
+     "text": "Don't skip planning. Building straight away without a storyboard usually means a messy game with no consistent theme."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Scoring is a measure of success, but games like Fortnite use 'last man standing' and Solitaire has no score at all.",
+      "The target audience is the group a game is aimed at; colours, characters, gameplay and age rating show it.",
+      "The Magic Amusements game is a 2D GameMaker game for ages 10–14.",
+      "It needs a title screen, a main menu, three or more levels, scoring and collectables.",
+      "Storyboard every screen, labelling colours, fonts and layout."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which game uses a 'last man standing' approach instead of a high score table?",
+     "o": [
+      "Solitaire",
+      "Fortnite",
+      "Chess",
+      "Pong"
+     ],
+     "a": 1,
+     "why": "Fortnite and Apex Legends use last man standing."
+    },
+    {
+     "q": "What is a target audience?",
+     "o": [
+      "The people who make a game",
+      "The score needed to win",
+      "The group a product is aimed at",
+      "The game's genre"
+     ],
+     "a": 2,
+     "why": "The intended players."
+    },
+    {
+     "q": "Which is an example of a game with no score?",
+     "o": [
+      "Solitaire",
+      "Space Invaders",
+      "Pac-Man",
+      "Tetris"
+     ],
+     "a": 0,
+     "why": "You win by clearing the cards."
+    },
+    {
+     "q": "What should a storyboard be labelled with?",
+     "o": [
+      "The price of the game",
+      "The program code",
+      "The players' names",
+      "Colours, fonts and layout"
+     ],
+     "a": 3,
+     "why": "These plan the look of each screen."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why it is important to know the target audience when developing a game.",
+     "m": 2,
+     "a": "The target audience are the people who will play the game (1), so its theme, difficulty, colours and content must suit them or they will not play/buy it (1)."
+    },
+    {
+     "q": "List four features the Magic Amusements game must include.",
+     "m": 4,
+     "a": "Any four: title screen with logo and instructions (1); main menu (start, help, high score, load, credits) (1); at least three levels getting harder (1); scoring system (1); collectables (1); suitable title and continuous theme (1)."
+    }
+   ],
+   "terms": [
+    "Scoring",
+    "Target audience",
+    "Storyboard"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How To Make A Classic Arcade Game in GameMaker",
+     "source": "YouTube – GameMaker",
+     "url": "https://www.youtube.com/watch?v=nwlvT-L9vFg",
+     "yt": "nwlvT-L9vFg"
+    },
+    {
+     "title": "Casual Gaming: Crash Course Games #11",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=fa-TFvPKpog",
+     "yt": "fa-TFvPKpog"
+    }
+   ]
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Leader board",
+   "def": "A table that ranks players by their scores, to motivate them to improve.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Punched card",
+   "def": "A card with holes punched in it that early computers read as instructions or data.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Naming convention",
+   "def": "An agreed way of naming things, such as starting every sprite name with spr.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Collision",
+   "def": "In GameMaker, an event that happens when two instances touch each other.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Game platform",
+   "def": "The device or system a game is played on, such as a console, phone or computer.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "GameMaker",
+   "def": "A 2D game engine that lets you build games with drag-and-drop actions.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Game engine",
+   "def": "Software that provides the tools to design, build and run games.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Sprite",
+   "def": "An image, or a set of images for an animation, that represents something in a game.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Object",
+   "def": "In GameMaker, a template for something in the game, with a sprite, events and actions.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Instance",
+   "def": "A copy of an object placed in a room; one object can have many instances.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Event",
+   "def": "Something that happens in a game, such as a key press or a collision, that triggers actions.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Action",
+   "def": "An instruction an object carries out when an event happens, such as Move Fixed.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Room",
+   "def": "In GameMaker, the area where instances are placed, used for levels and screens.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Sound effect",
+   "def": "A short sound that plays when something happens in a game; also called SFX.",
+   "alt": "SFX",
+   "page": "p07"
+  },
+  {
+   "term": "Genre",
+   "def": "The style or category of a game, based on its challenges, story and gameplay.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "VR",
+   "def": "Virtual Reality: a computer-generated 3D world experienced through a headset.",
+   "alt": "Virtual Reality",
+   "page": "p08"
+  },
+  {
+   "term": "AR",
+   "def": "Augmented Reality: computer-generated images added on top of the real world.",
+   "alt": "Augmented Reality",
+   "page": "p08"
+  },
+  {
+   "term": "Scoring",
+   "def": "Keeping track of a quantity, usually points, that measures a player's success.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Target audience",
+   "def": "The particular group of people a product, such as a game, is aimed at.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Storyboard",
+   "def": "A set of labelled sketches that plan each screen of a game before it is built.",
+   "alt": "",
+   "page": "p09"
+  }
+ ]
+}

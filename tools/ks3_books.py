@@ -11,9 +11,24 @@ import json, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.join(HERE, '..')
 TEMPLATE = os.path.join(ROOT, 'notes', 'U1.html')
 YEARS = {'Y8': 'Year 8', 'Y9': 'Year 9', 'Y10': 'Year 10'}
+# notes/Y0.html: a teacher preview of the topics in the library that no year teaches (made by tools/ks3_plan.py)
+PREVIEW = {'Y0': 'Topic library'}
+NAMES = dict(YEARS, **PREVIEW)
 BLURB = {'Y8': 'Starting out: the school network and email, staying safe in the computer room, what is inside a computer, and staying safe online',
          'Y9': 'Computer graphics and Photoshop, building web pages with HTML and CSS, and programming the BBC micro:bit',
          'Y10': 'Inside the computer and binary, designing your own game in GameMaker, and programming in C#'}
+
+# the hand-written blurb fits the topics it was written for; after a swap (Teacher area › KS3 topics) it is made from the titles
+BLURB_FOR = {'Y8': ['Introduction & MySchool', 'Safety in the Classroom', 'Hardware & Software', 'Online Safety'],
+             'Y9': ['Computer Graphics', 'Web Design', 'Micro:bits'], 'Y10': ['Under the Hood', 'Game Design', 'Programming']}
+
+
+def blurb(yid, chapters):
+    t = [c['title'] for c in chapters]
+    if yid in PREVIEW: return 'Teacher preview: KS3 topics in the library that no year is teaching at the moment'
+    if t == BLURB_FOR.get(yid): return BLURB[yid]
+    return (', '.join(t[:-1]) + ' and ' + t[-1]) if len(t) > 1 else (t[0] if t else '')
+
 
 # Code put into every KS3 book, just before the reader starts. It runs after BOOK, BK and COURSE exist.
 KS3_JS = r'''
@@ -28,7 +43,7 @@ def esc_script(s):
 
 def build(yid, data, tpl, manifest):
     lessons = {}
-    ytopics = next((y['topics'] for y in manifest.get('years', []) if y['year'] == YEARS[yid]), [])
+    ytopics = next((y['topics'] for y in manifest.get('years', []) if y['year'] == NAMES[yid]), [])
     for i, ch in enumerate(data['chapters']):
         if i < len(ytopics):
             ch['ks3'] = ytopics[i]['id']   # the topic id in ks3/manifest.json, e.g. 8-01
@@ -39,8 +54,8 @@ def build(yid, data, tpl, manifest):
             lessons[pod] = ch['title']
             for p in ch['pages']:
                 p['lessons'] = [pod]
-    book = {'book': {'id': yid, 'title': f'{YEARS[yid]}: Digital Technology', 'qual': 'KS3 Digital Technology', 'hub': '',
-                     'edition': '2026–27', 'mode': 'notes', 'blurb': BLURB[yid], 'lessonNames': lessons},
+    book = {'book': {'id': yid, 'title': f'{NAMES[yid]}: Digital Technology', 'qual': 'KS3 Digital Technology', 'hub': '',
+                     'edition': '2026–27', 'mode': 'notes', 'blurb': blurb(yid, data['chapters']), 'lessonNames': lessons},
             'chapters': data['chapters'], 'glossary': sorted(data['glossary'], key=lambda g: g['term'].lower())}
     lines = tpl.split('\n')
     i = next(n for n, l in enumerate(lines) if l.startswith('const BOOK = '))
@@ -48,7 +63,7 @@ def build(yid, data, tpl, manifest):
     book['illus'] = old.get('illus', {})
     lines[i] = 'const BOOK = ' + esc_script(json.dumps(book, ensure_ascii=False, separators=(',', ':'))) + ';'
     html = '\n'.join(lines)
-    html = re.sub(r'<title>[^<]*</title>', f'<title>{YEARS[yid]}: Digital Technology</title>', html, count=1)
+    html = re.sub(r'<title>[^<]*</title>', f'<title>{NAMES[yid]}: Digital Technology</title>', html, count=1)
     for a, b in PATCHES:
         if a not in html:
             sys.exit(f'template changed, patch not found: {a[:80]}')
@@ -107,11 +122,14 @@ def main():
         manifest = json.load(open(os.path.join(ROOT, 'ks3', 'manifest.json'), encoding='utf-8'))
     except (OSError, ValueError):
         manifest = {}
-    only = sys.argv[1:] or list(YEARS)
+    only = sys.argv[1:] or list(NAMES)
     for yid in only:
         src = os.path.join(ROOT, 'ks3', 'books', yid + '.json')
         if not os.path.exists(src):
-            print('no content yet for', yid); continue
+            out = os.path.join(ROOT, 'notes', yid + '.html')
+            if yid in PREVIEW and os.path.exists(out): os.remove(out); print('removed', out)
+            else: print('no content yet for', yid)
+            continue
         data = json.load(open(src, encoding='utf-8'))
         html = build(yid, data, tpl, manifest)
         open(os.path.join(ROOT, 'notes', yid + '.html'), 'w', encoding='utf-8').write(html)

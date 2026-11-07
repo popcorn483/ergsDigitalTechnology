@@ -1,0 +1,2692 @@
+{
+ "title": "Hardware & Software",
+ "summary": "Under the hood of a modern computer: the parts inside a computer, what each one does, and the difference between hardware and software.",
+ "learn": [
+  "Hardware and software",
+  "Input, output, storage and memory",
+  "The parts inside a computer and what they do",
+  "The Raspberry Pi",
+  "What common computing acronyms stand for"
+ ],
+ "temporary": false,
+ "intro": "What is under the hood of a modern computer: the five parts of a computer system, the components inside the case, the Raspberry Pi and games consoles, computing acronyms, algorithms and flowcharts, variables and the BBC micro:bit.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Know the difference between hardware and software, and the five key parts of any computer system",
+   "summary": "Hardware is the physical parts of a computer; software is the programs. Every computer, from a desktop to a Raspberry Pi, has input devices, memory, storage, a processor and output devices.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "We usually think of computers as the big desktop machines in the ICT room or at home. But in recent years, computers have become **faster and smaller**. Your phone, your games console, a smart speaker and even a credit-card-sized Raspberry Pi are all computers."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Hardware",
+      "Software"
+     ],
+     "rows": [
+      [
+       "What it is",
+       "The physical parts you can touch",
+       "The programs and instructions that run on the hardware"
+      ],
+      [
+       "Examples",
+       "Keyboard, mouse, processor, monitor, hard disk drive",
+       "Windows, Microsoft Word, Google Chrome, FIFA/EA FC, Minecraft"
+      ],
+      [
+       "Analogy",
+       "Your body",
+       "Your thoughts and knowledge"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Key terms: the five parts of a computer system"
+    },
+    {
+     "t": "p",
+     "text": "Every computer system has five parts: [[input device|input devices]], memory, storage, a processor and [[output device|output devices]]."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "**Input device**",
+       "Lets the user **input** (put) data into a computer."
+      ],
+      [
+       "**[[Memory]]**",
+       "Keeps the data that has been input, the software being used and the results of any processing, for the **short term**. It is lost when the computer is turned off."
+      ],
+      [
+       "**[[Storage device]]**",
+       "Stores files that have been created, and software that has been installed, for the **longer term**."
+      ],
+      [
+       "**[[Processor]]**",
+       "Processes data according to the instructions it has been given, turning it into information for the user."
+      ],
+      [
+       "**[[Output device]]**",
+       "Lets the user **receive** information from a computer."
+      ]
+     ],
+     "caption": "Key terms"
+    },
+    {
+     "t": "h",
+     "text": "Examples of each part (Copy and Complete)"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "Examples"
+     ],
+     "rows": [
+      [
+       "Input devices",
+       "Keyboard, mouse, microphone, webcam, touchscreen, game controller, scanner, barcode reader, graphics tablet"
+      ],
+      [
+       "Memory",
+       "RAM (Random Access Memory), ROM (Read Only Memory), cache memory"
+      ],
+      [
+       "Storage",
+       "Hard disk drive (HDD), solid state drive (SSD), USB memory stick, SD card, CD, DVD, Blu-ray disc, cloud storage (e.g. Google Drive)"
+      ],
+      [
+       "Processor",
+       "CPU chips made by Intel (Core i5/i7), AMD (Ryzen), Apple (M-series), ARM chips in phones and the Raspberry Pi"
+      ],
+      [
+       "Output devices",
+       "Monitor, speakers, headphones, printer, projector, VR headset, controller vibration motors"
+      ]
+     ],
+     "caption": "Completed examples table"
+    },
+    {
+     "t": "tip",
+     "text": "Memory vs storage: **memory** is like your desk (what you're working on right now, cleared at the end of the day); **storage** is like your schoolbag or locker (kept until you need it again)."
+    },
+    {
+     "t": "note",
+     "text": "A touchscreen is both an input **and** an output device: you tap it (input) and it shows you pictures (output)."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Hardware = physical parts; software = programs.",
+      "Input devices put data in; output devices give information out.",
+      "Memory is short term and is lost when power is off; storage is long term.",
+      "The processor follows instructions to process data."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "How the parts work together",
+    "caption": "Data flows from input, through the processor, to output.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "i",
+      "label": "Input",
+      "detail": "You press a button on the controller.",
+      "shape": "io"
+     },
+     {
+      "id": "p",
+      "label": "Processor",
+      "detail": "Follows the game's instructions to work out what happens.",
+      "shape": "process"
+     },
+     {
+      "id": "m",
+      "label": "Memory / storage",
+      "detail": "Memory holds the game while it runs; storage keeps it (and your save file) when the console is off.",
+      "shape": "process"
+     },
+     {
+      "id": "o",
+      "label": "Output",
+      "detail": "Your player jumps on the TV screen and you hear the sound.",
+      "shape": "io"
+     }
+    ],
+    "edges": [
+     [
+      "i",
+      "p"
+     ],
+     [
+      "p",
+      "m"
+     ],
+     [
+      "m",
+      "p"
+     ],
+     [
+      "p",
+      "o"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "Which of these is software?",
+     "o": [
+      "A keyboard",
+      "A monitor",
+      "Google Chrome",
+      "A hard disk drive"
+     ],
+     "a": 2,
+     "why": "Chrome is a program, so it is software."
+    },
+    {
+     "q": "What happens to the data in memory when the computer is turned off?",
+     "o": [
+      "It is saved forever",
+      "It is lost",
+      "It is printed",
+      "It moves to the monitor"
+     ],
+     "a": 1,
+     "why": "Memory is short term."
+    },
+    {
+     "q": "Which is an output device?",
+     "o": [
+      "Speakers",
+      "Microphone",
+      "Webcam",
+      "Mouse"
+     ],
+     "a": 0,
+     "why": "Speakers give information out to the user."
+    },
+    {
+     "q": "Where are installed programs and saved files kept for the long term?",
+     "o": [
+      "Memory",
+      "Processor",
+      "Input device",
+      "Storage device"
+     ],
+     "a": 3,
+     "why": "Storage is for the long term."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between memory and storage.",
+     "m": 2,
+     "a": "Memory holds the data and programs being used right now for the short term and is lost when the computer is turned off (1); storage keeps files and installed software for the long term, even when the power is off (1)."
+    },
+    {
+     "q": "Give **two** examples of input devices and **two** examples of output devices.",
+     "m": 4,
+     "a": "Input, any two: keyboard, mouse, microphone, webcam, touchscreen, controller (1 each). Output, any two: monitor, speakers, printer, headphones, projector (1 each)."
+    }
+   ],
+   "terms": [
+    "Hardware",
+    "Software",
+    "Input device",
+    "Output device",
+    "Memory",
+    "Storage device",
+    "Processor"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How Computers Work: Hardware and Software",
+     "source": "YouTube – Code.org",
+     "url": "https://www.youtube.com/watch?v=xnyFYiK2rSY",
+     "yt": "xnyFYiK2rSY"
+    },
+    {
+     "title": "How Computers Work: What Makes a Computer, a Computer?",
+     "source": "YouTube – Code.org",
+     "url": "https://www.youtube.com/watch?v=mCq8-xTH7jA",
+     "yt": "mCq8-xTH7jA"
+    },
+    {
+     "title": "Digital devices – BBC Bitesize",
+     "source": "BBC Bitesize",
+     "url": "https://www.bbc.co.uk/bitesize/guides/zxb72hv/revision/1"
+    }
+   ]
+  },
+  {
+   "id": "p02",
+   "spec": "Identify the main components of a computer and describe the function of each",
+   "summary": "When a computer is taken apart you find the motherboard, CPU, RAM, hard disk drive, power supply, graphics card, fan and heat sink inside the chassis, with the keyboard, mouse, webcam, microphone and monitor outside.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Imagine your teacher unscrewing the side of a desktop computer. Every **[[component]]** (part) has a job, and they all work together. Some are **[[internal]]** (inside the case) and some are **[[external]]** (outside, plugged in)."
+    },
+    {
+     "t": "h",
+     "text": "Computer Breakdown Service: what each component does"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Component",
+      "Internal or external?",
+      "Function (what it does and why it's needed)"
+     ],
+     "rows": [
+      [
+       "Keyboard",
+       "External",
+       "Input device used to type letters, numbers and commands into the computer."
+      ],
+      [
+       "Mouse",
+       "External",
+       "Input device that moves the pointer on screen and lets you click, select and drag."
+      ],
+      [
+       "[[Hard Disk Drive]] (HDD)",
+       "Internal",
+       "Storage device that keeps the operating system, programs and your files when the power is off."
+      ],
+      [
+       "[[CPU]]",
+       "Internal",
+       "The processor or 'brain': it carries out the instructions of programs and does the calculations."
+      ],
+      [
+       "[[RAM]]",
+       "Internal",
+       "Memory that holds the programs and data being used right now so the CPU can get them quickly. Wiped when the power is off."
+      ],
+      [
+       "Power supply",
+       "Internal",
+       "Changes mains electricity from the wall socket into the low voltages the components need."
+      ],
+      [
+       "[[Graphics card]]",
+       "Internal",
+       "Has its own processor (GPU) and memory to create the images, video and game graphics sent to the monitor."
+      ],
+      [
+       "Web cam",
+       "External (or built in)",
+       "Input device that captures video and photos, e.g. for video calls."
+      ],
+      [
+       "Microphone",
+       "External (or built in)",
+       "Input device that captures sound, e.g. for voice chat or recording."
+      ],
+      [
+       "Monitor",
+       "External",
+       "Output device that displays images, text and video."
+      ],
+      [
+       "[[Motherboard]]",
+       "Internal",
+       "The main circuit board: every other component plugs into it so they can communicate."
+      ],
+      [
+       "Fan unit / [[heat sink]]",
+       "Internal",
+       "Keeps the CPU and other parts cool so they don't overheat and get damaged."
+      ],
+      [
+       "Chassis",
+       "Holds everything",
+       "The case (frame) that holds and protects all the internal components."
+      ]
+     ],
+     "caption": "Completed Computer Breakdown Service"
+    },
+    {
+     "t": "tip",
+     "text": "Remember the motherboard as the 'town' where everyone lives: the CPU, RAM, graphics card and drives all connect to it."
+    },
+    {
+     "t": "note",
+     "text": "Many newer computers use an **SSD** (solid state drive) instead of a hard disk drive. It has no moving parts, so it is faster, quieter and tougher."
+    },
+    {
+     "t": "warn",
+     "text": "Never open a computer yourself while it is plugged in. The power supply carries mains electricity, which is dangerous."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "The motherboard connects all components together.",
+      "CPU = processor; RAM = short-term memory; HDD = long-term storage.",
+      "The power supply converts mains electricity; the fan and heat sink stop overheating.",
+      "The graphics card makes images; the chassis is the case.",
+      "Keyboard, mouse, webcam and microphone are input; the monitor is output."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Computer Breakdown Service",
+    "caption": "Click a hidden cell to check what each component does.",
+    "head": [
+     "Component",
+     "Function"
+    ],
+    "rows": [
+     [
+      "Motherboard",
+      "Main circuit board that connects everything"
+     ],
+     [
+      "CPU",
+      "Carries out instructions / processes data"
+     ],
+     [
+      "RAM",
+      "Short-term memory for programs in use"
+     ],
+     [
+      "Hard Disk Drive",
+      "Long-term storage of files and software"
+     ],
+     [
+      "Power supply",
+      "Converts mains electricity for the components"
+     ],
+     [
+      "Graphics card",
+      "Creates the images for the monitor"
+     ],
+     [
+      "Fan / heat sink",
+      "Keeps components cool"
+     ],
+     [
+      "Chassis",
+      "The case that holds everything"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "Which component does every other component plug into?",
+     "o": [
+      "The chassis",
+      "The monitor",
+      "The motherboard",
+      "The mouse"
+     ],
+     "a": 2,
+     "why": "The motherboard is the main circuit board."
+    },
+    {
+     "q": "What is the job of the heat sink and fan?",
+     "o": [
+      "Store files",
+      "Keep the CPU cool",
+      "Display images",
+      "Type letters"
+     ],
+     "a": 1,
+     "why": "They stop the CPU overheating."
+    },
+    {
+     "q": "Which component changes mains electricity into lower voltages?",
+     "o": [
+      "Power supply",
+      "RAM",
+      "Graphics card",
+      "Webcam"
+     ],
+     "a": 0,
+     "why": "The power supply does this."
+    },
+    {
+     "q": "Which of these is an internal component?",
+     "o": [
+      "Keyboard",
+      "Monitor",
+      "Microphone",
+      "RAM"
+     ],
+     "a": 3,
+     "why": "RAM sits inside the case on the motherboard."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe the function of the CPU and of RAM.",
+     "m": 2,
+     "a": "The CPU carries out program instructions / processes data (1); RAM holds the programs and data currently in use, for the short term (1)."
+    },
+    {
+     "q": "Explain why a computer needs a fan or heat sink.",
+     "m": 2,
+     "a": "Components such as the CPU get hot when working (1); the fan/heat sink removes the heat so they don't overheat and get damaged (1)."
+    }
+   ],
+   "terms": [
+    "Component",
+    "CPU",
+    "RAM",
+    "Hard Disk Drive",
+    "Motherboard",
+    "Graphics card",
+    "Heat sink",
+    "Internal",
+    "External"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How Computers Work: CPU, Memory, Input & Output",
+     "source": "YouTube – Code.org",
+     "url": "https://www.youtube.com/watch?v=DKGZlaPlVLY",
+     "yt": "DKGZlaPlVLY"
+    },
+    {
+     "title": "How does Computer Hardware Work? 💻🛠🔬 [3D Animated Teardown]",
+     "source": "YouTube – Branch Education",
+     "url": "https://www.youtube.com/watch?v=d86ws7mQYIg",
+     "yt": "d86ws7mQYIg"
+    },
+    {
+     "title": "Hardware and network technologies (CCEA) – BBC Bitesize",
+     "source": "BBC Bitesize",
+     "url": "https://www.bbc.co.uk/bitesize/guides/ztyd3k7/revision/1"
+    }
+   ]
+  },
+  {
+   "id": "p03",
+   "spec": "Identify the parts of a Raspberry Pi and recognise that games consoles contain the same hardware as computers",
+   "summary": "A Raspberry Pi is a credit-card-sized computer with a processor, RAM, storage (an SD card) and ports for input and output. Games consoles are computers too: under the hood a PlayStation and an Xbox have very similar hardware.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "The Raspberry Pi: the pocket-sized computer"
+    },
+    {
+     "t": "p",
+     "text": "The **[[Raspberry Pi]]** is a credit-card-sized computer that you can plug into a TV and a keyboard. It was designed in Cambridge to help young people learn to program, and it costs about the same as a video game. Even though it is tiny, it has everything a computer needs: a processor, memory, storage and ways to input and output."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Label",
+      "Part",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "A",
+       "Processor",
+       "The silver chip in the middle: carries out the instructions (the CPU)."
+      ],
+      [
+       "B",
+       "USB-C power supply",
+       "Where the power cable plugs in."
+      ],
+      [
+       "C",
+       "RAM",
+       "The black chip beside the processor: short-term memory."
+      ],
+      [
+       "D",
+       "Micro HDMI ports (×2)",
+       "Output video and sound to one or two TVs/monitors."
+      ],
+      [
+       "E",
+       "USB 2 ports (black)",
+       "Connect input devices like a keyboard and mouse."
+      ],
+      [
+       "F",
+       "USB 3 ports (blue)",
+       "Faster USB ports, good for USB sticks and drives."
+      ],
+      [
+       "G",
+       "Ethernet port",
+       "Plug in a network cable for a wired internet connection."
+      ]
+     ],
+     "caption": "Labelling the Raspberry Pi 4"
+    },
+    {
+     "t": "note",
+     "text": "Where is the storage? A Raspberry Pi has no hard drive: it uses a **microSD card** slotted into the underside of the board."
+    },
+    {
+     "t": "h",
+     "text": "Under the hood of a games console"
+    },
+    {
+     "t": "p",
+     "text": "A **[[games console]]** is a computer too. The famous consoles have very similar hardware under the hood, which is why many games look almost the same on both:"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "PlayStation 5",
+      "Xbox Series X"
+     ],
+     "rows": [
+      [
+       "Processor (CPU)",
+       "8-core AMD Zen 2",
+       "8-core AMD Zen 2"
+      ],
+      [
+       "Graphics (GPU)",
+       "AMD RDNA 2",
+       "AMD RDNA 2"
+      ],
+      [
+       "Memory (RAM)",
+       "16 GB GDDR6",
+       "16 GB GDDR6"
+      ],
+      [
+       "Storage",
+       "825 GB SSD",
+       "1 TB SSD"
+      ],
+      [
+       "Output",
+       "HDMI to the TV",
+       "HDMI to the TV"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Mind map my console"
+    },
+    {
+     "t": "p",
+     "text": "A good way to revise is to draw a mind map with your own device in the middle. For each strand, note **what the component is called**, **what it is used for**, **whether it is internal or external**, and **any different types or brands**."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a mind map for a PlayStation 5",
+     "context": "Make strands for the console's components.",
+     "steps": [
+      "**Controller (DualSense)**: input device; external; rivals include the Xbox controller.",
+      "**CPU (AMD Zen 2)**: processes the game's instructions; internal; other brands: Intel, ARM.",
+      "**GPU (AMD RDNA 2)**: draws the graphics; internal; other brand: NVIDIA (used in the Nintendo Switch).",
+      "**RAM (16 GB)**: holds the game while it runs; internal.",
+      "**SSD (825 GB)**: stores games and save files; internal (you can add an extra one).",
+      "**HDMI port**: output to the TV; the TV itself is an external output device.",
+      "**Fan and heat sink**: keep it cool; internal."
+     ],
+     "answer": "Each strand: name, job, internal/external, types or brands."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "The Raspberry Pi is a credit-card-sized computer.",
+      "Pi parts: processor, RAM, USB-C power, micro HDMI, USB 2, USB 3, Ethernet; storage is a microSD card.",
+      "Games consoles are computers with a CPU, GPU, RAM and storage.",
+      "PlayStation and Xbox have very similar hardware under the hood."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "match",
+    "title": "Label the Raspberry Pi",
+    "caption": "Match each part to its job.",
+    "pairs": [
+     [
+      "Processor",
+      "Carries out the instructions"
+     ],
+     [
+      "RAM",
+      "Short-term memory"
+     ],
+     [
+      "USB-C",
+      "Power supply"
+     ],
+     [
+      "Micro HDMI",
+      "Video and sound out to a screen"
+     ],
+     [
+      "Ethernet port",
+      "Wired network connection"
+     ],
+     [
+      "USB 3 (blue)",
+      "Fast connection for drives and sticks"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What does a Raspberry Pi use for storage?",
+     "o": [
+      "A hard disk drive",
+      "A DVD",
+      "A microSD card",
+      "Floppy disks"
+     ],
+     "a": 2,
+     "why": "The Pi stores its software on a microSD card."
+    },
+    {
+     "q": "Which Raspberry Pi port would you use to connect it to a TV?",
+     "o": [
+      "Ethernet",
+      "Micro HDMI",
+      "USB-C",
+      "USB 2"
+     ],
+     "a": 1,
+     "why": "Micro HDMI outputs video and sound."
+    },
+    {
+     "q": "What is the Ethernet port for?",
+     "o": [
+      "A wired network/internet connection",
+      "Power",
+      "A keyboard",
+      "Headphones"
+     ],
+     "a": 0,
+     "why": "Ethernet is for network cables."
+    },
+    {
+     "q": "Why do many games look almost the same on PlayStation and Xbox?",
+     "o": [
+      "They are made by the same company",
+      "They use the same controller",
+      "They are both Raspberry Pis",
+      "Their hardware is very similar"
+     ],
+     "a": 3,
+     "why": "Both use very similar AMD hardware."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name **three** parts of a Raspberry Pi and state what each does.",
+     "m": 3,
+     "a": "e.g. processor: carries out instructions (1); RAM: short-term memory (1); micro HDMI: output to a screen (1); USB ports: connect keyboard/mouse (1); Ethernet: wired network (1); USB-C: power (1). Any three."
+    },
+    {
+     "q": "Explain why a games console can be called a computer.",
+     "m": 2,
+     "a": "It has the same parts as a computer: a processor, memory and storage (1), and it takes input (controller) and produces output (TV picture/sound) by following instructions/programs (1)."
+    }
+   ],
+   "terms": [
+    "Raspberry Pi",
+    "Port",
+    "Games console"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "What is a Raspberry Pi?",
+     "source": "YouTube – Raspberry Pi",
+     "url": "https://www.youtube.com/watch?v=uXUjwk2-qx4",
+     "yt": "uXUjwk2-qx4"
+    },
+    {
+     "title": "How Computers Work: What Makes a Computer, a Computer?",
+     "source": "YouTube – Code.org",
+     "url": "https://www.youtube.com/watch?v=mCq8-xTH7jA",
+     "yt": "mCq8-xTH7jA"
+    }
+   ]
+  },
+  {
+   "id": "p04",
+   "spec": "Know what common computing acronyms stand for",
+   "summary": "Computing is full of acronyms. USB, RAM, ROM, HDD, SSD, WWW, CPU, GPU, CD, DVD, HDMI, LAN, I/O and VGA all stand for something, and you should be able to spell them out and say what they are.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "An **[[acronym]]** is a short word made from the first letters of other words. You use lots of computing acronyms every day without knowing what they mean. You may be asked them in a class test, so learn them!"
+    },
+    {
+     "t": "h",
+     "text": "USB: Universal Serial Bus"
+    },
+    {
+     "t": "p",
+     "text": "**[[USB]]** stands for **Universal Serial Bus**. USB is used to **connect devices**, **transfer data** and **supply power** between computers and peripherals like keyboards, mice and printers. You also use it to charge your phone."
+    },
+    {
+     "t": "h",
+     "text": "Don't use fancy words: the answers"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Acronym",
+      "Stands for",
+      "What it is"
+     ],
+     "rows": [
+      [
+       "USB",
+       "Universal Serial Bus",
+       "A connection for devices, data and power"
+      ],
+      [
+       "RAM",
+       "Random Access Memory",
+       "Short-term main memory; wiped when power is off"
+      ],
+      [
+       "ROM",
+       "Read Only Memory",
+       "Memory that keeps its contents when power is off; holds start-up instructions"
+      ],
+      [
+       "HDD",
+       "Hard Disk Drive",
+       "Storage using spinning magnetic disks"
+      ],
+      [
+       "SSD",
+       "Solid State Drive",
+       "Fast storage on memory chips with no moving parts"
+      ],
+      [
+       "WWW",
+       "World Wide Web",
+       "All the websites on the internet"
+      ],
+      [
+       "CPU",
+       "Central Processing Unit",
+       "The processor: carries out instructions"
+      ],
+      [
+       "GPU",
+       "Graphics Processing Unit",
+       "The processor that creates graphics"
+      ],
+      [
+       "WiFi",
+       "A brand name, not really short for anything (often said to mean 'Wireless Fidelity')",
+       "Wireless networking using radio waves"
+      ],
+      [
+       "CD",
+       "Compact Disc",
+       "Optical disc storing about 700 MB"
+      ],
+      [
+       "DVD",
+       "Digital Versatile Disc (first called Digital Video Disc)",
+       "Optical disc storing about 4.7 GB"
+      ],
+      [
+       "HDMI",
+       "High-Definition Multimedia Interface",
+       "Cable/port carrying HD video and sound"
+      ],
+      [
+       "LAN",
+       "Local Area Network",
+       "A network in one building or site, like the school"
+      ],
+      [
+       "I/O",
+       "Input/Output",
+       "Data going into and out of a computer"
+      ],
+      [
+       "VGA",
+       "Video Graphics Array",
+       "An older cable/port for sending video to a monitor"
+      ]
+     ],
+     "caption": "Computing acronyms"
+    },
+    {
+     "t": "tip",
+     "text": "Group them to learn them: **memory** (RAM, ROM), **storage** (HDD, SSD, CD, DVD), **processors** (CPU, GPU), **connections** (USB, HDMI, VGA), **networks** (LAN, WiFi, WWW)."
+    },
+    {
+     "t": "h",
+     "text": "Spelling test: words to learn"
+    },
+    {
+     "t": "p",
+     "text": "Don't rely on a spellchecker for key words, especially in ICT where some words use American spellings or are trademarks. Learn these 20 words: *Folder, Password, Safety, Expectations, Backup, Blind Carbon Copy, Memory, Hard Disk Drive, Graphics Card, Input, Output, Processor, Hardware, Software, Motherboard, Attachment, Employee, Raspberry Pi, Eye Strain, Repetitive Strain Injury.*"
+    },
+    {
+     "t": "tip",
+     "text": "Two ways to learn spellings: **mnemonics** (a silly sentence where the first letters spell the word, e.g. *Oscar Unleashed Top Performer Under Tournament* = OUTPUT) and **look – cover – write – check**."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "An acronym is made from the first letters of other words.",
+      "USB = Universal Serial Bus: connects devices, transfers data and supplies power.",
+      "RAM = Random Access Memory; ROM = Read Only Memory; CPU = Central Processing Unit; GPU = Graphics Processing Unit.",
+      "HDD = Hard Disk Drive; SSD = Solid State Drive; HDMI = High-Definition Multimedia Interface; LAN = Local Area Network."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Acronym quiz",
+    "caption": "Say the answer, then click to check.",
+    "head": [
+     "Acronym",
+     "Stands for"
+    ],
+    "rows": [
+     [
+      "USB",
+      "Universal Serial Bus"
+     ],
+     [
+      "RAM",
+      "Random Access Memory"
+     ],
+     [
+      "ROM",
+      "Read Only Memory"
+     ],
+     [
+      "HDD",
+      "Hard Disk Drive"
+     ],
+     [
+      "SSD",
+      "Solid State Drive"
+     ],
+     [
+      "CPU",
+      "Central Processing Unit"
+     ],
+     [
+      "GPU",
+      "Graphics Processing Unit"
+     ],
+     [
+      "HDMI",
+      "High-Definition Multimedia Interface"
+     ],
+     [
+      "LAN",
+      "Local Area Network"
+     ],
+     [
+      "VGA",
+      "Video Graphics Array"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What does CPU stand for?",
+     "o": [
+      "Computer Power Unit",
+      "Central Program Utility",
+      "Central Processing Unit",
+      "Control Processing Unit"
+     ],
+     "a": 2,
+     "why": "CPU = Central Processing Unit."
+    },
+    {
+     "q": "What does SSD stand for?",
+     "o": [
+      "Super Speed Disk",
+      "Solid State Drive",
+      "Secure Storage Device",
+      "Simple System Drive"
+     ],
+     "a": 1,
+     "why": "SSD = Solid State Drive."
+    },
+    {
+     "q": "What does LAN stand for?",
+     "o": [
+      "Local Area Network",
+      "Large Access Network",
+      "Long Area Net",
+      "Linked Access Node"
+     ],
+     "a": 0,
+     "why": "LAN = Local Area Network."
+    },
+    {
+     "q": "Which acronym is a type of memory that keeps its contents when the power is off?",
+     "o": [
+      "RAM",
+      "GPU",
+      "LAN",
+      "ROM"
+     ],
+     "a": 3,
+     "why": "ROM = Read Only Memory, which is non-volatile."
+    }
+   ],
+   "practice": [
+    {
+     "q": "What does USB stand for, and give **two** things it is used for.",
+     "m": 3,
+     "a": "Universal Serial Bus (1); any two: connecting devices (1), transferring data (1), supplying power/charging (1)."
+    },
+    {
+     "q": "Write out what these acronyms stand for: (a) RAM (b) HDMI (c) GPU.",
+     "m": 3,
+     "a": "(a) Random Access Memory (1); (b) High-Definition Multimedia Interface (1); (c) Graphics Processing Unit (1)."
+    }
+   ],
+   "terms": [
+    "Acronym",
+    "USB",
+    "ROM",
+    "SSD",
+    "GPU",
+    "HDMI",
+    "LAN"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How Computers Work: CPU, Memory, Input & Output",
+     "source": "YouTube – Code.org",
+     "url": "https://www.youtube.com/watch?v=DKGZlaPlVLY",
+     "yt": "DKGZlaPlVLY"
+    },
+    {
+     "title": "11. OCR GCSE (J277) 1.2 Suitable storage devices",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=xfDwcdap5LA",
+     "yt": "xfDwcdap5LA"
+    },
+    {
+     "title": "32. CAMBRIDGE IGCSE (0478-0984) 3.2 Input devices",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=rkhT6s5g0pE",
+     "yt": "rkhT6s5g0pE"
+    }
+   ]
+  },
+  {
+   "id": "p05",
+   "spec": "Explain what an algorithm is and put instructions into a correct sequence",
+   "summary": "An algorithm is a sequence of clear, short, specific instructions to complete a task or solve a problem, like a recipe or directions. Algorithms are translated into code in a programming language so a computer can follow them.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "An **[[algorithm]]** is a sequence of instructions, or a set of rules, that are followed to complete a task or solve a problem. The task can be anything, as long as you can give **clear, short and specific** instructions for it."
+    },
+    {
+     "t": "h",
+     "text": "Everyday algorithms"
+    },
+    {
+     "t": "list",
+     "items": [
+      "A **recipe** for baking a cake.",
+      "**Directions** to a place: \"Turn right after the bank, walk straight to the traffic lights, turn right…\"",
+      "The steps for starting a lesson: come in and sit down quietly, log on, open a browser, search for a word, then turn off your monitor when you've finished."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Computers and algorithms"
+    },
+    {
+     "t": "p",
+     "text": "Computers are very good at carrying out a **[[sequence]]** of precisely defined instructions. An algorithm could be simple (work out 25 ÷ 5, or check if a number is prime) or complex (study the pages you like on social media and decide which adverts to show you)."
+    },
+    {
+     "t": "p",
+     "text": "Computers don't actually understand algorithms written in English. An algorithm must be translated into **[[code]]**, written in a **[[programming language]]** such as **Scratch**, **Python** or **C#**. Different languages suit different jobs, and game developers sometimes use several languages in the same game!"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the zebra crossing",
+     "context": "A zebra crossing on a wide road has an island in the middle. Put the instructions in order (traffic in the UK drives on the left, so the first half of the road has traffic coming from your right).",
+     "steps": [
+      "1. Stop at the side of the road looking to the other side of the zebra crossing",
+      "2. Look right",
+      "3. Wait until traffic from the right has stopped or the road is clear",
+      "4. Step onto the first half of the zebra crossing",
+      "5. Walk to the island looking both ways and listening",
+      "6. Stop at the island",
+      "7. Look left",
+      "8. Stay on the island until traffic from the left has stopped or the road is clear",
+      "9. Step onto the second half of the zebra crossing",
+      "10. Walk to the other side of the road looking both ways and listening"
+     ],
+     "answer": "Putting the instructions in the correct order creates a sequence."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: making a cuppa",
+     "context": "Place the flowchart instructions in order to make a cup of tea.",
+     "steps": [
+      "Start → Boil water → Put teabag in teapot → Add water → Remove teabag from teapot → Pour tea into cup → Pour milk into cup → Add sugar → Drink tea → Stop"
+     ],
+     "answer": "Is there only one correct sequence? No: you could add sugar before milk, for example. But some steps must come first (you can't pour the tea before adding the water)."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the second river crossing",
+     "context": "A man and a woman weigh 100 kg each and two children weigh 50 kg each. Their boat can carry up to 100 kg. How can all four cross the river?",
+     "steps": [
+      "1. Both children cross (100 kg).",
+      "2. One child rows back.",
+      "3. The man crosses alone (100 kg).",
+      "4. The other child rows back.",
+      "5. Both children cross again.",
+      "6. One child rows back.",
+      "7. The woman crosses alone.",
+      "8. The other child rows back.",
+      "9. Both children cross. Everyone is over!"
+     ],
+     "answer": "9 crossings. The children do the shuttling, because only they can travel together."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "An algorithm is a sequence of clear, short, specific instructions to complete a task.",
+      "Recipes and directions are everyday algorithms.",
+      "The order (sequence) of the instructions matters.",
+      "Algorithms are turned into code in a programming language (e.g. Scratch, Python, C#)."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is an algorithm?",
+     "o": [
+      "A type of computer",
+      "A computer virus",
+      "A sequence of instructions to complete a task",
+      "A type of memory"
+     ],
+     "a": 2,
+     "why": "That is the definition of an algorithm."
+    },
+    {
+     "q": "Which of these is an everyday example of an algorithm?",
+     "o": [
+      "A keyboard",
+      "A recipe",
+      "A photo",
+      "A football"
+     ],
+     "a": 1,
+     "why": "A recipe is a set of ordered steps."
+    },
+    {
+     "q": "Why must an algorithm be translated into code?",
+     "o": [
+      "Computers can't understand algorithms written in English",
+      "To make it longer",
+      "To make it colourful",
+      "So it can be printed"
+     ],
+     "a": 0,
+     "why": "Computers follow code written in a programming language."
+    },
+    {
+     "q": "In the zebra crossing algorithm, what comes straight after 'Stop at the island'?",
+     "o": [
+      "Look right",
+      "Walk to the other side",
+      "Step onto the first half",
+      "Look left"
+     ],
+     "a": 3,
+     "why": "On the island you look left for traffic on the second half."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Define the term **algorithm**.",
+     "m": 2,
+     "a": "A sequence of instructions / set of rules (1) followed to complete a task or solve a problem (1)."
+    },
+    {
+     "q": "Name **two** programming languages.",
+     "m": 2,
+     "a": "Any two: Scratch, Python, C#, Java, JavaScript (1 each)."
+    }
+   ],
+   "terms": [
+    "Algorithm",
+    "Sequence",
+    "Programming language",
+    "Code"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "What's an algorithm? - David J. Malan",
+     "source": "YouTube – TED-Ed",
+     "url": "https://www.youtube.com/watch?v=6hfOvs8pY1k",
+     "yt": "6hfOvs8pY1k"
+    },
+    {
+     "title": "Designing an algorithm – BBC Bitesize",
+     "source": "BBC Bitesize",
+     "url": "https://www.bbc.co.uk/bitesize/guides/z3bq7ty/revision/1"
+    }
+   ]
+  },
+  {
+   "id": "p06",
+   "spec": "Recognise the four main flowchart symbols and follow a flowchart",
+   "summary": "A flowchart shows an algorithm using symbols joined by arrows. The four main symbols are start/stop, input/output, process and decision. The decision diamond is special because it has two exits: Yes and No.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A **[[flowchart]]** is made up of **symbols** and **arrows**. It can be used to help design a sequence that controls an event. Actions can be ordered, reordered or removed if they are no longer needed."
+    },
+    {
+     "t": "h",
+     "text": "The four main symbols"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Symbol",
+      "Shape",
+      "Used to…"
+     ],
+     "rows": [
+      [
+       "Start / Stop",
+       "Rounded rectangle",
+       "Start or stop a program"
+      ],
+      [
+       "Input or Output",
+       "Parallelogram (slanted box)",
+       "Receive data or give a signal, e.g. INPUT a name, OUTPUT a message"
+      ],
+      [
+       "Process / Delay",
+       "Rectangle",
+       "Give an instruction; often involves a delay, e.g. 'Wait 5 minutes'"
+      ],
+      [
+       "[[Decision]]",
+       "Diamond",
+       "Ask a question with a YES or NO answer"
+      ]
+     ],
+     "caption": "The four main flowchart symbols"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: running a bath",
+     "context": "What is this flowchart about, and what is unique about one of the shapes?",
+     "steps": [
+      "START",
+      "Output: 'I would like a bath'",
+      "Process: Turn on the taps",
+      "Process: Wait for 5 minutes",
+      "Decision: Is the bath full? NO → go back to 'Wait for 5 minutes'. YES → carry on.",
+      "Process: Turn off the taps",
+      "Output: Enjoy the bath",
+      "STOP"
+     ],
+     "answer": "It is about running a bath. The decision diamond is unique: it is the only shape with two exits (Yes and No), and the No path loops back to repeat the wait."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: checking an email address",
+     "context": "A program asks a pupil to type their email address. Follow the flowchart.",
+     "steps": [
+      "Start → create a variable to hold the address.",
+      "Clear the variable (empty it).",
+      "Input: 'What is your email address?'",
+      "Store the answer in the variable.",
+      "Decision: Is it a valid email address? NO → go back to 'Clear variable' and ask again. YES → End."
+     ],
+     "answer": "The program keeps asking until a valid address (e.g. one containing @) is entered."
+    },
+    {
+     "t": "tip",
+     "text": "Every flowchart should have exactly **one Start** and at least one **Stop**, and every arrow should point somewhere."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A flowchart shows an algorithm with symbols and arrows.",
+      "Start/Stop = rounded rectangle; Input/Output = parallelogram; Process = rectangle; Decision = diamond.",
+      "A decision asks a yes/no question and has two exits.",
+      "A No arrow that loops back makes steps repeat."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "Running a bath",
+    "caption": "Click each step. Notice the decision loops back.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "s",
+      "label": "Start",
+      "detail": "Every flowchart begins with Start.",
+      "shape": "start"
+     },
+     {
+      "id": "t",
+      "label": "Turn on the taps",
+      "detail": "A process: an instruction.",
+      "shape": "process"
+     },
+     {
+      "id": "w",
+      "label": "Wait 5 minutes",
+      "detail": "A process that involves a delay.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Is the bath full?",
+      "detail": "A decision. No: go back and wait again. Yes: carry on.",
+      "shape": "process"
+     },
+     {
+      "id": "o",
+      "label": "Turn off the taps",
+      "detail": "A process once the bath is full.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Stop",
+      "detail": "Enjoy the bath!",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "s",
+      "t"
+     ],
+     [
+      "t",
+      "w"
+     ],
+     [
+      "w",
+      "d"
+     ],
+     [
+      "d",
+      "w"
+     ],
+     [
+      "d",
+      "o"
+     ],
+     [
+      "o",
+      "e"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "Which flowchart shape is used for a decision?",
+     "o": [
+      "Rectangle",
+      "Parallelogram",
+      "Diamond",
+      "Circle"
+     ],
+     "a": 2,
+     "why": "Decisions are diamonds."
+    },
+    {
+     "q": "Which symbol would you use for 'Wait 5 minutes'?",
+     "o": [
+      "Decision diamond",
+      "Process/Delay rectangle",
+      "Start/Stop",
+      "Input/Output"
+     ],
+     "a": 1,
+     "why": "Delays are processes."
+    },
+    {
+     "q": "What is unique about the decision symbol?",
+     "o": [
+      "It has two exits, Yes and No",
+      "It is always first",
+      "It has no arrows",
+      "It is coloured red"
+     ],
+     "a": 0,
+     "why": "Decisions branch two ways."
+    },
+    {
+     "q": "'Input your name' would go in which shape?",
+     "o": [
+      "Rectangle",
+      "Diamond",
+      "Rounded rectangle",
+      "Parallelogram"
+     ],
+     "a": 3,
+     "why": "Input and output use a parallelogram."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name the **four** main flowchart symbols and what each is used for.",
+     "m": 4,
+     "a": "Start/Stop: start or stop a program (1); Input/Output: receive data or give a signal (1); Process: give an instruction, often a delay (1); Decision: ask a yes/no question (1)."
+    },
+    {
+     "q": "Suggest **one** decision you could add to the 'making a cup of tea' flowchart.",
+     "m": 1,
+     "a": "e.g. 'Do you want sugar?' / 'Do you want milk?' / 'Has the water boiled?' (1)."
+    }
+   ],
+   "terms": [
+    "Flowchart",
+    "Decision"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "54. OCR GCSE (J277) 2.1 Pseudocode and diagrams",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=MFojJssyKLw",
+     "yt": "MFojJssyKLw"
+    },
+    {
+     "title": "Designing an algorithm – BBC Bitesize",
+     "source": "BBC Bitesize",
+     "url": "https://www.bbc.co.uk/bitesize/guides/z3bq7ty/revision/1"
+    },
+    {
+     "title": "Selection in algorithms – BBC Bitesize",
+     "source": "BBC Bitesize",
+     "url": "https://www.bbc.co.uk/bitesize/guides/zy3q7ty/revision/1"
+    }
+   ]
+  },
+  {
+   "id": "p07",
+   "spec": "Compare computer control with human control and give advantages and disadvantages",
+   "summary": "Computers don't need breaks or pay, repeat actions identically and can work in danger, but they only know what they are programmed to do, need power and can be expensive. Traffic lights versus a police officer directing traffic is a good example.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Which is better at controlling traffic: **automatic traffic lights** or a **police officer** standing in the junction? Using a computer to run a system like this is called **[[computer control]]**. Both have good and bad points."
+    },
+    {
+     "t": "h",
+     "text": "Advantages of computer control"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Computers do **not need breaks**.",
+      "They do **not take sick days or holidays**.",
+      "They can **repeat actions in an identical way** indefinitely (forever).",
+      "They can **work in environments that are dangerous** for people.",
+      "They **don't need to be paid**.",
+      "They can process data from **[[sensor|sensors]]** very quickly.",
+      "They can manage **hundreds or thousands of inputs** at the same time.",
+      "They can make **reliable and accurate** decisions."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Disadvantages of computer control"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Computers are **only as good as their programming**, which may contain errors.",
+      "When faced with conditions **not covered in their programming**, they won't know what to do.",
+      "**Underpowered** computers might take too long in a time-critical (urgent) situation.",
+      "They **rely on power**: in a power cut the program won't work.",
+      "They may **cost a lot** to buy, maintain and develop."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Traffic lights (computer)",
+      "Police officer (human)"
+     ],
+     "rows": [
+      [
+       "Works 24/7 without breaks",
+       "Yes",
+       "No: needs breaks, sleep and holidays"
+      ],
+      [
+       "Cost",
+       "Expensive to install, but no wages",
+       "Needs paying every week"
+      ],
+      [
+       "Copes with something unexpected (a crash, an ambulance)",
+       "No, unless programmed for it",
+       "Yes, can think and adapt"
+      ],
+      [
+       "Power cut",
+       "Stops working",
+       "Keeps working"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Worked example: who should run the junction?",
+     "context": "A busy junction in Enniskillen town centre needs controlling every day of the year.",
+     "steps": [
+      "Normal traffic every day: traffic lights are better: cheap to run, never tired, consistent.",
+      "A crash or a power cut: a police officer is better, because they can adapt to something the lights weren't programmed for."
+     ],
+     "answer": "Use computer control for the everyday job, with humans ready for the unexpected."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Computer control: no breaks, no pay, identical repetition, works in danger, fast and accurate.",
+      "But: only as good as its programming, can't handle unplanned situations, needs power, can be expensive.",
+      "Humans can adapt and think; computers can't."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is an advantage of computer control?",
+     "o": [
+      "It needs regular holidays",
+      "It works in a power cut",
+      "It can work in places dangerous to humans",
+      "It can think of new ideas"
+     ],
+     "a": 2,
+     "why": "Computers can work in dangerous environments."
+    },
+    {
+     "q": "Which is a disadvantage of computer control?",
+     "o": [
+      "It doesn't need paying",
+      "It won't know what to do in situations it wasn't programmed for",
+      "It repeats actions identically",
+      "It processes sensor data quickly"
+     ],
+     "a": 1,
+     "why": "Computers only follow their programming."
+    },
+    {
+     "q": "What happens to computer-controlled traffic lights in a power cut?",
+     "o": [
+      "They stop working",
+      "They keep working",
+      "They turn green",
+      "They phone the police"
+     ],
+     "a": 0,
+     "why": "Computers rely on power."
+    },
+    {
+     "q": "A computer controlling a factory robot makes the same weld 10,000 times perfectly. Which advantage is this?",
+     "o": [
+      "It is cheap to buy",
+      "It needs no programming",
+      "It works in a power cut",
+      "It can repeat actions identically indefinitely"
+     ],
+     "a": 3,
+     "why": "Identical repetition."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Give **three** advantages of using a computer instead of a human to control a system.",
+     "m": 3,
+     "a": "Any three: no breaks (1); no sick days/holidays (1); repeats actions identically (1); works in dangerous places (1); no pay (1); processes sensor data quickly (1); handles many inputs at once (1); reliable, accurate decisions (1)."
+    },
+    {
+     "q": "Give **two** disadvantages of computer control.",
+     "m": 2,
+     "a": "Any two: only as good as its programming / may contain errors (1); can't cope with situations not programmed for (1); may be too slow if underpowered (1); relies on power (1); expensive to buy/maintain/develop (1)."
+    }
+   ],
+   "terms": [
+    "Computer control",
+    "Sensor"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How Computers Work: What Makes a Computer, a Computer?",
+     "source": "YouTube – Code.org",
+     "url": "https://www.youtube.com/watch?v=mCq8-xTH7jA",
+     "yt": "mCq8-xTH7jA"
+    },
+    {
+     "title": "What's an algorithm? - David J. Malan",
+     "source": "YouTube – TED-Ed",
+     "url": "https://www.youtube.com/watch?v=6hfOvs8pY1k",
+     "yt": "6hfOvs8pY1k"
+    }
+   ]
+  },
+  {
+   "id": "p08",
+   "spec": "Know that computers use binary, and explain what a variable is and why programs use them",
+   "summary": "Computers understand only 0s and 1s, called binary. Programmers use variables: named boxes in memory that store values like numbers, text or true/false, and can change while the program runs, making programs reusable.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Binary: the computer's language"
+    },
+    {
+     "t": "p",
+     "text": "Computers and games consoles understand a very simple language: just **0s and 1s**. That's a lot fewer than the 26 letters in our alphabet! This language is called **[[binary]]**. Computers read millions (even billions) of these 1s and 0s every second."
+    },
+    {
+     "t": "note",
+     "text": "Each 0 or 1 is like a tiny switch that is either **off (0)** or **on (1)**. Everything on your phone, from photos to songs to messages, is stored as huge patterns of 0s and 1s."
+    },
+    {
+     "t": "h",
+     "text": "What is a variable?"
+    },
+    {
+     "t": "p",
+     "text": "Humans program computers, often using **[[variable|variables]]**. A variable is a **location in memory** where you can **temporarily store text or numbers**. It is like an empty box with a label on it, or the memory button on a calculator. You choose a name for the box (the *variable name*) and your **[[program]]** can change what's inside."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: changing a variable",
+     "context": "What is stored in X at the end?",
+     "steps": [
+      "`X = 50` puts 50 in the box called X.",
+      "`X = X + 5` takes what's in X (50), adds 5, and puts the answer back in X."
+     ],
+     "answer": "X now holds 55."
+    },
+    {
+     "t": "h",
+     "text": "Variables describe things"
+    },
+    {
+     "t": "p",
+     "text": "Think of a character in a game like The Sims. What makes one character different from another? Each difference is a variable: **hair style** (long/short/combed/frizzy), **hair colour** (black/blue/blonde), **glasses** (yes/no), **top** (tank/T-shirt/shirt), **shorts**, **footwear** (trainers/boots/shoes), **piercings**, **tattoos**, and of course **name**, **age** and **interests**. There are literally thousands of possible variables!"
+    },
+    {
+     "t": "h",
+     "text": "Why variables make programs better"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a calculator program",
+     "context": "Compare a program with no variables to one that uses variables.",
+     "steps": [
+      "**Version 1:** START → SET answer AS 2 × 4 → PRINT answer → END. It always prints 8. Not very useful!",
+      "**Version 2:** START → INPUT number1 → INPUT number2 → SET answer AS number1 × number2 → PRINT answer → END.",
+      "Run Version 2 with 6 and 7: answer = 6 × 7 = **42**. Run it again with 12 and 3: answer = **36**."
+     ],
+     "answer": "Version 2 is slightly longer, but it works for any two numbers, so it is far more usable."
+    },
+    {
+     "t": "p",
+     "text": "Variables make programs **reusable**: for example, displaying your name at the top of the screen or keeping a score in a game. They can store **text**, **numbers** and even **true/false** values, and let the program store, change and use these values while it runs."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Computers understand binary: just 0s and 1s.",
+      "A variable is a named location in memory that temporarily stores a value.",
+      "X = X + 5 adds 5 to whatever is stored in X.",
+      "Variables can hold numbers, text and true/false values, and make programs reusable."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "bits",
+    "title": "Binary switches",
+    "caption": "Each bit is a switch: 0 = off, 1 = on. Click the bits to change them.",
+    "n": 8,
+    "modes": [
+     "unsigned"
+    ],
+    "start": "00000101"
+   },
+   "check": [
+    {
+     "q": "Which digits does binary use?",
+     "o": [
+      "0 to 9",
+      "1 and 2",
+      "0 and 1",
+      "A to Z"
+     ],
+     "a": 2,
+     "why": "Binary uses only 0 and 1."
+    },
+    {
+     "q": "X = 20, then X = X + 5. What is X now?",
+     "o": [
+      "5",
+      "25",
+      "20",
+      "205"
+     ],
+     "a": 1,
+     "why": "20 + 5 = 25."
+    },
+    {
+     "q": "What is a variable?",
+     "o": [
+      "A named location in memory that stores a value",
+      "A type of virus",
+      "A computer screen",
+      "A flowchart symbol"
+     ],
+     "a": 0,
+     "why": "A variable is a labelled box in memory."
+    },
+    {
+     "q": "Why is 'INPUT number1, INPUT number2, answer = number1 × number2' better than 'answer = 2 × 4'?",
+     "o": [
+      "It is shorter",
+      "It is always 8",
+      "It uses no memory",
+      "It works for any numbers, so it is reusable"
+     ],
+     "a": 3,
+     "why": "Variables make programs reusable."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what a variable is.",
+     "m": 2,
+     "a": "A named location in memory (1) that temporarily stores a value such as a number or text, which can change while the program runs (1)."
+    },
+    {
+     "q": "A program has `score = 10` and then `score = score + 3`. State the final value of score and explain how you got it.",
+     "m": 2,
+     "a": "13 (1); the program takes the current value 10, adds 3 and stores the result back in score (1)."
+    }
+   ],
+   "terms": [
+    "Binary",
+    "Variable",
+    "Program"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How Computers Work: Binary & Data",
+     "source": "YouTube – Code.org",
+     "url": "https://www.youtube.com/watch?v=USCBCmwMCDA",
+     "yt": "USCBCmwMCDA"
+    },
+    {
+     "title": "62. OCR GCSE (J277) 2.2 Variables, constants, inputs, outputs & assignments",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=dpBe_TXFqZ8",
+     "yt": "dpBe_TXFqZ8"
+    },
+    {
+     "title": "Binary: how computers see the world – BBC Bitesize",
+     "source": "BBC Bitesize",
+     "url": "https://www.bbc.co.uk/bitesize/guides/z26rcdm/revision/1"
+    }
+   ]
+  },
+  {
+   "id": "p09",
+   "spec": "Identify the parts of the BBC micro:bit, use LED coordinates and know the main data types",
+   "summary": "The BBC micro:bit is a pocket-sized codable computer with 25 LEDs, buttons A and B, an accelerometer, compass, Bluetooth/radio and more. LEDs are found with (x, y) coordinates from 0 to 4. Programs use data types: integer, double, string, char and Boolean.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The **[[BBC micro:bit]]** is a **pocket-sized, codable computer** with 25 red [[LED|LEDs]] on the front. You can use it to flash messages, create games, invent digital stories, act as a games controller or even pause and skip songs on a playlist."
+    },
+    {
+     "t": "h",
+     "text": "Parts of the micro:bit"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "25 red LEDs",
+       "A 5 × 5 grid of lights that can show text, numbers and pictures"
+      ],
+      [
+       "Buttons A and B",
+       "Two programmable buttons used as inputs"
+      ],
+      [
+       "[[Accelerometer]]",
+       "Motion detector: senses shaking and tilting"
+      ],
+      [
+       "Compass (magnetometer)",
+       "Detects which direction it is facing"
+      ],
+      [
+       "Radio and Bluetooth antenna",
+       "Connects to other micro:bits or devices wirelessly"
+      ],
+      [
+       "USB connector",
+       "Plug into a computer to load programs and power it"
+      ],
+      [
+       "Battery socket",
+       "Power it from a battery pack, away from the computer"
+      ],
+      [
+       "Processor",
+       "Runs your program"
+      ],
+      [
+       "Touch-sensitive logo",
+       "An extra touch input (newer V2 models)"
+      ],
+      [
+       "Edge connector",
+       "The gold strip along the bottom: pins (0, 1, 2, 3V, GND and more) for adding devices and sensors"
+      ],
+      [
+       "Speaker and microphone",
+       "Play sounds and detect noise (newer V2 models)"
+      ]
+     ],
+     "caption": "Parts of the BBC micro:bit"
+    },
+    {
+     "t": "h",
+     "text": "Finding an LED: coordinates"
+    },
+    {
+     "t": "p",
+     "text": "The LEDs are in a **5 × 5 grid**. Like coordinates in Maths, each LED has an **x** (across) and a **y** (down) value. Unlike Maths, the numbers **start at 0** in the **top-left corner** and go up to 4, and **y counts downwards**."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: which LED is (3, 1)?",
+     "context": "Find the LED at (3, 1).",
+     "steps": [
+      "x = 3: count across from the left: 0, 1, 2, **3**. That's the 4th column.",
+      "y = 1: count down from the top: 0, **1**. That's the 2nd row."
+     ],
+     "answer": "(3, 1) is the LED in the 4th column, 2nd row."
+    },
+    {
+     "t": "h",
+     "text": "Data types"
+    },
+    {
+     "t": "p",
+     "text": "Every value in a program has a **[[data type]]**, which tells the computer what kind of data it is, such as an [[integer]] (whole number). For example, the micro:bit's `show string` block displays text, and `show number` displays a number."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Data type",
+      "What it holds",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Integer (int)",
+       "A whole number, positive or negative",
+       "15, -4, 0"
+      ],
+      [
+       "Double / decimal",
+       "A number with a decimal point, positive or negative",
+       "3.14, -0.5"
+      ],
+      [
+       "[[String]]",
+       "Text: a sequence of characters",
+       "\"Hello ERGS!\""
+      ],
+      [
+       "Character (char)",
+       "A single letter or symbol",
+       "'A', '?'"
+      ],
+      [
+       "[[Boolean]] (bool)",
+       "True or false (on/off, 1 or 0)",
+       "true, false"
+      ]
+     ],
+     "caption": "The five data types to know"
+    },
+    {
+     "t": "tip",
+     "text": "Your phone number should be stored as a **string**, not an integer: it starts with 0, and you never do maths with it!"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "The micro:bit has 25 LEDs, buttons A and B, an accelerometer, compass, radio/Bluetooth, USB and a battery socket.",
+      "LED coordinates start at (0, 0) in the top-left; x goes across, y goes down.",
+      "Data types: integer, double, string, char and Boolean.",
+      "A string is text; a Boolean is true/false."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "hotspot",
+    "title": "The micro:bit LED grid",
+    "caption": "Click an LED to see its (x, y) coordinates.",
+    "rows": [
+     [
+      {
+       "label": "(0,0)",
+       "detail": "Top-left: x = 0, y = 0",
+       "span": 1
+      },
+      {
+       "label": "(1,0)",
+       "detail": "x = 1, y = 0",
+       "span": 1
+      },
+      {
+       "label": "(2,0)",
+       "detail": "x = 2, y = 0",
+       "span": 1
+      },
+      {
+       "label": "(3,0)",
+       "detail": "x = 3, y = 0",
+       "span": 1
+      },
+      {
+       "label": "(4,0)",
+       "detail": "Top-right: x = 4, y = 0",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "(0,1)",
+       "detail": "x = 0, y = 1",
+       "span": 1
+      },
+      {
+       "label": "(1,1)",
+       "detail": "x = 1, y = 1",
+       "span": 1
+      },
+      {
+       "label": "(2,1)",
+       "detail": "x = 2, y = 1",
+       "span": 1
+      },
+      {
+       "label": "(3,1)",
+       "detail": "x = 3, y = 1: the example on this page",
+       "span": 1
+      },
+      {
+       "label": "(4,1)",
+       "detail": "x = 4, y = 1",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "(0,2)",
+       "detail": "x = 0, y = 2",
+       "span": 1
+      },
+      {
+       "label": "(1,2)",
+       "detail": "x = 1, y = 2",
+       "span": 1
+      },
+      {
+       "label": "(2,2)",
+       "detail": "The centre LED: x = 2, y = 2",
+       "span": 1
+      },
+      {
+       "label": "(3,2)",
+       "detail": "x = 3, y = 2",
+       "span": 1
+      },
+      {
+       "label": "(4,2)",
+       "detail": "x = 4, y = 2",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "(0,3)",
+       "detail": "x = 0, y = 3",
+       "span": 1
+      },
+      {
+       "label": "(1,3)",
+       "detail": "x = 1, y = 3",
+       "span": 1
+      },
+      {
+       "label": "(2,3)",
+       "detail": "x = 2, y = 3",
+       "span": 1
+      },
+      {
+       "label": "(3,3)",
+       "detail": "x = 3, y = 3",
+       "span": 1
+      },
+      {
+       "label": "(4,3)",
+       "detail": "x = 4, y = 3",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "(0,4)",
+       "detail": "Bottom-left: x = 0, y = 4",
+       "span": 1
+      },
+      {
+       "label": "(1,4)",
+       "detail": "x = 1, y = 4",
+       "span": 1
+      },
+      {
+       "label": "(2,4)",
+       "detail": "x = 2, y = 4",
+       "span": 1
+      },
+      {
+       "label": "(3,4)",
+       "detail": "x = 3, y = 4",
+       "span": 1
+      },
+      {
+       "label": "(4,4)",
+       "detail": "Bottom-right: x = 4, y = 4",
+       "span": 1
+      }
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "How many LEDs are on the front of a micro:bit?",
+     "o": [
+      "10",
+      "16",
+      "25",
+      "64"
+     ],
+     "a": 2,
+     "why": "A 5 × 5 grid = 25 LEDs."
+    },
+    {
+     "q": "Which micro:bit part detects shaking?",
+     "o": [
+      "Compass",
+      "Accelerometer",
+      "Battery socket",
+      "LED"
+     ],
+     "a": 1,
+     "why": "The accelerometer is the motion sensor."
+    },
+    {
+     "q": "Which data type would store the value 7.5?",
+     "o": [
+      "Double",
+      "Integer",
+      "Boolean",
+      "Char"
+     ],
+     "a": 0,
+     "why": "Numbers with a decimal point are doubles."
+    },
+    {
+     "q": "Which data type can only be true or false?",
+     "o": [
+      "String",
+      "Integer",
+      "Double",
+      "Boolean"
+     ],
+     "a": 3,
+     "why": "Booleans hold true/false."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name **three** parts of the BBC micro:bit and say what each does.",
+     "m": 3,
+     "a": "Any three, e.g. LEDs: display text/pictures (1); buttons A and B: inputs (1); accelerometer: detects movement (1); compass: detects direction (1); Bluetooth/radio: communicates with other devices (1)."
+    },
+    {
+     "q": "State the best data type for each: (a) a player's name (b) the number of goals scored (c) whether the game is over.",
+     "m": 3,
+     "a": "(a) String (1); (b) Integer (1); (c) Boolean (1)."
+    }
+   ],
+   "terms": [
+    "BBC micro:bit",
+    "LED",
+    "Accelerometer",
+    "Data type",
+    "String",
+    "Integer",
+    "Boolean"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Introduction to the BBC micro:bit",
+     "source": "YouTube – Micro:bit Educational Foundation",
+     "url": "https://www.youtube.com/watch?v=u2u7UJSRuko",
+     "yt": "u2u7UJSRuko"
+    },
+    {
+     "title": "micro:bit LEDs",
+     "source": "YouTube – Micro:bit Educational Foundation",
+     "url": "https://www.youtube.com/watch?v=eRhlaXqT-0w",
+     "yt": "eRhlaXqT-0w"
+    },
+    {
+     "title": "Input and output devices",
+     "source": "YouTube – Micro:bit Educational Foundation",
+     "url": "https://www.youtube.com/watch?v=NkoS2JXaBuM",
+     "yt": "NkoS2JXaBuM"
+    }
+   ]
+  },
+  {
+   "id": "p10",
+   "spec": "Explain selection (IF/ELSE) and the two types of loop",
+   "summary": "Selection uses an IF statement: code runs only if a condition is true, and ELSE gives something else to do if it is false. Loops repeat code: count-controlled loops repeat a set number of times; condition-controlled loops repeat while a condition is true.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Selection: IF and ELSE"
+    },
+    {
+     "t": "p",
+     "text": "When programming, we use a **[[condition]]** (a test that is true or false) to decide if a piece of code should run. This is called **[[selection]]**, and it uses an **IF statement**. A piece of code inside the IF will **only run if the condition is true**."
+    },
+    {
+     "t": "p",
+     "text": "IF statements are usually paired with **ELSE**. If the condition is **not** true, the code in the ELSE part runs instead."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: IF … ELSE on a micro:bit",
+     "context": "`if myValue = 10 then` show a tick `else` show a cross. What appears?",
+     "steps": [
+      "If myValue is 10: the condition is **true**, so a tick is shown.",
+      "If myValue is 7: the condition is **false**, so the ELSE part runs and a cross is shown."
+     ],
+     "answer": "Only one of the two branches ever runs."
+    },
+    {
+     "t": "h",
+     "text": "Loops"
+    },
+    {
+     "t": "p",
+     "text": "A **[[loop]]** means **to repeat**. Loops (also called **iteration**) let code be repeated without retyping it over and over. We could loop 2 or 3 times, 5, 100, or even forever. There are two types:"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Count-controlled loop",
+      "Condition-controlled loop"
+     ],
+     "rows": [
+      [
+       "Also called",
+       "For loop / foreach loop",
+       "While loop / do-while loop"
+      ],
+      [
+       "Repeats…",
+       "A set number of times",
+       "As long as a condition is true"
+      ],
+      [
+       "Do we know how many times?",
+       "Yes, straight away",
+       "No, it depends on when the condition changes"
+      ],
+      [
+       "micro:bit block",
+       "`repeat 4 times`",
+       "`while myValue < 10`"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "In a **[[condition-controlled loop]]**, the condition is checked **before each repeat**. If it is true, the code inside runs; then the condition is checked again. As soon as it is false, the loop stops. A **[[count-controlled loop]]** is used when you know exactly how many repeats you need."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: tracing a while loop",
+     "context": "myValue starts at 7. The loop is `while myValue < 10: add 1 to myValue`.",
+     "steps": [
+      "7 < 10 is true → myValue becomes 8.",
+      "8 < 10 is true → myValue becomes 9.",
+      "9 < 10 is true → myValue becomes 10.",
+      "10 < 10 is false → the loop stops."
+     ],
+     "answer": "The loop ran 3 times and myValue ends at 10."
+    },
+    {
+     "t": "tip",
+     "text": "Ask yourself: *do I know how many times?* Yes → count-controlled (repeat/for). No → condition-controlled (while)."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Selection uses IF: code runs only if a condition is true.",
+      "ELSE runs when the condition is false.",
+      "Loop = repeat (iteration).",
+      "Count-controlled (for) loops repeat a set number of times.",
+      "Condition-controlled (while) loops repeat while a condition is true."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "A condition-controlled loop",
+    "caption": "The condition is checked before every repeat.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "s",
+      "label": "Start",
+      "detail": "Set myValue to 7.",
+      "shape": "start"
+     },
+     {
+      "id": "c",
+      "label": "myValue < 10?",
+      "detail": "A decision: true → run the loop body; false → leave the loop.",
+      "shape": "process"
+     },
+     {
+      "id": "b",
+      "label": "Add 1 to myValue",
+      "detail": "The loop body, then go back and check the condition again.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "End",
+      "detail": "Reached once myValue is 10.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "s",
+      "c"
+     ],
+     [
+      "c",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What does 'loop' mean in programming?",
+     "o": [
+      "To stop",
+      "To delete",
+      "To repeat",
+      "To print"
+     ],
+     "a": 2,
+     "why": "A loop repeats code."
+    },
+    {
+     "q": "`repeat 4 times` is an example of which loop?",
+     "o": [
+      "Condition-controlled",
+      "Count-controlled",
+      "IF statement",
+      "ELSE statement"
+     ],
+     "a": 1,
+     "why": "We know it will repeat exactly 4 times."
+    },
+    {
+     "q": "In an IF … ELSE statement, when does the ELSE part run?",
+     "o": [
+      "When the condition is false",
+      "Always",
+      "When the condition is true",
+      "Never"
+     ],
+     "a": 0,
+     "why": "ELSE runs when the condition is false."
+    },
+    {
+     "q": "Which type of loop should you use to keep asking for a password until it is correct?",
+     "o": [
+      "Count-controlled",
+      "Neither",
+      "A sequence",
+      "Condition-controlled"
+     ],
+     "a": 3,
+     "why": "We don't know how many attempts it will take."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by **selection** in programming.",
+     "m": 2,
+     "a": "Using a condition/IF statement to decide whether code runs (1); the code only runs if the condition is true (an ELSE can run if it is false) (1)."
+    },
+    {
+     "q": "Explain the difference between a count-controlled loop and a condition-controlled loop.",
+     "m": 2,
+     "a": "A count-controlled loop repeats a set/known number of times (1); a condition-controlled loop repeats while a condition is true, so the number of repeats isn't known in advance (1)."
+    }
+   ],
+   "terms": [
+    "Selection",
+    "Condition",
+    "Loop",
+    "Count-controlled loop",
+    "Condition-controlled loop"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "63. OCR GCSE (J277) 2.2 The 3 basic programming constructs",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=t0VphK9cWgE",
+     "yt": "t0VphK9cWgE"
+    },
+    {
+     "title": "Selection in algorithms – BBC Bitesize",
+     "source": "BBC Bitesize",
+     "url": "https://www.bbc.co.uk/bitesize/guides/zy3q7ty/revision/1"
+    },
+    {
+     "title": "Iteration in algorithms – BBC Bitesize",
+     "source": "BBC Bitesize",
+     "url": "https://www.bbc.co.uk/bitesize/guides/zg46tfr/revision/1"
+    }
+   ]
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Algorithm",
+   "def": "A sequence of clear, step-by-step instructions or rules followed to complete a task or solve a problem.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Hardware",
+   "def": "The physical parts of a computer that you can touch, such as the keyboard, processor and monitor.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Software",
+   "def": "The programs and apps that run on a computer and tell the hardware what to do, such as Word, Chrome or a game.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Input device",
+   "def": "Hardware that lets the user put data into a computer, such as a keyboard, mouse or microphone.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Output device",
+   "def": "Hardware that lets the user receive information from a computer, such as a monitor, speakers or printer.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Memory",
+   "def": "Where a computer keeps the data, programs and results it is using right now, for the short term; it is lost when the power is turned off.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Storage device",
+   "def": "Hardware that keeps files and installed software for the long term, even when the power is off, such as a hard disk drive or SSD.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Processor",
+   "def": "The part of a computer that processes data by following the instructions it has been given; also called the CPU.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Component",
+   "def": "One of the parts that a computer is built from, such as the RAM or the power supply.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "CPU",
+   "def": "Central Processing Unit: the processor, the 'brain' of the computer that carries out instructions.",
+   "alt": "Central Processing Unit",
+   "page": "p02"
+  },
+  {
+   "term": "RAM",
+   "def": "Random Access Memory: the computer's main memory, holding programs and data in use; it is wiped when the power goes off.",
+   "alt": "Random Access Memory",
+   "page": "p02"
+  },
+  {
+   "term": "Hard Disk Drive",
+   "def": "A storage device that stores data magnetically on spinning disks; it keeps data when the power is off.",
+   "alt": "HDD",
+   "page": "p02"
+  },
+  {
+   "term": "Motherboard",
+   "def": "The main circuit board that every other component plugs into, letting them communicate.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Graphics card",
+   "def": "A component with its own processor (GPU) that creates the images shown on the monitor.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Heat sink",
+   "def": "A metal block with fins, usually with a fan, that carries heat away from the CPU to stop it overheating.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Internal",
+   "def": "Inside the computer's case, such as the RAM or motherboard.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "External",
+   "def": "Outside the computer's case and plugged in, such as a keyboard or monitor (also called a peripheral).",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Raspberry Pi",
+   "def": "A cheap, credit-card-sized computer, designed in the UK, that you can plug into a TV and keyboard and use to learn programming.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Port",
+   "def": "A socket on a computer where you plug in a cable or device, such as a USB or HDMI port.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Games console",
+   "def": "A computer designed mainly for playing games, such as a PlayStation, Xbox or Nintendo Switch.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Acronym",
+   "def": "A word made from the first letters of other words, such as RAM for Random Access Memory.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "USB",
+   "def": "Universal Serial Bus: a standard connection used to connect devices, transfer data and supply power.",
+   "alt": "Universal Serial Bus",
+   "page": "p04"
+  },
+  {
+   "term": "ROM",
+   "def": "Read Only Memory: memory that keeps its contents when the power is off and holds the start-up instructions.",
+   "alt": "Read Only Memory",
+   "page": "p04"
+  },
+  {
+   "term": "SSD",
+   "def": "Solid State Drive: a fast storage device with no moving parts that stores data on memory chips.",
+   "alt": "Solid State Drive",
+   "page": "p04"
+  },
+  {
+   "term": "GPU",
+   "def": "Graphics Processing Unit: the processor that creates images and graphics.",
+   "alt": "Graphics Processing Unit",
+   "page": "p04"
+  },
+  {
+   "term": "HDMI",
+   "def": "High-Definition Multimedia Interface: a cable and port that carries high-quality video and sound to a TV or monitor.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "LAN",
+   "def": "Local Area Network: a network covering a small area such as a school or home.",
+   "alt": "Local Area Network",
+   "page": "p04"
+  },
+  {
+   "term": "Sequence",
+   "def": "A set of instructions carried out one after another, in the correct order.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Programming language",
+   "def": "A language such as Scratch, Python or C# used to write code that a computer can follow.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Code",
+   "def": "Instructions written in a programming language for a computer to carry out.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Flowchart",
+   "def": "A diagram made of symbols and arrows that shows the steps of an algorithm in order.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Decision",
+   "def": "A step in an algorithm that asks a question with a yes or no answer; drawn as a diamond in a flowchart.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Computer control",
+   "def": "Using a computer, rather than a person, to run a system automatically, such as traffic lights.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Sensor",
+   "def": "An input device that measures something in the real world, such as light, heat or movement.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Binary",
+   "def": "The number system computers use, made of only two digits: 0 and 1.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Variable",
+   "def": "A named location in memory that temporarily stores a value, such as a number or text, which can change while the program runs.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Program",
+   "def": "A set of instructions, written in code, that tells a computer what to do.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "BBC micro:bit",
+   "def": "A pocket-sized programmable computer with 25 LEDs, two buttons and built-in sensors.",
+   "alt": "micro:bit",
+   "page": "p09"
+  },
+  {
+   "term": "LED",
+   "def": "Light Emitting Diode: a small light; the micro:bit has 25 of them in a 5 × 5 grid.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Accelerometer",
+   "def": "A sensor that detects movement, such as shaking or tilting.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Data type",
+   "def": "The kind of data a variable holds, such as integer, double, string, character or Boolean.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "String",
+   "def": "A data type for text: a sequence of characters, such as \"Hello\".",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Integer",
+   "def": "A data type for whole numbers, positive or negative, such as 7 or -3.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Boolean",
+   "def": "A data type that can only be true or false (or 1 or 0).",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Selection",
+   "def": "Using a condition (an IF statement) to decide whether a piece of code runs.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Condition",
+   "def": "A test that is either true or false, such as score > 10.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Loop",
+   "def": "Code that repeats; also called iteration.",
+   "alt": "iteration",
+   "page": "p10"
+  },
+  {
+   "term": "Count-controlled loop",
+   "def": "A loop that repeats a set number of times, such as 'repeat 4 times' (a for loop).",
+   "alt": "for loop",
+   "page": "p10"
+  },
+  {
+   "term": "Condition-controlled loop",
+   "def": "A loop that keeps repeating while a condition is true, so we may not know how many times it will run (a while loop).",
+   "alt": "while loop",
+   "page": "p10"
+  }
+ ]
+}

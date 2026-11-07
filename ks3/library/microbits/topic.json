@@ -1,0 +1,2741 @@
+{
+ "title": "Micro:bits",
+ "summary": "Programming the BBC micro:bit: its buttons, LEDs and sensors, variables, loops, selection and logic gates.",
+ "learn": [
+  "What the BBC micro:bit is and what it has",
+  "Setting it up and the basic controls",
+  "Variables and loops",
+  "Selection and the AND, OR and NOT gates",
+  "Comparison operators"
+ ],
+ "temporary": true,
+ "intro": "Meet the BBC micro:bit and program it in MakeCode: LEDs, buttons, data types, loops, variables, selection, comparison operators and logic gates with truth tables.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Describe what the BBC micro:bit is and what makes it a microcontroller",
+   "summary": "The BBC micro:bit is a pocket-sized programmable computer on a single board (a microcontroller) with LEDs, buttons and sensors, designed to help pupils learn to code.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The **BBC micro:bit** is a pocket-sized computer designed by the BBC to encourage pupils to learn basic coding and programming skills for our ever-growing, technology-centred world."
+    },
+    {
+     "t": "p",
+     "text": "It has multiple sensors, buttons and lights you can program, so it can be used for a huge range of things, from fitness trackers to games consoles."
+    },
+    {
+     "t": "h",
+     "text": "What can it do?"
+    },
+    {
+     "t": "list",
+     "items": [
+      "25 red [[LED]]s that can light up, flash messages, make games and tell digital stories.",
+      "Two programmable buttons, A and B, so it can be used as a games controller, or even to pause or skip songs on a playlist.",
+      "A motion detector ([[accelerometer]]) that detects movement such as shaking or tilting.",
+      "A built-in compass (magnetometer).",
+      "Bluetooth and radio, so it can connect to other micro:bits or devices."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "A microcontroller"
+    },
+    {
+     "t": "p",
+     "text": "A mini computer with everything on a single board is called a [[microcontroller]]. To count as a microcontroller it needs:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "One or more CPUs (processors)",
+      "A built-in memory unit (RAM)",
+      "Programmable input/output (I/O) peripherals, such as buttons, sensors and LEDs",
+      "To be programmable using a computer language",
+      "All of the above on a **single board**"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: uses of the BBC micro:bit",
+     "context": "Use the internet to find at least 10 different uses of the BBC micro:bit (Activity 1 asks for five).",
+     "steps": [
+      "Step counter (pedometer) using the accelerometer",
+      "Electronic dice that ‘rolls’ when shaken",
+      "Digital compass for orienteering in Castle Archdale",
+      "Games controller (buttons A and B)",
+      "Scrolling name badge for an open night",
+      "Rock, paper, scissors game",
+      "Thermometer for a classroom science experiment",
+      "Radio messages between micro:bits, like walkie-talkie texts",
+      "Burglar alarm for your bedroom door using the accelerometer",
+      "Remote control for a robot car",
+      "Reaction-time game",
+      "Music player or instrument (V2 speaker)"
+     ],
+     "answer": "Any 10 of these, e.g. pedometer, dice, compass, games controller, name badge, rock-paper-scissors, thermometer, radio messages, alarm, robot controller."
+    },
+    {
+     "t": "note",
+     "text": "In 2016 the BBC gave a free micro:bit to about a million pupils across the UK: every Year 7 pupil in England and Wales, and the matching year groups in Scotland and Northern Ireland (Year 8 here)."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "The BBC micro:bit is a pocket-sized programmable computer.",
+      "It was designed to help pupils learn to code.",
+      "It has 25 LEDs, 2 buttons, an accelerometer, a compass and Bluetooth/radio.",
+      "It is a microcontroller: CPU, RAM and programmable I/O on one board.",
+      "It can be a dice, pedometer, games controller and much more."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a microcontroller?",
+     "o": [
+      "A large server",
+      "A type of keyboard",
+      "A mini computer with everything on a single board",
+      "A website for coding"
+     ],
+     "a": 2,
+     "why": "CPU, memory and I/O on one board."
+    },
+    {
+     "q": "Which sensor detects shaking?",
+     "o": [
+      "Accelerometer",
+      "Compass",
+      "LED",
+      "USB connector"
+     ],
+     "a": 0,
+     "why": "The accelerometer detects movement."
+    },
+    {
+     "q": "How many LEDs are on the front of the micro:bit?",
+     "o": [
+      "5",
+      "10",
+      "25",
+      "100"
+     ],
+     "a": 2,
+     "why": "A 5 × 5 grid = 25 LEDs."
+    },
+    {
+     "q": "Which of these is NOT needed to be a microcontroller?",
+     "o": [
+      "A CPU",
+      "Built-in RAM",
+      "A monitor and keyboard",
+      "Programmable I/O"
+     ],
+     "a": 2,
+     "why": "Microcontrollers do not need a monitor or keyboard."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State **three** things a device needs to be called a microcontroller.",
+     "m": 3,
+     "a": "Any three: one or more CPU (1); built-in memory/RAM (1); programmable I/O peripherals (1); programmable in a computer language (1); all on a single board (1)."
+    },
+    {
+     "q": "Give **three** uses of the BBC micro:bit.",
+     "m": 3,
+     "a": "Any three, one each: games controller; dice; pedometer/step counter; compass; name badge/scrolling message; music player; sending radio messages; alarm; thermometer."
+    }
+   ],
+   "terms": [
+    "Microcontroller",
+    "LED",
+    "Accelerometer"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Meet the latest BBC micro:bit",
+     "source": "YouTube – Micro:bit Educational Foundation",
+     "url": "https://www.youtube.com/watch?v=pIUJ4kvJ_QU",
+     "yt": "pIUJ4kvJ_QU"
+    },
+    {
+     "title": "Get to know the BBC micro:bit's features",
+     "source": "YouTube – Micro:bit Educational Foundation",
+     "url": "https://www.youtube.com/watch?v=7WMCgUIcKnk",
+     "yt": "7WMCgUIcKnk"
+    }
+   ]
+  },
+  {
+   "id": "p02",
+   "spec": "Identify the parts of the micro:bit and reference LEDs using (x, y) coordinates",
+   "summary": "The micro:bit has an LED matrix, buttons A and B, a touch logo, processor, accelerometer, compass, radio/Bluetooth antenna, USB and battery sockets and an edge connector (V2 adds a speaker and microphone). LEDs are numbered 0–4 across (x) and down (y).",
+   "blocks": [
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "Where",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "25-LED matrix (5 × 5)",
+       "Front, middle",
+       "Shows pictures, numbers and scrolling text. Can also sense light level."
+      ],
+      [
+       "Button A and Button B",
+       "Front, left and right",
+       "Programmable inputs"
+      ],
+      [
+       "Touch-sensitive logo (V2)",
+       "Front, top",
+       "An extra input you trigger by touching it"
+      ],
+      [
+       "Microphone (V2)",
+       "Small hole on the front beside the logo, with an LED that lights when it is in use",
+       "Detects sound level"
+      ],
+      [
+       "20-pin edge connector",
+       "Bottom edge (gold strip)",
+       "Connects extra devices and sensors, and sends commands to them (pins 0, 1, 2, 3V and GND are the big ones)"
+      ],
+      [
+       "USB connector",
+       "Back, top",
+       "Connects to a computer to power it and load programs"
+      ],
+      [
+       "Battery socket",
+       "Back, top",
+       "Plug in a battery pack to use it away from the computer"
+      ],
+      [
+       "Processor",
+       "Back",
+       "The CPU: runs your program"
+      ],
+      [
+       "Accelerometer and compass",
+       "Back",
+       "Detect movement/tilt and magnetic direction"
+      ],
+      [
+       "Bluetooth / radio antenna",
+       "Back, top left",
+       "Talks wirelessly to other micro:bits and devices"
+      ],
+      [
+       "Speaker (V2)",
+       "Back, centre",
+       "Plays sounds and music"
+      ]
+     ],
+     "caption": "Labelling the micro:bit Version 2"
+    },
+    {
+     "t": "note",
+     "text": "Version 2 (the newer model) added an on-board **speaker**, a **microphone** and the **touch-sensitive logo**. Older V1 boards need headphones or a buzzer wired to the pins for sound."
+    },
+    {
+     "t": "h",
+     "text": "How the LED grid works"
+    },
+    {
+     "t": "p",
+     "text": "The LEDs are arranged in a **5 × 5 grid**. Like coordinates in Maths, each LED has an **x** (across) and **y** (down) value. Unlike Maths, counting starts at **0** in the **top-left** corner, and y goes **down**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "",
+      "x = 0",
+      "x = 1",
+      "x = 2",
+      "x = 3",
+      "x = 4"
+     ],
+     "rows": [
+      [
+       "y = 0",
+       "(0,0)",
+       "(1,0)",
+       "(2,0)",
+       "(3,0)",
+       "(4,0)"
+      ],
+      [
+       "y = 1",
+       "(0,1)",
+       "(1,1)",
+       "(2,1)",
+       "**(3,1)**",
+       "(4,1)"
+      ],
+      [
+       "y = 2",
+       "(0,2)",
+       "(1,2)",
+       "(2,2)",
+       "(3,2)",
+       "(4,2)"
+      ],
+      [
+       "y = 3",
+       "(0,3)",
+       "(1,3)",
+       "(2,3)",
+       "(3,3)",
+       "(4,3)"
+      ],
+      [
+       "y = 4",
+       "(0,4)",
+       "(1,4)",
+       "(2,4)",
+       "(3,4)",
+       "(4,4)"
+      ]
+     ],
+     "caption": "LED coordinates (x, y)"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: naming an LED",
+     "context": "Which LED is 4th from the left on the 2nd row?",
+     "steps": [
+      "Count across from 0: 1st = 0, 2nd = 1, 3rd = 2, 4th = 3, so x = 3.",
+      "Count down from 0: 1st row = 0, 2nd row = 1, so y = 1."
+     ],
+     "answer": "(3,1)"
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "Light up LED (3,1)",
+     "code": "led.plot(3, 1)",
+     "output": "The LED 4th from the left on the 2nd row lights up."
+    },
+    {
+     "t": "warn",
+     "text": "The centre LED is (2,2), not (3,3), because counting starts at 0. The bottom-right LED is (4,4)."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "The LED matrix is a 5 × 5 grid of 25 LEDs.",
+      "Coordinates are (x, y), starting at (0,0) top-left; y counts down.",
+      "Buttons A and B and the touch logo are inputs.",
+      "Accelerometer, compass, microphone and light sensing are built in.",
+      "V2 adds a speaker, microphone and touch logo."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "hotspot",
+    "title": "Parts of the micro:bit",
+    "caption": "Click each part to see what it does.",
+    "rows": [
+     [
+      {
+       "label": "Button A",
+       "detail": "Programmable input on the left of the front.",
+       "span": 1
+      },
+      {
+       "label": "Touch logo",
+       "detail": "V2 only: touch it to trigger code.",
+       "span": 1
+      },
+      {
+       "label": "Button B",
+       "detail": "Programmable input on the right of the front.",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "LED matrix",
+       "detail": "25 red LEDs in a 5 × 5 grid; (0,0) is top-left.",
+       "span": 3
+      }
+     ],
+     [
+      {
+       "label": "Edge connector",
+       "detail": "20 pins (0, 1, 2, 3V, GND are the big ones) to connect extra devices.",
+       "span": 3
+      }
+     ],
+     [
+      {
+       "label": "USB + battery",
+       "detail": "On the back: power and programs via USB; battery pack for use on the move.",
+       "span": 1
+      },
+      {
+       "label": "Processor",
+       "detail": "The CPU that runs your program.",
+       "span": 1
+      },
+      {
+       "label": "Accelerometer / compass",
+       "detail": "Detect movement, tilt and direction.",
+       "span": 1
+      }
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What are the coordinates of the top-left LED?",
+     "o": [
+      "(1,1)",
+      "(0,0)",
+      "(5,5)",
+      "(0,4)"
+     ],
+     "a": 1,
+     "why": "Counting starts at 0 in the top-left."
+    },
+    {
+     "q": "Which LED is in the very centre?",
+     "o": [
+      "(3,3)",
+      "(2,2)",
+      "(2,3)",
+      "(5,5)"
+     ],
+     "a": 1,
+     "why": "0,1,2,3,4: the middle is 2."
+    },
+    {
+     "q": "Which part lets you plug in extra sensors?",
+     "o": [
+      "USB connector",
+      "LED matrix",
+      "Battery socket",
+      "20-pin edge connector"
+     ],
+     "a": 3,
+     "why": "The edge connector links to other devices."
+    },
+    {
+     "q": "Which parts were added in Version 2?",
+     "o": [
+      "Buttons A and B",
+      "Speaker and microphone",
+      "USB connector",
+      "LED matrix"
+     ],
+     "a": 1,
+     "why": "V2 added a speaker, a microphone and a touch logo."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Give the coordinates of the LED in the bottom-left corner and explain how you worked it out.",
+     "m": 2,
+     "a": "(0,4) (1); x counts across from 0 so the left column is 0, y counts down from 0 so the bottom row is 4 (1)."
+    },
+    {
+     "q": "Name **three** input parts of the micro:bit.",
+     "m": 3,
+     "a": "Any three: button A / button B (1); touch-sensitive logo (1); accelerometer (1); compass (1); microphone (1); light sensor/LEDs (1); pins (1)."
+    }
+   ],
+   "terms": [
+    "LED matrix",
+    "Edge connector"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Get to know the BBC micro:bit's features",
+     "source": "YouTube – Micro:bit Educational Foundation",
+     "url": "https://www.youtube.com/watch?v=7WMCgUIcKnk",
+     "yt": "7WMCgUIcKnk"
+    },
+    {
+     "title": "microbit MakeCode Editor - LED Blocks - Plot X Y - Kitronik",
+     "source": "YouTube – Kitronik",
+     "url": "https://www.youtube.com/watch?v=hI6jNTQipP4",
+     "yt": "hI6jNTQipP4"
+    },
+    {
+     "title": "Educator quick start video - Unit 7 Coordinates",
+     "source": "YouTube – MakeCode for Educators",
+     "url": "https://www.youtube.com/watch?v=FIofhOP8Ftk",
+     "yt": "FIofhOP8Ftk"
+    }
+   ]
+  },
+  {
+   "id": "p03",
+   "spec": "Set up a micro:bit and describe the parts of the MakeCode editor",
+   "summary": "Connect the micro:bit by USB, write code in the MakeCode editor at makecode.microbit.org, click Download to get a .hex file, then copy it to the MICROBIT drive to run it.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Code for the micro:bit can be written in several languages, including **MakeCode** (drag-and-drop blocks, which can be switched to JavaScript) and **Python**. Programming ideas such as loops, conditionals (if), variables and functions all work on it."
+    },
+    {
+     "t": "h",
+     "text": "Four steps to run a program"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Connect it:** plug the micro:bit into your computer with a micro USB cable. It shows up as a drive called **MICROBIT**, but it is not a normal USB stick.",
+      "**Program it:** go to **https://makecode.microbit.org** and build your code in the editor.",
+      "**Download it:** click **Download**. This makes a [[hex file]], a compact version of your program the micro:bit can read.",
+      "**Play it:** copy the hex file onto the MICROBIT drive (on Windows: right-click > Send to > MICROBIT). The yellow LED on the back flashes while it copies, then your code runs automatically."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "note",
+     "text": "After each copy the MICROBIT drive ejects itself and comes back, and your hex file seems to have vanished. That is normal: the micro:bit only accepts hex files and does not store anything else. Always keep a copy of your hex file in My Documents!"
+    },
+    {
+     "t": "h",
+     "text": "The MakeCode editor"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part of the editor",
+      "What it is for"
+     ],
+     "rows": [
+      [
+       "Simulator (left)",
+       "An on-screen micro:bit that runs your code straight away, so you can test it before downloading"
+      ],
+      [
+       "Toolbox (middle)",
+       "Coloured block categories: Basic, Input, Music, Led, Radio, Loops, Logic, Variables, Math and Advanced"
+      ],
+      [
+       "Workspace (right)",
+       "Where you drag and snap blocks together; starts with **on start** and **forever**"
+      ],
+      [
+       "Blocks / JavaScript switch (top)",
+       "Flip between the blocks view and the same code written as JavaScript"
+      ],
+      [
+       "Share button (top)",
+       "Get a link to share your project"
+      ],
+      [
+       "Download button (bottom left)",
+       "Saves your program as a .hex file"
+      ],
+      [
+       "Project name box (bottom)",
+       "Name your program, e.g. MyFirstProgram"
+      ]
+     ],
+     "caption": "Labelling the editor (the website tour)"
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "The two starting blocks",
+     "code": "// on start: runs once when the micro:bit turns on\nbasic.showString(\"Hi\")\n\n// forever: runs over and over until the power is removed\nbasic.forever(function () {\n    basic.showIcon(IconNames.Heart)\n})",
+     "output": "‘Hi’ scrolls once, then a heart shows for ever."
+    },
+    {
+     "t": "tip",
+     "text": "Click the **?** icon at the top right and choose **Tour** to be shown round the editor again."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Connect with USB: it appears as the MICROBIT drive.",
+      "Code at makecode.microbit.org in blocks, JavaScript or Python.",
+      "Download makes a .hex file; copy it to MICROBIT to run.",
+      "The simulator lets you test before downloading.",
+      "on start runs once; forever repeats."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "From code to micro:bit",
+    "caption": "The four steps every time you program it.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Connect",
+      "detail": "Plug in with micro USB; MICROBIT drive appears.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Program",
+      "detail": "Build blocks in MakeCode and test in the simulator.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "Download",
+      "detail": "Click Download to make a .hex file (save a copy!).",
+      "shape": "io"
+     },
+     {
+      "id": "d",
+      "label": "Copy & play",
+      "detail": "Send the hex file to MICROBIT; it runs automatically.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What type of file does MakeCode download for the micro:bit?",
+     "o": [
+      "A .docx file",
+      "A .html file",
+      "A .png file",
+      "A .hex file"
+     ],
+     "a": 3,
+     "why": "The micro:bit runs .hex files."
+    },
+    {
+     "q": "What is the simulator for?",
+     "o": [
+      "Charging the battery",
+      "Testing your code on screen before downloading",
+      "Sharing a link",
+      "Naming the project"
+     ],
+     "a": 1,
+     "why": "It runs a virtual micro:bit."
+    },
+    {
+     "q": "Which block runs its code only once at the start?",
+     "o": [
+      "on start",
+      "forever",
+      "on button A pressed",
+      "repeat"
+     ],
+     "a": 0,
+     "why": "on start runs once when the micro:bit powers up."
+    },
+    {
+     "q": "Why does your hex file disappear from the MICROBIT drive after copying?",
+     "o": [
+      "It failed",
+      "It moved to My Documents",
+      "The virus checker deleted it",
+      "The micro:bit runs it and does not store other files"
+     ],
+     "a": 3,
+     "why": "That is normal behaviour."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe the steps to get a program from MakeCode onto a micro:bit.",
+     "m": 3,
+     "a": "Connect the micro:bit to the computer by USB (1); click Download to create a .hex file (1); copy/send the hex file to the MICROBIT drive (1)."
+    },
+    {
+     "q": "Name **two** parts of the MakeCode editor and say what each does.",
+     "m": 2,
+     "a": "Simulator – tests the code on screen (1); toolbox – holds block categories (1); workspace – where blocks are assembled (1); Download button – creates hex file (1). Any two."
+    }
+   ],
+   "terms": [
+    "Hex file",
+    "MakeCode",
+    "Simulator"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Transferring your program to the BBC micro:bit",
+     "source": "YouTube – Micro:bit Educational Foundation",
+     "url": "https://www.youtube.com/watch?v=-FZ8yTnoozY",
+     "yt": "-FZ8yTnoozY"
+    },
+    {
+     "title": "MakeCode for micro:bit - Flashing Heart",
+     "source": "YouTube – Microsoft MakeCode",
+     "url": "https://www.youtube.com/watch?v=NvEOKZ8wh9s",
+     "yt": "NvEOKZ8wh9s"
+    }
+   ]
+  },
+  {
+   "id": "p04",
+   "spec": "Write simple programs that show pictures and text, and name common data types",
+   "summary": "Use show leds inside forever to make an animation and show string to scroll text. Data types include integer, double/decimal, string, character and Boolean.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Activity 1: an animation"
+    },
+    {
+     "t": "p",
+     "text": "Under **Basic**, the **show leds** block gives you a 5 × 5 grid to click on. Put several show leds blocks one after another inside **forever** and they play as an animation, over and over."
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "MyFirstProgram (a smiling, then frowning face)",
+     "code": "basic.forever(function () {\n    basic.showLeds(`\n        . . . . .\n        . # . # .\n        . . . . .\n        # . . . #\n        . # # # .\n        `)\n    basic.showLeds(`\n        . . . . .\n        . # . # .\n        . . . . .\n        . # # # .\n        # . . . #\n        `)\n})",
+     "output": "The face flips between a smile and a frown for ever."
+    },
+    {
+     "t": "p",
+     "text": "In the JavaScript view `#` means an LED is **on** and `.` means it is **off**. Name the project **MyFirstProgram** at the bottom of the screen, download it and copy it to the micro:bit."
+    },
+    {
+     "t": "h",
+     "text": "Showing text"
+    },
+    {
+     "t": "p",
+     "text": "A [[string]] is a piece of text: a sequence of characters. The **show string** block scrolls a string across the LEDs."
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "Say our name",
+     "code": "basic.forever(function () {\n    basic.showString(\"Hello Mr Butler\")\n})",
+     "output": "‘Hello Mr Butler’ scrolls across the LEDs again and again."
+    },
+    {
+     "t": "h",
+     "text": "Data types"
+    },
+    {
+     "t": "p",
+     "text": "Computers handle different types of data. The [[data type]] tells the computer what kind of value it is and what can be done with it."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Data type",
+      "What it holds",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Integer (int)",
+       "A whole number, positive or negative",
+       "15, -3, 0"
+      ],
+      [
+       "Double / decimal",
+       "A number with a decimal point, positive or negative",
+       "3.5, -0.25"
+      ],
+      [
+       "String",
+       "Text: words, sentences, any sequence of characters",
+       "\"Hello Mr Butler\""
+      ],
+      [
+       "Character (char)",
+       "A single letter or symbol",
+       "'A', '?'"
+      ],
+      [
+       "Boolean (bool)",
+       "Only two values: true/false, on/off, 1/0",
+       "true"
+      ]
+     ],
+     "caption": "Data types to know"
+    },
+    {
+     "t": "warn",
+     "text": "A phone number like 07700 900123 should be a **string**, not an integer. You never do maths with it, and an integer would lose the leading 0."
+    },
+    {
+     "t": "tip",
+     "text": "Text in quotation marks is always a string, even \"42\". Without quotes, 42 is a number."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "show leds draws a picture; several inside forever make an animation.",
+      "show string scrolls text; a string is a sequence of characters.",
+      "Integer = whole number; double = decimal number.",
+      "Char = one character; Boolean = true or false.",
+      "Choose the data type that matches how the data is used."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Which data type?",
+    "caption": "Click to reveal the best data type for each value.",
+    "head": [
+     "Value",
+     "Data type"
+    ],
+    "rows": [
+     [
+      "27",
+      "Integer"
+     ],
+     [
+      "\"Enniskillen\"",
+      "String"
+     ],
+     [
+      "1.85",
+      "Double / decimal"
+     ],
+     [
+      "'B'",
+      "Character (char)"
+     ],
+     [
+      "true",
+      "Boolean"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What is a string?",
+     "o": [
+      "A whole number",
+      "A true or false value",
+      "A piece of text / sequence of characters",
+      "A decimal number"
+     ],
+     "a": 2,
+     "why": "Strings hold text."
+    },
+    {
+     "q": "Which data type should store 3.75?",
+     "o": [
+      "Double / decimal",
+      "Integer",
+      "Boolean",
+      "Character"
+     ],
+     "a": 0,
+     "why": "It has a decimal point."
+    },
+    {
+     "q": "Which data type can only be true or false?",
+     "o": [
+      "String",
+      "Char",
+      "Integer",
+      "Boolean"
+     ],
+     "a": 3,
+     "why": "Booleans have two values."
+    },
+    {
+     "q": "In MakeCode's JavaScript view, what does # mean in a show leds picture?",
+     "o": [
+      "LED on",
+      "LED off",
+      "Comment",
+      "Error"
+     ],
+     "a": 0,
+     "why": "# = on, . = off."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Give the most suitable data type for each: (a) number of pupils in a class, (b) a pupil's name, (c) whether a door is locked.",
+     "m": 3,
+     "a": "(a) integer (1); (b) string (1); (c) Boolean (1)."
+    },
+    {
+     "q": "Explain the difference between an integer and a double.",
+     "m": 2,
+     "a": "An integer is a whole number (positive or negative) (1); a double/decimal has a decimal point (1)."
+    }
+   ],
+   "terms": [
+    "String",
+    "Data type",
+    "Integer",
+    "Boolean"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "MakeCode for micro:bit - Flashing Heart",
+     "source": "YouTube – Microsoft MakeCode",
+     "url": "https://www.youtube.com/watch?v=NvEOKZ8wh9s",
+     "yt": "NvEOKZ8wh9s"
+    },
+    {
+     "title": "MakeCode for micro:bit - Name Tag",
+     "source": "YouTube – Microsoft MakeCode",
+     "url": "https://www.youtube.com/watch?v=xpRI5jjQ31E",
+     "yt": "xpRI5jjQ31E"
+    },
+    {
+     "title": "Data Types | 2.2 | OCR GCSE Computer Science | J277",
+     "source": "YouTube – CSNewbs",
+     "url": "https://www.youtube.com/watch?v=EOwTklQI1Q4",
+     "yt": "EOwTklQI1Q4"
+    }
+   ]
+  },
+  {
+   "id": "p05",
+   "spec": "Use button events as inputs to control a program",
+   "summary": "The on button pressed block runs code when A, B or A+B is pressed. Buttons are inputs; the LEDs are outputs.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The two buttons are **inputs** for the microcontroller. The **on button pressed** block (in **Input**) is an [[event]]: its code runs only when that button is pressed, not all the time."
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "A short button program",
+     "code": "input.onButtonPressed(Button.A, function () {\n    basic.showString(\"Hello Mr Butler!\")\n})",
+     "output": "Press A and ‘Hello Mr Butler!’ scrolls across."
+    },
+    {
+     "t": "p",
+     "text": "Click the drop-down on the block to choose **A**, **B** or **A+B** (both pressed together). In JavaScript these are `Button.A`, `Button.B` and `Button.AB`."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: Activity 2 – A, B and AB (buttonBashing)",
+     "context": "When A is pressed, say “You should press button B now”. When B is pressed, say “Press both buttons together”. When A and B are pressed together, show an animation.",
+     "steps": [
+      "Use three separate **on button pressed** blocks: one set to A, one to B, one to A+B.",
+      "In the A block put **show string** with \"You should press button B now\".",
+      "In the B block put **show string** with \"Press both buttons together\".",
+      "In the A+B block put several **show leds** blocks, each with a bit more of the border lit, so a line runs round the edge of the screen.",
+      "Name the project **buttonBashing**, download it, and save a copy in My Documents too."
+     ],
+     "answer": "Three event blocks, one for each button choice (code below)."
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "buttonBashing",
+     "code": "input.onButtonPressed(Button.A, function () {\n    basic.showString(\"You should press button B now\")\n})\ninput.onButtonPressed(Button.B, function () {\n    basic.showString(\"Press both buttons together\")\n})\ninput.onButtonPressed(Button.AB, function () {\n    basic.showLeds(`\n        # # # # #\n        . . . . .\n        . . . . .\n        . . . . .\n        . . . . .\n        `)\n    basic.showLeds(`\n        # # # # #\n        . . . . #\n        . . . . #\n        . . . . #\n        . . . . #\n        `)\n    basic.showLeds(`\n        # # # # #\n        . . . . #\n        . . . . #\n        . . . . #\n        # # # # #\n        `)\n    basic.showLeds(`\n        # # # # #\n        # . . . #\n        # . . . #\n        # . . . #\n        # # # # #\n        `)\n})",
+     "output": "A: first message scrolls. B: second message scrolls. A+B: a line draws itself around the edge of the screen."
+    },
+    {
+     "t": "tip",
+     "text": "Extension: change the A+B animation to your own design and save it as **buttonBashingExtended**, so you do not overwrite your first version."
+    },
+    {
+     "t": "h",
+     "text": "Checkpoint: file organisation"
+    },
+    {
+     "t": "list",
+     "items": [
+      "My Documents should contain just a folder for each year.",
+      "Inside each year: subject folders, with no ‘orphan’ files lying loose.",
+      "Your ICT folder should now hold an HTML folder and a **Micro Bit** folder.",
+      "The Micro Bit folder should contain: buttonBashing (hex file), MicroBit Portfolio (Word document) and smileyShake (hex file)."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Buttons A and B are inputs; LEDs are outputs.",
+      "on button pressed is an event: it runs only when pressed.",
+      "Choose A, B or A+B from the drop-down.",
+      "Each button choice needs its own event block.",
+      "Save hex files in My Documents as well as on the micro:bit."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which option runs code when both buttons are pressed together?",
+     "o": [
+      "A",
+      "A+B",
+      "B",
+      "AB pressed twice"
+     ],
+     "a": 1,
+     "why": "Choose A+B (Button.AB)."
+    },
+    {
+     "q": "Which category holds the ‘on button pressed’ block?",
+     "o": [
+      "Basic",
+      "Input",
+      "Led",
+      "Math"
+     ],
+     "a": 1,
+     "why": "Buttons are inputs."
+    },
+    {
+     "q": "Why save a copy of your hex file in My Documents?",
+     "o": [
+      "It is required for the simulator",
+      "It makes the code run faster",
+      "MakeCode needs it",
+      "The micro:bit does not keep the file"
+     ],
+     "a": 3,
+     "why": "The MICROBIT drive does not store files, so keep your own copy."
+    },
+    {
+     "q": "In buttonBashing, is the LED display an input or an output?",
+     "o": [
+      "Input",
+      "Both",
+      "Output",
+      "Neither"
+     ],
+     "a": 2,
+     "why": "LEDs show information: output."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe how you would make the micro:bit show a heart when button B is pressed.",
+     "m": 2,
+     "a": "Use the on button B pressed block (1) with a show icon heart / show leds heart inside it (1)."
+    },
+    {
+     "q": "Explain what is meant by an event in a micro:bit program. Give an example.",
+     "m": 2,
+     "a": "Code that runs only when something happens (1), e.g. on button A pressed / on shake (1)."
+    }
+   ],
+   "terms": [
+    "Event",
+    "Input",
+    "Output"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Using the buttons on the BBC micro:bit",
+     "source": "YouTube – Micro:bit Educational Foundation",
+     "url": "https://www.youtube.com/watch?v=YNuIXsRdDp4",
+     "yt": "YNuIXsRdDp4"
+    },
+    {
+     "title": "microbit MakeCode Editor - Input Blocks - Button Is Pressed - Kitronik",
+     "source": "YouTube – Kitronik",
+     "url": "https://www.youtube.com/watch?v=pEbUnlRrEDg",
+     "yt": "pEbUnlRrEDg"
+    }
+   ]
+  },
+  {
+   "id": "p06",
+   "spec": "Explain count-controlled and condition-controlled loops and use them on the micro:bit",
+   "summary": "A loop repeats code. Count-controlled loops (repeat / for) run a set number of times; condition-controlled loops (while) repeat as long as a condition is true; forever never stops.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "In programming, to **loop** means to **repeat**. We might loop 2 or 3 times, or 5, or 100, or even forever. Loops are also called [[iteration]]: they let code repeat without retyping it over and over again."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Loop",
+      "Type",
+      "How many times?"
+     ],
+     "rows": [
+      [
+       "**repeat 4 times** (`for`)",
+       "Count-controlled",
+       "A set number, known before it starts: here exactly 4"
+      ],
+      [
+       "**while** condition",
+       "Condition-controlled",
+       "Unknown: keeps going as long as the condition is true"
+      ],
+      [
+       "**forever**",
+       "Infinite loop",
+       "Never stops while the micro:bit has power"
+      ]
+     ],
+     "caption": "Types of loop"
+    },
+    {
+     "t": "h",
+     "text": "Count-controlled loops"
+    },
+    {
+     "t": "p",
+     "text": "A [[count-controlled loop]] is also called a *for loop*. It repeats a **specific number of times**. Looking at a **repeat 4 times** block, we know immediately the code will run 4 times. Count-controlled loops are also used to go through each item in a list."
+    },
+    {
+     "t": "h",
+     "text": "Condition-controlled loops"
+    },
+    {
+     "t": "p",
+     "text": "A [[condition-controlled loop]] is also called a *while loop*. The condition is checked **before each repeat**. If it is true, the loop body runs, then the condition is checked again. When it is false, the loop stops."
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "while myValue < 10",
+     "code": "let myValue = 0\nwhile (myValue < 10) {\n    basic.showNumber(myValue)\n    myValue += 1\n}",
+     "output": "0 1 2 3 4 5 6 7 8 9, then the loop stops because myValue is now 10."
+    },
+    {
+     "t": "p",
+     "text": "In a real program we often do not know how many times a while loop will run: it keeps going until `myValue` stops being less than 10 (i.e. reaches **10 or more**)."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: Activity 3 – keeping an animation going",
+     "context": "Repeat the numbers 0 1 2 3 three times, then show 4 5 6 once, then start again from the beginning, for ever.",
+     "steps": [
+      "Use **forever** on the outside so the whole pattern starts again at the end.",
+      "Inside it, a **repeat 3 times** loop containing show number 0, 1, 2 and 3.",
+      "After the repeat loop (but still inside forever), show number 4, 5 and 6 once.",
+      "(You could also draw each number with show leds instead of show number.)"
+     ],
+     "answer": "0123 0123 0123 456, then back to the beginning, for ever."
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "Looping",
+     "code": "basic.forever(function () {\n    for (let index = 0; index < 3; index++) {\n        basic.showNumber(0)\n        basic.showNumber(1)\n        basic.showNumber(2)\n        basic.showNumber(3)\n    }\n    basic.showNumber(4)\n    basic.showNumber(5)\n    basic.showNumber(6)\n})"
+    },
+    {
+     "t": "example",
+     "title": "Extension: complete the blanks",
+     "context": "Fill in the missing words (Text, Repeat, Forever, Calculations).",
+     "steps": [
+      "In my program I have used a **forever** loop. This makes the program **repeat**.",
+      "String is the data type we use in Computer Science for variables we are not going to perform any **calculations** on.",
+      "The show string command displays the **text** I have written in the green box on my micro:bit."
+     ],
+     "answer": "forever, repeat, calculations, text."
+    },
+    {
+     "t": "warn",
+     "text": "If the condition of a while loop never becomes false (e.g. you forget `myValue += 1`), the loop never ends. This is an infinite loop and your program gets stuck."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Loop = repeat (also called iteration).",
+      "Count-controlled (repeat/for): a fixed number of times.",
+      "Condition-controlled (while): repeats while a condition is true.",
+      "forever repeats until the power is removed.",
+      "Make sure a while loop's condition can become false."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "How a while loop works",
+    "caption": "The condition is checked before every repeat.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "s",
+      "label": "Start",
+      "detail": "myValue is set to 0.",
+      "shape": "start"
+     },
+     {
+      "id": "c",
+      "label": "myValue < 10?",
+      "detail": "Check the condition before each repeat.",
+      "shape": "io"
+     },
+     {
+      "id": "b",
+      "label": "Run loop body",
+      "detail": "Show myValue, then add 1 to it.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Stop",
+      "detail": "When the condition is false, carry on with the rest of the program.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "s",
+      "c"
+     ],
+     [
+      "c",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What does ‘loop’ mean in programming?",
+     "o": [
+      "Stop",
+      "Decide",
+      "Repeat",
+      "Store"
+     ],
+     "a": 2,
+     "why": "Loop = repeat."
+    },
+    {
+     "q": "Which is a count-controlled loop?",
+     "o": [
+      "repeat 4 times",
+      "while myValue < 10",
+      "forever",
+      "if … then"
+     ],
+     "a": 0,
+     "why": "It runs a known number of times."
+    },
+    {
+     "q": "A while loop checks its condition…",
+     "o": [
+      "only once at the end",
+      "never",
+      "before each repeat",
+      "only when a button is pressed"
+     ],
+     "a": 2,
+     "why": "The condition is checked before each iteration."
+    },
+    {
+     "q": "How many times will ‘0 1 2 3’ show before ‘4 5 6’ in Activity 3?",
+     "o": [
+      "1",
+      "2",
+      "3",
+      "4"
+     ],
+     "a": 2,
+     "why": "The repeat block runs 3 times."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between a count-controlled loop and a condition-controlled loop.",
+     "m": 2,
+     "a": "A count-controlled loop repeats a set/known number of times (1); a condition-controlled loop repeats while a condition is true, so the number of repeats may not be known (1)."
+    },
+    {
+     "q": "Why do programmers use loops?",
+     "m": 2,
+     "a": "To repeat code (1) without having to type it out over and over again, making programs shorter/easier to change (1)."
+    }
+   ],
+   "terms": [
+    "Iteration",
+    "Count-controlled loop",
+    "Condition-controlled loop"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "63. OCR GCSE (J277) 2.2 The 3 basic programming constructs",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=t0VphK9cWgE",
+     "yt": "t0VphK9cWgE"
+    },
+    {
+     "title": "microbit MakeCode Editor - Loop Blocks - Repeat Loop - Kitronik",
+     "source": "YouTube – Kitronik",
+     "url": "https://www.youtube.com/watch?v=nj8Fw8snQgs",
+     "yt": "nj8Fw8snQgs"
+    },
+    {
+     "title": "microbit MakeCode Editor - Loop Blocks - While True Do - Kitronik",
+     "source": "YouTube – Kitronik",
+     "url": "https://www.youtube.com/watch?v=BGXy2ktIssM",
+     "yt": "BGXy2ktIssM"
+    }
+   ]
+  },
+  {
+   "id": "p07",
+   "spec": "Explain what a variable is and use one with random numbers to make a dice",
+   "summary": "A variable is a named box that stores a value that can change. Use pick random 1 to 6 on shake to build an electronic dice.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Imagine a magic box that can hold different things: toys, snacks or even secrets. A [[variable]] in programming is like that box. It is a named place in memory where we store information, like numbers or words, so we can use it later in the program."
+    },
+    {
+     "t": "p",
+     "text": "You give the box a **name**, put something in it, and then use the name to get at what is inside. The value **can change**: a variable `Age` might be set to 15, and in one year's time it will change to 16. It is not a fixed value."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Variable name",
+      "Value now",
+      "Value later"
+     ],
+     "rows": [
+      [
+       "age",
+       "15",
+       "16 (next year)"
+      ],
+      [
+       "score",
+       "0",
+       "3 (after three goals)"
+      ],
+      [
+       "name",
+       "\"Sam\"",
+       "\"Sam\" (unchanged)"
+      ]
+     ],
+     "caption": "Variables hold values that can change"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: define the term variable",
+     "context": "In your own words, define the term variable.",
+     "steps": [
+      "Say what it is: a named storage location in memory.",
+      "Say what it does: holds a value the program can use.",
+      "Say the key feature: the value can change while the program runs."
+     ],
+     "answer": "A variable is a named location in memory that stores a value, such as a number or text, which can change while the program is running."
+    },
+    {
+     "t": "h",
+     "text": "Activity 4: roll the dice"
+    },
+    {
+     "t": "p",
+     "text": "The challenge is to make the micro:bit replace a dice: when you **shake** it, it ‘rolls’ a random number from 1 to 6. The hint is the **pick random 0 to 10** block in **Math**: change it to 1 to 6."
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "RollTheDice",
+     "code": "input.onGesture(Gesture.Shake, function () {\n    basic.showNumber(randint(1, 6))\n})",
+     "output": "Shake the micro:bit and a random number from 1 to 6 appears."
+    },
+    {
+     "t": "p",
+     "text": "Storing the roll in a variable means you can use it again, e.g. to check if you rolled a 6:"
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "RollTheDice with a variable",
+     "code": "let roll = 0\ninput.onGesture(Gesture.Shake, function () {\n    roll = randint(1, 6)\n    basic.showNumber(roll)\n})"
+    },
+    {
+     "t": "warn",
+     "text": "The default pick random block goes from **0** to 10. A dice has no 0 and no 7–10, so change both numbers to 1 and 6."
+    },
+    {
+     "t": "tip",
+     "text": "Variable names should describe what they store: `roll`, `score`, `lives`. A name like `x` makes your code hard to follow."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A variable is a named box in memory that stores a value.",
+      "The value of a variable can change while the program runs.",
+      "Use the variable's name to get its value.",
+      "randint(1, 6) / pick random 1 to 6 makes a dice roll.",
+      "on shake is an event triggered by the accelerometer."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a variable?",
+     "o": [
+      "A fixed value that never changes",
+      "A type of loop",
+      "A named store for a value that can change",
+      "A button"
+     ],
+     "a": 2,
+     "why": "Variables hold values that can change."
+    },
+    {
+     "q": "Which block makes a random dice number?",
+     "o": [
+      "pick random 1 to 6",
+      "pick random 0 to 10",
+      "show number 6",
+      "repeat 6 times"
+     ],
+     "a": 0,
+     "why": "A dice gives 1 to 6."
+    },
+    {
+     "q": "Which sensor detects the shake gesture?",
+     "o": [
+      "Accelerometer",
+      "Compass",
+      "Microphone",
+      "Light sensor"
+     ],
+     "a": 0,
+     "why": "The accelerometer detects movement."
+    },
+    {
+     "q": "A variable age = 15. A year later the program sets age = 16. What does this show?",
+     "o": [
+      "Variable values can change",
+      "Variables are fixed",
+      "Ages are strings",
+      "The program crashed"
+     ],
+     "a": 0,
+     "why": "That is why it is called a variable."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Define the term **variable**.",
+     "m": 2,
+     "a": "A named location in memory used to store data (1) whose value can change while the program runs (1)."
+    },
+    {
+     "q": "Describe how to make a micro:bit dice.",
+     "m": 3,
+     "a": "Use the on shake event (1); use pick random with 1 to 6 (1); show the number on the LEDs with show number (1)."
+    }
+   ],
+   "terms": [
+    "Variable",
+    "Random number"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "MakeCode for micro:bit - Dice",
+     "source": "YouTube – Microsoft MakeCode",
+     "url": "https://www.youtube.com/watch?v=OmrmjtOm_sQ",
+     "yt": "OmrmjtOm_sQ"
+    },
+    {
+     "title": "62. OCR GCSE (J277) 2.2 Variables, constants, inputs, outputs & assignments",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=dpBe_TXFqZ8",
+     "yt": "dpBe_TXFqZ8"
+    },
+    {
+     "title": "microbit MakeCode Editor - Math Blocks - Pick Random - Kitronik",
+     "source": "YouTube – Kitronik",
+     "url": "https://www.youtube.com/watch?v=XOzX9fhGcwo",
+     "yt": "XOzX9fhGcwo"
+    }
+   ]
+  },
+  {
+   "id": "p08",
+   "spec": "Use if and if…else statements to make decisions in a program",
+   "summary": "Selection uses an if statement to run code only when a condition is true; else gives an alternative when it is false. Booleans (true/false) are at the heart of every decision.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Selection** means the program chooses which code to run. It uses an [[if statement]], found in the blue-green **Logic** blocks. You have met IF before, e.g. the IF function in Excel."
+    },
+    {
+     "t": "list",
+     "items": [
+      "An **if** asks a question (the **condition**), which has a [[Boolean]] answer: true or false.",
+      "The code inside the if only runs if the condition is **true**.",
+      "If statements are often paired with **else**: if the condition is **not** true, the else code runs instead."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: Task A – define Boolean",
+     "context": "Find a short definition of the word Boolean.",
+     "steps": [
+      "Boolean is named after George Boole, a mathematician who worked in Cork in the 1800s.",
+      "It describes data that can only have one of two values."
+     ],
+     "answer": "Boolean: a data type with only two possible values, true or false (often stored as 1 or 0)."
+    },
+    {
+     "t": "h",
+     "text": "The Lie Detector"
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "theLieDetector",
+     "code": "input.onButtonPressed(Button.A, function () {\n    if (Math.randomBoolean()) {\n        basic.showString(\"It's True!\")\n    } else {\n        basic.showString(\"It's False!\")\n    }\n})",
+     "output": "Press A: the micro:bit randomly scrolls either “It's True!” or “It's False!”."
+    },
+    {
+     "t": "p",
+     "text": "**pick random true or false** (`Math.randomBoolean()`) gives a random Boolean. If it is true, the *then* part runs; otherwise the *else* part runs. Save this as **theLieDetector** in My Documents."
+    },
+    {
+     "t": "h",
+     "text": "Thinking computationally"
+    },
+    {
+     "t": "p",
+     "text": "Computers cannot think for themselves: we have to tell them **exactly** what to do, step by step, and program the ‘intelligence’. Thinking like this is called **computational thinking**, and you already do it without knowing."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: making a cup of tea",
+     "context": "Write the exact steps to make a cup of tea, including a decision.",
+     "steps": [
+      "Fill the kettle and switch it on.",
+      "Put a tea bag in a mug.",
+      "When the kettle has boiled, pour the water into the mug.",
+      "Wait 3 minutes, then remove the tea bag.",
+      "**If** the person takes milk **then** add milk, **else** leave it black.",
+      "**If** they take sugar **then** add sugar and stir."
+     ],
+     "answer": "A precise sequence of steps with selection (if … else) for milk and sugar."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Selection = choosing which code runs, using if.",
+      "The condition is a question with a true/false (Boolean) answer.",
+      "if code runs only when the condition is true.",
+      "else code runs when the condition is false.",
+      "Computers need exact instructions: computational thinking."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "if … else",
+    "caption": "Only one of the two branches runs.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Button A pressed",
+      "detail": "The event starts the code.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Random true?",
+      "detail": "pick random true or false.",
+      "shape": "io"
+     },
+     {
+      "id": "c",
+      "label": "Show “It's True!”",
+      "detail": "Runs only if the condition is true.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Show “It's False!”",
+      "detail": "The else branch: runs if it is false.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Done",
+      "detail": "Wait for the next press.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "e"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "When does the code inside an if block run?",
+     "o": [
+      "Always",
+      "Only once a minute",
+      "When the condition is false",
+      "When the condition is true"
+     ],
+     "a": 3,
+     "why": "If = only when true."
+    },
+    {
+     "q": "What does else do?",
+     "o": [
+      "Repeats the code",
+      "Creates a variable",
+      "Ends the program",
+      "Runs code when the condition is false"
+     ],
+     "a": 3,
+     "why": "Else provides the alternative."
+    },
+    {
+     "q": "What is a Boolean?",
+     "o": [
+      "A whole number",
+      "A type of loop",
+      "A piece of text",
+      "A value that is either true or false"
+     ],
+     "a": 3,
+     "why": "Booleans have only two values."
+    },
+    {
+     "q": "In the Lie Detector, what decides which message appears?",
+     "o": [
+      "Button B",
+      "The temperature",
+      "A random true or false",
+      "The compass"
+     ],
+     "a": 2,
+     "why": "pick random true or false."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how an if…else statement works.",
+     "m": 3,
+     "a": "A condition is checked (1); if it is true the code in the if/then part runs (1); if it is false the code in the else part runs (1)."
+    },
+    {
+     "q": "Define the term Boolean.",
+     "m": 1,
+     "a": "A data type that can only be true or false (1 or 0) (1)."
+    }
+   ],
+   "terms": [
+    "Selection",
+    "If statement",
+    "Condition"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "microbit MakeCode Editor - Logic Blocks - If True Then Else - Kitronik",
+     "source": "YouTube – Kitronik",
+     "url": "https://www.youtube.com/watch?v=Rp1vRLJpFu8",
+     "yt": "Rp1vRLJpFu8"
+    },
+    {
+     "title": "microbit MakeCode Editor - Logic Blocks - If True Then - Kitronik",
+     "source": "YouTube – Kitronik",
+     "url": "https://www.youtube.com/watch?v=hYrPRggYbfQ",
+     "yt": "hYrPRggYbfQ"
+    },
+    {
+     "title": "63. OCR GCSE (J277) 2.2 The 3 basic programming constructs",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=t0VphK9cWgE",
+     "yt": "t0VphK9cWgE"
+    }
+   ]
+  },
+  {
+   "id": "p09",
+   "spec": "Use comparison operators to compare values and give a true or false result",
+   "summary": "Comparison operators (=, ≠, <, ≤, >, ≥) compare two values and give true or false. They are used in if statements and loops to make decisions.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "[[Comparison operator]]s compare two values. The result is always **true** or **false**. They are used constantly in programming, Maths and Science, and you will find them in the Logic blocks."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Operator",
+      "Block",
+      "Code",
+      "Returns true if…"
+     ],
+     "rows": [
+      [
+       "Equal to",
+       "=",
+       "`==`",
+       "the two values are equal"
+      ],
+      [
+       "Not equal to",
+       "≠",
+       "`!=`",
+       "the two values are not equal"
+      ],
+      [
+       "Less than",
+       "<",
+       "`<`",
+       "the left value is less than the right"
+      ],
+      [
+       "Less than or equal to",
+       "≤",
+       "`<=`",
+       "the left value is less than or equal to the right"
+      ],
+      [
+       "Greater (more) than",
+       ">",
+       "`>`",
+       "the left value is greater than the right"
+      ],
+      [
+       "Greater than or equal to",
+       "≥",
+       "`>=`",
+       "the left value is greater than or equal to the right"
+      ]
+     ],
+     "caption": "Comparison operators"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: true or false?",
+     "context": "Work out whether each condition is true or false.",
+     "steps": [
+      "IF(5 > 2): 5 is greater than 2, so **true**.",
+      "IF(3 > 8): 3 is not greater than 8, so **false**.",
+      "IF(6 >= 6): 6 is equal to 6, so **true**.",
+      "IF(4 != 4): 4 is equal to 4, so **false**."
+     ],
+     "answer": "true, false, true, false"
+    },
+    {
+     "t": "p",
+     "text": "Comparison operators are used in conditional statements (if, else, while, for) to make decisions, and in loops and sorting algorithms to put things in order (e.g. a leaderboard)."
+    },
+    {
+     "t": "warn",
+     "text": "In code, a single `=` *sets* a variable (`score = 0`) but `==` *compares* (`score == 0`). Mixing them up is one of the commonest bugs."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the faces task",
+     "context": "Using buttons as inputs and LEDs as outputs: A pressed and B not pressed → smiley face. A and B pressed → sad face. A not pressed and B pressed → neutral face.",
+     "steps": [
+      "Store each button as a number: a = 1 if A is pressed, otherwise 0; the same for b.",
+      "A pressed and B not: `a == 1 && b < 1` → happy face.",
+      "Both pressed: `a == 1 && b == 1` → sad face.",
+      "A not pressed and B pressed: `a != 1 && b == 1` → neutral (‘meh’) face.",
+      "`&&` means AND: both comparisons must be true."
+     ],
+     "answer": "See the code below."
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "Comparison faces",
+     "code": "basic.forever(function () {\n    let a = 0\n    let b = 0\n    if (input.buttonIsPressed(Button.A)) {\n        a = 1\n    }\n    if (input.buttonIsPressed(Button.B)) {\n        b = 1\n    }\n    if (a == 1 && b < 1) {\n        basic.showIcon(IconNames.Happy)\n    } else if (a == 1 && b == 1) {\n        basic.showIcon(IconNames.Sad)\n    } else if (a != 1 && b == 1) {\n        basic.showIcon(IconNames.Meh)\n    } else {\n        basic.clearScreen()\n    }\n})",
+     "output": "Hold A: happy. Hold both: sad. Hold B: neutral. Nothing: blank."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Comparison operators give true or false.",
+      "=, ≠, <, ≤, >, ≥ (== and != in code).",
+      "Used in if statements and loops to make decisions.",
+      "== compares; = sets a value.",
+      "&& joins two comparisons that must both be true."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "match",
+    "title": "Match the operator",
+    "caption": "Match each symbol to its meaning.",
+    "pairs": [
+     [
+      "==",
+      "Equal to"
+     ],
+     [
+      "!=",
+      "Not equal to"
+     ],
+     [
+      "<",
+      "Less than"
+     ],
+     [
+      "<=",
+      "Less than or equal to"
+     ],
+     [
+      ">",
+      "Greater than"
+     ],
+     [
+      ">=",
+      "Greater than or equal to"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What is the result of 7 < 4?",
+     "o": [
+      "true",
+      "false",
+      "11",
+      "3"
+     ],
+     "a": 1,
+     "why": "7 is not less than 4."
+    },
+    {
+     "q": "Which operator means ‘not equal to’?",
+     "o": [
+      "!=",
+      "==",
+      "<=",
+      ">="
+     ],
+     "a": 0,
+     "why": "!= (≠) means not equal."
+    },
+    {
+     "q": "Which is true?",
+     "o": [
+      "3 > 8",
+      "10 <= 9",
+      "2 == 3",
+      "5 >= 5"
+     ],
+     "a": 3,
+     "why": "5 is equal to 5, so ≥ is true."
+    },
+    {
+     "q": "What does == do?",
+     "o": [
+      "Sets a variable",
+      "Compares two values for equality",
+      "Adds two numbers",
+      "Joins two strings"
+     ],
+     "a": 1,
+     "why": "== tests whether values are equal."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State whether each is true or false: (a) 12 > 9, (b) 4 >= 5, (c) 6 != 6.",
+     "m": 3,
+     "a": "(a) true (1); (b) false (1); (c) false (1)."
+    },
+    {
+     "q": "Explain why comparison operators are important in programming.",
+     "m": 2,
+     "a": "They compare two values and give a true/false result (1) which is used in if statements/loops to decide what code runs (1)."
+    }
+   ],
+   "terms": [
+    "Comparison operator"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "64. OCR GCSE (J277) 2.2 Arithmetic and comparison operators",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=qozjsKdyBzM",
+     "yt": "qozjsKdyBzM"
+    },
+    {
+     "title": "microbit MakeCode Editor - Logic Blocks - If True Then Else - Kitronik",
+     "source": "YouTube – Kitronik",
+     "url": "https://www.youtube.com/watch?v=Rp1vRLJpFu8",
+     "yt": "Rp1vRLJpFu8"
+    }
+   ]
+  },
+  {
+   "id": "p10",
+   "spec": "Describe the AND, OR and NOT logic gates with truth tables and use them in code",
+   "summary": "AND outputs true only if all inputs are true; OR outputs true if at least one input is true; NOT flips its single input. In code they are written &&, || and !.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "[[Logic gate]]s are the building blocks of digital circuits in computers. They take binary inputs (0 = false, 1 = true) and give a binary output. In electronics they take in electrical wires and decide whether current passes to the output wire; combined, they make adders, multiplexers and flip-flops that let a computer calculate and store data."
+    },
+    {
+     "t": "p",
+     "text": "In programming, the same ideas are called **logical operators** (AND, OR, NOT). We use them with selection to decide whether code should run."
+    },
+    {
+     "t": "table",
+     "head": [
+      "A",
+      "B",
+      "A AND B",
+      "A OR B"
+     ],
+     "rows": [
+      [
+       "0",
+       "0",
+       "0",
+       "0"
+      ],
+      [
+       "0",
+       "1",
+       "0",
+       "1"
+      ],
+      [
+       "1",
+       "0",
+       "0",
+       "1"
+      ],
+      [
+       "1",
+       "1",
+       "1",
+       "1"
+      ]
+     ],
+     "caption": "Truth tables for AND and OR (0 = false, 1 = true)"
+    },
+    {
+     "t": "table",
+     "head": [
+      "A",
+      "NOT A"
+     ],
+     "rows": [
+      [
+       "0",
+       "1"
+      ],
+      [
+       "1",
+       "0"
+      ]
+     ],
+     "caption": "Truth table for NOT"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**AND:** all inputs must be true for the output to be true. Code: `&&`.",
+      "**OR:** only one input needs to be true for the output to be true. Code: `||`.",
+      "**NOT:** only one input; it inverts it (‘if it WAS true, make it false’). Code: `!`."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "AND: is myValue between 0 and 10?",
+     "code": "let myValue = 5\nif (myValue < 10 && myValue > 0) {\n    basic.showIcon(IconNames.Yes)\n}",
+     "output": "A tick, because 5 is less than 10 AND greater than 0."
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "OR: is myValue outside 0 to 10?",
+     "code": "let myValue = 15\nif (myValue > 10 || myValue < 0) {\n    basic.showIcon(IconNames.Yes)\n}",
+     "output": "A tick, because 15 > 10 (only one side needs to be true)."
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "NOT: run if myValue is false",
+     "code": "let myValue = false\nif (!(myValue)) {\n    basic.showIcon(IconNames.Yes)\n}",
+     "output": "A tick, because NOT false = true."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: OR with two buttons",
+     "context": "If either button A or button B is pressed, show that the condition is true; otherwise show that it is false.",
+     "steps": [
+      "Use `input.buttonIsPressed` for each button inside a forever loop.",
+      "Join them with OR (`||`).",
+      "Show T in the if branch and F in the else branch."
+     ],
+     "answer": "Press A, B or both: T. Press neither: F."
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "OR task",
+     "code": "basic.forever(function () {\n    if (input.buttonIsPressed(Button.A) || input.buttonIsPressed(Button.B)) {\n        basic.showString(\"T\")\n    } else {\n        basic.showString(\"F\")\n    }\n})"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: NOT with one button",
+     "context": "If the button is not pressed (input 0) show 1; if it is pressed (input 1) show 0.",
+     "steps": [
+      "Read button A.",
+      "Put NOT (`!`) in front so the result is flipped.",
+      "Show 1 when the NOT is true, 0 otherwise."
+     ],
+     "answer": "Not pressed → 1; pressed → 0. This is exactly the NOT truth table."
+    },
+    {
+     "t": "code",
+     "lang": "js",
+     "title": "NOT task",
+     "code": "basic.forever(function () {\n    if (!(input.buttonIsPressed(Button.A))) {\n        basic.showNumber(1)\n    } else {\n        basic.showNumber(0)\n    }\n})"
+    },
+    {
+     "t": "example",
+     "title": "Extension: OR into AND",
+     "context": "A and B go into an OR gate. Its output goes into BOTH inputs of an AND gate, giving C. What must A and B be for C to be true?",
+     "steps": [
+      "The AND gate gets the same value on both inputs, so C = (A OR B) AND (A OR B) = A OR B.",
+      "So C is true whenever at least one of A or B is true."
+     ],
+     "answer": "A = 1 or B = 1 (or both). Only A = 0, B = 0 gives false."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "AND: true only if all inputs are true (&&).",
+      "OR: true if at least one input is true (||).",
+      "NOT: one input, flipped (!).",
+      "Truth tables list every input combination and its output.",
+      "Logical operators let if statements check more than one condition."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Complete the truth tables",
+    "caption": "Click each hidden cell to check your answer.",
+    "head": [
+     "A",
+     "B",
+     "A AND B",
+     "A OR B",
+     "NOT A"
+    ],
+    "rows": [
+     [
+      "0",
+      "0",
+      "0",
+      "0",
+      "1"
+     ],
+     [
+      "0",
+      "1",
+      "0",
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "0",
+      "0",
+      "1",
+      "0"
+     ],
+     [
+      "1",
+      "1",
+      "1",
+      "1",
+      "0"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "When is the output of an AND gate true?",
+     "o": [
+      "Only when all inputs are true",
+      "When any input is true",
+      "When all inputs are false",
+      "Never"
+     ],
+     "a": 0,
+     "why": "AND needs every input true."
+    },
+    {
+     "q": "A = 0, B = 1. What is A OR B?",
+     "o": [
+      "0",
+      "It depends",
+      "2",
+      "1"
+     ],
+     "a": 3,
+     "why": "OR needs only one true input."
+    },
+    {
+     "q": "How many inputs does a NOT gate have?",
+     "o": [
+      "3",
+      "2",
+      "1",
+      "Any number"
+     ],
+     "a": 2,
+     "why": "NOT has a single input."
+    },
+    {
+     "q": "Which code checks that both button A and button B are pressed?",
+     "o": [
+      "input.buttonIsPressed(Button.A) || input.buttonIsPressed(Button.B)",
+      "!input.buttonIsPressed(Button.A)",
+      "input.buttonIsPressed(Button.A) && input.buttonIsPressed(Button.B)",
+      "Button.A == Button.B"
+     ],
+     "a": 2,
+     "why": "&& is AND."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Draw (write out) the truth table for an OR gate.",
+     "m": 4,
+     "a": "Inputs 00 → 0 (1); 01 → 1 (1); 10 → 1 (1); 11 → 1 (1)."
+    },
+    {
+     "q": "Explain the difference between an AND gate and an OR gate.",
+     "m": 2,
+     "a": "AND gives true only when all inputs are true (1); OR gives true when at least one input is true (1)."
+    },
+    {
+     "q": "What does a NOT gate do?",
+     "m": 1,
+     "a": "It inverts/reverses its single input: 0 becomes 1 and 1 becomes 0 (1)."
+    }
+   ],
+   "terms": [
+    "Logic gate",
+    "Truth table",
+    "AND gate",
+    "OR gate",
+    "NOT gate"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "81. OCR GCSE (J277) 2.4 Simple logic diagrams",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=jN9WtjyjXf4",
+     "yt": "jN9WtjyjXf4"
+    },
+    {
+     "title": "65. OCR GCSE (J277) 2.2 Boolean operators",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=IILJVSOg6Oo",
+     "yt": "IILJVSOg6Oo"
+    },
+    {
+     "title": "Boolean Logic & Logic Gates: Crash Course Computer Science #3",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=gI-qXk7XojA",
+     "yt": "gI-qXk7XojA"
+    }
+   ]
+  },
+  {
+   "id": "p11",
+   "spec": "Use NAND, NOR and XOR gates and complete truth tables for combined logic",
+   "summary": "NAND and NOR are AND and OR followed by NOT; XOR is true when the inputs are different. Work through combined circuits one column at a time.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "There are other logic gates beyond AND, OR and NOT. On circuit diagrams, a small circle on the output means ‘NOT’."
+    },
+    {
+     "t": "table",
+     "head": [
+      "A",
+      "B",
+      "NAND (NOT AND)",
+      "NOR (NOT OR)",
+      "XOR (exclusive OR)"
+     ],
+     "rows": [
+      [
+       "0",
+       "0",
+       "1",
+       "1",
+       "0"
+      ],
+      [
+       "0",
+       "1",
+       "1",
+       "0",
+       "1"
+      ],
+      [
+       "1",
+       "0",
+       "1",
+       "0",
+       "1"
+      ],
+      [
+       "1",
+       "1",
+       "0",
+       "0",
+       "0"
+      ]
+     ],
+     "caption": "NAND, NOR and XOR"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**NAND:** the opposite of AND. False only when both inputs are true.",
+      "**NOR:** the opposite of OR. True only when both inputs are false.",
+      "**XOR:** true when the inputs are **different**; false when they are the same."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "table",
+     "head": [
+      "Input A",
+      "Input B",
+      "NAND output"
+     ],
+     "rows": [
+      [
+       "True",
+       "True",
+       "False"
+      ],
+      [
+       "True",
+       "False",
+       "True"
+      ],
+      [
+       "False",
+       "True",
+       "True"
+      ],
+      [
+       "False",
+       "False",
+       "True"
+      ]
+     ],
+     "caption": "NAND table from the notes, completed"
+    },
+    {
+     "t": "h",
+     "text": "Worked answers to the logic questions"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: Q1 – R = P AND Q, then Q OR R",
+     "context": "Complete the table for R = P AND Q and for Q OR R.",
+     "steps": [
+      "P=0, Q=0: R = 0; Q OR R = 0 OR 0 = 0.",
+      "P=0, Q=1: R = 0; Q OR R = 1 OR 0 = 1.",
+      "P=1, Q=0: R = 0; Q OR R = 0 OR 0 = 0.",
+      "P=1, Q=1: R = 1; Q OR R = 1 OR 1 = 1."
+     ],
+     "answer": "R column: 0, 0, 0, 1. Q OR R column: 0, 1, 0, 1."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: which table is NOT(P AND Q)?",
+     "context": "Four tables, A–D, are offered.",
+     "steps": [
+      "P AND Q must be 0, 0, 0, 1 (only 1 when both are 1). Tables A, B and C get this column wrong.",
+      "NOT flips it: 1, 1, 1, 0.",
+      "Table D has P AND Q = 0, 0, 0, 1 and NOT(P AND Q) = 1, 1, 1, 0."
+     ],
+     "answer": "Table D."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: which table is D = NOT(C AND B), where C = NOT(B)?",
+     "context": "Four tables, A–D, are offered.",
+     "steps": [
+      "C = NOT B: B = 0, 1, 0, 1 gives C = 1, 0, 1, 0.",
+      "C AND B: (1 AND 0), (0 AND 1), (1 AND 0), (0 AND 1) = 0, 0, 0, 0. C and B are always opposite, so never both 1.",
+      "D = NOT(0) = 1 every time."
+     ],
+     "answer": "Table C (C = 1, 0, 1, 0 and D = 1, 1, 1, 1)."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: which table is (P OR Q) AND R?",
+     "context": "In every option R = 1. Four tables, A–D, are offered.",
+     "steps": [
+      "P OR Q for 00, 01, 10, 11 = 0, 1, 1, 1.",
+      "AND with R = 1 leaves it unchanged: 0, 1, 1, 1."
+     ],
+     "answer": "Table B (P OR Q = 0, 1, 1, 1 and output 0, 1, 1, 1)."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: circuit questions Q1 and Q2",
+     "context": "A and B go into a NOR gate (output C). B also goes into a NOT gate (output D). C and D go into a NAND gate (output Q). (Q2 is the same circuit with the final output called D.)",
+     "steps": [
+      "A=0, B=0: C = NOR(0,0) = 1; D = NOT 0 = 1; Q = NAND(1,1) = 0.",
+      "A=0, B=1: C = 0; D = 0; Q = NAND(0,0) = 1.",
+      "A=1, B=0: C = 0; D = 1; Q = NAND(0,1) = 1.",
+      "A=1, B=1: C = 0; D = 0; Q = NAND(0,0) = 1."
+     ],
+     "answer": "A B C D Q: 0 0 1 1 0 | 0 1 0 0 1 | 1 0 0 1 1 | 1 1 0 0 1. The output is 0 only when A and B are both 0 (it behaves like A OR B)."
+    },
+    {
+     "t": "tip",
+     "text": "Always add a column for each gate in the middle of a circuit and fill them left to right. Never try to do the whole circuit in your head."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Term",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "Array",
+       "A grid or list of items, e.g. the 5 × 5 LED array; in code, a list of values stored under one name"
+      ],
+      [
+       "LED",
+       "Light-emitting diode: a small light that uses very little power"
+      ],
+      [
+       "Logic gates",
+       "Circuits/operators (AND, OR, NOT…) that give an output from binary inputs"
+      ],
+      [
+       "Loops",
+       "Code that repeats"
+      ],
+      [
+       "Variable",
+       "A named store for a value that can change"
+      ],
+      [
+       "Accelerometer",
+       "A sensor that measures movement, tilt and shaking"
+      ]
+     ],
+     "caption": "Micro:bit glossary task, completed"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "NAND = NOT AND; NOR = NOT OR.",
+      "XOR is true when the inputs are different.",
+      "A small circle on a gate's output means NOT.",
+      "Fill truth tables one column (one gate) at a time.",
+      "4 rows cover every combination of 2 inputs."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "NAND, NOR, XOR",
+    "caption": "Click a hidden cell to check each output.",
+    "head": [
+     "A B",
+     "NAND",
+     "NOR",
+     "XOR"
+    ],
+    "rows": [
+     [
+      "0 0",
+      "1",
+      "1",
+      "0"
+     ],
+     [
+      "0 1",
+      "1",
+      "0",
+      "1"
+     ],
+     [
+      "1 0",
+      "1",
+      "0",
+      "1"
+     ],
+     [
+      "1 1",
+      "0",
+      "0",
+      "0"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "When is the output of a NOR gate true?",
+     "o": [
+      "When both inputs are true",
+      "When both inputs are false",
+      "When the inputs are different",
+      "Always"
+     ],
+     "a": 1,
+     "why": "NOR is the opposite of OR."
+    },
+    {
+     "q": "What is 1 XOR 1?",
+     "o": [
+      "0",
+      "1",
+      "2",
+      "11"
+     ],
+     "a": 0,
+     "why": "XOR is true only when inputs differ."
+    },
+    {
+     "q": "What is NOT(1 AND 1)?",
+     "o": [
+      "1",
+      "2",
+      "0",
+      "true"
+     ],
+     "a": 2,
+     "why": "1 AND 1 = 1, NOT 1 = 0."
+    },
+    {
+     "q": "How many rows does a truth table for 2 inputs need?",
+     "o": [
+      "2",
+      "3",
+      "4",
+      "8"
+     ],
+     "a": 2,
+     "why": "00, 01, 10, 11."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Complete the truth table for NAND with inputs A and B.",
+     "m": 4,
+     "a": "00 → 1 (1); 01 → 1 (1); 10 → 1 (1); 11 → 0 (1)."
+    },
+    {
+     "q": "Work out the output of (A AND B) OR (NOT A) when A = 0 and B = 1. Show your working.",
+     "m": 3,
+     "a": "A AND B = 0 AND 1 = 0 (1); NOT A = NOT 0 = 1 (1); 0 OR 1 = 1 (1)."
+    },
+    {
+     "q": "Explain when an XOR gate outputs 1.",
+     "m": 2,
+     "a": "When exactly one input is 1 (1) / the two inputs are different; it outputs 0 when they are the same (1)."
+    }
+   ],
+   "terms": [
+    "NAND gate",
+    "NOR gate",
+    "XOR gate",
+    "Array"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Boolean Logic & Logic Gates: Crash Course Computer Science #3",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=gI-qXk7XojA",
+     "yt": "gI-qXk7XojA"
+    },
+    {
+     "title": "Introduction to Logic Gates - NOT, AND, OR, NAND, NOR, XOR, XNOR",
+     "source": "YouTube – Computer Engineering Jitty",
+     "url": "https://www.youtube.com/watch?v=pUoljIrYSFU",
+     "yt": "pUoljIrYSFU"
+    }
+   ]
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Microcontroller",
+   "def": "A small computer with a processor, memory and programmable inputs/outputs all on a single board, like the micro:bit.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "LED",
+   "def": "Light-emitting diode: a tiny, low-power light; the micro:bit has 25 of them.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Accelerometer",
+   "def": "A sensor that detects movement such as shaking, tilting and falling.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "LED matrix",
+   "def": "The 5 × 5 grid of LEDs on the front of the micro:bit, numbered (0,0) to (4,4).",
+   "alt": "LED array",
+   "page": "p02"
+  },
+  {
+   "term": "Edge connector",
+   "def": "The gold strip of pins along the bottom of the micro:bit used to connect extra devices.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Hex file",
+   "def": "The compact file MakeCode downloads, which the micro:bit can read and run.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "MakeCode",
+   "def": "Microsoft's online block-based (and JavaScript) editor for programming the micro:bit, at makecode.microbit.org.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Simulator",
+   "def": "An on-screen micro:bit in MakeCode that runs your code so you can test it before downloading.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "String",
+   "def": "A data type for text: a sequence of characters, e.g. \"Hello\".",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Data type",
+   "def": "The kind of data a value is, such as integer, string or Boolean, which decides what can be done with it.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Integer",
+   "def": "A data type for whole numbers, positive or negative, e.g. 15 or -3.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Boolean",
+   "def": "A data type with only two values: true or false (1 or 0).",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Event",
+   "def": "Something that happens, such as a button press or a shake, that makes a block of code run.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Input",
+   "def": "Data going into a computer system, e.g. pressing a button.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Output",
+   "def": "Information coming out of a computer system, e.g. LEDs lighting up or a sound.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Iteration",
+   "def": "Repeating a set of instructions; another word for looping.",
+   "alt": "Loop",
+   "page": "p06"
+  },
+  {
+   "term": "Count-controlled loop",
+   "def": "A loop that repeats a set number of times, e.g. repeat 4 times (a for loop).",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Condition-controlled loop",
+   "def": "A loop that repeats as long as a condition is true, e.g. a while loop.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Variable",
+   "def": "A named location in memory that stores a value that can change while the program runs.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Random number",
+   "def": "A number picked by chance, e.g. pick random 1 to 6 for a dice.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Selection",
+   "def": "Choosing which code runs depending on a condition, using if and else.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "If statement",
+   "def": "Code that runs only when its condition is true; can have an else part for when it is false.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Condition",
+   "def": "A question with a true or false answer, e.g. score > 10.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Comparison operator",
+   "def": "A symbol that compares two values and gives true or false, e.g. <, >, ==, !=.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Logic gate",
+   "def": "A basic circuit or operator (AND, OR, NOT…) that gives a binary output from binary inputs.",
+   "alt": "Logical operator",
+   "page": "p10"
+  },
+  {
+   "term": "Truth table",
+   "def": "A table showing the output of a logic gate or circuit for every possible combination of inputs.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "AND gate",
+   "def": "A logic gate whose output is true only when all its inputs are true.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "OR gate",
+   "def": "A logic gate whose output is true when at least one input is true.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "NOT gate",
+   "def": "A logic gate with one input that inverts it: 0 becomes 1 and 1 becomes 0.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "NAND gate",
+   "def": "NOT AND: outputs false only when all inputs are true.",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "NOR gate",
+   "def": "NOT OR: outputs true only when all inputs are false.",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "XOR gate",
+   "def": "Exclusive OR: outputs true when the two inputs are different.",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "Array",
+   "def": "A grid or list of items stored together, such as the micro:bit's 5 × 5 LED array.",
+   "alt": "",
+   "page": "p11"
+  }
+ ]
+}

@@ -1,0 +1,2751 @@
+{
+ "title": "Programming",
+ "summary": "An introduction to programming in C#: what programmers do, variables and data types, and writing your first programs.",
+ "learn": [
+  "What programming is and the jobs in it",
+  "Variables: the box analogy",
+  "Data types: int, string and double",
+  "Writing and testing your first C# programs"
+ ],
+ "temporary": false,
+ "intro": "Learn to program in C#: what programming is, writing and running console programs in Visual Studio, variables and data types, input, arithmetic, IF statements, FOR and WHILE loops, and methods.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Know what programming is, who the first programmer was, and why programming skills are useful",
+   "summary": "Programming (coding) is writing instructions in a language computers understand. Ada Lovelace was the first programmer; there are about 700 languages, and programming builds skills used in many jobs.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is programming?"
+    },
+    {
+     "t": "p",
+     "text": "[[Programming]] is everything involved in making, controlling and communicating with digital devices. It is often called **coding**, because it involves writing in a language that computers can understand. This lets us develop devices, apps and technology in our own way. A [[programmer]] is a person who writes code for a device and also **tests** the code to make sure it is fully functional (works properly)."
+    },
+    {
+     "t": "h",
+     "text": "The first computer programmer"
+    },
+    {
+     "t": "p",
+     "text": "**[[Ada Lovelace]]** (1815–1852) is famous as the first computer programmer. She worked with **Charles Babbage**, who designed the first general-purpose computer, the **Analytical Engine**. In 1843 Ada wrote what is seen as the first algorithm intended to be carried out by a machine, to calculate a series called the Bernoulli numbers. She also saw that machines could go beyond pure calculation, for example to create music. That is why she is cited as the first computer programmer."
+    },
+    {
+     "t": "p",
+     "text": "**How many programming languages?** There are roughly **700** programming languages in use today. They exist because different jobs need different features. Some are very good for app development, web development, phone and tablet development, operating system development or general software development. Famous ones include Python, Java, JavaScript and C#."
+    },
+    {
+     "t": "h",
+     "text": "Jobs in programming"
+    },
+    {
+     "t": "p",
+     "text": "IT jobs have grown considerably every year and are often very well paid. Programming leads directly to jobs such as: It also helps in careers that are not directly in IT: **medicine and dentistry** (analysis skills), the **army** (problem solving), **analyst** roles (analysing everything) and **marketing** (all of the above). Jobs that use programming directly include:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Software engineer",
+      "Network architect",
+      "IT project manager",
+      "Database administrator",
+      "Web developer",
+      "Systems analyst",
+      "Mobile app developer",
+      "IT consultant",
+      "Technical sales rep",
+      "Support analyst",
+      "Cyber security specialist",
+      "Social media manager"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "p",
+     "text": "**Why learn programming?** Programming lets you give machines instructions, but it also teaches four key thinking skills you will use for the rest of your life:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Skill",
+      "What it means"
+     ],
+     "rows": [
+      [
+       "Analysis",
+       "Pulling information out of a scenario to understand the problem, so you can create sensible solutions."
+      ],
+      [
+       "Abstract thinking",
+       "Working with ideas (concepts) rather than physical things."
+      ],
+      [
+       "Pattern recognition",
+       "Seeing relationships, and the consequences of actions that haven't happened yet."
+      ],
+      [
+       "Problem solving",
+       "Finding solutions to anything, and thinking outside the box (forward thinking)."
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "h",
+     "text": "Programming you already know"
+    },
+    {
+     "t": "p",
+     "text": "In ICT you have used **Scratch** and **BBC micro:bits** (drag-and-drop, event-based programming) and **HTML** web design, where you met a lot of computational thinking. You have also used the three basic programming concepts in other subjects:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Concept",
+      "Meaning",
+      "Where you met it"
+     ],
+     "rows": [
+      [
+       "Sequencing",
+       "[[Sequence|Instructions]] in a logical order, one after the other. An algorithm is a sequence of instructions.",
+       "Following a method in Science"
+      ],
+      [
+       "[[Selection]]",
+       "The program decides whether a line or group of lines should be run, usually with an IF statement.",
+       "Making decisions in Art"
+      ],
+      [
+       "[[Iteration|Repetition (iteration)]]",
+       "Repeating steps using loops: count-controlled, condition-controlled or infinite.",
+       "Count- and condition-controlled 'loops' in PE"
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Programming (coding) means writing instructions in a language a computer understands.",
+      "A programmer writes and tests code.",
+      "Ada Lovelace, who worked with Charles Babbage on the Analytical Engine, was the first programmer.",
+      "There are about 700 programming languages, each suited to different jobs.",
+      "Programming builds analysis, abstract thinking, pattern recognition and problem-solving skills.",
+      "The three basic concepts are sequence, selection and iteration."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Who is considered the first computer programmer?",
+     "o": [
+      "Charles Babbage",
+      "Ada Lovelace",
+      "Alan Turing",
+      "Bill Gates"
+     ],
+     "a": 1,
+     "why": "She wrote the first algorithm for the Analytical Engine."
+    },
+    {
+     "q": "Roughly how many programming languages are used today?",
+     "o": [
+      "7",
+      "70",
+      "700",
+      "7 million"
+     ],
+     "a": 2,
+     "why": "About 700."
+    },
+    {
+     "q": "Choosing which code to run using an IF statement is called…",
+     "o": [
+      "Selection",
+      "Sequence",
+      "Iteration",
+      "Compiling"
+     ],
+     "a": 0,
+     "why": "Selection makes decisions."
+    },
+    {
+     "q": "'Working with concepts rather than physical things' describes…",
+     "o": [
+      "Pattern recognition",
+      "Problem solving",
+      "Analysis",
+      "Abstract thinking"
+     ],
+     "a": 3,
+     "why": "Abstract means not physical."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why Ada Lovelace is called the first computer programmer.",
+     "m": 2,
+     "a": "She worked with Charles Babbage on his Analytical Engine (1) and wrote the first algorithm intended to be carried out by the machine (1)."
+    },
+    {
+     "q": "Name and describe the three basic programming concepts.",
+     "m": 3,
+     "a": "Sequence: instructions run in a logical order one after another (1). Selection: deciding whether code runs, using IF statements (1). Iteration/repetition: repeating code using loops (1)."
+    },
+    {
+     "q": "Give two reasons why learning programming is useful even if you do not become a programmer.",
+     "m": 2,
+     "a": "It develops problem solving (1) and analysis/abstract thinking/pattern recognition (1), which are used in jobs like medicine, the army and marketing."
+    }
+   ],
+   "terms": [
+    "Programming",
+    "Programmer",
+    "Ada Lovelace",
+    "Sequence",
+    "Selection",
+    "Iteration"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "What Most Schools Don't Teach",
+     "source": "YouTube – Code.org (CodeAI)",
+     "url": "https://www.youtube.com/watch?v=nKIu9yen5nc",
+     "yt": "nKIu9yen5nc"
+    },
+    {
+     "title": "The Brilliant Mind of Ada Lovelace: Victorian Countess & Computer Programmer",
+     "source": "YouTube – SciShow",
+     "url": "https://www.youtube.com/watch?v=uBbVbqRvqTM",
+     "yt": "uBbVbqRvqTM"
+    },
+    {
+     "title": "The First Programming Languages: Crash Course Computer Science #11",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=RU1u-js7db8",
+     "yt": "RU1u-js7db8"
+    }
+   ]
+  },
+  {
+   "id": "p02",
+   "spec": "Know what C# is, what a compiler does and how Visual Studio (an IDE) helps you write code",
+   "summary": "C# is a high-level, strongly typed language made by Microsoft. A compiler turns it into binary, and we write it in an IDE such as Visual Studio, starting a Console App project.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "C#: a high-level language"
+    },
+    {
+     "t": "p",
+     "text": "At ERGS we learn **[[C#]]** (pronounced 'C sharp'). It was written by Microsoft, is versatile, relatively easy to learn and has lots of documentation. It is used by companies like Microsoft and NASA, and is the main language of the **Unity** game engine, used to build games such as **Pokémon Go** and **Among Us**. The Stack Overflow website was built with ASP.NET, which also uses C#. C# is an object-oriented language that runs on Microsoft's **.NET** framework. You can use it to make Windows applications, websites and web services, mobile apps, video games, AR and VR, and much more."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "High-level language",
+      "Low-level language"
+     ],
+     "rows": [
+      [
+       "Looks like",
+       "Close to human-readable English",
+       "Close to 1s and 0s (binary)"
+      ],
+      [
+       "Examples",
+       "C#, Python, Java",
+       "Assembly language, machine code"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Computers only understand binary. A [[compiler]] is the program that converts our human-readable code into the binary code the computer understands. This process is called **compiling**. We don't usually write in binary!"
+    },
+    {
+     "t": "h",
+     "text": "A strongly typed language"
+    },
+    {
+     "t": "p",
+     "text": "C# is **[[strongly typed]]**: you must say what type of data each variable holds before you use it. It means writing a bit more code, but has long-term benefits:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Built-in documentation**: you can see how each data type works.",
+      "**Increased readability**, helping programmers work in teams.",
+      "**IntelliSense**: predictive text for code.",
+      "**Help with debugging**: it knows what can and can't happen with a data type before you even run your code."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Visual Studio: an IDE"
+    },
+    {
+     "t": "p",
+     "text": "Programmers don't write code in any old application. Basic packages like Notepad exist, but most use an [[IDE]] (Integrated Development Environment), which brings all the tools for viewing, writing, testing and running code together in one place. We use **Visual Studio**. Its features include:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Line numbering**: tells lines apart in long programs and shows where errors are.",
+      "**Colour coding of keywords**, and coloured underlines: a **red underline** shows a syntax error.",
+      "**Collapsible code sections**: make large programs easier to view.",
+      "**Clipboard**: copy and paste.",
+      "Access to objects, methods and properties while you design."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "p",
+     "text": "To start: choose **Create a new project**, pick the **Console App** template (make sure it is the **C#** version), enter a project name with no spaces and click **Create**. A [[console]] application uses a text-only window, so we can focus on the fundamentals of C#."
+    },
+    {
+     "t": "note",
+     "text": "School computers are managed by C2K, which limits what can be coded on them to keep them secure. In Year 10 you can practise in an online tool such as dotnetfiddle.net and Codecademy's *Learn C#* course; at GCSE you use a virtual machine."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "C# is a high-level, strongly typed language made by Microsoft; Unity games such as Pokémon Go use it.",
+      "High-level languages are close to English; low-level languages are close to binary.",
+      "A compiler converts human-readable code into binary.",
+      "Strong typing gives documentation, readability, IntelliSense and help with debugging.",
+      "An IDE such as Visual Studio has line numbers, colour coding, red error underlines and collapsible code."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What converts C# code into binary the computer understands?",
+     "o": [
+      "An IDE",
+      "A compiler",
+      "The console",
+      "IntelliSense"
+     ],
+     "a": 1,
+     "why": "Compiling turns source code into machine code."
+    },
+    {
+     "q": "C# applications run on…",
+     "o": [
+      "only Linux",
+      "Java",
+      "the .NET framework",
+      "none of these"
+     ],
+     "a": 2,
+     "why": "C# runs on Microsoft's .NET."
+    },
+    {
+     "q": "In Visual Studio, a red underline shows…",
+     "o": [
+      "a syntax error",
+      "a comment",
+      "a variable",
+      "the line number"
+     ],
+     "a": 0,
+     "why": "Red underlines mark errors."
+    },
+    {
+     "q": "Which of these is a high-level language?",
+     "o": [
+      "Machine code",
+      "Binary",
+      "Assembly language",
+      "C#"
+     ],
+     "a": 3,
+     "why": "C# is close to human-readable English."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between a high-level and a low-level language.",
+     "m": 2,
+     "a": "A high-level language is close to human-readable English, e.g. C# (1). A low-level language is close to binary/what the computer understands, e.g. assembly language (1)."
+    },
+    {
+     "q": "Give three features of an IDE that help programmers.",
+     "m": 3,
+     "a": "Any three: line numbering (1); colour coding of keywords (1); red underlines for syntax errors (1); collapsible code sections (1); clipboard/copy and paste (1); IntelliSense (1)."
+    },
+    {
+     "q": "Give two benefits of using a strongly typed language like C#.",
+     "m": 2,
+     "a": "Any two: built-in documentation (1); increased readability for teams (1); IntelliSense/predictive text (1); help with debugging before the code runs (1)."
+    }
+   ],
+   "terms": [
+    "C#",
+    "Compiler",
+    "Strongly typed",
+    "IDE",
+    "Console"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "What is C#? | C# 101 [1 of 19]",
+     "source": "YouTube – dotnet (Microsoft)",
+     "url": "https://www.youtube.com/watch?v=BM4CHBmAPh4",
+     "yt": "BM4CHBmAPh4"
+    },
+    {
+     "title": "What is C#? (Part 1 of 19) – C# for Beginners",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/shows/csharp-for-beginners/what-is-csharp-csharp-for-beginners"
+    },
+    {
+     "title": "The First Programming Languages: Crash Course Computer Science #11",
+     "source": "YouTube – CrashCourse",
+     "url": "https://www.youtube.com/watch?v=RU1u-js7db8",
+     "yt": "RU1u-js7db8"
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "From your code to the computer",
+    "caption": "How C# code becomes something the computer can run.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Write C# code",
+      "detail": "You type human-readable code in Visual Studio.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Compiler",
+      "detail": "Checks the syntax and converts the code into binary.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "Errors?",
+      "detail": "If there are errors, they appear in the Error List and the program won't run.",
+      "shape": "io"
+     },
+     {
+      "id": "d",
+      "label": "Program runs",
+      "detail": "The console window opens and shows the output.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "a"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "id": "p03",
+   "spec": "Write, run and comment a first C# console program using Console.WriteLine()",
+   "summary": "Every C# console program has the same structure, starting in the Main method. Console.WriteLine() shows text, every statement ends with a semicolon, and // starts a comment.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "The program structure"
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Program.cs",
+     "code": "using System;\n\nnamespace myFirstProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            // outputs a hello message to the user\n            Console.WriteLine(\"Hello World!\");\n        }\n    }\n}",
+     "output": "Hello World!"
+    },
+    {
+     "t": "p",
+     "text": "Think of it like an author writing a series of books:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "`using System;` says 'we're going to use some premade tools'.",
+      "`namespace myFirstProgram` is the name of the **book series**. Its `{` and `}` show where the series starts and ends.",
+      "`class Program` is **one book** in the series, with its own `{` and `}`, inside the series.",
+      "`static void Main(string[] args)` is a **chapter**. Every program starts in this Main method.",
+      "`Console.WriteLine(\"Hello World!\");` is the **first sentence**."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "tip",
+     "text": "In newer versions of Visual Studio, tick **'Do not use top-level statements'** when making the project, so you see this full structure."
+    },
+    {
+     "t": "p",
+     "text": "**The magic command.** To make text appear on the screen we use `Console.WriteLine()`. `Console` is the **object**, `WriteLine` is the **method**, the text in speech marks is the **message**, and the `;` is the **line terminator**. Every instruction (statement) must end with a [[semicolon]], like a full stop at the end of a sentence."
+    },
+    {
+     "t": "p",
+     "text": "To run your program, click the green **Start** (play) button. If there are errors in the **Error List** at the bottom, the program won't run: treat them as clues to a puzzle. For example, 'error CS1002: ; expected' means you are missing a semicolon at the end of the line."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Challenge: personalise it",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Aoife Maguire\");\n            Console.WriteLine(\"My favourite food is pizza\");\n            Console.WriteLine(\"My favourite sport is Gaelic football\");\n        }\n    }\n}",
+     "output": "Aoife Maguire\nMy favourite food is pizza\nMy favourite sport is Gaelic football"
+    },
+    {
+     "t": "h",
+     "text": "Comments"
+    },
+    {
+     "t": "p",
+     "text": "A [[comment]] is text in a program that the computer ignores. Comments explain what code does, help other people understand it faster, and let you switch off a line to see how the program runs without it. In C#, anything after `//` on a line, or between `/*` and `*/`, is a comment. Visual Studio shows comments in **green**."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Comments.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            // this is an example of a single line comment\n\n            /*\n               This is an example of a comment\n               that can be several lines long\n            */\n            Console.WriteLine(\"Comments are ignored\");\n        }\n    }\n}",
+     "output": "Comments are ignored"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Key term",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "Console",
+       "The text-based window where our program output appears."
+      ],
+      [
+       "Syntax",
+       "The set of rules defining how code must be written."
+      ],
+      [
+       "Semicolon",
+       "The character ( ; ) used to end a statement in C#."
+      ],
+      [
+       "IDE",
+       "The software where we write code, e.g. Visual Studio."
+      ]
+     ],
+     "caption": "Key terms review (answers)"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "using System; → namespace (series) → class (book) → Main method (chapter) → statements (sentences).",
+      "Console.WriteLine(\"text\"); displays text in the console.",
+      "Every statement ends with a semicolon.",
+      "Errors in the Error List stop the program running; read them as clues.",
+      "// starts a comment; /* */ wraps a multi-line comment."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which line correctly displays Hello?",
+     "o": [
+      "Console.WriteLine(Hello)",
+      "Console.WriteLine(\"Hello\");",
+      "console.writeline(\"Hello\");",
+      "Console.Write Line(\"Hello\");"
+     ],
+     "a": 1,
+     "why": "Correct capitals, speech marks, brackets and semicolon."
+    },
+    {
+     "q": "What must every C# statement end with?",
+     "o": [
+      "A full stop",
+      "A colon",
+      "A semicolon",
+      "A bracket"
+     ],
+     "a": 2,
+     "why": "The semicolon is C#'s full stop."
+    },
+    {
+     "q": "Which line is a comment?",
+     "o": [
+      "// shows a greeting",
+      "Console.WriteLine(\"Hi\");",
+      "using System;",
+      "static void Main(string[] args)"
+     ],
+     "a": 0,
+     "why": "Anything after // is ignored."
+    },
+    {
+     "q": "Where does every C# console program start running?",
+     "o": [
+      "The namespace",
+      "The using line",
+      "The last line",
+      "The Main method"
+     ],
+     "a": 3,
+     "why": "Main is the first 'chapter'."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Give two reasons programmers add comments to code.",
+     "m": 2,
+     "a": "To explain what the code does so others understand it faster (1); to provide context for why code is written that way / to remember later (1); to temporarily stop a line running (1)."
+    },
+    {
+     "q": "Write a C# statement that displays the message: I live in Fermanagh",
+     "m": 2,
+     "a": "`Console.WriteLine(\"I live in Fermanagh\");` Correct method with text in speech marks (1); brackets and semicolon (1)."
+    },
+    {
+     "q": "A program will not run and the Error List says '; expected'. Explain the problem and how to fix it.",
+     "m": 2,
+     "a": "A statement is missing its semicolon (1). Add ; at the end of the line shown (1)."
+    }
+   ],
+   "terms": [
+    "Semicolon",
+    "Comment",
+    "Syntax"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Hello World! (Part 2 of 19) – C# for Beginners",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/shows/csharp-for-beginners/hello-world-csharp-for-beginners"
+    },
+    {
+     "title": "HOW TO PROGRAM - Getting Started!",
+     "source": "YouTube – Brackeys",
+     "url": "https://www.youtube.com/watch?v=N775KsWQVkw",
+     "yt": "N775KsWQVkw"
+    }
+   ]
+  },
+  {
+   "id": "p04",
+   "spec": "Declare variables using the correct data type: int, double, string, char and bool",
+   "summary": "A variable is a named box in memory that holds data. In C# you must give it a data type and a name, e.g. int score = 50; The main types are int, double, string, char and bool.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "The box analogy"
+    },
+    {
+     "t": "p",
+     "text": "A [[variable]] is like a storage box in the computer's memory (RAM). It holds data while the program is running, and it is called a *variable* because the value inside can change. To use a box you need two things:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "A **name**: the label on the box (the variable name, also called an identifier).",
+      "A **[[data type]]**: what kind of thing fits inside the box, e.g. a whole number or text."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "warn",
+     "text": "In C# you must state the data type **before** you can put anything in the box."
+    },
+    {
+     "t": "p",
+     "text": "**Data types.** Data types tell the computer how data can be stored, what operations can be done with it, and which methods it can be used with. Without them, a computer might try something impossible, like squaring a piece of text, and that is how we get bugs. C# is also **statically typed**: it checks you used the correct types before the program even runs."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Type",
+      "What it holds",
+      "Example",
+      "Size"
+     ],
+     "rows": [
+      [
+       "`int`",
+       "Whole numbers (integers), about −2.1 billion to +2.1 billion",
+       "`25`, `-5`, `1000000`",
+       "4 bytes"
+      ],
+      [
+       "`double`",
+       "Numbers with a decimal point (about 15–16 significant digits, **not** just two decimal places)",
+       "`3.14`, `1.75`, `99.99`",
+       "8 bytes"
+      ],
+      [
+       "`string`",
+       "Text: a sequence of characters, in double quotes",
+       "`\"Hello World!\"`",
+       "2 bytes per character"
+      ],
+      [
+       "`char`",
+       "A single letter or symbol, in single quotes",
+       "`'A'`, `'?'`",
+       "2 bytes"
+      ],
+      [
+       "`bool`",
+       "Boolean: only `true` or `false`",
+       "`true`",
+       "1 byte"
+      ]
+     ],
+     "caption": "The most common data types"
+    },
+    {
+     "t": "p",
+     "text": "Other types you may meet: `long` (bigger whole numbers, 8 bytes), `float` (less precise decimals, 4 bytes), `decimal` (money values, 16 bytes) and `DateTime` (moments in time from 00:00:00 on 1 January 0001 to 23:59:59 on 31 December 9999). You don't need to learn the ranges, but always choose a type of suitable size."
+    },
+    {
+     "t": "p",
+     "text": "**Declaring and assigning.** To create a variable, write the **data type**, then the **variable name**, then `=` and the **value**, then a semicolon: `int score = 50;`. Creating the variable is called **[[declaration]]**. The `=` is the **assignment operator**: the value on the right is stored in the variable on the left. Note that C# prints a `bool` as `True` or `False` with a capital letter."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Variables.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int age = 41;\n            string username = \"Alice\";\n            double price = 19.99;\n            char grade = 'A';\n            bool isMember = true;\n\n            Console.WriteLine(age);\n            Console.WriteLine(username);\n            Console.WriteLine(price);\n            Console.WriteLine(grade);\n            Console.WriteLine(isMember);\n        }\n    }\n}",
+     "output": "41\nAlice\n19.99\nA\nTrue"
+    },
+    {
+     "t": "h",
+     "text": "Naming variables"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Names can contain letters, numbers and the underscore `_`, and must start with a letter or underscore.",
+      "No spaces, full stops or symbols, and no **reserved keywords** (words C# already uses, like `int`, `class` or `lock`).",
+      "Use descriptive names: `firstName` and `lastName`, not `abc` or `xyz`.",
+      "Use **[[camelCase]]**: start lower case and give every new word a capital, e.g. `favouriteSport`, `isMember`."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Worksheet answers: Data Types and Variables"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Question",
+      "Answer"
+     ],
+     "rows": [
+      [
+       "What two things must you define before you can put anything into a variable box?",
+       "Its **data type** and its **name**."
+      ],
+      [
+       "Name badge ('Hello my name is')",
+       "`string`: stores text, such as a name."
+      ],
+      [
+       "Scoreboard showing 19 and 20",
+       "`int`: stores whole numbers, such as a score."
+      ],
+      [
+       "Weighing scales",
+       "`double`: stores decimal numbers, such as a weight of 52.7 kg."
+      ],
+      [
+       "Which command outputs text to the screen?",
+       "b) `Console.WriteLine()`"
+      ],
+      [
+       "Which command waits for the user to type and press Enter?",
+       "d) `Console.ReadLine()`"
+      ],
+      [
+       "`Console.ReadLine()` always returns which data type?",
+       "a) `string`"
+      ],
+      [
+       "Complete the summary",
+       "A **variable** is a named location in the computer's memory used to store data. When you create a variable, you are allocating space in the computer's **memory**. Specifying the name and the data type for a new variable is known as **declaration**. To store a whole number like 25, you should use the **int** data type. If you need to store a decimal value like 19.99, the **double** data type is required. Any data captured from a user via `Console.ReadLine()` is treated as a **string**."
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A variable is a named storage box in memory whose value can change.",
+      "Declare a variable with: data type, name, =, value, semicolon.",
+      "int = whole numbers; double = decimals; string = text in \"double quotes\"; char = one character in 'single quotes'; bool = true or false.",
+      "Use descriptive camelCase names with no spaces or symbols.",
+      "Reserved keywords cannot be used as variable names."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Which data type?",
+    "caption": "Decide the best data type, then click to check.",
+    "head": [
+     "Data",
+     "Data type"
+    ],
+    "rows": [
+     [
+      "Number of pupils in 10A: 27",
+      "int"
+     ],
+     [
+      "Your height: 1.62 m",
+      "double"
+     ],
+     [
+      "Your town: Enniskillen",
+      "string"
+     ],
+     [
+      "Your test grade: B",
+      "char"
+     ],
+     [
+      "Homework handed in? yes/no",
+      "bool"
+     ],
+     [
+      "Cost of a school trip: £12.50",
+      "double"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "Which data type should store the price £4.50?",
+     "o": [
+      "int",
+      "double",
+      "char",
+      "bool"
+     ],
+     "a": 1,
+     "why": "It has a decimal point."
+    },
+    {
+     "q": "Which is a correct declaration?",
+     "o": [
+      "name string = \"Niamh\";",
+      "string = name \"Niamh\";",
+      "string name = \"Niamh\";",
+      "String name == \"Niamh\""
+     ],
+     "a": 2,
+     "why": "Type, name, =, value, semicolon."
+    },
+    {
+     "q": "Which variable name follows the rules and uses camelCase?",
+     "o": [
+      "favouriteSport",
+      "favourite sport",
+      "FavouriteSport!",
+      "2favourite"
+     ],
+     "a": 0,
+     "why": "No spaces or symbols, cannot start with a digit."
+    },
+    {
+     "q": "Which data type can only be true or false?",
+     "o": [
+      "string",
+      "char",
+      "int",
+      "bool"
+     ],
+     "a": 3,
+     "why": "Boolean values."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State the most suitable data type for each: a pupil's age; a pupil's surname; whether a pupil has paid for a trip; a pupil's height in metres.",
+     "m": 4,
+     "a": "int (1); string (1); bool (1); double (1)."
+    },
+    {
+     "q": "Write a line of C# that declares a variable called score and stores 50 in it.",
+     "m": 2,
+     "a": "`int score = 50;` Correct data type int and name (1); assignment of 50 with semicolon (1)."
+    }
+   ],
+   "terms": [
+    "Variable",
+    "Data type",
+    "Integer",
+    "Double",
+    "String",
+    "Char",
+    "Boolean",
+    "Declaration",
+    "camelCase",
+    "Reserved keyword"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Hello World, Introducing Strings! (Part 4 of 19) – C# for Beginners",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/shows/csharp-for-beginners/hello-world-introducing-strings-csharp-for-beginners"
+    },
+    {
+     "title": "The Basics of Strings! [Pt 5] | C# for Beginners",
+     "source": "YouTube – dotnet (Microsoft)",
+     "url": "https://www.youtube.com/watch?v=nus5SP3AoHM",
+     "yt": "nus5SP3AoHM"
+    },
+    {
+     "title": "Perform basic operations on numbers in C#",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/training/modules/csharp-basic-operations"
+    }
+   ]
+  },
+  {
+   "id": "p05",
+   "spec": "Display variables with concatenation, explain why data types matter, and find and fix variable errors",
+   "summary": "Join text and variables with + (concatenation). Data types matter because \"10\" + \"10\" gives \"1010\" but 10 + 10 gives 20. Most beginner errors are missing types, wrong types, bad names and missing semicolons.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Displaying your data.** You can combine text and variables in `Console.WriteLine()` using the `+` symbol. Joining text together like this is called **[[concatenation]]**. If `string profession = \"Coding Wizard\";` then `Console.WriteLine(\"Hello \" + profession);` outputs **Hello Coding Wizard**. Tip: Leave a space inside the speech marks (`\"Hello \"`), or the words will be squashed together: `HelloCoding Wizard`."
+    },
+    {
+     "t": "h",
+     "text": "Coding challenge: Digital ID card"
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "DigitalID.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            string name = \"Alex\";\n            int age = 15;\n            double height = 1.8;\n            string sport = \"Rugby\";\n\n            Console.WriteLine(\"My Name is \" + name + \".\");\n            Console.WriteLine(\"I am \" + age + \" years old.\");\n            Console.WriteLine(\"I am \" + height + \"m tall.\");\n            Console.WriteLine(\"My Favourite sport is \" + sport + \".\");\n        }\n    }\n}",
+     "output": "My Name is Alex.\nI am 15 years old.\nI am 1.8m tall.\nMy Favourite sport is Rugby."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "DigitalID.cs (extension: age in 10 years, using (age + 10))",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            string name = \"Alex\";\n            int age = 15;\n            double height = 1.8;\n            string sport = \"Rugby\";\n\n            Console.WriteLine(\"My Name is \" + name + \".\");\n            Console.WriteLine(\"I will be \" + (age + 10) + \" years old in 10 years time.\");\n            Console.WriteLine(\"I am \" + height + \"m tall.\");\n            Console.WriteLine(\"My Favourite sport is \" + sport + \".\");\n        }\n    }\n}",
+     "output": "My Name is Alex.\nI will be 25 years old in 10 years time.\nI am 1.8m tall.\nMy Favourite sport is Rugby."
+    },
+    {
+     "t": "warn",
+     "text": "Put calculations in their own brackets: `(age + 10)`. Without them, `\"I will be \" + age + 10` joins the text \"15\" and \"10\" to give **I will be 1510**."
+    },
+    {
+     "t": "p",
+     "text": "**Why bother with data types?** If we could make every variable a `string`, why does C# make us use `int` and `double`? Because computers process numbers differently from text:"
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "WhyTypes.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            string a = \"10\";\n            string b = \"10\";\n            Console.WriteLine(a + b);\n\n            int c = 10;\n            int d = 10;\n            Console.WriteLine(c + d);\n        }\n    }\n}",
+     "output": "1010\n20"
+    },
+    {
+     "t": "list",
+     "items": [
+      "With strings, `+` joins the text: \"10\" + \"10\" = \"1010\", not 20, so you can't do maths properly.",
+      "Using the right type saves memory and prevents errors in complex calculations.",
+      "The compiler can spot type mistakes before you run the program."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: fix Tom's code",
+     "context": "Tom wrote `username = \"Alice\";`, `price = 19.99;` and `year = 2027;` and got red underlines on every line. Add a suitable data type to each.",
+     "steps": [
+      "`username` holds text in speech marks → `string username = \"Alice\";`",
+      "`price` holds a decimal number → `double price = 19.99;`",
+      "`year` holds a whole number → `int year = 2027;`"
+     ],
+     "answer": "Declaring a variable always starts with the data type: string, double, int."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Line",
+      "Error",
+      "Fix"
+     ],
+     "rows": [
+      [
+       "`int number = 38498.3222;`",
+       "An `int` must be a whole number.",
+       "Use `double number = 38498.3222;` (or store a whole number in the int)."
+      ],
+      [
+       "`dinosaur = \"Barney\";`",
+       "A variable must be declared with a data type.",
+       "`string dinosaur = \"Barney\";`"
+      ],
+      [
+       "`double lock = 293.000;`",
+       "`lock` is a **reserved keyword** in C#, so it can't be a variable name.",
+       "Rename it, e.g. `double lockNumber = 293.000;`"
+      ],
+      [
+       "`bool is.yes = true;`",
+       "A variable name cannot contain a full stop or symbol (and `is` is also a keyword).",
+       "`bool isYes = true;`"
+      ],
+      [
+       "`string band = \"The Low Anthem\"`",
+       "A statement must end with a semicolon.",
+       "`string band = \"The Low Anthem\";`"
+      ]
+     ],
+     "caption": "The bug squasher: this snippet has 5 errors (answers, 5 marks)"
+    },
+    {
+     "t": "note",
+     "text": "You may see the answer 'a double can only have 2 decimal places' for this line. That isn't true: `293.000` is a perfectly good double. The real problem on that line is the name `lock`."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "BugSquasher.cs (fixed)",
+     "code": "using System;\n\nnamespace BugSquasher\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            double number = 38498.3222;\n            string dinosaur = \"Barney\";\n            double lockNumber = 293.000;\n            bool isYes = true;\n            string band = \"The Low Anthem\";\n\n            Console.WriteLine(number);\n            Console.WriteLine(dinosaur);\n            Console.WriteLine(lockNumber);\n            Console.WriteLine(isYes);\n            Console.WriteLine(band);\n        }\n    }\n}",
+     "output": "38498.3222\nBarney\n293\nTrue\nThe Low Anthem"
+    },
+    {
+     "t": "tip",
+     "text": "**Common causes of errors:** Forgetting to specify a data type. Using a variable without declaring it first. Using the wrong data type. Badly named variables (use camelCase, no spaces or symbols). Using a reserved keyword as a name. Missing semicolons or speech marks."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "+ joins text and variables together: this is concatenation.",
+      "Put calculations in brackets inside WriteLine: (age + 10).",
+      "\"10\" + \"10\" = \"1010\" but 10 + 10 = 20, which is why data types matter.",
+      "Every variable must be declared with a type before use.",
+      "Names can't contain symbols or be reserved keywords; statements end with ;"
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does `Console.WriteLine(\"Score: \" + 7 + 3);` print?",
+     "o": [
+      "Score: 10",
+      "Score: 73",
+      "Score: 7 + 3",
+      "An error"
+     ],
+     "a": 1,
+     "why": "Text came first, so + joins 7 and 3 as text."
+    },
+    {
+     "q": "What is joining strings together called?",
+     "o": [
+      "Compiling",
+      "Iteration",
+      "Concatenation",
+      "Declaration"
+     ],
+     "a": 2,
+     "why": "Concatenation joins text."
+    },
+    {
+     "q": "Which line has an error?",
+     "o": [
+      "bool is.done = false;",
+      "int year = 2027;",
+      "string town = \"Omagh\";",
+      "double cost = 4.5;"
+     ],
+     "a": 0,
+     "why": "A full stop is not allowed in a name."
+    },
+    {
+     "q": "What does `string a = \"5\"; string b = \"5\"; Console.WriteLine(a + b);` print?",
+     "o": [
+      "10",
+      "5 5",
+      "a + b",
+      "55"
+     ],
+     "a": 3,
+     "why": "Strings are joined, not added."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why C# makes programmers use data types such as int rather than storing everything as a string.",
+     "m": 2,
+     "a": "Computers process numbers differently from text; with strings, \"10\" + \"10\" gives \"1010\" so you couldn't do maths (1). The right type saves memory/prevents errors in calculations (1)."
+    },
+    {
+     "q": "Spot and correct the error: `int goals = 2.5;`",
+     "m": 2,
+     "a": "An int can only store whole numbers (1). Correct: `double goals = 2.5;` or `int goals = 2;` (1)."
+    },
+    {
+     "q": "Write a line of C# that uses a variable called town (holding \"Enniskillen\") to print: I live in Enniskillen",
+     "m": 2,
+     "a": "`Console.WriteLine(\"I live in \" + town);` Correct WriteLine with text in speech marks (1); concatenation with + and the variable (1)."
+    }
+   ],
+   "terms": [
+    "Concatenation"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "The Basics of Strings! [Pt 5] | C# for Beginners",
+     "source": "YouTube – dotnet (Microsoft)",
+     "url": "https://www.youtube.com/watch?v=nus5SP3AoHM",
+     "yt": "nus5SP3AoHM"
+    },
+    {
+     "title": "Perform basic operations on numbers in C#",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/training/modules/csharp-basic-operations"
+    }
+   ]
+  },
+  {
+   "id": "p06",
+   "spec": "Get input from the user with Console.ReadLine() and convert it to the data type you need",
+   "summary": "Console.ReadLine() pauses the program until the user types and presses Enter, and always returns a string. Use Convert.ToInt32() or Convert.ToDouble() to turn input into numbers.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Imagine apps that didn't listen to you: no search bars, no login screens, no game controls. Boring! Useful software gathers data from the user and reacts to it. Interactive programs follow a simple flow: **Input → Process → Output**."
+    },
+    {
+     "t": "h",
+     "text": "Capturing input with Console.ReadLine()"
+    },
+    {
+     "t": "p",
+     "text": "`Console.ReadLine()` pauses the program until the user types some text and presses **Enter**. You store what they typed in a variable: `string name = Console.ReadLine();`"
+    },
+    {
+     "t": "warn",
+     "text": "`Console.ReadLine()` **always** returns a `string`, even if the user types a number. If you need to do maths with it, you must convert it."
+    },
+    {
+     "t": "p",
+     "text": "**Converting data types.** Because C# is strongly typed, sometimes we need to change the type of a value. This is called **[[data type conversion]]**. There are two kinds:"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Implicit conversion",
+      "Explicit conversion"
+     ],
+     "rows": [
+      [
+       "When",
+       "Happens automatically because no data is lost",
+       "You must ask for it, because data could be lost"
+      ],
+      [
+       "Example",
+       "int → double (a double can hold any int)",
+       "double → int using the cast operator `(int)`"
+      ],
+      [
+       "Result",
+       "`7` becomes `7.0`",
+       "`9.99` becomes `9` (the decimal part is chopped off, not rounded)"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "The most common way to convert input is with the `Convert.To…` methods. In `int myValue = Convert.ToInt32(\"42\");` the value \"42\" is in double quotes, so the computer thinks it is text. `Convert.ToInt32` is a predefined method that turns the string into an integer. (The 32 means it is a 32-bit integer, which is what `int` is.) For decimals, use `Convert.ToDouble()`."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Converting.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int myValue = Convert.ToInt32(\"42\");\n            double height = Convert.ToDouble(\"1.75\");\n\n            int wholeNumber = 7;\n            double asDouble = wholeNumber;      // implicit: int to double\n\n            double price = 9.99;\n            int roundedDown = (int)price;       // explicit cast: double to int\n\n            Console.WriteLine(myValue + 8);\n            Console.WriteLine(height);\n            Console.WriteLine(asDouble);\n            Console.WriteLine(roundedDown);\n        }\n    }\n}",
+     "output": "50\n1.75\n7\n9"
+    },
+    {
+     "t": "h",
+     "text": "Task: ask for a name and age, stored in myName and myAge"
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "NameAndAge.cs (user types Cormac and 14)",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"What is your name?\");\n            string myName = Console.ReadLine();\n\n            Console.WriteLine(\"How old are you?\");\n            int myAge = Convert.ToInt32(Console.ReadLine());\n\n            Console.WriteLine(\"Hello \" + myName + \", you are \" + myAge + \" years old.\");\n            Console.WriteLine(\"Next year you will be \" + (myAge + 1) + \".\");\n        }\n    }\n}",
+     "output": "What is your name?\nCormac\nHow old are you?\n14\nHello Cormac, you are 14 years old.\nNext year you will be 15."
+    },
+    {
+     "t": "warn",
+     "text": "If the user types letters when you use `Convert.ToInt32()`, for example `fourteen`, the program crashes with a **FormatException**. Testing with unexpected input is a good way to find bugs."
+    },
+    {
+     "t": "h",
+     "text": "Check yourself (answers)"
+    },
+    {
+     "t": "list",
+     "items": [
+      "To store a person's name, you first declare a **string** variable, then use **Console.ReadLine()** to capture their typing.",
+      "If you wanted to store their age, you would declare a variable called `age` with a data type of **int**.",
+      "To output the value stored within a variable, you would use the **Console.WriteLine()** method."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Interactive programs follow Input → Process → Output.",
+      "Console.ReadLine() waits for the user to type and press Enter.",
+      "Console.ReadLine() always returns a string.",
+      "Convert.ToInt32() turns text into an int; Convert.ToDouble() turns it into a double.",
+      "Implicit conversion is automatic (int → double); explicit conversion uses a cast such as (int)."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "Input → Process → Output",
+    "caption": "How the name-and-age program works.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Ask the question",
+      "detail": "Console.WriteLine shows a prompt.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Console.ReadLine()",
+      "detail": "The user types 14 and presses Enter; it arrives as the string \"14\".",
+      "shape": "io"
+     },
+     {
+      "id": "c",
+      "label": "Convert.ToInt32",
+      "detail": "The string \"14\" becomes the int 14, so maths works.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Output the result",
+      "detail": "Console.WriteLine shows the message with myAge + 1.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What data type does Console.ReadLine() return?",
+     "o": [
+      "int",
+      "string",
+      "double",
+      "bool"
+     ],
+     "a": 1,
+     "why": "Always a string."
+    },
+    {
+     "q": "Which line correctly reads a whole number from the user?",
+     "o": [
+      "int age = Console.ReadLine();",
+      "string age = Convert.ToInt32();",
+      "int age = Convert.ToInt32(Console.ReadLine());",
+      "int age = ReadLine(int);"
+     ],
+     "a": 2,
+     "why": "Read the string, then convert it."
+    },
+    {
+     "q": "What is `(int)7.9`?",
+     "o": [
+      "7",
+      "8",
+      "7.9",
+      "An error"
+     ],
+     "a": 0,
+     "why": "Casting to int chops off the decimal part."
+    },
+    {
+     "q": "Converting an int to a double happens automatically. This is…",
+     "o": [
+      "explicit conversion",
+      "concatenation",
+      "casting",
+      "implicit conversion"
+     ],
+     "a": 3,
+     "why": "No data is lost, so it is implicit."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write C# code that asks the user for their favourite subject and then prints 'You like ' followed by the subject.",
+     "m": 3,
+     "a": "`Console.WriteLine(\"What is your favourite subject?\");` (1) `string subject = Console.ReadLine();` (1) `Console.WriteLine(\"You like \" + subject);` (1)"
+    },
+    {
+     "q": "Explain why `int age = Console.ReadLine();` will not work, and correct it.",
+     "m": 2,
+     "a": "Console.ReadLine() returns a string, which can't be stored in an int (1). Correct: `int age = Convert.ToInt32(Console.ReadLine());` (1)."
+    },
+    {
+     "q": "Explain the difference between implicit and explicit conversion.",
+     "m": 2,
+     "a": "Implicit conversion happens automatically because no data is lost, e.g. int to double (1). Explicit conversion must be requested with a cast operator such as (int), e.g. double to int, because data may be lost (1)."
+    }
+   ],
+   "terms": [
+    "Data type conversion"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "HOW TO PROGRAM - Getting Started!",
+     "source": "YouTube – Brackeys",
+     "url": "https://www.youtube.com/watch?v=N775KsWQVkw",
+     "yt": "N775KsWQVkw"
+    },
+    {
+     "title": "Perform basic operations on numbers in C#",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/training/modules/csharp-basic-operations"
+    }
+   ]
+  },
+  {
+   "id": "p07",
+   "spec": "Use the arithmetic operators + - * / and %, and the shortcuts ++ and --",
+   "summary": "C# uses + - * / for maths and % for the remainder. Dividing two ints gives a whole number; use a double to get decimals. ++ adds 1 and -- takes 1 away.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Arithmetic operators"
+    },
+    {
+     "t": "p",
+     "text": "Programs often need to do calculations. [[Arithmetic operator|Arithmetic operators]] work on numbers (`int` and `double`) to create new values."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Operator",
+      "Meaning",
+      "Example",
+      "Result"
+     ],
+     "rows": [
+      [
+       "`+`",
+       "Addition",
+       "`24 + 18`",
+       "42"
+      ],
+      [
+       "`-`",
+       "Subtraction",
+       "`50 - 8`",
+       "42"
+      ],
+      [
+       "`*`",
+       "Multiplication",
+       "`6 * 7`",
+       "42"
+      ],
+      [
+       "`/`",
+       "Division",
+       "`10 / 4.0`",
+       "2.5"
+      ],
+      [
+       "`%`",
+       "Modulus (remainder)",
+       "`4 % 3`",
+       "1"
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Arithmetic.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int answer = 24 + 18;\n            Console.WriteLine(answer);\n            Console.WriteLine(50 - 8);\n            Console.WriteLine(6 * 7);\n            Console.WriteLine(5 / 3);\n            Console.WriteLine(5 / 3.0);\n\n            int remainder = 4 % 3;\n            Console.WriteLine(remainder);\n        }\n    }\n}",
+     "output": "42\n42\n42\n1\n1.6666666666666667\n1"
+    },
+    {
+     "t": "p",
+     "text": "**Watch the data types.** When both numbers are `int`s, the answer is an `int`. 3 doesn't go into 5 evenly, but `5 / 3` still gives the whole number **1** (the remainder is thrown away). In `5 / 3.0`, one number is a `double`, so the answer takes the 'bigger' data type and is a `double`: **1.6666666666666667**."
+    },
+    {
+     "t": "warn",
+     "text": "`7 / 2` is **3**, not 3.5! If you want decimals, make at least one of the numbers a double: `7 / 2.0` = 3.5."
+    },
+    {
+     "t": "tip",
+     "text": "C# follows BIDMAS, just like Maths: `2 + 3 * 4` is 14, but `(2 + 3) * 4` is 20."
+    },
+    {
+     "t": "p",
+     "text": "**Modulus %.** The [[modulus]] operator `%` gives the **remainder** after a division. It uses the percent sign but has nothing to do with percentages. It is useful for checking whether a number 'fits' into another: `17 % 2` is 1, so 17 is **odd**; `18 % 2` is 0, so 18 is **even**."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: sharing out",
+     "context": "62 pupils are going on a trip to the Marble Arch Caves, in minibuses that seat 15. How many full minibuses, and how many pupils are left over?",
+     "steps": [
+      "Full minibuses: `62 / 15` with ints = **4** (4 × 15 = 60).",
+      "Pupils left over: `62 % 15` = **2**.",
+      "So you need 4 full minibuses plus one more for the last 2 pupils."
+     ],
+     "answer": "62 / 15 = 4 full minibuses; 62 % 15 = 2 left over, so 5 minibuses are needed."
+    },
+    {
+     "t": "p",
+     "text": "**Operator shortcuts.** We often need to update a variable, e.g. `apple = apple + 1;`. Programmers love shortcuts, so this can be written `apple++;`. The double plus means **[[increment]]** (increase by 1). `apple--;` **decrements** (decreases by 1). `apple += 5;` adds 5."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Shortcuts.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int apple = 0;\n            apple = apple + 1;\n            Console.WriteLine(apple);\n\n            apple++;\n            Console.WriteLine(apple);\n\n            apple--;\n            Console.WriteLine(apple);\n\n            apple += 5;\n            Console.WriteLine(apple);\n        }\n    }\n}",
+     "output": "1\n2\n1\n6"
+    },
+    {
+     "t": "h",
+     "text": "Project idea: simple calculator"
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Calculator.cs (user types 12 and 4)",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Enter the first number:\");\n            double number1 = Convert.ToDouble(Console.ReadLine());\n            Console.WriteLine(\"Enter the second number:\");\n            double number2 = Convert.ToDouble(Console.ReadLine());\n\n            Console.WriteLine(number1 + \" + \" + number2 + \" = \" + (number1 + number2));\n            Console.WriteLine(number1 + \" - \" + number2 + \" = \" + (number1 - number2));\n            Console.WriteLine(number1 + \" * \" + number2 + \" = \" + (number1 * number2));\n            Console.WriteLine(number1 + \" / \" + number2 + \" = \" + (number1 / number2));\n        }\n    }\n}",
+     "output": "Enter the first number:\n12\nEnter the second number:\n4\n12 + 4 = 16\n12 - 4 = 8\n12 * 4 = 48\n12 / 4 = 3"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "+ - * / are add, subtract, multiply and divide; % is the remainder (modulus).",
+      "int / int gives an int: 5 / 3 = 1.",
+      "If either number is a double, the answer is a double: 5 / 3.0 = 1.6666666666666667.",
+      "x++ adds 1; x-- takes away 1; x += 5 adds 5.",
+      "C# follows BIDMAS; use brackets to control the order."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Predict the output",
+    "caption": "Work out each answer, then click to check.",
+    "head": [
+     "C# expression",
+     "Result"
+    ],
+    "rows": [
+     [
+      "10 + 5 * 2",
+      "20"
+     ],
+     [
+      "20 / 6",
+      "3"
+     ],
+     [
+      "20 / 6.0",
+      "3.3333333333333335"
+     ],
+     [
+      "20 % 6",
+      "2"
+     ],
+     [
+      "(10 + 5) * 2",
+      "30"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What is `17 % 5`?",
+     "o": [
+      "3",
+      "2",
+      "3.4",
+      "12"
+     ],
+     "a": 1,
+     "why": "17 = 3 × 5 + 2."
+    },
+    {
+     "q": "What does `Console.WriteLine(9 / 2);` print?",
+     "o": [
+      "4.5",
+      "5",
+      "4",
+      "1"
+     ],
+     "a": 2,
+     "why": "Both are ints, so the remainder is dropped."
+    },
+    {
+     "q": "If `score` is 10, what is it after `score++;`?",
+     "o": [
+      "11",
+      "10",
+      "12",
+      "9"
+     ],
+     "a": 0,
+     "why": "++ adds 1."
+    },
+    {
+     "q": "What is `2 + 3 * 4`?",
+     "o": [
+      "20",
+      "24",
+      "9",
+      "14"
+     ],
+     "a": 3,
+     "why": "Multiplication first: 3 × 4 = 12, + 2 = 14."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why `Console.WriteLine(5 / 3);` prints 1 but `Console.WriteLine(5 / 3.0);` prints a decimal.",
+     "m": 2,
+     "a": "5 and 3 are both ints, so the answer is an int and the remainder/decimal is discarded (1). 3.0 is a double, so the answer takes the bigger type (double) and shows 1.6666666666666667 (1)."
+    },
+    {
+     "q": "Write C# code that uses the modulus operator to check whether a number stored in `number` is even.",
+     "m": 3,
+     "a": "`if (number % 2 == 0)` (1) `{ Console.WriteLine(\"Even\"); }` (1) `else { Console.WriteLine(\"Odd\"); }` (1)"
+    }
+   ],
+   "terms": [
+    "Arithmetic operator",
+    "Modulus",
+    "Increment"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Perform basic operations on numbers in C#",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/training/modules/csharp-basic-operations"
+    }
+   ]
+  },
+  {
+   "id": "p08",
+   "spec": "Use IF, ELSE IF and ELSE with comparison operators to make decisions",
+   "summary": "An IF statement runs a block of code only if a condition is true; ELSE runs if it is false. Conditions use comparison operators such as ==, !=, <, >, <= and >=.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Logic is about choices. An [[IF statement]] tells the computer to run a block of code **only if** a specific [[condition]] is true. This is [[selection]]."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Operator",
+      "Meaning",
+      "Example (age = 14)",
+      "Result"
+     ],
+     "rows": [
+      [
+       "`==`",
+       "Equal to",
+       "`age == 14`",
+       "true"
+      ],
+      [
+       "`!=`",
+       "Not equal to",
+       "`age != 14`",
+       "false"
+      ],
+      [
+       "`<`",
+       "Less than",
+       "`age < 18`",
+       "true"
+      ],
+      [
+       "`<=`",
+       "Less than or equal to",
+       "`age <= 13`",
+       "false"
+      ],
+      [
+       "`>`",
+       "Greater than",
+       "`age > 10`",
+       "true"
+      ],
+      [
+       "`>=`",
+       "Greater than or equal to",
+       "`age >= 14`",
+       "true"
+      ]
+     ],
+     "caption": "Comparison operators"
+    },
+    {
+     "t": "warn",
+     "text": "Unlike Maths, C# uses a **double equals** `==` to compare things. A single `=` only **assigns** a value. So `if (age = 18)` is **not** the correct way to check if someone is 18 (it won't even compile); use `if (age == 18)`."
+    },
+    {
+     "t": "p",
+     "text": "**The code pattern.** The condition goes inside the round brackets. If it is true, the code inside the curly braces `{ }` runs. The optional **ELSE** part runs if the condition is false."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "IfElse.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            string name = \"Peter\";\n\n            if (name == \"Peter\")\n            {\n                Console.WriteLine(\"Hello Peter\");\n            }\n            else\n            {\n                Console.WriteLine(\"Hello Not Peter\");\n            }\n        }\n    }\n}",
+     "output": "Hello Peter"
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Marks.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int mark = 85;\n\n            if (mark < 50)\n            {\n                Console.WriteLine(\"You failed.\");\n            }\n            else\n            {\n                Console.WriteLine(\"You passed.\");\n            }\n        }\n    }\n}",
+     "output": "You passed."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: fixing the 'number greater than 0' program",
+     "context": "An old example reads `int myNumber; myNumber = Console.ReadLine(); if(myNumber < 0) { ... \"Number is not bigger than zero!\" }`. Find the two problems.",
+     "steps": [
+      "`Console.ReadLine()` returns a string, which can't go straight into an int: use `Convert.ToInt32(Console.ReadLine())`.",
+      "`myNumber < 0` misses 0 itself, but 0 is not bigger than zero either: use `myNumber <= 0`."
+     ],
+     "answer": "Convert the input with Convert.ToInt32 and test myNumber <= 0."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Fixed.cs (user types 0)",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Please enter a number greater than 0\");\n            int myNumber = Convert.ToInt32(Console.ReadLine());\n\n            if (myNumber <= 0)\n            {\n                Console.WriteLine(\"Number is not bigger than zero!\");\n            }\n        }\n    }\n}",
+     "output": "Please enter a number greater than 0\n0\nNumber is not bigger than zero!"
+    },
+    {
+     "t": "p",
+     "text": "**More than two choices: ELSE IF.** You can chain conditions with `else if`. C# checks each one in order and runs only the **first** block whose condition is true. You can also **nest** an IF statement inside another IF."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "ChooseYourPath.cs (user types Left)",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"You reach a fork in the path by Lough Erne.\");\n            Console.WriteLine(\"Do you go Left or Right?\");\n            string choice = Console.ReadLine();\n\n            if (choice == \"Left\")\n            {\n                Console.WriteLine(\"You find a boat and row to Devenish Island. You win!\");\n            }\n            else if (choice == \"Right\")\n            {\n                Console.WriteLine(\"You wander into a bog and lose your wellies. Game over!\");\n            }\n            else\n            {\n                Console.WriteLine(\"Please type Left or Right.\");\n            }\n        }\n    }\n}",
+     "output": "You reach a fork in the path by Lough Erne.\nDo you go Left or Right?\nLeft\nYou find a boat and row to Devenish Island. You win!"
+    },
+    {
+     "t": "warn",
+     "text": "String comparisons are case-sensitive: `\"left\" == \"Left\"` is **false**."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Challenge: AgeChecker.cs (user types 17)",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"How old are you?\");\n            int age = Convert.ToInt32(Console.ReadLine());\n\n            if (age >= 18)\n            {\n                Console.WriteLine(\"You are old enough to drive and to vote.\");\n            }\n            else if (age >= 17)\n            {\n                Console.WriteLine(\"You are old enough to drive, but not to vote yet.\");\n            }\n            else\n            {\n                Console.WriteLine(\"You are too young to drive or to vote.\");\n            }\n        }\n    }\n}",
+     "output": "How old are you?\n17\nYou are old enough to drive, but not to vote yet."
+    },
+    {
+     "t": "note",
+     "text": "In the UK you can drive a car at 17 and vote at 18. The UK Government has announced plans to lower the voting age to 16, so check the current law."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Selection uses IF statements to choose which code runs.",
+      "The condition goes in ( ); the code to run goes in { }.",
+      "ELSE runs when the condition is false; ELSE IF adds more choices.",
+      "== compares; = assigns. != means not equal.",
+      "Convert input to a number before comparing it with < or >."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which operator checks if two values are equal?",
+     "o": [
+      "=",
+      "==",
+      "!=",
+      "=>"
+     ],
+     "a": 1,
+     "why": "Double equals compares."
+    },
+    {
+     "q": "When does the ELSE block run?",
+     "o": [
+      "Always",
+      "When the condition is true",
+      "When the condition is false",
+      "Never"
+     ],
+     "a": 2,
+     "why": "It's the backup plan."
+    },
+    {
+     "q": "True or false: `if (age = 18)` correctly checks if someone is 18.",
+     "o": [
+      "False: it should be if (age == 18)",
+      "True: it checks if age is 18",
+      "True: = and == mean the same",
+      "False: it should be if (age === 18)"
+     ],
+     "a": 0,
+     "why": "A single = assigns; C# uses == to compare."
+    },
+    {
+     "q": "If `mark` is 50, what does `if (mark < 50) {…fail…} else {…pass…}` print?",
+     "o": [
+      "You failed.",
+      "Nothing",
+      "An error",
+      "You passed."
+     ],
+     "a": 3,
+     "why": "50 < 50 is false, so ELSE runs."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write an IF statement that prints 'Access granted' if a variable called password equals \"Erne2026\", and 'Access denied' otherwise.",
+     "m": 3,
+     "a": "`if (password == \"Erne2026\")` (1) `{ Console.WriteLine(\"Access granted\"); }` (1) `else { Console.WriteLine(\"Access denied\"); }` (1)"
+    },
+    {
+     "q": "Explain the difference between = and == in C#.",
+     "m": 2,
+     "a": "= is the assignment operator, which stores a value in a variable (1). == compares two values to see if they are equal, giving true or false (1)."
+    }
+   ],
+   "terms": [
+    "IF statement",
+    "Condition",
+    "Comparison operator"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Branching, Ifs, and Conditional Logic (Part 9 of 19) – C# for Beginners",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/shows/csharp-for-beginners/branching-ifs-and-conditional-logic-csharp-for-beginners"
+    },
+    {
+     "title": "Tutorial: C# if statements and loops",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/tutorials/branches-and-loops"
+    }
+   ]
+  },
+  {
+   "id": "p09",
+   "spec": "Use a FOR loop (count-controlled) and name its three parts",
+   "summary": "A FOR loop repeats code a known number of times. It has an initialiser (where the counter starts), a condition (how long to keep going) and an iterator (how the counter changes, e.g. i++).",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Why do we need loops?** Imagine printing 'Hello World' 1,000 times. You could copy and paste 1,000 lines, but what if you then needed to change the message? A [[loop]] lets you write a block of code **once** and run it as many times as needed. This is **[[iteration]]** (repetition)."
+    },
+    {
+     "t": "tip",
+     "text": "Loops make code shorter, easier to read and easier to maintain. Remember **DRY**: **D**on't **R**epeat **Y**ourself."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Type",
+      "Meaning",
+      "C# structure",
+      "Everyday example"
+     ],
+     "rows": [
+      [
+       "Count-controlled",
+       "[[Count-controlled loop|Repeats]] a known number of times",
+       "`for` loop",
+       "Run 10 laps of a 100 m track to make 1000 m"
+      ],
+      [
+       "[[Condition-controlled loop|Condition-controlled]]",
+       "Repeats an unknown number of times until a condition changes",
+       "`while` loop",
+       "Run until you are out of breath"
+      ],
+      [
+       "[[Infinite loop|Infinite]]",
+       "Repeats forever",
+       "`while (true)`",
+       "Traffic lights"
+      ]
+     ],
+     "caption": "Three kinds of iteration"
+    },
+    {
+     "t": "h",
+     "text": "The FOR loop"
+    },
+    {
+     "t": "p",
+     "text": "A `for` loop is used when you know exactly how many times you want to repeat a task. It uses a counter variable (often called `i`) to keep track of the repetitions. In C# the `for` line has three parts, separated by semicolons:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "Example",
+      "Job"
+     ],
+     "rows": [
+      [
+       "Initialiser",
+       "`int i = 0`",
+       "Where the counter starts (the [[initialiser]])"
+      ],
+      [
+       "Condition",
+       "`i < 10`",
+       "How long to keep going: the loop stops when this is false"
+      ],
+      [
+       "[[Iterator]]",
+       "`i++`",
+       "How to update the counter after each pass (++ increments i by 1)"
+      ]
+     ],
+     "caption": "for (int i = 0; i < 10; i++) runs 10 times, with i = 0, 1, 2 … 9"
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "OneToFive.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            for (int i = 1; i <= 5; i++)\n            {\n                Console.WriteLine(i);\n            }\n        }\n    }\n}",
+     "output": "1\n2\n3\n4\n5"
+    },
+    {
+     "t": "warn",
+     "text": "Watch the condition. `for (int i = 1; i < 5; i++)` prints only **1 to 4**, because when `i` reaches 5, `i < 5` is false. To print 1 to 5, use `i <= 5`."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the running track",
+     "context": "A track is 100 m. Use a count-controlled loop to run 10 laps and show the total distance after each lap.",
+     "steps": [
+      "We know there are exactly 10 laps, so use a `for` loop.",
+      "Start the counter at 1 and keep going while `lap <= 10`.",
+      "Each time round, add 100 to `distance` and print it."
+     ],
+     "answer": "After 10 laps the distance is 1000 m (see the program below)."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Laps.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int distance = 0;\n\n            for (int lap = 1; lap <= 10; lap++)\n            {\n                distance = distance + 100;\n                Console.WriteLine(\"Lap \" + lap + \" done: \" + distance + \"m\");\n            }\n\n            Console.WriteLine(\"Race finished!\");\n        }\n    }\n}",
+     "output": "Lap 1 done: 100m\nLap 2 done: 200m\nLap 3 done: 300m\nLap 4 done: 400m\nLap 5 done: 500m\nLap 6 done: 600m\nLap 7 done: 700m\nLap 8 done: 800m\nLap 9 done: 900m\nLap 10 done: 1000m\nRace finished!"
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Task: TimesTable.cs (user types 7)",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Which times table would you like?\");\n            int number = Convert.ToInt32(Console.ReadLine());\n\n            for (int i = 1; i <= 12; i++)\n            {\n                Console.WriteLine(i + \" x \" + number + \" = \" + (i * number));\n            }\n        }\n    }\n}",
+     "output": "Which times table would you like?\n7\n1 x 7 = 7\n2 x 7 = 14\n3 x 7 = 21\n4 x 7 = 28\n5 x 7 = 35\n6 x 7 = 42\n7 x 7 = 49\n8 x 7 = 56\n9 x 7 = 63\n10 x 7 = 70\n11 x 7 = 77\n12 x 7 = 84"
+    },
+    {
+     "t": "h",
+     "text": "Check your knowledge (answers)"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Which part of the for loop defines when the loop should stop running? **The condition.**",
+      "Which part defines the counter? **The initialiser.**",
+      "Which part increases the counter after each repetition? **The iterator.**"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Iteration means repeating code using loops (DRY: Don't Repeat Yourself).",
+      "A FOR loop is count-controlled: use it when you know how many times to repeat.",
+      "Initialiser = where the counter starts; condition = when to stop; iterator = how it changes.",
+      "i++ increments the counter by 1.",
+      "Check < versus <= carefully: i < 5 stops at 4."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "How a FOR loop runs",
+    "caption": "for (int i = 0; i < 10; i++)",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Start",
+      "detail": "The program reaches the loop.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Initialise i = 0",
+      "detail": "The initialiser runs once.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "Is i < 10?",
+      "detail": "The condition is checked before every pass.",
+      "shape": "io"
+     },
+     {
+      "id": "d",
+      "label": "Run code, then i++",
+      "detail": "The loop body runs, then the iterator adds 1.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Exit",
+      "detail": "When the condition is false, the loop ends.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "c"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "How many times does `for (int i = 0; i < 10; i++)` run?",
+     "o": [
+      "9",
+      "10",
+      "11",
+      "Forever"
+     ],
+     "a": 1,
+     "why": "i takes the values 0 to 9."
+    },
+    {
+     "q": "Which part of a for loop sets where the counter starts?",
+     "o": [
+      "The condition",
+      "The iterator",
+      "The initialiser",
+      "The curly braces"
+     ],
+     "a": 2,
+     "why": "e.g. int i = 0."
+    },
+    {
+     "q": "Which loop is best for printing the 12 times table?",
+     "o": [
+      "for loop",
+      "while loop",
+      "infinite loop",
+      "no loop"
+     ],
+     "a": 0,
+     "why": "We know it runs exactly 12 times."
+    },
+    {
+     "q": "What does `for (int i = 2; i <= 6; i += 2)` print?",
+     "o": [
+      "2 3 4 5 6",
+      "2 4",
+      "4 6",
+      "2 4 6"
+     ],
+     "a": 3,
+     "why": "i goes 2, 4, 6; 8 fails the condition."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write a for loop that prints the numbers 1 to 10.",
+     "m": 3,
+     "a": "`for (int i = 1; i <= 10; i++)` correct initialiser (1), correct condition (1); `{ Console.WriteLine(i); }` (1)."
+    },
+    {
+     "q": "Label the three parts of `for (int i = 0; i < 5; i++)` and say what each does.",
+     "m": 3,
+     "a": "`int i = 0` is the initialiser: where the counter starts (1). `i < 5` is the condition: the loop continues while it is true (1). `i++` is the iterator: adds 1 to the counter after each pass (1)."
+    }
+   ],
+   "terms": [
+    "Loop",
+    "Count-controlled loop",
+    "Condition-controlled loop",
+    "Infinite loop",
+    "Initialiser",
+    "Iterator"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "For Loops (Part 11 of 19) – C# for Beginners",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/shows/csharp-for-beginners/for-loops-csharp-for-beginners"
+    },
+    {
+     "title": "Tutorial: C# if statements and loops",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/tutorials/branches-and-loops"
+    }
+   ]
+  },
+  {
+   "id": "p10",
+   "spec": "Use a WHILE loop (condition-controlled), choose between FOR and WHILE, and avoid infinite loops",
+   "summary": "A WHILE loop checks a condition and keeps repeating while it is true, so it suits situations where you don't know how many repeats are needed. If the condition never becomes false, you get an infinite loop.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**The WHILE loop.** A `while` loop is best for **indefinite** iteration, where we don't know how many times the code will run, like waiting for a user to enter the correct password. It checks the condition **before** running the code block. If the condition is true, the code runs, then it checks again. It keeps looping **until the condition is false**. It looks a lot like an IF statement, but instead of running once, it repeats. Here `!=` means **not equal to** (≠). In the password program below, we don't know how many times the user will get the password wrong, but the loop repeats until they enter the correct one."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Password.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Enter the password:\");\n            string myVar = Console.ReadLine();\n\n            while (myVar != \"myPassword123\")\n            {\n                Console.WriteLine(\"Incorrect Password! Try again\");\n                myVar = Console.ReadLine();\n            }\n\n            Console.WriteLine(\"Access granted. Welcome!\");\n        }\n    }\n}",
+     "output": "Enter the password:\nletmein\nIncorrect Password! Try again\nfermanagh\nIncorrect Password! Try again\nmyPassword123\nAccess granted. Welcome!"
+    },
+    {
+     "t": "note",
+     "text": "Scratch has no WHILE block. Its **repeat until** block does the opposite: it keeps going *until* the condition becomes true, whereas a C# `while` keeps going *while* the condition is true."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Scenario",
+      "Loop type and reason"
+     ],
+     "rows": [
+      [
+       "Printing the 12 times table for a number",
+       "**For loop**: we know exactly how many times it runs (12)."
+      ],
+      [
+       "Waiting for a user to type the correct password",
+       "**While loop**: we don't know how many attempts they'll need."
+      ],
+      [
+       "A game where a player keeps guessing a secret number until they're right",
+       "**While loop**: we don't know how many guesses it will take before the condition becomes true."
+      ]
+     ],
+     "caption": "Answers to 'Choosing the right tool'"
+    },
+    {
+     "t": "p",
+     "text": "**Challenge: the guessing game.** A **while** loop is best, because we don't know how many attempts the player will need. Use a Boolean such as `isCorrect`, updated inside the loop to end it on success, and a counter to track the number of attempts."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Guessing.cs (user guesses 50, 25, 42)",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int secretNumber = 42;\n            int attempts = 0;\n            bool isCorrect = false;\n\n            Console.WriteLine(\"Guess the secret number between 1 and 100!\");\n\n            while (isCorrect == false)\n            {\n                int guess = Convert.ToInt32(Console.ReadLine());\n                attempts++;\n\n                if (guess == secretNumber)\n                {\n                    isCorrect = true;\n                    Console.WriteLine(\"Correct! You took \" + attempts + \" attempts.\");\n                }\n                else if (guess < secretNumber)\n                {\n                    Console.WriteLine(\"Too low, try again.\");\n                }\n                else\n                {\n                    Console.WriteLine(\"Too high, try again.\");\n                }\n            }\n        }\n    }\n}",
+     "output": "Guess the secret number between 1 and 100!\n50\nToo high, try again.\n25\nToo low, try again.\n42\nCorrect! You took 3 attempts."
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Challenge: TimesTableExit.cs (keeps going until the user types exit)",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Enter a number (or type exit to stop):\");\n            string input = Console.ReadLine();\n\n            while (input != \"exit\")\n            {\n                int number = Convert.ToInt32(input);\n                for (int i = 1; i <= 12; i++)\n                {\n                    Console.WriteLine(i + \" x \" + number + \" = \" + (i * number));\n                }\n                Console.WriteLine(\"Enter a number (or type exit to stop):\");\n                input = Console.ReadLine();\n            }\n\n            Console.WriteLine(\"Goodbye!\");\n        }\n    }\n}",
+     "output": "Enter a number (or type exit to stop):\n3\n1 x 3 = 3\n2 x 3 = 6\n3 x 3 = 9\n4 x 3 = 12\n5 x 3 = 15\n6 x 3 = 18\n7 x 3 = 21\n8 x 3 = 24\n9 x 3 = 27\n10 x 3 = 30\n11 x 3 = 33\n12 x 3 = 36\nEnter a number (or type exit to stop):\nexit\nGoodbye!"
+    },
+    {
+     "t": "h",
+     "text": "Infinite loops"
+    },
+    {
+     "t": "p",
+     "text": "One of the biggest dangers of a WHILE loop is an [[infinite loop]]. **Explained to a 10-year-old:** it's like getting stuck on a roundabout and never being able to take the exit. It happens when the condition to stop the loop never becomes false, so the computer keeps running the same code forever. Eventually the program can freeze or crash."
+    },
+    {
+     "t": "warn",
+     "text": "A common cause is forgetting to update the variable inside the loop. In the password program, if you left out `myVar = Console.ReadLine();` inside the loop, a wrong password would print 'Try again' forever."
+    },
+    {
+     "t": "p",
+     "text": "Infinite loops are sometimes useful, for example a traffic light system that must repeat forever:"
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "TrafficLights.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            // Traffic lights: an infinite loop that is meant to run forever\n            while (true)\n            {\n                Console.WriteLine(\"Red\");\n                Console.WriteLine(\"Red and amber\");\n                Console.WriteLine(\"Green\");\n                Console.WriteLine(\"Amber\");\n            }\n        }\n    }\n}",
+     "output": "Red\nRed and amber\nGreen\nAmber\nRed\nRed and amber\n... (repeats forever until the program is closed)"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Term",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "Initialiser",
+       "The starting value for a loop counter variable."
+      ],
+      [
+       "Iteration",
+       "A single pass through a group of instructions."
+      ],
+      [
+       "Condition",
+       "A Boolean expression that determines if a loop continues."
+      ],
+      [
+       "Infinite loop",
+       "A loop that never exits because the condition is always true."
+      ]
+     ],
+     "caption": "Match the data (answers)"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A WHILE loop is condition-controlled: it repeats while its condition is true.",
+      "Use WHILE when you don't know how many repeats are needed; FOR when you do.",
+      "!= means not equal to.",
+      "Update the loop variable inside the loop, or you may create an infinite loop.",
+      "Infinite loops never end: useful for traffic lights, a bug almost everywhere else."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which loop is best for waiting until a user enters the right password?",
+     "o": [
+      "for loop",
+      "while loop",
+      "No loop",
+      "An IF statement"
+     ],
+     "a": 1,
+     "why": "The number of attempts is unknown."
+    },
+    {
+     "q": "What does `!=` mean?",
+     "o": [
+      "Equal to",
+      "Assign",
+      "Not equal to",
+      "Greater than"
+     ],
+     "a": 2,
+     "why": "≠ in C#."
+    },
+    {
+     "q": "What causes an infinite loop?",
+     "o": [
+      "The condition never becomes false",
+      "Using a for loop",
+      "Missing a comment",
+      "Using a string"
+     ],
+     "a": 0,
+     "why": "So the loop never exits."
+    },
+    {
+     "q": "A WHILE loop checks its condition…",
+     "o": [
+      "only at the end of the program",
+      "never",
+      "only once",
+      "before each pass through the loop"
+     ],
+     "a": 3,
+     "why": "Check, run, check again."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between a count-controlled and a condition-controlled loop, naming the C# structure for each.",
+     "m": 4,
+     "a": "A count-controlled loop repeats a known/set number of times (1), using a FOR loop (1). A condition-controlled loop repeats an unknown number of times until a condition changes/becomes false (1), using a WHILE loop (1)."
+    },
+    {
+     "q": "Explain what an infinite loop is, what causes it and what happens to the program.",
+     "m": 3,
+     "a": "A loop that never stops/repeats forever (1). Caused by the stopping condition never becoming false, e.g. the variable is never updated inside the loop (1). The program may freeze or crash (1)."
+    },
+    {
+     "q": "State one similarity between FOR and WHILE loops.",
+     "m": 1,
+     "a": "Both repeat a block of code / both check a condition before each pass (1)."
+    }
+   ],
+   "terms": [],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Tutorial: C# if statements and loops",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/tutorials/branches-and-loops"
+    },
+    {
+     "title": "For Loops (Part 11 of 19) – C# for Beginners",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/shows/csharp-for-beginners/for-loops-csharp-for-beginners"
+    }
+   ]
+  },
+  {
+   "id": "p11",
+   "spec": "Understand methods and objects, and plan, build and test a program using the core four skills",
+   "summary": "Methods are named groups of instructions that run when called, and can take parameters and return answers. Every program is built from the core four: variables, input/output, selection and iteration. Plan, build in small steps, keep code clean and test it.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**Methods.** A [[method]] is a small group of instructions that runs when it is **called** in the code. The code inside runs in sequence, and only when the method is called. `Main` is a method, and so are `Console.WriteLine()` and `Console.ReadLine()`."
+    },
+    {
+     "t": "list",
+     "items": [
+      "You call a method using its name followed by brackets: `SayHello();`",
+      "If a method accepts an input, the value goes in the brackets. This input is called a **[[parameter]]**. When creating the method, you must state the data type it expects, e.g. `string name`.",
+      "A method can send an answer back to where it was called using `return`."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "Methods.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Let's say hello in C#\");\n            SayHello();\n            SayHelloTo(\"Mr Butler\");\n\n            int answer = AddTwoNumbers(4, 7);\n            Console.WriteLine(\"The answer is \" + answer);\n        }\n\n        // A basic method: no inputs\n        static void SayHello()\n        {\n            Console.WriteLine(\"Hello you!\");\n        }\n\n        // A method with a parameter (an input)\n        static void SayHelloTo(string name)\n        {\n            Console.WriteLine(\"Hello \" + name);\n        }\n\n        // A method with two parameters that returns an answer\n        static int AddTwoNumbers(int num1, int num2)\n        {\n            int solution = num1 + num2;\n            return solution;\n        }\n    }\n}",
+     "output": "Let's say hello in C#\nHello you!\nHello Mr Butler\nThe answer is 11"
+    },
+    {
+     "t": "note",
+     "text": "C# programmers usually start method names with a capital letter (PascalCase), e.g. `SayHello`, and variable names with a small letter (camelCase), e.g. `firstName`."
+    },
+    {
+     "t": "p",
+     "text": "**Objects and instances.** C# is an **object-oriented** language. Object-oriented programming is based on **[[object (programming)|objects]]**, which each have their own **properties** (attributes, i.e. data) and **methods** (things they can do), and which can interact with one another. Objects let us reuse code written for one object in another without rewriting it all."
+    },
+    {
+     "t": "tip",
+     "text": "You have met this idea in GameMaker: an object is a template and each instance is a copy placed in the game. In C#, a **class** is the template and each object made from it is an instance."
+    },
+    {
+     "t": "p",
+     "text": "**The core four.** Whether you're designing the next viral game or a secure bank login, it all comes down to four building blocks. Programming is simply giving a computer a set of instructions to solve a problem."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Building block",
+      "What it does",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Variables",
+       "Store data in memory locations",
+       "`int score = 10;`"
+      ],
+      [
+       "I/O (input/output)",
+       "Interact with users",
+       "`Console.ReadLine()` and `Console.WriteLine()`"
+      ],
+      [
+       "Selection",
+       "Make decisions based on conditions",
+       "`if … else`"
+      ],
+      [
+       "Iteration",
+       "Repeat code efficiently",
+       "`for` and `while` loops"
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "table",
+     "head": [
+      "Term",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "Variable",
+       "A named container for data that can change."
+      ],
+      [
+       "Selection",
+       "Choosing which code to run based on a condition (IF)."
+      ],
+      [
+       "Boolean",
+       "A data type that can only be true or false."
+      ],
+      [
+       "Iteration",
+       "Repeating a section of code (looping)."
+      ]
+     ],
+     "caption": "Match the data (answers)"
+    },
+    {
+     "t": "p",
+     "text": "**Your project.** Choose one project to show your skills: **Greeting Bot** (ask for a name and age, give a personalised welcome), **Simple Calculator**, **Number Guessing**, **Login System** (compare input with a stored password) or **Fitness Tracker**. Here is a fitness tracker that uses all four building blocks:"
+    },
+    {
+     "t": "code",
+     "lang": "cs",
+     "title": "FitnessTracker.cs",
+     "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int totalSteps = 0;\n\n            for (int day = 1; day <= 7; day++)\n            {\n                Console.WriteLine(\"Enter steps for day \" + day + \":\");\n                int steps = Convert.ToInt32(Console.ReadLine());\n                totalSteps = totalSteps + steps;\n            }\n\n            Console.WriteLine(\"Total steps this week: \" + totalSteps);\n\n            if (totalSteps >= 70000)\n            {\n                Console.WriteLine(\"Brilliant! You averaged at least 10,000 steps a day.\");\n            }\n            else\n            {\n                Console.WriteLine(\"Keep going! Try for 10,000 steps a day.\");\n            }\n        }\n    }\n}",
+     "output": "Enter steps for day 1:\n8000\nEnter steps for day 2:\n12000\nEnter steps for day 3:\n9500\nEnter steps for day 4:\n11000\nEnter steps for day 5:\n7000\nEnter steps for day 6:\n15000\nEnter steps for day 7:\n10000\nTotal steps this week: 72500\nBrilliant! You averaged at least 10,000 steps a day."
+    },
+    {
+     "t": "h",
+     "text": "Plan, build, tidy, test"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Plan first (flowchart).** Don't touch the keyboard yet! Sketch the flow: what variables do you need, where does the loop start, what condition triggers the IF? Code without a plan becomes 'spaghetti code' that is hard to fix.",
+      "**Build iteratively: code, test, repeat.** Declare variables first; get the input working; add the IF statements; wrap the code in a loop **last**, to avoid infinite loops while testing.",
+      "**Keep code clean.** Developers spend more time reading code than writing it. Indent code inside curly braces, use meaningful names (`number1`, not `xfgdfgd` or `var1`) and use `//` comments to explain tricky logic.",
+      "**Test and review.** Swap with a partner and try to break their program with unexpected input (e.g. letters when it asks for a number). Does the loop end correctly? Are the IF statements logical? Is the code easy to read?"
+     ],
+     "ordered": true
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A method is a named group of instructions that runs when called; parameters pass values in; return sends an answer back.",
+      "Objects have properties (data) and methods (actions); a class is the template.",
+      "The core four: variables, input/output, selection, iteration.",
+      "Plan with a flowchart before coding.",
+      "Build in small steps, keep code clean (indentation, names, comments) and test with unexpected inputs."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a parameter?",
+     "o": [
+      "A type of loop",
+      "A value passed into a method",
+      "A comment",
+      "A reserved keyword"
+     ],
+     "a": 1,
+     "why": "It goes in the method's brackets."
+    },
+    {
+     "q": "Which keyword sends an answer back from a method?",
+     "o": [
+      "void",
+      "static",
+      "return",
+      "else"
+     ],
+     "a": 2,
+     "why": "return ends the method and gives back a value."
+    },
+    {
+     "q": "Which of the core four is 'repeating code with loops'?",
+     "o": [
+      "Iteration",
+      "Variables",
+      "I/O",
+      "Selection"
+     ],
+     "a": 0,
+     "why": "Iteration means repetition."
+    },
+    {
+     "q": "Why should you add the loop last when building a program?",
+     "o": [
+      "Loops are optional",
+      "C# requires it",
+      "To make the program shorter",
+      "To avoid infinite loop errors while testing"
+     ],
+     "a": 3,
+     "why": "Get the inside working first."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name the core four building blocks of programming and give a C# example of each.",
+     "m": 4,
+     "a": "Variables, e.g. int score = 10; (1). Input/output, e.g. Console.ReadLine()/Console.WriteLine() (1). Selection, e.g. an if/else statement (1). Iteration, e.g. a for or while loop (1)."
+    },
+    {
+     "q": "Give three ways to make your code easy for someone else to read.",
+     "m": 3,
+     "a": "Indent code inside curly braces (1); use meaningful/descriptive variable names (1); add // comments to explain complex logic (1)."
+    },
+    {
+     "q": "Explain what a method is and one benefit of using methods.",
+     "m": 2,
+     "a": "A named group of instructions that only runs when it is called (1). Benefit: code can be reused without rewriting it / programs are easier to read (1)."
+    }
+   ],
+   "terms": [
+    "Method",
+    "Parameter",
+    "Object (programming)"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "HOW TO PROGRAM - Getting Started!",
+     "source": "YouTube – Brackeys",
+     "url": "https://www.youtube.com/watch?v=N775KsWQVkw",
+     "yt": "N775KsWQVkw"
+    },
+    {
+     "title": "Tutorial: C# if statements and loops",
+     "source": "Microsoft Learn",
+     "url": "https://learn.microsoft.com/en-us/dotnet/csharp/tour-of-csharp/tutorials/branches-and-loops"
+    }
+   ]
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Programming",
+   "def": "Writing instructions (code) in a language a computer can understand; also called coding.",
+   "alt": "coding",
+   "page": "p01"
+  },
+  {
+   "term": "Programmer",
+   "def": "A person who writes code for a device and tests it to make sure it works.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Ada Lovelace",
+   "def": "The first computer programmer, who wrote an algorithm for Charles Babbage's Analytical Engine in 1843.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Sequence",
+   "def": "Instructions carried out in a logical order, one after another.",
+   "alt": "sequencing",
+   "page": "p01"
+  },
+  {
+   "term": "Selection",
+   "def": "Deciding which code to run based on a condition, usually with an IF statement.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Iteration",
+   "def": "Repeating a set of instructions using a loop; also called repetition.",
+   "alt": "repetition",
+   "page": "p01"
+  },
+  {
+   "term": "C#",
+   "def": "A high-level, strongly typed programming language made by Microsoft, pronounced 'C sharp'.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Compiler",
+   "def": "A program that converts human-readable code into binary the computer can run.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Strongly typed",
+   "def": "A language where every variable must have a data type declared before it is used.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "IDE",
+   "def": "Integrated Development Environment: software such as Visual Studio for writing, testing and running code.",
+   "alt": "Integrated Development Environment",
+   "page": "p02"
+  },
+  {
+   "term": "Console",
+   "def": "The text-only window where a console program's output appears.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Semicolon",
+   "def": "The ; character that ends every statement in C#.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Comment",
+   "def": "Text in a program that the computer ignores, written after // or between /* and */.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Syntax",
+   "def": "The set of rules for how code must be written in a programming language.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Variable",
+   "def": "A named location in memory that stores data which can change while the program runs.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Data type",
+   "def": "The kind of data a variable can hold, such as int, double, string, char or bool.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Integer",
+   "def": "A whole number; stored in C# with the int data type.",
+   "alt": "int",
+   "page": "p04"
+  },
+  {
+   "term": "Double",
+   "def": "A C# data type for numbers with a decimal point, such as 1.75.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "String",
+   "def": "A data type for text, written inside double quotes in C#.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Char",
+   "def": "A data type for a single character, written inside single quotes, such as 'A'.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Boolean",
+   "def": "A data type (bool) that can only be true or false.",
+   "alt": "bool",
+   "page": "p04"
+  },
+  {
+   "term": "Declaration",
+   "def": "Creating a variable by stating its data type and name.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "camelCase",
+   "def": "A naming style with no spaces where each new word starts with a capital, like favouriteSport.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Reserved keyword",
+   "def": "A word that already means something in C# (such as int or lock) and cannot be used as a name.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Concatenation",
+   "def": "Joining strings together, using + in C#.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Data type conversion",
+   "def": "Changing a value from one data type to another, e.g. with Convert.ToInt32().",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Arithmetic operator",
+   "def": "A symbol for a calculation: + - * / or %.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Modulus",
+   "def": "The % operator, which gives the remainder after a division.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Increment",
+   "def": "Increase a variable by 1, written x++ in C#.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "IF statement",
+   "def": "A statement that runs a block of code only if its condition is true.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Condition",
+   "def": "An expression that is either true or false, used in IF statements and loops.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Comparison operator",
+   "def": "A symbol that compares two values, such as ==, !=, <, >, <= or >=.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Loop",
+   "def": "A structure that repeats a block of code.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Count-controlled loop",
+   "def": "A loop that repeats a known number of times, usually a FOR loop.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Condition-controlled loop",
+   "def": "A loop that repeats until a condition changes, usually a WHILE loop.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Infinite loop",
+   "def": "A loop that never ends because its condition never becomes false.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Initialiser",
+   "def": "The part of a FOR loop that sets the counter's starting value, e.g. int i = 0.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Iterator",
+   "def": "The part of a FOR loop that updates the counter after each pass, e.g. i++.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Method",
+   "def": "A named group of instructions that runs when it is called.",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "Parameter",
+   "def": "A value passed into a method inside its brackets.",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "Object (programming)",
+   "def": "A thing in a program with its own properties (data) and methods (actions).",
+   "alt": "",
+   "page": "p11"
+  }
+ ]
+}

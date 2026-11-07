@@ -1,0 +1,2605 @@
+{
+ "title": "Computer Graphics",
+ "summary": "How graphics are made and used, the key terms, bitmap and vector images, compression, and editing images in Adobe Photoshop.",
+ "learn": [
+  "How graphics and CGI are used",
+  "Where computer graphics come from",
+  "DPI, pixels, pixel dimensions and pixelation",
+  "Lossy and lossless compression",
+  "Bitmap and vector graphics",
+  "Photoshop tools and image layers"
+ ],
+ "temporary": false,
+ "intro": "Why graphics matter, where they come from and how they are stored as pixels or vectors, plus compression, file formats and hands-on editing with Photoshop tools and layers.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Explain why graphics are used and give examples of where they are used",
+   "summary": "Graphics grab attention far faster than text. They are used in logos, road signs, book and magazine covers, CD covers, concept art and packaging to entertain, promote, inform, advertise and educate.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Imagine the school website was just one long paragraph of black text with no photos, no crest and no colour. Would you read it? That is what the very first websites looked like: nothing but text… and more text… and even more text."
+    },
+    {
+     "t": "p",
+     "text": "The old saying *“a picture says a thousand words”* is still true with computers. A [[graphic]] is any image, drawing, photo, logo or diagram shown on a screen or printed on paper. Graphics bring colour and interest to everything around us."
+    },
+    {
+     "t": "note",
+     "text": "People’s attention spans have shrunk. Apps such as Snapchat, Instagram and TikTok are built almost entirely around images and short clips, because trends show you spend less than 30 seconds on any one image or video. Computer images and promotions therefore have to be **short, snappy and informative**."
+    },
+    {
+     "t": "h",
+     "text": "Where are graphics used?"
+    },
+    {
+     "t": "p",
+     "text": "Graphics are everywhere around us, carrying all kinds of information and messages. Company logos are so valuable that they are protected by law as a [[trademark]]."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Use",
+      "Why graphics help"
+     ],
+     "rows": [
+      [
+       "Logos",
+       "A company wants you to recognise it from a distance. A simple image tells you at once who they are. Logos are so valuable they are protected by law as a trademark, so nobody else can use them."
+      ],
+      [
+       "Road signs",
+       "Signs give information using pictures, often with no words. They must be recognised instantly and get past language barriers, so they work in airports, city streets and on the roads around Enniskillen."
+      ],
+      [
+       "Book covers",
+       "A book has to catch your eye from across the library, so covers use bold graphics to look interesting (even though “you cannot judge a book by its cover”)."
+      ],
+      [
+       "Magazines",
+       "There are so many magazines on the shelf that covers mix strong images with text to look eye-catching and vibrant."
+      ],
+      [
+       "CD covers and concept art",
+       "Album artwork sells music; concept art shows what a film or game character or world will look like before it is built."
+      ],
+      [
+       "Product packaging",
+       "How a product looks affects what you think of it. Manufacturers spend millions of pounds on packaging, and nearly all of it carries a graphic."
+      ]
+     ],
+     "caption": "Common uses of graphics"
+    },
+    {
+     "t": "h",
+     "text": "What are graphics used to do?"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Entertain** – games, films, cartoons, memes",
+      "**Promote** – a poster for the school musical",
+      "**Inform** – a fire exit sign or a bus timetable map",
+      "**Advertise** – a cinema poster for the latest film",
+      "**Educate** – a labelled diagram of the heart in your Biology book"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: designing a logo",
+     "context": "Mr Butler wants a new logo for his Computer Graphics company. It must use 3–5 colours, a simple image or text, and be clear and easy to print.",
+     "steps": [
+      "Pick a simple idea that says what the company does, e.g. a pencil tip turning into a computer cursor.",
+      "Choose a small colour scheme, e.g. navy, sky blue and orange (3 colours), so it prints cheaply and looks professional.",
+      "Add the company name in one clear, bold font, e.g. “Butler Graphics”.",
+      "Check it still works when shrunk to the size of a stamp and in black and white, so it is clear on a business card, a pen or a school letter."
+     ],
+     "answer": "A good logo is simple, uses 3–5 colours, is readable when small and tells customers what the company offers at a glance."
+    },
+    {
+     "t": "tip",
+     "text": "Remember the five purposes with **PIE AE**: **P**romote, **I**nform, **E**ntertain, **A**dvertise, **E**ducate."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Graphics get attention far faster than text.",
+      "They are used in logos, road signs, book covers, magazines, CD covers, concept art and packaging.",
+      "They are used to entertain, promote, inform, advertise and educate.",
+      "Logos are protected by law as trademarks.",
+      "A good logo uses 3–5 colours, is simple and prints clearly."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Why do road signs mostly use pictures instead of words?",
+     "o": [
+      "Pictures are cheaper to print",
+      "Pictures last longer in the rain",
+      "Words are not allowed on signs",
+      "They can be recognised instantly and get past language barriers"
+     ],
+     "a": 3,
+     "why": "Signs must be understood at a glance by anyone, whatever language they speak."
+    },
+    {
+     "q": "What is the legal protection on a company logo called?",
+     "o": [
+      "A patent",
+      "A licence",
+      "A trademark",
+      "A copyright notice"
+     ],
+     "a": 2,
+     "why": "Logos are protected as trademarks so no one else can use them."
+    },
+    {
+     "q": "Which of these is NOT one of the purposes of graphics listed in your notes?",
+     "o": [
+      "Promote",
+      "Educate",
+      "Calculate",
+      "Inform"
+     ],
+     "a": 2,
+     "why": "Graphics entertain, promote, inform, advertise and educate."
+    },
+    {
+     "q": "How many colours should a good, easily printed logo use?",
+     "o": [
+      "1",
+      "3–5",
+      "10–12",
+      "As many as possible"
+     ],
+     "a": 1,
+     "why": "3–5 colours keeps it clear, professional and cheap to print."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Give **two** places where graphics are used and explain why each one uses graphics.",
+     "m": 4,
+     "a": "Logos (1) so customers recognise the company instantly from a distance (1). Road signs (1) so they are understood quickly and get past language barriers (1). (Also accept book covers / magazines / packaging with a matching reason.)"
+    },
+    {
+     "q": "State **three** things that make a good logo.",
+     "m": 3,
+     "a": "Uses 3–5 colours (1); a simple image or text (1); clear and easily printed / still readable when small (1); tells customers what the company does (1)."
+    }
+   ],
+   "terms": [
+    "Graphic",
+    "Trademark"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Graphic Design Explained: The Basics, Fundamentals, History and Process",
+     "source": "YouTube – Gareth David Studio",
+     "url": "https://www.youtube.com/watch?v=RuoaienrAz0",
+     "yt": "RuoaienrAz0"
+    },
+    {
+     "title": "Graphic Design: Lesson 1 - What is Graphic Design",
+     "source": "YouTube – Upskillist",
+     "url": "https://www.youtube.com/watch?v=OqRGEtrNvAU",
+     "yt": "OqRGEtrNvAU"
+    }
+   ]
+  },
+  {
+   "id": "p02",
+   "spec": "Describe what computer-generated imagery (CGI) is and where it is used",
+   "summary": "CGI is still or moving images made with computer software, mostly 3D graphics for characters, scenes and special effects in films, TV and games.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "[[CGI]] stands for **Computer-Generated Imagery**. At the most basic level it means creating still or animated pictures with computer software."
+    },
+    {
+     "t": "p",
+     "text": "Most of the time CGI means the **3D computer graphics** used to create characters, scenes and special effects in films, television and computer or video games."
+    },
+    {
+     "t": "h",
+     "text": "CGI mixed with real actors"
+    },
+    {
+     "t": "p",
+     "text": "More powerful computers mean CGI now appears in most big films. In many of them, computer-made creatures, explosions and backgrounds are mixed with real human actors:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "*The Lord of the Rings* – Gollum and huge battle armies",
+      "*Pirates of the Caribbean* – Davy Jones and his crew",
+      "*Avengers* films – the Hulk, Thanos and whole cities being destroyed"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Films made entirely with CGI"
+    },
+    {
+     "t": "list",
+     "items": [
+      "*Shrek*",
+      "*Ice Age*",
+      "*The Polar Express*"
+     ],
+     "ordered": false
+    },
+    {
+     "t": "note",
+     "text": "CGI is now so good that it can be hard to tell what is real and what was made on a computer. Many backgrounds you think were filmed on location were actually built inside a computer."
+    },
+    {
+     "t": "p",
+     "text": "Making realistic CGI needs specialist software and a **huge** amount of skill. A single frame of an animated film can take hours for powerful computers to work out (called *rendering*), and a film shows 24 frames every second."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "CGI mixed with actors",
+      "Fully CGI film"
+     ],
+     "rows": [
+      [
+       "Real people on screen?",
+       "Yes – actors filmed, effects added",
+       "No – every character is computer-made"
+      ],
+      [
+       "Examples",
+       "Lord of the Rings, Avengers",
+       "Shrek, Ice Age"
+      ],
+      [
+       "What CGI adds",
+       "Creatures, explosions, backgrounds",
+       "Everything you see"
+      ]
+     ]
+    },
+    {
+     "t": "tip",
+     "text": "Games are CGI too: every character in FIFA or Minecraft is drawn by the computer in real time while you play."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "CGI = Computer-Generated Imagery.",
+      "It is still or animated images created with software, usually 3D.",
+      "It is used for characters, scenes and special effects in films, TV and games.",
+      "Some films mix CGI with actors; others, like Shrek, are entirely CGI.",
+      "Realistic CGI needs specialist software and lots of skill."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does CGI stand for?",
+     "o": [
+      "Computer Graphic Interface",
+      "Computer-Generated Imagery",
+      "Coloured Graphic Image",
+      "Computer Game Imaging"
+     ],
+     "a": 1,
+     "why": "CGI = Computer-Generated Imagery."
+    },
+    {
+     "q": "Which film was made entirely with CGI?",
+     "o": [
+      "Shrek",
+      "Pirates of the Caribbean",
+      "The Lord of the Rings",
+      "Avengers"
+     ],
+     "a": 0,
+     "why": "Shrek has no real actors on screen; the others mix CGI with actors."
+    },
+    {
+     "q": "Why is CGI used much more in films today than 30 years ago?",
+     "o": [
+      "Actors are more expensive",
+      "Cameras have got worse",
+      "Computers are much more powerful",
+      "Films are shorter"
+     ],
+     "a": 2,
+     "why": "More powerful computers make detailed CGI possible."
+    }
+   ],
+   "practice": [
+    {
+     "q": "What is CGI? Give **one** example of where it is used.",
+     "m": 2,
+     "a": "Computer-generated imagery: still or animated images created using computer software (1). Used for special effects / characters in films, TV or video games, e.g. the Hulk in Avengers (1)."
+    },
+    {
+     "q": "Explain the difference between a film that *uses* CGI and a film that is *entirely* CGI. Give an example of each.",
+     "m": 4,
+     "a": "A film that uses CGI mixes computer-made effects/characters with real actors (1), e.g. The Lord of the Rings (1). An entirely CGI film has every character and scene made on the computer with no actors on screen (1), e.g. Shrek / Ice Age / The Polar Express (1)."
+    }
+   ],
+   "terms": [
+    "CGI"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Welcome to Pixar in a Box",
+     "source": "YouTube – Pixar",
+     "url": "https://www.youtube.com/watch?v=db5VkHBP3JI",
+     "yt": "db5VkHBP3JI"
+    },
+    {
+     "title": "CGI Explained: Creating Digital Worlds and Characters",
+     "source": "YouTube – Explained",
+     "url": "https://www.youtube.com/watch?v=Ef_XP9xNyJc",
+     "yt": "Ef_XP9xNyJc"
+    }
+   ]
+  },
+  {
+   "id": "p03",
+   "spec": "List the main sources of computer graphics and explain why a scanner is not a source",
+   "summary": "Graphics come from clipart, the internet, CDs/DVDs, digital cameras, hand-drawn images (with a graphics digitiser or scanned in) and magazines. A scanner only imports a graphic; it is not the source.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Digital graphics appear in almost every multimedia product: websites, apps, games, presentations and adverts. It is very rare to find one without some kind of graphic. So where do the graphics come from?"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Source",
+      "What it is",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Clipart",
+       "Ready-made drawings that come with software such as Word or PowerPoint",
+       "A cartoon football for a sports-day poster"
+      ],
+      [
+       "Internet / search engines",
+       "Images found with Google Images, Flickr or other photo-sharing sites",
+       "A photo of Enniskillen Castle for a history project"
+      ],
+      [
+       "CDs / DVDs",
+       "Image collections sold on disc (older, but still around)",
+       "A disc of royalty-free stock photos"
+      ],
+      [
+       "Digital camera (or phone camera)",
+       "Photos you take yourself",
+       "Photos from the Year 9 trip"
+      ],
+      [
+       "Hand-drawn images",
+       "Drawn directly onto the computer with a [[graphics digitiser]], or drawn on paper and scanned in",
+       "A logo sketched with a stylus on a drawing tablet"
+      ],
+      [
+       "Magazines",
+       "Printed pictures that are scanned in",
+       "A picture of a car from a magazine"
+      ]
+     ],
+     "caption": "The main sources of graphics"
+    },
+    {
+     "t": "warn",
+     "text": "A **scanner is NOT a source of graphics.** It is an input device that *imports* a graphic from paper onto the computer. The source is the drawing or magazine page you put into it."
+    },
+    {
+     "t": "p",
+     "text": "A [[graphics digitiser]] (also called a graphics tablet) is a flat pad that you draw on with a special pen called a stylus. Your movements are copied onto the screen, so it feels like drawing on paper."
+    },
+    {
+     "t": "note",
+     "text": "Just because an image is on the internet does not mean you are free to use it. Most photos are protected by copyright. For school work, say where you got it from; for anything published, use images you took yourself or ones marked free to reuse."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the pair challenge",
+     "context": "With a partner, list as many SOURCES of graphics as you can in two minutes.",
+     "steps": [
+      "Think of where a picture starts its life: made by you, made by someone else, or bought.",
+      "Made by you: digital camera, phone camera, hand-drawn on a graphics digitiser, drawn on paper.",
+      "Made by someone else: clipart, internet / search engines, photo-sharing sites, magazines.",
+      "Bought: CDs/DVDs of images.",
+      "Cross out anything that is a device for getting images in, not a source, e.g. a scanner."
+     ],
+     "answer": "Clipart, internet/search engines, CDs/DVDs, digital camera, hand-drawn images (digitiser or scanned), magazines (scanned)."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Main sources: clipart, internet, CDs/DVDs, digital camera, hand-drawn images, magazines.",
+      "Paper images and magazines are scanned in.",
+      "A scanner is an input device, not a source.",
+      "A graphics digitiser lets you draw straight onto the computer with a stylus.",
+      "Images online are usually copyrighted."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which of these is NOT a source of graphics?",
+     "o": [
+      "Clipart",
+      "A digital camera",
+      "The internet",
+      "A scanner"
+     ],
+     "a": 3,
+     "why": "A scanner only imports a graphic from paper; it is a device, not a source."
+    },
+    {
+     "q": "What is a graphics digitiser?",
+     "o": [
+      "A pad you draw on with a stylus to create images on the computer",
+      "A program that shrinks images",
+      "A type of printer",
+      "A website of free photos"
+     ],
+     "a": 0,
+     "why": "It is a drawing tablet with a stylus."
+    },
+    {
+     "q": "You take a photo of the school rugby team on your phone. What is the source of the graphic?",
+     "o": [
+      "Clipart",
+      "A scanner",
+      "A digital camera",
+      "A CD"
+     ],
+     "a": 2,
+     "why": "A phone camera is a digital camera."
+    },
+    {
+     "q": "Which source would you scan in?",
+     "o": [
+      "A picture from a magazine",
+      "Clipart",
+      "An image from Google Images",
+      "A photo on your phone"
+     ],
+     "a": 0,
+     "why": "Printed images from magazines must be scanned to get them onto the computer."
+    }
+   ],
+   "practice": [
+    {
+     "q": "List **four** sources of computer graphics.",
+     "m": 4,
+     "a": "Any four, one mark each: clipart (1); internet / search engines / photo-sharing sites (1); CDs/DVDs (1); digital camera (1); hand-drawn images using a graphics digitiser or scanned (1); magazines scanned in (1)."
+    },
+    {
+     "q": "A pupil says “a scanner is a source of graphics”. Explain why they are wrong.",
+     "m": 2,
+     "a": "A scanner is an input device that imports/copies an image from paper onto the computer (1). The source is the original drawing, photo or magazine page that is scanned (1)."
+    }
+   ],
+   "terms": [
+    "Graphics digitiser"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "How Does A DIGITAL CAMERA Work",
+     "source": "YouTube – How-Does-It",
+     "url": "https://www.youtube.com/watch?v=1VQ-3RtjZPE",
+     "yt": "1VQ-3RtjZPE"
+    },
+    {
+     "title": "What are bitmap graphics? | Computer Science - Cracking the Code",
+     "source": "YouTube – BBC Bitesize for Teachers",
+     "url": "https://www.youtube.com/watch?v=djDNWPzlfwA",
+     "yt": "djDNWPzlfwA"
+    }
+   ]
+  },
+  {
+   "id": "p04",
+   "spec": "Explain pixels, resolution, DPI, pixel dimensions and pixelation",
+   "summary": "A pixel is one tiny square of colour. Resolution is how many pixels an image has; DPI is how many dots are printed per inch. Low-resolution images look pixelated when scaled up.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Zoom right in on a photo on your phone and you will eventually see it is made of tiny coloured squares. Each square is a [[pixel]] (short for *picture element*). A pixel can be only **one colour at a time**."
+    },
+    {
+     "t": "p",
+     "text": "The [[resolution]] of an image is how much detail it has, which depends on how many pixels it contains. A **high-resolution** image has lots of pixels; a **low-resolution** image has few."
+    },
+    {
+     "t": "h",
+     "text": "Key terms used in computer graphics"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Key term",
+      "Meaning"
+     ],
+     "rows": [
+      [
+       "DPI",
+       "Stands for **Dots Per Inch**. It usually refers to printer quality: how many dots of ink are printed in each inch. The higher the DPI, the better the quality of the printed image."
+      ],
+      [
+       "Pixel dimensions",
+       "The width and height of an image measured in pixels, e.g. 1920 × 1080."
+      ],
+      [
+       "Pixelated",
+       "When a low-resolution image is scaled up (made bigger), you can see the individual square pixels and jagged edges. A high-resolution image stays clear when scaled up."
+      ],
+      [
+       "Resolution",
+       "How much detail an image holds, linked to the number of pixels (on screen) or dots per inch (in print)."
+      ]
+     ],
+     "caption": "Key terms"
+    },
+    {
+     "t": "p",
+     "text": "To work out the pixel dimensions you need for a print, multiply the print **width** and **height** (in inches) by the DPI."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: pixels needed for a print",
+     "context": "You want to print a 6 × 4 inch photo of the school team at 300 DPI. What pixel dimensions does the image need?",
+     "steps": [
+      "Width: 6 inches × 300 DPI = 1800 pixels.",
+      "Height: 4 inches × 300 DPI = 1200 pixels.",
+      "Total pixels: 1800 × 1200 = 2,160,000 pixels (about 2.2 megapixels)."
+     ],
+     "answer": "1800 × 1200 pixels."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: is it big enough?",
+     "context": "A photo downloaded from a website is 600 × 400 pixels. How big can it be printed at 300 DPI before it looks pixelated?",
+     "steps": [
+      "Width: 600 ÷ 300 = 2 inches.",
+      "Height: 400 ÷ 300 = 1.33 inches (about 1⅓ inches)."
+     ],
+     "answer": "Only about 2 × 1.3 inches. Print it as an A4 poster and it will look badly pixelated."
+    },
+    {
+     "t": "warn",
+     "text": "You cannot make a small, low-resolution image sharp by stretching it. The computer has no extra detail to add, so it just makes each pixel bigger. TV crime shows that ‘zoom and enhance’ a blurry number plate are not realistic!"
+    },
+    {
+     "t": "tip",
+     "text": "Screens usually look fine at about 72–96 pixels per inch, but printing needs around 300 DPI for a sharp photo. That is why an image that looks fine on screen can look blocky when printed."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A pixel is one tiny square of a single colour.",
+      "Resolution = amount of detail / number of pixels.",
+      "DPI = dots per inch; higher DPI gives better print quality.",
+      "Pixel dimensions = width × height in pixels (print inches × DPI).",
+      "Low-resolution images look pixelated when scaled up."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "compare",
+    "title": "High vs low resolution",
+    "caption": "The same picture stored with lots of pixels and with very few.",
+    "states": [
+     {
+      "label": "High resolution",
+      "points": [
+       "Lots of pixels, e.g. 4000 × 3000",
+       "Fine detail and smooth curves",
+       "Stays sharp when printed large",
+       "Bigger file size"
+      ],
+      "art": null
+     },
+     {
+      "label": "Low resolution",
+      "points": [
+       "Few pixels, e.g. 200 × 150",
+       "Jagged, blocky edges",
+       "Looks pixelated when scaled up",
+       "Smaller file size"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "check": [
+    {
+     "q": "What does DPI stand for?",
+     "o": [
+      "Digital Picture Image",
+      "Dots Printed Instantly",
+      "Data Per Image",
+      "Dots Per Inch"
+     ],
+     "a": 3,
+     "why": "DPI = Dots Per Inch, a measure of print quality."
+    },
+    {
+     "q": "What happens when you scale up a low-resolution image?",
+     "o": [
+      "It becomes sharper",
+      "It becomes pixelated",
+      "It turns into a vector",
+      "Its file size halves"
+     ],
+     "a": 1,
+     "why": "The individual pixels become visible as jagged squares."
+    },
+    {
+     "q": "A 5 × 3 inch print is needed at 200 DPI. What are the pixel dimensions?",
+     "o": [
+      "1500 × 900",
+      "500 × 300",
+      "200 × 200",
+      "1000 × 600"
+     ],
+     "a": 3,
+     "why": "5 × 200 = 1000 and 3 × 200 = 600."
+    },
+    {
+     "q": "Which image will stay clearest when printed large?",
+     "o": [
+      "A low-resolution image",
+      "Any image – size does not matter",
+      "A screenshot of a thumbnail",
+      "A high-resolution image"
+     ],
+     "a": 3,
+     "why": "More pixels means more detail to fill the larger print."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by an image being **pixelated**.",
+     "m": 2,
+     "a": "When a low-resolution image is enlarged/scaled up (1) the individual square pixels / jagged edges become visible (1)."
+    },
+    {
+     "q": "A photo needs to be printed at 8 × 10 inches at 300 DPI. Work out its pixel dimensions. Show your working.",
+     "m": 3,
+     "a": "8 × 300 = 2400 (1); 10 × 300 = 3000 (1); so 2400 × 3000 pixels (1)."
+    },
+    {
+     "q": "State what DPI stands for and what a higher DPI means.",
+     "m": 2,
+     "a": "Dots Per Inch (1); a higher DPI gives a better quality / sharper printed image (1)."
+    }
+   ],
+   "terms": [
+    "Pixel",
+    "Resolution",
+    "DPI",
+    "Pixelated",
+    "Pixel dimensions"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "AMD Simplified: Pixels and Resolution",
+     "source": "YouTube – AMD",
+     "url": "https://www.youtube.com/watch?v=3kz2GAof9tI",
+     "yt": "3kz2GAof9tI"
+    },
+    {
+     "title": "Pixels, Image Size and Resolution",
+     "source": "YouTube – Tuts+ Design",
+     "url": "https://www.youtube.com/watch?v=nMAYZH1SB5Q",
+     "yt": "nMAYZH1SB5Q"
+    },
+    {
+     "title": "DPI and PPI Image Resolution - What do They Mean? Is There a Difference?",
+     "source": "YouTube – Marketing Tech Guide",
+     "url": "https://www.youtube.com/watch?v=WjnMKMT9cMk",
+     "yt": "WjnMKMT9cMk"
+    }
+   ]
+  },
+  {
+   "id": "p05",
+   "spec": "Explain how bitmap images are stored as a grid of coloured pixels using binary codes",
+   "summary": "A bitmap is a grid of pixels. Each pixel's colour is stored as a binary code; with 2 bits per pixel you get 4 colours (00, 01, 10, 11).",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A [[bitmap]] image (also called a **raster** image) is made up of a grid of tiny square pixels. The computer stores information about **every single pixel**: where it is and what colour it is."
+    },
+    {
+     "t": "p",
+     "text": "When you zoom into a bitmap you can see the individual pixels, or ‘jagged’ edges. This is called **pixelation**."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Bitmap images"
+     ],
+     "rows": [
+      [
+       "Made of",
+       "A grid of pixels"
+      ],
+      [
+       "Best for",
+       "Highly detailed photographs"
+      ],
+      [
+       "Drawback",
+       "Large file sizes; pixelated when enlarged"
+      ],
+      [
+       "Examples",
+       "Photos from your phone, BMP, JPEG, PNG and GIF files"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Storing colours as numbers"
+    },
+    {
+     "t": "p",
+     "text": "Computers only store 0s and 1s (binary). So each colour is given a binary code, and the image is saved as a long list of those codes. The number of bits used for each pixel is called the [[colour depth]]."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Bits per pixel",
+      "Number of colours",
+      "Codes"
+     ],
+     "rows": [
+      [
+       "1 bit",
+       "2",
+       "0, 1"
+      ],
+      [
+       "2 bits",
+       "4",
+       "00, 01, 10, 11"
+      ],
+      [
+       "3 bits",
+       "8",
+       "000 to 111"
+      ],
+      [
+       "8 bits",
+       "256",
+       "00000000 to 11111111"
+      ],
+      [
+       "24 bits",
+       "16,777,216 (about 16.7 million)",
+       "used for photos"
+      ]
+     ],
+     "caption": "Each extra bit doubles the number of colours"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a 2-bit pixel image",
+     "context": "Design a pixel picture using 2-bit colour and write it as a grid of numbers. Key: 00 = white, 01 = black, 10 = yellow, 11 = red.",
+     "steps": [
+      "With 2 bits there are exactly four codes, so four colours: 00, 01, 10, 11.",
+      "Draw the picture on a grid, e.g. a smiley face: yellow face, black eyes, red mouth, white background.",
+      "Replace each square with its code. A row that is white, yellow, yellow, black, yellow becomes: 00 10 10 01 10.",
+      "Write the whole grid row by row, then put it on a single line to send to your partner, with the key at the end."
+     ],
+     "answer": "Row ‘white, yellow, yellow, black, yellow’ = 00 10 10 01 10. The full image is every row of codes plus the key."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: decoding your partner's image",
+     "context": "You receive the code 00 01 01 00 / 01 11 11 01 / 01 11 11 01 / 00 01 01 00 (4 × 4 grid, each / starts a new row) with the key 00 = white, 01 = black, 11 = red.",
+     "steps": [
+      "Split the code into rows of 4 pixels.",
+      "Row 1: white, black, black, white.",
+      "Row 2: black, red, red, black.",
+      "Row 3: black, red, red, black.",
+      "Row 4: white, black, black, white."
+     ],
+     "answer": "A red square with a black outline and white corners (a tiny red gem). You can redraw it exactly from the numbers alone."
+    },
+    {
+     "t": "note",
+     "text": "This is exactly how a bitmap file works: a long list of numbers plus a ‘key’ (the colour palette) so the computer knows what each number means. Without the key, the numbers are meaningless."
+    },
+    {
+     "t": "tip",
+     "text": "Number of colours = 2 multiplied by itself once for each bit. 2 bits: 2 × 2 = 4. 3 bits: 2 × 2 × 2 = 8."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A bitmap is a grid of pixels; each pixel is one colour.",
+      "The colour of every pixel is stored as a binary code.",
+      "Colour depth = bits per pixel; 2 bits gives 4 colours.",
+      "Bitmaps are best for detailed photos but have large file sizes.",
+      "Zoomed in, bitmaps show pixelation."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "pixels",
+    "title": "Paint a bitmap",
+    "caption": "Click pixels to change their colour, then switch the colour depth to see how many colours each pixel can be.",
+    "w": 8,
+    "h": 8,
+    "depths": [
+     1,
+     2,
+     8,
+     24
+    ],
+    "start": [
+     [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      1,
+      0,
+      0,
+      1,
+      0,
+      1
+     ],
+     [
+      1,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      1
+     ],
+     [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "How many colours can be shown with 2 bits per pixel?",
+     "o": [
+      "2",
+      "4",
+      "8",
+      "16"
+     ],
+     "a": 1,
+     "why": "2 × 2 = 4 codes: 00, 01, 10, 11."
+    },
+    {
+     "q": "Using the key 00 = white, 01 = black, 10 = yellow, what is ‘yellow, white, black’?",
+     "o": [
+      "10 00 01",
+      "01 00 10",
+      "10 01 00",
+      "00 10 01"
+     ],
+     "a": 0,
+     "why": "Yellow = 10, white = 00, black = 01."
+    },
+    {
+     "q": "What type of image is best for a detailed photograph?",
+     "o": [
+      "Vector",
+      "Bitmap",
+      "Clipart",
+      "Text"
+     ],
+     "a": 1,
+     "why": "Bitmaps store every pixel so they can hold photographic detail."
+    },
+    {
+     "q": "Why can bitmap files be large?",
+     "o": [
+      "They use mathematical equations",
+      "They store information about every pixel",
+      "They can only use two colours",
+      "They cannot be compressed"
+     ],
+     "a": 1,
+     "why": "Information is stored for each individual pixel."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe how a bitmap image is stored.",
+     "m": 3,
+     "a": "As a grid of pixels (1); each pixel has one colour (1); each colour is stored as a binary code / number (1)."
+    },
+    {
+     "q": "A 3 × 3 image uses the key 00 = white, 01 = black. Its code is 01 00 01 / 00 01 00 / 01 00 01. Describe the image.",
+     "m": 3,
+     "a": "Row 1: black, white, black (1); row 2: white, black, white (1); row 3: black, white, black (1) – an X / chequered pattern."
+    },
+    {
+     "q": "How many colours are possible with a colour depth of 3 bits?",
+     "m": 1,
+     "a": "8 (2 × 2 × 2) (1)."
+    }
+   ],
+   "terms": [
+    "Bitmap",
+    "Colour depth"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "What are bitmap graphics? | Computer Science - Cracking the Code",
+     "source": "YouTube – BBC Bitesize for Teachers",
+     "url": "https://www.youtube.com/watch?v=djDNWPzlfwA",
+     "yt": "djDNWPzlfwA"
+    },
+    {
+     "title": "20. OCR GCSE (J277) 1.2 Representing images",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=6EfxuAOKZKc",
+     "yt": "6EfxuAOKZKc"
+    },
+    {
+     "title": "Images, Pixels and RGB",
+     "source": "YouTube – CodeAI",
+     "url": "https://www.youtube.com/watch?v=15aqFQQVBWU",
+     "yt": "15aqFQQVBWU"
+    }
+   ]
+  },
+  {
+   "id": "p06",
+   "spec": "Compare bitmap and vector graphics and choose the right one for a job",
+   "summary": "Vector graphics are calculated from maths (lines, curves, shapes), so they scale without going pixelated and suit logos. Bitmaps suit photos.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Some graphics do not use a grid of pixels at all. A [[vector graphic]] is ‘calculated’ using mathematical equations that describe lines, curves and shapes, for example *“a circle, centre here, radius 50, filled red”*."
+    },
+    {
+     "t": "p",
+     "text": "Because the computer redraws the shapes from the maths every time, a vector can be made as big or small as you like and **never goes pixelated**. It does not rely on fixed points or a grid."
+    },
+    {
+     "t": "p",
+     "text": "However, think how many shapes you would need to describe a photo of a busy Enniskillen street: far too many. So vectors should only be used for **simple images** such as logos, icons, clipart, diagrams and fonts."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Bitmap (e.g. .bmp)",
+      "Vector (e.g. .svg)"
+     ],
+     "rows": [
+      [
+       "Made of",
+       "A grid of pixels",
+       "Shapes, lines and curves worked out with maths"
+      ],
+      [
+       "Resizing",
+       "Goes pixelated when enlarged",
+       "Stays perfectly sharp at any size"
+      ],
+      [
+       "Best for",
+       "Photographs and detailed images",
+       "Logos, icons, diagrams, cartoons"
+      ],
+      [
+       "File size",
+       "Usually large (stores every pixel)",
+       "Usually small for simple images"
+      ],
+      [
+       "Editing",
+       "Edit individual pixels (e.g. Photoshop)",
+       "Edit whole shapes (e.g. Illustrator)"
+      ],
+      [
+       "Example formats",
+       "BMP, JPEG, PNG, GIF",
+       "SVG, AI, EPS"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the fact-file task",
+     "context": "In pairs, make a fact file for a BMP file and one for an SVG file.",
+     "steps": [
+      "BMP fact file: stands for *bitmap*; a grid of pixels; stores the colour of every pixel; usually uncompressed so very large files; good for photos; goes pixelated if enlarged; opened in Paint or Photoshop.",
+      "SVG fact file: stands for *Scalable Vector Graphics*; stores shapes as maths (written as text the browser can read); can be resized to any size without losing quality; small files for simple images; perfect for logos and website icons; made in Illustrator, CorelDRAW or Inkscape."
+     ],
+     "answer": "BMP = pixels, photos, large, pixelates. SVG = maths shapes, logos, small, scales perfectly."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: which type?",
+     "context": "Which type of graphic should be used for (a) the school crest on a huge banner for sports day, (b) a photo of the prize-giving?",
+     "steps": [
+      "(a) The crest must be printed very large and stay sharp, and it is made of simple shapes and colours.",
+      "(b) A photo has millions of different colours and fine detail that shapes cannot describe."
+     ],
+     "answer": "(a) Vector. (b) Bitmap."
+    },
+    {
+     "t": "tip",
+     "text": "Think **V for Vector, V for Very scalable**. Photos are **B**itmaps because they are **B**usy."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Vectors are made from mathematical shapes, not pixels.",
+      "Vectors can be resized without going pixelated.",
+      "Vectors suit simple images like logos; bitmaps suit photos.",
+      "BMP is a bitmap format; SVG is a vector format.",
+      "Bitmaps usually have bigger file sizes."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "match",
+    "title": "Bitmap or vector?",
+    "caption": "Match each description to the right answer.",
+    "pairs": [
+     [
+      "Grid of pixels",
+      "Bitmap"
+     ],
+     [
+      "Calculated from equations",
+      "Vector"
+     ],
+     [
+      "Best for photographs",
+      "Bitmap"
+     ],
+     [
+      "Scales without pixelation",
+      "Vector"
+     ],
+     [
+      "SVG file",
+      "Vector"
+     ],
+     [
+      "BMP file",
+      "Bitmap"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "Why does a vector image not go pixelated when you enlarge it?",
+     "o": [
+      "It is saved at 300 DPI",
+      "It is redrawn from mathematical equations",
+      "It only uses two colours",
+      "It is compressed"
+     ],
+     "a": 1,
+     "why": "The shapes are recalculated at the new size."
+    },
+    {
+     "q": "Which is the best choice for a company logo that will go on pens and on lorries?",
+     "o": [
+      "Vector",
+      "Bitmap",
+      "JPEG photo",
+      "Low-resolution GIF"
+     ],
+     "a": 0,
+     "why": "Vectors scale to any size and stay sharp."
+    },
+    {
+     "q": "Why are vectors not used for photographs?",
+     "o": [
+      "Photos would need far too many individual shapes",
+      "Vectors cannot show colour",
+      "Vectors are always huge files",
+      "Photos must be printed"
+     ],
+     "a": 0,
+     "why": "A photo has too much detail to describe with shapes."
+    },
+    {
+     "q": "Which file type is a vector format?",
+     "o": [
+      "BMP",
+      "SVG",
+      "JPEG",
+      "PNG"
+     ],
+     "a": 1,
+     "why": "SVG stands for Scalable Vector Graphics."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Give **two** differences between bitmap and vector graphics.",
+     "m": 4,
+     "a": "Bitmaps are made of a grid of pixels (1) whereas vectors are made of shapes/lines calculated using maths (1). Bitmaps go pixelated when enlarged (1) but vectors can be resized without losing quality (1). (Also accept file size: bitmaps usually larger; uses: photos vs logos.)"
+    },
+    {
+     "q": "Explain why a graphic designer would create a logo as a vector graphic.",
+     "m": 2,
+     "a": "Logos are simple shapes so suit vectors (1); the logo can be resized to any size, e.g. for a business card or a billboard, without going pixelated (1)."
+    }
+   ],
+   "terms": [
+    "Vector graphic"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "What are Vector Graphics? Vector vs. Raster Graphics",
+     "source": "YouTube – Eye on Tech",
+     "url": "https://www.youtube.com/watch?v=ywIpBSblBdA",
+     "yt": "ywIpBSblBdA"
+    },
+    {
+     "title": "Vector and bitmap images explained and compared",
+     "source": "YouTube – Vectorize Images",
+     "url": "https://www.youtube.com/watch?v=ifStxdntvRQ",
+     "yt": "ifStxdntvRQ"
+    }
+   ]
+  },
+  {
+   "id": "p07",
+   "spec": "Explain lossy and lossless compression and choose suitable image file formats",
+   "summary": "Compression makes files smaller. Lossless keeps all the quality; lossy throws some detail away for good. Each file format (JPEG, PNG, GIF, BMP, SVG, PSD) suits different jobs.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Images can be very big files. [[Compression]] is making a file smaller so it takes up less storage space and downloads faster. There are two kinds."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Lossless compression",
+      "Lossy compression"
+     ],
+     "rows": [
+      [
+       "What happens",
+       "File made smaller; when opened it is restored exactly",
+       "Some detail is removed to make the file smaller"
+      ],
+      [
+       "Quality",
+       "Keeps all of its original quality",
+       "Quality is lost permanently; you cannot get it back"
+      ],
+      [
+       "File size",
+       "Smaller, but not as small as lossy",
+       "Much smaller"
+      ],
+      [
+       "Image example",
+       "PNG, GIF",
+       "JPEG"
+      ],
+      [
+       "Good for",
+       "Logos, text, screenshots, anything that must stay perfect",
+       "Photos for websites, social media, email"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "[[Lossless compression]] finds patterns, e.g. instead of storing *white, white, white, white, white* it stores *5 × white*. Nothing is thrown away. [[Lossy compression]] removes detail your eye is unlikely to notice, such as tiny changes in colour in a sky."
+    },
+    {
+     "t": "warn",
+     "text": "Each time you edit and re-save a JPEG it is compressed again and loses a bit more quality. Keep an original (or a .psd) and export a JPEG at the end."
+    },
+    {
+     "t": "h",
+     "text": "Common image file formats"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Format",
+      "Type",
+      "Compression",
+      "Best used for"
+     ],
+     "rows": [
+      [
+       "JPEG / JPG",
+       "Bitmap",
+       "Lossy",
+       "Photos: millions of colours, small files"
+      ],
+      [
+       "PNG",
+       "Bitmap",
+       "Lossless",
+       "Logos, screenshots and images that need a transparent background"
+      ],
+      [
+       "GIF",
+       "Bitmap",
+       "Lossless (but only 256 colours)",
+       "Simple graphics and short animations"
+      ],
+      [
+       "BMP",
+       "Bitmap",
+       "Usually none",
+       "Very large files; rarely used online"
+      ],
+      [
+       "SVG",
+       "Vector",
+       "Text-based shapes",
+       "Logos and icons on websites"
+      ],
+      [
+       "PSD",
+       "Photoshop document",
+       "Lossless",
+       "Saving your work with all layers so you can keep editing"
+      ]
+     ],
+     "caption": "Choosing a format"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: grainy sunset",
+     "context": "A pupil saves a bright sunset photo as a GIF and it looks grainy, with stripes of colour. Why, and how should it be fixed?",
+     "steps": [
+      "A GIF can only hold 256 colours.",
+      "A sunset photo has thousands of slightly different shades, so they get squashed into 256 and look grainy/banded.",
+      "A JPEG can hold millions of colours."
+     ],
+     "answer": "Save photos with lots of colour as JPEG, not GIF."
+    },
+    {
+     "t": "tip",
+     "text": "**PNG for Pictures with No background** (transparency); **JPEG for photos**; **PSD to keep your layers**."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Compression makes files smaller.",
+      "Lossless: smaller file, all quality kept (PNG, GIF).",
+      "Lossy: much smaller file, quality permanently lost (JPEG).",
+      "GIF has only 256 colours, so photos look grainy.",
+      "Save Photoshop work as .psd to keep layers; export .png or .jpg for others to view."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What happens to quality with lossy compression?",
+     "o": [
+      "Some is lost permanently",
+      "It is kept perfectly",
+      "It improves",
+      "It is lost only until you reopen the file"
+     ],
+     "a": 0,
+     "why": "Lossy compression permanently removes some detail."
+    },
+    {
+     "q": "Which format would keep a transparent background around a logo?",
+     "o": [
+      "JPEG",
+      "BMP",
+      "None of them",
+      "PNG"
+     ],
+     "a": 3,
+     "why": "PNG supports transparency and is lossless."
+    },
+    {
+     "q": "Which format is lossy and best for photographs?",
+     "o": [
+      "JPEG",
+      "PNG",
+      "GIF",
+      "PSD"
+     ],
+     "a": 0,
+     "why": "JPEG uses lossy compression and holds millions of colours."
+    },
+    {
+     "q": "Why should you save Photoshop work as a .psd file?",
+     "o": [
+      "It is the smallest file",
+      "Every browser can open it",
+      "It keeps all your layers so you can edit later",
+      "It turns the image into a vector"
+     ],
+     "a": 2,
+     "why": "PSD keeps layers and editing information."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between lossy and lossless compression.",
+     "m": 4,
+     "a": "Both make the file size smaller (1). Lossless: the file can be restored to its original quality / no data lost (1). Lossy: some data/detail is removed (1) and that quality is lost permanently, but the file is smaller (1)."
+    },
+    {
+     "q": "A pupil wants to email 20 holiday photos to a friend. Which compression type and file format should they use? Explain why.",
+     "m": 3,
+     "a": "Lossy compression (1) as JPEG (1) because it makes the files much smaller so they send quickly, and the small loss of quality is hard to notice in photos (1)."
+    }
+   ],
+   "terms": [
+    "Compression",
+    "Lossless compression",
+    "Lossy compression"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "22. OCR GCSE (J277) 1.2 Compression",
+     "source": "YouTube – Craig'n'Dave",
+     "url": "https://www.youtube.com/watch?v=kOFA8FPL5kE",
+     "yt": "kOFA8FPL5kE"
+    },
+    {
+     "title": "Lossy and Lossless (RLE) Compression",
+     "source": "YouTube – MrBrownCS",
+     "url": "https://www.youtube.com/watch?v=v1u-vY6NEmM",
+     "yt": "v1u-vY6NEmM"
+    },
+    {
+     "title": "4 Image Formats Explained (BMP, PNG, JPG & SVG)",
+     "source": "YouTube – Train To Code",
+     "url": "https://www.youtube.com/watch?v=CljHv8GaCUA",
+     "yt": "CljHv8GaCUA"
+    }
+   ]
+  },
+  {
+   "id": "p08",
+   "spec": "Name graphics packages and identify the main parts of the Photoshop screen",
+   "summary": "There are many graphics packages for different users and file types. Photoshop's screen has a toolbox, an options bar, a Layers panel and Colour/Swatches panels.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A **graphics package** is software for creating and manipulating (editing) images. There are lots of them because each offers specialised tools for different file types and different levels of user ability."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Package",
+      "Type",
+      "Who / what it suits"
+     ],
+     "rows": [
+      [
+       "Microsoft Paint",
+       "Bitmap",
+       "Beginners (novice users): simple drawing"
+      ],
+      [
+       "Adobe Photoshop",
+       "Bitmap (raster)",
+       "Professionals editing photos; the most famous package"
+      ],
+      [
+       "Adobe Illustrator",
+       "Vector",
+       "Logo designers and comic-book artists, because vector images scale easily"
+      ],
+      [
+       "CorelDRAW",
+       "Vector",
+       "Professional illustration and design"
+      ],
+      [
+       "GIMP",
+       "Bitmap",
+       "Free alternative to Photoshop"
+      ],
+      [
+       "Pixlr",
+       "Bitmap",
+       "Free and runs in a web browser, so good for working at home"
+      ],
+      [
+       "Paintshop Pro",
+       "Bitmap",
+       "Cheaper photo editing"
+      ],
+      [
+       "Picasa",
+       "Photo organiser",
+       "Organising and lightly editing photos (Google stopped supporting it in 2016)"
+      ]
+     ],
+     "caption": "Graphics packages"
+    },
+    {
+     "t": "p",
+     "text": "Because we want to edit real photographs, which are bitmaps, we use **Adobe Photoshop**. School has it, and Photoshop files can be opened in GIMP or Pixlr if you want to keep working at home."
+    },
+    {
+     "t": "h",
+     "text": "The Photoshop screen"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "Toolbox",
+       "The column of tools down the left-hand side. If it is missing, go to **Window > Tools**."
+      ],
+      [
+       "Options bar (top)",
+       "Shows settings for the tool you have chosen, e.g. brush size or Magic Wand tolerance. It changes every time you pick a different tool."
+      ],
+      [
+       "Layers panel",
+       "Bottom right. Lets you select, hide, show and reorder the layers of your image."
+      ],
+      [
+       "Colour and Swatches panels",
+       "Top right. Pick colours; click the tabs to switch between them."
+      ],
+      [
+       "Canvas",
+       "The middle of the screen, where your image is."
+      ]
+     ],
+     "caption": "Main parts of the Photoshop window (CS6 – later versions look very similar)"
+    },
+    {
+     "t": "note",
+     "text": "Photoshop is a professional package with literally thousands of settings. Do not expect to be a professional after a few lessons; even experts keep learning new tricks."
+    },
+    {
+     "t": "tip",
+     "text": "If the options at the top suddenly look different, do not panic: you have just changed tool. The options bar always matches the tool you have selected."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Different graphics packages suit different users and file types.",
+      "Paint suits beginners; Photoshop and Illustrator suit professionals.",
+      "Illustrator and CorelDRAW are vector packages; Photoshop is bitmap.",
+      "GIMP and Pixlr are free.",
+      "Photoshop has a toolbox, options bar, Layers panel and Colour/Swatches panels."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "hotspot",
+    "title": "The Photoshop window",
+    "caption": "Click each area to see what it does.",
+    "rows": [
+     [
+      {
+       "label": "Options bar",
+       "detail": "Runs along the top. Shows settings for whichever tool you have selected.",
+       "span": 3
+      }
+     ],
+     [
+      {
+       "label": "Toolbox",
+       "detail": "Down the left side: Marquee, Move, Lasso, Brush, Eraser and more. Window > Tools if it is missing.",
+       "span": 1
+      },
+      {
+       "label": "Canvas",
+       "detail": "The middle: your image appears here.",
+       "span": 1
+      },
+      {
+       "label": "Colour / Swatches",
+       "detail": "Top right: choose colours. Click the tabs to switch panels.",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "(toolbox continues)",
+       "detail": "Hold the mouse on a tool with a small triangle to see the hidden tools grouped with it.",
+       "span": 1
+      },
+      {
+       "label": "(canvas)",
+       "detail": "Use the Zoom and Hand tools to look around a large image.",
+       "span": 1
+      },
+      {
+       "label": "Layers panel",
+       "detail": "Bottom right: select, hide, show and reorder layers.",
+       "span": 1
+      }
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "Which package is vector-based and popular with logo designers?",
+     "o": [
+      "Microsoft Paint",
+      "Adobe Illustrator",
+      "Pixlr",
+      "GIMP"
+     ],
+     "a": 1,
+     "why": "Illustrator works with vectors, so logos scale easily."
+    },
+    {
+     "q": "Where do you find the Photoshop toolbox if it has disappeared?",
+     "o": [
+      "File > Open",
+      "Window > Tools",
+      "Edit > Transform",
+      "Image > Size"
+     ],
+     "a": 1,
+     "why": "Window > Tools brings the toolbox back."
+    },
+    {
+     "q": "What does the options bar at the top of Photoshop show?",
+     "o": [
+      "Your saved files",
+      "A list of fonts only",
+      "The layers in the image",
+      "Settings for the currently selected tool"
+     ],
+     "a": 3,
+     "why": "It changes to match the tool you choose."
+    },
+    {
+     "q": "Which two packages are free?",
+     "o": [
+      "GIMP and Pixlr",
+      "Photoshop and Illustrator",
+      "CorelDRAW and Paintshop Pro",
+      "Photoshop and Paint"
+     ],
+     "a": 0,
+     "why": "GIMP and Pixlr are free to use."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name **two** graphics packages and say who each is suitable for.",
+     "m": 4,
+     "a": "Microsoft Paint (1) – novice/beginner users (1). Adobe Photoshop (1) – professionals editing photographs (1). (Accept Illustrator – logo designers; GIMP/Pixlr – free home use, etc.)"
+    },
+    {
+     "q": "Why are there so many different graphics packages?",
+     "m": 2,
+     "a": "Different packages offer specialised tools for different file types, e.g. vector or bitmap (1) and different levels of complexity for different user abilities (1)."
+    }
+   ],
+   "terms": [
+    "Graphics package"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Get to Know Adobe Photoshop | Adobe Photoshop",
+     "source": "YouTube – Adobe Photoshop",
+     "url": "https://www.youtube.com/watch?v=O92mOGLXXu4",
+     "yt": "O92mOGLXXu4"
+    },
+    {
+     "title": "Adobe Photoshop Tutorial: EVERY Tool in the Toolbar Explained and Demonstrated",
+     "source": "YouTube – Photoshop Tutorial Works",
+     "url": "https://www.youtube.com/watch?v=BzQElxY5-MM",
+     "yt": "BzQElxY5-MM"
+    }
+   ]
+  },
+  {
+   "id": "p09",
+   "spec": "Name the main Photoshop tools and describe what each one does",
+   "summary": "Photoshop's toolbox holds selection tools (Marquee, Lasso, Magic Wand), editing tools (Brush, Eraser, Clone Stamp, Healing), colour tools (Paint Bucket, Eyedropper) and effect tools (Blur, Dodge, Burn).",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The toolbox holds the most common tools. Many buttons hide extra tools: **hold down the left mouse button** on a tool with a small triangle in its corner to see the others."
+    },
+    {
+     "t": "h",
+     "text": "Selection tools"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Tool",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "Marquee",
+       "Selects a rectangular (or oval) part of the image. Hold the mouse button down on it to change the shape."
+      ],
+      [
+       "Move",
+       "Moves the selection, or the whole layer, around the canvas. Shortcut **V**."
+      ],
+      [
+       "Lasso",
+       "Selects around a hand-drawn shape. The **Magnetic Lasso** ‘sticks’ to the edge of a shape that contrasts with its background."
+      ],
+      [
+       "Magic Wand",
+       "Click an area to select all touching pixels of the same or very similar colour. Change the **tolerance** in the options bar to select a bigger or smaller range of shades."
+      ],
+      [
+       "Crop",
+       "Select an area and throw away everything outside it, just like cropping in Word."
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "h",
+     "text": "Painting and repairing tools"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Tool",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "Eyedropper",
+       "Picks up (samples) the colour from any part of the image so you can use it."
+      ],
+      [
+       "Spot Healing / Patch / Red Eye",
+       "Fix blemishes and spots, and remove red eyes caused by a camera flash."
+      ],
+      [
+       "Brush",
+       "Paints over the image. Change the brush type and size in the options bar. One of the most used tools."
+      ],
+      [
+       "Clone Stamp",
+       "Hold **Alt** and click to pick a source area, then paint elsewhere to copy (‘clone’) that area over it."
+      ],
+      [
+       "History Brush",
+       "Paints part of the image back to an earlier state, like an ‘undo’ for just one area, leaving the rest alone."
+      ],
+      [
+       "Eraser",
+       "Rubs out part of the **selected layer** (check you have the right layer selected in the Layers panel)."
+      ],
+      [
+       "Paint Bucket / Gradient",
+       "Paint Bucket fills an area with a solid colour; the Gradient tool (hidden with it) fills with a gradient instead."
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "h",
+     "text": "Effect, text and other tools"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Tool",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "Blur / Sharpen / Smudge",
+       "Soften edges, make edges clearer, or smear colour like a finger in wet paint."
+      ],
+      [
+       "Dodge / Burn / Sponge",
+       "Dodge lightens and Burn darkens areas with a brush; Sponge changes colour strength. Used to add shine and shadow so 2D shapes look 3D."
+      ],
+      [
+       "Pen and Text (Type)",
+       "The Pen draws precise paths; the Text tool adds typed text. Text goes on a new layer above the selected one."
+      ],
+      [
+       "Shape / Zoom / Hand",
+       "Draw rectangles and other shapes; zoom in and out; move around the image."
+      ],
+      [
+       "Foreground / background colours",
+       "The two squares at the bottom. Click one to choose a colour; the double arrow swaps them; the small icon resets them to black and white."
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "h",
+     "text": "Labelled toolbar (notes booklet page)"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Label",
+      "Tool name",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "Top left (1st row, left)",
+       "Rectangular Marquee",
+       "Selects a rectangle or oval area"
+      ],
+      [
+       "Top right (1st row, right)",
+       "Move",
+       "Moves a selection or layer"
+      ],
+      [
+       "2nd label left (2nd row, left)",
+       "Lasso",
+       "Selects around a freehand shape"
+      ],
+      [
+       "2nd label right (3rd row, right)",
+       "Eyedropper",
+       "Picks up a colour from the image"
+      ],
+      [
+       "3rd label left (5th row, left)",
+       "Clone Stamp",
+       "Copies one area of the image over another"
+      ],
+      [
+       "3rd label right (5th row, right)",
+       "History Brush",
+       "Restores an area to an earlier state"
+      ],
+      [
+       "4th label left (6th row, left)",
+       "Eraser",
+       "Rubs out part of the selected layer"
+      ],
+      [
+       "4th label right (6th row, right)",
+       "Paint Bucket",
+       "Fills an area with a solid colour"
+      ],
+      [
+       "5th label left (bottom left)",
+       "Foreground / background colour squares",
+       "Choose the two working colours (the arrow sits just below the Hand tool, which moves your view around the image)"
+      ],
+      [
+       "5th label right (7th row, right)",
+       "Dodge",
+       "Lightens areas to add highlights"
+      ]
+     ],
+     "caption": "Answers for the ‘Using some of the tools in Adobe Photoshop’ labelling page"
+    },
+    {
+     "t": "tip",
+     "text": "Press **[** and **]** on the keyboard to make the brush smaller or bigger, with any brush-based tool."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Selection tools: Marquee, Lasso, Magic Wand (plus Crop to cut).",
+      "Brush paints, Eraser rubs out, Paint Bucket fills.",
+      "Clone Stamp copies an area: Alt + click the source first.",
+      "History Brush undoes changes in just one area.",
+      "Dodge lightens, Burn darkens."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Test yourself: Photoshop tools",
+    "caption": "Click a hidden cell to check what each tool does.",
+    "head": [
+     "Tool",
+     "What it does"
+    ],
+    "rows": [
+     [
+      "Marquee",
+      "Selects a rectangle or oval area"
+     ],
+     [
+      "Lasso",
+      "Selects around a freehand shape"
+     ],
+     [
+      "Magic Wand",
+      "Selects pixels of a similar colour"
+     ],
+     [
+      "Eyedropper",
+      "Picks up a colour from the image"
+     ],
+     [
+      "Paint Bucket",
+      "Fills an area with solid colour"
+     ],
+     [
+      "Burn",
+      "Darkens areas with a brush"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "Which tool selects all neighbouring pixels of a similar colour with one click?",
+     "o": [
+      "Lasso",
+      "Marquee",
+      "Magic Wand",
+      "Crop"
+     ],
+     "a": 2,
+     "why": "The Magic Wand selects by colour; tolerance controls how similar."
+    },
+    {
+     "q": "What must you do before painting with the Clone Stamp?",
+     "o": [
+      "Press Ctrl + T",
+      "Hold Alt and click a source area",
+      "Select the Background layer",
+      "Choose Window > Tools"
+     ],
+     "a": 1,
+     "why": "Alt + click picks the area to copy from."
+    },
+    {
+     "q": "Which tool darkens parts of an image?",
+     "o": [
+      "Dodge",
+      "Sharpen",
+      "Sponge",
+      "Burn"
+     ],
+     "a": 3,
+     "why": "Burn darkens; Dodge lightens."
+    },
+    {
+     "q": "What does the History Brush do?",
+     "o": [
+      "Paints in a new colour",
+      "Deletes the history",
+      "Restores part of the image to an earlier state",
+      "Saves the file"
+     ],
+     "a": 2,
+     "why": "It is like an undo for just the area you paint over."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe what the **Magic Wand** tool does and how you can change how much it selects.",
+     "m": 2,
+     "a": "It selects (touching) pixels of the same/very similar colour when you click (1). Change the tolerance in the options bar to select a bigger or smaller range of colours (1)."
+    },
+    {
+     "q": "Explain how to use the **Clone Stamp** tool to cover a mark on a photo.",
+     "m": 3,
+     "a": "Select the Clone Stamp tool (1); hold Alt and click on a clean/good area to choose the source (1); release Alt and click/drag over the mark to copy the clean area over it (1)."
+    },
+    {
+     "q": "Name the tools used to (a) lighten an area, (b) fill an area with one colour, (c) rub out part of a layer.",
+     "m": 3,
+     "a": "(a) Dodge (1); (b) Paint Bucket (1); (c) Eraser (1)."
+    }
+   ],
+   "terms": [
+    "Magic Wand",
+    "Clone Stamp",
+    "Tolerance"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Adobe Photoshop Tutorial: EVERY Tool in the Toolbar Explained and Demonstrated",
+     "source": "YouTube – Photoshop Tutorial Works",
+     "url": "https://www.youtube.com/watch?v=BzQElxY5-MM",
+     "yt": "BzQElxY5-MM"
+    },
+    {
+     "title": "Your First Tools: Photoshop for Beginners | Lesson 2",
+     "source": "YouTube – PiXimperfect",
+     "url": "https://www.youtube.com/watch?v=lO9cNUajts8",
+     "yt": "lO9cNUajts8"
+    },
+    {
+     "title": "Get to Know Selections in Adobe Photoshop | Adobe Photoshop",
+     "source": "YouTube – Adobe Photoshop",
+     "url": "https://www.youtube.com/watch?v=hEcqi-ckZqI",
+     "yt": "hEcqi-ckZqI"
+    }
+   ]
+  },
+  {
+   "id": "p10",
+   "spec": "Use Photoshop tools to edit an image, resize, add text and save in the right formats",
+   "summary": "Organise your files, save a .psd first, fix images with the Paint Bucket, Magic Wand and Clone Stamp, resize with Free Transform, add text and blending options, then export as PNG.",
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Organise before you start"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Create a folder called **Simpsons Photoshop** inside your **Year 9 > ICT** folder.",
+      "Save the starting image (HOMER.png) into it.",
+      "Open Photoshop, then **File > Open** the image.",
+      "Before doing ANYTHING else, **File > Save As…** and save it as a **.psd** (Photoshop) file."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "p",
+     "text": "Good file organisation means you can always find your work again, and saving a .psd straight away means you have a working copy with all your layers."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: fixing Homer",
+     "context": "The Homer image has a white background, blue eyes and green marks around his mouth. Make the background disappear, the eyes white and the marks go, using at least 3 tools on one layer.",
+     "steps": [
+      "**Eyes – Paint Bucket:** select the Paint Bucket, set the foreground colour to white, click on each blue eye to fill it white.",
+      "**Background – Magic Wand:** select the Magic Wand, click the white background, press **Delete**. Repeat for white gaps, e.g. around his hair.",
+      "**Green dots – Clone Stamp:** hold **Alt** and click on a clean part of the beard, release Alt, then click and drag over each green dot to clone the clean beard over it.",
+      "Other tools that would also work: the Brush (paint the eyes white), the Eraser or Lasso (remove the background), Spot Healing (remove the dots)."
+     ],
+     "answer": "Paint Bucket for the eyes, Magic Wand + Delete for the background, Clone Stamp for the green dots. There can be more than one right answer."
+    },
+    {
+     "t": "h",
+     "text": "Saving properly"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**File > Save** – updates your .psd (keeps layers, for editing later).",
+      "**File > Save As… → PNG** – creates an actual image file that anyone can open and that keeps the transparent background."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Resizing, text and effects"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Skill",
+      "How to do it"
+     ],
+     "rows": [
+      [
+       "Resize a layer",
+       "Click the layer, then **Edit > Transform > Free Transform** (or **Ctrl + T**). Drag a corner. Holding **Shift** keeps the **aspect ratio** (width and height in proportion) so it does not stretch. (In newer versions this is the default and Shift turns it off.)"
+      ],
+      [
+       "Add text",
+       "Choose the **Text** tool, click on the canvas, type, e.g. ‘The Simpsons’. Change the colour (e.g. yellow) and move it into position."
+      ],
+      [
+       "Blending options",
+       "In the Layers panel right-click the text layer > **Blending Options**. Add effects such as Stroke (outline), Drop Shadow or Outer Glow so the text stands out. Works on normal layers too."
+      ],
+      [
+       "Make 2D look 3D",
+       "Colour the shape with the Paint Bucket, then use **Burn** to add shadows and **Dodge** to add shine and highlights."
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "tip",
+     "text": "Use **[** and **]** to change the brush size quickly when using Burn and Dodge."
+    },
+    {
+     "t": "example",
+     "title": "Checkpoint: what you should now be able to do",
+     "context": "List the skills practised in the Simpsons and dragon activities.",
+     "steps": [
+      "Insert images, placing them on layers",
+      "Resize layers",
+      "Clone parts of an image",
+      "Remove the background from an image",
+      "Add text and blending options",
+      "Fill areas with colour",
+      "Save Photoshop files and export them as PNG images"
+     ],
+     "answer": "Seven core Photoshop skills, ready for the layers and crest work."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Make a folder and save a .psd before editing.",
+      "Paint Bucket, Magic Wand and Clone Stamp fix most simple problems.",
+      "Ctrl + T (Free Transform) resizes; Shift keeps the aspect ratio.",
+      "Blending options make text stand out.",
+      "Save .psd to keep editing; export .png to share."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "flow",
+    "title": "A sensible Photoshop workflow",
+    "caption": "Follow this order and you will never lose your work.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Make folder",
+      "detail": "Create a folder in Year 9 > ICT and save the starting image in it.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Open image",
+      "detail": "File > Open in Photoshop.",
+      "shape": "io"
+     },
+     {
+      "id": "c",
+      "label": "Save as .psd",
+      "detail": "File > Save As… Photoshop format, before any changes.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Edit",
+      "detail": "Use the tools and layers; File > Save as you go.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Export .png",
+      "detail": "Save As… PNG to make an image anyone can view.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   },
+   "check": [
+    {
+     "q": "What is the keyboard shortcut for Free Transform?",
+     "o": [
+      "Ctrl + F",
+      "Ctrl + R",
+      "Ctrl + T",
+      "Ctrl + S"
+     ],
+     "a": 2,
+     "why": "Ctrl + T opens Free Transform."
+    },
+    {
+     "q": "Which tool did the notes use to remove Homer's white background?",
+     "o": [
+      "Magic Wand",
+      "Clone Stamp",
+      "Dodge",
+      "Text"
+     ],
+     "a": 0,
+     "why": "Magic Wand selects the white, then Delete removes it."
+    },
+    {
+     "q": "Why save as .psd before editing?",
+     "o": [
+      "It is the only format Photoshop can open",
+      "It keeps a working copy with layers that you can keep editing",
+      "It makes the image a vector",
+      "It compresses the image the most"
+     ],
+     "a": 1,
+     "why": "PSD keeps layers and edits."
+    },
+    {
+     "q": "What does keeping the ‘aspect ratio’ mean when resizing?",
+     "o": [
+      "Width and height stay in proportion so it does not stretch",
+      "The colours stay the same",
+      "The file size stays the same",
+      "The layer stays locked"
+     ],
+     "a": 0,
+     "why": "Aspect ratio is the proportion of width to height."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe how to remove the white background from an image in Photoshop.",
+     "m": 2,
+     "a": "Select the Magic Wand tool and click on the white background (1); press Delete to remove the selected pixels (1)."
+    },
+    {
+     "q": "Explain why you would save your work as both a .psd and a .png.",
+     "m": 2,
+     "a": ".psd keeps all the layers so you can go back and edit it later (1); .png is a normal image file other people/programs can open and view (and keeps transparency) (1)."
+    },
+    {
+     "q": "Describe how to make a flat 2D drawing look 3D in Photoshop.",
+     "m": 2,
+     "a": "Use the Burn tool to darken areas and add shadow (1); use the Dodge tool to lighten areas and add shine/highlights (1)."
+    }
+   ],
+   "terms": [
+    "Aspect ratio",
+    "Blending options"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Explained: Clone Stamp VS Healing Brush (and Spot Healing) Tools In Photoshop",
+     "source": "YouTube – Steve Arnold",
+     "url": "https://www.youtube.com/watch?v=KM0gAwLq3CA",
+     "yt": "KM0gAwLq3CA"
+    },
+    {
+     "title": "Get to Know Selections in Adobe Photoshop | Adobe Photoshop",
+     "source": "YouTube – Adobe Photoshop",
+     "url": "https://www.youtube.com/watch?v=hEcqi-ckZqI",
+     "yt": "hEcqi-ckZqI"
+    },
+    {
+     "title": "Get to Know Adobe Photoshop | Adobe Photoshop",
+     "source": "YouTube – Adobe Photoshop",
+     "url": "https://www.youtube.com/watch?v=O92mOGLXXu4",
+     "yt": "O92mOGLXXu4"
+    }
+   ]
+  },
+  {
+   "id": "p11",
+   "spec": "Explain what layers are and use them to combine images",
+   "summary": "Layers are separate see-through sheets stacked on top of each other, so each part of an image can be moved and edited on its own. The Background layer is locked and cannot be transparent.",
+   "blocks": [
+    {
+     "t": "p",
+     "text": "[[Layer]]s let you have several images existing together on separate levels. It is like sticking cut-out pictures onto clear plastic sheets and stacking them: you can move one sheet without disturbing the others. This keeps every element **independent**."
+    },
+    {
+     "t": "p",
+     "text": "Every photo opened in Photoshop (from a scanner or digital camera) starts with a **Background layer**. This layer is like the glue on the back of a stamp: you cannot move it above any other layer and it **cannot contain transparent pixels**."
+    },
+    {
+     "t": "note",
+     "text": "To make the Background layer behave like a normal layer, double-click it in the Layers panel and press OK. It becomes ‘Layer 0’ and can then have transparency."
+    },
+    {
+     "t": "h",
+     "text": "Combining two images on layers"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: putting the dragon on the crest",
+     "context": "Place your coloured dragon (Activity 3) onto the shield banner (Activity 4) and add your name.",
+     "steps": [
+      "Save ‘Activity 4 – Shield Banner’ into your Photoshop folder and open it, plus your dragon image.",
+      "Click the dragon’s tab. Press **Ctrl + A** to select all (a moving border appears round the image).",
+      "Press **Ctrl + C** to copy.",
+      "Click the shield banner’s tab and press **Ctrl + V** to paste. The dragon arrives on a new layer (Layer 1) above the shield (Layer 0).",
+      "Click Layer 1 in the Layers panel, choose the **Move tool (V)** and drag the dragon up so it does not cover the banner.",
+      "Use the Text tool to add your name on the banner, then position it.",
+      "To change the background, add a **new layer**, fill it, and drag it below the others in the Layers panel."
+     ],
+     "answer": "The crest is built from separate layers: background, shield, dragon and text, each movable on its own. Save it as ‘Activity 4 – My Crest’."
+    },
+    {
+     "t": "warn",
+     "text": "The slides say Ctrl + P to paste, but in Photoshop **Ctrl + P is Print**. Paste is **Ctrl + V**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Layers panel action",
+      "How"
+     ],
+     "rows": [
+      [
+       "Select a layer",
+       "Click its name; tools only affect the selected layer"
+      ],
+      [
+       "Hide / show a layer",
+       "Click the eye icon next to it"
+      ],
+      [
+       "Reorder layers",
+       "Drag a layer up or down; higher layers cover lower ones"
+      ],
+      [
+       "Add a new layer",
+       "Click the New Layer button at the bottom of the panel"
+      ],
+      [
+       "Rename a layer",
+       "Double-click its name, e.g. ‘Homer’, ‘Maggie’"
+      ]
+     ],
+     "caption": ""
+    },
+    {
+     "t": "h",
+     "text": "Reviewing your work"
+    },
+    {
+     "t": "p",
+     "text": "Work is peer assessed with **Two Stars and a Wish**: two things you really liked about your partner’s work, and one improvement they could make. Then set yourself one target and note it in a Word document called ‘Graphic Improvements’."
+    },
+    {
+     "t": "p",
+     "text": "The assessed **Pixlr Inc. poster task** is marked on: research and how it inspired your poster; creativity; planning and organisation (including files and folders); use of layers and other tools; a 3–5 colour scheme; including key information; and presentation and use of logos/brand names."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Layers keep each part of an image separate and independent.",
+      "Higher layers sit on top of lower ones.",
+      "The Background layer is locked and cannot be transparent.",
+      "Ctrl + A, Ctrl + C, Ctrl + V pastes an image onto a new layer.",
+      "Use the Move tool (V) with the right layer selected."
+     ]
+    }
+   ],
+   "diagram": {
+    "kind": "layers",
+    "title": "Layers in the crest",
+    "caption": "The top of the list sits in front. Each layer can be moved separately.",
+    "items": [
+     {
+      "label": "Text layer – your name",
+      "detail": "Added with the Text tool; always on its own layer."
+     },
+     {
+      "label": "Layer 1 – dragon",
+      "detail": "Pasted in with Ctrl + V and moved with the Move tool."
+     },
+     {
+      "label": "Layer 0 – shield banner",
+      "detail": "The original image."
+     },
+     {
+      "label": "New background layer",
+      "detail": "Filled with your own colour and dragged to the bottom."
+     }
+    ]
+   },
+   "check": [
+    {
+     "q": "Why are layers useful?",
+     "o": [
+      "They make the file smaller",
+      "They print the image",
+      "They turn images into vectors",
+      "Each element can be moved and edited without affecting the others"
+     ],
+     "a": 3,
+     "why": "Layers keep elements independent."
+    },
+    {
+     "q": "Which of these is true about the Background layer?",
+     "o": [
+      "It cannot be moved above other layers or be transparent",
+      "It can be moved above other layers",
+      "It can contain transparent pixels",
+      "It is deleted when you save"
+     ],
+     "a": 0,
+     "why": "It is locked at the bottom and cannot hold transparency."
+    },
+    {
+     "q": "What is the shortcut to paste in Photoshop?",
+     "o": [
+      "Ctrl + P",
+      "Ctrl + A",
+      "Ctrl + T",
+      "Ctrl + V"
+     ],
+     "a": 3,
+     "why": "Ctrl + V pastes; Ctrl + P prints."
+    },
+    {
+     "q": "In the Layers panel, which layer appears in front?",
+     "o": [
+      "The one at the bottom of the list",
+      "The one with the longest name",
+      "The Background layer",
+      "The one at the top of the list"
+     ],
+     "a": 3,
+     "why": "Higher layers cover the ones below."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what layers are in a graphics package and why they are useful.",
+     "m": 3,
+     "a": "Layers are separate levels/sheets that images or elements sit on, stacked on top of each other (1). Each layer can be moved/edited independently (1) without changing the rest of the image, e.g. moving one character in a scene (1)."
+    },
+    {
+     "q": "Describe how to copy an image from one Photoshop document into another.",
+     "m": 3,
+     "a": "In the first image press Ctrl + A to select all (1); press Ctrl + C to copy (1); go to the other document and press Ctrl + V to paste it onto a new layer (1)."
+    }
+   ],
+   "terms": [
+    "Layer",
+    "Background layer"
+   ],
+   "exam": [],
+   "videos": [
+    {
+     "title": "Get to Know Layers in Adobe Photoshop | Adobe Photoshop",
+     "source": "YouTube – Adobe Photoshop",
+     "url": "https://www.youtube.com/watch?v=EGbeHB6iUXk",
+     "yt": "EGbeHB6iUXk"
+    },
+    {
+     "title": "Layers for Beginners | Photoshop CC Tutorial",
+     "source": "YouTube – Pixel & Bracket",
+     "url": "https://www.youtube.com/watch?v=3gxcIn8L__w",
+     "yt": "3gxcIn8L__w"
+    }
+   ]
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Graphic",
+   "def": "Any image, photo, drawing, logo or diagram shown on a screen or printed.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Trademark",
+   "def": "Legal protection that stops anyone else from using a company's logo or brand name.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "CGI",
+   "def": "Computer-Generated Imagery: still or moving pictures, usually 3D, created with computer software for films, TV and games.",
+   "alt": "Computer-generated imagery",
+   "page": "p02"
+  },
+  {
+   "term": "Graphics digitiser",
+   "def": "A flat pad you draw on with a stylus so your drawing appears on the computer; also called a graphics tablet.",
+   "alt": "Graphics tablet",
+   "page": "p03"
+  },
+  {
+   "term": "Pixel",
+   "def": "One tiny square of a single colour; bitmap images are made of a grid of them.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Resolution",
+   "def": "How much detail an image has, linked to how many pixels it contains (or dots per inch when printed).",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "DPI",
+   "def": "Dots Per Inch: how many dots are printed in each inch; the higher the DPI, the better the print quality.",
+   "alt": "Dots per inch",
+   "page": "p04"
+  },
+  {
+   "term": "Pixelated",
+   "def": "When a low-resolution image is enlarged so much that the individual square pixels and jagged edges can be seen.",
+   "alt": "Pixelation",
+   "page": "p04"
+  },
+  {
+   "term": "Pixel dimensions",
+   "def": "The width and height of an image measured in pixels, e.g. 1920 × 1080.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Bitmap",
+   "def": "An image made of a grid of pixels, where the colour of every pixel is stored; also called a raster image.",
+   "alt": "Raster image",
+   "page": "p05"
+  },
+  {
+   "term": "Colour depth",
+   "def": "The number of bits used to store the colour of each pixel; 2 bits gives 4 colours.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Vector graphic",
+   "def": "An image stored as shapes, lines and curves worked out with maths, so it can be resized without going pixelated.",
+   "alt": "Vector",
+   "page": "p06"
+  },
+  {
+   "term": "Compression",
+   "def": "Making a file smaller so it takes less storage space and downloads faster.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Lossless compression",
+   "def": "Compression that makes a file smaller but lets it be restored with no loss of quality, e.g. PNG.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Lossy compression",
+   "def": "Compression that permanently removes some detail to make a file much smaller, e.g. JPEG.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Graphics package",
+   "def": "Software used to create and edit images, e.g. Photoshop, Paint or Illustrator.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Magic Wand",
+   "def": "A Photoshop tool that selects touching pixels of the same or a similar colour with one click.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Clone Stamp",
+   "def": "A Photoshop tool that copies one area of an image over another; Alt + click picks the source.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Tolerance",
+   "def": "A Magic Wand setting that controls how similar a colour must be to be included in the selection.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Aspect ratio",
+   "def": "The proportion of an image's width to its height; keeping it stops an image looking stretched.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Blending options",
+   "def": "Photoshop layer effects such as drop shadow, stroke and glow that make text or images stand out.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Layer",
+   "def": "A separate see-through level in an image; layers are stacked so each part can be edited on its own.",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "Background layer",
+   "def": "The locked bottom layer of an opened photo; it cannot be moved above other layers or contain transparency.",
+   "alt": "",
+   "page": "p11"
+  }
+ ]
+}
