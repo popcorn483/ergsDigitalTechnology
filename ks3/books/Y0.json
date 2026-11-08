@@ -34233,11 +34233,2645 @@
   {
    "id": "c14",
    "n": 14,
+   "title": "Programming Next Steps: Functions, Lists and AI",
+   "intro": "This topic carries on from Programming. You will make your C# programs shorter and smarter with methods, store whole collections of data in arrays and lists, learn the standard list algorithms, find out how to use generative AI to help with code without being fooled by it, and finish by building and testing a quiz-score analyser.",
+   "pages": [
+    {
+     "id": "c14-p01",
+     "spec": "Describe the data types int, double, float, string, char and bool, and choose the most suitable data type for a value",
+     "summary": "Every variable has a data type that decides what it can store and what you can do with it. Use int for whole numbers, double or float for decimals, string for text, char for one character and bool for true or false.",
+     "diagram": {
+      "kind": "match",
+      "title": "Which data type?",
+      "caption": "Match each value to the best C# data type.",
+      "pairs": [
+       [
+        "Number of pupils in 10C",
+        "int"
+       ],
+       [
+        "A pupil's height, 1.68 m",
+        "double"
+       ],
+       [
+        "A speed in a Unity game, 12.5f",
+        "float"
+       ],
+       [
+        "The town Enniskillen",
+        "string"
+       ],
+       [
+        "The grade letter B",
+        "char"
+       ],
+       [
+        "Has the pupil paid for the trip?",
+        "bool"
+       ]
+      ]
+     },
+     "blocks": [
+      {
+       "t": "p",
+       "text": "In the **Programming** topic you wrote C# console programs in Visual Studio using variables, input, IF statements and loops. This topic carries on from there. You will make code shorter and tidier with **methods**, store lots of values at once with **arrays** and **lists**, and learn how to check code written by **generative AI**. Everything starts with data types, so here is a quick recap."
+      },
+      {
+       "t": "p",
+       "text": "A **[[data type|Data type]]** tells the computer what kind of value a variable holds. It decides how much memory the value needs, what you can do with it (you can multiply numbers, but not names) and how it is shown on screen. C# is **strongly typed**: you must give every variable a data type before you use it."
+      },
+      {
+       "t": "table",
+       "head": [
+        "C# type",
+        "General name",
+        "What it stores",
+        "Example declaration"
+       ],
+       "rows": [
+        [
+         "`int`",
+         "[[Integer]]",
+         "Whole numbers, positive or negative",
+         "`int goals = 3;`"
+        ],
+        [
+         "`double`",
+         "Real / [[float|Float]]",
+         "Numbers with a decimal point",
+         "`double height = 1.72;`"
+        ],
+        [
+         "`float`",
+         "Real / float",
+         "Decimals with less precision; the value needs an `f` on the end",
+         "`float speed = 12.5f;`"
+        ],
+        [
+         "`string`",
+         "[[String]]",
+         "Text: any characters inside double quotes",
+         "`string town = \"Enniskillen\";`"
+        ],
+        [
+         "`char`",
+         "Character",
+         "One single character inside single quotes",
+         "`char grade = 'B';`"
+        ],
+        [
+         "`bool`",
+         "[[Boolean]]",
+         "Only `true` or `false`",
+         "`bool hasPaid = false;`"
+        ]
+       ],
+       "caption": "The data types you will use most"
+      },
+      {
+       "t": "note",
+       "text": "The new Northern Ireland curriculum and GCSE papers often use the **general names**: integer, float (or real), string, character and Boolean. In C# you type the keywords `int`, `double` or `float`, `string`, `char` and `bool`. They mean the same thing."
+      },
+      {
+       "t": "h",
+       "text": "Booleans and conditions"
+      },
+      {
+       "t": "p",
+       "text": "A **Boolean** can only ever be `true` or `false`. You already use Booleans without noticing: every condition in an IF statement or loop, such as `mark >= 50`, works out to `true` or `false`. You can store that answer in a `bool` variable and use it later."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "Booleans.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int mark = 63;\n            bool passed = mark >= 50;\n            bool fullMarks = mark == 100;\n\n            Console.WriteLine(\"Passed: \" + passed);\n            Console.WriteLine(\"Full marks: \" + fullMarks);\n\n            if (passed)\n            {\n                Console.WriteLine(\"Well done!\");\n            }\n        }\n    }\n}",
+       "output": "Passed: True\nFull marks: False\nWell done!"
+      },
+      {
+       "t": "warn",
+       "text": "C# **displays** a Boolean as `True` or `False` with a capital letter, but in your **code** you must type `true` and `false` in lower case. `bool done = True;` is a syntax error."
+      },
+      {
+       "t": "h",
+       "text": "Choosing the right type"
+      },
+      {
+       "t": "example",
+       "title": "Worked example: Erne Swimming Club app",
+       "context": "A swimming club in Enniskillen wants an app that stores, for each swimmer: (a) their name, (b) the number of lengths swum this week, (c) their best 50 m time in seconds, such as 34.27, (d) whether their fees are paid, (e) their age group letter, such as C, and (f) their parent's phone number, 028 6632 4100. Choose a data type for each.",
+       "steps": [
+        "(a) Name: text, so **string**.",
+        "(b) Lengths: always a whole number, so **int**.",
+        "(c) Best time: has a decimal point, so **double**.",
+        "(d) Fees paid: only yes or no, so **bool**.",
+        "(e) Age group: one letter, so **char**.",
+        "(f) Phone number: **string**. You never do maths with it, it starts with a 0 that an int would lose, and it contains spaces."
+       ],
+       "answer": "string, int, double, bool, char, string. If you will never do arithmetic with a 'number', store it as a string."
+      },
+      {
+       "t": "warn",
+       "text": "Phone numbers, postcodes (BT74 6AA) and pupil ID numbers with leading zeros are **not** integers. Storing 02866324100 in an `int` loses the first 0, and the number is too big for an `int` anyway."
+      },
+      {
+       "t": "h",
+       "text": "Two number traps to remember"
+      },
+      {
+       "t": "p",
+       "text": "**Dividing two integers gives an integer.** `7 / 2` is `3`, because C# throws away the remainder. To get `3.5`, make one side a double first with a **cast**: `(double)7 / 2`. You will need this for averages later in the topic."
+      },
+      {
+       "t": "p",
+       "text": "**A float needs an f.** Writing `12.5` in C# makes a double. To store it in a `float` you write `12.5f`, otherwise you get the error *cannot implicitly convert type 'double' to 'float'*. Game engines such as Unity use floats a lot, because they take up half the memory of a double."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "NumberTypes.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int total = 7;\n            int count = 2;\n            Console.WriteLine(total / count);\n            Console.WriteLine((double)total / count);\n\n            float speed = 12.5f;\n            Console.WriteLine(speed * 2);\n        }\n    }\n}",
+       "output": "3\n3.5\n25"
+      },
+      {
+       "t": "tip",
+       "text": "`Console.ReadLine()` always gives you a **string**. Convert it before doing maths: `Convert.ToInt32()` for an int and `Convert.ToDouble()` for a double."
+      },
+      {
+       "t": "key",
+       "title": "Key points",
+       "items": [
+        "A data type decides what a variable can store and what you can do with it.",
+        "int = whole numbers; double and float = decimals; string = text; char = one character; bool = true or false.",
+        "Conditions such as mark >= 50 produce a bool.",
+        "Type true and false in lower case; C# displays them as True and False.",
+        "int / int gives an int: cast to double to keep the decimal part.",
+        "If you will never do maths with it (phone numbers, postcodes), use a string."
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "Which data type is best for the number of goals scored in a match?",
+       "o": [
+        "double",
+        "string",
+        "int",
+        "bool"
+       ],
+       "a": 2,
+       "why": "Goals are always whole numbers, so int is the best choice."
+      },
+      {
+       "q": "What is displayed by Console.WriteLine(9 / 2); in C#?",
+       "o": [
+        "4",
+        "4.5",
+        "5",
+        "4.0"
+       ],
+       "a": 0,
+       "why": "Both values are integers, so C# does integer division and drops the .5."
+      },
+      {
+       "q": "Which line correctly declares a float?",
+       "o": [
+        "float temp = 12.5;",
+        "float temp = 12.5f;",
+        "float temp = \"12.5\";",
+        "Float temp = 12.5f;"
+       ],
+       "a": 1,
+       "why": "A decimal value is a double unless you add f; and float is lower case."
+      },
+      {
+       "q": "A variable stores whether the school bus has arrived. Which type should it be?",
+       "o": [
+        "string",
+        "char",
+        "int",
+        "bool"
+       ],
+       "a": 3,
+       "why": "It can only be yes or no, which is exactly what a Boolean stores."
+      },
+      {
+       "q": "Why should a phone number like 028 6632 4100 be stored as a string?",
+       "o": [
+        "Strings use less memory than integers",
+        "An int would lose the leading 0 and you never do maths with it",
+        "C# cannot store numbers bigger than 1000",
+        "Strings are faster to add together"
+       ],
+       "a": 1,
+       "why": "A phone number is an identifier, not a quantity, and integers drop leading zeros."
+      }
+     ],
+     "practice": [
+      {
+       "q": "State the most suitable C# data type for: (a) the price of a cinema ticket, (b) a pupil's surname, (c) whether a pupil is in the school choir.",
+       "m": 3,
+       "a": "(a) double (or decimal) (1); (b) string (1); (c) bool (1)."
+      },
+      {
+       "q": "Explain why `Console.WriteLine(7 / 2);` displays 3, and show how to make it display 3.5.",
+       "m": 2,
+       "a": "7 and 2 are both integers, so C# does integer division and discards the remainder (1). Cast one value to double, e.g. `(double)7 / 2` or use `7 / 2.0` (1)."
+      },
+      {
+       "q": "Write a C# statement that declares a Boolean called `isRaining` and sets it to true.",
+       "m": 1,
+       "a": "`bool isRaining = true;` (lower-case true, semicolon) (1)."
+      }
+     ],
+     "terms": [
+      "Data type",
+      "Integer",
+      "Float",
+      "String",
+      "Boolean"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p02",
+     "spec": "Explain why programmers use methods (functions) to avoid repetition and decompose problems, and write and call a static void method",
+     "summary": "A method is a named block of code that does one job. Write it once, then call it by name whenever you need it. Methods stop you repeating code, make programs easier to read and fix, and let you break a big problem into smaller parts.",
+     "diagram": {
+      "kind": "flow",
+      "title": "What happens when you call a method",
+      "caption": "Click each step. The program jumps to the method, runs it, then comes back.",
+      "direction": "lr",
+      "nodes": [
+       {
+        "id": "a",
+        "label": "Main starts",
+        "detail": "Every C# console program starts at the top of the Main method.",
+        "shape": "start"
+       },
+       {
+        "id": "b",
+        "label": "ShowBanner();",
+        "detail": "Main reaches a method call. It pauses here and jumps to the method.",
+        "shape": "process"
+       },
+       {
+        "id": "c",
+        "label": "Run the method",
+        "detail": "Every line inside ShowBanner's curly brackets runs, from top to bottom.",
+        "shape": "io"
+       },
+       {
+        "id": "d",
+        "label": "Return to Main",
+        "detail": "At the closing } of the method, the program goes back to the line after the call.",
+        "shape": "process"
+       },
+       {
+        "id": "e",
+        "label": "Main carries on",
+        "detail": "The next line of Main runs. It could call the same method again.",
+        "shape": "end"
+       }
+      ],
+      "edges": [
+       [
+        "a",
+        "b"
+       ],
+       [
+        "b",
+        "c"
+       ],
+       [
+        "c",
+        "d"
+       ],
+       [
+        "d",
+        "e"
+       ],
+       [
+        "e",
+        "b"
+       ]
+      ]
+     },
+     "blocks": [
+      {
+       "t": "p",
+       "text": "Imagine you are writing a program for the Year 10 quiz night. Before each round it shows the same banner. Here is the first attempt:"
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "QuizNight_v1.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"========================\");\n            Console.WriteLine(\"   ERGS Year 10 Quiz    \");\n            Console.WriteLine(\"========================\");\n            Console.WriteLine(\"Round 1: Sport\");\n\n            Console.WriteLine(\"========================\");\n            Console.WriteLine(\"   ERGS Year 10 Quiz    \");\n            Console.WriteLine(\"========================\");\n            Console.WriteLine(\"Round 2: Music\");\n        }\n    }\n}",
+       "output": "========================\n   ERGS Year 10 Quiz    \n========================\nRound 1: Sport\n========================\n   ERGS Year 10 Quiz    \n========================\nRound 2: Music"
+      },
+      {
+       "t": "p",
+       "text": "It works, but the same three lines are copied twice. With eight rounds, that is 24 copied lines. And if the quiz is renamed, you have to find and change every copy. Miss one and you have a bug."
+      },
+      {
+       "t": "h",
+       "text": "Methods to the rescue"
+      },
+      {
+       "t": "p",
+       "text": "A **[[method|Method]]** is a named block of code that carries out one task. You write it **once**, then **call** it whenever you need it. Other languages call methods **functions**, **procedures** or **subroutines**; the new NI curriculum and GCSE use the word *functions*. In C# they are all called methods. You have used methods already: `Console.WriteLine()` and `Convert.ToInt32()` are methods that someone else wrote."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "QuizNight_v2.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            ShowBanner();\n            Console.WriteLine(\"Round 1: Sport\");\n\n            ShowBanner();\n            Console.WriteLine(\"Round 2: Music\");\n        }\n\n        static void ShowBanner()\n        {\n            Console.WriteLine(\"========================\");\n            Console.WriteLine(\"   ERGS Year 10 Quiz    \");\n            Console.WriteLine(\"========================\");\n        }\n    }\n}",
+       "output": "========================\n   ERGS Year 10 Quiz    \n========================\nRound 1: Sport\n========================\n   ERGS Year 10 Quiz    \n========================\nRound 2: Music"
+      },
+      {
+       "t": "p",
+       "text": "The output is exactly the same, but now the banner is written in one place. Change it there and every round changes. Here is what each part of the first line, the **method header**, means:"
+      },
+      {
+       "t": "list",
+       "items": [
+        "`static`: the method belongs to the program itself, so Main can call it directly. For now, put `static` on every method.",
+        "`void`: the method does a job but does **not** send a value back (page 4 shows methods that do).",
+        "`ShowBanner`: the method's name. Use a verb in **PascalCase** (every word starts with a capital), such as `ShowMenu` or `PrintReceipt`.",
+        "`()`: the brackets. Values the method needs go in here (next page). Empty brackets mean it needs nothing.",
+        "`{ }`: the **body**: the lines that run each time the method is called."
+       ],
+       "ordered": false
+      },
+      {
+       "t": "p",
+       "text": "To **[[call|Calling a method]]** a method, write its name, the brackets and a semicolon: `ShowBanner();`. The program jumps to the method, runs every line in it, then comes back to the line straight after the call."
+      },
+      {
+       "t": "warn",
+       "text": "Two common mistakes: (1) **Writing a method but never calling it.** Defining a method does not run it; nothing happens until it is called. (2) **Putting it in the wrong place.** Write each method inside `class Program` but **outside** the curly brackets of `Main`, as in the example above."
+      },
+      {
+       "t": "h",
+       "text": "Decomposition: breaking a big problem down"
+      },
+      {
+       "t": "p",
+       "text": "Methods also help you **plan**. **[[Decomposition]]** means breaking a big problem into smaller parts that are easier to solve. Each part can become its own method, and Main simply calls them in order. You met decomposition in computational thinking; methods are how programmers put it into practice."
+      },
+      {
+       "t": "example",
+       "title": "Worked example: decomposing a tuck shop program",
+       "context": "The school tuck shop wants a program that shows the menu, takes a pupil's order and prints a receipt. Decompose it into methods.",
+       "steps": [
+        "Find the separate jobs: **show** the menu, **take** the order, **print** the receipt.",
+        "Give each job a method with a clear verb name: `ShowMenu()`, `TakeOrder()`, `PrintReceipt()`.",
+        "Main becomes a short list of calls in the right order, so anyone can see what the program does at a glance.",
+        "Each method can now be written and tested on its own, or by a different member of the team."
+       ],
+       "answer": "Main calls ShowMenu(); then TakeOrder(); then PrintReceipt();"
+      },
+      {
+       "t": "table",
+       "head": [
+        "Benefit of methods",
+        "Why it helps"
+       ],
+       "rows": [
+        [
+         "Less repetition",
+         "Code is written once and called many times. This is the **DRY** rule: Don't Repeat Yourself."
+        ],
+        [
+         "Easier to read",
+         "A name like `PrintReceipt()` tells you what the code does without reading every line."
+        ],
+        [
+         "Easier to fix and change",
+         "A bug or change only needs fixing in one place."
+        ],
+        [
+         "Easier to test",
+         "You can test each method on its own before joining them together."
+        ],
+        [
+         "Teamwork and reuse",
+         "Different people can write different methods, and a good method can be reused in other programs."
+        ]
+       ],
+       "caption": "Why programmers use methods"
+      },
+      {
+       "t": "tip",
+       "text": "Naming style in C#: **methods** use PascalCase (`ShowBanner`), **variables** use camelCase (`roundNumber`). Following the style makes your code easier for others to read."
+      },
+      {
+       "t": "key",
+       "title": "Key points",
+       "items": [
+        "A method is a named block of code that does one task.",
+        "Write it once, call it as often as you like: Don't Repeat Yourself.",
+        "static void ShowBanner() means: belongs to the program, returns nothing, called ShowBanner, needs no values.",
+        "Call a method with its name, brackets and a semicolon: ShowBanner();",
+        "Methods go inside class Program but outside Main.",
+        "Decomposition = breaking a problem into smaller parts; each part can be a method."
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What is the main reason for putting repeated lines of code into a method?",
+       "o": [
+        "It makes the program run faster",
+        "The code is written once and can be called many times",
+        "It stops anyone else reading the code",
+        "Methods do not need semicolons"
+       ],
+       "a": 1,
+       "why": "Methods avoid repetition: write once, call many times."
+      },
+      {
+       "q": "Which line correctly calls a method called ShowMenu?",
+       "o": [
+        "static void ShowMenu()",
+        "ShowMenu;",
+        "call ShowMenu()",
+        "ShowMenu();"
+       ],
+       "a": 3,
+       "why": "A call is the name, empty brackets and a semicolon. The first option is a method header, not a call."
+      },
+      {
+       "q": "What does the word void mean in static void ShowBanner()?",
+       "o": [
+        "The method sends no value back",
+        "The method is empty",
+        "The method cannot be called",
+        "The method has no name"
+       ],
+       "a": 0,
+       "why": "void means the method does a job but returns nothing."
+      },
+      {
+       "q": "Breaking a big problem into smaller, more manageable parts is called…",
+       "o": [
+        "Iteration",
+        "Decomposition",
+        "Concatenation",
+        "Declaration"
+       ],
+       "a": 1,
+       "why": "Decomposition breaks problems down; each part can become a method."
+      },
+      {
+       "q": "A pupil writes a method but nothing appears when the program runs. What is the most likely cause?",
+       "o": [
+        "The method name is in PascalCase",
+        "The method was never called from Main",
+        "The method has empty brackets",
+        "The method uses Console.WriteLine"
+       ],
+       "a": 1,
+       "why": "Defining a method does not run it; it must be called."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Give two benefits of using methods in a program.",
+       "m": 2,
+       "a": "Any two: avoids repeating code (1); easier to read (1); a change or bug fix only needs making in one place (1); each method can be tested separately (1); can be reused / shared out in a team (1)."
+      },
+      {
+       "q": "Write a C# method called `ShowRules` that displays two lines: `No phones` and `Answers in pen`. Then write the line that calls it.",
+       "m": 3,
+       "a": "`static void ShowRules()` header (1); body with `Console.WriteLine(\"No phones\");` and `Console.WriteLine(\"Answers in pen\");` inside { } (1); call `ShowRules();` (1)."
+      },
+      {
+       "q": "Explain what is meant by decomposition, using a program of your choice as an example.",
+       "m": 2,
+       "a": "Breaking a large problem into smaller, more manageable parts (1); e.g. a quiz program split into ShowRules(), AskQuestions() and ShowScore() (1)."
+      }
+     ],
+     "terms": [
+      "Method",
+      "Calling a method",
+      "Decomposition"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p03",
+     "spec": "Use parameters and arguments to pass values into a method, so one method can work with different data",
+     "summary": "A parameter is a variable in a method's brackets that receives a value. An argument is the actual value you pass in when you call the method. Parameters let one method do the same job with different data.",
+     "diagram": {
+      "kind": "table-reveal",
+      "title": "Test yourself: PrintReceipt",
+      "caption": "The method header is static void PrintReceipt(string item, int quantity, double price). Click a hidden cell to check.",
+      "head": [
+       "Question",
+       "Answer"
+      ],
+      "rows": [
+       [
+        "How many parameters does it have?",
+        "Three"
+       ],
+       [
+        "Data type of the quantity parameter?",
+        "int"
+       ],
+       [
+        "In PrintReceipt(\"Toastie\", 2, 2.5), what is the argument for price?",
+        "2.5"
+       ],
+       [
+        "Is \"Toastie\" a parameter or an argument?",
+        "An argument (the actual value)"
+       ],
+       [
+        "What does PrintReceipt(\"Toastie\", 2, 2.5) display?",
+        "2 x Toastie = £5"
+       ],
+       [
+        "Why does PrintReceipt(2, \"Toastie\", 2.5) fail?",
+        "Arguments are in the wrong order, so the types do not match"
+       ]
+      ],
+      "hidden": [
+       [
+        0,
+        1
+       ],
+       [
+        1,
+        1
+       ],
+       [
+        2,
+        1
+       ],
+       [
+        3,
+        1
+       ],
+       [
+        4,
+        1
+       ],
+       [
+        5,
+        1
+       ]
+      ]
+     },
+     "blocks": [
+      {
+       "t": "p",
+       "text": "The `ShowBanner()` method on the last page always shows the same thing. But each round of the quiz has a different title. Instead of writing a separate method for every round, we can give the method a **value to work with** each time we call it."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "Parameters.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            ShowRound(\"Round 1: Sport\");\n            ShowRound(\"Round 2: Music\");\n            ShowRound(\"Round 3: Fermanagh\");\n        }\n\n        static void ShowRound(string title)\n        {\n            Console.WriteLine(\"== \" + title + \" ==\");\n        }\n    }\n}",
+       "output": "== Round 1: Sport ==\n== Round 2: Music ==\n== Round 3: Fermanagh =="
+      },
+      {
+       "t": "p",
+       "text": "`string title` inside the brackets is a **[[parameter|Parameter]]**: a variable that belongs to the method and receives a value when the method is called. The value you put in the brackets when you call it, such as `\"Round 1: Sport\"`, is the **[[argument|Argument]]**. Each call passes a different argument, so the same method gives a different result."
+      },
+      {
+       "t": "compare",
+       "head": [
+        "Parameter",
+        "Argument"
+       ],
+       "rows": [
+        [
+         "Where is it?",
+         "In the method **header**: `static void ShowRound(string title)`",
+         "In the method **call**: `ShowRound(\"Round 1: Sport\");`"
+        ],
+        [
+         "What is it?",
+         "A variable with a data type and a name",
+         "The actual value passed in"
+        ],
+        [
+         "Think of it as…",
+         "An empty, labelled box waiting for a value",
+         "The value that goes into the box"
+        ]
+       ]
+      },
+      {
+       "t": "tip",
+       "text": "Memory trick: **P**arameter = **P**laceholder; **A**rgument = **A**ctual value."
+      },
+      {
+       "t": "h",
+       "text": "More than one parameter"
+      },
+      {
+       "t": "p",
+       "text": "A method can have several parameters, separated by commas. Each one needs its own data type."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "Receipts.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            PrintReceipt(\"Toastie\", 2, 2.5);\n            PrintReceipt(\"Smoothie\", 1, 1.75);\n            PrintReceipt(\"Fruit pot\", 4, 0.5);\n        }\n\n        static void PrintReceipt(string item, int quantity, double price)\n        {\n            double total = quantity * price;\n            Console.WriteLine(quantity + \" x \" + item + \" = £\" + total);\n        }\n    }\n}",
+       "output": "2 x Toastie = £5\n1 x Smoothie = £1.75\n4 x Fruit pot = £2"
+      },
+      {
+       "t": "p",
+       "text": "When you call a method, the arguments must match the parameters in three ways:"
+      },
+      {
+       "t": "list",
+       "items": [
+        "**Number**: three parameters need three arguments.",
+        "**Order**: the first argument goes into the first parameter, the second into the second, and so on.",
+        "**Data type**: each argument must be the right type for its parameter, e.g. a string for `item`, an int for `quantity`."
+       ],
+       "ordered": false
+      },
+      {
+       "t": "warn",
+       "text": "`PrintReceipt(2, \"Toastie\", 2.5);` will not compile: the arguments are in the wrong order, so C# tries to put `2` into the string parameter `item` (*cannot convert from 'int' to 'string'*). `PrintReceipt(\"Toastie\", 2);` is also an error, because there is no argument for `price`."
+      },
+      {
+       "t": "h",
+       "text": "Arguments can be variables"
+      },
+      {
+       "t": "p",
+       "text": "An argument does not have to be typed straight in. It can be a variable or even a calculation. The variable's name does **not** have to match the parameter's name: the **value** is copied into the parameter."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "Greeting.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"What is your name?\");\n            string pupilName = Console.ReadLine();\n            Console.WriteLine(\"How old are you?\");\n            int pupilAge = Convert.ToInt32(Console.ReadLine());\n\n            Greet(pupilName, pupilAge);\n        }\n\n        static void Greet(string name, int age)\n        {\n            Console.WriteLine(\"Hi \" + name + \"! In 2 years you will be \" + (age + 2) + \".\");\n        }\n    }\n}",
+       "output": "What is your name?\nNiamh\nHow old are you?\n14\nHi Niamh! In 2 years you will be 16."
+      },
+      {
+       "t": "example",
+       "title": "Worked example: trace a method call",
+       "context": "What does this display? `Repeat(\"Erne\", 3);` where the method is `static void Repeat(string word, int times) { for (int i = 0; i < times; i++) { Console.Write(word + \" \"); } Console.WriteLine(); }`",
+       "steps": [
+        "The argument `\"Erne\"` is copied into the parameter `word`.",
+        "The argument `3` is copied into the parameter `times`.",
+        "The loop runs for i = 0, 1 and 2: three times. `Console.Write` keeps everything on one line.",
+        "Each time it writes `Erne` followed by a space."
+       ],
+       "answer": "Erne Erne Erne"
+      },
+      {
+       "t": "key",
+       "title": "Key points",
+       "items": [
+        "A parameter is a variable in the method header that receives a value.",
+        "An argument is the actual value passed in when the method is called.",
+        "Parameters let one method work with different data each time.",
+        "Arguments must match the parameters in number, order and data type.",
+        "An argument can be a value, a variable or a calculation; names do not have to match."
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "In static void Greet(string name), what is string name?",
+       "o": [
+        "An argument",
+        "A parameter",
+        "A return value",
+        "A method call"
+       ],
+       "a": 1,
+       "why": "It is in the method header, so it is a parameter."
+      },
+      {
+       "q": "In the call PrintReceipt(\"Crisps\", 3, 0.8);, what is 3?",
+       "o": [
+        "A parameter",
+        "The method name",
+        "An argument",
+        "A data type"
+       ],
+       "a": 2,
+       "why": "Values passed in a call are arguments."
+      },
+      {
+       "q": "A method has the header static void Book(string name, int seats). Which call is correct?",
+       "o": [
+        "Book(\"Orla\", 2);",
+        "Book(2, \"Orla\");",
+        "Book(\"Orla\");",
+        "Book(name, seats, 2);"
+       ],
+       "a": 0,
+       "why": "Two arguments, in the right order and of the right types."
+      },
+      {
+       "q": "What does ShowRound(\"Final\"); display if the method body is Console.WriteLine(\"== \" + title + \" ==\");?",
+       "o": [
+        "== title ==",
+        "Final",
+        "== \"Final\" ==",
+        "== Final =="
+       ],
+       "a": 3,
+       "why": "The argument Final is copied into title, and the speech marks are not displayed."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain the difference between a parameter and an argument.",
+       "m": 2,
+       "a": "A parameter is the variable listed in the method header that receives a value (1); an argument is the actual value passed in when the method is called (1)."
+      },
+      {
+       "q": "Write a method called `ShowTotal` with two int parameters, `a` and `b`, that displays their sum. Then call it with the values 8 and 5.",
+       "m": 3,
+       "a": "`static void ShowTotal(int a, int b)` (1); `Console.WriteLine(a + b);` in the body (1); call `ShowTotal(8, 5);` (1)."
+      },
+      {
+       "q": "A pupil calls `PrintReceipt(2, \"Toastie\", 2.5);` for the method `static void PrintReceipt(string item, int quantity, double price)`. Explain why there is an error.",
+       "m": 2,
+       "a": "The arguments are in the wrong order (1), so 2 (an int) is passed to the string parameter item / the types do not match (1)."
+      }
+     ],
+     "terms": [
+      "Parameter",
+      "Argument"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p04",
+     "spec": "Write methods that return a value, and explain the difference between a void method and a method with a return type",
+     "summary": "A method with a return type, such as int, double or bool, works something out and sends one value back to where it was called, using the keyword return. A void method does a job but sends nothing back.",
+     "diagram": {
+      "kind": "calc",
+      "title": "Try the CalculateAverage method",
+      "caption": "Change the three arguments. The result is the value the method returns.",
+      "inputs": [
+       {
+        "id": "a",
+        "label": "First mark (a)",
+        "value": 70
+       },
+       {
+        "id": "b",
+        "label": "Second mark (b)",
+        "value": 85
+       },
+       {
+        "id": "c",
+        "label": "Third mark (c)",
+        "value": 90
+       }
+      ],
+      "formula": "(a + b + c) / 3",
+      "result": {
+       "label": "CalculateAverage(a, b, c) returns",
+       "unit": ""
+      }
+     },
+     "blocks": [
+      {
+       "t": "p",
+       "text": "Some methods **do** something, like showing a banner. Others **work something out** and hand the answer back, like asking a friend to work out a sum: they tell you the answer, and you decide what to do with it. A method that hands back an answer has a **return type** instead of `void`."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "Square.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int answer = Square(7);\n            Console.WriteLine(answer);\n            Console.WriteLine(Square(3) + Square(4));\n        }\n\n        static int Square(int number)\n        {\n            return number * number;\n        }\n    }\n}",
+       "output": "49\n25"
+      },
+      {
+       "t": "list",
+       "items": [
+        "`static int Square(int number)`: the word `int` before the name is the **return type**. It promises the method will send back an int.",
+        "`return number * number;`: the keyword `return` sends the **[[return value|Return value]]** back to the line that called the method, and ends the method.",
+        "`int answer = Square(7);`: the call `Square(7)` is replaced by the value it returns, 49, which is stored in `answer`.",
+        "`Square(3) + Square(4)`: returned values can be used straight away in a calculation: 9 + 16 = 25."
+       ],
+       "ordered": false
+      },
+      {
+       "t": "compare",
+       "head": [
+        "void method",
+        "Method with a return type"
+       ],
+       "rows": [
+        [
+         "Header",
+         "`static void ShowBanner()`",
+         "`static int Square(int number)`"
+        ],
+        [
+         "Sends a value back?",
+         "No",
+         "Yes, one value, using `return`"
+        ],
+        [
+         "Typical job",
+         "Display something, change something",
+         "Calculate or check something"
+        ],
+        [
+         "How you call it",
+         "On its own line: `ShowBanner();`",
+         "Inside an expression: `int x = Square(7);`"
+        ]
+       ]
+      },
+      {
+       "t": "h",
+       "text": "Returning doubles and Booleans"
+      },
+      {
+       "t": "p",
+       "text": "The return type can be any data type. A method that works out an average returns a `double`. A method that answers a yes/no question returns a `bool`, and you can use it straight inside an IF statement."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "Returns.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            double average = CalculateAverage(70, 85, 90);\n            Console.WriteLine(\"Average: \" + Math.Round(average, 1));\n\n            if (IsPass(49))\n            {\n                Console.WriteLine(\"49 is a pass\");\n            }\n            else\n            {\n                Console.WriteLine(\"49 is not a pass\");\n            }\n        }\n\n        static double CalculateAverage(int a, int b, int c)\n        {\n            return (a + b + c) / 3.0;\n        }\n\n        static bool IsPass(int mark)\n        {\n            return mark >= 50;\n        }\n    }\n}",
+       "output": "Average: 81.7\n49 is not a pass"
+      },
+      {
+       "t": "p",
+       "text": "`(a + b + c) / 3.0` divides by `3.0`, a double, so the answer keeps its decimal part: 245 ÷ 3 = 81.666… `Math.Round(average, 1)` rounds it to one decimal place, 81.7."
+      },
+      {
+       "t": "warn",
+       "text": "The value you return must match the return type. `static int Half(int n) { return n / 2.0; }` will not compile, because `n / 2.0` is a double (*cannot implicitly convert type 'double' to 'int'*). Forgetting `return` altogether gives the error *not all code paths return a value*."
+      },
+      {
+       "t": "warn",
+       "text": "Calling a method that returns a value and then ignoring it, such as `Square(7);` on its own line, works out the answer and throws it away. Store it, display it or use it."
+      },
+      {
+       "t": "example",
+       "title": "Worked example: a temperature converter",
+       "context": "Write a method `ToFahrenheit` that takes a temperature in Celsius (a double) and returns it in Fahrenheit, using F = C × 9 ÷ 5 + 32. What does `Console.WriteLine(ToFahrenheit(20));` display?",
+       "steps": [
+        "Input: one double, so the parameter is `double celsius`.",
+        "Output: a decimal number, so the return type is `double`.",
+        "Method: `static double ToFahrenheit(double celsius) { return celsius * 9 / 5 + 32; }`",
+        "Trace: 20 × 9 = 180; 180 ÷ 5 = 36; 36 + 32 = 68."
+       ],
+       "answer": "68"
+      },
+      {
+       "t": "note",
+       "text": "At GCSE you may hear two names: a **[[function|Function]]** is a subroutine that **returns** a value, and a **[[procedure|Procedure]]** is one that does not. In C# both are just methods: a **[[void|Void]]** method behaves like a procedure, and a method with a return type behaves like a function."
+      },
+      {
+       "t": "tip",
+       "text": "`return` ends the method immediately. Any lines after it inside the method will not run (Visual Studio warns you with *unreachable code detected*)."
+      },
+      {
+       "t": "key",
+       "title": "Key points",
+       "items": [
+        "A method with a return type sends one value back using return.",
+        "The return type (int, double, string, bool...) replaces void in the header.",
+        "The call is replaced by the returned value: int x = Square(7); stores 49.",
+        "void methods return nothing; they just do a job.",
+        "The returned value must match the return type.",
+        "Function = returns a value; procedure = does not."
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What does the keyword return do?",
+       "o": [
+        "Sends a value back to where the method was called",
+        "Restarts the program",
+        "Displays a value on the screen",
+        "Repeats the method"
+       ],
+       "a": 0,
+       "why": "return sends the value back and ends the method."
+      },
+      {
+       "q": "What is displayed by Console.WriteLine(Square(5)); if Square returns number * number?",
+       "o": [
+        "10",
+        "5",
+        "25",
+        "55"
+       ],
+       "a": 2,
+       "why": "5 × 5 = 25 is returned and displayed."
+      },
+      {
+       "q": "Which header is right for a method that checks if a pupil is old enough to vote and answers yes or no?",
+       "o": [
+        "static void CanVote(int age)",
+        "static int CanVote(int age)",
+        "static string CanVote(age)",
+        "static bool CanVote(int age)"
+       ],
+       "a": 3,
+       "why": "A yes/no answer is a Boolean, so the return type is bool."
+      },
+      {
+       "q": "Why does static int Half(int n) { return n / 2.0; } give an error?",
+       "o": [
+        "n / 2.0 is a double but the method promises an int",
+        "Methods cannot divide",
+        "return must come first in a method",
+        "int methods cannot have parameters"
+       ],
+       "a": 0,
+       "why": "The returned value must match the return type."
+      },
+      {
+       "q": "In GCSE terms, a subroutine that returns a value is called a…",
+       "o": [
+        "procedure",
+        "function",
+        "parameter",
+        "loop"
+       ],
+       "a": 1,
+       "why": "Functions return a value; procedures do not."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain the difference between a void method and a method with a return type.",
+       "m": 2,
+       "a": "A void method carries out a task but does not send a value back (1); a method with a return type uses return to send one value of that type back to where it was called (1)."
+      },
+      {
+       "q": "Write a method `Triple` that takes an int and returns three times its value. Show how to store the result of `Triple(4)` in a variable.",
+       "m": 3,
+       "a": "`static int Triple(int number)` (1); `return number * 3;` (1); `int result = Triple(4);` (1)."
+      },
+      {
+       "q": "A method is `static double Average(int a, int b) { return (a + b) / 2; }`. What does `Average(3, 4)` return, and why is it wrong? How would you fix it?",
+       "m": 3,
+       "a": "It returns 3 (1) because (a + b) / 2 is integer division, which drops the .5 (1). Divide by 2.0 (or cast to double) to get 3.5 (1)."
+      }
+     ],
+     "terms": [
+      "Return value",
+      "Void",
+      "Function",
+      "Procedure"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p05",
+     "spec": "Explain the scope of a variable, and the difference between local and global (class-level) variables",
+     "summary": "The scope of a variable is the part of the program where it can be used. A local variable only exists inside the method or block where it is declared. A global (class-level) variable can be used by every method, but it is safer to use local variables, parameters and return values.",
+     "diagram": {
+      "kind": "layers",
+      "title": "Where can each variable be seen?",
+      "caption": "Each box sits inside the one below it. A variable can be used in its own box and any box inside it.",
+      "items": [
+       {
+        "label": "for loop block: int i",
+        "detail": "The loop counter only exists inside the loop's { }. After the loop, i has gone."
+       },
+       {
+        "label": "AddPoints method: parameter points",
+        "detail": "Parameters are local to their method. Main cannot see points."
+       },
+       {
+        "label": "Main method: string name",
+        "detail": "A local variable of Main. Other methods cannot see it unless it is passed as an argument."
+       },
+       {
+        "label": "class Program: static int score",
+        "detail": "A class-level (global) variable. Every method in the class can use and change it."
+       }
+      ]
+     },
+     "blocks": [
+      {
+       "t": "p",
+       "text": "Think about your school. Notes on the whiteboard in room 12 can only be seen by people in room 12. A notice on the main corridor can be seen by everyone in the school. Variables work in a similar way."
+      },
+      {
+       "t": "p",
+       "text": "The **[[scope|Scope]]** of a variable is the part of the program where it exists and can be used. In C#, a variable's scope is the pair of curly brackets `{ }` it was declared in."
+      },
+      {
+       "t": "h",
+       "text": "Local variables"
+      },
+      {
+       "t": "p",
+       "text": "A **[[local variable|Local variable]]** is declared **inside** a method (or inside a loop or IF block). It is created when that code runs and disappears when it finishes. Parameters are local variables too. Other methods cannot see it."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "ScopeError.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Shopping total\");\n            AddItems();\n            Console.WriteLine(total);\n        }\n\n        static void AddItems()\n        {\n            double total = 2.5 + 1.75;\n        }\n    }\n}",
+       "output": "error CS0103: The name 'total' does not exist in the current context"
+      },
+      {
+       "t": "p",
+       "text": "`total` is local to `AddItems`, so Main cannot see it and the program will not compile. The fix is to **return** the value and store it in Main:"
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "ScopeFixed.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Shopping total\");\n            double total = AddItems();\n            Console.WriteLine(total);\n        }\n\n        static double AddItems()\n        {\n            double total = 2.5 + 1.75;\n            return total;\n        }\n    }\n}",
+       "output": "Shopping total\n4.25"
+      },
+      {
+       "t": "p",
+       "text": "Notice that there are now **two different** variables called `total`: one local to `AddItems` and one local to Main. They do not clash, because each lives in its own scope. That is a big advantage of local variables: you can reuse sensible names without worrying about other methods."
+      },
+      {
+       "t": "h",
+       "text": "Global (class-level) variables"
+      },
+      {
+       "t": "p",
+       "text": "Some languages have **[[global variables|Global variable]]** that can be used anywhere in the program. C# does not have truly global variables, but the nearest thing is a variable declared inside `class Program` and **outside every method**, with the word `static`. Every method in the class can use and change it. At GCSE you can call this a global variable."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "GlobalScore.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static int score = 0;\n\n        static void Main(string[] args)\n        {\n            AddPoints(3);\n            AddPoints(5);\n            Console.WriteLine(\"Score: \" + score);\n        }\n\n        static void AddPoints(int points)\n        {\n            score = score + points;\n        }\n    }\n}",
+       "output": "Score: 8"
+      },
+      {
+       "t": "compare",
+       "head": [
+        "Local variable",
+        "Global (class-level) variable"
+       ],
+       "rows": [
+        [
+         "Declared",
+         "Inside a method, loop or IF block",
+         "Inside the class, outside every method"
+        ],
+        [
+         "Can be used by",
+         "Only the code inside its own { }",
+         "Every method in the class"
+        ],
+        [
+         "Exists for",
+         "Only while that code is running",
+         "The whole time the program runs"
+        ],
+        [
+         "Risk",
+         "Low: other methods cannot change it",
+         "Higher: any method can change it by mistake"
+        ]
+       ]
+      },
+      {
+       "t": "warn",
+       "text": "Use global variables sparingly. Because **any** method can change them, a bug in one method can break a completely different part of the program, and it is hard to work out which method changed the value. Methods that use parameters and return values are also easier to test and reuse."
+      },
+      {
+       "t": "p",
+       "text": "**Block scope.** A variable declared inside a loop only exists inside that loop. After `for (int i = 0; i < 3; i++) { ... }` finishes, trying `Console.WriteLine(i);` gives the same *does not exist in the current context* error. If you need a value after the loop, declare the variable **before** the loop."
+      },
+      {
+       "t": "example",
+       "title": "Worked example: spot the scope bug",
+       "context": "A pupil wants to count the scores over 50: they write `foreach (int s in scores) { int count = 0; if (s > 50) { count++; } }` and then `Console.WriteLine(count);` after the loop. Find two problems.",
+       "steps": [
+        "`count` is declared **inside** the loop, so it does not exist after the loop: the WriteLine will not compile.",
+        "Worse, `int count = 0;` runs on **every** pass, so the count is reset to 0 each time.",
+        "Fix: move `int count = 0;` to the line **before** the loop. Now it keeps its value and can be used after the loop."
+       ],
+       "answer": "Declare count before the loop so it is not reset each time and is still in scope afterwards."
+      },
+      {
+       "t": "key",
+       "title": "Key points",
+       "items": [
+        "Scope = the part of a program where a variable can be used: the { } it was declared in.",
+        "A local variable is declared inside a method or block and only exists there.",
+        "Parameters are local to their method.",
+        "A global (class-level) variable is declared outside every method and can be used by all of them.",
+        "Prefer local variables, parameters and return values: fewer bugs, easier testing.",
+        "Error CS0103 'does not exist in the current context' usually means a scope problem."
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What is meant by the scope of a variable?",
+       "o": [
+        "How much memory it uses",
+        "Its data type",
+        "The part of the program where it can be used",
+        "How many times it can change"
+       ],
+       "a": 2,
+       "why": "Scope is where in the program a variable exists and can be used."
+      },
+      {
+       "q": "A variable is declared inside a method called CalculateTotal. What kind of variable is it?",
+       "o": [
+        "Global",
+        "Local",
+        "Constant",
+        "Parameter list"
+       ],
+       "a": 1,
+       "why": "Variables declared inside a method are local to it."
+      },
+      {
+       "q": "Why can too many global variables cause problems?",
+       "o": [
+        "They use too little memory",
+        "They cannot store strings",
+        "They must be declared inside a loop",
+        "Any method can change them, making bugs hard to find"
+       ],
+       "a": 3,
+       "why": "Every method can change a global, so it is hard to trace what changed it."
+      },
+      {
+       "q": "After the loop for (int i = 0; i < 5; i++) { } finishes, what happens if you try Console.WriteLine(i);?",
+       "o": [
+        "It shows 5",
+        "A compile error: i does not exist there",
+        "It shows 4",
+        "It shows 0"
+       ],
+       "a": 1,
+       "why": "i was declared in the loop, so it is out of scope after the loop."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain the difference between a local variable and a global variable.",
+       "m": 2,
+       "a": "A local variable is declared inside a method/block and can only be used there (1); a global variable is declared outside all methods and can be used by every method in the program (1)."
+      },
+      {
+       "q": "Give one advantage of using local variables instead of global variables.",
+       "m": 1,
+       "a": "Any one: other methods cannot change them by accident (1); the same name can be reused in different methods (1); methods are easier to test and reuse (1); memory is freed when the method ends (1)."
+      },
+      {
+       "q": "A method declares `double total` and Main tries to display `total`. Explain the error and describe how to fix it.",
+       "m": 2,
+       "a": "total is local to the method so it is out of scope / does not exist in Main (1). Return total from the method and store the returned value in a variable in Main (1)."
+      }
+     ],
+     "terms": [
+      "Scope",
+      "Local variable",
+      "Global variable"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p06",
+     "spec": "Declare an array, access its elements using an index that starts at 0, and loop through it with a for loop",
+     "summary": "An array stores a fixed number of values of the same data type under one name. Each element has an index starting at 0, so the last index is always Length - 1. A for loop can visit every element.",
+     "diagram": {
+      "kind": "hotspot",
+      "title": "Inside the marks array",
+      "caption": "int[] marks = { 72, 65, 88, 54, 91 }; Click each element.",
+      "rows": [
+       [
+        {
+         "label": "[0] 72",
+         "detail": "marks[0] is 72. The FIRST element is at index 0, not 1.",
+         "span": 1
+        },
+        {
+         "label": "[1] 65",
+         "detail": "marks[1] is 65, the second element.",
+         "span": 1
+        },
+        {
+         "label": "[2] 88",
+         "detail": "marks[2] is 88. Index 2 is the third element.",
+         "span": 1
+        },
+        {
+         "label": "[3] 54",
+         "detail": "marks[3] is 54.",
+         "span": 1
+        },
+        {
+         "label": "[4] 91",
+         "detail": "marks[4] is 91, the LAST element. Length is 5, so the last index is 5 - 1 = 4. marks[5] would crash the program.",
+         "span": 1
+        }
+       ]
+      ]
+     },
+     "blocks": [
+      {
+       "t": "p",
+       "text": "Suppose you want to store the test marks for a class of 28 pupils. You could make 28 variables: `mark1`, `mark2`, `mark3`… but that is a lot of typing, and you could not use a loop to go through them. Programmers use a **[[data structure|Data structure]]** instead: a way of storing and organising lots of related data under one name."
+      },
+      {
+       "t": "p",
+       "text": "An **[[array|Array]]** is the simplest data structure. It stores a **fixed number** of values, all of the **same data type**, under one name. Each value is called an **element**, and each element has a number called its **[[index|Index]]** that says where it is."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "Arrays.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            string[] towns = { \"Enniskillen\", \"Omagh\", \"Belfast\", \"Newry\", \"Lisburn\" };\n\n            Console.WriteLine(towns[0]);\n            Console.WriteLine(towns[2]);\n            Console.WriteLine(\"There are \" + towns.Length + \" towns.\");\n\n            towns[4] = \"Armagh\";\n            Console.WriteLine(towns[4]);\n        }\n    }\n}",
+       "output": "Enniskillen\nBelfast\nThere are 5 towns.\nArmagh"
+      },
+      {
+       "t": "table",
+       "head": [
+        "Index",
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+       ],
+       "rows": [
+        [
+         "Value",
+         "Enniskillen",
+         "Omagh",
+         "Belfast",
+         "Newry",
+         "Lisburn"
+        ]
+       ],
+       "caption": "The towns array before towns[4] is changed"
+      },
+      {
+       "t": "list",
+       "items": [
+        "`string[]`: the square brackets after the type mean *an array of strings*.",
+        "`{ ... }`: the starting values, separated by commas. C# counts them to set the size: 5.",
+        "`towns[2]`: square brackets after the name pick one element by its index. Index 2 is the **third** town, Belfast.",
+        "`towns.Length`: the number of elements (5). It has no brackets.",
+        "`towns[4] = \"Armagh\";`: you can change an element by assigning a new value to it."
+       ],
+       "ordered": false
+      },
+      {
+       "t": "warn",
+       "text": "Arrays are **zero-indexed**: the first element is at index **0**, so the last element is at index **Length - 1**. In a 5-element array the indexes are 0 to 4. There is no `towns[5]`."
+      },
+      {
+       "t": "h",
+       "text": "Creating an empty array"
+      },
+      {
+       "t": "p",
+       "text": "If you do not know the values yet, give the size instead. `int[] scores = new int[4];` makes room for 4 integers, all starting at 0. You then fill each element by its index."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "NewArray.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int[] scores = new int[4];\n            scores[0] = 12;\n            scores[1] = 17;\n            scores[3] = 9;\n\n            Console.WriteLine(scores[1]);\n            Console.WriteLine(scores[2]);\n        }\n    }\n}",
+       "output": "17\n0"
+      },
+      {
+       "t": "p",
+       "text": "`scores[2]` was never given a value, so it still holds the default for an int, **0**. Once an array is made, its size is **fixed**: you cannot add a fifth score to this array."
+      },
+      {
+       "t": "h",
+       "text": "Looping through an array"
+      },
+      {
+       "t": "p",
+       "text": "This is where arrays become powerful. A `for` loop counter can be used as the index, so one short loop can visit every element, whether there are 5 or 500."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "LoopArray.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int[] marks = { 72, 65, 88, 54, 91 };\n\n            for (int i = 0; i < marks.Length; i++)\n            {\n                Console.WriteLine(\"Pupil \" + (i + 1) + \": \" + marks[i]);\n            }\n        }\n    }\n}",
+       "output": "Pupil 1: 72\nPupil 2: 65\nPupil 3: 88\nPupil 4: 54\nPupil 5: 91"
+      },
+      {
+       "t": "p",
+       "text": "The loop starts at `i = 0` (the first index) and keeps going while `i < marks.Length`, so the last value of `i` is 4. We display `i + 1` because people count pupils from 1, even though the computer counts indexes from 0."
+      },
+      {
+       "t": "h",
+       "text": "Off-by-one errors"
+      },
+      {
+       "t": "p",
+       "text": "An **[[off-by-one error|Off-by-one error]]** is when a loop runs one time too many or one time too few. With arrays it is the most common bug of all. Look what happens if `<` is changed to `<=`:"
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "OffByOne.cs",
+       "code": "using System;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            int[] marks = { 72, 65, 88, 54, 91 };\n\n            for (int i = 0; i <= marks.Length; i++)\n            {\n                Console.WriteLine(marks[i]);\n            }\n        }\n    }\n}",
+       "output": "72\n65\n88\n54\n91\nUnhandled exception. System.IndexOutOfRangeException: Index was outside the bounds of the array."
+      },
+      {
+       "t": "warn",
+       "text": "With `i <= marks.Length` the loop tries `marks[5]`, which does not exist, and the program **crashes** with an *IndexOutOfRangeException*. Starting the loop at `i = 1` is the opposite mistake: it never displays the first element, `marks[0]`, and gives no error at all, which makes it harder to spot. Use `for (int i = 0; i < array.Length; i++)`."
+      },
+      {
+       "t": "example",
+       "title": "Worked example: array questions",
+       "context": "`int[] goals = { 2, 0, 3, 1, 4, 2 };` (a) What is `goals.Length`? (b) What is `goals[3]`? (c) What is the index of the last element? (d) What is `goals[0] + goals[4]`?",
+       "steps": [
+        "(a) There are 6 values, so `goals.Length` is **6**.",
+        "(b) Count from 0: index 0 is 2, index 1 is 0, index 2 is 3, index 3 is **1**.",
+        "(c) The last index is Length - 1 = 6 - 1 = **5**.",
+        "(d) `goals[0]` is 2 and `goals[4]` is 4, so the answer is **6**."
+       ],
+       "answer": "6, 1, 5 and 6."
+      },
+      {
+       "t": "key",
+       "title": "Key points",
+       "items": [
+        "A data structure stores and organises lots of related data under one name.",
+        "An array holds a fixed number of elements of the same data type.",
+        "Indexes start at 0; the last index is Length - 1.",
+        "Use array[index] to read or change one element; array.Length gives the size.",
+        "Loop through with for (int i = 0; i < array.Length; i++).",
+        "Using <= instead of < goes one past the end and crashes the program (off-by-one error)."
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What is the index of the first element in a C# array?",
+       "o": [
+        "1",
+        "0",
+        "-1",
+        "It depends on the array"
+       ],
+       "a": 1,
+       "why": "C# arrays are zero-indexed."
+      },
+      {
+       "q": "string[] days = { \"Mon\", \"Tue\", \"Wed\", \"Thu\", \"Fri\" }; What is days[3]?",
+       "o": [
+        "Wed",
+        "Fri",
+        "Thu",
+        "Tue"
+       ],
+       "a": 2,
+       "why": "Index 0 is Mon, 1 Tue, 2 Wed, 3 Thu."
+      },
+      {
+       "q": "An array has a Length of 8. What is the index of its last element?",
+       "o": [
+        "7",
+        "8",
+        "9",
+        "0"
+       ],
+       "a": 0,
+       "why": "The last index is always Length - 1."
+      },
+      {
+       "q": "Which loop safely visits every element of an array called marks?",
+       "o": [
+        "for (int i = 1; i <= marks.Length; i++)",
+        "for (int i = 0; i <= marks.Length; i++)",
+        "for (int i = 1; i < marks.Length; i++)",
+        "for (int i = 0; i < marks.Length; i++)"
+       ],
+       "a": 3,
+       "why": "Start at 0 and stop before Length."
+      },
+      {
+       "q": "Which of these is true about an array?",
+       "o": [
+        "It can hold any mix of data types",
+        "Its size is fixed once it is created",
+        "Its first index is 1",
+        "It grows when you add items"
+       ],
+       "a": 1,
+       "why": "An array's size cannot change after it is created."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Write a C# statement that creates an array called `subjects` holding the strings Maths, English and Science.",
+       "m": 2,
+       "a": "`string[] subjects = { \"Maths\", \"English\", \"Science\" };` correct type with [] (1); values in { } with quotes, commas and semicolon (1)."
+      },
+      {
+       "q": "Explain what an off-by-one error is, and give an example of one when looping through an array.",
+       "m": 2,
+       "a": "A loop that runs one time too many or too few (1); e.g. using i <= marks.Length, which tries to access marks[marks.Length], an index that does not exist, so the program crashes (1)."
+      },
+      {
+       "q": "`int[] temps = { 4, 7, -1, 3 };` State the value of (a) temps.Length, (b) temps[2], (c) temps[1] + temps[3].",
+       "m": 3,
+       "a": "(a) 4 (1); (b) -1 (1); (c) 7 + 3 = 10 (1)."
+      }
+     ],
+     "terms": [
+      "Data structure",
+      "Array",
+      "Index",
+      "Off-by-one error"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p07",
+     "spec": "Use a List to store a collection that can grow and shrink, using Add, Remove, Count and foreach, and choose between a list and an array",
+     "summary": "A List is like an array that can change size. Add puts an item on the end, Remove takes one out, Count says how many items there are and a foreach loop visits every item. Use an array when the size is fixed and a list when it will change.",
+     "diagram": {
+      "kind": "compare",
+      "title": "Array or list?",
+      "caption": "Both store many values of one data type under one name.",
+      "states": [
+       {
+        "label": "Array",
+        "points": [
+         "Fixed size, set when it is created",
+         "Declared with []: int[] marks = new int[5];",
+         "Size: marks.Length",
+         "Best when you know exactly how many items, e.g. 7 days, 12 months"
+        ],
+        "art": null
+       },
+       {
+        "label": "List",
+        "points": [
+         "Grows and shrinks as you Add and Remove",
+         "Declared with < >: List<int> marks = new List<int>();",
+         "Size: marks.Count",
+         "Best when the number of items changes, e.g. a queue, a basket, sign-ups"
+        ],
+        "art": null
+       }
+      ]
+     },
+     "blocks": [
+      {
+       "t": "p",
+       "text": "Think about the names of pupils signing up for the school trip to the Marble Arch Caves. You do not know how many will sign up, and some might drop out. An array has a fixed size, so it is a poor fit. A **[[List]]** is a data structure that can **grow and shrink** while the program runs."
+      },
+      {
+       "t": "p",
+       "text": "To use lists, add `using System.Collections.Generic;` at the top of your program. Then declare a list like this: `List<string> names = new List<string>();`. The type inside the **angle brackets** `< >` says what the list holds: `List<string>` holds strings and `List<int>` holds integers."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "TeamList.cs",
+       "code": "using System;\nusing System.Collections.Generic;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            List<string> team = new List<string>();\n            team.Add(\"Ciara\");\n            team.Add(\"Jack\");\n            team.Add(\"Orla\");\n            team.Add(\"Ryan\");\n            Console.WriteLine(\"Players: \" + team.Count);\n\n            team.Remove(\"Jack\");\n            Console.WriteLine(\"Players: \" + team.Count);\n            Console.WriteLine(\"First player: \" + team[0]);\n\n            foreach (string player in team)\n            {\n                Console.WriteLine(player);\n            }\n        }\n    }\n}",
+       "output": "Players: 4\nPlayers: 3\nFirst player: Ciara\nCiara\nOrla\nRyan"
+      },
+      {
+       "t": "table",
+       "head": [
+        "Code",
+        "What it does",
+        "Example"
+       ],
+       "rows": [
+        [
+         "`list.Add(item)`",
+         "Adds an item to the **end** of the list",
+         "`team.Add(\"Sam\");`"
+        ],
+        [
+         "`list.Remove(item)`",
+         "Removes the first matching item",
+         "`team.Remove(\"Jack\");`"
+        ],
+        [
+         "`list.RemoveAt(index)`",
+         "Removes the item at that index",
+         "`team.RemoveAt(0);`"
+        ],
+        [
+         "`list.Count`",
+         "How many items are in the list",
+         "`team.Count`"
+        ],
+        [
+         "`list[index]`",
+         "Reads or changes one item; indexes start at 0, just like arrays",
+         "`team[0]`"
+        ],
+        [
+         "`list.Contains(item)`",
+         "`true` if the item is in the list, otherwise `false`",
+         "`team.Contains(\"Orla\")`"
+        ],
+        [
+         "`list.Clear()`",
+         "Removes every item",
+         "`team.Clear();`"
+        ]
+       ],
+       "caption": "Useful List methods"
+      },
+      {
+       "t": "warn",
+       "text": "Arrays use `.Length` but lists use `.Count`, and neither has brackets. Writing `team.Length` or `team.Count()` for a list is a common mistake. Also remember the `using System.Collections.Generic;` line: without it, C# does not know what `List` means."
+      },
+      {
+       "t": "h",
+       "text": "The foreach loop"
+      },
+      {
+       "t": "p",
+       "text": "A **[[foreach loop|foreach loop]]** visits every item in a list or array, one at a time, without needing an index. Read `foreach (string player in team)` as *for each string, called player, in the team list*. Each time round the loop, `player` holds the next item."
+      },
+      {
+       "t": "p",
+       "text": "Use `foreach` when you just want to **read** every item. Use a `for` loop when you need the **index** (for example to show positions), or when you want to **change** items. You cannot Add or Remove items from a list while a foreach loop is going through it: the program crashes."
+      },
+      {
+       "t": "h",
+       "text": "Building a list from input"
+      },
+      {
+       "t": "p",
+       "text": "Lists are perfect when the user decides how many values there will be. This program keeps adding scores until the user types -1, a special *stop* value."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "ScoreInput.cs",
+       "code": "using System;\nusing System.Collections.Generic;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            List<int> scores = new List<int>();\n\n            Console.WriteLine(\"Enter a score (or -1 to finish):\");\n            int score = Convert.ToInt32(Console.ReadLine());\n\n            while (score != -1)\n            {\n                scores.Add(score);\n                Console.WriteLine(\"Enter a score (or -1 to finish):\");\n                score = Convert.ToInt32(Console.ReadLine());\n            }\n\n            Console.WriteLine(\"You entered \" + scores.Count + \" scores.\");\n        }\n    }\n}",
+       "output": "Enter a score (or -1 to finish):\n14\nEnter a score (or -1 to finish):\n9\nEnter a score (or -1 to finish):\n17\nEnter a score (or -1 to finish):\n-1\nYou entered 3 scores."
+      },
+      {
+       "t": "compare",
+       "head": [
+        "Array",
+        "List"
+       ],
+       "rows": [
+        [
+         "Size",
+         "Fixed when created",
+         "Grows and shrinks"
+        ],
+        [
+         "Declare",
+         "`int[] a = new int[5];`",
+         "`List<int> a = new List<int>();`"
+        ],
+        [
+         "How many items?",
+         "`a.Length`",
+         "`a.Count`"
+        ],
+        [
+         "Add an item",
+         "Not possible: the size is fixed",
+         "`a.Add(7);`"
+        ],
+        [
+         "Best for",
+         "A known, fixed number of items",
+         "A number of items that changes"
+        ]
+       ]
+      },
+      {
+       "t": "example",
+       "title": "Worked example: array or list?",
+       "context": "Choose an array or a list for: (a) the temperature in Enniskillen each day for one week, (b) the items in an online shopping basket, (c) rainfall for each of the 12 months of 2025, (d) pupils queuing for the canteen.",
+       "steps": [
+        "(a) Always exactly 7 days: **array**.",
+        "(b) Items are added and removed all the time: **list**.",
+        "(c) Always exactly 12 months: **array**.",
+        "(d) Pupils join and leave the queue: **list**."
+       ],
+       "answer": "Arrays for (a) and (c); lists for (b) and (d)."
+      },
+      {
+       "t": "note",
+       "text": "You can also create a list with starting values: `List<string> towns = new List<string> { \"Omagh\", \"Lisnaskea\" };`. Many programmers use lists almost all the time because they are so flexible, but at GCSE you need to know both."
+      },
+      {
+       "t": "key",
+       "title": "Key points",
+       "items": [
+        "A List can grow and shrink; an array cannot.",
+        "Declare with List<type> name = new List<type>(); and add using System.Collections.Generic;",
+        "Add, Remove, RemoveAt, Contains and Clear change or check the list.",
+        "list.Count gives the number of items (arrays use Length).",
+        "Indexes start at 0, as with arrays.",
+        "foreach visits every item; use for when you need the index."
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "Which line adds \"Erin\" to a list called names?",
+       "o": [
+        "names.Add(\"Erin\");",
+        "names[\"Erin\"];",
+        "names.Insert(\"Erin\");",
+        "names = \"Erin\";"
+       ],
+       "a": 0,
+       "why": "Add puts a new item on the end of the list."
+      },
+      {
+       "q": "How do you find out how many items are in a list called team?",
+       "o": [
+        "team.Length",
+        "team.Size()",
+        "team.Count",
+        "team.Count()"
+       ],
+       "a": 2,
+       "why": "Lists use Count with no brackets."
+      },
+      {
+       "q": "A program stores the names of everyone who signs up for a club during the year. Which is the best choice?",
+       "o": [
+        "An array, because names are strings",
+        "A single string variable",
+        "An array of size 1",
+        "A list, because the number of names will change"
+       ],
+       "a": 3,
+       "why": "The number of sign-ups is unknown and changes, so a list fits."
+      },
+      {
+       "q": "A list holds Ciara, Orla, Ryan. After list.Remove(\"Orla\");, what is list[1]?",
+       "o": [
+        "Ciara",
+        "Ryan",
+        "Orla",
+        "An error"
+       ],
+       "a": 1,
+       "why": "Ciara stays at index 0 and Ryan moves up to index 1."
+      },
+      {
+       "q": "Which line must be at the top of a C# program that uses List?",
+       "o": [
+        "using System.Lists;",
+        "using List;",
+        "using System.Collections.Generic;",
+        "import List;"
+       ],
+       "a": 2,
+       "why": "List lives in System.Collections.Generic."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Give one difference between an array and a list in C#.",
+       "m": 1,
+       "a": "Any one: an array has a fixed size but a list can grow and shrink (1); arrays use Length, lists use Count (1); you can Add/Remove items with a list but not an array (1)."
+      },
+      {
+       "q": "Write C# code that creates an empty list of strings called `pets`, adds \"dog\" and \"cat\", then displays how many items it holds.",
+       "m": 3,
+       "a": "`List<string> pets = new List<string>();` (1); `pets.Add(\"dog\");` and `pets.Add(\"cat\");` (1); `Console.WriteLine(pets.Count);` (1)."
+      },
+      {
+       "q": "A program needs to store the scores of the 15 players in a rugby starting line-up. Should it use an array or a list? Justify your answer.",
+       "m": 2,
+       "a": "An array (1), because there are always exactly 15 players, so the size is fixed and known (1). (Allow list if justified by substitutions changing the team.)"
+      }
+     ],
+     "terms": [
+      "List",
+      "foreach loop"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p08",
+     "spec": "Use loops to process a list: find the total, average and largest value, search for an item and count matches",
+     "summary": "Most list programs use a handful of standard algorithms: keep a running total, divide it by Count for the average, remember the largest value so far, check each item in turn to search for one, and add 1 to a counter for each match.",
+     "diagram": {
+      "kind": "flow",
+      "title": "Linear search",
+      "caption": "Click each step. A linear search checks items one at a time, from the start.",
+      "direction": "tb",
+      "nodes": [
+       {
+        "id": "a",
+        "label": "Start at the first item",
+        "detail": "Begin at index 0 and set found = false.",
+        "shape": "start"
+       },
+       {
+        "id": "b",
+        "label": "Is this item the target?",
+        "detail": "Compare the current item with the value you are looking for, using ==.",
+        "shape": "process"
+       },
+       {
+        "id": "c",
+        "label": "Found it",
+        "detail": "Set found = true and remember the position. You can stop searching.",
+        "shape": "end"
+       },
+       {
+        "id": "d",
+        "label": "Any items left?",
+        "detail": "If yes, move on to the next item and check again.",
+        "shape": "process"
+       },
+       {
+        "id": "e",
+        "label": "Not found",
+        "detail": "You have checked every item and none matched, so found is still false.",
+        "shape": "end"
+       }
+      ],
+      "edges": [
+       [
+        "a",
+        "b"
+       ],
+       [
+        "b",
+        "c"
+       ],
+       [
+        "b",
+        "d"
+       ],
+       [
+        "d",
+        "b"
+       ],
+       [
+        "d",
+        "e"
+       ]
+      ]
+     },
+     "blocks": [
+      {
+       "t": "p",
+       "text": "Once your data is in a list, you will want to do something with it. An **algorithm** is a set of steps to solve a problem, and a few simple algorithms come up again and again in programming, from school reports to sports apps. Learn these and you can solve most list problems. All the examples on this page use the same class marks:"
+      },
+      {
+       "t": "p",
+       "text": "`List<int> marks = new List<int> { 72, 65, 88, 54, 91, 47 };`"
+      },
+      {
+       "t": "h",
+       "text": "1. Total and average"
+      },
+      {
+       "t": "p",
+       "text": "To add up a list, start a **running total** at 0, then add each item to it as you go through the list. The average (mean) is the total divided by how many items there are."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "TotalAverage.cs",
+       "code": "using System;\nusing System.Collections.Generic;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            List<int> marks = new List<int> { 72, 65, 88, 54, 91, 47 };\n\n            int total = 0;\n            foreach (int mark in marks)\n            {\n                total = total + mark;\n            }\n\n            double average = (double)total / marks.Count;\n\n            Console.WriteLine(\"Total: \" + total);\n            Console.WriteLine(\"Average: \" + average);\n        }\n    }\n}",
+       "output": "Total: 417\nAverage: 69.5"
+      },
+      {
+       "t": "warn",
+       "text": "If you write `total / marks.Count`, both values are integers, so C# does integer division: 417 / 6 gives **69**, not 69.5. Cast to double first: `(double)total / marks.Count`."
+      },
+      {
+       "t": "h",
+       "text": "2. Largest value and counting matches"
+      },
+      {
+       "t": "p",
+       "text": "To find the **largest**, remember the biggest value seen so far. Start with the **first item**, then compare every item with it; if an item is bigger, it becomes the new largest. To **count matches**, start a counter at 0 and add 1 each time an item meets the condition."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "LargestAndCount.cs",
+       "code": "using System;\nusing System.Collections.Generic;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            List<int> marks = new List<int> { 72, 65, 88, 54, 91, 47 };\n\n            int largest = marks[0];\n            int passes = 0;\n\n            foreach (int mark in marks)\n            {\n                if (mark > largest)\n                {\n                    largest = mark;\n                }\n                if (mark >= 50)\n                {\n                    passes++;\n                }\n            }\n\n            Console.WriteLine(\"Highest mark: \" + largest);\n            Console.WriteLine(\"Number of passes: \" + passes);\n        }\n    }\n}",
+       "output": "Highest mark: 91\nNumber of passes: 5"
+      },
+      {
+       "t": "warn",
+       "text": "Do not start `largest` at 0. If every value is negative, such as winter temperatures of -3, -6 and -1, nothing is bigger than 0, so the program wrongly reports 0. Starting with the first item always works. To find the **smallest**, use the same idea with `<`."
+      },
+      {
+       "t": "example",
+       "title": "Worked example: trace the largest algorithm",
+       "context": "Trace the largest algorithm for the list { 4, 9, 2, 9, 7 }. Show the value of largest after each item.",
+       "steps": [
+        "Start: largest = the first item = **4**.",
+        "Item 4: 4 > 4? No. largest = 4.",
+        "Item 9: 9 > 4? Yes. largest = **9**.",
+        "Item 2: 2 > 9? No. largest = 9.",
+        "Item 9: 9 > 9? No (they are equal). largest = 9.",
+        "Item 7: 7 > 9? No. largest = 9."
+       ],
+       "answer": "largest = 9. A **[[trace table|Trace table]]** like this, showing each variable as the code runs, is the best way to check an algorithm by hand."
+      },
+      {
+       "t": "h",
+       "text": "3. Searching for an item"
+      },
+      {
+       "t": "p",
+       "text": "A **[[linear search|Linear search]]** checks each item in turn, from the start, until it finds the one it is looking for or runs out of items. Using a `for` loop means we also know the **position** where it was found."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "LinearSearch.cs",
+       "code": "using System;\nusing System.Collections.Generic;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            List<string> names = new List<string> { \"Aoife\", \"Cian\", \"Erin\", \"Darragh\", \"Niamh\" };\n\n            Console.WriteLine(\"Who are you looking for?\");\n            string target = Console.ReadLine();\n\n            bool found = false;\n            int position = -1;\n\n            for (int i = 0; i < names.Count; i++)\n            {\n                if (names[i] == target)\n                {\n                    found = true;\n                    position = i;\n                }\n            }\n\n            if (found)\n            {\n                Console.WriteLine(target + \" is at index \" + position + \".\");\n            }\n            else\n            {\n                Console.WriteLine(target + \" is not in the list.\");\n            }\n        }\n    }\n}",
+       "output": "Who are you looking for?\nErin\nErin is at index 2."
+      },
+      {
+       "t": "p",
+       "text": "`found` is a Boolean **flag**: it starts `false` and only becomes `true` if a match turns up. `position` starts at -1, a value that can never be a real index, so you can tell if nothing was found. A search is **case-sensitive**: `\"erin\"` does not match `\"Erin\"`."
+      },
+      {
+       "t": "tip",
+       "text": "C# has shortcuts, such as `names.Contains(\"Erin\")`, and `marks.Max()` (with `using System.Linq;`), that do some of these jobs for you. They are handy, but you still need to understand the algorithm behind them: you may be asked to write and trace these algorithms at GCSE, and you need them when the shortcut does not quite fit."
+      },
+      {
+       "t": "table",
+       "head": [
+        "Algorithm",
+        "Before the loop",
+        "Inside the loop",
+        "After the loop"
+       ],
+       "rows": [
+        [
+         "Total",
+         "`total = 0`",
+         "`total = total + item`",
+         "Use total"
+        ],
+        [
+         "Average",
+         "Find the total",
+         "(as for total)",
+         "`(double)total / list.Count`"
+        ],
+        [
+         "Largest",
+         "`largest = list[0]`",
+         "If `item > largest`, `largest = item`",
+         "Use largest"
+        ],
+        [
+         "Count matches",
+         "`count = 0`",
+         "If the item matches, `count++`",
+         "Use count"
+        ],
+        [
+         "Linear search",
+         "`found = false`",
+         "If `item == target`, `found = true`",
+         "Check found"
+        ]
+       ],
+       "caption": "The five list algorithms at a glance"
+      },
+      {
+       "t": "key",
+       "title": "Key points",
+       "items": [
+        "Running total: start at 0 and add each item.",
+        "Average = (double)total / list.Count, or integer division loses the decimal.",
+        "Largest: start with the first item, not 0; swap when an item is bigger.",
+        "Count matches: start a counter at 0 and add 1 for each match.",
+        "Linear search: check each item in turn; a bool flag records whether it was found.",
+        "Trace tables let you check an algorithm by hand."
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What should a running total be set to before the loop starts?",
+       "o": [
+        "The first item",
+        "0",
+        "1",
+        "The number of items"
+       ],
+       "a": 1,
+       "why": "Start at 0 so the first item is added correctly."
+      },
+      {
+       "q": "total is 23 and list.Count is 4 (both ints). What does total / list.Count give?",
+       "o": [
+        "5.75",
+        "6",
+        "5",
+        "5.7"
+       ],
+       "a": 2,
+       "why": "Integer division drops the .75."
+      },
+      {
+       "q": "Why should largest start as the first item rather than 0?",
+       "o": [
+        "0 is not allowed in a list",
+        "If all the values are negative, 0 would wrongly be the answer",
+        "The first item is always the largest",
+        "It makes the loop run faster"
+       ],
+       "a": 1,
+       "why": "Starting at 0 fails when no value is above 0."
+      },
+      {
+       "q": "A linear search…",
+       "o": [
+        "checks each item in turn from the start",
+        "only works on numbers",
+        "jumps straight to the middle of the list",
+        "sorts the list first"
+       ],
+       "a": 0,
+       "why": "Linear means one after another, in order."
+      },
+      {
+       "q": "marks = { 40, 55, 50, 38 }. How many are counted by if (mark >= 50) count++;?",
+       "o": [
+        "1",
+        "3",
+        "4",
+        "2"
+       ],
+       "a": 3,
+       "why": "55 and 50 are both at least 50."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Describe how to find the average of the numbers in a list.",
+       "m": 3,
+       "a": "Set a total to 0 (1); loop through the list adding each item to the total (1); divide the total by the number of items / Count, using double division (1)."
+      },
+      {
+       "q": "Write a foreach loop that counts how many values in `List<int> ages` are 18 or over, storing the answer in `adults`.",
+       "m": 3,
+       "a": "`int adults = 0;` before the loop (1); `foreach (int age in ages)` (1); `if (age >= 18) { adults++; }` (1)."
+      },
+      {
+       "q": "Explain what a linear search is.",
+       "m": 2,
+       "a": "A search that checks each item in the list in turn, starting at the first (1), until the target is found or the end of the list is reached (1)."
+      }
+     ],
+     "terms": [
+      "Trace table",
+      "Linear search"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p09",
+     "spec": "Evaluate the benefits and limitations of using generative AI to help write code, and review and verify the code it produces",
+     "summary": "Generative AI can explain errors, suggest code and speed up routine work, but it can be confidently wrong. Write clear prompts, then check every line by reading, tracing and testing it, and always be honest about where your code came from.",
+     "diagram": {
+      "kind": "cycle",
+      "title": "Using AI to help with code",
+      "caption": "Never skip a step: the loop repeats until the code is right and you understand it.",
+      "items": [
+       {
+        "label": "Prompt clearly",
+        "detail": "Say the language, the task, the inputs and outputs, and what you already know."
+       },
+       {
+        "label": "Read and understand",
+        "detail": "Read every line. If you cannot explain a line, ask the AI to explain it, or do not use it."
+       },
+       {
+        "label": "Trace",
+        "detail": "Dry run the code with a trace table on a small example to check the logic."
+       },
+       {
+        "label": "Test",
+        "detail": "Run it with normal, boundary and erroneous data. Compare actual results with expected results."
+       },
+       {
+        "label": "Refine",
+        "detail": "Fix the problems yourself or with a better prompt, then go round again."
+       }
+      ]
+     },
+     "blocks": [
+      {
+       "t": "p",
+       "text": "**[[Generative AI]]** tools can now write code. You can type a request into a chatbot, or use an assistant built into an editor (for example GitHub Copilot in Visual Studio), and it produces code in seconds. These tools learn patterns from huge amounts of existing code and text, then **predict** code that is likely to fit your request. They do not run your program or check it is right before giving it to you."
+      },
+      {
+       "t": "compare",
+       "head": [
+        "Benefits",
+        "Limitations"
+       ],
+       "rows": [
+        [
+         "Speed",
+         "Writes routine code quickly",
+         "Fast code that does not work saves no time"
+        ],
+        [
+         "Learning",
+         "Explains error messages and code in plain English, like a patient tutor",
+         "If it writes everything, *you* do not learn, and you cannot do it in an exam"
+        ],
+        [
+         "Accuracy",
+         "Usually right for common, simple tasks",
+         "Can be **confidently wrong**: code that looks fine but has bugs"
+        ],
+        [
+         "Understanding",
+         "Can suggest ideas and other approaches",
+         "Does not know your teacher's task, your data or what you have learned so far"
+        ],
+        [
+         "Responsibility",
+         "A handy assistant",
+         "You are still responsible for every line you hand in"
+        ]
+       ]
+      },
+      {
+       "t": "h",
+       "text": "Writing a good prompt"
+      },
+      {
+       "t": "p",
+       "text": "A **[[prompt|Prompt]]** is the instruction you give an AI tool. Vague prompts get vague answers. A good coding prompt includes these ingredients:"
+      },
+      {
+       "t": "table",
+       "head": [
+        "Ingredient",
+        "Example"
+       ],
+       "rows": [
+        [
+         "Language and setup",
+         "*C# console app in Visual Studio*"
+        ],
+        [
+         "The task",
+         "*a method that finds the highest score in a List<int>*"
+        ],
+        [
+         "Inputs and outputs",
+         "*takes the list as a parameter and returns an int*"
+        ],
+        [
+         "Your level",
+         "*use only for or foreach loops and if statements; I am in Year 10*"
+        ],
+        [
+         "Ask to learn",
+         "*add comments and explain each line*"
+        ]
+       ],
+       "caption": "Ingredients of a good coding prompt"
+      },
+      {
+       "t": "example",
+       "title": "Worked example: improve a prompt",
+       "context": "A pupil types: *make a quiz program*. The AI produces 150 lines of code using features they have never seen. How could the prompt be better?",
+       "steps": [
+        "Name the language: **C# console app**.",
+        "Say exactly what it should do: **ask 5 questions about Fermanagh, read the answers with Console.ReadLine and add 1 to a score for each correct answer**.",
+        "Set the level: **use only if statements, variables and Console.WriteLine; I am a Year 10 beginner**.",
+        "Ask to learn: **explain each part so I can write the next question myself**."
+       ],
+       "answer": "A specific prompt with the language, task, level and a request to explain gives code you can understand, check and build on."
+      },
+      {
+       "t": "h",
+       "text": "Typical mistakes AI makes in code"
+      },
+      {
+       "t": "list",
+       "items": [
+        "**Off-by-one errors** in loops, such as `<=` instead of `<`.",
+        "**Integer division** in averages, losing the decimal part.",
+        "**Missing pieces**, such as the `using System.Collections.Generic;` line, so the code does not compile.",
+        "**[[Hallucinations|Hallucination]]**: confidently using methods or features that do not exist.",
+        "**Not handling unexpected input**: typing *ten* instead of 10 crashes `Convert.ToInt32`.",
+        "**Solving a slightly different problem** from the one you set.",
+        "**Using advanced features** you have not learned and cannot explain."
+       ],
+       "ordered": false
+      },
+      {
+       "t": "p",
+       "text": "Here is a method an AI tool produced for *\"write a C# method to find the average of a list of scores\"*. It looks tidy, but it has **two** bugs."
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "AiAverage.cs",
+       "code": "using System;\nusing System.Collections.Generic;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            List<int> scores = new List<int> { 12, 15, 18, 14 };\n            Console.WriteLine(Average(scores));\n        }\n\n        static double Average(List<int> scores)\n        {\n            int total = 0;\n            for (int i = 0; i <= scores.Count; i++)\n            {\n                total = total + scores[i];\n            }\n            return total / scores.Count;\n        }\n    }\n}",
+       "output": "Unhandled exception. System.ArgumentOutOfRangeException: Index was out of range. Must be non-negative and less than the size of the collection. (Parameter 'index')"
+      },
+      {
+       "t": "p",
+       "text": "**Bug 1:** `i <= scores.Count` goes one past the end, so it crashes on `scores[4]`. It should be `i < scores.Count`. **Bug 2:** once that is fixed, `total / scores.Count` is 59 / 4 in integer division, giving 14 instead of 14.75. It should be `(double)total / scores.Count`. Testing found the first bug straight away; the second would only be caught by comparing the answer with one worked out by hand."
+      },
+      {
+       "t": "h",
+       "text": "How to verify AI code"
+      },
+      {
+       "t": "list",
+       "items": [
+        "**Read** every line. If you cannot explain what a line does, find out before you use it.",
+        "**Trace** it with a trace table on a small example, as on the previous page.",
+        "**Test** it with normal, boundary and erroneous data, and compare the actual output with what you expected.",
+        "**Check the requirements**: does it do exactly what the task asked, no more and no less?",
+        "**Refine** and test again."
+       ],
+       "ordered": true
+      },
+      {
+       "t": "warn",
+       "text": "**Academic honesty.** Handing in AI-written code as if you wrote it yourself is **[[plagiarism|Plagiarism]]**. Always follow your teacher's rules for each task. For GCSE coursework, the exam boards' rules say the work must be your own and any AI use must be acknowledged; misusing AI counts as malpractice and can cost you marks or the whole qualification."
+      },
+      {
+       "t": "warn",
+       "text": "Never paste personal data, such as real pupils' names and marks, passwords or school login details, into an AI tool. What you type may be stored and used by the company that runs it."
+      },
+      {
+       "t": "note",
+       "text": "AI tools run in large data centres that use a lot of electricity and water for cooling. Use them when they genuinely help, not for things you can quickly do yourself."
+      },
+      {
+       "t": "tip",
+       "text": "Use AI as a **tutor**, not a ghost-writer. Prompts like *\"Why does this give IndexOutOfRangeException?\"* or *\"Give me a hint, not the answer\"* help you learn, and the skills stay with you in the exam."
+      },
+      {
+       "t": "key",
+       "title": "Key points",
+       "items": [
+        "Generative AI predicts likely code from patterns; it can be confidently wrong.",
+        "Benefits: speed, explanations, ideas. Limitations: bugs, hallucinations, code you cannot explain.",
+        "Good prompts state the language, task, inputs and outputs, your level, and ask for explanations.",
+        "Verify AI code: read, trace, test, check against the requirements, refine.",
+        "Passing off AI code as your own is plagiarism; acknowledge any AI use.",
+        "Never put personal data into AI tools."
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "How does a generative AI tool produce code?",
+       "o": [
+        "It runs every possible program and picks one that works",
+        "It predicts likely code from patterns in the code and text it was trained on",
+        "It copies the code from your teacher's computer",
+        "It understands your program exactly as you do"
+       ],
+       "a": 1,
+       "why": "It predicts; it does not test or truly understand your program."
+      },
+      {
+       "q": "An AI tool confidently uses a C# method that does not exist. This is called…",
+       "o": [
+        "a hallucination",
+        "a syntax highlight",
+        "decomposition",
+        "an argument"
+       ],
+       "a": 0,
+       "why": "Making up facts or features is called hallucination."
+      },
+      {
+       "q": "Which is the best first thing to do with code an AI tool gives you?",
+       "o": [
+        "Hand it in straight away",
+        "Delete the comments",
+        "Read it and make sure you understand every line",
+        "Paste it into a second AI tool"
+       ],
+       "a": 2,
+       "why": "You must understand code before you can check or use it."
+      },
+      {
+       "q": "Which prompt is most likely to give useful code for a Year 10 pupil?",
+       "o": [
+        "code",
+        "make a game",
+        "write C# that does lists",
+        "C# console app: a method that returns the highest int in a List<int>, using a foreach loop; explain each line"
+       ],
+       "a": 3,
+       "why": "It states language, task, inputs/outputs, method and asks for explanation."
+      },
+      {
+       "q": "A pupil hands in AI-written code as their own work without saying so. This is…",
+       "o": [
+        "decomposition",
+        "plagiarism",
+        "validation",
+        "refactoring"
+       ],
+       "a": 1,
+       "why": "Passing off someone else's (or an AI's) work as your own is plagiarism."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Give one benefit and one limitation of using generative AI to write code.",
+       "m": 2,
+       "a": "Benefit, any one: writes code quickly / explains errors / suggests ideas (1). Limitation, any one: can produce code with bugs / hallucinated methods / code the pupil cannot explain / does not know the task's requirements (1)."
+      },
+      {
+       "q": "Describe two ways a programmer can check that code written by AI is correct.",
+       "m": 2,
+       "a": "Any two: read and understand every line (1); trace it with a trace table / dry run (1); test it with normal, boundary and erroneous data and compare with expected results (1); check it meets the requirements (1)."
+      },
+      {
+       "q": "Explain why a pupil should not paste their classmates' names and test marks into an AI chatbot.",
+       "m": 2,
+       "a": "It is personal data belonging to other people (1); it may be stored or used by the company running the tool / breaks data protection (GDPR) (1)."
+      }
+     ],
+     "terms": [
+      "Generative AI",
+      "Prompt",
+      "Hallucination",
+      "Plagiarism"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p10",
+     "spec": "Plan, develop, test and refine a program in stages, using methods, a list and a test table",
+     "summary": "Real software is built in cycles of planning, development, testing and refinement. The class quiz-score analyser is planned with decomposition, built one method at a time, checked with a test table of normal, boundary and erroneous data, then refined.",
+     "diagram": {
+      "kind": "timeline",
+      "title": "Building the quiz-score analyser",
+      "caption": "Click each stage. Testing happens at every stage, not just at the end.",
+      "items": [
+       {
+        "label": "Stage 1: Plan",
+        "detail": "Read the brief, decompose it into methods and decide each method's parameters and return type."
+       },
+       {
+        "label": "Stage 2: Input",
+        "detail": "Write GetScores() to fill a List<int>. Test it by displaying Count."
+       },
+       {
+        "label": "Stage 3: Calculations",
+        "detail": "Add CalculateAverage, FindHighest and CountPasses, testing each one against answers worked out by hand."
+       },
+       {
+        "label": "Stage 4: Test table",
+        "detail": "Plan tests with normal, boundary and erroneous data; record expected and actual results."
+       },
+       {
+        "label": "Stage 5: Refine",
+        "detail": "Fix the failed tests: reject scores outside 0 to 20, handle typed words, cope with no scores at all."
+       }
+      ]
+     },
+     "blocks": [
+      {
+       "t": "p",
+       "text": "Time to put everything together. Programmers rarely write a whole program in one go. They work in a **[[software development cycle|Software development cycle]]**: **plan** a part, **develop** it, **test** it, **refine** it, then move on to the next part, going round the cycle again and again. Building in small stages means that when something breaks, you know it was in the bit you just added."
+      },
+      {
+       "t": "p",
+       "text": "**The brief:** Mr Butler gives his class a quiz marked out of 20. He wants a program where he types in each pupil's score, then sees how many scores were entered, the average, the highest score and how many pupils passed (10 or more)."
+      },
+      {
+       "t": "h",
+       "text": "Stage 1: Plan with decomposition"
+      },
+      {
+       "t": "table",
+       "head": [
+        "Job",
+        "Method",
+        "Parameters",
+        "Returns"
+       ],
+       "rows": [
+        [
+         "Read the scores into a list",
+         "`GetScores()`",
+         "none",
+         "`List<int>`"
+        ],
+        [
+         "Work out the average",
+         "`CalculateAverage(scores)`",
+         "`List<int> scores`",
+         "`double`"
+        ],
+        [
+         "Find the highest score",
+         "`FindHighest(scores)`",
+         "`List<int> scores`",
+         "`int`"
+        ],
+        [
+         "Count the passes",
+         "`CountPasses(scores, passMark)`",
+         "`List<int> scores, int passMark`",
+         "`int`"
+        ],
+        [
+         "Show the results",
+         "Main",
+         "–",
+         "–"
+        ]
+       ],
+       "caption": "The plan: one method per job"
+      },
+      {
+       "t": "p",
+       "text": "Notice how this uses the whole topic: a **list** because we do not know how many pupils there are, **methods** with **parameters** and **return values**, and the **algorithms** from page 8. Passing the pass mark as a parameter means the same method works if the pass mark changes to 12."
+      },
+      {
+       "t": "h",
+       "text": "Stage 2: Get the input working"
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "Analyser_stage2.cs",
+       "code": "using System;\nusing System.Collections.Generic;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            List<int> scores = GetScores();\n            Console.WriteLine(\"Scores entered: \" + scores.Count);\n        }\n\n        static List<int> GetScores()\n        {\n            List<int> scores = new List<int>();\n            Console.WriteLine(\"Enter a score out of 20 (or -1 to finish):\");\n            int score = Convert.ToInt32(Console.ReadLine());\n\n            while (score != -1)\n            {\n                scores.Add(score);\n                Console.WriteLine(\"Enter a score out of 20 (or -1 to finish):\");\n                score = Convert.ToInt32(Console.ReadLine());\n            }\n\n            return scores;\n        }\n    }\n}",
+       "output": "Enter a score out of 20 (or -1 to finish):\n15\nEnter a score out of 20 (or -1 to finish):\n8\nEnter a score out of 20 (or -1 to finish):\n-1\nScores entered: 2"
+      },
+      {
+       "t": "p",
+       "text": "Two scores in, *Scores entered: 2* out. Stage 2 works, so we can build on it. The method **returns** the whole list, so Main can pass it to the other methods."
+      },
+      {
+       "t": "h",
+       "text": "Stage 3 and 4: Add the calculations, then test"
+      },
+      {
+       "t": "p",
+       "text": "Next we add the three calculation methods, `CalculateAverage`, `FindHighest` and `CountPasses` (you can see them in the finished program below), and check each against answers worked out by hand. Then we plan a **[[test table|Test table]]** using three kinds of **[[test data|Test data]]**: **normal** data (sensible values), **[[boundary data|Boundary data]]** (values at the very edge of what is allowed: 0, 20 and the pass mark 10) and **[[erroneous data|Erroneous data]]** (values that should be rejected, like 25 or the word *ten*)."
+      },
+      {
+       "t": "table",
+       "head": [
+        "Test",
+        "Data entered",
+        "Type",
+        "Expected result",
+        "Actual result (before refining)",
+        "Pass?"
+       ],
+       "rows": [
+        [
+         "1",
+         "15, 8, 20, 12, then -1",
+         "Normal",
+         "Count 4, average 13.75, highest 20, passed 3",
+         "As expected",
+         "✔"
+        ],
+        [
+         "2",
+         "0, then -1",
+         "Boundary",
+         "0 accepted; average 0, passed 0",
+         "As expected",
+         "✔"
+        ],
+        [
+         "3",
+         "10, then -1",
+         "Boundary",
+         "10 counts as a pass: passed 1",
+         "As expected",
+         "✔"
+        ],
+        [
+         "4",
+         "25, then -1",
+         "Erroneous",
+         "Rejected: *Scores must be from 0 to 20*",
+         "25 was accepted and counted",
+         "✘"
+        ],
+        [
+         "5",
+         "ten",
+         "Erroneous",
+         "Rejected: *That is not a whole number*",
+         "Program crashed (FormatException)",
+         "✘"
+        ],
+        [
+         "6",
+         "-1 straight away",
+         "Boundary (no data)",
+         "*No scores entered.*",
+         "Program crashed on scores[0]",
+         "✘"
+        ]
+       ],
+       "caption": "Test table for the quiz-score analyser"
+      },
+      {
+       "t": "p",
+       "text": "Three tests failed. That is not bad news: the test table has found the bugs **before** Mr Butler uses the program with a real class. Each failed test tells us exactly what to refine."
+      },
+      {
+       "t": "h",
+       "text": "Stage 5: Refine"
+      },
+      {
+       "t": "list",
+       "items": [
+        "**Test 4:** add **[[validation|Validation]]**: an IF statement that rejects any score below 0 or above 20.",
+        "**Test 5:** `Convert.ToInt32(\"ten\")` crashes. `int.TryParse(input, out score)` tries to convert the text and returns a bool: `true` if it worked (and puts the number in `score`), `false` if not, without crashing.",
+        "**Test 6:** with no scores, `scores[0]` does not exist. Main now checks `scores.Count == 0` before calling the other methods."
+       ],
+       "ordered": false
+      },
+      {
+       "t": "code",
+       "lang": "cs",
+       "title": "QuizAnalyser.cs",
+       "code": "using System;\nusing System.Collections.Generic;\n\nnamespace MyProgram\n{\n    class Program\n    {\n        static void Main(string[] args)\n        {\n            Console.WriteLine(\"Class Quiz Score Analyser\");\n            List<int> scores = GetScores();\n\n            if (scores.Count == 0)\n            {\n                Console.WriteLine(\"No scores entered.\");\n            }\n            else\n            {\n                Console.WriteLine(\"Scores entered: \" + scores.Count);\n                Console.WriteLine(\"Average: \" + CalculateAverage(scores));\n                Console.WriteLine(\"Highest: \" + FindHighest(scores));\n                Console.WriteLine(\"Passed (10 or more): \" + CountPasses(scores, 10));\n            }\n        }\n\n        static List<int> GetScores()\n        {\n            List<int> scores = new List<int>();\n            bool finished = false;\n\n            while (finished == false)\n            {\n                Console.WriteLine(\"Enter a score out of 20 (or -1 to finish):\");\n                string input = Console.ReadLine();\n                int score;\n\n                if (int.TryParse(input, out score) == false)\n                {\n                    Console.WriteLine(\"That is not a whole number. Try again.\");\n                }\n                else if (score == -1)\n                {\n                    finished = true;\n                }\n                else if (score < 0 || score > 20)\n                {\n                    Console.WriteLine(\"Scores must be from 0 to 20. Try again.\");\n                }\n                else\n                {\n                    scores.Add(score);\n                }\n            }\n\n            return scores;\n        }\n\n        static double CalculateAverage(List<int> scores)\n        {\n            int total = 0;\n            foreach (int score in scores)\n            {\n                total = total + score;\n            }\n            return (double)total / scores.Count;\n        }\n\n        static int FindHighest(List<int> scores)\n        {\n            int highest = scores[0];\n            foreach (int score in scores)\n            {\n                if (score > highest)\n                {\n                    highest = score;\n                }\n            }\n            return highest;\n        }\n\n        static int CountPasses(List<int> scores, int passMark)\n        {\n            int passes = 0;\n            foreach (int score in scores)\n            {\n                if (score >= passMark)\n                {\n                    passes++;\n                }\n            }\n            return passes;\n        }\n    }\n}",
+       "output": "Class Quiz Score Analyser\nEnter a score out of 20 (or -1 to finish):\n15\nEnter a score out of 20 (or -1 to finish):\n8\nEnter a score out of 20 (or -1 to finish):\ntwenty\nThat is not a whole number. Try again.\nEnter a score out of 20 (or -1 to finish):\n25\nScores must be from 0 to 20. Try again.\nEnter a score out of 20 (or -1 to finish):\n20\nEnter a score out of 20 (or -1 to finish):\n12\nEnter a score out of 20 (or -1 to finish):\n-1\nScores entered: 4\nAverage: 13.75\nHighest: 20\nPassed (10 or more): 3"
+      },
+      {
+       "t": "p",
+       "text": "Now we run the **whole** test table again, because a change to fix one bug can create another. All six tests now give the expected result: normal data is processed correctly, 0, 10 and 20 are handled properly, 25 and *ten* are rejected with a helpful message, and an empty class gives *No scores entered.*"
+      },
+      {
+       "t": "example",
+       "title": "Worked example: work out the expected result",
+       "context": "Before running test 1, Mr Butler works out the expected results for the scores 15, 8, 20 and 12 by hand.",
+       "steps": [
+        "Count: four scores were entered, so **4**.",
+        "Total: 15 + 8 + 20 + 12 = 55. Average: 55 ÷ 4 = **13.75**.",
+        "Highest: **20**.",
+        "Passes (10 or more): 15, 20 and 12, so **3**. The 8 is a fail."
+       ],
+       "answer": "Count 4, average 13.75, highest 20, passed 3. The program must match these exactly, or there is a bug."
+      },
+      {
+       "t": "tip",
+       "text": "Extend it yourself: add a `FindLowest` method, display the average to one decimal place with `Math.Round`, or show every score above the average. If you ask an AI tool for help, test its code with your test table before you trust it."
+      },
+      {
+       "t": "key",
+       "title": "Key points",
+       "items": [
+        "Software is developed in cycles: plan, develop, test, refine, and repeat.",
+        "Decompose the brief into methods, each with clear parameters and return types.",
+        "Build and test in small stages, so you know where a bug came from.",
+        "A test table lists the test data, expected result, actual result and whether it passed.",
+        "Use normal, boundary and erroneous test data.",
+        "Validation rejects bad input; re-run every test after each refinement."
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "Which order matches the software development cycle on this page?",
+       "o": [
+        "Test, plan, refine, develop",
+        "Develop, refine, plan, test",
+        "Plan, develop, test, refine",
+        "Refine, test, develop, plan"
+       ],
+       "a": 2,
+       "why": "Plan, develop, test, refine, then repeat."
+      },
+      {
+       "q": "Scores must be from 0 to 20. Which is boundary test data?",
+       "o": [
+        "12",
+        "20",
+        "25",
+        "ten"
+       ],
+       "a": 1,
+       "why": "20 is right at the edge of the allowed range."
+      },
+      {
+       "q": "Scores must be from 0 to 20. Which is erroneous test data?",
+       "o": [
+        "-1 to finish",
+        "0",
+        "15",
+        "25"
+       ],
+       "a": 3,
+       "why": "25 is outside the allowed range, so it should be rejected."
+      },
+      {
+       "q": "What does int.TryParse(input, out score) return if input is \"ten\"?",
+       "o": [
+        "false",
+        "true",
+        "10",
+        "It crashes"
+       ],
+       "a": 0,
+       "why": "TryParse returns false instead of crashing when it cannot convert the text."
+      },
+      {
+       "q": "Why build a program in small stages and test each one?",
+       "o": [
+        "It is the only way C# will compile",
+        "So that when something breaks, you know which part caused it",
+        "So you never need a test table",
+        "Because methods can only be written one at a time"
+       ],
+       "a": 1,
+       "why": "Small stages make bugs easy to locate."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Name the three types of test data and give an example of each for a program that accepts ages from 11 to 18.",
+       "m": 3,
+       "a": "Normal, e.g. 14 (1); boundary/extreme, e.g. 11 or 18 (1); erroneous/invalid, e.g. 25 or 'fifteen' (1)."
+      },
+      {
+       "q": "State what four things should be recorded in a test table for each test.",
+       "m": 2,
+       "a": "Any four for 2 marks (two or three for 1): the test data / what is entered (1); the type of test data (1); the expected result (1); the actual result (1); whether it passed / any action needed (1)."
+      },
+      {
+       "q": "Explain why the quiz-score analyser checks `scores.Count == 0` before calling `FindHighest`.",
+       "m": 2,
+       "a": "If no scores are entered the list is empty (1), so scores[0] does not exist and the program would crash / the average would divide by zero (1)."
+      }
+     ],
+     "terms": [
+      "Software development cycle",
+      "Test table",
+      "Test data",
+      "Boundary data",
+      "Erroneous data",
+      "Validation"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    }
+   ]
+  },
+  {
+   "id": "c15",
+   "n": 15,
    "title": "Programming with Scratch",
    "intro": "Scratch is where many programmers start: you snap blocks together instead of typing code, but the ideas are the same ones you will use in C# later. In this topic you will learn the Scratch window, events, coordinates, animation, loops, decisions, variables, messages and your own custom blocks, build a simulation, and then plan, build, test and refine a game for a real user.",
    "pages": [
     {
-     "id": "c14-p01",
+     "id": "c15-p01",
      "spec": "Describe what Scratch is and identify the stage, sprites, blocks palette and scripts area",
      "summary": "Scratch is a free, block-based programming language: you snap blocks together into scripts instead of typing code. The Scratch window has a stage where things happen, sprites that you program, a blocks palette to choose blocks from and a scripts area to build them in.",
      "diagram": {
@@ -34552,7 +37186,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p02",
+     "id": "c15-p02",
      "spec": "Use event blocks to start scripts and explain why the sequence of blocks matters",
      "summary": "Event (hat) blocks such as [when green flag clicked] or [when (space) key pressed] start a script. The blocks underneath then run in sequence, one after another from top to bottom, so putting them in the wrong order changes what happens.",
      "diagram": {
@@ -34808,7 +37442,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p03",
+     "id": "c15-p03",
      "spec": "Use motion blocks and x and y coordinates to position and move a sprite on the stage",
      "summary": "The stage is a grid 480 steps wide (x from -240 to 240) and 360 steps tall (y from -180 to 180), with (0, 0) in the centre. Motion blocks either move a sprite relative to where it is, such as [change x by (10)], or send it to an exact position, such as [go to x: (100) y: (50)].",
      "diagram": {
@@ -35107,7 +37741,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p04",
+     "id": "c15-p04",
      "spec": "Use looks and sound blocks, and switch costumes to animate a sprite",
      "summary": "Looks blocks change how a sprite appears: speech bubbles, size, effects, show and hide, and its costume. Switching quickly between costumes with a short wait in between makes an animation, just like a flip book, and sound blocks add music and effects.",
      "diagram": {
@@ -35330,7 +37964,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p05",
+     "id": "c15-p05",
      "spec": "Use repeat, forever and repeat until loops and explain why loops make code shorter",
      "summary": "Iteration means repeating blocks using a loop. [repeat (10)] is a count-controlled loop that runs a set number of times; [repeat until <>] is a condition-controlled loop that stops when its condition becomes true; [forever] never stops. Loops make code shorter, easier to read and easier to change.",
      "diagram": {
@@ -35569,7 +38203,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p06",
+     "id": "c15-p06",
      "spec": "Use if and if-else blocks with sensing blocks so a program can make decisions",
      "summary": "Selection lets a program choose what to do. [if <condition> then] runs its blocks only when the condition is true; [if <> then else] picks one of two paths. Sensing blocks such as <touching (Bowl)?>, <key (space) pressed?> and [ask () and wait] give the conditions and inputs, and an if usually needs to sit inside a forever loop so it keeps checking.",
      "diagram": {
@@ -35853,7 +38487,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p07",
+     "id": "c15-p07",
      "spec": "Create and use variables for score, lives and timers, know the data types they hold, and use operators for maths, comparisons and random numbers",
      "summary": "A variable is a named store for a value that can change, such as score, lives or time. In Scratch a variable can hold a number, text (a string) or true/false (a Boolean). Operator blocks do maths (+, -, ×, /), compare values (<, =, >), join text and pick random numbers.",
      "diagram": {
@@ -36155,7 +38789,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p08",
+     "id": "c15-p08",
      "spec": "Use broadcast and when I receive blocks to send messages between sprites and the stage",
      "summary": "A broadcast sends a message to every sprite and the stage. Any script that starts with [when I receive (message)] then runs. Broadcasts let sprites work together, such as starting a level, showing a game-over screen or making one sprite react to another.",
      "diagram": {
@@ -36348,7 +38982,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p09",
+     "id": "c15-p09",
      "spec": "Use abstraction to reduce complexity by making My Blocks (custom blocks) with inputs",
      "summary": "A My Block is a custom block you define once and then use whenever you need it, giving a long set of blocks a single clear name. This is abstraction: hiding detail you do not need to think about. Inputs (parameters) let the same block do slightly different jobs, such as drawing a shape with any number of sides.",
      "diagram": {
@@ -36535,7 +39169,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p10",
+     "id": "c15-p10",
      "spec": "Use variables to build a simple simulation, and explain how changing a variable changes the outcome of a model",
      "summary": "A model is a simplified version of a real system, and a simulation runs the model to see what happens. In Scratch, variables such as gravity, bounciness or growth rate control the model: change one and you can test a prediction, such as how quickly rabbits fill an island or how high a ball bounces.",
      "diagram": {
@@ -36749,7 +39383,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p11",
+     "id": "c15-p11",
      "spec": "Find and fix bugs by tracing a script and recognising common Scratch errors",
      "summary": "A bug is a mistake that stops a program doing what it should; debugging is finding and fixing it. Scratch blocks stop most typing errors, so most Scratch bugs are logic errors: blocks in the wrong order, the wrong sprite, set instead of change, a missing loop or reset, or a condition that is never true. Tracing a script step by step shows where it goes wrong.",
      "diagram": {
@@ -37016,7 +39650,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p12",
+     "id": "c15-p12",
      "spec": "Plan, develop, test and refine a simple game for a user, using a user story and a test table",
      "summary": "Software is made in cycles: plan, develop, test and refine, then go round again. Start by asking who the game is for and writing a user story ('As a ... I want ... so that ...'). Build one feature at a time, test each one with a test table of normal, boundary and erroneous tests, and refine it using what you find and what users say.",
      "diagram": {
@@ -37319,13 +39953,13 @@
    ]
   },
   {
-   "id": "c15",
-   "n": 15,
+   "id": "c16",
+   "n": 16,
    "title": "Spreadsheets",
    "intro": "How to use Microsoft Excel to store and calculate data: cells and ranges, formatting, formulas and functions, relative and absolute references, sorting and filtering, charts, and building a tested 'what if' model for a school tuck shop and trip.",
    "pages": [
     {
-     "id": "c15-p01",
+     "id": "c16-p01",
      "spec": "Describe what a spreadsheet is used for and identify cells, rows, columns and ranges",
      "summary": "A spreadsheet is a grid of cells used to store, calculate and present numbers. Each cell has a cell reference made of its column letter and row number, such as B3, and a block of cells is a range, such as A1:D6.",
      "diagram": {
@@ -37631,7 +40265,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p02",
+     "id": "c16-p02",
      "spec": "Enter different types of data and format cells so a spreadsheet is clear to read",
      "summary": "Cells can hold text, numbers, currency, percentages and dates. Formatting (bold, borders, number formats, column width) changes how data looks, not its value, and makes a sheet easier to read.",
      "diagram": {
@@ -37864,7 +40498,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p03",
+     "id": "c16-p03",
      "spec": "Explain what a formula is and write formulas using arithmetic operators",
      "summary": "A formula is a calculation that always starts with =. It can use numbers and cell references with the operators + - * / and ^, and Excel works it out using BODMAS. If a value changes, the formula recalculates automatically.",
      "diagram": {
@@ -38138,7 +40772,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p04",
+     "id": "c16-p04",
      "spec": "Use the functions SUM, AVERAGE, MIN, MAX and COUNT on a range of cells",
      "summary": "A function is a ready-made formula with a name, such as SUM or AVERAGE. You give it a range in brackets, e.g. =SUM(B2:B9), and it does the work. Functions are quicker and less error-prone than long formulas.",
      "diagram": {
@@ -38417,7 +41051,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p05",
+     "id": "c16-p05",
      "spec": "Use IF and COUNTIF to make decisions and count values that meet a condition",
      "summary": "IF checks a condition and shows one result if it is true and another if it is false, e.g. =IF(B2>=70,\"Pass\",\"Fail\"). COUNTIF counts the cells in a range that meet a condition, e.g. =COUNTIF(C2:C9,\"Pass\").",
      "diagram": {
@@ -38688,7 +41322,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p06",
+     "id": "c16-p06",
      "spec": "Explain the difference between relative and absolute cell references when replicating formulas",
      "summary": "Replicating (copying) a formula with the fill handle changes relative references, so =B2*C2 becomes =B3*C3 on the next row. An absolute reference such as $F$1 has dollar signs and never changes when copied.",
      "diagram": {
@@ -38940,7 +41574,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p07",
+     "id": "c16-p07",
      "spec": "Sort and filter data and use conditional formatting to highlight important values",
      "summary": "Sorting puts rows in order (ascending A to Z, smallest to largest, or descending). Filtering hides the rows you do not need. Conditional formatting changes a cell's colour automatically when it meets a rule, such as scores under 60.",
      "diagram": {
@@ -39139,7 +41773,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p08",
+     "id": "c16-p08",
      "spec": "Create a chart from spreadsheet data and choose the right type of chart",
      "summary": "A chart turns numbers into a picture. Column or bar charts compare categories, line graphs show change over time and pie charts show parts of a whole. A good chart has a title, axis titles and, if needed, a legend.",
      "diagram": {
@@ -39358,7 +41992,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p09",
+     "id": "c16-p09",
      "spec": "Use a spreadsheet model to answer 'what if' questions",
      "summary": "A spreadsheet model uses formulas to represent a real situation, such as a school trip budget. Changing the input values (what if more pupils go?) instantly shows the effect on the outputs, which helps people make decisions.",
      "diagram": {
@@ -39564,7 +42198,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p10",
+     "id": "c16-p10",
      "spec": "Plan, build and test a spreadsheet so that it is accurate and easy for others to use",
      "summary": "A good spreadsheet is planned first, built with clear labels and formulas, then tested with data whose answers you already know. Data validation, such as a drop-down list or a number range, stops users typing in impossible data.",
      "diagram": {
@@ -42649,454 +45283,664 @@
    "page": "c13-p11"
   },
   {
+   "term": "Data type",
+   "def": "The kind of value a variable holds, such as int, double, string, char or bool. It decides what can be stored and what can be done with it.",
+   "alt": "",
+   "page": "c14-p01"
+  },
+  {
+   "term": "Integer",
+   "def": "A whole number with no decimal part, positive or negative. In C# the data type is int.",
+   "alt": "int",
+   "page": "c14-p01"
+  },
+  {
+   "term": "Float",
+   "def": "A number with a decimal point, also called a real number. In C# use double, or float with an f on the end of the value.",
+   "alt": "real",
+   "page": "c14-p01"
+  },
+  {
+   "term": "String",
+   "def": "Text: a sequence of characters, written inside double quotes in C#.",
+   "alt": "",
+   "page": "c14-p01"
+  },
+  {
+   "term": "Boolean",
+   "def": "A data type with only two possible values, true or false. In C# the data type is bool.",
+   "alt": "bool",
+   "page": "c14-p01"
+  },
+  {
+   "term": "Method",
+   "def": "A named block of code that carries out one task and runs when it is called. Also called a function, procedure or subroutine.",
+   "alt": "subroutine",
+   "page": "c14-p02"
+  },
+  {
+   "term": "Calling a method",
+   "def": "Running a method by writing its name followed by brackets (and any arguments), e.g. ShowBanner();",
+   "alt": "call",
+   "page": "c14-p02"
+  },
+  {
+   "term": "Decomposition",
+   "def": "Breaking a large problem down into smaller parts that are easier to solve; each part can become a method.",
+   "alt": "",
+   "page": "c14-p02"
+  },
+  {
+   "term": "Parameter",
+   "def": "A variable listed in a method's header that receives a value when the method is called.",
+   "alt": "",
+   "page": "c14-p03"
+  },
+  {
+   "term": "Argument",
+   "def": "The actual value passed into a method when it is called.",
+   "alt": "",
+   "page": "c14-p03"
+  },
+  {
+   "term": "Return value",
+   "def": "The value a method sends back to the place it was called from, using the return keyword.",
+   "alt": "return",
+   "page": "c14-p04"
+  },
+  {
+   "term": "Void",
+   "def": "A keyword in a method header meaning the method does not return a value.",
+   "alt": "",
+   "page": "c14-p04"
+  },
+  {
+   "term": "Function",
+   "def": "A subroutine that returns a value. In C# this is a method with a return type such as int or bool.",
+   "alt": "",
+   "page": "c14-p04"
+  },
+  {
+   "term": "Procedure",
+   "def": "A subroutine that carries out a task but does not return a value. In C# this is a void method.",
+   "alt": "",
+   "page": "c14-p04"
+  },
+  {
+   "term": "Scope",
+   "def": "The part of a program where a variable exists and can be used: the { } it was declared in.",
+   "alt": "",
+   "page": "c14-p05"
+  },
+  {
+   "term": "Local variable",
+   "def": "A variable declared inside a method or block; it can only be used there and disappears when that code ends.",
+   "alt": "",
+   "page": "c14-p05"
+  },
+  {
+   "term": "Global variable",
+   "def": "A variable that can be used by every method in a program. In C# the nearest thing is a static variable declared in the class, outside every method.",
+   "alt": "class-level variable",
+   "page": "c14-p05"
+  },
+  {
+   "term": "Data structure",
+   "def": "A way of storing and organising a collection of related data under one name, such as an array or a list.",
+   "alt": "",
+   "page": "c14-p06"
+  },
+  {
+   "term": "Array",
+   "def": "A data structure that holds a fixed number of elements of the same data type, each found by its index.",
+   "alt": "",
+   "page": "c14-p06"
+  },
+  {
+   "term": "Index",
+   "def": "The number that gives an element's position in an array or list. In C# the first index is 0.",
+   "alt": "",
+   "page": "c14-p06"
+  },
+  {
+   "term": "Off-by-one error",
+   "def": "A logic error where a loop runs one time too many or one time too few, e.g. using <= instead of < with an array.",
+   "alt": "",
+   "page": "c14-p06"
+  },
+  {
+   "term": "List",
+   "def": "A data structure that can grow and shrink while the program runs, e.g. List<int> in C#.",
+   "alt": "",
+   "page": "c14-p07"
+  },
+  {
+   "term": "foreach loop",
+   "def": "A loop that visits every item in a list or array in turn, without needing an index.",
+   "alt": "",
+   "page": "c14-p07"
+  },
+  {
+   "term": "Trace table",
+   "def": "A table showing the value of each variable at each step as an algorithm runs; used to check code by hand (a dry run).",
+   "alt": "dry run",
+   "page": "c14-p08"
+  },
+  {
+   "term": "Linear search",
+   "def": "A search that checks each item in a list in turn, from the start, until the target is found or the list ends.",
+   "alt": "",
+   "page": "c14-p08"
+  },
+  {
+   "term": "Generative AI",
+   "def": "AI that creates new content, such as text, images or code, by predicting what is likely based on patterns in its training data.",
+   "alt": "",
+   "page": "c14-p09"
+  },
+  {
+   "term": "Prompt",
+   "def": "The instruction or question you type into a generative AI tool.",
+   "alt": "",
+   "page": "c14-p09"
+  },
+  {
+   "term": "Hallucination",
+   "def": "When an AI tool confidently produces something false or made up, such as a method that does not exist.",
+   "alt": "",
+   "page": "c14-p09"
+  },
+  {
+   "term": "Plagiarism",
+   "def": "Passing off someone else's work, including AI-generated work, as your own.",
+   "alt": "",
+   "page": "c14-p09"
+  },
+  {
+   "term": "Software development cycle",
+   "def": "Developing software in repeated stages of planning, development, testing and refinement.",
+   "alt": "",
+   "page": "c14-p10"
+  },
+  {
+   "term": "Test table",
+   "def": "A table that plans and records tests: the test data, its type, the expected result, the actual result and whether it passed.",
+   "alt": "",
+   "page": "c14-p10"
+  },
+  {
+   "term": "Test data",
+   "def": "Values chosen to test a program: normal (sensible values), boundary (at the edges of what is allowed) and erroneous (values that should be rejected).",
+   "alt": "",
+   "page": "c14-p10"
+  },
+  {
+   "term": "Boundary data",
+   "def": "Test data at the very edge of the allowed range, such as 0 and 20 for a score out of 20.",
+   "alt": "extreme data",
+   "page": "c14-p10"
+  },
+  {
+   "term": "Erroneous data",
+   "def": "Test data that should be rejected by the program, such as 25 or the word ten for a score out of 20.",
+   "alt": "invalid data",
+   "page": "c14-p10"
+  },
+  {
+   "term": "Validation",
+   "def": "Checking that input is sensible and allowed before the program uses it, e.g. rejecting a score above 20.",
+   "alt": "",
+   "page": "c14-p10"
+  },
+  {
    "term": "Scratch",
    "def": "A free, block-based programming language from the MIT Media Lab. Programs are built by snapping blocks together.",
    "alt": "",
-   "page": "c14-p01"
+   "page": "c15-p01"
   },
   {
    "term": "Sprite",
    "def": "A character or object on the stage that can be programmed with its own scripts, e.g. the Scratch Cat.",
    "alt": "",
-   "page": "c14-p01"
+   "page": "c15-p01"
   },
   {
    "term": "Stage",
    "def": "The area of the Scratch window where the project runs. It is 480 steps wide and 360 steps tall.",
    "alt": "",
-   "page": "c14-p01"
+   "page": "c15-p01"
   },
   {
    "term": "Backdrop",
    "def": "A background picture for the stage. Switching backdrops can show a new level or screen.",
    "alt": "",
-   "page": "c14-p01"
+   "page": "c15-p01"
   },
   {
    "term": "Blocks palette",
    "def": "The part of the Scratch window that lists the blocks in the chosen category, ready to drag.",
    "alt": "",
-   "page": "c14-p01"
+   "page": "c15-p01"
   },
   {
    "term": "Script",
    "def": "A stack of joined blocks that runs from top to bottom, usually started by a hat block.",
    "alt": "",
-   "page": "c14-p01"
+   "page": "c15-p01"
   },
   {
    "term": "Event",
    "def": "Something that happens, such as clicking the green flag or pressing a key, that starts a script.",
    "alt": "",
-   "page": "c14-p02"
+   "page": "c15-p02"
   },
   {
    "term": "Sequence",
    "def": "Carrying out instructions one after another, in order. A Scratch script runs from top to bottom.",
    "alt": "",
-   "page": "c14-p02"
+   "page": "c15-p02"
   },
   {
    "term": "Coordinates",
    "def": "A pair of numbers (x, y) giving an exact position on the stage. The centre is (0, 0).",
    "alt": "",
-   "page": "c14-p03"
+   "page": "c15-p03"
   },
   {
    "term": "Costume",
    "def": "One of the pictures a sprite can show. Switching costumes changes how the sprite looks.",
    "alt": "",
-   "page": "c14-p04"
+   "page": "c15-p04"
   },
   {
    "term": "Loop",
    "def": "A block that repeats the blocks inside it, such as [repeat (10)], [repeat until] or [forever].",
    "alt": "",
-   "page": "c14-p05"
+   "page": "c15-p05"
   },
   {
    "term": "Iteration",
    "def": "Repeating a set of instructions using a loop.",
    "alt": "Repetition",
-   "page": "c14-p05"
+   "page": "c15-p05"
   },
   {
    "term": "Count-controlled loop",
    "def": "A loop that repeats a set number of times, known before it starts, e.g. [repeat (4)].",
    "alt": "",
-   "page": "c14-p05"
+   "page": "c15-p05"
   },
   {
    "term": "Condition-controlled loop",
    "def": "A loop that repeats until a condition becomes true, e.g. [repeat until <touching (edge)?>].",
    "alt": "",
-   "page": "c14-p05"
+   "page": "c15-p05"
   },
   {
    "term": "Selection",
    "def": "Choosing which instructions to run depending on a condition, using if or if-else blocks.",
    "alt": "",
-   "page": "c14-p06"
+   "page": "c15-p06"
   },
   {
    "term": "Condition",
    "def": "A test whose answer is either true or false, e.g. <(score) > (10)>.",
    "alt": "",
-   "page": "c14-p06"
+   "page": "c15-p06"
   },
   {
    "term": "Boolean",
    "def": "A value or block that can only be true or false. Boolean blocks have pointed (hexagon) ends.",
    "alt": "",
-   "page": "c14-p06"
+   "page": "c15-p06"
   },
   {
    "term": "Sensing",
    "def": "Scratch blocks that find out what is happening, such as touching, key pressed, mouse position, timer and ask/answer.",
    "alt": "",
-   "page": "c14-p06"
+   "page": "c15-p06"
   },
   {
    "term": "Variable",
    "def": "A named store in memory that holds a value which can change while the program runs, e.g. score.",
    "alt": "",
-   "page": "c14-p07"
+   "page": "c15-p07"
   },
   {
    "term": "Data type",
    "def": "The kind of value stored, such as integer, float, string (text) or Boolean (true/false).",
    "alt": "",
-   "page": "c14-p07"
+   "page": "c15-p07"
   },
   {
    "term": "Operator",
    "def": "A block or symbol that does something with values: maths (+ - * /), comparisons or joining text.",
    "alt": "",
-   "page": "c14-p07"
+   "page": "c15-p07"
   },
   {
    "term": "Comparison operator",
    "def": "An operator that compares two values and gives true or false: <, = or >.",
    "alt": "",
-   "page": "c14-p07"
+   "page": "c15-p07"
   },
   {
    "term": "Broadcast",
    "def": "A message sent to every sprite and the stage; scripts with a matching [when I receive] block then start.",
    "alt": "Message",
-   "page": "c14-p08"
+   "page": "c15-p08"
   },
   {
    "term": "Abstraction",
    "def": "Hiding detail that is not needed and giving a set of instructions a simple name, to reduce complexity.",
    "alt": "",
-   "page": "c14-p09"
+   "page": "c15-p09"
   },
   {
    "term": "My Block",
    "def": "A custom block you define yourself in the My Blocks category and can use as often as you like.",
    "alt": "Custom block",
-   "page": "c14-p09"
+   "page": "c15-p09"
   },
   {
    "term": "Parameter",
    "def": "An input to a custom block or function that lets it do slightly different jobs, e.g. the number of sides.",
    "alt": "Input",
-   "page": "c14-p09"
+   "page": "c15-p09"
   },
   {
    "term": "Model",
    "def": "A simplified representation of a real system that keeps only the parts that matter.",
    "alt": "",
-   "page": "c14-p10"
+   "page": "c15-p10"
   },
   {
    "term": "Simulation",
    "def": "Running a model to see what happens over time or to test a prediction.",
    "alt": "",
-   "page": "c14-p10"
+   "page": "c15-p10"
   },
   {
    "term": "Bug",
    "def": "An error in a program that stops it working as it should.",
    "alt": "",
-   "page": "c14-p11"
+   "page": "c15-p11"
   },
   {
    "term": "Debugging",
    "def": "Finding and fixing bugs in a program.",
    "alt": "",
-   "page": "c14-p11"
+   "page": "c15-p11"
   },
   {
    "term": "Logic error",
    "def": "An error where the program runs but does the wrong thing, e.g. blocks in the wrong order.",
    "alt": "",
-   "page": "c14-p11"
+   "page": "c15-p11"
   },
   {
    "term": "Iterative development",
    "def": "Making software in repeated cycles of planning, developing, testing and refining.",
    "alt": "Development cycle",
-   "page": "c14-p12"
+   "page": "c15-p12"
   },
   {
    "term": "User story",
    "def": "A short sentence describing what a user needs: As a ... I want ... so that ...",
    "alt": "",
-   "page": "c14-p12"
+   "page": "c15-p12"
   },
   {
    "term": "Test table",
    "def": "A table listing each test with its expected result, actual result and whether it passed.",
    "alt": "Test plan",
-   "page": "c14-p12"
+   "page": "c15-p12"
   },
   {
    "term": "Test data",
    "def": "Values or actions used to test a program: normal, boundary and erroneous.",
    "alt": "",
-   "page": "c14-p12"
+   "page": "c15-p12"
   },
   {
    "term": "Spreadsheet",
    "def": "A program that stores data in a grid of cells and carries out calculations on it automatically, e.g. Microsoft Excel.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Workbook",
    "def": "An Excel file. It can contain one or more worksheets.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Worksheet",
    "def": "One page (tab) of a workbook, made of rows, columns and cells.",
    "alt": "Sheet",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Cell",
    "def": "A single box in a spreadsheet, where a column and a row meet. It holds one item of data or one formula.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Row",
    "def": "A horizontal line of cells, labelled with a number.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Column",
    "def": "A vertical line of cells, labelled with a letter.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Cell reference",
    "def": "The address of a cell: its column letter followed by its row number, e.g. B3.",
    "alt": "Cell address",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Range",
    "def": "A rectangular block of cells, written as first cell:last cell, e.g. A1:D6.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Active cell",
    "def": "The currently selected cell, shown with a thick border. Its reference appears in the Name Box.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Formula bar",
    "def": "The bar above the grid that shows the real contents (value or formula) of the active cell.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Data type",
    "def": "The kind of data in a cell, such as text, number, currency, percentage or date.",
    "alt": "",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Formatting",
    "def": "Changing how a cell looks (font, colour, borders, number of decimal places) without changing the value stored.",
    "alt": "",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Currency format",
    "def": "A number format that shows a value as money, e.g. 0.6 is shown as £0.60.",
    "alt": "",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Formula",
    "def": "A calculation in a cell. It always begins with =, e.g. =B2*C2.",
    "alt": "",
-   "page": "c15-p03"
+   "page": "c16-p03"
   },
   {
    "term": "Operator",
    "def": "A symbol that tells Excel which calculation to do: + - * / or ^.",
    "alt": "Arithmetic operator",
-   "page": "c15-p03"
+   "page": "c16-p03"
   },
   {
    "term": "Automatic recalculation",
    "def": "When a value changes, every formula that uses it is worked out again straight away.",
    "alt": "",
-   "page": "c15-p03"
+   "page": "c16-p03"
   },
   {
    "term": "BODMAS",
    "def": "The order Excel works out a calculation: Brackets, Orders (powers), Division and Multiplication, Addition and Subtraction.",
    "alt": "Order of operations",
-   "page": "c15-p03"
+   "page": "c16-p03"
   },
   {
    "term": "Function",
    "def": "A ready-made formula with a name, such as SUM or AVERAGE, e.g. =SUM(B2:B9).",
    "alt": "",
-   "page": "c15-p04"
+   "page": "c16-p04"
   },
   {
    "term": "Argument",
    "def": "The value or range given to a function inside its brackets, e.g. B2:B9 in =SUM(B2:B9).",
    "alt": "",
-   "page": "c15-p04"
+   "page": "c16-p04"
   },
   {
    "term": "SUM",
    "def": "A function that adds up all the numbers in a range.",
    "alt": "",
-   "page": "c15-p04"
+   "page": "c16-p04"
   },
   {
    "term": "AVERAGE",
    "def": "A function that finds the mean of the numbers in a range (total divided by how many).",
    "alt": "",
-   "page": "c15-p04"
+   "page": "c16-p04"
   },
   {
    "term": "COUNT",
    "def": "A function that counts how many cells in a range contain numbers.",
    "alt": "",
-   "page": "c15-p04"
+   "page": "c16-p04"
   },
   {
    "term": "IF",
    "def": "A function that tests a condition and gives one result if it is true and another if it is false.",
    "alt": "IF function",
-   "page": "c15-p05"
+   "page": "c16-p05"
   },
   {
    "term": "COUNTIF",
    "def": "A function that counts how many cells in a range meet a condition, e.g. =COUNTIF(C2:C9,\"Pass\").",
    "alt": "",
-   "page": "c15-p05"
+   "page": "c16-p05"
   },
   {
    "term": "Condition",
    "def": "A test that is either TRUE or FALSE, e.g. B2>=70.",
    "alt": "",
-   "page": "c15-p05"
+   "page": "c16-p05"
   },
   {
    "term": "Comparison operator",
    "def": "A symbol used to compare two values: = <> > < >= <=.",
    "alt": "",
-   "page": "c15-p05"
+   "page": "c16-p05"
   },
   {
    "term": "Fill handle",
    "def": "The small square at the bottom right of the active cell, dragged to copy its contents into neighbouring cells.",
    "alt": "",
-   "page": "c15-p06"
+   "page": "c16-p06"
   },
   {
    "term": "Replication",
    "def": "Copying a formula into other cells so the same calculation is done on each row or column.",
    "alt": "Replicate",
-   "page": "c15-p06"
+   "page": "c16-p06"
   },
   {
    "term": "Relative reference",
    "def": "A cell reference such as B2 that changes to match the new position when a formula is copied.",
    "alt": "Relative cell reference",
-   "page": "c15-p06"
+   "page": "c16-p06"
   },
   {
    "term": "Absolute reference",
    "def": "A cell reference with $ signs, such as $F$1, that does not change when a formula is copied.",
    "alt": "Absolute cell reference",
-   "page": "c15-p06"
+   "page": "c16-p06"
   },
   {
    "term": "Sort",
    "def": "To put the rows of data in order of one column, ascending (A to Z, smallest first) or descending.",
    "alt": "",
-   "page": "c15-p07"
+   "page": "c16-p07"
   },
   {
    "term": "Filter",
    "def": "To show only the rows that match a condition, hiding the others without deleting them.",
    "alt": "",
-   "page": "c15-p07"
+   "page": "c16-p07"
   },
   {
    "term": "Conditional formatting",
    "def": "Formatting that is applied automatically when a cell's value meets a rule, e.g. red fill for scores under 60.",
    "alt": "",
-   "page": "c15-p07"
+   "page": "c16-p07"
   },
   {
    "term": "Chart",
    "def": "A visual display of spreadsheet data, such as a column chart, line graph or pie chart.",
    "alt": "Graph",
-   "page": "c15-p08"
+   "page": "c16-p08"
   },
   {
    "term": "Axis",
    "def": "One of the two lines of a chart: the x-axis runs across and the y-axis runs up.",
    "alt": "",
-   "page": "c15-p08"
+   "page": "c16-p08"
   },
   {
    "term": "Legend",
    "def": "The key on a chart that shows which colour or symbol represents each data series.",
    "alt": "",
-   "page": "c15-p08"
+   "page": "c16-p08"
   },
   {
    "term": "Model",
    "def": "A spreadsheet that represents a real-life situation using inputs, formulas and outputs.",
    "alt": "Spreadsheet model",
-   "page": "c15-p09"
+   "page": "c16-p09"
   },
   {
    "term": "What-if question",
    "def": "Changing one or more input values in a model to see the effect on the results.",
    "alt": "What-if analysis",
-   "page": "c15-p09"
+   "page": "c16-p09"
   },
   {
    "term": "Test data",
    "def": "Data with known expected results used to check a spreadsheet works: normal, boundary and invalid.",
    "alt": "",
-   "page": "c15-p10"
+   "page": "c16-p10"
   },
   {
    "term": "Data validation",
    "def": "Rules that check data as it is entered and reject values that break them, e.g. a whole number between 0 and 100.",
    "alt": "Validation",
-   "page": "c15-p10"
+   "page": "c16-p10"
   }
  ]
 }
