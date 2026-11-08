@@ -1,0 +1,2710 @@
+{
+ "title": "Designing for Users: UX and Accessibility",
+ "summary": "How designers put users first: finding out what people need, writing user stories, following usability principles, sketching wireframes and prototypes, designing for accessibility (WCAG) and inclusion, testing with real users and improving in cycles.",
+ "learn": [
+  "What user-centred design is, and why asking who a design works for matters as much as whether it works",
+  "How to find out user needs with interviews, surveys and observation, and sum them up in personas",
+  "How to write user stories and acceptance criteria",
+  "Usability principles, wireframes and prototypes, and how abstraction helps",
+  "Accessibility, the WCAG guidelines and the POUR principles, and avoiding bias with inclusive design",
+  "How to test with users (think-aloud and A/B tests) and improve a design",
+  "Development cycles: waterfall compared with iterative and agile approaches"
+ ],
+ "temporary": false,
+ "intro": "A product can work perfectly and still fail the people it is for. In this topic you will learn how designers of apps, websites and games put users at the centre: finding out what they need, planning with user stories, sketching and testing prototypes, and making sure everyone, including disabled users, can use what they build.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Explain what user-centred design is and why products that work can still fail their users",
+   "summary": "User-centred design puts the people who will use a product at the centre of every decision. A product can work perfectly and still fail if the people it is for find it confusing, slow or impossible to use.",
+   "diagram": {
+    "kind": "compare",
+    "title": "Designer-centred vs user-centred",
+    "caption": "Two ways to build the same school app. Which one would you rather use?",
+    "states": [
+     {
+      "label": "Designer-centred",
+      "points": [
+       "Built the way the designer likes it",
+       "Assumes users think like the designer",
+       "Users first see it on launch day",
+       "Problems found by angry users after release",
+       "Asks: does it work?"
+      ],
+      "art": null
+     },
+     {
+      "label": "User-centred",
+      "points": [
+       "Built around what real users need",
+       "Finds out how users actually think and behave",
+       "Users try early sketches and prototypes",
+       "Problems found and fixed before release",
+       "Asks: who does it work for?"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Have you ever pushed a door that should have been pulled? Or tapped round an app for ages looking for one setting? That is not *your* fault. It is a design problem. Somebody built that door or app without thinking hard enough about the people who would use it."
+    },
+    {
+     "t": "p",
+     "text": "**[[User-centred design]]** (UCD) is a way of designing apps, websites, games and other products where the needs of the **users** come first, at every stage. Designers find out who the users are, what they need, and how they behave, then test their ideas with real users and keep improving them."
+    },
+    {
+     "t": "h",
+     "text": "Works vs works for people"
+    },
+    {
+     "t": "p",
+     "text": "A program can pass every test a programmer runs and still be a failure. The real question is not just *does it work?* but **who does it work for?** A canteen app that works perfectly on the developer's big laptop is useless to a Year 8 pupil on a cracked phone screen in a queue with 30 seconds to spare."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Word",
+      "What it means",
+      "Example"
+     ],
+     "rows": [
+      [
+       "**[[Usability]]**",
+       "How easy it is to use a product to get a job done.",
+       "Can you top up your dinner money in under a minute without help?"
+      ],
+      [
+       "**[[User experience|User experience (UX)]]** (UX)",
+       "How the whole experience **feels** to the user: easy, quick, pleasant, or frustrating.",
+       "Do you come away from the app happy or annoyed?"
+      ],
+      [
+       "**[[User interface]]** (UI)",
+       "The parts of a product the user sees and touches: screens, buttons, menus, icons.",
+       "The big green Pay button and the menu at the bottom of the screen."
+      ]
+     ],
+     "caption": "Three words designers use all the time"
+    },
+    {
+     "t": "h",
+     "text": "Why products fail users"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**The designer designed for themselves.** They assumed everyone is a confident, young, sighted person with a new phone and fast broadband.",
+      "**Nobody asked the users.** The team guessed what people wanted instead of finding out.",
+      "**Too many features.** Every idea was added, so the one thing users came to do is buried.",
+      "**Confusing words.** Buttons say things like *Submit transaction* instead of *Pay*.",
+      "**No testing with real people.** Problems were only discovered after launch, when they are expensive to fix.",
+      "**Some people were forgotten.** For example, users who are blind, colour blind, older, or who speak another language."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: does it work, and who does it work for?",
+     "context": "A new self-service car park machine in Enniskillen takes payment only by tapping a phone app. The developers tested it and every payment went through. Is it a good design?",
+     "steps": [
+      "**Does it work?** Yes: payments by app are processed correctly.",
+      "**Who does it work for?** People with a smartphone, mobile data and the app installed.",
+      "**Who does it fail?** Older drivers without smartphones, tourists without the app, anyone with no signal, people whose phone has run out of battery.",
+      "**A user-centred fix:** also accept contactless cards and coins, and put clear instructions in large text on the machine."
+     ],
+     "answer": "It works, but only for some users. A user-centred design asks who might be left out before it is built."
+    },
+    {
+     "t": "warn",
+     "text": "A common mistake is to think *I find it easy, so everyone will*. You know how your own design works because you built it. Your users do not. Never use yourself as the only test user."
+    },
+    {
+     "t": "p",
+     "text": "The idea of user-centred design was made popular by **Don Norman**, a designer and psychologist. He pointed out that when people struggle with a product, they usually blame themselves, when really the design has let them down. Doors you push when you should pull are now nicknamed *Norman doors* after him."
+    },
+    {
+     "t": "tip",
+     "text": "Good design is often invisible. When an app is really well designed you do not notice the design at all: you just get your job done and move on."
+    },
+    {
+     "t": "note",
+     "text": "In the new Northern Ireland curriculum (TransformED), this topic covers analysing **user needs**, **user-centred design** for apps, websites and games, **user stories**, **abstraction**, **refining** a product to improve usability, **development cycles** and **accessibility guidelines** such as WCAG."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "User-centred design puts users' needs at the centre of every stage of design.",
+      "Usability = how easy it is to get the job done. UX = how the whole experience feels.",
+      "A product can work perfectly and still fail its users.",
+      "Always ask: who does this design work for, and who might it leave out?",
+      "Products fail when designers guess, design for themselves, or skip testing with real users."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does **user-centred design** mean?",
+     "o": [
+      "Designing so the product looks as modern as possible",
+      "Designing around the needs of the people who will use the product",
+      "Designing so the code runs as fast as possible",
+      "Designing a product that the designer personally enjoys using"
+     ],
+     "a": 1,
+     "why": "UCD puts the users' needs at the centre of every design decision."
+    },
+    {
+     "q": "Which word describes **how easy** it is to use a product to get a task done?",
+     "o": [
+      "Accessibility",
+      "Abstraction",
+      "Usability",
+      "Integrity"
+     ],
+     "a": 2,
+     "why": "Usability is about how easily users can complete their tasks."
+    },
+    {
+     "q": "A ticket app works perfectly in testing but older customers cannot work out how to buy a ticket. What is the best description?",
+     "o": [
+      "It works, but it does not work well for all its users",
+      "It has a bug in its code that needs fixing",
+      "It is fine because the code passed every test",
+      "The older customers are using it wrongly"
+     ],
+     "a": 0,
+     "why": "Working code is not enough: the design has failed some of its users."
+    },
+    {
+     "q": "Which of these is part of the **user interface**?",
+     "o": [
+      "The database that stores orders",
+      "The server the app runs on",
+      "The company's marketing plan",
+      "The buttons and menus on the screen"
+     ],
+     "a": 3,
+     "why": "The UI is what the user sees and interacts with: screens, buttons, menus and icons."
+    },
+    {
+     "q": "Why should a designer not use themselves as the only tester?",
+     "o": [
+      "Designers are not allowed to test their own work",
+      "Testing takes too long to do yourself",
+      "They already know how it works, so they will not struggle like a new user",
+      "Designers always make worse testers than programmers"
+     ],
+     "a": 2,
+     "why": "You built it, so you know where everything is. New users do not."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between **usability** and **user experience (UX)**.",
+     "m": 2,
+     "a": "Usability is how easy it is to use a product to complete a task (1). UX is how the whole experience feels to the user, e.g. pleasant, quick or frustrating (1)."
+    },
+    {
+     "q": "Give **two** reasons why a product might work correctly but still fail its users.",
+     "m": 2,
+     "a": "Any two: designers designed for themselves / assumed all users are like them (1); users were not asked what they need (1); confusing words or layout (1); too many features (1); not tested with real users (1); some groups left out, e.g. disabled or older users (1)."
+    },
+    {
+     "q": "A school builds an online form to book parent–teacher meetings. It only works on a laptop. Explain **one** group of users it might fail and suggest a fix.",
+     "m": 2,
+     "a": "e.g. parents who only have a phone / no computer at home (1). Make the form work on phones / a responsive design, or offer booking by phone (1)."
+    }
+   ],
+   "terms": [
+    "User-centred design",
+    "Usability",
+    "User experience (UX)",
+    "User interface"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "spec": "Describe how designers find out user needs through interviews, surveys and observation, and use personas",
+   "summary": "Designers find out what users need with interviews, surveys and observation, then sum up what they learned in personas: realistic made-up characters that represent the main groups of users.",
+   "diagram": {
+    "kind": "match",
+    "title": "Which research method?",
+    "caption": "Match each research method to what it is best at.",
+    "pairs": [
+     [
+      "Interview",
+      "Detailed answers and the reasons behind them"
+     ],
+     [
+      "Survey",
+      "Quick answers from lots of people"
+     ],
+     [
+      "Observation",
+      "Seeing what people really do"
+     ],
+     [
+      "Focus group",
+      "A small group discussing ideas together"
+     ],
+     [
+      "Persona",
+      "A made-up character summing up one user group"
+     ],
+     [
+      "Target audience",
+      "The group of people the product is for"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Before you design anything, you need to know **who** it is for and **what they need**. Guessing is not good enough. The people a product is for are called the **[[target audience|Target audience]]**, and what they need it to do are their **user needs**."
+    },
+    {
+     "t": "p",
+     "text": "Finding this out yourself, by talking to and watching real users, is called **[[primary research|Primary research]]**. Reading what others have already found (articles, reviews, statistics) is **secondary research**."
+    },
+    {
+     "t": "h",
+     "text": "Three main ways to find out user needs"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Method",
+      "How it works",
+      "Good for",
+      "Watch out for"
+     ],
+     "rows": [
+      [
+       "**[[Interview]]**",
+       "Talk to one user at a time, asking open questions such as *Tell me about the last time you…*",
+       "Detailed answers and the **reasons** why people feel the way they do.",
+       "Slow, so you can only talk to a few people."
+      ],
+      [
+       "**[[Survey]]** (questionnaire)",
+       "A list of questions, often online (e.g. Microsoft Forms), sent to lots of people.",
+       "Quick answers from **many** people; easy to turn into charts.",
+       "Short answers only; people may tick boxes without thinking."
+      ],
+      [
+       "**[[Observation]]**",
+       "Watch people using a product or doing the task in real life, and take notes.",
+       "Seeing what people **actually do**, not just what they say they do.",
+       "People may act differently if they know they are being watched."
+      ]
+     ],
+     "caption": "Ways to find out user needs"
+    },
+    {
+     "t": "p",
+     "text": "A **focus group** is a fourth option: a small group of users discuss an idea together while someone leads the conversation and takes notes."
+    },
+    {
+     "t": "tip",
+     "text": "Ask **open questions** in interviews: *What annoys you about ordering lunch?* gets a much more useful answer than the **closed question** *Do you like the canteen?*, which can be answered with a single yes or no."
+    },
+    {
+     "t": "warn",
+     "text": "What people **say** and what they **do** are often different. A pupil might tell you in a survey that they always read the menu before ordering, but when you **observe** the canteen queue you see most of them just point at what their friend is having. Use more than one method."
+    },
+    {
+     "t": "h",
+     "text": "Personas"
+    },
+    {
+     "t": "p",
+     "text": "After the research, designers sum up what they found in **[[personas|Persona]]**. A persona is a realistic, made-up character who represents one important group of users. It has a name, a photo or sketch, an age, goals, frustrations and the devices they use."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a persona for a canteen ordering website",
+     "context": "A design team surveyed 120 pupils and interviewed 6 at a school in Fermanagh about ordering lunch. They write their first persona.",
+     "steps": [
+      "**Name and age:** Orla, 12, Year 8. Gets the bus from Lisnaskea.",
+      "**Devices:** an older Android phone with a cracked screen and limited mobile data.",
+      "**Goals:** order lunch before first period so she does not queue at break; check she has enough money left.",
+      "**Frustrations:** *The menu is a PDF that takes ages to load and is tiny on my phone.* *I never know if my order went through.*",
+      "**Needs:** a fast, phone-friendly menu; a clear confirmation; her balance shown on screen."
+     ],
+     "answer": "Every design decision can now be checked against Orla: *Would this help Orla order lunch on the bus in under a minute?*"
+    },
+    {
+     "t": "p",
+     "text": "Most products need **two to four personas**, for example a pupil, a parent who pays, and a canteen worker who prepares the orders. Each persona is a simplified summary of lots of real people, so creating personas is a kind of **[[abstraction|Abstraction]]**: keeping the details that matter and leaving out the rest."
+    },
+    {
+     "t": "warn",
+     "text": "A persona must be based on **real research**, not stereotypes. *Older people cannot use computers* is a lazy assumption. Many older people are confident users; some have poorer eyesight or less steady hands, which is a design need you can plan for."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Find out user needs with primary research: interviews, surveys, observation and focus groups.",
+      "Interviews give depth, surveys give numbers, observation shows what people really do.",
+      "Use open questions and more than one method.",
+      "A persona is a realistic made-up character representing one group of users.",
+      "Personas keep the whole team focused on real people's needs."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which method is best for getting quick answers from **hundreds** of pupils?",
+     "o": [
+      "Interview",
+      "Observation",
+      "Focus group",
+      "Survey"
+     ],
+     "a": 3,
+     "why": "Surveys can be sent to many people and the results turned into charts."
+    },
+    {
+     "q": "Why is **observation** useful even after doing a survey?",
+     "o": [
+      "It shows what people actually do, not just what they say",
+      "It is quicker than any other method",
+      "People always behave normally when watched",
+      "It gives you lots of numbers to put in charts"
+     ],
+     "a": 0,
+     "why": "People's actions often differ from what they report in surveys."
+    },
+    {
+     "q": "What is a **persona**?",
+     "o": [
+      "A real customer who tests the product",
+      "A realistic made-up character representing a group of users",
+      "The person who designs the user interface",
+      "A password used to log in to a prototype"
+     ],
+     "a": 1,
+     "why": "Personas summarise research about a type of user in one believable character."
+    },
+    {
+     "q": "Which of these is an **open** question?",
+     "o": [
+      "Do you use the canteen?",
+      "Is the menu easy to read?",
+      "What is the most annoying part of buying lunch?",
+      "Have you used the app this week?"
+     ],
+     "a": 2,
+     "why": "Open questions cannot be answered with yes or no, so they give richer answers."
+    },
+    {
+     "q": "Which is primary research?",
+     "o": [
+      "Reading an online article about school apps",
+      "Interviewing five pupils about how they order lunch",
+      "Looking up statistics on smartphone use in the UK",
+      "Reading reviews of another school's app"
+     ],
+     "a": 1,
+     "why": "Primary research means collecting the information yourself from real users."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe **one** advantage and **one** disadvantage of using interviews to find out user needs.",
+     "m": 2,
+     "a": "Advantage: detailed answers / can ask follow-up questions / find out why (1). Disadvantage: slow / time-consuming / only a few people can be asked (1)."
+    },
+    {
+     "q": "What is a **persona**? List **three** things it would usually include.",
+     "m": 4,
+     "a": "A realistic made-up character who represents a group of users, based on research (1). Any three: name, age, goals, frustrations, devices used, skills/needs, photo (3)."
+    },
+    {
+     "q": "A designer only uses a survey to research a new homework app. Explain why they should also observe pupils.",
+     "m": 2,
+     "a": "People do not always do what they say / survey answers can be unreliable (1); observation shows what pupils really do and the problems they meet (1)."
+    }
+   ],
+   "terms": [
+    "Target audience",
+    "Primary research",
+    "Interview",
+    "Survey",
+    "Observation",
+    "Persona"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "spec": "Write user stories in the form 'As a …, I want …, so that …' with acceptance criteria to plan what a product must do",
+   "summary": "A user story describes one thing a user wants to do and why, in one sentence: As a [type of user], I want [goal], so that [reason]. Acceptance criteria are the checks that prove the story is done.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Take a user story apart",
+    "caption": "Work out each part of the user story, then click to check.",
+    "head": [
+     "User story",
+     "Who?",
+     "Wants what?",
+     "Why?"
+    ],
+    "rows": [
+     [
+      "As a pupil, I want to pre-order lunch on my phone, so that I don't queue at break.",
+      "Pupil",
+      "Pre-order lunch on phone",
+      "To avoid queuing"
+     ],
+     [
+      "As a parent, I want an email when the balance is under £5, so that my child never goes without lunch.",
+      "Parent",
+      "Low-balance email",
+      "Child always has lunch money"
+     ],
+     [
+      "As a canteen worker, I want a list of orders by 10:30, so that I know how much food to make.",
+      "Canteen worker",
+      "Order list by 10:30",
+      "To prepare the right amount"
+     ],
+     [
+      "As a player, I want to save my game, so that I can carry on later.",
+      "Player",
+      "Save the game",
+      "To continue later"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      0,
+      3
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      1,
+      3
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      2,
+      3
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      3,
+      3
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Once you know your users, you need to plan **what the product must do** for them. Software teams do this with **[[user stories|User story]]**: short, simple descriptions of a feature told from the point of view of the person who wants it."
+    },
+    {
+     "t": "h",
+     "text": "The user story template"
+    },
+    {
+     "t": "p",
+     "text": "Almost every user story follows the same three-part pattern:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "Template",
+      "It answers…"
+     ],
+     "rows": [
+      [
+       "Who",
+       "**As a** [type of user],",
+       "Who wants this? (often one of your personas)"
+      ],
+      [
+       "What",
+       "**I want** [to do something],",
+       "What do they want to do?"
+      ],
+      [
+       "Why",
+       "**so that** [reason or benefit].",
+       "Why does it matter to them?"
+      ]
+     ],
+     "caption": "As a …, I want …, so that …"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: writing a user story",
+     "context": "Orla (Year 8) says in an interview: *I never know if my lunch order has gone through. Sometimes I get to the canteen and there's nothing there for me.* Write a user story.",
+     "steps": [
+      "**Who?** A pupil.",
+      "**What do they want?** To see a confirmation after ordering.",
+      "**Why?** So they know their lunch will be ready.",
+      "Put it together using the template."
+     ],
+     "answer": "As a pupil, I want to see a confirmation with my order number after I order, so that I know my lunch will be ready when I get to the canteen."
+    },
+    {
+     "t": "tip",
+     "text": "The **so that** part is the most important. It reminds the team **why** the feature exists, which helps them design it well. If you cannot think of a *so that*, maybe nobody actually needs the feature."
+    },
+    {
+     "t": "h",
+     "text": "Acceptance criteria"
+    },
+    {
+     "t": "p",
+     "text": "A story on its own is a bit vague. How do you know when it is finished? Teams add **[[acceptance criteria|Acceptance criteria]]**: a short list of specific, testable checks that must all be true for the story to count as done."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: acceptance criteria for the confirmation story",
+     "context": "Write acceptance criteria for: *As a pupil, I want to see a confirmation after I order, so that I know my lunch will be ready.*",
+     "steps": [
+      "A confirmation screen appears within **3 seconds** of pressing Pay.",
+      "It shows the **order number**, the **food** ordered and the **collection time**.",
+      "The same confirmation appears in **My orders** for the rest of the day.",
+      "If payment fails, a clear message says the order has **not** been placed."
+     ],
+     "answer": "Each criterion can be tested with a clear yes or no, so the team knows exactly when the story is done."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Weak acceptance criterion",
+      "Strong acceptance criterion"
+     ],
+     "rows": [
+      [
+       "Vague or testable?",
+       "The page loads fast.",
+       "The menu page loads in under 3 seconds on a phone."
+      ],
+      [
+       "Clear to everyone?",
+       "The confirmation looks nice.",
+       "The confirmation shows the order number, food and collection time."
+      ],
+      [
+       "Yes/no answer?",
+       "Users can find their balance easily.",
+       "The balance is shown on the home screen without scrolling."
+      ]
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "A common mistake is writing a user story about the **technology** instead of the **user**: *As a developer, I want a SQL database…* Users do not care how it works inside. Keep the story about what the user wants to achieve."
+    },
+    {
+     "t": "p",
+     "text": "User stories also help a team decide **what to build first**. Stories are written on cards or sticky notes, and the most important ones are built first. Nice-to-have stories, such as *As a pupil, I want to rate today's lunch*, can wait for a later version."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A user story: As a [user], I want [goal], so that [reason].",
+      "It is written from the user's point of view, not the developer's.",
+      "The 'so that' explains why the feature matters.",
+      "Acceptance criteria are specific, testable checks that show a story is done.",
+      "Stories help teams plan and decide what to build first."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is the correct pattern for a user story?",
+     "o": [
+      "As a …, I want …, so that …",
+      "If …, then …, else …",
+      "Input …, process …, output …",
+      "Who …, where …, when …"
+     ],
+     "a": 0,
+     "why": "User stories follow As a [user], I want [goal], so that [reason]."
+    },
+    {
+     "q": "In *As a parent, I want a low-balance email, so that my child never goes without lunch*, what is the **reason**?",
+     "o": [
+      "As a parent",
+      "A low-balance email",
+      "My child never goes without lunch",
+      "The email address of the parent"
+     ],
+     "a": 2,
+     "why": "The reason comes after 'so that'."
+    },
+    {
+     "q": "What are **acceptance criteria**?",
+     "o": [
+      "The minimum age to use an app",
+      "Specific, testable checks that show a story is complete",
+      "A list of every user who has tested the app",
+      "The prices users accept to pay for the app"
+     ],
+     "a": 1,
+     "why": "Acceptance criteria define exactly when a story counts as done."
+    },
+    {
+     "q": "Which acceptance criterion is the **most testable**?",
+     "o": [
+      "The app should be easy to use",
+      "The menu should look attractive",
+      "Users should like the colours",
+      "The menu loads in under 3 seconds on a phone"
+     ],
+     "a": 3,
+     "why": "It has a clear measurement, so the answer is simply yes or no."
+    },
+    {
+     "q": "What is wrong with *As a developer, I want to use a SQL database, so that the data is stored*?",
+     "o": [
+      "It is about the technology, not what a user wants",
+      "It has no 'so that' part",
+      "It is too long to be a user story",
+      "Developers are not allowed to write user stories"
+     ],
+     "a": 0,
+     "why": "Good user stories describe what a real user wants to achieve."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write a user story for a pupil who wants to see their homework deadlines in one place.",
+     "m": 3,
+     "a": "As a pupil (1), I want to see all my homework deadlines on one page (1), so that I don't miss any / can plan my time (1)."
+    },
+    {
+     "q": "Write **two** acceptance criteria for this story: *As a parent, I want to top up my child's dinner money online, so that they always have money for lunch.*",
+     "m": 2,
+     "a": "Any two testable criteria, e.g. parent can pay by card (1); new balance shown straight after payment (1); a receipt is emailed (1); minimum top-up shown clearly (1)."
+    },
+    {
+     "q": "Explain why the **so that** part of a user story is important.",
+     "m": 2,
+     "a": "It explains why the user needs the feature / the benefit (1), which helps the team design it well or decide whether it is needed / how important it is (1)."
+    }
+   ],
+   "terms": [
+    "User story",
+    "Acceptance criteria"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "spec": "Describe usability principles such as consistency, feedback, simple navigation and error prevention, using good and bad examples",
+   "summary": "Usable products follow a few simple principles: be consistent, give clear feedback, keep navigation simple, prevent errors (and help people recover from them) and use words users understand.",
+   "diagram": {
+    "kind": "hotspot",
+    "title": "Spot the usability problems",
+    "caption": "This is a badly designed sign-up screen for a school club app. Click each area to find the problem and the fix.",
+    "rows": [
+     [
+      {
+       "label": "Title: 'Initialise account'",
+       "detail": "Problem: jargon. Fix: use the user's words, e.g. 'Join the club'.",
+       "span": 3
+      }
+     ],
+     [
+      {
+       "label": "Date of birth: free text box",
+       "detail": "Problem: users type it in lots of formats, causing errors. Fix: a date picker or three drop-downs (error prevention).",
+       "span": 2
+      },
+      {
+       "label": "Tiny grey '?' icon",
+       "detail": "Problem: help is hidden and hard to see. Fix: show a short hint under the box.",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "Password box",
+       "detail": "Problem: rules only shown after you fail. Fix: show the rules before typing and tick them off as they are met.",
+       "span": 3
+      }
+     ],
+     [
+      {
+       "label": "'Clear form' button next to 'Go'",
+       "detail": "Problem: one slip wipes everything. Fix: remove it, or move it away and ask 'Are you sure?'",
+       "span": 1
+      },
+      {
+       "label": "'Go' button",
+       "detail": "Problem: nothing happens for 10 seconds after clicking. Fix: show a loading spinner, then a success message (feedback).",
+       "span": 2
+      }
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Designers have learned a lot over the years about what makes products easy or hard to use. Experts such as **Jakob Nielsen** wrote these lessons down as **usability principles** (sometimes called *heuristics*). You can use them as a checklist when you design or review any app, website or game."
+    },
+    {
+     "t": "h",
+     "text": "Five usability principles"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Principle",
+      "What it means",
+      "Good example",
+      "Bad example"
+     ],
+     "rows": [
+      [
+       "**[[Consistency]]**",
+       "Things that do the same job look and behave the same everywhere.",
+       "The menu is in the same place on every page; the Back button always looks the same.",
+       "Save is a blue button on one screen and a floppy-disk icon in a different corner on the next."
+      ],
+      [
+       "**[[Feedback]]**",
+       "The system tells users what is happening, straight away.",
+       "A spinner while loading; *Order placed! Number 214* afterwards.",
+       "You tap Pay and nothing happens, so you tap again and pay twice."
+      ],
+      [
+       "**Simple navigation**",
+       "Users can always see where they are, where they can go, and how to get back.",
+       "A few clear menu items: Menu, Order, My account.",
+       "Twelve menu items with clever names and no way back to the home page."
+      ],
+      [
+       "**[[Error prevention]]**",
+       "Design so mistakes are hard to make, and easy to fix when they happen.",
+       "A date picker instead of a free text box; *Are you sure you want to delete?*",
+       "A form that clears everything you typed because one box was wrong."
+      ],
+      [
+       "**Speak the user's language**",
+       "Use words, icons and ideas users already know.",
+       "*Pay*, *Basket*, *Sign in*.",
+       "*Execute transaction*, *Authenticate credentials*."
+      ]
+     ],
+     "caption": "Usability principles with examples"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: which principle is broken?",
+     "context": "A pupil reviews a school homework app. Name the principle broken in each case. (a) After pressing Submit, the screen just goes blank. (b) On the home page the menu is at the top, but on the homework page it moves to the bottom. (c) A message says *Error 0x80070057*.",
+     "steps": [
+      "(a) Nothing tells the user if their homework was sent: **feedback** is missing.",
+      "(b) The menu moves between pages: **consistency** is broken.",
+      "(c) The error message is in computer jargon. It breaks **speak the user's language**, and does not help the user **recover from the error**. A better message: *Your file is too big. Please choose a file under 10 MB.*"
+     ],
+     "answer": "(a) Feedback, (b) Consistency, (c) Speak the user's language / help users recover from errors."
+    },
+    {
+     "t": "h",
+     "text": "Good error messages"
+    },
+    {
+     "t": "p",
+     "text": "Errors will still happen, so good design helps people recover. A good error message says, in plain words: **what went wrong**, **why**, and **what to do next**. It appears next to the problem, not at the top of a long page."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Bad error message",
+      "Good error message"
+     ],
+     "rows": [
+      [
+       "Wording",
+       "Invalid input.",
+       "Please enter your mobile number using digits only, e.g. 07700 900123."
+      ],
+      [
+       "Where it appears",
+       "In red at the very top of the page",
+       "Right next to the box that needs fixing"
+      ],
+      [
+       "What happens to your work",
+       "Everything you typed is wiped",
+       "Everything you typed is kept"
+      ]
+     ]
+    },
+    {
+     "t": "tip",
+     "text": "**Recognition is easier than recall.** It is much easier to choose from a list (recognise) than to remember and type something exactly (recall). That is why good apps show recent searches, drop-down lists and icons with labels."
+    },
+    {
+     "t": "warn",
+     "text": "Do not confuse **looking good** with **being usable**. A beautiful screen with tiny low-contrast text and hidden menus can look great in a screenshot but be a nightmare to use. Usability first, then make it attractive."
+    },
+    {
+     "t": "note",
+     "text": "You may have met some of these ideas in the **Web Design** topic, such as navigation bars that are the same on every page and limiting colours and fonts. The same principles apply to apps and games too: a game's pause menu and controls should be consistent and give clear feedback."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Consistency: the same things look and work the same everywhere.",
+      "Feedback: always show users what is happening.",
+      "Simple navigation: users know where they are and how to get back.",
+      "Error prevention: make mistakes hard, and recovery easy.",
+      "Use the user's language, not technical jargon."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "You press **Pay** and nothing happens for ten seconds. Which principle is missing?",
+     "o": [
+      "Consistency",
+      "Abstraction",
+      "Error prevention",
+      "Feedback"
+     ],
+     "a": 3,
+     "why": "Users should always be shown what is happening, e.g. a spinner and then a confirmation."
+    },
+    {
+     "q": "A website's menu moves to a different place on every page. Which principle is broken?",
+     "o": [
+      "Consistency",
+      "Feedback",
+      "Accessibility",
+      "Recognition"
+     ],
+     "a": 0,
+     "why": "Things that do the same job should look and behave the same everywhere."
+    },
+    {
+     "q": "Which design best follows **error prevention**?",
+     "o": [
+      "A free text box for typing the date",
+      "An error message after a wrong date is typed",
+      "A date picker that only allows real dates",
+      "A help page explaining date formats"
+     ],
+     "a": 2,
+     "why": "A date picker stops invalid dates being entered in the first place."
+    },
+    {
+     "q": "Which is the **best** error message?",
+     "o": [
+      "Error 404: request invalid",
+      "Please enter your postcode, e.g. BT74 6AB",
+      "Something went wrong",
+      "Invalid input in field 3"
+     ],
+     "a": 1,
+     "why": "It says what is needed in plain words with an example."
+    },
+    {
+     "q": "Why is choosing from a list usually easier than typing an answer from memory?",
+     "o": [
+      "Lists use less storage space",
+      "Typing is not allowed on phones",
+      "Recognising something is easier than recalling it",
+      "Lists always load faster than text boxes"
+     ],
+     "a": 2,
+     "why": "Recognition is easier than recall, so lists, icons and recent items help users."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by **feedback** in user interface design and give an example.",
+     "m": 2,
+     "a": "The system tells the user what is happening / the result of their action straight away (1). e.g. loading spinner, 'Order placed' message, button changes colour when pressed (1)."
+    },
+    {
+     "q": "A shop website clears the whole form when one box is filled in wrongly. Identify the principle broken and suggest **two** improvements.",
+     "m": 3,
+     "a": "Error prevention / helping users recover from errors (1). Any two: keep what the user typed (1); show the error next to the box (1); explain how to fix it in plain words (1); check each box as it is filled in (1)."
+    },
+    {
+     "q": "Describe what **consistency** means and why it helps users.",
+     "m": 2,
+     "a": "Things that do the same job look and work the same way everywhere (1); users learn it once and do not have to re-learn / it is predictable, so it is quicker and causes fewer mistakes (1)."
+    }
+   ],
+   "terms": [
+    "Consistency",
+    "Feedback",
+    "Error prevention"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "spec": "Explain how wireframes and prototypes, from paper sketches to high-fidelity models, use abstraction to test ideas before building",
+   "summary": "A wireframe is a simple outline of a screen's layout. A prototype is an early model users can try. Designers start with quick low-fidelity sketches and move to detailed high-fidelity prototypes, using abstraction to leave out detail that is not needed yet.",
+   "diagram": {
+    "kind": "flow",
+    "title": "From idea to working product",
+    "caption": "Click each stage. At any stage, testing can send you back to change the design.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Paper sketch",
+      "detail": "Pencil drawings of screens. Takes minutes. Easy to throw away and try again.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Wireframe",
+      "detail": "Boxes and labels showing where things go. No colours, images or real text yet.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "Low-fidelity prototype",
+      "detail": "Paper or simple clickable screens. Users can try the flow, e.g. order a lunch.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "High-fidelity prototype",
+      "detail": "Looks and feels like the real app, with colours, fonts and images, but no real data behind it.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Build it",
+      "detail": "Programmers build the real product, knowing the design has already been tested.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "c",
+      "a"
+     ],
+     [
+      "d",
+      "b"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Building a real app takes weeks. Finding out after all that work that users hate the layout would be a disaster. So designers try out their ideas first with quick, cheap models of the product."
+    },
+    {
+     "t": "h",
+     "text": "Wireframes"
+    },
+    {
+     "t": "p",
+     "text": "A **[[wireframe|Wireframe]]** is a simple outline of one screen or page. It shows **where** things go (the menu, the buttons, the images, the text) using plain boxes and labels. It deliberately leaves out colours, fonts, real photos and real text."
+    },
+    {
+     "t": "p",
+     "text": "This is **[[abstraction|Abstraction]]**: removing unnecessary detail so you can focus on what matters. At the wireframe stage the important question is *is the layout right?*, not *what shade of green should the button be?*"
+    },
+    {
+     "t": "tip",
+     "text": "A crossed box (a rectangle with an X through it) is the usual wireframe symbol for *an image goes here*. Wavy or straight lines stand for text. You do not need to be good at art to draw a wireframe."
+    },
+    {
+     "t": "h",
+     "text": "Prototypes"
+    },
+    {
+     "t": "p",
+     "text": "A **[[prototype|Prototype]]** is an early model of a product that users can **try out**, so you can test your ideas before the real thing is built. Prototypes come in different levels of detail, called **[[fidelity|Fidelity]]**."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Low-fidelity prototype",
+      "High-fidelity prototype"
+     ],
+     "rows": [
+      [
+       "What it looks like",
+       "Paper sketches or plain grey boxes",
+       "Looks almost exactly like the finished app"
+      ],
+      [
+       "Time and cost",
+       "Minutes; almost free",
+       "Hours or days; needs design software such as Figma"
+      ],
+      [
+       "Best for",
+       "Testing early ideas, layout and the order of screens",
+       "Testing details: wording, colours, how it feels to use"
+      ],
+      [
+       "Changing it",
+       "Easy: just draw it again",
+       "Slower, and people are less willing to throw it away"
+      ],
+      [
+       "What users comment on",
+       "The big ideas: *I can't find where to order*",
+       "Small details: *That button is the wrong blue*"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**Low fidelity** means simple and rough. **High fidelity** means detailed and realistic. Teams usually start low and move up, because early mistakes are cheapest to fix on paper."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a paper prototype test",
+     "context": "A Year 9 team draws five canteen-app screens on paper: Home, Menu, Basket, Pay, Confirmation. How can they test it without any code?",
+     "steps": [
+      "One pupil plays the **computer**. A tester taps on the paper screens with their finger.",
+      "When the tester taps *Menu*, the computer swaps in the Menu sheet.",
+      "The team gives the tester a task: *Order a chicken wrap and a bottle of water.*",
+      "They watch and take notes. The tester taps the food picture instead of the small *Add* button, and nothing happens.",
+      "The team redraws the Menu screen so tapping anywhere on a food item adds it."
+     ],
+     "answer": "In 15 minutes, with paper and pencils, the team found and fixed a real usability problem before writing a single line of code."
+    },
+    {
+     "t": "warn",
+     "text": "Do not jump straight to a beautiful high-fidelity design. If users find the order of screens confusing, you will have wasted hours on colours and pictures that you now have to throw away. **Sketch first, polish later.**"
+    },
+    {
+     "t": "p",
+     "text": "Abstraction is used all through design. A wireframe leaves out visual detail, a persona leaves out the details of individual people, and a **storyboard** or flow diagram of screens leaves out everything except the order the user moves through them."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A wireframe shows the layout of a screen with simple boxes and labels.",
+      "A prototype is an early model that users can try out.",
+      "Low fidelity = quick and rough; high fidelity = detailed and realistic.",
+      "Start with low fidelity: early changes are cheap.",
+      "Wireframes use abstraction: leave out detail that is not needed yet."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a **wireframe**?",
+     "o": [
+      "The finished code for a web page",
+      "A simple outline of a screen's layout using boxes and labels",
+      "The cables that connect a computer to a network",
+      "A list of user stories for a product"
+     ],
+     "a": 1,
+     "why": "Wireframes show where things go without colours, images or real text."
+    },
+    {
+     "q": "Why do wireframes leave out colours and images?",
+     "o": [
+      "Colours cannot be drawn on paper",
+      "Wireframes are only for blind users",
+      "To focus on the layout: this is abstraction",
+      "Images make the file too big to email"
+     ],
+     "a": 2,
+     "why": "Removing unnecessary detail to focus on what matters is abstraction."
+    },
+    {
+     "q": "Which is a **high-fidelity** prototype?",
+     "o": [
+      "A clickable model that looks almost exactly like the finished app",
+      "Pencil sketches on sticky notes",
+      "Grey boxes with labels in a word processor",
+      "A list of features the app will have"
+     ],
+     "a": 0,
+     "why": "High fidelity means detailed and realistic."
+    },
+    {
+     "q": "Why do designers usually start with **low-fidelity** prototypes?",
+     "o": [
+      "They look more professional to clients",
+      "They can be tested by the computer automatically",
+      "They contain the finished program code",
+      "They are quick and cheap, so early changes cost very little"
+     ],
+     "a": 3,
+     "why": "Paper is fast to change, so big problems can be fixed early."
+    },
+    {
+     "q": "In a paper prototype test, what does the person 'playing the computer' do?",
+     "o": [
+      "Writes the code for each screen",
+      "Swaps in the right paper screen when the tester taps",
+      "Fills in a survey about the app",
+      "Marks the tester's answers out of ten"
+     ],
+     "a": 1,
+     "why": "They act like the computer, showing the next screen in response to taps."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between a **wireframe** and a **high-fidelity prototype**.",
+     "m": 2,
+     "a": "A wireframe is a simple layout of a screen with boxes/labels, no colours or real content (1). A high-fidelity prototype looks and feels like the finished product and can be clicked through / tried (1)."
+    },
+    {
+     "q": "Give **two** advantages of testing a paper prototype with users.",
+     "m": 2,
+     "a": "Any two: quick to make (1); cheap / no code needed (1); easy to change (1); finds problems early before building (1); users comment on the big ideas, not small details (1)."
+    },
+    {
+     "q": "Explain how a wireframe is an example of **abstraction**.",
+     "m": 2,
+     "a": "Abstraction is removing unnecessary detail (1); a wireframe leaves out colours, images, fonts and real text to focus only on the layout (1)."
+    }
+   ],
+   "terms": [
+    "Wireframe",
+    "Prototype",
+    "Fidelity",
+    "Abstraction"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "spec": "Explain what accessibility is, who it helps, and how the WCAG guidelines and the POUR principles guide accessible design",
+   "summary": "Accessibility means designing so that everyone, including disabled people, can use a product. The international WCAG guidelines say content must be Perceivable, Operable, Understandable and Robust (POUR), through things like alt text, good contrast, captions and keyboard access.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Which POUR principle?",
+    "caption": "Decide which POUR principle each accessibility feature mainly supports, then click to check.",
+    "head": [
+     "Feature",
+     "Principle",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Alt text on every photo",
+      "Perceivable",
+      "Blind users hear a description instead of seeing the image"
+     ],
+     [
+      "Captions on a video",
+      "Perceivable",
+      "Deaf users can read what is said"
+     ],
+     [
+      "Every button works with the Tab and Enter keys",
+      "Operable",
+      "Users who cannot use a mouse can still use it"
+     ],
+     [
+      "No time limit, or a way to ask for more time",
+      "Operable",
+      "Users who need longer are not locked out"
+     ],
+     [
+      "Error messages say exactly how to fix the problem",
+      "Understandable",
+      "Users know what went wrong and what to do"
+     ],
+     [
+      "Code written to standards so screen readers can read it",
+      "Robust",
+      "It works with lots of browsers and assistive technology"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      0,
+      2
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      1,
+      2
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      3,
+      2
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**[[Accessibility]]** means designing products so that **everyone** can use them, including people with disabilities. More than one in five people in the UK are disabled, so an inaccessible app shuts out a huge number of users."
+    },
+    {
+     "t": "h",
+     "text": "Who does accessibility help?"
+    },
+    {
+     "t": "p",
+     "text": "Accessibility is not only about permanent disabilities. Designers often think about three kinds of situation:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Type",
+      "Example",
+      "A feature that helps"
+     ],
+     "rows": [
+      [
+       "**Permanent**",
+       "A pupil who is blind, deaf, or has only one arm.",
+       "Screen reader support, captions, one-handed controls."
+      ],
+      [
+       "**Temporary**",
+       "A broken wrist in a cast; an eye infection.",
+       "Keyboard shortcuts, voice control, zoom."
+      ],
+      [
+       "**Situational**",
+       "Holding a baby in one arm; a noisy bus; bright sunlight on your screen.",
+       "One-handed use, captions, high contrast."
+      ]
+     ],
+     "caption": "Accessibility helps far more people than you might think"
+    },
+    {
+     "t": "tip",
+     "text": "This is sometimes called the **kerb-cut effect**. Dropped kerbs were made for wheelchair users, but parents with buggies, cyclists and people pulling suitcases all use them too. Accessible design usually makes things better for **everyone**."
+    },
+    {
+     "t": "h",
+     "text": "WCAG: the international standard"
+    },
+    {
+     "t": "p",
+     "text": "**[[WCAG]]** stands for the **Web Content Accessibility Guidelines**. They are written by the **W3C** (World Wide Web Consortium), the organisation that also sets the standards for HTML and CSS, and are used around the world. The current version is **WCAG 2.2**, published in 2023. Each guideline has a level: **A** (the minimum), **AA** (the usual target) and **AAA** (the highest)."
+    },
+    {
+     "t": "p",
+     "text": "In the UK, most public sector websites and apps, such as councils, the NHS and government services, must by law meet WCAG level **AA**."
+    },
+    {
+     "t": "h",
+     "text": "The POUR principles"
+    },
+    {
+     "t": "p",
+     "text": "All of WCAG is organised under four principles, remembered as **[[POUR]]**:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Principle",
+      "In simple terms",
+      "Examples"
+     ],
+     "rows": [
+      [
+       "**P**erceivable",
+       "Users must be able to **sense** the content (see it, hear it or feel it).",
+       "[[Alt text]] for images; captions for video; good colour contrast."
+      ],
+      [
+       "**O**perable",
+       "Users must be able to **use** every control.",
+       "Everything works with a keyboard alone; no flashing content; enough time to finish."
+      ],
+      [
+       "**U**nderstandable",
+       "Users must be able to **understand** the content and how it works.",
+       "Clear, simple language; consistent menus; helpful error messages."
+      ],
+      [
+       "**R**obust",
+       "Content must **work with lots of technologies**, including assistive ones.",
+       "Correct, standard HTML that works in different browsers and with screen readers."
+      ]
+     ],
+     "caption": "POUR: Perceivable, Operable, Understandable, Robust"
+    },
+    {
+     "t": "h",
+     "text": "Six accessibility habits you can use now"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Alt text:** give every meaningful image a short description, e.g. *ERGS rugby team holding the cup*. A **[[screen reader|Screen reader]]** (software that reads the screen aloud) speaks this to blind users.",
+      "**[[Contrast|Colour contrast]]:** text must stand out clearly from its background. WCAG AA needs a contrast ratio of at least **4.5 : 1** for normal text and **3 : 1** for large text.",
+      "**Captions:** add captions to videos so deaf users, and anyone watching with the sound off, can follow.",
+      "**Keyboard use:** every link, button and menu should work using **Tab**, **Shift + Tab** and **Enter**, with a visible outline showing where you are.",
+      "**Readable text:** clear fonts, sensible size, short paragraphs, left-aligned text, and text that still works when zoomed to 200%.",
+      "**Never rely on colour alone:** about 1 in 12 men and 1 in 200 women are colour blind. Add a word or icon, e.g. *Sold out* as well as a red dot."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: fixing an inaccessible menu",
+     "context": "A canteen website shows today's menu as one photo of a handwritten whiteboard. Vegetarian dishes are marked only in green. Which POUR principles are broken and how should it be fixed?",
+     "steps": [
+      "A screen reader cannot read words inside a photo: **Perceivable** is broken. Fix: type the menu as real text.",
+      "Colour-blind users cannot see which dishes are green: **Perceivable** again. Fix: add *(V)* or a leaf icon with a label.",
+      "Handwriting is hard to read for many users, including dyslexic pupils: **Understandable**. Fix: a clear font and a simple list.",
+      "Real text in proper HTML also makes it **Robust**: it works on any device, can be zoomed, and can be translated."
+     ],
+     "answer": "Replace the photo with a typed, clearly labelled list, and never use colour as the only clue."
+    },
+    {
+     "t": "warn",
+     "text": "Alt text should describe what matters in the image, not say *image of* or repeat the file name (*IMG_2045.jpg*). Purely decorative images, such as a background swirl, should have **empty** alt text so screen readers skip them."
+    },
+    {
+     "t": "note",
+     "text": "**[[Assistive technology]]** is any device or software that helps disabled people use computers: screen readers (e.g. NVDA, VoiceOver, TalkBack), screen magnifiers, voice control, switch controls and braille displays. Good, standard code is what lets these tools work."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Accessibility = designing so everyone can use it, including disabled people.",
+      "It helps people with permanent, temporary and situational needs.",
+      "WCAG are the international accessibility guidelines from the W3C; AA is the usual target.",
+      "POUR: Perceivable, Operable, Understandable, Robust.",
+      "Use alt text, strong contrast, captions, full keyboard access and readable text; never rely on colour alone."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does **WCAG** stand for?",
+     "o": [
+      "World Computer Access Group",
+      "Web Content Accessibility Guidelines",
+      "Website Colour and Graphics",
+      "Web Coding Accessibility Grades"
+     ],
+     "a": 1,
+     "why": "WCAG = Web Content Accessibility Guidelines, published by the W3C."
+    },
+    {
+     "q": "What do the letters **POUR** stand for?",
+     "o": [
+      "Perceivable, Operable, Understandable, Robust",
+      "Private, Open, Usable, Reliable",
+      "Perceivable, Organised, Usable, Readable",
+      "Predictable, Operable, Useful, Responsive"
+     ],
+     "a": 0,
+     "why": "WCAG is organised under these four principles."
+    },
+    {
+     "q": "What is **alt text** used for?",
+     "o": [
+      "Changing the colour of text for dark mode",
+      "Alternative fonts if the main font fails",
+      "A description of an image that a screen reader can read aloud",
+      "Translating a page into another language"
+     ],
+     "a": 2,
+     "why": "Alt text lets people who cannot see the image know what it shows."
+    },
+    {
+     "q": "A parent holding a baby can only use one hand on their phone. What type of accessibility need is this?",
+     "o": [
+      "Permanent",
+      "Temporary",
+      "Robust",
+      "Situational"
+     ],
+     "a": 3,
+     "why": "It is caused by the situation they are in, not a disability."
+    },
+    {
+     "q": "Which is the best way to show that a dish is vegetarian?",
+     "o": [
+      "Colour its name green",
+      "Add the label (V) or a labelled leaf icon",
+      "Make its name flash on and off",
+      "Put it in a smaller font size"
+     ],
+     "a": 1,
+     "why": "Never rely on colour alone, and flashing content can harm some users."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name the **four** POUR principles of WCAG.",
+     "m": 4,
+     "a": "Perceivable (1); Operable (1); Understandable (1); Robust (1)."
+    },
+    {
+     "q": "Describe **two** ways a website can be made more accessible for a user who is blind.",
+     "m": 2,
+     "a": "Any two: alt text on images (1); works fully with a screen reader / correct HTML headings and labels (1); everything works by keyboard (1); descriptive link text instead of 'click here' (1)."
+    },
+    {
+     "q": "Explain why accessible design helps people who are **not** disabled. Use an example.",
+     "m": 2,
+     "a": "Accessibility features help everyone / situational needs (1). e.g. captions help people on a noisy bus or with the sound off; high contrast helps in bright sunlight; dropped kerbs help buggies (1)."
+    }
+   ],
+   "terms": [
+    "Accessibility",
+    "WCAG",
+    "POUR",
+    "Alt text",
+    "Colour contrast",
+    "Screen reader",
+    "Assistive technology"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p07",
+   "spec": "Explain inclusive design and how bias can leave users out, considering different ages, abilities, languages and devices",
+   "summary": "Inclusive design means designing for the full range of people who might use a product: different ages, abilities, languages, cultures, devices and internet connections. Bias creeps in when designers assume everyone is like them.",
+   "diagram": {
+    "kind": "match",
+    "title": "Who might be left out?",
+    "caption": "Match each user to a design choice that includes them.",
+    "pairs": [
+     [
+      "Grandparent with poor eyesight",
+      "Text that can be enlarged without breaking the layout"
+     ],
+     [
+      "Pupil with dyslexia",
+      "Clear font, short paragraphs, left-aligned text"
+     ],
+     [
+      "Family who speak Polish at home",
+      "Simple English and a translation option"
+     ],
+     [
+      "Pupil with an old, slow phone",
+      "A light page that loads quickly on mobile data"
+     ],
+     [
+      "Pupil called Seán O'Neill",
+      "Name boxes that accept fadas and apostrophes"
+     ],
+     [
+      "Parent with no smartphone",
+      "Another way to do the same task, e.g. by phone"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Accessibility is about making sure disabled people can use a product. **[[Inclusive design]]** goes even wider: it means designing for the **full range** of people who might use it, whatever their age, ability, language, culture, device or internet connection."
+    },
+    {
+     "t": "h",
+     "text": "What is bias in design?"
+    },
+    {
+     "t": "p",
+     "text": "**[[Bias]]** in design happens when a product works well for some groups of people but badly for others, usually by accident. It often happens because the design team are all quite similar, and they design for people like themselves without realising."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Area",
+      "Biased assumption",
+      "Who gets left out",
+      "Inclusive choice"
+     ],
+     "rows": [
+      [
+       "**Age**",
+       "Everyone is a confident teenager or young adult.",
+       "Older users, younger children.",
+       "Clear labels, larger tap targets, no hidden gestures."
+      ],
+      [
+       "**Ability**",
+       "Everyone can see, hear and use a mouse or touchscreen easily.",
+       "Disabled users.",
+       "Follow WCAG; test with assistive technology."
+      ],
+      [
+       "**Language**",
+       "Everyone reads English fluently.",
+       "New arrivals, families who speak another language at home.",
+       "Plain English, icons with labels, translation."
+      ],
+      [
+       "**Names and culture**",
+       "Names are short and use only the letters A to Z.",
+       "Seán, Aoife Ní Bhriain, Siobhán O'Neill, people with one name.",
+       "Accept accents (fadas), apostrophes, hyphens and spaces."
+      ],
+      [
+       "**Devices**",
+       "Everyone has the latest phone and fast Wi-Fi.",
+       "Older phones, rural areas with poor signal, limited data.",
+       "Small, fast pages that also work offline or on slow connections."
+      ],
+      [
+       "**Money and access**",
+       "Everyone has a smartphone and a bank card.",
+       "Families without them.",
+       "Offer another way, e.g. cash top-up at the school office."
+      ]
+     ],
+     "caption": "Common biases and how to avoid them"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the name box",
+     "context": "A new school club website rejects the names *Seán Ó Ceallaigh* and *Ciara O'Neill* with the message *Invalid characters in name*. Explain the problem and suggest a fix.",
+     "steps": [
+      "The form only accepts the letters A to Z. The programmer assumed every name looks like their own.",
+      "In Northern Ireland, Irish names often use a **fada** (á, é, í, ó, ú) and many surnames include an **apostrophe**.",
+      "Pupils are told their own name is *invalid*, which is both unusable and upsetting.",
+      "**Fix:** allow letters with accents, apostrophes, hyphens and spaces in name boxes, and only check what really needs checking (e.g. that the box is not empty)."
+     ],
+     "answer": "The form is biased towards one kind of name. Inclusive design accepts real names as people actually write them."
+    },
+    {
+     "t": "warn",
+     "text": "Bias in design is usually **not deliberate**. Nobody set out to block Seán. That is exactly why teams need to research a wide range of users and test with them, rather than trusting their own assumptions."
+    },
+    {
+     "t": "h",
+     "text": "Bias in data and AI"
+    },
+    {
+     "t": "p",
+     "text": "Products that learn from data can be biased too. If a face-recognition system is trained mostly on photos of one group of people, it may work less well for others. If a voice assistant has heard mostly one accent, it may struggle with a strong Fermanagh or Belfast accent. The fix is the same: **include a wide range of real users** from the start."
+    },
+    {
+     "t": "tip",
+     "text": "A quick inclusive-design check: picture your product being used by your granny, by a new pupil who has just arrived from another country, and by someone on a bus in the countryside with one bar of signal. Does it still work for all three?"
+    },
+    {
+     "t": "note",
+     "text": "Inclusive design also means thinking about **who might be harmed**, not just who is left out. For example, a feature that shows every pupil's location to their friends might be fun for most, but risky for a pupil who needs to stay safe from someone."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Inclusive design = designing for the full range of people: ages, abilities, languages, cultures, devices and connections.",
+      "Bias happens when a design works well for some groups but badly for others.",
+      "Bias is usually accidental: designers assume users are like them.",
+      "Data-driven systems can be biased if their training data is not varied.",
+      "Fix bias by researching and testing with a wide range of real users."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is **inclusive design**?",
+     "o": [
+      "Designing only for disabled users",
+      "Designing for the full range of people who might use a product",
+      "Including as many features as possible",
+      "Designing a product that includes adverts"
+     ],
+     "a": 1,
+     "why": "Inclusive design considers age, ability, language, culture, devices and more."
+    },
+    {
+     "q": "A form rejects the name *Seán*. What is the most likely cause?",
+     "o": [
+      "The user typed it in the wrong box",
+      "The website has been hacked",
+      "The designer assumed names only use the letters A to Z",
+      "Irish names are not allowed online"
+     ],
+     "a": 2,
+     "why": "This is design bias: the programmer only allowed the letters they expected."
+    },
+    {
+     "q": "Why is bias in design usually accidental?",
+     "o": [
+      "Designers assume users are like themselves",
+      "Computers add bias by themselves",
+      "Users ask for biased features",
+      "The law requires some groups to be left out"
+     ],
+     "a": 0,
+     "why": "Similar design teams often design for people like them without realising."
+    },
+    {
+     "q": "Which choice best includes users with slow internet connections?",
+     "o": [
+      "Autoplay a large video on the home page",
+      "Use the highest-quality images available",
+      "Require the latest version of the app",
+      "Keep pages small so they load quickly"
+     ],
+     "a": 3,
+     "why": "Light, fast pages work for users with poor signal or limited data."
+    },
+    {
+     "q": "A voice assistant struggles to understand people with strong local accents. What is the most likely reason?",
+     "o": [
+      "Accents are too loud for microphones",
+      "It was trained mostly on voices with other accents",
+      "Voice assistants only understand written English",
+      "Local accents use different words for everything"
+     ],
+     "a": 1,
+     "why": "Systems that learn from data can be biased if the data is not varied."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by **bias** in the design of a digital product. Give an example.",
+     "m": 2,
+     "a": "When a product works well for some groups but badly for others / designers assume users are like them (1). e.g. name boxes rejecting fadas or apostrophes; app only works on new phones; face recognition works less well for some groups (1)."
+    },
+    {
+     "q": "A school's new app is only in English and needs the latest iPhone. Describe **two** groups of users it might exclude and how to include them.",
+     "m": 4,
+     "a": "e.g. parents who do not read English well (1): use plain English / translation / icons with labels (1). Families with older or Android phones / no smartphone (1): make it work on older devices / a website version / another way to do the task (1)."
+    },
+    {
+     "q": "How can a design team reduce bias in their product?",
+     "m": 2,
+     "a": "Any two: research a wide range of users (1); test with varied users, e.g. different ages, abilities, languages (1); have a varied design team (1); use varied training data for AI (1); check assumptions / follow WCAG (1)."
+    }
+   ],
+   "terms": [
+    "Inclusive design",
+    "Bias"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p08",
+   "spec": "Describe how to test a design with users, including think-aloud testing and A/B tests, and use the results to improve it",
+   "summary": "Usability testing means watching real users try real tasks. Think-aloud testing shows what users are thinking; A/B tests compare two versions to see which works better. Designers then fix the most serious problems first.",
+   "diagram": {
+    "kind": "calc",
+    "title": "Task success rate",
+    "caption": "Change the numbers to see the percentage of testers who completed the task. Many teams aim for 80% or more.",
+    "inputs": [
+     {
+      "id": "done",
+      "label": "Testers who completed the task",
+      "value": 4
+     },
+     {
+      "id": "total",
+      "label": "Testers who tried it",
+      "value": 5
+     }
+    ],
+    "formula": "done / total * 100",
+    "result": {
+     "label": "Task success rate",
+     "unit": "%"
+    }
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "You have done your research, written user stories and built a prototype. Now comes the most important part: **watching real people use it**. This is called **[[usability testing|Usability testing]]**."
+    },
+    {
+     "t": "h",
+     "text": "How to run a usability test"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Pick testers** who match your personas (for a canteen app: pupils, not teachers).",
+      "**Give them real tasks**, e.g. *Order a pasta pot for collection at lunchtime.* Do not tell them how.",
+      "**Watch and take notes.** Where do they hesitate, tap the wrong thing or give up?",
+      "**Do not help!** If you have to explain it, the design is not clear enough. Just note the problem.",
+      "**Measure** things such as whether they finished the task, how long it took and how many mistakes they made.",
+      "**Ask a few questions at the end**, e.g. *What was the most confusing part?*"
+     ],
+     "ordered": true
+    },
+    {
+     "t": "h",
+     "text": "Think-aloud testing"
+    },
+    {
+     "t": "p",
+     "text": "In **[[think-aloud testing|Think-aloud testing]]**, the tester says out loud what they are thinking as they use the product: *I'm looking for the menu… I think it's this burger icon… oh no, that's my account…* This shows you **why** they get stuck, not just **where**."
+    },
+    {
+     "t": "tip",
+     "text": "Testing with only about **five** users usually reveals most of the biggest problems. You do not need a huge test: test with a few people, fix what you find, then test again."
+    },
+    {
+     "t": "h",
+     "text": "A/B testing"
+    },
+    {
+     "t": "p",
+     "text": "In an **[[A/B test|A/B testing]]**, two versions of a design (A and B) are shown to different groups of users, and you measure which version works better. Big websites do this constantly, for example testing two different button colours or two different headings."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: an A/B test on the Order button",
+     "context": "A school canteen website tries two home pages for a week. Version A has a small *Order* link in the menu. Version B has a large *Order lunch* button in the middle of the screen. Which is better?",
+     "steps": [
+      "Version A: 400 pupils visited and 160 placed an order. 160 ÷ 400 × 100 = **40%**.",
+      "Version B: 400 pupils visited and 260 placed an order. 260 ÷ 400 × 100 = **65%**.",
+      "Both groups were the same size and the test ran over the same week, so the comparison is fair.",
+      "Version B has a much higher success rate."
+     ],
+     "answer": "Keep Version B: 65% of visitors ordered, compared with 40% for Version A."
+    },
+    {
+     "t": "warn",
+     "text": "An A/B test only tells you **which** version did better, not **why**. For the *why*, you need to watch and listen to users, e.g. with think-aloud testing. Also, keep everything else the **same** for both groups (same week, same kind of users), so the only difference is the design itself."
+    },
+    {
+     "t": "h",
+     "text": "Acting on feedback"
+    },
+    {
+     "t": "p",
+     "text": "Testing usually finds more problems than you can fix at once. Designers **prioritise**: they fix the most serious problems, and those that affect the most people, first."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Problem found",
+      "How many testers?",
+      "How serious?",
+      "Priority"
+     ],
+     "rows": [
+      [
+       "Cannot find how to pay",
+       "4 out of 5",
+       "Stops the task completely",
+       "**Fix first**"
+      ],
+      [
+       "Confirmation message is easy to miss",
+       "3 out of 5",
+       "Causes worry and double orders",
+       "**Fix next**"
+      ],
+      [
+       "Does not like the shade of blue",
+       "1 out of 5",
+       "Does not stop anyone",
+       "Later, if at all"
+      ]
+     ],
+     "caption": "Prioritising usability problems"
+    },
+    {
+     "t": "p",
+     "text": "Then you change the design and **test again**, to check the fix really worked and did not cause a new problem. Gathering feedback, improving and retesting like this is how a product gets better over time."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Usability testing: watch real users try real tasks, and do not help them.",
+      "Think-aloud testing: users say what they are thinking, so you learn why they get stuck.",
+      "A/B testing: compare two versions with different users to see which works better.",
+      "Measure task success, time taken and mistakes.",
+      "Fix the most serious, most common problems first, then test again."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In **think-aloud testing**, what does the tester do?",
+     "o": [
+      "Reads the instructions aloud before starting",
+      "Says out loud what they are thinking as they use the product",
+      "Asks the designer for help when stuck",
+      "Records a video review of the app afterwards"
+     ],
+     "a": 1,
+     "why": "Speaking their thoughts shows why users get stuck."
+    },
+    {
+     "q": "During a test a pupil cannot find the Pay button. What should the designer do?",
+     "o": [
+      "Point to the button so the test can continue",
+      "Stop the test and start again with someone else",
+      "Tell the tester they are doing it wrong",
+      "Note the problem and let them keep trying"
+     ],
+     "a": 3,
+     "why": "Helping hides the problem. If users need help, the design needs changing."
+    },
+    {
+     "q": "What is an **A/B test**?",
+     "o": [
+      "Comparing two versions of a design with different users to see which works better",
+      "A test with two questions, A and B",
+      "Testing a product on Android and on Apple phones",
+      "Grading a design from A to B"
+     ],
+     "a": 0,
+     "why": "Each group sees one version, and results are compared."
+    },
+    {
+     "q": "Version A: 30 orders from 200 visitors. Version B: 50 orders from 200 visitors. What is B's success rate?",
+     "o": [
+      "15%",
+      "20%",
+      "25%",
+      "50%"
+     ],
+     "a": 2,
+     "why": "50 ÷ 200 × 100 = 25%."
+    },
+    {
+     "q": "Which problem should be fixed **first**?",
+     "o": [
+      "One tester dislikes the font",
+      "Four out of five testers cannot complete the order",
+      "The logo is slightly off-centre",
+      "Two testers want a dark mode"
+     ],
+     "a": 1,
+     "why": "Fix serious problems that affect many users first."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe how to carry out **think-aloud** usability testing.",
+     "m": 3,
+     "a": "Choose testers who match the target users (1); give them a realistic task without telling them how (1); they say aloud what they are thinking while the designer watches/notes problems without helping (1)."
+    },
+    {
+     "q": "Version A of a sign-up page: 120 sign-ups from 600 visitors. Version B: 180 from 600. Calculate both success rates and say which version to keep.",
+     "m": 3,
+     "a": "A = 120 ÷ 600 × 100 = 20% (1). B = 180 ÷ 600 × 100 = 30% (1). Keep B (1)."
+    },
+    {
+     "q": "Explain why designers should test again after making changes.",
+     "m": 2,
+     "a": "To check the change actually fixed the problem (1) and has not caused any new problems (1)."
+    }
+   ],
+   "terms": [
+    "Usability testing",
+    "Think-aloud testing",
+    "A/B testing"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p09",
+   "spec": "Describe development cycles and compare the waterfall approach with iterative and agile approaches",
+   "summary": "Software is developed in stages: plan, design, build, test and refine. The waterfall approach does each stage once, in order. Iterative and agile approaches go round the cycle many times in short loops, getting user feedback each time.",
+   "diagram": {
+    "kind": "cycle",
+    "title": "The iterative design cycle",
+    "caption": "Click each stage. The loop repeats, and each time round the product gets better.",
+    "items": [
+     {
+      "label": "Research",
+      "detail": "Find out who the users are and what they need: interviews, surveys, observation."
+     },
+     {
+      "label": "Plan and design",
+      "detail": "Write user stories, sketch wireframes and decide what to build this time round."
+     },
+     {
+      "label": "Build a prototype",
+      "detail": "Make a version users can try: paper at first, then working software."
+     },
+     {
+      "label": "Test with users",
+      "detail": "Watch real users try real tasks. Note what works and what does not."
+     },
+     {
+      "label": "Refine",
+      "detail": "Fix the most important problems, then go round the loop again."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Making software is not just writing code. It follows a **cycle** of stages: **planning**, **design**, **development** (building), **testing** and **refinement** (improving). Different approaches arrange these stages in different ways."
+    },
+    {
+     "t": "h",
+     "text": "The waterfall approach"
+    },
+    {
+     "t": "p",
+     "text": "In the **[[waterfall|Waterfall model]]** approach, each stage is completed **once, fully, in order**, like water flowing down steps. You do not go back up."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Stage",
+      "What happens"
+     ],
+     "rows": [
+      [
+       "1. Analysis",
+       "Find out and write down everything the product must do (the requirements)."
+      ],
+      [
+       "2. Design",
+       "Plan every screen, the data and the code structure."
+      ],
+      [
+       "3. Implementation",
+       "Programmers build the whole product."
+      ],
+      [
+       "4. Testing",
+       "Check the finished product works and meets the requirements."
+      ],
+      [
+       "5. Deployment and maintenance",
+       "Release it to users, then fix problems and make small updates."
+      ]
+     ],
+     "caption": "Waterfall stages"
+    },
+    {
+     "t": "p",
+     "text": "Waterfall works well when the requirements are clear and will not change, for example software for a machine where the rules are fixed by law. Its big weakness: users often do not see the product until near the end, when changes are slow and expensive."
+    },
+    {
+     "t": "h",
+     "text": "Iterative and agile approaches"
+    },
+    {
+     "t": "p",
+     "text": "In an **[[iterative|Iteration]]** approach the team goes round the cycle **many times**. Each loop (an *iteration*) produces a slightly better version, which is tested with users before the next loop starts."
+    },
+    {
+     "t": "p",
+     "text": "**[[Agile]]** is a popular iterative way of working. Work is split into short blocks of time called **[[sprints|Sprint]]**, usually one to four weeks. Each sprint the team picks the most important user stories, builds them, tests them and shows users a working version. Users' feedback shapes the next sprint."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Waterfall",
+      "Agile (iterative)"
+     ],
+     "rows": [
+      [
+       "Order of stages",
+       "Each stage once, in order",
+       "Plan, build, test and refine repeated in short loops"
+      ],
+      [
+       "When users see it",
+       "Near the end",
+       "Early and often: after every sprint"
+      ],
+      [
+       "Changing requirements",
+       "Hard and expensive",
+       "Expected and welcome"
+      ],
+      [
+       "Planning",
+       "Everything planned in detail at the start",
+       "Plan a little at a time, starting with the most important stories"
+      ],
+      [
+       "Best for",
+       "Clear, fixed requirements",
+       "Products where users' needs are not fully known or may change"
+      ],
+      [
+       "Risk",
+       "Find big problems late",
+       "Can drift without clear goals or deadlines"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Worked example: which approach?",
+     "context": "Choose waterfall or agile for each project. (a) A new app to help Year 8 pupils settle into school, where nobody is sure yet what features pupils want most. (b) Software that controls the timing of traffic lights, with exact rules set in advance.",
+     "steps": [
+      "(a) Pupils' needs are not fully known and will become clearer as they try it. Short loops with feedback suit this: **agile**.",
+      "(b) The requirements are fixed and safety-critical, and must be fully designed and tested before use: **waterfall** suits this."
+     ],
+     "answer": "(a) Agile, because needs are uncertain. (b) Waterfall, because requirements are clear and fixed."
+    },
+    {
+     "t": "warn",
+     "text": "Agile does **not** mean *no planning* or *start coding straight away*. Agile teams plan carefully, just in smaller pieces, and they still test every version thoroughly."
+    },
+    {
+     "t": "tip",
+     "text": "User stories from page 3 fit agile perfectly. The team keeps a list of stories, puts the most important at the top, and works through them sprint by sprint."
+    },
+    {
+     "t": "note",
+     "text": "The **Agile Manifesto** was written by a group of software developers in **2001**. It values working software, teamwork and responding to change, and putting users at the heart of development, which links agile closely to user-centred design."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Development cycles include planning, design, development, testing and refinement.",
+      "Waterfall: each stage once, in order; users see the product late.",
+      "Iterative: go round the cycle many times, improving each time.",
+      "Agile: short sprints, each producing a working version tested by users.",
+      "Waterfall suits fixed requirements; agile suits needs that are uncertain or changing."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In the **waterfall** approach, how are the stages done?",
+     "o": [
+      "Each stage once, fully, in order",
+      "All stages at the same time",
+      "In short loops repeated many times",
+      "In any order the team chooses"
+     ],
+     "a": 0,
+     "why": "Waterfall moves down through the stages once, like water down steps."
+    },
+    {
+     "q": "What is a **sprint** in agile development?",
+     "o": [
+      "A race to finish all the code in one day",
+      "A short, fixed block of time to build and test some features",
+      "The final test before release",
+      "A very fast computer used for testing"
+     ],
+     "a": 1,
+     "why": "Sprints are usually one to four weeks long."
+    },
+    {
+     "q": "What is the main **disadvantage** of waterfall for a new app?",
+     "o": [
+      "It has no testing stage",
+      "Users see the product often",
+      "Users may not see it until near the end, when changes are expensive",
+      "It cannot be used for large projects"
+     ],
+     "a": 2,
+     "why": "Problems are found late, so they are costly to fix."
+    },
+    {
+     "q": "Which project best suits an **agile** approach?",
+     "o": [
+      "Software with exact rules fixed by law",
+      "A program that will never change",
+      "Copying an existing system exactly",
+      "A new app where users' needs are still unclear"
+     ],
+     "a": 3,
+     "why": "Agile handles uncertain or changing needs through regular feedback."
+    },
+    {
+     "q": "What does **iterative** mean?",
+     "o": [
+      "Done once only",
+      "Repeated in cycles, improving each time",
+      "Designed by one person",
+      "Tested only at the end"
+     ],
+     "a": 1,
+     "why": "Each iteration produces a better version."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe **two** differences between the waterfall and agile approaches.",
+     "m": 4,
+     "a": "Waterfall does each stage once in order, agile repeats the cycle in short sprints (2). Waterfall users see the product near the end, agile users see working versions often (2). Also accept: waterfall plans everything at the start / agile plans a bit at a time; changes hard vs welcome (2 each)."
+    },
+    {
+     "q": "Explain why agile development fits well with user-centred design.",
+     "m": 2,
+     "a": "Users test a working version after every sprint (1), so their feedback is used to improve the product throughout / problems are found early (1)."
+    },
+    {
+     "q": "Give **one** type of project where waterfall might be the better choice, and explain why.",
+     "m": 2,
+     "a": "e.g. safety-critical software / traffic lights / software with fixed legal rules (1), because requirements are clear and unlikely to change, and everything must be fully planned and tested first (1)."
+    }
+   ],
+   "terms": [
+    "Waterfall model",
+    "Iteration",
+    "Agile",
+    "Sprint"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p10",
+   "spec": "Apply user-centred design to a case study: redesigning a school canteen ordering website",
+   "summary": "Putting it all together: research users, write personas and user stories, sketch and test prototypes, check accessibility, measure the results and keep improving.",
+   "diagram": {
+    "kind": "timeline",
+    "title": "Redesigning the canteen website",
+    "caption": "Click each stage of the project to see what the team did.",
+    "items": [
+     {
+      "label": "Week 1: research",
+      "detail": "Survey of 300 pupils and parents, 8 interviews, and observing the lunch queue."
+     },
+     {
+      "label": "Week 2: personas and stories",
+      "detail": "Three personas (pupil, parent, canteen worker) and a list of user stories in priority order."
+     },
+     {
+      "label": "Week 3: paper prototypes",
+      "detail": "Sketches and wireframes tested with 5 pupils. The basket was redesigned after the test."
+     },
+     {
+      "label": "Weeks 4–5: sprint 1",
+      "detail": "A working ordering page built, checked against WCAG AA and tested with real pupils."
+     },
+     {
+      "label": "Weeks 6–7: sprint 2",
+      "detail": "Parent top-ups and low-balance emails added. A/B test on the home page."
+     },
+     {
+      "label": "Week 8 onwards: keep improving",
+      "detail": "Launch, then collect feedback and keep refining each sprint."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Let's follow one project from start to finish. A school in Enniskillen wants a new canteen ordering website. The old one works, but the canteen staff report long queues, wrong orders and lots of complaints. The school asks a design team to use **user-centred design** to fix it."
+    },
+    {
+     "t": "h",
+     "text": "Step 1: Find out user needs"
+    },
+    {
+     "t": "p",
+     "text": "The team surveys 300 pupils and parents, interviews 8 people, and spends two lunchtimes **observing** the queue. They discover:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**71%** of pupils use a phone, but the old site was designed for laptops and is tiny on a phone screen.",
+      "Pupils do not know if their order has gone through, so many order twice.",
+      "Parents only find out the balance is empty when their child cannot buy lunch.",
+      "Canteen staff get orders too late to know how much food to make.",
+      "Several pupils use screen readers or zoom, and one parent is colour blind."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Step 2: Personas and user stories"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Persona",
+      "User story"
+     ],
+     "rows": [
+      [
+       "**Orla**, 12, pupil, old Android phone",
+       "As a pupil, I want to order lunch on my phone in under a minute, so that I don't queue at break."
+      ],
+      [
+       "**Mark**, 44, parent, works shifts",
+       "As a parent, I want an email when the balance falls below £5, so that my son never goes without lunch."
+      ],
+      [
+       "**Bernie**, 58, canteen supervisor",
+       "As a canteen worker, I want a list of today's orders by 10:30, so that I know how much food to prepare."
+      ],
+      [
+       "**Tomás**, 14, pupil, uses a screen reader",
+       "As a pupil who uses a screen reader, I want every button to be clearly labelled, so that I can order without help."
+      ]
+     ],
+     "caption": "Personas and their main user stories"
+    },
+    {
+     "t": "h",
+     "text": "Step 3: Wireframes and paper prototypes"
+    },
+    {
+     "t": "p",
+     "text": "The team sketches five phone screens: **Home**, **Menu**, **Basket**, **Pay**, **Confirmation**. In a paper prototype test, 3 out of 5 pupils could not find the basket because it was a tiny icon in a corner. The team moves it to a big bar along the bottom of the screen showing *Basket (2 items) – £3.40*. In the retest, 5 out of 5 find it straight away."
+    },
+    {
+     "t": "h",
+     "text": "Step 4: Design for usability and accessibility"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Old website",
+      "New website"
+     ],
+     "rows": [
+      [
+       "Menu",
+       "A photo of the printed menu",
+       "A typed list with clear headings, allergy information and (V) labels"
+      ],
+      [
+       "Feedback",
+       "Nothing happens after paying",
+       "Confirmation with order number, food and collection time"
+      ],
+      [
+       "Errors",
+       "*Transaction error*",
+       "*Your balance is £1.20. Top up or remove an item.*"
+      ],
+      [
+       "Accessibility",
+       "Light grey text; images with no alt text; mouse only",
+       "Contrast above 4.5 : 1; alt text; works with keyboard and screen readers"
+      ],
+      [
+       "Devices",
+       "Laptop only",
+       "Designed for phones first, works on laptops too"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Step 5: Test, measure and improve"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: did the redesign work?",
+     "context": "The team measures the same task, *order a lunch*, with 20 pupils before and after the redesign. Old site: 11 of 20 pupils completed it, taking 3 minutes on average. New site: 19 of 20 completed it, taking 50 seconds on average. Calculate the success rates and decide whether the redesign worked.",
+     "steps": [
+      "Old success rate: 11 ÷ 20 × 100 = **55%**.",
+      "New success rate: 19 ÷ 20 × 100 = **95%**.",
+      "Average time fell from 180 seconds to 50 seconds: about **2 minutes 10 seconds** quicker.",
+      "One pupil still could not finish, so the team watches their recording to find out why, ready for the next sprint."
+     ],
+     "answer": "Yes: success rose from 55% to 95% and ordering became much quicker. The team keeps improving in the next sprint."
+    },
+    {
+     "t": "tip",
+     "text": "Notice how every page of this topic appeared in the project: research, personas, user stories, usability principles, wireframes, prototypes, accessibility, inclusive design, testing and iteration."
+    },
+    {
+     "t": "warn",
+     "text": "A redesign is never truly *finished*. New pupils arrive, phones change and the menu changes. User-centred teams keep collecting feedback and keep improving, sprint after sprint."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Start with research: find out real users' needs, not guesses.",
+      "Personas and user stories keep the team focused on real people.",
+      "Test cheap paper prototypes early and fix what users struggle with.",
+      "Build in usability and accessibility from the start, not at the end.",
+      "Measure results (e.g. success rate and time) and keep iterating."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What should the team do **first** when redesigning the canteen website?",
+     "o": [
+      "Choose the colour scheme",
+      "Start writing the code",
+      "Find out what users need",
+      "Launch a test version"
+     ],
+     "a": 2,
+     "why": "User-centred design starts with research into users' needs."
+    },
+    {
+     "q": "3 out of 5 pupils could not find the basket in a paper prototype. What is the best response?",
+     "o": [
+      "Redesign the basket so it is easier to find, then test again",
+      "Write instructions telling pupils where it is",
+      "Ignore it because 2 pupils found it",
+      "Wait until the real site is built to see if it is a problem"
+     ],
+     "a": 0,
+     "why": "Fix usability problems early, then retest to check the fix works."
+    },
+    {
+     "q": "19 of 20 pupils completed the task on the new site. What is the success rate?",
+     "o": [
+      "19%",
+      "90%",
+      "85%",
+      "95%"
+     ],
+     "a": 3,
+     "why": "19 ÷ 20 × 100 = 95%."
+    },
+    {
+     "q": "Which change to the menu helps a pupil who uses a screen reader the most?",
+     "o": [
+      "Making the menu photo bigger",
+      "Typing the menu as real, labelled text",
+      "Using more colours on the menu",
+      "Adding a background image"
+     ],
+     "a": 1,
+     "why": "A screen reader can read typed text but not words inside a photo."
+    },
+    {
+     "q": "Why does the team keep improving the website after launch?",
+     "o": [
+      "Because the law says websites must change every month",
+      "Because the first version had no testing",
+      "Because users, devices and needs keep changing",
+      "Because agile teams are not allowed to finish"
+     ],
+     "a": 2,
+     "why": "User-centred design is a continuing cycle of feedback and improvement."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe **three** steps a team should follow to redesign a school website using user-centred design.",
+     "m": 3,
+     "a": "Any three in a sensible order: research user needs (interviews/surveys/observation) (1); create personas / user stories (1); sketch wireframes / prototypes (1); test with real users (1); refine and retest / iterate (1); check accessibility against WCAG (1)."
+    },
+    {
+     "q": "Old site: 9 of 15 pupils completed an order. New site: 14 of 15. Calculate both success rates to the nearest whole number.",
+     "m": 2,
+     "a": "Old: 9 ÷ 15 × 100 = 60% (1). New: 14 ÷ 15 × 100 = 93% (1)."
+    },
+    {
+     "q": "Write a user story for Bernie, the canteen supervisor, about allergies.",
+     "m": 3,
+     "a": "As a canteen worker (1), I want each order to show any allergies (1), so that I do not give a pupil food that could harm them (1)."
+    }
+   ],
+   "terms": [],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "User-centred design",
+   "def": "A way of designing where the needs of the people who will use a product come first at every stage, with users involved in research and testing.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Usability",
+   "def": "How easy it is for users to use a product to get a task done.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "User experience (UX)",
+   "def": "How the whole experience of using a product feels to the user: easy, quick and pleasant, or confusing and frustrating.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "User interface",
+   "def": "The parts of a product that users see and interact with, such as screens, buttons, menus and icons (UI).",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Target audience",
+   "def": "The group of people a product is designed for.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Primary research",
+   "def": "Collecting information yourself, directly from users, e.g. by interviews, surveys or observation.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Interview",
+   "def": "A research method where a designer talks to one user at a time, asking open questions to get detailed answers.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Survey",
+   "def": "A list of questions (questionnaire), often online, used to collect quick answers from lots of people.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Observation",
+   "def": "A research method where designers watch people doing a task or using a product to see what they really do.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Persona",
+   "def": "A realistic, made-up character, based on research, who represents one important group of users.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "User story",
+   "def": "A short description of a feature from the user's point of view: As a [user], I want [goal], so that [reason].",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Acceptance criteria",
+   "def": "Specific, testable checks that must all be true for a user story to count as done.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Consistency",
+   "def": "A usability principle: things that do the same job look and behave the same way everywhere in a product.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Feedback",
+   "def": "A usability principle: the system shows users straight away what is happening or what their action has done.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Error prevention",
+   "def": "A usability principle: designing so mistakes are hard to make, and easy to recover from when they happen.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Wireframe",
+   "def": "A simple outline of a screen's layout using boxes and labels, without colours, images or real text.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Prototype",
+   "def": "An early model of a product that users can try out, so ideas can be tested before the real thing is built.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Fidelity",
+   "def": "How detailed and realistic a prototype is: low fidelity is quick and rough, high fidelity looks like the finished product.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Abstraction",
+   "def": "Removing unnecessary detail to focus on what matters, e.g. a wireframe leaves out colours to focus on layout.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Accessibility",
+   "def": "Designing products so that everyone, including disabled people, can perceive, use and understand them.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "WCAG",
+   "def": "Web Content Accessibility Guidelines: the international accessibility standard from the W3C, with levels A, AA and AAA.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "POUR",
+   "def": "The four WCAG principles: content must be Perceivable, Operable, Understandable and Robust.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Alt text",
+   "def": "A short text description of an image, read aloud by screen readers and shown if the image does not load.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Colour contrast",
+   "def": "How much text stands out from its background. WCAG AA needs at least 4.5 : 1 for normal text.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Screen reader",
+   "def": "Software that reads out what is on the screen, used by blind and partially sighted people.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Assistive technology",
+   "def": "Devices or software that help disabled people use computers, e.g. screen readers, magnifiers, voice control.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Inclusive design",
+   "def": "Designing for the full range of people who might use a product: different ages, abilities, languages, cultures and devices.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Bias",
+   "def": "When a design works well for some groups of people but badly for others, often because designers assumed users are like them.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Usability testing",
+   "def": "Watching real users try to complete real tasks with a product, to find problems.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Think-aloud testing",
+   "def": "Usability testing where users say out loud what they are thinking as they use the product.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "A/B testing",
+   "def": "Showing two versions of a design to different groups of users and measuring which one works better.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Waterfall model",
+   "def": "A development approach where each stage (analysis, design, implementation, testing, deployment) is done once, in order.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Iteration",
+   "def": "Repeating a cycle of design, building, testing and refining, improving the product each time round.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Agile",
+   "def": "An iterative way of developing software in short sprints, with working versions shown to users for feedback after each one.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Sprint",
+   "def": "In agile development, a short fixed block of time (usually 1 to 4 weeks) in which a team builds and tests some features.",
+   "alt": "",
+   "page": "p09"
+  }
+ ]
+}
