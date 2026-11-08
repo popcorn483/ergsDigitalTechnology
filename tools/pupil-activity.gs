@@ -28,7 +28,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 22;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 23;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -183,7 +183,8 @@ function doPost(e) {
       if (i >= 0) sh.getRange(i + 2, 1, 1, row.length).setValues([row]); else sh.appendRow(row); });
     return out_({ ok: true });
   }
-  if (d.kind === 'testdone') return out_(testDone_(d));   /* a pupil has finished a topic test */
+  if (d.kind === 'testdone') return out_(testDone_(d));
+  if (d.kind === 'compentry') return out_(compEntry_(d));   /* a pupil's competition entry */   /* a pupil has finished a topic test */
   if (!(s > 0 && s <= 3600)) return out_({ ok: false });
   locked_(() => { const id = resolve_(String(d.id), aliases_()); log_().appendRow([new Date(), id, name, clean_(d.cls, 12).toUpperCase(), book, clean_(d.ch, 8), s, clean_(d.pg, 12)]); });
   return out_({ ok: true });
@@ -220,7 +221,38 @@ function myWork_(rawId, cls) {
   const res = rows_(tres_()).filter(r => String(r[1]) === id);
   const tests = rows_(tests_()).filter(r => r[0] && forMe_(String(r[1]), id, cls)).map(r => { const mine = res.filter(x => String(x[4]) === String(r[2]) && String(x[5]) === String(r[3]));
     return { id: String(r[0]), book: String(r[2]), ch: String(r[3]), title: String(r[4] || ''), due: String(r[5]).slice(0, 10), note: String(r[6] || ''), tries: mine.length, best: mine.reduce((m, x) => Math.max(m, +x[6] || 0), -1), of: mine.length ? +mine[0][7] || 100 : 100 }; });
-  return { ok: true, work, msgs, tests };
+  const yr = +((String(cls || '').match(/^\d{1,2}/) || ['0'])[0]), today = new Date().toISOString().slice(0, 10), ents = rows_(cent_()).filter(r => String(r[2]) === id);
+  const comps = rows_(comps_()).filter(r => r[0] && String(r[3]).split(',').map(Number).indexOf(yr) >= 0 && String(r[5]).slice(0, 10) <= today && String(r[6]).slice(0, 10) >= today)
+    .map(r => { const e = ents.find(x => String(x[1]) === String(r[0])); return { id: String(r[0]), comp: String(r[1]), title: String(r[2]), cat: String(r[4]), closes: String(r[6]).slice(0, 10), note: String(r[7] || ''), entered: e ? new Date(e[10]).getTime() : 0, house: e ? String(e[5]) : '' }; });
+  return { ok: true, work, msgs, tests, comps };
+}
+/* INTER-HOUSE COMPETITIONS: the ideas are in competitions/catalogue.json on the site; "Competitions" is what the teacher is running
+   (for which years, open and closing dates); "Comp entries" has one row per pupil per competition (a re-submission replaces it).
+   Uploaded pictures go in a Drive folder ("Digital Technology competition entries") owned by whoever deployed this script. */
+const comps_ = () => tab_('Competitions', ['ID', 'Competition', 'Title', 'Years', 'Category', 'Opens', 'Closes', 'Note', 'Set']);
+const cent_ = () => tab_('Comp entries', ['Entry ID', 'Run ID', 'Pupil ID', 'Name', 'Class', 'House', 'Entry title', 'Link', 'Picture (Drive file ID)', 'Text', 'Submitted', 'Scores', 'Total', 'Place', 'Judge notes']);
+const HOUSES = ['Belmore', 'Benaughlin', 'Cuilcagh', 'Trien'];
+function compFolder_() { const n = 'Digital Technology competition entries', it = DriveApp.getFoldersByName(n); return it.hasNext() ? it.next() : DriveApp.createFolder(n); }
+function compEntry_(d) {
+  const id = resolve_(String(d.id), aliases_()), N = names_(), cls = (N[id] && N[id][1]) || clean_(d.cls, 12).toUpperCase(), yr = +((cls.match(/^\d{1,2}/) || ['0'])[0]);
+  const run = rows_(comps_()).find(r => String(r[0]) === String(d.rid)); if (!run) return { ok: false, error: 'This competition has closed or been removed.' };
+  const today = new Date().toISOString().slice(0, 10);
+  if (String(run[3]).split(',').map(Number).indexOf(yr) < 0) return { ok: false, error: 'This competition is not for your year group.' };
+  if (String(run[6]).slice(0, 10) < today) return { ok: false, error: 'Entries have closed.' };
+  const house = HOUSES.indexOf(String(d.house)) >= 0 ? String(d.house) : '';
+  let fileId = '';
+  const m = String(d.img || '').match(/^data:(image\/(png|jpeg|webp|gif));base64,(.+)$/);
+  if (m) { if (m[3].length > 7e6) return { ok: false, error: 'That picture is too big.' };
+    const f = compFolder_().createFile(Utilities.newBlob(Utilities.base64Decode(m[3]), m[1], `${String(run[2]).slice(0, 40)} - ${(N[id] && N[id][0]) || clean_(d.name, 40)} (${cls}).${m[2] === 'jpeg' ? 'jpg' : m[2]}`)); fileId = f.getId(); }
+  const link = /^https:\/\/[^\s"'<>]{4,600}$/.test(String(d.link || '')) ? String(d.link) : '';
+  if (!fileId && !link && !String(d.text || '').trim()) return { ok: false, error: 'Add your entry first.' };
+  return locked_(() => { const sh = cent_(), R = rows_(sh); let row = -1;
+    for (let i = 0; i < R.length; i++) if (String(R[i][1]) === String(d.rid) && String(R[i][2]) === id) row = i;
+    if (row >= 0 && R[row][8] && !fileId && !d.dropImg) fileId = String(R[row][8]);
+    else if (row >= 0 && R[row][8] && String(R[row][8]) !== fileId) { try { DriveApp.getFileById(String(R[row][8])).setTrashed(true); } catch (e) { } }
+    const vals = [row >= 0 ? R[row][0] : 'E' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), String(d.rid), id, (N[id] && N[id][0]) || clean_(d.name, 40), cls, house, clean_(d.title, 80), link, fileId, (t => /^[=+\-@]/.test(t) ? "'" + t : t)(String(d.text || '').replace(/[\u0000-\u0009\u000b-\u001f]/g, ' ').trim().slice(0, 3000)), new Date()];
+    if (row >= 0) sh.getRange(row + 2, 1, 1, vals.length).setValues([vals]); else sh.appendRow(vals);
+    return { ok: true, updated: row >= 0 }; });
 }
 /* TOPIC TESTS: 100-question multiple-choice tests (the questions live on the site in tests/<unit>/<topic>.json).
    "Tests set" is what the teacher has set; "Test results" has one row per finished attempt. The script marks every attempt
@@ -486,6 +518,27 @@ function act_(q) {
     const who = String(q.who || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12), book = String(q.book || ''), ch = String(q.ch || '');
     if (!who || BOOKS.indexOf(book) < 1 || !/^c\d{1,2}$/.test(ch)) return { ok: false, error: 'bad request' };
     const id = 'W' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); work_().appendRow([id, who, book, ch, String(q.due || '').slice(0, 10), clean_(q.note, 200), new Date()]); return { ok: true, id };
+  }
+  if (q.action === 'comps') {   /* competitions being run, and every entry (pictures are fetched one at a time with compimg) */
+    return { ok: true, houses: HOUSES, runs: rows_(comps_()).filter(r => r[0]).map(r => ({ id: String(r[0]), comp: String(r[1]), title: String(r[2]), years: String(r[3]), cat: String(r[4]), opens: String(r[5]).slice(0, 10), closes: String(r[6]).slice(0, 10), note: String(r[7] || ''), at: new Date(r[8]).getTime() })),
+      entries: rows_(cent_()).filter(r => r[0]).map(r => ({ id: String(r[0]), rid: String(r[1]), pid: String(r[2]), name: String(r[3]), cls: String(r[4]), house: String(r[5]), title: String(r[6]), link: String(r[7]), img: !!r[8], text: String(r[9]), at: new Date(r[10]).getTime(), scores: String(r[11] || ''), total: r[12] === '' ? null : +r[12], place: +r[13] || 0, notes: String(r[14] || '') })) };
+  }
+  if (q.action === 'compimg') { const r = rows_(cent_()).find(x => String(x[0]) === String(q.eid)); if (!r || !r[8]) return { ok: false };
+    try { const b = DriveApp.getFileById(String(r[8])).getBlob(); return { ok: true, src: 'data:' + b.getContentType() + ';base64,' + Utilities.base64Encode(b.getBytes()) }; } catch (e) { return { ok: false }; } }
+  if (q.action === 'setcomp') {
+    const years = String(q.years || '').split(',').map(Number).filter(y => y >= 8 && y <= 14), id = 'C' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+    if (!years.length || !/^[a-z0-9-]{3,60}$/.test(String(q.comp || '')) || !/^\d{4}-\d\d-\d\d$/.test(String(q.closes || ''))) return { ok: false, error: 'bad request' };
+    comps_().appendRow([id, String(q.comp), clean_(q.title, 80), years.join(','), ['Bronze', 'Silver', 'Gold', 'Platinum'].indexOf(String(q.cat)) >= 0 ? String(q.cat) : 'Silver', String(q.opens || new Date().toISOString().slice(0, 10)).slice(0, 10), String(q.closes).slice(0, 10), clean_(q.note, 300), new Date()]); return { ok: true, id };
+  }
+  if (q.action === 'editcomp') { const sh = comps_(), R = rows_(sh); for (let i = 0; i < R.length; i++) if (String(R[i][0]) === String(q.rid)) {
+      if (q.closes) sh.getRange(i + 2, 7).setValue(String(q.closes).slice(0, 10)); if (q.opens) sh.getRange(i + 2, 6).setValue(String(q.opens).slice(0, 10)); if (q.cat) sh.getRange(i + 2, 5).setValue(String(q.cat)); return { ok: true }; } return { ok: false }; }
+  if (q.action === 'delcomp') { const sh = comps_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (String(r[i][0]) === String(q.rid)) sh.deleteRow(i + 2); return { ok: true }; }
+  if (q.action === 'judge') {   /* scores (JSON list), total, place (1-4, 0 = none), notes, house (a teacher can correct it) */
+    const sh = cent_(), R = rows_(sh); for (let i = 0; i < R.length; i++) if (String(R[i][0]) === String(q.eid)) {
+      const sc = String(q.scores || '').slice(0, 300), tot = q.total === '' || q.total == null ? '' : Math.max(0, Math.min(1000, +q.total || 0));
+      sh.getRange(i + 2, 12, 1, 4).setValues([[sc, tot, Math.max(0, Math.min(4, +q.place || 0)) || '', clean_(q.notes, 500)]]);
+      if (HOUSES.indexOf(String(q.house)) >= 0) sh.getRange(i + 2, 6).setValue(String(q.house));
+      return { ok: true }; } return { ok: false };
   }
   if (q.action === 'tests') {   /* topic tests set, and every finished attempt (answers left out: see testres) */
     return { ok: true, tests: rows_(tests_()).filter(r => r[0]).map(r => ({ id: String(r[0]), who: String(r[1]), book: String(r[2]), ch: String(r[3]), title: String(r[4] || ''), due: String(r[5]).slice(0, 10), note: String(r[6] || ''), at: new Date(r[7]).getTime() })),

@@ -232,6 +232,33 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 .tt-t{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}.tt-t th,.tt-t td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}.tt-sort{border:0;background:none;font:inherit;font-weight:700;color:var(--ink-2);cursor:pointer;padding:0}.tt-sort.on{color:var(--accent)}.tt-none td{color:var(--ink-3)}
 .tt-sc{display:inline-block;min-width:44px;text-align:center;padding:2px 6px;border-radius:6px;font-weight:700}.tt-sc.hi{background:#E3F4EA;color:#17663F}.tt-sc.mid{background:#FFF3D6;color:#7A5200}.tt-sc.lo{background:#FCE4E2;color:#A3241B}
 .tt-ql{padding-left:0;list-style:none;margin:8px 0}.tt-ql li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}.tt-ql p{margin:0 0 4px}.tt-ok{color:#17663F;font-weight:700}.tt-no{color:#A3241B}
+
+.cp-hpg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0}@media (max-width:700px){.cp-hpg{grid-template-columns:repeat(2,1fr)}}
+.cp-h{border:1px solid var(--line);border-top:6px solid var(--h);border-radius:12px;padding:10px;display:grid;gap:4px}.cp-h b{font-size:16px}.cp-pts{font-size:26px;font-weight:800;color:var(--h)}.cp-bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden}.cp-bar i{display:block;height:100%;background:var(--h)}.cp-h small{color:var(--ink-3)}
+.cp-hcs{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.cp-hc{display:inline-block;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;border:1px solid var(--h);color:var(--h)}
+.cp-st{font-weight:700}.cp-st.open{color:#17784A}.cp-st.closed{color:#A3241B}.cp-st.startssoon{color:#7A5200}
+.cp-chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}.cp-chip{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 12px;font:inherit;font-weight:700;font-size:13px;cursor:pointer;color:var(--ink-2)}.cp-chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.cp-g{display:grid;gap:10px}.cp-c{border:1px solid var(--line);border-radius:12px;overflow:hidden}.cp-c.open{border-color:var(--accent)}
+.cp-ch{display:grid;gap:4px;width:100%;text-align:left;background:var(--paper);border:0;padding:12px 14px;cursor:pointer;font:inherit;color:inherit}.cp-ch b{font-size:17px}.cp-ch:hover{background:var(--bg-2,rgba(0,0,0,.03))}
+.cp-tags{display:flex;flex-wrap:wrap;gap:5px}.cp-tag{font-size:11.5px;font-weight:700;padding:2px 8px;border-radius:6px;background:var(--bg-2,#EEF2F7);color:var(--ink-2)}.cp-tag.run{background:#E3F4EA;color:#17663F}.cp-tag.cat-bronze{background:#F3E1D0;color:#7A4A1D}.cp-tag.cat-silver{background:#E6E8EC;color:#3B4660}.cp-tag.cat-gold{background:#FFF0C2;color:#7A5200}.cp-tag.cat-platinum{background:#E4E9FB;color:#2B3F8F}
+.cp-body{padding:4px 14px 14px;border-top:1px solid var(--line)}.cp-brief{background:var(--bg-2,#F4F6FA);border-radius:10px;padding:10px 12px}.cp-cols{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media (max-width:760px){.cp-cols{grid-template-columns:1fr}}
+.cp-sec h5,.cp-runf h5{margin:14px 0 6px;font-size:14px;text-transform:uppercase;letter-spacing:.05em;color:var(--ink-2)}.cp-sec ol,.cp-sec ul{margin:0;padding-left:20px}.cp-sec li{margin:3px 0;font-size:14.5px}
+.cp-rub{width:100%;border-collapse:collapse;font-size:14px}.cp-rub td{border-top:1px solid var(--line);padding:6px;vertical-align:top}.cp-rub td:last-child{font-weight:700;text-align:right;width:40px}
+.cp-safe{background:#FFF3D6;border-radius:8px;padding:8px 10px}.cp-runf{border-top:1px dashed var(--line);margin-top:12px}.cp-yrs{display:flex;flex-wrap:wrap;gap:10px}.cp-yrs label{font-weight:600}
+.cp-ov{position:fixed;inset:0;background:rgba(10,14,24,.55);z-index:900;display:grid;place-items:center;padding:16px}.cp-sheet{background:var(--paper);border-radius:14px;padding:16px;width:min(640px,100%)}.cp-ta{width:100%;min-height:280px;font:14px/1.5 inherit;padding:10px;border:1px solid var(--line);border-radius:10px}
+.cp-zoom img{max-width:95vw;max-height:92vh;border-radius:8px;background:#fff}
+.cp-bl{font-weight:600;font-size:14px;display:inline-flex;align-items:center;gap:4px}
+.cp-jg{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:12px}.cp-j{border-top:5px solid var(--h,var(--line));display:grid;gap:8px;align-content:start}.cp-j.cp-dup{outline:3px solid #B3261E}
+.cp-jh{display:flex;flex-wrap:wrap;gap:6px;align-items:center}.cp-jh small{color:var(--ink-3);width:100%}
+.cp-pv img{width:100%;max-height:260px;object-fit:contain;background:#f4f4f4;border-radius:8px;cursor:zoom-in}.cp-url{display:block;word-break:break-all;color:var(--ink-3);font-size:12px;margin-top:4px}.cp-txt{white-space:pre-wrap;font-size:14px;max-height:220px;overflow:auto;background:var(--bg-2,#F4F6FA);border-radius:8px;padding:8px}
+.cp-sc{display:grid;grid-template-columns:1fr 1fr;gap:6px}.cp-sc label{display:grid;gap:2px;font-size:12.5px;font-weight:600}.cp-sc input{width:100%;padding:6px;border:1px solid var(--line);border-radius:8px;font:inherit}
+.cp-jf{display:flex;flex-wrap:wrap;gap:10px;align-items:center}.cp-jf label{font-size:13px;font-weight:600}.cp-tot{font-size:18px}.cp-j > input{padding:6px 8px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:14px}
+.cp-show{position:fixed;inset:0;z-index:2000;background:radial-gradient(circle at 50% 30%,color-mix(in srgb,var(--h,#1F5FBF) 55%,#0b1020),#0b1020);color:#fff;display:grid;place-items:center;font-family:var(--sans,system-ui);cursor:pointer;outline:0}
+.cs-in{text-align:center;padding:4vh 6vw}.cs-big{font-size:14vh}.cs-in h1{font-size:7vh;margin:2vh 0}.cs-in p{font-size:3vh;opacity:.9}.cs-hint{opacity:.6!important;font-size:2.2vh!important}
+.cs-s{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);grid-template-rows:auto 1fr;gap:2vh 4vw;width:92vw;height:86vh;align-items:center}.cs-pl{grid-column:1/-1;font-size:9vh;font-weight:800;text-align:center;color:#fff;text-shadow:0 .5vh 2vh rgba(0,0,0,.4)}
+.cs-pic{height:100%;display:grid;place-items:center;background:rgba(255,255,255,.08);border-radius:2vh;overflow:hidden}.cs-pic img{max-width:100%;max-height:100%;object-fit:contain}.cs-txt{font-size:2.6vh;line-height:1.5;padding:3vh;white-space:pre-wrap}
+.cs-who{display:grid;gap:1.5vh}.cs-who b{font-size:6vh}.cs-who span{font-size:3.2vh;opacity:.9}.cs-who i{font-size:3vh;opacity:.85}.cs-who small{font-size:3vh;font-weight:800;color:#FFE38A}
+.cs-nav{position:fixed;bottom:2vh;right:3vw;font-size:1.8vh;opacity:.6}
 </style></head><body><div class="wrap">
 <a class="back" href="index.html">‹ Revision site</a>
 <div class="hrow"><h1>Teacher area</h1><button type="button" class="ib" aria-expanded="false" aria-controls="i-lead" aria-label="About the Teacher area" title="About the Teacher area"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
@@ -475,7 +502,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
  <div id="ac-on" hidden>
   <div class="hrow" id="ac-keyrow" hidden><input type="password" id="ac-key" placeholder="Teacher key" aria-label="Teacher key (TEACHER_KEY in the Apps Script)" autocomplete="off" style="font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:9px;min-width:0;flex:1;max-width:260px"><button type="button" class="tp-mini" id="ac-save">Show activity</button></div>
   <div class="tp-tools" id="ac-tools" hidden><div class="ac-qrow" id="ac-qrow"><input type="search" id="ac-q" placeholder="Find a pupil" aria-label="Find a pupil by name or class" autocomplete="off"><button type="button" class="tp-mini" id="ac-sel" aria-pressed="false">Select</button></div><select id="ac-tch" aria-label="Teacher"></select><select id="ac-yr" aria-label="Year group"></select><select id="ac-cls" aria-label="Class"></select><select id="ac-sort" aria-label="Sort pupils"><option value="class">Sort: by class</option><optgroup label="Name"><option value="name">First name A–Z</option><option value="surname">Surname A–Z</option></optgroup><optgroup label="Time revising"><option value="total">Most time in total</option><option value="totalAsc">Least time in total</option><option value="week">Most time this week</option><option value="weekAsc">Least time this week</option><option value="days">Most days revised</option></optgroup><optgroup label="Activity"><option value="last">Most recently active</option><option value="lastAsc">Not seen for longest</option></optgroup><optgroup label="Progress"><option value="prog">Most pages covered</option><option value="progAsc">Fewest pages covered</option><option value="quiz">Best page-quiz average</option><option value="quizAsc">Lowest page-quiz average</option></optgroup></select><details class="ac-more"><summary class="tp-mini" aria-label="More">⋯</summary><div class="ac-menu"><button type="button" id="ac-refresh">Refresh</button><button type="button" id="ac-csv">Download CSV</button><button type="button" id="ac-forget">Forget key on this device</button><button type="button" id="ac-mailtest">Send a test email</button><button type="button" id="ac-staffout">Sign out of staff mode on this device</button></div></details></div>
-  <div class="ac-view" id="ac-view" role="tablist" aria-label="Show" hidden><button type="button" role="tab" data-v="pupils" aria-selected="true">Pupils</button><button type="button" role="tab" data-v="classes" aria-selected="false">Classes &amp; zones<span class="t-badge" id="cl-badge" hidden></span></button><button type="button" role="tab" data-v="topics" aria-selected="false">Topics</button><button type="button" role="tab" data-v="tests" aria-selected="false">Topic tests</button><button type="button" role="tab" data-v="work" aria-selected="false">Set work &amp; messages</button><button type="button" role="tab" data-v="reports" aria-selected="false">Reports</button><button type="button" role="tab" data-v="week" aria-selected="false">Weekly report</button></div>
+  <div class="ac-view" id="ac-view" role="tablist" aria-label="Show" hidden><button type="button" role="tab" data-v="pupils" aria-selected="true">Pupils</button><button type="button" role="tab" data-v="classes" aria-selected="false">Classes &amp; zones<span class="t-badge" id="cl-badge" hidden></span></button><button type="button" role="tab" data-v="topics" aria-selected="false">Topics</button><button type="button" role="tab" data-v="tests" aria-selected="false">Topic tests</button><button type="button" role="tab" data-v="comps" aria-selected="false">Competitions</button><button type="button" role="tab" data-v="work" aria-selected="false">Set work &amp; messages</button><button type="button" role="tab" data-v="reports" aria-selected="false">Reports</button><button type="button" role="tab" data-v="week" aria-selected="false">Weekly report</button></div>
   <p class="tp-status" id="ac-status" role="status" aria-live="polite" hidden></p>
   <div class="ac-live card" id="ac-live" hidden></div>
   <div class="ac-req card" id="ac-req" hidden></div>
@@ -486,6 +513,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
   <div class="card tg-w" id="tg-wrap" hidden><h3>Topics</h3><div id="tg-body"></div></div>
   <div class="sw-w" id="sw-wrap" hidden><div id="sw-body"></div></div>
   <div class="sw-w" id="tt-wrap" hidden><div id="tt-body"></div></div>
+  <div class="sw-w" id="cp-wrap" hidden><div id="cp-body"></div></div>
   <div class="card rp-w" id="rp-wrap" hidden><div id="rp-body"></div></div>
   <div class="cl-w" id="cl-wrap" hidden><div id="cl-body"></div></div>
   <div class="card wk" id="wk-wrap" hidden><div class="wk-h"><h3>Weekly report</h3><span class="wk-nav"><button type="button" class="tp-mini" id="wk-prev" aria-label="Previous week">‹</button><b id="wk-range"></b><button type="button" class="tp-mini" id="wk-next" aria-label="Next week">›</button><button type="button" class="tp-mini" id="wk-print">Print</button></span></div><p class="small" id="wk-sum"></p><div id="wk-body"></div></div>
@@ -2453,13 +2481,14 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     $$('#ac-view [data-v]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === VIEW)));
     const wk = VIEW === 'week', pu = VIEW === 'pupils';
     $('#ac-wrap').hidden = !pu; $('#ac-pd').hidden = !pu || !OPEN; $('#wk-wrap').hidden = !wk; $('#ac-sort').hidden = !pu; $('#ac-qrow').hidden = !pu;
-    $('#tg-wrap').hidden = VIEW !== 'topics'; $('#sw-wrap').hidden = VIEW !== 'work'; $('#tt-wrap').hidden = VIEW !== 'tests'; $('#rp-wrap').hidden = VIEW !== 'reports'; $('#cl-wrap').hidden = VIEW !== 'classes';
+    $('#tg-wrap').hidden = VIEW !== 'topics'; $('#sw-wrap').hidden = VIEW !== 'work'; $('#tt-wrap').hidden = VIEW !== 'tests'; $('#cp-wrap').hidden = VIEW !== 'comps'; $('#rp-wrap').hidden = VIEW !== 'reports'; $('#cl-wrap').hidden = VIEW !== 'classes';
     const zr = $('#ac-zr'); if (zr && !pu) zr.hidden = true; if (VIEW === 'classes') classesView();
     const lv = $('#ac-live'); if (lv && !pu) lv.hidden = true; const at = $('#ac-att'); if (at && !pu) at.hidden = true; const rq = $('#ac-req'); if (rq && !pu) rq.hidden = true;
     if (wk) week();
     if (VIEW === 'topics') topics();
     if (VIEW === 'work') work();
     if (VIEW === 'tests') testsView();
+    if (VIEW === 'comps') compsView();
     if (VIEW === 'reports') reports();
     if (pu) { requests(); zreqs(); live(); attention(); }
   }
@@ -2704,6 +2733,190 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         ol.append(el('li', {}, el('b', { class: 'tt-sc ' + (x.right / x.n < 0.4 ? 'lo' : x.right / x.n < 0.7 ? 'mid' : 'hi'), text: tpc(x.right, x.n) + '%' }), el('div', {}, el('p', { text: x.q.q }), el('p', { class: 'small' }, el('span', { class: 'tt-ok', text: '✓ ' + x.q.o[x.q.a] }), wo ? el('span', { class: 'tt-no', text: ` · most chose ✗ ${wo} (${w[1]})` }) : null), bank.pages && bank.pages[x.q.p] ? el('a', { class: 'small', href: `notes/${t.book}.html#${x.q.p}`, target: '_blank', rel: 'noopener', text: 'Workbook page: ' + bank.pages[x.q.p] + ' ↗' }) : null))); });
       box.append(ol); if (k < st.length) box.append(el('button', { type: 'button', class: 'tp-mini', text: `Show all ${st.length}`, onclick: () => show(st.length) })); };
     show(15);
+  }
+  /* ---------- HOUSE COMPETITIONS: a library of ready-to-run competitions per year group; run one, pupils enter in the app, judge with a rubric, house points, winners slideshow and certificates ---------- */
+  const HSE = { Belmore: ['#C99A06', 'Gold', 'Hare'], Benaughlin: ['#1F5FBF', 'Blue', 'Eagle'], Cuilcagh: ['#C0392B', 'Red', 'Fox'], Trien: ['#1E8E4E', 'Green', 'Stag'] };
+  const CATPTS = { Bronze: [20, 15, 10, 5], Silver: [40, 30, 20, 10], Gold: [80, 60, 40, 20], Platinum: [200, 150, 100, 50] };
+  const PLACE = ['', '1st', '2nd', '3rd', '4th'];
+  let CAT = null, CR = null, CE = null, CYEAR = LS.get('teacher.compyear') || 'all', COPEN = null, CJ = null, CBLIND = false;
+  const cToday = () => new Date().toISOString().slice(0, 10);
+  const yearStart = () => { const d = new Date(); return new Date(d.getMonth() >= 8 ? d.getFullYear() : d.getFullYear() - 1, 8, 1).getTime(); };
+  const plus = (days) => new Date(Date.now() + days * 864e5).toISOString().slice(0, 10);
+  const cDate = d => { const x = new Date(d + 'T12:00:00'); return isNaN(x) ? d : x.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }); };
+  const catOf = id => (CAT || []).find(c => c.id === id) || null;
+  const shortName = n => { const p = String(n || '').trim().split(/\s+/); return p.length > 1 ? p[0] + ' ' + p[p.length - 1][0] + '.' : p[0] || ''; };
+  const runState = r => r.opens > cToday() ? 'Starts soon' : r.closes >= cToday() ? 'Open' : 'Closed';
+  function housePoints() {
+    const t = {}; Object.keys(HSE).forEach(h => { t[h] = { pts: 0, ent: 0, wins: 0 }; });
+    const ys = yearStart(); (CR || []).filter(r => r.at >= ys).forEach(r => { const pts = CATPTS[r.cat] || CATPTS.Silver;
+      (CE || []).filter(e => e.rid === r.id && t[e.house]).forEach(e => { t[e.house].pts += 1; t[e.house].ent++; if (e.place) { t[e.house].pts += pts[e.place - 1] || 0; if (e.place === 1) t[e.house].wins++; } }); });
+    return t;
+  }
+  async function compsView(reload) {
+    const box = $('#cp-body'); if (!box) return;
+    if (!CAT) { try { CAT = (await fetch('competitions/catalogue.json', { cache: 'no-cache' }).then(r => r.json())).comps || []; } catch (e) { CAT = []; } }
+    if (!CR || reload) { box.innerHTML = '<p class="small">Loading…</p>'; try { const j = await api({ action: 'comps' }); if (!j || !j.ok) throw new Error(j && j.error === 'unknown action' ? 'paste in Apps Script version 23 and deploy it as a new version' : (j && j.error) || 'failed'); CR = j.runs || []; CE = j.entries || []; } catch (e) { CR = null; box.innerHTML = `<p class="tp-status warn">Couldn’t load competitions: ${e.message}.</p>`; box.append(libraryCard()); return; } }
+    box.innerHTML = '';
+    if (CJ) return judgeView(box);
+    /* house points */
+    const hp = housePoints(), order = Object.keys(HSE).sort((a, b) => hp[b].pts - hp[a].pts), top = Math.max(1, ...order.map(h => hp[h].pts));
+    const hpBox = el('div', { class: 'card cp-hp' }, el('h4', { text: 'House points from Digital Technology competitions this year' }),
+      el('div', { class: 'cp-hpg' }, ...order.map((h, i) => el('div', { class: 'cp-h', style: `--h:${HSE[h][0]}` }, el('b', { text: (i === 0 && hp[h].pts ? '👑 ' : '') + h }), el('span', { class: 'cp-pts', text: hp[h].pts + ' pts' }), el('span', { class: 'cp-bar' }, el('i', { style: `width:${hp[h].pts / top * 100}%` })), el('small', { text: `${hp[h].ent} entr${hp[h].ent === 1 ? 'y' : 'ies'} · ${hp[h].wins} win${hp[h].wins === 1 ? '' : 's'}` })))),
+      el('p', { class: 'small', text: 'ERGS house points: 1 point per entry, plus places by category: Bronze 20/15/10/5, Silver 40/30/20/10, Gold 80/60/40/20, Platinum 200/150/100/50 (1st to 4th). Add these to the school totaliser when a competition is judged.' }));
+    box.append(hpBox);
+    /* running and past */
+    const rl = el('div', { class: 'sw-l' });
+    const runs = (CR || []).slice().sort((a, b) => (runState(a) === 'Open' ? 0 : runState(a) === 'Starts soon' ? 1 : 2) - (runState(b) === 'Open' ? 0 : runState(b) === 'Starts soon' ? 1 : 2) || b.at - a.at);
+    if (!runs.length) rl.append(el('p', { class: 'small', text: 'Nothing running yet. Pick one from the library below and press “Run this competition”.' }));
+    runs.forEach(r => rl.append(runCard(r)));
+    box.append(el('h4', { text: 'Your competitions' }), rl, libraryCard());
+  }
+  function runCard(r) {
+    const ents = (CE || []).filter(e => e.rid === r.id), st = runState(r), judged = ents.filter(e => e.total != null).length, placed = ents.filter(e => e.place).sort((a, b) => a.place - b.place);
+    const byH = Object.keys(HSE).map(h => el('span', { class: 'cp-hc', style: `--h:${HSE[h][0]}`, text: `${h} ${ents.filter(e => e.house === h).length}` }));
+    const yrs = r.years.split(',').map(y => 'Y' + y).join(', ');
+    return el('div', { class: 'card sw-i cp-run' },
+      el('div', { class: 'sw-h' }, el('b', { text: r.title }), el('small', { text: `${yrs} · ${r.cat} · ${cDate(r.opens)} to ${cDate(r.closes)} · ` }, el('span', { class: 'cp-st ' + st.replace(/\s/g, '').toLowerCase(), text: st }))),
+      el('p', { class: 'small', text: `${ents.length} entr${ents.length === 1 ? 'y' : 'ies'}` + (ents.length ? ` · ${judged} judged` : '') + (placed.length ? ' · winners: ' + placed.map(e => `${PLACE[e.place]} ${shortName(e.name)} (${e.house || '?'})`).join(', ') : '') }),
+      el('div', { class: 'cp-hcs' }, ...byH),
+      el('div', { class: 'ac-row' },
+        el('button', { type: 'button', class: 'tp-mini pri', text: st === 'Open' ? `See entries (${ents.length})` : `Judge entries (${ents.length})`, onclick: () => { CJ = r.id; compsView(); window.scrollTo(0, 0); } }),
+        placed.length ? el('button', { type: 'button', class: 'tp-mini', text: 'Winners slideshow', onclick: () => slideshow(r) }) : null,
+        ents.length ? el('button', { type: 'button', class: 'tp-mini', text: 'Certificates', onclick: () => certificates(r) }) : null,
+        el('button', { type: 'button', class: 'tp-mini', text: 'Launch message', onclick: () => launchMsg(r) }),
+        el('button', { type: 'button', class: 'tp-mini', text: 'Change closing date', onclick: async () => { const d = prompt('New closing date (YYYY-MM-DD)', r.closes); if (!d || !/^\d{4}-\d\d-\d\d$/.test(d)) return; await api({ action: 'editcomp', rid: r.id, closes: d }); compsView(true); } }),
+        el('button', { type: 'button', class: 'tp-mini', text: 'Remove', onclick: async () => { if (!confirm('Remove this competition? Entries stay in the sheet, but pupils can’t see it any more.')) return; await api({ action: 'delcomp', rid: r.id }); compsView(true); } })));
+  }
+  function launchMsg(r) {
+    const c = catOf(r.comp) || {};
+    const txt = `🏆 Inter-house Digital Technology competition: ${r.title}\n\n${c.brief || ''}\n\nWho: ${r.years.split(',').map(y => 'Year ' + y).join(', ')}${c.group ? ' · ' + c.group : ''}\nCloses: ${cDate(r.closes)}\nHow to enter: open the Digital Technology app (${location.origin + location.pathname.replace(/teacher\.html$/, '')}), sign in, and tap the competition on your home page.${c.entry && c.entry.help ? '\n' + c.entry.help : ''}\n\nEvery entry earns a point for your house; 1st to 4th earn ${r.cat} points (${(CATPTS[r.cat] || []).join('/')}).${r.note ? '\n\n' + r.note : ''}`;
+    const ta = el('textarea', { class: 'cp-ta', readonly: '' }); ta.value = txt;
+    const ov = el('div', { class: 'cp-ov' }, el('div', { class: 'cp-sheet', role: 'dialog', 'aria-modal': 'true' }, el('h4', { text: 'Launch message' }), el('p', { class: 'small', text: 'For Google Classroom, form-time notices or an assembly slide.' }), ta,
+      el('div', { class: 'ac-row' }, el('button', { type: 'button', class: 'tp-mini pri', text: 'Copy', onclick: async (e) => { try { await navigator.clipboard.writeText(txt); e.target.textContent = 'Copied ✓'; } catch (x) { ta.select(); } } }), el('button', { type: 'button', class: 'tp-mini', text: 'Close', onclick: () => ov.remove() }))));
+    ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); }); document.body.append(ov);
+  }
+  function libraryCard() {
+    const wrap = el('div', { class: 'card cp-lib' }, el('h4', { text: 'Competition library' }), el('p', { class: 'small', text: 'Ready-made inter-house competitions for each year group, one for each term. Open one to see how to set it up, run it, judge it and display the winners, then press “Run this competition”: it appears on those pupils’ home pages until it closes.' }));
+    const yrs = ['all', '8', '9', '10', '11', '12', '13', '14'], chips = el('div', { class: 'cp-chips', role: 'group', 'aria-label': 'Year group' });
+    yrs.forEach(y => chips.append(el('button', { type: 'button', class: 'cp-chip', 'aria-pressed': String(CYEAR === y), text: y === 'all' ? 'All years' : 'Year ' + y, onclick: () => { CYEAR = y; LS.set('teacher.compyear', y); compsView(); } })));
+    wrap.append(chips);
+    const list = (CAT || []).filter(c => CYEAR === 'all' || (c.years || []).map(String).includes(CYEAR));
+    const TERM = { Autumn: 0, Spring: 1, Summer: 2, Any: 3 };
+    list.sort((a, b) => (a.years.length > 3) - (b.years.length > 3) || Math.min(...a.years) - Math.min(...b.years) || (TERM[a.term] ?? 3) - (TERM[b.term] ?? 3));
+    if (!list.length) wrap.append(el('p', { class: 'small', text: CAT && CAT.length ? 'None for this year group.' : 'The competition library hasn’t loaded (competitions/catalogue.json).' }));
+    const g = el('div', { class: 'cp-g' }); list.forEach(c => g.append(compCard(c))); wrap.append(g);
+    return wrap;
+  }
+  function compCard(c) {
+    const open = COPEN === c.id, yrs = c.years.length > 3 ? 'Any year' : c.years.map(y => 'Y' + y).join(', ');
+    const runs = (CR || []).filter(r => r.comp === c.id && r.at >= yearStart());
+    const card = el('div', { class: 'cp-c' + (open ? ' open' : '') },
+      el('button', { type: 'button', class: 'cp-ch', 'aria-expanded': String(open), onclick: () => { COPEN = open ? null : c.id; compsView(); } },
+        el('span', { class: 'cp-tags' }, el('span', { class: 'cp-tag', text: yrs }), el('span', { class: 'cp-tag', text: c.term }), el('span', { class: 'cp-tag', text: c.type }), el('span', { class: 'cp-tag cat-' + String(c.category || 'Silver').toLowerCase(), text: c.category || 'Silver' }), runs.length ? el('span', { class: 'cp-tag run', text: 'Run this year ✓' }) : null),
+        el('b', { text: c.title }), el('span', { class: 'small', text: c.summary })));
+    if (!open) return card;
+    const sec = (h, items, ol) => items && items.length ? el('div', { class: 'cp-sec' }, el('h5', { text: h }), el(ol ? 'ol' : 'ul', {}, ...items.map(x => el('li', { text: x })))) : null;
+    const max = (c.rubric || []).reduce((s, r) => s + (+r.max || 0), 0);
+    const rub = el('table', { class: 'cp-rub' }, el('tbody', {}, ...(c.rubric || []).map(r => el('tr', {}, el('td', {}, el('b', { text: r.c }), el('br'), el('span', { class: 'small', text: r.look })), el('td', { text: String(r.max) })))));
+    /* run form */
+    const yBoxes = el('div', { class: 'cp-yrs' }); const sel = new Set(c.years.length > 3 ? [] : c.years.map(String));
+    [8, 9, 10, 11, 12, 13, 14].forEach(y => { const cb = el('input', { type: 'checkbox', value: String(y) }); cb.checked = sel.has(String(y)); yBoxes.append(el('label', {}, cb, document.createTextNode(' Y' + y))); });
+    const fCat = el('select', {}); ['Bronze', 'Silver', 'Gold', 'Platinum'].forEach(k => { const o = el('option', { value: k, text: `${k} (1st ${CATPTS[k][0]} pts)` }); if (k === (c.category || 'Silver')) o.selected = true; fCat.append(o); });
+    const wk = +(String(c.time || '').match(/(\d+)\s*week/) || [0, 2])[1] || 2;
+    const fO = el('input', { type: 'date', value: cToday() }), fC = el('input', { type: 'date', value: plus(wk * 7) }), fN = el('input', { type: 'text', maxlength: '300', placeholder: 'Note for pupils (optional), e.g. lunchtime help in room 12 on Tuesdays' });
+    const go = el('button', { type: 'button', class: 'tp-mini pri', text: 'Run this competition' });
+    go.addEventListener('click', async () => { const ys = [...yBoxes.querySelectorAll('input:checked')].map(x => x.value); if (!ys.length) return status('Tick at least one year group.', 'warn'); if (!fC.value || fC.value < fO.value) return status('Pick a closing date after the opening date.', 'warn');
+      go.disabled = true; try { const r = await api({ action: 'setcomp', comp: c.id, title: c.title, years: ys.join(','), cat: fCat.value, opens: fO.value, closes: fC.value, note: fN.value }); if (!r || !r.ok) throw new Error(r && r.error === 'unknown action' ? 'paste in Apps Script version 23 first' : 'failed');
+        status(`${c.title} is running: pupils in ${ys.map(y => 'Y' + y).join(', ')} see it on their home page.`, 'ok'); COPEN = null; compsView(true); } catch (e) { status('Couldn’t start it: ' + e.message + '.', 'warn'); go.disabled = false; } });
+    card.append(el('div', { class: 'cp-body' },
+      el('p', { class: 'cp-brief' }, el('b', { text: 'Pupil brief: ' }), document.createTextNode(c.brief)),
+      el('p', { class: 'small' }, el('b', { text: 'Entry: ' }), document.createTextNode(`${({ image: 'a picture/screenshot', link: 'a link', text: 'typed text', 'image-or-link': 'a picture or a link' })[c.entry && c.entry.kind] || 'a picture or a link'} · ${c.group || 'Individual'} · ${c.time || ''}`)),
+      el('div', { class: 'cp-cols' }, sec('Quick set-up', c.setup, true), sec('How to run it', c.run, true)),
+      sec('You’ll need', c.resources),
+      el('div', { class: 'cp-sec' }, el('h5', { text: `Judging rubric (out of ${max})` }), rub, el('p', { class: 'small', text: c.judging })),
+      sec('Display and celebrate', c.display),
+      el('p', { class: 'small' }, el('b', { text: 'Builds on: ' }), document.createTextNode(c.curriculum || '')),
+      c.extension ? el('p', { class: 'small' }, el('b', { text: 'Stretch: ' }), document.createTextNode(c.extension)) : null,
+      c.safety ? el('p', { class: 'small cp-safe' }, el('b', { text: 'Safeguarding and copyright: ' }), document.createTextNode(c.safety)) : null,
+      el('div', { class: 'cp-runf' }, el('h5', { text: 'Run this competition' }), el('div', { class: 'sw-g' }, el('label', { class: 'w2' }, document.createTextNode('Year groups'), yBoxes), el('label', {}, document.createTextNode('Category'), fCat), el('label', {}, document.createTextNode('Opens'), fO), el('label', {}, document.createTextNode('Closes'), fC), el('label', { class: 'w2' }, document.createTextNode('Note'), fN)), el('div', { class: 'ac-row' }, go))));
+    return card;
+  }
+  /* judging */
+  const imgCache = {};
+  async function loadImg(e, im) { if (imgCache[e.id]) { im.src = imgCache[e.id]; return; } try { const j = await api({ action: 'compimg', eid: e.id }); if (j && j.ok) { imgCache[e.id] = j.src; im.src = j.src; } else im.alt = 'Picture not found'; } catch (x) { im.alt = 'Couldn’t load the picture'; } }
+  function judgeView(box) {
+    const r = (CR || []).find(x => x.id === CJ); if (!r) { CJ = null; return compsView(); }
+    const c = catOf(r.comp) || { rubric: [] }, rub = c.rubric && c.rubric.length ? c.rubric : [{ c: 'Overall', max: 20, look: '' }], max = rub.reduce((s, x) => s + (+x.max || 0), 0);
+    const ents = (CE || []).filter(e => e.rid === r.id).sort((a, b) => (b.total ?? -1) - (a.total ?? -1) || a.at - b.at);
+    const blind = el('label', { class: 'cp-bl' }, el('input', { type: 'checkbox' }), document.createTextNode(' Blind judging (hide names and houses)')); blind.querySelector('input').checked = CBLIND; blind.querySelector('input').addEventListener('change', e => { CBLIND = e.target.checked; compsView(); });
+    box.append(el('div', { class: 'ac-row' }, el('button', { type: 'button', class: 'tp-mini', text: '← All competitions', onclick: () => { CJ = null; compsView(true); } }), blind,
+      el('button', { type: 'button', class: 'tp-mini', text: 'Winners slideshow', onclick: () => slideshow(r) }), el('button', { type: 'button', class: 'tp-mini', text: 'Certificates', onclick: () => certificates(r) })),
+      el('h4', { text: `${r.title}: ${ents.length} entr${ents.length === 1 ? 'y' : 'ies'}` }),
+      el('p', { class: 'small', text: `${runState(r)} · closes ${cDate(r.closes)} · ${r.cat}. Score each criterion, then give 1st to 4th places. Scores save as you go. ${c.judging || ''}` }));
+    if (!ents.length) { box.append(el('p', { class: 'small', text: 'No entries yet.' })); return; }
+    const g = el('div', { class: 'cp-jg' });
+    ents.forEach((e, n) => {
+      const sc = (() => { try { return JSON.parse(e.scores || '[]'); } catch (x) { return []; } })();
+      const tot = el('b', { class: 'cp-tot', text: e.total == null ? `– / ${max}` : `${e.total} / ${max}` }), stat = el('span', { class: 'small cp-sv' });
+      const ins = rub.map((x, i) => { const inp = el('input', { type: 'number', min: '0', max: String(x.max), step: '1', inputmode: 'numeric', 'aria-label': x.c }); if (sc[i] != null && sc[i] !== '') inp.value = sc[i]; return inp; });
+      const pl = el('select', { 'aria-label': 'Place' }); PLACE.forEach((p, i) => { const o = el('option', { value: String(i), text: p || 'No place' }); if (e.place === i) o.selected = true; pl.append(o); });
+      const hs = el('select', { 'aria-label': 'House' }); ['', ...Object.keys(HSE)].forEach(h => { const o = el('option', { value: h, text: h || '(house?)' }); if (e.house === h) o.selected = true; hs.append(o); });
+      const nt = el('input', { type: 'text', maxlength: '500', placeholder: 'Notes / feedback (optional)', value: e.notes || '' });
+      let tmr = null; const save = () => { clearTimeout(tmr); stat.textContent = '…'; tmr = setTimeout(async () => {
+        const vals = ins.map((x, i) => x.value === '' ? '' : Math.max(0, Math.min(+rub[i].max || 0, +x.value || 0))); const any = vals.some(v => v !== ''), t = vals.reduce((s, v) => s + (+v || 0), 0);
+        tot.textContent = any ? `${t} / ${max}` : `– / ${max}`;
+        try { const j = await api({ action: 'judge', eid: e.id, scores: JSON.stringify(vals), total: any ? t : '', place: pl.value, notes: nt.value, house: hs.value }); if (!j || !j.ok) throw 0; e.scores = JSON.stringify(vals); e.total = any ? t : null; e.place = +pl.value; e.notes = nt.value; if (hs.value) e.house = hs.value; stat.textContent = 'Saved ✓'; dup(); } catch (x) { stat.textContent = 'Not saved, try again'; } }, 500); };
+      [...ins, nt].forEach(x => x.addEventListener('input', save)); [pl, hs].forEach(x => x.addEventListener('change', save));
+      const prev = el('div', { class: 'cp-pv' });
+      if (e.img) { const im = el('img', { alt: e.title || 'Entry', loading: 'lazy' }); prev.append(im); loadImg(e, im); im.addEventListener('click', () => { const ov = el('div', { class: 'cp-ov cp-zoom' }, el('img', { src: im.src, alt: '' })); ov.addEventListener('click', () => ov.remove()); document.body.append(ov); }); }
+      if (e.link) prev.append(el('a', { href: e.link, target: '_blank', rel: 'noopener noreferrer', class: 'tp-mini', text: 'Open the link ↗' }), el('small', { class: 'cp-url', text: e.link }));
+      if (e.text) prev.append(el('div', { class: 'cp-txt', text: e.text }));
+      const who = CBLIND ? `Entry ${n + 1}` : `${e.name} · ${e.cls}`;
+      g.append(el('div', { class: 'card cp-j', 'data-eid': e.id, style: CBLIND ? '' : `--h:${(HSE[e.house] || ['#888'])[0]}` },
+        el('div', { class: 'cp-jh' }, el('b', { text: who }), CBLIND ? null : el('span', { class: 'cp-hc', style: `--h:${(HSE[e.house] || ['#888'])[0]}`, text: e.house || 'no house' }), el('small', { text: (e.title ? '“' + e.title + '” · ' : '') + new Date(e.at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) })),
+        prev,
+        el('div', { class: 'cp-sc' }, ...rub.map((x, i) => el('label', { title: x.look }, el('span', { text: `${x.c} (/${x.max})` }), ins[i]))),
+        el('div', { class: 'cp-jf' }, tot, el('label', {}, document.createTextNode('Place '), pl), CBLIND ? null : el('label', {}, document.createTextNode('House '), hs), stat), nt));
+    });
+    box.append(g);
+    const dup = () => { const seen = {}; g.querySelectorAll('.cp-j').forEach(cd => { const s = cd.querySelector('.cp-jf select'); cd.classList.remove('cp-dup'); if (+s.value) { if (seen[s.value]) { cd.classList.add('cp-dup'); seen[s.value].classList.add('cp-dup'); } else seen[s.value] = cd; } }); };
+    dup();
+  }
+  /* assembly / corridor screen: 4th to 1st, first name + initial only */
+  async function slideshow(r) {
+    const ents = (CE || []).filter(e => e.rid === r.id && e.place).sort((a, b) => b.place - a.place);
+    if (!ents.length) return status('Give out places first (1st to 4th) in the judging view.', 'warn');
+    const pts = CATPTS[r.cat] || CATPTS.Silver, slides = [{ intro: true }, ...ents];
+    let i = 0; const ov = el('div', { class: 'cp-show', role: 'dialog', 'aria-modal': 'true', tabindex: '-1' }); document.body.append(ov);
+    const paint = async () => { const s = slides[i]; ov.innerHTML = '';
+      if (s.intro) { ov.append(el('div', { class: 'cs-in' }, el('div', { class: 'cs-big', text: '🏆' }), el('h1', { text: r.title }), el('p', { text: `Inter-house Digital Technology competition · ${r.years.split(',').map(y => 'Year ' + y).join(', ')}` }), el('p', { class: 'cs-hint', text: 'Press → or click for the results' }))); }
+      else { const h = HSE[s.house] || ['#555', '', ''];
+        const pic = el('div', { class: 'cs-pic' }); if (s.img) { const im = el('img', { alt: '' }); pic.append(im); loadImg(s, im); } else if (s.text) pic.append(el('div', { class: 'cs-txt', text: s.text.slice(0, 700) + (s.text.length > 700 ? '…' : '') })); else if (s.link) pic.append(el('div', { class: 'cs-txt', text: 'Entry: ' + s.link }));
+        ov.style.setProperty('--h', h[0]);
+        ov.append(el('div', { class: 'cs-s' }, el('div', { class: 'cs-pl', text: PLACE[s.place] }), pic, el('div', { class: 'cs-who' }, el('b', { text: shortName(s.name) }), el('span', { text: `${s.cls} · ${s.house || ''}${h[2] ? ' ' + ({ Hare: '🐇', Eagle: '🦅', Fox: '🦊', Stag: '🦌' })[h[2]] : ''}` }), s.title ? el('i', { text: '“' + s.title + '”' }) : null, el('small', { text: `+${pts[s.place - 1]} house points` })))); }
+      ov.append(el('div', { class: 'cs-nav', text: `${i + 1} / ${slides.length} · Esc to close` })); };
+    const key = e => { if (e.key === 'Escape') { close(); } else if (e.key === 'ArrowRight' || e.key === ' ') { if (i < slides.length - 1) { i++; paint(); } } else if (e.key === 'ArrowLeft') { if (i > 0) { i--; paint(); } } };
+    const close = () => { document.removeEventListener('keydown', key); ov.remove(); if (document.fullscreenElement) document.exitFullscreen().catch(() => { }); };
+    ov.addEventListener('click', () => { if (i < slides.length - 1) { i++; paint(); } else close(); }); document.addEventListener('keydown', key);
+    try { await ov.requestFullscreen(); } catch (e) { } paint(); ov.focus();
+  }
+  function certificates(r) {
+    const ents = (CE || []).filter(e => e.rid === r.id); if (!ents.length) return;
+    const winnersOnly = ents.some(e => e.place) && !confirm(`Print certificates for all ${ents.length} entrants?\n\nOK = everyone (winners get their place), Cancel = only 1st to 4th.`);
+    const list = ents.filter(e => !winnersOnly || e.place).sort((a, b) => (a.place || 9) - (b.place || 9) || a.name.localeCompare(b.name));
+    const esc = s => String(s || '').replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[ch]);
+    const date = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+    const w = window.open('', '_blank'); if (!w) return status('Allow pop-ups for this site to print certificates.', 'warn');
+    w.document.write(`<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>Certificates · ${esc(r.title)}</title><style>
+@page{size:A4 landscape;margin:0}body{margin:0;font-family:Georgia,'Times New Roman',serif;color:#16213A}
+.c{width:297mm;height:210mm;box-sizing:border-box;padding:18mm;page-break-after:always;display:flex}
+.f{flex:1;border:3mm solid var(--h);outline:1mm solid var(--h);outline-offset:-6mm;border-radius:4mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:10mm}
+.s{font:700 14pt system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;color:var(--h);margin:0}
+h1{font-size:44pt;margin:6mm 0 2mm}.p{font-size:16pt;margin:2mm 0}.n{font-size:34pt;font-weight:700;margin:6mm 0 2mm;border-bottom:1px solid #999;padding:0 12mm 2mm}
+.pl{font:800 28pt system-ui,sans-serif;color:var(--h);margin:4mm 0}.m{display:flex;justify-content:space-between;width:80%;margin-top:14mm;font-size:12pt}.m span{border-top:1px solid #777;padding-top:2mm;min-width:60mm}
+@media screen{body{background:#ddd}.c{margin:10mm auto;background:#fff;box-shadow:0 2mm 8mm rgba(0,0,0,.2)}}
+</style></head><body>${list.map(e => { const h = HSE[e.house] || ['#1F5FBF']; return `<div class="c" style="--h:${h[0]}"><div class="f"><p class="s">Enniskillen Royal Grammar School · Digital Technology</p><h1>${e.place ? 'Certificate of Achievement' : 'Certificate of Participation'}</h1><p class="p">presented to</p><div class="n">${esc(e.name)}</div><p class="p">${esc(e.cls)}${e.house ? ' · ' + esc(e.house) + ' House' : ''}</p>${e.place ? `<div class="pl">${PLACE[e.place]} place</div>` : '<p class="p">for taking part in</p>'}<p class="p"><b>${esc(r.title)}</b>, inter-house competition</p><div class="m"><span>Mr Butler, Head of Digital Technology</span><span>${date}</span></div></div></div>`; }).join('')}<script>setTimeout(()=>print(),400)<\/script></body></html>`);
+    w.document.close();
   }
   /* ---------- REPORTS: who's using it (a usage grid), day by day (what each pupil studied), and a printable overview of one pupil ---------- */
   const H = x => String(x == null ? '' : x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));

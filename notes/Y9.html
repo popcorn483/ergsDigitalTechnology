@@ -10021,7 +10021,7 @@ try {
     const p = me(); if (!p || !URL0 || LS.get('notes-nocount') || window.__mrbWork) return; window.__mrbWork = 1;
     let j; try { j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=mywork&id=' + encodeURIComponent(p.id) + '&cls=' + encodeURIComponent(p.cls || ''), { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); } catch (e) { return; }
     if (!j || !j.ok) return;
-    LS.set('mrb-mywork', JSON.stringify(j.work || [])); if (Array.isArray(j.tests)) { LS.set('mrb-mytests', JSON.stringify(j.tests)); try { window.dispatchEvent(new Event('mrb-tests')); } catch (e) { } }
+    LS.set('mrb-mywork', JSON.stringify(j.work || [])); if (Array.isArray(j.comps)) LS.set('mrb-mycomps', JSON.stringify(j.comps)); if (Array.isArray(j.tests)) { LS.set('mrb-mytests', JSON.stringify(j.tests)); try { window.dispatchEvent(new Event('mrb-tests')); } catch (e) { } }
     const msgs = j.msgs || [], work = (j.work || []).filter(w => !w.due || w.due >= new Date(Date.now() - 864e5).toISOString().slice(0, 10)), tests = (j.tests || []).filter(t => !(t.tries > 0));
     let seenWork = false; try { seenWork = sessionStorage.getItem('mrb-work-shown') === '1'; } catch (e) { }
     if (!msgs.length && (seenWork || (!work.length && !tests.length))) return;
