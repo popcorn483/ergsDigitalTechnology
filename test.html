@@ -133,7 +133,7 @@ ul.how li{margin:6px 0}
     var mid = S && !S.done && answered() > 0;
     var my = []; try { my = JSON.parse(LS.get('mrb-mytests') || '[]'); } catch (e) { }
     var set = my.filter(function (t) { return t.book === BOOK && t.ch === CH; })[0];
-    main.innerHTML = '<div class="card"><p class="eyebrow">Topic test' + (set ? ' · set by your teacher' : '') + '</p><h1>' + H(T.title) + '</h1><p class="muted">' + H(UN[BOOK] || BOOK) + ' · Topic ' + (+CH.slice(1)) + (set && set.due ? ' · due ' + H(niceDate(set.due)) : '') + '</p>' +
+    main.innerHTML = '<div class="card"><p class="eyebrow">' + (set ? 'Topic test · set by your teacher' : 'Optional topic test · practise whenever you like') + '</p><h1>' + H(T.title) + '</h1><p class="muted">' + H(UN[BOOK] || BOOK) + ' · Topic ' + (+CH.slice(1)) + (set && set.due ? ' · due ' + H(niceDate(set.due)) : '') + '</p>' +
       (set && set.note ? '<div class="note">' + H(set.note) + '</div>' : '') +
       '<div class="facts"><div><b>' + T.q.length + '</b><small>questions</small></div><div><b>A–D</b><small>pick one answer</small></div><div><b>' + Math.round(T.q.length * 0.6) + '+</b><small>minutes</small></div></div>' +
       '<ul class="how"><li>Read each question carefully: the wrong answers are designed to look right.</li><li>Tap an answer, then <b>Next</b>. You can go back and change answers any time before you finish.</li><li>Not sure? Tap <b>⚑ Flag</b> to come back to it. <b>☷ All questions</b> shows which ones you’ve answered.</li><li>Your answers save on this device as you go, so you can stop and come back later.</li><li>When you finish, it marks itself and shows you what to revise.' + (me ? ' Your score goes to your teacher.' : '') + '</li></ul>' +

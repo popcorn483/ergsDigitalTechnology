@@ -2337,7 +2337,7 @@ a.btn{text-decoration:none}
 .act:hover{border-color:var(--k);background:color-mix(in srgb,var(--k) 11%,var(--paper))}.act:active{transform:scale(.98)}
 .act-i{flex:none;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;background:var(--k);color:#fff}.act-i svg{width:21px;height:21px}
 .act-t{display:flex;flex-direction:column;min-width:0}.act-t b{font:800 14px/1.2 var(--sans)}.act-t small{font:600 12px/1.3 var(--sans);color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.k-ppt{--k:#C0392B}.k-sheet{--k:#1F5FBF}.k-prac{--k:#1E8E4E}.k-pod{--k:#B4416E}.k-tips{--k:#C77A00}.k-lesson{--k:#C0392B}.k-video{--k:#D64545}.k-anim{--k:#7B4FD6}.k-quiz{--k:#1E8E4E}.k-terms{--k:#0F7C8C}.k-learn{--k:#1F5FBF}.k-test{--k:#C77A00}
+.k-ppt{--k:#C0392B}.k-sheet{--k:#1F5FBF}.k-prac{--k:#1E8E4E}.k-pod{--k:#B4416E}.k-tips{--k:#C77A00}.k-lesson{--k:#C0392B}.k-video{--k:#D64545}.k-anim{--k:#7B4FD6}.k-quiz{--k:#1E8E4E}.k-terms{--k:#0F7C8C}.k-learn{--k:#1F5FBF}.k-test{--k:#C77A00}.k-mcq{--k:#7A3FC4}
 .notes-k{display:flex;align-items:center;gap:8px;margin:4px 2px 8px;font:800 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3)}.notes-k svg{width:16px;height:16px}
 .act-pop{position:fixed;inset:0;z-index:100;background:rgba(10,14,22,.55);display:flex;align-items:center;justify-content:center;padding:24px}
 .act-pop .ap-box{--k:#1F5FBF;width:min(920px,100%);max-height:calc(100dvh - 48px);display:flex;flex-direction:column;background:var(--bg,var(--paper-2));border-radius:16px;box-shadow:0 24px 70px rgba(0,0,0,.4);overflow:hidden}
@@ -10819,6 +10819,7 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
     terms: SVG('<path d="M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h10.5"/><path d="M9 8h5"/>'),
     learn: SVG('<rect x="4" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.5"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.5"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.5"/>'),
     test: SVG('<rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M8.5 10h7M8.5 14h7M8.5 18h4"/>'),
+  mcq: SVG('<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9l1.5 1.5L12 8M8 15l1.5 1.5L12 14M14.5 9.5H17M14.5 15.5H17"/>'),
     notes: SVG('<path d="M7 3.5h7l4 4V20a.5.5 0 01-.5.5h-10.5a.5.5 0 01-.5-.5V4a.5.5 0 01.5-.5z"/><path d="M14 3.5V8h4M9 12h6M9 16h6"/>'),
     ppt: SVG('<rect x="3" y="4.5" width="18" height="12" rx="1.8"/><path d="M12 16.5V20M8.5 20h7M7.5 9h5M7.5 12h8"/>'),
     sheet: SVG('<path d="M6 3.5h9l3 3V20.5H6z"/><path d="M9 9h6M9 12.5h6M9 16h4"/><path d="M15 3.5V7h3"/>'),
@@ -11018,11 +11019,15 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
     if (hub) tile('pod', 'Podcast', 'Listen', b => { if (window.MRB_POD) window.MRB_POD.open(ids); else openPop({ k: 'pod', t: 'Podcast' }, hubNode('podcast', 'Podcast', ids), b); });
     /* the topic test only once it is unlocked (every page covered, page quizzes passed); not on every page before then */
     if (typeof cqUnlocked === 'function' && cqUnlocked(P.ch) && !TUT) { const tb = tile('test', 'Topic test', 'The whole topic: check your answers', () => { location.hash = 'quiz-' + P.ch.id; }); tb.removeAttribute('aria-haspopup'); }
+    /* the 100-question topic test (optional: any time, whether or not the teacher has set it) */
+    { const mt = tile('mcq', 'Practice test', 'Optional · 100 questions', () => { location.href = '../test.html?book=' + encodeURIComponent(BK.id) + '&ch=' + encodeURIComponent(P.ch.id); }); mt.removeAttribute('aria-haspopup'); mt.hidden = true;
+      const show = L => { if ((L || []).some(t => t.book === BK.id && t.ch === P.ch.id)) mt.hidden = false; };
+      if (window.__mcqIdx) show(window.__mcqIdx); else (window.__mcqP = window.__mcqP || fetch('../tests/index.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : { tests: [] }).then(j => (window.__mcqIdx = j.tests || [])).catch(() => [])).then(show); }
     tile('tips', 'How to revise this', tipsFor(P).map(k => HOW[k].t).join(' · '), b => openPop({ k: 'tips', t: 'How to revise this' }, tipsNode(P), b));
     /* the page quiz shows in Extra help on phones too once this page is marked covered (checked again when it is marked) */
     { const pqSync = () => { const q = box.querySelector('.act.k-quiz'); if (!q || !box.isConnected) { clearInterval(pqT); return; } q.classList.toggle('pq-ok', !!(state.done && state.done[P.p.id]) || (typeof chDone === 'function' && chDone(P.ch))); }; const pqT = setInterval(pqSync, 800); setTimeout(pqSync, 0); }
     /* EXTRA HELP in sections: Learn, Practise, (the topic test once unlocked), Revise */
-    { const SEC = [['Learn', ['ppt', 'video', 'pod']], ['Practise', ['anim', 'prac', 'quiz']], ['Unlocked: you’ve covered the whole topic', ['sheet', 'test']], ['Revise', ['tips']]];
+    { const SEC = [['Learn', ['ppt', 'video', 'pod']], ['Practise', ['anim', 'prac', 'quiz', 'mcq']], ['Unlocked: you’ve covered the whole topic', ['sheet', 'test']], ['Revise', ['tips']]];
       const tiles = [...g.children], used = new Set(); g.remove();
       SEC.forEach(([h, ks], si) => { const mine = tiles.filter(b => !used.has(b) && (ks.some(k => b.classList.contains('k-' + k)) || (si === 3 && !SEC.some(([, kk]) => kk.some(k => b.classList.contains('k-' + k)))))); if (!mine.length) return; mine.forEach(b => used.add(b));
         const s = document.createElement('div'); s.className = 'acts-sec' + (ks.includes('test') ? ' acts-unl' : ''); s.innerHTML = `<h3 class="acts-sh">${h}</h3><div class="acts-g"></div>`; s.querySelector('.acts-g').append(...mine); box.append(s); }); }
