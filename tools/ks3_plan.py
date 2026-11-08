@@ -6,7 +6,8 @@
   ks3/plan.json          which topics each year teaches, in order: {"years": {"Y8": ["online-safety", ...], ...}}
 
 This writes ks3/books/Y8.json, Y9.json and Y10.json (chapter n = the year's topic n), the topic icons icons/K9-2.png and
-the podcasts notes/podcasts/K9C2.json. A topic with no notes pages yet gets a "notes on the way" page showing its
+the podcasts notes/podcasts/K9C2.json and the topic tests tests/Y9/c02.json (from each topic's test.json: 100
+multiple-choice questions, so a test follows its topic from year to year). A topic with no notes pages yet gets a "notes on the way" page showing its
 summary and what pupils will learn, so it can go into a year straight away; its PowerPoint still shows.
 Then run tools/ks3_manifest.py and tools/ks3_books.py (the GitHub Action runs all three).
 Run by hand: python3 tools/ks3_plan.py   (python3 tools/ks3_plan.py --check only reports problems)
@@ -77,6 +78,19 @@ def chapter(n, t):
     return {'id': c, 'n': n, 'title': title, 'intro': t.get('intro') or t.get('summary') or '', 'pages': out}, gloss
 
 
+def put_test(s, yid, n, ch, want):
+    """copy ks3/library/<s>/test.json to tests/<yid>/cNN.json, with page ids p03 -> cNN-p03"""
+    t = load(os.path.join(LIB, s, 'test.json'))
+    if not t or not t.get('q'): return
+    ids = {p['id'].split('-')[-1]: p['id'] for p in ch['pages']}
+    out = {'book': yid, 'ch': ch['id'], 'n': n, 'title': ch['title'], 'slug': s,
+           'q': [dict(q, p=ids.get(str(q.get('p', '')).split('-')[-1], ch['pages'][0]['id'])) for q in t['q']]}
+    dst = os.path.join(ROOT, 'tests', yid, ch['id'] + '.json'); want.add(dst); os.makedirs(os.path.dirname(dst), exist_ok=True)
+    old = load(dst) or {}
+    if {k: old.get(k) for k in out} != out:   # tools/tests_index.js adds the page names afterwards
+        json.dump(out, open(dst, 'w', encoding='utf-8'), ensure_ascii=False)
+
+
 def same(a, b):
     try:
         return open(a, 'rb').read() == open(b, 'rb').read()
@@ -89,13 +103,14 @@ def main():
     problems = []
     warn = lambda m: (problems.append(m), print('!', m))
     lib = library(); P = plan(lib, warn)
-    want_icons, want_pods = set(), set()
+    want_icons, want_pods, want_tests = set(), set(), set()
     for yid, slugs in P.items():
         chs, gl = [], []
         for i, s in enumerate(slugs):
             ch, g = chapter(i + 1, lib[s]); chs.append(ch); gl += g
             n, y = i + 1, yid[1:]
             if check: continue
+            put_test(s, yid, n, ch, want_tests)
             # icon and podcast: the topic's own, copied to the position the reader looks for
             src = os.path.join(LIB, s, 'icon.png')
             if not os.path.exists(src): src = os.path.join(LIB, '_default-icon.png')
@@ -121,6 +136,7 @@ def main():
     chs, gl = [], []
     for i, s in enumerate(spare):
         ch, g = chapter(i + 1, lib[s]); chs.append(ch); gl += g
+        put_test(s, 'Y0', i + 1, ch, want_tests)
         src = os.path.join(LIB, s, 'icon.png')
         if not os.path.exists(src): src = os.path.join(LIB, '_default-icon.png')
         dst = os.path.join(ROOT, 'icons', f'K0-{i + 1}.png'); want_icons.add(dst)
@@ -139,6 +155,11 @@ def main():
     for f in os.listdir(os.path.join(ROOT, 'notes', 'podcasts')):
         p = os.path.join(ROOT, 'notes', 'podcasts', f)
         if re.fullmatch(r'K(8|9|10)C\d+\.json', f) and p not in want_pods: os.remove(p); print('removed', f)
+    for yid in list(YEARS) + ['Y0']:   # tests for positions that now have no topic, or a topic with no test
+        d = os.path.join(ROOT, 'tests', yid)
+        for f in (os.listdir(d) if os.path.isdir(d) else []):
+            p = os.path.join(d, f)
+            if re.fullmatch(r'c\d{2}\.json', f) and p not in want_tests: os.remove(p); print('removed test', yid, f)
     return 0
 
 
