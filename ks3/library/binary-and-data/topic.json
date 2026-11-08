@@ -1,0 +1,3638 @@
+{
+ "title": "Binary, Numbers and Data",
+ "summary": "The maths of computing: why computers use binary, converting between binary, denary and hexadecimal, binary addition, units of data, and how text, data types, images and sound are stored and compressed.",
+ "learn": [
+  "Why computers process all information as binary, and how memory capacity and processing power affect performance (NI curriculum S9)",
+  "Place value in denary and binary, and converting between them",
+  "Adding binary numbers and spotting overflow errors",
+  "Units of data from bit to terabyte (1 KB = 1024 bytes) and converting between them",
+  "Hexadecimal and why programmers use it, including web colour codes",
+  "How integers, floats, strings and Booleans are stored, including text as ASCII and Unicode codes (NI curriculum S4)",
+  "How images and sound are represented, calculating file sizes, and lossy and lossless compression"
+ ],
+ "temporary": false,
+ "intro": "Everything inside a computer, from your messages to your music, is stored as 1s and 0s. Learn to think like a computer: convert and add binary numbers, use hexadecimal, work with units of data, and calculate how much space text, images and sound need. This topic leads straight into GCSE Digital Technology Unit 1 (Digital data).",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Explain why computers use binary to represent all data",
+   "summary": "Inside every computer are billions of tiny switches called transistors, which can only be on (1) or off (0). So everything a computer stores, from numbers to music, is held as patterns of bits, and n bits give 2ⁿ different patterns.",
+   "diagram": {
+    "kind": "compare",
+    "title": "Denary vs binary",
+    "caption": "How people count compared with how computers count.",
+    "states": [
+     {
+      "label": "Denary (humans)",
+      "points": [
+       "Base 10: uses ten digits, 0 to 9",
+       "Column values go up in tens: 1, 10, 100, 1000",
+       "Probably comes from counting on ten fingers",
+       "Easy for people to read and write"
+      ],
+      "art": null
+     },
+     {
+      "label": "Binary (computers)",
+      "points": [
+       "Base 2: uses only two digits, 0 and 1",
+       "Column values double: 1, 2, 4, 8, 16 …",
+       "Matches switches that are either off or on",
+       "Easy for electronic circuits to store reliably"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Every photo on your phone, every message in your group chat, every song, game and web page is stored inside a computer as nothing more than long strings of **1**s and **0**s. This page explains why, and the rest of this topic shows how numbers, text, pictures and sound are all turned into those 1s and 0s."
+    },
+    {
+     "t": "h",
+     "text": "Billions of tiny switches"
+    },
+    {
+     "t": "p",
+     "text": "The processor and memory in a computer are made from **[[transistors|Transistor]]**: microscopic electronic switches etched onto a silicon chip. A modern phone processor has **billions** of them, each far smaller than a speck of dust."
+    },
+    {
+     "t": "p",
+     "text": "A transistor can only be in one of two states. Either electricity flows (a **high** voltage, which we call **1** or *on*) or it does not (a **low** voltage, which we call **0** or *off*). A number system that uses only two digits is called **[[binary|Binary]]**, or **base 2**."
+    },
+    {
+     "t": "p",
+     "text": "One binary digit, a single 1 or 0, is called a **[[bit|Bit]]** (short for **bi**nary digi**t**). It is the smallest unit of data a computer can store."
+    },
+    {
+     "t": "tip",
+     "text": "Think of a row of light switches on a wall. Each switch is either off (0) or on (1). Eight switches in a row can show 256 different on/off patterns, and that is exactly how a computer stores one byte."
+    },
+    {
+     "t": "h",
+     "text": "Why not just use ten digits like we do?"
+    },
+    {
+     "t": "p",
+     "text": "People count in **[[denary|Denary]]** (also called decimal), which is **base 10**: it uses ten digits, 0 to 9. You could try to build a computer that stores ten different voltage levels, but it would be much harder. Two states win because:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Reliable**: it is easy to tell *on* from *off*, even if the voltage wobbles a little. Telling ten levels apart would cause far more errors.",
+      "**Simple and cheap**: two-state switches are tiny, fast and use little power, so billions fit on one chip.",
+      "**Fits logic**: computers make decisions using true/false logic, which maps neatly onto 1 and 0.",
+      "**Works for storage too**: magnetic spots (north/south), pits and lands on a disc, and charged/uncharged memory cells all have two states."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "How many patterns can bits make?"
+    },
+    {
+     "t": "p",
+     "text": "Every extra bit **doubles** the number of different patterns, because each old pattern can now end in a 0 *or* a 1. With **n** bits you get **2ⁿ** patterns."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Number of bits",
+      "Working",
+      "Different patterns",
+      "Biggest number (starting at 0)"
+     ],
+     "rows": [
+      [
+       "1",
+       "2",
+       "2",
+       "1"
+      ],
+      [
+       "2",
+       "2 × 2",
+       "4",
+       "3"
+      ],
+      [
+       "3",
+       "2 × 2 × 2",
+       "8",
+       "7"
+      ],
+      [
+       "4",
+       "2⁴",
+       "16",
+       "15"
+      ],
+      [
+       "8",
+       "2⁸",
+       "256",
+       "255"
+      ],
+      [
+       "16",
+       "2¹⁶",
+       "65,536",
+       "65,535"
+      ],
+      [
+       "24",
+       "2²⁴",
+       "16,777,216",
+       "16,777,215"
+      ]
+     ],
+     "caption": "The biggest number is always one less than the number of patterns, because 0 uses up one pattern."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: how many bits do I need?",
+     "context": "A teacher at an Enniskillen school wants to give each of the 30 pupils in a class a different binary code. What is the smallest number of bits needed?",
+     "steps": [
+      "4 bits give 2⁴ = **16** patterns. That is not enough for 30 pupils.",
+      "5 bits give 2⁵ = **32** patterns. 32 is at least 30, so every pupil can have a different code.",
+      "(2 codes are left over, which is fine.)"
+     ],
+     "answer": "5 bits are needed. Find the smallest power of 2 that is at least as big as the number of things you need to code."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a bigger group",
+     "context": "Every one of 1,000 pupils in a school needs a unique binary ID. How many bits are needed?",
+     "steps": [
+      "2⁹ = 512: too few.",
+      "2¹⁰ = 1,024: enough, because 1,024 is at least 1,000."
+     ],
+     "answer": "10 bits."
+    },
+    {
+     "t": "warn",
+     "text": "A pattern like **01000001** has no meaning on its own. It could be the number 65, the letter **A**, part of a colour or part of a sound. It only means something when the computer knows what *kind* of data it represents."
+    },
+    {
+     "t": "note",
+     "text": "Binary was not invented for computers. The German mathematician **Gottfried Leibniz** wrote about base 2 in 1703, more than 200 years before the first electronic computers."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Computers are built from transistors: tiny switches that are either on (1) or off (0).",
+      "Binary is base 2 and uses only the digits 0 and 1. Denary is base 10.",
+      "A bit is one binary digit, the smallest unit of data.",
+      "Two states are reliable, simple and cheap to build.",
+      "n bits give 2ⁿ patterns; the largest number is 2ⁿ − 1."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Why do computers use binary?",
+     "o": [
+      "Their transistors are switches with only two states, on and off",
+      "Binary numbers are always smaller than denary numbers",
+      "Binary was the only number system known when computers were invented",
+      "Computers cannot store more than two numbers at once"
+     ],
+     "a": 0,
+     "why": "Each transistor is either on (1) or off (0), so two digits match the hardware."
+    },
+    {
+     "q": "What is a **bit**?",
+     "o": [
+      "A group of 8 binary digits",
+      "A group of 4 binary digits",
+      "A tiny electronic switch on a chip",
+      "A single binary digit: a 1 or a 0"
+     ],
+     "a": 3,
+     "why": "Bit is short for binary digit. 8 bits is a byte; 4 bits is a nibble."
+    },
+    {
+     "q": "How many different patterns can **6 bits** make?",
+     "o": [
+      "12",
+      "36",
+      "64",
+      "63"
+     ],
+     "a": 2,
+     "why": "2⁶ = 2 × 2 × 2 × 2 × 2 × 2 = 64. (63 is the biggest number, not the number of patterns.)"
+    },
+    {
+     "q": "What is the smallest number of bits needed to give 20 pupils each a different code?",
+     "o": [
+      "4",
+      "5",
+      "20",
+      "10"
+     ],
+     "a": 1,
+     "why": "4 bits give only 16 patterns; 5 bits give 32, which is enough."
+    },
+    {
+     "q": "Which statement about denary is correct?",
+     "o": [
+      "It is base 10 and uses the digits 0 to 9",
+      "It is base 2 and uses the digits 0 and 1",
+      "It is base 10 and uses the digits 1 to 10",
+      "It is base 16 and uses 0 to 9 and A to F"
+     ],
+     "a": 0,
+     "why": "Denary (decimal) has ten digits, 0 to 9."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain **why** computers store data in binary.",
+     "m": 2,
+     "a": "Computers are made of transistors/switches that have only two states (1), on and off, which can be represented by 1 and 0 (1)."
+    },
+    {
+     "q": "How many different patterns can be made with **7 bits**? Show your working.",
+     "m": 2,
+     "a": "2⁷ (1) = 128 (1)."
+    },
+    {
+     "q": "A sports centre in Belfast wants a unique binary code for each of its 200 members. What is the smallest number of bits needed? Explain your answer.",
+     "m": 2,
+     "a": "8 bits (1) because 7 bits only give 128 patterns but 8 bits give 256, which is at least 200 (1)."
+    }
+   ],
+   "terms": [
+    "Transistor",
+    "Binary",
+    "Bit",
+    "Denary"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "spec": "Describe place value in denary and binary and use the 8-bit column headings 128 to 1",
+   "summary": "In denary each column is worth ten times the one to its right; in binary each column is worth double. An 8-bit binary number has columns 128, 64, 32, 16, 8, 4, 2, 1, and its value is the total of the columns holding a 1.",
+   "diagram": {
+    "kind": "bits",
+    "title": "An 8-bit number",
+    "caption": "Click the bits to switch them on and off. Watch which place values are added to make the denary total.",
+    "n": 8,
+    "modes": [
+     "unsigned"
+    ],
+    "start": "00101101"
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "You already understand **place value** from Maths, even if you have not thought about it for a while. In the denary number **4,307**, the 4 does not mean four: it means four *thousands*, because of the column it sits in."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Thousands (10³)",
+      "Hundreds (10²)",
+      "Tens (10¹)",
+      "Units (10⁰)"
+     ],
+     "rows": [
+      [
+       "4",
+       "3",
+       "0",
+       "7"
+      ]
+     ],
+     "caption": "4,307 = (4 × 1000) + (3 × 100) + (0 × 10) + (7 × 1)"
+    },
+    {
+     "t": "p",
+     "text": "In denary every column is worth **10 times** the column to its right, because there are ten digits. This is what **base 10** means."
+    },
+    {
+     "t": "h",
+     "text": "Binary columns double"
+    },
+    {
+     "t": "p",
+     "text": "Binary works in exactly the same way, except that there are only two digits, so each column is worth **2 times** the one to its right. Start at **1** on the right-hand side and keep doubling as you move left."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Power of 2",
+      "2⁷",
+      "2⁶",
+      "2⁵",
+      "2⁴",
+      "2³",
+      "2²",
+      "2¹",
+      "2⁰"
+     ],
+     "rows": [
+      [
+       "Place value",
+       "128",
+       "64",
+       "32",
+       "16",
+       "8",
+       "4",
+       "2",
+       "1"
+      ]
+     ],
+     "caption": "The eight column headings of a byte. Learn them by heart: you will use them on every page of this topic."
+    },
+    {
+     "t": "p",
+     "text": "Because each binary digit can only be 0 or 1, a column is either **counted once** (1) or **not counted at all** (0). There is no \"three lots of 16\" in binary."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: what is each 1 worth?",
+     "context": "In the binary number 00101101, which place values are switched on?",
+     "steps": [
+      "Write the headings above the bits: 128 64 32 16 8 4 2 1.",
+      "Line up the bits underneath: 0 0 1 0 1 1 0 1.",
+      "The 1s sit under **32, 8, 4 and 1**."
+     ],
+     "answer": "32 + 8 + 4 + 1 = 45. (You will practise this properly on the next page.)"
+    },
+    {
+     "t": "h",
+     "text": "The two ends of a binary number"
+    },
+    {
+     "t": "p",
+     "text": "The bit on the far left has the biggest place value. It is called the **[[most significant bit|Most significant bit]]** (MSB). The bit on the far right, worth 1, is the **least significant bit** (LSB)."
+    },
+    {
+     "t": "tip",
+     "text": "Quick check: if the LSB (the 1s column) is **1**, the number is **odd**. If it is **0**, the number is **even**. Every other column is an even number, so only the 1s column can make the total odd."
+    },
+    {
+     "t": "h",
+     "text": "Counting in binary"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Denary",
+      "Binary (4 bits)",
+      "Denary",
+      "Binary (4 bits)"
+     ],
+     "rows": [
+      [
+       "0",
+       "0000",
+       "8",
+       "1000"
+      ],
+      [
+       "1",
+       "0001",
+       "9",
+       "1001"
+      ],
+      [
+       "2",
+       "0010",
+       "10",
+       "1010"
+      ],
+      [
+       "3",
+       "0011",
+       "11",
+       "1011"
+      ],
+      [
+       "4",
+       "0100",
+       "12",
+       "1100"
+      ],
+      [
+       "5",
+       "0101",
+       "13",
+       "1101"
+      ],
+      [
+       "6",
+       "0110",
+       "14",
+       "1110"
+      ],
+      [
+       "7",
+       "0111",
+       "15",
+       "1111"
+      ]
+     ],
+     "caption": "Counting from 0 to 15 with 4 bits. Notice the 1s column flips every time, the 2s column every two, the 4s every four."
+    },
+    {
+     "t": "p",
+     "text": "When a column runs out of digits it goes back to 0 and **carries** 1 into the next column, just as 9 + 1 in denary gives 10. In binary this happens much sooner: 1 + 1 already needs a carry."
+    },
+    {
+     "t": "warn",
+     "text": "Read binary out digit by digit. **10** in binary is said \"one zero\" and means **two**, not ten. Writing a small ₂ after a number, like 10₂, shows that it is binary; 10₁₀ means denary ten."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Place value: a digit's value depends on the column it is in.",
+      "Denary columns are powers of 10: 1, 10, 100, 1000.",
+      "Binary columns are powers of 2: 128, 64, 32, 16, 8, 4, 2, 1 for 8 bits.",
+      "The MSB is the left-most bit (biggest value); the LSB is the right-most (worth 1).",
+      "A binary number ending in 1 is odd; ending in 0 is even."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is the place value of the left-most bit in an 8-bit binary number?",
+     "o": [
+      "128",
+      "256",
+      "64",
+      "8"
+     ],
+     "a": 0,
+     "why": "The columns are 128, 64, 32, 16, 8, 4, 2, 1, so the left-most is 128."
+    },
+    {
+     "q": "In denary, why is the 3 in 4,307 worth 300?",
+     "o": [
+      "It is the second digit from the right",
+      "It is multiplied by 10 three times",
+      "It is the largest digit in the number",
+      "It is in the hundreds column"
+     ],
+     "a": 3,
+     "why": "The 3 is in the hundreds column (10²), so it is worth 3 × 100."
+    },
+    {
+     "q": "Which binary number is **odd**?",
+     "o": [
+      "01100101",
+      "01100100",
+      "11111110",
+      "10000000"
+     ],
+     "a": 0,
+     "why": "Only 01100101 ends in a 1, so only it has the 1s column switched on."
+    },
+    {
+     "q": "What is the place value of the 1 in **00010000**?",
+     "o": [
+      "4",
+      "32",
+      "16",
+      "5"
+     ],
+     "a": 2,
+     "why": "Counting from the right: 1, 2, 4, 8, 16. The 1 is in the 16s column."
+    },
+    {
+     "q": "Which name is given to the right-most bit of a binary number?",
+     "o": [
+      "The most significant bit",
+      "The least significant bit",
+      "The carry bit",
+      "The overflow bit"
+     ],
+     "a": 1,
+     "why": "The right-most bit has the smallest value (1), so it is the least significant bit."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write down the place values of an 8-bit binary number, from left to right.",
+     "m": 1,
+     "a": "128, 64, 32, 16, 8, 4, 2, 1 (1)."
+    },
+    {
+     "q": "Explain the difference between the place values in denary and in binary.",
+     "m": 2,
+     "a": "Denary columns are worth 10 times the column to their right / powers of 10 (1); binary columns are worth 2 times / double the column to their right / powers of 2 (1)."
+    },
+    {
+     "q": "Without converting it, explain how you can tell that 10110111 is an odd number.",
+     "m": 1,
+     "a": "Its least significant bit / 1s column is 1, and all other columns are even, so the total is odd (1)."
+    }
+   ],
+   "terms": [
+    "Most significant bit"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "spec": "Convert binary numbers of up to 8 bits into denary",
+   "summary": "To convert binary to denary, write the place values 128, 64, 32, 16, 8, 4, 2, 1 above the bits and add up the place values that have a 1 underneath. 8 bits can hold any whole number from 0 to 255.",
+   "diagram": {
+    "kind": "match",
+    "title": "Binary to denary",
+    "caption": "Match each binary number to its denary value. Work them out first, then check.",
+    "pairs": [
+     [
+      "00001010",
+      "10"
+     ],
+     [
+      "00010001",
+      "17"
+     ],
+     [
+      "00101010",
+      "42"
+     ],
+     [
+      "01000000",
+      "64"
+     ],
+     [
+      "10000001",
+      "129"
+     ],
+     [
+      "11110000",
+      "240"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Converting binary to denary is the most common binary question in tests, and it always uses the same four steps. Once you know the column headings, it is just adding up."
+    },
+    {
+     "t": "h",
+     "text": "The method"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Write the place values **128 64 32 16 8 4 2 1** in a row.",
+      "Write the binary number underneath, one bit under each heading. If the number has fewer than 8 bits, line it up on the **right**.",
+      "Cross out every place value with a **0** under it.",
+      "**Add** the place values that have a **1** under them."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "table",
+     "head": [
+      "Place value",
+      "128",
+      "64",
+      "32",
+      "16",
+      "8",
+      "4",
+      "2",
+      "1"
+     ],
+     "rows": [
+      [
+       "Bit",
+       "0",
+       "0",
+       "1",
+       "1",
+       "0",
+       "1",
+       "0",
+       "1"
+      ],
+      [
+       "Count it?",
+       "",
+       "",
+       "32",
+       "16",
+       "",
+       "4",
+       "",
+       "1"
+      ]
+     ],
+     "caption": "00110101 = 32 + 16 + 4 + 1 = 53"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1",
+     "context": "Convert 10010110 into denary.",
+     "steps": [
+      "Headings: 128, 64, 32, 16, 8, 4, 2, 1",
+      "Bits under them: 1, 0, 0, 1, 0, 1, 1, 0",
+      "The 1s are under 128, 16, 4 and 2.",
+      "128 + 16 + 4 + 2 = 150"
+     ],
+     "answer": "10010110 = **150**"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2",
+     "context": "Convert 01111111 into denary.",
+     "steps": [
+      "The 1s are under 64, 32, 16, 8, 4, 2 and 1.",
+      "64 + 32 + 16 + 8 + 4 + 2 + 1 = 127"
+     ],
+     "answer": "01111111 = **127**. Shortcut: it is one less than the next column (128)."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 3: fewer than 8 bits",
+     "context": "Convert 1011 into denary.",
+     "steps": [
+      "Line it up on the right, so it fills the 8, 4, 2 and 1 columns: 0000**1011**.",
+      "The 1s are under 8, 2 and 1.",
+      "8 + 2 + 1 = 11"
+     ],
+     "answer": "1011 = **11**"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 4: the biggest byte",
+     "context": "Convert 11111111 into denary.",
+     "steps": [
+      "128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 = 255"
+     ],
+     "answer": "11111111 = **255**, the largest number 8 bits can store. Together with 0, that makes 256 different values."
+    },
+    {
+     "t": "h",
+     "text": "Patterns worth spotting"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Binary",
+      "Denary",
+      "Why"
+     ],
+     "rows": [
+      [
+       "00000001",
+       "1",
+       "Only the 1s column"
+      ],
+      [
+       "00000010",
+       "2",
+       "Moving a 1 one place left doubles it"
+      ],
+      [
+       "00000100",
+       "4",
+       "Doubled again"
+      ],
+      [
+       "10000000",
+       "128",
+       "Only the MSB"
+      ],
+      [
+       "11111111",
+       "255",
+       "All eight columns: 256 − 1"
+      ],
+      [
+       "00001111",
+       "15",
+       "The bottom four columns: 16 − 1"
+      ]
+     ],
+     "caption": "Handy results to remember"
+    },
+    {
+     "t": "warn",
+     "text": "Common mistakes: (1) reading the headings from the wrong end, so 00000011 becomes 128 + 64 instead of 2 + 1; (2) lining up a short number on the **left** instead of the right; (3) adding the place values with a **0** under them instead of a 1."
+    },
+    {
+     "t": "tip",
+     "text": "Check your answer is sensible. If the MSB is 1 the answer must be **128 or more**; if the MSB is 0 it must be **127 or less**. If the last bit is 1 the answer must be odd."
+    },
+    {
+     "t": "note",
+     "text": "This is exactly the method CCEA GCSE questions expect. Always show the place values you added (e.g. 32 + 16 + 4 + 1 = 53), because working can earn marks even if you slip up in the adding."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Write 128 64 32 16 8 4 2 1 above the bits.",
+      "Add the place values with a 1 under them; ignore the 0s.",
+      "Line up short binary numbers on the right.",
+      "8 bits store 0 to 255.",
+      "Check: MSB 1 means 128 or more; LSB 1 means odd."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is **00011001** in denary?",
+     "o": [
+      "25",
+      "19",
+      "35",
+      "50"
+     ],
+     "a": 0,
+     "why": "16 + 8 + 1 = 25."
+    },
+    {
+     "q": "What is **11000000** in denary?",
+     "o": [
+      "192",
+      "128",
+      "96",
+      "160"
+     ],
+     "a": 0,
+     "why": "128 + 64 = 192."
+    },
+    {
+     "q": "What is **101** in denary?",
+     "o": [
+      "101",
+      "160",
+      "5",
+      "10"
+     ],
+     "a": 2,
+     "why": "Lined up on the right it fills the 4, 2 and 1 columns: 4 + 1 = 5."
+    },
+    {
+     "q": "A pupil says 00000110 = 192. What mistake have they made?",
+     "o": [
+      "They forgot to add the 1s column",
+      "They read the place values from the wrong end",
+      "They added the columns with 0s in them",
+      "They doubled the answer at the end"
+     ],
+     "a": 1,
+     "why": "They used 128 + 64 instead of 4 + 2 = 6: the headings were read from the left."
+    },
+    {
+     "q": "What is **01010101** in denary?",
+     "o": [
+      "170",
+      "84",
+      "86",
+      "85"
+     ],
+     "a": 3,
+     "why": "64 + 16 + 4 + 1 = 85."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Convert **01101100** into denary. Show your working.",
+     "m": 2,
+     "a": "64 + 32 + 8 + 4 (1) = 108 (1)."
+    },
+    {
+     "q": "Convert **10101010** into denary. Show your working.",
+     "m": 2,
+     "a": "128 + 32 + 8 + 2 (1) = 170 (1)."
+    },
+    {
+     "q": "State the largest denary number that can be stored in 8 bits and explain why.",
+     "m": 2,
+     "a": "255 (1) because 11111111 = 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1 / 2⁸ − 1, since one of the 256 patterns is 0 (1)."
+    }
+   ],
+   "terms": [],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "spec": "Convert denary numbers from 0 to 255 into 8-bit binary",
+   "summary": "To convert denary to binary, work along the place values from 128 down to 1: if the place value fits into what is left, write 1 and subtract it; if not, write 0. Always give 8 bits and check by converting back.",
+   "diagram": {
+    "kind": "flow",
+    "title": "The subtraction method",
+    "caption": "Click each stage. Repeat the loop for every column from 128 down to 1.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Start at the 128 column",
+      "detail": "Write the eight place values 128 64 32 16 8 4 2 1. Begin with the left-most one.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Does this place value fit into what is left?",
+      "detail": "Compare the column's value with the amount you still have to make.",
+      "shape": "decision"
+     },
+     {
+      "id": "c",
+      "label": "Yes: write 1 and subtract",
+      "detail": "Write 1 under the column and take its value away from what is left.",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "No: write 0",
+      "detail": "Write 0 under the column. What is left does not change.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Move to the next column right",
+      "detail": "Repeat until you have done the 1s column. You should have 0 left over.",
+      "shape": "process"
+     },
+     {
+      "id": "f",
+      "label": "Check by converting back",
+      "detail": "Add up the place values with a 1. You should get your original number.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c",
+      "Yes"
+     ],
+     [
+      "b",
+      "d",
+      "No"
+     ],
+     [
+      "c",
+      "e"
+     ],
+     [
+      "d",
+      "e"
+     ],
+     [
+      "e",
+      "b",
+      "More columns"
+     ],
+     [
+      "e",
+      "f",
+      "Done"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Going the other way, from denary to binary, means splitting a number into place values: which of 128, 64, 32, 16, 8, 4, 2 and 1 add up to it? Each place value can be used **once or not at all**."
+    },
+    {
+     "t": "h",
+     "text": "The subtraction method"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Write the place values 128 64 32 16 8 4 2 1.",
+      "Start at **128**. Does it fit into your number? If **yes**, write **1** and subtract it. If **no**, write **0**.",
+      "Move one column right and ask the same question about **what is left**.",
+      "Keep going until you have filled the 1s column. You should have **0** left.",
+      "Check your answer by converting it back to denary."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1",
+     "context": "Convert 77 into 8-bit binary.",
+     "steps": [
+      "128 does not fit into 77 → **0**",
+      "64 fits → **1**, 77 − 64 = 13 left",
+      "32 does not fit into 13 → **0**",
+      "16 does not fit → **0**",
+      "8 fits → **1**, 13 − 8 = 5 left",
+      "4 fits → **1**, 5 − 4 = 1 left",
+      "2 does not fit into 1 → **0**",
+      "1 fits → **1**, 1 − 1 = 0 left"
+     ],
+     "answer": "77 = **01001101**. Check: 64 + 8 + 4 + 1 = 77 ✓"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Place value",
+      "128",
+      "64",
+      "32",
+      "16",
+      "8",
+      "4",
+      "2",
+      "1"
+     ],
+     "rows": [
+      [
+       "Left before",
+       "77",
+       "77",
+       "13",
+       "13",
+       "13",
+       "5",
+       "1",
+       "1"
+      ],
+      [
+       "Bit",
+       "0",
+       "1",
+       "0",
+       "0",
+       "1",
+       "1",
+       "0",
+       "1"
+      ]
+     ],
+     "caption": "The same working laid out as a table"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2",
+     "context": "Convert 200 into 8-bit binary.",
+     "steps": [
+      "128 fits → 1, 200 − 128 = 72",
+      "64 fits → 1, 72 − 64 = 8",
+      "32 → 0",
+      "16 → 0",
+      "8 fits → 1, 8 − 8 = 0",
+      "4 → 0, 2 → 0, 1 → 0 (nothing left)"
+     ],
+     "answer": "200 = **11001000**. Check: 128 + 64 + 8 = 200 ✓"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 3: a small number",
+     "context": "Convert 19 into 8-bit binary.",
+     "steps": [
+      "128, 64 and 32 are all too big → 0 0 0",
+      "16 fits → 1, 19 − 16 = 3",
+      "8 → 0, 4 → 0",
+      "2 fits → 1, 3 − 2 = 1",
+      "1 fits → 1, 1 − 1 = 0"
+     ],
+     "answer": "19 = **00010011**. The three leading zeros matter: the question asked for **8 bits**."
+    },
+    {
+     "t": "warn",
+     "text": "Do not stop when you reach 0 left. Fill **every** remaining column with 0s, so that the answer still has 8 bits. 11001 is not the same answer as 11001000!"
+    },
+    {
+     "t": "h",
+     "text": "Another way: dividing by 2"
+    },
+    {
+     "t": "p",
+     "text": "Some people prefer to keep dividing by 2 and writing down the **remainders**. Then read the remainders from the **bottom up**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Divide",
+      "Answer",
+      "Remainder"
+     ],
+     "rows": [
+      [
+       "150 ÷ 2",
+       "75",
+       "0"
+      ],
+      [
+       "75 ÷ 2",
+       "37",
+       "1"
+      ],
+      [
+       "37 ÷ 2",
+       "18",
+       "1"
+      ],
+      [
+       "18 ÷ 2",
+       "9",
+       "0"
+      ],
+      [
+       "9 ÷ 2",
+       "4",
+       "1"
+      ],
+      [
+       "4 ÷ 2",
+       "2",
+       "0"
+      ],
+      [
+       "2 ÷ 2",
+       "1",
+       "0"
+      ],
+      [
+       "1 ÷ 2",
+       "0",
+       "1"
+      ]
+     ],
+     "caption": "Reading the remainders from the bottom up: 150 = 10010110"
+    },
+    {
+     "t": "tip",
+     "text": "Use whichever method you find easier, but always **check** by converting back. It takes ten seconds and catches most mistakes."
+    },
+    {
+     "t": "note",
+     "text": "Numbers bigger than 255 will not fit in 8 bits. 256 needs a ninth column (worth 256), so it is 1 00000000 in binary. That is why one byte can only count from 0 to 255."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Work from the 128 column down to the 1 column.",
+      "Fits? Write 1 and subtract. Does not fit? Write 0.",
+      "Always write all 8 bits, including leading zeros.",
+      "The division method: divide by 2 and read the remainders bottom up.",
+      "Check by converting back; numbers above 255 need more than 8 bits."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is denary **37** in 8-bit binary?",
+     "o": [
+      "00100110",
+      "00101001",
+      "10100100",
+      "00100101"
+     ],
+     "a": 3,
+     "why": "32 + 4 + 1 = 37, so the 32, 4 and 1 columns are 1."
+    },
+    {
+     "q": "What is denary **130** in 8-bit binary?",
+     "o": [
+      "10000010",
+      "10000001",
+      "01000010",
+      "11000010"
+     ],
+     "a": 0,
+     "why": "128 + 2 = 130."
+    },
+    {
+     "q": "Using the subtraction method for 90, what is left after the 64 column?",
+     "o": [
+      "90",
+      "58",
+      "26",
+      "10"
+     ],
+     "a": 2,
+     "why": "128 does not fit; 64 fits, 90 − 64 = 26."
+    },
+    {
+     "q": "Why can the denary number 300 not be stored in a single byte?",
+     "o": [
+      "It is an even number",
+      "It is bigger than 255, the largest 8-bit value",
+      "It has three digits, so it needs three bytes",
+      "It needs a negative place value"
+     ],
+     "a": 1,
+     "why": "8 bits store 0 to 255 only, so 300 needs at least 9 bits."
+    },
+    {
+     "q": "What is denary **64** in 8-bit binary?",
+     "o": [
+      "01000000",
+      "00100000",
+      "10000000",
+      "00001000"
+     ],
+     "a": 0,
+     "why": "64 is one of the place values, so only that column is 1."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Convert **99** into an 8-bit binary number. Show your working.",
+     "m": 2,
+     "a": "99 = 64 + 32 + 2 + 1 (1) = 01100011 (1)."
+    },
+    {
+     "q": "Convert **175** into an 8-bit binary number. Show your working.",
+     "m": 2,
+     "a": "175 = 128 + 32 + 8 + 4 + 2 + 1 (1) = 10101111 (1)."
+    },
+    {
+     "q": "A pupil converts 12 to binary and writes 1100. Explain why this would lose a mark if the question asked for an 8-bit answer, and give the correct answer.",
+     "m": 2,
+     "a": "It only has 4 bits / missing leading zeros (1); 00001100 (1)."
+    }
+   ],
+   "terms": [],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "spec": "Add two 8-bit binary numbers and explain what an overflow error is",
+   "summary": "Binary addition works column by column from the right, using four rules: 0+0=0, 0+1=1, 1+1=10 (write 0, carry 1) and 1+1+1=11 (write 1, carry 1). If the answer needs more bits than are available, an overflow error happens.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Test yourself: binary sums",
+    "caption": "Work out each answer, then click to check.",
+    "head": [
+     "Sum",
+     "Binary answer",
+     "Denary check"
+    ],
+    "rows": [
+     [
+      "1 + 1",
+      "10",
+      "1 + 1 = 2"
+     ],
+     [
+      "1 + 1 + 1",
+      "11",
+      "1 + 1 + 1 = 3"
+     ],
+     [
+      "0011 + 0001",
+      "0100",
+      "3 + 1 = 4"
+     ],
+     [
+      "0101 + 0011",
+      "1000",
+      "5 + 3 = 8"
+     ],
+     [
+      "00101101 + 00011010",
+      "01000111",
+      "45 + 26 = 71"
+     ],
+     [
+      "11111111 + 00000001",
+      "Overflow: 1 00000000",
+      "255 + 1 = 256, too big for 8 bits"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Computers spend much of their time adding numbers, and they do it in binary. The good news: binary addition is the same column addition you learned in primary school, but with only two digits there are just **four rules** to learn."
+    },
+    {
+     "t": "h",
+     "text": "The four rules"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Sum",
+      "Total in denary",
+      "Write down",
+      "Carry to next column"
+     ],
+     "rows": [
+      [
+       "0 + 0",
+       "0",
+       "0",
+       "0"
+      ],
+      [
+       "0 + 1 (or 1 + 0)",
+       "1",
+       "1",
+       "0"
+      ],
+      [
+       "1 + 1",
+       "2 (binary 10)",
+       "0",
+       "1"
+      ],
+      [
+       "1 + 1 + 1",
+       "3 (binary 11)",
+       "1",
+       "1"
+      ]
+     ],
+     "caption": "Work from right to left. The third 1 in the last row is a carry from the column before."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1: no tricky carries",
+     "context": "Add 00101101 and 00011010.",
+     "steps": [
+      "Line the numbers up and start on the right.",
+      "  0 0 1 0 1 1 0 1",
+      "+ 0 0 0 1 1 0 1 0",
+      "1s column: 1 + 0 = 1. 2s: 0 + 1 = 1. 4s: 1 + 0 = 1.",
+      "8s: 1 + 1 = 10 → write 0, carry 1.",
+      "16s: 0 + 1 + carry 1 = 10 → write 0, carry 1.",
+      "32s: 1 + 0 + carry 1 = 10 → write 0, carry 1.",
+      "64s: 0 + 0 + carry 1 = 1. 128s: 0 + 0 = 0.",
+      "Answer: 01000111"
+     ],
+     "answer": "**01000111**. Check in denary: 45 + 26 = 71, and 64 + 4 + 2 + 1 = 71 ✓"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2: lots of carries",
+     "context": "Add 01011011 and 00110110.",
+     "steps": [
+      "In denary first: 01011011 = 91 and 00110110 = 54, so the answer should be 145.",
+      "1s: 1 + 0 = 1. 2s: 1 + 1 = 10 → 0, carry 1.",
+      "4s: 0 + 1 + 1 = 10 → 0, carry 1. 8s: 1 + 0 + 1 = 10 → 0, carry 1.",
+      "16s: 1 + 1 + 1 = 11 → 1, carry 1. 32s: 0 + 1 + 1 = 10 → 0, carry 1.",
+      "64s: 1 + 0 + 1 = 10 → 0, carry 1. 128s: 0 + 0 + 1 = 1.",
+      "Answer: 10010001 = 128 + 16 + 1 = 145 ✓"
+     ],
+     "answer": "**10010001** (145)"
+    },
+    {
+     "t": "tip",
+     "text": "Always convert both numbers and your answer to denary to check. If the denary sum does not match, look for a lost carry."
+    },
+    {
+     "t": "h",
+     "text": "Overflow"
+    },
+    {
+     "t": "p",
+     "text": "A byte has room for exactly 8 bits. If the answer to a sum needs a **ninth** bit, there is nowhere to put it. This is called an **[[overflow error|Overflow]]**: the result is too large to fit in the number of bits available, so the extra bit is lost and the stored answer is **wrong**."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 3: an overflow",
+     "context": "Add 11001000 and 01100100 in an 8-bit register.",
+     "steps": [
+      "In denary: 200 + 100 = 300. The biggest 8-bit number is 255, so this will overflow.",
+      "Adding column by column gives 1 00101100: that is **9 bits**.",
+      "Only the right-most 8 bits can be kept: 00101100.",
+      "00101100 = 32 + 8 + 4 = 44."
+     ],
+     "answer": "The computer stores **44** instead of 300. The lost carry bit has caused an overflow error."
+    },
+    {
+     "t": "warn",
+     "text": "An overflow does **not** give an error message on its own. Unless the program checks for it, the computer quietly carries on with the wrong number, which can cause strange bugs."
+    },
+    {
+     "t": "note",
+     "text": "Real overflow bugs: in the arcade game **Pac-Man** (1980), the level counter was stored in 8 bits, so level 256 overflowed and half the screen filled with garbled symbols. In 2014 the music video *Gangnam Style* was watched so many times that YouTube's view counter (a 32-bit number with a maximum of 2,147,483,647) had to be upgraded to 64 bits."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "0 + 0 = 0; 0 + 1 = 1; 1 + 1 = 10 (write 0 carry 1); 1 + 1 + 1 = 11 (write 1 carry 1).",
+      "Work right to left, carrying into the next column.",
+      "Check every sum by converting to denary.",
+      "Overflow: the answer needs more bits than are available.",
+      "With 8 bits, any answer above 255 overflows and the stored result is wrong."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is **1 + 1** in binary?",
+     "o": [
+      "2",
+      "10",
+      "11",
+      "01"
+     ],
+     "a": 1,
+     "why": "1 + 1 = 2, which is 10 in binary: write 0 and carry 1."
+    },
+    {
+     "q": "What is **1 + 1 + 1** in binary?",
+     "o": [
+      "11",
+      "10",
+      "111",
+      "3"
+     ],
+     "a": 0,
+     "why": "1 + 1 + 1 = 3, which is 11: write 1, carry 1."
+    },
+    {
+     "q": "What is **00000111 + 00000101**?",
+     "o": [
+      "00001010",
+      "00000110",
+      "00001011",
+      "00001100"
+     ],
+     "a": 3,
+     "why": "7 + 5 = 12 = 8 + 4 = 00001100."
+    },
+    {
+     "q": "Which 8-bit addition causes an overflow?",
+     "o": [
+      "01000000 + 01000000",
+      "00001111 + 11110000",
+      "10000000 + 10000000",
+      "01111111 + 00000001"
+     ],
+     "a": 2,
+     "why": "128 + 128 = 256, which needs 9 bits. The others give 128, 255 and 128."
+    },
+    {
+     "q": "What is an **overflow error**?",
+     "o": [
+      "The result needs more bits than are available to store it",
+      "The computer runs out of storage space on its hard drive",
+      "A carry is added into the 1s column",
+      "The result is a negative number"
+     ],
+     "a": 0,
+     "why": "Overflow happens when an answer is too big for the bits available, so the extra bit is lost."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Add **00110101** and **00011100**. Show your working and check your answer in denary.",
+     "m": 3,
+     "a": "Correct column addition with carries (1). 01010001 (1). Check: 53 + 28 = 81 = 64 + 16 + 1 (1)."
+    },
+    {
+     "q": "Explain what is meant by an **overflow error**, using 8-bit binary in your answer.",
+     "m": 2,
+     "a": "The result of a calculation is too large for the number of bits available (1); with 8 bits, any result above 255 needs a ninth bit, which is lost, so the stored answer is wrong (1)."
+    }
+   ],
+   "terms": [
+    "Overflow"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "spec": "Describe the units of data from bit to terabyte, convert between them, and explain how memory capacity and processing power affect performance",
+   "summary": "8 bits make a byte, and each bigger unit (KB, MB, GB, TB) is 1024 of the one before. To go to a bigger unit divide; to a smaller unit multiply. A computer's performance depends on its memory capacity and its processing power.",
+   "diagram": {
+    "kind": "calc",
+    "title": "Unit converter",
+    "caption": "Type a size in megabytes to see it in every other unit (CCEA uses 1 KB = 1024 bytes).",
+    "inputs": [
+     {
+      "id": "m",
+      "label": "Size in megabytes (MB)",
+      "value": 3
+     }
+    ],
+    "formula": "m*1024",
+    "result": {
+     "label": "Size",
+     "unit": "KB"
+    },
+    "show": [
+     "bits",
+     "bytes",
+     "KB",
+     "MB",
+     "GB"
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A single bit cannot hold much: just a yes or no. To store anything useful, bits are grouped together, and as files get bigger we need bigger units to describe them, just as we use grams, kilograms and tonnes for weight."
+    },
+    {
+     "t": "h",
+     "text": "The units of data"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Unit",
+      "Size",
+      "Roughly enough for…"
+     ],
+     "rows": [
+      [
+       "[[Bit]]",
+       "A single 0 or 1",
+       "One yes/no answer"
+      ],
+      [
+       "[[Nibble]]",
+       "4 bits",
+       "One hexadecimal digit (see the next page)"
+      ],
+      [
+       "[[Byte]]",
+       "8 bits",
+       "One character, such as the letter K"
+      ],
+      [
+       "[[Kilobyte]] (KB)",
+       "1024 bytes",
+       "A short text file or email"
+      ],
+      [
+       "[[Megabyte]] (MB)",
+       "1024 KB",
+       "A photo or about a minute of music"
+      ],
+      [
+       "[[Gigabyte]] (GB)",
+       "1024 MB",
+       "A film; the RAM in a laptop"
+      ],
+      [
+       "[[Terabyte]] (TB)",
+       "1024 GB",
+       "A large hard drive full of files"
+      ]
+     ],
+     "caption": "Learn the order: bit, nibble, byte, KB, MB, GB, TB"
+    },
+    {
+     "t": "note",
+     "text": "Why 1024 and not 1000? Computers count in powers of 2, and 2¹⁰ = 1024 is the power of 2 closest to 1000. **CCEA uses 1 KB = 1024 bytes, so use 1024 in your answers.** Drive makers often use 1000, which is why a new 1 TB drive seems to have a little less space than you expected."
+    },
+    {
+     "t": "h",
+     "text": "Converting between units"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Bigger unit → smaller unit: multiply.** (e.g. GB → MB: × 1024; bytes → bits: × 8)",
+      "**Smaller unit → bigger unit: divide.** (e.g. KB → MB: ÷ 1024; bits → bytes: ÷ 8)",
+      "Skipping a unit? Do it twice: GB → KB is × 1024 × 1024.",
+      "Bits and bytes use **8**; every other step uses **1024**."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1: down the ladder",
+     "context": "Convert 3 GB into MB, then into KB.",
+     "steps": [
+      "GB → MB is down one step, so multiply: 3 × 1024 = **3,072 MB**.",
+      "MB → KB is down another step: 3,072 × 1024 = **3,145,728 KB**."
+     ],
+     "answer": "3 GB = 3,072 MB = 3,145,728 KB"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2: up the ladder",
+     "context": "Convert 6,144 KB into MB, and 6,400 bits into bytes.",
+     "steps": [
+      "KB → MB is up one step, so divide: 6,144 ÷ 1024 = **6 MB**.",
+      "Bits → bytes: divide by 8. 6,400 ÷ 8 = **800 bytes**."
+     ],
+     "answer": "6 MB and 800 bytes"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 3: will it fit?",
+     "context": "Orla has a 64 GB phone with all its space free. Each photo she takes is 4 MB. How many photos can she store?",
+     "steps": [
+      "Change both sizes into the **same unit** first: 64 GB × 1024 = 65,536 MB.",
+      "Now divide by the size of one photo: 65,536 ÷ 4 = 16,384."
+     ],
+     "answer": "About **16,384 photos** (a real phone also needs space for its apps and operating system)."
+    },
+    {
+     "t": "warn",
+     "text": "The most common mistake is dividing sizes in different units, for example 64 ÷ 4 = 16 photos. Always convert to the same unit **before** you divide. And check your answer is sensible: a bigger unit should give a **smaller** number."
+    },
+    {
+     "t": "h",
+     "text": "Memory capacity and processing power"
+    },
+    {
+     "t": "p",
+     "text": "The NI curriculum says that a computer's **performance** depends on its **[[memory capacity|Memory capacity]]** and its **[[processing power|Processing power]]**. Both are measured using the ideas on this page."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Memory capacity (RAM)",
+      "Processing power (CPU)"
+     ],
+     "rows": [
+      [
+       "What it means",
+       "How much data and how many programs can be held in RAM at once",
+       "How quickly the processor can carry out instructions"
+      ],
+      [
+       "Measured in",
+       "Gigabytes (GB), e.g. 8 GB or 16 GB",
+       "Clock speed in gigahertz (GHz) and the number of cores"
+      ],
+      [
+       "If it is too small",
+       "The computer has to keep swapping data out to much slower storage, so it slows down",
+       "Programs, games and video editing feel slow and laggy"
+      ],
+      [
+       "Upgrade",
+       "Add more RAM",
+       "Faster CPU, or one with more cores"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A clock speed of **3 GHz** means about 3 billion instruction cycles every second, each one working on binary data. More RAM means more of that binary data can be kept close to the processor, ready to use."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "8 bits = 1 byte; 4 bits = 1 nibble.",
+      "KB, MB, GB and TB are each 1024 of the unit below (CCEA uses 1024).",
+      "Bigger to smaller: multiply. Smaller to bigger: divide.",
+      "Convert to the same unit before comparing or dividing.",
+      "Performance depends on memory capacity (RAM, in GB) and processing power (GHz and cores)."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "How many bytes are in **2 KB**?",
+     "o": [
+      "2,048",
+      "2,000",
+      "16",
+      "16,384"
+     ],
+     "a": 0,
+     "why": "2 × 1024 = 2,048 bytes. (16,384 is the number of bits.)"
+    },
+    {
+     "q": "Which list is in order from smallest to largest?",
+     "o": [
+      "Byte, nibble, kilobyte, megabyte",
+      "Nibble, byte, kilobyte, megabyte",
+      "Bit, byte, megabyte, kilobyte",
+      "Nibble, bit, byte, gigabyte"
+     ],
+     "a": 1,
+     "why": "Bit, nibble, byte, KB, MB, GB, TB."
+    },
+    {
+     "q": "How many MB is **5 GB**?",
+     "o": [
+      "5,000 MB",
+      "0.005 MB",
+      "5,120 MB",
+      "40 MB"
+     ],
+     "a": 2,
+     "why": "Bigger to smaller: multiply. 5 × 1024 = 5,120."
+    },
+    {
+     "q": "A USB stick holds 32 GB. Each video clip is 512 MB. How many clips fit?",
+     "o": [
+      "64",
+      "16",
+      "62",
+      "16,384"
+     ],
+     "a": 0,
+     "why": "32 × 1024 = 32,768 MB; 32,768 ÷ 512 = 64."
+    },
+    {
+     "q": "A laptop runs slowly when lots of programs are open at once. Which upgrade would most likely help?",
+     "o": [
+      "Buying a bigger monitor with a higher resolution",
+      "Using a faster mouse and a better keyboard",
+      "Saving every file with a much shorter name",
+      "Adding more RAM to increase memory capacity"
+     ],
+     "a": 3,
+     "why": "With more RAM, more programs and data can be held at once without swapping to slow storage."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Convert **7 KB** into bits. Show your working.",
+     "m": 2,
+     "a": "7 × 1024 = 7,168 bytes (1); 7,168 × 8 = 57,344 bits (1)."
+    },
+    {
+     "q": "A song is 8 MB. How many songs will fit on a 16 GB phone? Show your working.",
+     "m": 2,
+     "a": "16 × 1024 = 16,384 MB (1); 16,384 ÷ 8 = 2,048 songs (1)."
+    },
+    {
+     "q": "Explain **two** factors that affect the performance of a computer.",
+     "m": 4,
+     "a": "Memory capacity / amount of RAM (1): more RAM lets more programs and data be held at once without slowing down (1). Processing power / clock speed or cores (1): a faster CPU or more cores carries out more instructions per second (1)."
+    }
+   ],
+   "terms": [
+    "Bit",
+    "Nibble",
+    "Byte",
+    "Kilobyte",
+    "Megabyte",
+    "Gigabyte",
+    "Terabyte",
+    "Memory capacity",
+    "Processing power"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p07",
+   "spec": "Convert between binary, hexadecimal and denary and explain why programmers use hexadecimal",
+   "summary": "Hexadecimal is base 16 and uses 0–9 then A–F (A = 10 … F = 15). One hex digit stands for exactly one nibble, so a byte is always two hex digits. Programmers use hex because it is shorter and easier to read than binary, for example in colour codes like #FF0000.",
+   "diagram": {
+    "kind": "bits",
+    "title": "Binary to hex",
+    "caption": "Click the bits. Each group of four bits (a nibble) becomes one hex digit.",
+    "n": 8,
+    "modes": [
+     "unsigned",
+     "hex"
+    ],
+    "start": "10110101"
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Long binary numbers are hard for people to read. Is 1101011010110101 the same as 1101011011010101? It is very easy to miss a digit. Programmers solve this by writing binary in a shorter form called **[[hexadecimal|Hexadecimal]]**, or **hex** for short."
+    },
+    {
+     "t": "h",
+     "text": "Base 16"
+    },
+    {
+     "t": "p",
+     "text": "Hexadecimal is **base 16**: it needs sixteen different digits. It uses 0 to 9 as normal, then borrows the letters **A to F** for the values 10 to 15."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Denary",
+      "Binary",
+      "Hex",
+      "Denary",
+      "Binary",
+      "Hex"
+     ],
+     "rows": [
+      [
+       "0",
+       "0000",
+       "0",
+       "8",
+       "1000",
+       "8"
+      ],
+      [
+       "1",
+       "0001",
+       "1",
+       "9",
+       "1001",
+       "9"
+      ],
+      [
+       "2",
+       "0010",
+       "2",
+       "10",
+       "1010",
+       "**A**"
+      ],
+      [
+       "3",
+       "0011",
+       "3",
+       "11",
+       "1011",
+       "**B**"
+      ],
+      [
+       "4",
+       "0100",
+       "4",
+       "12",
+       "1100",
+       "**C**"
+      ],
+      [
+       "5",
+       "0101",
+       "5",
+       "13",
+       "1101",
+       "**D**"
+      ],
+      [
+       "6",
+       "0110",
+       "6",
+       "14",
+       "1110",
+       "**E**"
+      ],
+      [
+       "7",
+       "0111",
+       "7",
+       "15",
+       "1111",
+       "**F**"
+      ]
+     ],
+     "caption": "Every nibble (4 bits) has exactly one hex digit"
+    },
+    {
+     "t": "p",
+     "text": "Four bits give 16 patterns and hex has 16 digits, so **one hex digit = one [[nibble|Nibble]]**. That means a whole byte is always exactly **two** hex digits, from 00 to FF."
+    },
+    {
+     "t": "h",
+     "text": "Binary to hex"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1",
+     "context": "Convert 10110101 into hexadecimal.",
+     "steps": [
+      "Split the byte into two nibbles: **1011** and **0101**.",
+      "1011 = 8 + 2 + 1 = 11 = **B**.",
+      "0101 = 4 + 1 = 5 = **5**."
+     ],
+     "answer": "10110101 = **B5** in hex (and 181 in denary)."
+    },
+    {
+     "t": "h",
+     "text": "Hex to denary"
+    },
+    {
+     "t": "p",
+     "text": "In a two-digit hex number, the left digit is worth **16s** and the right digit is worth **1s**."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2",
+     "context": "Convert 2F and FF into denary.",
+     "steps": [
+      "2F: 2 sixteens = 32, F = 15. 32 + 15 = **47**.",
+      "FF: F sixteens = 15 × 16 = 240, plus F = 15. 240 + 15 = **255**."
+     ],
+     "answer": "2F = 47 and FF = 255 (the biggest byte, the same as 11111111)."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 3: denary to hex",
+     "context": "Convert 200 into hexadecimal.",
+     "steps": [
+      "How many 16s fit into 200? 16 × 12 = 192, so **12** sixteens, which is **C**.",
+      "Remainder: 200 − 192 = **8**."
+     ],
+     "answer": "200 = **C8**. Check: 12 × 16 + 8 = 200 ✓, and in binary 1100 1000 = 11001000 ✓"
+    },
+    {
+     "t": "warn",
+     "text": "Hex is **not** a different way of storing data. Inside the computer everything is still binary. Hex is just a shorter way for **people** to write binary down."
+    },
+    {
+     "t": "h",
+     "text": "Why programmers use hex"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Shorter**: two hex digits instead of eight bits.",
+      "**Fewer mistakes**: much easier to read, type and copy correctly.",
+      "**Easy to convert**: each hex digit swaps straight to four bits, with no long sums.",
+      "**Used everywhere**: web colour codes, MAC addresses on network cards, and error codes."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Hex colours on the web"
+    },
+    {
+     "t": "p",
+     "text": "In HTML and CSS, colours are written as **#RRGGBB**: three bytes, one each for the amount of **red**, **green** and **blue** light, from 00 (none) to FF (full, 255)."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Colour code",
+      "Red",
+      "Green",
+      "Blue",
+      "Colour"
+     ],
+     "rows": [
+      [
+       "#FF0000",
+       "FF (255)",
+       "00",
+       "00",
+       "Red"
+      ],
+      [
+       "#00FF00",
+       "00",
+       "FF (255)",
+       "00",
+       "Bright green"
+      ],
+      [
+       "#0000FF",
+       "00",
+       "00",
+       "FF (255)",
+       "Blue"
+      ],
+      [
+       "#FFFF00",
+       "FF",
+       "FF",
+       "00",
+       "Yellow (red + green light)"
+      ],
+      [
+       "#FFFFFF",
+       "FF",
+       "FF",
+       "FF",
+       "White (all light on)"
+      ],
+      [
+       "#000000",
+       "00",
+       "00",
+       "00",
+       "Black (no light)"
+      ]
+     ],
+     "caption": "Three bytes per colour: 256 × 256 × 256 = 16,777,216 possible colours"
+    },
+    {
+     "t": "tip",
+     "text": "Try it in your web design work: change **color: #FF0000;** to **#800000;** and the red becomes a darker maroon, because there is less red light."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Hexadecimal is base 16: digits 0–9 and A–F (A = 10, F = 15).",
+      "One hex digit = one nibble; one byte = two hex digits (00 to FF).",
+      "Binary → hex: split into nibbles and convert each one.",
+      "Hex → denary: left digit × 16, plus the right digit.",
+      "Programmers use hex because it is shorter and less error-prone; web colours use #RRGGBB."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is hex **C** in denary?",
+     "o": [
+      "12",
+      "11",
+      "13",
+      "14"
+     ],
+     "a": 0,
+     "why": "A = 10, B = 11, C = 12."
+    },
+    {
+     "q": "What is **11110010** in hex?",
+     "o": [
+      "2F",
+      "E2",
+      "F2",
+      "F4"
+     ],
+     "a": 2,
+     "why": "1111 = F and 0010 = 2, so F2."
+    },
+    {
+     "q": "What is hex **1A** in denary?",
+     "o": [
+      "26",
+      "11",
+      "110",
+      "16"
+     ],
+     "a": 0,
+     "why": "1 × 16 + 10 = 26."
+    },
+    {
+     "q": "Which colour is **#00FF00**?",
+     "o": [
+      "Red",
+      "Blue",
+      "White",
+      "Bright green"
+     ],
+     "a": 3,
+     "why": "The pattern is RRGGBB, so 00FF00 is full green and no red or blue."
+    },
+    {
+     "q": "Why do programmers often use hexadecimal?",
+     "o": [
+      "Computers store hex digits instead of binary",
+      "It is a shorter and less error-prone way to write binary",
+      "Hex numbers take up less memory than binary",
+      "Hex can store negative numbers but binary cannot"
+     ],
+     "a": 1,
+     "why": "Hex is only for people. The computer still stores binary."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Convert **01111100** into hexadecimal. Show your working.",
+     "m": 2,
+     "a": "0111 = 7 and 1100 = C (1); 7C (1)."
+    },
+    {
+     "q": "Convert hex **3B** into denary. Show your working.",
+     "m": 2,
+     "a": "3 × 16 = 48, B = 11 (1); 48 + 11 = 59 (1)."
+    },
+    {
+     "q": "Give **two** reasons why programmers use hexadecimal instead of binary.",
+     "m": 2,
+     "a": "Any two: shorter to write (1); easier to read / fewer mistakes when copying (1); easy to convert to and from binary, one digit per nibble (1)."
+    }
+   ],
+   "terms": [
+    "Hexadecimal"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p08",
+   "spec": "Explain how characters are represented in binary using a character set such as ASCII or Unicode",
+   "summary": "A character set gives every character its own number, which is stored in binary. In ASCII, 'A' = 65, 'a' = 97 and the digit '0' = 48, and each character takes one byte. Unicode extends this to every language in the world and emoji.",
+   "diagram": {
+    "kind": "match",
+    "title": "ASCII codes",
+    "caption": "Match each character to its ASCII code in denary.",
+    "pairs": [
+     [
+      "A",
+      "65"
+     ],
+     [
+      "Z",
+      "90"
+     ],
+     [
+      "a",
+      "97"
+     ],
+     [
+      "0 (the digit)",
+      "48"
+     ],
+     [
+      "Space",
+      "32"
+     ],
+     [
+      "!",
+      "33"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "When you type a message, the computer cannot store the *shape* of each letter. Instead, every character (a letter, digit, punctuation mark, space or symbol) is given a number, and the number is stored in binary."
+    },
+    {
+     "t": "p",
+     "text": "The full list of characters a computer can use, with the code for each one, is called a **[[character set|Character set]]**. Both computers must use the **same** character set, or the message comes out as nonsense."
+    },
+    {
+     "t": "h",
+     "text": "ASCII"
+    },
+    {
+     "t": "p",
+     "text": "**[[ASCII]]** (American Standard Code for Information Interchange, said *ask-ee*) is one of the oldest and best-known character sets. It was designed in the 1960s and uses **7 bits**, giving 128 codes: upper and lower case English letters, the digits 0–9, punctuation, the space and some control codes. Each character is normally stored in **one byte**."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Character",
+      "Denary code",
+      "8-bit binary"
+     ],
+     "rows": [
+      [
+       "Space",
+       "32",
+       "00100000"
+      ],
+      [
+       "0 (the digit)",
+       "48",
+       "00110000"
+      ],
+      [
+       "1",
+       "49",
+       "00110001"
+      ],
+      [
+       "A",
+       "65",
+       "01000001"
+      ],
+      [
+       "B",
+       "66",
+       "01000010"
+      ],
+      [
+       "Z",
+       "90",
+       "01011010"
+      ],
+      [
+       "a",
+       "97",
+       "01100001"
+      ],
+      [
+       "b",
+       "98",
+       "01100010"
+      ]
+     ],
+     "caption": "Some ASCII codes worth knowing"
+    },
+    {
+     "t": "p",
+     "text": "The codes are in order, so once you know **A = 65** you can work out the rest of the alphabet: B = 66, C = 67, and so on up to Z = 90. Lower case starts at **a = 97**, exactly **32 more** than the capital letter."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1: encode a word",
+     "context": "Write the word CAT using ASCII codes in denary and binary.",
+     "steps": [
+      "C is 2 after A, so C = 65 + 2 = **67** = 01000011.",
+      "A = **65** = 01000001.",
+      "T is the 20th letter, so T = 64 + 20 = **84** = 01010100."
+     ],
+     "answer": "CAT = 67 65 84 = 01000011 01000001 01010100"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2: decode a message",
+     "context": "Decode the ASCII codes 72 73 33.",
+     "steps": [
+      "72 − 64 = 8, and the 8th letter is **H**.",
+      "73 − 64 = 9, the 9th letter is **I**.",
+      "33 is the code for **!**"
+     ],
+     "answer": "The message says **HI!**"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 3: how much storage?",
+     "context": "How much storage is needed for the word Enniskillen in ASCII?",
+     "steps": [
+      "Count the characters: E-n-n-i-s-k-i-l-l-e-n = **11** characters.",
+      "1 byte per character: 11 bytes.",
+      "11 × 8 = **88 bits**."
+     ],
+     "answer": "11 bytes, or 88 bits. Remember that spaces and punctuation are characters too."
+    },
+    {
+     "t": "warn",
+     "text": "Upper and lower case letters have **different** codes: A = 65 but a = 97. And the **digit** '7' is stored as code 55, not as the number 7. A character code is a label, not a value you can do maths with."
+    },
+    {
+     "t": "h",
+     "text": "Unicode: every language, and emoji"
+    },
+    {
+     "t": "p",
+     "text": "ASCII only has room for English. It has no **á** or **ó** for the fadas in Irish names like Seán or Ciarán, no Chinese, Arabic or Greek, and no emoji. **[[Unicode]]** is a much bigger character set that aims to include **every character in every writing system**. It has well over **150,000** characters."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "ASCII",
+      "Unicode"
+     ],
+     "rows": [
+      [
+       "Bits per character",
+       "7 bits (stored in 1 byte)",
+       "Up to 32 bits (1 to 4 bytes in the common UTF-8 form)"
+      ],
+      [
+       "Number of characters",
+       "128",
+       "Over 150,000, and more added each year"
+      ],
+      [
+       "Languages",
+       "English only",
+       "Almost every language in the world"
+      ],
+      [
+       "Emoji?",
+       "No",
+       "Yes, e.g. 😀 is code 128,512"
+      ]
+     ]
+    },
+    {
+     "t": "note",
+     "text": "The first 128 Unicode characters are exactly the same as ASCII, so A is still 65. That way, old ASCII text still works with new Unicode systems."
+    },
+    {
+     "t": "tip",
+     "text": "More bits per character means more possible characters, but also **bigger files**. A message in plain English takes 1 byte per character in UTF-8, but each emoji takes 4 bytes."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Each character is given a unique code in a character set; the code is stored in binary.",
+      "ASCII: 7 bits, 128 characters, stored in 1 byte each. A = 65, a = 97, '0' = 48, space = 32.",
+      "Lower case letters are 32 more than their capitals.",
+      "Storage for text = number of characters × bytes per character (spaces count).",
+      "Unicode covers almost every language and emoji, using more bits per character."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "If 'A' is 65 in ASCII, what is 'E'?",
+     "o": [
+      "70",
+      "68",
+      "101",
+      "69"
+     ],
+     "a": 3,
+     "why": "E is four letters after A: 65 + 4 = 69. (101 is lower case e.)"
+    },
+    {
+     "q": "What is a **character set**?",
+     "o": [
+      "A list of characters with a unique binary code for each one",
+      "The font, size and colour used to display text",
+      "The set of keys found on a computer keyboard",
+      "A group of 8 bits used to store one number"
+     ],
+     "a": 0,
+     "why": "A character set defines the code used for every character."
+    },
+    {
+     "q": "How many bytes are needed to store **Belfast City** in ASCII?",
+     "o": [
+      "11",
+      "96",
+      "12",
+      "13"
+     ],
+     "a": 2,
+     "why": "B-e-l-f-a-s-t is 7, the space is 1 and C-i-t-y is 4: 12 characters, 1 byte each."
+    },
+    {
+     "q": "Why was Unicode needed?",
+     "o": [
+      "ASCII has too few codes for other languages and emoji",
+      "ASCII cannot store any capital letters",
+      "ASCII uses more storage than Unicode does",
+      "Unicode is the only way to store numbers"
+     ],
+     "a": 0,
+     "why": "ASCII's 128 codes only cover English; Unicode covers almost every writing system."
+    },
+    {
+     "q": "The ASCII code for 'g' is 103. What is the code for 'G'?",
+     "o": [
+      "72",
+      "71",
+      "135",
+      "70"
+     ],
+     "a": 1,
+     "why": "Capitals are 32 less than lower case: 103 − 32 = 71."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how a character set is used to represent text in a computer.",
+     "m": 2,
+     "a": "Each character is given a unique code/number (1), which is stored in binary (1)."
+    },
+    {
+     "q": "Using A = 65, write the word **BAD** in ASCII denary codes and in 8-bit binary.",
+     "m": 3,
+     "a": "66 65 68 (1); 01000010 (1) 01000001 01000100 (1)."
+    },
+    {
+     "q": "Give **two** differences between ASCII and Unicode.",
+     "m": 2,
+     "a": "Any two: ASCII uses 7/8 bits, Unicode uses more bits per character (1); ASCII has 128 characters, Unicode has over 150,000 (1); ASCII is English only, Unicode covers most languages and emoji (1)."
+    }
+   ],
+   "terms": [
+    "Character set",
+    "ASCII",
+    "Unicode"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p09",
+   "spec": "Describe the data types integer, float, string and Boolean and explain how each is stored in binary",
+   "summary": "A data type tells the computer what kind of value it is storing and how to store it. Integers are stored as binary numbers, floats store a number and the position of its decimal point, strings are stored as a sequence of character codes, and a Boolean needs just one bit.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Which data type?",
+    "caption": "Choose the best data type for each item, then click to check.",
+    "head": [
+     "Data to store",
+     "Data type",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Number of pupils in 9B (28)",
+      "Integer",
+      "A whole number you might count or add"
+     ],
+     [
+      "Height of a pupil (1.62 m)",
+      "Float",
+      "It has a decimal part"
+     ],
+     [
+      "Pupil's surname (McGrath)",
+      "String",
+      "Letters: a sequence of characters"
+     ],
+     [
+      "Has paid for the trip? (yes or no)",
+      "Boolean",
+      "Only two possible values"
+     ],
+     [
+      "Phone number (07700 900456)",
+      "String",
+      "Leading zero, a space, and no maths is done on it"
+     ],
+     [
+      "Price of a school dinner (£2.75)",
+      "Float",
+      "Money has a decimal part"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The binary pattern **00110111** could be the number 55 or the character '7'. So how does a program know which? Every value in a program has a **[[data type|Data type]]**, which tells the computer what kind of data it is, **how to store it in binary** and what you can do with it."
+    },
+    {
+     "t": "p",
+     "text": "The NI curriculum names four data types for KS3. You will meet them again in programming and at GCSE (where a float is called a **real** number)."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Data type",
+      "What it stores",
+      "Examples",
+      "How it is stored"
+     ],
+     "rows": [
+      [
+       "[[Integer]]",
+       "Whole numbers, positive or negative",
+       "28, −3, 2026",
+       "As a binary number, e.g. 28 = 00011100"
+      ],
+      [
+       "[[Float]]",
+       "Numbers with a decimal part",
+       "1.62, −4.5, 2.75",
+       "As the digits plus where the point goes, a bit like scientific notation"
+      ],
+      [
+       "[[String]]",
+       "Text: any sequence of characters",
+       "\"Aoife\", \"BT74 6AA\"",
+       "As a list of character codes, one after another"
+      ],
+      [
+       "[[Boolean]]",
+       "Only True or False",
+       "True, False",
+       "As a single bit: 1 = True, 0 = False"
+      ]
+     ],
+     "caption": "The four KS3 data types"
+    },
+    {
+     "t": "h",
+     "text": "Integer"
+    },
+    {
+     "t": "p",
+     "text": "An integer is stored as a binary number using the place values you already know. The more bits it is given, the bigger the numbers it can hold: 8 bits store 0 to 255, while many programming languages (such as C#) give an **int** 32 bits, enough for numbers up to about 2.1 billion. Negative numbers are stored using a method called *two's complement*, which you will meet at GCSE and A level."
+    },
+    {
+     "t": "h",
+     "text": "Float"
+    },
+    {
+     "t": "p",
+     "text": "A float (short for *floating point*) stores numbers with a decimal point. It keeps two parts: the **digits** of the number and a **power** that says where the decimal point goes, just like writing 162 × 10⁻² for 1.62 in science. Floats usually use 32 or 64 bits."
+    },
+    {
+     "t": "note",
+     "text": "Some decimals cannot be stored exactly in binary, just as 1 ÷ 3 = 0.333… never ends in denary. In Python, **0.1 + 0.2** gives **0.30000000000000004**! That is why programmers are careful when comparing floats."
+    },
+    {
+     "t": "h",
+     "text": "String"
+    },
+    {
+     "t": "p",
+     "text": "A string is stored as a sequence of character codes from the character set (previous page). The string **\"Hi\"** is stored as H = 72 and i = 105, so in ASCII it is 01001000 01101001: **2 bytes**, one per character. The program also stores how long the string is."
+    },
+    {
+     "t": "h",
+     "text": "Boolean"
+    },
+    {
+     "t": "p",
+     "text": "A Boolean can only ever be **True** or **False**, so it needs just **one bit**: 1 for True and 0 for False. It is named after the English mathematician **George Boole**, who later worked in Cork. (In practice, many languages give a Boolean a whole byte, because memory is organised in bytes.)"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: 7 or \"7\"?",
+     "context": "How is the integer 7 stored, and how is the string \"7\" stored? What happens if you add each one to itself?",
+     "steps": [
+      "Integer 7: the binary number **00000111**.",
+      "String \"7\": the ASCII code for the character 7, which is 55 = **00110111**.",
+      "7 + 7 with integers = **14** (real addition).",
+      "\"7\" + \"7\" with strings = **\"77\"** (the text is joined together, called *concatenation*)."
+     ],
+     "answer": "Same symbol, different data type, different binary, and a different result."
+    },
+    {
+     "t": "warn",
+     "text": "Phone numbers, postcodes and ID numbers with leading zeros should be **strings**, not integers. Stored as an integer, 07700 900456 would lose its leading 0, and you never need to do maths on a phone number."
+    },
+    {
+     "t": "tip",
+     "text": "Choosing a data type: Will you do maths with it? → integer or float (float if it needs a decimal point). Only two possible values? → Boolean. Anything else, including text and phone numbers → string."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A data type says what kind of value is stored and how it is stored in binary.",
+      "Integer: whole numbers, stored as binary numbers.",
+      "Float (real): numbers with a decimal part, stored as digits plus the position of the point.",
+      "String: text, stored as a sequence of character codes.",
+      "Boolean: True or False, needs only one bit."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which data type is best for storing whether a pupil has handed in their homework?",
+     "o": [
+      "Boolean",
+      "String",
+      "Integer",
+      "Float"
+     ],
+     "a": 0,
+     "why": "There are only two possible values, True or False."
+    },
+    {
+     "q": "How is a **string** stored in binary?",
+     "o": [
+      "As a sequence of character codes, one for each character",
+      "As a single binary number for the whole word",
+      "As one bit per character",
+      "As the digits plus the position of the point"
+     ],
+     "a": 0,
+     "why": "Each character's code from the character set is stored in turn."
+    },
+    {
+     "q": "Which value should be stored as a **float**?",
+     "o": [
+      "A shoe size of 7",
+      "The name of a town",
+      "Whether a light is on",
+      "A temperature of 12.5 °C"
+     ],
+     "a": 3,
+     "why": "Floats store numbers with a decimal part."
+    },
+    {
+     "q": "How many bits does a Boolean value need, at minimum?",
+     "o": [
+      "2",
+      "1",
+      "8",
+      "4"
+     ],
+     "a": 1,
+     "why": "True or False can be stored as a single bit: 1 or 0."
+    },
+    {
+     "q": "Why should a phone number like 028 9649 6123 be stored as a string?",
+     "o": [
+      "Strings always use less storage space than integers",
+      "Integers cannot store any number with 11 digits",
+      "An integer would lose the leading zero, and no maths is done on it",
+      "Phone numbers contain a decimal point to store"
+     ],
+     "a": 2,
+     "why": "The leading 0 matters and phone numbers are never added or multiplied."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name the most suitable data type for: (a) the number of goals scored in a match; (b) a pupil's name; (c) whether the school bus has arrived; (d) the price of a cinema ticket.",
+     "m": 4,
+     "a": "(a) integer (1); (b) string (1); (c) Boolean (1); (d) float / real (1)."
+    },
+    {
+     "q": "Explain how the integer 5 and the string \"5\" are stored differently.",
+     "m": 2,
+     "a": "The integer is stored as the binary number 00000101 (1); the string is stored as the character code for '5' (53) = 00110101 (1)."
+    },
+    {
+     "q": "Explain why a Boolean needs only one bit.",
+     "m": 1,
+     "a": "It only has two possible values (True/False), and one bit has two states, 1 and 0 (1)."
+    }
+   ],
+   "terms": [
+    "Data type",
+    "Integer",
+    "Float",
+    "String",
+    "Boolean"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p10",
+   "spec": "Explain how images are represented using pixels, resolution and colour depth, and calculate the file size of a bitmap image",
+   "summary": "A bitmap image is a grid of pixels, and each pixel's colour is stored as a binary code. Resolution is the number of pixels (width × height); colour depth is the number of bits per pixel. File size in bits = width × height × colour depth.",
+   "diagram": {
+    "kind": "pixels",
+    "title": "Paint a bitmap",
+    "caption": "Click pixels to change their colour, then switch the colour depth to see how many colours each pixel can be.",
+    "w": 8,
+    "h": 8,
+    "depths": [
+     1,
+     2,
+     8,
+     24
+    ],
+    "start": [
+     [
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      1,
+      0
+     ],
+     [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+     ],
+     [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+     ],
+     [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0
+     ],
+     [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Zoom right in on a photo on your phone and eventually you will see tiny coloured squares. Each square is a **[[pixel|Pixel]]** (short for *picture element*): the smallest single point of colour in a digital image. An image stored as a grid of pixels is called a **[[bitmap|Bitmap]]**."
+    },
+    {
+     "t": "p",
+     "text": "Each pixel's colour is stored as a binary code. In the simplest image, black and white, one bit per pixel is enough: **1 = black, 0 = white**."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1: a black and white icon",
+     "context": "The 8 × 8 heart in the diagram uses 1 bit per pixel. How much storage does it need?",
+     "steps": [
+      "Number of pixels: 8 × 8 = 64.",
+      "Each pixel needs 1 bit: 64 × 1 = **64 bits**.",
+      "64 ÷ 8 = **8 bytes**."
+     ],
+     "answer": "64 bits, or 8 bytes"
+    },
+    {
+     "t": "h",
+     "text": "Colour depth"
+    },
+    {
+     "t": "p",
+     "text": "To have more colours, each pixel needs more bits. The number of bits used for each pixel is called the **[[colour depth|Colour depth]]**. With n bits per pixel you get **2ⁿ** colours."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Colour depth (bits per pixel)",
+      "Number of colours",
+      "Typical use"
+     ],
+     "rows": [
+      [
+       "1",
+       "2¹ = 2",
+       "Black and white icon"
+      ],
+      [
+       "2",
+       "2² = 4",
+       "Very simple pixel art"
+      ],
+      [
+       "4",
+       "2⁴ = 16",
+       "Early computer games"
+      ],
+      [
+       "8",
+       "2⁸ = 256",
+       "GIF images"
+      ],
+      [
+       "24",
+       "2²⁴ = 16,777,216",
+       "Photos (\"true colour\": 8 bits each for red, green and blue)"
+      ]
+     ],
+     "caption": "More bits per pixel → more colours → bigger file"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2: how many bits per pixel?",
+     "context": "A logo uses 5 colours. What is the smallest colour depth that will work?",
+     "steps": [
+      "2 bits give 2² = 4 colours: one too few.",
+      "3 bits give 2³ = 8 colours: enough."
+     ],
+     "answer": "**3 bits** per pixel"
+    },
+    {
+     "t": "h",
+     "text": "Resolution"
+    },
+    {
+     "t": "p",
+     "text": "**[[Resolution]]** is the number of pixels in an image, written **width × height**, e.g. 1280 × 720. Higher resolution means more pixels, so more detail and a sharper image, but also **more data** and a bigger file."
+    },
+    {
+     "t": "p",
+     "text": "If you enlarge a low-resolution bitmap, each pixel is just made bigger and you see blocky squares. This is called **pixelation**."
+    },
+    {
+     "t": "h",
+     "text": "Calculating file size"
+    },
+    {
+     "t": "p",
+     "text": "**File size (bits) = width × height × colour depth.** Then divide by 8 for bytes, by 1024 for KB and by 1024 again for MB."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 3: simple pixel art",
+     "context": "A 10 × 10 pixel emoji uses 4 colours. What is its file size in bytes?",
+     "steps": [
+      "4 colours need 2 bits per pixel (2² = 4).",
+      "10 × 10 × 2 = **200 bits**.",
+      "200 ÷ 8 = **25 bytes**."
+     ],
+     "answer": "25 bytes"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 4: a school website banner",
+     "context": "A banner is 1280 × 720 pixels with 24-bit colour. What is the file size in MB?",
+     "steps": [
+      "Pixels: 1280 × 720 = 921,600.",
+      "Bits: 921,600 × 24 = 22,118,400 bits.",
+      "Bytes: 22,118,400 ÷ 8 = 2,764,800 bytes.",
+      "KB: 2,764,800 ÷ 1024 = 2,700 KB.",
+      "MB: 2,700 ÷ 1024 ≈ **2.64 MB**."
+     ],
+     "answer": "About 2.64 MB"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 5: what if it doubles?",
+     "context": "What happens to the file size if (a) the colour depth doubles; (b) the width and the height both double?",
+     "steps": [
+      "(a) Twice as many bits per pixel → the file size **doubles**.",
+      "(b) Twice as wide and twice as tall → 2 × 2 = **4 times** as many pixels → the file is **4 times** bigger."
+     ],
+     "answer": "Doubling both dimensions quadruples the file size."
+    },
+    {
+     "t": "note",
+     "text": "A real image file also stores **metadata** (data about the data), such as the width, height and colour depth, and often the date and camera used. Without the width, the computer would not know where each row of pixels ends."
+    },
+    {
+     "t": "warn",
+     "text": "Do not forget to divide by **8** to turn bits into bytes before dividing by 1024. And read the question: if it gives the number of **colours** rather than the colour depth, work out the bits per pixel first."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A bitmap is a grid of pixels; each pixel's colour is stored in binary.",
+      "Colour depth = bits per pixel; n bits give 2ⁿ colours.",
+      "Resolution = width × height in pixels; more pixels = more detail and bigger files.",
+      "File size (bits) = width × height × colour depth; ÷ 8 for bytes.",
+      "Enlarging a bitmap causes pixelation; files also store metadata."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "How many colours can be shown with a colour depth of **4 bits**?",
+     "o": [
+      "16",
+      "4",
+      "8",
+      "32"
+     ],
+     "a": 0,
+     "why": "2⁴ = 16."
+    },
+    {
+     "q": "What is the file size of a 20 × 10 image with 1-bit colour depth?",
+     "o": [
+      "30 bits",
+      "25 bits",
+      "200 bits",
+      "2,000 bits"
+     ],
+     "a": 2,
+     "why": "20 × 10 × 1 = 200 bits (which is 25 bytes)."
+    },
+    {
+     "q": "What does **resolution** mean for a bitmap image?",
+     "o": [
+      "The number of pixels, given as width × height",
+      "The number of bits used for each pixel",
+      "The number of colours in the image",
+      "The size of the file in megabytes"
+     ],
+     "a": 0,
+     "why": "Bits per pixel is colour depth; resolution is the pixel count."
+    },
+    {
+     "q": "An image is resized so its width and height are both doubled. What happens to the file size?",
+     "o": [
+      "It doubles",
+      "It becomes 4 times bigger",
+      "It stays the same",
+      "It becomes 8 times bigger"
+     ],
+     "a": 1,
+     "why": "2 × 2 = 4 times as many pixels to store."
+    },
+    {
+     "q": "An image uses 200 different colours. What is the smallest colour depth that will work?",
+     "o": [
+      "7 bits",
+      "200 bits",
+      "24 bits",
+      "8 bits"
+     ],
+     "a": 3,
+     "why": "7 bits give 128 colours (too few); 8 bits give 256."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the terms **pixel** and **colour depth**.",
+     "m": 2,
+     "a": "Pixel: the smallest single point/element of a digital image (1). Colour depth: the number of bits used to store the colour of each pixel (1)."
+    },
+    {
+     "q": "An image is 800 × 600 pixels with a colour depth of 8 bits. Calculate its file size in KB. Show your working.",
+     "m": 3,
+     "a": "800 × 600 × 8 = 3,840,000 bits (1); ÷ 8 = 480,000 bytes (1); ÷ 1024 = 468.75 KB (1)."
+    },
+    {
+     "q": "Explain how increasing the resolution of an image affects its quality and its file size.",
+     "m": 2,
+     "a": "More pixels so more detail / sharper image / less pixelation (1); more pixels to store so the file size increases (1)."
+    }
+   ],
+   "terms": [
+    "Pixel",
+    "Bitmap",
+    "Colour depth",
+    "Resolution"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p11",
+   "spec": "Explain how sound is sampled and stored, and calculate the file size of a sound recording",
+   "summary": "Sound is an analogue wave, so it must be sampled to be stored digitally. The sample rate is how many samples are taken each second and the bit depth is how many bits store each sample. File size in bits = sample rate × bit depth × channels × length in seconds.",
+   "diagram": {
+    "kind": "calc",
+    "title": "Sound file size calculator",
+    "caption": "Change the settings to see how big the recording would be. CD quality is 44,100 Hz, 16 bits, 2 channels.",
+    "inputs": [
+     {
+      "id": "r",
+      "label": "Sample rate (Hz)",
+      "value": 44100
+     },
+     {
+      "id": "b",
+      "label": "Bit depth (bits)",
+      "value": 16
+     },
+     {
+      "id": "c",
+      "label": "Channels (1 = mono, 2 = stereo)",
+      "value": 2
+     },
+     {
+      "id": "s",
+      "label": "Length (seconds)",
+      "value": 10
+     }
+    ],
+    "formula": "r*b*c*s",
+    "result": {
+     "label": "File size",
+     "unit": "bits"
+    },
+    "show": [
+     "bytes",
+     "KB",
+     "MB"
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Sound is a wave of vibrations travelling through the air. The wave changes smoothly and continuously, with no gaps or steps: it is an **[[analogue|Analogue]]** signal. Computers can only store **digital** data (binary), so sound must be converted from analogue to digital before a computer can store, edit or play it."
+    },
+    {
+     "t": "h",
+     "text": "From microphone to binary"
+    },
+    {
+     "t": "list",
+     "items": [
+      "A **microphone** picks up the sound wave and turns it into an analogue electrical signal.",
+      "An **analogue-to-digital converter (ADC)** measures the height of the signal at regular time intervals.",
+      "Each measurement is called a **sample**. It is rounded to the nearest level that the bits can store.",
+      "Each sample is stored as a binary number. The sound is now digital.",
+      "To play it back, a **digital-to-analogue converter (DAC)** turns the numbers back into a signal for the speakers or headphones."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "h",
+     "text": "Sample rate"
+    },
+    {
+     "t": "p",
+     "text": "The **[[sample rate|Sample rate]]** is the number of samples taken **every second**, measured in **hertz (Hz)**. CD-quality audio uses **44,100 Hz** (44.1 kHz): 44,100 measurements every single second."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Low sample rate",
+      "High sample rate"
+     ],
+     "rows": [
+      [
+       "Samples per second",
+       "Few, e.g. 8,000 Hz (phone calls)",
+       "Many, e.g. 44,100 Hz (CDs)"
+      ],
+      [
+       "Shape of the wave",
+       "Changes between samples are missed",
+       "The wave is captured much more accurately"
+      ],
+      [
+       "Sound quality",
+       "Muffled, less like the original",
+       "Closer to the original sound"
+      ],
+      [
+       "File size",
+       "Smaller",
+       "Larger"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Bit depth"
+    },
+    {
+     "t": "p",
+     "text": "The **[[bit depth|Bit depth]]** is the number of bits used to store **each sample**. Just like colour depth, n bits give 2ⁿ possible levels: 8 bits give 256 levels, and the 16 bits used on a CD give **65,536** levels. More levels means each sample is rounded less, so the recording is more accurate, but the file is bigger."
+    },
+    {
+     "t": "tip",
+     "text": "Think of a graph on squared paper. The sample rate is how close together the **vertical** lines are (how often you measure); the bit depth is how close together the **horizontal** lines are (how precisely you measure). Finer squares = a more accurate copy of the wave = more data."
+    },
+    {
+     "t": "h",
+     "text": "Bit rate and file size"
+    },
+    {
+     "t": "p",
+     "text": "The **[[bit rate|Bit rate]]** is the number of bits used for each second of sound: **bit rate = sample rate × bit depth** (× 2 for stereo, which has a left and a right channel)."
+    },
+    {
+     "t": "p",
+     "text": "**File size (bits) = sample rate × bit depth × channels × length in seconds.** Then divide by 8 for bytes, 1024 for KB and 1024 again for MB."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1: a voice note",
+     "context": "Ciara records a 1-minute mono voice note for her Irish oral at 8,000 Hz with 8-bit samples. What is the file size in KB?",
+     "steps": [
+      "Length = 60 seconds; mono = 1 channel.",
+      "8,000 × 8 × 1 × 60 = **3,840,000 bits**.",
+      "÷ 8 = 480,000 bytes.",
+      "÷ 1024 = **468.75 KB**."
+     ],
+     "answer": "468.75 KB"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2: CD quality",
+     "context": "What is the size of a 10-second stereo clip at CD quality (44,100 Hz, 16-bit)?",
+     "steps": [
+      "44,100 × 16 × 2 × 10 = **14,112,000 bits**.",
+      "÷ 8 = 1,764,000 bytes.",
+      "÷ 1024 = 1,722.66 KB; ÷ 1024 again ≈ **1.68 MB**."
+     ],
+     "answer": "About 1.68 MB for just 10 seconds"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 3: bit rate",
+     "context": "What is the bit rate of the CD clip?",
+     "steps": [
+      "44,100 × 16 = 705,600 bits per second for one channel.",
+      "× 2 channels = **1,411,200 bits per second** (about 1,411 kbps)."
+     ],
+     "answer": "1,411,200 bps"
+    },
+    {
+     "t": "warn",
+     "text": "Do not forget to change minutes into **seconds** (× 60) and to multiply by **2** for stereo. These are the two most common slips in sound calculations."
+    },
+    {
+     "t": "note",
+     "text": "Most people can hear sounds from about 20 Hz to 20,000 Hz. To capture a wave you need to sample it at more than twice its highest frequency, which is one reason CDs use 44,100 Hz."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Sound is analogue; an ADC samples it so it can be stored in binary.",
+      "Sample rate: samples per second, in Hz (CD = 44,100 Hz).",
+      "Bit depth: bits per sample (CD = 16 bits = 65,536 levels).",
+      "Higher sample rate or bit depth = better quality but bigger files.",
+      "File size (bits) = sample rate × bit depth × channels × seconds."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is the **sample rate**?",
+     "o": [
+      "The number of bits stored in each sample",
+      "The number of channels in the recording",
+      "The number of seconds the recording lasts",
+      "The number of samples taken each second"
+     ],
+     "a": 3,
+     "why": "Sample rate is measured in hertz: samples per second."
+    },
+    {
+     "q": "What does increasing the **bit depth** do?",
+     "o": [
+      "Each sample is stored more precisely, but the file is bigger",
+      "More samples are taken every second of sound",
+      "The recording changes from mono to stereo",
+      "The file gets smaller and the quality drops"
+     ],
+     "a": 0,
+     "why": "More bits per sample means more possible levels, so less rounding."
+    },
+    {
+     "q": "A 5-second mono clip uses 1,000 Hz and 8-bit samples. What is its size in bits?",
+     "o": [
+      "40,000",
+      "5,000",
+      "8,000",
+      "80,000"
+     ],
+     "a": 0,
+     "why": "1,000 × 8 × 1 × 5 = 40,000 bits."
+    },
+    {
+     "q": "Why must sound be converted before a computer can store it?",
+     "o": [
+      "It is far too loud for the computer to process",
+      "Speakers can only play sound stored in binary",
+      "It is analogue and computers can only store digital data",
+      "Microphones only work with digital signals"
+     ],
+     "a": 2,
+     "why": "Analogue waves are continuous; computers need binary values."
+    },
+    {
+     "q": "How many levels can a 16-bit sample have?",
+     "o": [
+      "16",
+      "65,536",
+      "256",
+      "32"
+     ],
+     "a": 1,
+     "why": "2¹⁶ = 65,536."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the terms **sample rate** and **bit depth**.",
+     "m": 2,
+     "a": "Sample rate: the number of samples taken per second (1). Bit depth: the number of bits used to store each sample (1)."
+    },
+    {
+     "q": "A 30-second mono recording uses a sample rate of 22,050 Hz and a bit depth of 16 bits. Calculate the file size in KB. Show your working.",
+     "m": 3,
+     "a": "22,050 × 16 × 1 × 30 = 10,584,000 bits (1); ÷ 8 = 1,323,000 bytes (1); ÷ 1024 ≈ 1,292 KB (1,291.99 KB) (1)."
+    },
+    {
+     "q": "Explain **one** advantage and **one** disadvantage of increasing the sample rate.",
+     "m": 2,
+     "a": "Advantage: better quality / closer to the original sound (1). Disadvantage: larger file size / more storage needed / slower to download (1)."
+    }
+   ],
+   "terms": [
+    "Analogue",
+    "Sample rate",
+    "Bit depth",
+    "Bit rate"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p12",
+   "spec": "Explain the need for compression and describe lossy and lossless compression",
+   "summary": "Compression makes files smaller so they use less storage and transfer faster. Lossy compression removes some data permanently for much smaller files (jpeg, mp3, mp4); lossless compression keeps every bit so the original can be rebuilt exactly (png, gif, zip).",
+   "diagram": {
+    "kind": "compare",
+    "title": "Lossy vs lossless",
+    "caption": "Two ways to make a file smaller.",
+    "states": [
+     {
+      "label": "Lossy",
+      "points": [
+       "Removes some data for ever",
+       "Much smaller files",
+       "Quality drops a little (or a lot)",
+       "jpeg, mp3, mp4: photos, music, video"
+      ],
+      "art": null
+     },
+     {
+      "label": "Lossless",
+      "points": [
+       "Keeps every single bit",
+       "Files are smaller, but not by as much",
+       "The original is rebuilt exactly",
+       "png, gif, zip: text, code, logos"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "On the last two pages you worked out that a single photo could be several megabytes and a song over 30 MB. Without some clever tricks, your phone would fill up in days and streaming a film would be impossible. The trick is **[[compression|Compression]]**: making a file smaller by storing its data more efficiently or by removing some of it."
+    },
+    {
+     "t": "h",
+     "text": "Why compress files?"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Less storage**: more photos, songs and apps fit on a device.",
+      "**Faster to send**: smaller files upload and download more quickly, so web pages load faster.",
+      "**Less bandwidth**: streaming video and music is smoother.",
+      "**Size limits**: many email services and websites limit the size of attachments and uploads."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Lossless compression"
+    },
+    {
+     "t": "p",
+     "text": "**[[Lossless compression]]** makes a file smaller **without losing any data**. When it is decompressed you get back **exactly** the original, bit for bit. Files do not shrink as much as with lossy compression. Examples: **zip** files, **png** and **gif** images."
+    },
+    {
+     "t": "p",
+     "text": "A simple lossless method is **[[run-length encoding|Run-length encoding]]** (RLE). Instead of storing the same value over and over, it stores **how many** times in a row it appears and **what** it is."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1: run-length encoding",
+     "context": "One row of a black-and-white image is WWWWWWBBBWWWW (W = white pixel, B = black pixel). Compress it with RLE.",
+     "steps": [
+      "Count the runs: 6 white, then 3 black, then 4 white.",
+      "Write each run as a count and a colour: 6W 3B 4W.",
+      "The original was 13 characters; the compressed version, 6W3B4W, is 6 characters."
+     ],
+     "answer": "**6W3B4W**, and it can be turned back into exactly WWWWWWBBBWWWW, so it is lossless."
+    },
+    {
+     "t": "warn",
+     "text": "RLE only helps when there are long runs of the same value. On a busy photo where almost every pixel is different, writing \"1\" in front of every value could make the file **bigger**!"
+    },
+    {
+     "t": "h",
+     "text": "Lossy compression"
+    },
+    {
+     "t": "p",
+     "text": "**[[Lossy compression]]** makes files much smaller by **permanently removing** some data, usually detail that our eyes or ears are unlikely to notice, such as tiny colour differences or very quiet sounds hidden under loud ones. The original can **never** be rebuilt. Examples: **jpeg** images, **mp3** music and **mp4** video."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2: how much smaller is an mp3?",
+     "context": "A 3-minute song as CD-quality wav: 44,100 Hz, 16-bit, stereo. The same song as an mp3 at 128 kbps (128,000 bits per second). Compare the sizes.",
+     "steps": [
+      "wav: 44,100 × 16 × 2 × 180 = 254,016,000 bits ÷ 8 = 31,752,000 bytes ≈ **30.3 MB**.",
+      "mp3: 128,000 × 180 = 23,040,000 bits ÷ 8 = 2,880,000 bytes ≈ **2.75 MB**.",
+      "254,016,000 ÷ 23,040,000 ≈ 11."
+     ],
+     "answer": "The mp3 is about **11 times smaller**, and most listeners can hardly hear the difference."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 3: why phone photos are jpegs",
+     "context": "A 12-megapixel phone photo is 4000 × 3000 pixels with 24-bit colour. How big would it be uncompressed?",
+     "steps": [
+      "4000 × 3000 = 12,000,000 pixels.",
+      "× 24 = 288,000,000 bits ÷ 8 = 36,000,000 bytes.",
+      "÷ 1024 ÷ 1024 ≈ **34.3 MB**."
+     ],
+     "answer": "About 34 MB each, so phones save photos as compressed jpegs (or similar), which are usually just a few MB."
+    },
+    {
+     "t": "h",
+     "text": "Which one should I use?"
+    },
+    {
+     "t": "table",
+     "head": [
+      "File",
+      "Best choice",
+      "Why"
+     ],
+     "rows": [
+      [
+       "Holiday photo for social media",
+       "Lossy (jpeg)",
+       "Small file; a little lost detail does not matter"
+      ],
+      [
+       "Music on your phone",
+       "Lossy (mp3)",
+       "Many more songs fit; most people cannot hear the difference"
+      ],
+      [
+       "School crest with a see-through background",
+       "Lossless (png)",
+       "Sharp edges and transparency kept perfectly"
+      ],
+      [
+       "Your coursework, a spreadsheet or a program",
+       "Lossless (zip)",
+       "Losing even one bit could change a mark or stop a program working"
+      ]
+     ],
+     "caption": "Choose lossy for media where small losses are fine; lossless when every bit matters"
+    },
+    {
+     "t": "warn",
+     "text": "Saving a jpeg again and again with lossy compression loses a little more detail each time, so the image gets steadily worse. Keep an original copy and export from that."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Compression makes files smaller: less storage, faster transfer, less bandwidth.",
+      "Lossless: no data lost; the original is rebuilt exactly (zip, png, gif).",
+      "Lossy: some data removed for ever; much smaller files (jpeg, mp3, mp4).",
+      "RLE stores runs as a count and a value, e.g. 6W3B4W.",
+      "Use lossless for text, code and data; lossy for photos, music and video."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which statement describes **lossless** compression?",
+     "o": [
+      "The file can be returned to exactly the original",
+      "Some data is removed for ever to make the file much smaller",
+      "The file is made bigger so it has better quality",
+      "Only the quiet sounds are removed from a recording"
+     ],
+     "a": 0,
+     "why": "Lossless keeps every bit, so decompression gives the original exactly."
+    },
+    {
+     "q": "Which file format uses **lossy** compression?",
+     "o": [
+      "png",
+      "jpeg",
+      "zip",
+      "gif"
+     ],
+     "a": 1,
+     "why": "jpeg (as well as mp3 and mp4) is lossy; png, gif and zip are lossless."
+    },
+    {
+     "q": "What is BBBBWWWWWW in run-length encoding?",
+     "o": [
+      "4B6W",
+      "6B4W",
+      "B4W6",
+      "10BW"
+     ],
+     "a": 0,
+     "why": "4 black pixels followed by 6 white pixels."
+    },
+    {
+     "q": "Why should a spreadsheet of exam marks never be compressed with lossy compression?",
+     "o": [
+      "Spreadsheets are already as small as possible",
+      "Lossy compression only works on text files",
+      "Losing any data could change the marks",
+      "It would make the spreadsheet open more slowly"
+     ],
+     "a": 2,
+     "why": "Every bit matters in data, so lossless must be used."
+    },
+    {
+     "q": "Which is **not** a reason to compress a file?",
+     "o": [
+      "To use less storage space",
+      "To send it more quickly over the internet",
+      "To fit under an email attachment limit",
+      "To improve the quality of the image or sound"
+     ],
+     "a": 3,
+     "why": "Compression never improves quality; at best (lossless) it keeps it the same."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Give **two** reasons why files are compressed.",
+     "m": 2,
+     "a": "Any two: take up less storage space (1); faster to upload/download/transfer (1); use less bandwidth / smoother streaming (1); fit email/upload size limits (1)."
+    },
+    {
+     "q": "Describe the difference between lossy and lossless compression, giving an example file format for each.",
+     "m": 4,
+     "a": "Lossy permanently removes some data / the original cannot be restored (1), e.g. jpeg/mp3/mp4 (1). Lossless removes no data / the original can be restored exactly (1), e.g. png/gif/zip (1)."
+    },
+    {
+     "q": "Compress WWWBBBBBBBBWW using run-length encoding.",
+     "m": 1,
+     "a": "3W8B2W (1)."
+    }
+   ],
+   "terms": [
+    "Compression",
+    "Lossless compression",
+    "Lossy compression",
+    "Run-length encoding"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Transistor",
+   "def": "A microscopic electronic switch on a chip that is either on (1) or off (0). Processors contain billions of them.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Binary",
+   "def": "The base 2 number system, which uses only the digits 0 and 1. Computers store and process all data in binary.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Bit",
+   "def": "A binary digit: a single 1 or 0. The smallest unit of data.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Denary",
+   "def": "The base 10 number system people normally use, with the digits 0 to 9. Also called decimal.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Most significant bit",
+   "def": "The left-most bit of a binary number, which has the largest place value (128 in a byte). Shortened to MSB.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Overflow",
+   "def": "An error that happens when the result of a calculation needs more bits than are available, so the extra bit is lost and the stored answer is wrong.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Nibble",
+   "def": "A group of 4 bits (half a byte). One nibble can be written as one hexadecimal digit.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Byte",
+   "def": "A group of 8 bits. One byte can store a whole number from 0 to 255 or one ASCII character.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Kilobyte",
+   "def": "1024 bytes (KB).",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Megabyte",
+   "def": "1024 kilobytes (MB).",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Gigabyte",
+   "def": "1024 megabytes (GB).",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Terabyte",
+   "def": "1024 gigabytes (TB).",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Memory capacity",
+   "def": "How much data the main memory (RAM) can hold at once, usually measured in gigabytes. More RAM lets more programs and data be used without slowing down.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Processing power",
+   "def": "How quickly a processor can carry out instructions, affected by its clock speed (in GHz) and number of cores.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Hexadecimal",
+   "def": "The base 16 number system, using the digits 0 to 9 and the letters A to F (A = 10, F = 15). One hex digit represents one nibble.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Character set",
+   "def": "A list of all the characters a computer can use, with a unique binary code for each one.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "ASCII",
+   "def": "American Standard Code for Information Interchange: a 7-bit character set of 128 characters, e.g. A = 65, a = 97.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Unicode",
+   "def": "A large character set that aims to include every character from every writing system, plus emoji, using up to 32 bits per character. Its first 128 codes match ASCII.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Data type",
+   "def": "The kind of data a value is, such as integer, float, string or Boolean. It decides how the value is stored in binary and what can be done with it.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Integer",
+   "def": "A data type for whole numbers, positive or negative, stored as a binary number.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Float",
+   "def": "A data type for numbers with a decimal part (called real at GCSE), stored as the digits plus the position of the decimal point.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "String",
+   "def": "A data type for text: a sequence of characters, stored as one character code after another.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Boolean",
+   "def": "A data type that can only be True or False, so it needs only one bit.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Pixel",
+   "def": "Short for picture element: the smallest single point of colour in a digital image.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Bitmap",
+   "def": "An image stored as a grid of pixels, with a binary colour code for each pixel.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Colour depth",
+   "def": "The number of bits used to store the colour of each pixel. n bits give 2ⁿ colours.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Resolution",
+   "def": "The number of pixels in an image, written as width × height, e.g. 1280 × 720.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Analogue",
+   "def": "A signal that changes smoothly and continuously, such as a sound wave. It must be converted to digital before a computer can store it.",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "Sample rate",
+   "def": "The number of samples of a sound taken every second, measured in hertz (Hz). CD quality is 44,100 Hz.",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "Bit depth",
+   "def": "The number of bits used to store each sound sample. CD quality uses 16 bits.",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "Bit rate",
+   "def": "The number of bits used for each second of sound: sample rate × bit depth (× channels).",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "Compression",
+   "def": "Making a file smaller so it uses less storage and transfers faster.",
+   "alt": "",
+   "page": "p12"
+  },
+  {
+   "term": "Lossless compression",
+   "def": "Compression that makes a file smaller without losing any data, so the original can be rebuilt exactly, e.g. png, gif, zip.",
+   "alt": "",
+   "page": "p12"
+  },
+  {
+   "term": "Lossy compression",
+   "def": "Compression that permanently removes some data to make a file much smaller, e.g. jpeg, mp3, mp4.",
+   "alt": "",
+   "page": "p12"
+  },
+  {
+   "term": "Run-length encoding",
+   "def": "A simple lossless compression method that stores runs of repeated values as a count and the value, e.g. WWWWBB becomes 4W2B.",
+   "alt": "",
+   "page": "p12"
+  }
+ ]
+}

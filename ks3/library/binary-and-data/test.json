@@ -1,0 +1,1205 @@
+{
+ "title": "Binary, Numbers and Data",
+ "q": [
+  {
+   "q": "What is the main reason computers use binary?",
+   "o": [
+    "Binary numbers use less electricity than denary",
+    "Binary was invented specially for computers",
+    "Transistors are switches with only two states",
+    "Computers can only count up to two"
+   ],
+   "a": 2,
+   "why": "Each transistor is either on (1) or off (0), so two digits match the hardware.",
+   "p": "p01"
+  },
+  {
+   "q": "What is a transistor?",
+   "o": [
+    "A group of eight binary digits",
+    "A device that converts sound to binary",
+    "A tiny electronic switch on a chip",
+    "A unit used to measure file size"
+   ],
+   "a": 2,
+   "why": "Processors contain billions of microscopic transistor switches.",
+   "p": "p01"
+  },
+  {
+   "q": "Why are two voltage levels more reliable than ten?",
+   "o": [
+    "Ten levels would need ten times as many cables",
+    "It is easy to tell on from off even if the voltage wobbles",
+    "Computers cannot measure voltage at all",
+    "Two levels make the computer run on batteries"
+   ],
+   "a": 1,
+   "why": "With only two states, small changes in voltage do not cause errors.",
+   "p": "p01"
+  },
+  {
+   "q": "How many different patterns can 5 bits make?",
+   "o": [
+    "10",
+    "32",
+    "25",
+    "31"
+   ],
+   "a": 1,
+   "why": "2 to the power 5 is 32. 31 is the largest number, not the number of patterns.",
+   "p": "p01"
+  },
+  {
+   "q": "What is the largest number that can be stored using 4 bits?",
+   "o": [
+    "16",
+    "8",
+    "15",
+    "4"
+   ],
+   "a": 2,
+   "why": "4 bits give 16 patterns, from 0 to 15.",
+   "p": "p01"
+  },
+  {
+   "q": "A club needs a unique binary code for each of 50 members. What is the smallest number of bits needed?",
+   "o": [
+    "5",
+    "7",
+    "6",
+    "50"
+   ],
+   "a": 2,
+   "why": "5 bits give 32 patterns (too few); 6 bits give 64.",
+   "p": "p01"
+  },
+  {
+   "q": "What happens to the number of possible patterns each time one bit is added?",
+   "o": [
+    "It doubles",
+    "It increases by one",
+    "It increases by two",
+    "It is multiplied by ten"
+   ],
+   "a": 0,
+   "why": "Every old pattern can now end in 0 or 1, so the number doubles.",
+   "p": "p01"
+  },
+  {
+   "q": "A pupil says the pattern 01000001 always means the letter A. Why are they wrong?",
+   "o": [
+    "It means the number 1 in binary",
+    "It could also be a number, colour or sound value",
+    "Only hexadecimal can store letters",
+    "Binary patterns never stand for letters"
+   ],
+   "a": 1,
+   "why": "A bit pattern only has meaning once the computer knows what type of data it represents.",
+   "p": "p01"
+  },
+  {
+   "q": "What are the place values of an 8-bit binary number from left to right?",
+   "o": [
+    "128, 64, 32, 16, 8, 4, 2, 1",
+    "1, 2, 4, 8, 16, 32, 64, 128",
+    "100, 50, 25, 12, 6, 3, 2, 1",
+    "256, 128, 64, 32, 16, 8, 4, 2"
+   ],
+   "a": 0,
+   "why": "Start at 1 on the right and double as you move left.",
+   "p": "p02"
+  },
+  {
+   "q": "In denary, each column is worth how many times the column to its right?",
+   "o": [
+    "2",
+    "16",
+    "100",
+    "10"
+   ],
+   "a": 3,
+   "why": "Denary is base 10, so each column is ten times the one before.",
+   "p": "p02"
+  },
+  {
+   "q": "What is the place value of the fourth bit from the right?",
+   "o": [
+    "4",
+    "8",
+    "16",
+    "3"
+   ],
+   "a": 1,
+   "why": "From the right the place values are 1, 2, 4, 8.",
+   "p": "p02"
+  },
+  {
+   "q": "What is the most significant bit?",
+   "o": [
+    "The left-most bit, with the largest place value",
+    "The right-most bit, with a value of 1",
+    "Any bit that has the value 1",
+    "The bit that is carried in an addition"
+   ],
+   "a": 0,
+   "why": "In a byte the MSB is worth 128.",
+   "p": "p02"
+  },
+  {
+   "q": "Which binary number must be even?",
+   "o": [
+    "10110111",
+    "00000001",
+    "10110110",
+    "11111111"
+   ],
+   "a": 2,
+   "why": "Only 10110110 ends in 0, so its 1s column is off.",
+   "p": "p02"
+  },
+  {
+   "q": "What comes straight after 0111 when counting in binary?",
+   "o": [
+    "1000",
+    "0112",
+    "1111",
+    "0110"
+   ],
+   "a": 0,
+   "why": "0111 is 7, so the next number is 8, which is 1000.",
+   "p": "p02"
+  },
+  {
+   "q": "How should the binary number 10 be read aloud?",
+   "o": [
+    "Ten, meaning ten",
+    "One zero, meaning ten",
+    "Ten, meaning two",
+    "One zero, meaning two"
+   ],
+   "a": 3,
+   "why": "In binary, 10 is 2. Saying it digit by digit avoids confusing it with denary ten.",
+   "p": "p02"
+  },
+  {
+   "q": "Which power of 2 is the 64 column?",
+   "o": [
+    "2 to the power 8",
+    "2 to the power 6",
+    "2 to the power 7",
+    "2 to the power 5"
+   ],
+   "a": 1,
+   "why": "2 x 2 x 2 x 2 x 2 x 2 = 64. The columns start at 2 to the power 0 = 1.",
+   "p": "p02"
+  },
+  {
+   "q": "What is 00100110 in denary?",
+   "o": [
+    "26",
+    "70",
+    "100",
+    "38"
+   ],
+   "a": 3,
+   "why": "32 + 4 + 2 = 38.",
+   "p": "p03"
+  },
+  {
+   "q": "What is 10000011 in denary?",
+   "o": [
+    "193",
+    "11",
+    "129",
+    "131"
+   ],
+   "a": 3,
+   "why": "128 + 2 + 1 = 131.",
+   "p": "p03"
+  },
+  {
+   "q": "What is 110 in denary?",
+   "o": [
+    "3",
+    "110",
+    "6",
+    "192"
+   ],
+   "a": 2,
+   "why": "Lined up on the right it fills the 4 and 2 columns: 4 + 2 = 6.",
+   "p": "p03"
+  },
+  {
+   "q": "What is 01001001 in denary?",
+   "o": [
+    "146",
+    "65",
+    "137",
+    "73"
+   ],
+   "a": 3,
+   "why": "64 + 8 + 1 = 73.",
+   "p": "p03"
+  },
+  {
+   "q": "What is 11100000 in denary?",
+   "o": [
+    "7",
+    "192",
+    "240",
+    "224"
+   ],
+   "a": 3,
+   "why": "128 + 64 + 32 = 224.",
+   "p": "p03"
+  },
+  {
+   "q": "Without fully converting it, what can you say about 10000110?",
+   "o": [
+    "It is odd and at least 128",
+    "It is even and less than 128",
+    "It is even and at least 128",
+    "It is odd and less than 128"
+   ],
+   "a": 2,
+   "why": "The MSB is 1 so it is 128 or more, and the last bit is 0 so it is even.",
+   "p": "p03"
+  },
+  {
+   "q": "Ryan converts 00000101 and gets 160. What mistake did he make?",
+   "o": [
+    "He added the 0 columns instead of the 1s",
+    "He forgot to add the 1s column",
+    "He read the place values from the left",
+    "He multiplied instead of adding"
+   ],
+   "a": 2,
+   "why": "128 + 32 = 160 uses the wrong end. The right answer is 4 + 1 = 5.",
+   "p": "p03"
+  },
+  {
+   "q": "Which binary number is the same as denary 100?",
+   "o": [
+    "01100100",
+    "01010100",
+    "00110010",
+    "10010100"
+   ],
+   "a": 0,
+   "why": "64 + 32 + 4 = 100.",
+   "p": "p03"
+  },
+  {
+   "q": "What is denary 42 in 8-bit binary?",
+   "o": [
+    "00101010",
+    "00101100",
+    "01010100",
+    "00100110"
+   ],
+   "a": 0,
+   "why": "32 + 8 + 2 = 42.",
+   "p": "p04"
+  },
+  {
+   "q": "What is denary 255 in 8-bit binary?",
+   "o": [
+    "11111110",
+    "10000000",
+    "100000000",
+    "11111111"
+   ],
+   "a": 3,
+   "why": "255 is the total of every place value in a byte.",
+   "p": "p04"
+  },
+  {
+   "q": "What is denary 9 in 8-bit binary?",
+   "o": [
+    "10010000",
+    "00001010",
+    "00000101",
+    "00001001"
+   ],
+   "a": 3,
+   "why": "8 + 1 = 9, so only the 8 and 1 columns are on.",
+   "p": "p04"
+  },
+  {
+   "q": "When converting 150 with the subtraction method, what is left after taking away 128?",
+   "o": [
+    "150",
+    "6",
+    "86",
+    "22"
+   ],
+   "a": 3,
+   "why": "150 - 128 = 22, so move on to the 64 column with 22 left.",
+   "p": "p04"
+  },
+  {
+   "q": "What is denary 220 in 8-bit binary?",
+   "o": [
+    "11101100",
+    "11011010",
+    "10111100",
+    "11011100"
+   ],
+   "a": 3,
+   "why": "128 + 64 + 16 + 8 + 4 = 220.",
+   "p": "p04"
+  },
+  {
+   "q": "Why is 1101 not a full answer when asked for 13 as an 8-bit number?",
+   "o": [
+    "It needs leading zeros to make 8 bits",
+    "1101 is not equal to 13",
+    "13 cannot be stored in 8 bits",
+    "Binary answers must end in 0"
+   ],
+   "a": 0,
+   "why": "The correct 8-bit answer is 00001101.",
+   "p": "p04"
+  },
+  {
+   "q": "Using the dividing by 2 method on 6, the remainders are 0, 1, 1. What is 6 in binary?",
+   "o": [
+    "011",
+    "110",
+    "100",
+    "101"
+   ],
+   "a": 1,
+   "why": "Read the remainders from the bottom up: 110 = 4 + 2 = 6.",
+   "p": "p04"
+  },
+  {
+   "q": "What is the smallest denary number that cannot be stored in 8 bits?",
+   "o": [
+    "255",
+    "128",
+    "1000",
+    "256"
+   ],
+   "a": 3,
+   "why": "8 bits store 0 to 255, so 256 needs a ninth bit.",
+   "p": "p04"
+  },
+  {
+   "q": "In binary addition, what do you write and carry for 1 + 1?",
+   "o": [
+    "Write 0, carry 1",
+    "Write 1, carry 1",
+    "Write 2, carry 0",
+    "Write 1, carry 0"
+   ],
+   "a": 0,
+   "why": "1 + 1 = 2 = 10 in binary.",
+   "p": "p05"
+  },
+  {
+   "q": "In binary addition, what do you write and carry for 1 + 1 + 1?",
+   "o": [
+    "Write 1, carry 1",
+    "Write 0, carry 1",
+    "Write 1, carry 0",
+    "Write 3, carry 0"
+   ],
+   "a": 0,
+   "why": "1 + 1 + 1 = 3 = 11 in binary.",
+   "p": "p05"
+  },
+  {
+   "q": "What is 00001001 + 00000011?",
+   "o": [
+    "00001010",
+    "00001100",
+    "00001011",
+    "00010010"
+   ],
+   "a": 1,
+   "why": "9 + 3 = 12 = 8 + 4.",
+   "p": "p05"
+  },
+  {
+   "q": "What is 00110011 + 00010101?",
+   "o": [
+    "01000110",
+    "01001000",
+    "00100100",
+    "01001010"
+   ],
+   "a": 1,
+   "why": "51 + 21 = 72 = 64 + 8.",
+   "p": "p05"
+  },
+  {
+   "q": "What is an overflow error?",
+   "o": [
+    "A result needs more bits than are available",
+    "A file is too big for the storage device",
+    "A program runs for too long",
+    "A carry is added to the 1s column"
+   ],
+   "a": 0,
+   "why": "The extra bit is lost, so the stored answer is wrong.",
+   "p": "p05"
+  },
+  {
+   "q": "Which 8-bit addition would cause an overflow?",
+   "o": [
+    "01111111 + 01111111",
+    "10000000 + 01111111",
+    "11000000 + 00111111",
+    "11110000 + 00100000"
+   ],
+   "a": 3,
+   "why": "240 + 32 = 272, which is more than 255. The others give 254, 255 and 255.",
+   "p": "p05"
+  },
+  {
+   "q": "200 + 100 is calculated in an 8-bit register and only the right-most 8 bits are kept. What value is stored?",
+   "o": [
+    "300",
+    "44",
+    "255",
+    "0"
+   ],
+   "a": 1,
+   "why": "300 is 100101100; dropping the ninth bit leaves 00101100 = 44.",
+   "p": "p05"
+  },
+  {
+   "q": "What is the best way to check a binary addition?",
+   "o": [
+    "Add the numbers again from left to right",
+    "Count how many 1s are in the answer",
+    "Check that the answer has 8 bits",
+    "Convert both numbers and the answer to denary"
+   ],
+   "a": 3,
+   "why": "If the denary sum matches the denary answer, the binary sum is right.",
+   "p": "p05"
+  },
+  {
+   "q": "Why can an overflow cause bugs that are hard to spot?",
+   "o": [
+    "The computer always crashes straight away",
+    "The answer is rounded to the nearest 10",
+    "The computer asks the user to fix it",
+    "The computer may carry on with a wrong answer and no warning"
+   ],
+   "a": 3,
+   "why": "Unless a program checks for overflow, the wrong value is used silently.",
+   "p": "p05"
+  },
+  {
+   "q": "How many bytes are in 1 kilobyte, as used in CCEA questions?",
+   "o": [
+    "1000",
+    "8",
+    "1024",
+    "100"
+   ],
+   "a": 2,
+   "why": "CCEA uses 1 KB = 1024 bytes, because 1024 is 2 to the power 10.",
+   "p": "p06"
+  },
+  {
+   "q": "Which unit is 1024 megabytes?",
+   "o": [
+    "1 terabyte",
+    "1 gigabyte",
+    "1 kilobyte",
+    "1 petabyte"
+   ],
+   "a": 1,
+   "why": "KB, MB, GB, TB: each is 1024 of the one before.",
+   "p": "p06"
+  },
+  {
+   "q": "How many bits are in 3 KB?",
+   "o": [
+    "3,072",
+    "24,576",
+    "24,000",
+    "384"
+   ],
+   "a": 1,
+   "why": "3 x 1024 = 3,072 bytes; x 8 = 24,576 bits.",
+   "p": "p06"
+  },
+  {
+   "q": "How many MB is 2,048 KB?",
+   "o": [
+    "2,097,152 MB",
+    "2 MB",
+    "16 MB",
+    "0.5 MB"
+   ],
+   "a": 1,
+   "why": "Smaller to bigger unit: divide. 2,048 / 1024 = 2.",
+   "p": "p06"
+  },
+  {
+   "q": "How many 256 MB files fit on an 8 GB memory card?",
+   "o": [
+    "2",
+    "31",
+    "2,048",
+    "32"
+   ],
+   "a": 3,
+   "why": "8 x 1024 = 8,192 MB; 8,192 / 256 = 32.",
+   "p": "p06"
+  },
+  {
+   "q": "Niamh divides 64 GB by 4 MB and gets 16 photos. What went wrong?",
+   "o": [
+    "She should have multiplied instead of dividing",
+    "She should have used 1000 instead of 1024",
+    "She did not change both sizes to the same unit first",
+    "She should have divided by 8 for bits"
+   ],
+   "a": 2,
+   "why": "64 GB = 65,536 MB, and 65,536 / 4 = 16,384 photos.",
+   "p": "p06"
+  },
+  {
+   "q": "Which pair of features most affects a computer's performance?",
+   "o": [
+    "Screen size and keyboard layout",
+    "Case colour and number of USB ports",
+    "Monitor brightness and speaker volume",
+    "Memory capacity and processing power"
+   ],
+   "a": 3,
+   "why": "More RAM and a faster processor let the computer do more, more quickly.",
+   "p": "p06"
+  },
+  {
+   "q": "What does a clock speed of 3 GHz mean?",
+   "o": [
+    "3 gigabytes of memory",
+    "About 3 thousand cycles every second",
+    "3 processors working together",
+    "About 3 billion cycles every second"
+   ],
+   "a": 3,
+   "why": "Giga means billion and hertz means per second.",
+   "p": "p06"
+  },
+  {
+   "q": "How many different digits does hexadecimal use?",
+   "o": [
+    "10",
+    "16",
+    "15",
+    "6"
+   ],
+   "a": 1,
+   "why": "0 to 9 plus A to F makes 16 digits.",
+   "p": "p07"
+  },
+  {
+   "q": "What is hex F in denary?",
+   "o": [
+    "16",
+    "15",
+    "14",
+    "6"
+   ],
+   "a": 1,
+   "why": "A = 10, B = 11, C = 12, D = 13, E = 14, F = 15.",
+   "p": "p07"
+  },
+  {
+   "q": "How many bits does one hex digit represent?",
+   "o": [
+    "8",
+    "2",
+    "16",
+    "4"
+   ],
+   "a": 3,
+   "why": "One hex digit is exactly one nibble.",
+   "p": "p07"
+  },
+  {
+   "q": "What is 10011110 in hexadecimal?",
+   "o": [
+    "E9",
+    "9E",
+    "9D",
+    "8E"
+   ],
+   "a": 1,
+   "why": "1001 = 9 and 1110 = 14 = E.",
+   "p": "p07"
+  },
+  {
+   "q": "What is hex 4C in denary?",
+   "o": [
+    "412",
+    "64",
+    "76",
+    "60"
+   ],
+   "a": 2,
+   "why": "4 x 16 = 64, C = 12, and 64 + 12 = 76.",
+   "p": "p07"
+  },
+  {
+   "q": "What is denary 255 in hexadecimal?",
+   "o": [
+    "FF",
+    "EE",
+    "FFF",
+    "F0"
+   ],
+   "a": 0,
+   "why": "15 x 16 + 15 = 255.",
+   "p": "p07"
+  },
+  {
+   "q": "What is hex A7 in 8-bit binary?",
+   "o": [
+    "10100110",
+    "10100111",
+    "01111010",
+    "10110111"
+   ],
+   "a": 1,
+   "why": "A = 1010 and 7 = 0111.",
+   "p": "p07"
+  },
+  {
+   "q": "In the web colour #FF0000, what do the first two hex digits control?",
+   "o": [
+    "The amount of red",
+    "The amount of blue",
+    "The brightness of the screen",
+    "The transparency of the colour"
+   ],
+   "a": 0,
+   "why": "Colours are written as RRGGBB, so the first pair is red.",
+   "p": "p07"
+  },
+  {
+   "q": "Which is the best reason programmers use hexadecimal?",
+   "o": [
+    "The computer stores data in hexadecimal",
+    "It uses less storage space than binary",
+    "It is shorter and easier to read than binary",
+    "It can only be read by programmers"
+   ],
+   "a": 2,
+   "why": "Hex is a shorthand for people; the computer still stores binary.",
+   "p": "p07"
+  },
+  {
+   "q": "What does ASCII stand for?",
+   "o": [
+    "American System for Computer Information Input",
+    "American Standard Code for Information Interchange",
+    "Automatic Standard Code for Internet Information",
+    "Advanced System Code for Information Interchange"
+   ],
+   "a": 1,
+   "why": "ASCII is a character set first published in the 1960s.",
+   "p": "p08"
+  },
+  {
+   "q": "How many characters can standard 7-bit ASCII represent?",
+   "o": [
+    "128",
+    "256",
+    "127",
+    "65,536"
+   ],
+   "a": 0,
+   "why": "2 to the power 7 is 128 different codes.",
+   "p": "p08"
+  },
+  {
+   "q": "In ASCII, A = 65. What is the code for M?",
+   "o": [
+    "76",
+    "78",
+    "77",
+    "109"
+   ],
+   "a": 2,
+   "why": "M is the 13th letter: 64 + 13 = 77. 109 is lower case m.",
+   "p": "p08"
+  },
+  {
+   "q": "What is the ASCII code for the space character?",
+   "o": [
+    "0",
+    "48",
+    "32",
+    "65"
+   ],
+   "a": 2,
+   "why": "A space is a character too, with code 32.",
+   "p": "p08"
+  },
+  {
+   "q": "The ASCII code for b is 98. What is the code for B?",
+   "o": [
+    "130",
+    "97",
+    "67",
+    "66"
+   ],
+   "a": 3,
+   "why": "Capitals are 32 less than lower case: 98 - 32 = 66.",
+   "p": "p08"
+  },
+  {
+   "q": "Decode the ASCII codes 79 75.",
+   "o": [
+    "NO",
+    "PL",
+    "OL",
+    "OK"
+   ],
+   "a": 3,
+   "why": "79 - 64 = 15 = O and 75 - 64 = 11 = K.",
+   "p": "p08"
+  },
+  {
+   "q": "How many bits are needed to store the text Erne Bridge in ASCII, at one byte per character?",
+   "o": [
+    "80",
+    "11",
+    "96",
+    "88"
+   ],
+   "a": 3,
+   "why": "E-r-n-e is 4, the space is 1 and B-r-i-d-g-e is 6: 11 characters x 8 bits = 88.",
+   "p": "p08"
+  },
+  {
+   "q": "Why was Unicode developed?",
+   "o": [
+    "To make English text files smaller",
+    "To include characters from all languages and emoji",
+    "To replace binary with hexadecimal",
+    "To store numbers more accurately"
+   ],
+   "a": 1,
+   "why": "ASCII has only 128 codes, enough for English but not for other writing systems.",
+   "p": "p08"
+  },
+  {
+   "q": "Which data type stores only True or False?",
+   "o": [
+    "Boolean",
+    "Integer",
+    "String",
+    "Float"
+   ],
+   "a": 0,
+   "why": "A Boolean has just two values.",
+   "p": "p09"
+  },
+  {
+   "q": "Which data type is best for a pupil's height of 1.58 m?",
+   "o": [
+    "Float",
+    "Integer",
+    "Boolean",
+    "Character"
+   ],
+   "a": 0,
+   "why": "The value has a decimal part.",
+   "p": "p09"
+  },
+  {
+   "q": "Which data type is best for the number of tickets sold?",
+   "o": [
+    "Float",
+    "Integer",
+    "Boolean",
+    "String"
+   ],
+   "a": 1,
+   "why": "You cannot sell half a ticket, so a whole number is right.",
+   "p": "p09"
+  },
+  {
+   "q": "How is the string \"Hi\" stored in ASCII?",
+   "o": [
+    "As the codes 72 and 105, one byte each",
+    "As one binary number worth 72105",
+    "As one bit per letter",
+    "As the hex value FF"
+   ],
+   "a": 0,
+   "why": "A string is stored as one character code after another.",
+   "p": "p09"
+  },
+  {
+   "q": "What is the minimum storage a Boolean value needs?",
+   "o": [
+    "1 bit",
+    "1 byte",
+    "2 bits",
+    "4 bits"
+   ],
+   "a": 0,
+   "why": "Two values, so one bit (1 = True, 0 = False) is enough.",
+   "p": "p09"
+  },
+  {
+   "q": "Which data type should be used for a postcode such as BT74 6AA?",
+   "o": [
+    "Integer",
+    "Float",
+    "String",
+    "Boolean"
+   ],
+   "a": 2,
+   "why": "It contains letters, digits and a space.",
+   "p": "p09"
+  },
+  {
+   "q": "How is the integer 6 stored differently from the string \"6\"?",
+   "o": [
+    "As 00110110 rather than the code 6",
+    "In exactly the same way",
+    "As 00000110 rather than the character code 54",
+    "As a float rather than a Boolean"
+   ],
+   "a": 2,
+   "why": "The integer is the binary number 6; the character 6 has ASCII code 54 (00110110).",
+   "p": "p09"
+  },
+  {
+   "q": "What does \"3\" + \"4\" give when both values are strings?",
+   "o": [
+    "7",
+    "\"7\"",
+    "\"34\"",
+    "12"
+   ],
+   "a": 2,
+   "why": "Adding strings joins them together (concatenation).",
+   "p": "p09"
+  },
+  {
+   "q": "Which statement about floats is true?",
+   "o": [
+    "They can only store whole numbers",
+    "They always use exactly one byte",
+    "Some decimals, like 0.1, cannot be stored exactly",
+    "They are stored as character codes"
+   ],
+   "a": 2,
+   "why": "Floats store digits plus a power, and some fractions never end in binary.",
+   "p": "p09"
+  },
+  {
+   "q": "What is a pixel?",
+   "o": [
+    "The number of bits used for each colour",
+    "The smallest single point of colour in an image",
+    "A group of 8 bits in an image file",
+    "The width of an image in centimetres"
+   ],
+   "a": 1,
+   "why": "Pixel is short for picture element.",
+   "p": "p10"
+  },
+  {
+   "q": "What is colour depth?",
+   "o": [
+    "The number of pixels across an image",
+    "The number of bits used for each pixel",
+    "How bright the screen is",
+    "The number of colours in a palette file"
+   ],
+   "a": 1,
+   "why": "n bits per pixel gives 2 to the power n colours.",
+   "p": "p10"
+  },
+  {
+   "q": "How many colours can a colour depth of 3 bits give?",
+   "o": [
+    "8",
+    "3",
+    "6",
+    "9"
+   ],
+   "a": 0,
+   "why": "2 to the power 3 = 8.",
+   "p": "p10"
+  },
+  {
+   "q": "An image has 1024 x 768 pixels. What is this called?",
+   "o": [
+    "Its resolution",
+    "Its colour depth",
+    "Its bit rate",
+    "Its sample rate"
+   ],
+   "a": 0,
+   "why": "Resolution is width x height in pixels.",
+   "p": "p10"
+  },
+  {
+   "q": "What is the file size of a 16 x 16 icon with a colour depth of 4 bits?",
+   "o": [
+    "1,024 bytes",
+    "64 bytes",
+    "128 bytes",
+    "256 bytes"
+   ],
+   "a": 2,
+   "why": "16 x 16 x 4 = 1,024 bits; / 8 = 128 bytes.",
+   "p": "p10"
+  },
+  {
+   "q": "A 100 x 50 image uses 16 colours. What is its size in bits?",
+   "o": [
+    "80,000",
+    "5,000",
+    "20,000",
+    "10,000"
+   ],
+   "a": 2,
+   "why": "16 colours need 4 bits: 100 x 50 x 4 = 20,000 bits.",
+   "p": "p10"
+  },
+  {
+   "q": "What happens to the file size if the colour depth goes from 8 bits to 24 bits?",
+   "o": [
+    "It doubles",
+    "It stays the same",
+    "It becomes 3 times bigger",
+    "It becomes 16 times bigger"
+   ],
+   "a": 2,
+   "why": "Each pixel now needs 24 bits instead of 8: 24 / 8 = 3.",
+   "p": "p10"
+  },
+  {
+   "q": "Why does a small photo look blocky when printed on a large poster?",
+   "o": [
+    "Each pixel is enlarged, causing pixelation",
+    "The printer changes the colour depth",
+    "Lossless compression removes detail",
+    "The file gains extra pixels when printed"
+   ],
+   "a": 0,
+   "why": "No new detail is added, so the pixels show as squares.",
+   "p": "p10"
+  },
+  {
+   "q": "Why does an image file also store metadata such as its width?",
+   "o": [
+    "So the image can be compressed with RLE",
+    "To increase the colour depth of the image",
+    "So the computer knows where each row of pixels ends",
+    "To make the file size smaller"
+   ],
+   "a": 2,
+   "why": "The pixel codes are stored in one long list, so the width is needed to rebuild the grid.",
+   "p": "p10"
+  },
+  {
+   "q": "Why must sound be sampled before a computer can store it?",
+   "o": [
+    "Sound is analogue but computers store digital data",
+    "Sound is too fast for a computer to hear",
+    "Microphones only produce binary signals",
+    "Speakers cannot play analogue signals"
+   ],
+   "a": 0,
+   "why": "Sampling turns the continuous wave into binary numbers.",
+   "p": "p11"
+  },
+  {
+   "q": "What is the sample rate measured in?",
+   "o": [
+    "Bits (b)",
+    "Bytes per pixel",
+    "Gigabytes (GB)",
+    "Hertz (Hz)"
+   ],
+   "a": 3,
+   "why": "Hertz means samples per second.",
+   "p": "p11"
+  },
+  {
+   "q": "What is the sample rate of CD-quality audio?",
+   "o": [
+    "16 Hz",
+    "8,000 Hz",
+    "44,100 Hz",
+    "128,000 Hz"
+   ],
+   "a": 2,
+   "why": "CDs take 44,100 samples per second with 16-bit samples.",
+   "p": "p11"
+  },
+  {
+   "q": "What does bit depth mean for sound?",
+   "o": [
+    "The number of samples taken each second",
+    "The number of speakers used",
+    "The number of bits used to store each sample",
+    "The length of the recording in seconds"
+   ],
+   "a": 2,
+   "why": "Higher bit depth means more levels, so each sample is more precise.",
+   "p": "p11"
+  },
+  {
+   "q": "A 10-second mono clip uses a sample rate of 8,000 Hz and 8-bit samples. What is its size in bytes?",
+   "o": [
+    "640,000",
+    "80,000",
+    "10,000",
+    "64,000"
+   ],
+   "a": 1,
+   "why": "8,000 x 8 x 1 x 10 = 640,000 bits; / 8 = 80,000 bytes.",
+   "p": "p11"
+  },
+  {
+   "q": "What is the bit rate of a mono recording at 22,050 Hz with 16-bit samples?",
+   "o": [
+    "22,066 bits per second",
+    "352,800 bits per second",
+    "705,600 bits per second",
+    "44,100 bits per second"
+   ],
+   "a": 1,
+   "why": "Bit rate = sample rate x bit depth = 22,050 x 16 = 352,800.",
+   "p": "p11"
+  },
+  {
+   "q": "What effect does a higher sample rate have?",
+   "o": [
+    "Better quality and a smaller file",
+    "Worse quality and a larger file",
+    "No change to quality or file size",
+    "Better quality and a larger file"
+   ],
+   "a": 3,
+   "why": "More samples capture the wave better, but there is more data to store.",
+   "p": "p11"
+  },
+  {
+   "q": "A pupil calculates a 2-minute stereo clip using 2 for the length and 1 for the channels. Which two errors have they made?",
+   "o": [
+    "Length should be 2 hours and channels 1",
+    "Length should be 120 seconds and channels 1",
+    "Length should be 60 seconds and channels 4",
+    "Length should be 120 seconds and channels 2"
+   ],
+   "a": 3,
+   "why": "Minutes must become seconds (x 60) and stereo has 2 channels.",
+   "p": "p11"
+  },
+  {
+   "q": "Which is a reason for compressing files?",
+   "o": [
+    "They take less time to send over the internet",
+    "They become higher quality",
+    "They are easier to edit",
+    "They can be read without software"
+   ],
+   "a": 0,
+   "why": "Smaller files transfer faster and use less storage.",
+   "p": "p12"
+  },
+  {
+   "q": "What does lossy compression do?",
+   "o": [
+    "Permanently removes some data to make a much smaller file",
+    "Keeps every bit so the original can be rebuilt",
+    "Makes the file bigger to improve quality",
+    "Changes the file into plain text"
+   ],
+   "a": 0,
+   "why": "Lost data can never be recovered.",
+   "p": "p12"
+  },
+  {
+   "q": "Which group of formats all use lossless compression?",
+   "o": [
+    "jpeg, mp3, mp4",
+    "png, gif, zip",
+    "png, mp3, zip",
+    "jpeg, gif, mp4"
+   ],
+   "a": 1,
+   "why": "jpeg, mp3 and mp4 are lossy.",
+   "p": "p12"
+  },
+  {
+   "q": "What is WWWWWWWWBB in run-length encoding?",
+   "o": [
+    "2B8W",
+    "10WB",
+    "8W2B",
+    "W8B2"
+   ],
+   "a": 2,
+   "why": "8 white pixels then 2 black pixels.",
+   "p": "p12"
+  },
+  {
+   "q": "Which type of compression should be used for a computer program file?",
+   "o": [
+    "Lossy, because it makes the smallest file",
+    "Lossless, because every bit is needed",
+    "Lossy, because programs are mostly text",
+    "Neither, as programs cannot be compressed"
+   ],
+   "a": 1,
+   "why": "Losing even one bit could stop the program working.",
+   "p": "p12"
+  },
+  {
+   "q": "Why does RLE work badly on a detailed photograph?",
+   "o": [
+    "There are few long runs of the same colour",
+    "Photographs are always stored as text",
+    "RLE only works on sound files",
+    "Photographs have no pixels"
+   ],
+   "a": 0,
+   "why": "With few repeats, writing a count before each value can even make the file bigger.",
+   "p": "p12"
+  },
+  {
+   "q": "A wav song is 30 MB. The same song as an mp3 is about 11 times smaller. Roughly how big is the mp3?",
+   "o": [
+    "2.7 MB",
+    "0.3 MB",
+    "11 MB",
+    "330 MB"
+   ],
+   "a": 0,
+   "why": "30 / 11 is about 2.7 MB.",
+   "p": "p12"
+  },
+  {
+   "q": "Why would a photographer keep an uncompressed original rather than re-saving a jpeg many times?",
+   "o": [
+    "jpeg files can only be opened once",
+    "Uncompressed files are smaller",
+    "Re-saving changes the resolution to 1 x 1",
+    "Each lossy save removes a little more detail"
+   ],
+   "a": 3,
+   "why": "Lossy compression throws away data each time it is applied.",
+   "p": "p12"
+  }
+ ]
+}

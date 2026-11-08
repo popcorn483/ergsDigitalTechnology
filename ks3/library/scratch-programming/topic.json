@@ -1,0 +1,3297 @@
+{
+ "title": "Programming with Scratch",
+ "summary": "Your first programming language: building scripts from blocks in Scratch, with events, sequence, coordinates, loops, selection, variables, broadcasts, My Blocks and simulations, then planning, building and testing your own game.",
+ "learn": [
+  "The Scratch window: stage, sprites, blocks palette and scripts area",
+  "Events and sequence, motion and x/y coordinates, costumes and animation",
+  "Loops (iteration) and if/if-else (selection) with sensing blocks",
+  "Variables, data types (number, text, true/false) and operators",
+  "Broadcasts, and abstraction with My Blocks and inputs (a bridge to functions and parameters)",
+  "Simulations: how changing a variable in a model changes the outcome",
+  "Debugging, and developing a game for a real user in cycles of plan, develop, test and refine (new NI curriculum links S1, S4, S7, C1, C3, C4)"
+ ],
+ "temporary": false,
+ "intro": "Scratch is where many programmers start: you snap blocks together instead of typing code, but the ideas are the same ones you will use in C# later. In this topic you will learn the Scratch window, events, coordinates, animation, loops, decisions, variables, messages and your own custom blocks, build a simulation, and then plan, build, test and refine a game for a real user.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Describe what Scratch is and identify the stage, sprites, blocks palette and scripts area",
+   "summary": "Scratch is a free, block-based programming language: you snap blocks together into scripts instead of typing code. The Scratch window has a stage where things happen, sprites that you program, a blocks palette to choose blocks from and a scripts area to build them in.",
+   "diagram": {
+    "kind": "hotspot",
+    "title": "The Scratch window",
+    "caption": "Click each part of the Scratch editor to find out what it does.",
+    "rows": [
+     [
+      {
+       "label": "Menu bar",
+       "detail": "Along the top: File (new, load, save to your computer), Edit, Tutorials and your project's title.",
+       "span": 3
+      }
+     ],
+     [
+      {
+       "label": "Code / Costumes / Sounds tabs",
+       "detail": "Top left. Switch between building scripts, drawing costumes and adding sounds for the selected sprite.",
+       "span": 1
+      },
+      {
+       "label": "Scripts area",
+       "detail": "The big space in the middle. Drag blocks here and snap them together to build scripts.",
+       "span": 1
+      },
+      {
+       "label": "Green flag and stop sign",
+       "detail": "Above the stage. The green flag starts the project; the red stop sign stops every script.",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "Block categories",
+       "detail": "The coloured circles on the far left: Motion, Looks, Sound, Events, Control, Sensing, Operators, Variables and My Blocks.",
+       "span": 1
+      },
+      {
+       "label": "Blocks palette",
+       "detail": "Next to the categories. Shows every block in the chosen category, ready to drag into the scripts area.",
+       "span": 1
+      },
+      {
+       "label": "Stage",
+       "detail": "Top right. Where your project runs and the sprites move, talk and play. It is 480 steps wide and 360 steps tall.",
+       "span": 1
+      }
+     ],
+     [
+      {
+       "label": "Add extension",
+       "detail": "Bottom left button. Adds extra block categories such as Pen (for drawing) or Music.",
+       "span": 1
+      },
+      {
+       "label": "Sprite info",
+       "detail": "Under the stage. Shows the selected sprite's name, x and y position, size, direction and whether it is shown.",
+       "span": 1
+      },
+      {
+       "label": "Sprite list and backdrops",
+       "detail": "Bottom right. Click a sprite to select it and see its scripts; click the stage to choose backdrops.",
+       "span": 1
+      }
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "**[[Scratch]]** is a free programming language made for beginners. Instead of typing code, you **drag and snap coloured blocks together**, a bit like LEGO. Each block is one instruction, so you never have to worry about spelling a command wrong or forgetting a semicolon."
+    },
+    {
+     "t": "p",
+     "text": "Scratch was created by the **Lifelong Kindergarten group at the MIT Media Lab** in the USA and was first released in **2007**. Millions of young people use it around the world. You can use it free in a web browser at **scratch.mit.edu**, or download the Scratch app to use offline."
+    },
+    {
+     "t": "h",
+     "text": "Why start with Scratch?"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**No typing errors**: blocks only fit together in ways that make sense.",
+      "**You see results straight away**: click the green flag and your sprites move.",
+      "**Real programming ideas**: [[sequence]], [[selection]], [[iteration|Loop]] and [[variables|Variable]] are exactly the same ideas you will use later in C# at GCSE.",
+      "**Creative**: you can make games, animations, stories and quizzes."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "The parts of the Scratch window"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "What it is",
+      "Think of it as..."
+     ],
+     "rows": [
+      [
+       "[[Stage]]",
+       "The area (top right) where your project runs",
+       "The cinema screen"
+      ],
+      [
+       "[[Sprite]]",
+       "A character or object on the stage that you program, e.g. the Scratch Cat",
+       "An actor"
+      ],
+      [
+       "[[Backdrop]]",
+       "A background picture for the stage",
+       "The scenery"
+      ],
+      [
+       "[[Blocks palette]]",
+       "The list of blocks you can choose from, sorted into coloured categories",
+       "The LEGO box"
+      ],
+      [
+       "Scripts area",
+       "The space where you drag blocks and join them together",
+       "The workbench"
+      ],
+      [
+       "[[Script]]",
+       "A stack of blocks joined together that runs from top to bottom",
+       "The actor's lines"
+      ]
+     ],
+     "caption": "Key words for finding your way around Scratch"
+    },
+    {
+     "t": "p",
+     "text": "Every sprite has its **own scripts**. If you click the Scratch Cat in the sprite list you see the cat's scripts; click a different sprite and the scripts area changes to show *that* sprite's scripts. The stage can have scripts too, but it cannot move."
+    },
+    {
+     "t": "h",
+     "text": "The block categories"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Category",
+      "Colour",
+      "What its blocks do",
+      "Example block"
+     ],
+     "rows": [
+      [
+       "Motion",
+       "Dark blue",
+       "Move and turn sprites",
+       "[move (10) steps]"
+      ],
+      [
+       "Looks",
+       "Purple",
+       "Speech bubbles, costumes, size, show and hide",
+       "[say (Hello!) for (2) seconds]"
+      ],
+      [
+       "Sound",
+       "Pink",
+       "Play sounds",
+       "[start sound (Meow)]"
+      ],
+      [
+       "Events",
+       "Yellow",
+       "Start scripts when something happens",
+       "[when green flag clicked]"
+      ],
+      [
+       "Control",
+       "Orange",
+       "Wait, loops and if blocks",
+       "[repeat (10)]"
+      ],
+      [
+       "Sensing",
+       "Light blue",
+       "Check what is happening, e.g. touching or key pressed",
+       "<touching (mouse-pointer)?>"
+      ],
+      [
+       "Operators",
+       "Green",
+       "Maths, random numbers and comparisons",
+       "(pick random (1) to (10))"
+      ],
+      [
+       "Variables",
+       "Dark orange",
+       "Make and change variables",
+       "[change (score) by (1)]"
+      ]
+     ],
+     "caption": "Scratch's main block categories"
+    },
+    {
+     "t": "tip",
+     "text": "In these notes, blocks are written in square brackets, with the bits you can type into shown in round brackets: **[move (10) steps]** means the *move steps* block with 10 typed in its white box. Blocks that give a value are written in round brackets, like **(x position)**, and true/false blocks in angle brackets, like **<key (space) pressed?>**."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: which part is it?",
+     "context": "Niamh is making a Scratch project about Enniskillen Castle. Name the part of Scratch she uses for each job: (a) a photo of the castle behind everything; (b) a knight character who walks around; (c) the place she joins blocks together.",
+     "steps": [
+      "(a) A background picture for the stage is a **backdrop**.",
+      "(b) A character she can program is a **sprite**.",
+      "(c) Blocks are joined together in the **scripts area**."
+     ],
+     "answer": "(a) backdrop, (b) sprite, (c) scripts area."
+    },
+    {
+     "t": "warn",
+     "text": "A common mistake is building a script on the **wrong sprite**. If your cat will not move, check which sprite is highlighted in the sprite list: you may have built the script on the stage or on another sprite by accident."
+    },
+    {
+     "t": "note",
+     "text": "Scratch saves projects online if you are logged in to an account. Your teacher may ask you to use **File > Save to your computer** instead, which saves an **.sb3** file you can load again next lesson."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Scratch is a free, block-based programming language from MIT.",
+      "The stage is where the project runs; sprites are the characters you program.",
+      "Blocks come from the blocks palette and are joined in the scripts area.",
+      "A script is a stack of joined blocks; each sprite has its own scripts.",
+      "Blocks are sorted into colour-coded categories such as Motion, Looks and Control."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a sprite in Scratch?",
+     "o": [
+      "A character or object that you program",
+      "The background picture of the stage",
+      "The list of blocks to choose from",
+      "A saved Scratch project file"
+     ],
+     "a": 0,
+     "why": "Sprites are the characters or objects on the stage, each with its own scripts."
+    },
+    {
+     "q": "Where do you drag blocks to join them into a script?",
+     "o": [
+      "The stage",
+      "The sprite list",
+      "The menu bar",
+      "The scripts area"
+     ],
+     "a": 3,
+     "why": "Scripts are built in the scripts area in the middle of the screen."
+    },
+    {
+     "q": "Which category holds the [when green flag clicked] block?",
+     "o": [
+      "Control",
+      "Motion",
+      "Events",
+      "Sensing"
+     ],
+     "a": 2,
+     "why": "Event blocks (yellow) start scripts when something happens."
+    },
+    {
+     "q": "Why is Scratch a good first programming language?",
+     "o": [
+      "It can only be used on school computers",
+      "Blocks only snap together in ways that make sense",
+      "You have to type every command exactly",
+      "It does not use sequence or loops"
+     ],
+     "a": 1,
+     "why": "Block-based coding avoids typing errors while still teaching real programming ideas."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State what is meant by a **sprite** and a **backdrop** in Scratch.",
+     "m": 2,
+     "a": "Sprite: a character/object on the stage that can be programmed (1). Backdrop: a background picture for the stage (1)."
+    },
+    {
+     "q": "Give **two** reasons why Scratch is a good language for beginners.",
+     "m": 2,
+     "a": "Any two, e.g. drag-and-drop blocks so no typing/spelling errors (1); blocks only fit together in sensible ways (1); results seen straight away on the stage (1); free / runs in a browser (1); teaches the same ideas as text languages (1)."
+    },
+    {
+     "q": "A pupil clicks the green flag but the cat does not move, even though the pupil built a script. Suggest **one** likely reason.",
+     "m": 1,
+     "a": "e.g. the script was built on the wrong sprite / on the stage (1); or the script has no [when green flag clicked] block on top (1)."
+    }
+   ],
+   "terms": [
+    "Scratch",
+    "Sprite",
+    "Stage",
+    "Backdrop",
+    "Blocks palette",
+    "Script"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "spec": "Use event blocks to start scripts and explain why the sequence of blocks matters",
+   "summary": "Event (hat) blocks such as [when green flag clicked] or [when (space) key pressed] start a script. The blocks underneath then run in sequence, one after another from top to bottom, so putting them in the wrong order changes what happens.",
+   "diagram": {
+    "kind": "flow",
+    "title": "Running a script in sequence",
+    "caption": "Click each block. The script starts when its event happens, then runs from top to bottom.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "when green flag clicked",
+      "detail": "A hat block from Events. Nothing happens until the green flag is clicked.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "go to x: 0 y: 0",
+      "detail": "Puts the sprite back in the centre of the stage, so it starts in the same place every time.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "say Hello! for 2 seconds",
+      "detail": "Shows a speech bubble. The script waits here for 2 seconds before moving on.",
+      "shape": "io"
+     },
+     {
+      "id": "d",
+      "label": "move 100 steps",
+      "detail": "The sprite moves 100 steps in the direction it is facing (right, at the start).",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "say Bye! for 2 seconds",
+      "detail": "The last block. When it finishes, the script ends.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "e"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A program is a set of instructions. In Scratch, the instructions in a script do nothing until something **starts** them. That something is an **[[event]]**: clicking the green flag, pressing a key, clicking on a sprite or receiving a message."
+    },
+    {
+     "t": "h",
+     "text": "Event blocks (hat blocks)"
+    },
+    {
+     "t": "p",
+     "text": "Event blocks are yellow and have a curved top, so nothing can go above them. That is why they are called **hat blocks**: they sit on top of a script like a hat."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Event block",
+      "The script starts when..."
+     ],
+     "rows": [
+      [
+       "[when green flag clicked]",
+       "the green flag above the stage is clicked. Used to start the whole project."
+      ],
+      [
+       "[when (space) key pressed]",
+       "that key is pressed. You can choose any key, e.g. the right arrow."
+      ],
+      [
+       "[when this sprite clicked]",
+       "someone clicks on the sprite with the mouse."
+      ],
+      [
+       "[when backdrop switches to (level 2)]",
+       "the stage changes to that backdrop."
+      ],
+      [
+       "[when I receive (game over)]",
+       "a message is broadcast (see the page on broadcasts)."
+      ]
+     ],
+     "caption": "Common event blocks"
+    },
+    {
+     "t": "tip",
+     "text": "One sprite can have **several scripts**, each with its own hat block. For example, one script for the green flag and another for when the space key is pressed. They can even run at the same time."
+    },
+    {
+     "t": "h",
+     "text": "Sequence: order matters"
+    },
+    {
+     "t": "p",
+     "text": "**[[Sequence]]** means instructions are carried out **one after another, in order**. A Scratch script always runs from the **top block down to the bottom block**. Change the order and you change the result."
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "Script A: a greeting",
+     "code": "[when green flag clicked]\n[say (Welcome to Fermanagh!) for (2) seconds]\n[move (100) steps]\n[say (Mind the lough!) for (2) seconds]",
+     "output": "The sprite speaks, then moves 100 steps, then speaks again."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: does the order matter?",
+     "context": "Ryan wants his sprite to walk to the right and then say 'I made it!'. He builds: [when green flag clicked], [say (I made it!) for (2) seconds], [move (150) steps]. What goes wrong and how should he fix it?",
+     "steps": [
+      "Scratch runs the blocks from top to bottom.",
+      "So the sprite says 'I made it!' **before** it has moved anywhere.",
+      "Fix: swap the two blocks so that [move (150) steps] comes **before** the say block."
+     ],
+     "answer": "The speech happens too early. Moving the [move (150) steps] block above the say block puts the sequence right."
+    },
+    {
+     "t": "h",
+     "text": "Say versus say for 2 seconds"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "[say (Hi!)]",
+      "[say (Hi!) for (2) seconds]"
+     ],
+     "rows": [
+      [
+       "How long the bubble stays",
+       "Until another say block replaces it",
+       "Exactly 2 seconds"
+      ],
+      [
+       "Does the script wait?",
+       "No: the next block runs straight away",
+       "Yes: the next block waits for 2 seconds"
+      ],
+      [
+       "Good for",
+       "A message that stays on screen",
+       "A conversation where things happen in turn"
+      ]
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "Computers are **very fast**. If you put [move (10) steps] four times in a row with nothing between them, it looks like one big jump. Add [wait (0.5) seconds] between blocks if you want to see each step happen."
+    },
+    {
+     "t": "tip",
+     "text": "Always start your green flag script with blocks that **reset** things, such as [go to x: (0) y: (0)] and [point in direction (90)]. Then the project starts the same way every time you click the green flag."
+    },
+    {
+     "t": "note",
+     "text": "In the Computational Thinking topic you met **sequence** in flowcharts and algorithms. A Scratch script is just an algorithm written in blocks."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "An event is something that happens, such as a click or key press, that starts a script.",
+      "Event blocks are hat blocks: they always go at the top of a script.",
+      "Sequence means blocks run one after another, from top to bottom.",
+      "Changing the order of blocks changes what the program does.",
+      "Use wait blocks or 'for 2 seconds' blocks so the user can see each step."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In which order does Scratch run the blocks in a script?",
+     "o": [
+      "From the top block to the bottom block",
+      "From the bottom block to the top block",
+      "All blocks at exactly the same instant",
+      "In a random order each time"
+     ],
+     "a": 0,
+     "why": "Sequence: one after another, top to bottom."
+    },
+    {
+     "q": "Why is [when green flag clicked] called a hat block?",
+     "o": [
+      "It makes the sprite wear a hat costume",
+      "It is always the last block in a script",
+      "It can only be used on the stage",
+      "It goes on top of a script and nothing fits above it"
+     ],
+     "a": 3,
+     "why": "Hat blocks have a curved top and start a script."
+    },
+    {
+     "q": "Which block makes the next block wait before it runs?",
+     "o": [
+      "[say (Hi!)]",
+      "[move (10) steps]",
+      "[say (Hi!) for (2) seconds]",
+      "[when this sprite clicked]"
+     ],
+     "a": 2,
+     "why": "The 'for 2 seconds' version waits; plain [say] does not."
+    },
+    {
+     "q": "A script has [move (10) steps] four times in a row. What does the user see?",
+     "o": [
+      "Four slow, clearly separate steps",
+      "What looks like one jump of 40 steps",
+      "No movement, as 10 is too small",
+      "An error message from Scratch"
+     ],
+     "a": 1,
+     "why": "With no waits, the blocks run so fast that it looks like one jump."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by **sequence** in programming.",
+     "m": 2,
+     "a": "Instructions are carried out one after another (1) in the order they are written / top to bottom (1)."
+    },
+    {
+     "q": "Name **two** different event blocks that could start a script in Scratch.",
+     "m": 2,
+     "a": "Any two: when green flag clicked (1); when (key) key pressed (1); when this sprite clicked (1); when I receive (message) (1); when backdrop switches to (1)."
+    },
+    {
+     "q": "A sprite should say 'Ready', move 100 steps and then say 'Go!'. Write the four blocks needed, in order.",
+     "m": 3,
+     "a": "[when green flag clicked] first (1); [say (Ready) for (2) seconds] then [move (100) steps] (1); [say (Go!)] last (1)."
+    }
+   ],
+   "terms": [
+    "Event",
+    "Sequence"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "spec": "Use motion blocks and x and y coordinates to position and move a sprite on the stage",
+   "summary": "The stage is a grid 480 steps wide (x from -240 to 240) and 360 steps tall (y from -180 to 180), with (0, 0) in the centre. Motion blocks either move a sprite relative to where it is, such as [change x by (10)], or send it to an exact position, such as [go to x: (100) y: (50)].",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Where is the sprite?",
+    "caption": "Work out each answer, then click the hidden cell to check.",
+    "head": [
+     "Question",
+     "Answer"
+    ],
+    "rows": [
+     [
+      "Centre of the stage",
+      "(0, 0)"
+     ],
+     [
+      "Top-right corner",
+      "(240, 180)"
+     ],
+     [
+      "Bottom-left corner",
+      "(-240, -180)"
+     ],
+     [
+      "At (50, 20), then [change x by (30)]",
+      "(80, 20)"
+     ],
+     [
+      "At (0, 0) facing right, then [move (100) steps]",
+      "(100, 0)"
+     ],
+     [
+      "At (10, 60), then [change y by (-80)]",
+      "(10, -20)"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "To move a sprite to an exact spot, Scratch uses **[[coordinates|Coordinates]]**, just like the grids you use in maths. Every point on the stage has an **x coordinate** (how far left or right) and a **y coordinate** (how far up or down)."
+    },
+    {
+     "t": "h",
+     "text": "The stage is a grid"
+    },
+    {
+     "t": "table",
+     "head": [
+      "",
+      "x (left and right)",
+      "y (up and down)"
+     ],
+     "rows": [
+      [
+       "Range",
+       "-240 (left edge) to 240 (right edge)",
+       "-180 (bottom edge) to 180 (top edge)"
+      ],
+      [
+       "Centre",
+       "0",
+       "0"
+      ],
+      [
+       "Bigger number means...",
+       "further right",
+       "further up"
+      ],
+      [
+       "Negative number means...",
+       "left of the centre",
+       "below the centre"
+      ]
+     ],
+     "caption": "The Scratch stage: 480 steps wide and 360 steps tall"
+    },
+    {
+     "t": "tip",
+     "text": "Remember: **x comes first, then y**, written (x, y). A handy way to remember: you walk along the corridor (x) *before* you go up the stairs (y)."
+    },
+    {
+     "t": "p",
+     "text": "When you move the mouse over the stage in some versions of Scratch, the x and y position of the mouse pointer is shown. The **sprite info** panel under the stage also shows the selected sprite's x and y."
+    },
+    {
+     "t": "h",
+     "text": "Two kinds of motion block"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Moves relative to where the sprite is",
+      "Goes to an exact position"
+     ],
+     "rows": [
+      [
+       "Blocks",
+       "[move (10) steps], [change x by (10)], [change y by (10)]",
+       "[go to x: (0) y: (0)], [set x to (100)], [set y to (-50)], [glide (1) secs to x: () y: ()]"
+      ],
+      [
+       "Result depends on...",
+       "where the sprite is now (and its direction)",
+       "nothing: it always ends up in the same place"
+      ],
+      [
+       "Good for",
+       "Walking, falling, steering with keys",
+       "Starting positions and resetting"
+      ]
+     ]
+    },
+    {
+     "t": "table",
+     "head": [
+      "Direction",
+      "Means the sprite faces..."
+     ],
+     "rows": [
+      [
+       "90",
+       "right (the starting direction)"
+      ],
+      [
+       "-90",
+       "left"
+      ],
+      [
+       "0",
+       "up"
+      ],
+      [
+       "180",
+       "down"
+      ]
+     ],
+     "caption": "[point in direction ()] values"
+    },
+    {
+     "t": "p",
+     "text": "[move (10) steps] moves the sprite 10 steps **in the direction it is facing**. One step is one unit on the coordinate grid. [turn ↻ (15) degrees] turns it clockwise (to the right) and [turn ↺ (15) degrees] turns it anticlockwise (to the left)."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1: change x and change y",
+     "context": "A sprite starts at (40, -30). These blocks run in order: [change x by (60)], [change y by (50)], [change x by (-120)]. Where does it finish?",
+     "steps": [
+      "Start: x = 40, y = -30.",
+      "[change x by (60)]: x = 40 + 60 = **100**. Position (100, -30).",
+      "[change y by (50)]: y = -30 + 50 = **20**. Position (100, 20).",
+      "[change x by (-120)]: x = 100 - 120 = **-20**. Position (-20, 20)."
+     ],
+     "answer": "The sprite finishes at (-20, 20)."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2: move and turn",
+     "context": "A sprite is at (0, 0), facing right (direction 90). It runs: [move (80) steps], [turn ↻ (90) degrees], [move (50) steps]. Where does it finish?",
+     "steps": [
+      "Facing right, moving 80 steps adds 80 to x: position **(80, 0)**.",
+      "Turning 90 degrees clockwise from right makes it face **down** (direction 180).",
+      "Moving 50 steps down takes 50 off y: position **(80, -50)**."
+     ],
+     "answer": "The sprite finishes at (80, -50), facing down."
+    },
+    {
+     "t": "warn",
+     "text": "Mixing up **set** and **change** is a very common bug. [set x to (10)] puts the sprite *at* x = 10. [change x by (10)] moves it *10 more* to the right. If your sprite jumps to the same spot every time instead of moving along, you have used set where you needed change."
+    },
+    {
+     "t": "warn",
+     "text": "Do not mix up x and y. [change y by (10)] moves a sprite **up**, not right. To fall down the screen, use a **negative** number: [change y by (-5)]."
+    },
+    {
+     "t": "note",
+     "text": "[if on edge, bounce] turns the sprite around when it touches the edge of the stage. Scratch also stops sprites from disappearing completely off the edge, so [set x to (500)] leaves the sprite just poking in at the right-hand edge rather than at x = 500."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "The stage runs from x = -240 to 240 and y = -180 to 180; the centre is (0, 0).",
+      "Coordinates are written (x, y): x across, then y up or down.",
+      "Change blocks move a sprite relative to where it is; go to and set blocks send it to an exact place.",
+      "[move () steps] goes the way the sprite is facing; direction 90 is right, 0 is up.",
+      "Negative y is below the centre, negative x is left of the centre."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What are the coordinates of the centre of the Scratch stage?",
+     "o": [
+      "(0, 0)",
+      "(240, 180)",
+      "(-240, -180)",
+      "(480, 360)"
+     ],
+     "a": 0,
+     "why": "The centre is where x and y are both 0."
+    },
+    {
+     "q": "A sprite is at (20, 50). It runs [change y by (-70)]. Where is it now?",
+     "o": [
+      "(20, -20)",
+      "(-50, 50)",
+      "(20, 120)",
+      "(-70, 50)"
+     ],
+     "a": 0,
+     "why": "Only y changes: 50 - 70 = -20, so (20, -20)."
+    },
+    {
+     "q": "Which block ALWAYS puts a sprite in the same place, wherever it started?",
+     "o": [
+      "[move (10) steps]",
+      "[change x by (10)]",
+      "[go to x: (0) y: (0)]",
+      "[turn ↻ (90) degrees]"
+     ],
+     "a": 2,
+     "why": "Go to and set blocks give an exact position."
+    },
+    {
+     "q": "Which direction does a sprite face after [point in direction (0)]?",
+     "o": [
+      "Right",
+      "Up",
+      "Left",
+      "Down"
+     ],
+     "a": 1,
+     "why": "0 is up, 90 is right, 180 is down and -90 is left."
+    },
+    {
+     "q": "A sprite at (0, 0) faces right and runs [move (60) steps] then [turn ↻ (90) degrees] then [move (30) steps]. Where does it end?",
+     "o": [
+      "(60, 30)",
+      "(30, 60)",
+      "(90, 0)",
+      "(60, -30)"
+     ],
+     "a": 3,
+     "why": "Right 60 to (60, 0), turn to face down, then down 30 to (60, -30)."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State the x and y coordinates of the **top-left** corner of the Scratch stage.",
+     "m": 2,
+     "a": "x = -240 (1); y = 180 (1)."
+    },
+    {
+     "q": "Explain the difference between [set x to (50)] and [change x by (50)].",
+     "m": 2,
+     "a": "Set puts the sprite at the exact position x = 50 wherever it was (1). Change adds 50 to its current x, moving it 50 steps right from where it is (1)."
+    },
+    {
+     "q": "A sprite starts at (-100, 40). It runs [change x by (150)] then [change y by (-90)]. Give its final position and show your working.",
+     "m": 2,
+     "a": "x: -100 + 150 = 50; y: 40 - 90 = -50 (1 for working). Final position (50, -50) (1)."
+    }
+   ],
+   "terms": [
+    "Coordinates"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "spec": "Use looks and sound blocks, and switch costumes to animate a sprite",
+   "summary": "Looks blocks change how a sprite appears: speech bubbles, size, effects, show and hide, and its costume. Switching quickly between costumes with a short wait in between makes an animation, just like a flip book, and sound blocks add music and effects.",
+   "diagram": {
+    "kind": "cycle",
+    "title": "How a walking animation works",
+    "caption": "The loop repeats, so the sprite keeps switching costumes and looks as if it is walking.",
+    "items": [
+     {
+      "label": "Show costume 1",
+      "detail": "The cat with its legs together."
+     },
+     {
+      "label": "Move a few steps",
+      "detail": "[move (10) steps] carries the sprite a little way across the stage."
+     },
+     {
+      "label": "Wait a moment",
+      "detail": "[wait (0.2) seconds] so your eyes can see this costume before it changes."
+     },
+     {
+      "label": "Next costume",
+      "detail": "[next costume] swaps to costume 2: legs apart. After the last costume it goes back to the first."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A **[[costume]]** is one of the pictures a sprite can show. The Scratch Cat has two costumes: one with its legs together and one with its legs apart. You can see, draw and edit costumes in the **Costumes** tab."
+    },
+    {
+     "t": "h",
+     "text": "Animation: a digital flip book"
+    },
+    {
+     "t": "p",
+     "text": "**Animation** is the trick of showing slightly different pictures one after another so quickly that it looks like movement. Cartoons and films work in exactly the same way. In Scratch you animate by switching costumes inside a loop."
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "A walking cat",
+     "code": "[when green flag clicked]\n[forever]\n    [move (10) steps]\n    [next costume]\n    [wait (0.2) seconds]\n    [if on edge, bounce]",
+     "output": "The cat walks from side to side, swapping costumes so its legs move."
+    },
+    {
+     "t": "warn",
+     "text": "Without the [wait (0.2) seconds] block, the costumes change so fast that the animation is a blur. Too long a wait (e.g. 2 seconds) makes it jerky. Try values between **0.1 and 0.3 seconds**."
+    },
+    {
+     "t": "h",
+     "text": "Useful looks blocks"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Block",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "[switch costume to (costume2)]",
+       "Shows a chosen costume, e.g. a 'sad' costume when you lose a life"
+      ],
+      [
+       "[next costume]",
+       "Moves on to the next costume in the list, then back to the first after the last"
+      ],
+      [
+       "[switch backdrop to (Belfast City Hall)]",
+       "Changes the stage's background, e.g. a new level"
+      ],
+      [
+       "[change size by (10)] / [set size to (50) %]",
+       "Makes the sprite bigger or smaller; 100% is normal size"
+      ],
+      [
+       "[change (color) effect by (25)]",
+       "Changes its colour; other effects include ghost (see-through)"
+      ],
+      [
+       "[show] / [hide]",
+       "Makes the sprite appear or disappear"
+      ],
+      [
+       "[think (Hmm...) for (2) seconds]",
+       "A thought bubble instead of a speech bubble"
+      ]
+     ],
+     "caption": "Looks blocks"
+    },
+    {
+     "t": "tip",
+     "text": "The **Paint** button in the Costumes tab lets you draw your own costumes, and the **Choose a Costume** library has hundreds ready-made. Right-click a costume and choose *duplicate* to make a copy you can change slightly, such as moving an arm, for a smooth animation."
+    },
+    {
+     "t": "h",
+     "text": "Sound blocks"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "[start sound (Meow)]",
+      "[play sound (Meow) until done]"
+     ],
+     "rows": [
+      [
+       "Does the script wait?",
+       "No: the next block runs while the sound plays",
+       "Yes: the next block waits until the sound has finished"
+      ],
+      [
+       "Good for",
+       "Sound effects during action, e.g. a 'pop' when you catch something",
+       "Music or speech where things should happen afterwards"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "You can record your own sounds, choose from the sound library or upload a sound file in the **Sounds** tab. [stop all sounds] and [change volume by (-10)] are in the Sound category too."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a Giant's Causeway explorer",
+     "context": "Aoife wants her explorer sprite to grow bigger as it walks towards the camera, 5 times, with a footstep sound each time. Which blocks should go inside her loop?",
+     "steps": [
+      "She needs a count-controlled loop: [repeat (5)] (covered fully on the next page).",
+      "Inside: [next costume] to animate the legs.",
+      "[change size by (10)] so it gets bigger each time.",
+      "[start sound (footstep)] so the sound plays while it moves on.",
+      "[wait (0.3) seconds] so each step can be seen."
+     ],
+     "answer": "[repeat (5)] containing [next costume], [change size by (10)], [start sound (footstep)], [wait (0.3) seconds]. The sprite grows from 100% to 150%."
+    },
+    {
+     "t": "warn",
+     "text": "If you [hide] a sprite at the end of a game, remember to put [show] in its green flag script. Otherwise the next time you click the green flag the sprite stays invisible and looks as if it has vanished."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A costume is one picture a sprite can show; a backdrop is a picture for the stage.",
+      "Animation = switching costumes quickly, with a short wait between them.",
+      "[next costume] cycles through costumes; [switch costume to ()] picks one.",
+      "Looks blocks also change size, colour effects, speech and whether a sprite is shown.",
+      "[start sound] does not wait; [play sound until done] does."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a costume in Scratch?",
+     "o": [
+      "A background picture for the stage",
+      "One of the pictures a sprite can show",
+      "A sound attached to a sprite",
+      "A script that dresses up a sprite"
+     ],
+     "a": 1,
+     "why": "Sprites can have many costumes; switching them makes animation."
+    },
+    {
+     "q": "A pupil's walking animation is just a blur. What is the best fix?",
+     "o": [
+      "Remove the [next costume] block",
+      "Use a bigger number of steps",
+      "Add a short wait between costume changes",
+      "Change the backdrop each time"
+     ],
+     "a": 2,
+     "why": "A wait of about 0.1 to 0.3 seconds lets each costume be seen."
+    },
+    {
+     "q": "Which block makes the script wait until a sound has finished?",
+     "o": [
+      "[start sound (Meow)]",
+      "[change volume by (10)]",
+      "[stop all sounds]",
+      "[play sound (Meow) until done]"
+     ],
+     "a": 3,
+     "why": "'Until done' means the next block waits for the sound to end."
+    },
+    {
+     "q": "A sprite is at size 100%. It runs [change size by (10)] four times. What size is it now?",
+     "o": [
+      "140%",
+      "104%",
+      "110%",
+      "400%"
+     ],
+     "a": 0,
+     "why": "100 + 10 + 10 + 10 + 10 = 140%."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how a sprite can be made to look as if it is walking in Scratch.",
+     "m": 3,
+     "a": "Use more than one costume showing slightly different leg positions (1); switch between them with [next costume] inside a loop (1); with a short wait between changes and/or move blocks so it moves across (1)."
+    },
+    {
+     "q": "State the difference between [start sound] and [play sound until done].",
+     "m": 2,
+     "a": "Start sound plays the sound and the next block runs straight away (1). Play sound until done waits for the sound to finish before the next block runs (1)."
+    },
+    {
+     "q": "Name **two** looks blocks, other than costume blocks, and say what each does.",
+     "m": 2,
+     "a": "Any two with correct description, e.g. [say] shows a speech bubble (1); [change size by] makes it bigger/smaller (1); [hide]/[show] (1); [change colour effect by] (1); [switch backdrop to] (1)."
+    }
+   ],
+   "terms": [
+    "Costume"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "spec": "Use repeat, forever and repeat until loops and explain why loops make code shorter",
+   "summary": "Iteration means repeating blocks using a loop. [repeat (10)] is a count-controlled loop that runs a set number of times; [repeat until <>] is a condition-controlled loop that stops when its condition becomes true; [forever] never stops. Loops make code shorter, easier to read and easier to change.",
+   "diagram": {
+    "kind": "calc",
+    "title": "Draw any regular shape",
+    "caption": "Change the number of sides. Inside [repeat (sides)], the sprite does [move (100) steps] then turns by this many degrees.",
+    "inputs": [
+     {
+      "id": "n",
+      "label": "Number of sides",
+      "value": 4
+     }
+    ],
+    "formula": "360 / n",
+    "result": {
+     "label": "Turn in [turn ↻ () degrees]",
+     "unit": "degrees"
+    }
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Imagine drawing a square. Without a loop you need eight blocks: move, turn, move, turn, move, turn, move, turn. You are writing the **same two blocks four times**. A **[[loop]]** lets you write them once and repeat them. Repeating blocks is called **[[iteration]]**."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Without a loop",
+      "With a loop"
+     ],
+     "rows": [
+      [
+       "Blocks needed for a square",
+       "8 (move, turn, written 4 times)",
+       "3 ([repeat (4)] plus move and turn)"
+      ],
+      [
+       "To make a hexagon instead",
+       "Add 4 more blocks and change every turn",
+       "Change 4 to 6 and 90 to 60"
+      ],
+      [
+       "Chance of mistakes",
+       "Higher: easy to miss one block",
+       "Lower: one copy to check"
+      ]
+     ]
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "Drawing a square with the Pen extension",
+     "code": "[when green flag clicked]\n[erase all]\n[go to x: (0) y: (0)]\n[pen down]\n[repeat (4)]\n    [move (100) steps]\n    [turn ↻ (90) degrees]\n[pen up]",
+     "output": "A square with sides of 100 steps. The pen blocks come from Add Extension > Pen."
+    },
+    {
+     "t": "h",
+     "text": "Three kinds of loop"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Loop",
+      "Type",
+      "Stops when...",
+      "Example use"
+     ],
+     "rows": [
+      [
+       "[repeat (10)]",
+       "[[Count-controlled loop]]",
+       "it has run the set number of times",
+       "Drawing a shape, jumping 3 times"
+      ],
+      [
+       "[repeat until <touching (edge)?>]",
+       "[[Condition-controlled loop]]",
+       "the condition becomes **true**",
+       "Walk until you reach the wall"
+      ],
+      [
+       "[forever]",
+       "Infinite loop",
+       "never: only the red stop sign ends it",
+       "Keep checking keys in a game, background music"
+      ]
+     ],
+     "caption": "Loops in Scratch (all in the orange Control category)"
+    },
+    {
+     "t": "p",
+     "text": "Loops are **C-shaped blocks**: the blocks you want to repeat go *inside* the C. Anything placed underneath a [repeat] or [repeat until] runs once the loop has finished. Nothing can go underneath [forever], because it never finishes."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1: the right numbers for a shape",
+     "context": "Conor wants to draw a regular hexagon (6 equal sides). What should his loop look like?",
+     "steps": [
+      "A full turn is **360 degrees**. The sprite must turn all the way round once while drawing the shape.",
+      "Turn angle = 360 / number of sides = 360 / 6 = **60 degrees**.",
+      "The loop must run once for each side: **6 times**."
+     ],
+     "answer": "[repeat (6)] containing [move (100) steps] and [turn ↻ (60) degrees]."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2: walk to the edge",
+     "context": "A sprite at x = -200 faces right. It runs: [repeat until <touching (edge)?>] containing [move (10) steps]. Then it says 'Made it!'. Explain what happens.",
+     "steps": [
+      "Before each repeat, Scratch checks: is the sprite touching the edge? At the start, **no**, so it moves 10 steps.",
+      "It keeps checking and moving: x = -190, -180, -170 and so on.",
+      "When it touches the right-hand edge the condition is **true**, so the loop stops.",
+      "The next block under the loop runs: it says 'Made it!'."
+     ],
+     "answer": "The sprite walks right in steps of 10 until it touches the edge, then says 'Made it!'. We did not need to know how many steps it would take."
+    },
+    {
+     "t": "tip",
+     "text": "Choose a **count-controlled** loop when you know how many times before you start (e.g. 4 sides). Choose a **condition-controlled** loop when you do not know how many times, only when to stop (e.g. until the score reaches 10)."
+    },
+    {
+     "t": "warn",
+     "text": "In Scratch, [repeat until] stops when its condition becomes **true**. If the condition can never become true (e.g. *until touching Sprite2* when Sprite2 is hidden), the loop never ends and the rest of the script never runs."
+    },
+    {
+     "t": "warn",
+     "text": "Blocks placed *after* a loop run only once, when the loop ends. A common bug is putting [next costume] under a [repeat] instead of inside it, so the costume changes only once."
+    },
+    {
+     "t": "h",
+     "text": "Loops inside loops"
+    },
+    {
+     "t": "p",
+     "text": "You can put a loop inside another loop. [repeat (3)] containing the square-drawing [repeat (4)] loop, plus [turn ↻ (120) degrees], draws three squares in a fan. The inner loop runs 4 times **for each** of the 3 outer repeats: 12 sides in total."
+    },
+    {
+     "t": "note",
+     "text": "When you meet C# in Year 10, [repeat (10)] becomes a **for loop** and [repeat until] becomes a **while loop**. The ideas are exactly the same, only the way you write them changes."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Iteration means repeating; a loop repeats the blocks inside it.",
+      "[repeat (n)] is count-controlled: it runs a fixed number of times.",
+      "[repeat until <condition>] is condition-controlled: it stops when the condition is true.",
+      "[forever] is an infinite loop: it only stops when the project is stopped.",
+      "Loops make scripts shorter, easier to read and easier to change.",
+      "For a regular shape, turn 360 / number of sides degrees."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is another word for repeating blocks with a loop?",
+     "o": [
+      "Selection",
+      "Iteration",
+      "Sequence",
+      "Broadcasting"
+     ],
+     "a": 1,
+     "why": "Iteration means repetition."
+    },
+    {
+     "q": "Which loop is count-controlled?",
+     "o": [
+      "[repeat (10)]",
+      "[forever]",
+      "[repeat until <touching (edge)?>]",
+      "[if <> then]"
+     ],
+     "a": 0,
+     "why": "Repeat (10) runs a fixed, known number of times."
+    },
+    {
+     "q": "What angle should a sprite turn inside [repeat (5)] to draw a regular pentagon?",
+     "o": [
+      "60 degrees",
+      "90 degrees",
+      "108 degrees",
+      "72 degrees"
+     ],
+     "a": 3,
+     "why": "360 / 5 = 72 degrees."
+    },
+    {
+     "q": "When does [repeat until <score = 10>] stop?",
+     "o": [
+      "When score is anything other than 10",
+      "After exactly 10 repeats",
+      "When score becomes 10",
+      "Never, it is a forever loop"
+     ],
+     "a": 2,
+     "why": "Repeat until stops as soon as its condition is true."
+    },
+    {
+     "q": "A loop [repeat (3)] contains another loop [repeat (4)] with [move (50) steps] inside. How many times does the move block run?",
+     "o": [
+      "12",
+      "7",
+      "4",
+      "3"
+     ],
+     "a": 0,
+     "why": "The inner loop runs 4 times for each of the 3 outer repeats: 3 × 4 = 12."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain **two** advantages of using a loop instead of copying the same blocks many times.",
+     "m": 2,
+     "a": "Any two: shorter script / fewer blocks (1); easier to read (1); easier to change, e.g. one number to edit (1); fewer chances of mistakes (1)."
+    },
+    {
+     "q": "Describe the difference between a **count-controlled** and a **condition-controlled** loop, giving a Scratch block for each.",
+     "m": 4,
+     "a": "Count-controlled repeats a set number of times (1), e.g. [repeat (10)] (1). Condition-controlled repeats until a condition is met/true (1), e.g. [repeat until <touching edge?>] (1)."
+    },
+    {
+     "q": "Write a script that draws an equilateral triangle with sides of 80 steps.",
+     "m": 3,
+     "a": "[when green flag clicked] and [pen down] (1); [repeat (3)] (1); containing [move (80) steps] and [turn ↻ (120) degrees] (1)."
+    }
+   ],
+   "terms": [
+    "Loop",
+    "Iteration",
+    "Count-controlled loop",
+    "Condition-controlled loop"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "spec": "Use if and if-else blocks with sensing blocks so a program can make decisions",
+   "summary": "Selection lets a program choose what to do. [if <condition> then] runs its blocks only when the condition is true; [if <> then else] picks one of two paths. Sensing blocks such as <touching (Bowl)?>, <key (space) pressed?> and [ask () and wait] give the conditions and inputs, and an if usually needs to sit inside a forever loop so it keeps checking.",
+   "diagram": {
+    "kind": "flow",
+    "title": "Is the cat touching the apple?",
+    "caption": "Click each block. Inside a forever loop, the if-else checks again and again.",
+    "direction": "tb",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "when green flag clicked",
+      "detail": "The script starts.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "forever",
+      "detail": "Keeps repeating the check, many times a second.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "touching Apple?",
+      "detail": "A sensing block. Its answer is either true or false.",
+      "shape": "decision"
+     },
+     {
+      "id": "d",
+      "label": "say Yum! and change score by 1",
+      "detail": "Runs only when the condition is true.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "say Where is it?",
+      "detail": "The else part: runs only when the condition is false.",
+      "shape": "io"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d",
+      "true"
+     ],
+     [
+      "c",
+      "e",
+      "false"
+     ],
+     [
+      "d",
+      "b"
+     ],
+     [
+      "e",
+      "b"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "So far our scripts have done the same thing every time. Real programs **make decisions**: if you catch the apple, your score goes up; if you touch the lava, you lose a life. Choosing between different paths is called **[[selection]]**."
+    },
+    {
+     "t": "h",
+     "text": "If and if-else"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "[if <> then]",
+      "[if <> then else]"
+     ],
+     "rows": [
+      [
+       "Paths",
+       "One: do something, or do nothing",
+       "Two: do one thing or the other"
+      ],
+      [
+       "When the condition is true",
+       "Runs the blocks inside",
+       "Runs the blocks in the top gap"
+      ],
+      [
+       "When the condition is false",
+       "Skips the blocks inside",
+       "Runs the blocks in the else gap"
+      ],
+      [
+       "Example",
+       "If touching lava, lose a life",
+       "If answer = 56, say Correct, else say Try again"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "The **[[condition]]** is the hexagon-shaped (pointy-ended) gap in the if block. Only **[[Boolean]]** blocks fit there: blocks whose answer is always **true** or **false**, such as <touching (edge)?> or <(score) > (10)>."
+    },
+    {
+     "t": "h",
+     "text": "Sensing blocks"
+    },
+    {
+     "t": "p",
+     "text": "**[[Sensing]]** blocks (light blue) let a sprite find out what is going on: is it touching something, is a key being pressed, where is the mouse?"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Sensing block",
+      "What it reports"
+     ],
+     "rows": [
+      [
+       "<touching (Apple)?>",
+       "True if this sprite is touching the Apple sprite (or the mouse-pointer or edge)"
+      ],
+      [
+       "<touching colour ( )?>",
+       "True if it is touching that colour, e.g. the black walls of a maze"
+      ],
+      [
+       "<key (space) pressed?>",
+       "True while that key is held down"
+      ],
+      [
+       "<mouse down?>",
+       "True while the mouse button is pressed"
+      ],
+      [
+       "[ask (What's your name?) and wait]",
+       "Shows a box for the user to type into, and waits for them"
+      ],
+      [
+       "(answer)",
+       "Holds whatever the user typed in the last ask"
+      ],
+      [
+       "(timer)",
+       "How many seconds since the project started or the timer was reset"
+      ]
+     ],
+     "caption": "Sensing blocks"
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "Steering with the arrow keys",
+     "code": "[when green flag clicked]\n[forever]\n    [if <key (right arrow) pressed?> then]\n        [change x by (10)]\n    [if <key (left arrow) pressed?> then]\n        [change x by (-10)]",
+     "output": "The sprite moves smoothly left and right while the arrow keys are held down."
+    },
+    {
+     "t": "warn",
+     "text": "An if block checks its condition **once**, at the moment it runs. If you put [if <touching (Apple)?> then] straight under the green flag with no loop, Scratch checks once at the start and never again. Put it **inside a [forever] loop** so it keeps checking."
+    },
+    {
+     "t": "h",
+     "text": "Asking questions"
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "A times-table quiz",
+     "code": "[when green flag clicked]\n[ask (What is 7 × 8?) and wait]\n[if <(answer) = (56)> then]\n    [say (Correct! Well done.) for (2) seconds]\n[else]\n    [say (Not quite: it is 56.) for (2) seconds]"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: trace the quiz",
+     "context": "Use the quiz script above. What does the sprite say if the user types (a) 56, (b) 54, (c) fifty-six?",
+     "steps": [
+      "(a) answer = 56, so the condition <(answer) = (56)> is **true**: it says **Correct! Well done.**",
+      "(b) 54 is not equal to 56, so the condition is **false** and the else part runs: **Not quite: it is 56.**",
+      "(c) The text *fifty-six* is not the same as the number 56, so the condition is **false**: **Not quite: it is 56.**"
+     ],
+     "answer": "(a) Correct! Well done. (b) and (c) Not quite: it is 56."
+    },
+    {
+     "t": "note",
+     "text": "Scratch's = block ignores capital letters: <(answer) = (belfast)> is true whether the user types *Belfast*, *BELFAST* or *belfast*. Most text-based languages, including C#, are **not** this forgiving."
+    },
+    {
+     "t": "tip",
+     "text": "When there are more than two choices, put an if-else **inside** the else part of another if-else. For example: if score > 20 say *Gold*, else (if score > 10 say *Silver*, else say *Bronze*)."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Selection means the program chooses which blocks to run.",
+      "[if <> then] has one path; [if <> then else] has two.",
+      "A condition is a Boolean: it is always true or false.",
+      "Sensing blocks report touching, key presses, the mouse, the timer and typed answers.",
+      "Put an if inside a forever loop so it keeps checking.",
+      "[ask () and wait] stores what the user types in (answer)."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does selection allow a program to do?",
+     "o": [
+      "Repeat blocks many times",
+      "Run blocks one after another",
+      "Choose which blocks to run",
+      "Send a message to other sprites"
+     ],
+     "a": 2,
+     "why": "Selection = making a decision between paths."
+    },
+    {
+     "q": "Which kind of block fits in the condition gap of an if block?",
+     "o": [
+      "A hat block such as when flag clicked",
+      "A true/false (Boolean) block",
+      "A motion block such as move 10 steps",
+      "A C-shaped loop block"
+     ],
+     "a": 1,
+     "why": "Conditions must be Boolean: true or false."
+    },
+    {
+     "q": "A pupil's [if <touching (Apple)?> then] is directly under the green flag with no loop. What happens?",
+     "o": [
+      "It is checked only once, at the start",
+      "It is checked again and again forever",
+      "Scratch will not let the blocks join",
+      "It is checked only when the apple moves"
+     ],
+     "a": 0,
+     "why": "Without a loop the if runs once; put it inside forever."
+    },
+    {
+     "q": "Where is the text the user types after [ask () and wait] stored?",
+     "o": [
+      "In the (timer) block",
+      "In the (x position) block",
+      "In the [say] block",
+      "In the (answer) block"
+     ],
+     "a": 3,
+     "why": "Answer holds the most recent reply."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between [if <> then] and [if <> then else].",
+     "m": 2,
+     "a": "If then only runs its blocks when the condition is true, otherwise nothing happens (1). If-else runs one set of blocks if true and a different set if false (1)."
+    },
+    {
+     "q": "Write a script that asks 'What is the capital of Northern Ireland?' and says 'Correct' if the answer is Belfast, or 'Wrong' otherwise.",
+     "m": 3,
+     "a": "[ask (What is the capital of Northern Ireland?) and wait] (1); [if <(answer) = (Belfast)> then] say Correct (1); else say Wrong (1)."
+    },
+    {
+     "q": "Explain why an [if <touching (Lava)?> then] block in a game is usually placed inside a [forever] loop.",
+     "m": 2,
+     "a": "An if only checks its condition once when it runs (1); the forever loop makes it check continuously so it notices whenever the sprite touches the lava (1)."
+    }
+   ],
+   "terms": [
+    "Selection",
+    "Condition",
+    "Boolean",
+    "Sensing"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p07",
+   "spec": "Create and use variables for score, lives and timers, know the data types they hold, and use operators for maths, comparisons and random numbers",
+   "summary": "A variable is a named store for a value that can change, such as score, lives or time. In Scratch a variable can hold a number, text (a string) or true/false (a Boolean). Operator blocks do maths (+, -, ×, /), compare values (<, =, >), join text and pick random numbers.",
+   "diagram": {
+    "kind": "match",
+    "title": "Which operator?",
+    "caption": "Match each operator block to what it gives.",
+    "pairs": [
+     [
+      "((5) + (3))",
+      "8"
+     ],
+     [
+      "((10) - (4))",
+      "6"
+     ],
+     [
+      "((6) * (7))",
+      "42"
+     ],
+     [
+      "<(12) > (20)>",
+      "false"
+     ],
+     [
+      "(pick random (1) to (6))",
+      "A whole number from 1 to 6"
+     ],
+     [
+      "(join (Hello ) (Niamh))",
+      "Hello Niamh"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Games need to **remember** things: your score, how many lives you have left, how much time is left. A **[[variable]]** is a named store in the computer's memory that holds one value, and that value can **change** (vary) while the program runs."
+    },
+    {
+     "t": "h",
+     "text": "Making and using a variable"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Go to the **Variables** category and click **Make a Variable**.",
+      "Give it a clear name, such as *score* (not *v1*).",
+      "Choose **For all sprites** (every sprite can use it) or **For this sprite only**.",
+      "Tick the box beside it to show it on the stage, so the player can see their score."
+     ],
+     "ordered": true
+    },
+    {
+     "t": "table",
+     "head": [
+      "Block",
+      "What it does",
+      "Example"
+     ],
+     "rows": [
+      [
+       "[set (score) to (0)]",
+       "Puts an exact value in the variable, replacing what was there",
+       "Reset the score at the start of a game"
+      ],
+      [
+       "[change (score) by (1)]",
+       "Adds to the value (use a negative number to take away)",
+       "+1 for each apple caught; [change (lives) by (-1)] when hit"
+      ],
+      [
+       "(score)",
+       "The rounded reporter block: gives the current value",
+       "[say (score)], or use it in a condition"
+      ],
+      [
+       "[show variable (score)] / [hide variable (score)]",
+       "Shows or hides the variable on the stage",
+       "Hide the timer on the title screen"
+      ]
+     ],
+     "caption": "Variable blocks"
+    },
+    {
+     "t": "warn",
+     "text": "Always **[set]** your variables at the start of the green flag script, e.g. [set (score) to (0)] and [set (lives) to (3)]. If you forget, the score carries on from the last game, so a new game might start with 17 points."
+    },
+    {
+     "t": "h",
+     "text": "What can a variable hold? Data types"
+    },
+    {
+     "t": "p",
+     "text": "The kind of value stored is called its **[[data type]]**. Scratch quietly works this out for you, but text-based languages like C# make you choose, so it is worth knowing them now."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Data type",
+      "What it holds",
+      "Scratch example"
+     ],
+     "rows": [
+      [
+       "Integer",
+       "Whole numbers",
+       "score = 12, lives = 3"
+      ],
+      [
+       "Float (real)",
+       "Numbers with a decimal point",
+       "speed = 2.5, time = 9.75"
+      ],
+      [
+       "String",
+       "Text: letters, numbers and symbols",
+       "playerName = Ciara, answer = Enniskillen"
+      ],
+      [
+       "[[Boolean]]",
+       "Only true or false",
+       "gameOver = false; <(lives) = (0)> reports true or false"
+      ]
+     ],
+     "caption": "Data types"
+    },
+    {
+     "t": "h",
+     "text": "Operators"
+    },
+    {
+     "t": "p",
+     "text": "**[[Operators|Operator]]** are the green blocks. They take values, do something with them and report the result."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Kind",
+      "Blocks",
+      "Gives"
+     ],
+     "rows": [
+      [
+       "Arithmetic",
+       "(() + ()), (() - ()), (() * ()), (() / ())",
+       "A number. * means multiply, / means divide."
+      ],
+      [
+       "[[Comparison operators|Comparison operator]]",
+       "<() < ()>, <() = ()>, <() > ()>",
+       "True or false"
+      ],
+      [
+       "Logic",
+       "<<> and <>>, <<> or <>>, <not <>>",
+       "True or false: combines conditions"
+      ],
+      [
+       "Random number",
+       "(pick random (1) to (10))",
+       "A whole number from 1 to 10, including both 1 and 10"
+      ],
+      [
+       "Text",
+       "(join (apple) (banana)), (length of (world))",
+       "applebanana; 5"
+      ]
+     ],
+     "caption": "Operator blocks"
+    },
+    {
+     "t": "tip",
+     "text": "Scratch has no 'greater than or equal to' block. To check *score is 10 or more*, use <(score) > (9)> for whole numbers, or <<(score) > (10)> or <(score) = (10)>>."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1: trace the variables",
+     "context": "A game runs these blocks in order: [set (score) to (0)], [set (lives) to (3)], [change (score) by (5)], [change (lives) by (-1)], [change (score) by (5)], [set (score) to ((score) * (2))]. What are score and lives at the end?",
+     "steps": [
+      "set score to 0, set lives to 3: **score 0, lives 3**.",
+      "change score by 5: **score 5**.",
+      "change lives by -1: **lives 2**.",
+      "change score by 5: **score 10**.",
+      "set score to score × 2: 10 × 2 = **20**."
+     ],
+     "answer": "score = 20, lives = 2."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2: a countdown timer",
+     "context": "A catch game should last 30 seconds. How can a variable called *time* count down and end the game?",
+     "steps": [
+      "[set (time) to (30)] at the start.",
+      "[repeat until <(time) = (0)>] containing [wait (1) seconds] and [change (time) by (-1)].",
+      "After the loop: [say (Time's up!)] and [stop (all)].",
+      "The loop runs 30 times, once a second, so it lasts 30 seconds."
+     ],
+     "answer": "time goes 30, 29, 28 ... 0, then the game ends."
+    },
+    {
+     "t": "note",
+     "text": "Scratch also has a built-in **(timer)** in Sensing that counts up in seconds, and [reset timer] sets it back to 0. A variable gives you more control, such as counting down or adding bonus time."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A variable is a named store for a value that can change.",
+      "[set] gives a variable an exact value; [change] adds to it.",
+      "Reset variables at the start of every game.",
+      "Data types: integer, float, string (text) and Boolean (true/false).",
+      "Operators do maths, compare values, join text and pick random numbers.",
+      "(pick random (1) to (6)) includes both 1 and 6."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a variable?",
+     "o": [
+      "A named store for a value that can change",
+      "A block that starts a script",
+      "A picture a sprite can show",
+      "A loop that never stops"
+     ],
+     "a": 0,
+     "why": "Variables store values such as score or lives."
+    },
+    {
+     "q": "score is 4. The program runs [change (score) by (3)] then [set (score) to (10)]. What is score now?",
+     "o": [
+      "17",
+      "7",
+      "10",
+      "13"
+     ],
+     "a": 2,
+     "why": "Set replaces whatever was there, so the final value is 10."
+    },
+    {
+     "q": "Which data type would store the value true or false?",
+     "o": [
+      "Boolean",
+      "String",
+      "Integer",
+      "Float"
+     ],
+     "a": 0,
+     "why": "Booleans hold only true or false."
+    },
+    {
+     "q": "Which numbers can (pick random (1) to (6)) give?",
+     "o": [
+      "Any whole number from 1 to 5",
+      "Any whole number from 2 to 5",
+      "Only the numbers 1 and 6",
+      "Any whole number from 1 to 6"
+     ],
+     "a": 3,
+     "why": "Both ends are included, like rolling a dice."
+    },
+    {
+     "q": "A game starts with 17 points instead of 0. What is the most likely bug?",
+     "o": [
+      "The score was changed by -1 by mistake",
+      "The score was not set to 0 at the start",
+      "The score was set to 0 every time",
+      "The variable was hidden on the stage"
+     ],
+     "a": 1,
+     "why": "Without [set (score) to (0)] the old value carries over."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what a **variable** is and give **one** example of a variable you might use in a game.",
+     "m": 2,
+     "a": "A named storage location / value in memory that can change while the program runs (1). e.g. score, lives, time, level (1)."
+    },
+    {
+     "q": "State the most suitable data type for: (a) the player's name (b) number of lives (c) whether the game is over.",
+     "m": 3,
+     "a": "(a) String / text (1). (b) Integer (1). (c) Boolean (1)."
+    },
+    {
+     "q": "Write the blocks needed to make a dice sprite say a random number from 1 to 6 when it is clicked.",
+     "m": 2,
+     "a": "[when this sprite clicked] (1); [say (pick random (1) to (6))] (1)."
+    }
+   ],
+   "terms": [
+    "Variable",
+    "Data type",
+    "Operator",
+    "Comparison operator"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p08",
+   "spec": "Use broadcast and when I receive blocks to send messages between sprites and the stage",
+   "summary": "A broadcast sends a message to every sprite and the stage. Any script that starts with [when I receive (message)] then runs. Broadcasts let sprites work together, such as starting a level, showing a game-over screen or making one sprite react to another.",
+   "diagram": {
+    "kind": "timeline",
+    "title": "A game told by messages",
+    "caption": "Click each step to see which sprite broadcasts and who receives.",
+    "items": [
+     {
+      "label": "Green flag: title screen",
+      "detail": "The stage shows the title backdrop. The Start button sprite shows itself."
+     },
+     {
+      "label": "Start clicked: broadcast start game",
+      "detail": "The Start button hides, then broadcasts start game."
+     },
+     {
+      "label": "Everyone receives start game",
+      "detail": "The stage switches backdrop, the apple starts falling, the bowl can move and the timer starts."
+     },
+     {
+      "label": "Lives reach 0: broadcast game over",
+      "detail": "The apple sprite spots lives = 0 and broadcasts game over."
+     },
+     {
+      "label": "Everyone receives game over",
+      "detail": "The stage shows the Game Over backdrop, the bowl hides and the music stops."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "In a real game, lots of sprites need to work **together**. When the player clicks *Start*, the title must disappear, the music start and the enemies begin moving. How does the Start button tell everyone else? It sends a **[[broadcast]]**."
+    },
+    {
+     "t": "h",
+     "text": "How broadcasting works"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Block",
+      "Category",
+      "What it does"
+     ],
+     "rows": [
+      [
+       "[broadcast (start game)]",
+       "Events",
+       "Sends the message *start game* to every sprite and the stage, then carries straight on"
+      ],
+      [
+       "[broadcast (start game) and wait]",
+       "Events",
+       "Sends the message, then waits until every script that received it has finished"
+      ],
+      [
+       "[when I receive (start game)]",
+       "Events",
+       "A hat block: starts this script whenever that message is broadcast"
+      ]
+     ],
+     "caption": "Broadcast blocks"
+    },
+    {
+     "t": "p",
+     "text": "Think of a broadcast like the **school intercom**. The office makes one announcement and it goes to every classroom. Each class decides what to do when it hears it, and classes it does not concern simply ignore it."
+    },
+    {
+     "t": "tip",
+     "text": "Create a new message by clicking the drop-down arrow on a broadcast block and choosing **New message**. Give it a clear name such as *game over* or *level 2*, not *message1*."
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "Start button sprite",
+     "code": "[when green flag clicked]\n[show]\n\n[when this sprite clicked]\n[hide]\n[broadcast (start game)]"
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "Stage",
+     "code": "[when I receive (start game)]\n[switch backdrop to (Lough Erne)]\n[start sound (music)]"
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "Apple sprite",
+     "code": "[when I receive (start game)]\n[show]\n[go to x: (pick random (-220) to (220)) y: (170)]\n[forever]\n    [change y by (-5)]"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: who does what?",
+     "context": "In a quiz game, the Teacher sprite asks a question. If the answer is right, the Teacher broadcasts *correct*. The Crowd sprite has [when I receive (correct)] then [play sound (cheer) until done]. The Score sprite has [when I receive (correct)] then [change (score) by (1)]. What happens when the user answers correctly?",
+     "steps": [
+      "The Teacher's if block is true, so it runs [broadcast (correct)].",
+      "Every sprite gets the message. The Crowd's receive script starts: it **cheers**.",
+      "At the same time, the Score sprite's receive script starts: **score goes up by 1**.",
+      "Any sprite without a [when I receive (correct)] script does nothing."
+     ],
+     "answer": "One broadcast makes two different sprites react at the same time: the crowd cheers and the score increases."
+    },
+    {
+     "t": "warn",
+     "text": "Broadcast names must match **exactly**. If one sprite broadcasts *game over* and another is waiting for *gameover*, nothing happens. Use the drop-down to pick an existing message instead of making a new one with a slightly different name."
+    },
+    {
+     "t": "warn",
+     "text": "Do not put [broadcast] inside a [forever] loop without an if around it. It would send the message over and over many times a second, restarting the receiving scripts so they never get to finish."
+    },
+    {
+     "t": "note",
+     "text": "Broadcasts are a simple way of passing **control** from one part of a program to another. Larger programs use similar ideas: buttons on a website send *events*, and code elsewhere listens for them."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A broadcast sends a message to every sprite and the stage.",
+      "[when I receive (message)] starts a script when that message arrives.",
+      "Broadcasts let sprites work together, e.g. start game, level up, game over.",
+      "[broadcast and wait] waits until the receiving scripts finish.",
+      "Message names must match exactly; give them clear names."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which sprites receive a broadcast message?",
+     "o": [
+      "Only the sprite that sent it",
+      "Only the sprite touching the sender",
+      "Only the stage",
+      "Every sprite and the stage"
+     ],
+     "a": 3,
+     "why": "Broadcasts go to everyone; only scripts with a matching receive block react."
+    },
+    {
+     "q": "Which block starts a script when a message arrives?",
+     "o": [
+      "[when I receive (message)]",
+      "[broadcast (message)]",
+      "[when this sprite clicked]",
+      "[wait until <>]"
+     ],
+     "a": 0,
+     "why": "When I receive is the hat block for messages."
+    },
+    {
+     "q": "Sprite A broadcasts 'game over'. Sprite B has [when I receive (gameover)]. What happens?",
+     "o": [
+      "Sprite B runs its script as normal",
+      "Scratch shows an error message",
+      "Nothing, because the names do not match",
+      "Sprite A runs sprite B's script"
+     ],
+     "a": 2,
+     "why": "Message names must match exactly."
+    },
+    {
+     "q": "How is [broadcast (level 2) and wait] different from [broadcast (level 2)]?",
+     "o": [
+      "It only sends to one chosen sprite",
+      "It waits for the receiving scripts to finish",
+      "It waits two seconds before sending",
+      "It repeats the message every second"
+     ],
+     "a": 1,
+     "why": "The 'and wait' version pauses until all receiving scripts end."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what a **broadcast** is in Scratch and why it is useful.",
+     "m": 2,
+     "a": "A message sent to all sprites and the stage (1); lets sprites communicate/work together, e.g. starting a level or game over (1)."
+    },
+    {
+     "q": "A Start button should hide and make the stage change to the 'Level 1' backdrop. Write the scripts for the button and the stage.",
+     "m": 3,
+     "a": "Button: [when this sprite clicked], [hide] (1), [broadcast (start)] (1). Stage: [when I receive (start)], [switch backdrop to (Level 1)] (1)."
+    }
+   ],
+   "terms": [
+    "Broadcast"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p09",
+   "spec": "Use abstraction to reduce complexity by making My Blocks (custom blocks) with inputs",
+   "summary": "A My Block is a custom block you define once and then use whenever you need it, giving a long set of blocks a single clear name. This is abstraction: hiding detail you do not need to think about. Inputs (parameters) let the same block do slightly different jobs, such as drawing a shape with any number of sides.",
+   "diagram": {
+    "kind": "compare",
+    "title": "Without and with a My Block",
+    "caption": "The same drawing of a hexagon, a square and a triangle, written two ways.",
+    "states": [
+     {
+      "label": "Without My Blocks",
+      "points": [
+       "Three separate repeat loops written out in full",
+       "Every move and turn typed in each time",
+       "Hard to see at a glance what the script draws",
+       "A change to the size means editing every loop"
+      ],
+      "art": null
+     },
+     {
+      "label": "With a My Block",
+      "points": [
+       "define draw shape (sides) (size) written once",
+       "Main script: draw shape (6) (50), draw shape (4) (80), draw shape (3) (100)",
+       "Reads almost like English",
+       "Change the definition once and every shape updates"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "As projects grow, scripts get long and hard to follow. Programmers deal with this using **[[abstraction]]**: hiding the details you do not need right now, and giving a group of instructions a simple name. You already use abstraction every day: you say *make toast* rather than listing every step of using the toaster."
+    },
+    {
+     "t": "h",
+     "text": "My Blocks: make your own block"
+    },
+    {
+     "t": "p",
+     "text": "In the pink **My Blocks** category, click **Make a Block**. You name your new block and Scratch gives you a **define** hat block. The blocks you put under *define* are what your new block does. This is called a **[[custom block|My Block]]**."
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "A My Block with no inputs",
+     "code": "[define jump]\n[repeat (10)]\n    [change y by (10)]\n[repeat (10)]\n    [change y by (-10)]\n\n[when (space) key pressed]\n[jump]",
+     "output": "Pressing space makes the sprite jump up 100 steps and back down. The space-key script only needs one block."
+    },
+    {
+     "t": "h",
+     "text": "Inputs make blocks more useful"
+    },
+    {
+     "t": "p",
+     "text": "When you make a block you can **add an input**: a number or text box that the user of the block fills in. Inside the define script, the input appears as a round block you can drag into other blocks. In text-based languages like C# these inputs are called **[[parameters|Parameter]]**, and the custom block itself is called a **function** (or method)."
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "A My Block with two inputs",
+     "code": "[define draw shape (sides) (size)]\n[pen down]\n[repeat (sides)]\n    [move (size) steps]\n    [turn ↻ ((360) / (sides)) degrees]\n[pen up]\n\n[when green flag clicked]\n[erase all]\n[draw shape (6) (50)]\n[draw shape (4) (80)]\n[draw shape (3) (100)]",
+     "output": "A hexagon with sides of 50, a square with sides of 80 and a triangle with sides of 100, all from one definition."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: using inputs",
+     "context": "Using the *draw shape* block above, what is drawn by [draw shape (8) (40)], and what turn does the sprite make?",
+     "steps": [
+      "sides = 8 and size = 40.",
+      "The loop repeats 8 times, moving 40 steps each time.",
+      "The turn is 360 / sides = 360 / 8 = **45 degrees**."
+     ],
+     "answer": "A regular octagon with sides of 40 steps, turning 45 degrees at each corner."
+    },
+    {
+     "t": "h",
+     "text": "Why bother?"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Shorter, tidier scripts**: the main script reads like a list of jobs.",
+      "**Less repetition**: write the details once, use them many times.",
+      "**Easier to fix**: a bug in *draw shape* is fixed in one place and every shape is fixed.",
+      "**Easier to share work**: one person can build *jump* while another builds the scoring, as long as they agree what each block does."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "warn",
+     "text": "A My Block belongs to the sprite it was made in. If you make *jump* on the Cat, the Dog sprite cannot use it unless you make it again there (or drag the define script on to the Dog in the sprite list to copy it)."
+    },
+    {
+     "t": "tip",
+     "text": "Give My Blocks **verb names** that say what they do: *draw shape*, *reset game*, *lose a life*. Then your main script explains itself."
+    },
+    {
+     "t": "note",
+     "text": "New NI curriculum link: **abstraction to reduce complexity**, and My Blocks with inputs lead straight on to **functions and parameters** in text-based code."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Abstraction means hiding detail and giving a set of instructions a simple name.",
+      "A My Block is a custom block: define it once, use it many times.",
+      "Inputs (parameters) let one block do slightly different jobs.",
+      "My Blocks make scripts shorter, clearer and easier to fix.",
+      "In text-based languages, My Blocks are called functions and inputs are called parameters."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is abstraction?",
+     "o": [
+      "Repeating blocks a set number of times",
+      "Choosing between two paths in a script",
+      "Sending a message to every sprite",
+      "Hiding detail and giving instructions a simple name"
+     ],
+     "a": 3,
+     "why": "Abstraction reduces complexity by hiding detail."
+    },
+    {
+     "q": "Which category do you use to make your own custom block?",
+     "o": [
+      "Control",
+      "My Blocks",
+      "Events",
+      "Operators"
+     ],
+     "a": 1,
+     "why": "Make a Block is in the My Blocks category."
+    },
+    {
+     "q": "A My Block [draw shape (sides) (size)] runs [draw shape (5) (60)]. How many degrees does it turn at each corner?",
+     "o": [
+      "72",
+      "60",
+      "108",
+      "300"
+     ],
+     "a": 0,
+     "why": "360 / 5 = 72 degrees."
+    },
+    {
+     "q": "What are the inputs of a custom block called in text-based languages such as C#?",
+     "o": [
+      "Broadcasts",
+      "Costumes",
+      "Parameters",
+      "Conditions"
+     ],
+     "a": 2,
+     "why": "Inputs to a function are called parameters."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how making a My Block is an example of **abstraction**.",
+     "m": 2,
+     "a": "The detailed blocks are hidden inside the definition (1); the main script only uses a simple name for what it does, reducing complexity (1)."
+    },
+    {
+     "q": "Give **two** benefits of using a My Block with inputs instead of writing the same loop three times.",
+     "m": 2,
+     "a": "Any two: shorter script (1); easier to read (1); a fix/change is made in one place (1); the same block can do different jobs by changing the inputs (1)."
+    },
+    {
+     "q": "A My Block is defined as [define jump (height)] with [change y by (height)], [wait (0.3) seconds], [change y by ((0) - (height))]. Describe what [jump (50)] does.",
+     "m": 2,
+     "a": "The sprite moves up 50 steps (1), waits 0.3 seconds, then moves back down 50 steps to where it started (1)."
+    }
+   ],
+   "terms": [
+    "Abstraction",
+    "My Block",
+    "Parameter"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p10",
+   "spec": "Use variables to build a simple simulation, and explain how changing a variable changes the outcome of a model",
+   "summary": "A model is a simplified version of a real system, and a simulation runs the model to see what happens. In Scratch, variables such as gravity, bounciness or growth rate control the model: change one and you can test a prediction, such as how quickly rabbits fill an island or how high a ball bounces.",
+   "diagram": {
+    "kind": "calc",
+    "title": "Rabbit island simulation",
+    "caption": "Change the starting rabbits, the growth each year and the number of years. This is what the Scratch population model calculates.",
+    "inputs": [
+     {
+      "id": "s",
+      "label": "Rabbits at the start",
+      "value": 20
+     },
+     {
+      "id": "g",
+      "label": "Growth each year (%)",
+      "value": 50
+     },
+     {
+      "id": "y",
+      "label": "Number of years",
+      "value": 4
+     }
+    ],
+    "formula": "Math.floor(s * Math.pow(1 + g / 100, y) + 0.5)",
+    "result": {
+     "label": "Rabbits at the end",
+     "unit": "rabbits"
+    }
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Engineers, scientists and game designers often need to answer *what if?* questions before building anything. What if a bridge has to carry twice the traffic? What if a disease spreads faster? They build a **[[model]]**: a **simplified** version of the real thing that keeps only the parts that matter. Running the model to see what happens over time is a **[[simulation]]**."
+    },
+    {
+     "t": "p",
+     "text": "Models leave things out on purpose. A model of rabbits on an island might ignore weather, foxes and illness. That makes it easier to build, but it also means its predictions are **only as good as the model**."
+    },
+    {
+     "t": "h",
+     "text": "Simulation 1: a bouncing ball"
+    },
+    {
+     "t": "p",
+     "text": "Real balls speed up as they fall, because of gravity, and lose some height with every bounce. We can model that with two variables: **speed** (how fast the ball is moving up or down) and **gravity** (how much the speed changes every moment)."
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "Ball sprite",
+     "code": "[when green flag clicked]\n[go to x: (0) y: (150)]\n[set (speed) to (0)]\n[set (gravity) to (-1)]\n[forever]\n    [change (speed) by (gravity)]\n    [change y by (speed)]\n    [if <(y position) < (-150)> then]\n        [set y to (-150)]\n        [set (speed) to ((speed) * (-0.8))]",
+     "output": "The ball falls faster and faster, bounces, and each bounce is lower than the last until it settles on the ground."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Variable",
+      "What it represents",
+      "Try changing it to...",
+      "What happens"
+     ],
+     "rows": [
+      [
+       "gravity",
+       "The pull of gravity",
+       "-0.3",
+       "Floaty falling, like on the Moon"
+      ],
+      [
+       "-0.8 in the bounce",
+       "Bounciness: how much speed is kept",
+       "-0.95",
+       "A super-bouncy ball that keeps bouncing high"
+      ],
+      [
+       "-0.8 in the bounce",
+       "Bounciness",
+       "-0.3",
+       "A dead ball that barely bounces, like a beanbag"
+      ]
+     ],
+     "caption": "Changing variables changes the outcome"
+    },
+    {
+     "t": "tip",
+     "text": "Make sliders: right-click a variable shown on the stage and choose **slider**. Now you can change gravity while the simulation is running and watch the effect straight away."
+    },
+    {
+     "t": "h",
+     "text": "Simulation 2: rabbits on an island"
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "Stage",
+     "code": "[when green flag clicked]\n[set (rabbits) to (20)]\n[set (year) to (0)]\n[repeat (4)]\n    [wait (1) seconds]\n    [change (year) by (1)]\n    [set (rabbits) to ((rabbits) * (1.5))]\n    [say (join (Year ) (year))]",
+     "output": "Each year the number of rabbits grows by 50%."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: run the model by hand",
+     "context": "Start with 20 rabbits. Each year the population is multiplied by 1.5 (a 50% increase). How many rabbits are there after 4 years?",
+     "steps": [
+      "Year 1: 20 × 1.5 = **30**.",
+      "Year 2: 30 × 1.5 = **45**.",
+      "Year 3: 45 × 1.5 = **67.5** (about 68 rabbits).",
+      "Year 4: 67.5 × 1.5 = **101.25** (about 101 rabbits)."
+     ],
+     "answer": "About 101 rabbits after 4 years: the population has roughly multiplied by 5."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: test a prediction",
+     "context": "Ciara predicts: 'If the growth rate is doubled from 50% to 100%, there will be twice as many rabbits after 4 years.' Use the model to test her prediction.",
+     "steps": [
+      "At 100% growth the population doubles each year: 20, 40, 80, 160, **320**.",
+      "At 50% growth there were about **101**.",
+      "320 is more than three times 101, not twice."
+     ],
+     "answer": "Her prediction is wrong: the model shows about 320 rabbits, over three times as many, because the growth builds on itself each year."
+    },
+    {
+     "t": "warn",
+     "text": "A simulation is not the real world. Real rabbits run out of food and space, so a real population would not keep growing for ever. Always ask: **what has this model left out**, and could that change the answer?"
+    },
+    {
+     "t": "note",
+     "text": "New NI curriculum link: **a model is a simplified representation of a real system; changing variables changes outcomes; simulations use models to test predictions.** Weather forecasts, flight simulators and video game physics all work this way."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A model is a simplified version of a real system.",
+      "A simulation runs a model to see what happens over time.",
+      "Variables such as gravity or growth rate control the model.",
+      "Changing a variable lets you test a 'what if?' prediction.",
+      "Models leave things out, so their predictions can be wrong."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a model in computing?",
+     "o": [
+      "An exact copy of the real world",
+      "A simplified version of a real system",
+      "A picture used as a sprite costume",
+      "A list of every block in a script"
+     ],
+     "a": 1,
+     "why": "Models keep only the parts that matter."
+    },
+    {
+     "q": "In the bouncing ball model, what does [set (speed) to ((speed) * (-0.8))] do?",
+     "o": [
+      "Reverses the ball and keeps 80% of its speed",
+      "Makes the ball 80% smaller each bounce",
+      "Moves the ball 80 steps down the stage",
+      "Stops the ball dead on the ground"
+     ],
+     "a": 0,
+     "why": "Multiplying by a negative number reverses direction; 0.8 keeps 80% of the speed."
+    },
+    {
+     "q": "Start with 40 rabbits growing by 50% a year. How many after 2 years?",
+     "o": [
+      "80",
+      "60",
+      "90",
+      "120"
+     ],
+     "a": 2,
+     "why": "40 × 1.5 = 60, then 60 × 1.5 = 90."
+    },
+    {
+     "q": "Why might the rabbit model's prediction for 20 years be wrong?",
+     "o": [
+      "Scratch cannot multiply decimals",
+      "Variables cannot hold large numbers",
+      "The repeat loop only works 4 times",
+      "It leaves out food, space and predators"
+     ],
+     "a": 3,
+     "why": "Models are simplified, so missing factors can change the real outcome."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between a **model** and a **simulation**.",
+     "m": 2,
+     "a": "A model is a simplified representation of a real system (1). A simulation runs/uses the model to see what happens over time or to test predictions (1)."
+    },
+    {
+     "q": "In a bouncing ball simulation, describe what would happen if the gravity variable were changed from -1 to -0.2.",
+     "m": 2,
+     "a": "The ball would fall more slowly / speed up more gently (1), so it looks floaty, like on the Moon (1)."
+    },
+    {
+     "q": "Give **one** reason why a simulation's results might not match real life.",
+     "m": 1,
+     "a": "e.g. the model is simplified and leaves out factors such as food, weather or predators (1)."
+    }
+   ],
+   "terms": [
+    "Model",
+    "Simulation"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p11",
+   "spec": "Find and fix bugs by tracing a script and recognising common Scratch errors",
+   "summary": "A bug is a mistake that stops a program doing what it should; debugging is finding and fixing it. Scratch blocks stop most typing errors, so most Scratch bugs are logic errors: blocks in the wrong order, the wrong sprite, set instead of change, a missing loop or reset, or a condition that is never true. Tracing a script step by step shows where it goes wrong.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Trace it: the lives script",
+    "caption": "lives starts at 3. Each time round the loop the sprite is hit once. Work out each value, then click to check.",
+    "head": [
+     "Step",
+     "lives"
+    ],
+    "rows": [
+     [
+      "[set (lives) to (3)]",
+      "3"
+     ],
+     [
+      "Hit 1: [change (lives) by (-1)]",
+      "2"
+     ],
+     [
+      "Hit 2: [change (lives) by (-1)]",
+      "1"
+     ],
+     [
+      "Hit 3: [change (lives) by (-1)]",
+      "0"
+     ],
+     [
+      "Does <(lives) = (0)> now give true or false?",
+      "true"
+     ],
+     [
+      "What should happen next?",
+      "broadcast game over"
+     ]
+    ],
+    "hidden": [
+     [
+      0,
+      1
+     ],
+     [
+      1,
+      1
+     ],
+     [
+      2,
+      1
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      1
+     ],
+     [
+      5,
+      1
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Every programmer, from Year 8 pupils to the engineers at Belfast's software companies, writes **[[bugs|Bug]]**. A bug is a mistake that makes a program do the wrong thing. **[[Debugging]]** means finding the bug and fixing it. Good programmers are not people who never make mistakes; they are people who are good at finding them."
+    },
+    {
+     "t": "h",
+     "text": "Logic errors"
+    },
+    {
+     "t": "p",
+     "text": "In text-based languages, many bugs are **syntax errors**: a spelling mistake or a missing bracket that stops the code running at all. Scratch blocks only fit together correctly, so syntax errors are almost impossible. Instead, Scratch bugs are usually **[[logic errors|Logic error]]**: the program runs, but does the wrong thing."
+    },
+    {
+     "t": "h",
+     "text": "Tracing a script"
+    },
+    {
+     "t": "p",
+     "text": "**Tracing** means stepping through a script one block at a time, writing down what happens to each variable and sprite, just as the computer would. It works best on paper, or by clicking blocks one at a time in the scripts area to see what each one does."
+    },
+    {
+     "t": "example",
+     "title": "Worked example 1: trace and find the bug",
+     "context": "This script should make the cat count up from 1 to 5: [set (count) to (0)], [repeat (5)] containing [say (count) for (1) seconds] and [change (count) by (1)]. The cat says 0, 1, 2, 3, 4. Find and fix the bug.",
+     "steps": [
+      "Trace: count = 0. Loop 1: says **0**, then count becomes 1.",
+      "Loop 2: says 1, count becomes 2. Loop 3: says 2. Loop 4: says 3. Loop 5: says 4, count becomes 5.",
+      "The say block runs **before** the change block, so each number is said before it goes up.",
+      "Fix: swap the two blocks inside the loop (change first, then say), or start count at 1."
+     ],
+     "answer": "It is a sequence bug. With [change (count) by (1)] above [say (count) for (1) seconds], the cat says 1, 2, 3, 4, 5."
+    },
+    {
+     "t": "h",
+     "text": "Common Scratch bugs"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Symptom",
+      "Likely cause",
+      "Fix"
+     ],
+     "rows": [
+      [
+       "Nothing happens when the flag is clicked",
+       "No hat block, or the script is on the wrong sprite",
+       "Add [when green flag clicked]; check which sprite is selected"
+      ],
+      [
+       "Score starts at last game's total",
+       "Variable not reset",
+       "[set (score) to (0)] at the start"
+      ],
+      [
+       "Sprite jumps to the same spot instead of moving",
+       "[set x to] used instead of [change x by]",
+       "Use change for movement"
+      ],
+      [
+       "Touching only works once, or never",
+       "if block not inside a loop",
+       "Put the if inside [forever]"
+      ],
+      [
+       "Animation only changes once",
+       "[next costume] under the loop, not inside it",
+       "Move it inside the C of the loop"
+      ],
+      [
+       "Sprite invisible after restarting",
+       "[hide] at game over, no [show] at start",
+       "Add [show] to the green flag script"
+      ],
+      [
+       "Receiving script never runs",
+       "Message names do not match",
+       "Pick the same message from the drop-down"
+      ],
+      [
+       "Game never ends",
+       "repeat until condition can never be true, e.g. until score = 10 but score goes up in 3s",
+       "Use <(score) > (9)> instead of = 10"
+      ]
+     ],
+     "caption": "A debugging checklist"
+    },
+    {
+     "t": "example",
+     "title": "Worked example 2: off by a little",
+     "context": "A game should end when score reaches 10. The script uses [repeat until <(score) = (10)>]. Each apple is worth 3 points. Why does the game never end?",
+     "steps": [
+      "Trace score: 0, 3, 6, 9, **12**, 15 ...",
+      "score is never exactly 10, so <(score) = (10)> is never true.",
+      "The repeat until loop never stops."
+     ],
+     "answer": "Use <(score) > (9)> so the game ends once the score is 10 or more (it will end at 12)."
+    },
+    {
+     "t": "tip",
+     "text": "Debugging tricks: **click a single block** to run it on its own; **show variables** on the stage so you can watch them change; add a temporary [say (score)] to see a value; add [wait (1) seconds] to slow things down so you can see what is happening."
+    },
+    {
+     "t": "warn",
+     "text": "Change **one thing at a time**, then test again. If you change five blocks at once and it works (or breaks), you will not know which change made the difference."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A bug is an error in a program; debugging is finding and fixing it.",
+      "Scratch bugs are mostly logic errors: the program runs but does the wrong thing.",
+      "Tracing means stepping through a script block by block, tracking the variables.",
+      "Common bugs: wrong order, wrong sprite, set instead of change, missing reset, if not in a loop.",
+      "Change one thing at a time and test after each change."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is debugging?",
+     "o": [
+      "Adding new sprites to a project",
+      "Deleting all of the scripts",
+      "Making a program run faster",
+      "Finding and fixing errors in a program"
+     ],
+     "a": 3,
+     "why": "A bug is an error; debugging removes it."
+    },
+    {
+     "q": "Why are syntax errors rare in Scratch?",
+     "o": [
+      "Blocks only fit together in ways that make sense",
+      "Scratch fixes every mistake for you",
+      "Scratch programs are always very short",
+      "Scratch has no variables or loops"
+     ],
+     "a": 0,
+     "why": "Block shapes stop most spelling and bracket mistakes."
+    },
+    {
+     "q": "A script says [set (n) to (2)], [repeat (3)] containing [change (n) by (2)]. What is n at the end?",
+     "o": [
+      "8",
+      "6",
+      "5",
+      "4"
+     ],
+     "a": 0,
+     "why": "2 + 2 + 2 + 2 = 8."
+    },
+    {
+     "q": "A sprite should move right each time the arrow key is pressed but stays in one spot. Which bug is most likely?",
+     "o": [
+      "[change x by (10)] used instead of [set x to (10)]",
+      "The sprite's costume is the wrong colour",
+      "[set x to (10)] used instead of [change x by (10)]",
+      "The backdrop has not been changed"
+     ],
+     "a": 2,
+     "why": "Set always puts it at the same position."
+    },
+    {
+     "q": "Score goes up in 4s. Why does [repeat until <(score) = (10)>] never stop?",
+     "o": [
+      "Repeat until loops can only run 10 times",
+      "Score goes 8 then 12 and is never exactly 10",
+      "A score of 10 is too large for a variable",
+      "The = block only works with text values"
+     ],
+     "a": 1,
+     "why": "The condition is never true, so the loop never ends."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State what is meant by a **logic error** and give an example from Scratch.",
+     "m": 2,
+     "a": "An error where the program runs but does not do what was intended / gives the wrong result (1). e.g. blocks in the wrong order, set instead of change, wrong condition (1)."
+    },
+    {
+     "q": "A pupil's game always starts with the score from the previous game. Explain the cause and how to fix it.",
+     "m": 2,
+     "a": "The score variable is not reset at the start (1). Add [set (score) to (0)] under [when green flag clicked] (1)."
+    },
+    {
+     "q": "Describe **two** techniques a programmer could use to find a bug in a Scratch project.",
+     "m": 2,
+     "a": "Any two: trace the script on paper (1); click blocks one at a time (1); show variables on the stage / add say blocks to display values (1); add waits to slow it down (1); change one thing at a time and retest (1)."
+    }
+   ],
+   "terms": [
+    "Bug",
+    "Debugging",
+    "Logic error"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p12",
+   "spec": "Plan, develop, test and refine a simple game for a user, using a user story and a test table",
+   "summary": "Software is made in cycles: plan, develop, test and refine, then go round again. Start by asking who the game is for and writing a user story ('As a ... I want ... so that ...'). Build one feature at a time, test each one with a test table of normal, boundary and erroneous tests, and refine it using what you find and what users say.",
+   "diagram": {
+    "kind": "cycle",
+    "title": "The development cycle",
+    "caption": "Go round the cycle once for each feature, not just once for the whole game.",
+    "items": [
+     {
+      "label": "Plan",
+      "detail": "Who is it for? Write a user story, sketch the screen, list the sprites, variables and messages."
+     },
+     {
+      "label": "Develop",
+      "detail": "Build one small feature, e.g. moving the bowl with the arrow keys."
+     },
+     {
+      "label": "Test",
+      "detail": "Use a test table: what should happen, what did happen, pass or fail?"
+     },
+     {
+      "label": "Refine",
+      "detail": "Fix bugs and improve it using test results and feedback from real users, then plan the next feature."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Games are not made in one go. Professional developers, including games studios in Belfast, work in **cycles**: they plan a little, build a little, test it and improve it, then go round again. This is called **[[iterative development]]**, and you should make your Scratch games the same way."
+    },
+    {
+     "t": "h",
+     "text": "Step 1: plan for a real user"
+    },
+    {
+     "t": "p",
+     "text": "Before building anything, ask **who is this game for?** A game for a five-year-old cousin needs big buttons, simple controls and no reading; a game for your form class can be faster and harder. Designing around the people who will use it is called **user-centred design**."
+    },
+    {
+     "t": "p",
+     "text": "A **[[user story]]** sums up what a user needs in one sentence: **As a** (type of user) **I want** (something) **so that** (reason)."
+    },
+    {
+     "t": "table",
+     "head": [
+      "User story",
+      "What it tells the designer"
+     ],
+     "rows": [
+      [
+       "As a **Year 8 pupil with five minutes at break**, I want **a quick game with a score** so that **I can try to beat my friends**.",
+       "Short games, a clear score on screen, an easy restart"
+      ],
+      [
+       "As a **P2 pupil who is still learning to read**, I want **picture instructions** so that **I know what to do without help**.",
+       "Few words, big pictures, simple controls"
+      ],
+      [
+       "As a **player who is colour-blind**, I want **the good and bad items to be different shapes** so that **I can tell them apart**.",
+       "Do not rely on colour alone"
+      ]
+     ],
+     "caption": "User stories for a catch game"
+    },
+    {
+     "t": "h",
+     "text": "Our game: Orchard Catch"
+    },
+    {
+     "t": "p",
+     "text": "Armagh is the Orchard County, so our game has apples falling from the top of the stage. The player moves a basket with the arrow keys. Catch an apple: +1 point. Miss one: lose a life. Three lives; the game lasts 30 seconds."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Plan item",
+      "Our game"
+     ],
+     "rows": [
+      [
+       "Sprites",
+       "Basket (player), Apple, Game Over text"
+      ],
+      [
+       "Variables",
+       "score (start 0), lives (start 3), time (start 30)"
+      ],
+      [
+       "Messages",
+       "game over"
+      ],
+      [
+       "Abstraction",
+       "A My Block *reset apple* that sends the apple to a random x at the top"
+      ]
+     ],
+     "caption": "Planning the game"
+    },
+    {
+     "t": "code",
+     "lang": "scratch",
+     "title": "Apple sprite",
+     "code": "[define reset apple]\n[go to x: (pick random (-220) to (220)) y: (170)]\n\n[when green flag clicked]\n[set (score) to (0)]\n[set (lives) to (3)]\n[show]\n[reset apple]\n[repeat until <(lives) = (0)>]\n    [change y by (-5)]\n    [if <touching (Basket)?> then]\n        [change (score) by (1)]\n        [start sound (pop)]\n        [reset apple]\n    [if <(y position) < (-170)> then]\n        [change (lives) by (-1)]\n        [reset apple]\n[hide]\n[broadcast (game over)]",
+     "output": "Develop one feature at a time: the basket's arrow-key script (from the selection page) first, then the falling apple, then scoring, then lives."
+    },
+    {
+     "t": "h",
+     "text": "Step 3: test with a test table"
+    },
+    {
+     "t": "p",
+     "text": "A **[[test table]]** lists each test, the **expected result** (what should happen) and the **actual result** (what did happen). Good testing uses three kinds of **[[test data]]**: **normal** (what you expect a player to do), **boundary** (right at the edges, such as the last life or the edge of the stage) and **erroneous** (things a player should not do, such as pressing the wrong key)."
+    },
+    {
+     "t": "table",
+     "head": [
+      "No.",
+      "Test",
+      "Type",
+      "Expected result",
+      "Actual result",
+      "Pass / fail"
+     ],
+     "rows": [
+      [
+       "1",
+       "Hold the right arrow",
+       "Normal",
+       "Basket moves right",
+       "Basket moves right",
+       "Pass"
+      ],
+      [
+       "2",
+       "Catch an apple",
+       "Normal",
+       "score + 1, pop sound, apple back to top",
+       "As expected",
+       "Pass"
+      ],
+      [
+       "3",
+       "Miss an apple",
+       "Normal",
+       "lives - 1, apple back to top",
+       "lives - 1, apple back to top",
+       "Pass"
+      ],
+      [
+       "4",
+       "Miss with 1 life left",
+       "Boundary",
+       "lives = 0, Game Over shown",
+       "Apple disappears, no Game Over",
+       "**Fail**"
+      ],
+      [
+       "5",
+       "Hold right arrow at the edge",
+       "Boundary",
+       "Basket stops at the edge",
+       "Basket stops at the edge",
+       "Pass"
+      ],
+      [
+       "6",
+       "Press the space bar",
+       "Erroneous",
+       "Nothing happens",
+       "Nothing happens",
+       "Pass"
+      ],
+      [
+       "7",
+       "Click the green flag again",
+       "Normal",
+       "score 0, lives 3, apple shown",
+       "Apple invisible",
+       "**Fail**"
+      ]
+     ],
+     "caption": "Test table for Orchard Catch"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: refine using the test results",
+     "context": "Tests 4 and 7 failed. Suggest the cause of each and a fix.",
+     "steps": [
+      "**Test 4**: the apple broadcasts *game over*, but the Game Over sprite is waiting for *gameover*. The names do not match, so nothing receives it. Fix: choose the same message from the drop-down.",
+      "**Test 7**: the apple hides at the end and the green flag script was missing [show]. Fix: add [show] near the top of the green flag script (as in the script above).",
+      "Then **re-run every test**, not just the ones that failed, in case a fix broke something else."
+     ],
+     "answer": "Fix the message name and add [show], then retest everything."
+    },
+    {
+     "t": "tip",
+     "text": "Refining is not only fixing bugs. Watch someone from your user story play it: is it too fast? Are the instructions clear? Each answer becomes the plan for your next trip round the cycle, such as adding a *speed up every 5 points* feature."
+    },
+    {
+     "t": "note",
+     "text": "New NI curriculum link: **software development follows cycles of planning, development, testing and refinement**, and **user stories** help plan products that meet real users' needs."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Develop in cycles: plan, develop, test, refine, then repeat.",
+      "Start with who the game is for; write a user story: As a ... I want ... so that ...",
+      "Build and test one feature at a time.",
+      "A test table records each test, expected result, actual result and pass/fail.",
+      "Use normal, boundary and erroneous test data.",
+      "After a fix, retest everything."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What are the four stages of the development cycle in order?",
+     "o": [
+      "Plan, develop, test, refine",
+      "Develop, plan, refine, test",
+      "Test, plan, develop, refine",
+      "Plan, test, develop, refine"
+     ],
+     "a": 0,
+     "why": "Plan first, then build, then test, then improve, and go round again."
+    },
+    {
+     "q": "Which is written as a user story?",
+     "o": [
+      "The game has three lives and a 30 second timer",
+      "As a Year 7 pupil I want big buttons so that I can play easily",
+      "Test 4 failed because the message names did not match",
+      "The apple falls 5 steps at a time from the top"
+     ],
+     "a": 1,
+     "why": "User stories follow As a ... I want ... so that ..."
+    },
+    {
+     "q": "In a test table, what is the expected result?",
+     "o": [
+      "What should happen if the program works",
+      "What actually happened in the test",
+      "Whether the test passed or failed",
+      "The kind of data used in the test"
+     ],
+     "a": 0,
+     "why": "Expected = what should happen; actual = what did happen."
+    },
+    {
+     "q": "A game has 3 lives. Which is boundary test data?",
+     "o": [
+      "Catching one apple",
+      "Pressing the space bar",
+      "Losing the last life",
+      "Moving the basket left"
+     ],
+     "a": 2,
+     "why": "Boundary tests are at the edge of what is allowed, e.g. the final life."
+    },
+    {
+     "q": "After fixing a bug, what should you do?",
+     "o": [
+      "Only retest the one test that failed",
+      "Delete the test table as it is finished",
+      "Move on, as fixes never cause new bugs",
+      "Retest all the tests, not just the failed one"
+     ],
+     "a": 3,
+     "why": "A fix can break something else, so retest everything."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write a **user story** for a Scratch maths quiz game for P6 pupils.",
+     "m": 2,
+     "a": "Correct format As a ... I want ... so that ... (1); sensible content linked to P6 pupils' needs, e.g. As a P6 pupil I want the quiz to tell me the right answer when I get it wrong so that I can learn from mistakes (1)."
+    },
+    {
+     "q": "Describe the **four** stages of the development cycle.",
+     "m": 4,
+     "a": "Plan: decide what to make, who it is for, design (1). Develop: build/code a feature (1). Test: check it works using a test table (1). Refine: fix bugs/improve using results and feedback, then repeat (1)."
+    },
+    {
+     "q": "A catch game ends when lives reach 0. Give **one** normal, **one** boundary and **one** erroneous test for this game, with the expected result for each.",
+     "m": 3,
+     "a": "Normal, e.g. miss an apple with 3 lives: lives becomes 2 (1). Boundary, e.g. miss with 1 life left: lives 0 and game over (1). Erroneous, e.g. press a key not used: nothing happens (1)."
+    }
+   ],
+   "terms": [
+    "Iterative development",
+    "User story",
+    "Test table",
+    "Test data"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Scratch",
+   "def": "A free, block-based programming language from the MIT Media Lab. Programs are built by snapping blocks together.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Sprite",
+   "def": "A character or object on the stage that can be programmed with its own scripts, e.g. the Scratch Cat.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Stage",
+   "def": "The area of the Scratch window where the project runs. It is 480 steps wide and 360 steps tall.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Backdrop",
+   "def": "A background picture for the stage. Switching backdrops can show a new level or screen.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Blocks palette",
+   "def": "The part of the Scratch window that lists the blocks in the chosen category, ready to drag.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Script",
+   "def": "A stack of joined blocks that runs from top to bottom, usually started by a hat block.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Event",
+   "def": "Something that happens, such as clicking the green flag or pressing a key, that starts a script.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Sequence",
+   "def": "Carrying out instructions one after another, in order. A Scratch script runs from top to bottom.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Coordinates",
+   "def": "A pair of numbers (x, y) giving an exact position on the stage. The centre is (0, 0).",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Costume",
+   "def": "One of the pictures a sprite can show. Switching costumes changes how the sprite looks.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Loop",
+   "def": "A block that repeats the blocks inside it, such as [repeat (10)], [repeat until] or [forever].",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Iteration",
+   "def": "Repeating a set of instructions using a loop.",
+   "alt": "Repetition",
+   "page": "p05"
+  },
+  {
+   "term": "Count-controlled loop",
+   "def": "A loop that repeats a set number of times, known before it starts, e.g. [repeat (4)].",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Condition-controlled loop",
+   "def": "A loop that repeats until a condition becomes true, e.g. [repeat until <touching (edge)?>].",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Selection",
+   "def": "Choosing which instructions to run depending on a condition, using if or if-else blocks.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Condition",
+   "def": "A test whose answer is either true or false, e.g. <(score) > (10)>.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Boolean",
+   "def": "A value or block that can only be true or false. Boolean blocks have pointed (hexagon) ends.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Sensing",
+   "def": "Scratch blocks that find out what is happening, such as touching, key pressed, mouse position, timer and ask/answer.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Variable",
+   "def": "A named store in memory that holds a value which can change while the program runs, e.g. score.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Data type",
+   "def": "The kind of value stored, such as integer, float, string (text) or Boolean (true/false).",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Operator",
+   "def": "A block or symbol that does something with values: maths (+ - * /), comparisons or joining text.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Comparison operator",
+   "def": "An operator that compares two values and gives true or false: <, = or >.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Broadcast",
+   "def": "A message sent to every sprite and the stage; scripts with a matching [when I receive] block then start.",
+   "alt": "Message",
+   "page": "p08"
+  },
+  {
+   "term": "Abstraction",
+   "def": "Hiding detail that is not needed and giving a set of instructions a simple name, to reduce complexity.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "My Block",
+   "def": "A custom block you define yourself in the My Blocks category and can use as often as you like.",
+   "alt": "Custom block",
+   "page": "p09"
+  },
+  {
+   "term": "Parameter",
+   "def": "An input to a custom block or function that lets it do slightly different jobs, e.g. the number of sides.",
+   "alt": "Input",
+   "page": "p09"
+  },
+  {
+   "term": "Model",
+   "def": "A simplified representation of a real system that keeps only the parts that matter.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Simulation",
+   "def": "Running a model to see what happens over time or to test a prediction.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Bug",
+   "def": "An error in a program that stops it working as it should.",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "Debugging",
+   "def": "Finding and fixing bugs in a program.",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "Logic error",
+   "def": "An error where the program runs but does the wrong thing, e.g. blocks in the wrong order.",
+   "alt": "",
+   "page": "p11"
+  },
+  {
+   "term": "Iterative development",
+   "def": "Making software in repeated cycles of planning, developing, testing and refining.",
+   "alt": "Development cycle",
+   "page": "p12"
+  },
+  {
+   "term": "User story",
+   "def": "A short sentence describing what a user needs: As a ... I want ... so that ...",
+   "alt": "",
+   "page": "p12"
+  },
+  {
+   "term": "Test table",
+   "def": "A table listing each test with its expected result, actual result and whether it passed.",
+   "alt": "Test plan",
+   "page": "p12"
+  },
+  {
+   "term": "Test data",
+   "def": "Values or actions used to test a program: normal, boundary and erroneous.",
+   "alt": "",
+   "page": "p12"
+  }
+ ]
+}
