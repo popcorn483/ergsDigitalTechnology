@@ -229,6 +229,9 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 @media print{body{background:#fff;color:#000} .bar,.back,.tabs,.cd,.lead,.brand,h1,.noprint{display:none!important} .wrap{padding:0;max-width:none} .u{border:0;padding:0;break-inside:auto} .u[hidden]{display:none} a{color:#000}
  .card{box-shadow:none;border:0;padding:0} #tr-print-h{display:block;font-size:18px;margin:0 0 8px} .tr-scroll{overflow:visible} #tr-grid{min-width:0;font-size:10px} .tr-tn{min-width:0} .tr-open::after{display:none}
  .tr-c,.tr-duebox,.tr-due,.tr-bt i{-webkit-print-color-adjust:exact;print-color-adjust:exact} .cd-sow{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.tt-t{width:100%;border-collapse:collapse;font-size:14px;margin:8px 0}.tt-t th,.tt-t td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}.tt-sort{border:0;background:none;font:inherit;font-weight:700;color:var(--ink-2);cursor:pointer;padding:0}.tt-sort.on{color:var(--accent)}.tt-none td{color:var(--ink-3)}
+.tt-sc{display:inline-block;min-width:44px;text-align:center;padding:2px 6px;border-radius:6px;font-weight:700}.tt-sc.hi{background:#E3F4EA;color:#17663F}.tt-sc.mid{background:#FFF3D6;color:#7A5200}.tt-sc.lo{background:#FCE4E2;color:#A3241B}
+.tt-ql{padding-left:0;list-style:none;margin:8px 0}.tt-ql li{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}.tt-ql p{margin:0 0 4px}.tt-ok{color:#17663F;font-weight:700}.tt-no{color:#A3241B}
 </style></head><body><div class="wrap">
 <a class="back" href="index.html">‹ Revision site</a>
 <div class="hrow"><h1>Teacher area</h1><button type="button" class="ib" aria-expanded="false" aria-controls="i-lead" aria-label="About the Teacher area" title="About the Teacher area"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
@@ -472,16 +475,17 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
  <div id="ac-on" hidden>
   <div class="hrow" id="ac-keyrow" hidden><input type="password" id="ac-key" placeholder="Teacher key" aria-label="Teacher key (TEACHER_KEY in the Apps Script)" autocomplete="off" style="font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:9px;min-width:0;flex:1;max-width:260px"><button type="button" class="tp-mini" id="ac-save">Show activity</button></div>
   <div class="tp-tools" id="ac-tools" hidden><div class="ac-qrow" id="ac-qrow"><input type="search" id="ac-q" placeholder="Find a pupil" aria-label="Find a pupil by name or class" autocomplete="off"><button type="button" class="tp-mini" id="ac-sel" aria-pressed="false">Select</button></div><select id="ac-tch" aria-label="Teacher"></select><select id="ac-yr" aria-label="Year group"></select><select id="ac-cls" aria-label="Class"></select><select id="ac-sort" aria-label="Sort pupils"><option value="class">Sort: by class</option><optgroup label="Name"><option value="name">First name A–Z</option><option value="surname">Surname A–Z</option></optgroup><optgroup label="Time revising"><option value="total">Most time in total</option><option value="totalAsc">Least time in total</option><option value="week">Most time this week</option><option value="weekAsc">Least time this week</option><option value="days">Most days revised</option></optgroup><optgroup label="Activity"><option value="last">Most recently active</option><option value="lastAsc">Not seen for longest</option></optgroup><optgroup label="Progress"><option value="prog">Most pages covered</option><option value="progAsc">Fewest pages covered</option><option value="quiz">Best page-quiz average</option><option value="quizAsc">Lowest page-quiz average</option></optgroup></select><details class="ac-more"><summary class="tp-mini" aria-label="More">⋯</summary><div class="ac-menu"><button type="button" id="ac-refresh">Refresh</button><button type="button" id="ac-csv">Download CSV</button><button type="button" id="ac-forget">Forget key on this device</button><button type="button" id="ac-mailtest">Send a test email</button><button type="button" id="ac-staffout">Sign out of staff mode on this device</button></div></details></div>
-  <div class="ac-view" id="ac-view" role="tablist" aria-label="Show" hidden><button type="button" role="tab" data-v="pupils" aria-selected="true">Pupils</button><button type="button" role="tab" data-v="classes" aria-selected="false">Classes &amp; zones<span class="t-badge" id="cl-badge" hidden></span></button><button type="button" role="tab" data-v="topics" aria-selected="false">Topics</button><button type="button" role="tab" data-v="work" aria-selected="false">Set work &amp; messages</button><button type="button" role="tab" data-v="reports" aria-selected="false">Reports</button><button type="button" role="tab" data-v="week" aria-selected="false">Weekly report</button></div>
+  <div class="ac-view" id="ac-view" role="tablist" aria-label="Show" hidden><button type="button" role="tab" data-v="pupils" aria-selected="true">Pupils</button><button type="button" role="tab" data-v="classes" aria-selected="false">Classes &amp; zones<span class="t-badge" id="cl-badge" hidden></span></button><button type="button" role="tab" data-v="topics" aria-selected="false">Topics</button><button type="button" role="tab" data-v="tests" aria-selected="false">Topic tests</button><button type="button" role="tab" data-v="work" aria-selected="false">Set work &amp; messages</button><button type="button" role="tab" data-v="reports" aria-selected="false">Reports</button><button type="button" role="tab" data-v="week" aria-selected="false">Weekly report</button></div>
   <p class="tp-status" id="ac-status" role="status" aria-live="polite" hidden></p>
   <div class="ac-live card" id="ac-live" hidden></div>
   <div class="ac-req card" id="ac-req" hidden></div>
   <div class="ac-req ac-zr card" id="ac-zr" hidden></div>
   <div class="ac-att card" id="ac-att" hidden></div>
-  <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><button type="button" class="tp-mini" id="ac-selall">Select all shown</button><span class="ac-bsp"></span><button type="button" class="tp-mini" id="ac-msg">Message</button><button type="button" class="tp-mini" id="ac-move">Move to class</button><button type="button" class="tp-mini" id="ac-zones">Zones</button><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-pin">Reset PIN</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Done</button></div>
+  <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><button type="button" class="tp-mini" id="ac-selall">Select all shown</button><span class="ac-bsp"></span><button type="button" class="tp-mini" id="ac-msg">Message</button><button type="button" class="tp-mini" id="ac-test">Set a test</button><button type="button" class="tp-mini" id="ac-move">Move to class</button><button type="button" class="tp-mini" id="ac-zones">Zones</button><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-pin">Reset PIN</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Done</button></div>
   <div class="ac-panel card" id="ac-panel" hidden></div>
   <div class="card tg-w" id="tg-wrap" hidden><h3>Topics</h3><div id="tg-body"></div></div>
   <div class="sw-w" id="sw-wrap" hidden><div id="sw-body"></div></div>
+  <div class="sw-w" id="tt-wrap" hidden><div id="tt-body"></div></div>
   <div class="card rp-w" id="rp-wrap" hidden><div id="rp-body"></div></div>
   <div class="cl-w" id="cl-wrap" hidden><div id="cl-body"></div></div>
   <div class="card wk" id="wk-wrap" hidden><div class="wk-h"><h3>Weekly report</h3><span class="wk-nav"><button type="button" class="tp-mini" id="wk-prev" aria-label="Previous week">‹</button><b id="wk-range"></b><button type="button" class="tp-mini" id="wk-next" aria-label="Next week">›</button><button type="button" class="tp-mini" id="wk-print">Print</button></span></div><p class="small" id="wk-sum"></p><div id="wk-body"></div></div>
@@ -2381,6 +2385,10 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const busy = (btn, f) => async () => { btn.disabled = true; try { const r = await f(); if (!r || !r.ok) throw new Error(r && r.error || 'failed'); SEL.clear(); SELMODE = false; box.hidden = true; await load(); status(kind === 'delete' ? 'Deleted.' : kind === 'merge' ? 'Merged.' : kind === 'pin' ? 'PIN reset.' : kind === 'move' ? 'Moved.' : kind === 'msg' ? 'Message sent.' : kind === 'zones' ? 'Zones saved.' : 'Renamed.', 'ok'); }
       catch (e) { status('That didn’t work: ' + e.message + '. If you’ve just updated the Apps Script, check you deployed it as a new version.', 'warn'); btn.disabled = false; } };
     const cancel = el('button', { type: 'button', class: 'tp-mini', text: 'Cancel', onclick: () => { box.hidden = true; } });
+    if (kind === 'test') {   /* a topic test for just the ticked pupils */
+      const go = async () => { if (!TIDX) { try { TIDX = (await fetch('tests/index.json', { cache: 'no-cache' }).then(r => r.json())).tests || []; } catch (e) { TIDX = []; } } box.innerHTML = ''; box.append(setTestForm(ps.map(p => p.id)), el('div', { class: 'ac-row' }, cancel)); };
+      go(); return;
+    }
     if (kind === 'msg') {   /* one message to every ticked pupil: each sees it the next time they open the guide */
       const ta = el('textarea', { rows: '4', maxlength: '500', placeholder: 'A short message. Each pupil sees it the next time they open the guide.', style: 'width:100%;box-sizing:border-box;font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:inherit' });
       const cnt = el('small', { class: 'small', text: '0 / 500' }); ta.addEventListener('input', () => { cnt.textContent = `${ta.value.length} / 500`; });
@@ -2445,12 +2453,13 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     $$('#ac-view [data-v]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === VIEW)));
     const wk = VIEW === 'week', pu = VIEW === 'pupils';
     $('#ac-wrap').hidden = !pu; $('#ac-pd').hidden = !pu || !OPEN; $('#wk-wrap').hidden = !wk; $('#ac-sort').hidden = !pu; $('#ac-qrow').hidden = !pu;
-    $('#tg-wrap').hidden = VIEW !== 'topics'; $('#sw-wrap').hidden = VIEW !== 'work'; $('#rp-wrap').hidden = VIEW !== 'reports'; $('#cl-wrap').hidden = VIEW !== 'classes';
+    $('#tg-wrap').hidden = VIEW !== 'topics'; $('#sw-wrap').hidden = VIEW !== 'work'; $('#tt-wrap').hidden = VIEW !== 'tests'; $('#rp-wrap').hidden = VIEW !== 'reports'; $('#cl-wrap').hidden = VIEW !== 'classes';
     const zr = $('#ac-zr'); if (zr && !pu) zr.hidden = true; if (VIEW === 'classes') classesView();
     const lv = $('#ac-live'); if (lv && !pu) lv.hidden = true; const at = $('#ac-att'); if (at && !pu) at.hidden = true; const rq = $('#ac-req'); if (rq && !pu) rq.hidden = true;
     if (wk) week();
     if (VIEW === 'topics') topics();
     if (VIEW === 'work') work();
+    if (VIEW === 'tests') testsView();
     if (VIEW === 'reports') reports();
     if (pu) { requests(); zreqs(); live(); attention(); }
   }
@@ -2604,6 +2613,97 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       ml.append(el('li', {}, el('div', {}, el('b', { text: toTxt }), el('small', { text: ` · ${when(m.at)} · read by ${m.read.length}${ps.length > 1 ? ` of ${ps.length}` : ''}` }), el('p', { text: m.text })), el('button', { type: 'button', class: 'tp-mini', text: 'Delete', onclick: async () => { await api({ action: 'delmsg', mid: m.id }); work(true); } }))); });
     box.append(el('div', { class: 'card sw-f' }, el('h4', { text: 'Send a message' }), el('div', { class: 'sw-g' }, el('label', { class: 'w2' }, document.createTextNode('To'), mTo), el('label', { class: 'w2' }, document.createTextNode('Message'), mT)), send), MSGS && MSGS.length ? el('h4', { text: 'Messages sent' }) : null, ml);
     if (MSG_TO) { const t = $('#sw-msg-text'); if (t) setTimeout(() => t.scrollIntoView({ behavior: 'smooth', block: 'center' }), 50); }
+  }
+  /* ---------- TOPIC TESTS: set a 100-question test for a class, year or picked pupils; see scores, who hasn't done it, and the hardest questions ---------- */
+  let TT = null, TRES = null, TIDX = null, TT_OPEN = null, TT_SORT = 'name';
+  const TUN = { Y8: 'Year 8', Y9: 'Year 9', Y10: 'Year 10', Y0: 'KS3 topic library', U1: 'GCSE Unit 1', U4: 'GCSE Unit 4', U5: 'GCSE Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+  const tName = t => { const x = (TIDX || []).find(i => i.book === t.book && i.ch === t.ch); return `${TUN[t.book] || t.book} · ${x ? x.n + '. ' + x.title : t.ch}`; };
+  const tpc = (a, b) => b ? Math.round(a / b * 100) : 0;
+  async function testsView(reload) {
+    const box = $('#tt-body'); if (!box || !DATA) return;
+    if (!TIDX) { try { TIDX = (await fetch('tests/index.json', { cache: 'no-cache' }).then(r => r.json())).tests || []; } catch (e) { TIDX = []; } }
+    if (!TT || reload) { box.innerHTML = '<p class="small">Loading…</p>'; try { const j = await api({ action: 'tests' }); if (!j || !j.ok) throw new Error(j && j.error === 'unknown action' ? 'paste in Apps Script version 22 and deploy it as a new version' : (j && j.error) || 'failed'); TT = j.tests || []; TRES = j.results || []; } catch (e) { box.innerHTML = `<p class="tp-status warn">Couldn’t load topic tests: ${e.message}.</p>`; return; } }
+    box.innerHTML = '';
+    box.append(setTestForm([]));
+    const wl = el('div', { class: 'sw-l' });
+    if (!TT.length) wl.append(el('p', { class: 'small', text: 'No tests set yet. Pick a class and a topic above.' }));
+    TT.slice().sort((a, b) => b.at - a.at).forEach(t => wl.append(testCard(t)));
+    box.append(el('h4', { text: 'Tests set' }), wl);
+  }
+  function setTestForm(ids) {
+    const sel = (opts, v) => { const s2 = el('select', {}); opts.forEach(([k, t]) => { const o = el('option', { value: k, text: t }); if (k === v) o.selected = true; s2.append(o); }); return s2; };
+    if (!TIDX || !TIDX.length) return el('div', { class: 'card sw-f' }, el('p', { class: 'small', text: 'No question banks found (tests/index.json).' }));
+    const books = [...new Set(TIDX.map(t => t.book))];
+    const fWho = ids.length ? null : sel(whoOpts(), cls || (yr ? 'Y' + yr : 'ALL'));
+    const fU = sel(books.map(b => [b, TUN[b] || b]), books.includes(TU) ? TU : books[0]), fC = el('select', {}), fD = el('input', { type: 'date' }), fN = el('input', { type: 'text', maxlength: '200', placeholder: 'Note (optional), e.g. Do it in one sitting' });
+    const pv = el('a', { class: 'tp-mini', target: '_blank', rel: 'noopener', text: 'Try it yourself ↗' });
+    const fillC = () => { fC.innerHTML = ''; TIDX.filter(t => t.book === fU.value).forEach(t => fC.append(el('option', { value: t.ch, text: `${t.n}. ${t.title} (${t.q} questions)` }))); paintPv(); };
+    const paintPv = () => { pv.href = `test.html?book=${fU.value}&ch=${fC.value}`; };
+    fU.addEventListener('change', fillC); fC.addEventListener('change', paintPv); fillC();
+    const go = el('button', { type: 'button', class: 'tp-mini pri', text: ids.length ? `Set for ${ids.length} pupil${ids.length === 1 ? '' : 's'}` : 'Set this test' });
+    go.addEventListener('click', async () => { go.disabled = true;
+      try { const r = await api(Object.assign({ action: 'settest', book: fU.value, ch: fC.value, due: fD.value, note: fN.value }, ids.length ? { ids: ids.join(',') } : { who: fWho.value })); if (!r || !r.ok) throw new Error(r && r.error === 'unknown action' ? 'paste in Apps Script version 22 first' : 'failed');
+        status('Test set. Pupils see it the next time they open the app.', 'ok'); if (ids.length) { SEL.clear(); SELMODE = false; $('#ac-panel').hidden = true; render(); } TT = null; if (VIEW === 'tests') testsView(true); }
+      catch (e) { status('Couldn’t set that test: ' + e.message + '.', 'warn'); go.disabled = false; } });
+    return el('div', { class: 'card sw-f' }, el('h4', { text: 'Set a topic test' }), el('p', { class: 'small', text: '100 multiple-choice questions on one topic. It marks itself; pupils see their score, their mistakes with explanations and which pages to revise. Each attempt is recorded here.' }),
+      el('div', { class: 'sw-g' }, fWho ? el('label', {}, document.createTextNode('For'), fWho) : null, el('label', {}, document.createTextNode('Course'), fU), el('label', { class: 'w2' }, document.createTextNode('Topic'), fC), el('label', {}, document.createTextNode('Due'), fD), el('label', { class: 'w2' }, document.createTextNode('Note'), fN)),
+      el('div', { class: 'ac-row' }, go, pv));
+  }
+  function testRows(t) {   /* each pupil the test is for: their attempts at this topic */
+    const ps = DATA.filter(p => matchWho(t.who, p)), mine = (TRES || []).filter(r => r.book === t.book && r.ch === t.ch);
+    return ps.map(p => { const a = mine.filter(r => r.id === p.id).sort((x, y) => x.at - y.at);
+      return { p, n: a.length, first: a[0] ? tpc(a[0].score, a[0].of) : null, best: a.length ? Math.max(...a.map(r => tpc(r.score, r.of))) : null, last: a.length ? a[a.length - 1] : null, min: a[0] ? a[0].min : null }; });
+  }
+  function testCard(t) {
+    const rows = testRows(t), done = rows.filter(r => r.n), none = rows.filter(r => !r.n), sc = done.map(r => r.best);
+    const avg = sc.length ? Math.round(sc.reduce((a, b) => a + b, 0) / sc.length) : null, late = t.due && t.due < new Date().toISOString().slice(0, 10);
+    const forTxt = t.who.includes(',') ? `${t.who.split(',').length} pupils` : t.who === 'ALL' ? 'everyone' : t.who.replace(/^Y(\d+)$/, 'Year $1');
+    const body = el('div', { class: 'tt-res' }); const open = TT_OPEN === t.id;
+    const tog = el('button', { type: 'button', class: 'tp-mini pri', text: open ? 'Hide results' : 'Results', 'aria-expanded': String(open) });
+    tog.addEventListener('click', () => { TT_OPEN = TT_OPEN === t.id ? null : t.id; testsView(); });
+    const nudge = none.length ? el('button', { type: 'button', class: 'tp-mini', text: `Message the ${none.length} not done`, onclick: () => { SEL.clear(); none.forEach(r => SEL.add(r.p.id)); VIEW = 'pupils'; LS.set('teacher.actview', VIEW); view(); render(); panel('msg'); const ta = $('#ac-panel textarea'); if (ta) ta.value = `Please do the ${tName(t)} topic test${t.due ? ' by ' + t.due : ''}. Open the app: it’s on your home page.`; } }) : null;
+    const del = el('button', { type: 'button', class: 'tp-mini', text: 'Remove', onclick: async () => { if (!confirm('Remove this test? Pupils’ results stay saved.')) return; await api({ action: 'deltest', tid: t.id }); testsView(true); } });
+    const card = el('div', { class: 'card sw-i' + (late && none.length ? ' late' : '') },
+      el('div', { class: 'sw-h' }, el('b', { text: tName(t) }), el('small', { text: `for ${forTxt}${t.due ? ' · due ' + t.due : ''}${late ? ' (past due)' : ''} · set ${new Date(t.at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}` })),
+      t.note ? el('p', { class: 'small', text: t.note }) : null,
+      el('div', { class: 'sw-bar' }, el('i', { class: 'd', style: `width:${rows.length ? done.length / rows.length * 100 : 0}%` })),
+      el('p', { class: 'small', text: `${done.length} of ${rows.length} done` + (avg != null ? ` · average best score ${avg}% · highest ${Math.max(...sc)}% · lowest ${Math.min(...sc)}%` : '') + (none.length && none.length <= 8 ? ` · not done: ${none.map(r => r.p.name).join(', ')}` : '') }),
+      el('div', { class: 'ac-row' }, tog, nudge, el('a', { class: 'tp-mini', href: `test.html?book=${t.book}&ch=${t.ch}`, target: '_blank', rel: 'noopener', text: 'Preview ↗' }), del), body);
+    if (open) resultsTable(t, rows, body);
+    return card;
+  }
+  function resultsTable(t, rows, box) {
+    const S2 = { name: (a, b) => a.p.name.localeCompare(b.p.name), cls: (a, b) => a.p.cls.localeCompare(b.p.cls, undefined, { numeric: true }) || a.p.name.localeCompare(b.p.name), best: (a, b) => (b.best ?? -1) - (a.best ?? -1), first: (a, b) => (b.first ?? -1) - (a.first ?? -1), n: (a, b) => b.n - a.n, min: (a, b) => (b.min ?? -1) - (a.min ?? -1), last: (a, b) => ((b.last && b.last.at) || 0) - ((a.last && a.last.at) || 0) };
+    const COLS = [['name', 'Pupil'], ['cls', 'Class'], ['best', 'Best'], ['first', 'First try'], ['n', 'Tries'], ['min', 'Minutes'], ['last', 'Last done']];
+    const tb = el('table', { class: 'tt-t' }), hr = el('tr');
+    COLS.forEach(([k, txt]) => hr.append(el('th', {}, el('button', { type: 'button', class: 'tt-sort' + (TT_SORT === k ? ' on' : ''), text: txt + (TT_SORT === k ? ' ▾' : ''), onclick: () => { TT_SORT = k; testsView(); } }))));
+    const body = el('tbody');
+    rows.slice().sort(S2[TT_SORT] || S2.name).forEach(r => { const c = r.best == null ? '' : r.best >= 70 ? 'hi' : r.best < 40 ? 'lo' : 'mid';
+      body.append(el('tr', { class: r.n ? '' : 'tt-none' }, el('td', {}, el('button', { type: 'button', class: 'lv-n', text: r.p.name, onclick: () => { VIEW = 'pupils'; OPEN = r.p.id; LS.set('teacher.actview', VIEW); view(); render(); } })), el('td', { text: r.p.cls }),
+        el('td', {}, r.best == null ? el('span', { class: 'small', text: 'not done' }) : el('b', { class: 'tt-sc ' + c, text: r.best + '%' })), el('td', { text: r.first == null ? '–' : r.first + '%' }), el('td', { text: String(r.n || '–') }), el('td', { text: r.min == null ? '–' : String(r.min) }), el('td', { text: r.last ? when(r.last.at) : '–' }))); });
+    tb.append(el('thead', {}, hr), body);
+    const csv = el('button', { type: 'button', class: 'tp-mini', text: 'Download as a spreadsheet (CSV)', onclick: () => {
+      const q = v => `"${String(v == null ? '' : v).replace(/"/g, '""')}"`, lines = [['Pupil', 'Class', 'Best %', 'First try %', 'Tries', 'Minutes (first try)', 'Last done'].map(q).join(',')];
+      rows.forEach(r => lines.push([r.p.name, r.p.cls, r.best, r.first, r.n, r.min, r.last ? new Date(r.last.at).toLocaleString('en-GB') : ''].map(q).join(',')));
+      const a = el('a', { href: URL.createObjectURL(new Blob(['﻿' + lines.join('\r\n')], { type: 'text/csv' })), download: `${t.book}-${t.ch} topic test results.csv` }); document.body.append(a); a.click(); a.remove(); } });
+    const qa = el('div', { class: 'tt-qa' }), qb = el('button', { type: 'button', class: 'tp-mini', text: 'Question analysis: which questions they got wrong' });
+    qb.addEventListener('click', () => { qb.remove(); questionAnalysis(t, rows, qa); });
+    box.append(el('div', { class: 'tg-s' }, tb), el('div', { class: 'ac-row' }, qb, csv), qa);
+  }
+  async function questionAnalysis(t, rows, box) {
+    box.innerHTML = '<p class="small">Loading answers…</p>';
+    let bank, res; try { [bank, res] = await Promise.all([fetch(`tests/${t.book}/${t.ch}.json`, { cache: 'no-cache' }).then(r => r.json()), api({ action: 'testres', book: t.book, ch: t.ch })]); if (!res || !res.ok) throw 0; } catch (e) { box.innerHTML = '<p class="tp-status warn">Couldn’t load the answers.</p>'; return; }
+    const ids = new Set(rows.map(r => r.p.id)), first = {};   /* each pupil's first attempt: the fairest picture of what they knew */
+    res.results.filter(r => ids.has(r.id)).sort((a, b) => a.at - b.at).forEach(r => { if (!first[r.id]) first[r.id] = r; });
+    const att = Object.values(first); if (!att.length) { box.innerHTML = '<p class="small">No one in this group has finished it yet.</p>'; return; }
+    const st = bank.q.map((q, i) => { let right = 0, n = 0; const wrong = {}; att.forEach(a => { const x = a.ans[i]; if (x == null) return; n++; if (x === String(q.a)) right++; else wrong[x] = (wrong[x] || 0) + 1; }); return { i, q, right, n, wrong }; }).filter(x => x.n);
+    st.sort((a, b) => a.right / a.n - b.right / b.n);
+    const L = 'ABCD', show = k => { box.innerHTML = ''; box.append(el('h4', { text: `Hardest questions (first attempts, ${att.length} pupil${att.length === 1 ? '' : 's'})` }), el('p', { class: 'small', text: 'Lowest share right first. “Most chose” is the wrong answer picked most often: usually the misconception to reteach.' }));
+      const ol = el('ol', { class: 'tt-ql' });
+      st.slice(0, k).forEach(x => { const w = Object.entries(x.wrong).sort((a, b) => b[1] - a[1])[0], wo = w && w[0] !== '-' ? x.q.o[+w[0]] : null;
+        ol.append(el('li', {}, el('b', { class: 'tt-sc ' + (x.right / x.n < 0.4 ? 'lo' : x.right / x.n < 0.7 ? 'mid' : 'hi'), text: tpc(x.right, x.n) + '%' }), el('div', {}, el('p', { text: x.q.q }), el('p', { class: 'small' }, el('span', { class: 'tt-ok', text: '✓ ' + x.q.o[x.q.a] }), wo ? el('span', { class: 'tt-no', text: ` · most chose ✗ ${wo} (${w[1]})` }) : null), bank.pages && bank.pages[x.q.p] ? el('a', { class: 'small', href: `notes/${t.book}.html#${x.q.p}`, target: '_blank', rel: 'noopener', text: 'Workbook page: ' + bank.pages[x.q.p] + ' ↗' }) : null))); });
+      box.append(ol); if (k < st.length) box.append(el('button', { type: 'button', class: 'tp-mini', text: `Show all ${st.length}`, onclick: () => show(st.length) })); };
+    show(15);
   }
   /* ---------- REPORTS: who's using it (a usage grid), day by day (what each pupil studied), and a printable overview of one pupil ---------- */
   const H = x => String(x == null ? '' : x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
@@ -2761,7 +2861,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     $('#ac-staffout').addEventListener('click', () => { if (!confirm('Sign this device out of staff mode? It will ask for the staff password to open the Teacher area, and pupils signing in here will be counted.')) return; ['mrb-staff-ok', 'notes-nocount', 'teacher.nocount-set', 'teacher.actkey'].forEach(k => LS.set(k, null)); location.href = 'index.html'; });
     $('#ac-refresh').addEventListener('click', () => { Object.keys(DET).forEach(k => delete DET[k]); load(); });
     $('#ac-selall').addEventListener('click', () => { const vis = shownNow(), all = vis.length && vis.every(p => SEL.has(p.id)); vis.forEach(p => { if (all) SEL.delete(p.id); else SEL.add(p.id); }); render(); });
-    $('#ac-msg').addEventListener('click', () => panel('msg')); $('#ac-move').addEventListener('click', () => panel('move')); $('#ac-zones').addEventListener('click', () => panel('zones'));
+    $('#ac-msg').addEventListener('click', () => panel('msg')); $('#ac-test').addEventListener('click', () => panel('test')); $('#ac-move').addEventListener('click', () => panel('move')); $('#ac-zones').addEventListener('click', () => panel('zones'));
     $('#ac-tch').addEventListener('change', e => { tch = e.target.value; LS.set('teacher.acttch', tch); cls = ''; LS.set('teacher.actcls', ''); render(); week(); });
     $('#ac-merge').addEventListener('click', () => panel('merge')); $('#ac-rename').addEventListener('click', () => panel('rename')); $('#ac-pin').addEventListener('click', () => panel('pin')); $('#ac-del').addEventListener('click', () => panel('delete'));
     $('#ac-clear').addEventListener('click', () => { SEL.clear(); SELMODE = false; render(); });

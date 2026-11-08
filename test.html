@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Topic test</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="app-icons/favicon-32.png" sizes="32x32">
+<link rel="manifest" href="manifest.webmanifest">
+<style>
+@font-face{font-family:'Atkinson Hyperlegible';src:url('fonts/AtkinsonHyperlegible-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Atkinson Hyperlegible';src:url('fonts/AtkinsonHyperlegible-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+:root{--sans:'Atkinson Hyperlegible','Segoe UI',system-ui,sans-serif;--bg:#EEF2F7;--paper:#fff;--ink:#16213A;--ink-2:#3B4660;--ink-3:#5F6A7A;--line:#D3D9E2;--accent:#1F5FBF;--accent-2:#E8F0FC;--ok:#17784A;--ok-2:#E6F4EC;--bad:#B3261E;--bad-2:#FCEBEA;--flag:#B76E00;--flag-2:#FFF3DC}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1524;--paper:#18213A;--ink:#EEF2FA;--ink-2:#C9D1E3;--ink-3:#97A2BA;--line:#2D3A58;--accent:#6EA2FF;--accent-2:#1D2C4D;--ok:#5FD39A;--ok-2:#173528;--bad:#FF8A80;--bad-2:#3D1D1D;--flag:#FFC163;--flag-2:#3A2C10}}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.5 var(--sans);-webkit-text-size-adjust:100%}
+button{font:inherit;color:inherit}
+.top{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:1px solid var(--line);padding:10px 16px calc(10px);display:flex;align-items:center;gap:10px}
+.top a,.top button.lnk{display:inline-flex;align-items:center;gap:6px;color:var(--ink-2);text-decoration:none;font-weight:700;font-size:15px;background:none;border:0;padding:6px 4px;cursor:pointer}
+.top .t{flex:1;min-width:0;font-weight:700;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;margin:0 16px}
+.bar i{display:block;height:100%;background:var(--accent);width:0;transition:width .25s}
+main{max-width:720px;margin:0 auto;padding:18px 16px 120px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:20px}
+h1{font-size:26px;line-height:1.2;margin:0 0 6px}
+h2{font-size:20px;margin:22px 0 10px}
+.eyebrow{font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin:0 0 6px}
+.muted{color:var(--ink-3)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:16px 0}
+.facts div{background:var(--bg);border-radius:12px;padding:10px;text-align:center}
+.facts b{display:block;font-size:22px}
+.facts small{color:var(--ink-3);font-size:13px}
+ul.how{padding-left:20px;margin:10px 0 18px}
+ul.how li{margin:6px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 20px;border-radius:12px;border:1px solid var(--line);background:var(--paper);font-weight:700;cursor:pointer;text-decoration:none;color:var(--ink)}
+.btn.pri{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.wide{width:100%}
+.btn:disabled{opacity:.45;cursor:default}
+.qn{display:flex;justify-content:space-between;align-items:center;margin:0 0 10px;font-weight:700;color:var(--ink-3);font-size:15px}
+.qtext{font-size:20px;line-height:1.45;font-weight:700;margin:0 0 18px;white-space:pre-wrap}
+.opts{display:grid;gap:10px}
+.opt{display:flex;align-items:flex-start;gap:12px;width:100%;text-align:left;padding:14px;border:2px solid var(--line);border-radius:14px;background:var(--paper);cursor:pointer;font-size:17px;line-height:1.4;min-height:58px}
+.opt .k{flex:0 0 32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:700;background:var(--bg);color:var(--ink-2)}
+.opt[aria-checked="true"]{border-color:var(--accent);background:var(--accent-2)}
+.opt[aria-checked="true"] .k{background:var(--accent);color:#fff}
+.opt:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.foot{position:fixed;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));z-index:5}
+.foot .in{max-width:720px;margin:0 auto;display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center}
+.foot .mid{display:flex;justify-content:center;gap:8px}
+.chip{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;cursor:pointer;min-height:44px}
+.chip[aria-pressed="true"]{background:var(--flag-2);border-color:var(--flag);color:var(--flag)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(44px,1fr));gap:6px;margin:12px 0}
+.grid button{min-height:44px;border-radius:10px;border:1px solid var(--line);background:var(--paper);font-weight:700;cursor:pointer;font-size:14px;position:relative}
+.grid button.a{background:var(--accent-2);border-color:var(--accent);color:var(--accent)}
+.grid button.f::after{content:'';position:absolute;top:4px;right:4px;width:8px;height:8px;border-radius:50%;background:var(--flag)}
+.grid button.cur{outline:3px solid var(--ink);outline-offset:1px}
+.grid button.r{background:var(--ok-2);border-color:var(--ok);color:var(--ok)}
+.grid button.w{background:var(--bad-2);border-color:var(--bad);color:var(--bad)}
+.key{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;color:var(--ink-3)}
+.key i{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px;margin-right:4px;border:1px solid var(--line)}
+.ov{position:fixed;inset:0;background:rgba(10,14,24,.55);z-index:20;display:grid;place-items:end center}
+.ov .sheet{background:var(--paper);width:min(720px,100%);max-height:88dvh;overflow:auto;border-radius:18px 18px 0 0;padding:18px 16px calc(18px + env(safe-area-inset-bottom))}
+@media (min-width:700px){.ov{place-items:center}.ov .sheet{border-radius:18px}}
+.score{font-size:64px;font-weight:700;line-height:1;margin:8px 0}
+.ring{display:flex;align-items:center;gap:18px}
+.msg{font-size:18px;font-weight:700}
+.sec{display:grid;gap:8px;margin:10px 0}
+.sec a{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);background:var(--paper)}
+.sec a small{color:var(--ink-3);grid-column:1/-1}
+.sec .pc{font-weight:700}
+.sec .m{height:6px;border-radius:3px;background:var(--line);grid-column:1/-1;overflow:hidden}
+.sec .m i{display:block;height:100%;background:var(--ok)}
+.sec .lo .m i{background:var(--bad)}
+.rv{border:1px solid var(--line);border-radius:14px;padding:14px;margin:10px 0;background:var(--paper)}
+.rv p{margin:0 0 8px}
+.rv .y{color:var(--bad);font-weight:700}
+.rv .c{color:var(--ok);font-weight:700}
+.rv .why{color:var(--ink-2);font-size:15px;background:var(--bg);border-radius:10px;padding:8px 10px}
+.rv a{font-size:14px;font-weight:700;color:var(--accent)}
+.note{background:var(--flag-2);color:var(--ink);border-radius:12px;padding:10px 12px;font-size:15px;margin:12px 0}
+.err{background:var(--bad-2);border-radius:12px;padding:12px;margin:12px 0}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.row .btn{flex:1}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<header class="top"><a href="index.html" id="back">← Home</a><span class="t" id="ttl">Topic test</span><button type="button" class="lnk" id="map-b" hidden>☷ All questions</button></header>
+<div class="bar" aria-hidden="true"><i id="bar-i"></i></div>
+<main id="main"><p class="muted">Loading the test…</p></main>
+<div class="foot" id="foot" hidden><div class="in"><button type="button" class="btn" id="prev" aria-label="Previous question">‹ Back</button><div class="mid"><button type="button" class="chip" id="flag" aria-pressed="false">⚑ Flag</button></div><button type="button" class="btn pri" id="next">Next ›</button></div></div>
+<div class="sr" aria-live="polite" id="live"></div>
+<script>
+(function () {
+  'use strict';
+  var $ = function (s) { return document.querySelector(s); };
+  var LS = { get: function (k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set: function (k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) { } } };
+  var H = function (x) { return String(x == null ? '' : x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var UN = { U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2', Y8: 'Year 8', Y9: 'Year 9', Y10: 'Year 10', Y0: 'KS3' };
+  var qs = new URLSearchParams(location.search), BOOK = (qs.get('book') || '').replace(/[^A-Za-z0-9]/g, ''), CH = (qs.get('ch') || '').replace(/[^a-z0-9]/g, ''), TID = (qs.get('t') || '').replace(/[^A-Za-z0-9]/g, '');
+  var me = null; try { me = JSON.parse(LS.get('mrb-pupil') || 'null'); } catch (e) { }
+  var STAFF = !!LS.get('mrb-staff-ok') || !!LS.get('teacher.actkey');
+  if (STAFF && !LS.get('mrb-pupilmode')) me = null;   /* a teacher trying the test: nothing is sent */
+  var KEY = 'mrb-test:' + BOOK + ':' + CH;
+  var T = null, S = null, cur = 0, URL0 = LS.get('mrb-act-url') || '';
+  var LETTERS = 'ABCD';
+  var main = $('#main');
+  if (!/^[A-Z0-9]{2,4}$/.test(BOOK) || !/^c\d{2}$/.test(CH)) { main.innerHTML = '<div class="err">This test link isn’t complete. Go back and open it from the home page.</div>'; return; }
+  var bookHref = 'notes/' + BOOK + '.html';
+  fetch('activity.json', { cache: 'no-cache' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) { if (j && typeof j.url === 'string' && j.url.trim()) { URL0 = j.url.trim(); flush(); } }).catch(function () { });
+  fetch('tests/' + BOOK + '/' + CH + '.json', { cache: 'no-cache' }).then(function (r) { if (!r.ok) throw 0; return r.json(); }).then(function (j) { T = j; start(); })
+    .catch(function () { main.innerHTML = '<div class="err">Couldn’t load this test. Check you’re online and try again.</div><button type="button" class="btn" onclick="location.reload()">Try again</button>'; });
+
+  function shuffle(n) { var a = []; for (var i = 0; i < n; i++) a.push(i); for (var k = n - 1; k > 0; k--) { var r = Math.floor(Math.random() * (k + 1)), t = a[k]; a[k] = a[r]; a[r] = t; } return a; }
+  function save() { LS.set(KEY, JSON.stringify(S)); }
+  function fresh() { var n = T.q.length; return { tid: TID, order: shuffle(n), opt: T.q.map(function (q) { return shuffle(q.o.length); }), ans: {}, flag: {}, cur: 0, secs: 0, began: Date.now(), done: null }; }
+  function title() { return (UN[BOOK] || BOOK) + ' · ' + (T.title || ('Topic ' + (+CH.slice(1)))); }
+  var tick = null;
+  function timer(on) { clearInterval(tick); if (on) tick = setInterval(function () { if (document.visibilityState === 'visible' && S && !S.done) { S.secs++; if (S.secs % 10 === 0) save(); } }, 1000); }
+  function mins(s) { var m = Math.round(s / 60); return m < 1 ? 'under a minute' : m === 1 ? '1 minute' : m + ' minutes'; }
+  function answered() { return Object.keys(S.ans).length; }
+
+  function start() {
+    document.title = 'Topic test · ' + (T.title || '');
+    $('#ttl').textContent = title();
+    try { S = JSON.parse(LS.get(KEY) || 'null'); } catch (e) { S = null; }
+    if (S && (S.order || []).length !== T.q.length) S = null;
+    if (S && S.done) return results();
+    intro();
+  }
+  function intro() {
+    $('#foot').hidden = true; $('#map-b').hidden = true; timer(false); $('#bar-i').style.width = '0';
+    var mid = S && !S.done && answered() > 0;
+    var my = []; try { my = JSON.parse(LS.get('mrb-mytests') || '[]'); } catch (e) { }
+    var set = my.filter(function (t) { return t.book === BOOK && t.ch === CH; })[0];
+    main.innerHTML = '<div class="card"><p class="eyebrow">Topic test' + (set ? ' · set by your teacher' : '') + '</p><h1>' + H(T.title) + '</h1><p class="muted">' + H(UN[BOOK] || BOOK) + ' · Topic ' + (+CH.slice(1)) + (set && set.due ? ' · due ' + H(niceDate(set.due)) : '') + '</p>' +
+      (set && set.note ? '<div class="note">' + H(set.note) + '</div>' : '') +
+      '<div class="facts"><div><b>' + T.q.length + '</b><small>questions</small></div><div><b>A–D</b><small>pick one answer</small></div><div><b>' + Math.round(T.q.length * 0.6) + '+</b><small>minutes</small></div></div>' +
+      '<ul class="how"><li>Read each question carefully: the wrong answers are designed to look right.</li><li>Tap an answer, then <b>Next</b>. You can go back and change answers any time before you finish.</li><li>Not sure? Tap <b>⚑ Flag</b> to come back to it. <b>☷ All questions</b> shows which ones you’ve answered.</li><li>Your answers save on this device as you go, so you can stop and come back later.</li><li>When you finish, it marks itself and shows you what to revise.' + (me ? ' Your score goes to your teacher.' : '') + '</li></ul>' +
+      (!me ? '<div class="note">' + (STAFF ? 'Teacher preview: results aren’t saved.' : 'You’re not signed in, so your score won’t be sent to your teacher. Sign in on the home page first.') + '</div>' : '') +
+      (mid ? '<button type="button" class="btn pri wide" id="go">Carry on (' + answered() + ' of ' + T.q.length + ' answered)</button><div class="row"><button type="button" class="btn" id="restart">Start again</button></div>' : '<button type="button" class="btn pri wide" id="go">Start the test</button>') + '</div>';
+    $('#go').onclick = function () { if (!S || S.done) { S = fresh(); save(); } cur = S.cur || 0; ask(); };
+    var rs = $('#restart'); if (rs) rs.onclick = function () { if (confirm('Clear your answers and start again?')) { S = fresh(); save(); cur = 0; ask(); } };
+  }
+  function niceDate(d) { var x = new Date(d + 'T12:00:00'); return isNaN(x) ? d : x.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }); }
+  function ask() {
+    timer(true); $('#foot').hidden = false; $('#map-b').hidden = false;
+    var qi = S.order[cur], q = T.q[qi], oo = S.opt[qi], a = S.ans[qi], n = T.q.length;
+    $('#bar-i').style.width = (answered() / n * 100) + '%';
+    main.innerHTML = '<div class="card"><p class="qn"><span>Question ' + (cur + 1) + ' of ' + n + '</span><span>' + answered() + ' answered</span></p><p class="qtext" id="qt">' + H(q.q) + '</p>' +
+      '<div class="opts" role="radiogroup" aria-labelledby="qt">' + oo.map(function (oi, k) { return '<button type="button" class="opt" role="radio" aria-checked="' + (a === oi) + '" data-o="' + oi + '"><span class="k">' + LETTERS[k] + '</span><span>' + H(q.o[oi]) + '</span></button>'; }).join('') + '</div></div>';
+    main.querySelectorAll('.opt').forEach(function (b) { b.onclick = function () { S.ans[qi] = +b.dataset.o; S.cur = cur; save(); main.querySelectorAll('.opt').forEach(function (x) { x.setAttribute('aria-checked', String(x === b)); }); $('#bar-i').style.width = (answered() / n * 100) + '%'; main.querySelector('.qn span:last-child').textContent = answered() + ' answered'; $('#next').focus(); }; });
+    $('#prev').disabled = cur === 0;
+    $('#next').textContent = cur === n - 1 ? 'Finish ✓' : 'Next ›';
+    var fl = $('#flag'); fl.setAttribute('aria-pressed', String(!!S.flag[qi])); fl.textContent = S.flag[qi] ? '⚑ Flagged' : '⚑ Flag';
+    S.cur = cur; save(); window.scrollTo(0, 0);
+    $('#live').textContent = 'Question ' + (cur + 1) + ' of ' + n;
+  }
+  $('#prev').onclick = function () { if (cur > 0) { cur--; ask(); } };
+  $('#next').onclick = function () { if (cur < T.q.length - 1) { cur++; ask(); } else review(); };
+  $('#flag').onclick = function () { var qi = S.order[cur]; if (S.flag[qi]) delete S.flag[qi]; else S.flag[qi] = 1; save(); ask(); };
+  $('#map-b').onclick = function () { review(); };
+  document.addEventListener('keydown', function (e) {
+    if (!S || S.done || $('#foot').hidden || document.querySelector('.ov')) return;
+    var k = e.key.toUpperCase(), i = LETTERS.indexOf(k); if (i < 0 && /^[1-4]$/.test(k)) i = +k - 1;
+    if (i >= 0 && !e.ctrlKey && !e.metaKey) { var b = main.querySelectorAll('.opt')[i]; if (b) b.click(); }
+    else if (e.key === 'ArrowRight' || e.key === 'Enter' && e.target === document.body) $('#next').click(); else if (e.key === 'ArrowLeft') $('#prev').click();
+  });
+
+  /* all questions / finish */
+  function review() {
+    var n = T.q.length, left = n - answered(), fl = Object.keys(S.flag).length;
+    var ov = document.createElement('div'); ov.className = 'ov';
+    ov.innerHTML = '<div class="sheet" role="dialog" aria-modal="true" aria-labelledby="rv-h"><h2 id="rv-h" style="margin-top:0">All questions</h2><p class="muted" style="margin:0">' + answered() + ' of ' + n + ' answered' + (fl ? ' · ' + fl + ' flagged' : '') + '. Tap a number to go to it.</p>' +
+      '<div class="grid">' + S.order.map(function (qi, k) { return '<button type="button" data-k="' + k + '" class="' + (qi in S.ans ? 'a' : '') + (S.flag[qi] ? ' f' : '') + (k === cur ? ' cur' : '') + '" aria-label="Question ' + (k + 1) + (qi in S.ans ? ', answered' : ', not answered') + (S.flag[qi] ? ', flagged' : '') + '">' + (k + 1) + '</button>'; }).join('') + '</div>' +
+      '<p class="key"><span><i style="background:var(--accent-2);border-color:var(--accent)"></i>answered</span><span><i></i>not answered</span><span><i style="background:var(--flag);border-color:var(--flag);border-radius:50%"></i>flagged</span></p>' +
+      (left ? '<div class="note">' + left + ' question' + (left === 1 ? '' : 's') + ' not answered yet. Unanswered questions are marked wrong.</div>' : '') +
+      '<div class="row"><button type="button" class="btn" id="rv-x">Keep going</button><button type="button" class="btn pri" id="rv-f">Finish and mark</button></div></div>';
+    document.body.appendChild(ov);
+    var close = function () { ov.remove(); };
+    ov.addEventListener('click', function (e) { if (e.target === ov) close(); });
+    ov.querySelectorAll('.grid button').forEach(function (b) { b.onclick = function () { cur = +b.dataset.k; close(); ask(); }; });
+    $('#rv-x').onclick = close; $('#rv-x').focus();
+    $('#rv-f').onclick = function () { if (left && !confirm('You have ' + left + ' unanswered. Finish anyway?')) return; close(); finish(); };
+  }
+  function finish() {
+    timer(false);
+    var ans = T.q.map(function (q, i) { return i in S.ans ? String(S.ans[i]) : '-'; }).join('');
+    var score = T.q.reduce(function (s, q, i) { return s + (S.ans[i] === q.a ? 1 : 0); }, 0);
+    S.done = { score: score, of: T.q.length, at: Date.now(), ans: ans }; save();
+    if (me && me.id) { var out = []; try { out = JSON.parse(LS.get('mrb-test-out') || '[]'); } catch (e) { }
+      out.push({ kind: 'testdone', id: me.id, name: me.name, cls: me.cls, book: BOOK, ch: CH, tid: S.tid || TID, ans: ans, score: score, secs: S.secs }); LS.set('mrb-test-out', JSON.stringify(out.slice(-20))); flush(); }
+    var my = []; try { my = JSON.parse(LS.get('mrb-mytests') || '[]'); } catch (e) { }
+    my.forEach(function (t) { if (t.book === BOOK && t.ch === CH) { t.tries = (t.tries || 0) + 1; t.best = Math.max(t.best == null ? -1 : t.best, score); t.of = T.q.length; } }); LS.set('mrb-mytests', JSON.stringify(my));
+    results();
+  }
+  function flush() {   /* send finished tests; kept on this device until the request goes through, so being offline doesn't lose a score */
+    if (!URL0 || flush.busy) return; var out = []; try { out = JSON.parse(LS.get('mrb-test-out') || '[]'); } catch (e) { } if (!out.length) return;
+    flush.busy = true; var x = out[0], st = function (t) { var e = $('#sent'); if (e) e.textContent = t; };
+    fetch(URL0, { method: 'POST', mode: 'no-cors', body: JSON.stringify(x) }).then(function () {
+      var o2 = []; try { o2 = JSON.parse(LS.get('mrb-test-out') || '[]'); } catch (e) { } o2.shift(); LS.set('mrb-test-out', JSON.stringify(o2)); flush.busy = false; st('✓ Sent to your teacher'); if (o2.length) flush();
+    }).catch(function () { flush.busy = false; st('Not sent yet (you seem to be offline). It sends the next time you open a test online.'); });
+  }
+  function results() {
+    $('#foot').hidden = true; $('#map-b').hidden = true; timer(false);
+    var d = S.done, pc = Math.round(d.score / d.of * 100); $('#bar-i').style.width = '100%';
+    var msg = pc >= 85 ? 'Outstanding! 🏆' : pc >= 70 ? 'Great work! 🌟' : pc >= 55 ? 'Good effort, keep going 👍' : pc >= 40 ? 'Getting there: revise the red sections 📚' : 'Time to revise this topic again 💪';
+    /* by section (workbook page) */
+    var pages = {}, order = [];
+    T.q.forEach(function (q, i) { var p = q.p || ''; if (!pages[p]) { pages[p] = { r: 0, n: 0 }; order.push(p); } pages[p].n++; if (S.ans[i] === q.a) pages[p].r++; });
+    var weak = order.filter(function (p) { return pages[p].r / pages[p].n < 0.7; }).sort(function (a, b) { return pages[a].r / pages[a].n - pages[b].r / pages[b].n; });
+    var ptitle = function (p) { return (T.pages && T.pages[p]) || ('Page ' + (+String(p).split('-p')[1] || '')); };
+    var wrong = T.q.map(function (q, i) { return i; }).filter(function (i) { return S.ans[i] !== T.q[i].a; });
+    main.innerHTML = '<div class="card"><p class="eyebrow">Your result</p><h1>' + H(T.title) + '</h1><div class="score">' + d.score + '<span class="muted" style="font-size:28px">/' + d.of + '</span></div><p class="msg">' + pc + '% · ' + msg + '</p><p class="muted">Finished ' + new Date(d.at).toLocaleString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) + ' · took ' + mins(S.secs) + '</p>' +
+      (me ? '<p id="sent" class="muted">Sending to your teacher…</p>' : '<div class="note">' + (STAFF ? 'Teacher preview: this result isn’t saved.' : 'Not signed in, so this score wasn’t sent to your teacher.') + '</div>') +
+      '<div class="row"><a class="btn pri" href="#wrong">My mistakes (' + wrong.length + ')</a><button type="button" class="btn" id="again">Try again</button></div></div>' +
+      '<h2>' + (weak.length ? 'Revise these first' : 'How you did in each section') + '</h2><div class="sec">' + (weak.length ? weak : order).map(function (p) { var x = pages[p], r = Math.round(x.r / x.n * 100); return '<a href="' + bookHref + '#' + H(p) + '" class="' + (r < 50 ? 'lo' : '') + '"><span>' + H(ptitle(p)) + '</span><span class="pc">' + x.r + '/' + x.n + '</span><span class="m"><i style="width:' + r + '%"></i></span><small>Open this page in the workbook →</small></a>'; }).join('') + '</div>' +
+      (weak.length && weak.length < order.length ? '<details><summary class="muted" style="cursor:pointer;font-weight:700">All sections</summary><div class="sec">' + order.map(function (p) { var x = pages[p]; return '<a href="' + bookHref + '#' + H(p) + '"><span>' + H(ptitle(p)) + '</span><span class="pc">' + x.r + '/' + x.n + '</span><span class="m"><i style="width:' + Math.round(x.r / x.n * 100) + '%"></i></span></a>'; }).join('') + '</div></details>' : '') +
+      '<h2 id="wrong">Your mistakes</h2>' + (wrong.length ? wrong.map(function (i) { var q = T.q[i], y = S.ans[i]; return '<div class="rv"><p><b>' + H(q.q) + '</b></p><p class="y">' + (y == null ? '✗ Not answered' : '✗ You said: ' + H(q.o[y])) + '</p><p class="c">✓ Answer: ' + H(q.o[q.a]) + '</p><p class="why">' + H(q.why) + '</p><a href="' + bookHref + '#' + H(q.p) + '">Revise this in the workbook →</a></div>'; }).join('') : '<p>None. Every answer right! 🎉</p>');
+    $('#again').onclick = function () { if (confirm('Start a new attempt? The questions and answers will be in a different order.')) { S = fresh(); save(); cur = 0; ask(); } };
+    window.scrollTo(0, 0);
+    if (me) { var o = []; try { o = JSON.parse(LS.get('mrb-test-out') || '[]'); } catch (e) { } if (!o.length) $('#sent').textContent = '✓ Sent to your teacher'; else flush(); }
+  }
+})();
+</script>
+</body>
+</html>

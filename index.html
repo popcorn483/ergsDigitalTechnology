@@ -5074,12 +5074,12 @@ try {
     const p = me(); if (!p || !URL0 || LS.get('notes-nocount') || window.__mrbWork) return; window.__mrbWork = 1;
     let j; try { j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=mywork&id=' + encodeURIComponent(p.id) + '&cls=' + encodeURIComponent(p.cls || ''), { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); } catch (e) { return; }
     if (!j || !j.ok) return;
-    LS.set('mrb-mywork', JSON.stringify(j.work || []));
-    const msgs = j.msgs || [], work = (j.work || []).filter(w => !w.due || w.due >= new Date(Date.now() - 864e5).toISOString().slice(0, 10));
+    LS.set('mrb-mywork', JSON.stringify(j.work || [])); if (Array.isArray(j.tests)) { LS.set('mrb-mytests', JSON.stringify(j.tests)); try { window.dispatchEvent(new Event('mrb-tests')); } catch (e) { } }
+    const msgs = j.msgs || [], work = (j.work || []).filter(w => !w.due || w.due >= new Date(Date.now() - 864e5).toISOString().slice(0, 10)), tests = (j.tests || []).filter(t => !(t.tries > 0));
     let seenWork = false; try { seenWork = sessionStorage.getItem('mrb-work-shown') === '1'; } catch (e) { }
-    if (!msgs.length && (seenWork || !work.length)) return;
+    if (!msgs.length && (seenWork || (!work.length && !tests.length))) return;
     try { sessionStorage.setItem('mrb-work-shown', '1'); } catch (e) { }
-    const UN = { U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
+    const UN = { U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2', Y8: 'Year 8', Y9: 'Year 9', Y10: 'Year 10', Y0: 'KS3' };
     const base = /\/notes\/[^/]*$/.test(location.pathname) ? '' : 'notes/';
     const due = d => { if (!d) return ''; const x = new Date(d + 'T12:00:00'); return isNaN(x) ? d : x.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }); };
     const show = () => {
@@ -5087,7 +5087,8 @@ try {
       const d = document.createElement('div'); d.id = 'mrb-msg';
       d.innerHTML = `<style>#mrb-msg{position:fixed;inset:0;z-index:2147482900;display:grid;place-items:center;background:rgba(10,16,30,.55);padding:16px}#mrb-msg .b{background:#fff;color:#16213A;border-radius:16px;max-width:420px;width:100%;max-height:85vh;overflow:auto;padding:20px;font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.35)}#mrb-msg h2{margin:0 0 10px;font-size:19px}#mrb-msg .m{background:#EEF3FB;border-left:4px solid #1F5FBF;border-radius:10px;padding:10px 12px;margin:0 0 10px;white-space:pre-wrap}#mrb-msg .m small{display:block;color:#5A6478;font-size:12px;margin-top:4px}#mrb-msg ul{list-style:none;margin:0 0 12px;padding:0}#mrb-msg li{border:1px solid #DCE2EA;border-radius:10px;padding:9px 12px;margin:0 0 8px}#mrb-msg li a{font-weight:800;color:#1F5FBF;text-decoration:none}#mrb-msg li small{display:block;color:#5A6478;font-size:12.5px}#mrb-msg button{width:100%;font:inherit;font-weight:800;border:0;border-radius:12px;padding:12px;background:#1F5FBF;color:#fff;cursor:pointer}@media (prefers-color-scheme:dark){#mrb-msg .b{background:#1B2233;color:#E8ECF4}#mrb-msg .m{background:#22304A}#mrb-msg li{border-color:#3A4458}}</style>
         <div class="b" role="dialog" aria-modal="true" aria-labelledby="mm-h">${msgs.length ? `<h2 id="mm-h">${msgs.length === 1 ? 'A message from Mr Butler' : 'Messages from Mr Butler'}</h2>${msgs.map(m => `<div class="m"></div>`).join('')}` : ''}
-        ${work.length ? `<h2${msgs.length ? '' : ' id="mm-h"'}>Work set for you</h2><ul>${work.map(w => `<li><a href="${base}${w.book}.html#${w.ch}-p01">${UN[w.book] || w.book} · Topic ${+w.ch.slice(1)}</a>${w.due ? `<small>Due ${due(w.due)}</small>` : ''}${w.note ? `<small class="wn"></small>` : ''}</li>`).join('')}</ul>` : ''}<button type="button">OK</button></div>`;
+        ${tests.length ? `<h2${msgs.length ? '' : ' id="mm-h"'}>${tests.length === 1 ? 'A topic test' : 'Topic tests'} for you</h2><ul>${tests.map(t => `<li><a href="${base ? '' : '../'}test.html?book=${encodeURIComponent(t.book)}&ch=${encodeURIComponent(t.ch)}&t=${encodeURIComponent(t.id)}">📝 ${UN[t.book] || t.book} · Topic ${+t.ch.slice(1)} test (100 questions)</a>${t.due ? `<small>Due ${due(t.due)}</small>` : ''}</li>`).join('')}</ul>` : ''}
+        ${work.length ? `<h2${msgs.length || tests.length ? '' : ' id="mm-h"'}>Work set for you</h2><ul>${work.map(w => `<li><a href="${base}${w.book}.html#${w.ch}-p01">${UN[w.book] || w.book} · Topic ${+w.ch.slice(1)}</a>${w.due ? `<small>Due ${due(w.due)}</small>` : ''}${w.note ? `<small class="wn"></small>` : ''}</li>`).join('')}</ul>` : ''}<button type="button">OK</button></div>`;
       d.querySelectorAll('.m').forEach((el, i) => { el.textContent = msgs[i].text; el.insertAdjacentHTML('beforeend', `<small>${new Date(msgs[i].at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</small>`); });
       d.querySelectorAll('.wn').forEach((el, i) => { el.textContent = work.filter(w => w.note)[i].note; });
       const done = () => { d.remove(); msgs.forEach(m => { const body = JSON.stringify({ kind: 'msgread', id: p.id, name: p.name, cls: p.cls, book: 'home', mid: m.id }); try { if (!(navigator.sendBeacon && navigator.sendBeacon(URL0, new Blob([body], { type: 'text/plain' })))) fetch(URL0, { method: 'POST', mode: 'no-cors', body }); } catch (e) { } }); };
@@ -10517,6 +10518,48 @@ kbd.mg-k{display:inline-block;min-width:22px;padding:1px 6px;border:1px solid va
     if (busy && ++tries < 600) return setTimeout(wait, 1000);
     if (!busy) setTimeout(open, 600);
   })();
+})();
+</script>
+
+<!-- TOPIC TESTS: tests the teacher has set, on the home page -->
+<style>
+.mytests{margin:0 0 16px;background:var(--paper);border:1px solid var(--line);border-left:5px solid #7A3FC4;border-radius:16px;padding:14px 16px}
+.mytests h2{margin:0 0 8px;font-size:17px;display:flex;align-items:center;gap:8px}
+.mytests ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.mytests li a{display:flex;align-items:center;gap:12px;padding:10px 12px;border:1px solid var(--line);border-radius:12px;text-decoration:none;color:var(--ink);background:var(--paper)}
+.mytests li a:hover{border-color:#7A3FC4}
+.mytests .mt-t{flex:1;min-width:0}
+.mytests .mt-t b{display:block;line-height:1.3}
+.mytests .mt-t small{color:var(--ink-3);font-size:13px}
+.mytests .mt-go{flex:none;font-weight:700;font-size:14px;padding:8px 12px;border-radius:999px;background:#7A3FC4;color:#fff;white-space:nowrap}
+.mytests .mt-go.done{background:var(--paper-2,#EEF2F7);color:var(--ink)}
+.mytests .late{color:#B3261E;font-weight:700}
+html.wl-on .mytests,html.su-on .mytests{display:none}
+</style>
+<script>
+(function () {
+  var UN = { U1: 'Unit 1', U4: 'Unit 4', U5: 'Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2', Y8: 'Year 8', Y9: 'Year 9', Y10: 'Year 10', Y0: 'KS3' };
+  var H = function (x) { return String(x == null ? '' : x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  var titles = null;
+  function paint() {
+    var old = document.getElementById('mytests'); if (old) old.remove();
+    var seg = document.querySelector('.seg'), list = []; try { list = JSON.parse(localStorage.getItem('mrb-mytests') || '[]') || []; } catch (e) { }
+    if (!seg || !list.length) return;
+    var today = new Date().toISOString().slice(0, 10);
+    list = list.slice().sort(function (a, b) { return ((a.tries > 0) - (b.tries > 0)) || String(a.due || '9').localeCompare(String(b.due || '9')); });
+    var mid = function (t) { try { var s = JSON.parse(localStorage.getItem('mrb-test:' + t.book + ':' + t.ch) || 'null'); return s && !s.done ? Object.keys(s.ans || {}).length : 0; } catch (e) { return 0; } };
+    var nm = function (t) { var x = (titles || []).filter(function (i) { return i.book === t.book && i.ch === t.ch; })[0]; return x ? x.title : 'Topic ' + (+t.ch.slice(1)); };
+    var due = function (d) { var x = new Date(d + 'T12:00:00'); return isNaN(x) ? d : x.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short' }); };
+    var html = '<section class="mytests" id="mytests" aria-labelledby="mt-h"><h2 id="mt-h">📝 ' + (list.length === 1 ? 'Topic test set for you' : 'Topic tests set for you') + '</h2><ul>' + list.map(function (t) {
+      var done = t.tries > 0, m = mid(t), late = !done && t.due && t.due < today, pc = done && t.best >= 0 ? Math.round(t.best / (t.of || 100) * 100) : null;
+      return '<li><a href="test.html?book=' + encodeURIComponent(t.book) + '&ch=' + encodeURIComponent(t.ch) + '&t=' + encodeURIComponent(t.id) + '"><span class="mt-t"><b>' + H(nm(t)) + '</b><small>' + H(UN[t.book] || t.book) + ' · 100 questions' + (t.due ? ' · <span class="' + (late ? 'late' : '') + '">due ' + H(due(t.due)) + (late ? ' (late)' : '') + '</span>' : '') + (t.note ? ' · ' + H(t.note) : '') + '</small></span>' +
+        '<span class="mt-go' + (done ? ' done' : '') + '">' + (done ? (pc != null ? pc + '% ✓' : 'Done ✓') : m ? 'Carry on ›' : 'Start ›') + '</span></a></li>';
+    }).join('') + '</ul></section>';
+    seg.insertAdjacentHTML('afterend', html);
+  }
+  function go() { if (titles) return paint(); fetch('tests/index.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).then(function (j) { titles = j.tests || []; paint(); }).catch(function () { titles = []; paint(); }); }
+  window.addEventListener('mrb-tests', go); window.addEventListener('hashchange', function () { setTimeout(go, 50); }); window.addEventListener('pageshow', go);
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', go); else go();
 })();
 </script>
 </body>

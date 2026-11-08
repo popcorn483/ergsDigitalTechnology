@@ -28,7 +28,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 21;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 22;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -36,7 +36,7 @@ const SITE = 'https://popcorn483.github.io/ergsdigitaltechnology/';
 const REQUIRE_APPROVAL = true;   // new pupils wait until you approve them in the Teacher area › Pupils (false: anyone can sign up)
 const NOTIFY_EMAIL = '';   // where the emails go (sign-up requests, staff details, weekly report); empty: the Google account that owns this script
 const EMAIL_SIGNINS = true;   // email the script's owner each time a new pupil signs up (false to stop)   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
-const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22', 'KS3', 'Y8', 'Y9', 'Y10'];
+const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22', 'KS3', 'Y8', 'Y9', 'Y10', 'Y0'];
 /* ZONES: what a pupil may open. Year 8 / 9 / 10 are the KS3 years; the rest are the GCSE and A level workbooks.
    A pupil's own zones (Zones sheet) win; otherwise their class's zones (Classes sheet); with neither, everything is open. */
 const ZONES = ['Y8', 'Y9', 'Y10', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
@@ -183,6 +183,7 @@ function doPost(e) {
       if (i >= 0) sh.getRange(i + 2, 1, 1, row.length).setValues([row]); else sh.appendRow(row); });
     return out_({ ok: true });
   }
+  if (d.kind === 'testdone') return out_(testDone_(d));   /* a pupil has finished a topic test */
   if (!(s > 0 && s <= 3600)) return out_({ ok: false });
   locked_(() => { const id = resolve_(String(d.id), aliases_()); log_().appendRow([new Date(), id, name, clean_(d.cls, 12).toUpperCase(), book, clean_(d.ch, 8), s, clean_(d.pg, 12)]); });
   return out_({ ok: true });
@@ -216,7 +217,28 @@ function myWork_(rawId, cls) {
   const id = resolve_(String(rawId), aliases_());
   const work = rows_(work_()).filter(r => r[0] && forMe_(String(r[1]), id, cls)).map(r => ({ id: String(r[0]), book: String(r[2]), ch: String(r[3]), due: String(r[4]).slice(0, 10), note: String(r[5] || '') }));
   const msgs = rows_(msgs_()).filter(r => r[0] && forMe_(String(r[1]), id, cls) && String(r[4] || '').split(',').indexOf(id) < 0).slice(-10).map(r => ({ id: String(r[0]), text: String(r[2]), at: new Date(r[3]).getTime() }));
-  return { ok: true, work, msgs };
+  const res = rows_(tres_()).filter(r => String(r[1]) === id);
+  const tests = rows_(tests_()).filter(r => r[0] && forMe_(String(r[1]), id, cls)).map(r => { const mine = res.filter(x => String(x[4]) === String(r[2]) && String(x[5]) === String(r[3]));
+    return { id: String(r[0]), book: String(r[2]), ch: String(r[3]), title: String(r[4] || ''), due: String(r[5]).slice(0, 10), note: String(r[6] || ''), tries: mine.length, best: mine.reduce((m, x) => Math.max(m, +x[6] || 0), -1), of: mine.length ? +mine[0][7] || 100 : 100 }; });
+  return { ok: true, work, msgs, tests };
+}
+/* TOPIC TESTS: 100-question multiple-choice tests (the questions live on the site in tests/<unit>/<topic>.json).
+   "Tests set" is what the teacher has set; "Test results" has one row per finished attempt. The script marks every attempt
+   itself from the answer key on the site, so a pupil can't send in a made-up score. */
+const tests_ = () => tab_('Tests set', ['ID', 'For (class, year, ALL or pupil IDs)', 'Unit', 'Topic', 'Title', 'Due', 'Note', 'Set']);
+const tres_ = () => tab_('Test results', ['Test ID', 'Pupil ID', 'Name', 'Class', 'Unit', 'Topic', 'Score', 'Out of', 'Answers', 'Minutes', 'Finished']);
+function testKey_(book, ch) {   /* the right answers, as a string of 0-3 per question (cached for 6 hours) */
+  const c = CacheService.getScriptCache(), k = 'key:' + book + ':' + ch, hit = c.get(k); if (hit) return hit;
+  try { const r = UrlFetchApp.fetch(SITE + 'tests/' + book + '/' + ch + '.json', { muteHttpExceptions: true }); if (r.getResponseCode() !== 200) return '';
+    const j = JSON.parse(r.getContentText()), key = (j.q || []).map(q => String(q.a)).join(''); if (key) c.put(k, key, 21600); return key; } catch (e) { return ''; }
+}
+function testDone_(d) {
+  const book = String(d.book || ''), ch = String(d.ch || ''); if (!/^c\d{1,2}$/.test(ch)) return { ok: false };
+  const ans = String(d.ans || '').replace(/[^0-3-]/g, '').slice(0, 200), key = testKey_(book, ch);
+  let score = 0, of = ans.length; if (key) { of = key.length; for (let i = 0; i < key.length; i++) if (ans[i] === key[i]) score++; } else { score = Math.max(0, Math.min(of, Math.round(+d.score || 0))); }
+  const id = resolve_(String(d.id), aliases_()), N = names_();
+  locked_(() => tres_().appendRow([String(d.tid || '').replace(/[^A-Za-z0-9]/g, '').slice(0, 20), id, (N[id] && N[id][0]) || clean_(d.name, 40), (N[id] && N[id][1]) || clean_(d.cls, 12).toUpperCase(), book, ch, score, of, "'" + ans, Math.round(Math.max(0, Math.min(600, (+d.secs || 0) / 60))), new Date()]));
+  return { ok: true, score, of };
 }
 /* QUESTION ANALYSIS: for every page quiz, how many pupils got each question right first time (from their best-recorded attempt) */
 function qstats_() {
@@ -465,6 +487,21 @@ function act_(q) {
     if (!who || BOOKS.indexOf(book) < 1 || !/^c\d{1,2}$/.test(ch)) return { ok: false, error: 'bad request' };
     const id = 'W' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); work_().appendRow([id, who, book, ch, String(q.due || '').slice(0, 10), clean_(q.note, 200), new Date()]); return { ok: true, id };
   }
+  if (q.action === 'tests') {   /* topic tests set, and every finished attempt (answers left out: see testres) */
+    return { ok: true, tests: rows_(tests_()).filter(r => r[0]).map(r => ({ id: String(r[0]), who: String(r[1]), book: String(r[2]), ch: String(r[3]), title: String(r[4] || ''), due: String(r[5]).slice(0, 10), note: String(r[6] || ''), at: new Date(r[7]).getTime() })),
+      results: rows_(tres_()).filter(r => r[1]).map(r => ({ tid: String(r[0]), id: String(r[1]), name: String(r[2]), cls: String(r[3]), book: String(r[4]), ch: String(r[5]), score: +r[6] || 0, of: +r[7] || 100, min: +r[9] || 0, at: new Date(r[10]).getTime() })) };
+  }
+  if (q.action === 'testres') {   /* every attempt at one topic test, with the answers (for the question analysis) */
+    const b = String(q.book || ''), c = String(q.ch || '');
+    return { ok: true, results: rows_(tres_()).filter(r => String(r[4]) === b && String(r[5]) === c).map(r => ({ id: String(r[1]), name: String(r[2]), cls: String(r[3]), score: +r[6] || 0, of: +r[7] || 100, ans: String(r[8] || '').replace(/^'/, ''), min: +r[9] || 0, at: new Date(r[10]).getTime() })) };
+  }
+  if (q.action === 'settest') {   /* who: a class, a year (Y11), ALL, or pupils picked in the Teacher area (ids) */
+    const book = String(q.book || ''), ch = String(q.ch || ''), list = ids.map(x => x.toUpperCase().replace(/[^A-Z0-9]/g, '')).filter(Boolean);
+    const who = list.length ? [...new Set(list)].join(',').slice(0, 45000) : String(q.who || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 12);
+    if (!who || BOOKS.indexOf(book) < 1 || !/^c\d{1,2}$/.test(ch)) return { ok: false, error: 'bad request' };
+    const id = 'T' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5); tests_().appendRow([id, who, book, ch, clean_(q.title, 80), String(q.due || '').slice(0, 10), clean_(q.note, 200), new Date()]); return { ok: true, id };
+  }
+  if (q.action === 'deltest') { const sh = tests_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (String(r[i][0]) === String(q.tid)) sh.deleteRow(i + 2); return { ok: true }; }
   if (q.action === 'delwork') { const sh = work_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (String(r[i][0]) === String(q.wid)) sh.deleteRow(i + 2); return { ok: true }; }
   if (q.action === 'sendmsg') {   /* to: a pupil ID, a form class, a year (Y11) or ALL; or ids: several pupils picked in the Teacher area (one message, each sees it) */
     const text = clean_(q.text, 500), list = ids.map(x => x.toUpperCase().replace(/[^A-Z0-9]/g, '')).filter(Boolean);
