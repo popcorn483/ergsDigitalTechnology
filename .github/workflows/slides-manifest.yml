@@ -45,6 +45,8 @@ jobs:
         run: python3 tools/ks3_manifest.py
       - name: KS3 - rebuild the Year 8, 9 and 10 notes books
         run: python3 tools/ks3_books.py
+      - name: Topic tests - tidy the question banks and list them (tests/index.json)
+        run: node tools/tests_index.js
       - name: List uploaded past papers
         run: python3 tools/papers_manifest.py
       - name: Find each question on its page (so the app can show just that question)
@@ -58,7 +60,7 @@ jobs:
           python3 tools/report_crops.py || echo "report finder failed; keeping the previous reports.json"
       - name: Commit the list if it changed
         run: |
-          git add ks3/manifest.json ks3 'notes/Y*.html' notes/podcasts icons index.html teacher.html tools/pupil-activity.gs notes/slides/manifest.json papers/manifest.json papers/crops.json papers/reports.json papers/topics.json
+          git add ks3/manifest.json ks3 tests 'notes/Y*.html' notes/podcasts icons index.html teacher.html tools/pupil-activity.gs notes/slides/manifest.json papers/manifest.json papers/crops.json papers/reports.json papers/topics.json
           if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898283+github-actions[bot]@users.noreply.github.com"

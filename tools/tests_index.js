@@ -21,7 +21,7 @@ for (const u of fs.existsSync(TD) ? fs.readdirSync(TD) : []) {
     const B = book(u), ch = B && B.chapters.find(c => c.id === T.ch);
     if (ch) { T.title = T.title || ch.title; T.n = ch.n; T.pages = {}; ch.pages.forEach(pg => { T.pages[pg.id] = strip(pg.spec || pg.title || pg.id); }); }
     T.book = u; T.ch = f.slice(0, 3);
-    const out = JSON.stringify({ book: T.book, ch: T.ch, n: T.n, title: T.title, pages: T.pages, q: T.q });
+    const out = JSON.stringify(Object.assign({ book: T.book, ch: T.ch, n: T.n, title: T.title }, T.slug ? { slug: T.slug } : {}, { pages: T.pages, q: T.q }));
     if (out !== fs.readFileSync(p, 'utf8')) fs.writeFileSync(p, out);
     list.push({ book: u, ch: T.ch, n: T.n || +T.ch.slice(1), title: T.title, q: (T.q || []).length });
   }
