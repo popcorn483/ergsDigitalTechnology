@@ -1,0 +1,2650 @@
+{
+ "title": "Models and Simulations",
+ "summary": "How computer models represent real systems in a simplified way, and how simulations use them to test predictions: inputs, rules and outputs, spreadsheet what-ifs, Goal Seek, simulations over time and chance, validation, and bias.",
+ "learn": [
+  "What models and simulations are, and why engineers model and simulate before they build",
+  "Abstraction: deciding what a model keeps and what it leaves out",
+  "Variables, inputs, rules and outputs, and choosing data types (integer, float, string, Boolean)",
+  "Spreadsheet models, what-if questions, Goal Seek and scenarios",
+  "Simulations over time and with random numbers, and testing predictions against reality",
+  "Limitations, trade-offs and bias, including AI models, and who a model works for",
+  "Planning, building, testing and evaluating your own model (links to TransformED: S1, S4, S7, S9, C4)"
+ ],
+ "temporary": false,
+ "intro": "A model is a simplified representation of a real system, and a simulation uses a model to test predictions before anything is built or spent. This topic covers abstraction, variables and data types, spreadsheet what-if models, Goal Seek and scenarios, simulations step by step and with chance, validating a model against real data, and asking who a model works for.",
+ "pages": [
+  {
+   "id": "p01",
+   "spec": "Explain what a model is, what a simulation is, and why people use them",
+   "summary": "A model is a simplified representation of a real system. A simulation runs a model to see what would happen, so people can test ideas safely, cheaply and quickly before trying them for real.",
+   "diagram": {
+    "kind": "match",
+    "title": "Who uses models?",
+    "caption": "Match each model or simulation to what it is used for.",
+    "pairs": [
+     [
+      "Weather forecast model",
+      "Predicts tomorrow's rain, wind and temperature"
+     ],
+     [
+      "Flight simulator",
+      "Trains pilots to handle emergencies safely"
+     ],
+     [
+      "Sat nav traffic model",
+      "Predicts the quickest route and arrival time"
+     ],
+     [
+      "Game physics engine",
+      "Makes a ball bounce and fall realistically"
+     ],
+     [
+      "Bridge design software",
+      "Tests how much weight a bridge can carry"
+     ],
+     [
+      "Spreadsheet budget",
+      "Shows whether a school event will make a profit"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Before a new bridge is built, before a pilot flies a real passenger jet, and before the Met Office tells you to bring a coat tomorrow, someone has used a **[[model]]**."
+    },
+    {
+     "t": "h",
+     "text": "What is a model?"
+    },
+    {
+     "t": "p",
+     "text": "A **model** is a **simplified representation of a [[real system]]**. It keeps the parts that matter for a question and leaves out the rest. A map of Enniskillen is a model of the town; a toy car is a model of a car; a spreadsheet that works out the cost of a school trip is a model of the trip."
+    },
+    {
+     "t": "p",
+     "text": "In Digital Technology we are mostly interested in **computer models**: a set of values and **rules** (usually formulas or code) that represent how something behaves."
+    },
+    {
+     "t": "h",
+     "text": "What is a simulation?"
+    },
+    {
+     "t": "p",
+     "text": "A **[[simulation]]** uses a model to **imitate what would happen** in the real system, often step by step over time. You change something, run the simulation, and watch the result. Simulations let us **test a [[prediction]]** without doing the real thing."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Model",
+      "Simulation"
+     ],
+     "rows": [
+      [
+       "What is it?",
+       "A simplified representation of a real system",
+       "Running a model to see what happens"
+      ],
+      [
+       "Example",
+       "Formulas for how a cold spreads through a class",
+       "Running those formulas day by day to see how many pupils are off sick by Friday"
+      ],
+      [
+       "Question it answers",
+       "How does this system work?",
+       "What would happen if...?"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Models all around you"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Model or simulation",
+      "Who uses it",
+      "Why not just try it for real?"
+     ],
+     "rows": [
+      [
+       "Weather forecast",
+       "The Met Office, farmers, airports",
+       "You cannot test tomorrow's weather: you can only predict it."
+      ],
+      [
+       "Flight simulator",
+       "Airlines training pilots",
+       "Practising an engine fire in a real plane would be far too dangerous."
+      ],
+      [
+       "Traffic model",
+       "Sat navs, road planners",
+       "Closing a real road to see what happens would cause chaos."
+      ],
+      [
+       "Car crash simulation",
+       "Car makers",
+       "Crashing hundreds of real cars costs millions of pounds."
+      ],
+      [
+       "Video game",
+       "Game developers",
+       "Games model gravity, speed and collisions so worlds feel real."
+      ],
+      [
+       "Spreadsheet budget",
+       "Schools, businesses, families",
+       "You want to know if the plan is affordable before spending money."
+      ]
+     ],
+     "caption": "Everyday models and simulations"
+    },
+    {
+     "t": "h",
+     "text": "Why use a model?"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Safer**: crash a virtual car or fail a virtual landing and nobody is hurt.",
+      "**Cheaper**: changing a number costs nothing; building the real thing costs a fortune.",
+      "**Faster**: a computer can simulate years in seconds, or slow down something that happens in a split second.",
+      "**Possible**: some things cannot be tested for real, like how the climate might change over 50 years.",
+      "**Repeatable**: you can run the same test again and again, changing one thing at a time."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "tip",
+     "text": "Engineers say: **model and simulate before you build**. Testing an idea on a computer first finds problems while they are still cheap to fix."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: model, simulation, or neither?",
+     "context": "Decide for each: (a) a scale model of a new school building made from card; (b) a game that lets you run a virtual farm through ten seasons; (c) a photo of the school canteen.",
+     "steps": [
+      "(a) A simplified version of a real building, used to see what it will look like: a **model** (a physical one).",
+      "(b) It has rules for crops, weather and money, and runs them season by season: a **simulation**.",
+      "(c) A photo just records what something looked like. It has no rules and cannot predict anything: **neither**."
+     ],
+     "answer": "(a) model, (b) simulation, (c) neither."
+    },
+    {
+     "t": "warn",
+     "text": "A model is **never** the real thing. It is always a simplification, so its answers are predictions, not certainties. The weather forecast can be wrong!"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A model is a simplified representation of a real system.",
+      "A simulation runs a model to see what would happen, often over time.",
+      "Models and simulations let us test predictions safely, cheaply and quickly.",
+      "Uses include weather forecasts, flight simulators, traffic, games and budgets.",
+      "Model and simulate before you build."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a model?",
+     "o": [
+      "An exact copy of a real system",
+      "A photo of a real object",
+      "A simplified representation of a real system",
+      "A program with no rules"
+     ],
+     "a": 2,
+     "why": "A model keeps what matters and leaves out the rest."
+    },
+    {
+     "q": "Why do airlines train pilots on flight simulators?",
+     "o": [
+      "Emergencies can be practised safely",
+      "Simulators fly faster than real planes",
+      "Pilots do not need to learn real controls",
+      "Real planes cannot be flown in Northern Ireland"
+     ],
+     "a": 0,
+     "why": "Practising an engine failure in a real plane would be dangerous."
+    },
+    {
+     "q": "Which of these is a simulation?",
+     "o": [
+      "A list of pupils' names",
+      "A photo of a traffic jam",
+      "A printed bus timetable",
+      "Running a virus model day by day to see how many are ill"
+     ],
+     "a": 3,
+     "why": "A simulation runs a model's rules to see what happens."
+    },
+    {
+     "q": "Which is NOT usually a reason to use a model?",
+     "o": [
+      "It is cheaper than testing for real",
+      "It always gives the exact right answer",
+      "It is safer than testing for real",
+      "It can speed up time"
+     ],
+     "a": 1,
+     "why": "Models are simplifications, so their answers are predictions, not certainties."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by a **computer model**.",
+     "m": 2,
+     "a": "A simplified representation of a real system / situation (1) using values and rules (formulas or code) so it can be used to predict what happens (1)."
+    },
+    {
+     "q": "Give **two** reasons why car makers use crash simulations before building real cars.",
+     "m": 2,
+     "a": "Any two: cheaper than crashing real cars (1); safer (1); faster to test many designs (1); can test the same crash many times / change one thing at a time (1)."
+    },
+    {
+     "q": "State the difference between a model and a simulation.",
+     "m": 2,
+     "a": "A model represents the system / is the set of rules (1); a simulation runs the model to see what happens, often over time / to test a prediction (1)."
+    }
+   ],
+   "terms": [
+    "Model",
+    "Real system",
+    "Simulation",
+    "Prediction"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "spec": "Use abstraction to decide what to include in a model and what to leave out",
+   "summary": "Abstraction means keeping only the details that matter for the question you want to answer. Every model also makes assumptions, and a good modeller writes them down.",
+   "diagram": {
+    "kind": "compare",
+    "title": "The real canteen vs the model",
+    "caption": "Abstraction keeps only what affects the length of the queue.",
+    "states": [
+     {
+      "label": "The real canteen",
+      "points": [
+       "Hundreds of pupils with names, uniforms and moods",
+       "Noise, smells, trays, the menu board",
+       "Pupils arriving at slightly different times",
+       "Staff who sometimes chat or pause"
+      ],
+      "art": null
+     },
+     {
+      "label": "The queue model",
+      "points": [
+       "Pupils arriving per minute: 12",
+       "Tills open: 2",
+       "Time to serve one pupil: 15 seconds",
+       "Assumption: every pupil takes the same time"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A real system has far too much detail to copy into a computer. If you tried to model *everything* about the school canteen, you would never finish. Instead, you use **[[abstraction]]**: you **remove the details that do not matter** for your question and keep the ones that do."
+    },
+    {
+     "t": "p",
+     "text": "You may have met abstraction already, for example the London Underground map, which keeps the stations and lines but leaves out the real distances and streets. Every model is built the same way."
+    },
+    {
+     "t": "h",
+     "text": "Start with the question"
+    },
+    {
+     "t": "p",
+     "text": "What you keep depends on **what you want to find out**. The same canteen could be modelled in different ways for different questions."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Question",
+      "Keep in the model",
+      "Leave out"
+     ],
+     "rows": [
+      [
+       "How long will the lunch queue be?",
+       "Pupils arriving per minute, number of tills, time to serve each pupil",
+       "Names, what they eat, colour of the trays"
+      ],
+      [
+       "Will the canteen run out of pizza?",
+       "Portions made, how many pupils usually choose pizza",
+       "Number of tills, serving time"
+      ],
+      [
+       "Is the canteen making a profit?",
+       "Price of each meal, cost of ingredients, staff wages",
+       "Queue length, seating plan"
+      ]
+     ],
+     "caption": "Same canteen, three different models"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: modelling the canteen queue",
+     "context": "The principal asks: \"If we open a second till, will the queue get shorter?\" Which details should the model keep?",
+     "steps": [
+      "Ask: does this detail change the length of the queue?",
+      "Pupils arriving per minute: **yes**, keep it.",
+      "Number of tills open: **yes**, it is the thing we want to change, so keep it.",
+      "Time taken to serve one pupil: **yes**, keep it.",
+      "Pupils' names, uniforms, the menu board: **no**, leave them out."
+     ],
+     "answer": "Keep arrival rate, number of tills and serving time. Everything else can be abstracted away."
+    },
+    {
+     "t": "h",
+     "text": "Assumptions"
+    },
+    {
+     "t": "p",
+     "text": "When you leave something out or simplify it, you are making an **[[assumption]]**: something you treat as true so the model can work. For example, \"every pupil takes exactly 15 seconds to be served\". In real life some pupils take 5 seconds and some take a minute while they find their money."
+    },
+    {
+     "t": "tip",
+     "text": "Always **write down your assumptions**. Anyone using your model can then see what it ignores, and you know what to check if its predictions turn out wrong."
+    },
+    {
+     "t": "h",
+     "text": "Too simple or too complicated?"
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Too simple",
+      "Too complicated"
+     ],
+     "rows": [
+      [
+       "What goes wrong",
+       "Leaves out something important, so predictions are wrong",
+       "So much detail it takes ages to build, run and understand"
+      ],
+      [
+       "Canteen example",
+       "Ignores that half the pupils arrive in the first 5 minutes",
+       "Models every pupil's favourite food and walking speed"
+      ],
+      [
+       "Result",
+       "Fast but misleading",
+       "Slow, hard to check, and more places for mistakes"
+      ]
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "Leaving out a detail is a **choice**, and it can matter. A model of a school bus route that leaves out the pupils who live down narrow country lanes might suggest a route that is cheaper but leaves those pupils without a bus. Always ask: **who or what did I leave out?**"
+    },
+    {
+     "t": "note",
+     "text": "This is the same idea as **[[decomposition|Decomposition]]** and abstraction in computational thinking: break the problem down, then keep only what matters."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Abstraction means removing details that do not matter for your question.",
+      "What you keep depends on the question the model must answer.",
+      "Simplifying means making assumptions: write them down.",
+      "Too simple gives wrong answers; too complicated is slow and hard to check.",
+      "Ask who or what has been left out."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is abstraction?",
+     "o": [
+      "Adding as much detail as possible",
+      "Removing details that do not matter for the question",
+      "Copying a real system exactly",
+      "Breaking a problem into smaller parts"
+     ],
+     "a": 1,
+     "why": "Abstraction keeps only the important details."
+    },
+    {
+     "q": "A model must predict the length of the lunch queue. Which detail should be left out?",
+     "o": [
+      "The colour of the trays",
+      "The number of tills open",
+      "The time to serve each pupil",
+      "How many pupils arrive per minute"
+     ],
+     "a": 0,
+     "why": "Tray colour does not change how long the queue is."
+    },
+    {
+     "q": "What is an assumption in a model?",
+     "o": [
+      "A value that is calculated by a formula",
+      "An error found while testing",
+      "The question the model is answering",
+      "Something treated as true so the model can work"
+     ],
+     "a": 3,
+     "why": "e.g. assuming every pupil takes 15 seconds to be served."
+    },
+    {
+     "q": "What is the main problem with a model that is far too complicated?",
+     "o": [
+      "It always gives the wrong answer",
+      "It cannot use formulas",
+      "It is slow to build and hard to check",
+      "It leaves out too much detail"
+     ],
+     "a": 2,
+     "why": "More detail means more time and more places for mistakes."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by **abstraction** when building a model.",
+     "m": 2,
+     "a": "Removing / hiding unnecessary detail (1) so only the details relevant to the problem / question are kept (1)."
+    },
+    {
+     "q": "A model is being built to decide whether the school car park needs more spaces. State **two** details that should be included and **one** that should be left out.",
+     "m": 3,
+     "a": "Include any two: number of spaces (1); number of cars arriving / staff and visitors who drive (1); times of day cars arrive (1). Leave out, e.g., colour or make of cars / drivers' names (1)."
+    },
+    {
+     "q": "Explain why a modeller should write down the assumptions a model makes.",
+     "m": 2,
+     "a": "So users know what the model ignores / its limits (1) and so the assumptions can be checked or changed if predictions are wrong (1)."
+    }
+   ],
+   "terms": [
+    "Abstraction",
+    "Assumption"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "spec": "Identify the variables, inputs, rules and outputs of a model and choose a suitable data type for each",
+   "summary": "A model takes inputs, applies rules, and produces outputs. The values that can change are variables, and each one needs the right data type: integer, float, string or Boolean.",
+   "diagram": {
+    "kind": "flow",
+    "title": "How a model works",
+    "caption": "Click each stage. Changing an input and running the rules again gives new outputs.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Inputs",
+      "detail": "Values you can change, e.g. distance 18 km, average speed 40 km/h, 12 stops.",
+      "shape": "io"
+     },
+     {
+      "id": "b",
+      "label": "Rules",
+      "detail": "Formulas or code that describe how the system behaves, e.g. time = distance ÷ speed × 60 + stops × 0.5.",
+      "shape": "process"
+     },
+     {
+      "id": "c",
+      "label": "Outputs",
+      "detail": "The answers the model produces, e.g. journey time 33 minutes.",
+      "shape": "io"
+     },
+     {
+      "id": "d",
+      "label": "Decide",
+      "detail": "Use the output to make a decision, or change an input and run the model again (a what-if).",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "a"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Every computer model, from a weather forecast to a game, is made of the same four parts."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Part",
+      "What it is",
+      "School bus example"
+     ],
+     "rows": [
+      [
+       "**[[Input]]**",
+       "A value fed into the model that you can change",
+       "Distance 18 km, average speed 40 km/h, 12 stops"
+      ],
+      [
+       "**[[Rule]]**",
+       "A formula or instruction describing how the system behaves",
+       "Driving time = distance ÷ speed × 60; each stop adds half a minute"
+      ],
+      [
+       "**[[Output]]**",
+       "The result the model produces",
+       "Journey time in minutes"
+      ],
+      [
+       "**[[Constant]]**",
+       "A value that stays the same every time the model runs",
+       "60 minutes in an hour"
+      ]
+     ],
+     "caption": "The parts of a model"
+    },
+    {
+     "t": "p",
+     "text": "A **[[variable]]** is a named value that can change, such as *speed* or *number of stops*. Inputs and outputs are both variables: when an input variable changes, the outputs change too. That is the whole point of a model."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the school bus model",
+     "context": "A bus brings pupils 18 km to school from the far side of Lough Erne. Its average speed is 40 km/h and it makes 12 stops, each taking 0.5 minutes. How long is the journey?",
+     "steps": [
+      "Rule 1: driving time = distance ÷ speed × 60 = 18 ÷ 40 × 60 = **27 minutes**.",
+      "Rule 2: stop time = stops × time per stop = 12 × 0.5 = **6 minutes**.",
+      "Output: journey time = 27 + 6 = **33 minutes**."
+     ],
+     "answer": "The model predicts a 33-minute journey."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: change one variable",
+     "context": "What if roadworks slow the bus to an average of 30 km/h? Everything else stays the same.",
+     "steps": [
+      "Driving time = 18 ÷ 30 × 60 = **36 minutes**.",
+      "Stop time is still 12 × 0.5 = 6 minutes.",
+      "Journey time = 36 + 6 = **42 minutes**."
+     ],
+     "answer": "Changing one input (speed) changed the output from 33 to 42 minutes."
+    },
+    {
+     "t": "h",
+     "text": "Choosing data types"
+    },
+    {
+     "t": "p",
+     "text": "Each variable stores a particular kind of value, called its **[[data type]]**. Choosing the right one matters in spreadsheets and in code, because it decides what you can do with the value."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Data type",
+      "What it stores",
+      "Model example"
+     ],
+     "rows": [
+      [
+       "**[[Integer]]**",
+       "Whole numbers",
+       "Number of stops: 12; pupils on the bus: 48"
+      ],
+      [
+       "**[[Float]]** (real)",
+       "Numbers with a decimal point",
+       "Time per stop: 0.5 minutes; ticket price: 2.75"
+      ],
+      [
+       "**[[String]]**",
+       "Text",
+       "Route name: \"Belleek route\""
+      ],
+      [
+       "**[[Boolean]]**",
+       "Only TRUE or FALSE",
+       "Is it snowing? FALSE; Bus full? TRUE"
+      ]
+     ],
+     "caption": "Data types in a model"
+    },
+    {
+     "t": "warn",
+     "text": "Do not store a count of people as a float. You cannot have **48.5 pupils** on a bus! Counts of whole things should be **integers**. Money and measurements usually need **floats**."
+    },
+    {
+     "t": "tip",
+     "text": "A **Boolean** input is a great way to switch part of a model on or off. For example, *Snowing? = TRUE* could add 15 minutes to the journey using an IF rule."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Inputs go in, rules are applied, outputs come out.",
+      "A variable is a value that can change; a constant stays the same.",
+      "Changing an input variable changes the outputs.",
+      "Integer = whole number, float = decimal, string = text, Boolean = TRUE/FALSE.",
+      "Pick the data type that matches the real value."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In the bus model, which is an input?",
+     "o": [
+      "Journey time in minutes",
+      "Driving time = distance ÷ speed × 60",
+      "60 minutes in an hour",
+      "Average speed of the bus"
+     ],
+     "a": 3,
+     "why": "Speed is a value you can change and feed in."
+    },
+    {
+     "q": "Which data type should store whether it is raining?",
+     "o": [
+      "Integer",
+      "Boolean",
+      "String",
+      "Float"
+     ],
+     "a": 1,
+     "why": "It can only be TRUE or FALSE."
+    },
+    {
+     "q": "A bus travels 18 km at 30 km/h and makes 12 stops of 0.5 minutes. What is the journey time?",
+     "o": [
+      "33 minutes",
+      "36 minutes",
+      "42 minutes",
+      "48 minutes"
+     ],
+     "a": 2,
+     "why": "18 ÷ 30 × 60 = 36, plus 12 × 0.5 = 6, gives 42."
+    },
+    {
+     "q": "What is a constant in a model?",
+     "o": [
+      "A value that stays the same every time",
+      "A value the user changes often",
+      "The answer the model produces",
+      "A detail that has been left out"
+     ],
+     "a": 0,
+     "why": "e.g. 60 minutes in an hour."
+    }
+   ],
+   "practice": [
+    {
+     "q": "A model works out the cost of a pizza order. Identify **one** input, **one** rule and **one** output.",
+     "m": 3,
+     "a": "Input, e.g. number of pizzas / price per pizza / delivery charge (1). Rule, e.g. total = number × price + delivery (1). Output, e.g. total cost (1)."
+    },
+    {
+     "q": "State the most suitable data type for each variable: (a) number of pupils on a trip; (b) cost per pupil in pounds; (c) whether a pupil has paid.",
+     "m": 3,
+     "a": "(a) Integer (1). (b) Float / real (1). (c) Boolean (1)."
+    },
+    {
+     "q": "A bus travels 24 km at 40 km/h and makes 12 stops of 0.5 minutes. Calculate the journey time. Show your working.",
+     "m": 2,
+     "a": "24 ÷ 40 × 60 = 36 minutes driving (1); 12 × 0.5 = 6, so 36 + 6 = 42 minutes (1)."
+    }
+   ],
+   "terms": [
+    "Variable",
+    "Input",
+    "Rule",
+    "Output",
+    "Constant",
+    "Data type",
+    "Integer",
+    "Float",
+    "String",
+    "Boolean"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "spec": "Build a spreadsheet model with formulas and use it to answer 'what if' questions",
+   "summary": "In a spreadsheet model the inputs are cells, the rules are formulas that refer to those cells, and the outputs recalculate automatically. Changing one input to see the effect is a what-if question.",
+   "diagram": {
+    "kind": "calc",
+    "title": "Try it: the Year 9 disco model",
+    "caption": "Change the inputs and watch the profit. Costs are £150 for the DJ, £40 for decorations, plus snacks for each pupil.",
+    "inputs": [
+     {
+      "id": "p",
+      "label": "Ticket price (£)",
+      "value": 5
+     },
+     {
+      "id": "s",
+      "label": "Tickets sold",
+      "value": 180
+     },
+     {
+      "id": "k",
+      "label": "Snacks per pupil (£)",
+      "value": 1.2
+     }
+    ],
+    "formula": "p*s - (150 + 40 + k*s)",
+    "result": {
+     "label": "Profit (£)",
+     "unit": ""
+    },
+    "show": []
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Spreadsheets are one of the most common tools for building models, because a formula **recalculates automatically** whenever a value it uses changes. If you have studied the Spreadsheets topic, this page builds on it."
+    },
+    {
+     "t": "h",
+     "text": "Example: the Year 9 Christmas disco"
+    },
+    {
+     "t": "p",
+     "text": "The Year 9 council is running a disco to raise money for charity. They need to know whether it will make a profit. Here is their model."
+    },
+    {
+     "t": "table",
+     "head": [
+      "",
+      "A",
+      "B"
+     ],
+     "rows": [
+      [
+       "**1**",
+       "**Ticket price (£)**",
+       "5.00"
+      ],
+      [
+       "**2**",
+       "**Tickets sold**",
+       "180"
+      ],
+      [
+       "**3**",
+       "**DJ hire (£)**",
+       "150.00"
+      ],
+      [
+       "**4**",
+       "**Decorations (£)**",
+       "40.00"
+      ],
+      [
+       "**5**",
+       "**Snacks and drink per pupil (£)**",
+       "1.20"
+      ],
+      [
+       "**6**",
+       "",
+       ""
+      ],
+      [
+       "**7**",
+       "**Income (£)**",
+       "=B1*B2 → 900.00"
+      ],
+      [
+       "**8**",
+       "**Total costs (£)**",
+       "=B3+B4+B5*B2 → 406.00"
+      ],
+      [
+       "**9**",
+       "**Profit (£)**",
+       "=B7-B8 → 494.00"
+      ],
+      [
+       "**10**",
+       "**Result**",
+       "=IF(B9>=0,\"Profit\",\"Loss\") → Profit"
+      ]
+     ],
+     "caption": "Inputs in B1:B5, outputs in B7:B10"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: checking the outputs",
+     "context": "Check each output by hand.",
+     "steps": [
+      "Income: 5 × 180 = **£900**.",
+      "Snacks cost 1.20 × 180 = £216, so total costs = 150 + 40 + 216 = **£406**.",
+      "Profit = 900 − 406 = **£494**, so B10 shows *Profit*."
+     ],
+     "answer": "The model is working correctly: £494 profit."
+    },
+    {
+     "t": "h",
+     "text": "Asking 'what if?'"
+    },
+    {
+     "t": "p",
+     "text": "A **[[what-if question|What-if question]]** changes one input and looks at the effect on the outputs. Change only **one** input at a time, so you know which change caused the difference."
+    },
+    {
+     "t": "table",
+     "head": [
+      "What if...?",
+      "Input changed",
+      "Income",
+      "Costs",
+      "Profit"
+     ],
+     "rows": [
+      [
+       "Original plan",
+       "none",
+       "£900",
+       "£406",
+       "£494"
+      ],
+      [
+       "Only 120 pupils come",
+       "B2 = 120",
+       "£600",
+       "£334",
+       "£266"
+      ],
+      [
+       "Tickets cost £4",
+       "B1 = 4",
+       "£720",
+       "£406",
+       "£314"
+      ],
+      [
+       "Snacks cost £1.50 each",
+       "B5 = 1.50",
+       "£900",
+       "£460",
+       "£440"
+      ]
+     ],
+     "caption": "Four what-if questions, one input changed each time"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: only 120 pupils come",
+     "context": "Snow is forecast and the council worries only 120 will come. What happens to the profit?",
+     "steps": [
+      "Change B2 from 180 to 120. Nothing else changes.",
+      "Income: 5 × 120 = £600.",
+      "Costs: snacks 1.20 × 120 = £144, so 150 + 40 + 144 = £334.",
+      "Profit: 600 − 334 = **£266**."
+     ],
+     "answer": "The disco still makes a profit, but £228 less than planned."
+    },
+    {
+     "t": "warn",
+     "text": "Never **[[hard-code|Hard-coding]]** values into formulas, e.g. `=5*180`. If the price changes, that formula will not update and your model gives the wrong answer. Always refer to the input cells: `=B1*B2`."
+    },
+    {
+     "t": "tip",
+     "text": "Colour your **input cells** (for example light yellow) and keep them together at the top. Anyone using the model can see straight away which cells they are allowed to change."
+    },
+    {
+     "t": "note",
+     "text": "The DJ and decorations are **fixed costs**: they stay the same however many pupils come. Snacks are a **variable cost**: they go up with every ticket sold. Spotting which is which is a key part of building a money model."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Inputs are cells; rules are formulas that refer to those cells; outputs recalculate.",
+      "A what-if question changes one input to see the effect.",
+      "Change one input at a time so you know what caused the change.",
+      "Never hard-code numbers into formulas.",
+      "Label and colour the input cells."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In the disco model, which cell is an output?",
+     "o": [
+      "B1",
+      "B2",
+      "B5",
+      "B9"
+     ],
+     "a": 3,
+     "why": "B9 is calculated by a formula; B1, B2 and B5 are inputs."
+    },
+    {
+     "q": "Tickets are £5, 180 are sold, fixed costs are £190 and snacks are £1.20 each. What is the profit?",
+     "o": [
+      "£494",
+      "£710",
+      "£900",
+      "£406"
+     ],
+     "a": 0,
+     "why": "900 − (190 + 216) = 494."
+    },
+    {
+     "q": "Why is =5*180 a poor formula for income?",
+     "o": [
+      "It gives the wrong answer",
+      "Excel cannot multiply numbers",
+      "It will not update if the price or tickets change",
+      "It needs an IF function"
+     ],
+     "a": 2,
+     "why": "Hard-coded values do not change when the inputs change."
+    },
+    {
+     "q": "Why should you change only one input at a time in a what-if?",
+     "o": [
+      "Excel can only recalculate one cell",
+      "So you know which change caused the effect",
+      "Changing two inputs causes an error",
+      "It makes the profit bigger"
+     ],
+     "a": 1,
+     "why": "One change at a time shows clearly what each input does."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Using the disco model, calculate the profit if 200 tickets are sold at £5. Show your working.",
+     "m": 3,
+     "a": "Income 5 × 200 = £1000 (1). Costs 150 + 40 + 1.20 × 200 = £430 (1). Profit 1000 − 430 = £570 (1)."
+    },
+    {
+     "q": "Write the formula for cell B8 (total costs) in the disco model, and explain why it uses cell references.",
+     "m": 2,
+     "a": "=B3+B4+B5*B2 (1). So the total updates automatically if any cost or the number of tickets changes (1)."
+    },
+    {
+     "q": "Explain the difference between a **fixed cost** and a **variable cost**, using the disco as an example.",
+     "m": 2,
+     "a": "Fixed cost stays the same however many come, e.g. DJ hire £150 (1). Variable cost depends on the number of pupils, e.g. snacks £1.20 each (1)."
+    }
+   ],
+   "terms": [
+    "What-if question",
+    "Hard-coding"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "spec": "Use Goal Seek and scenarios to explore a spreadsheet model",
+   "summary": "Goal Seek works backwards: you choose the answer you want and it finds the input needed. Scenarios save whole sets of inputs, such as worst case, expected and best case, so you can compare them.",
+   "diagram": {
+    "kind": "compare",
+    "title": "What-if vs Goal Seek",
+    "caption": "Both use the same model, but they work in opposite directions.",
+    "states": [
+     {
+      "label": "What-if (forwards)",
+      "points": [
+       "You choose the input",
+       "The model works out the output",
+       "e.g. What profit if 120 come?",
+       "Answer: £266"
+      ],
+      "art": null
+     },
+     {
+      "label": "Goal Seek (backwards)",
+      "points": [
+       "You choose the output you want",
+       "Excel finds the input needed",
+       "e.g. How many must come to break even?",
+       "Answer: 50 tickets"
+      ],
+      "art": null
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A what-if question works **forwards**: change an input, see the output. Sometimes you want to work **backwards** instead: *\"How many tickets must we sell to raise £600?\"* You could keep guessing, but Excel has a tool for it."
+    },
+    {
+     "t": "h",
+     "text": "Goal Seek"
+    },
+    {
+     "t": "p",
+     "text": "**[[Goal Seek]]** finds the input value that makes an output reach a target. In Excel it is on the **Data** tab: **What-If Analysis > Goal Seek**. It asks three things:"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Goal Seek box",
+      "Meaning",
+      "Disco example"
+     ],
+     "rows": [
+      [
+       "**Set cell**",
+       "The output you care about",
+       "B9 (Profit)"
+      ],
+      [
+       "**To value**",
+       "The answer you want",
+       "0"
+      ],
+      [
+       "**By changing cell**",
+       "The input Excel may change",
+       "B2 (Tickets sold)"
+      ]
+     ],
+     "caption": "Goal Seek settings to find the break-even point"
+    },
+    {
+     "t": "p",
+     "text": "The point where income exactly equals costs, so profit is £0, is called **[[break-even|Break-even point]]**."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the break-even point",
+     "context": "Tickets are £5, fixed costs are £190 (DJ + decorations) and snacks cost £1.20 per pupil. How many tickets must be sold to break even?",
+     "steps": [
+      "Each ticket brings in £5 but costs £1.20 in snacks, so each pupil adds 5 − 1.20 = **£3.80** towards the fixed costs.",
+      "The fixed costs are £190, so we need 190 ÷ 3.80 = **50** tickets.",
+      "Check: income 5 × 50 = £250; costs 190 + 1.20 × 50 = £250; profit = £0."
+     ],
+     "answer": "Goal Seek gives 50 tickets: any more and the disco makes a profit."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: a target of £600",
+     "context": "The council wants to raise £600. Use Goal Seek on B9 = 600 by changing B2.",
+     "steps": [
+      "Need 3.80 × tickets − 190 = 600, so 3.80 × tickets = 790.",
+      "790 ÷ 3.80 = 207.89...",
+      "You cannot sell 0.89 of a ticket, and 207 tickets would fall just short, so **round up**."
+     ],
+     "answer": "They need to sell 208 tickets."
+    },
+    {
+     "t": "warn",
+     "text": "Goal Seek often gives a decimal answer like **207.89**. For people, tickets or buses you must think about whether to round **up** or down. Rounding 207.89 down to 207 would miss the target."
+    },
+    {
+     "t": "h",
+     "text": "Scenarios"
+    },
+    {
+     "t": "p",
+     "text": "A **[[scenario]]** is a saved set of input values that describes one possible situation. Planners often compare a **worst case**, an **expected case** and a **best case**. In Excel, **Data > What-If Analysis > Scenario Manager** stores scenarios and can produce a summary table."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Scenario",
+      "Tickets sold",
+      "Snacks per pupil",
+      "Income",
+      "Costs",
+      "Profit"
+     ],
+     "rows": [
+      [
+       "Worst case",
+       "100",
+       "£1.50",
+       "£500",
+       "£340",
+       "£160"
+      ],
+      [
+       "Expected",
+       "180",
+       "£1.20",
+       "£900",
+       "£406",
+       "£494"
+      ],
+      [
+       "Best case",
+       "250",
+       "£1.00",
+       "£1,250",
+       "£440",
+       "£810"
+      ]
+     ],
+     "caption": "Three disco scenarios (ticket price £5, fixed costs £190 in each)"
+    },
+    {
+     "t": "p",
+     "text": "Even in the worst case the disco makes £160, so the council can go ahead with confidence. That is exactly the kind of decision a model is for."
+    },
+    {
+     "t": "tip",
+     "text": "A scenario can change **several** inputs at once, because in real life bad news often comes together: on a snowy night fewer pupils come **and** the shop may charge more for last-minute snacks."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Goal Seek works backwards from a target output to the input needed.",
+      "Set cell = output, To value = target, By changing cell = input.",
+      "Break-even is where income equals costs (profit £0).",
+      "Round Goal Seek answers sensibly, often up.",
+      "Scenarios save sets of inputs such as worst, expected and best case."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does Goal Seek do?",
+     "o": [
+      "Sorts the data into order",
+      "Changes several inputs at random",
+      "Finds the input needed to reach a target output",
+      "Draws a chart of the outputs"
+     ],
+     "a": 2,
+     "why": "It works backwards from the answer you want."
+    },
+    {
+     "q": "Each pupil adds £3.80 and fixed costs are £190. What is the break-even number of tickets?",
+     "o": [
+      "50",
+      "38",
+      "190",
+      "72"
+     ],
+     "a": 0,
+     "why": "190 ÷ 3.80 = 50."
+    },
+    {
+     "q": "Goal Seek says 207.89 tickets are needed to reach a target. How many should be sold?",
+     "o": [
+      "207",
+      "207.89",
+      "200",
+      "208"
+     ],
+     "a": 3,
+     "why": "You cannot sell part of a ticket and 207 falls short, so round up."
+    },
+    {
+     "q": "What is a scenario?",
+     "o": [
+      "A formula that works backwards",
+      "A saved set of input values for one possible situation",
+      "A chart comparing outputs",
+      "A single what-if change"
+     ],
+     "a": 1,
+     "why": "e.g. worst case, expected case, best case."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between a what-if question and Goal Seek.",
+     "m": 2,
+     "a": "What-if: you change an input and see the output (1). Goal Seek: you set the output you want and Excel finds the input needed (1)."
+    },
+    {
+     "q": "Tickets cost £6, fixed costs are £190 and snacks cost £1.20 per pupil. Calculate the break-even number of tickets. Show your working.",
+     "m": 3,
+     "a": "Each pupil adds 6 − 1.20 = £4.80 (1). 190 ÷ 4.80 = 39.58 (1). Round up: 40 tickets (1)."
+    },
+    {
+     "q": "Give **one** reason why planners compare a worst case, expected case and best case scenario.",
+     "m": 1,
+     "a": "To check the plan still works if things go badly / to see the range of possible results / to plan for risks (1)."
+    }
+   ],
+   "terms": [
+    "Goal Seek",
+    "Break-even point",
+    "Scenario"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "spec": "Carry out a simulation step by step over time and explain how changing a variable changes the outcome",
+   "summary": "A simulation over time applies the model's rules again and again, one time step after another, and each new row is worked out from the row before. Small changes to a variable can make a huge difference.",
+   "diagram": {
+    "kind": "table-reveal",
+    "title": "Test yourself: the sickness bug simulation",
+    "caption": "Each pupil who catches the bug passes it to 2 new pupils the next day. Click a hidden cell to check.",
+    "head": [
+     "Day",
+     "New cases",
+     "Total so far"
+    ],
+    "rows": [
+     [
+      "0",
+      "1",
+      "1"
+     ],
+     [
+      "1",
+      "2",
+      "3"
+     ],
+     [
+      "2",
+      "4",
+      "7"
+     ],
+     [
+      "3",
+      "8",
+      "15"
+     ],
+     [
+      "4",
+      "16",
+      "31"
+     ],
+     [
+      "5",
+      "32",
+      "63"
+     ],
+     [
+      "6",
+      "64",
+      "127"
+     ]
+    ],
+    "hidden": [
+     [
+      2,
+      2
+     ],
+     [
+      3,
+      1
+     ],
+     [
+      4,
+      2
+     ],
+     [
+      5,
+      1
+     ],
+     [
+      5,
+      2
+     ],
+     [
+      6,
+      2
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Many real systems change **over time**: a population grows, a bug spreads, money in a savings account builds up. A simulation handles this by working in **[[time steps|Time step]]**: it applies the rules to get from one day (or minute, or year) to the next, then does it again and again. This repetition is a kind of **[[iteration]]**."
+    },
+    {
+     "t": "h",
+     "text": "Example: a sickness bug in Year 9"
+    },
+    {
+     "t": "p",
+     "text": "One pupil in a year group of **120** comes in with a sickness bug. The model's rules are:"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Each new case passes the bug to **2** new pupils the next day (the **spread rate**).",
+      "New cases today = new cases yesterday × spread rate.",
+      "Total so far = yesterday's total + today's new cases."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "example",
+     "title": "Worked example: run the simulation",
+     "context": "Start on day 0 with 1 case. Work out each day until day 6.",
+     "steps": [
+      "Day 1: new = 1 × 2 = 2; total = 1 + 2 = 3.",
+      "Day 2: new = 2 × 2 = 4; total = 3 + 4 = 7.",
+      "Day 3: new = 4 × 2 = 8; total = 7 + 8 = 15.",
+      "Day 4: new = 16; total = 31. Day 5: new = 32; total = 63.",
+      "Day 6: new = 64; total = 63 + 64 = **127**."
+     ],
+     "answer": "By day 6 the model says 127 pupils have caught it. But there are only 120 in the year group!"
+    },
+    {
+     "t": "warn",
+     "text": "A result of **127 out of 120** shows the model has broken. Our rules forgot that pupils who have already had the bug cannot catch it again, so there are fewer and fewer people left to infect. Always ask: **does this output make sense in real life?**"
+    },
+    {
+     "t": "h",
+     "text": "Building it in a spreadsheet"
+    },
+    {
+     "t": "table",
+     "head": [
+      "",
+      "A",
+      "B",
+      "C"
+     ],
+     "rows": [
+      [
+       "**1**",
+       "**Day**",
+       "**New cases**",
+       "**Total so far**"
+      ],
+      [
+       "**2**",
+       "0",
+       "1",
+       "=B2 → 1"
+      ],
+      [
+       "**3**",
+       "=A2+1 → 1",
+       "=B2*$F$1 → 2",
+       "=C2+B3 → 3"
+      ],
+      [
+       "**4**",
+       "=A3+1 → 2",
+       "=B3*$F$1 → 4",
+       "=C3+B4 → 7"
+      ]
+     ],
+     "caption": "Spread rate (2) is stored in F1. Row 3 is filled down to make more days."
+    },
+    {
+     "t": "p",
+     "text": "Each row uses the row above it, so you write row 3 once and drag it down. The spread rate is in **one input cell**, F1, with an absolute reference `$F$1`, so you can change it and the whole simulation reruns instantly."
+    },
+    {
+     "t": "h",
+     "text": "Change one variable"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Spread rate",
+      "Total by day 3",
+      "Total by day 5",
+      "What it could mean"
+     ],
+     "rows": [
+      [
+       "1",
+       "4",
+       "6",
+       "Everyone washes their hands well"
+      ],
+      [
+       "2",
+       "15",
+       "63",
+       "Our original model"
+      ],
+      [
+       "3",
+       "40",
+       "364",
+       "A very catching bug"
+      ]
+     ],
+     "caption": "Changing one variable changes the outcome enormously"
+    },
+    {
+     "t": "p",
+     "text": "With a spread rate of 1, only 6 pupils have had it by day 5. With a rate of 3, the model passes the whole year group by day 5. This is why health experts focus so much on reducing how many people each case passes an illness to."
+    },
+    {
+     "t": "note",
+     "text": "Real disease models used by scientists are far more detailed. They track who is healthy, ill and recovered, and they include randomness. But the idea is the same: rules applied step by step."
+    },
+    {
+     "t": "tip",
+     "text": "A spreadsheet chart of the *Total so far* column makes the pattern obvious: a curve that gets steeper and steeper. This is called **exponential growth**."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "A simulation over time applies rules one time step after another.",
+      "Each row is calculated from the row before.",
+      "In a spreadsheet: write one row, store variables in input cells, fill down.",
+      "A small change to a variable can make a huge difference over time.",
+      "Check outputs make sense: impossible results show a missing rule."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In a simulation over time, what is a time step?",
+     "o": [
+      "The total time the simulation takes",
+      "One jump forward, such as one day",
+      "The first row of the spreadsheet",
+      "A random number"
+     ],
+     "a": 1,
+     "why": "The rules are applied once per time step."
+    },
+    {
+     "q": "New cases double each day, starting with 1 on day 0. How many new cases are there on day 4?",
+     "o": [
+      "16",
+      "8",
+      "31",
+      "32"
+     ],
+     "a": 0,
+     "why": "1, 2, 4, 8, 16."
+    },
+    {
+     "q": "The sickness model said 127 out of 120 pupils were ill. What does this show?",
+     "o": [
+      "The arithmetic is wrong",
+      "More pupils joined the school",
+      "The spread rate should be 3",
+      "A rule is missing, so the model has broken"
+     ],
+     "a": 3,
+     "why": "Pupils who have had it cannot catch it again; the model ignored this."
+    },
+    {
+     "q": "Why is the spread rate stored in $F$1?",
+     "o": [
+      "Absolute references calculate faster",
+      "Excel will not multiply by a number",
+      "So every row uses it when filled down and it can be changed in one place",
+      "So the spread rate changes on every row"
+     ],
+     "a": 2,
+     "why": "The $ signs keep the reference fixed when the formula is copied."
+    }
+   ],
+   "practice": [
+    {
+     "q": "A model of rabbits on a farm starts with 20 rabbits. Each year the number of rabbits doubles. Work out how many rabbits there are after 3 years, showing each year.",
+     "m": 2,
+     "a": "Year 1: 40, Year 2: 80 (1). Year 3: 160 (1)."
+    },
+    {
+     "q": "Explain why simulations over time are often built in a spreadsheet by filling a formula down.",
+     "m": 2,
+     "a": "Each row is one time step calculated from the row above (1); writing one formula and filling down repeats the rule for as many steps as needed without retyping (1)."
+    },
+    {
+     "q": "The sickness model predicted more pupils were ill than there were in the year group. Suggest how the rules could be improved.",
+     "m": 2,
+     "a": "Add a rule that only pupils who have not yet had it can catch it / limit new cases to the number of healthy pupils left (1) so the total can never be more than 120 (1)."
+    }
+   ],
+   "terms": [
+    "Time step",
+    "Iteration"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p07",
+   "spec": "Explain why some simulations use random numbers and why they are run many times",
+   "summary": "Real life involves chance, so some simulations use random numbers. Each run gives a different result, so the simulation is run many times and the results are averaged to give a reliable prediction.",
+   "diagram": {
+    "kind": "calc",
+    "title": "Chance of at least one six",
+    "caption": "Change the number of dice rolls. The model works out the chance of rolling at least one six.",
+    "inputs": [
+     {
+      "id": "n",
+      "label": "Number of rolls",
+      "value": 4
+     }
+    ],
+    "formula": "Math.round((1 - Math.pow(5/6, n)) * 1000) / 10",
+    "result": {
+     "label": "Chance of at least one six",
+     "unit": "%"
+    },
+    "show": []
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Some things are not certain. A penalty taker does not score every time; it does not rain every day in Fermanagh (even if it feels like it). To model **chance**, a simulation uses **[[random numbers|Random number]]**."
+    },
+    {
+     "t": "h",
+     "text": "Random numbers in a spreadsheet"
+    },
+    {
+     "t": "table",
+     "head": [
+      "Formula",
+      "What it does",
+      "Example result"
+     ],
+     "rows": [
+      [
+       "`=RAND()`",
+       "A random decimal from 0 up to (but not including) 1",
+       "0.4172"
+      ],
+      [
+       "`=RANDBETWEEN(1,6)`",
+       "A random whole number from 1 to 6, like rolling a dice",
+       "4"
+      ],
+      [
+       "`=IF(RAND()<0.75,\"Goal\",\"Miss\")`",
+       "Gives Goal about 75% of the time",
+       "Goal"
+      ]
+     ],
+     "caption": "Excel's random functions"
+    },
+    {
+     "t": "p",
+     "text": "These cells give a new value every time the sheet recalculates. In Excel you can press **F9** to force a recalculation and \"run\" the simulation again."
+    },
+    {
+     "t": "h",
+     "text": "One run is not enough"
+    },
+    {
+     "t": "p",
+     "text": "Roll a dice 6 times and you might get no sixes, or three. A single run of a random simulation can be very lucky or unlucky. So we run it **many times** and look at the average or the overall pattern. The more runs, the closer the result gets to the true [[probability]]."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Rolls simulated",
+      "Sixes",
+      "Fraction that were sixes"
+     ],
+     "rows": [
+      [
+       "10",
+       "1",
+       "0.100"
+      ],
+      [
+       "100",
+       "10",
+       "0.100"
+      ],
+      [
+       "1,000",
+       "162",
+       "0.162"
+      ],
+      [
+       "100,000",
+       "16,552",
+       "0.166"
+      ]
+     ],
+     "caption": "One computer run (results change every time). The true probability is 1 ÷ 6 ≈ 0.167."
+    },
+    {
+     "t": "code",
+     "lang": "python",
+     "title": "Simulating 1,000 dice rolls in Python",
+     "code": "import random\n\nsixes = 0\nfor roll in range(1000):\n    if random.randint(1, 6) == 6:\n        sixes = sixes + 1\nprint(sixes, \"sixes out of 1000 rolls\")",
+     "output": "e.g. 171 sixes out of 1000 rolls. Run it again and you will get a slightly different number, usually somewhere near 167."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: penalty shoot-out",
+     "context": "Ciara scores 75% of her penalties. A simulation of 5 penalties uses =IF(RAND()<0.75,\"Goal\",\"Miss\") five times. Run 1 gave 5 goals, run 2 gave 3 goals. How many goals should the coach expect, on average?",
+     "steps": [
+      "Two runs gave very different answers, so neither on its own is a good prediction.",
+      "On average she scores 0.75 goals per penalty.",
+      "Expected goals = 5 × 0.75 = **3.75**.",
+      "If the simulation is run 1,000 times, the average number of goals will be very close to 3.75."
+     ],
+     "answer": "About 3.75 goals out of 5. Many runs give a reliable average; one run does not."
+    },
+    {
+     "t": "h",
+     "text": "Weather forecasts do this too"
+    },
+    {
+     "t": "p",
+     "text": "The weather is very sensitive to tiny changes. Forecasters such as the **Met Office** run their weather model **many times**, each with slightly different starting conditions. If almost every run shows rain tomorrow, they are confident. If the runs disagree, the forecast is less certain. This is where a forecast like *\"60% chance of rain\"* comes from."
+    },
+    {
+     "t": "warn",
+     "text": "Do not judge a random simulation on **one run**. A single run that says \"the team scores 5 out of 5\" is just luck. Look at the results of many runs."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Random numbers let a simulation model chance.",
+      "RAND() gives a decimal from 0 up to 1; RANDBETWEEN(1,6) gives a whole number 1 to 6.",
+      "Each run of a random simulation gives a different result.",
+      "Run it many times and average the results.",
+      "More runs give a more reliable prediction."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Why do some simulations use random numbers?",
+     "o": [
+      "To make the formulas shorter",
+      "To stop the results changing",
+      "To model events that happen by chance",
+      "Because computers cannot do exact maths"
+     ],
+     "a": 2,
+     "why": "e.g. a penalty that goes in only some of the time."
+    },
+    {
+     "q": "What can =RANDBETWEEN(1,6) give?",
+     "o": [
+      "Any whole number from 1 to 6",
+      "Any decimal between 1 and 6",
+      "Only the number 6",
+      "A number from 0 up to 1"
+     ],
+     "a": 0,
+     "why": "It simulates rolling a normal dice."
+    },
+    {
+     "q": "Why is a random simulation run many times?",
+     "o": [
+      "Excel needs several runs to start",
+      "One run might be lucky or unlucky",
+      "Every run gives the same answer",
+      "It makes the spreadsheet smaller"
+     ],
+     "a": 1,
+     "why": "The average of many runs is a more reliable prediction."
+    },
+    {
+     "q": "A player scores 75% of penalties. How many goals would you expect from 8 penalties, on average?",
+     "o": [
+      "7.5",
+      "5",
+      "4",
+      "6"
+     ],
+     "a": 3,
+     "why": "8 × 0.75 = 6."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write a spreadsheet formula that simulates a coin toss, showing *Heads* or *Tails*.",
+     "m": 2,
+     "a": "=IF(RAND()<0.5,\"Heads\",\"Tails\") or using RANDBETWEEN(1,2) with an IF (1 for the random part, 1 for the correct IF with both outcomes)."
+    },
+    {
+     "q": "A simulation of 10 dice rolls gave 4 sixes. Explain why this does not mean the chance of a six is 4 in 10.",
+     "m": 2,
+     "a": "10 rolls is a small number of runs, so the result can be lucky/unlucky (1). Running it many more times (e.g. 1,000) would give a fraction close to 1/6 (1)."
+    },
+    {
+     "q": "Explain why a weather forecaster runs the same model many times with slightly different starting values.",
+     "m": 2,
+     "a": "Small changes in starting conditions can change the weather a lot (1); if most runs agree the forecast is confident, if they differ it is uncertain / it gives a percentage chance (1)."
+    }
+   ],
+   "terms": [
+    "Random number",
+    "Probability"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p08",
+   "spec": "Test a model's predictions against real data and refine the model to improve it",
+   "summary": "Testing checks the model's formulas work as intended; validating checks its predictions against what really happens. If they do not match, refine the rules or assumptions and test again.",
+   "diagram": {
+    "kind": "flow",
+    "title": "Validating a model",
+    "caption": "Click each stage. If the prediction is not close enough, refine the model and go round again.",
+    "direction": "lr",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Predict",
+      "detail": "Run the model, e.g. the bus journey will take 33 minutes.",
+      "shape": "start"
+     },
+     {
+      "id": "b",
+      "label": "Collect real data",
+      "detail": "Time the real bus every day for a week.",
+      "shape": "io"
+     },
+     {
+      "id": "c",
+      "label": "Compare",
+      "detail": "How far apart are the prediction and reality? Is the model always too high or too low?",
+      "shape": "process"
+     },
+     {
+      "id": "d",
+      "label": "Refine",
+      "detail": "Change a rule or assumption, e.g. add 5 minutes for town traffic, then predict again.",
+      "shape": "process"
+     },
+     {
+      "id": "e",
+      "label": "Use",
+      "detail": "Close enough? Use the model to make decisions, and keep checking.",
+      "shape": "end"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ],
+     [
+      "d",
+      "a"
+     ],
+     [
+      "c",
+      "e"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "A model is only useful if its predictions are close to what really happens. There are two different checks."
+    },
+    {
+     "t": "compare",
+     "head": [
+      "Testing",
+      "Validating"
+     ],
+     "rows": [
+      [
+       "Question",
+       "Does the model do what I designed it to do?",
+       "Does the model match the real world?"
+      ],
+      [
+       "How",
+       "Work out answers by hand with test data and compare with the spreadsheet",
+       "Compare the model's predictions with real measurements"
+      ],
+      [
+       "Finds",
+       "Mistakes in formulas, e.g. a wrong cell reference",
+       "Missing rules or wrong assumptions"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[Validation]]** means comparing a model's predictions with **real data**. The difference between them is the model's **[[error|Prediction error]]**."
+    },
+    {
+     "t": "example",
+     "title": "Worked example: validating the bus model",
+     "context": "The bus model predicts 33 minutes. A pupil times the real bus for a week: Mon 38, Tue 41, Wed 36, Thu 52 (heavy snow), Fri 37 minutes.",
+     "steps": [
+      "Find each error (real − predicted): 5, 8, 3, 19, 4 minutes. The model is **always too low**.",
+      "Thursday was very unusual (snow), so look at it separately. The other four days average (38 + 41 + 36 + 37) ÷ 4 = **38 minutes**.",
+      "On a normal day the model is about 5 minutes short. Something is missing: the bus crawls through traffic in Enniskillen at 8:30.",
+      "Refine: add a new rule, *town traffic = 5 minutes*. New prediction: 33 + 5 = **38 minutes**."
+     ],
+     "answer": "After refining, the model matches normal days. A Boolean input *Snowing?* could add extra time for days like Thursday."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Day",
+      "Predicted (old)",
+      "Real",
+      "Error",
+      "Predicted (refined)"
+     ],
+     "rows": [
+      [
+       "Mon",
+       "33",
+       "38",
+       "+5",
+       "38"
+      ],
+      [
+       "Tue",
+       "33",
+       "41",
+       "+8",
+       "38"
+      ],
+      [
+       "Wed",
+       "33",
+       "36",
+       "+3",
+       "38"
+      ],
+      [
+       "Fri",
+       "33",
+       "37",
+       "+4",
+       "38"
+      ]
+     ],
+     "caption": "The refined model is much closer on normal days (times in minutes)"
+    },
+    {
+     "t": "h",
+     "text": "What makes a fair comparison?"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Use **real data that the model was not built from**, so it is a genuine test.",
+      "Collect **enough** data: one day could just be a fluke.",
+      "Look for a **pattern** in the errors. Always too low? Something is missing.",
+      "Note unusual events (like snow) separately rather than ignoring them."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "warn",
+     "text": "Do not change a model just to match **one** odd result. If you added 19 minutes to make Thursday fit, the model would then be wrong on every normal day."
+    },
+    {
+     "t": "p",
+     "text": "Professional modellers do this all the time. Weather forecasters check every forecast against what actually happened, and this is one reason forecasts have become much more accurate over the years."
+    },
+    {
+     "t": "tip",
+     "text": "Each time round the loop (predict, compare, refine) the model should get a little better. This is the same **plan, build, test, refine** cycle used in all software development."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Testing checks the formulas work; validating checks the model matches reality.",
+      "Error = real value − predicted value.",
+      "A pattern in the errors points to a missing rule or a wrong assumption.",
+      "Refine the model, then test it again.",
+      "Use enough real data, and treat unusual events separately."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does it mean to validate a model?",
+     "o": [
+      "Check the spelling of the labels",
+      "Compare its predictions with real data",
+      "Add more formulas to it",
+      "Make the inputs a different colour"
+     ],
+     "a": 1,
+     "why": "Validation asks whether the model matches the real world."
+    },
+    {
+     "q": "A model predicts 33 minutes; the real journey took 41. What is the error?",
+     "o": [
+      "8 minutes",
+      "74 minutes",
+      "33 minutes",
+      "41 minutes"
+     ],
+     "a": 0,
+     "why": "41 − 33 = 8."
+    },
+    {
+     "q": "A model's predictions are too low every single day. What does this most likely show?",
+     "o": [
+      "The real data must be wrong",
+      "The model is perfect",
+      "Random numbers are needed",
+      "A rule or factor is missing from the model"
+     ],
+     "a": 3,
+     "why": "A consistent pattern in the errors points to something the model leaves out."
+    },
+    {
+     "q": "Which is the best thing to do with one very unusual result, such as a snow day?",
+     "o": [
+      "Change the model to match it exactly",
+      "Delete the whole set of results",
+      "Note it and consider it separately",
+      "Use it as the main prediction"
+     ],
+     "a": 2,
+     "why": "Changing the model to fit one odd day would make it worse on normal days."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between **testing** a model and **validating** a model.",
+     "m": 2,
+     "a": "Testing checks the formulas / model work as designed, e.g. by comparing with hand-worked answers (1). Validating compares the model's predictions with real-world data (1)."
+    },
+    {
+     "q": "The disco model predicted 180 pupils. Only 152 came. Calculate the error and suggest **one** reason the prediction might have been wrong.",
+     "m": 2,
+     "a": "Error 152 − 180 = −28 / 28 fewer pupils (1). Any sensible reason, e.g. bad weather, a clash with another event, assumption based on last year's numbers (1)."
+    },
+    {
+     "q": "Describe how a model can be improved after it has been validated.",
+     "m": 2,
+     "a": "Look for patterns in the differences between predictions and reality (1); change / add rules or assumptions and then test it again against new data (1)."
+    }
+   ],
+   "terms": [
+    "Validation",
+    "Prediction error"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p09",
+   "spec": "Evaluate the limitations, trade-offs and possible bias of models, including AI models, and ask who a model works for",
+   "summary": "Every model leaves things out, so it has limits. A model can be unfair if its data or assumptions leave some people out. AI models are models too: they learn patterns from data, so biased data gives biased results.",
+   "diagram": {
+    "kind": "match",
+    "title": "What went wrong with the model?",
+    "caption": "Match each problem to an example.",
+    "pairs": [
+     [
+      "Out-of-date data",
+      "A bus model still uses last year's timetable"
+     ],
+     [
+      "Missing rule",
+      "A sickness model says 127 out of 120 pupils are ill"
+     ],
+     [
+      "Biased data",
+      "Face recognition trained mostly on one group of people"
+     ],
+     [
+      "Unfair assumption",
+      "Crash tests that only use a dummy the size of an average man"
+     ],
+     [
+      "Too simple",
+      "A queue model assuming every pupil takes exactly 15 seconds"
+     ],
+     [
+      "Garbage in, garbage out",
+      "A typing mistake enters 1,800 tickets instead of 180"
+     ]
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "The statistician George Box famously said: *\"All models are wrong, but some are useful.\"* Because every model is a simplification, it will never be perfect. A good modeller knows the **limits** of their model and asks **who it works for**, not just whether it works."
+    },
+    {
+     "t": "h",
+     "text": "Common limitations"
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Missing factors**: abstraction left out something that turned out to matter.",
+      "**Assumptions** that are not true for everyone or every day.",
+      "**Data quality**: old, incomplete or wrongly typed data. *Garbage in, garbage out* (**[[GIGO]]**).",
+      "**The unexpected**: no model can predict every event, like a sudden storm or a pandemic.",
+      "**People change**: if a model says *\"traffic is quiet on this road\"*, everyone's sat nav sends them there and it fills up."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "Trade-offs"
+    },
+    {
+     "t": "p",
+     "text": "Building a model always involves **[[trade-offs|Trade-off]]**: gaining one thing means giving up another."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Trade-off",
+      "One side",
+      "The other side"
+     ],
+     "rows": [
+      [
+       "Simple vs detailed",
+       "Quick to build, easy to understand",
+       "More accurate, but slow and hard to check"
+      ],
+      [
+       "Speed vs accuracy",
+       "Answer in seconds",
+       "Waiting hours for a better answer"
+      ],
+      [
+       "Cost vs benefit",
+       "A cheap spreadsheet model",
+       "An expensive supercomputer model"
+      ]
+     ],
+     "caption": "Trade-offs in modelling"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: the disco price",
+     "context": "A council member adds a rule: *for every £1 the ticket price goes up, 25 fewer pupils come* (300 − 25 × price). With fixed costs of £190 and snacks at £1.20, which price is best?",
+     "steps": [
+      "£4: 200 pupils come, profit = 200 × (4 − 1.20) − 190 = **£370**.",
+      "£6: 150 pupils come, profit = 150 × (6 − 1.20) − 190 = **£530**.",
+      "£7: 125 pupils come, profit = 125 × (7 − 1.20) − 190 = **£535**.",
+      "The model says £7 makes the most money, but 75 fewer pupils come than at £4."
+     ],
+     "answer": "Best for the charity: about £7. Best for pupils who cannot afford £7: £4. The model gives the numbers; people must decide what is fair."
+    },
+    {
+     "t": "h",
+     "text": "Bias: who gets left out?"
+    },
+    {
+     "t": "p",
+     "text": "A model is **[[biased|Bias]]** if it gives results that are unfair to some groups of people, often because of the data or assumptions it was built on."
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Crash test dummies**: for many years the standard dummy was based on an average-sized man. Research has found that women are more likely to be seriously injured in similar crashes. In 2022, researchers in Sweden presented a crash test dummy based on an average woman.",
+      "**Exam grades in 2020**: when exams were cancelled because of Covid-19, a statistical model was used across the UK, including by CCEA in Northern Ireland, to work out grades, partly using schools' past results. Many pupils felt it marked them down unfairly because of their school's history rather than their own work. After protests, teachers' predicted grades were used instead (A level pupils kept the calculated grade if it was higher)."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "AI models are models too"
+    },
+    {
+     "t": "p",
+     "text": "An **[[AI model]]** is a model that has **learned patterns from a large set of data** (its **[[training data]]**) so it can make predictions or generate content. Like any model, it is a simplification, and it can only be as good as its data. If the data leaves some people out, the AI's predictions will be worse for them. For example, studies found some face recognition systems were much less accurate for people with darker skin, because they had been trained mostly on photos of lighter-skinned faces."
+    },
+    {
+     "t": "warn",
+     "text": "A computer's answer is **not automatically fair or correct** just because a computer worked it out. Ask: what data was it built from, what did it leave out, and who could lose out?"
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "All models are simplifications, so all have limits.",
+      "Garbage in, garbage out: bad data gives bad predictions.",
+      "Modelling involves trade-offs such as simple vs accurate.",
+      "Biased data or assumptions can make a model unfair to some people.",
+      "AI models learn from training data, so they can carry its bias.",
+      "Always ask who a model works for, and who it leaves out."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does garbage in, garbage out mean?",
+     "o": [
+      "Bad input data leads to bad output",
+      "Deleted files can be recovered",
+      "Old models should be thrown away",
+      "Outputs are always more accurate than inputs"
+     ],
+     "a": 0,
+     "why": "A model can only be as good as the data put into it."
+    },
+    {
+     "q": "Why were older crash test dummies a problem?",
+     "o": [
+      "They were too expensive to use",
+      "They were made by computer",
+      "They were based on an average-sized man",
+      "They could only test slow crashes"
+     ],
+     "a": 2,
+     "why": "Models based on one body type can be less safe for others."
+    },
+    {
+     "q": "How does an AI model learn?",
+     "o": [
+      "A programmer writes every rule by hand",
+      "It copies a human brain exactly",
+      "It uses no data at all",
+      "It finds patterns in a large set of training data"
+     ],
+     "a": 3,
+     "why": "AI models learn patterns from data, so their data matters."
+    },
+    {
+     "q": "A model shows the highest profit comes from a £7 ticket, but fewer pupils can afford it. This is an example of...",
+     "o": [
+      "a missing input",
+      "a trade-off",
+      "a broken formula",
+      "random error"
+     ],
+     "a": 1,
+     "why": "Gaining more money means fewer pupils can go."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by **bias** in a model, and give an example.",
+     "m": 2,
+     "a": "When a model gives results that are unfair to / less accurate for some groups of people (1). Example, e.g. crash test dummies based on men; face recognition trained mostly on lighter-skinned faces; 2020 grades model (1)."
+    },
+    {
+     "q": "Describe **two** limitations of using a computer model to make decisions.",
+     "m": 2,
+     "a": "Any two: it is a simplification so may leave out important factors (1); assumptions may be wrong (1); depends on accurate data / garbage in, garbage out (1); cannot predict unexpected events (1)."
+    },
+    {
+     "q": "An AI system is trained to predict which pupils will do well at GCSE using data from only one school. Explain why its predictions might be unfair for pupils at other schools.",
+     "m": 2,
+     "a": "It has only learned patterns from one school's pupils / training data is not representative (1), so it may not work for pupils with different backgrounds, subjects or circumstances / results would be biased (1)."
+    }
+   ],
+   "terms": [
+    "GIGO",
+    "Trade-off",
+    "Bias",
+    "AI model",
+    "Training data"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p10",
+   "spec": "Plan, build, test and evaluate a model of your own to answer a real question",
+   "summary": "Building a good model follows a cycle: plan the question, inputs, rules, outputs and assumptions; build it; test and validate it; then evaluate how well it works and who it works for, and refine it.",
+   "diagram": {
+    "kind": "cycle",
+    "title": "The modelling cycle",
+    "caption": "Most models go round this loop more than once.",
+    "items": [
+     {
+      "label": "Plan",
+      "detail": "Write the question, the user, the success criteria, the inputs, rules, outputs and assumptions."
+     },
+     {
+      "label": "Build",
+      "detail": "Create the spreadsheet or program. Label and colour the inputs. Use cell references, not typed numbers."
+     },
+     {
+      "label": "Test and validate",
+      "detail": "Check outputs against hand calculations, then compare predictions with real data."
+     },
+     {
+      "label": "Evaluate and refine",
+      "detail": "Did it meet the success criteria? Who does it work for? Improve it and go round again."
+     }
+    ]
+   },
+   "blocks": [
+    {
+     "t": "p",
+     "text": "Now it is your turn. Building your own model uses everything in this topic, and it follows the same cycle of **planning, development, testing and refinement** used to build any software."
+    },
+    {
+     "t": "h",
+     "text": "1. Plan"
+    },
+    {
+     "t": "p",
+     "text": "Before you open Excel, plan on paper. A clear plan saves a lot of time later."
+    },
+    {
+     "t": "table",
+     "head": [
+      "Plan section",
+      "Hot chocolate stall at the school Christmas fair"
+     ],
+     "rows": [
+      [
+       "**Question**",
+       "What price should we charge to make at least £100 for charity?"
+      ],
+      [
+       "**User**",
+       "The Year 10 enterprise group"
+      ],
+      [
+       "**Inputs**",
+       "Price per cup (float), cups sold (integer), cost per cup (float), stall hire (float)"
+      ],
+      [
+       "**Rules**",
+       "Income = price × cups; costs = stall hire + cost per cup × cups; profit = income − costs"
+      ],
+      [
+       "**Outputs**",
+       "Income, costs, profit, and \"Target met?\" (Boolean)"
+      ],
+      [
+       "**Assumptions**",
+       "Same number sold at any price; no cups wasted; everyone pays"
+      ],
+      [
+       "**[[Success criteria]]**",
+       "Profit is correct when checked by hand; answers the price question; inputs are clearly labelled"
+      ]
+     ],
+     "caption": "A model plan"
+    },
+    {
+     "t": "h",
+     "text": "2. Build"
+    },
+    {
+     "t": "list",
+     "items": [
+      "Put all **inputs together** at the top, labelled and coloured.",
+      "Write **rules as formulas** using cell references.",
+      "Format money as currency, and use sensible data types.",
+      "Add an IF output to make the answer obvious, e.g. =IF(B9>=100,TRUE,FALSE)."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "h",
+     "text": "3. Test and validate"
+    },
+    {
+     "t": "example",
+     "title": "Worked example: test with hand-worked data",
+     "context": "Inputs: price £1.50, 120 cups sold, cost 40p per cup, stall hire £20. What should the model show?",
+     "steps": [
+      "Income = 1.50 × 120 = **£180**.",
+      "Costs = 20 + 0.40 × 120 = 20 + 48 = **£68**.",
+      "Profit = 180 − 68 = **£112**, so *Target met?* should be TRUE.",
+      "If the spreadsheet shows anything different, a formula is wrong."
+     ],
+     "answer": "Expected outputs: £180, £68, £112, TRUE."
+    },
+    {
+     "t": "p",
+     "text": "Use **[[test data|Test data]]** that includes normal values, extreme values (0 cups sold) and values right on the target. With 0 cups sold the profit should be **−£20** (just the stall hire). After the fair, **validate** by comparing the model's prediction with what was really sold."
+    },
+    {
+     "t": "h",
+     "text": "4. Evaluate and refine"
+    },
+    {
+     "t": "p",
+     "text": "An **evaluation** judges how well your model met its success criteria and what could be improved. Use evidence, not just \"it works\"."
+    },
+    {
+     "t": "list",
+     "items": [
+      "**Did it answer the question?** e.g. it showed £1.50 meets the target if 120 cups sell.",
+      "**How accurate was it?** e.g. predicted 120 cups, really sold 95.",
+      "**What were its limits?** e.g. it assumed the same sales at any price.",
+      "**Who does it work for?** e.g. could pupils with less money still buy a drink?",
+      "**Improvements**: e.g. add a demand rule, a scenario for a rainy day, or a chart."
+     ],
+     "ordered": false
+    },
+    {
+     "t": "tip",
+     "text": "Good project ideas: a canteen queue, your savings towards a new phone, a school sports day timetable, a fundraising event, the spread of a rumour through a year group, or a simple game with random dice rolls."
+    },
+    {
+     "t": "warn",
+     "text": "Do not write *\"My model is perfect.\"* Every model has limitations. Naming them, with a sensible improvement, is what earns the best marks in an evaluation."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Plan first: question, user, inputs, rules, outputs, assumptions, success criteria.",
+      "Build with labelled inputs and formulas that use cell references.",
+      "Test with hand-worked answers, then validate with real data.",
+      "Evaluate against the success criteria, using evidence.",
+      "Name limitations, think about who it works for, and refine."
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What should you do first when building a model?",
+     "o": [
+      "Draw a chart of the results",
+      "Type the formulas into Excel",
+      "Evaluate the finished model",
+      "Plan the question, inputs, rules and outputs"
+     ],
+     "a": 3,
+     "why": "Planning first saves time and mistakes later."
+    },
+    {
+     "q": "Price £1.50, 120 cups, 40p per cup, stall hire £20. What is the profit?",
+     "o": [
+      "£180",
+      "£112",
+      "£68",
+      "£132"
+     ],
+     "a": 1,
+     "why": "180 − (20 + 48) = 112."
+    },
+    {
+     "q": "What are success criteria?",
+     "o": [
+      "Statements used to judge whether the model does its job",
+      "The formulas used in the model",
+      "The assumptions the model makes",
+      "The random numbers in a simulation"
+     ],
+     "a": 0,
+     "why": "You evaluate against them at the end."
+    },
+    {
+     "q": "Which is the best evaluation comment?",
+     "o": [
+      "My model is perfect",
+      "My model works",
+      "It predicted 120 cups but 95 sold, as it ignored the weather",
+      "The colours look nice"
+     ],
+     "a": 2,
+     "why": "A good evaluation uses evidence and names a limitation."
+    }
+   ],
+   "practice": [
+    {
+     "q": "A pupil plans a model of their savings for a £300 bike. List **two** inputs, **one** rule and **one** output for the model.",
+     "m": 4,
+     "a": "Inputs, e.g. money saved already, pocket money per week, money from a part-time job / birthday (2). Rule, e.g. total = saved + weekly amount × weeks (1). Output, e.g. weeks needed / date they can buy it (1)."
+    },
+    {
+     "q": "Explain why test data should include extreme values as well as normal values.",
+     "m": 2,
+     "a": "Extreme values (e.g. 0 cups sold) check the model still gives sensible answers at the limits (1) and can reveal errors that normal values do not show (1)."
+    },
+    {
+     "q": "Write **two** sentences evaluating the hot chocolate model, using the fact that it predicted 120 cups but only 95 were sold.",
+     "m": 2,
+     "a": "One mark for using the evidence (prediction 120 vs real 95, so the model was too high / profit was lower than predicted) (1); one mark for a reason or improvement, e.g. it assumed the same sales at any price / did not include weather, so add a demand rule or a rainy-day scenario (1)."
+    }
+   ],
+   "terms": [
+    "Success criteria",
+    "Test data"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Model",
+   "def": "A simplified representation of a real system, used to understand it or predict what will happen.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Real system",
+   "def": "The actual thing or situation in the real world that a model represents, such as the weather or a school canteen.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Simulation",
+   "def": "Running a model, often step by step over time, to imitate what would happen in the real system.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Prediction",
+   "def": "A model's estimate of what will happen. It may turn out to be wrong.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Abstraction",
+   "def": "Removing details that do not matter for the question, keeping only what is important.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Assumption",
+   "def": "Something a modeller treats as true to simplify a model, e.g. every pupil takes 15 seconds to be served.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Decomposition",
+   "def": "Breaking a big problem down into smaller parts that are easier to solve.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Variable",
+   "def": "A named value in a model that can change, such as speed or number of pupils.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Input",
+   "def": "A value fed into a model that the user can change.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Rule",
+   "def": "A formula or instruction in a model that describes how the system behaves.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Output",
+   "def": "A result produced by a model from its inputs and rules.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Constant",
+   "def": "A value that stays the same every time a model runs, e.g. 60 minutes in an hour.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Data type",
+   "def": "The kind of value a variable stores, such as integer, float, string or Boolean.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Integer",
+   "def": "A data type for whole numbers, e.g. 12 stops.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Float",
+   "def": "A data type for numbers with a decimal point, e.g. 0.5 or 2.75. Also called real.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "String",
+   "def": "A data type for text, e.g. \"Belleek route\".",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Boolean",
+   "def": "A data type with only two values: TRUE or FALSE.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "What-if question",
+   "def": "Changing an input in a model to see the effect on the outputs.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Hard-coding",
+   "def": "Typing a fixed number into a formula instead of referring to an input cell, so the formula does not update.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Goal Seek",
+   "def": "An Excel tool that works backwards: it finds the input value needed for an output to reach a target.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Break-even point",
+   "def": "Where income exactly equals costs, so the profit is £0.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Scenario",
+   "def": "A saved set of input values describing one possible situation, such as a worst case or best case.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Time step",
+   "def": "One jump forward in a simulation over time, such as one day or one year.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Iteration",
+   "def": "Repeating a set of steps; in a simulation, applying the rules again for each time step.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Random number",
+   "def": "A number chosen by chance, used in simulations to model events such as dice rolls.",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Probability",
+   "def": "How likely something is to happen, from 0 (impossible) to 1 (certain).",
+   "alt": "",
+   "page": "p07"
+  },
+  {
+   "term": "Validation",
+   "def": "Checking a model by comparing its predictions with real data.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "Prediction error",
+   "def": "The difference between the real value and the value a model predicted.",
+   "alt": "",
+   "page": "p08"
+  },
+  {
+   "term": "GIGO",
+   "def": "Garbage in, garbage out: if the data put into a model is wrong, its outputs will be wrong too.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Trade-off",
+   "def": "Gaining one thing by giving up another, e.g. a simpler model is quicker but less accurate.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Bias",
+   "def": "When a model's results are unfair to, or less accurate for, some groups of people.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "AI model",
+   "def": "A model that has learned patterns from a large set of data so it can make predictions or generate content.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Training data",
+   "def": "The examples an AI model learns its patterns from.",
+   "alt": "",
+   "page": "p09"
+  },
+  {
+   "term": "Success criteria",
+   "def": "Statements used to judge whether a model or product does its job.",
+   "alt": "",
+   "page": "p10"
+  },
+  {
+   "term": "Test data",
+   "def": "Values chosen to check a model gives correct results, including normal and extreme values.",
+   "alt": "",
+   "page": "p10"
+  }
+ ]
+}
