@@ -1,0 +1,417 @@
+{
+ "c01": {
+  "gaps": [
+   "A **programming paradigm** is a style or approach to programming. In {{procedural programming|procedural}}, the program is a sequence of imperative commands executed in order. The main task is broken into sub-tasks by {{top-down design|top down design|top-down}}, and each sub-task becomes a procedure or function. Data is kept separate in variables and passed into procedures and functions as {{parameters|parameter}}.",
+   "In object-oriented programming, a {{class}} is a blueprint, and an {{object}} is one instance made from it with its own values. An object's data is held in properties, and the actions it can carry out are its {{methods|method}}. {{Encapsulation|information hiding}} keeps an object's data inside it so it can only be changed through its own properties and methods, while {{inheritance}} lets a new class take on the properties and methods of an existing class and add its own.",
+   "C# is written in Visual Studio, an {{IDE|integrated development environment}} that combines a code editor, translator, debugger and other tools in one application. {{IntelliSense|auto-complete|autocomplete|auto complete}} suggests keywords, variable and method names as you type, and syntax highlighting shows keywords, strings and comments in different colours, so code is written faster with fewer errors.",
+   "The processor can only execute {{machine code|machine-code}}, so high-level source code must be translated. A {{compiler}} translates the whole program before it is run and produces an {{executable file|executable|exe|.exe|exe file}}, so the finished program runs quickly. An {{interpreter}} translates and runs the program one line at a time and stops at the first error, which suits developing and testing."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **procedural and object-oriented programming**",
+    "pts": [
+     "Procedural: imperative commands executed in sequence",
+     "Code organised top-down into procedures and functions that can be called repeatedly",
+     "Procedural: data kept separate in variables and passed in as parameters",
+     "Procedural suits smaller, linear tasks",
+     "OOP builds a program from objects; design starts with the objects in the problem",
+     "Class = blueprint; object = an instance of a class with its own values",
+     "Properties are an object's data; methods are its actions",
+     "Encapsulation protects an object's data; inheritance lets a class reuse and extend another class"
+    ]
+   },
+   {
+    "p": "Everything you know about **IDEs and their editing features**",
+    "pts": [
+     "IDE = one application with code editor, translator, debugger, GUI designer and project tools",
+     "IntelliSense / auto-complete suggests names and shows a method's parameters: fewer spelling and syntax errors",
+     "Syntax highlighting colours keywords, strings and comments: easier to read",
+     "Error underlining: a wavy red line under code that breaks the rules, as you type",
+     "Line numbering: go straight to the line named in an error message",
+     "Code outlining collapses and expands blocks to navigate long programs",
+     "Debugger: breakpoints, stepping and watching variables to find logic errors"
+    ]
+   },
+   {
+    "p": "Everything you know about **translating and running high-level code**",
+    "pts": [
+     "The CPU only executes machine code, so source code must be translated",
+     "Compiler translates the whole program before it runs and lists all syntax errors",
+     "Compiler produces an executable file; the user does not need the source code",
+     "Compiled programs run fast but must be recompiled after every change",
+     "Interpreter translates and runs one line at a time and stops at the first error",
+     "Interpreter: no executable, slower, translated on every run",
+     "Compiler stages: include library code, lexical analysis, syntax analysis, semantic analysis, code generation and optimisation"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **encapsulation** and the use of **private fields and public properties** in a C# class.",
+    "a": "Encapsulation keeps an object's data inside it so it can only be read or changed through the object's own properties and methods. In C# the data is held in `private` fields, which no code outside the class can touch, so other code has to go through the public properties' `get` and `set` accessors or the methods. This protects the data and reduces errors, because, for example, a field with no property can only be changed by a method such as `AddMerit()`."
+   },
+   {
+    "q": "How does the choice between a **compiler** and an **interpreter** affect a programmer while developing and when distributing a program?",
+    "a": "An interpreter translates and runs one line at a time and stops as soon as it meets an error, showing where it is, so it is convenient while developing and testing. A compiler translates the whole program first and produces an executable file, so the finished program runs quickly and can be given to users without the source code, which protects the programmer's work. So interpreting suits quick testing, while compiling suits handing a fast, finished product to customers."
+   },
+   {
+    "q": "Explain the link between the **IDE's editing features and debugger** and the types of error in **Simple error handling techniques**.",
+    "a": "Error underlining and IntelliSense help prevent and reveal syntax errors, because code that breaks the language rules is underlined as it is typed and names are spelt the same every time. Logic errors do not stop the program, so they are tracked down with the debugger: a breakpoint pauses the program and stepping lets the programmer watch variable values to see where they go wrong. Line numbers let the programmer go straight to the line named in an error message."
+   },
+   {
+    "q": "Explain the link between **procedural programming** and **decomposition** in **Digital design principles**.",
+    "a": "Decomposition breaks a large, complex problem into smaller, more manageable sub-problems, often drawn as a structure diagram, which is top-down design. Procedural programming is organised the same way: each sub-task becomes a procedure or function that does one task. Because each one is a named block, it can be called from anywhere in the program as often as needed, so the solution is easier to build."
+   }
+  ]
+ },
+ "c02": {
+  "gaps": [
+   "Computers store data in binary because their switches have only two states. A single 0 or 1 is a {{bit|binary digit}}, four bits make a {{nibble}} and eight bits make a {{byte}}. With n bits there are 2ⁿ patterns, so one byte stores whole numbers from 0 to 255. Each larger unit, from kilobyte up to terabyte, is {{1024|1,024}} times the one below.",
+   "{{Hexadecimal|hex}} is base 16, using 0–9 and then A–F; one digit stands for one nibble, so it is a shorthand that people can read and copy more easily than binary. Negative numbers are usually stored in {{two's complement|twos complement|two’s complement|2's complement}}, made by inverting the bits of the positive number and adding 1. When the result of an addition is too large for the number of bits available, {{overflow}} occurs: the extra bit is lost and the stored result is wrong.",
+   "A {{character set}} gives each character a unique binary code. 7-bit {{ASCII|American Standard Code for Information Interchange}} has 128 codes and mainly covers English, while {{Unicode}} aims to give every character in every writing system, including emoji, its own code point, but can use more bits per character.",
+   "A data type decides how much memory is used and which operations are allowed. Whole numbers are stored as an integer and numbers with a decimal part as {{real|double|float|decimal}}. A phone number is stored as a {{string}} because its leading zero would be lost, and a value that can only be true or false uses the {{Boolean|bool}} data type. The Boolean operator {{AND|&&}} gives true only when both inputs are true."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **units of data and converting between denary, binary and hexadecimal**",
+    "pts": [
+     "Bit = one binary digit; nibble = 4 bits; byte = 8 bits",
+     "KB, MB, GB, TB: each is 1024 of the unit below; bigger unit ÷ 1024, smaller unit × 1024",
+     "Binary place values double from the right: 1, 2, 4, 8, 16, 32, 64, 128",
+     "n bits give 2ⁿ patterns; a byte stores 0 to 255",
+     "Denary to binary: subtract the largest place value that fits (or divide by 2 and read the remainders upwards)",
+     "Binary to denary: add the place values that have a 1 under them",
+     "Hex is base 16: 0–9 then A–F (10–15); one hex digit = one nibble",
+     "Hex is easier for people to read and copy, but does not save storage"
+    ]
+   },
+   {
+    "p": "Everything you know about **binary addition, overflow and storing negative numbers**",
+    "pts": [
+     "0+0=0; 0+1=1; 1+1=0 carry 1; 1+1+1=1 carry 1",
+     "Overflow: the result is too large for the number of bits available",
+     "The extra bit is lost, so the stored result is wrong",
+     "Sign and magnitude: MSB is the sign (1 = negative); range −127 to +127; two zeros",
+     "One's complement: invert every bit of the positive number",
+     "Two's complement: invert and add 1; MSB worth −128; range −128 to +127",
+     "BCD: each denary digit stored in its own nibble"
+    ]
+   },
+   {
+    "p": "Everything you know about **character sets, data types and Boolean logic**",
+    "pts": [
+     "A character set maps each character to a unique binary code",
+     "7-bit ASCII = 128 characters; 8-bit extended ASCII = 256",
+     "Unicode covers almost every writing system and emoji; its first 128 codes match ASCII; more bits per character",
+     "Data types: integer, real, character, string, Boolean, date/time",
+     "`Console.ReadLine()` returns a string, so convert with `Convert.ToInt32` or `Convert.ToDouble`",
+     "AND = both true; OR = at least one true; NOT = reverses the input",
+     "A truth table has 2ⁿ rows for n inputs; in C# `&&`, `||` and `!`"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between a **nibble** and **hexadecimal**.",
+    "a": "A nibble is 4 bits, which gives 16 patterns, and hexadecimal is base 16, so one hex digit stands for exactly one nibble. This means any byte can be written as just two hex digits, and converting is easy because each nibble is converted separately. So hex is a shorthand for binary that people can read and copy with fewer mistakes."
+   },
+   {
+    "q": "How does the **number of bits** available affect **overflow**?",
+    "a": "With n bits there are 2ⁿ patterns, so one byte can only store whole numbers up to 255. If the result of an addition needs more bits than are available, such as 200 + 100 = 300, overflow occurs: the ninth bit is lost, so the byte stores the wrong answer, 44. Using more bits (16, 32 or 64) makes overflow less likely, but any fixed number of bits still has a limit."
+   },
+   {
+    "q": "Explain the link between **ASCII** and **Unicode**.",
+    "a": "Both are character sets that give each character a unique binary code. ASCII uses 7 bits (128 characters), or 8 bits in extended ASCII, so it mainly covers English, whereas Unicode has room for over a million code points covering almost every writing system and emoji. Unicode's first 128 code points are the same as ASCII, so plain ASCII text is still read correctly, but Unicode can need more bits per character, so files can be larger."
+   },
+   {
+    "q": "Explain the link between **data types** and the input statements in **Programming constructs**.",
+    "a": "`Console.ReadLine()` always returns a string, so input must be converted to the right data type before arithmetic, using `Convert.ToInt32` for an integer or `Convert.ToDouble` for a real. This matters because the data type decides which operations are allowed: you can multiply two numbers, but not two names. Dividing one `int` by another gives a whole-number answer in C#, so you cast to `double` when the decimal part is needed."
+   }
+  ]
+ },
+ "c03": {
+  "gaps": [
+   "Computational thinking uses {{decomposition}} to break a large problem into smaller, more manageable sub-problems, and {{abstraction}} to remove details that are not needed to solve it. This leads to an {{algorithm}}: a precise, step-by-step set of instructions. An algorithm can be drawn as a {{flowchart|flow diagram|flow chart}} using standard symbols, such as a diamond for a decision, or written in {{pseudocode|pseudo-code|pseudo code}}, which uses structured English-like statements.",
+   "A {{bubble sort}} compares neighbouring items and swaps them if they are in the wrong order, and stops when a whole pass makes no swaps. An {{insertion sort}} takes each next item and inserts it into its correct place in a growing sorted section, and usually needs fewer comparisons than a bubble sort. A {{linear search}} checks each item in turn from the start, while a {{binary search}} checks the middle item and discards half of the list each time, but it only works if the data is already {{sorted|in order|ordered}}.",
+   "A first design is improved in stages before coding; this is called {{refinement|stepwise refinement}}. Every input, processed value and output is listed with its name, data type and validation rule in a {{data dictionary}}. A {{dry run|dry-run|desk check|desk checking}} means working through an algorithm by hand, line by line, recording every variable, condition and output in a {{trace table}}."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **computational thinking and representing algorithms**",
+    "pts": [
+     "Decomposition: breaking a problem into smaller, more manageable sub-problems",
+     "Top-down design, often drawn as a structure diagram",
+     "Abstraction: removing details that are not needed to solve the problem",
+     "Benefits: parts easier to solve, share, test and reuse; less to code and store",
+     "Algorithms are built from sequence, selection and iteration",
+     "Flowchart symbols: terminator, input/output (parallelogram), process (rectangle), decision (diamond), flow lines",
+     "Pseudocode: language-independent structured English with keywords like INPUT, IF, WHILE, FOR"
+    ]
+   },
+   {
+    "p": "Everything you know about **sorting and searching algorithms**",
+    "pts": [
+     "Bubble sort compares adjacent pairs and swaps them if they are in the wrong order",
+     "After each pass the largest unsorted item is in place; stop when a pass makes no swaps",
+     "Insertion sort inserts each next item into the sorted section, shifting larger items right",
+     "Insertion sort usually needs about half the comparisons and is very fast on nearly sorted data",
+     "Both sorts are simple and sort in place, but are slow on large lists",
+     "Linear search checks each item in turn; works on unsorted data; up to n comparisons",
+     "Binary search needs sorted data: check the middle, discard half, repeat",
+     "Binary search needs about 10 comparisons for 1000 items"
+    ]
+   },
+   {
+    "p": "Everything you know about **refinement, data requirements, user interfaces and dry runs**",
+    "pts": [
+     "Refinement improves a design in stages, after dry runs or user feedback, before coding",
+     "Typical refinements: add validation and messages, fix conditions, use loops and subroutines",
+     "Data dictionary: name, data type, example and validation for every data item",
+     "Good interface: clear prompts, logical layout, suitable controls, helpful error messages, clear output",
+     "Wireframe: a sketch of each screen, shown to the user before coding",
+     "Dry run: by hand, line by line, recording values in a trace table",
+     "Trace table: Line, a column per variable, condition and output",
+     "Dry runs find logic errors and check the expected output"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Why must data be **sorted** for a **binary search**, and how does this affect the choice between a binary and a linear search?",
+    "a": "A binary search checks the middle item and discards the half that cannot contain the target, which only works on sorted data, because otherwise the target could be in the half thrown away. Each comparison halves the search space, so it needs only about 10 comparisons for 1000 items, compared with up to 1000 for a linear search. However, a linear search works on unsorted data and is simpler to code, so it is used when the data is not sorted."
+   },
+   {
+    "q": "Explain the link between a **dry run** and the **refinement** of a design.",
+    "a": "A dry run works through an algorithm by hand, recording values in a trace table, so it finds logic errors and checks the expected output before any code exists. Problems found this way, such as a wrong comparison at a boundary or a missing validation step, are fixed by refining the design and dry-running it again. This saves time because fixing a problem in the design costs minutes, but fixing it after the program is coded costs far more."
+   },
+   {
+    "q": "Explain the link between **data requirements** and the validation checks in **Simple error handling techniques**.",
+    "a": "A data dictionary lists every input with its data type and a validation rule, such as a range check of 1–14 for the number of nights. Working this out before coding means validation is planned rather than bolted on, so the programmer knows which checks to write for each input. Suitable interface controls, such as a drop-down for pitch size, also stop invalid entries being typed at all."
+   },
+   {
+    "q": "How does **decomposition** link to **user-defined functions** in **Programming constructs**?",
+    "a": "Decomposition breaks a problem into smaller sub-problems, and each sub-problem can be written as its own function or procedure. Because each function carries out one task, it can be tested on its own and written by a different programmer at the same time. Steps that do the same job in two places can be merged into one subroutine, so the code is shorter and any later fix is made once."
+   }
+  ]
+ },
+ "c04": {
+  "gaps": [
+   "A {{variable}} is a named location in memory whose value can change while the program runs, while a {{constant}} is a named value that is set once and cannot change as it runs; if the value ever needs updating, only one line is edited. The operator {{DIV|integer division}} gives the whole-number part of a division, and {{MOD|modulus|modulo}} gives only the remainder (`%` in C#).",
+   "An {{array}} stores many values of the same data type under one identifier, and each element is reached by its {{index}}, which starts at 0 in C#. Joining strings together end to end is called {{concatenation|concatenating}}, and `Split(',')` breaks a string into an array at each comma.",
+   "Selection uses IF, ELSE IF and ELSE to choose which statements run; an IF placed inside another IF is a {{nested IF|nested IF statement|nested selection}}. A FOR loop is a {{count-controlled|count controlled|unconditional|bounded}} loop, while a WHILE loop is condition-controlled and may run zero times. A special input such as −1 that tells a loop the data has finished is a {{sentinel value|sentinel}}.",
+   "A {{function}} is a subroutine that returns a value, while a {{procedure}} does not return a value (`void` in C#). {{File handling}} lets data be stored permanently between runs: a file is opened, read from or written to, and then always {{closed|close}}."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **variables, constants, operators and input/output**",
+    "pts": [
+     "Variable: named memory location whose value can change",
+     "Constant: set once and cannot change, e.g. `const double VAT_RATE = 0.2;`",
+     "Constants: more readable, changed in one place, cannot be changed by accident",
+     "DIV = whole-number part (`/` with two ints); MOD = remainder (`%`)",
+     "Relational operators (==, !=, <, >, <=, >=) give True or False; `=` assigns, `==` compares",
+     "`Console.ReadLine()` returns a string; convert with `Convert.ToInt32` or `Convert.ToDouble`",
+     "Assignment works right to left, e.g. `count = count + 1`"
+    ]
+   },
+   {
+    "p": "Everything you know about **sequence, selection and iteration**",
+    "pts": [
+     "Sequence: statements run in the order written",
+     "ELSE IF conditions are checked in order; only the first True branch runs",
+     "Nested IF: the inner condition is only tested if the outer one is True",
+     "FOR = count-controlled; WHILE and REPEAT…UNTIL = condition-controlled",
+     "WHILE tests first (zero or more runs); `do … while` tests last (at least once)",
+     "A sentinel value such as −1 ends the data",
+     "Running total: initialise to 0 before the loop, add inside it, output after it",
+     "Infinite loop: the condition never becomes False"
+    ]
+   },
+   {
+    "p": "Everything you know about **arrays, strings, subroutines and files**",
+    "pts": [
+     "Array: same data type, one identifier; index from 0; last index is Length − 1",
+     "A FOR loop from 0 to Length − 1 visits every element",
+     "String functions: Length, Substring(start, length), IndexOf (−1 if absent), Contains, Split, ToUpper",
+     "Function returns a value; procedure does not (`void`)",
+     "Parameters receive values passed in; local variables exist only inside the subroutine",
+     "Subroutine benefits: reuse, independent testing, one-place maintenance, readability, teamwork",
+     "Files: open, read or write, close; write mode overwrites, append adds to the end",
+     "One record per line, fields separated by commas and split with `Split(',')`"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **arrays** and **iteration**.",
+    "a": "An array stores many values of the same data type under one identifier, with each element reached by its index starting at 0. A FOR loop whose counter is used as the index visits every element from 0 to Length − 1, so the same few lines can total, count, average or find the largest value. This is much better than separate variables such as `day1` and `day2`, because a loop could not process those."
+   },
+   {
+    "q": "Explain the link between a **temporary variable** and the **exchange** in a bubble sort.",
+    "a": "In a bubble sort, neighbouring elements that are in the wrong order are exchanged. If you wrote only `list[j] = list[j + 1]`, one of the values would be overwritten, so the array would end up with a duplicate and a value missing. So the first value is copied into `temp`, the second is copied into the first position, and then `temp` is copied into the second position."
+   },
+   {
+    "q": "How does **file handling** link to **execution errors** in **Simple error handling techniques**?",
+    "a": "Opening a missing file for reading causes an execution (run-time) error that crashes the program. This can be prevented by checking `File.Exists` first, or the error can be trapped with `try … catch` so a helpful message is shown instead of a crash. This matters because files give persistent storage, so the program depends on them being there."
+   },
+   {
+    "q": "Explain the link between **user-defined functions** and **unit testing** in **Developing test plans and testing a solution**.",
+    "a": "A user-defined function is a named, self-contained block of code that carries out one task. Because it is self-contained, it can be tested on its own as soon as it is written, which is unit testing, before it is combined with others in integration testing. So errors are easier to find, and a fix is made in one place so every call benefits."
+   }
+  ]
+ },
+ "c05": {
+  "gaps": [
+   "{{Validation}} is an automatic check by the program that input data is sensible and follows set rules before it is processed. A {{presence check}} makes sure a field has not been left blank, a {{length check}} checks the number of characters entered, a type check checks the data type and a {{format check}} makes sure the data matches a pattern, such as an email address containing @. A {{validation loop}} repeats the input, with an error message, for as long as the data is invalid. Validation cannot prove that data is {{correct|accurate}}, only that it is reasonable.",
+   "A {{syntax error}} breaks the grammar rules of the language, so the program cannot be translated and will not run. An {{execution error|run-time error|runtime error|run time error}} happens while the program is running and makes it crash, for example dividing by zero. A {{logic error}} lets the program run to the end but gives the wrong result; it is found by testing, dry runs and by setting {{breakpoints|breakpoint}} in the IDE to pause the program and step through it.",
+   "When a run-time error happens, C# throws an {{exception}}. {{Error trapping|exception handling}} uses `try … catch` to handle it, showing a helpful message instead of crashing, which makes the program more {{robust}}."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **validation**",
+    "pts": [
+     "Automatic check that data is sensible and follows rules before it is processed",
+     "Presence check: something has been entered, e.g. `surname != \"\"`",
+     "Length check: number of characters, e.g. `password.Length >= 8`",
+     "Type check: correct data type, e.g. `int.TryParse`",
+     "Format check: matches a pattern, e.g. `email.Contains(\"@\")`",
+     "Range check: between limits, e.g. `frames >= 10 && frames <= 40`",
+     "Validation loop: WHILE invalid, show an error message and input again",
+     "Valid does not mean correct: validation only checks data is reasonable"
+    ]
+   },
+   {
+    "p": "Everything you know about **syntax, execution and logic errors**",
+    "pts": [
+     "Syntax error: breaks the grammar rules, e.g. missing `;`, so it will not run",
+     "Syntax errors are found by the compiler/IDE: error list with line numbers, red underlining",
+     "Execution error: crashes while running, e.g. divide by zero, missing file, index out of range",
+     "Logic error: runs but gives the wrong result, e.g. `>` instead of `>=`",
+     "Logic errors are found by testing against expected results, dry runs and trace tables",
+     "Breakpoints pause the program; step through and watch values in the Locals window",
+     "Fix the first error first; change one thing at a time and retest"
+    ]
+   },
+   {
+    "p": "Everything you know about **error trapping**",
+    "pts": [
+     "A run-time error throws (raises) an exception",
+     "An unhandled exception stops the program with an error message",
+     "`try` block: the statements that might fail",
+     "`catch` block: runs if an exception is thrown; skipped otherwise",
+     "Several catch blocks, e.g. FormatException, DivideByZeroException",
+     "Combine with a loop so the user can try again",
+     "Benefits: no crash, helpful message, no lost data, a more robust program"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **validation** and **error trapping**.",
+    "a": "Validation checks that input data follows set rules, such as a type or range check, before it is processed, so bad data is rejected with an error message. Error trapping uses `try … catch` to deal with problems that still occur at run time, such as a missing file, so the program shows a helpful message instead of crashing. Together they make the program more robust."
+   },
+   {
+    "q": "Why is a **logic error** harder to detect than a **syntax error**?",
+    "a": "A syntax error breaks the grammar rules, so the compiler/IDE detects it straight away, underlining it and listing it with its line number, and the program will not run until it is fixed. A logic error lets the program run to the end with no error message, but the result is wrong, so the programmer has to notice it. It is found by testing against expected results, dry runs with trace tables, or breakpoints to see where the values stop matching."
+   },
+   {
+    "q": "How do validation checks link to the choice of **test data** in **Developing test plans and testing a solution**?",
+    "a": "Each validation check must be tested with chosen test data: valid and extreme data should be accepted, and invalid and null data should be rejected with an error message. For an age range of 16 to 70, testing 16 and 70 (extreme) and 15 and 71 (just outside) catches boundary mistakes such as `<` written instead of `<=`. Wrong-type data such as \"thirty\" tests the type check, and a blank entry tests the presence check."
+   }
+  ]
+ },
+ "c06": {
+  "gaps": [
+   "In {{iterative testing}}, each part is tested, errors are fixed and the tests are repeated, throughout and after development. {{White box testing|white box|white-box testing|white-box}} examines the internal code so that every path is executed, while {{black box testing|black box|black-box testing|black-box}} only checks the outputs for given inputs against the requirements. Testing moves from {{unit testing|unit}} of a single module, to {{integration testing|integration}} of modules working together, to {{system testing|system}} of the complete solution.",
+   "A {{test plan}} is written before testing begins and lists each test's number, purpose, test data, type of data, {{expected outcome|expected output|expected result}}, actual outcome and action taken. {{Extreme data|extreme|boundary data|boundary}} sits on the limits of the range and should be accepted, data that is out of range or the wrong type is {{invalid data|invalid|erroneous data|erroneous}} and should be rejected, and a test where nothing is entered uses {{null data|null}}."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **white box, black box, unit, integration and system testing**",
+    "pts": [
+     "Iterative testing: test, fix, retest, throughout and after development",
+     "White box: looks at the code, logic and structure; usually the programmer",
+     "White box data makes every statement run and every branch taken; loops run zero, once and more than once",
+     "Black box: only inputs and outputs, code not seen; independent testers or users",
+     "Unit testing: one module, function or method on its own",
+     "Integration testing: modules working together, including data passed between them",
+     "System testing: the complete system against its specification and requirements",
+     "Order: unit, then integration, then system"
+    ]
+   },
+   {
+    "p": "Everything you know about **test plans and test data**",
+    "pts": [
+     "Test plan written before testing; each test links to a success criterion",
+     "Columns: number, purpose, test data, type, expected outcome, actual outcome, action",
+     "Expected outcome must be precise, e.g. the exact error message",
+     "Failed test: record the correction and repeat the test",
+     "Valid: typical data, accepted",
+     "Extreme: on the boundary, accepted",
+     "Invalid: out of range or wrong type, rejected; null: blank, rejected",
+     "Also test values just outside each limit"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **extreme data** and finding boundary mistakes.",
+    "a": "Extreme data is valid data on the limits of the range, such as 16 and 70 for ages 16 to 70, so it should be accepted. Testing on the boundaries, and just outside them (15 and 71), catches mistakes such as `<` written instead of `<=`, because these only give a different result at the limit. In the youth club test plan the extreme value 11 was rejected, so `> 11` was changed to `>= 11` and the test repeated."
+   },
+   {
+    "q": "Explain the link between **unit testing** and **white box testing**.",
+    "a": "Unit testing tests one module, function or method on its own as soon as it is written, usually by its developer. Because the tester works from the code of that one small part, it counts as white box testing, so test data is chosen to make every branch run. Errors found are fixed and retested before the unit is combined with others in integration testing."
+   },
+   {
+    "q": "How does a **test plan** link to **Evaluation of digitally authored systems**?",
+    "a": "A test plan links each test to the success criteria and records the expected and actual outcomes. In evaluation these results are the evidence used to judge whether each requirement is fully met, partly met or not met. The results for invalid, extreme and null data also show how robust the solution is."
+   }
+  ]
+ },
+ "c07": {
+  "gaps": [
+   "{{Evaluation}} means judging how well a solution meets the original {{user requirements|requirements}} and design criteria, using evidence such as test results and feedback from {{stakeholders|stakeholder}}. A {{functional requirement|functional}} states what the system must do, such as calculate a total, while a {{non-functional requirement|non-functional}} states how well it must work, such as its response time or the platform it runs on.",
+   "A solution is full and {{complete}} only when every requirement is implemented and working. An {{efficient}} solution does its job quickly without wasting processor time, memory, storage or the user's effort, while a {{robust}} solution copes with invalid, unexpected and extreme data without crashing or giving wrong results. {{High-volume testing|high volume testing}} checks that the system still performs with large amounts of data."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **evaluating a solution against its requirements**",
+    "pts": [
+     "Evaluation judges how well the solution meets the original requirements and design criteria",
+     "Be evaluative, not descriptive: a verdict backed by evidence",
+     "User requirements are agreed with the client at the start",
+     "Functional = what it must do; non-functional = how well (response time, usability, reliability, platform)",
+     "Evidence: test plan results, stakeholder feedback, measurements",
+     "Each requirement judged fully met, partly met or not met",
+     "Complete = every requirement implemented and working; missing features become improvements"
+    ]
+   },
+   {
+    "p": "Everything you know about **efficient and robust solutions**",
+    "pts": [
+     "Efficient: quick, without wasting processor time, memory, storage or the user's effort",
+     "Check response times and the number of steps a task takes",
+     "Efficient code: loops, arrays, reused functions, searches that stop once the item is found",
+     "Robust: copes with invalid, unexpected and extreme data, missing files and large volumes",
+     "Robustness improved by validation and error trapping",
+     "Proved by testing with valid, extreme, invalid and null data and high-volume testing",
+     "A robust system rejects bad data with a helpful message and does not crash"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between the **user requirements** and a **full and complete** solution.",
+    "a": "The user requirements are the agreed list of what the system must do, drawn up with the client at the start. In evaluation each requirement is checked against evidence and judged fully met, partly met or not met. Because they are the agreed standard, comparing the solution against them reveals any missing feature and shows exactly what must be added before the solution is complete."
+   },
+   {
+    "q": "How do the techniques in **Simple error handling techniques** make a solution more **robust**?",
+    "a": "Robustness is the ability to cope with invalid, unexpected or extreme data without crashing or giving wrong results. Validation rejects data that breaks the rules with a helpful message, and error trapping (`try … catch`) handles run-time errors such as a missing file, so the program does not crash. This is checked in evaluation by testing with invalid, null and high volumes of data."
+   },
+   {
+    "q": "Explain the link between an **efficient solution** and constructs from **Programming constructs** such as arrays, loops and functions.",
+    "a": "An efficient solution does not waste processor time, memory or the user's effort. Using one array and a loop instead of seven separate variables and additions gives shorter code that works for any number of days, and user-defined functions that are reused remove repeated code. A search that stops once the item is found avoids unnecessary work, so the program does its job more quickly."
+   }
+  ]
+ }
+}

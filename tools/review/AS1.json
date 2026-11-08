@@ -1,0 +1,666 @@
+{
+ "c01": {
+  "gaps": [
+   "A **system** is a set of {{interdependent|inter-dependent}} components that work together to achieve a defined purpose and meet a defined need. Large systems are decomposed into {{sub-systems|sub-system|subsystems|subsystem}}, which share data with each other. Any computer system can be described as three elements: data, processes and the {{user interface|UI|user interfaces}}. Processes manipulate raw data into {{information}}, which has context and meaning.",
+   "Organisations develop a new information system because of internal triggers, such as growth or an old, unreliable {{legacy system|legacy systems}}, and external triggers, such as new legislation. From the mid-1960s the **software crisis** meant software was late, over budget and unreliable. The industry responded with {{software engineering}}, a disciplined, systematic approach to the design, development and maintenance of software. Its structured framework of stages is the {{systems development life cycle|SDLC|system development life cycle|systems development lifecycle|system development lifecycle}}, in which each stage produces an end product called a {{deliverable|deliverables}} that the client signs off before the next stage begins.",
+   "Every project is shaped by three constraints: user needs, time and {{cost|budget}}. Before money is committed, a {{feasibility study}} tests the proposal against the TELOS criteria; for example, {{operational}} feasibility asks whether the system will work in practice and be accepted by staff and customers. Economic feasibility is tested with a cost–benefit analysis, whose key result is the {{payback period}}: the time until cumulative benefits equal cumulative costs. The {{systems analyst|analyst|system analyst}} identifies the user and data processing requirements, while the project manager plans and controls the project and the programmer builds and tests it."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **systems, sub-systems and the three elements of a computer system**",
+    "pts": [
+     "Three characteristics: a defined purpose, a defined need, interdependent components",
+     "Interdependent: a fault or change in one component affects the others",
+     "Large systems are decomposed into sub-systems that share data",
+     "Interfaces between sub-systems must be designed carefully",
+     "Five functions: receive, process, store, present, communicate",
+     "Three elements: data, user interface, processes",
+     "Data = raw facts; information = processed data with context and meaning",
+     "UI choice depends on the application, the environment and the users"
+    ]
+   },
+   {
+    "p": "Everything you know about **the software crisis, software engineering and the SDLC**",
+    "pts": [
+     "Software crisis from the mid-1960s; term popularised at the 1968 NATO conference",
+     "Software was late, over budget, unreliable and failed to meet user requirements",
+     "Causes: little past experience, crude estimates, unsophisticated tools, imprecise requirements capture, no specialist testers",
+     "Software engineering = a disciplined, systematic approach to design, development and maintenance",
+     "SDLC stages: feasibility, analysis, design, development, testing, implementation, maintenance and evaluation",
+     "Each stage produces a deliverable signed off before the next stage",
+     "Structured approach: errors cheapest to fix early, measurable milestones, documentation",
+     "Weakness: inflexible if requirements change late on"
+    ]
+   },
+   {
+    "p": "Everything you know about **feasibility, cost–benefit analysis and the development team**",
+    "pts": [
+     "TELOS: technical, economic, legal, operational, schedule",
+     "Alternatives compared, including doing nothing",
+     "Feasibility report ends with a justified recommendation for management",
+     "Cost–benefit analysis: one-off and ongoing costs against tangible and intangible benefits",
+     "Payback period: time until cumulative benefits equal cumulative costs",
+     "User needs, time and cost interact: change one and another must change",
+     "Systems analyst: feasibility study, fact-finding, system specification, client liaison",
+     "Project manager plans, schedules, allocates resources and manages risk; programmer codes, comments, tests and debugs"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between the **software crisis** and the **systems development life cycle**.",
+    "a": "The software crisis happened because development methods could not keep pace with demand, so projects were late, over budget and unreliable. The industry responded with software engineering, a systematic approach to development, and the SDLC is the structured framework of stages that grew out of it. Because each stage produces a deliverable that is signed off before the next begins, progress can be measured and errors are caught early, when they are cheapest to fix."
+   },
+   {
+    "q": "How do **user needs**, **time** and **cost** affect each other during development?",
+    "a": "Each factor is a constraint, so changing one affects the others. Adding features to meet more user needs increases time and cost, and a tighter deadline needs more staff (more cost) or fewer features. So the scope is often adjusted, for example by moving a feature to a later release, but testing should not be cut because faults found later by users are far more expensive to correct."
+   },
+   {
+    "q": "Explain the link between **economic feasibility** and the **payback period**.",
+    "a": "Economic feasibility asks whether the benefits of a proposed system outweigh its costs, and it is usually tested with a cost–benefit analysis of one-off and ongoing costs against tangible and intangible benefits. The payback period is the time until cumulative benefits equal cumulative costs, so a short payback supports a recommendation to proceed. Because every figure is an estimate, the assumptions should be stated, and intangible benefits may tip the decision even when payback is long."
+   },
+   {
+    "q": "How does the systems analyst's work on the feasibility study lead into the **Analysis** topic?",
+    "a": "The systems analyst carries out the feasibility study and, once the project is judged feasible, begins analysis using fact-finding such as interviews, questionnaires, observation and document sampling. This produces the system specification, which the client signs off. Because the analyst is the bridge between the client and the technical team, their communication skills matter: a requirement misunderstood here becomes very expensive to put right after coding."
+   }
+  ]
+ },
+ "c02": {
+  "gaps": [
+   "The purpose of **analysis** is to understand how the current system works and to agree the user requirements before design begins. The analyst gathers evidence using {{fact-finding|fact finding|factfinding}} techniques. A {{direct data source|direct source|direct}} is collected first-hand for the current purpose, whereas an indirect source already exists and is reused. Interviews give depth from a few people, while {{questionnaires|questionnaire}} reach many people at low cost and can be anonymous. Observation risks the {{Hawthorne effect|the Hawthorne effect}}, where people change their behaviour because they know they are being watched. A finding from one source is cross-checked against another using {{triangulation}}.",
+   "A {{stakeholder|stakeholders}} is any person or group with an interest in the system or affected by it; their conflicting needs can be prioritised with {{MoSCoW}}. A {{functional requirement|functional}} is something the system must do, whereas a condition such as response time or security is a {{non-functional requirement|non-functional|non functional requirement|nonfunctional requirement|non functional|nonfunctional}}. Requirements are recorded in the {{system specification|requirements specification|system requirements specification|system (requirements) specification|systems specification}}, the deliverable of analysis that the client signs off.",
+   "A **data flow diagram (DFD)** models how data moves through a system using external entities, processes, data stores and labelled data flows. An external entity that receives data from the system is a {{sink}}. The {{context diagram|Level 0 DFD|Level 0 diagram|Level 0}} shows the whole system as a single process and defines the system boundary. A Level 1 DFD explodes that process into numbered sub-processes, and the rule that the external flows must be identical at both levels is called {{balancing}}. A process that has inputs but no outputs is an error called a {{black hole}}."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **fact-finding techniques and how to choose them**",
+    "pts": [
+     "Interviews: plan, select, brief, reassure; structured or unstructured; notes on a response sheet",
+     "Interviews give rich detail and follow-up questions but cover few people and are time-consuming",
+     "Questionnaires: same questions to many people, often online and anonymous; closed and open questions; consistency checks",
+     "Questionnaires: often a low response rate and no follow-up",
+     "Observation: shadow a representative sample; shows real workarounds; risk of the Hawthorne effect",
+     "Document sampling: shows users, data items, formats, flows, volumes and outputs; a good first step",
+     "Direct sources are targeted but costly; indirect sources are cheap but may not fit",
+     "Justify each choice with scenario details and cross-check by triangulation"
+    ]
+   },
+   {
+    "p": "Everything you know about **stakeholders, requirements and the system specification**",
+    "pts": [
+     "Stakeholders: internal (client, end users, IT staff) and external (customers, suppliers, regulators)",
+     "Conflicting needs are recorded and prioritised, e.g. with MoSCoW",
+     "Early user involvement improves acceptance",
+     "Functional = what the system must do; non-functional = a condition or quality it must meet",
+     "Non-functional requirements need a category and a measure so they are testable",
+     "Specification contents: scope, current system, stakeholders, requirements, data, DFDs, constraints, schedule",
+     "Specification records the agreement, guides design, drives testing, supports evaluation, controls scope",
+     "Once a rigid two-way contract; now less prescriptive with change control because of more suppliers and Agile"
+    ]
+   },
+   {
+    "p": "Everything you know about **data flow diagrams**",
+    "pts": [
+     "Four elements: external entity, process, data store, data flow",
+     "Source supplies data; sink receives data; one entity can be both",
+     "Processes: verb phrase and a number; flows: labelled noun phrases; stores: D1, D2…",
+     "Context diagram: exactly one process, all entities and flows, no (or very few) data stores",
+     "Level 1: explode process 0 into sub-processes, add data stores and internal flows, same entities",
+     "Balancing: the same external flows at both levels",
+     "Every flow passes through a process; every process has an input and an output; every store is written and read",
+     "A DFD is not a flowchart: no decisions and no order of events"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "How do the weaknesses of one **fact-finding technique** affect the choice of others?",
+    "a": "Every technique trades depth against breadth, so analysts combine them so that the weakness of one is covered by the strength of another. For example, a questionnaire reaches many people but allows no follow-up, so the analyst interviews a few people to explore the issues it raises. Observation can be distorted by the Hawthorne effect, so findings are triangulated against objective evidence from document sampling."
+   },
+   {
+    "q": "Explain the link between the **context diagram** and the **Level 1 DFD**.",
+    "a": "The context diagram shows the whole system as a single process with its external entities and labelled data flows, defining the boundary. The Level 1 DFD explodes that single process into numbered sub-processes and adds data stores and internal flows, while keeping the same external entities. The two must balance, so every flow crossing the boundary on the context diagram appears at Level 1 with the same name and direction."
+   },
+   {
+    "q": "How does the **system specification** produced in Analysis feed into **System design, development and testing**?",
+    "a": "The system specification is the deliverable of analysis, and it is signed off before design begins, so designers plan the inputs, outputs and data structures from it. DFDs in the specification feed directly into design because processes become modules and data stores become files or tables. Each testable requirement also becomes an acceptance criterion in the test plan, so the finished system can be checked against what was agreed."
+   },
+   {
+    "q": "Explain the link between **Agile** approaches (Alternative development approaches) and the changing role of the **system specification**.",
+    "a": "The specification used to be a legally binding two-way contract, so any change led to penalties or revised charges, which suited an era with few suppliers. Agile delivers software in short iterations, with the client reviewing working software every few weeks and reprioritising, so a rigid specification written months before coding sits awkwardly with it. Specifications are therefore less prescriptive, giving high-level goals and a prioritised list of requirements, and they handle change through agreed change control."
+   }
+  ]
+ },
+ "c03": {
+  "gaps": [
+   "Design decides how the system will meet the agreed user requirements, and its main deliverable is the {{design document|design specification}}, the blueprint that programmers build from. A {{storyboard|storyboards|storyboarding}} sketches each screen as a frame, with arrows showing the navigation between screens. A {{prototype|prototypes}} is an early, incomplete working model that gives users the look and feel of the system. It may contain {{stubs|stub}}: menu options or buttons that appear but do nothing yet. Interfaces are designed using **HCI** principles such as consistency, feedback and error prevention.",
+   "The name, data type, size, format and validation rule of every data item are recorded in the {{data dictionary|data dictionaries}}. An automatic check that data is reasonable and obeys set rules is {{validation}}, but it cannot ensure the data is correct. A check that data has been entered or copied accurately, for example by double entry, is {{verification}}. A {{lookup check|look-up check|look up check|lookup}} tests that a value matches one of a list of allowed values.",
+   "Testing runs throughout development because errors found early are cheaper and easier to fix. {{Unit testing}} checks each module on its own; once tested modules are combined, {{integration testing}} checks that they work together and pass data correctly. Testing that uses knowledge of the code to exercise every path, branch and loop is {{white-box testing|white box testing|white-box|white box|glass-box testing|glass box testing}}. The final test, by the client's end users with genuine data in their live environment, is {{acceptance testing}} and ends in sign-off.",
+   "A {{test plan}} lists every test in advance, giving the part of the system tested, what is being tested, the test data and the expected outcome. Valid test data at the very edges of an allowed range is {{boundary data|boundary|extreme data|extreme}}, while data that is wrong in type, format or range is erroneous data and must be rejected."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **designing the interface: storyboards, prototypes and HCI**",
+    "pts": [
+     "Design document: interface and navigation, inputs, outputs, data structures, validation, algorithms, security, initial test plan",
+     "Storyboard: one frame per screen with contents, inputs/outputs and navigation arrows",
+     "Storyboards are quick, cheap and non-technical but not interactive",
+     "Prototype: early, incomplete working model; may contain stubs and lack validation",
+     "Prototypes are used for the interface and to discover the data model (tables and relationships)",
+     "Prototype risks: time spent polishing; users swayed by appearance; users expect the system soon",
+     "HCI principles: consistency, feedback, error prevention, low memory load, accessibility, suit the user",
+     "Good input design minimises typing; output design matches the audience"
+    ]
+   },
+   {
+    "p": "Everything you know about **data dictionaries, validation and verification**",
+    "pts": [
+     "Data dictionary: name, description, type, length, format, validation rule, example, key status",
+     "Benefits: consistency across the team, precise test data, easier maintenance",
+     "Validation = automatic check that data is sensible and obeys rules",
+     "Validation cannot prove data is correct",
+     "Verification = check data was entered or copied accurately: double entry or proof-reading",
+     "Checks: presence, type, range, length, format, lookup, check digit, consistency",
+     "State the exact rule, e.g. range check: whole number from 1 to 8 inclusive"
+    ]
+   },
+   {
+    "p": "Everything you know about **testing stages, test plans and test data**",
+    "pts": [
+     "Earlier testing is cheaper; each stage catches faults the previous one cannot",
+     "Unit testing: each module alone, by the programmer",
+     "Black-box: inputs v expected outputs, no code knowledge; white-box: every path using the code",
+     "Integration testing: faults at interfaces between modules; fix, re-unit-test, re-integrate",
+     "System testing (developer, against the specification); alpha (final in-house phase); beta (external users, pre-release)",
+     "Acceptance testing: client's users, live environment, real data volumes, ends in sign-off",
+     "Test plan: test number, part of system, what is tested, test data, expected outcome, actual outcome, pass/fail",
+     "Normal, boundary (valid at the limits) and erroneous (invalid type, format or range) data"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between the **data dictionary** and **integration errors**.",
+    "a": "The data dictionary records the name, type and format of every data item, so every programmer uses the same definitions and modules join cleanly. Without it, one module might store dates as day/month/year while another reads them as month/day/year. Both modules would pass their unit tests, but the fault would appear only when they are joined, as an integration error found by integration testing, so agreeing formats in the data dictionary prevents it."
+   },
+   {
+    "q": "Explain the link between **validation rules** and **boundary test data**.",
+    "a": "Validation rules are decided at design time and recorded precisely in the data dictionary, so testers can take boundary values straight from them. Boundary data is valid data at the very edges of the range, so it is accepted and detects off-by-one mistakes such as writing < instead of <=. The value just outside each limit is erroneous data, so the expected outcome is that it is rejected with a helpful message."
+   },
+   {
+    "q": "How does **storyboarding** lead on to **prototyping** when designing a user interface?",
+    "a": "A storyboard is quick and cheap and gets early user feedback on screen contents and navigation before any code is written. However, it is not interactive, so it cannot show speed, responsiveness or real usability. So once the navigation is agreed, a prototype is built, because it gives users the look and feel of a working model and they can react to something real."
+   },
+   {
+    "q": "Explain the link between **acceptance testing** and the **post-implementation review** in System implementation.",
+    "a": "Acceptance testing happens before handover and checks, with the client's users and real data, that the system meets their requirements, ending in sign-off. A post-implementation review happens after the system has been live for some time and asks whether it has achieved its objectives and benefits. Acceptance test results are used as evidence of effectiveness in the review, but only the review can show, for example, whether predicted savings were achieved in real use."
+   }
+  ]
+ },
+ "c04": {
+  "gaps": [
+   "{{Implementation}} is the stage at which a new system is put into operation in place of the old one. Its tasks include installing hardware and software, training staff, supplying documentation and {{data conversion}}, which transfers existing records into the format and structure the new system needs. Moving data from an older computer system into the new one is called {{data migration}}.",
+   "In {{parallel changeover|parallel}} the old and new systems process the same transactions side by side, which is safest but expensive. A switch at a single moment with no overlap is {{direct changeover|direct|big bang|big-bang}}, which is cheapest but riskiest. Introducing the whole system in one branch or site first is {{pilot changeover|pilot}}, whereas introducing one part at a time is {{phased changeover|phased}}. In {{cascade training|cascade}} a small number of staff are trained and then train their colleagues.",
+   "Non-technical guides, troubleshooting and FAQs for end users make up the {{user documentation}}, while annotated code, data models and test plans for maintenance staff are {{technical documentation}}.",
+   "Fixing flaws or security holes found once the system is in use is {{corrective maintenance|corrective}}, often delivered as a software patch. Changing the system because circumstances have changed, such as new legislation, is {{adaptive maintenance|adaptive}}, while improving a system that already works is {{perfective maintenance|perfective}}. Some months after go-live, a {{post-implementation review|PIR|post implementation review|post-implementation review (PIR)}} formally evaluates the live system against its original objectives."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **implementation tasks and data conversion**",
+    "pts": [
+     "Implementation = putting the new system into operation in place of the old",
+     "Planned during development because resources take time to arrange",
+     "Tasks: install hardware and software, convert data, train staff, supply documentation, changeover, hand over",
+     "From paper: create the structure, key in or scan records, verify, validate",
+     "Verify by proof-reading a sample or double keying; validation rejects impossible values",
+     "Data migration from an old computer system is quicker but may need reformatting and specialist software"
+    ]
+   },
+   {
+    "p": "Everything you know about **changeover methods and training**",
+    "pts": [
+     "Parallel: both run together; lowest risk, highest cost, double work",
+     "Direct: switch at one moment; cheapest and fastest but highest risk",
+     "Pilot: whole system, one place first; problems affect one section",
+     "Phased: one part at a time; slowest; old and new parts must exchange data",
+     "Choose the lowest-risk method that is affordable and feasible, justified from the scenario",
+     "Training methods: classroom, one-to-one, e-learning, manuals and online help, cascade",
+     "Choose training by numbers, locations, budget, complexity and users' needs",
+     "Direct needs everyone trained before the switch; pilot staff can train the next sites"
+    ]
+   },
+   {
+    "p": "Everything you know about **documentation, maintenance and the post-implementation review**",
+    "pts": [
+     "Documentation at every stage: starting point for the next stage, record of work, aid to maintenance, continuity when staff change",
+     "User documentation: overview, installation, user guide, troubleshooting, FAQs, training materials, backup procedures",
+     "Technical documentation: specification, DFDs/ERDs/data dictionary, I/O designs, annotated code, test plans and results, configuration",
+     "Corrective: fixes faults; should fall over time; patches",
+     "Adaptive: internal or external change in circumstances; client usually pays",
+     "Perfective: improves performance, efficiency or usability of a working system",
+     "Maintenance cost often exceeds build cost; modular design and documentation reduce it",
+     "PIR: judges against objectives, checks costs and benefits, recommends maintenance, records lessons learned"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "How does the choice of **changeover method** affect **training**?",
+    "a": "With direct changeover everyone must be trained before the switch date, because there is no fallback to learn on. With parallel running, staff can practise on live work with the old system as a backup, although they are doing double work. In a pilot, the pilot staff gain experience first so they can become trainers for the next sites, which is cascade training, and with phased changeover training can be delivered one module at a time."
+   },
+   {
+    "q": "Explain the link between **technical documentation** and the cost of **system maintenance**.",
+    "a": "A system may be in use for ten years or more, so the total cost of maintenance often exceeds the cost of building it. Accurate technical documentation, such as annotated code, the data dictionary and stored test plans, means programmers understand the system quickly without reverse-engineering it, and tests can be re-run after each change. So maintenance is quicker, cheaper and safer, but only if the documentation is updated every time the system is changed."
+   },
+   {
+    "q": "Explain the link between the **post-implementation review** and **maintenance**.",
+    "a": "A post-implementation review evaluates the live system against its original objectives, using evidence such as questionnaires, performance statistics and error logs. Where an objective is not met, it identifies the outstanding problem and recommends corrective, adaptive or perfective maintenance. For example, if older users struggle with a date picker, the review would recommend redesigning it, which is perfective maintenance."
+   },
+   {
+    "q": "Explain the link between **validation and verification** (System design, development and testing) and **data conversion**.",
+    "a": "Data conversion transfers existing records into the new system, often by keying in or scanning paper records, so errors can easily be introduced. Verification, such as proof-reading a sample against the originals or double keying, checks the data was copied accurately. Validation then rejects impossible values, such as a date of 31/02, so the new system starts with reliable data."
+   }
+  ]
+ },
+ "c05": {
+  "gaps": [
+   "The {{waterfall model|waterfall}} is a sequential methodology: each stage is completed and signed off before the next begins, and its deliverable becomes the input to the following stage. Users are involved mainly at analysis and at acceptance testing, so a misunderstanding introduced at a {{handover|hand-over|hand over}} between stages may not be found until late, when it is most expensive to fix. It suits projects whose requirements are stable and well understood.",
+   "{{Iterative development}} builds a system through repeated cycles, each producing a working version that users review. The {{spiral model}}, proposed by Barry Boehm, is iterative but driven by {{risk analysis}}, so risks are identified and resolved in every loop, with the riskiest unknowns tackled first. In {{throwaway prototyping|throwaway|throw-away prototyping|throw-away|throw away prototyping|throwaway prototype}} the prototype is discarded once the requirements are agreed, whereas an evolutionary prototype is refined until it becomes the final system.",
+   "**RAD** delivers a system quickly through a series of builds within a strict timescale that must not be overrun, called {{timeboxing|time-boxing|time boxing}}. Its final phase, in which the new system replaces the old, is {{cutover|cut-over|cut over}}. In Agile, the prioritised wish list of everything the product should do is the {{product backlog}}, and work is carried out in {{sprints|sprint}} of a few weeks that each deliver a working increment. The voice of the client is the {{product owner}}, while the {{Scrum master|scrum master}} arranges meetings, monitors progress and removes obstacles. Work remaining is compared with an ideal straight line on a {{burn down chart|burndown chart|burn-down chart}}. In extreme programming, two programmers sharing one workstation is called {{pair programming}}."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **the waterfall model**",
+    "pts": [
+     "Distinct stages in sequence: analysis, design, implementation, testing, maintenance",
+     "Each stage completed and signed off before the next begins",
+     "Each stage produces a deliverable that is the input to the next",
+     "Going back to an earlier stage is possible but costly",
+     "Users involved mainly at analysis and at acceptance testing",
+     "Strengths: clear structure, measurable progress, thorough documentation, easier estimates, efficient specialists",
+     "Weaknesses: inflexible, errors found late, nothing usable until the end",
+     "Suits stable, well-understood requirements, e.g. payroll changed to new HMRC rules"
+    ]
+   },
+   {
+    "p": "Everything you know about **iterative development, the spiral model, prototyping and RAD**",
+    "pts": [
+     "Iterative: repeated cycles, each producing a version users review",
+     "Spiral (Boehm, 1986): risk-driven; four quadrants each loop",
+     "Quadrants: objectives, risk analysis (often a prototype), develop and test, review and plan",
+     "Prototyping is a technique used inside methodologies, not a methodology on its own",
+     "Throwaway: discarded once requirements are agreed; evolutionary: refined into the final system",
+     "RAD (James Martin): builds, timeboxing, prioritised requirements, frequent prototypes",
+     "RAD phases: requirements planning, user design, construction, cutover",
+     "RAD users involved continually through prototypes"
+    ]
+   },
+   {
+    "p": "Everything you know about **Agile, Scrum and extreme programming**",
+    "pts": [
+     "Agile Manifesto 2001: early, continuous delivery, customer collaboration, welcomes change",
+     "Product backlog = prioritised wish list; release backlog = features chosen for the next release",
+     "Sprint: a few weeks (no more than a month), producing a working increment",
+     "Scrum master co-ordinates and removes obstacles; product owner represents the client; small multi-skilled team",
+     "Daily Scrum: about 15 minutes; yesterday, today, obstacles",
+     "Burn down chart: actual line above the ideal = behind; below = ahead",
+     "Sprint review examines the product; retrospective examines the process",
+     "XP: pair programming, test-driven development, continuous integration, small releases, refactoring, on-site customer"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **user involvement** and when misunderstandings are found in the **waterfall model** compared with **RAD**.",
+    "a": "In the waterfall model users are involved mainly at analysis and at acceptance testing, so between those points they see no working software. A misunderstanding introduced at a handover can therefore travel undetected through design and coding and be found only at testing, when it is most expensive to fix. In RAD users are involved continually through frequent prototypes, so they comment on real screens from the start and misunderstandings surface early."
+   },
+   {
+    "q": "Explain the link between the **daily Scrum** and the **burn down chart**.",
+    "a": "Both are used to keep a sprint on schedule. The burn down chart compares the actual work remaining with an ideal straight line, so if the actual line is above it the team is behind. At the daily Scrum each member reports progress and obstacles, so the Scrum master can act within a day, for example by moving a multi-skilled developer onto the overrunning task or agreeing with the product owner to drop a low-priority item."
+   },
+   {
+    "q": "How do **timeboxing** and **prioritised requirements** work together in RAD?",
+    "a": "Timeboxing fixes a strict timescale that must not be overrun. Because requirements are ranked in priority order, if time runs short the low-priority add-ons are dropped rather than the deadline being missed. So the system still goes live on time with its most important features working."
+   },
+   {
+    "q": "Explain the link between **test-driven development** in XP and testing in **System design, development and testing**.",
+    "a": "In test-driven development an automated test is written before the code, so every feature has a test and a later change that breaks it is detected immediately. Continuous integration merges code several times a day and runs the full test suite, so integration problems are found within hours rather than at the end. This supports the principle that testing should run throughout development, because errors found early are cheaper and easier to fix."
+   }
+  ]
+ },
+ "c06": {
+  "gaps": [
+   "Every software project aims to meet its objectives by deploying {{resources|resource}} within the constraints, while managing the risks. Resources can be human, technical, financial or physical, and are planned, deployed and released. Changes to what the client wants after the project has started are called {{requirements shift|requirement shift}}, often caused by too little user involvement during analysis. A deadline is a constraint; the possibility of missing it is a risk.",
+   "The {{project manager}} plans and schedules the project, allocates staff and resources, monitors progress against milestones and manages risks. Clear objectives should be {{SMART}}: Specific, Measurable, Agreed, Realistic and Timed. Whether an objective has been met is judged using {{performance indicators|performance indicator|metrics|metric}}, such as time taken, error rate or user satisfaction.",
+   "A {{Gantt chart|Gantt|Gantt charts}} shows each task as a horizontal bar against a timeline. In critical path analysis, a forward pass finds the earliest start times and a backward pass finds the {{latest finish times|latest finish time|LFT|LFTs}}. The {{critical path}} is the longest route through the network and sets the minimum project duration, and a non-critical task's {{float}} is the time it can be delayed without delaying the whole project.",
+   "Version management holds all of a project's files and their history in a {{repository|repo}}, and each **commit** saves a change as a new numbered version with a note. A {{branch|branches}} is a separate line of development, a **merge** combines parallel versions, and a {{rollback|roll back|roll-back}} continues development from an earlier stable version. Quality is also assured by a {{code review|code reviews|peer review}}, in which other developers examine code before it is accepted, and by {{coding standards|coding standard}} such as naming conventions, indentation and commenting."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **resources, constraints and risks** in a software project",
+    "pts": [
+     "Four types of resource: human, technical, financial, physical",
+     "Resources classified by availability (recurring/depleting), location (fixed/movable), elasticity (elastic/inelastic) and ownership (dedicated/shared)",
+     "Resource management: planning, deployment, release",
+     "Constraints: scope, time and resources; they must be stated explicitly",
+     "Main risks: missed deadline, requirements shift, staff turnover, low productivity",
+     "Each risk needs a cause, a consequence and a way of reducing it",
+     "A risk register scores each risk for likelihood and impact so the highest get attention first",
+     "A deadline is a constraint; missing it is a risk"
+    ]
+   },
+   {
+    "p": "Everything you know about **project management, Gantt charts and critical path analysis**",
+    "pts": [
+     "Software is intangible, bespoke and affected by rapid technological change",
+     "SMART: Specific, Measurable, Agreed, Realistic, Timed, each with a short explanation",
+     "Gantt chart: task bars against time showing start, duration, end, overlap and dependencies",
+     "A task starts only when the latest of its predecessors has finished",
+     "Forward pass gives ESTs (take the highest); backward pass gives LFTs (take the lowest)",
+     "Critical path: nodes where EST = LFT; the longest path; tasks on it have zero float",
+     "Float = LFT − EST − duration",
+     "Both tools are only as good as their duration estimates and must be updated; less suited to Agile"
+    ]
+   },
+   {
+    "p": "Everything you know about **version management and quality in software projects**",
+    "pts": [
+     "Repository records who made each change, when, and a note describing it",
+     "Commit, branch, merge (conflicts flagged) and rollback",
+     "Version management graph: nodes are versions, arrows point from older to newer; two out = parallel, two in = merge",
+     "Three conditions: consistent tracking with version numbers; changes can be reversed; everyone uses the same version of each file",
+     "Upper CASE supports analysis and design; lower CASE supports coding and testing",
+     "Collaboration tools: repositories and issue trackers, messaging, shared documents, task boards, CI servers",
+     "Code reviews find defects early and spread knowledge across the team",
+     "Quality assurance covers the whole process; testing is only one QA activity"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **requirements shift** and the analysis stage (c02 Analysis).",
+    "a": "Requirements shift is often caused by too little user involvement during analysis, so the client's needs are not fully captured at the start. When requirements then change, the result is rework, delay and extra cost. Involving users fully in analysis and agreeing a signed-off specification reduces the risk, because later changes must go through change control."
+   },
+   {
+    "q": "How does a task's **float** help a project manager respond to a delay on the **critical path**?",
+    "a": "Tasks on the critical path have zero float, so any delay to one of them delays the whole project. Tasks with float can be delayed without affecting the finish date, so CPA shows which tasks can give up resources (those with float) and which must receive them (critical tasks). Staff can therefore be moved onto the delayed critical task, keeping the project on schedule."
+   },
+   {
+    "q": "Explain the link between **version management** and the risk of **staff turnover**.",
+    "a": "Staff turnover is a risk because a developer who leaves takes vital knowledge with them. Version management records who made every change, when and a note explaining it, so the commit history forms an audit trail that helps new staff understand why the code is as it is. Code reviews and documentation also spread knowledge across the team, so the damage when someone leaves is reduced."
+   },
+   {
+    "q": "Why are Gantt charts and CPA less suited to projects using Agile methods (c05 Alternative development approaches)?",
+    "a": "Gantt charts and CPA depend on accurate duration estimates for a planned set of tasks, and must be updated whenever the project changes, which takes time. In an Agile project the scope changes sprint by sprint, so the charts would constantly be out of date. Burn down charts are used instead."
+   }
+  ]
+ },
+ "c07": {
+  "gaps": [
+   "A {{worm}} replicates itself across a network without needing a host file or any user action, whereas a {{virus}} attaches itself to a host file and needs user action to spread. A {{Trojan|Trojan horse}} is disguised as legitimate software that the user installs, and does not replicate. {{Social engineering}} attacks the person rather than the technology, for example through phishing, while a {{DDoS|distributed denial of service|distributed denial-of-service|DDOS}} attack uses a botnet to flood a server so that genuine users cannot reach it.",
+   "Data {{archiving}} moves inactive data out of the live system to separate, secure, indexed storage, whereas a {{backup|back-up}} copies current data, which stays in the live system, so that it can be restored if lost. A {{restore point}} records the exact state of the system at the moment it was backed up, and changes made since then can be re-applied from a {{transaction log}}.",
+   "A **full backup** copies every file. A {{differential backup|differential}} copies every file changed since the most recent full backup, so it grows each day. An {{incremental backup|incremental}} copies only files changed since the most recent backup of any kind, so restoring needs the last full backup plus every incremental since, in order.",
+   "The procedural foundation of security is a {{security policy}}, a formal document setting out rules, procedures and responsibilities. Technical measures include multi-factor authentication, a firewall and {{encryption}}, which makes stolen data unreadable without the correct key. Because disasters cannot be prevented, a {{disaster recovery plan}} sets out how the organisation will resume operating as quickly as possible with the least disruption to customers."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **deliberate threats to data**",
+    "pts": [
+     "Virus: attaches to a host file and needs user action to spread",
+     "Worm: standalone, replicates itself across a network, usually via an unpatched vulnerability",
+     "Trojan: disguised as legitimate software, installed by the user, does not replicate; e.g. a back door",
+     "Ransomware encrypts files and demands payment for the key; spyware (e.g. a keylogger) secretly records activity",
+     "Hacking = unauthorised access, an offence under the Computer Misuse Act 1990",
+     "Hacking methods: unpatched software, brute-force or dictionary attacks on passwords, SQL injection",
+     "Social engineering: phishing, spear phishing, smishing/vishing, pretexting",
+     "DDoS: a botnet floods a server so legitimate users cannot access it; harms availability, not normally data theft"
+    ]
+   },
+   {
+    "p": "Everything you know about **archiving, backup and recovery**",
+    "pts": [
+     "Archiving moves inactive data to separate, secure, indexed long-term storage",
+     "Archiving: faster live system and backups, data retained, cheaper storage; but slower to find and access",
+     "Backup copies current data regularly to separate storage; usually automated; the original stays live",
+     "Restore point = the state of the system at the moment of the backup",
+     "Logged transactions are re-applied after a restore to bring the data up to date",
+     "Full: everything; simplest restore but slowest and largest",
+     "Differential: changes since last full; restore needs last full + latest differential",
+     "Incremental: changes since last backup of any kind; fastest and smallest but restore needs every incremental in order"
+    ]
+   },
+   {
+    "p": "Everything you know about **security policies, security measures and disaster recovery**",
+    "pts": [
+     "Security policy contents: acceptable use, passwords, access control, devices, remote working, incident reporting, backup, training, consequences",
+     "A policy must be communicated, enforced and reviewed",
+     "Authentication factors: something you know, have or are; MFA needs two or more different types",
+     "Access rights and the principle of least privilege limit what each user can do",
+     "Encryption makes data unreadable without the key but does not stop it being stolen; firewalls filter traffic against rules",
+     "Disaster recovery plan contents: critical data, key personnel, backup and recovery processes, alternative site",
+     "CCEA: RPOs are the parts of the system to restore; RTOs are the time limit for recovering each one",
+     "Plans are tested by theoretical walk-throughs and simulated tests"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "How does the choice of **backup method** affect **downtime** when a system has to be restored?",
+    "a": "A full backup can be restored from a single backup, which is the simplest restore, and a differential needs only two (the last full plus the latest differential). An incremental restore needs the last full backup plus every incremental since, in order, so it is the slowest and most complex. Where downtime is unacceptable, faster restores matter more than faster backups, so full or differential backups are favoured."
+   },
+   {
+    "q": "Explain the link between **off-site backups** and a **disaster recovery plan**.",
+    "a": "A disaster such as a flood can destroy the servers and any backups kept in the same building, so backups alone are not enough. A disaster recovery plan forces the organisation to put resources such as off-site or cloud backups and an alternative site in place beforehand, because these cannot be arranged after a disaster. This means systems can be restored and the organisation can resume operating quickly with the least disruption to customers."
+   },
+   {
+    "q": "Explain how **multi-factor authentication** reduces the harm caused by **phishing**.",
+    "a": "Phishing tricks users into revealing details such as passwords, for example on a fake login page. MFA requires at least two different types of factor, such as a password (something you know) and a code sent to a phone (something you have), so a stolen password alone is not enough to log in. MFA is used together with staff awareness training, the main defence against phishing, and email filtering."
+   },
+   {
+    "q": "Explain the link between **SQL injection** and input validation in programs (c09 Fundamentals of programming).",
+    "a": "SQL injection is possible when a web form does not validate its input, so database commands typed into the form are run by the server. Validation is an automatic check by the program that input is reasonable and obeys set rules before it is processed or stored, so it helps stop such input reaching the database. Code reviews also look for security weaknesses such as unvalidated input before code is accepted."
+   }
+  ]
+ },
+ "c08": {
+  "gaps": [
+   "A computer program is a set of instructions that a computer executes to carry out a specific task, and it is designed first as an {{algorithm}}: a finite, ordered sequence of precise, unambiguous steps. {{Decomposition}} breaks a complex problem into smaller sub-problems, shown in a structure diagram, while {{abstraction}} removes detail that is not relevant so that only the essential features remain.",
+   "Algorithms can be written as pseudocode or drawn as a {{flowchart|flow chart}}, in which a diamond is used for a decision. A {{dry run|dry-run}} works through an algorithm by hand, step by step, and the values of each variable are recorded in a {{trace table}}. This exposes a {{logic error|logic errors|logical error}}, which gives the wrong result but does not stop the program running.",
+   "A {{linear search}} checks each item in turn from the start and works on unsorted data, whereas a {{binary search}} needs sorted data and repeatedly compares the target with the middle item, discarding the half that cannot contain it. Linear search is O(n), while binary search is O(log n), so doubling the list adds only one more comparison to a binary search.",
+   "A {{bubble sort}} compares adjacent items and swaps them if they are in the wrong order, and a {{swapped flag|swap flag|flag}} lets it stop as soon as a pass makes no swaps. {{Insertion sort}} takes each item in turn and inserts it into its correct place in a growing sorted section. Merge sort and quick sort are {{divide and conquer|divide-and-conquer}} algorithms: quick sort partitions the list around a {{pivot}}, while merge sort is always O(n log n) but needs extra memory, so it does not sort **in place**."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **designing and testing algorithms**",
+    "pts": [
+     "An algorithm is a finite, ordered sequence of precise, unambiguous steps",
+     "Zero or more inputs but at least one related output; correct, effective and efficient",
+     "Decomposition = break into sub-problems (structure diagram); abstraction = leave out unnecessary detail",
+     "Pseudocode uses keywords and indentation; both pseudocode and flowcharts are language-independent",
+     "Flowchart symbols: terminator, process (rectangle), input/output (parallelogram), decision (diamond), flow lines",
+     "Three constructs: sequence, selection, iteration",
+     "Dry run with a trace table: a column per variable, condition and output; a new row when values change",
+     "Test data: normal, boundary and erroneous"
+    ]
+   },
+   {
+    "p": "Everything you know about **linear and binary search**",
+    "pts": [
+     "Linear: check each item from the start until found or the end is reached; works on unsorted data",
+     "Binary: list must be sorted; compare with the middle item and discard the half that cannot contain the target",
+     "mid = (low + high) DIV 2; low ← mid + 1 or high ← mid − 1; stop when found or low > high",
+     "In C#, return the index if found or -1 if not",
+     "Linear: best 1, average about n/2, worst n comparisons → O(n)",
+     "Binary: best 1, worst ⌊log₂ n⌋ + 1 comparisons → O(log n)",
+     "Binary suits large, sorted, directly accessible, frequently searched data",
+     "Linear suits small, unsorted or sequential-access data and one-off searches"
+    ]
+   },
+   {
+    "p": "Everything you know about **sorting algorithms and their efficiency**",
+    "pts": [
+     "Bubble sort: compare adjacent pairs, swap if in the wrong order; a temporary variable is needed for the swap",
+     "Swapped flag: stop when a pass makes no swaps; best case becomes O(n)",
+     "Insertion sort: take each item as the key, shift larger items right, insert the key into the gap",
+     "Merge sort: split into single items, then merge sorted sub-lists; always O(n log n) but needs extra memory",
+     "Quick sort: partition around a pivot, then sort each side; usually O(n log n), worst O(n²) with poor pivots",
+     "Bubble and insertion sorts are O(n²) in the average and worst case but sort in place",
+     "Insertion sort suits small or nearly sorted lists",
+     "Choose by time efficiency, memory use and the state of the data"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **decomposition** and modular programming (c09 Fundamentals of programming).",
+    "a": "Decomposition breaks a problem into smaller sub-problems, shown in a structure diagram, and each bottom-level task usually becomes a module such as a procedure or function. Modular programming divides the program into these self-contained modules, each performing one task, so the main program becomes a short sequence of calls. Because each module can be tested independently and developed in parallel, errors are easier to locate and team members can share the work."
+   },
+   {
+    "q": "Explain why a **binary search** needs sorted data, and how this affects the choice between binary and **linear search**.",
+    "a": "Binary search discards the half of the list that cannot contain the target, which is only possible because the data is in order. If the data is not already sorted, it must be sorted first, which takes far more work than one linear search, so this is only worthwhile if the cost is spread over many searches. Linear search is therefore better for small, unsorted lists or one-off searches."
+   },
+   {
+    "q": "How does a **swapped flag** affect the **best case** of a bubble sort?",
+    "a": "The flag is set to False at the start of each pass and to True whenever a swap is made. If a whole pass finishes with no swaps, every adjacent pair is in order, so the sort stops. For an already sorted list this gives a best case of one pass of n − 1 comparisons, which is O(n) rather than O(n²), although the worst case is not improved."
+   },
+   {
+    "q": "Explain the link between **trace tables** and **boundary test data**.",
+    "a": "A common logic error is the wrong comparison, such as > instead of >=, which only treats the boundary value incorrectly, so normal test data alone would miss it. Dry running the algorithm with boundary values and recording every value in a trace table exposes this error. Finding it on paper at the design stage is far cheaper than finding it after release."
+   }
+  ]
+ },
+ "c09": {
+  "gaps": [
+   "An {{IDE|integrated development environment}} brings together an editor, preferences, a translator and debugging tools in one application. A **compiler** translates the whole program before it runs and produces an executable, whereas an {{interpreter}} translates and executes one statement at a time and produces no object code. A variable's **data type**, such as integer, real, character, string or Boolean, decides what values it can hold and which operations are allowed.",
+   "Every program is built from sequence, selection and iteration. A while loop may run zero times, so it suits data that ends with a {{sentinel value|sentinel|rogue value}}, such as -1, which marks the end and is not itself processed. A {{function}} returns a single value to the point where it was called, whereas a procedure does not. Passing an argument {{by reference|by ref}} lets the subroutine change the caller's original variable, while passing by value sends a copy. A variable declared inside a subroutine is a {{local variable|local}} and can only be accessed there.",
+   "An array is a static data structure because its size is fixed when it is created, whereas a {{list}} is dynamic and can grow and shrink while the program runs. A {{record}} groups a fixed set of related, named fields, which may be of different data types, to describe one item. Files on secondary storage give persistent storage; in a CSV file each record is one line, with its fields separated by a {{delimiter}} such as a comma.",
+   "{{Validation}} is an automatic check that input is reasonable and obeys set rules, whereas verification checks that data was entered accurately. Code that might cause a run-time error is placed in a {{try}} block, and a matching catch block handles the exception. A {{logic error}} lets the program run but gives the wrong result, so it can only be found by testing. {{Extreme data|extreme|boundary data|boundary}} is valid test data at the edges of the allowed range, and a {{breakpoint|break point|breakpoints}} pauses execution at a chosen line so that variable values can be inspected."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **IDEs, translators, data types and operators**",
+    "pts": [
+     "IDE editor features (syntax highlighting, auto-indentation, syntax checking, code completion) and how each helps",
+     "Preferences give a team one consistent code layout",
+     "Compiler: whole program first, produces an executable, reports all errors together, fast execution",
+     "Interpreter: translates and runs line by line, no object code, stops when it reaches an error, slower",
+     "Assembler: assembly language to machine code, one mnemonic to one instruction",
+     "Five data types: int, double, char, string, bool, chosen by how the data is used",
+     "Constants (const) cannot change while the program runs: safer, more readable, edited in one place",
+     "/ on two integers is integer division; % gives the remainder; precedence ! then && then ||"
+    ]
+   },
+   {
+    "p": "Everything you know about **control structures and subroutines**",
+    "pts": [
+     "Sequence, selection and iteration; the order of statements matters",
+     "else if chain runs only the first true branch; switch needs break after each case and default for the rest",
+     "for loop: initialisation, condition checked before each pass, update after each pass",
+     "while tests first (zero or more passes); do…while tests last (at least one pass)",
+     "Nested loop: the inner loop runs completely for every pass of the outer loop",
+     "Procedure returns no value (void); function returns one value",
+     "Parameter is in the header; argument is in the call; matched by number, order and type",
+     "By value passes a copy (original protected); by reference (ref) lets the original be changed; local variables preferred to globals"
+    ]
+   },
+   {
+    "p": "Everything you know about **data structures, files and robust programs**",
+    "pts": [
+     "Static structure (array) has a fixed size; dynamic structure (list) grows and shrinks at run time",
+     "Array index runs from 0 to Length − 1; 2D arrays use [row, column] and nested loops",
+     "Record: related fields of different data types, accessed with dot notation",
+     "File modes: write (overwrite), append (add to end), read; Split on the delimiter and convert each field",
+     "Validation checks: presence, length, range, type, format, lookup; verification: double entry, visual check",
+     "try…catch…finally handles exceptions; finally always runs",
+     "Four error types: syntax, semantic, run-time, logic",
+     "Test data: valid, extreme, invalid and null; debugging with breakpoints, stepping and watches"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "How does the choice of **translator** affect when **syntax errors** are detected?",
+    "a": "A compiler reports all syntax errors together before the program can run and produces no executable until they are fixed, so a program that builds successfully has no syntax errors, even in rarely used branches. An interpreter finds a syntax error only when execution reaches that line, so earlier statements have already run. This means an interpreted program could stop part-way through updating a file or database, leaving the data half-changed."
+   },
+   {
+    "q": "Explain the link between **validation** and **exception handling** in a robust program.",
+    "a": "Validation rejects predictable bad input before it is processed, for example a loop using `int.TryParse` with a range check that re-prompts until the input is valid. Exception handling uses try…catch to deal with errors that cannot easily be checked in advance, such as a missing or locked file, so the program gives a message instead of crashing. They work together because checking `File.Exists` alone is not enough: the file could be deleted or locked between the check and the read."
+   },
+   {
+    "q": "Explain the link between **extreme (boundary) test data** and **logic errors**.",
+    "a": "Many logic errors are a wrong relational operator, such as > instead of >=, which affects only the value exactly on the boundary. Normal data would never reveal this, and no translator detects logic errors because the code is legal, so both sides of every boundary must be tested. For example, testing age 65 shows that `age > 65` wrongly charges full price; after the fix, all the tests are re-run."
+   },
+   {
+    "q": "Explain the link between IDE **preferences** and **coding standards** (c06 Software projects).",
+    "a": "Coding standards are agreed rules such as naming conventions, indentation and commenting, so that any developer can read and maintain anyone else's code. IDE preferences let a team set the same layout options, and the IDE can reformat existing code to match the agreed style. When everyone's modules are combined the code looks consistent, so code reviews are faster and maintenance is cheaper."
+   }
+  ]
+ },
+ "c10": {
+  "gaps": [
+   "A {{class}} is a template that defines the attributes and methods shared by all objects of one type, and an {{object}} is one specific instance of it holding its own attribute values. Creating an object with `new` is called {{instantiation}}, and it automatically runs the {{constructor}}, a special method with the class's name and no return type. A method's {{return type}} states what kind of value it sends back, or void if it returns nothing.",
+   "{{Encapsulation}} combines data and the methods that act on it in a class and makes the attributes private, so they can only be read or changed through the class's methods. A {{set method|setter|set methods|setters}} takes a new value as a parameter and can validate it before changing the attribute. In a class diagram, + shows public, - shows private and # shows {{protected}}.",
+   "{{Inheritance}} lets a subclass take on the attributes and methods of a superclass and add its own, modelling an 'is a' relationship; in C# the subclass constructor passes values up with `: base(...)`. {{Polymorphism}} is the ability of objects of different classes to respond to the same method call in different ways, achieved by {{overriding|override|method overriding}} a virtual or abstract method. An {{abstract class}} cannot be instantiated, so objects must be created from its subclasses.",
+   "OOP suits applications with clear real-world entities, such as games and simulations, but adds complexity and overheads for small computational tasks. In {{event-driven programming|event-driven|event driven programming|event driven}}, the flow of the program is determined by events such as clicks, and each event runs its {{event handler|handler}}: a subroutine attached to a particular event on a particular control."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **classes, objects and encapsulation**",
+    "pts": [
+     "Class = template defining attributes and methods; object = an instance with its own values (its state)",
+     "Instantiation with new calls the constructor, which has the class's name and no return type",
+     "Parameter list: data the method must be given; arguments must match in number, order and type",
+     "Return type: the type of value sent back; void if nothing",
+     "Encapsulation: attributes private, accessed only through public get and set methods",
+     "A setter can validate changes; a getter with no setter makes an attribute read-only",
+     "Benefits: data integrity, fewer accidental errors, easier maintenance",
+     "Class diagram: three compartments (name, attributes, methods); + public, - private, # protected"
+    ]
+   },
+   {
+    "p": "Everything you know about **inheritance and polymorphism**",
+    "pts": [
+     "Subclass (derived/child) inherits the attributes and methods of the superclass (base/parent) and can add or modify its own",
+     "Inheritance models an 'is a' relationship",
+     "C#: `class Book : Item`; subclass constructor calls `: base(...)`",
+     "Private base members are inherited but not directly accessible; protected ones are",
+     "Hierarchy diagram: superclass at top, hollow arrows pointing up; inherited members not repeated",
+     "Polymorphism: same method call, different behaviour; virtual (may override) or abstract (must override), then override",
+     "The version run is chosen at run time from the object's actual class",
+     "Overloading: same name, different parameter lists, chosen at compile time; not polymorphism through inheritance"
+    ]
+   },
+   {
+    "p": "Everything you know about **evaluating OOP and event-driven programming**",
+    "pts": [
+     "Advantages: more accurate modelling, reuse through inheritance, less testing, protected data, teamwork and maintenance",
+     "Disadvantages: not suited to abstract or purely computational programs; less successful for routine business systems such as payroll",
+     "Disadvantages: complexity and design time, overheads, fragile deep hierarchies",
+     "An evaluation applies points to the scenario and ends with a justified judgement",
+     "Event-driven: the flow of the program is determined by events",
+     "Event loop waits for events and passes each to its event handler",
+     "Controls (buttons, text boxes, labels) are objects with properties, methods and events",
+     "Handlers must work whatever order events happen in"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **encapsulation** and **data integrity**.",
+    "a": "Encapsulation makes attributes private, so no code outside the class can overwrite them by mistake. All changes must go through a set method, which can validate every new value, so an object can never be put into an invalid state; for example, a weight of −4 kg is refused. Leaving out a setter makes an attribute read-only, such as a hospital number that must never change."
+   },
+   {
+    "q": "How does **inheritance** reduce the amount of **testing** and new code needed?",
+    "a": "A subclass automatically inherits the attributes and methods of its superclass, so less new code is written. A superclass that has already been tested need not be retested; only the new or overridden methods in the subclass do. However, a fault or change in a base class spreads to every subclass, so deep hierarchies can be fragile."
+   },
+   {
+    "q": "Explain the link between **polymorphism** and adding new subclasses to a program.",
+    "a": "With polymorphism, code such as a loop can call `b.Cost()` on every object without checking what kind of object it is, because the version that runs is chosen at run time from the object's actual class. The calling code therefore needs no if statements to test types. A new subclass that overrides the method, such as PoolBooking, can be added later without changing the loop at all."
+   },
+   {
+    "q": "Explain the link between **methods** in a class and **subroutines** (c09 Fundamentals of programming).",
+    "a": "In object-oriented languages such as C#, subroutines that belong to a class are called methods. A method that only carries out an action is like a procedure and has the return type void, while one that calculates or answers a question is like a function and must return a value of its return type. For example, a getter has an empty parameter list and returns the attribute's type, whereas a setter has one parameter and a void return type."
+   }
+  ]
+ }
+}

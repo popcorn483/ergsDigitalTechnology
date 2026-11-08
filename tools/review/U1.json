@@ -1,0 +1,670 @@
+{
+ "c01": {
+  "gaps": [
+   "**Data** is raw facts and figures with no meaning or context, whereas {{information}} is data that has been processed and given context so that it has meaning. Computers store everything in {{binary}} because their switches have only two states, off and on. A single 0 or 1 is called a {{bit|binary digit}}, and a group of 8 bits is a {{byte}}, which stores one character. From bytes upwards, each unit (KB, MB, GB, TB) is 1024 times the one before.",
+   "A {{character set}} is an agreed list that gives every character its own unique binary code; ASCII is a common example. Before data is processed it is given a data type: whole numbers such as a count of pupils are stored as {{integer|integers}}, numbers with a decimal part are stored as real, and a sequence of characters such as a postcode or phone number is stored as a {{string|strings}}.",
+   "A bitmap image is a grid of {{pixels|pixel|picture elements|picture element}}, and the number of bits used to store the colour of each one is the {{colour depth|color depth}}. A {{vector|vector-based|vector based}} graphic instead stores a list of objects (lines, curves and shapes) and their properties, so it can be resized without pixelating. Sound is an analogue wave, so an {{ADC|analogue-to-digital converter|analogue to digital converter|analog-to-digital converter|analog to digital converter}} measures it at regular intervals and stores each sample in binary. The number of samples taken each second, measured in hertz, is the {{sample rate|sampling rate}}.",
+   "When video is streamed, the next part is downloaded into a {{buffer}}, an area of memory that holds data temporarily, so playback continues if the connection slows. Compression makes files smaller: **lossy** compression permanently removes some data (e.g. JPEG, MP3), whereas {{lossless}} compression lets the file be restored exactly to the original (e.g. ZIP, PNG)."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **units of storage and converting between them**",
+    "pts": [
+     "Bit = a single binary digit, 0 or 1; the smallest unit",
+     "Nibble = 4 bits; byte = 8 bits; one character is stored in one byte",
+     "1 KB = 1024 bytes, 1 MB = 1024 KB, 1 GB = 1024 MB, 1 TB = 1024 GB",
+     "Order: bit, nibble, byte, KB, MB, GB, TB",
+     "Going to a smaller unit: multiply by 1024; to a bigger unit: divide by 1024",
+     "Bits and bytes are linked by 8, not 1024",
+     "'How many will fit?': convert both values to the same unit first, then divide",
+     "Round down when counting whole files"
+    ]
+   },
+   {
+    "p": "Everything you know about **bitmap and vector graphics**",
+    "pts": [
+     "A pixel (picture element) is the smallest element of a digital image that can be displayed or edited",
+     "A bitmap stores the colour code of every pixel plus metadata (width, height, colour depth)",
+     "Colour depth = bits per pixel; n bits give 2ⁿ colours",
+     "Higher resolution means more pixels: sharper image but larger file",
+     "File size (bits) = width × height × colour depth; ÷ 8 for bytes",
+     "A vector stores a list of objects and their properties (position, size, line colour, fill colour)",
+     "Bitmaps pixelate when enlarged; vectors are recalculated and stay sharp",
+     "Bitmaps suit photographs; vectors suit logos, diagrams and fonts"
+    ]
+   },
+   {
+    "p": "Everything you know about **compression: why it is needed, and lossy versus lossless**",
+    "pts": [
+     "Compression reduces the size of a file",
+     "Benefits: less storage, faster upload and download, less bandwidth, fits size limits",
+     "Lossy compression permanently removes some data, so the original cannot be fully restored",
+     "Lossy gives much smaller files but lower quality; examples JPEG, MP3, MP4",
+     "Lossless compression loses no data, so the file is restored exactly",
+     "Lossless examples: ZIP, PNG, GIF",
+     "Lossless must be used for text, spreadsheets and programs, where every bit matters",
+     "Choosing between them is a trade-off between file size and quality"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **resolution**, **colour depth** and the **file size** of a bitmap image.",
+    "a": "A bitmap stores the colour code of every pixel, so its size in bits is width × height × colour depth. A higher resolution means more pixels, so more colour codes must be stored and the file is larger; doubling both the width and height gives 4 times as many pixels. A greater colour depth means more bits are used for each pixel, so doubling the bits per pixel doubles the file size."
+   },
+   {
+    "q": "How do **sample rate** and **bit depth** affect the quality and file size of a sound recording?",
+    "a": "Sample rate is the number of samples taken each second, so a higher sample rate follows the shape of the wave more closely and less detail between samples is missed. Bit depth is the number of bits used to store each sample, so more bits give more possible levels and each sample is rounded less precisely. Both raise the bit rate (sample rate × bit depth per channel), so the recording is higher quality but needs a larger file."
+   },
+   {
+    "q": "Explain the link between **data portability** and **file formats**.",
+    "a": "Data portability is the ability to move data between computers or software applications without having to re-enter it. This is possible because data saved in a standard file format, shown by its file extension, can be opened by many different programs on different systems. For example, a club can export a database table as a CSV file, with one record per line and fields separated by commas, and open it directly in spreadsheet software, so time is saved and no new typing errors are introduced."
+   },
+   {
+    "q": "Explain the link between defining a **data type** and **validation** in the topic **Database applications**.",
+    "a": "Data must be given a data type before it is processed because the type decides what processing is possible, such as calculating with numbers or sorting dates in true order. Once a field's data type is set, a type check can reject entries of the wrong kind, such as letters in a Number or Date/Time field, so some invalid data is stopped from entering the system. This makes later processing such as queries, calculations and reports more reliable."
+   }
+  ]
+ },
+ "c02": {
+  "gaps": [
+   "{{System software|systems software}} runs and manages the computer and provides a platform for other programs, whereas {{application software}} lets the user carry out a specific task such as editing a photo. Applications can be packaged (off-the-shelf) or {{tailored|bespoke|tailor-made|tailor made}}, which means written for one organisation's specific needs.",
+   "The {{operating system|OS}} shares out the computer's resources by allocating memory, storage and processing time. It gives each task a short {{time slice|time-slice}} of processor time in turn. When the computer is switched on, start-up instructions stored in {{ROM|read only memory|read-only memory}} test the hardware, then the operating system is found on storage and copied into {{RAM|random access memory}}.",
+   "In {{real-time|real time}} processing each input is processed at once, so the output is produced in time to affect the next input, e.g. booking a seat. In {{batch}} processing similar data is collected over time and processed together later without human involvement; a bill run matches a temporary transaction file against a permanent {{master file}}. In a multi-user system each user at a terminal gets a time slice in a fixed order, which is the {{round robin|round-robin}} method.",
+   "When files are split into blocks stored in separate, non-adjacent places on a hard disk, this is called {{fragmentation|file fragmentation|disk fragmentation}}, and a disk defragmenter puts each file's blocks back together. An {{incremental}} backup copies only the data changed since the last backup, so restoring needs the last full backup plus every one since. Antivirus software compares files with a database of virus {{signatures|signature}}, so it must be updated regularly to detect new viruses."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **the operating system's functions and the boot-up sequence**",
+    "pts": [
+     "Memory: the OS loads programs from storage into free space in RAM, keeps them separate and frees the space when they close",
+     "If RAM is full the OS can use part of the storage drive as virtual memory, which is much slower",
+     "Storage: the OS saves files, records their location, frees space when they are deleted and sets permissions",
+     "Processing time: the OS gives each task time slices in turn, with more for high-priority tasks",
+     "Boot instructions are stored in ROM because it is non-volatile",
+     "Power-on self-test (POST) checks the hardware; faults are shown by a message or beeps",
+     "The firmware finds the OS on storage using a set boot order",
+     "The OS is loaded into RAM and takes control, loading drivers and showing the log-in screen"
+    ]
+   },
+   {
+    "p": "Everything you know about **real-time, batch and multi-user processing**",
+    "pts": [
+     "Real-time: each input processed as soon as it is entered; output affects the next input",
+     "Real-time example: booking a seat, so it cannot be sold twice",
+     "Batch: similar data collected over time and processed together later, without human involvement",
+     "Batch runs are often overnight or at a weekend; e.g. payroll, utility bills",
+     "Batch uses a permanent master file and a temporary transaction file, matched on the account number",
+     "Multi-user: many users at different terminals share one powerful processor (time-sharing)",
+     "Each user gets a time slice in turn (round robin), so each seems to have sole use",
+     "A system can be both, e.g. an airline booking system is multi-user and real-time"
+    ]
+   },
+   {
+    "p": "Everything you know about **utility software: defragmenting, task scheduling, backup and antivirus**",
+    "pts": [
+     "Utility software is system software that does one specific job to maintain, protect or speed up the computer",
+     "Fragmentation: file blocks stored in non-adjacent places because there is not enough continuous free space",
+     "Defragmenting moves each file's blocks together and groups free space, so an HDD reads files faster",
+     "Do not defragment an SSD: no moving parts, and extra writing wears out its cells",
+     "Task scheduler shares processor time (round robin) and runs jobs such as backups automatically at set times",
+     "Full backup copies everything; incremental copies only changes since the last backup",
+     "Good procedure: scheduled overnight, stored off-site or in the cloud, several generations, restores tested",
+     "Antivirus compares files with a database of virus signatures and removes or quarantines threats; must be updated regularly"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between the **boot-up sequence** and the types of memory in the topic **Computer hardware**.",
+    "a": "At switch-on RAM is empty because it is volatile, so the start-up instructions must be stored in ROM, which is non-volatile and keeps its contents without power. These instructions test the hardware and find the operating system on storage. The operating system is then copied into RAM because the processor can only run what is in main memory."
+   },
+   {
+    "q": "How does **file fragmentation** affect the performance of a **hard disk drive**, and how does defragmenting help?",
+    "a": "As files are saved and deleted, free space becomes small scattered gaps, so a large file's blocks are stored in separate places on the disk. To read it, the read/write head must keep jumping to different parts of the disk, which takes milliseconds each time, so files open and save more slowly. A disk defragmenter moves each file's blocks next to each other and groups the free space, so the head reads each file in one smooth sweep and access is faster."
+   },
+   {
+    "q": "Explain the link between **time slices** and **multi-user processing**.",
+    "a": "In a multi-user system many users at different terminals share the processor of one powerful computer. The operating system gives each user a short time slice in a fixed order, returning to the first after the last, which is the round robin method. Because the processor carries out billions of instructions a second, each user's turn comes round so quickly that they seem to have the computer to themselves, although more users make each round longer, so the system feels slower."
+   },
+   {
+    "q": "How does the choice of **full or incremental backups** affect the time to back up and the time to **restore**?",
+    "a": "A full backup copies all the data, so it takes a long time and needs a lot of storage, but restoring is quick because everything is in one backup set. An incremental backup copies only the data changed since the last backup, so it is quick and small, but restoring needs the last full backup plus every incremental since, applied in order. This is why a good procedure combines a weekly full backup with nightly incrementals, scheduled automatically overnight."
+   }
+  ]
+ },
+ "c03": {
+  "gaps": [
+   "A database table stores data about one type of thing: each row is a {{record}} and each column is a field. The {{primary key|key field|primary key field}}, such as MemberID, has a value that is unique for every record and is never blank. A {{flat file|flat-file|flat file database}} holds all its data in one table, which leads to data {{redundancy|duplication}}, where the same data is repeated many times, and to inconsistency.",
+   "A relational database splits data into several tables linked by relationships, made by storing the primary key of one table as a {{foreign key}} in another. {{Referential integrity}} keeps the linked tables consistent, so a foreign key value must match an existing primary key and there are no orphan records.",
+   "A {{query}} searches the tables and extracts the records that meet set criteria, a form is used to enter and view records, a {{report}} presents data in a formatted layout for printing, and a {{macro}} automates a repeated sequence of actions, usually from a button.",
+   "{{Validation}} is an automatic check made by the computer as data is input to make sure it is sensible and within allowed limits, but it cannot confirm that data is correct. Checking that data has been entered accurately, such as by double entry, is {{verification}}. A {{range check}} makes sure a value lies between a lower and an upper limit, e.g. Between 1 And 8. **Big data** is described by volume, variety and {{velocity}}, which is the speed at which data is created and must be processed."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **relational databases, keys and relationships**",
+    "pts": [
+     "Table = data about one thing; record = one row; field = one column",
+     "Primary key (key field): unique for every record and never blank",
+     "Flat file = one table; causes data redundancy and inconsistency",
+     "Relational database: several tables, each about one thing, linked by relationships; each fact stored once",
+     "Foreign key: a field holding another table's primary key values; it can repeat",
+     "Linked fields must have matching data types",
+     "One-to-many is most common, e.g. one member can make many bookings; ∞ or a crow's foot marks the 'many' end",
+     "Referential integrity: foreign key must match an existing primary key, so there are no orphan records"
+    ]
+   },
+   {
+    "p": "Everything you know about **validation and verification**",
+    "pts": [
+     "Validation is an automatic check as data is input that it is sensible and within allowed limits",
+     "Invalid data is rejected and validation text explains what is wrong",
+     "Presence check: field cannot be left blank (Is Not Null)",
+     "Length check: exact number of characters or a min/max, e.g. Len([BookingRef])=7",
+     "Type check: correct data type; format check: matches a pattern, often set with an input mask",
+     "Range check: value between a lower and upper limit, e.g. Between 1 And 8 (inclusive)",
+     "Validation cannot confirm data is correct: valid but wrong data still gets in",
+     "Verification checks data was entered accurately, e.g. double entry or a visual check"
+    ]
+   },
+   {
+    "p": "Everything you know about **big data and data analytics**",
+    "pts": [
+     "Big data: too large, fast-arriving and varied for ordinary database software",
+     "Volume: the huge amount of data, terabytes or petabytes",
+     "Velocity: the speed data is created and must be processed, often in real time",
+     "Variety: many different types and formats, e.g. text, photos, video, sensor readings",
+     "Structured data has a fixed format of fields and records, so it is easy to search with queries",
+     "Unstructured data (emails, photos, video) has no fixed format; most big data is unstructured",
+     "Data analytics uses algorithms, software or AI to find patterns, trends and relationships",
+     "Uses: fraud detection, personalised offers, staffing rotas, traffic light timings"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between a **flat file** and **data redundancy**, and how a **relational database** solves the problem.",
+    "a": "A flat file stores all its data in one table, so when one member makes many bookings their name and phone number are retyped on every row, which is data redundancy. If only one copy is changed, the file holds two different values for the same person, so the data becomes inconsistent. A relational database stores the member details once in a Members table and links each booking through the MemberID foreign key, so a change is made in one place and every linked record sees it."
+   },
+   {
+    "q": "Explain the link between a **query** and a **report**.",
+    "a": "A query searches the tables and extracts only the records that meet the criteria set, for example all U16 members. A report does not search for data; it takes its data from a table or query and presents it in a formatted, user-friendly layout, grouped and sorted, with headings and totals. So a query could select this month's bookings, and a report would then print them grouped by court."
+   },
+   {
+    "q": "How does **importing data** into a database link to the topic **Spreadsheet applications**?",
+    "a": "Spreadsheets are good for handling numbers, but a database can hold several linked tables, so organisations often move data between the two. Data such as a spreadsheet worksheet or a csv file can be imported into a database table instead of being retyped, which is much faster and avoids transcription errors. Before importing, the column headings should match the field names, each value must suit its field's data type and no key values can be duplicated, because the primary key must stay unique."
+   },
+   {
+    "q": "Explain why **big data** needs **data analytics**.",
+    "a": "Big data has such a huge volume that there is far too much for people to read or for ordinary database software to handle. Its velocity means new data arrives constantly, so analysis must be automatic and fast, sometimes in real time, and its variety means much of it is unstructured, so simple queries cannot interpret it. Data analytics uses algorithms, software and AI to find patterns, so the organisation can make evidence-based decisions such as blocking a payment that may be fraud."
+   }
+  ]
+ },
+ "c04": {
+  "gaps": [
+   "A spreadsheet file is called a {{workbook}}, and it can contain several worksheets, each shown on its own tab. Every cell has a {{cell reference}} such as D7, written with the column letter first and then the row number. A rectangular block of neighbouring cells such as B2:B10 is a {{range|cell range|range of cells}}.",
+   "A {{formula}} such as =B2*C2 carries out a calculation and always begins with =. Copying a formula into neighbouring cells by dragging the fill handle is called {{replication|replicating}}. When a formula is filled down, a {{relative}} reference such as B2 changes to B3, whereas an {{absolute}} reference such as $F$1 stays the same, so every row can use one fixed value such as a rate.",
+   "The function {{COUNTIF}} counts how many cells in a range meet a condition, e.g. =COUNTIF(C2:C40,\"Yes\"). The {{VLOOKUP}} function searches the first column of a lookup table for a value and returns a value from a chosen column in the same row; FALSE means an exact match only.",
+   "{{Conditional formatting}} applies a format such as a red fill automatically, only when a set condition is true. A {{template}} is a pre-designed workbook with the layout, formatting and formulae already set up, used as the starting point for new files. In a spreadsheet model, changing input values to see the effect on the outputs is called {{what-if|what if}} analysis. A {{macro}} is a small program that stores a sequence of actions so they can be replayed with one click."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **formulae, functions and cell referencing**",
+    "pts": [
+     "Every formula starts with =",
+     "Operators: + add, - subtract, * multiply, / divide, ^ power; brackets are worked out first",
+     "Use cell references, not typed numbers, so results update automatically",
+     "Replication with the fill handle copies a formula and adjusts its references for each row",
+     "Functions: SUM, AVERAGE, MAX, MIN, COUNT, COUNTIF; a range uses a colon, e.g. =SUM(D2:D7)",
+     "AVERAGE and COUNT ignore blank cells; COUNT only counts cells holding numbers",
+     "Relative reference (B2) changes when replicated; absolute ($F$1) stays the same",
+     "A missing $ can make copied formulae point at blank cells and give wrong answers silently"
+    ]
+   },
+   {
+    "p": "Everything you know about **IF, nested IF and VLOOKUP**",
+    "pts": [
+     "=IF(condition, value_if_true, value_if_false): three parts, two commas",
+     "Text results go in double quotes; numbers and references do not",
+     "> excludes the boundary value; >= includes it, so always test the boundary",
+     "A nested IF puts a second IF in the false part, giving three or more results",
+     "In a nested IF test the highest boundary first and close every bracket",
+     "VLOOKUP searches the first column of the lookup table and returns a value from the chosen column number in the same row",
+     "FALSE means exact match only; a value not found gives #N/A",
+     "Make the table range absolute so the formula can be replicated"
+    ]
+   },
+   {
+    "p": "Everything you know about **spreadsheet models and what-if analysis**",
+    "pts": [
+     "A model represents a real situation with numbers",
+     "Inputs: values you can change, such as a ticket price",
+     "Rules: formulae that say how things are connected",
+     "Outputs: the answers, such as profit, which recalculate automatically",
+     "What-if analysis: change an input and see the effect on the outputs",
+     "Benefits: quick, cheap and risk-free testing of options to support better-informed decisions",
+     "Charts of the outcomes make trends easy to see",
+     "Limitations: only as good as its data and rules; people may not behave as predicted; factors not in the model are ignored"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **absolute cell references** and **replication**.",
+    "a": "When a formula is replicated with the fill handle, relative references change to point at the matching cell in each new row, so =B2*C2 becomes =B3*C3. If every row must use one fixed value, such as a price per mile in F1, that cell needs an absolute reference, $F$1, because it does not change when the formula is replicated. Without the $ signs the copied formula would point at F2, which is empty, so the answer would be wrong with no warning."
+   },
+   {
+    "q": "How does **VLOOKUP** help a business keep its prices accurate?",
+    "a": "VLOOKUP searches the first column of a lookup table for a code and returns the price from a chosen column in the same row, so staff only type a short code. Because prices are stored once in the lookup table, changing one price updates every booking that uses it. Using FALSE means an exact match only, so an unrecognised code gives #N/A instead of a wrong price."
+   },
+   {
+    "q": "Explain the link between a **spreadsheet model** and **what-if analysis**.",
+    "a": "A spreadsheet model has inputs, rules written as formulae and outputs such as profit. Because the formulae recalculate automatically, a user can change one input, such as the ticket price, and see the effect on the outputs straight away, which is what-if analysis. This lets an organisation test many options quickly and without risking money before making a decision, although the predictions are only as reliable as the data and rules in the model."
+   },
+   {
+    "q": "Compare **data validation** in a spreadsheet with **validation** in the topic **Database applications**.",
+    "a": "In both, validation checks data against a rule as it is entered, such as a range check that only accepts a whole number from 1 to 16, so unsuitable data is rejected. In a spreadsheet an error alert asks the user to re-enter the data, and in a database the validation text explains what is allowed. In both cases validation only checks that data is sensible and within limits, so it cannot confirm that the data is correct."
+   }
+  ]
+ },
+ "c05": {
+  "gaps": [
+   "The {{CPU|central processing unit|processor}} processes data and carries out the instructions of programs by repeating the fetch–execute cycle. The {{control unit|CU}} fetches and decodes instructions and sends control signals, while the {{ALU|arithmetic logic unit}} carries out arithmetic and logical comparisons, with each result held in the {{accumulator}}.",
+   "During the fetch stage, the address in the {{program counter|PC}} is copied into the {{MAR|memory address register}}, which holds the address of the memory location being used. The instruction at that address is copied into the {{MDR|memory data register}}, then into the IAR, and the program counter is incremented by 1.",
+   "Performance depends on three factors. A higher {{clock speed}}, measured in hertz, means more fetch–execute cycles each second. A processor with more {{cores|core|processor cores}} can process several instructions at the same time. A larger {{cache}}, very fast memory inside or next to the CPU, means fewer slow trips to RAM.",
+   "{{RAM|random access memory}} is volatile, read/write main memory that holds the operating system, programs and data currently in use, while {{ROM|read only memory|read-only memory}} is non-volatile and holds the boot program. For storage, an {{SSD|solid state drive|solid-state drive}} uses flash memory with no moving parts, so it is faster and more durable than an HDD but costs more per gigabyte."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **the CPU and the fetch–execute cycle**",
+    "pts": [
+     "The CPU (central processing unit) processes data, executes program instructions and controls other hardware with control signals",
+     "Control unit: fetches and decodes instructions and sends control signals",
+     "ALU: arithmetic and logic (AND, OR, NOT, comparisons); results go in the accumulator",
+     "Immediate-access store: main memory holding programs and data in use; each location has a unique address",
+     "Fetch: PC copied to the MAR; instruction copied from memory into the MDR, then into the IAR",
+     "The program counter is incremented by 1 after each fetch",
+     "Decode: the control unit works out what the instruction in the IAR means",
+     "Execute: instruction carried out; the ALU does any calculation"
+    ]
+   },
+   {
+    "p": "Everything you know about **RAM, ROM and cache**",
+    "pts": [
+     "RAM holds the OS, programs and data currently in use",
+     "RAM is volatile and read/write; typically gigabytes",
+     "If RAM is full, virtual memory on the storage drive is used, which slows the computer",
+     "ROM holds the boot program; it is non-volatile and read only",
+     "ROM is small and is used because the boot program must be there at every switch-on",
+     "Cache holds frequently used instructions and data inside or next to the CPU",
+     "Cache is volatile, read/write, megabytes in size and the fastest of the three",
+     "Faster memory costs more per byte, so cache is small and RAM is larger"
+    ]
+   },
+   {
+    "p": "Everything you know about **storage devices: HDD, SSD and HD media**",
+    "pts": [
+     "HDD: magnetic platters divided into tracks and sectors, read by moving heads",
+     "HDD: very large capacity at the lowest cost per gigabyte, but moving parts can be damaged if dropped",
+     "SSD: flash memory with no moving parts; non-volatile",
+     "SSD: faster access, durable, silent, light and lower power, but higher cost per gigabyte",
+     "Blu-ray uses a blue-violet laser with a shorter wavelength, so smaller pits store 25 GB (single layer) or 50 GB (dual layer)",
+     "Blu-ray suits distributing HD films and games but scratches easily and needs a drive",
+     "Compare on capacity, access speed, portability, durability and cost",
+     "USB flash drives, memory cards and smart cards are also solid-state flash storage"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between the **MAR** and the **MDR** during the fetch–execute cycle.",
+    "a": "The memory address register (MAR) holds the address of the memory location being read from or written to, which is where the data is. The memory data register (MDR) holds the instruction or data being transferred to or from that location, which is what is there. So during a fetch, the address from the program counter goes into the MAR, and the instruction stored at that address arrives in the MDR before being copied to the IAR."
+   },
+   {
+    "q": "How does **cache size** affect **CPU performance**, and why is cache kept small?",
+    "a": "Cache is a small amount of very fast memory inside or next to the CPU that holds frequently used instructions and data. The CPU checks the cache first, so a larger cache means more can be kept close to the CPU and there are fewer slow trips to RAM, so processing is faster. Cache is built from the fastest, most expensive memory, so only a few megabytes are fitted."
+   },
+   {
+    "q": "Explain the link between the amount of **RAM** and the operating system's role in allocating memory in the topic **Software**.",
+    "a": "The operating system loads programs and data from storage into free space in RAM, because the processor can only work on what is in main memory. If RAM fills up, the OS moves data not being used out to the storage drive as virtual memory. Storage is far slower than RAM, so the computer slows down, which is why adding more RAM can make a computer feel faster."
+   },
+   {
+    "q": "Why would an **SSD** be recommended over an **HDD** for a laptop that is carried between sites?",
+    "a": "An SSD stores data in flash memory with no moving parts, whereas an HDD has spinning platters and moving read/write heads. Because it has no moving parts, the SSD is less likely to be damaged if the laptop is knocked or dropped, and it gives faster access so large files open quickly. It is also lighter and uses less power, giving longer battery life, although it costs more per gigabyte than an HDD."
+   }
+  ]
+ },
+ "c06": {
+  "gaps": [
+   "A **network** is two or more devices linked so they can communicate and share resources; a computer that is not linked to anything is a {{standalone computer|standalone|stand-alone computer|stand-alone|stand alone computer|stand alone}}. A {{LAN|local area network}} covers a small geographical area such as one school, and its hardware is usually owned by the organisation. A WAN covers a large geographical area and uses {{telecommunications links|telecommunications link|telecommunication links|telecoms links|telecoms link}} that are usually rented from telecoms companies.",
+   "The {{internet}} is the largest WAN in the world: a network of networks. The World Wide Web is one service that uses it, while a private network using internet technology that only authorised users can log on to is an {{intranet}}.",
+   "Each device needs a {{NIC|network interface card}} to connect to the network. A {{switch}} forwards data only to the intended device within a LAN, using its MAC address, while a {{router}} connects separate networks and sends data along the best route using {{IP addresses|IP address}}. In a {{bus}} topology all devices share one backbone cable, with a {{terminator|terminators}} at each end to stop the signal bouncing back.",
+   "{{Bluetooth}} links two paired devices directly over about 10 metres, while {{optical fibre|fibre optic|fibre-optic|fibre|optical fiber|fiber optic|fiber}} sends data as pulses of light through glass strands, giving very high bandwidth. **5G** is faster than 4G and has much lower {{latency}}, but each mast covers a smaller area so many more masts are needed."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **LANs, WANs and using a network in an organisation**",
+    "pts": [
+     "A LAN covers a small geographical area such as one building or site",
+     "LAN hardware is usually owned and managed by the organisation",
+     "A WAN covers a large geographical area using telecommunications links rented from telecoms companies",
+     "The internet is the largest WAN; an intranet is private and log-on only",
+     "Advantages: log on from any computer, shared hardware, data and software",
+     "Advantages: central backup and central security (user accounts and access rights)",
+     "Disadvantages: set-up cost and staff cost (network manager or technician)",
+     "Disadvantages: malware spreads to every machine; server failure stops work; slows with heavy traffic"
+    ]
+   },
+   {
+    "p": "Everything you know about **network hardware and the bus, star and ring topologies**",
+    "pts": [
+     "NIC: lets a device connect to the network and provides the port for the cable",
+     "Switch: forwards data only to the intended device in a LAN, using the MAC address",
+     "Router: connects two or more networks and routes data using IP addresses",
+     "Bus: one backbone cable with terminators; cheap; if the backbone breaks the whole network stops",
+     "Bus: collisions slow it down when traffic is heavy",
+     "Star: each device has its own cable to a central switch; one broken cable only affects that device",
+     "Star: if the central switch fails the whole network stops; needs more cable",
+     "Ring: data travels one way round a closed loop; no collisions, but one break stops the whole ring"
+    ]
+   },
+   {
+    "p": "Everything you know about **Wi-Fi, Bluetooth, optical fibre and 4G/5G**",
+    "pts": [
+     "Wi-Fi uses radio waves and a wireless router or access point; range of tens of metres",
+     "Wi-Fi should be protected with a password and WPA2 or WPA3 encryption",
+     "Bluetooth: short-range, low-power, links two paired devices directly within about 10 metres",
+     "Optical fibre sends pulses of light through glass strands, giving very high bandwidth",
+     "Fibre is not affected by electrical interference and is very hard to tap, but is expensive to install",
+     "4G and 5G send mobile data by radio between phones and masts",
+     "5G is faster with much lower latency and more devices, but needs many more masts",
+     "Evaluate using five criteria: speed, range, reliability, security and cost"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between a **switch** and a **router** when a pupil requests a web page from a school PC.",
+    "a": "The switch works inside the school LAN and forwards data only to the intended device, so it sends the request towards the router rather than to every PC. The router connects the LAN to the internet and reads the destination **IP address**, so it can send the request along the best route. The reply comes back to the router, which passes it to the switch, and the switch delivers it only to that pupil's PC."
+   },
+   {
+    "q": "How does the choice of **topology** affect the **reliability** of a network?",
+    "a": "In a **bus** topology every device shares one backbone, so if the backbone breaks the whole network stops. In a **star** topology each device has its own cable, so a broken cable only cuts off that one device, but if the central switch fails the whole network stops. In a **ring** topology data must travel round the loop in one direction, so one broken cable or failed computer breaks the whole ring."
+   },
+   {
+    "q": "Explain why **optical fibre** is more reliable and more secure than **wireless** communication.",
+    "a": "Fibre sends data as pulses of light through glass, so it is not affected by electrical **interference** and is very hard to tap into without being detected. Wireless sends radio waves through the air, so signals are weakened by walls and distance and can be picked up by anyone in range, which is why they must be encrypted. However, wireless is cheaper to set up because no cables have to be laid, so many networks use fibre to the building and Wi-Fi inside."
+   },
+   {
+    "q": "Explain the link between **networking computers** and the threats covered in **Cyberspace, network security and data transfer**.",
+    "a": "On a network a **virus** or worm on one computer can quickly reach every machine and the shared files, so one infection can affect the whole organisation. Central data on the file server is also an attractive target for hackers. So a network must be protected, for example with anti-virus software on every PC, a **firewall**, and user accounts with passwords and access rights that are managed centrally."
+   }
+  ]
+ },
+ "c07": {
+  "gaps": [
+   "**Cybercrime** is any crime committed using a computer, a network or the internet. {{Hacking}} is gaining unauthorised access to a computer system or its data. A {{denial of service|denial-of-service|DoS}} attack floods a server with so many requests that genuine users cannot use it. {{Phishing}} messages pretend to come from a trusted organisation to trick people into giving personal details, while {{spamming|spam}} is sending bulk unwanted messages to many people.",
+   "{{Malware}} is software designed to damage or disrupt a computer system, or to gain unauthorised access to it. A {{virus}} needs a host file and spreads when that file is run, a {{worm}} spreads across a network by itself, and a {{Trojan horse|Trojan}} is disguised as useful software so the user installs it. A {{key logger|keylogger|key-logger}} secretly records every key pressed and sends the log to the criminal.",
+   "{{Encryption}} scrambles data using an algorithm and a key, so it cannot be understood if it is intercepted. A {{firewall}} monitors and filters data entering or leaving a network using rules, and a {{backup|back-up|back up}} is a copy of data kept separately so it can be restored if the original is lost.",
+   "A {{protocol}} is an agreed set of rules for sending and receiving data between devices. FTP transfers files between computers, HTTP requests web pages, and {{HTTPS|HyperText Transfer Protocol Secure|Hyper Text Transfer Protocol Secure}} does the same job as HTTP but encrypts the data using TLS."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **cybercrime and threats to cybersecurity**",
+    "pts": [
+     "Cybercrime: any crime committed using a computer, a network or the internet",
+     "Hacking: gaining unauthorised access to a computer system or its data",
+     "Data theft: stealing personal or company data, often for identity fraud",
+     "Denial of service: flooding a server so genuine users cannot get in; DDoS uses thousands of computers",
+     "Cyber stalking: using technology to repeatedly harass, track or frighten a person",
+     "Digital forgery: falsely altering digital content such as photos or documents to deceive",
+     "Cyber defamation: untrue online statements that harm a reputation",
+     "Spam is bulk unwanted messages; phishing pretends to be a trusted source to steal personal details"
+    ]
+   },
+   {
+    "p": "Everything you know about **malware and anti-virus software**",
+    "pts": [
+     "Malware: software designed to damage, disrupt or gain unauthorised access",
+     "Virus: attaches to a host file and runs when the file is opened",
+     "Worm: spreads across a network by itself and uses up bandwidth",
+     "Trojan horse: disguised as useful software; does not copy itself; may open a back door",
+     "Key logger records keystrokes; spyware secretly monitors activity and sends it to a third party",
+     "Routes in: email attachments, links, untrusted downloads, infected USB sticks, fake apps, unpatched software",
+     "Anti-virus scans files and compares them with known malware signatures, then quarantines or deletes threats",
+     "Anti-virus must be updated regularly; brand-new malware may not be in its database"
+    ]
+   },
+   {
+    "p": "Everything you know about **protecting networks and data, and protocols**",
+    "pts": [
+     "Encryption scrambles data with a key so it is meaningless if intercepted; it does not stop interception",
+     "Strong passwords are long and mix upper and lower case, digits and symbols",
+     "Two-factor authentication adds a second check, such as a code sent to a phone",
+     "Levels of access: no access, read only, read and copy, read and write, full control",
+     "Backup: a separate copy, scheduled automatically and stored off site, used to restore lost data",
+     "Firewall: monitors and filters traffic entering or leaving a network using rules",
+     "Protocol: agreed set of rules covering format, addressing, error checking, starting and ending",
+     "The internet uses TCP/IP; FTP transfers files, HTTP requests web pages, HTTPS encrypts with TLS"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **phishing** and **two-factor authentication**.",
+    "a": "**Phishing** tricks a user into giving personal details such as their password, by pretending to come from a trusted organisation. **Two-factor authentication** adds a second check, such as a code sent to the user's phone, so a stolen password alone is not enough to log on. This means that even if a phishing message succeeds in stealing a password, the criminal still cannot get into the account."
+   },
+   {
+    "q": "How does **encryption** make **HTTPS** safer than HTTP?",
+    "a": "HTTP sends data as plain text, so if it is intercepted, details such as card numbers can be read. HTTPS encrypts the data using TLS, scrambling it so that only someone with the key can decrypt it. The data can still be intercepted, but it is meaningless, so HTTPS should be used whenever personal details are entered, such as for logins, banking and shopping."
+   },
+   {
+    "q": "Explain why an organisation needs both **anti-virus software** and a **backup**.",
+    "a": "**Anti-virus software** scans files and quarantines or deletes known malware, but it cannot catch everything because brand-new malware may not yet be in its database. A **backup** does not prevent an attack, but it lets the organisation restore its data after it is lost, corrupted or deleted. So anti-virus software reduces the chance of an attack succeeding, and the backup lets the organisation recover if one does, for example after ransomware."
+   },
+   {
+    "q": "Explain the link between **hacking** and the **Computer Misuse Act 1990** (from **Ethical, legal and environmental impact**).",
+    "a": "**Hacking** is gaining unauthorised access to a computer system or its data, which is an offence under section 1 of the Computer Misuse Act 1990 even if nothing is changed or taken. If the hacker gets in intending to commit a further crime, such as fraud, that is section 2. If they go on to delete or change data or plant a virus, that is an unauthorised act that impairs a computer, so section 3 is also broken."
+   }
+  ]
+ },
+ "c08": {
+  "gaps": [
+   "**Cloud computing** means using storage and software delivered on demand over the internet from {{remote servers|remote server}}, instead of from your own computer. These servers sit in large {{data centres|data centre|data centers|data center}} run by providers such as Microsoft, Google and Amazon, and organisations usually pay a subscription or {{pay as you go|pay-as-you-go}}, paying only for what they use.",
+   "A key advantage is that the cloud is {{scalable}}: storage, users and bandwidth can be increased or reduced quickly as needs change. The provider also handles backup and software updates automatically. However, staff cannot reach files or software without a reliable {{internet|broadband}} connection, a provider outage causes {{downtime}}, and data held by a {{third party|third-party|third-party provider|third party provider}} could be exposed in a data breach.",
+   "In {{cloud gaming|game streaming}} the game runs on powerful servers in a data centre and video of it is streamed to the player, so a fast connection with low {{latency}} is essential. For producers, selling games online cuts distribution costs and, because games are run or checked online, reduces {{piracy}}.",
+   "{{Synchronisation|synchronization|sync}} means the latest version of a file appears on every device. {{Collaborative tools|collaborative tool}} such as Google Docs and Microsoft 365 let several people edit the same document at the same time, and {{version history}} records who changed what and when so an earlier version can be restored."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **what cloud computing is and its advantages for an organisation**",
+    "pts": [
+     "Storage and software on remote servers, accessed on demand over the internet",
+     "Servers are in data centres run by providers such as Microsoft, Google and Amazon",
+     "Paid for by subscription or pay as you go",
+     "Cost effective: no need to buy and maintain its own servers",
+     "Scalable: storage, users and bandwidth can be increased or reduced quickly",
+     "Provider handles automatic software updates, backup and recovery",
+     "Staff can access files anywhere on any internet-connected device and collaborate",
+     "Data is protected from local disasters such as a flood or burglary at the office"
+    ]
+   },
+   {
+    "p": "Everything you know about **the disadvantages of cloud computing for an organisation**",
+    "pts": [
+     "Needs a reliable internet connection: if it fails, work stops",
+     "Provider downtime makes data unavailable and the organisation cannot fix it itself",
+     "Bandwidth limits may bring extra charges; large uploads are slow on a slow line",
+     "Data is held by a third party and could be exposed in a data breach",
+     "The organisation is still responsible for personal data under the UK GDPR and Data Protection Act 2018",
+     "Ongoing subscription costs that may rise",
+     "Less control: depends on the provider's decisions and prices; moving provider can be hard"
+    ]
+   },
+   {
+    "p": "Everything you know about **the impact of the cloud on gaming, file storage and file sharing**",
+    "pts": [
+     "Producers: lower distribution costs, instant release, global market, instant updates",
+     "Producers: less piracy because games run or are checked online",
+     "Players: high-quality games on cheap devices; saves kept in the cloud",
+     "Players need a fast, low-latency connection; streaming uses lots of data; ongoing subscriptions",
+     "Storage: autosave, files recoverable, synchronised across devices",
+     "Sharing a link with permissions to view, comment on or edit, instead of emailing attachments",
+     "Collaborative tools allow real-time co-editing, comments and alerts",
+     "Version history shows who changed what and lets earlier versions be restored"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **scalability** and **pay as you go**.",
+    "a": "**Scalability** means storage, users and bandwidth can be increased or reduced quickly as an organisation's needs change. **Pay as you go** means the organisation pays only for the resources it actually uses. So a seasonal business, such as a garden centre that is busy in spring, can pay for extra capacity for a few months and then drop back, instead of buying servers that sit idle most of the year."
+   },
+   {
+    "q": "How does **latency** affect **cloud gaming**?",
+    "a": "In **cloud gaming** the game runs on servers in a data centre, so the player's controller inputs are sent up and video of the game is streamed back. **Latency** is the delay between data being sent and received, so high latency causes lag, which spoils fast-paced games. This means players need a fast, low-latency connection, so cloud gaming only lets them play high-end games on a cheap device if their broadband is good enough."
+   },
+   {
+    "q": "Explain how **synchronisation** and **version history** help a group working on a shared document.",
+    "a": "**Synchronisation** means a change made on one device appears on every device and for every user, so everyone always sees the latest version and there are no out-of-date copies. **Version history** records who changed what and when, so if someone deletes or overwrites work by mistake, an earlier version can be restored. Together they solve the usual problems of group work, because people can edit at the same time without losing each other's work."
+   },
+   {
+    "q": "Explain the link between storing personal data in the **cloud** and the data protection law covered in **Ethical, legal and environmental impact**.",
+    "a": "When an organisation stores customers' or staff members' personal data in the cloud, the data is held by a third party, but the organisation is still responsible for it under the **UK GDPR** and the **Data Protection Act 2018**. So it must choose a provider that keeps the data secure, because a breach at the provider could break the security principle. It can be investigated by the **Information Commission** if the data is not protected, and cloud servers in other countries may have weaker privacy laws than the UK."
+   }
+  ]
+ },
+ "c09": {
+  "gaps": [
+   "The {{Consumer Contracts Regulations 2013|Consumer Contracts (Information, Cancellation and Additional Charges) Regulations 2013|Consumer Contracts Regulations}} protect people who buy online, by phone or by post. For goods, buyers get a 14-day {{cooling-off period|cooling off period}} to cancel without giving a reason, starting the day after delivery. Original creative work such as software is called {{intellectual property|IP}} and is protected by the Copyright, Designs and Patents Act 1988.",
+   "The {{Computer Misuse Act 1990|Computer Misuse Act}} makes unauthorised access an offence under section 1, and unauthorised acts that impair a computer, such as planting a virus, an offence under section 3. Personal data is protected by the Data Protection Act 2018 together with the {{UK GDPR|GDPR}}, whose seven principles include {{data minimisation|data minimization}}: data must be adequate, relevant and limited to what is needed.",
+   "The living person the data is about is the {{data subject}}, who can see a copy of their data by making a {{subject access request|SAR}}, normally answered free within one month. The independent UK regulator that investigates complaints and can issue fines is the {{Information Commission|ICO|Information Commissioner's Office|Information Commissioner}}.",
+   "Using technology to repeatedly hurt one particular person is {{cyberbullying|cyber bullying|cyber-bullying}}, whereas trolling tries to provoke anyone. When technology does work that people used to do, this is job {{displacement}}, so workers need {{upskilling|up-skilling}}, training in new digital skills, to keep up with new technology. Repeating small movements such as typing for long periods can cause {{RSI|repetitive strain injury}}, while glare on a screen causes eye strain."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **the Consumer Contracts Regulations 2013, the Copyright, Designs and Patents Act 1988 and the Computer Misuse Act 1990**",
+    "pts": [
+     "Consumer Contracts Regulations: clear information before paying, including total price and the right to cancel",
+     "14-day cooling-off period from the day after delivery; refund within 14 days",
+     "Exceptions: started downloads, unsealed discs, personalised items; pre-ticked boxes are banned",
+     "Copyright is automatic; software counts as a literary work; lasts for the creator's life plus 70 years",
+     "Buying software means buying a licence, not the program itself",
+     "Breaches: software piracy and licensing infringements, e.g. installing a single-user licence on many PCs",
+     "Computer Misuse Act s1: unauthorised access; s2: with intent to commit a further offence",
+     "Computer Misuse Act s3: unauthorised acts that impair a computer, e.g. deleting data, spreading a virus"
+    ]
+   },
+   {
+    "p": "Everything you know about **data protection law**",
+    "pts": [
+     "Personal data: any information about a living person who can be identified from it",
+     "Current law: UK GDPR and Data Protection Act 2018 (replaced the 1998 Act), updated by the Data (Use and Access) Act 2025",
+     "Seven principles: lawful, fair and transparent; purpose limitation; data minimisation; accuracy; storage limitation; security; accountability",
+     "Special category data (e.g. health, religion, ethnic origin, biometric data) needs extra protection",
+     "Data subject rights include access (subject access request), rectification, erasure and objecting to direct marketing",
+     "Data controller: responsible for compliance; reports serious breaches within 72 hours",
+     "DPO advises, trains staff and monitors compliance; Information Commission investigates and can fine",
+     "Measures: encryption, access rights, staff training, retention policy, privacy notices"
+    ]
+   },
+   {
+    "p": "Everything you know about **the ethical, employment and health impacts of digital technology**",
+    "pts": [
+     "Ethics is about right and wrong: something can be legal but still unethical",
+     "Internet misuse: stolen logins, phishing, piracy, plagiarism, fake news, misuse at work",
+     "Social media misuse: cyberbullying, trolling, hate speech, fake profiles, oversharing",
+     "GPS uses satellites to find a device's position; tracking helps safety but can invade privacy",
+     "Employment: new jobs, job displacement, changes in work patterns (e.g. teleworking), upskilling",
+     "RSI from repeated movements; back strain from poor posture; eye strain from long screen use and glare",
+     "DSE Regulations (NI) 1992: employers assess workstations, plan breaks, provide eye tests and training",
+     "Employees: take regular breaks, keep good posture, adjust equipment, report hazards"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between the **data controller** and the **Information Commission** when personal data is lost.",
+    "a": "The **data controller** is responsible for keeping personal data secure, so if a breach is likely to harm people it must report it to the **Information Commission** within 72 hours and tell affected people if they are at high risk. The Information Commission is the regulator, so it can investigate the breach. If the controller did not protect the data, the regulator can issue an enforcement notice or a fine of up to £17.5 million or 4% of worldwide turnover."
+   },
+   {
+    "q": "How does **teleworking** link to **changes in work patterns** and the environment?",
+    "a": "**Teleworking** means using ICT such as broadband, laptops, cloud apps and video calls to work from home, so it is a change in where and when people work. Because employees do not commute, there is less traffic and pollution, which reduces the **carbon footprint**. However, poor rural broadband in parts of Northern Ireland makes teleworking harder for some people."
+   },
+   {
+    "q": "Explain how a hacker stealing customer data from a company can lead to **more than one law** being broken.",
+    "a": "The hacker has broken the **Computer Misuse Act 1990**, because getting into the system without permission is unauthorised access (section 1), and doing it to commit fraud is section 2. The company may also have broken the **UK GDPR** and **Data Protection Act 2018** if it failed to keep the personal data secure, because the security principle requires data to be protected against unauthorised access. So an answer must say who broke which law."
+   },
+   {
+    "q": "Explain the link between **spyware** (from **Cyberspace, network security and data transfer**) and the **Computer Misuse Act 1990**.",
+    "a": "**Spyware** is malware that is installed secretly and records a user's activity, such as keystrokes, and sends it to someone else. Installing it on someone's device without consent is an unauthorised act that impairs a computer, so it is an offence under section 3. If the attacker then uses a captured password to log in, that is unauthorised access under section 1, or section 2 if the aim is fraud."
+   }
+  ]
+ },
+ "c10": {
+  "gaps": [
+   "Gaming applications motivate players with rules, levels, rewards and a {{leaderboard|leader board}} that ranks players' scores, and they give {{immediate feedback|instant feedback}} so the player sees at once how well they did. A {{simulation}} uses a {{computer model}}, built from data and mathematical rules, to copy how a real object or system behaves. A mobile app is software for a smartphone or tablet, usually downloaded from an {{app store}}.",
+   "Adding points, badges and leaderboards to a non-game activity, such as work tasks, to increase motivation is called {{gamification}}. {{Virtual reality|VR}} places a trainee inside a computer-generated 3D world using a headset; stimulating several senses so the experience feels real is called {{immersion}}.",
+   "{{Online banking}} lets customers manage their account 24/7 through a bank's secure website or app, usually logging in with {{two-factor authentication|two factor authentication|2FA}}. The UK service called {{Faster Payments}} moves money between accounts almost instantly. **Online training** systems record each learner's modules completed and scores through {{automatic tracking}}. The buying and selling of goods and services over the internet is called {{e-commerce|ecommerce|e commerce}}."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **gaming applications, simulations and mobile apps, and how they support education, social interaction and work**",
+    "pts": [
+     "Games: rules and levels, rewards, leaderboards, immediate feedback, multimedia and avatars, real-time chat",
+     "Simulation: a computer model (data plus mathematical rules) that copies a real system; 'what if?' testing without risk or cost",
+     "Mobile apps: touch screen, push notifications, GPS and camera, offline use with cloud sync, personalisation",
+     "Education: levels build skills step by step; leaderboards and instant feedback motivate learners",
+     "Simulations let pupils experiment safely, e.g. a virtual chemistry lab",
+     "Social: online multiplayer, messaging, video calls and group chats keep people in touch",
+     "Work: gamification raises staff motivation; trainees practise dangerous tasks; staff messaging and shared calendars",
+     "Risks: addiction, contact with strangers, in-game spending, cyberbullying, distraction"
+    ]
+   },
+   {
+    "p": "Everything you know about **virtual reality for training**",
+    "pts": [
+     "VR uses a simulation to create a computer-generated 3D world the user feels inside",
+     "Headset shows a separate image to each eye and tracks head movement",
+     "Headphones, data gloves or controllers add sound and touch feedback; this creates immersion",
+     "Safety: dangerous situations practised with no risk to life",
+     "Cost: no fuel, no aircraft taken out of service, no materials wasted",
+     "Rare events on demand, scenarios repeated, every action recorded for feedback",
+     "Examples: pilots, and surgeons rehearsing on a virtual patient built from scan data",
+     "Limitations: expensive, cannot copy every real feeling, motion sickness, still need real-world practice"
+    ]
+   },
+   {
+    "p": "Everything you know about **the impact of online banking, online training and e-commerce**",
+    "pts": [
+     "Online banking for customers: 24/7 access, instant transfers and alerts, but needs device, internet and skills",
+     "Online banking risks: phishing, outages and no face-to-face help",
+     "Banks: fewer branches and staff, but costly security systems and data breach risk",
+     "Online training for employees: own pace, convenient time, no travel, but isolation and needs self-motivation",
+     "Online training for employers: cheaper, consistent, automatic tracking, but harder to check real understanding",
+     "E-commerce for customers: 24/7, choice, reviews, but cannot try goods, delivery delays, scam sites",
+     "E-commerce for businesses: lower premises and staff costs, global reach, but competition and returns",
+     "Evaluate: weigh both sides for the person named in the question and reach a judgement"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between a **simulation** and **virtual reality**.",
+    "a": "A **simulation** is the computer model, built from data and mathematical rules, that copies how a real system behaves. **Virtual reality** is one way of experiencing a simulation, because it uses a headset and sometimes gloves or controllers to place the user inside a 3D world. They are not the same thing, because a flight simulator can use real cockpit controls and screens without a headset."
+   },
+   {
+    "q": "How does **immediate feedback** in games support **education and training**?",
+    "a": "**Immediate feedback** shows the learner straight away how well they did, so they can see what went well and decide what to try next. This means they improve faster, and because mistakes in a game have no real consequences, they can take risks and reflect. For example, a trainee can see straight away what they did wrong in a level and try again, so they improve faster."
+   },
+   {
+    "q": "Explain the link between **online banking** and **phishing** (from **Cyberspace, network security and data transfer**).",
+    "a": "**Phishing** emails and fake texts pretend to come from a trusted organisation, such as a bank, to trick customers into giving their login details. If this works, criminals can log into the customer's online bank account and steal money or their identity. Banks reduce the risk with **two-factor authentication**, so a stolen password alone is not enough, but they cannot remove the risk completely."
+   },
+   {
+    "q": "Explain the link between **e-commerce** and the **Consumer Contracts Regulations 2013** (from **Ethical, legal and environmental impact**).",
+    "a": "In **e-commerce** the customer cannot see, touch or try goods before buying, so the purchase is a distance contract. The **Consumer Contracts Regulations 2013** protect the customer because the trader must give clear information, such as the total price, before payment, and pre-ticked boxes for extra payments are banned. The customer also gets a 14-day cooling-off period to cancel most goods, starting the day after delivery, and must be refunded within 14 days."
+   }
+  ]
+ }
+}

@@ -1,0 +1,468 @@
+{
+ "c01": {
+  "gaps": [
+   "All data is held as bits, and four bits make a {{nibble}}. With n bits, 2ⁿ different values can be represented, so unsigned integers run from 0 to 2ⁿ − 1. People often write binary in base 16, called {{hexadecimal|hex}}, because it is shorter and less error-prone, although the computer still stores the value in binary. In {{binary-coded decimal|BCD|binary coded decimal}}, each denary digit is coded separately in its own 4 bits, which suits digital clocks and seven-segment displays.",
+   "Sign and magnitude uses the MSB as a sign bit, but it has two zeros and ordinary addition fails when the signs differ. Processors therefore use {{two's complement|twos complement|two’s complement|2's complement}}, in which the MSB has a place value of −128 in 8 bits and a number is negated by inverting its bits and adding 1. When the true result of a calculation lies outside the range of the representation, {{overflow}} occurs; in two's complement it is spotted when two inputs with the same sign give a result with the opposite sign.",
+   "In fixed-point representation the binary point is at an agreed position that is never stored. Floating-point representation stores the significant bits in the {{mantissa}} and uses the exponent to say how far to move the binary point. A floating-point number is {{normalised|normalized}} when the first two bits of the mantissa differ (0.1 or 1.0), which gives maximum precision and a unique representation. Giving more bits to the mantissa increases the {{precision}}, while giving more bits to the exponent increases the range. Many fractions, such as 0.1, cannot be stored exactly, causing rounding errors, and a value too close to zero for the exponent to represent causes {{underflow}}.",
+   "A {{character set}} is an agreed list of characters, each with a unique binary code. ASCII uses 7 bits for 128 characters, whereas {{Unicode}} gives every character in almost all writing systems one code point that is the same worldwide. An extra {{parity bit|parity}} is added to each transmitted byte so the number of 1s is odd or even, letting the receiver detect a single flipped bit. In a bitmap, the number of bits used for each pixel is the {{colour depth|color depth|bit depth}}, and for sound the number of samples taken per second is the {{sampling rate|sample rate|sampling frequency}}."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **number systems and unsigned binary**",
+    "pts": [
+     "Bit = 0 or 1; nibble = 4 bits; byte = 8 bits; each larger unit is 1024 times the one below (KB = 2¹⁰ bytes)",
+     "n bits give 2ⁿ values; unsigned range 0 to 2ⁿ − 1",
+     "Binary to denary: add the place values (128 64 32 16 8 4 2 1) of the 1s",
+     "Denary to binary: subtract place values, or divide by 2 and read remainders bottom-up; pad to 8 bits",
+     "Hexadecimal is base 16 (A–F = 10–15); one hex digit = one nibble",
+     "Hex is used because it is shorter, less error-prone and easy to convert – not because it saves memory",
+     "BCD codes each denary digit in its own 4 bits (0000–1001); used in clocks, calculators and for exact money values",
+     "Binary addition: 1 + 1 = 0 carry 1; 1 + 1 + 1 = 1 carry 1; unsigned carry out of the MSB = overflow"
+    ]
+   },
+   {
+    "p": "Everything you know about **signed integers and real numbers**",
+    "pts": [
+     "Sign and magnitude: MSB is the sign bit; range −127 to +127; two zeros; addition fails when signs differ",
+     "Two's complement: MSB worth −128; range −128 to +127; only one zero",
+     "To negate: write the positive in 8 bits, invert every bit, add 1",
+     "A − B = A + (two's complement of B); discard any carry out of the MSB",
+     "Two's complement overflow: two same-sign inputs give an opposite-sign result",
+     "Fixed point: binary point at an agreed place; columns ½, ¼, ⅛ …; constant precision, small range",
+     "Floating point: value = mantissa × 2^exponent; both in two's complement",
+     "Normalised mantissa starts 0.1 (positive) or 1.0 (negative): maximum precision, unique representation"
+    ]
+   },
+   {
+    "p": "Everything you know about **representing characters, images and sound**",
+    "pts": [
+     "Character set: agreed list of characters, each with a unique binary code; a standard is needed to exchange text",
+     "ASCII: 7 bits, 128 characters; extended ASCII: 8 bits, 256 characters, codes 128–255 vary by code page",
+     "Unicode: one code point per character for almost all languages; UTF-8 uses 1 to 4 bytes",
+     "Parity bit makes the count of 1s even or odd; cannot detect an even number of flipped bits or locate the error",
+     "Bitmap: grid of pixels; resolution = number of pixels; colour depth n bits gives 2ⁿ colours",
+     "Metadata such as width, height and colour depth is needed to rebuild the image; EXIF can include GPS location",
+     "Vector graphics store objects and properties, so they scale without loss; bitmaps suit photographs",
+     "Sound: an ADC samples the amplitude at regular intervals; sampling rate (Hz) and sample resolution (bits) set quality and file size"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **colour depth** and the **file size** of a bitmap image.",
+    "a": "Colour depth is the number of bits used for each pixel, so n bits give 2ⁿ possible colours and smoother shading. Because the file size in bits is width × height × colour depth, every extra bit per pixel adds one bit for every pixel in the image. So increasing the colour depth improves quality but makes the uncompressed file larger."
+   },
+   {
+    "q": "How does **two's complement** (this topic) make the job of the **ALU** described in **Architecture** simpler?",
+    "a": "In two's complement A − B is worked out as A + (two's complement of B), so one adder circuit in the ALU handles both addition and subtraction. No extra logic is needed to compare signs and magnitudes, because the sign looks after itself in the arithmetic, unlike sign and magnitude. There is also only one zero, so no bit patterns are wasted and tests for zero are simple; if a signed result overflows, the ALU sets the overflow flag in the status register."
+   },
+   {
+    "q": "How does the split of bits between the **mantissa** and the **exponent** affect a floating-point format?",
+    "a": "With a fixed total number of bits, every bit given to the mantissa is taken from the exponent. More mantissa bits store more significant bits, so precision increases because neighbouring values are closer together. More exponent bits let the binary point move further, so the range increases, but precision falls because there are fewer mantissa bits."
+   },
+   {
+    "q": "Explain the link between a **parity bit** and a **check digit**, which is used as a validation check in **Data and information**.",
+    "a": "Both add redundant information so that errors can be detected, but neither can correct them. A parity bit is added to every transmitted byte so the receiver can recount the 1s and detect a bit flipped by interference, then request a re-send. A check digit is calculated from the other digits of a code, such as with Modulus 11, so that mistyped or transposed digits are caught at data entry and the code is rejected."
+   }
+  ]
+ },
+ "c02": {
+  "gaps": [
+   "Data is raw facts and figures with no {{context}}, so on its own it has no meaning. Data that has been processed and given context so that it has meaning becomes {{information}}, and applying a rule to information so that an informed decision can be made produces {{knowledge}}. Good-quality information is accurate, relevant, up to date, complete, well presented and reliable, but the principle of {{GIGO|garbage in, garbage out|garbage in garbage out}} means poor-quality input data always produces poor-quality information.",
+   "An automatic check that input data is sensible and obeys set rules is called {{validation}}; it cannot prove data is correct. A {{lookup check|look-up check|lookup|look-up}} compares the entered value with a list or file of valid values. A {{check digit}} is calculated from the other digits of a code, for example using Modulus 11, so that transposition errors are detected. When a batch of paper documents is keyed in, a {{hash total}} is the sum of a field whose total has no meaning, such as member IDs.",
+   "Checking that data has been entered or copied accurately, so that it exactly matches the source, is {{verification}}. In {{double entry|double-entry}}, the data is typed twice and the computer compares the two versions, while proofreading compares the entry with the source by eye. Neither method can detect an error that is already in the source document.",
+   "Automated data capture is fast and accurate for high volumes: {{OMR|optical mark recognition}} detects marks made in set positions, such as on a multiple-choice answer sheet. In {{batch processing}}, transactions are collected in a transaction file and processed together later with no user interaction. In real-time transaction processing, {{record locking|record-locking}} stops two users updating the same record at once, which prevents double-booking. Splitting one program into threads that run concurrently and share its memory is called {{multithreading|multi-threading}}."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **data, information, knowledge and the quality of information**",
+    "pts": [
+     "Data: raw facts and figures with no context, so no meaning",
+     "Information: data processed and given context so it has meaning (information = data + context + meaning)",
+     "Knowledge: a rule applied to information so an informed decision can be made",
+     "Use one example carried through all three levels",
+     "Six quality factors: accurate, relevant, up to date, complete, well presented, reliable",
+     "GIGO: poor input data gives poor information and poor decisions",
+     "Errors come from transcription errors, transposition errors, incorrect formulae and biased data collection"
+    ]
+   },
+   {
+    "p": "Everything you know about **validation, verification and batch totals**",
+    "pts": [
+     "Validation: automatic check that data is sensible / obeys rules, not that it is correct",
+     "Six checks: range, type, length, format, presence, lookup – often combined on one field",
+     "Check digit (Modulus 11): weightings, sum the products, remainder after ÷ 11; remainder 0 gives 0, remainder 1 gives X, otherwise 11 − remainder",
+     "Batch total = count of documents; control total = meaningful sum; hash total = meaningless sum",
+     "Manual total compared with computer total shows each document was entered exactly once",
+     "Verification: checks the copy matches the source – double entry or proofreading",
+     "Limitation of validation: valid-but-wrong values are accepted",
+     "Limitation of verification: cannot detect an error in the source; same mistake typed twice gets through"
+    ]
+   },
+   {
+    "p": "Everything you know about **data capture and processing methods**",
+    "pts": [
+     "Manual capture (keying from forms, online forms): cheap and flexible but slower and error-prone",
+     "Automated capture: OMR, OCR, barcode/QR scanners, card readers, sensors, RFID – fast and accurate at volume but need equipment",
+     "Batch processing: collect transactions, validate, sort, process later with no user interaction (e.g. payroll, bills)",
+     "Real-time transaction processing: each transaction updates the master file while the user waits (e.g. bookings, cash machines)",
+     "Real-time control: sensor input processed within a guaranteed time so the output affects the next input (e.g. anti-lock brakes)",
+     "Multitasking: one processor switches rapidly between programs in time slices",
+     "Multi-user: many users share one system's resources, each with their own session and permissions",
+     "Multithreading: one program split into threads that run concurrently and share memory"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **GIGO** and the use of **validation and verification**.",
+    "a": "GIGO means that if poor-quality data is input, the output information will also be poor, however good the system is. Validation rejects data that is not sensible, such as an impossible age, and verification catches transcription and transposition errors so the copy matches the source. Together they reduce the errors entering the system, so the information produced is more accurate, although neither can guarantee the data is correct."
+   },
+   {
+    "q": "How does **real-time transaction processing** depend on **record locking** in a **multi-user** system?",
+    "a": "In real-time transaction processing each transaction updates the master file while the user waits, so the next user sees the effect at once, for example a sold seat. Because a multi-user system lets many users update shared records at the same time, two users could otherwise book the same seat. Record locking stops other users changing a record while one user is updating it, so lost updates and double-booking are prevented."
+   },
+   {
+    "q": "Explain the link between **batch totals** and **batch processing**.",
+    "a": "In batch processing, transactions are collected in a transaction file and processed together later, with no user interaction once the job starts. Before the run, batch, control or hash totals calculated by hand are compared with the computer's totals to check that every document was entered exactly once. So a bad batch can be rejected before it updates the master file, because errors in batch processing are otherwise only discovered after the run."
+   },
+   {
+    "q": "Explain the link between **multithreading** (this topic) and the **multi-core processors** described in **Architecture**.",
+    "a": "Multithreading splits one program into threads, separate paths of execution that run concurrently and share the program's memory. A multi-core processor has several independent cores, so threads can genuinely run in parallel on different cores, improving performance. However, a single-threaded program only uses one core, so extra cores only help software written to use threads."
+   }
+  ]
+ },
+ "c03": {
+  "gaps": [
+   "Inside the processor, the {{control unit|CU}} manages the fetch–decode–execute cycle and sends control signals to coordinate the hardware, while the {{ALU|arithmetic logic unit|arithmetic and logic unit}} carries out arithmetic and logical operations such as comparisons. The {{program counter|PC}} holds the address of the next instruction to be fetched and is incremented during each fetch. The one-way part of the system bus that carries the address of the location to be accessed is the {{address bus}}.",
+   "In the Von Neumann architecture, instructions and data share one main memory and one bus, so they cannot be fetched at the same time; this limit on performance is the Von Neumann {{bottleneck}}. During decode, the control unit splits the instruction in the CIR into the {{opcode|op code|op-code|operation code}} and the operand. Overlapping the fetch, decode and execute stages of successive instructions is called {{pipelining}}, which raises throughput: with each stage taking one time unit, n instructions take n + 2 time units instead of 3n.",
+   "The number of clock cycles a processor carries out per second, measured in hertz, is its {{clock speed}}. Small, very fast, expensive memory on or beside the processor, called {{cache|cache memory}}, holds frequently used instructions and data so fewer slow trips to RAM are needed. When RAM is full, the operating system moves inactive pages to {{virtual memory}} on secondary storage, and heavy swapping causes disk thrashing.",
+   "RAM is volatile, whereas {{ROM|read-only memory|read only memory}} is non-volatile and holds the start-up firmware. Magnetic tape has to be wound through in order, giving {{serial access|sequential access|serial|sequential}}, so it suits archives and backups. The {{Harvard}} architecture uses separate memories and buses for instructions and data, and is common in embedded systems. Processors with a small set of simple, fixed-length instructions, such as the ARM chips in phones, are {{RISC|reduced instruction set computer|reduced instruction set computing}} processors."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **the processor, registers, buses and the fetch–decode–execute cycle**",
+    "pts": [
+     "Control unit: runs the fetch–decode–execute cycle, sends control signals, controls data in and out",
+     "ALU: arithmetic (add, subtract, shift) and logic (AND, OR, comparisons); result usually in the accumulator",
+     "PC holds the address of the next instruction; MAR holds the address being accessed; MDR holds data or an instruction being transferred; CIR holds the current instruction",
+     "Address bus: one-way from CPU; data bus: two-way; control bus: read, write, clock, interrupt signals",
+     "Fetch: PC copied to MAR, PC incremented, read signal, instruction into MDR via data bus, then MDR to CIR",
+     "Decode: CU splits the instruction into opcode and operand",
+     "Maximum memory in bits = 2^(address bus width) × data bus width",
+     "I/O controllers handle protocol, voltage and data-format conversion and buffering between the bus and peripherals"
+    ]
+   },
+   {
+    "p": "Everything you know about **processor performance and alternative architectures**",
+    "pts": [
+     "Clock speed: cycles per second in hertz; faster means more instructions per second but more heat and power",
+     "Word size: bits handled in one operation; 64-bit can use more than 4 GB of RAM",
+     "More cores run threads in parallel, but only help multi-threaded software",
+     "Larger cache, wider data bus and more RAM speed up the supply of instructions and data",
+     "Clock speed alone misleads; benchmarks such as MIPS and FLOPS compare real work",
+     "Von Neumann: shared memory and bus, causing the bottleneck; Harvard: separate memories and buses, used in embedded systems",
+     "RISC: few simple, fixed-length, single-cycle instructions, easy to pipeline, low power; CISC: many complex, variable-length instructions",
+     "GPU: many simple cores using SIMD – one instruction on many data items, e.g. graphics and machine learning"
+    ]
+   },
+   {
+    "p": "Everything you know about **main memory, virtual memory and secondary storage**",
+    "pts": [
+     "RAM: volatile, read/write, holds the OS, programs and data in use",
+     "ROM: non-volatile, read-only, holds start-up firmware and embedded programs",
+     "Cache: holds frequently used items and reads ahead; levels L1, L2, L3; hit or miss",
+     "Virtual memory: pages swapped between RAM and secondary storage; slows the computer; disk thrashing",
+     "Secondary storage is non-volatile and needed for permanence, capacity, portability and backups",
+     "Choice factors: speed, capacity, durability, portability, reliability, cost",
+     "Hard disk: magnetised platters, tracks and sectors, direct access; tape: serial access, cheap, for archives",
+     "Optical: laser reads marks on a reflective layer; flash/SSD: trapped charges, no moving parts, fast but higher cost per GB"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between the **Von Neumann bottleneck** and **cache memory**.",
+    "a": "In the Von Neumann architecture instructions and data share one memory and bus, so they cannot be fetched at the same time and the processor is often left waiting for slower memory. Cache is small, very fast memory beside the processor that holds frequently used instructions and data and reads ahead, so more requests are served without a slow trip to RAM. Splitting the L1 cache into separate instruction and data caches also lets a core fetch both at once, reducing the bottleneck."
+   },
+   {
+    "q": "How does the **amount of RAM** affect the use of **virtual memory** and the speed of a computer?",
+    "a": "If RAM is too small to hold all the programs and data in use, the operating system moves inactive pages out to virtual memory on secondary storage and swaps them back when needed. Secondary storage is far slower than RAM, so every swap holds the processor up, and heavy swapping causes disk thrashing. Fitting more RAM reduces swapping, although once RAM exceeds what the workload needs there is no further gain."
+   },
+   {
+    "q": "Explain the link between **RISC** processors and **pipelining**.",
+    "a": "RISC processors use a small set of simple, fixed-length instructions, most taking one clock cycle. Because the instructions are uniform, they keep the pipeline full, so fetch, decode and execute of successive instructions overlap smoothly and throughput rises. CISC instructions vary in length and time, so they are harder to pipeline."
+   },
+   {
+    "q": "Explain the link between **address bus width** and **maximum addressable memory**, using the idea from **Data representation** that n bits give 2ⁿ values.",
+    "a": "Each address line carries one bit, so an address bus with n lines can form 2ⁿ different patterns and identify 2ⁿ memory locations. Each location holds as many bits as the data bus carries, so maximum memory in bits = 2^(address bus width) × data bus width. So one extra address line doubles the memory that can be addressed."
+   }
+  ]
+ },
+ "c04": {
+  "gaps": [
+   "The study and design of how people interact with computers is called {{HCI|human–computer interaction|human-computer interaction|human computer interaction}}. A good user interface is simple, intuitive and consistent, responsive and attractive, and it is {{forgiving}}, so mistakes are easy to reverse with undo, confirmation prompts and help.",
+   "A {{WIMP|GUI|graphical}} interface uses windows, icons, menus and a pointer, so users recognise options on screen instead of recalling commands. In a {{command line interface|CLI|command line|command-line interface|command-line}} the user types commands in an exact syntax at a prompt, and extra parameters called {{switches|switch}}, such as `/s`, modify what a command does. Designing systems so they can be used by people with visual, hearing, motor or cognitive impairments is called accessibility; for example, alternative text for images is read aloud by a {{screen reader}} for users with visual impairments.",
+   "Data compression encodes data using fewer bits than the original by removing {{redundancy}}, so files take less storage space and less time to transmit. Original size divided by compressed size gives the {{compression ratio}}. {{Lossless}} compression lets the original be rebuilt exactly, bit for bit, while {{lossy}} compression permanently discards data that human senses are unlikely to notice.",
+   "{{Run-length encoding|RLE|run length encoding}} replaces each run of identical values with a count and one copy of the value, so `GGGGYYY` becomes `4G3Y`. Dictionary-based compression stores repeated words once and replaces each occurrence with a short {{token|tokens|reference}}. A {{GIF}} stores up to 256 palette colours losslessly and supports animation, so it suits logos, while a {{JPEG|JPG}} keeps 24-bit colour with adjustable lossy compression, so it suits photographs."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **types of user interface** (WIMP, command line, forms dialogue and other interfaces)",
+    "pts": [
+     "WIMP = windows, icons, menus, pointer; options are recognised, not recalled",
+     "GUI needs more RAM, storage, processing power and a good display",
+     "Command line: exact syntax typed at a prompt; switches modify commands; scripts automate repetitive jobs",
+     "Command line is fastest for experts but confusing for novices; a mistyped command may delete data",
+     "Forms dialogue: text boxes, drop-down lists, check boxes, radio buttons; data validated as it is entered",
+     "Menu-driven: limited list of options in levels, suits kiosks; voice: hands-free but background noise and accents cause errors",
+     "Biometric: unique, nothing to forget, but expensive and storing biometric data raises privacy concerns",
+     "No interface is best for everyone: match it to the user's expertise, the task and the hardware"
+    ]
+   },
+   {
+    "p": "Everything you know about **good interface design, HCI principles and accessibility**",
+    "pts": [
+     "Features of a good interface: simple, intuitive and consistent, responsive, forgiving, attractive",
+     "Consistency: same layout, colours and controls throughout so users can predict how things work",
+     "Feedback: every action acknowledged with a message, sound or visual change",
+     "Minimise memory load: recognise rather than recall; show progress through multi-step tasks",
+     "Error prevention and recovery: validate input, confirm destructive actions, offer undo, clear error messages",
+     "Suit the user: age, experience, task, environment and device",
+     "Visual impairment: screen readers, alt text, high contrast, resizable text; hearing impairment: captions and transcripts",
+     "Motor impairment: full keyboard navigation, large targets; WCAG is the widely used accessibility standard"
+    ]
+   },
+   {
+    "p": "Everything you know about **data compression** (reasons, lossy and lossless, RLE, dictionary methods, zipping and file formats)",
+    "pts": [
+     "Two reasons: reduce storage space and reduce transmission time/bandwidth",
+     "Compression ratio = original size ÷ compressed size (same units)",
+     "Lossless: original restored exactly; for text, program code, medical images (ZIP, PNG, GIF)",
+     "Lossy: data permanently removed using perceptual coding; for photos, music, video (JPEG, MP3, MPEG)",
+     "RLE: count + value for each run; good for long runs, bad for varied data (ABCD becomes 1A1B1C1D)",
+     "Dictionary-based: repeated words stored once and replaced with tokens; LZW/LZ77 used in ZIP, GIF and PNG",
+     "Zipping: lossless, any file type, big savings on TXT, BMP, WAV but little on JPEG, MP3, MP4",
+     "TXT, WAV and BMP are uncompressed; GIF uses a 256-colour palette; MPEG stores changes between frames"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **redundancy** and how much a file shrinks when it is **zipped**.",
+    "a": "Zipping is lossless compression that uses a dictionary method to replace repeated sequences with short references, so it can only make a file smaller by removing redundancy. Uncompressed files such as TXT, BMP and WAV contain a lot of redundancy, so they often zip to a much smaller size. JPEG, MP3 and MP4 files are already compressed, so little redundancy remains and zipping saves very little; an existing ZIP may even grow slightly because of the extra archive headers."
+   },
+   {
+    "q": "How does a user's **expertise** affect the choice between a **command line** and a **forms dialogue** interface?",
+    "a": "A command line is the fastest interface for an expert who already knows the commands, and commands can be scripted, so a network technician could create 400 pupil accounts in seconds. However, commands must be learned and typed exactly, so a novice would find it confusing and one typo could delete data. A forms dialogue interface suits a member of the public because the layout is logical, there are no commands to learn and data is validated as it is entered, but it is restrictive and tedious for experienced users."
+   },
+   {
+    "q": "Explain the link between **colour depth** (from **Data representation**) and the file size of a **bitmap** image.",
+    "a": "An uncompressed bitmap stores every pixel, so its size in bytes is width × height × colour depth ÷ 8. File size is therefore directly proportional to colour depth: halving the depth from 24 to 12 bits halves the file size. 24-bit colour gives 16 777 216 colours but makes BMP files very large, which is why a GIF, using 8 bits per pixel as an index into a 256-colour palette, is about a third of the size before its lossless compression is applied."
+   },
+   {
+    "q": "Explain the link between **zipping** and **utility programs** in the **Software** topic.",
+    "a": "Data compression counts as a utility program because shrinking a file is a means to an end, saving storage and transfer time, rather than a task the user wants for its own sake. Windows, for example, includes compression of zip folders as a built-in utility. Because zipping is lossless, every file is restored exactly when unzipped, so it is suitable for archiving and backup and for sending email attachments without any loss of quality."
+   }
+  ]
+ },
+ "c05": {
+  "gaps": [
+   "The operating system manages the computer's resources and acts as the interface between the hardware, the application software and the user. Its core, the {{kernel}}, loads programs into memory and allocates memory, secondary storage and processor time. A {{device driver|driver}} is a program that translates the operating system's general requests into the specific commands one piece of hardware understands. A multi-user operating system shares processor time fairly using {{time-slicing|time slicing}}, giving each user a short turn on the CPU, and keeps each user's data private.",
+   "{{Multiprocessing|multi-processing}} divides work between two or more processors or cores so that it executes truly in parallel, whereas {{multithreading|multi-threading}} lets several threads inside one process share its memory and code. In memory management, {{paging}} divides memory into equal, fixed-size blocks mapped to frames by a page table, while {{segmentation}} divides a program into variable-sized logical units recorded with a base address and length. When an interrupt is handled, the contents of the registers are saved on the {{stack}} before the interrupt service routine runs.",
+   "{{Utility programs|utility program|utilities}} are system software that each perform one specific task to manage, maintain or protect a computer. A {{disk defragmenter|defragmenter}} rearranges a magnetic hard disk so that each file's clusters are contiguous, reducing access time. A {{compiler}} translates a whole high-level program before it is executed, producing an executable file and reporting all errors together. The first stage of compilation, in which comments and white space are removed and the source is split into tokens, is {{lexical analysis}}.",
+   "Software distributed with its source code under a licence that lets anyone study, change and redistribute it is {{open source|open-source}} software, whereas proprietary software keeps its source code secret. In {{batch processing|batch}} transactions are collected into a transaction file and processed together at a scheduled time without human intervention, whereas real-time processing updates the master file as soon as each transaction occurs."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **the operating system**: its purpose, types and management jobs",
+    "pts": [
+     "Purpose: manage resources (processor, memory, storage, devices, files) and act as the interface between hardware, applications and user",
+     "Four components: user interface, application interface (with device drivers), kernel, hardware interface",
+     "Multi-user: many users share one computer at once; time-slicing, fair resource allocation, data privacy",
+     "Multiprogramming: several programs in memory, CPU switched when one waits for I/O; multiprocessing: true parallelism for speed",
+     "Multithreading: threads in one process share memory and code; risks of corrupted shared data and deadlock",
+     "Paging: fixed-size pages, page table, internal fragmentation; segmentation: variable logical segments, segment table, external fragmentation",
+     "Scheduling, e.g. round robin: fixed time slice in turn, unfinished processes go to the back of the queue",
+     "Interrupts: check at end of each fetch–decode–execute cycle, compare priority, save registers on the stack, run ISR, restore registers"
+    ]
+   },
+   {
+    "p": "Everything you know about **utility programs and translators**",
+    "pts": [
+     "Utility: system software for one housekeeping task; often built into the OS and scheduled to run automatically",
+     "Compression: fewer bits, less storage and faster transfer (lossless or lossy)",
+     "Backup: exact copies, scheduled (full, incremental, differential), stored off-site or in the cloud, test-restored",
+     "Archive: combines old files no longer in daily use into one file with metadata; usually removed from the live system",
+     "Defragmenter: makes clusters contiguous on magnetic disks; do not defragment an SSD",
+     "Assembler: assembly to machine code; compiler: whole program first; interpreter: one statement at a time",
+     "Compilation stages: lexical analysis, syntax analysis, semantic analysis, code generation, optimisation",
+     "Intermediate code (Java bytecode, C# CIL) run by a virtual machine or just-in-time compiler makes programs portable"
+    ]
+   },
+   {
+    "p": "Everything you know about **application software**: types, obtaining it, delivering it and processing methods",
+    "pts": [
+     "Generic software: many tasks without modification, mass market, low cost per user",
+     "Special purpose software: one specific task or business need, sold to a sector or custom-built",
+     "Custom-built: exact fit, possible competitive edge, but expensive, slow to obtain and less tested",
+     "Off-the-shelf: cheaper because development cost is shared, available immediately, well tested and supported, but may not fit",
+     "Proprietary: owned and licensed, source code secret, polished with professional support, but vendor lock-in",
+     "Open source: source code available to study, change and share; copyleft (GNU GPL) means modified versions must stay open",
+     "Downloaded software runs locally and works offline; web-delivered software runs on servers, updated centrally, needs a connection",
+     "Batch: collected and processed together later, cheap but master file out of date; real-time: master file always current"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **interrupts** and **priority** in how the processor's time is shared.",
+    "a": "An interrupt is a signal that an event needs attention, and the CPU checks for interrupts at the end of each fetch–decode–execute cycle. The interrupt's priority is compared with the current task, so a lower-priority interrupt waits, while a higher-priority one causes the registers to be saved on the stack and the interrupt service routine to run before the task resumes. The scheduler works in a similar way in priority scheduling, running the highest-priority process first, which real-time systems depend on so urgent events are handled immediately."
+   },
+   {
+    "q": "Explain the link between **intermediate code** and delivering software on different **platforms**.",
+    "a": "Each platform has its own processor instruction set and operating system API, so traditionally software had to be rewritten or recompiled for every platform. Java and C# instead compile to processor-independent intermediate code (bytecode or CIL), which a virtual machine or runtime on each platform interprets or compiles just in time into native machine code. This means the same compiled file runs on Windows, macOS, Linux or Android, combining the portability of interpretation with much of the speed of compilation."
+   },
+   {
+    "q": "How does the need for an up-to-date **master file** affect the choice between **batch** and **real-time processing**?",
+    "a": "Batch processing is cheap and efficient because transactions are processed together off-peak without an operator, but the master file is out of date until the batch has run. This is acceptable for payroll, because pay is only needed monthly and the same calculation applies to every employee. Real-time processing updates the master file as each transaction occurs, so it is needed for concert seat booking, because otherwise the same seat could be sold to two customers, even though it needs more powerful and costly hardware."
+   },
+   {
+    "q": "Explain the link between the **user interface** component of an operating system and the interface types studied in **User interface and data compression**.",
+    "a": "The user interface component of the OS accepts input from the user and presents information back, through either a GUI or a command line. A GUI is intuitive because users recognise icons and menus rather than recalling commands, but it needs more RAM, processing power and a good display. A command line needs very little processing power or memory and is fastest for an expert who can script commands, so the OS interface used should suit the user's expertise and the task."
+   }
+  ]
+ },
+ "c06": {
+  "gaps": [
+   "The World Wide Web is one service that runs over the {{Internet}}, a global network of interconnected networks that use the TCP/IP protocols. Every connected device needs a unique {{IP address}}, which is 32 bits in IPv4 and 128 bits in IPv6. The {{DNS|Domain Name System}} is a distributed hierarchy of servers that translates domain names into IP addresses.",
+   "HTTP is {{stateless}}, meaning each request is independent and the server keeps no memory of earlier requests. To remember a visitor, a website can ask the browser to store a {{cookie}}, a small piece of text returned with every later request, or it can keep the data on the server in a {{session}} identified by an ID. A search engine's {{web crawler|crawler|spider}} starts from seed pages and follows every link to discover pages for its index, and Google's {{PageRank}} algorithm ranks a page higher the more pages link to it.",
+   "{{Client-side|client side}} scripting code, usually JavaScript, is downloaded with the page and run by the browser, giving instant responses, whereas server-side scripts run on the web server and can query databases. Parameterised queries and server-side validation prevent {{SQL injection}}, where an attacker types SQL into a form field hoping it will be executed by the database.",
+   "In public key encryption, a confidential message is encrypted with the recipient's public key and can only be decrypted with the recipient's {{private key}}, which is never shared. A {{digital certificate|certificate}}, issued and signed by a certificate authority, binds a public key to its verified owner. A {{digital signature|signature}} is a hash of a document encrypted with the sender's private key, proving who sent it and that it has not been altered."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **how the Internet and the Web work** (addresses, DNS, URLs and protocols)",
+    "pts": [
+     "Internet = physical network of networks + TCP/IP; the Web = linked pages accessed over it with HTTP and browsers",
+     "IPv4: 32 bits, four denary octets 0–255; IPv6: 128 bits, eight groups of hexadecimal",
+     "Domain names read right to left; the TLD is last; each label is a sub-domain of what follows",
+     "DNS: distributed hierarchy (root, TLD, authoritative servers); resolver usually run by the ISP; answers cached",
+     "URL = protocol + domain name + path (+ optional query string)",
+     "HTTP: request–response (GET, POST), status codes such as 200 and 404; HTTPS = HTTP over TLS",
+     "FTP: transfers files in either direction with username and password, e.g. uploading a site to a web host",
+     "Stateless HTTP is simple and efficient; cookies, sessions and caches make up for it"
+    ]
+   },
+   {
+    "p": "Everything you know about **search engines and web applications** (scripting, web and native apps, e-services, portals and intranets)",
+    "pts": [
+     "Search engine: web crawler from seed pages, search index of words and metadata, query engine that ranks results (e.g. PageRank)",
+     "Client-side scripting: runs in the browser, instant, but can be read, switched off or altered",
+     "Server-side scripting: runs on the web server, accesses databases, code hidden, needs a round trip",
+     "Dynamic page: request, script queries database, builds HTML around results, server sends it to the browser",
+     "Web app: one version for any browser, instant updates, needs connection; native app: per OS, faster, offline, full device access",
+     "E-government: information, transactions and participation online, but alternatives needed to avoid digital exclusion",
+     "Portal: consistent single starting point to many services, grouped into portlets",
+     "Intranet: private web for authorised members; current information and communication but costs, UK GDPR duties and dependence"
+    ]
+   },
+   {
+    "p": "Everything you know about **security over the Internet** (encryption, TLS/HTTPS, certificates and signatures)",
+    "pts": [
+     "Encryption turns plaintext into ciphertext with an algorithm and key, giving confidentiality",
+     "Symmetric: one shared secret key, fast, but key distribution problem",
+     "Public key: linked pair; encrypt with recipient's public key, decrypt with recipient's private key; much slower",
+     "Hybrid: public key techniques agree a symmetric session key, which encrypts the data",
+     "TLS handshake: server sends certificate, browser checks it, session key agreed, data encrypted symmetrically",
+     "HTTPS gives confidentiality, integrity and server authentication, but does not prove the site is honest",
+     "Digital certificate: signed by a trusted CA, binds a public key to its owner, never contains the private key",
+     "Digital signature: hash encrypted with sender's private key, verified with sender's public key by comparing hashes"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between a **URL**, the **DNS** and **HTTP** when a browser fetches a web page.",
+    "a": "A URL gives the protocol, the domain name of the server and the path to the resource on that server. Because data is routed using IP addresses, the browser first asks a DNS resolver to translate the domain name into the server's IP address, and the answer may be cached to speed up later look-ups. The browser then sends an HTTP request such as GET to that IP address, and the web server responds with a status code and the page."
+   },
+   {
+    "q": "How does the **stateless** nature of HTTP lead to the use of **cookies** and **sessions**?",
+    "a": "HTTP is stateless, so each request is independent and the server keeps no memory of earlier requests, which keeps it simple and efficient. This means a shop could not remember a basket, so the browser stores a cookie and sends it back with every later request so the server can recognise the visitor. A session is more secure because the data stays on the server and the browser only holds a random session ID, so sensitive information never sits on the user's device."
+   },
+   {
+    "q": "Explain the link between **public key encryption** and **symmetric encryption** in TLS.",
+    "a": "Symmetric encryption is fast but has a key distribution problem, because the key must be shared secretly before strangers can communicate. Public key encryption solves this because the public key can be published, but it is much slower. TLS therefore combines them: after the browser checks the server's digital certificate, public key techniques are used to agree a symmetric session key, which then encrypts all the data quickly."
+   },
+   {
+    "q": "Explain the link between **server-side scripting** and **validating form input** in **Website development**.",
+    "a": "Client-side checks give instant feedback, but they can be bypassed because JavaScript can be switched off, the page edited or a request sent straight to the server. Server-side scripts run on the web server where the code is hidden and under the site owner's control, so every important check must be repeated there before data is stored. This protects the integrity of the database and its security, because parameterised queries and server-side validation stop SQL injection."
+   }
+  ]
+ },
+ "c07": {
+  "gaps": [
+   "A web page is a plain text file written in {{HTML|Hypertext Markup Language}}, which uses tags to mark up what each part of the content is. The {{head}} section holds information about the page, such as the title on the browser tab and links to style sheets, while the body holds everything the user sees. A {{container}} tag such as `p` is used as an opening and closing pair around content, whereas an {{empty}} tag such as `br` or `img` stands alone. The {{alt}} attribute of an image gives a text description that is read aloud by screen readers.",
+   "In a CSS rule, the {{selector}} picks out which elements to style, followed by declarations of a property and a value. An {{external}} style sheet is a separate .css file attached with a link tag, so one file controls the appearance of the whole site. When styles conflict, a nested child element takes on its parent's text properties through {{inheritance}}, and the rule that the definition closest to the element wins is called {{precedence}}.",
+   "When planning a website, a {{site map}} is a diagram, usually a tree, showing every page and how the pages link, while an annotated {{storyboard|wireframe}} sketches the layout of each page. A {{linear}} navigation structure leads users through pages in a fixed order using Next and Previous, which suits a checkout. The W3C's international standard for accessible web content, organised under the principles perceivable, operable, understandable and robust, is {{WCAG|Web Content Accessibility Guidelines}}.",
+   "Client-side validation gives instant feedback and reduces server load, but it can be bypassed, so important checks are repeated on the server to protect the database's integrity and security. Before publishing, a site is tested against a {{test plan}}, then the domain name is registered, {{web hosting|hosting}} is rented, the files are uploaded using {{FTP|SFTP|File Transfer Protocol}} and the DNS records are pointed at the host's server."
+  ],
+  "blurt": [
+   {
+    "p": "Everything you know about **creating web pages with HTML**",
+    "pts": [
+     "HTML marks up content so the browser knows what each part is; it does not decide how it looks",
+     "Structure: DOCTYPE, html (with lang), head (title, meta, link) and body (visible content)",
+     "h1–h6 headings, p paragraph, br line break; ul gives bullets, ol gives numbers, each item in li",
+     "img: src gives the file, alt gives a text alternative; a: href gives the destination, enclosed content is clickable",
+     "Container tags enclose content in a pair; empty tags (br, img, link, input) stand alone",
+     "Attributes are written in the opening tag as name and value; character entities such as `&lt;` and `&amp;` show reserved characters",
+     "Tables use table, tr, th, td; forms use form (action, method), label and input (type)"
+    ]
+   },
+   {
+    "p": "Everything you know about **CSS and separating content from presentation**",
+    "pts": [
+     "CSS rule: selector, then braces with property: value; declarations",
+     "Selectors: element `p`, class `.name`, id `#name`, group `h1, h2`, descendant `nav a`",
+     "Colours as a name, rgb() with values 0–255, or a hex code #RRGGBB; CSS spells it `color`",
+     "Inline style: one element; internal style sheet: one page; external style sheet: the whole site",
+     "Inheritance: children take on parents' text properties such as color and font-family",
+     "Precedence: the definition closest to the element wins; no rule means the browser default",
+     "Benefits of external CSS: consistency, one edit changes every page, smaller cached pages, different styles for devices, accessibility"
+    ]
+   },
+   {
+    "p": "Everything you know about **planning, accessibility, validation, testing and publishing** a website",
+    "pts": [
+     "Planning: purpose, target audience, requirements, site map, annotated storyboards, house style",
+     "Navigation: linear (fixed order), hierarchical (tree from home page), non-linear (any page links to any page)",
+     "Usability: consistent menu, few clicks, clear text, conventions, fast loading, responsive design, helpful error messages",
+     "WCAG 2.2 from the W3C: levels A, AA, AAA; POUR = perceivable, operable, understandable, robust",
+     "Client-side validation: required, min/max, maxlength, pattern, type; can be bypassed so the server checks again",
+     "Server-side processing: database queries and updates, payments, rollback, generating the response page",
+     "Testing: links, forms with valid/invalid/extreme data, browsers and devices, accessibility, code validation, performance, usability",
+     "Publishing: register domain, rent hosting, upload by FTP/SFTP, point DNS, install TLS certificate, retest; then maintain"
+    ]
+   }
+  ],
+  "links": [
+   {
+    "q": "Explain the link between **separating content (HTML) from presentation (CSS)** and making a website **accessible**.",
+    "a": "HTML describes the meaning and structure of the content while CSS describes its presentation, so clean, semantic HTML is easier for screen readers to interpret because the meaning is not cluttered with formatting. This supports the WCAG principle robust, because real headings, lists and labels are announced correctly. The same HTML can also be given a high-contrast alternative style sheet, so visually impaired users are helped without rewriting any pages."
+   },
+   {
+    "q": "Explain the link between a **site map** and the **navigation structure** of a website.",
+    "a": "A site map is a diagram, usually a tree, showing every page and how the pages link, so it fixes the navigation structure before building begins. For most organisational sites this is a hierarchical structure, where the home page links to main sections and each section to its sub-pages. Drawing the site map makes sure no page is forgotten or unreachable, and it can show where a linear sequence, such as a checkout, is combined with the hierarchy."
+   },
+   {
+    "q": "Explain the link between **client-side processing** and **server-side processing** when a user submits a booking form.",
+    "a": "Client-side processing in the browser checks the input first, for example that required fields are filled and values are in range, so the user gets instant feedback and invalid data is never sent, reducing server load. Because these checks can be bypassed, the server-side script must repeat the important checks and then do what the browser cannot, such as fetching the places left from the database and updating it. If any stage fails, the server rolls back the database to keep it consistent and returns a response page explaining the outcome."
+   },
+   {
+    "q": "Explain the link between **publishing a website** and **FTP** and **DNS** from **Web applications**.",
+    "a": "Registering a domain name does not store the site anywhere, so web hosting must also be rented on a server permanently connected to the Internet. The site's files are uploaded to the host using FTP or SFTP, because FTP transfers files of any type with user authentication. The domain's DNS records are then pointed at the host's server, so the name resolves to its IP address and visitors reach the site, and a TLS certificate is installed so it is served over HTTPS."
+   }
+  ]
+ }
+}
