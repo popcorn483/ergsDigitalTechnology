@@ -73,7 +73,7 @@ li{margin:4px 0}
   if (!run) { main.innerHTML = '<div class="card"><h1>Competition not found</h1><p>It may have closed. Go back to the home page to see the competitions open for your year.</p><a class="btn" href="index.html">Home</a></div>'; return; }
   if (!me || !me.id) { main.innerHTML = '<div class="card"><h1>' + H(run.title) + '</h1><div class="err">Sign in on the home page first, so your entry counts for your house.</div><a class="btn" href="index.html">Home</a></div>'; return; }
   Promise.all([fetch('activity.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).catch(function () { return null; }), fetch('competitions/catalogue.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).catch(function () { return { comps: [] }; })])
-    .then(function (a) { if (a[0] && a[0].url) URL0 = String(a[0].url).trim(); C = (a[1].comps || []).filter(function (c) { return c.id === run.comp; })[0] || { title: run.title, brief: '', entry: { kind: 'image-or-link', help: '' }, rubric: [] }; paint(); });
+    .then(function (a) { if (a[0] && a[0].url) URL0 = String(a[0].url).trim(); C = (a[1].comps || []).filter(function (c) { return c.id === run.comp; })[0] || (a[1].comps || []).filter(function (c) { return c.title === run.title; })[0] || { title: run.title, brief: '', entry: { kind: 'image-or-link', help: '' }, rubric: [] }; paint(); });
 
   function paint() {
     document.title = run.title + ' · House competition';
