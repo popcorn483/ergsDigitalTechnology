@@ -62,6 +62,7 @@ def build(yid, data, tpl, manifest):
     old = json.loads(lines[i][len('const BOOK = '):].rstrip().rstrip(';'))
     book['illus'] = old.get('illus', {})
     lines[i] = 'const BOOK = ' + esc_script(json.dumps(book, ensure_ascii=False, separators=(',', ':'))) + ';'
+    lines = ['const REVIEW = {};' if l.startswith('const REVIEW = ') else l for l in lines]   # topic reviews are written per book (tools/review_build.py); KS3 has none yet
     html = '\n'.join(lines)
     html = re.sub(r'<title>[^<]*</title>', f'<title>{NAMES[yid]}: Digital Technology</title>', html, count=1)
     for a, b in PATCHES:
