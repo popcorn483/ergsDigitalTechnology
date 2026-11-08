@@ -3570,8 +3570,8 @@ function renderPage(i, focus) {
   const cykTabs = [];
   if (p.check && p.check.length) {
     let h2 = []; { const h = h2; h.push(`<div class="mcq">`);
-    p.check.forEach((q, qi) => {
-      h.push(`<fieldset data-q="${qi}" id="cyk-q${qi}"><legend><span>${qi + 1}.</span><div>${inline(q.q)}</div></legend><div class="opts">${(q.o || []).map((o, oi) => `<button type="button" class="opt" data-o="${oi}"><i>${'ABCD'[oi] || oi + 1}</i><span>${inline(o)}</span></button>`).join('')}</div><div class="why" aria-live="polite" hidden></div></fieldset>`);
+    mixUp(p.check.map((q, qi) => [q, qi])).forEach(([q, qi], pos) => {   /* questions and answers in a new random order each time */
+      h.push(`<fieldset data-q="${qi}" id="cyk-q${qi}"><legend><span>${pos + 1}.</span><div>${inline(q.q)}</div></legend><div class="opts">${mixUp((q.o || []).map((o, oi) => [o, oi])).map(([o, oi], k) => `<button type="button" class="opt" data-o="${oi}"><i>${'ABCD'[k] || k + 1}</i><span>${inline(o)}</span></button>`).join('')}</div><div class="why" aria-live="polite" hidden></div></fieldset>`);
     });
     h.push(`</div>`); }
     cykTabs.push(['chk', 'Quick check', 'chk', h2.join(''), `${p.check.length} quick question${p.check.length === 1 ? '' : 's'}`]);
@@ -3628,7 +3628,7 @@ function renderPage(i, focus) {
       const fxb = ok ? btn : btn; fxb.classList.remove('fx'); void fxb.offsetWidth; fxb.classList.add('fx');
       if (ok) { const r = btn.getBoundingClientRect(); burst(r.left + 22, r.top + r.height / 2, 14, hueCols()); }
       why.hidden = false;
-      why.innerHTML = `<b class="${ok ? 'ok' : 'no'}">${ok ? 'Correct.' : 'Not quite – the answer is ' + 'ABCD'[q.a] + '.'}</b> ${inline(q.why)} <button type="button" class="btn" style="margin-left:4px" data-retry>Try again</button>`;
+      why.innerHTML = `<b class="${ok ? 'ok' : 'no'}">${ok ? 'Correct.' : 'Not quite – the answer is ' + ((fs.querySelector(`.opt[data-o="${q.a}"] i`) || {}).textContent || 'ABCD'[q.a]) + '.'}</b> ${inline(q.why)} <button type="button" class="btn" style="margin-left:4px" data-retry>Try again</button>`;
       why.querySelector('[data-retry]').addEventListener('click', () => { fs.querySelectorAll('.opt').forEach(b => { b.disabled = false; b.classList.remove('right', 'wrong'); }); why.hidden = true; fs.querySelector('.opt').focus(); });
     }));
   });
@@ -3960,6 +3960,7 @@ $('#q-res').addEventListener('click', e => { const a = e.target.closest('a'); if
 
 // glossary view: A–Z list, flashcards and a quick quiz, for the whole book or one chapter
 const G = { mode: 'list', ch: '', fc: null, qz: null };
+function mixUp(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
 $('#dg-h').setAttribute('tabindex', '-1');
 $('#gch').innerHTML = `<option value="">All chapters · ${GLOSS.length} terms</option>` + B.chapters.filter(ch => (CH_TERMS.get(ch.id) || []).length).map(ch => `<option value="${esc(ch.id)}">${esc(ch.n)}. ${esc(ch.title)} · ${CH_TERMS.get(ch.id).length}</option>`).join('');
@@ -8873,9 +8874,10 @@ function cqPaint(focus) {
   const it = items[CQ.i], a = CQ.ans[it.key] || {}, done = Object.keys(CQ.ans).filter(k => CQ.ans[k].done).length;
   let body = '';
   if (it.t === 'mcq') {
-    body = `<p class="cq-q">${inline(it.q.q)}</p><div class="cq-os" role="group" aria-label="Answers">${it.q.o.map((o, k) => {
+    CQ.ord = CQ.ord || {}; const ord = CQ.ord[it.key] || (CQ.ord[it.key] = mixUp(it.q.o.map((o, k) => k)));
+    body = `<p class="cq-q">${inline(it.q.q)}</p><div class="cq-os" role="group" aria-label="Answers">${ord.map((k, pos) => { const o = it.q.o[k];
       const st = a.done ? (k === it.q.a ? ' ok' : k === a.pick ? ' no' : '') : '';
-      return `<button type="button" class="cq-o${st}" data-o="${k}"${a.done ? ' disabled' : ''}><span class="cq-ok">${'ABCD'[k]}</span><span>${inline(o)}</span></button>`; }).join('')}</div>
+      return `<button type="button" class="cq-o${st}" data-o="${k}"${a.done ? ' disabled' : ''}><span class="cq-ok">${'ABCD'[pos]}</span><span>${inline(o)}</span></button>`; }).join('')}</div>
       ${a.done ? `<p class="cq-fb ${a.s ? 'ok' : 'no'}"><b>${a.s ? 'Correct.' : 'Not quite.'}</b> ${inline(it.q.why || '')}</p>` : ''}`;
   } else if (it.t === 'prac') {
     body = `<p class="cq-q">${inline(it.q.q)} <span class="cq-m">[${marksTxt(it.max)}]</span></p>
@@ -8978,7 +8980,7 @@ document.addEventListener('click', e => {
   };
   document.addEventListener('keydown', e => {
     if (!CQ || !(TUT_VIEW || '').startsWith('quiz-') || e.target.closest('textarea,input') || e.altKey || e.ctrlKey || e.metaKey) return;
-    if (/^[1-4]$/.test(e.key)) { const b = $(`.cq-o[data-o="${+e.key - 1}"]`); if (b && !b.disabled) { e.preventDefault(); b.click(); } }
+    if (/^[1-4]$/.test(e.key)) { const b = $$('.cq-o')[+e.key - 1]; if (b && !b.disabled) { e.preventDefault(); b.click(); } }
     else if (e.key === 'ArrowRight') { const b = $('[data-next]'); if (b) { e.preventDefault(); b.click(); } }
     else if (e.key === 'ArrowLeft') { const b = $('[data-prev]'); if (b && !b.disabled) { e.preventDefault(); b.click(); } }
   });
@@ -11103,6 +11105,7 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
 
   /* ---- the page quiz: quick-check questions, first answer to each counts; a full attempt is recorded ---- */
   let attempt = {}, picks = {};
+  const byQ = fs => fs.slice().sort((x, y) => x.dataset.q - y.dataset.q);   /* the questions are shown shuffled; records keep the book's order */
   document.addEventListener('click', e => {
     const b = e.target.closest && e.target.closest('#cyk fieldset[data-q] .opt'); if (!b) return;
     const P = here(); if (!P) return;
@@ -11111,7 +11114,7 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
       attempt[k] = b.classList.contains('wrong') ? 0 : 1; picks[k] = 'ABCD'[+b.dataset.o] || '?';
       const all = [...document.querySelectorAll('#cyk fieldset[data-q]')]; if (Object.keys(attempt).length < all.length) return;
       const s = Object.values(attempt).reduce((a, v) => a + v, 0), m = all.length, old = pqOf(P.p.id);
-      state.pq = state.pq || {}; state.pq[P.p.id] = { s, m, at: Date.now(), bs: Math.max(s, old ? (old.bs != null ? old.bs : old.s) : 0), n: (old && old.n || 0) + 1, a: all.map(f => picks[f.dataset.q] || '-').join(''), c: all.map(f => f.dataset.q in attempt ? String(attempt[f.dataset.q]) : '-').join('') }; save();
+      state.pq = state.pq || {}; state.pq[P.p.id] = { s, m, at: Date.now(), bs: Math.max(s, old ? (old.bs != null ? old.bs : old.s) : 0), n: (old && old.n || 0) + 1, a: byQ(all).map(f => picks[f.dataset.q] || '-').join(''), c: byQ(all).map(f => f.dataset.q in attempt ? String(attempt[f.dataset.q]) : '-').join('') }; save();
       attempt = {}; picks = {};
       const card = document.getElementById('cyk'); if (card) { const r = card.querySelector('.pq-res'); if (r) r.remove(); card.querySelector('.cyk-b').insertAdjacentHTML('afterbegin', `<p class="pq-res ${s / m >= .7 ? 'hi' : s / m >= .4 ? 'mid' : 'lo'}"><b>Page quiz: ${s}/${m}</b> right first time${state.pq[P.p.id].bs > s ? ` · best ${state.pq[P.p.id].bs}/${m}` : ''}. Saved to your progress.</p>`); }
       paintTile(); repaintSteps();
@@ -11164,7 +11167,7 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
     const va = (() => { try { return JSON.parse(localStorage.getItem('mrb-viewas') || 'null'); } catch (e) { return null; } })();
     const fs = [...card.querySelectorAll('fieldset[data-q]')]; if (!fs.length) return;
     fs.forEach((f, i) => {
-      const L = r.a[i], q = (P.p.check || [])[+f.dataset.q], pick = 'ABCD'.indexOf(L || '-');
+      const L = r.a[+f.dataset.q], q = (P.p.check || [])[+f.dataset.q], pick = 'ABCD'.indexOf(L || '-');
       const b = pick >= 0 ? f.querySelector(`.opt[data-o="${pick}"]`) : null; if (b) { b.classList.add('pq-pick'); b.title = va ? `${va.name.split(' ')[0]} chose this` : 'Your last answer'; }
       if (va && q && q.a != null) {   /* the teacher sees the right answer and whether they got it */
         const ok = pick === q.a, c = f.querySelector(`.opt[data-o="${q.a}"]`); if (c) c.classList.add('pq-right'); if (b && !ok) b.classList.add('pq-wrong');
