@@ -32,7 +32,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 26;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 27;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -96,7 +96,22 @@ function resolve_(id, A) { let k = 0; while (A[id] && k++ < 20) id = A[id]; retu
 function out_(o) { return ContentService.createTextOutput(typeof o === 'string' ? o : JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
 /* SPEED: the Teacher area's summary (every pupil, from the whole Log) is kept for 2 minutes in the script cache, in 90 KB
    pieces (the cache's limit is 100 KB a value). Any teacher change clears it; ?fresh=1 skips it. */
-const SUM_TTL = 120;
+const SUM_TTL = 600;   /* SPEED (v27): the pupil summary is kept 10 minutes, and warmSummary (every 5 minutes, see setupFastPupils) keeps it ready */
+/* SPEED (v27): the summary reads only the 7 log columns it needs, and works out the UK date without Utilities.formatDate */
+function logRows7_() { const sh = log_(), n = sh.getLastRow() - 1; return n > 0 ? sh.getRange(2, 1, n, 7).getValues() : []; }
+const BST_ = {};
+function ukDay_(t) {   /* days since 1970 in UK time: BST from 01:00 UTC on the last Sunday in March to the last Sunday in October */
+  const y = new Date(t).getUTCFullYear();
+  const b = BST_[y] || (BST_[y] = [3, 10].map(m => { const d = new Date(Date.UTC(y, m, 0, 1)); d.setUTCDate(d.getUTCDate() - d.getUTCDay()); return d.getTime(); }));
+  return Math.floor((t + (t >= b[0] && t < b[1] ? 36e5 : 0)) / 864e5);
+}
+/* Run setupFastPupils once (choose it in the function list, press Run): every 5 minutes warmSummary works out the pupil list
+   in the background, so the Teacher area gets it straight away instead of waiting while the whole log is read. */
+function warmSummary() { try { sumPut_(JSON.stringify(summary_())); } catch (e) { } }
+function setupFastPupils() {
+  ScriptApp.getProjectTriggers().filter(t => t.getHandlerFunction() === 'warmSummary').forEach(t => ScriptApp.deleteTrigger(t));
+  ScriptApp.newTrigger('warmSummary').timeBased().everyMinutes(5).create(); warmSummary();
+}
 function sumGet_() { try { const c = CacheService.getScriptCache(), n = +(c.get('sum:n') || 0); if (!n) return null; const k = []; for (let i = 0; i < n; i++) k.push('sum:' + i); const m = c.getAll(k), parts = k.map(x => m[x]); return parts.every(x => typeof x === 'string') ? parts.join('') : null; } catch (e) { return null; } }
 function sumPut_(json) { try { const c = CacheService.getScriptCache(), o = {}, n = Math.ceil(json.length / 90000); if (n > 80) return; for (let i = 0; i < n; i++) o['sum:' + i] = json.slice(i * 90000, (i + 1) * 90000); c.putAll(o, SUM_TTL); c.put('sum:n', String(n), SUM_TTL); } catch (e) { } }
 function sumClear_() { try { CacheService.getScriptCache().remove('sum:n'); } catch (e) { } }
@@ -426,7 +441,7 @@ function doGet(e) {
   if (!keyOk_(q.key)) return out_({ error: 'key' });
   ensureWeekly_();
   if (q.action === 'week') return out_(week_(q.start));   /* the Teacher area's weekly report */
-  if (q.action) { const r = locked_(() => act_(q)); sumClear_(); return out_(r); }
+  if (q.action) { const r = locked_(() => act_(q)); sumClear_(); return out_(r); }   /* the next load rebuilds it (or warmSummary within 5 minutes) */
   if (q.fresh !== '1') { const hit = sumGet_(); if (hit) return out_(hit); }
   const json = JSON.stringify(summary_()); sumPut_(json); return out_(json);
 }
@@ -749,14 +764,14 @@ function awardsFor_(id, since) {
 }
 function summary_() {
   const PN = {}; rows_(pins_()).forEach(r => { PN[String(r[0])] = 1; });
-  const rows = rows_(log_()), A = aliases_(), N = names_(), now = Date.now(), WEEK = 7 * 864e5, P = {};
+  const rows = logRows7_(), A = aliases_(), N = names_(), now = Date.now(), WEEK = 7 * 864e5, P = {};
   for (const r of rows) {
     const t = new Date(r[0]).getTime(), id = resolve_(String(r[1]), A), s = +r[6] || 0; if (!id || !s) continue;
     const p = P[id] || (P[id] = { id, name: '', cls: '', typed: {}, total: 0, week: 0, last: 0, first: t, days: {}, units: {} });
     if (t >= p.last) { p.name = String(r[2]); p.cls = String(r[3]); p.last = t; }
     p.typed[String(r[2]) + ' (' + String(r[3]) + ')'] = 1;
     p.first = Math.min(p.first, t); p.total += s; if (now - t < WEEK) p.week += s;
-    p.days[Utilities.formatDate(new Date(t), 'Europe/London', 'yyyy-MM-dd')] = 1;
+    p.days[ukDay_(t)] = 1;   /* SPEED: no Utilities.formatDate per row (it was the slowest part with a long log) */
     const u = String(r[4]); p.units[u] = (p.units[u] || 0) + s;
   }
   for (const r of rows_(prog_())) {
