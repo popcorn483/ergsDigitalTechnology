@@ -10188,16 +10188,39 @@ try {
     const p = me() || {}, editing = !!me() && !!LS.get('mrb-pin-ok');
     const css = `#mrb-who{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:rgba(10,16,30,.62);padding:16px}#mrb-who form{background:#fff;color:#16213A;border-radius:14px;max-width:380px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}#mrb-who h2{margin:0 0 4px;font-size:19px}#mrb-who p{margin:0 0 12px;color:#4A5468;font-size:13.5px}#mrb-who label{display:block;font-weight:700;font-size:13px;margin:8px 0 4px}#mrb-who input{width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px}#mrb-who .r{display:flex;gap:8px;margin-top:14px}#mrb-who button{font:inherit;font-weight:700;border-radius:9px;padding:10px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer}#mrb-who button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff;flex:1}#mrb-who button:disabled{opacity:.6}#mrb-who .m{margin:10px 0 0;font-size:13px;color:#4A5468;min-height:1em}#mrb-who button.sd{display:block;margin:6px auto 0;padding:4px 6px;border:0;background:none;color:#8A93A6;font-size:12px;font-weight:600;text-decoration:underline}@media (prefers-color-scheme:dark){#mrb-who form{background:#1B2233;color:#E8ECF4}#mrb-who p,#mrb-who .m{color:#AEB8CA}#mrb-who input,#mrb-who button:not(.p){background:#121826;color:#E8ECF4;border-color:#3A4458}}`;
     const d = document.createElement('div'); d.id = 'mrb-who'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'mrb-who-h');
-    d.innerHTML = `<style>${css}</style><form novalidate><h2 id="mrb-who-h">Who’s using the Revision Guide?</h2><p>Enter your name, form class and a 4-digit PIN. Your progress is saved under your name, so it follows you to any device.</p><label for="mrb-n">First name and surname</label><input id="mrb-n" autocomplete="name" maxlength="40"><label for="mrb-c">Class</label><select id="mrb-cs" hidden style="width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px;background:inherit;color:inherit"></select><input id="mrb-c" maxlength="12" placeholder="e.g. 11B or 13D" autocomplete="off"><label for="mrb-p">PIN</label><input id="mrb-p" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="4 digits"><small style="display:block;margin-top:4px;color:#687386;font-size:12.5px">First time? Choose one you’ll remember. Use the same PIN on every device.</small><div class="r">${editing ? '<button type="button" class="l">Cancel</button>' : ''}<button class="p">Continue</button></div><p class="m" aria-live="polite"></p></form>`;
+    d.innerHTML = `<style>${css}</style><form novalidate><h2 id="mrb-who-h">Who’s using the Revision Guide?</h2><p>Enter your name, year group, teacher and a 4-digit PIN. Your progress is saved under your name, so it follows you to any device.</p><label for="mrb-n">First name and surname</label><input id="mrb-n" autocomplete="name" maxlength="40"><label for="mrb-y">Year group</label><select id="mrb-y" style="width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px;background:inherit;color:inherit"><option value="">Choose your year…</option><option value="8">Year 8</option><option value="9">Year 9</option><option value="10">Year 10</option><option value="11">Year 11</option><option value="12">Year 12</option><option value="13">Year 13</option><option value="14">Year 14</option></select><label for="mrb-t">Teacher</label><select id="mrb-t" disabled style="width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px;background:inherit;color:inherit"><option value="">Choose your year first</option></select><input id="mrb-to" hidden maxlength="30" placeholder="Your teacher’s name, e.g. Mr Butler" autocomplete="off" style="margin-top:6px"><label for="mrb-k" id="mrb-kl" hidden>Class</label><select id="mrb-k" hidden style="width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px;background:inherit;color:inherit"></select><input id="mrb-c" type="hidden"><label for="mrb-p">PIN</label><input id="mrb-p" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="4 digits"><small style="display:block;margin-top:4px;color:#687386;font-size:12.5px">First time? Choose one you’ll remember. Use the same PIN on every device.</small><div class="r">${editing ? '<button type="button" class="l">Cancel</button>' : ''}<button class="p">Continue</button></div><p class="m" aria-live="polite"></p></form>`;
     document.body.append(d);
     const n = d.querySelector('#mrb-n'), c = d.querySelector('#mrb-c'), pinI = d.querySelector('#mrb-p'), m = d.querySelector('.m'), go = d.querySelector('.p'); n.value = p.name || ''; c.value = p.cls || '';
     /* the class list from Mr Butler (cached for offline): pick one, or "Not listed" to type it */
-    const cs = d.querySelector('#mrb-cs'), fillCls = list => { if (!Array.isArray(list) || !list.length) return; const cur = (c.value || '').toUpperCase();
-      cs.innerHTML = '<option value="">Choose your class…</option>' + list.map(x => `<option></option>`).join('') + '<option value="~">My class isn’t listed</option>';
-      list.forEach((x, i) => { const o = cs.options[i + 1]; o.value = x.cls; o.textContent = x.cls + (x.teacher ? ' · ' + x.teacher : ''); });
-      const hit = list.some(x => x.cls === cur); cs.value = hit ? cur : cur ? '~' : ''; cs.hidden = false; c.hidden = cs.value !== '~'; };
-    cs.addEventListener('change', () => { c.hidden = cs.value !== '~'; if (cs.value === '~') { c.value = ''; c.focus(); } else c.value = cs.value; });
-    try { fillCls(JSON.parse(LS.get('mrb-classes') || 'null')); } catch (x) { }
+    /* YEAR GROUP + TEACHER (no class codes to remember): the teachers come from Mr Butler's class list (cached for offline).
+       One class for that year and teacher: that class. Several: pick one. None set up yet: the year and the teacher's
+       surname (e.g. 11BUTLER), so year-based zones still work. */
+    const yS = d.querySelector('#mrb-y'), tS = d.querySelector('#mrb-t'), tO = d.querySelector('#mrb-to'), kS = d.querySelector('#mrb-k'), kL = d.querySelector('#mrb-kl');
+    let CL = [];
+    const yrOf = x => { const mm = /^(\d{1,2})/.exec(String(x || '')); return mm ? mm[1] : ''; };
+    const surname = t => String(t || '').replace(/^(mr|mrs|ms|miss|mx|dr)\.?\s+/i, '').split(/\s+/).pop().toUpperCase().replace(/[^A-Z]/g, '');
+    const fillT = keep => {
+      const y = yS.value, ts = [...new Set(CL.filter(x => x.teacher && (!y || yrOf(x.cls) === y)).map(x => x.teacher))], all = [...new Set(CL.filter(x => x.teacher).map(x => x.teacher))];
+      const list = ts.length ? ts : all;
+      tS.disabled = !y; tS.innerHTML = y ? '<option value="">Choose your teacher…</option>' + list.map(() => '<option></option>').join('') + '<option value="~">My teacher isn’t listed</option>' : '<option value="">Choose your year first</option>';
+      list.forEach((t, i) => { const o = tS.options[i + 1]; o.value = t; o.textContent = t; });
+      if (keep && list.includes(keep)) tS.value = keep; else if (keep && y) { tS.value = '~'; tO.value = keep; }
+      tO.hidden = tS.value !== '~'; fillK();
+    };
+    const fillK = keepCls => {
+      const y = yS.value, t = tS.value, ks = y && t && t !== '~' ? CL.filter(x => x.teacher === t && yrOf(x.cls) === y).map(x => x.cls) : [];
+      kS.hidden = kL.hidden = ks.length < 2; kS.innerHTML = ks.map(() => '<option></option>').join(''); ks.forEach((k, i) => { kS.options[i].value = k; kS.options[i].textContent = k; });
+      if (keepCls && ks.includes(keepCls)) kS.value = keepCls;
+      const tn = t === '~' ? tO.value : t;
+      c.value = ks.length ? (ks.length > 1 ? kS.value : ks[0]) : (y && tn ? (y + surname(tn)).slice(0, 12) : '');
+    };
+    const fillCls = list => { if (!Array.isArray(list)) return; CL = list; const cur = (c.value || p.cls || '').toUpperCase(), hit = CL.find(x => x.cls === cur);
+      if (!yS.value) yS.value = yrOf(cur); fillT(hit ? hit.teacher : ''); if (hit) fillK(hit.cls); };
+    yS.addEventListener('change', () => fillT(tS.value && tS.value !== '~' ? tS.value : ''));
+    tS.addEventListener('change', () => { tO.hidden = tS.value !== '~'; if (tS.value === '~') tO.focus(); fillK(); });
+    tO.addEventListener('input', () => fillK()); kS.addEventListener('change', () => fillK(kS.value));
+    yS.value = yrOf(p.cls); fillT('');
+    try { fillCls(JSON.parse(LS.get('mrb-classes') || 'null') || []); } catch (x) { }
     if (URL0) fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=classes', { cache: 'no-store', credentials: 'omit' }).then(r => r.json()).then(j => { if (j && j.ok && Array.isArray(j.classes)) { LS.set('mrb-classes', JSON.stringify(j.classes)); fillCls(j.classes); } }).catch(() => { });
     const close = () => { d.remove(); document.documentElement.style.overflow = ''; paintWho(); try { zoneLock(); } catch (e) { } };
     document.documentElement.style.overflow = 'hidden';
@@ -10205,7 +10228,7 @@ try {
     const cancel = d.querySelector('.l'); if (cancel) cancel.addEventListener('click', close);
     d.querySelector('form').addEventListener('submit', async e => {
       e.preventDefault();
-      const name = n.value.replace(/\s+/g, ' ').trim(), cls = (!cs.hidden && cs.value && cs.value !== '~' ? cs.value : c.value).replace(/\s+/g, '').toUpperCase();
+      const name = n.value.replace(/\s+/g, ' ').trim(), cls = (fillK(kS.hidden ? '' : kS.value), c.value).replace(/\s+/g, '').toUpperCase();
       const pinV = pinI.value.trim();
       if (name.split(' ').length < 2) {
         /* staff: the staff password or staff PIN typed in the name box (or the PIN box, name left empty), checked by the Apps Script
@@ -10221,7 +10244,7 @@ try {
         }
         m.textContent = 'Please enter your first name and surname.'; n.focus(); return;
       }
-      if (!/^[A-Z0-9]{1,12}$/.test(cls)) { m.textContent = cs.hidden ? 'Please enter your form class, e.g. 11B.' : 'Please choose your class.'; (cs.hidden || cs.value === '~' ? c : cs).focus(); return; }
+      if (!/^[A-Z0-9]{1,12}$/.test(cls)) { m.textContent = !yS.value ? 'Please choose your year group.' : tS.value === '~' && !tO.value.trim() ? 'Please type your teacher’s name.' : 'Please choose your teacher.'; (!yS.value ? yS : tS.value === '~' ? tO : tS).focus(); return; }
       const pin = pinI.value.trim(); if (!/^\d{4}$/.test(pin)) { m.textContent = 'Please enter a 4-digit PIN.'; pinI.focus(); return; }
       go.disabled = true; m.textContent = 'Checking… (this can take a few seconds)';
       let found = null, offline = false; const devId = p.id || (Math.random().toString(36).slice(2) + Date.now().toString(36)).slice(0, 16);
@@ -10249,7 +10272,7 @@ try {
       if (pulled) { m.textContent = 'Welcome back! Loading your progress…'; setTimeout(() => location.reload(), 600); return; }
       close(); checkAccess();
     });
-    setTimeout(() => (p.name ? c : n).focus(), 50);
+    setTimeout(() => (p.name ? (yS.value ? tS : yS) : n).focus(), 50);
   }
   window.MRB_WHO = ask;
   /* "Revising as … · Change" wherever a [data-mrb-who] slot is on the page */
