@@ -32,7 +32,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 27;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 28;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -414,6 +414,7 @@ function staffMail_() {
   return { ok: true };
 }
 /* the Teacher area: ?key=… gives one summary row per pupil; &action=merge|rename|delete changes them */
+const READS = { live: 1, detail: 1, report: 1, qstats: 1, work: 1, comps: 1, compimg: 1, tests: 1, testres: 1, pdata: 1 };   /* actions that only read */
 function doGet(e) {
   const q = (e && e.parameter) || {};
   if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
@@ -441,6 +442,7 @@ function doGet(e) {
   if (!keyOk_(q.key)) return out_({ error: 'key' });
   ensureWeekly_();
   if (q.action === 'week') return out_(week_(q.start));   /* the Teacher area's weekly report */
+  if (READS[q.action]) return out_(act_(q));   /* SPEED (v28): looking things up never waits for the lock or throws away the pupil list */
   if (q.action) { const r = locked_(() => act_(q)); sumClear_(); return out_(r); }   /* the next load rebuilds it (or warmSummary within 5 minutes) */
   if (q.fresh !== '1') { const hit = sumGet_(); if (hit) return out_(hit); }
   const json = JSON.stringify(summary_()); sumPut_(json); return out_(json);
@@ -705,8 +707,10 @@ function week_(start) {
 function ensureWeekly_() {   /* the Monday email: its trigger is made the first time the Teacher area opens after this code is deployed */
   try {
     const c = CacheService.getScriptCache(); if (c.get('wk-ok')) return; c.put('wk-ok', '1', 21600);   /* checked at most every 6 hours (it's slow) */
-    const has = ScriptApp.getProjectTriggers().some(t => t.getHandlerFunction() === 'weeklyEmail');
+    const T = ScriptApp.getProjectTriggers(), has = T.some(t => t.getHandlerFunction() === 'weeklyEmail');
     if (WEEKLY_EMAIL && !has) ScriptApp.newTrigger('weeklyEmail').timeBased().onWeekDay(ScriptApp.WeekDay.MONDAY).atHour(7).inTimezone('Europe/London').create();
+    /* SPEED (v28): the 5-minute warmSummary job sets itself up too, so nobody needs to run setupFastPupils by hand */
+    if (!T.some(t => t.getHandlerFunction() === 'warmSummary')) ScriptApp.newTrigger('warmSummary').timeBased().everyMinutes(5).create();
   } catch (e) { }
 }
 function weeklyEmail() {   /* runs every Monday about 7am: last week's report (you can also run it by hand from the editor) */

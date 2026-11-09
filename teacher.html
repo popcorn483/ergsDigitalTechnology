@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>window.T_PUPIL=/[?&]pupil=trends\b/.test(location.search);if(window.T_PUPIL)document.documentElement.classList.add('t-pupil');else try{if(!localStorage.getItem('mrb-staff-ok')||localStorage.getItem('mrb-viewas'))document.documentElement.classList.add('t-lock')}catch(e){document.documentElement.classList.add('t-lock')}</script>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>window.T_PUPIL=/[?&]pupil=trends\b/.test(location.search);if(window.T_PUPIL)document.documentElement.classList.add('t-pupil');else try{if(!localStorage.getItem('mrb-staff-ok')||localStorage.getItem('mrb-viewas'))document.documentElement.classList.add('t-lock')}catch(e){document.documentElement.classList.add('t-lock')}
+/* SPEED: ask the Apps Script for the pupil list straight away (URL remembered from activity.json), before the page has loaded */
+try{var u0=localStorage.getItem('teacher.acturl'),k0=localStorage.getItem('teacher.actkey');if(!window.T_PUPIL&&u0&&k0&&localStorage.getItem('mrb-staff-ok')&&/^https:\/\/script\.google(usercontent)?\.com\//.test(u0)){window.T_SUMU=u0+(u0.indexOf('?')>=0?'&':'?')+'key='+encodeURIComponent(k0);window.T_SUM=fetch(window.T_SUMU,{cache:'no-store',credentials:'omit'}).then(function(r){return r.json()});window.T_SUM.catch(function(){})}}catch(e){}</script>
 <title>Teacher Area – Mr Butler's</title>
 <meta name="robots" content="noindex"><meta name="description" content="Teacher area: CCEA past-paper topic packs and mock tests (questions, mark schemes and examiner reports), exam trends, exam countdown, the scheme of work and pupil visits.">
 <link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#16213A"><link rel="icon" href="app-icons/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="app-icons/apple-touch-icon.png">
@@ -1320,6 +1322,11 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     btns.forEach(b => { b.disabled = false; b.addEventListener('click', () => download(b.dataset.pk, b, packJob(), { dls: btns, status: st, after: () => btns.forEach(x => { x.disabled = false; }) })); });
     const v = q.get('v'), go = btns.find(b => b.dataset.pk === v); if (go) go.click();
   }
+  const needPapers = () => new Promise(res => {
+    const secs = ['packs', 'test', 'trends'].map(id => document.getElementById(id)).filter(Boolean), on = () => secs.some(x => !x.hidden);
+    if (!secs.length || on()) return res();
+    const mo = new MutationObserver(() => { if (on()) { mo.disconnect(); res(); } }); secs.forEach(x => mo.observe(x, { attributes: true, attributeFilter: ['hidden'] }));
+  });
   async function start() {
     if ($('#pk-root')) return pupilStart();
     ui.course = $('#tp-course'); ui.unit = $('#tp-unit'); ui.unitWrap = $('#tp-s2'); ui.topic = $('#tp-topic'); ui.topicWrap = $('#tp-s3'); ui.packWrap = $('#tp-s4'); ui.steps = Steps($('#tp-steps')); ui.qs = $('#tp-qs');
@@ -1335,6 +1342,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const wsb = [...document.querySelectorAll('[data-ws]')], wst = { box: $('#ws-status'), text: $('#ws-status-t'), bar: $('#ws-bar') };
     wsb.forEach(b => b.addEventListener('click', async () => download(b.dataset.ws, b, await wsJob(), { dls: wsb, status: wst, after: () => { wsb.forEach(x => { x.disabled = false; }); renderSummary(); } })));
     $('#tp-none').addEventListener('click', () => { S.off = new Set(S.topic.items.map(i => i.k)); renderPack(); });
+    await needPapers();   /* SPEED: the question data (~650 KB) loads only once Topic packs, Build a test or Exam trends is opened */
     try {
       const [topics, folders, manifest, crops, pages, reports] = await Promise.all(['papers/topics.json', 'papers/folders.json', 'papers/manifest.json', 'papers/crops.json', 'papers/pages.json', 'papers/reports.json'].map((u, i) => getJ(u, i < 2)));
       D = { topics, folders: folders || {}, manifest: manifest || {}, crops: crops || {}, pages: pages || {}, reports: reports || { files: {}, crops: {} } };
@@ -2051,10 +2059,9 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     if (!$('#visits')) return;
     nocount();
     $('#vs-retry').addEventListener('click', () => { loaded = false; load(); });
-    /* fetch only when the tab is shown */
-    const go = () => { if (!$('#visits').hidden) load(); };
-    window.addEventListener('hashchange', go); document.querySelectorAll('.tabs a').forEach(a => a.addEventListener('click', () => setTimeout(go, 0)));
-    go();
+    /* SPEED: fetch only when "Anonymous visit counts" is opened (about 30 small requests) */
+    const box = $('#vs-t') && $('#vs-t').closest('details'), go = () => { if (!box || box.open) load(); };
+    if (box) box.addEventListener('toggle', go); else go();
   }
   window.TeacherVisits = { parseCount, count };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
@@ -2259,8 +2266,9 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     if (!DATA) try { const c = JSON.parse(LS.get('teacher.actcache') || 'null'); if (c && c.j && c.j.pupils) { fromCache = true; applySummary(c.j, true); status(`Showing pupils from ${when(c.t)}. Updating…`); } } catch (e) { }
     if (!fromCache) status('Loading…');
     try {
-      const r = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'key=' + encodeURIComponent(key), { cache: 'no-store', credentials: 'omit' });
-      const j = await r.json();
+      const u = URL0 + (URL0.includes('?') ? '&' : '?') + 'key=' + encodeURIComponent(key);
+      let j = null; if (window.T_SUM && window.T_SUMU === u) { try { j = await window.T_SUM; } catch (e) { } } window.T_SUM = null;   /* started in <head> */
+      if (!j) j = await fetch(u, { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
       if (j.error !== 'key' && j.pupils) { try { LS.set('teacher.actcache', JSON.stringify({ t: Date.now(), j })); } catch (e) { } }
       applySummary(j, false);
     } catch (e) { status(fromCache ? 'Couldn’t refresh: showing the last copy on this device. Check you’re online.' : 'Couldn’t load pupil activity. Check you’re online and that the Apps Script is deployed for “Anyone”.', 'warn'); }
@@ -3110,7 +3118,10 @@ h1{font-size:44pt;margin:6mm 0 2mm}.p{font-size:16pt;margin:2mm 0}.n{font-size:3
   }
   async function start() {
     if (!$('#activity')) return;
-    try { const j = await fetch('activity.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null); URL0 = (j && j.url || '').trim(); } catch (e) { }
+    /* SPEED: use the Apps Script URL remembered from last time straight away; activity.json is checked alongside (a changed URL reloads) */
+    const fresh = fetch('activity.json', { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).then(j => { if (!j) return null; const u = String(j.url || '').trim(); LS.set('teacher.acturl', u || null); return u; }).catch(() => null);
+    URL0 = LS.get('teacher.acturl') || '';
+    if (!URL0) URL0 = (await fresh) || ''; else fresh.then(u => { if (u !== null && u !== URL0) location.reload(); });
     const on = /^https:\/\/script\.google(usercontent)?\.com\//.test(URL0);
     $('#ac-setup').hidden = on; $('#ac-on').hidden = !on;
     if (!on) return;
