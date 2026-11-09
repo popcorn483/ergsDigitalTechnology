@@ -32,7 +32,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 24;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 25;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -42,7 +42,8 @@ const NOTIFY_EMAIL = '';   // where the emails go (sign-up requests, staff detai
 const EMAIL_SIGNINS = true;   // email the script's owner each time a new pupil signs up (false to stop)   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
 const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22', 'KS3', 'Y8', 'Y9', 'Y10', 'Y0'];
 /* ZONES: what a pupil may open. Year 8 / 9 / 10 are the KS3 years; the rest are the GCSE and A level workbooks.
-   A pupil's own zones (Zones sheet) win; otherwise their class's zones (Classes sheet); with neither, everything is open. */
+   A pupil's own zones (Zones sheet) win; otherwise their class's zones (Classes sheet); otherwise their year's (YEAR_ZONES:
+   Y8/9/10 their KS3 year, Y11 Unit 1, Y12 Units 1, 4 and 5, Y13 AS 1 and AS 2, Y14 AS and A2); with none of these, everything is open. */
 const ZONES = ['Y8', 'Y9', 'Y10', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22'];
 const ZONE_NAMES = { Y8: 'Year 8', Y9: 'Year 9', Y10: 'Year 10', U1: 'GCSE Unit 1', U4: 'GCSE Unit 4', U5: 'GCSE Unit 5', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1', A22: 'A2 2' };
 const zl_ = v => [...new Set(String(v || '').toUpperCase().split(/[\s,]+/).filter(z => ZONES.indexOf(z) >= 0))];
@@ -56,7 +57,10 @@ function setZones_(id, zones) { const sh = zonesSh_(), r = rows_(sh), i = r.find
   if (i >= 0) sh.getRange(i + 2, 1, 1, 3).setValues([row]); else sh.appendRow(row); }
 function dropZones_(ids) { const sh = zonesSh_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (ids.indexOf(String(r[i][0])) >= 0) sh.deleteRow(i + 2); }
 /* the zones that apply: the pupil's own, else their class's, else null (no limits) */
-function effZones_(id, cls, PZ, CL) { PZ = PZ || pzones_(); CL = CL || classes_(); if (PZ[id]) return PZ[id]; const c = CL.find(x => x.cls === ncls_(cls)); return c && c.zones.length ? c.zones : null; }
+/* DEFAULT ZONES BY YEAR (from the start of the class code: 11B -> Year 11), used when neither the pupil nor their class has zones */
+const YEAR_ZONES = { 8: ['Y8'], 9: ['Y9'], 10: ['Y10'], 11: ['U1'], 12: ['U1', 'U4', 'U5'], 13: ['AS1', 'AS2'], 14: ['AS1', 'AS2', 'A21', 'A22'] };
+const yearOf_ = cls => { const m = /^(\d{1,2})/.exec(ncls_(cls)); return m ? +m[1] : 0; };
+function effZones_(id, cls, PZ, CL) { PZ = PZ || pzones_(); CL = CL || classes_(); if (PZ[id]) return PZ[id]; const c = CL.find(x => x.cls === ncls_(cls)); if (c && c.zones.length) return c.zones; return YEAR_ZONES[yearOf_(cls)] || null; }
 /* ZONE REQUESTS: a pupil asks to open a unit or year outside their zones. Zone requests sheet [ID, Pupil ID, Name, Class, Zone, Asked, Status, Decided] */
 const zreqSh_ = () => tab_('Zone requests', ['ID', 'Pupil ID', 'Name', 'Class', 'Zone', 'Asked', 'Status', 'Decided']);
 function zreqs_(status) { return rows_(zreqSh_()).filter(r => String(r[0]) && (!status || String(r[6]) === status)).map(r => ({ rid: String(r[0]), id: String(r[1]), name: String(r[2]), cls: String(r[3]), zone: String(r[4]), at: new Date(r[5]).getTime(), status: String(r[6]) })); }
