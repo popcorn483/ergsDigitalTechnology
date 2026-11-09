@@ -10247,6 +10247,8 @@ try {
         if (j && j.error === 'pin') { go.disabled = false; pinI.value = ''; pinI.focus(); m.textContent = `That PIN doesn’t match the one for ${name}.${j.left != null ? ` ${j.left} ${j.left === 1 ? 'try' : 'tries'} left.` : ''} Forgotten it? Ask Mr Butler to reset it.`; return; }
         if (j && j.error === 'locked') { go.disabled = false; m.textContent = 'Too many wrong PINs. Try again in 15 minutes, or ask Mr Butler to reset your PIN.'; return; }
         if (j && j.ok && j.id) found = j;
+        /* a teacher (the Teacher area made them one): this device becomes a teacher device with their own teacher key */
+        if (found && found.teacher && found.tkey) { LS.set('notes-nocount', '1'); LS.set('teacher.nocount-set', '1'); LS.set('mrb-staff-ok', '1'); LS.set('teacher.actkey', found.tkey); LS.set('mrb-pupil', null); LS.set('mrb-access', null); const gg = document.getElementById('mrb-gate'); if (gg) gg.remove(); m.textContent = 'Teacher account: this device now opens the Teacher area and isn’t counted.'; setTimeout(close, 1200); return; }
         /* anything else (an older Apps Script, a server error): let them in now and check the PIN again next time, so nobody is ever locked out */
       } catch (x) { offline = true; }
       /* couldn't reach the sign-in check (offline, slow, a server error): not in until it can be checked */

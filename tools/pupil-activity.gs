@@ -18,6 +18,10 @@
    STAFF: typing TEACHER_KEY or STAFF_PIN in the sign-in box's name or PIN field marks that device as staff (never asked,
    never counted). Its "Send me staff details" link emails both to the Google account that owns this script.
 
+   TEACHERS (v24): Teacher area › Pupils › tick someone › Make teacher. When they next sign in with their name and PIN, that
+   device becomes a teacher device with the Teacher area open, using a key of its own (never TEACHER_KEY). Remove teacher
+   cancels that key at once. Only your TEACHER_KEY can make or remove teachers. Sheet: Roles [Pupil ID, Role, Name, Updated].
+
    CLASSES and ZONES (v20): Teacher area › Pupil tracking › Classes: add each class with its teacher and what it studies
    (its zones). Pupils sign in by picking their class; you can move them between classes and set their own zones there.
    UPDATING this code later: paste the new version over the old one (keep your TEACHER_KEY line), save, then
@@ -28,7 +32,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 23;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 24;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -116,6 +120,18 @@ function setPin_(id, pin) { const sh = pins_(), r = rows_(sh), i = r.findIndex(x
 function dropPins_(ids) { const sh = pins_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (ids.indexOf(String(r[i][0])) >= 0) sh.deleteRow(i + 2); }
 /* signing in: the pupil with this name and form class (as shown, or as they once typed it). With the right PIN: their ID and
    saved progress. A pupil with no PIN yet takes this one. Nobody with that name: this device's ID becomes a new pupil with this PIN. */
+/* TEACHERS: Roles sheet [Pupil ID, Role, Name, Updated]; a teacher's device gets its own key T<id>.<hash> (no TEACHER_KEY) */
+const rolesSh_ = () => tab_('Roles', ['Pupil ID', 'Role', 'Name', 'Updated']);
+function roles_() { const m = {}; rows_(rolesSh_()).forEach(r => { if (String(r[0]) && String(r[1])) m[String(r[0])] = String(r[1]); }); return m; }
+function setRole_(id, role, name) { const sh = rolesSh_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === id);
+  if (!role) { if (i >= 0) sh.deleteRow(i + 2); return; }
+  const row = [id, role, String(name || ''), new Date()]; if (i >= 0) sh.getRange(i + 2, 1, 1, 4).setValues([row]); else sh.appendRow(row); }
+function tkey_(id) { return 'T' + id + '.' + Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, 'mrbtk|' + id + '|' + salt_())).replace(/=+$/, '').slice(0, 24); }
+function keyOk_(k) {   /* TEACHER_KEY, or the key of someone who is (still) a teacher */
+  k = String(k || ''); if (k === TEACHER_KEY && TEACHER_KEY !== 'change-me') return true;
+  const m = /^T([A-Za-z0-9_-]{4,40})\.[A-Za-z0-9_-]{24}$/.exec(k); return !!(m && roles_()[m[1]] === 'teacher' && tkey_(m[1]) === k);
+}
+const asTeacher_ = (o, id) => { if (o && o.ok && roles_()[id] === 'teacher') { o.teacher = true; o.tkey = tkey_(id); } return o; };
 function whois_(name, cls, pin, devId) {
   const want = norm_(name, cls); if (want.length < 4) return { ok: false };
   if (!/^\d{4}$/.test(String(pin || ''))) return { ok: false, error: 'pin' };
@@ -128,7 +144,7 @@ function whois_(name, cls, pin, devId) {
     if (had && had !== pinHash_(id, pin)) return { ok: false, error: 'pin' };
     locked_(() => setPin_(id, pin));
     if (!had && !req) { if (REQUIRE_APPROVAL) setAccess_(id, 'pending', name, cls); notify_('New sign-up', name, cls, REQUIRE_APPROVAL ? 'A new pupil is waiting for you to approve them: Teacher area › Pupils › Requests.' : 'A new pupil has signed up.'); }
-    return { ok: true, id, fresh: !req, name: req ? String(req[2]) : undefined, cls: req ? String(req[3]) : undefined, status: access_(id) };
+    return asTeacher_({ ok: true, id, fresh: !req, name: req ? String(req[2]) : undefined, cls: req ? String(req[3]) : undefined, status: access_(id) }, id);
   }
   const p = hits.sort((a, b) => b.total - a.total)[0], cache = CacheService.getScriptCache(), fk = 'fail:' + p.id, fails = +(cache.get(fk) || 0);
   if (fails >= 5) return { ok: false, error: 'locked' };
@@ -137,7 +153,7 @@ function whois_(name, cls, pin, devId) {
   if (!had) locked_(() => setPin_(p.id, pin));
   cache.remove(fk);
   const sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + p.id);
-  return { ok: true, status: access_(p.id), id: p.id, name: p.name, cls: p.cls, updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' };
+  return asTeacher_({ ok: true, status: access_(p.id), id: p.id, name: p.name, cls: p.cls, updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' }, p.id);
 }
 /* who is in the sheet (for signing in): id, name, class, the names they typed and total time. Much quicker than summary_. */
 function roster_() {
@@ -387,12 +403,12 @@ function doGet(e) {
   if (q.action === 'zonereq') return out_(zoneAsk_(q.id, String(q.zone || '').toUpperCase(), q.name, q.cls));   /* a pupil's device: approved yet? has a PIN? */
   if (q.action === 'awards') return out_(awardsFor_(q.id, +q.since || 0));   /* a pupil's device: pages the teacher marked or unmarked */   /* pupils signing in: find them by name and form class */
   if (q.action === 'staff') {   /* the sign-in box: staff password check (TEACHER_KEY or STAFF_PIN) */
-    const k = String(q.key || ''), ok = (k === TEACHER_KEY && TEACHER_KEY !== 'change-me') || (k === STAFF_PIN && STAFF_PIN !== 'change-me');
-    return out_(ok ? { ok: true, teacher: k === TEACHER_KEY } : { error: 'key' });
+    const k = String(q.key || ''), tk = keyOk_(k), ok = tk || (k === STAFF_PIN && STAFF_PIN !== 'change-me');
+    return out_(ok ? { ok: true, teacher: tk, main: k === TEACHER_KEY } : { error: 'key' });
   }
   if (q.action === 'staffmail') return out_(staffMail_());
   if (q.action === 'mywork') { const N = names_(), id = okId(q.id) ? resolve_(String(q.id), aliases_()) : ''; return out_(myWork_(q.id, (N[id] && N[id][1]) || q.cls)); }   /* a pupil's device: work set for their class, and messages for them */   /* "Send me staff details": only ever to the script's owner */
-  if (q.key !== TEACHER_KEY || TEACHER_KEY === 'change-me') return out_({ error: 'key' });
+  if (!keyOk_(q.key)) return out_({ error: 'key' });
   ensureWeekly_();
   if (q.action === 'week') return out_(week_(q.start));   /* the Teacher area's weekly report */
   if (q.action) { const r = locked_(() => act_(q)); sumClear_(); return out_(r); }
@@ -568,6 +584,12 @@ function act_(q) {
     const sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + to);
     return { ok: true, updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' };
   }
+  if (q.action === 'setrole') {   /* make (role=teacher) or remove (role empty) teachers: only with the main TEACHER_KEY */
+    if (q.key !== TEACHER_KEY) return { ok: false, error: 'Only the main teacher key can make or remove teachers.' };
+    const A = aliases_(), N = names_(), role = q.role === 'teacher' ? 'teacher' : '', ids = String(q.ids || '').split(',').map(x => resolve_(x.trim(), A)).filter(okId);
+    if (!ids.length) return { ok: false, error: 'bad request' };
+    ids.forEach(id => setRole_(id, role, N[id] ? N[id][0] : (q.name || ''))); return { ok: true };
+  }
   if (q.action === 'resetpin') { if (!okId(to)) return { ok: false, error: 'bad request' }; dropPins_([to]); return { ok: true }; }   /* the pupil chooses a new PIN next time they sign in */
   if (q.action === 'rename') { if (!okId(to) || !q.name) return { ok: false, error: 'bad request' }; setName_(to, q.name, q.cls); return { ok: true }; }
   if (q.action === 'delete') {   /* remove their rows; a device that keeps sending starts a fresh record */
@@ -742,5 +764,5 @@ function summary_() {
   const requests = Object.keys(AC).filter(id => String(AC[id][1]) === 'pending').map(id => ({ id, name: String(AC[id][2]), cls: String(AC[id][3]), at: new Date(AC[id][4]).getTime() }));
   const CL = classes_(), PZ = pzones_();
   pupils.forEach(p => { p.zones = PZ[p.id] || null; p.ezones = effZones_(p.id, p.cls, PZ, CL); });
-  return { pupils, requests, classes: CL, zreqs: zreqs_('pending'), zones: ZONES, live: live_().live, updated: now, v: SCRIPT_VERSION, mail: EMAIL_SIGNINS ? mailState_() : null };
+  return { pupils, requests, classes: CL, zreqs: zreqs_('pending'), zones: ZONES, live: live_().live, updated: now, v: SCRIPT_VERSION, mail: EMAIL_SIGNINS ? mailState_() : null, roles: roles_() };
 }

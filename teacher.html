@@ -509,7 +509,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
   <div class="ac-req card" id="ac-req" hidden></div>
   <div class="ac-req ac-zr card" id="ac-zr" hidden></div>
   <div class="ac-att card" id="ac-att" hidden></div>
-  <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><button type="button" class="tp-mini" id="ac-selall">Select all shown</button><span class="ac-bsp"></span><button type="button" class="tp-mini" id="ac-msg">Message</button><button type="button" class="tp-mini" id="ac-test">Set a test</button><button type="button" class="tp-mini" id="ac-move">Move to class</button><button type="button" class="tp-mini" id="ac-zones">Zones</button><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-pin">Reset PIN</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Done</button></div>
+  <div class="ac-bar" id="ac-bar" hidden><b id="ac-n"></b><button type="button" class="tp-mini" id="ac-selall">Select all shown</button><span class="ac-bsp"></span><button type="button" class="tp-mini" id="ac-msg">Message</button><button type="button" class="tp-mini" id="ac-test">Set a test</button><button type="button" class="tp-mini" id="ac-move">Move to class</button><button type="button" class="tp-mini" id="ac-zones">Zones</button><button type="button" class="tp-mini" id="ac-role">Teacher</button><button type="button" class="tp-mini" id="ac-merge">Merge</button><button type="button" class="tp-mini" id="ac-rename">Rename</button><button type="button" class="tp-mini" id="ac-pin">Reset PIN</button><button type="button" class="tp-mini" id="ac-del">Delete</button><button type="button" class="tp-mini" id="ac-clear">Done</button></div>
   <div class="ac-panel card" id="ac-panel" hidden></div>
   <div class="card tg-w" id="tg-wrap" hidden><h3>Topics</h3><div id="tg-body"></div></div>
   <div class="sw-w" id="sw-wrap" hidden><div id="sw-body"></div></div>
@@ -2260,10 +2260,11 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const key = LS.get('teacher.actkey');
     {
       if (j.error === 'key') { LS.set('teacher.actkey', null); status('That key doesn’t match TEACHER_KEY in the Apps Script. Type it again.', 'warn'); $('#ac-keyrow').hidden = false; $('#ac-tools').hidden = true; return; }
-      DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; CLASSES = Array.isArray(j.classes) ? j.classes : []; ZREQ = Array.isArray(j.zreqs) ? j.zreqs : []; LIVE = Array.isArray(j.live) ? j.live : []; status((+j.v || 0) < 19 ? 'Your Google Apps Script is an older version, so reports, set work, messages, the topic grid, “revising now”, page-quiz answers, PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 19 ? 'warn' : ''); $('#ac-view').hidden = false; if ((+j.v || 0) >= 19 && (+j.v || 0) < 20) status('Classes, teachers and zones need the latest Apps Script (v20): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); view(); render(); requests();
+      ROLES = (j.roles && typeof j.roles === 'object') ? j.roles : {}; DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; CLASSES = Array.isArray(j.classes) ? j.classes : []; ZREQ = Array.isArray(j.zreqs) ? j.zreqs : []; LIVE = Array.isArray(j.live) ? j.live : []; status((+j.v || 0) < 19 ? 'Your Google Apps Script is an older version, so reports, set work, messages, the topic grid, “revising now”, page-quiz answers, PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 19 ? 'warn' : ''); $('#ac-view').hidden = false; if ((+j.v || 0) >= 19 && (+j.v || 0) < 20) status('Classes, teachers and zones need the latest Apps Script (v20): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); view(); render(); requests();
       const ml = j.mail; if ((+j.v || 0) >= 13 && ml && (ml.err || !ml.to)) status(`Emails aren’t being sent${ml.err ? ': ' + ml.err.replace(/^\S+\s/, '') : ''}. In the Apps Script, choose testEmail in the function list and press Run, allow “Send email as you”, then deploy a new version. ⋯ › Send a test email checks it.`, 'warn');
     }
   }
+  let ROLES = {};   /* TEACHERS: pupil ID -> 'teacher' (Roles sheet, Apps Script v24) */
   const accTag = p => {
     if (p.access !== 'declined' && p.access !== 'pending') return null;
     const b = el('button', { type: 'button', class: 'ac-ap', text: 'Approve' }); b.addEventListener('click', () => decide('approve', [p.id], [b]));
@@ -2372,7 +2373,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const cb = el('input', { type: 'checkbox', 'aria-label': `Select ${p.name}` }); cb.checked = SEL.has(p.id);
       cb.addEventListener('change', () => { cb.checked ? SEL.add(p.id) : SEL.delete(p.id); row.classList.toggle('sel', cb.checked); bar(); });
       const open = () => { if (SELMODE) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); return; } const was = OPEN === p.id; OPEN = was ? null : p.id; PICK = null; render(); if (!was) setTimeout(() => { const r = list.querySelector(`[data-id="${p.id}"]`); if (r) r.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60); };
-      const tags = [p.pin === false ? el('span', { class: 'ac-tag', text: 'No PIN' }) : null, typed.length ? el('span', { class: 'ac-tag', title: 'Also typed: ' + typed.join(', '), text: 'Also typed: ' + typed.slice(0, 2).join(', ') }) : null, accTag(p)].filter(Boolean);
+      const tags = [ROLES[p.id] === 'teacher' ? el('span', { class: 'ac-tag', style: 'background:#1B1B1B;color:#FFE066;font-weight:800', title: 'Signs in as a teacher: their device opens the Teacher area', text: 'Teacher' }) : null, p.pin === false ? el('span', { class: 'ac-tag', text: 'No PIN' }) : null, typed.length ? el('span', { class: 'ac-tag', title: 'Also typed: ' + typed.join(', '), text: 'Also typed: ' + typed.slice(0, 2).join(', ') }) : null, accTag(p)].filter(Boolean);
       const btn = el('button', { type: 'button', class: 'ac-main', 'aria-expanded': String(OPEN === p.id) },
         ring(cov),
         el('span', { class: 'ac-who' }, el('span', { class: 'ac-nmr' }, LIVE.some(r => r.id === p.id) ? el('span', { class: 'lv-dot', title: 'Revising now' }) : null, el('b', { text: p.name }), el('span', { class: 'ac-cl', title: teacherOf(p.cls) ? 'Taught by ' + teacherOf(p.cls) : CLASSES.length ? 'Not in one of your classes' : '', text: p.cls + (CLASSES.length && !classOf(p.cls) ? ' ?' : '') })),
@@ -2406,12 +2407,12 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   function bar() {
     const n = SEL.size, b = $('#ac-bar'); b.hidden = !SELMODE; const sb = $('#ac-sel'); if (sb) { sb.textContent = SELMODE ? 'Done' : 'Select'; sb.setAttribute('aria-pressed', String(SELMODE)); }
     $$('#ac-bar .tp-mini:not(#ac-clear):not(#ac-selall)').forEach(x => { x.disabled = !n; }); { const vis = shownNow(); $('#ac-selall').textContent = vis.length && vis.every(p => SEL.has(p.id)) ? 'Select none' : `Select all shown (${vis.length})`; }
-    if (!n) { $('#ac-panel').hidden = true; $('#ac-n').textContent = SELMODE ? 'Tick pupils to message, move, set zones, merge, rename or delete' : ''; return; }
+    if (!n) { $('#ac-panel').hidden = true; $('#ac-n').textContent = SELMODE ? 'Tick pupils to message, move, set zones, make teachers, merge, rename or delete' : ''; return; }
     $('#ac-n').textContent = `${n} selected`; $('#ac-merge').hidden = n < 2; $('#ac-rename').hidden = n !== 1; $('#ac-pin').hidden = n !== 1;
   }
   function panel(kind) {
     const ps = DATA.filter(p => SEL.has(p.id)), box = $('#ac-panel'); box.innerHTML = ''; box.hidden = false;
-    const busy = (btn, f) => async () => { btn.disabled = true; try { const r = await f(); if (!r || !r.ok) throw new Error(r && r.error || 'failed'); SEL.clear(); SELMODE = false; box.hidden = true; await load(); status(kind === 'delete' ? 'Deleted.' : kind === 'merge' ? 'Merged.' : kind === 'pin' ? 'PIN reset.' : kind === 'move' ? 'Moved.' : kind === 'msg' ? 'Message sent.' : kind === 'zones' ? 'Zones saved.' : 'Renamed.', 'ok'); }
+    const busy = (btn, f) => async () => { btn.disabled = true; try { const r = await f(); if (!r || !r.ok) throw new Error(r && r.error || 'failed'); SEL.clear(); SELMODE = false; box.hidden = true; await load(); status(kind === 'delete' ? 'Deleted.' : kind === 'merge' ? 'Merged.' : kind === 'pin' ? 'PIN reset.' : kind === 'move' ? 'Moved.' : kind === 'msg' ? 'Message sent.' : kind === 'zones' ? 'Zones saved.' : kind === 'role' ? 'Teacher settings saved.' : 'Renamed.', 'ok'); }
       catch (e) { status('That didn’t work: ' + e.message + '. If you’ve just updated the Apps Script, check you deployed it as a new version.', 'warn'); btn.disabled = false; } };
     const cancel = el('button', { type: 'button', class: 'tp-mini', text: 'Cancel', onclick: () => { box.hidden = true; } });
     if (kind === 'test') {   /* a topic test for just the ticked pupils */
@@ -2448,6 +2449,17 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       box.append(el('p', { text: one ? `What can ${ps[0].name} open? Tick every unit or year they are studying (more than one is fine). Anything else is locked, with a button to ask you.` : `Change the zones of these ${ps.length} pupils. Tick the units or years, then choose how.` }),
         one ? null : el('p', { class: 'small', text: 'They have now: ' + Object.keys(now).map(z => `${ZN[z] || z} (${now[z]})`).join(', ') }), one ? null : modes, zp,
         el('div', { class: 'ac-row' }, go, own || ps.length > 1 ? back : null, cancel));
+      return;
+    }
+    if (kind === 'role') {   /* TEACHERS: make or remove teachers (needs the main TEACHER_KEY and Apps Script v24) */
+      const isT = ps.filter(p => ROLES[p.id] === 'teacher'), notT = ps.filter(p => ROLES[p.id] !== 'teacher'), names = l => l.map(p => p.name).join(', ');
+      const mk = el('button', { type: 'button', class: 'tp-mini pri', text: notT.length === 1 ? 'Make teacher' : `Make ${notT.length} teachers` });
+      const rm = el('button', { type: 'button', class: 'tp-mini danger', text: isT.length === 1 ? 'Remove teacher' : `Remove ${isT.length} teachers` });
+      mk.addEventListener('click', busy(mk, () => api({ action: 'setrole', role: 'teacher', ids: notT.map(p => p.id).join(',') })));
+      rm.addEventListener('click', busy(rm, () => api({ action: 'setrole', role: '', ids: isT.map(p => p.id).join(',') })));
+      box.append(el('p', { text: (notT.length ? `Make ${names(notT)} a teacher? Next time they sign in with their name and PIN, that device becomes a teacher device: it opens the Teacher area (pupils, reports, set work) and isn’t counted. ` : '') + (isT.length ? `${names(isT)} ${isT.length === 1 ? 'is' : 'are'} a teacher. Removing them stops their devices opening the Teacher area straight away.` : '') }),
+        el('p', { class: 'ac-note', text: 'Only your main teacher key can make or remove teachers. Make sure each teacher has set a PIN first (no “No PIN” tag).' }),
+        el('div', { class: 'ac-row' }, notT.length ? mk : null, isT.length ? rm : null, cancel));
       return;
     }
     if (kind === 'pin') {
@@ -3078,7 +3090,7 @@ h1{font-size:44pt;margin:6mm 0 2mm}.p{font-size:16pt;margin:2mm 0}.n{font-size:3
     $('#ac-selall').addEventListener('click', () => { const vis = shownNow(), all = vis.length && vis.every(p => SEL.has(p.id)); vis.forEach(p => { if (all) SEL.delete(p.id); else SEL.add(p.id); }); render(); });
     $('#ac-msg').addEventListener('click', () => panel('msg')); $('#ac-test').addEventListener('click', () => panel('test')); $('#ac-move').addEventListener('click', () => panel('move')); $('#ac-zones').addEventListener('click', () => panel('zones'));
     $('#ac-tch').addEventListener('change', e => { tch = e.target.value; LS.set('teacher.acttch', tch); cls = ''; LS.set('teacher.actcls', ''); render(); week(); });
-    $('#ac-merge').addEventListener('click', () => panel('merge')); $('#ac-rename').addEventListener('click', () => panel('rename')); $('#ac-pin').addEventListener('click', () => panel('pin')); $('#ac-del').addEventListener('click', () => panel('delete'));
+    $('#ac-merge').addEventListener('click', () => panel('merge')); $('#ac-role').addEventListener('click', () => panel('role')); $('#ac-rename').addEventListener('click', () => panel('rename')); $('#ac-pin').addEventListener('click', () => panel('pin')); $('#ac-del').addEventListener('click', () => panel('delete'));
     $('#ac-clear').addEventListener('click', () => { SEL.clear(); SELMODE = false; render(); });
     $('#ac-sel').addEventListener('click', () => { SELMODE = !SELMODE; if (!SELMODE) SEL.clear(); else { OPEN = null; } render(); });
     $('#ac-q').addEventListener('input', e => { QRY = e.target.value; render(); }); $('#ac-csv').addEventListener('click', csv);
