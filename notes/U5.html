@@ -2484,7 +2484,7 @@ html.act-open{overflow:hidden}html.act-open .pbar,html.act-open .sv-sw{display:n
 /* ================= DESIGN: END ================= */
 
 /* mark scheme definitions in the notes */
-.msd{margin:12px 0 16px;padding:12px 14px 12px 16px;border-radius:12px;background:color-mix(in srgb,#18744A 7%,var(--paper));border:1.5px solid color-mix(in srgb,#18744A 45%,var(--line));border-left:6px solid #18744A;font-family:var(--sans);break-inside:avoid}
+.msd{margin:14px 0 18px;padding:14px 16px 14px 18px;border-radius:12px;background:#FFF3B0;border:2px solid #E0B000;border-left:8px solid #E0B000;box-shadow:0 2px 10px rgba(160,120,0,.18);font-family:var(--sans);break-inside:avoid}.msd p,.msd .msd-alt,.msd p *{color:#1B1B1B!important}.msd small{color:#5C4A00!important}.msd-tag{background:#1B1B1B!important;color:#FFE066!important}.msd p b:first-child{color:#1B1B1B!important}
 .msd-tag{display:inline-flex;align-items:center;gap:5px;font:800 11.5px/1 var(--sans);letter-spacing:.07em;text-transform:uppercase;color:#fff;background:#18744A;border-radius:999px;padding:5px 10px 5px 8px;margin-bottom:8px}
 .msd-tag svg{width:13px;height:13px}
 .msd p{margin:0;font-size:15.5px;line-height:1.5;color:var(--ink)}
@@ -2517,7 +2517,7 @@ html.act-open .mrb-gl-fab,html.mf-open .mrb-gl-fab,html.pod-on .mrb-gl-fab,body.
 .cq-next{order:-1}
 
 /* mark scheme definitions in the notes */
-.msd{margin:12px 0 16px;padding:12px 14px 12px 16px;border-radius:12px;background:color-mix(in srgb,#18744A 7%,var(--paper));border:1.5px solid color-mix(in srgb,#18744A 45%,var(--line));border-left:6px solid #18744A;font-family:var(--sans);break-inside:avoid}
+.msd{margin:14px 0 18px;padding:14px 16px 14px 18px;border-radius:12px;background:#FFF3B0;border:2px solid #E0B000;border-left:8px solid #E0B000;box-shadow:0 2px 10px rgba(160,120,0,.18);font-family:var(--sans);break-inside:avoid}.msd p,.msd .msd-alt,.msd p *{color:#1B1B1B!important}.msd small{color:#5C4A00!important}.msd-tag{background:#1B1B1B!important;color:#FFE066!important}.msd p b:first-child{color:#1B1B1B!important}
 .msd-tag{display:inline-flex;align-items:center;gap:5px;font:800 11.5px/1 var(--sans);letter-spacing:.07em;text-transform:uppercase;color:#fff;background:#18744A;border-radius:999px;padding:5px 10px 5px 8px;margin-bottom:8px}
 .msd-tag svg{width:13px;height:13px}
 .msd p{margin:0;font-size:15.5px;line-height:1.5;color:var(--ink)}
@@ -2547,7 +2547,7 @@ html.act-open .mrb-gl-fab,html.mf-open .mrb-gl-fab,html.pod-on .mrb-gl-fab,body.
 .cq-next{order:-1}
 
 /* mark scheme definitions in the notes */
-.msd{margin:12px 0 16px;padding:12px 14px 12px 16px;border-radius:12px;background:color-mix(in srgb,#18744A 7%,var(--paper));border:1.5px solid color-mix(in srgb,#18744A 45%,var(--line));border-left:6px solid #18744A;font-family:var(--sans);break-inside:avoid}
+.msd{margin:14px 0 18px;padding:14px 16px 14px 18px;border-radius:12px;background:#FFF3B0;border:2px solid #E0B000;border-left:8px solid #E0B000;box-shadow:0 2px 10px rgba(160,120,0,.18);font-family:var(--sans);break-inside:avoid}.msd p,.msd .msd-alt,.msd p *{color:#1B1B1B!important}.msd small{color:#5C4A00!important}.msd-tag{background:#1B1B1B!important;color:#FFE066!important}.msd p b:first-child{color:#1B1B1B!important}
 .msd-tag{display:inline-flex;align-items:center;gap:5px;font:800 11.5px/1 var(--sans);letter-spacing:.07em;text-transform:uppercase;color:#fff;background:#18744A;border-radius:999px;padding:5px 10px 5px 8px;margin-bottom:8px}
 .msd-tag svg{width:13px;height:13px}
 .msd p{margin:0;font-size:15.5px;line-height:1.5;color:var(--ink)}
@@ -11153,7 +11153,7 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
     if (hub) tile('prac', 'Activities & worksheet', 'Self-marking', b => openPop({ k: 'prac', t: 'Activities & worksheet' }, hubNode('practice', 'Activities & worksheet', ids), b));
     add(KINDS[2]);
     const nPage = pageKt ? pageKt.querySelectorAll('.kt-l > div').length : 0, nAll = ((typeof CH_TERMS !== 'undefined' && CH_TERMS.get(P.ch.id)) || []).length;
-    if (false && (nPage || nAll)) tile('terms', 'Key terms', nPage ? `${nPage} on this page · ${nAll} in topic` : `${nAll} in this topic`, b => openPop({ k: 'terms', t: 'Key terms' }, termsNode(P, pageKt), b));
+    if (nPage || nAll) tile('terms', 'Glossary', nPage ? `${nPage} on this page · ${nAll} in topic` : `${nAll} in this topic`, b => openPop({ k: 'terms', t: 'Glossary' }, termsNode(P, pageKt), b));   /* in Learn: this page's key terms, the whole topic, and the whole unit's glossary */
     if (hub) tile('pod', 'Podcast', 'Listen', b => { if (window.MRB_POD) window.MRB_POD.open(ids); else openPop({ k: 'pod', t: 'Podcast' }, hubNode('podcast', 'Podcast', ids), b); });
     /* the topic test only once it is unlocked (every page covered, page quizzes passed); not on every page before then */
     if (typeof cqUnlocked === 'function' && cqUnlocked(P.ch) && !TUT) { const tb = tile('test', 'Topic test', 'The whole topic: check your answers', () => { location.hash = 'quiz-' + P.ch.id; }); tb.removeAttribute('aria-haspopup'); }
@@ -11165,7 +11165,7 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
     /* the page quiz shows in Extra help on phones too once this page is marked covered (checked again when it is marked) */
     { const pqSync = () => { const q = box.querySelector('.act.k-quiz'); if (!q || !box.isConnected) { clearInterval(pqT); return; } q.classList.toggle('pq-ok', !!(state.done && state.done[P.p.id]) || (typeof chDone === 'function' && chDone(P.ch))); }; const pqT = setInterval(pqSync, 800); setTimeout(pqSync, 0); }
     /* EXTRA HELP in sections: Learn, Practise, (the topic test once unlocked), Revise */
-    { const SEC = [['Learn', ['ppt', 'video', 'pod']], ['Practise', ['anim', 'prac', 'quiz', 'mcq']], ['Unlocked: you’ve covered the whole topic', ['sheet', 'test']], ['Revise', ['tips']]];
+    { const SEC = [['Learn', ['ppt', 'video', 'pod', 'terms']], ['Practise', ['anim', 'prac', 'quiz', 'mcq']], ['Unlocked: you’ve covered the whole topic', ['sheet', 'test']], ['Revise', ['tips']]];
       const tiles = [...g.children], used = new Set(); g.remove();
       SEC.forEach(([h, ks], si) => { const mine = tiles.filter(b => !used.has(b) && (ks.some(k => b.classList.contains('k-' + k)) || (si === 3 && !SEC.some(([, kk]) => kk.some(k => b.classList.contains('k-' + k)))))); if (!mine.length) return; mine.forEach(b => used.add(b));
         const s = document.createElement('div'); s.className = 'acts-sec' + (ks.includes('test') ? ' acts-unl' : ''); s.innerHTML = `<h3 class="acts-sh">${h}</h3><div class="acts-g"></div>`; s.querySelector('.acts-g').append(...mine); box.append(s); }); }
