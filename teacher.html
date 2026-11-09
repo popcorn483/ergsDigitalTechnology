@@ -2420,10 +2420,11 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   }
   /* merge / rename / delete the ticked pupils */
   const shownNow = () => { const q = QRY.toLowerCase().replace(/\s+/g, ' ').trim(); return (DATA || []).filter(keep).filter(p => !q || (p.name + ' ' + p.cls).toLowerCase().includes(q)); };
+  const lbl = (b, t) => { if (!b) return; const s = b.querySelector('.lb'); if (s) s.textContent = t; else b.textContent = t; };   /* buttons with an icon keep it: only their label changes */
   function bar() {
-    const n = SEL.size, b = $('#ac-bar'); b.hidden = !SELMODE; const sb = $('#ac-sel'); if (sb) { sb.textContent = SELMODE ? 'Done' : 'Select'; sb.setAttribute('aria-pressed', String(SELMODE)); }
-    $$('#ac-bar .tp-mini:not(#ac-clear):not(#ac-selall)').forEach(x => { x.disabled = !n; }); { const vis = shownNow(); $('#ac-selall').textContent = vis.length && vis.every(p => SEL.has(p.id)) ? 'Select none' : `Select all shown (${vis.length})`; }
-    if (!n) { $('#ac-panel').hidden = true; $('#ac-n').textContent = SELMODE ? 'Tick pupils to message, move, set zones, make teachers, merge, rename or delete' : ''; return; }
+    const n = SEL.size, b = $('#ac-bar'); b.hidden = !SELMODE; const sb = $('#ac-sel'); if (sb) { lbl(sb, SELMODE ? 'Done' : 'Select'); sb.setAttribute('aria-pressed', String(SELMODE)); }
+    $$('#ac-bar .tp-mini:not(#ac-clear):not(#ac-selall)').forEach(x => { x.disabled = !n; }); { const vis = shownNow(); lbl($('#ac-selall'), vis.length && vis.every(p => SEL.has(p.id)) ? 'Select none' : `Select all (${vis.length})`); }
+    if (!n) { $('#ac-panel').hidden = true; $('#ac-n').textContent = SELMODE ? 'Tick pupils to act on them' : ''; return; }
     $('#ac-n').textContent = `${n} selected`; $('#ac-merge').hidden = n < 2; $('#ac-rename').hidden = n !== 1; $('#ac-pin').hidden = n !== 1;
   }
   function panel(kind) {
@@ -3546,8 +3547,75 @@ body.ta-on nav.tabs,body.ta-on #ac-view,body.ta-on .wrap > a.back,body.ta-on .wr
 .ta-c button{justify-self:start;margin-top:6px}
 .ta-quick{display:flex;flex-wrap:wrap;gap:8px}
 .ta-h2{font-size:18px;margin:6px 0 0}
-@media (max-width:900px){.ta-app{grid-template-columns:1fr}.ta-side{position:fixed;left:0;top:0;width:270px;transform:translateX(-105%);transition:transform .2s;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+@media (max-width:900px){.ta-app{grid-template-columns:minmax(0,1fr)}.ta-side{position:fixed;left:0;top:0;width:270px;transform:translateX(-105%);transition:transform .2s;box-shadow:0 10px 40px rgba(0,0,0,.25)}
   body.ta-open .ta-side{transform:none}.ta-menu{display:inline-flex}.ta-scrim{display:none}body.ta-open .ta-scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:29}}
+/* TIDY: icon buttons, Filters popover, selection bar, Overview tiles */
+.ta-ib{display:inline-grid;place-items:center;width:38px;height:38px;padding:0;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink-2);cursor:pointer}
+.ta-ib:hover{background:var(--paper-2);color:var(--ink)}.ta-ib svg{width:20px;height:20px}
+.ta-btn{display:inline-flex!important;align-items:center;gap:7px;min-height:38px;padding:0 12px!important;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink-2);font:600 14px/1 var(--sans);cursor:pointer;white-space:nowrap}
+.ta-btn:hover{background:var(--paper-2);color:var(--ink)}.ta-btn svg{width:18px;height:18px;flex:none}
+#ac-tools{gap:8px;flex-wrap:nowrap;margin:4px 0 12px}
+#ac-tools .ac-qrow{flex:1 1 auto;position:relative;gap:8px;min-width:0}
+#ac-tools .ac-qrow input{padding-left:38px;min-height:38px;box-sizing:border-box;border-radius:10px}
+.ta-sic{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--ink-3);pointer-events:none;display:flex}.ta-sic svg{width:18px;height:18px}
+#ac-sel[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+html[data-theme="dark"] #ac-sel[aria-pressed="true"]{color:var(--accent-ink,#0E1117)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #ac-sel[aria-pressed="true"]{color:var(--accent-ink,#0E1117)}}
+.ta-flt>summary{list-style:none}.ta-flt>summary::-webkit-details-marker{display:none}
+.ta-flt.on>summary{border-color:var(--accent);color:var(--accent)}
+.ta-cnt{min-width:19px;height:19px;padding:0 5px;border-radius:999px;background:var(--accent);color:#fff;font-size:11.5px;font-weight:800;display:inline-grid;place-items:center;box-sizing:border-box}
+.ta-flt[open]>summary,.ta-bmore[open]>summary,#ac-tools details.ac-more[open]>summary{background:var(--paper-2);color:var(--ink)}
+.ta-fpan{left:auto;right:0;min-width:250px!important;padding:10px!important;gap:10px}
+.ta-fh{font:800 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding:2px 2px 0}
+.ta-fl{display:grid!important;gap:4px;font-size:13px;color:var(--ink-2);font-weight:600}
+.ta-fl select{display:block!important;width:100%;min-height:38px;font:inherit;font-size:14px;font-weight:400;padding:5px 8px;border:1px solid var(--line);border-radius:9px;background:var(--paper-2);color:var(--ink)}
+.ac-menu .ta-fclr{color:var(--accent);font-weight:700;text-align:center;padding:6px}
+.ta-sel{position:relative;display:inline-flex;align-items:center;color:var(--ink-3)}.ta-sel>svg{position:absolute;left:11px;width:17px;height:17px;pointer-events:none}
+.ta-sel:has(select[hidden]){display:none}
+.ta-sel select{min-height:38px!important;padding:0 10px 0 34px!important;border-radius:10px!important;background:var(--paper)!important;font-weight:600;color:var(--ink-2)!important;max-width:200px}
+#ac-tools details.ac-more:not(.ta-flt)>summary{width:38px;padding:0!important;justify-content:center}
+.ac-menu{padding:6px!important;border-radius:12px!important}
+.ac-menu button{display:flex;align-items:center;gap:10px;width:100%;box-sizing:border-box}
+.ac-menu button svg{width:18px;height:18px;flex:none;color:var(--ink-3)}
+.ac-menu button.danger,.ac-menu button.danger svg{color:#B42318}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ac-menu button.danger,:root:not([data-theme="light"]) .ac-menu button.danger svg{color:var(--err,#FF9C94)}}
+.ac-menu hr{border:0;border-top:1px solid var(--line);margin:4px 2px;width:auto}
+.ac-menu .tp-mini{min-height:0;border:0;background:none;color:var(--ink);font-size:14px;padding:8px 10px;border-radius:7px}
+.ac-menu .tp-mini:hover{background:var(--paper-2)}.ac-menu .tp-mini:disabled{opacity:.4;cursor:default}.ac-menu .tp-mini[hidden]{display:none}
+/* selection bar */
+#ac-bar{gap:6px;padding:6px 8px;align-items:center;flex-wrap:nowrap}
+#ac-bar .ta-x{width:34px;height:34px;border:0;background:none}#ac-bar .ta-x .lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.ta-blead{display:flex;align-items:baseline;gap:10px;flex:1;min-width:0;flex-wrap:wrap}.ta-blead b{font-size:14.5px}
+.ta-link{background:none!important;border:0!important;color:var(--accent)!important;font:700 13.5px/1 var(--sans)!important;padding:4px 0!important;min-height:0!important;cursor:pointer;display:inline-flex;gap:6px;align-items:center}.ta-link svg{width:16px;height:16px}
+#ac-bar .ta-act{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:0 11px;border:1px solid transparent;border-radius:9px;background:none;color:var(--ink-2);font:600 14px/1 var(--sans);cursor:pointer;white-space:nowrap}
+#ac-bar .ta-act:hover:not(:disabled){background:var(--paper-2);color:var(--ink)}#ac-bar .ta-act svg{width:18px;height:18px}
+#ac-bar .ta-act:disabled{opacity:.4;cursor:default}
+.ta-bmore{position:relative}.ta-bmore>summary{list-style:none}.ta-bmore>summary::-webkit-details-marker{display:none}
+.ta-bmore .ac-menu{min-width:200px}
+/* Overview */
+.ta-c{position:relative}.ta-cic{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:10px;display:grid;place-items:center;background:var(--paper-2);color:var(--ink-3)}.ta-cic svg{width:19px;height:19px}
+.ta-c.warn .ta-cic{background:color-mix(in srgb,#E8A33D 22%,var(--paper));color:#9A5B00}.ta-c.live .ta-cic{background:color-mix(in srgb,#1E8E4E 15%,var(--paper));color:#1E8E4E}
+.ta-quick{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.ta-tile{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--paper);border:1px solid var(--line);border-radius:14px;text-decoration:none;color:var(--ink);transition:border-color .15s,transform .15s}
+.ta-tile:hover{border-color:var(--accent);transform:translateY(-1px)}
+.ta-tic{flex:none;width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:color-mix(in srgb,var(--accent) 12%,var(--paper));color:var(--accent)}.ta-tic svg{width:21px;height:21px}
+.ta-tile b{display:block;font-size:15px}.ta-tile small{display:block;font-size:12.5px;color:var(--ink-3);margin-top:2px}
+.ta-top .ta-menu{display:none}
+@media (max-width:900px){.ta-top .ta-menu{display:inline-grid}}
+/* phones: labels drop to icons, the selection bar sits at the bottom of the screen */
+@media (max-width:700px){
+  .ta-btn .lb{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}.ta-btn{padding:0!important;width:38px;justify-content:center;position:relative}
+  .ta-flt .ta-cnt{position:absolute;top:-6px;right:-6px}
+  .ta-sel select{width:42px;max-width:42px;min-width:0;padding:0 0 0 38px!important;color:transparent!important}#ac-tools{gap:6px}#ac-tools .ac-qrow{gap:6px;flex:1 1 0}.ta-sel select option,.ta-sel select optgroup{color:var(--ink)}
+  #ac-bar{position:fixed!important;left:8px;right:8px;bottom:8px;top:auto!important;z-index:40;flex-wrap:wrap;padding:8px;box-shadow:0 8px 30px rgba(10,16,30,.22)}
+  .ta-blead{flex:1 1 calc(100% - 44px);order:0}#ac-bar .ta-x{order:1}
+  #ac-bar>.ta-act,#ac-bar>.ta-bmore{order:2;flex:1 1 0}
+  #ac-bar>.ta-act,#ac-bar>.ta-bmore>summary{flex-direction:column;gap:3px;height:auto;min-height:50px;padding:4px 2px;font-size:11.5px;justify-content:center;width:100%}
+  .ta-bmore .ac-menu{top:auto;bottom:calc(100% + 6px);right:0}
+  body:has(#ac-bar:not([hidden])) .wrap{padding-bottom:130px}
+  .ta-cards{grid-template-columns:1fr 1fr;gap:8px}.ta-c{padding:12px}.ta-c b.n{font-size:24px}.ta-cic{width:28px;height:28px;top:10px;right:10px}.ta-quick{grid-template-columns:1fr}
+}
+.ta-home{grid-template-columns:minmax(0,1fr)}
 @media print{.ta-side,.ta-top{display:none!important}.ta-app{display:block}}
 </style>
 <script>
@@ -3568,7 +3636,15 @@ body.ta-on nav.tabs,body.ta-on #ac-view,body.ta-on .wrap > a.back,body.ta-on .wr
   var IC = { home: I('<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>'), pupils: I('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.6c2.8.2 4.8 1.9 5.4 4.9"/>'), classes: I('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/>'),
     topics: I('<path d="M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6"/>'), tests: I('<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 3.5v2h6v-2M8.5 11l2 2 4-4M8.5 17h7"/>'), reports: I('<path d="M6 3.5h9l3 3v14H6z"/><path d="M9 11h6M9 14.5h6M9 18h4"/>'), week: I('<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>'),
     work: I('<path d="M4 5h16v11H8l-4 4z"/><path d="M8 9.5h8M8 12.5h5"/>'), comps: I('<path d="M7 4h10v4a5 5 0 01-10 0z"/><path d="M7 6H4a3 3 0 003 4M17 6h3a3 3 0 01-3 4M12 13v4M8.5 20h7M10 17h4"/>'),
-    packs: I('<path d="M4 7l8-4 8 4-8 4z"/><path d="M4 12l8 4 8-4M4 17l8 4 8-4"/>'), test: I('<path d="M9 3.5h6M10 3.5v5L5 18a2 2 0 001.8 3h10.4a2 2 0 001.8-3l-5-9.5v-5"/>'), trends: I('<path d="M3.5 17l5-5 4 4 8-8"/><path d="M15 8h5.5v5.5"/>'), sow: I('<path d="M5 4h14v16H5z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>'), ks3: I('<path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11.5V16c0 1.4 2.2 3 5 3s5-1.6 5-3v-4.5"/>'), back: I('<path d="M15 5l-7 7 7 7"/>') };
+    packs: I('<path d="M4 7l8-4 8 4-8 4z"/><path d="M4 12l8 4 8-4M4 17l8 4 8-4"/>'), test: I('<path d="M9 3.5h6M10 3.5v5L5 18a2 2 0 001.8 3h10.4a2 2 0 001.8-3l-5-9.5v-5"/>'), trends: I('<path d="M3.5 17l5-5 4 4 8-8"/><path d="M15 8h5.5v5.5"/>'), sow: I('<path d="M5 4h14v16H5z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>'), ks3: I('<path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11.5V16c0 1.4 2.2 3 5 3s5-1.6 5-3v-4.5"/>'), back: I('<path d="M15 5l-7 7 7 7"/>'),
+    menu: I('<path d="M4 6.5h16M4 12h16M4 17.5h16"/>'), search: I('<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/>'), check: I('<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.5 12l2.5 2.5 4.5-5"/>'),
+    filter: I('<path d="M4 5h16l-6 7.5V19l-4 1.5v-8z"/>'), sort: I('<path d="M7 4v16M4 17l3 3 3-3M17 20V4M14 7l3-3 3 3"/>'), dots: I('<circle cx="5.5" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="18.5" cy="12" r="1.3" fill="currentColor"/>'),
+    refresh: I('<path d="M19.5 12a7.5 7.5 0 11-2.2-5.3M19.5 4.5v4.5H15"/>'), download: I('<path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 20h14"/>'), key: I('<circle cx="8" cy="15" r="4"/><path d="M11 12l8.5-8.5M16.5 6.5l2.5 2.5"/>'),
+    mail: I('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 6.5l8.5 6.5 8.5-6.5"/>'), out: I('<path d="M14 4h5v16h-5M10 8l-4 4 4 4M6 12h11"/>'), move: I('<path d="M4 8h14l-3.5-3.5M20 16H6l3.5 3.5"/>'),
+    zones: I('<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><path d="M15 16.5v-1a1.5 1.5 0 013 0v1M14 16.5h5v3.5h-5z"/>'),
+    merge: I('<path d="M7 4v4c0 3 2 5 5 5h7M16 10l3 3-3 3M7 20v-7"/>'), rename: I('<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13.5 6.5l4 4"/>'), pin: I('<rect x="3" y="7" width="18" height="10" rx="2"/><circle cx="8" cy="12" r="1.1" fill="currentColor"/><circle cx="12" cy="12" r="1.1" fill="currentColor"/><circle cx="16" cy="12" r="1.1" fill="currentColor"/>'),
+    trash: I('<path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/>'), close: I('<path d="M6 6l12 12M18 6L6 18"/>'), all: I('<path d="M10 6h10M10 12h10M10 18h10M3.5 6l1.5 1.5 2.5-2.5M3.5 12l1.5 1.5 2.5-2.5M3.5 18l1.5 1.5 2.5-2.5"/>'),
+    bell: I('<path d="M6 16V11a6 6 0 0112 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 004 0"/>'), live: I('<circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M7.5 7.5a6.4 6.4 0 000 9M16.5 7.5a6.4 6.4 0 010 9"/>'), down: I('<path d="M6 9l6 6 6-6"/>') };
   var NAV = [
     ['', [['home', 'Overview', 'home']]],
     ['Pupils', [['p-pupils', 'Pupils', 'pupils', '#t-badge'], ['p-classes', 'Classes & zones', 'classes', '#cl-badge']]],
@@ -3584,27 +3660,27 @@ body.ta-on nav.tabs,body.ta-on #ac-view,body.ta-on .wrap > a.back,body.ta-on .wr
     return (g[0] ? '<div class="ta-g">' + g[0] + '</div>' : '') + g[1].map(function (x) { return '<a class="ta-i" href="#' + x[0] + '" data-go="' + x[0] + '">' + IC[x[2]] + '<span>' + x[1] + '</span>' + (x[3] ? '<span class="ta-b" data-of="' + x[3] + '" hidden></span>' : '') + '</a>'; }).join('');
   }).join('') + '<div class="ta-foot"><a class="ta-i" href="index.html">' + IC.back + '<span>Revision site</span></a></div>';
   var mainCol = document.createElement('div'); mainCol.className = 'ta-mainc';
-  var top = document.createElement('div'); top.className = 'ta-top'; top.innerHTML = '<button type="button" class="tp-mini ta-menu" aria-controls="ta-side" aria-expanded="false">☰ Menu</button><h1 id="ta-title" tabindex="-1">Overview</h1>';
+  var top = document.createElement('div'); top.className = 'ta-top'; top.innerHTML = '<button type="button" class="ta-ib ta-menu" aria-controls="ta-side" aria-expanded="false" aria-label="Menu" title="Menu">' + IC.menu + '</button><h1 id="ta-title" tabindex="-1">Overview</h1>';
   var scrim = document.createElement('div'); scrim.className = 'ta-scrim';
   wrap.parentNode.insertBefore(app, wrap); app.append(side, mainCol); mainCol.append(top, wrap); document.body.append(scrim);
   /* OVERVIEW: what needs you, who is revising, this week, the exam countdown, quick links, visit counts */
   var home = document.createElement('section'); home.id = 'ta-home'; home.className = 'ta-home'; home.hidden = true;
   home.innerHTML = '<div class="ta-cards" id="ta-cards"><div class="ta-c"><span>Loading pupils…</span></div></div><h2 class="ta-h2">Quick links</h2><div class="ta-quick">' +
-    [['p-work', 'Set work or send a message'], ['test', 'Build a test'], ['packs', 'Topic packs'], ['p-comps', 'Competitions'], ['p-reports', 'Reports']].map(function (x) { return '<a class="tp-mini" href="#' + x[0] + '" data-go="' + x[0] + '">' + x[1] + '</a>'; }).join('') + '</div>';
+    [['p-work', 'Set work', 'Work or a message for a class', 'work'], ['test', 'Build a test', 'Past-paper questions', 'test'], ['packs', 'Topic packs', 'Questions & mark schemes', 'packs'], ['p-reports', 'Reports', 'Use over any dates', 'reports'], ['p-comps', 'Competitions', 'House entries & judging', 'comps'], ['trends', 'Exam trends', 'What CCEA asks most', 'trends']].map(function (x) { return '<a class="ta-tile" href="#' + x[0] + '" data-go="' + x[0] + '"><span class="ta-tic">' + IC[x[3]] + '</span><span><b>' + x[1] + '</b><small>' + x[2] + '</small></span></a>'; }).join('') + '</div>';
   var cd = $('#cd'); var tabs = $('nav.tabs'); (tabs || wrap.firstChild).parentNode.insertBefore(home, tabs); if (cd) home.insertBefore(cd, home.querySelector('.ta-h2'));
   var vis = Array.prototype.filter.call(document.querySelectorAll('#visits details'), function (d) { return /Anonymous visit counts/.test(d.textContent); })[0]; if (vis) home.append(vis);
   var hm = function (s) { var m = Math.round((+s || 0) / 60); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0'); };
   var H = function (x) { return String(x == null ? '' : x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   addEventListener('ta-data', function (e) {
     var d = e.detail || {}, P = d.pupils || [], act = P.filter(function (p) { return p.week > 0; }), wk = P.reduce(function (a, p) { return a + (+p.week || 0); }, 0), lv = d.live || [];
-    var card = function (cls, n, t, sub, go, btn) { return '<div class="ta-c ' + cls + '"><b class="n">' + n + '</b><span>' + t + '</span>' + (sub ? '<small>' + sub + '</small>' : '') + (go ? '<button type="button" class="tp-mini' + (cls === 'warn' ? ' pri' : '') + '" data-go="' + go + '">' + btn + '</button>' : '') + '</div>'; };
+    var card = function (cls, n, t, sub, go, btn, ic) { return '<div class="ta-c ' + cls + '">' + (ic ? '<span class="ta-cic">' + IC[ic] + '</span>' : '') + '<b class="n">' + n + '</b><span>' + t + '</span>' + (sub ? '<small>' + sub + '</small>' : '') + (go ? '<button type="button" class="tp-mini' + (cls === 'warn' ? ' pri' : '') + '" data-go="' + go + '">' + btn + '</button>' : '') + '</div>'; };
     var c = [];
-    if (d.req) c.push(card('warn', d.req, d.req === 1 ? 'pupil waiting for approval' : 'pupils waiting for approval', '', 'p-pupils', 'Review'));
-    if (d.zreq) c.push(card('warn', d.zreq, d.zreq === 1 ? 'zone request' : 'zone requests', 'Pupils asking to open another unit', 'p-pupils', 'Review'));
-    if (d.noclass) c.push(card('warn', d.noclass, 'not in a class yet', '', 'p-classes', 'Sort them out'));
-    c.push(card('live', lv.length, 'revising now', lv.slice(0, 4).map(function (r) { return H(r.name || ''); }).join(', ') + (lv.length > 4 ? ' and ' + (lv.length - 4) + ' more' : ''), 'p-pupils', 'See pupils'));
-    c.push(card('', act.length + '<small style="font-size:16px"> / ' + P.length + '</small>', 'pupils active this week', hm(wk) + ' revising this week', 'p-week', 'Weekly report'));
-    c.push(card('', (d.classes || []).length, (d.classes || []).length === 1 ? 'class' : 'classes', '', 'p-classes', 'Classes & zones'));
+    if (d.req) c.push(card('warn', d.req, d.req === 1 ? 'pupil waiting for approval' : 'pupils waiting for approval', '', 'p-pupils', 'Review', 'bell'));
+    if (d.zreq) c.push(card('warn', d.zreq, d.zreq === 1 ? 'zone request' : 'zone requests', 'Pupils asking to open another unit', 'p-pupils', 'Review', 'zones'));
+    if (d.noclass) c.push(card('warn', d.noclass, 'not in a class yet', '', 'p-classes', 'Sort them out', 'classes'));
+    c.push(card('live', lv.length, 'revising now', lv.slice(0, 4).map(function (r) { return H(r.name || ''); }).join(', ') + (lv.length > 4 ? ' and ' + (lv.length - 4) + ' more' : ''), 'p-pupils', 'See pupils', 'live'));
+    c.push(card('', act.length + '<small style="font-size:16px"> / ' + P.length + '</small>', 'pupils active this week', hm(wk) + ' revising this week', 'p-week', 'Weekly report', 'pupils'));
+    c.push(card('', (d.classes || []).length, (d.classes || []).length === 1 ? 'class' : 'classes', '', 'p-classes', 'Classes & zones', 'classes'));
     $('#ta-cards').innerHTML = c.join('');
   });
   /* GO: Overview, a pupil-tracking view (p-*) or a resource tab */
@@ -3622,7 +3698,7 @@ body.ta-on nav.tabs,body.ta-on #ac-view,body.ta-on .wrap > a.back,body.ta-on .wr
     side.querySelectorAll('[data-go]').forEach(function (a) { if (a.dataset.go === cur) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
     $('#ta-title').textContent = TITLE[cur] || 'Teacher area'; document.title = (TITLE[cur] || 'Teacher area') + ' · Teacher area';
     /* filters (teacher, year, class) only where they apply */
-    var noF = ['p-classes', 'p-work', 'p-comps'].indexOf(cur) >= 0; ['#ac-tch', '#ac-yr', '#ac-cls'].forEach(function (s) { var e = $(s); if (e) e.style.display = noF ? 'none' : ''; });
+    var noF = ['p-classes', 'p-work', 'p-comps'].indexOf(cur) >= 0; var fl = $('#ta-flt'); if (fl) fl.style.display = noF ? 'none' : '';
   }
   document.addEventListener('click', function (e) { var a = e.target.closest('[data-go]'); if (!a) return; e.preventDefault(); go(a.dataset.go, true); });
   top.querySelector('.ta-menu').addEventListener('click', function () { var o = !document.body.classList.contains('ta-open'); document.body.classList.toggle('ta-open', o); this.setAttribute('aria-expanded', String(o)); });
@@ -3631,6 +3707,43 @@ body.ta-on nav.tabs,body.ta-on #ac-view,body.ta-on .wrap > a.back,body.ta-on .wr
   var av = $('#ac-view'); if (av) new MutationObserver(function () { if (cur.indexOf('p-') !== 0) return; var s = av.querySelector('[aria-selected="true"]'); if (s && 'p-' + s.dataset.v !== cur) { cur = 'p-' + s.dataset.v; history.replaceState(null, '', '#' + cur); sync(); } }).observe(av, { attributes: true, subtree: true, attributeFilter: ['aria-selected'] });
   /* badges: mirror the tab badges (requests, classes & zones) */
   side.querySelectorAll('[data-of]').forEach(function (b) { var src = $(b.dataset.of); if (!src) return; var f = function () { b.textContent = src.textContent; b.hidden = src.hidden || !src.textContent; }; f(); new MutationObserver(f).observe(src, { attributes: true, childList: true, characterData: true, subtree: true }); });
+  /* TIDY TOOLBARS: icons, a Filters popover, an icon sort, and the selection actions grouped (main four, then a More menu) */
+  (function () {
+    var tools = $('#ac-tools'), bar = $('#ac-bar'); if (!tools || !bar) return;
+    var ib = function (b, ic, keep) { if (!b) return; var t = b.textContent.trim(); b.innerHTML = IC[ic] + '<span class="lb">' + t + '</span>'; if (!keep) b.title = t; };
+    /* search + Select */
+    var qr = $('#ac-qrow'); if (qr) { var si = document.createElement('span'); si.className = 'ta-sic'; si.innerHTML = IC.search; qr.prepend(si); }
+    var sel = $('#ac-sel'); if (sel) { ib(sel, 'check', true); sel.classList.add('ta-btn'); }
+    /* Filters: teacher, year and class in one popover, with a count of filters on */
+    var flt = document.createElement('details'); flt.className = 'ac-more ta-flt'; flt.id = 'ta-flt';
+    flt.innerHTML = '<summary class="tp-mini ta-btn" aria-label="Filters">' + IC.filter + '<span class="lb">Filters</span><span class="ta-cnt" hidden></span>' + '</summary><div class="ac-menu ta-fpan"><div class="ta-fh">Show pupils of</div></div>';
+    var pan = flt.querySelector('.ta-fpan'), F = [['#ac-tch', 'Teacher'], ['#ac-yr', 'Year group'], ['#ac-cls', 'Class']];
+    F.forEach(function (f) { var e = $(f[0]); if (!e) return; var l = document.createElement('label'); l.className = 'ta-fl'; l.innerHTML = '<span>' + f[1] + '</span>'; l.append(e); pan.append(l); });
+    var clr = document.createElement('button'); clr.type = 'button'; clr.className = 'ta-fclr'; clr.textContent = 'Clear filters'; pan.append(clr);
+    var cnt = function () { var n = F.filter(function (f) { var e = $(f[0]); return e && e.value; }).length, c = flt.querySelector('.ta-cnt'); c.textContent = n; c.hidden = !n; flt.classList.toggle('on', !!n); clr.hidden = !n; };
+    clr.addEventListener('click', function () { F.forEach(function (f) { var e = $(f[0]); if (e && e.value) { e.value = ''; e.dispatchEvent(new Event('change')); } }); cnt(); });
+    pan.addEventListener('change', function () { setTimeout(cnt, 0); });
+    F.forEach(function (f) { var e = $(f[0]); if (e) new MutationObserver(cnt).observe(e, { childList: true }); });
+    var srt = $('#ac-sort'), more = tools.querySelector('details.ac-more');
+    tools.insertBefore(flt, srt || more); cnt();
+    /* sort: an icon in front of the list (hidden with it) */
+    if (srt) { var sw = document.createElement('span'); sw.className = 'ta-sel'; sw.innerHTML = IC.sort; srt.parentNode.insertBefore(sw, srt); sw.append(srt); }
+    /* the ⋯ menu */
+    if (more) { var ms = more.querySelector('summary'); ms.innerHTML = IC.dots; ms.classList.add('ta-btn'); ms.setAttribute('aria-label', 'More'); ms.title = 'More';
+      [['#ac-refresh', 'refresh'], ['#ac-csv', 'download'], ['#ac-mailtest', 'mail'], ['#ac-forget', 'key'], ['#ac-staffout', 'out']].forEach(function (x) { ib($(x[0]), x[1], true); });
+      var so = $('#ac-staffout'), fg = $('#ac-forget'), mt = $('#ac-mailtest'); if (fg && mt) fg.parentNode.insertBefore(mt, fg); if (so) { var hr = document.createElement('hr'); so.parentNode.insertBefore(hr, fg || so); so.classList.add('danger'); } }
+    /* selection bar: [x] n selected · Select all | Message · Set a test · Move · Zones · More ▾ (Teacher, Merge, Rename, Reset PIN, Delete) */
+    var done = $('#ac-clear'), n = $('#ac-n'), all = $('#ac-selall');
+    if (done) { done.innerHTML = IC.close + '<span class="lb">Done</span>'; done.className = 'ta-ib ta-x'; done.title = 'Done'; done.setAttribute('aria-label', 'Done: clear the selection'); bar.prepend(done); }
+    if (all) { ib(all, 'all', true); all.classList.add('ta-link'); }
+    var lead = document.createElement('span'); lead.className = 'ta-blead'; if (n) bar.insertBefore(lead, n); if (n) lead.append(n); if (all) lead.append(all);
+    [['#ac-msg', 'work', 'Message'], ['#ac-test', 'tests', 'Set a test'], ['#ac-move', 'move', 'Move'], ['#ac-zones', 'zones', 'Zones']].forEach(function (x) { var b = $(x[0]); if (!b) return; b.textContent = x[2]; ib(b, x[1]); b.classList.add('ta-act'); });
+    var bm = document.createElement('details'); bm.className = 'ac-more ta-bmore'; bm.innerHTML = '<summary class="ta-btn ta-act" title="More actions">' + IC.dots + '<span class="lb">More</span></summary><div class="ac-menu"></div>';
+    var bmm = bm.querySelector('.ac-menu');
+    [['#ac-role', 'ks3', 'Teacher account'], ['#ac-merge', 'merge'], ['#ac-rename', 'rename'], ['#ac-pin', 'pin'], ['#ac-del', 'trash']].forEach(function (x) { var b = $(x[0]); if (!b) return; if (x[2]) b.textContent = x[2]; ib(b, x[1], true); if (x[0] === '#ac-del') { bmm.append(document.createElement('hr')); b.classList.add('danger'); } bmm.append(b); });
+    bar.append(bm);
+    var sp = bar.querySelector('.ac-bsp'); if (sp) sp.remove();
+  })();
   /* start: #visits (old links) opens Pupils on the last view used */
   var h = location.hash.slice(1); if (h === 'visits') { var v = ''; try { v = localStorage.getItem('teacher.actview') || 'pupils'; } catch (e) { v = 'pupils'; } h = 'p-' + v; }
   go(TITLE[h] ? h : 'home', false);
