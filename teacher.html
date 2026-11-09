@@ -260,6 +260,15 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 .cs-pic{height:100%;display:grid;place-items:center;background:rgba(255,255,255,.08);border-radius:2vh;overflow:hidden}.cs-pic img{max-width:100%;max-height:100%;object-fit:contain}.cs-txt{font-size:2.6vh;line-height:1.5;padding:3vh;white-space:pre-wrap}
 .cs-who{display:grid;gap:1.5vh}.cs-who b{font-size:6vh}.cs-who span{font-size:3.2vh;opacity:.9}.cs-who i{font-size:3vh;opacity:.85}.cs-who small{font-size:3vh;font-weight:800;color:#FFE38A}
 .cs-nav{position:fixed;bottom:2vh;right:3vw;font-size:1.8vh;opacity:.6}
+.ac-cmp,.ac-hd{display:grid!important;grid-template-columns:minmax(130px,1.7fr) 58px minmax(110px,1.3fr) 50px 72px 72px 118px;gap:10px;align-items:center;padding:6px 12px!important;min-height:0!important;text-align:left;font-size:14px}
+.ac-hd{padding:6px 12px 6px calc(12px + var(--pk,0px))!important;font:800 11.5px/1 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--ink-3);border-bottom:1px solid var(--line);background:var(--paper-2);position:sticky;top:0;z-index:1}
+.ac-wrap.picking .ac-hd{--pk:34px}
+.ac-cmp .c-n{display:flex;align-items:center;gap:6px;min-width:0}.ac-cmp .c-n b{font-size:14.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-cmp .c-cl{font-size:12.5px;font-weight:700;color:var(--ink-2);background:var(--paper-2);border-radius:6px;padding:2px 6px;justify-self:start;white-space:nowrap}
+.ac-cmp .c-pr{display:grid;grid-template-columns:1fr auto;gap:6px;align-items:center}.ac-cmp .c-pr i{height:7px;border-radius:9px;background:var(--line);overflow:hidden;display:block}.ac-cmp .c-pr u{display:block;height:100%;background:#D64545;text-decoration:none}.ac-cmp .c-pr.mid u{background:#E0A21B}.ac-cmp .c-pr.hi u{background:#1E8E4E}.ac-cmp .c-pr small{font-size:12px;color:var(--ink-2);white-space:nowrap}
+.ac-cmp .c-q,.ac-cmp .c-wk,.ac-cmp .c-tot{font-size:13px;white-space:nowrap;color:var(--ink-2);font-variant-numeric:tabular-nums}.ac-cmp .c-wk.on{color:#1E8E4E;font-weight:700}.ac-cmp .c-last{font-size:12.5px;color:var(--ink-3);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-row2 .ac-tags{grid-column:2;padding:0 12px 6px;margin:0}.ac-grp{margin:0!important;padding:10px 12px 4px!important;font-size:13.5px!important}
+@media (max-width:760px){.ac-cmp,.ac-hd{grid-template-columns:minmax(110px,1.6fr) 50px minmax(90px,1.2fr) 64px}.ac-cmp .c-q,.ac-cmp .c-tot,.ac-cmp .c-last,.ac-hd .c-q,.ac-hd .c-tot,.ac-hd .c-last{display:none}}
 </style></head><body><div class="wrap">
 <a class="back" href="index.html">‹ Revision site</a>
 <div class="hrow"><h1>Teacher area</h1><button type="button" class="ib" aria-expanded="false" aria-controls="i-lead" aria-label="About the Teacher area" title="About the Teacher area"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
@@ -2363,6 +2372,8 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const list = $('#ac-list'), pd = $('#ac-pd'); if (pd) wrap.append(pd); list.innerHTML = '';
     $('#ac-wrap').classList.toggle('picking', SELMODE);
     const ring = v => { const r = 15, c = 2 * Math.PI * r; return el('span', { class: 'ac-ring' + (v >= 70 ? ' hi' : v >= 30 ? ' mid' : ''), 'aria-hidden': 'true', html: `<svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="${r}"/><circle cx="18" cy="18" r="${r}" stroke-dasharray="${c * v / 100} ${c}"/></svg><b>${v}<small>%</small></b>` }); };
+    const SHORTU = { U1: 'U1', U4: 'U4', U5: 'U5', AS1: 'AS1', AS2: 'AS2', A21: 'A2 1', A22: 'A2 2', Y8: 'Y8', Y9: 'Y9', Y10: 'Y10', Y0: 'KS3' };
+    if (shown.length) list.append(el('div', { class: 'ac-hd', 'aria-hidden': 'true' }, el('span', { class: 'c-n', text: 'Pupil' }), el('span', { class: 'c-cl', text: 'Class' }), el('span', { class: 'c-pr', text: 'Covered' }), el('span', { class: 'c-q', text: 'Quiz' }), el('span', { class: 'c-wk', text: 'This week' }), el('span', { class: 'c-tot', text: 'Total' }), el('span', { class: 'c-last', text: 'Last active' })));
     let lastG = null;
     shown.forEach(p => {
       if (sortBy === 'class') { const g = gk(p), key = g.join('|'); if (key !== lastG) { lastG = key; const n = shown.filter(x => gk(x).join('|') === key).length, c = classOf(p.cls);
@@ -2374,12 +2385,16 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       cb.addEventListener('change', () => { cb.checked ? SEL.add(p.id) : SEL.delete(p.id); row.classList.toggle('sel', cb.checked); bar(); });
       const open = () => { if (SELMODE) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); return; } const was = OPEN === p.id; OPEN = was ? null : p.id; PICK = null; render(); if (!was) setTimeout(() => { const r = list.querySelector(`[data-id="${p.id}"]`); if (r) r.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60); };
       const tags = [ROLES[p.id] === 'teacher' ? el('span', { class: 'ac-tag', style: 'background:#1B1B1B;color:#FFE066;font-weight:800', title: 'Signs in as a teacher: their device opens the Teacher area', text: 'Teacher' }) : null, p.pin === false ? el('span', { class: 'ac-tag', text: 'No PIN' }) : null, typed.length ? el('span', { class: 'ac-tag', title: 'Also typed: ' + typed.join(', '), text: 'Also typed: ' + typed.slice(0, 2).join(', ') }) : null, accTag(p)].filter(Boolean);
-      const btn = el('button', { type: 'button', class: 'ac-main', 'aria-expanded': String(OPEN === p.id) },
-        ring(cov),
-        el('span', { class: 'ac-who' }, el('span', { class: 'ac-nmr' }, LIVE.some(r => r.id === p.id) ? el('span', { class: 'lv-dot', title: 'Revising now' }) : null, el('b', { text: p.name }), el('span', { class: 'ac-cl', title: teacherOf(p.cls) ? 'Taught by ' + teacherOf(p.cls) : CLASSES.length ? 'Not in one of your classes' : '', text: p.cls + (CLASSES.length && !classOf(p.cls) ? ' ?' : '') })),
-          el('small', { text: main ? `${UNIT[main] || main}: ${cov}% covered` + (() => { let a = 0, m = 0; Object.values(pr[main].quiz || {}).forEach(x => { a += x[0]; m += x[1]; }); return m ? ` · quiz ${pct(a, m)}%` : ''; })() : 'Nothing covered yet' }),
-          el('small', { class: 'ac-last', text: p.last ? 'Last active ' + when(p.last) : 'Not used yet' })),
-        el('span', { class: 'ac-time' }, el('b', { text: hm(p.total) }), el('small', { class: p.week ? 'on' : '', text: p.week ? hm(p.week) + ' this week' : 'none this week' })));
+      /* COMPACT ROW: one line per pupil, in columns (name, class, main unit covered, quiz, this week, total, last active) */
+      let qa = 0, qm = 0; if (main) Object.values(pr[main].quiz || {}).forEach(x => { qa += x[0]; qm += x[1]; });
+      const btn = el('button', { type: 'button', class: 'ac-main ac-cmp', 'aria-expanded': String(OPEN === p.id), title: main ? `${UNIT[main] || main}: ${cov}% covered` : 'Nothing covered yet' },
+        el('span', { class: 'c-n' }, LIVE.some(r => r.id === p.id) ? el('span', { class: 'lv-dot', title: 'Revising now' }) : null, el('b', { text: p.name })),
+        el('span', { class: 'c-cl', title: teacherOf(p.cls) ? 'Taught by ' + teacherOf(p.cls) : CLASSES.length ? 'Not in one of your classes' : '', text: p.cls + (CLASSES.length && !classOf(p.cls) ? ' ?' : '') }),
+        el('span', { class: 'c-pr' + (cov >= 70 ? ' hi' : cov >= 30 ? ' mid' : '') }, el('i', { 'aria-hidden': 'true' }, el('u', { style: `width:${cov}%` })), el('small', { text: main ? `${SHORTU[main] || main} ${cov}%` : '–' })),
+        el('span', { class: 'c-q', text: qm ? pct(qa, qm) + '%' : '–' }),
+        el('span', { class: 'c-wk' + (p.week ? ' on' : ''), text: p.week ? hm(p.week) : '–' }),
+        el('span', { class: 'c-tot', text: hm(p.total) }),
+        el('span', { class: 'c-last', text: p.last ? when(p.last) : 'Not yet' }));
       btn.addEventListener('click', open);
       const row = el('div', { class: 'ac-row2' + (SEL.has(p.id) ? ' sel' : '') + (OPEN === p.id ? ' open' : ''), 'data-id': p.id }, el('label', { class: 'ac-pk' }, cb), btn, tags.length ? el('div', { class: 'ac-tags' }, ...tags) : null);
       list.append(row);
@@ -2396,6 +2411,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     live(); if (!liveT) liveT = setTimeout(pollLive, 45000);
     const tb = $('#t-badge'); if (tb) { tb.textContent = REQ.length ? String(REQ.length) : ''; tb.hidden = !REQ.length; }
     requests(); zreqs(); attention();
+    try { dispatchEvent(new CustomEvent('ta-data', { detail: { pupils: DATA, req: REQ.length, zreq: ZREQ.length, live: LIVE, classes: CLASSES, noclass: CLASSES.length ? DATA.filter(p => !classOf(p.cls)).length : 0 } })); } catch (e) { }   /* the Overview page */
     const cb = $('#cl-badge'); if (cb) { const nz = ZREQ.length + (CLASSES.length ? DATA.filter(p => !classOf(p.cls)).length : 0); cb.textContent = nz ? String(nz) : ''; cb.hidden = !nz; }
     if (VIEW === 'classes') classesView();
     if (VIEW !== 'pupils') ['#ac-live', '#ac-req', '#ac-zr', '#ac-att'].forEach(q => { const x = $(q); if (x) x.hidden = true; });
@@ -3120,6 +3136,7 @@ h1{font-size:44pt;margin:6mm 0 2mm}.p{font-size:16pt;margin:2mm 0}.n{font-size:3
     $('#ac-sort').value = sortBy; $('#ac-sort').addEventListener('change', e => { sortBy = e.target.value; LS.set('teacher.actsort', sortBy); render(); });
     /* load when the Pupils tab is first shown: the tabs switch with history.replaceState (no hashchange), so watch the tab too */
     let done = false; const go = () => { const sec = $('#visits'); if (done || !sec || sec.hidden) return; done = true; load(); };
+    window.TA_LOAD = () => { if (!done) { done = true; load(); } };   /* the Overview page loads pupils without showing them */
     const tb = $('#t-visits'); if (tb) tb.addEventListener('click', () => setTimeout(go, 0));
     new MutationObserver(go).observe($('#visits'), { attributes: true, attributeFilter: ['hidden'] });
     addEventListener('hashchange', go); go();
@@ -3506,4 +3523,109 @@ h1{font-size:44pt;margin:6mm 0 2mm}.p{font-size:16pt;margin:2mm 0}.n{font-size:3
   start();
 })();
 </script>
+<style id="ta-shell-css">
+/* TEACHER AREA LAYOUT: one sidebar (grouped) instead of two rows of tabs; an Overview page; filters only where they apply */
+body.ta-on .wrap{max-width:1120px;padding-top:6px}
+body.ta-on nav.tabs,body.ta-on #ac-view,body.ta-on .wrap > a.back,body.ta-on .wrap > .hrow:first-of-type,body.ta-on #i-lead,body.ta-on #activity > .hrow:first-child{display:none!important}
+.ta-app{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
+.ta-side{position:sticky;top:0;height:100vh;overflow-y:auto;background:var(--paper);border-right:1px solid var(--line);padding:16px 12px 24px;display:flex;flex-direction:column;gap:2px;z-index:30}
+.ta-brand{font:800 19px/1.1 var(--display,var(--sans));letter-spacing:.02em;text-transform:uppercase;padding:4px 10px 2px}
+.ta-sub{font-size:12.5px;color:var(--ink-3);padding:0 10px 12px}
+.ta-g{font:800 11px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--ink-3);padding:14px 10px 6px}
+.ta-i{display:flex;align-items:center;gap:10px;width:100%;text-align:left;font:600 14.5px/1.2 var(--sans);color:var(--ink-2);background:none;border:0;border-radius:9px;padding:8px 10px;cursor:pointer;text-decoration:none}
+.ta-i:hover{background:var(--paper-2)}.ta-i[aria-current="page"]{background:color-mix(in srgb,var(--accent) 12%,var(--paper));color:var(--accent);font-weight:800}
+.ta-i svg{flex:none;width:18px;height:18px}.ta-i .ta-b{margin-left:auto;min-width:20px;height:20px;padding:0 6px;border-radius:999px;background:#E8A33D;color:#16213A;font-size:12px;font-weight:800;display:inline-grid;place-items:center}
+.ta-foot{margin-top:auto;padding:16px 0 56px;border-top:1px solid var(--line)}
+.ta-top{display:flex;align-items:center;gap:12px;padding:18px 16px 4px;max-width:1120px;margin:0 auto;width:100%;box-sizing:border-box}
+.ta-top h1{margin:0;font-size:26px}.ta-menu{display:none}
+.ta-home{display:grid;gap:16px}
+.ta-cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px}
+.ta-c{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px;display:grid;gap:4px;align-content:start}
+.ta-c b.n{font:800 30px/1 var(--sans)}.ta-c span{font-size:14px;color:var(--ink-2)}.ta-c small{font-size:12.5px;color:var(--ink-3)}
+.ta-c.warn{border-color:#E8A33D;background:color-mix(in srgb,#E8A33D 9%,var(--paper))}.ta-c.live{border-left:5px solid #1E8E4E}
+.ta-c button{justify-self:start;margin-top:6px}
+.ta-quick{display:flex;flex-wrap:wrap;gap:8px}
+.ta-h2{font-size:18px;margin:6px 0 0}
+@media (max-width:900px){.ta-app{grid-template-columns:1fr}.ta-side{position:fixed;left:0;top:0;width:270px;transform:translateX(-105%);transition:transform .2s;box-shadow:0 10px 40px rgba(0,0,0,.25)}
+  body.ta-open .ta-side{transform:none}.ta-menu{display:inline-flex}.ta-scrim{display:none}body.ta-open .ta-scrim{display:block;position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:29}}
+@media print{.ta-side,.ta-top{display:none!important}.ta-app{display:block}}
+</style>
+<script>
+(function () {
+  'use strict';
+  var wrap = document.querySelector('body > .wrap'); if (!wrap || !document.getElementById('visits')) return;
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var I = function (d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>'; };
+  var IC = { home: I('<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>'), pupils: I('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.6c2.8.2 4.8 1.9 5.4 4.9"/>'), classes: I('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/>'),
+    topics: I('<path d="M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6"/>'), tests: I('<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 3.5v2h6v-2M8.5 11l2 2 4-4M8.5 17h7"/>'), reports: I('<path d="M6 3.5h9l3 3v14H6z"/><path d="M9 11h6M9 14.5h6M9 18h4"/>'), week: I('<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>'),
+    work: I('<path d="M4 5h16v11H8l-4 4z"/><path d="M8 9.5h8M8 12.5h5"/>'), comps: I('<path d="M7 4h10v4a5 5 0 01-10 0z"/><path d="M7 6H4a3 3 0 003 4M17 6h3a3 3 0 01-3 4M12 13v4M8.5 20h7M10 17h4"/>'),
+    packs: I('<path d="M4 7l8-4 8 4-8 4z"/><path d="M4 12l8 4 8-4M4 17l8 4 8-4"/>'), test: I('<path d="M9 3.5h6M10 3.5v5L5 18a2 2 0 001.8 3h10.4a2 2 0 001.8-3l-5-9.5v-5"/>'), trends: I('<path d="M3.5 17l5-5 4 4 8-8"/><path d="M15 8h5.5v5.5"/>'), sow: I('<path d="M5 4h14v16H5z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>'), ks3: I('<path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11.5V16c0 1.4 2.2 3 5 3s5-1.6 5-3v-4.5"/>'), back: I('<path d="M15 5l-7 7 7 7"/>') };
+  var NAV = [
+    ['', [['home', 'Overview', 'home']]],
+    ['Pupils', [['p-pupils', 'Pupils', 'pupils', '#t-badge'], ['p-classes', 'Classes & zones', 'classes', '#cl-badge']]],
+    ['Progress', [['p-topics', 'Topics', 'topics'], ['p-tests', 'Topic tests', 'tests'], ['p-reports', 'Reports', 'reports'], ['p-week', 'Weekly report', 'week']]],
+    ['Communicate', [['p-work', 'Set work & messages', 'work'], ['p-comps', 'Competitions', 'comps']]],
+    ['Teaching resources', [['packs', 'Topic packs', 'packs'], ['test', 'Build a test', 'test'], ['trends', 'Exam trends', 'trends'], ['sow', 'Scheme of work', 'sow'], ['ks3', 'KS3 topics', 'ks3']]]];
+  var TITLE = {}; NAV.forEach(function (g) { g[1].forEach(function (x) { TITLE[x[0]] = x[1]; }); });
+  /* build: sidebar + top bar, the page moved into the main column */
+  document.body.classList.add('ta-on');
+  var app = document.createElement('div'); app.className = 'ta-app';
+  var side = document.createElement('nav'); side.className = 'ta-side'; side.id = 'ta-side'; side.setAttribute('aria-label', 'Teacher area');
+  side.innerHTML = '<div class="ta-brand">Teacher area</div><div class="ta-sub">Mr Butler’s Digital Technology</div>' + NAV.map(function (g) {
+    return (g[0] ? '<div class="ta-g">' + g[0] + '</div>' : '') + g[1].map(function (x) { return '<a class="ta-i" href="#' + x[0] + '" data-go="' + x[0] + '">' + IC[x[2]] + '<span>' + x[1] + '</span>' + (x[3] ? '<span class="ta-b" data-of="' + x[3] + '" hidden></span>' : '') + '</a>'; }).join('');
+  }).join('') + '<div class="ta-foot"><a class="ta-i" href="index.html">' + IC.back + '<span>Revision site</span></a></div>';
+  var mainCol = document.createElement('div'); mainCol.className = 'ta-mainc';
+  var top = document.createElement('div'); top.className = 'ta-top'; top.innerHTML = '<button type="button" class="tp-mini ta-menu" aria-controls="ta-side" aria-expanded="false">☰ Menu</button><h1 id="ta-title" tabindex="-1">Overview</h1>';
+  var scrim = document.createElement('div'); scrim.className = 'ta-scrim';
+  wrap.parentNode.insertBefore(app, wrap); app.append(side, mainCol); mainCol.append(top, wrap); document.body.append(scrim);
+  /* OVERVIEW: what needs you, who is revising, this week, the exam countdown, quick links, visit counts */
+  var home = document.createElement('section'); home.id = 'ta-home'; home.className = 'ta-home'; home.hidden = true;
+  home.innerHTML = '<div class="ta-cards" id="ta-cards"><div class="ta-c"><span>Loading pupils…</span></div></div><h2 class="ta-h2">Quick links</h2><div class="ta-quick">' +
+    [['p-work', 'Set work or send a message'], ['test', 'Build a test'], ['packs', 'Topic packs'], ['p-comps', 'Competitions'], ['p-reports', 'Reports']].map(function (x) { return '<a class="tp-mini" href="#' + x[0] + '" data-go="' + x[0] + '">' + x[1] + '</a>'; }).join('') + '</div>';
+  var cd = $('#cd'); var tabs = $('nav.tabs'); (tabs || wrap.firstChild).parentNode.insertBefore(home, tabs); if (cd) home.insertBefore(cd, home.querySelector('.ta-h2'));
+  var vis = Array.prototype.filter.call(document.querySelectorAll('#visits details'), function (d) { return /Anonymous visit counts/.test(d.textContent); })[0]; if (vis) home.append(vis);
+  var hm = function (s) { var m = Math.round((+s || 0) / 60); return m < 60 ? m + ' min' : Math.floor(m / 60) + ' h ' + String(m % 60).padStart(2, '0'); };
+  var H = function (x) { return String(x == null ? '' : x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
+  addEventListener('ta-data', function (e) {
+    var d = e.detail || {}, P = d.pupils || [], act = P.filter(function (p) { return p.week > 0; }), wk = P.reduce(function (a, p) { return a + (+p.week || 0); }, 0), lv = d.live || [];
+    var card = function (cls, n, t, sub, go, btn) { return '<div class="ta-c ' + cls + '"><b class="n">' + n + '</b><span>' + t + '</span>' + (sub ? '<small>' + sub + '</small>' : '') + (go ? '<button type="button" class="tp-mini' + (cls === 'warn' ? ' pri' : '') + '" data-go="' + go + '">' + btn + '</button>' : '') + '</div>'; };
+    var c = [];
+    if (d.req) c.push(card('warn', d.req, d.req === 1 ? 'pupil waiting for approval' : 'pupils waiting for approval', '', 'p-pupils', 'Review'));
+    if (d.zreq) c.push(card('warn', d.zreq, d.zreq === 1 ? 'zone request' : 'zone requests', 'Pupils asking to open another unit', 'p-pupils', 'Review'));
+    if (d.noclass) c.push(card('warn', d.noclass, 'not in a class yet', '', 'p-classes', 'Sort them out'));
+    c.push(card('live', lv.length, 'revising now', lv.slice(0, 4).map(function (r) { return H(r.name || ''); }).join(', ') + (lv.length > 4 ? ' and ' + (lv.length - 4) + ' more' : ''), 'p-pupils', 'See pupils'));
+    c.push(card('', act.length + '<small style="font-size:16px"> / ' + P.length + '</small>', 'pupils active this week', hm(wk) + ' revising this week', 'p-week', 'Weekly report'));
+    c.push(card('', (d.classes || []).length, (d.classes || []).length === 1 ? 'class' : 'classes', '', 'p-classes', 'Classes & zones'));
+    $('#ta-cards').innerHTML = c.join('');
+  });
+  /* GO: Overview, a pupil-tracking view (p-*) or a resource tab */
+  var cur = '';
+  function go(id, focus) {
+    if (!TITLE[id]) id = 'home';
+    cur = id; var isP = id.indexOf('p-') === 0;
+    if (id === 'home') { Array.prototype.forEach.call(document.querySelectorAll('.wrap > section[role="tabpanel"]'), function (s) { s.hidden = true; }); home.hidden = false; var k = 0, ld = function () { if (window.TA_LOAD) window.TA_LOAD(); else if (k++ < 60) setTimeout(ld, 250); }; ld(); }   /* the pupil tracker sets TA_LOAD once it has the Apps Script URL */
+    else { home.hidden = true; var t = $('#t-' + (isP ? 'visits' : id)); if (t) t.click(); if (isP) { var b = $('#ac-view [data-v="' + id.slice(2) + '"]'); if (b) b.click(); } }
+    history.replaceState(null, '', '#' + id);
+    sync(); document.body.classList.remove('ta-open'); top.querySelector('.ta-menu').setAttribute('aria-expanded', 'false');
+    if (focus) { window.scrollTo(0, 0); $('#ta-title').focus({ preventScroll: true }); }
+  }
+  function sync() {
+    side.querySelectorAll('[data-go]').forEach(function (a) { if (a.dataset.go === cur) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
+    $('#ta-title').textContent = TITLE[cur] || 'Teacher area'; document.title = (TITLE[cur] || 'Teacher area') + ' · Teacher area';
+    /* filters (teacher, year, class) only where they apply */
+    var noF = ['p-classes', 'p-work', 'p-comps'].indexOf(cur) >= 0; ['#ac-tch', '#ac-yr', '#ac-cls'].forEach(function (s) { var e = $(s); if (e) e.style.display = noF ? 'none' : ''; });
+  }
+  document.addEventListener('click', function (e) { var a = e.target.closest('[data-go]'); if (!a) return; e.preventDefault(); go(a.dataset.go, true); });
+  top.querySelector('.ta-menu').addEventListener('click', function () { var o = !document.body.classList.contains('ta-open'); document.body.classList.toggle('ta-open', o); this.setAttribute('aria-expanded', String(o)); });
+  scrim.addEventListener('click', function () { document.body.classList.remove('ta-open'); });
+  /* other parts of the page switch pupil views themselves (e.g. a pupil's name in a report opens Pupils): follow them */
+  var av = $('#ac-view'); if (av) new MutationObserver(function () { if (cur.indexOf('p-') !== 0) return; var s = av.querySelector('[aria-selected="true"]'); if (s && 'p-' + s.dataset.v !== cur) { cur = 'p-' + s.dataset.v; history.replaceState(null, '', '#' + cur); sync(); } }).observe(av, { attributes: true, subtree: true, attributeFilter: ['aria-selected'] });
+  /* badges: mirror the tab badges (requests, classes & zones) */
+  side.querySelectorAll('[data-of]').forEach(function (b) { var src = $(b.dataset.of); if (!src) return; var f = function () { b.textContent = src.textContent; b.hidden = src.hidden || !src.textContent; }; f(); new MutationObserver(f).observe(src, { attributes: true, childList: true, characterData: true, subtree: true }); });
+  /* start: #visits (old links) opens Pupils on the last view used */
+  var h = location.hash.slice(1); if (h === 'visits') { var v = ''; try { v = localStorage.getItem('teacher.actview') || 'pupils'; } catch (e) { v = 'pupils'; } h = 'p-' + v; }
+  go(TITLE[h] ? h : 'home', false);
+})();
+</script>
+
 </body></html>
