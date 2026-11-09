@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>try{if(!localStorage.getItem('mrb-staff-ok')||localStorage.getItem('mrb-viewas'))document.documentElement.classList.add('t-lock')}catch(e){document.documentElement.classList.add('t-lock')}</script>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><script>window.T_PUPIL=/[?&]pupil=trends\b/.test(location.search);if(window.T_PUPIL)document.documentElement.classList.add('t-pupil');else try{if(!localStorage.getItem('mrb-staff-ok')||localStorage.getItem('mrb-viewas'))document.documentElement.classList.add('t-lock')}catch(e){document.documentElement.classList.add('t-lock')}</script>
 <title>Teacher Area – Mr Butler's</title>
 <meta name="robots" content="noindex"><meta name="description" content="Teacher area: CCEA past-paper topic packs and mock tests (questions, mark schemes and examiner reports), exam trends, exam countdown, the scheme of work and pupil visits.">
 <link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#16213A"><link rel="icon" href="app-icons/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="app-icons/apple-touch-icon.png">
@@ -1844,7 +1844,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       if (open) {
         const det = el('div', { class: 'tr-det' });
         det.append(el('div', { class: 'tr-dh' }, el('p', { text: `${plural(r.count, 'question')}, ${r1(r.total)} marks${r.shared ? `; ${r.shared} of the questions are also in another topic, so their marks are split` : ''}. Spec points from the ${book.short} workbook:` }),
-          el('button', { type: 'button', class: 'tp-mini', text: 'Make a topic pack ›', onclick: () => { location.hash = 'packs'; setTimeout(() => TP.open(book.id, r.t.n), 30); } })));
+          window.T_PUPIL ? null : el('button', { type: 'button', class: 'tp-mini', text: 'Make a topic pack ›', onclick: () => { location.hash = 'packs'; setTimeout(() => TP.open(book.id, r.t.n), 30); } })));
         const ul = el('ul', { class: 'tr-spec' });
         r.pages.forEach(p => {
           const qs = p.items.slice().sort((a, b) => serCmp(b.s, a.s) || qCmp(a.q, b.q));
@@ -3554,6 +3554,15 @@ body.ta-on nav.tabs,body.ta-on #ac-view,body.ta-on .wrap > a.back,body.ta-on .wr
 (function () {
   'use strict';
   var wrap = document.querySelector('body > .wrap'); if (!wrap || !document.getElementById('visits')) return;
+  /* PUPIL MODE (teacher.html?pupil=trends, linked from the home page): Exam trends only, nothing else of the Teacher area */
+  if (window.T_PUPIL) {
+    var st = document.createElement('style'); st.textContent = 'html.t-pupil .wrap > *:not(#trends):not(.ta-ptop){display:none!important}html.t-pupil #trends{display:block!important}html.t-pupil #trends > .hrow h2{display:none}html.t-pupil .ta-ptop{display:flex;align-items:center;gap:12px;margin:0 0 12px}html.t-pupil .ta-ptop h1{margin:0;font-size:26px}html.t-pupil .ta-ptop a{font-weight:700;text-decoration:none;color:var(--accent)}';
+    document.head.append(st); var tp = document.createElement('div'); tp.className = 'ta-ptop'; tp.innerHTML = '<a href="index.html">‹ Revision site</a>'; wrap.prepend(tp);
+    var h1 = document.createElement('h1'); h1.textContent = 'Exam trends'; h1.style.cssText = 'margin:0 0 6px;font-size:28px'; tp.after(h1); h1.className = 'ta-ptop';
+    document.title = 'Exam trends · Mr Butler’s Digital Technology';
+    var tt = document.getElementById('t-trends'); if (tt) tt.click(); var trs = document.getElementById('trends'); if (trs) trs.hidden = false;
+    return;
+  }
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var I = function (d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>'; };
   var IC = { home: I('<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>'), pupils: I('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.6c2.8.2 4.8 1.9 5.4 4.9"/>'), classes: I('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/>'),

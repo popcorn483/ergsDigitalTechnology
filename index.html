@@ -4325,6 +4325,25 @@ function render(course) {
       <div class="acts"><a class="tp-open" href="${esc(u.file)}#${esc(c.page)}" aria-label="Open the workbook: ${esc(c.title)}">${I_BOOK}<span>Open workbook</span><span class="tp-arr" aria-hidden="true">→</span></a></div>
     </li>`; }).join('')}</ol></section>`).join('');
   guard(box);   /* no topic PowerPoint / glossary icons in the list any more: the workbook has both */
+  if (course !== 'ks3') box.insertAdjacentHTML('beforeend', xpHTML(course));
+}
+/* EXAM PRACTICE (bottom of the GCSE / A level units): Exam trends (always open) and each topic's CCEA topic pack
+   (pack.html: every past-paper question on the topic, with mark schemes), unlocked once every page of the topic is marked done */
+const XP_BOOKS = ['U1', 'U4', 'AS1', 'AS2', 'A21'];
+function xpHTML(course) {
+  const staff = (() => { try { return !!localStorage.getItem('mrb-staff-ok') && !localStorage.getItem('mrb-pupilmode'); } catch (e) { return false; } })();
+  const doneOf = id => { try { return (JSON.parse(localStorage.getItem('notes-reader:' + id)) || {}).done || {}; } catch (e) { return {}; } };
+  const us = UNITS.filter(u => u.course === course && XP_BOOKS.includes(u.id));
+  if (!document.getElementById('xp-css')) { const st = document.createElement('style'); st.id = 'xp-css'; st.textContent = `.xp{margin-top:28px}.xp-tr{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:14px;border:1.5px solid var(--line);background:var(--paper);text-decoration:none;color:var(--ink);margin:4px 0 14px}.xp-tr:hover{border-color:var(--accent)}.xp-tr .xi{flex:none;width:44px;height:44px;border-radius:12px;background:#7B4FD6;color:#fff;display:grid;place-items:center}.xp-tr b{display:block;font-size:16px}.xp-tr small{color:var(--ink-3);font-size:13.5px}.xp-tr .go{margin-left:auto;font-weight:800;color:var(--accent)}
+.xp-u{margin:16px 0 6px;font-size:15px}.xp-l{list-style:none;margin:0;padding:0;display:grid;gap:6px}.xp-l li{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:9px 12px;border-radius:12px;background:var(--paper);border:1px solid var(--line);font-size:14.5px}
+.xp-l li b{flex:1;min-width:160px;font-weight:700}.xp-l li a{font-weight:700;font-size:13.5px;text-decoration:none;color:#fff;background:var(--accent);border-radius:999px;padding:6px 12px}.xp-l li a.ms{background:transparent;color:var(--accent);box-shadow:inset 0 0 0 1.5px var(--accent)}
+.xp-l li.lk{opacity:.75}.xp-l li.lk small{color:var(--ink-3);font-size:13px}.xp-p{color:var(--ink-2);font-size:14.5px;margin:0 0 4px}`; document.head.append(st); }
+  const unit = u => { const d = doneOf(u.id); return `<h3 class="xp-u">${esc(u.short)} · ${esc(u.title)}</h3><ul class="xp-l">${u.chapters.map(c => { const n = (c.pids || []).length, k = (c.pids || []).filter(x => d[x]).length, open = staff || (n && k === n);
+      return open ? `<li><b>${esc(pad2(c.n))} ${esc(c.title)}</b><a href="pack.html?b=${esc(u.id)}&t=${esc(c.n)}&v=questions">Questions</a><a class="ms" href="pack.html?b=${esc(u.id)}&t=${esc(c.n)}&v=answers">Mark schemes</a></li>`
+        : `<li class="lk"><b>🔒 ${esc(pad2(c.n))} ${esc(c.title)}</b><small>${k} of ${n} pages done</small></li>`; }).join('')}</ul>`; };
+  return `<section class="unit xp" aria-labelledby="h-xp"><div class="unit-h"><div><span class="unit-k">Exam practice</span><h2 id="h-xp">Topic packs and exam trends</h2></div></div>
+    <a class="xp-tr" href="teacher.html?pupil=trends#trends"><span class="xi" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 17l5-5 4 4 8-8"/><path d="M15 8h5.5v5.5"/></svg></span><span><b>Exam trends</b><small>How often CCEA asks each topic, how many marks, and when it last came up</small></span><span class="go" aria-hidden="true">→</span></a>
+    ${us.length ? `<p class="xp-p">Each topic pack has every CCEA past-paper question on the topic, and its mark schemes. A pack unlocks when you’ve marked every page in the topic as done.</p>${us.map(unit).join('')}` : ''}</section>`;
 }
 /* temporary decks: manifest._temporary = {"<hub topic id>": "_temporary/<topic id>.pptx"}; shown only when the chapter's
    own folder has nothing (manifest, then the API). The teacher's file always replaces it, badge and line included. */
@@ -4410,7 +4429,7 @@ const reEsc = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 const PPT_OK = new Map();
 function applyFilter(anim) {
   let shown = 0, total = 0; const mine = mineSet();
-  box.querySelectorAll('.unit').forEach(sec => {
+  box.querySelectorAll('.unit[data-unit]').forEach(sec => {   /* not the Exam practice section */
     const u = UNITS.find(x => x.id === sec.dataset.unit), unitOn = (!mine || mine.has(u.id)) && (!F.units.size || F.units.has(u.id));
     let vis = 0;
     sec.querySelectorAll('.tp').forEach(li => {
