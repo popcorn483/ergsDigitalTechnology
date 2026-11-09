@@ -2796,13 +2796,29 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         el('button', { type: 'button', class: 'tp-mini pri', text: st === 'Open' ? `See entries (${ents.length})` : `Judge entries (${ents.length})`, onclick: () => { CJ = r.id; compsView(); window.scrollTo(0, 0); } }),
         placed.length ? el('button', { type: 'button', class: 'tp-mini', text: 'Winners slideshow', onclick: () => slideshow(r) }) : null,
         ents.length ? el('button', { type: 'button', class: 'tp-mini', text: 'Certificates', onclick: () => certificates(r) }) : null,
+        el('button', { type: 'button', class: 'tp-mini', text: 'Share link & QR code', onclick: () => shareComp(r) }),
         el('button', { type: 'button', class: 'tp-mini', text: 'Launch message', onclick: () => launchMsg(r) }),
         el('button', { type: 'button', class: 'tp-mini', text: 'Change closing date', onclick: async () => { const d = prompt('New closing date (YYYY-MM-DD)', r.closes); if (!d || !/^\d{4}-\d\d-\d\d$/.test(d)) return; await api({ action: 'editcomp', rid: r.id, closes: d }); compsView(true); } }),
-        el('button', { type: 'button', class: 'tp-mini', text: 'Remove', onclick: async () => { if (!confirm('Remove this competition? Entries stay in the sheet, but pupils can’t see it any more.')) return; await api({ action: 'delcomp', rid: r.id }); compsView(true); } })));
+        el('button', { type: 'button', class: 'tp-mini', text: 'Remove', onclick: async () => { if (!confirm('Remove this competition? Entries stay in the sheet, but its link stops working.')) return; await api({ action: 'delcomp', rid: r.id }); compsView(true); } })));
+  }
+  /* COMPETITIONS ARE INDEPENDENT: each one has its own public page (compete.html?r=ID): anyone with the link enters with their name, form and house */
+  const compLink = r => location.origin + location.pathname.replace(/teacher\.html$/, '') + 'compete.html?r=' + encodeURIComponent(r.id);
+  function shareComp(r) {
+    const url = compLink(r), qr = el('div', { class: 'cp-qr', style: 'width:220px;max-width:70vw;margin:8px auto;background:#fff;padding:8px;border-radius:12px' });
+    const ov = el('div', { class: 'cp-ov' }, el('div', { class: 'cp-sheet', role: 'dialog', 'aria-modal': 'true', 'aria-label': 'Share ' + r.title },
+      el('h4', { text: 'Share: ' + r.title }), el('p', { class: 'small', text: 'Anyone with this link can enter: no sign-in, any class or year. Put the QR code on a slide or poster.' }), qr,
+      el('input', { type: 'text', readonly: '', value: url, style: 'width:100%;font:inherit;padding:8px;border:1px solid var(--line);border-radius:8px', onclick: e => e.target.select() }),
+      el('div', { class: 'ac-row' }, el('button', { type: 'button', class: 'tp-mini pri', text: 'Copy link', onclick: async (e) => { try { await navigator.clipboard.writeText(url); e.target.textContent = 'Copied ✓'; } catch (x) { } } }),
+        el('a', { class: 'tp-mini', href: url, target: '_blank', rel: 'noopener', text: 'Open the page' }),
+        el('a', { class: 'tp-mini', href: location.origin + location.pathname.replace(/teacher\.html$/, '') + 'compete.html', target: '_blank', rel: 'noopener', text: 'All open competitions' }),
+        el('button', { type: 'button', class: 'tp-mini', text: 'Close', onclick: () => ov.remove() }))));
+    ov.addEventListener('click', e => { if (e.target === ov) ov.remove(); }); document.body.append(ov);
+    const draw = () => { try { const q = qrcode(0, 'M'); q.addData(url); q.make(); qr.innerHTML = q.createSvgTag({ cellSize: 6, margin: 2, scalable: true }); } catch (e) { qr.hidden = true; } };
+    if (typeof qrcode === 'function') draw(); else { const sc = document.createElement('script'); sc.src = 'qrcode.js'; sc.onload = draw; sc.onerror = () => { qr.hidden = true; }; document.head.append(sc); }
   }
   function launchMsg(r) {
     const c = catOf(r.comp) || {};
-    const txt = `🏆 Inter-house Digital Technology competition: ${r.title}\n\n${c.brief || ''}\n\nWho: ${r.years.split(',').map(y => 'Year ' + y).join(', ')}${c.group ? ' · ' + c.group : ''}\nCloses: ${cDate(r.closes)}\nHow to enter: open the Digital Technology app (${location.origin + location.pathname.replace(/teacher\.html$/, '')}), sign in, and tap the competition on your home page.${c.entry && c.entry.help ? '\n' + c.entry.help : ''}\n\nEvery entry earns a point for your house; 1st to 4th earn ${r.cat} points (${(CATPTS[r.cat] || []).join('/')}).${r.note ? '\n\n' + r.note : ''}`;
+    const txt = `🏆 Inter-house Digital Technology competition: ${r.title}\n\n${c.brief || ''}\n\nWho: ${r.years.split(',').map(y => 'Year ' + y).join(', ')}${c.group ? ' · ' + c.group : ''}\nCloses: ${cDate(r.closes)}\nHow to enter (no sign-in needed): ${compLink(r)}${c.entry && c.entry.help ? '\n' + c.entry.help : ''}\n\nEvery entry earns a point for your house; 1st to 4th earn ${r.cat} points (${(CATPTS[r.cat] || []).join('/')}).${r.note ? '\n\n' + r.note : ''}`;
     const ta = el('textarea', { class: 'cp-ta', readonly: '' }); ta.value = txt;
     const ov = el('div', { class: 'cp-ov' }, el('div', { class: 'cp-sheet', role: 'dialog', 'aria-modal': 'true' }, el('h4', { text: 'Launch message' }), el('p', { class: 'small', text: 'For Google Classroom, form-time notices or an assembly slide.' }), ta,
       el('div', { class: 'ac-row' }, el('button', { type: 'button', class: 'tp-mini pri', text: 'Copy', onclick: async (e) => { try { await navigator.clipboard.writeText(txt); e.target.textContent = 'Copied ✓'; } catch (x) { ta.select(); } } }), el('button', { type: 'button', class: 'tp-mini', text: 'Close', onclick: () => ov.remove() }))));

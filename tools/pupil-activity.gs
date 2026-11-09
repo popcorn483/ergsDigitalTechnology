@@ -32,7 +32,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 25;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 26;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -257,8 +257,12 @@ function compEntry_(d) {
   const id = resolve_(String(d.id), aliases_()), N = names_(), cls = (N[id] && N[id][1]) || clean_(d.cls, 12).toUpperCase(), yr = +((cls.match(/^\d{1,2}/) || ['0'])[0]);
   const run = rows_(comps_()).find(r => String(r[0]) === String(d.rid)); if (!run) return { ok: false, error: 'This competition has closed or been removed.' };
   const today = new Date().toISOString().slice(0, 10);
-  if (String(run[3]).split(',').map(Number).indexOf(yr) < 0) return { ok: false, error: 'This competition is not for your year group.' };
+  /* COMPETITIONS ARE INDEPENDENT (v26): anyone with the link can enter, signed in to the revision site or not, in any class;
+     the years are who it is aimed at, not a gate. Entrants without a pupil record give their own name and form. */
+  void yr;
+  if (String(run[5]).slice(0, 10) > today) return { ok: false, error: 'Entries open on ' + String(run[5]).slice(0, 10) + '.' };
   if (String(run[6]).slice(0, 10) < today) return { ok: false, error: 'Entries have closed.' };
+  if (!(N[id] && N[id][0]) && clean_(d.name, 40).replace(/[^A-Za-z]/g, '').length < 3) return { ok: false, error: 'Type your name first.' };
   const house = HOUSES.indexOf(String(d.house)) >= 0 ? String(d.house) : '';
   let fileId = '';
   const m = String(d.img || '').match(/^data:(image\/(png|jpeg|webp|gif));base64,(.+)$/);
@@ -406,6 +410,13 @@ function doGet(e) {
   if (q.action === 'classes') return out_({ ok: true, classes: classes_().map(c => ({ cls: c.cls, teacher: c.teacher, course: c.course })) });   /* the sign-in box: the class list */
   if (q.action === 'zonereq') return out_(zoneAsk_(q.id, String(q.zone || '').toUpperCase(), q.name, q.cls));   /* a pupil's device: approved yet? has a PIN? */
   if (q.action === 'awards') return out_(awardsFor_(q.id, +q.since || 0));   /* a pupil's device: pages the teacher marked or unmarked */   /* pupils signing in: find them by name and form class */
+  if (q.action === 'comprun' || q.action === 'compsopen') {   /* COMPETITIONS (public, no sign-in): one competition by its link, or every one open now */
+    const today = new Date().toISOString().slice(0, 10), pub = r => ({ id: String(r[0]), comp: String(r[1]), title: String(r[2]), years: String(r[3]), cat: String(r[4]), opens: String(r[5]).slice(0, 10), closes: String(r[6]).slice(0, 10), note: String(r[7] || ''),
+      state: String(r[5]).slice(0, 10) > today ? 'soon' : String(r[6]).slice(0, 10) < today ? 'closed' : 'open' });
+    const R = rows_(comps_()).filter(r => r[0]);
+    if (q.action === 'comprun') { const r = R.find(x => String(x[0]) === String(q.r || '')); return out_(r ? { ok: true, run: pub(r), houses: HOUSES } : { ok: false, error: 'not found' }); }
+    return out_({ ok: true, runs: R.map(pub).filter(r => r.state !== 'closed').sort((a, b) => a.closes < b.closes ? -1 : 1), houses: HOUSES });
+  }
   if (q.action === 'staff') {   /* the sign-in box: staff password check (TEACHER_KEY or STAFF_PIN) */
     const k = String(q.key || ''), tk = keyOk_(k), ok = tk || (k === STAFF_PIN && STAFF_PIN !== 'change-me');
     return out_(ok ? { ok: true, teacher: tk, main: k === TEACHER_KEY } : { error: 'key' });

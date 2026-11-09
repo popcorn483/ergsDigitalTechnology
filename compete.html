@@ -55,7 +55,7 @@ li{margin:4px 0}
 </style>
 </head>
 <body>
-<header class="top"><a href="index.html">← Home</a><span class="t">House competition</span><span style="width:60px"></span></header>
+<header class="top"><a href="compete.html">All competitions</a><span class="t">House competition</span><span style="width:60px"></span></header>
 <main id="main"><p class="muted">Loading…</p></main>
 <script>
 (function () {
@@ -65,16 +65,45 @@ li{margin:4px 0}
   var H = function (x) { return String(x == null ? '' : x).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
   var HOUSES = [['Belmore', 'Gold · Hare', 'var(--gold)'], ['Benaughlin', 'Blue · Eagle', 'var(--blue)'], ['Cuilcagh', 'Red · Fox', 'var(--red)'], ['Trien', 'Green · Stag', 'var(--green)']];
   var RID = (new URLSearchParams(location.search).get('r') || '').replace(/[^A-Za-z0-9]/g, '');
-  var me = null; try { me = JSON.parse(LS.get('mrb-pupil') || 'null'); } catch (e) { }
+  /* INDEPENDENT (no sign-in, any class): anyone with the link enters with their name, form and house. A pupil signed in to the
+     revision site gets their name filled in; otherwise this device remembers what they typed, and its own ID keeps their entry. */
+  var pupil = null; try { pupil = JSON.parse(LS.get('mrb-pupil') || 'null'); } catch (e) { }
+  var saved = {}; try { saved = JSON.parse(LS.get('mrb-comp-me') || '{}') || {}; } catch (e) { }
+  var devId = LS.get('mrb-comp-dev'); if (!/^[a-z0-9]{6,24}$/.test(devId || '')) { devId = (Math.random().toString(36).slice(2) + Date.now().toString(36)).replace(/[^a-z0-9]/g, '').slice(0, 16); LS.set('mrb-comp-dev', devId); }
+  var me = pupil && pupil.id ? { id: pupil.id, name: pupil.name || '', cls: pupil.cls || '', pupil: true } : { id: devId, name: saved.name || '', cls: saved.cls || '' };
   var runs = []; try { runs = JSON.parse(LS.get('mrb-mycomps') || '[]') || []; } catch (e) { }
-  var run = runs.filter(function (r) { return r.id === RID; })[0];
-  var main = $('#main'), URL0 = LS.get('mrb-act-url') || '', C = null, img = null;
+  var run = runs.filter(function (r) { return r.id === RID; })[0] || null;
+  var mine = {}; try { mine = JSON.parse(LS.get('mrb-comp-entered') || '{}') || {}; } catch (e) { }
+  var main = $('#main'), URL0 = LS.get('mrb-act-url') || '', C = null, img = null, CAT = [];
   var nice = function (d) { var x = new Date(d + 'T12:00:00'); return isNaN(x) ? d : x.toLocaleDateString('en-GB', { weekday: 'long', day: 'numeric', month: 'long' }); };
-  if (!run) { main.innerHTML = '<div class="card"><h1>Competition not found</h1><p>It may have closed. Go back to the home page to see the competitions open for your year.</p><a class="btn" href="index.html">Home</a></div>'; return; }
-  if (!me || !me.id) { main.innerHTML = '<div class="card"><h1>' + H(run.title) + '</h1><div class="err">Sign in on the home page first, so your entry counts for your house.</div><a class="btn" href="index.html">Home</a></div>'; return; }
+  var api = function (q) { return fetch(URL0 + (URL0.indexOf('?') >= 0 ? '&' : '?') + q, { cache: 'no-store', credentials: 'omit' }).then(function (r) { return r.json(); }); };
   Promise.all([fetch('activity.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).catch(function () { return null; }), fetch('competitions/catalogue.json', { cache: 'no-cache' }).then(function (r) { return r.json(); }).catch(function () { return { comps: [] }; })])
-    .then(function (a) { if (a[0] && a[0].url) URL0 = String(a[0].url).trim(); C = (a[1].comps || []).filter(function (c) { return c.id === run.comp; })[0] || (a[1].comps || []).filter(function (c) { return c.title === run.title; })[0] || { title: run.title, brief: '', entry: { kind: 'image-or-link', help: '' }, rubric: [] }; paint(); });
-
+    .then(function (a) {
+      if (a[0] && a[0].url) URL0 = String(a[0].url).trim(); CAT = a[1].comps || [];
+      if (!URL0) { if (run) return start(); main.innerHTML = '<div class="card"><h1>Competitions</h1><p>Competitions aren’t set up yet.</p></div>'; return; }
+      if (!RID) return list();
+      return api('action=comprun&r=' + encodeURIComponent(RID)).then(function (j) {
+        if (j && j.ok && j.run) { var keep = run || {}; run = j.run; run.entered = keep.entered || mine[RID] || 0; run.house = keep.house || ''; }
+        start();
+      }).catch(function () { start(); });
+    });
+  function start() {
+    if (!run) { main.innerHTML = '<div class="card"><h1>Competition not found</h1><p>It may have finished or been removed.</p><a class="btn" href="compete.html">See the competitions open now</a></div>'; return; }
+    C = CAT.filter(function (c) { return c.id === run.comp; })[0] || CAT.filter(function (c) { return c.title === run.title; })[0] || { title: run.title, brief: '', entry: { kind: 'image-or-link', help: '' }, rubric: [] };
+    if (run.state === 'closed') { main.innerHTML = '<div class="card"><p class="eyebrow">Inter-house competition</p><h1>' + H(run.title) + '</h1><div class="note">Entries closed on ' + H(nice(run.closes)) + '. Winners are announced by your teacher.</div><a class="btn" href="compete.html">See the competitions open now</a></div>'; return; }
+    if (run.state === 'soon') { main.innerHTML = '<div class="card"><p class="eyebrow">Inter-house competition</p><h1>' + H(run.title) + '</h1><div class="note">Entries open on ' + H(nice(run.opens)) + '.</div><p>' + H(C.brief || '') + '</p></div>'; return; }
+    paint();
+  }
+  /* no link to one competition: every competition open now */
+  function list() {
+    main.innerHTML = '<p class="muted">Loading…</p>';
+    api('action=compsopen').then(function (j) {
+      var rs = (j && j.ok && j.runs) || [];
+      main.innerHTML = '<div class="card"><p class="eyebrow">Digital Technology</p><h1>Inter-house competitions</h1><p>Open to everyone: you don’t need to sign in. Every entry earns a point for your house.</p></div>' +
+        (rs.length ? rs.map(function (r) { var c = CAT.filter(function (x) { return x.id === r.comp; })[0] || {}; return '<a class="card" style="display:block;text-decoration:none;color:inherit" href="compete.html?r=' + encodeURIComponent(r.id) + '"><p class="eyebrow">' + H(r.cat) + (r.years ? ' · ' + H(r.years.split(',').map(function (y) { return 'Year ' + y; }).join(', ')) : '') + '</p><h2>' + H(r.title) + '</h2><p class="muted" style="margin:0 0 8px">' + H(c.summary || '') + '</p><div class="chips"><span class="chip due">' + (r.state === 'soon' ? 'Opens ' + H(nice(r.opens)) : 'Closes ' + H(nice(r.closes))) + '</span></div></a>'; }).join('')
+          : '<div class="card"><p>No competitions are open right now. Check back soon!</p></div>');
+    }).catch(function () { main.innerHTML = '<div class="card"><h1>Inter-house competitions</h1><div class="err">Couldn’t load the competitions. Check you’re online.</div></div>'; });
+  }
   function paint() {
     document.title = run.title + ' · House competition';
     var kind = (C.entry && C.entry.kind) || 'image-or-link', house = run.house || LS.get('mrb-house') || '';
@@ -86,7 +115,7 @@ li{margin:4px 0}
       (C.entry && C.entry.help ? '<h2 style="margin-top:16px">How to enter</h2><p>' + H(C.entry.help) + '</p>' : '') + '</div>' +
       ((C.rubric || []).length ? '<div class="card"><h2>How it’s judged' + (max ? ' (out of ' + max + ')' : '') + '</h2><table class="rub">' + C.rubric.map(function (r) { return '<tr><td><b>' + H(r.c) + '</b><br><span class="muted">' + H(r.look) + '</span></td><td>' + H(r.max) + '</td></tr>'; }).join('') + '</table><p class="muted" style="margin:10px 0 0;font-size:14px">Every entry earns a point for your house. Places 1st to 4th earn more.</p></div>' : '') +
       '<div class="card"><h2>Your entry</h2>' + (run.entered ? '<div class="okbox">✓ You entered on ' + new Date(run.entered).toLocaleDateString('en-GB', { day: 'numeric', month: 'long' }) + '. Sending it again replaces your entry, until it closes.</div>' : '') +
-      '<label class="f">Your house</label><div class="houses" role="group" aria-label="Your house">' + HOUSES.map(function (h) { return '<button type="button" style="--h:' + h[2] + '" aria-pressed="' + (house === h[0]) + '" data-h="' + h[0] + '">' + h[0] + '<small>' + h[1] + '</small></button>'; }).join('') + '</div>' +
+      (me.pupil ? '<p class="muted" style="margin:0 0 4px">Entering as <b>' + H(me.name) + '</b>' + (me.cls ? ' (' + H(me.cls) + ')' : '') + '</p>' : '<label class="f" for="en">Your name</label><input type="text" id="en" maxlength="40" autocomplete="name" placeholder="First name and surname" value="' + H(me.name) + '"><label class="f" for="ec">Your form class <small>(e.g. 9B)</small></label><input type="text" id="ec" maxlength="12" autocapitalize="characters" placeholder="Form class" value="' + H(me.cls) + '">') + '<label class="f">Your house</label><div class="houses" role="group" aria-label="Your house">' + HOUSES.map(function (h) { return '<button type="button" style="--h:' + h[2] + '" aria-pressed="' + (house === h[0]) + '" data-h="' + h[0] + '">' + h[0] + '<small>' + h[1] + '</small></button>'; }).join('') + '</div>' +
       '<label class="f" for="et">Title of your entry <small>(optional)</small></label><input type="text" id="et" maxlength="80" placeholder="Give it a name">' +
       (wantImg ? '<label class="f">Picture or screenshot</label><div class="drop" id="drop" tabindex="0" role="button" aria-label="Choose a picture"><div id="pv"></div><b>Tap to choose a picture</b><br><span class="muted" style="font-size:14px">PNG or JPG. It’s resized to send quickly.</span><input type="file" id="file" accept="image/*" hidden></div>' : '') +
       (wantImg && wantLink ? '<div class="or">or</div>' : '') +
@@ -101,6 +130,7 @@ li{margin:4px 0}
     var ex = $('#ex'), wc = $('#wc'); if (wc) ex.oninput = function () { var n = (ex.value.trim().match(/\S+/g) || []).length; wc.textContent = n + ' word' + (n === 1 ? '' : 's'); };
     $('#go').onclick = function () {
       var link = $('#el') ? $('#el').value.trim() : '', text = ex.value.trim();
+      if (!me.pupil) { me.name = ($('#en').value || '').trim().replace(/\s+/g, ' '); me.cls = ($('#ec').value || '').trim().toUpperCase().replace(/[^A-Z0-9]/g, ''); if (me.name.replace(/[^A-Za-z]/g, '').length < 3 || me.name.indexOf(' ') < 0) return say('err', 'Type your first name and surname.'); LS.set('mrb-comp-me', JSON.stringify({ name: me.name, cls: me.cls })); }
       if (!house) return say('err', 'Pick your house first.');
       if (link && !/^https:\/\/\S+$/.test(link)) return say('err', 'That link should start with https://');
       if (wantText && text.length < 20) return say('err', 'Write your entry in the box first.');
@@ -117,7 +147,8 @@ li{margin:4px 0}
     if (!j || !j.ok) { go.disabled = false; go.textContent = run.entered ? 'Update my entry' : 'Send my entry'; return say('err', (j && j.error) || 'That didn’t send. Try again.'); }
     run.entered = Date.now(); run.house = LS.get('mrb-house') || run.house;
     var all = []; try { all = JSON.parse(LS.get('mrb-mycomps') || '[]'); } catch (e) { } all.forEach(function (r) { if (r.id === RID) { r.entered = run.entered; r.house = run.house; } }); LS.set('mrb-mycomps', JSON.stringify(all));
-    main.innerHTML = '<div class="card" style="text-align:center"><div style="font-size:56px">🏆</div><h1>Entry ' + (j.updated ? 'updated' : 'received') + '!</h1><p>Good luck, ' + H((me.name || '').split(' ')[0]) + '. You’ve earned a point for ' + H(run.house || 'your house') + ' just by entering.</p><p class="muted">Winners are announced after it closes on ' + H(nice(run.closes)) + '. You can change your entry until then.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a class="btn" href="index.html">Home</a><button type="button" class="btn" id="again">Change my entry</button></div></div>';
+    mine[RID] = run.entered; LS.set('mrb-comp-entered', JSON.stringify(mine));
+    main.innerHTML = '<div class="card" style="text-align:center"><div style="font-size:56px">🏆</div><h1>Entry ' + (j.updated ? 'updated' : 'received') + '!</h1><p>Good luck, ' + H((me.name || '').split(' ')[0]) + '. You’ve earned a point for ' + H(run.house || 'your house') + ' just by entering.</p><p class="muted">Winners are announced after it closes on ' + H(nice(run.closes)) + '. You can change your entry until then.</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><a class="btn" href="compete.html">All competitions</a><button type="button" class="btn" id="again">Change my entry</button></div></div>';
     $('#again').onclick = function () { img = null; paint(); };
     window.scrollTo(0, 0);
   }
