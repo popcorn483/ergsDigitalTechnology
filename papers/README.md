@@ -30,6 +30,13 @@ qualification. `tools/report_crops.py` finds each question's comment (unit secti
 `papers/reports.json`; the Teacher area (`teacher.html`) puts each comment after the question's mark scheme in its topic packs.
 See the README.md in each folder.
 
+## Mark scheme wording in the notes
+
+`mswording.json` holds CCEA's own credited wording for key terms, copied from the mark schemes here (with the school's
+permission): `{ "U1": { "LAN": { "ms": "Local Area Network [1] …", "ref": "2019|6(a)", "qtext": "What is a LAN?", "marks": 2 } } }`.
+The notes show it first in each yellow **Mark scheme definition** box, with the question it came from, and the site's own
+definition underneath. It is the one place mark-scheme text is quoted rather than shown as the PDF. Edit it by hand if a line needs fixing.
+
 ## Generated files (don't edit by hand)
 
 - `manifest.json`: the uploaded PDFs (`tools/papers_manifest.py`)
