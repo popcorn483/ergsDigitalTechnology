@@ -11164,7 +11164,25 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
     }
     if (hub && typeof cqUnlocked === 'function' && cqUnlocked(P.ch)) tile('sheet', 'Revision Summary Sheet', ids.length > 1 ? `${ids.length} lessons` : 'Lesson ' + ids[0], b => openPop({ k: 'sheet', t: 'Revision Summary Sheet' }, hubNode('notes', 'Revision Summary Sheet', ids), b));
     const add = K => found.filter(([k]) => k === K).forEach(([K2, el]) => { const sub = (() => { try { return K2.sub(el); } catch (e) { return ''; } })(), kick = K2.kick ? K2.kick(el) : ''; const b = tile(K2.k, K2.t, sub, bb => openPop(K2, el, bb)); if (kick) b.title = kick; el.classList.add('act-hid'); });
-    add(KINDS[0]); add(KINDS[1]);
+    add(KINDS[0]);
+    /* INTERACTIVE: not a tile any more. It goes into the notes, straight after the section it fits best (the most words shared
+       with its title and text), as an icon button that opens it in place */
+    found.filter(([K]) => K === KINDS[1]).forEach(([, el]) => {
+      const cards = [...art.querySelectorAll(':scope > .ncard')]; if (!cards.length) return;
+      if (!document.getElementById('dg-in-css')) { const st = document.createElement('style'); st.id = 'dg-in-css'; st.textContent = `.dg-in{margin:0 0 18px}.dg-chip{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;font-family:var(--sans);padding:10px 14px;border-radius:14px;border:2px solid #7B4FD6;background:color-mix(in srgb,#7B4FD6 9%,var(--paper));color:var(--ink);cursor:pointer}.dg-chip:hover{background:color-mix(in srgb,#7B4FD6 15%,var(--paper))}.dg-chip:focus-visible{outline:3px solid #7B4FD6;outline-offset:2px}.dg-ic{flex:none;width:42px;height:42px;border-radius:11px;background:#7B4FD6;color:#fff;display:grid;place-items:center}.dg-ic svg{width:24px;height:24px}.dg-chip>span:nth-child(2){flex:1;min-width:0;display:grid}.dg-chip b{font-size:15px}.dg-chip small{font-size:13px;color:var(--ink-2)}.dg-go{flex:none;font-weight:800;font-size:13.5px;color:#fff;background:#7B4FD6;border-radius:999px;padding:6px 13px}.dg-in>figure.dg{margin-top:12px}`; document.head.append(st); }
+      const STOP = new Set('the and for with this that are from into what how why your you can has have its their which when will each more than then also use used using these those them they not but one two all any out about over only same such does did was were been being'.split(' '));
+      const words = s => new Set((String(s || '').toLowerCase().match(/[a-z0-9][a-z0-9+#-]{2,}/g) || []).filter(w => !STOP.has(w)));
+      const title = txt(el, '.dg-head h3'), kind = txt(el, '.dg-kicker').replace(/^Interactive\s*·\s*/i, '');
+      const tw = words(title), want = [...words(title + ' ' + (el.textContent || '').slice(0, 700))];
+      let best = cards[cards.length - 1], bs = 0;
+      cards.forEach(c => { const hw = words(txt(c, 'h2, h3')), bw = words(c.textContent); let s = 0; want.forEach(w => { if (bw.has(w)) s += tw.has(w) ? 2 : 1; if (hw.has(w)) s += 3; }); if (s > bs) { bs = s; best = c; } });
+      const wrap = document.createElement('div'); wrap.className = 'dg-in';
+      wrap.innerHTML = `<button type="button" class="dg-chip" aria-expanded="false"><span class="dg-ic">${IC.anim}</span><span><b>Interactive</b><small></small></span><span class="dg-go">Try it</span></button>`;
+      wrap.querySelector('small').textContent = title + (kind && title ? ' · ' + kind : kind);
+      el.classList.remove('act-hid'); el.hidden = true; wrap.append(el); best.after(wrap);
+      const bt = wrap.querySelector('.dg-chip');
+      bt.addEventListener('click', () => { const o = el.hidden; el.hidden = !o; bt.setAttribute('aria-expanded', String(o)); bt.querySelector('.dg-go').textContent = o ? 'Hide' : 'Try it'; if (o) { window.dispatchEvent(new Event('resize')); el.scrollIntoView({ block: 'nearest', behavior: RM() ? 'auto' : 'smooth' }); } });
+    });
     if (hub) tile('prac', 'Activities & worksheet', 'Self-marking', b => openPop({ k: 'prac', t: 'Activities & worksheet' }, hubNode('practice', 'Activities & worksheet', ids), b));
     add(KINDS[2]);
     const nPage = pageKt ? pageKt.querySelectorAll('.kt-l > div').length : 0, nAll = ((typeof CH_TERMS !== 'undefined' && CH_TERMS.get(P.ch.id)) || []).length;
@@ -11180,7 +11198,7 @@ html.egg-glitch body > :not(.egg-st):not(.egg-cv):not(#egg-t){animation:eggshake
     /* the page quiz shows in Extra help on phones too once this page is marked covered (checked again when it is marked) */
     { const pqSync = () => { const q = box.querySelector('.act.k-quiz'); if (!q || !box.isConnected) { clearInterval(pqT); return; } q.classList.toggle('pq-ok', !!(state.done && state.done[P.p.id]) || (typeof chDone === 'function' && chDone(P.ch))); }; const pqT = setInterval(pqSync, 800); setTimeout(pqSync, 0); }
     /* EXTRA HELP in sections: Learn, Practise, (the topic test once unlocked), Revise */
-    { const SEC = [['Learn', ['ppt', 'video', 'pod', 'terms']], ['Practise', ['anim', 'prac', 'quiz', 'mcq']], ['Unlocked: you’ve covered the whole topic', ['sheet', 'test']], ['Revise', ['tips']]];
+    { const SEC = [['Learn', ['ppt', 'video', 'pod', 'terms']], ['Practise', ['prac', 'quiz', 'mcq']], ['Unlocked: you’ve covered the whole topic', ['sheet', 'test']], ['Revise', ['tips']]];
       const tiles = [...g.children], used = new Set(); g.remove();
       SEC.forEach(([h, ks], si) => { const mine = tiles.filter(b => !used.has(b) && (ks.some(k => b.classList.contains('k-' + k)) || (si === 3 && !SEC.some(([, kk]) => kk.some(k => b.classList.contains('k-' + k)))))); if (!mine.length) return; mine.forEach(b => used.add(b));
         const s = document.createElement('div'); s.className = 'acts-sec' + (ks.includes('test') ? ' acts-unl' : ''); s.innerHTML = `<h3 class="acts-sh">${h}</h3><div class="acts-g"></div>`; s.querySelector('.acts-g').append(...mine); box.append(s); }); }
