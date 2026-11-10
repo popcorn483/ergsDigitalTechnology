@@ -2277,7 +2277,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const key = LS.get('teacher.actkey');
     {
       if (j.error === 'key') { LS.set('teacher.actkey', null); status('That key doesn’t match TEACHER_KEY in the Apps Script. Type it again.', 'warn'); $('#ac-keyrow').hidden = false; $('#ac-tools').hidden = true; return; }
-      ROLES = (j.roles && typeof j.roles === 'object') ? j.roles : {}; DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; CLASSES = Array.isArray(j.classes) ? j.classes : []; ZREQ = Array.isArray(j.zreqs) ? j.zreqs : []; LIVE = Array.isArray(j.live) ? j.live : []; status((+j.v || 0) < 19 ? 'Your Google Apps Script is an older version, so reports, set work, messages, the topic grid, “revising now”, page-quiz answers, PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 19 ? 'warn' : ''); $('#ac-view').hidden = false; if ((+j.v || 0) >= 19 && (+j.v || 0) < 20) status('Classes, teachers and zones need the latest Apps Script (v20): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); view(); render(); requests();
+      ROLES = (j.roles && typeof j.roles === 'object') ? j.roles : {}; DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; CLASSES = Array.isArray(j.classes) ? j.classes : []; ZREQ = Array.isArray(j.zreqs) ? j.zreqs : []; LIVE = Array.isArray(j.live) ? j.live : []; status((+j.v || 0) < 19 ? 'Your Google Apps Script is an older version, so reports, set work, messages, the topic grid, “revising now”, page-quiz answers, PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 19 ? 'warn' : ''); $('#ac-view').hidden = false; if ((+j.v || 0) >= 19 && (+j.v || 0) < 20) status('Classes, teachers and zones need the latest Apps Script (v20): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); else if ((+j.v || 0) >= 20 && (+j.v || 0) < 29) status('Email sign-in, class lists and merging duplicates need the latest Apps Script (v29): paste in tools/pupil-activity.gs (keep your TEACHER_KEY and STAFF_PIN lines), then Deploy › Manage deployments › pencil › New version.', 'warn'); view(); render(); requests();
       const ml = j.mail; if ((+j.v || 0) >= 13 && ml && (ml.err || !ml.to)) status(`Emails aren’t being sent${ml.err ? ': ' + ml.err.replace(/^\S+\s/, '') : ''}. In the Apps Script, choose testEmail in the function list and press Run, allow “Send email as you”, then deploy a new version. ⋯ › Send a test email checks it.`, 'warn');
     }
   }
@@ -2333,7 +2333,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const pick = CLASSES.length ? classSel(r.cls, 'Class…') : null;
       ok.addEventListener('click', () => decide('approve', [r.id], [ok, no], pick && pick.value));
       no.addEventListener('click', () => { if (confirm(`Decline ${r.name}? They won’t be able to use the Revision Guide under this name. You can approve them later from their row.`)) decide('decline', [r.id], [ok, no]); });
-      ul.append(el('li', {}, el('span', {}, el('b', { text: r.name }), document.createTextNode(` ${r.cls || ''}`), el('small', { text: 'Asked ' + when(r.at) })), el('span', { class: 'rq-b' }, pick, no, ok)));
+      ul.append(el('li', {}, el('span', {}, el('b', { text: r.name }), document.createTextNode(` ${r.cls || ''}`), el('small', { text: (r.email ? r.email + ' · not on a class list · ' : '') + 'Asked ' + when(r.at) })), el('span', { class: 'rq-b' }, pick, no, ok)));
     });
     box.append(ul);
   }
@@ -2392,7 +2392,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const cb = el('input', { type: 'checkbox', 'aria-label': `Select ${p.name}` }); cb.checked = SEL.has(p.id);
       cb.addEventListener('change', () => { cb.checked ? SEL.add(p.id) : SEL.delete(p.id); row.classList.toggle('sel', cb.checked); bar(); });
       const open = () => { if (SELMODE) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); return; } const was = OPEN === p.id; OPEN = was ? null : p.id; PICK = null; render(); if (!was) setTimeout(() => { const r = list.querySelector(`[data-id="${p.id}"]`); if (r) r.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60); };
-      const tags = [ROLES[p.id] === 'teacher' ? el('span', { class: 'ac-tag', style: 'background:#1B1B1B;color:#FFE066;font-weight:800', title: 'Signs in as a teacher: their device opens the Teacher area', text: 'Teacher' }) : null, p.pin === false ? el('span', { class: 'ac-tag', text: 'No PIN' }) : null, typed.length ? el('span', { class: 'ac-tag', title: 'Also typed: ' + typed.join(', '), text: 'Also typed: ' + typed.slice(0, 2).join(', ') }) : null, accTag(p)].filter(Boolean);
+      const tags = [ROLES[p.id] === 'teacher' ? el('span', { class: 'ac-tag', style: 'background:#1B1B1B;color:#FFE066;font-weight:800', title: 'Signs in as a teacher: their device opens the Teacher area', text: 'Teacher' }) : null, p.pin === false ? el('span', { class: 'ac-tag', text: 'No PIN' }) : null, p.email === '' ? el('span', { class: 'ac-tag', title: 'No school email yet: they’re asked for it next time they open the Revision Guide', text: 'No email' }) : null, typed.length ? el('span', { class: 'ac-tag', title: 'Also typed: ' + typed.join(', '), text: 'Also typed: ' + typed.slice(0, 2).join(', ') }) : null, accTag(p)].filter(Boolean);
       /* COMPACT ROW: one line per pupil, in columns (name, class, main unit covered, quiz, this week, total, last active) */
       let qa = 0, qm = 0; if (main) Object.values(pr[main].quiz || {}).forEach(x => { qa += x[0]; qm += x[1]; });
       const btn = el('button', { type: 'button', class: 'ac-main ac-cmp', 'aria-expanded': String(OPEN === p.id), title: main ? `${UNIT[main] || main}: ${cov}% covered` : 'Nothing covered yet' },
@@ -2499,14 +2499,17 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       box.append(el('p', { text: `Delete ${ps.map(p => p.name).join(', ')} and all their activity? This can’t be undone. If they carry on using the site on that device they will appear again as new.` }), el('div', { class: 'ac-row' }, go, cancel));
       return;
     }
-    const keep = ps.slice().sort((a, b) => b.total - a.total)[0];
+    const keep = ps.slice().sort((a, b) => (b.email ? 1 : 0) - (a.email ? 1 : 0) || b.total - a.total)[0];   /* keep the account with a school email */
     const nm = el('input', { type: 'text', maxlength: '40', 'aria-label': 'Name' }), cl = el('input', { type: 'text', maxlength: '12', 'aria-label': 'Class', style: 'max-width:90px' });
     nm.value = keep.name; cl.value = keep.cls;
+    const em = kind === 'rename' && 'email' in keep ? el('input', { type: 'email', maxlength: '80', 'aria-label': 'School email', placeholder: 'school email (@c2ken.net)', style: 'min-width:220px' }) : null; if (em) em.value = keep.email || '';
     const go = el('button', { type: 'button', class: 'tp-mini pri', text: kind === 'merge' ? `Merge ${ps.length} into one` : 'Save' });
     go.addEventListener('click', busy(go, () => { const name = nm.value.replace(/\s+/g, ' ').trim(), cls = cl.value.replace(/\s+/g, '').toUpperCase(); if (!name) throw new Error('give a name');
-      return kind === 'merge' ? api({ action: 'merge', ids: ps.map(p => p.id).join(','), to: keep.id, name, cls }) : api({ action: 'rename', to: keep.id, name, cls }); }));
-    box.append(el('p', { text: kind === 'merge' ? `Merge ${ps.map(p => `${p.name} (${p.cls})`).join(', ')} into one pupil, adding up their time. Their devices keep counting under the merged pupil.` : 'Change the name and class shown for this pupil (what they typed is kept in the Sheet).' }),
-      el('div', { class: 'ac-row' }, nm, cl, go, cancel));
+      if (kind === 'merge') return api({ action: 'merge', ids: ps.map(p => p.id).join(','), to: keep.id, name, cls });
+      const mail = em ? em.value.trim().toLowerCase() : '';
+      return api({ action: 'rename', to: keep.id, name, cls }).then(r => r && r.ok && em && mail && mail !== (keep.email || '') ? api({ action: 'setemail', to: keep.id, email: mail }) : r); }));
+    box.append(el('p', { text: kind === 'merge' ? `Merge ${ps.map(p => `${p.name} (${p.cls})`).join(', ')} into one pupil, adding up their time. Their devices keep counting under the merged pupil.` : 'Change the name, class and school email for this pupil (what they typed is kept in the Sheet). They sign in with the email.' }),
+      el('div', { class: 'ac-row' }, nm, cl, em, go, cancel));
     nm.focus();
   }
   /* ---------- the weekly report (Monday to Sunday) */
@@ -2533,6 +2536,59 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   /* ---------- CLASSES & ZONES: your classes (teacher, course, zones), who is in each, and pupils not in one yet ---------- */
   let CL_EDIT = null;
   async function clDo(params, btn, msg) { if (btn) btn.disabled = true; try { const j = await api(params); if (!j || !j.ok) throw new Error(j && j.error || 'failed'); await load(); status(msg, 'ok'); } catch (e) { status('That didn’t work: ' + e.message + '. If you’ve just updated the Apps Script, check you deployed it as a new version.', 'warn'); if (btn) btn.disabled = false; } }
+  /* CLASS LISTS (Apps Script v29): paste Name, Email, Class from Excel / SIMS / a CSV. A listed pupil gets straight in when they
+     first sign in with that email (no approval), with the name and class from the list, and is matched to any account they
+     already have (same name and year: duplicates merged). Sent 60 rows at a time. */
+  function parseList(txt) {
+    const lines = String(txt || '').split(/\r?\n/).map(l => l.trim()).filter(Boolean); if (!lines.length) return [];
+    const split = l => (l.includes('\t') ? l.split('\t') : l.split(/,(?=(?:[^"]*"[^"]*")*[^"]*$)/)).map(x => x.replace(/^\s*"|"\s*$/g, '').trim());
+    let rows = lines.map(split);
+    const H = rows[0].map(x => x.toLowerCase()), head = !rows[0].some(x => x.includes('@')) && H.some(x => /name|mail|class|form|reg/.test(x));
+    const ix = { e: -1, n: -1, f: -1, s: -1, c: -1 };
+    if (head) { H.forEach((h, i) => { if (/mail/.test(h)) ix.e = i; else if (/surname|last|family/.test(h)) ix.s = i; else if (/fore|first|given|preferred/.test(h)) { if (ix.f < 0) ix.f = i; } else if (/class|form|reg|group/.test(h)) ix.c = i; else if (/name|pupil|student/.test(h) && ix.n < 0) ix.n = i; }); rows = rows.slice(1); }
+    return rows.map(r => {
+      const email = (ix.e >= 0 ? r[ix.e] : r.find(x => x.includes('@'))) || '';
+      let name = ix.f >= 0 || ix.s >= 0 ? `${r[ix.f] || ''} ${r[ix.s] || ''}` : ix.n >= 0 ? r[ix.n] || '' : '', cls = ix.c >= 0 ? r[ix.c] || '' : '';
+      if (!head) { const rest = r.filter(x => x && !x.includes('@')); cls = rest.find(x => /^\d{1,2}\s*[A-Za-z0-9]{0,6}$/.test(x)) || ''; name = rest.filter(x => x !== cls).join(' '); }
+      if (name.includes(',')) { const [a, b] = name.split(',').map(x => x.trim()); name = `${b} ${a}`; }   /* "Smith, John" */
+      return { name: name.replace(/\s+/g, ' ').trim(), email: email.trim().toLowerCase(), cls: ncl(cls) };
+    });
+  }
+  function listCard() {
+    const card = el('div', { class: 'card', id: 'cl-lists' }, el('h3', { text: 'Class lists' }),
+      el('p', { class: 'small', text: 'Paste a class list from Excel, SIMS or a CSV: one row per pupil with their name, school email (@c2ken.net) and class. A header row (Name, Email, Class, or Forename and Surname) helps. Pupils on a list get straight in the first time they sign in with that email (no approval needed), with the name and class from your list, and are matched to any account they already have.' }));
+    const ta = el('textarea', { rows: '7', 'aria-label': 'Class list', placeholder: 'Name\tEmail\tClass\nJohn Smith\tjsmith123@c2ken.net\t8A', style: 'width:100%;box-sizing:border-box;font:13px/1.4 ui-monospace,Menlo,Consolas,monospace' });
+    const cs = el('select', { 'aria-label': 'Class for everyone on this list' }); cs.append(el('option', { value: '', text: 'Use the class column' }), ...CLASSES.map(c => el('option', { value: c.cls, text: c.cls + (c.teacher ? ' · ' + c.teacher : '') })));
+    const prev = el('div', { class: 'small' }), go = el('button', { type: 'button', class: 'tp-mini pri', text: 'Import', disabled: '' });
+    let rows = [];
+    const check = () => {
+      const all = parseList(ta.value).map(r => cs.value ? Object.assign(r, { cls: cs.value }) : r), ok = all.filter(r => /^[^@\s]+@c2ken\.net$/.test(r.email) && r.name.split(' ').length >= 2), bad = all.length - ok.length;
+      prev.innerHTML = ''; rows = ok; go.disabled = !ok.length; if (!all.length) return;
+      const t = el('table', { class: 'cl-t' }, el('thead', {}, el('tr', {}, el('th', { text: 'Name' }), el('th', { text: 'Email' }), el('th', { text: 'Class' })))), tb = el('tbody'); t.append(tb);
+      all.slice(0, 8).forEach(r => tb.append(el('tr', {}, el('td', { text: r.name || '–' }), el('td', { text: r.email || '–' }), el('td', { text: r.cls || '–' }))));
+      prev.append(el('p', { style: 'margin:10px 0 6px', text: `${ok.length} pupil${ok.length === 1 ? '' : 's'} ready to import${bad ? ` · ${bad} row${bad === 1 ? '' : 's'} skipped (no @c2ken.net email, or no surname)` : ''}${all.length > 8 ? ' · first 8 shown' : ''}` }), el('div', { style: 'overflow-x:auto' }, t));
+    };
+    ta.addEventListener('input', check); cs.addEventListener('change', check);
+    go.addEventListener('click', async () => {
+      go.disabled = true; const tot = { added: 0, updated: 0, linked: 0, merged: 0, waiting: 0 };
+      try {
+        for (let i = 0; i < rows.length; i += 60) { status(`Importing… ${Math.min(i + 60, rows.length)} of ${rows.length}`); const j = await api({ action: 'importlist', rows: JSON.stringify(rows.slice(i, i + 60)) }); if (!j || !j.ok) throw new Error(j && j.error || 'failed'); ['added', 'updated', 'linked', 'merged'].forEach(k => { tot[k] += j[k] || 0; }); tot.waiting = j.waiting || 0; }
+        ta.value = ''; await load();
+        status(`Class list imported: ${tot.added} new, ${tot.updated} updated. ${tot.linked} matched to an existing account${tot.merged ? ` (${tot.merged} duplicate account${tot.merged === 1 ? '' : 's'} merged)` : ''}. ${tot.waiting} not signed up yet: they get straight in when they do.`, 'ok');
+      } catch (e) { status('That didn’t work: ' + e.message + '. Check the Apps Script is v29 and deployed as a new version.', 'warn'); go.disabled = false; }
+    });
+    const dd = el('button', { type: 'button', class: 'tp-mini', text: 'Merge duplicate accounts now' });
+    dd.addEventListener('click', async () => {
+      if (!confirm('Merge every set of accounts with the same name in the same year group into one? Their time, progress, test results and PINs are combined. Two accounts with different school emails are never merged.')) return;
+      dd.disabled = true;
+      try { const j = await api({ action: 'dedupe' }); if (!j || !j.ok) throw new Error(j && j.error || 'failed'); await load(); status(j.merged ? `Merged ${j.merged} duplicate account${j.merged === 1 ? '' : 's'} into ${j.groups} pupil${j.groups === 1 ? '' : 's'}.` : 'No duplicate accounts found.', 'ok'); }
+      catch (e) { status('That didn’t work: ' + e.message + '. Check the Apps Script is v29 and deployed as a new version.', 'warn'); }
+      dd.disabled = false;
+    });
+    card.append(ta, el('div', { class: 'ac-row' }, el('label', { class: 'small' }, document.createTextNode('Class for everyone on this list '), cs), go), prev,
+      el('h4', { text: 'Duplicate accounts' }), el('p', { class: 'small', text: 'Pupils who signed up more than once (same name, same year group) were merged automatically when the v29 Apps Script first ran. Press this to check again.' }), el('div', { class: 'ac-row' }, dd));
+    return card;
+  }
   function classesView() {
     const box = $('#cl-body'); if (!box || !DATA) return; box.innerHTML = '';
     /* whose device is this? sets the teacher filter on this device */
@@ -2571,6 +2627,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       el('div', { class: 'ac-row' }, save, del, cancel)));
     if (ed && ncl(code.value) !== ed.cls) { }
     box.append(card);
+    box.append(listCard());
     /* pupils not in a class */
     if (CLASSES.length) {
       const un = DATA.filter(p => !classOf(p.cls)).sort((a, b) => a.cls.localeCompare(b.cls, undefined, { numeric: true }) || a.name.localeCompare(b.name));

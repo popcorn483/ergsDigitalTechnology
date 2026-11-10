@@ -10121,6 +10121,7 @@ try {
     let j = null; try { const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000); j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=access&id=' + encodeURIComponent(p.id) + '&cls=' + encodeURIComponent(p.cls || ''), { cache: 'no-store', credentials: 'omit', signal: ctl.signal }).then(r => r.json()); clearTimeout(t); } catch (e) { j = null; }
     if (!j) { if (blocked()) { if (!/^(pending|declined)$/.test(LS.get('mrb-access') || '')) LS.set('mrb-access', 'check'); gate(); } return; }   /* couldn't reach it: stay as we were */
     if (j.ok && j.pin === false) { LS.set('mrb-pin-ok', null); try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } unGate(); ask(); return; }   /* no PIN on record (never set, or Mr Butler reset it): sign in again and choose one */
+    if (j.ok && j.email) { const cur = me(); if (cur && cur.email !== j.email) LS.set('mrb-pupil', JSON.stringify(Object.assign(cur, { email: j.email }))); }
     const st = j.ok && typeof j.status === 'string' ? j.status : '';
     if (j.ok) {   /* the class (and name) Mr Butler set, the zones this pupil can open, and what they have asked for */
       const cur = me(); if (cur && ((j.cls && j.cls !== cur.cls) || (j.name && j.name !== cur.name))) { LS.set('mrb-pupil', JSON.stringify(Object.assign(cur, j.cls ? { cls: j.cls } : {}, j.name ? { name: j.name } : {}))); paintWho(); }
@@ -10128,7 +10129,7 @@ try {
       try { zoneLock(); } catch (e) { }
     }
     if (/^(pending|declined)$/.test(st)) { LS.set('mrb-access', st); gate(); }
-    else { LS.set('mrb-access', 'ok'); unGate(); myWork(); }   /* approved (or an Apps Script without approvals) */
+    else { LS.set('mrb-access', 'ok'); unGate(); myWork(); if (j.ok && j.email === '' && LS.get('mrb-pin-ok')) askEmail(); }   /* approved (or an Apps Script without approvals); v29: no school email on record yet, ask for it once */
   }
   /* SET WORK and MESSAGES from Mr Butler: messages show once (then marked read); set work shows once a visit, and is kept
      ('mrb-mywork') for My progress and the workbook's cover */
@@ -10182,16 +10183,17 @@ try {
     g.querySelector('.p').hidden = dec;
     clearInterval(gateT); if (!dec) gateT = setInterval(() => { if (!document.getElementById('mrb-gate')) return clearInterval(gateT); if (!document.hidden) checkAccess(); }, 20000);
   }
-  /* "Who's using the Revision Guide?": name and form class, required (it cannot be skipped). If that name and class are
-     already in Mr Butler's sheet, this device joins that pupil and their saved progress is pulled in. */
+  const WHO_CSS = `#mrb-who{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:rgba(10,16,30,.62);padding:16px}#mrb-who form{background:#fff;color:#16213A;border-radius:14px;max-width:380px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}#mrb-who h2{margin:0 0 4px;font-size:19px}#mrb-who p{margin:0 0 12px;color:#4A5468;font-size:13.5px}#mrb-who label{display:block;font-weight:700;font-size:13px;margin:8px 0 4px}#mrb-who input{width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px}#mrb-who .r{display:flex;gap:8px;margin-top:14px}#mrb-who button{font:inherit;font-weight:700;border-radius:9px;padding:10px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer}#mrb-who button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff;flex:1}#mrb-who button:disabled{opacity:.6}#mrb-who .m{margin:10px 0 0;font-size:13px;color:#4A5468;min-height:1em}#mrb-who button.sd{display:block;margin:6px auto 0;padding:4px 6px;border:0;background:none;color:#8A93A6;font-size:12px;font-weight:600;text-decoration:underline}@media (prefers-color-scheme:dark){#mrb-who form{background:#1B2233;color:#E8ECF4}#mrb-who p,#mrb-who .m{color:#AEB8CA}#mrb-who input,#mrb-who button:not(.p){background:#121826;color:#E8ECF4;border-color:#3A4458}}`;
+  /* SIGN IN (v29): school email (@c2ken.net) and a 4-digit PIN. First time with an email, the pupil also gives their name,
+     year group and teacher; their old account (same name and year, same PIN) keeps everything. Required (cannot be skipped). */
   function ask() {
     if (document.getElementById('mrb-who')) return;
     const p = me() || {}, editing = !!me() && !!LS.get('mrb-pin-ok');
-    const css = `#mrb-who{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:rgba(10,16,30,.62);padding:16px}#mrb-who form{background:#fff;color:#16213A;border-radius:14px;max-width:380px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.35);font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif}#mrb-who h2{margin:0 0 4px;font-size:19px}#mrb-who p{margin:0 0 12px;color:#4A5468;font-size:13.5px}#mrb-who label{display:block;font-weight:700;font-size:13px;margin:8px 0 4px}#mrb-who input{width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px}#mrb-who .r{display:flex;gap:8px;margin-top:14px}#mrb-who button{font:inherit;font-weight:700;border-radius:9px;padding:10px 14px;border:1px solid #C9D2DE;background:#fff;color:#16213A;cursor:pointer}#mrb-who button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff;flex:1}#mrb-who button:disabled{opacity:.6}#mrb-who .m{margin:10px 0 0;font-size:13px;color:#4A5468;min-height:1em}#mrb-who button.sd{display:block;margin:6px auto 0;padding:4px 6px;border:0;background:none;color:#8A93A6;font-size:12px;font-weight:600;text-decoration:underline}@media (prefers-color-scheme:dark){#mrb-who form{background:#1B2233;color:#E8ECF4}#mrb-who p,#mrb-who .m{color:#AEB8CA}#mrb-who input,#mrb-who button:not(.p){background:#121826;color:#E8ECF4;border-color:#3A4458}}`;
+    const css = WHO_CSS;
     const d = document.createElement('div'); d.id = 'mrb-who'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'mrb-who-h');
-    d.innerHTML = `<style>${css}</style><form novalidate><h2 id="mrb-who-h">Who’s using the Revision Guide?</h2><p>Enter your name, year group, teacher and a 4-digit PIN. Your progress is saved under your name, so it follows you to any device.</p><label for="mrb-n">First name and surname</label><input id="mrb-n" autocomplete="name" maxlength="40"><label for="mrb-y">Year group</label><select id="mrb-y" style="width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px;background:inherit;color:inherit"><option value="">Choose your year…</option><option value="8">Year 8</option><option value="9">Year 9</option><option value="10">Year 10</option><option value="11">Year 11</option><option value="12">Year 12</option><option value="13">Year 13</option><option value="14">Year 14</option></select><label for="mrb-t">Teacher</label><select id="mrb-t" disabled style="width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px;background:inherit;color:inherit"><option value="">Choose your year first</option></select><input id="mrb-to" hidden maxlength="30" placeholder="Your teacher’s name, e.g. Mr Butler" autocomplete="off" style="margin-top:6px"><label for="mrb-k" id="mrb-kl" hidden>Class</label><select id="mrb-k" hidden style="width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px;background:inherit;color:inherit"></select><input id="mrb-c" type="hidden"><label for="mrb-p">PIN</label><input id="mrb-p" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="4 digits"><small style="display:block;margin-top:4px;color:#687386;font-size:12.5px">First time? Choose one you’ll remember. Use the same PIN on every device.</small><div class="r">${editing ? '<button type="button" class="l">Cancel</button>' : ''}<button class="p">Continue</button></div><p class="m" aria-live="polite"></p></form>`;
+    d.innerHTML = `<style>${css}</style><form novalidate><h2 id="mrb-who-h">Sign in to the Revision Guide</h2><p class="ld">Use your school email and your 4-digit PIN. Your progress is saved to your account, so it follows you to any device.</p><label for="mrb-e">School email</label><input id="mrb-e" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="80" placeholder="e.g. jsmith123@c2ken.net"><label for="mrb-p">PIN</label><input id="mrb-p" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="4 digits"><small style="display:block;margin-top:4px;color:#687386;font-size:12.5px">First time? Choose one you’ll remember. Already signed up? Use the same PIN as before.</small><div id="mrb-new" hidden><p class="nw" style="margin:12px 0 0;padding:9px 11px;border-radius:9px;background:#EEF3FB;color:#16213A;font-size:13.5px">First time with this email? Tell us who you are.</p><label for="mrb-n">First name and surname</label><input id="mrb-n" autocomplete="name" maxlength="40"><label for="mrb-y">Year group</label><select id="mrb-y" style="width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px;background:inherit;color:inherit"><option value="">Choose your year…</option><option value="8">Year 8</option><option value="9">Year 9</option><option value="10">Year 10</option><option value="11">Year 11</option><option value="12">Year 12</option><option value="13">Year 13</option><option value="14">Year 14</option></select><label for="mrb-t">Teacher</label><select id="mrb-t" disabled style="width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px;background:inherit;color:inherit"><option value="">Choose your year first</option></select><input id="mrb-to" hidden maxlength="30" placeholder="Your teacher’s name, e.g. Mr Butler" autocomplete="off" style="margin-top:6px"><label for="mrb-k" id="mrb-kl" hidden>Class</label><select id="mrb-k" hidden style="width:100%;box-sizing:border-box;font:inherit;padding:9px 10px;border:1px solid #C9D2DE;border-radius:9px;background:inherit;color:inherit"></select><input id="mrb-c" type="hidden"></div><div class="r">${editing ? '<button type="button" class="l">Cancel</button>' : ''}<button class="p">Continue</button></div><p class="m" aria-live="polite"></p></form>`;
     document.body.append(d);
-    const n = d.querySelector('#mrb-n'), c = d.querySelector('#mrb-c'), pinI = d.querySelector('#mrb-p'), m = d.querySelector('.m'), go = d.querySelector('.p'); n.value = p.name || ''; c.value = p.cls || '';
+    const n = d.querySelector('#mrb-n'), c = d.querySelector('#mrb-c'), pinI = d.querySelector('#mrb-p'), m = d.querySelector('.m'), go = d.querySelector('.p'), eI = d.querySelector('#mrb-e'), nw = d.querySelector('#mrb-new'); let LEGACY = false; eI.value = p.email || ''; n.value = p.name || ''; c.value = p.cls || '';
     /* the class list from Mr Butler (cached for offline): pick one, or "Not listed" to type it */
     /* YEAR GROUP + TEACHER (no class codes to remember): the teachers come from Mr Butler's class list (cached for offline).
        One class for that year and teacher: that class. Several: pick one. None set up yet: the year and the teacher's
@@ -10229,12 +10231,11 @@ try {
     const cancel = d.querySelector('.l'); if (cancel) cancel.addEventListener('click', close);
     d.querySelector('form').addEventListener('submit', async e => {
       e.preventDefault();
-      const name = n.value.replace(/\s+/g, ' ').trim(), cls = (fillK(kS.hidden ? '' : kS.value), c.value).replace(/\s+/g, '').toUpperCase();
-      const pinV = pinI.value.trim();
-      if (name.split(' ').length < 2) {
-        /* staff: the staff password or staff PIN typed in the name box (or the PIN box, name left empty), checked by the Apps Script
-           (never stored in the site), marks this device as staff: never asked again, never counted */
-        const tryK = name || pinV;
+      const raw = eI.value.trim(), email = raw.toLowerCase(), pinV = pinI.value.trim(), more = !nw.hidden;
+      if (!raw.includes('@')) {
+        /* staff: the staff password or staff PIN typed in the email box (or the PIN box, email left empty), checked by the Apps
+           Script (never stored in the site), marks this device as staff: never asked again, never counted */
+        const tryK = raw || pinV;
         if (tryK.length >= 4) {
           go.disabled = true; m.textContent = 'Checking…';
           try {
@@ -10243,37 +10244,84 @@ try {
           } catch (x) { }
           go.disabled = false;
         }
-        m.textContent = 'Please enter your first name and surname.'; n.focus(); return;
+        m.textContent = 'Please enter your school email, e.g. jsmith123@c2ken.net.'; eI.focus(); return;
       }
-      if (!/^[A-Z0-9]{1,12}$/.test(cls)) { m.textContent = !yS.value ? 'Please choose your year group.' : tS.value === '~' && !tO.value.trim() ? 'Please type your teacher’s name.' : 'Please choose your teacher.'; (!yS.value ? yS : tS.value === '~' ? tO : tS).focus(); return; }
-      const pin = pinI.value.trim(); if (!/^\d{4}$/.test(pin)) { m.textContent = 'Please enter a 4-digit PIN.'; pinI.focus(); return; }
+      if (!LEGACY && !/^[a-z0-9._%+'-]+@c2ken\.net$/.test(email)) { m.textContent = 'Use your school email: it ends in @c2ken.net.'; eI.focus(); return; }
+      if (!/^\d{4}$/.test(pinV)) { m.textContent = 'Please enter a 4-digit PIN.'; pinI.focus(); return; }
+      let name = '', cls = '';
+      if (more) {
+        name = n.value.replace(/\s+/g, ' ').trim(); cls = (fillK(kS.hidden ? '' : kS.value), c.value).replace(/\s+/g, '').toUpperCase();
+        if (name.split(' ').length < 2) { m.textContent = 'Please enter your first name and surname.'; n.focus(); return; }
+        if (!/^[A-Z0-9]{1,12}$/.test(cls)) { m.textContent = !yS.value ? 'Please choose your year group.' : tS.value === '~' && !tO.value.trim() ? 'Please type your teacher’s name.' : 'Please choose your teacher.'; (!yS.value ? yS : tS.value === '~' ? tO : tS).focus(); return; }
+      }
       go.disabled = true; m.textContent = 'Checking… (this can take a few seconds)';
-      let found = null, offline = false; const devId = p.id || (Math.random().toString(36).slice(2) + Date.now().toString(36)).slice(0, 16);
+      const devId = p.id || (Math.random().toString(36).slice(2) + Date.now().toString(36)).slice(0, 16);
+      let j = null;
       try {
         const ctl = new AbortController(), t = setTimeout(() => ctl.abort(), 30000);
-        const j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=whois&name=' + encodeURIComponent(name) + '&cls=' + encodeURIComponent(cls) + '&pin=' + pin + '&id=' + encodeURIComponent(devId), { cache: 'no-store', credentials: 'omit', signal: ctl.signal }).then(r => r.json());
+        const qs = LEGACY ? 'action=whois&name=' + encodeURIComponent(name) + '&cls=' + encodeURIComponent(cls) + '&pin=' + pinV + '&id=' + encodeURIComponent(devId)
+          : 'action=signin&email=' + encodeURIComponent(email) + '&pin=' + pinV + (more ? '&name=' + encodeURIComponent(name) + '&cls=' + encodeURIComponent(cls) : '') + '&id=' + encodeURIComponent(devId);
+        j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + qs, { cache: 'no-store', credentials: 'omit', signal: ctl.signal }).then(r => r.json());
         clearTimeout(t);
-        if (j && j.error === 'pin') { go.disabled = false; pinI.value = ''; pinI.focus(); m.textContent = `That PIN doesn’t match the one for ${name}.${j.left != null ? ` ${j.left} ${j.left === 1 ? 'try' : 'tries'} left.` : ''} Forgotten it? Ask Mr Butler to reset it.`; return; }
-        if (j && j.error === 'locked') { go.disabled = false; m.textContent = 'Too many wrong PINs. Try again in 15 minutes, or ask Mr Butler to reset your PIN.'; return; }
-        if (j && j.ok && j.id) found = j;
-        /* a teacher (the Teacher area made them one): this device becomes a teacher device with their own teacher key */
-        if (found && found.teacher && found.tkey) { LS.set('notes-nocount', '1'); LS.set('teacher.nocount-set', '1'); LS.set('mrb-staff-ok', '1'); LS.set('teacher.actkey', found.tkey); LS.set('mrb-pupil', null); LS.set('mrb-access', null); const gg = document.getElementById('mrb-gate'); if (gg) gg.remove(); m.textContent = 'Teacher account: this device now opens the Teacher area and isn’t counted.'; setTimeout(close, 1200); return; }
-        /* anything else (an older Apps Script, a server error): let them in now and check the PIN again next time, so nobody is ever locked out */
-      } catch (x) { offline = true; }
-      /* couldn't reach the sign-in check (offline, slow, a server error): not in until it can be checked */
-      if (offline) { go.disabled = false; m.textContent = 'Couldn’t check your name just now. Check you are online, then press Continue again.'; return; }
-      const id = found ? found.id : devId;
-      if (found) LS.set('mrb-pin-ok', '1'); else { LS.set('mrb-pin-ok', null); try { sessionStorage.setItem('mrb-pin-later', '1'); } catch (x) { } }
-      void offline;
-      LS.set('mrb-pupil', JSON.stringify({ id, name: found && found.name ? found.name : name, cls: found && found.cls ? found.cls : cls }));
-      let pulled = 0; if (found && found.data && !found.fresh) { try { pulled = mergeInto(JSON.parse(found.data)); } catch (x) { } }
+      } catch (x) { go.disabled = false; m.textContent = 'Couldn’t check just now. Check you are online, then press Continue again.'; return; }
+      go.disabled = false;
+      /* an Apps Script from before email sign-in: name, year and teacher instead */
+      if (j && j.error === 'key' && !LEGACY) { LEGACY = true; nw.hidden = false; nw.querySelector('.nw').textContent = 'Enter your name, year group and teacher too.'; m.textContent = ''; n.focus(); return; }
+      if (j && j.error === 'new') { nw.hidden = false; m.textContent = 'Now press Continue again.'; (n.value ? (yS.value ? tS : yS) : n).focus(); return; }
+      if (j && j.error === 'email') { m.textContent = 'Use your school email: it ends in @c2ken.net.'; eI.focus(); return; }
+      if (j && j.error === 'pin') { pinI.value = ''; pinI.focus(); m.textContent = `That PIN doesn’t match the one for ${LEGACY ? name : email}.${j.left != null ? ` ${j.left} ${j.left === 1 ? 'try' : 'tries'} left.` : ''} Forgotten it? Ask Mr Butler to reset it.`; return; }
+      if (j && j.error === 'locked') { m.textContent = 'Too many wrong PINs. Try again in 15 minutes, or ask Mr Butler to reset your PIN.'; return; }
+      const found = j && j.ok && j.id ? j : null;
+      if (!found) { m.textContent = 'Something went wrong. Please press Continue again.'; return; }
+      /* a teacher (the Teacher area made them one): this device becomes a teacher device with their own teacher key */
+      if (found.teacher && found.tkey) { LS.set('notes-nocount', '1'); LS.set('teacher.nocount-set', '1'); LS.set('mrb-staff-ok', '1'); LS.set('teacher.actkey', found.tkey); LS.set('mrb-pupil', null); LS.set('mrb-access', null); const gg = document.getElementById('mrb-gate'); if (gg) gg.remove(); m.textContent = 'Teacher account: this device now opens the Teacher area and isn’t counted.'; setTimeout(close, 1200); return; }
+      LS.set('mrb-pin-ok', '1');
+      LS.set('mrb-pupil', JSON.stringify({ id: found.id, name: found.name || name, cls: found.cls || cls, email: found.email || (LEGACY ? '' : email) }));
+      let pulled = 0; if (found.data && !found.fresh) { try { pulled = mergeInto(JSON.parse(found.data)); } catch (x) { } }
       LS.set('mrb-save-hash', null);
-      LS.set('mrb-access', found && /^(pending|declined)$/.test(found.status || '') ? found.status : 'ok');   /* approved, or an Apps Script without approvals */
+      LS.set('mrb-access', /^(pending|declined)$/.test(found.status || '') ? found.status : 'ok');   /* approved, or an Apps Script without approvals */
       if (blocked()) { close(); gate(); return; }
       if (pulled) { m.textContent = 'Welcome back! Loading your progress…'; setTimeout(() => location.reload(), 600); return; }
       close(); checkAccess();
     });
-    setTimeout(() => (p.name ? (yS.value ? tS : yS) : n).focus(), 50);
+    setTimeout(() => (eI.value ? pinI : eI).focus(), 50);
+  }
+  /* PUPILS FROM BEFORE EMAIL SIGN-IN (v29): signed in on this device with their PIN but no email on record: asked once for their
+     school email (and PIN, to show it's them). From then on they sign in with it. If that email already has an account (made on
+     another device), the same PIN joins the two. */
+  function askEmail() {
+    if (document.getElementById('mrb-who') || LS.get('notes-nocount')) return;
+    const p = me(); if (!p) return;
+    const d = document.createElement('div'); d.id = 'mrb-who'; d.dataset.kind = 'email'; d.setAttribute('role', 'dialog'); d.setAttribute('aria-modal', 'true'); d.setAttribute('aria-labelledby', 'mrb-who-h');
+    d.innerHTML = `<style>${WHO_CSS}</style><form novalidate><h2 id="mrb-who-h">Add your school email</h2><p class="t"></p><label for="mrb-e">School email</label><input id="mrb-e" type="email" inputmode="email" autocomplete="email" autocapitalize="off" spellcheck="false" maxlength="80" placeholder="e.g. jsmith123@c2ken.net"><label for="mrb-p">Your PIN</label><input id="mrb-p" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off" placeholder="4 digits"><div class="r"><button type="button" class="l">Sign out</button><button class="p">Save</button></div><p class="m" aria-live="polite"></p></form>`;
+    d.querySelector('.t').textContent = `Hi ${(p.name || '').split(' ')[0] || 'there'}! From now on you’ll sign in with your school email and PIN. Enter them once to add your email to your account.`;
+    document.body.append(d); document.documentElement.style.overflow = 'hidden';
+    const eI = d.querySelector('#mrb-e'), pinI = d.querySelector('#mrb-p'), m = d.querySelector('.m'), go = d.querySelector('.p');
+    const close = () => { d.remove(); document.documentElement.style.overflow = ''; paintWho(); };
+    d.addEventListener('keydown', e => { if (e.key === 'Escape') { e.preventDefault(); e.stopPropagation(); } }, true);
+    d.querySelector('.l').addEventListener('click', ev => { close(); const b = document.querySelector('[data-mrb-who] [data-w="out"]'); signOut(false, b || ev.currentTarget); });
+    d.querySelector('form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const email = eI.value.trim().toLowerCase(), pin = pinI.value.trim();
+      if (!/^[a-z0-9._%+'-]+@c2ken\.net$/.test(email)) { m.textContent = 'Use your school email: it ends in @c2ken.net.'; eI.focus(); return; }
+      if (!/^\d{4}$/.test(pin)) { m.textContent = 'Please enter your 4-digit PIN.'; pinI.focus(); return; }
+      go.disabled = true; m.textContent = 'Saving…';
+      let j = null; try { j = await fetch(URL0 + (URL0.includes('?') ? '&' : '?') + 'action=addemail&id=' + encodeURIComponent(p.id) + '&email=' + encodeURIComponent(email) + '&pin=' + pin, { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); } catch (x) { j = null; }
+      go.disabled = false;
+      if (!j) { m.textContent = 'Couldn’t save just now. Check you are online and try again.'; return; }
+      if (j.error === 'pin') { pinI.value = ''; pinI.focus(); m.textContent = `That isn’t your PIN.${j.left != null ? ` ${j.left} ${j.left === 1 ? 'try' : 'tries'} left.` : ''} Forgotten it? Ask Mr Butler to reset it.`; return; }
+      if (j.error === 'locked') { m.textContent = 'Too many wrong PINs. Try again in 15 minutes, or ask Mr Butler.'; return; }
+      if (j.error === 'email') { m.textContent = 'Use your school email: it ends in @c2ken.net.'; eI.focus(); return; }
+      if (j.error === 'taken') { m.textContent = 'That email is already used by another account with a different PIN. Check it’s yours, or ask Mr Butler.'; eI.focus(); return; }
+      if (!j.ok || !j.id) { m.textContent = 'Something went wrong. Please try again.'; return; }
+      const cur = me() || {}; LS.set('mrb-pupil', JSON.stringify(Object.assign(cur, { id: j.id, email: j.email || email }, j.name ? { name: j.name } : {}, j.cls ? { cls: j.cls } : {})));
+      LS.set('mrb-pin-ok', '1');
+      let pulled = 0; if (j.id !== p.id && j.data) { try { pulled = mergeInto(JSON.parse(j.data)); } catch (x) { } }
+      if (/^(pending|declined)$/.test(j.status || '')) LS.set('mrb-access', j.status); else LS.set('mrb-access', 'ok');
+      m.textContent = 'Saved. Next time, sign in with ' + (j.email || email) + '.';
+      setTimeout(() => { if (pulled || j.id !== p.id) location.reload(); else { close(); if (blocked()) gate(); } }, 1100);
+    });
+    setTimeout(() => eI.focus(), 50);
   }
   window.MRB_WHO = ask;
   /* "Revising as … · Change" wherever a [data-mrb-who] slot is on the page */
@@ -10283,7 +10331,7 @@ try {
       const p = me(), staff = !!LS.get('notes-nocount'); el.hidden = false; el.classList.add('mrb-whoslot');
       el.innerHTML = staff ? `<b>Staff device</b>: not asked to sign in, not counted · <button type="button" class="mrb-ch" data-w="out">Sign out</button>`
         : p ? `Using the Revision Guide as <b></b> (<span></span>) · <button type="button" class="mrb-ch" data-w="ch">Change</button> · <button type="button" class="mrb-ch" data-w="out">Sign out</button>`
-        : `<button type="button" class="mrb-ch" data-w="ch">Enter your name</button> to save your progress.`;
+        : `<button type="button" class="mrb-ch" data-w="ch">Sign in</button> to save your progress.`;
       if (p && !staff) { el.querySelector('b').textContent = p.name; el.querySelector('span').textContent = p.cls; }
       const ch = el.querySelector('[data-w="ch"]'); if (ch) ch.addEventListener('click', ask);
       const out = el.querySelector('[data-w="out"]'); if (out) out.addEventListener('click', () => signOut(staff, out));
@@ -10297,7 +10345,7 @@ try {
       if (!confirm('Sign out of this staff device? It will ask for a name again and count visits.')) return;
       ['notes-nocount', 'teacher.nocount-set', 'teacher.actkey', 'mrb-staff-ok'].forEach(k => LS.set(k, null)); location.reload(); return;
     }
-    if (!confirm('Sign out? Your progress is saved online first, then removed from this device. Sign in again with your name, form class and PIN to get it back.')) return;
+    if (!confirm('Sign out? Your progress is saved online first, then removed from this device. Sign in again with your school email and PIN to get it back.')) return;
     btn.disabled = true; btn.textContent = 'Saving…';
     let ok = false;
     try { ok = !!(window.MRB_CLOUD && await Promise.race([window.MRB_CLOUD.save(true), new Promise(r => setTimeout(() => r(false), 8000))])); } catch (e) { }

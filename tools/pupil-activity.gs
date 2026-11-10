@@ -24,6 +24,13 @@
 
    CLASSES and ZONES (v20): Teacher area › Pupil tracking › Classes: add each class with its teacher and what it studies
    (its zones). Pupils sign in by picking their class; you can move them between classes and set their own zones there.
+   EMAIL SIGN-IN (v29): pupils sign in with their school email (@c2ken.net) and a 4-digit PIN. First time, they give their name,
+   year and teacher and choose a PIN; a pupil already in the sheet (same name and year, the right PIN) keeps their account and
+   their email is added to it. Pupils signed in from before v29 are asked for their email once. Emails sheet [Email, Pupil ID,
+   Linked]. CLASS LISTS: Teacher area › Pupil tracking › Classes & zones › Class lists: paste Name, Email, Class from Excel; a
+   listed pupil gets straight in (no approval) with the name and class from your list. Class list sheet [Email, Name, Class,
+   Imported]. DUPLICATES: accounts with the same name in the same year are merged automatically (progress, time, tests and PINs
+   combined), once when v29 first runs and again from Classes & zones › "Merge duplicate accounts now" (or run mergeDuplicates).
    UPDATING this code later: paste the new version over the old one (keep your TEACHER_KEY line), save, then
    Deploy › Manage deployments › pencil (Edit) › Version: New version › Deploy. The URL stays the same.
 
@@ -32,7 +39,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 28;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 29;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -40,6 +47,7 @@ const SITE = 'https://popcorn483.github.io/ergsdigitaltechnology/';
 const REQUIRE_APPROVAL = true;   // new pupils wait until you approve them in the Teacher area › Pupils (false: anyone can sign up)
 const NOTIFY_EMAIL = '';   // where the emails go (sign-up requests, staff details, weekly report); empty: the Google account that owns this script
 const EMAIL_SIGNINS = true;   // email the script's owner each time a new pupil signs up (false to stop)   // a short staff password: typed in the sign-in box it marks a device as staff (no access to pupil data)
+const EMAIL_RE = /^[a-z0-9._%+'-]{1,64}@c2ken\.net$/;   // only school (C2k) emails can sign in
 const BOOKS = ['home', 'U1', 'U4', 'U5', 'AS1', 'AS2', 'A21', 'A22', 'KS3', 'Y8', 'Y9', 'Y10', 'Y0'];
 /* ZONES: what a pupil may open. Year 8 / 9 / 10 are the KS3 years; the rest are the GCSE and A level workbooks.
    A pupil's own zones (Zones sheet) win; otherwise their class's zones (Classes sheet); otherwise their year's (YEAR_ZONES:
@@ -125,8 +133,12 @@ function save_(code, data) {   /* code: a save code (K7P4-QX9M) or P-<pupil ID> 
   if (!(CODE_RE.test(code) || /^P-[a-z0-9]{6,24}$/i.test(code)) || typeof data !== 'string' || data.length > PART * PARTS) return { ok: false };
   try { JSON.parse(data); } catch (x) { return { ok: false }; }
   const parts = Array.from({ length: PARTS }, (_, i) => { const p = data.slice(i * PART, (i + 1) * PART); return p ? '~' + p : ''; });   // '~' so a part never starts like a formula
-  return locked_(() => { const sh = saves_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === code), row = [code, new Date(), data.length].concat(parts);
-    if (i >= 0) sh.getRange(i + 2, 1, 1, row.length).setValues([row]); else sh.appendRow(row); return { ok: true }; });
+  return locked_(() => saveRow_(code, data, parts));
+}
+function saveRow_(code, data, parts) {   /* (call inside the lock) */
+  parts = parts || Array.from({ length: PARTS }, (_, i) => { const p = data.slice(i * PART, (i + 1) * PART); return p ? '~' + p : ''; });
+  const sh = saves_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === code), row = [code, new Date(), data.length].concat(parts);
+  if (i >= 0) sh.getRange(i + 2, 1, 1, row.length).setValues([row]); else sh.appendRow(row); return { ok: true };
 }
 const norm_ = (n, c) => String(n || '').toLowerCase().replace(/\s+/g, ' ').trim() + '|' + String(c || '').toUpperCase().replace(/\s+/g, '');
 /* PINs: a pupil's 4-digit PIN, stored only as a salted hash (Pins sheet). Five wrong tries locks that pupil for 15 minutes. */
@@ -136,6 +148,10 @@ function pinHash_(id, pin) { return Utilities.base64Encode(Utilities.computeDige
 function getPin_(id) { const r = rows_(pins_()).find(x => String(x[0]) === id); return r ? String(r[1]) : ''; }
 function setPin_(id, pin) { const sh = pins_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === id), row = [id, pinHash_(id, pin), new Date()];
   if (i >= 0) sh.getRange(i + 2, 1, 1, 3).setValues([row]); else sh.appendRow(row); }
+/* after a merge, the kept pupil's PIN is their own or any merged account's (each pupil keeps the PIN they remember) */
+function pinIds_(id, A) { A = A || aliases_(); return [id].concat(Object.keys(A).filter(k => resolve_(k, A) === id)); }
+function hasPin_(id, A) { const P = {}; rows_(pins_()).forEach(r => { P[String(r[0])] = 1; }); return pinIds_(id, A).some(x => P[x]); }
+function pinOk_(id, pin, A) { const P = {}; rows_(pins_()).forEach(r => { P[String(r[0])] = String(r[1]); }); return pinIds_(id, A).some(x => P[x] && P[x] === pinHash_(x, pin)); }
 function dropPins_(ids) { const sh = pins_(), r = rows_(sh); for (let i = r.length - 1; i >= 0; i--) if (ids.indexOf(String(r[i][0])) >= 0) sh.deleteRow(i + 2); }
 /* signing in: the pupil with this name and form class (as shown, or as they once typed it). With the right PIN: their ID and
    saved progress. A pupil with no PIN yet takes this one. Nobody with that name: this device's ID becomes a new pupil with this PIN. */
@@ -167,8 +183,8 @@ function whois_(name, cls, pin, devId) {
   }
   const p = hits.sort((a, b) => b.total - a.total)[0], cache = CacheService.getScriptCache(), fk = 'fail:' + p.id, fails = +(cache.get(fk) || 0);
   if (fails >= 5) return { ok: false, error: 'locked' };
-  const had = getPin_(p.id);
-  if (had && had !== pinHash_(p.id, pin)) { cache.put(fk, String(fails + 1), 900); return { ok: false, error: 'pin', left: 4 - fails }; }
+  const had = hasPin_(p.id);
+  if (had && !pinOk_(p.id, pin)) { cache.put(fk, String(fails + 1), 900); return { ok: false, error: 'pin', left: 4 - fails }; }
   if (!had) locked_(() => setPin_(p.id, pin));
   cache.remove(fk);
   const sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + p.id);
@@ -183,6 +199,207 @@ function roster_() {
     if (t >= p.last) { p.name = String(r[2]); p.cls = String(r[3]); p.last = t; } p.typed[String(r[2]) + ' (' + String(r[3]) + ')'] = 1; p.total += +r[6] || 0; });
   rows_(prog_()).forEach(r => { const id = resolve_(String(r[1]), A); if (id && !P[id]) get(id, r[2], r[3]); });
   return Object.keys(P).map(k => { const p = P[k]; if (N[k]) { p.name = N[k][0] || p.name; p.cls = N[k][1] || p.cls; } p.typed = Object.keys(p.typed); return p; });
+}
+/* ---------- EMAIL SIGN-IN, CLASS LISTS AND MERGING (v29) ----------
+   Emails [Email, Pupil ID, Linked]: one school email per pupil, used to sign in (with their PIN).
+   Class list [Email, Name, Class, Imported]: pasted in by the teacher; a listed pupil gets straight in with that name and class. */
+const emailsSh_ = () => tab_('Emails', ['Email', 'Pupil ID', 'Linked']);
+const clistSh_ = () => tab_('Class list', ['Email', 'Name', 'Class', 'Imported']);
+const nem_ = e => String(e || '').trim().toLowerCase();
+/* a name as a key: lower case, letters only, words sorted ("Smith, John" = "John Smith") */
+const nameKey_ = n => String(n || '').toLowerCase().replace(/['’-]/g, '').replace(/[^a-z\s]/g, ' ').split(/\s+/).filter(Boolean).sort().join(' ');
+function emailIds_(A) { A = A || aliases_(); const m = {}; rows_(emailsSh_()).forEach(r => { const e = nem_(r[0]); if (e && String(r[1])) m[e] = resolve_(String(r[1]), A); }); return m; }
+function emailOf_(id) { const m = emailIds_(); return Object.keys(m).find(e => m[e] === id) || ''; }
+function clist_() { const m = {}; rows_(clistSh_()).forEach(r => { const e = nem_(r[0]); if (e) m[e] = { name: String(r[1] || ''), cls: ncls_(r[2]) }; }); return m; }
+/* write several Emails / Names rows in one go: pairs [id, email] (one email per pupil; an email moves to its new pupil) */
+function setEmails_(pairs) {
+  if (!pairs.length) return; const sh = emailsSh_(), A = aliases_(), ids = {}, ems = {}; pairs.forEach(([id, e]) => { ids[id] = 1; ems[e] = 1; });
+  const keep = rows_(sh).filter(r => String(r[0]) && !ems[nem_(r[0])] && !ids[resolve_(String(r[1]), A)]).map(r => r.slice(0, 3)), n = sh.getLastRow() - 1;
+  const all = keep.concat(pairs.map(([id, e]) => [e, id, new Date()]));
+  if (n > 0) sh.getRange(2, 1, n, 3).clearContent(); if (all.length) sh.getRange(2, 1, all.length, 3).setValues(all);
+}
+function setNames_(list) {   /* list: [id, name, class] */
+  if (!list.length) return; const sh = tab_('Names', ['Pupil ID', 'Name', 'Class']), r = rows_(sh).map(x => x.slice(0, 3)), at = {}; r.forEach((x, i) => { at[String(x[0])] = i; });
+  list.forEach(([id, nm, cl]) => { const row = [id, clean_(nm, 40), clean_(cl, 12).toUpperCase()]; if (at[id] != null) r[at[id]] = row; else { at[id] = r.length; r.push(row); } });
+  sh.getRange(2, 1, r.length, 3).setValues(r);
+}
+function approve_(ids, N) {   /* sign-up requests answered "yes" (a listed pupil needs no approval) */
+  if (!REQUIRE_APPROVAL || !ids.length) return; N = N || names_(); const sh = acc_(), r = rows_(sh), at = {}, now = new Date(); r.forEach((x, i) => { at[String(x[0])] = i; });
+  ids.forEach(id => { if (at[id] == null) return; if (String(r[at[id]][1]) !== 'approved') sh.getRange(at[id] + 2, 2, 1, 1).setValue('approved'), sh.getRange(at[id] + 2, 6).setValue(now); });
+  sumClear_(); void N;
+}
+/* every pupil the sheet knows (from the Log and Progress, sign-up requests and names you set), for matching and merging */
+function accounts_() {
+  const A = aliases_(), N = names_(), P = {};
+  roster_().forEach(p => { P[p.id] = { id: p.id, name: p.name, cls: p.cls, total: p.total }; });
+  const AR = rows_(acc_()), AC = {};
+  AR.forEach(r => { const raw = String(r[0]), id = resolve_(raw, A); AC[raw] = String(r[1]); if (!id || P[id]) return; P[id] = { id, name: (N[id] || [])[0] || String(r[2]), cls: (N[id] || [])[1] || String(r[3]), total: 0 }; });
+  Object.keys(N).forEach(k => { const id = resolve_(k, A); if (id && !P[id]) P[id] = { id, name: N[k][0], cls: N[k][1], total: 0 }; });
+  const R = roles_(), E = emailIds_(A), EM = {}; Object.keys(E).forEach(e => { EM[E[e]] = e; });
+  return Object.keys(P).map(k => { const p = P[k]; return Object.assign(p, { status: REQUIRE_APPROVAL ? (AC[k] || 'approved') : 'approved', teacher: R[k] === 'teacher', email: EM[k] || '', key: nameKey_(p.name), yr: yearOf_(p.cls) }); })
+    .filter(p => p.key.split(' ').length >= 2);
+}
+/* which account to keep when several are one pupil: a teacher, then one with an email, then approved, then the most time */
+const rank_ = p => (p.teacher ? 8 : 0) + (p.email ? 4 : 0) + (p.status === 'approved' ? 2 : 0);
+const best_ = L => L.slice().sort((a, b) => rank_(b) - rank_(a) || (b.total || 0) - (a.total || 0))[0];
+/* MERGE: M maps each merged pupil ID to the one kept. Time, progress, page marks, test results, competition entries, zone
+   requests, emails, names, approval, zones, teacher role and saved progress all move to the kept pupil. Each merged account's
+   PIN still works for the kept one (Aliases), so nobody has to remember which PIN they used. (Call inside the lock.) */
+function relabelCol_(sh, col, M) {
+  const n = sh.getLastRow() - 1; if (n < 1) return; const rg = sh.getRange(2, col, n, 1), v = rg.getValues(); let ch = false;
+  v.forEach(r => { const k = String(r[0]); if (M[k]) { r[0] = M[k]; ch = true; } }); if (ch) rg.setValues(v);
+}
+function mergeObj_(a, b) {   /* the same rules as the site's mergeInto: progress from both, best quiz scores, every trophy */
+  const J = v => { try { return JSON.parse(v); } catch (e) { return null; } };
+  Object.keys(b || {}).forEach(k => {
+    if (!/^notes-/.test(k) || /^notes-(nocount|counted)/.test(k) || typeof b[k] !== 'string') return;
+    if (a[k] == null) { a[k] = b[k]; return; }
+    const x = J(a[k]), y = J(b[k]); if (!x || !y || typeof x !== 'object' || typeof y !== 'object') return;
+    if (/^notes-reader:/.test(k)) { ['done', 'seen'].forEach(f => { x[f] = Object.assign({}, y[f] || {}, x[f] || {}); }); x.steps = x.steps || {}; Object.keys(y.steps || {}).forEach(s => { x.steps[s] = [...new Set([...(x.steps[s] || []), ...(y.steps[s] || [])])]; }); if (!x.last && y.last) x.last = y.last; }
+    else if (/^notes-chquiz:/.test(k)) { x.best = x.best || {}; Object.keys(y.best || {}).forEach(q => { if (!x.best[q] || (y.best[q] && y.best[q].pc > x.best[q].pc)) x.best[q] = y.best[q]; }); x.open = Object.assign({}, y.open || {}, x.open || {}); }
+    else if (/^notes-trophy:/.test(k)) x.earned = Object.assign({}, y.earned || {}, x.earned || {});
+    else return;
+    a[k] = JSON.stringify(x);
+  });
+  return a;
+}
+function mergeSaves_(M) {
+  const S = {}; rows_(saves_()).forEach(x => { const c = String(x[0]); if (/^P-/.test(c)) S[c.slice(2)] = x.slice(3, 3 + PARTS).map(v => String(v || '').replace(/^~/, '')).join(''); });
+  const by = {}; Object.keys(M).forEach(f => { (by[M[f]] = by[M[f]] || []).push(f); });
+  Object.keys(by).forEach(t => { const src = by[t].filter(f => S[f]); if (!src.length) return;
+    let base = {}; try { base = JSON.parse(S[t] || '{}') || {}; } catch (e) { base = {}; }
+    src.forEach(f => { try { mergeObj_(base, JSON.parse(S[f])); } catch (e) { } });
+    const data = JSON.stringify(base); if (data.length <= PART * PARTS) saveRow_('P-' + t, data); });
+}
+function mergeMap_(M) {
+  Object.keys(M).forEach(f => { let t = M[f], k = 0; while (M[t] && k++ < 20) t = M[t]; M[f] = t; });
+  Object.keys(M).forEach(f => { if (!okId(f) || !okId(M[f]) || f === M[f]) delete M[f]; });
+  const from = Object.keys(M); if (!from.length) return { ok: true, merged: 0 };
+  const al = tab_('Aliases', ['Old ID', 'Kept ID']); relabelCol_(al, 2, M);   /* older merges into a merged ID follow it */
+  al.getRange(al.getLastRow() + 1, 1, from.length, 2).setValues(from.map(f => [f, M[f]]));
+  relabelCol_(log_(), 2, M); relabelProgMap_(M); relabelCol_(awards_(), 2, M); relabelCol_(tres_(), 2, M); relabelCol_(cent_(), 3, M); relabelCol_(zreqSh_(), 2, M); relabelCol_(emailsSh_(), 2, M);
+  const N = names_(), nm = []; from.forEach(f => { const t = M[f]; if (!N[t] && N[f]) { N[t] = N[f]; nm.push([t, N[f][0], N[f][1]]); } }); setNames_(nm); dropNames_(from);
+  if (REQUIRE_APPROVAL) { const AC = {}; rows_(acc_()).forEach(r => { AC[String(r[0])] = String(r[1]); }); const st = id => AC[id] || 'approved';
+    from.forEach(f => { const t = M[f]; if (st(t) !== 'approved' && st(f) === 'approved') { setAccess_(t, 'approved'); AC[t] = 'approved'; } }); dropAccess_(from); }
+  const PZ = pzones_(); from.forEach(f => { const t = M[f]; if (!PZ[t] && PZ[f]) { setZones_(t, PZ[f]); PZ[t] = PZ[f]; } }); dropZones_(from);
+  const R = roles_(); from.forEach(f => { const t = M[f]; if (R[f] === 'teacher' && R[t] !== 'teacher') { setRole_(t, 'teacher', (names_()[t] || [])[0] || ''); R[t] = 'teacher'; } if (R[f]) setRole_(f, ''); });
+  mergeSaves_(M); sumClear_();
+  return { ok: true, merged: from.length };
+}
+function relabelProgMap_(M) {   /* keep one row per workbook: the one with most pages covered */
+  const sh = prog_(), r = rows_(sh); if (!r.length) return; if (!r.some(x => M[String(x[1])])) return;
+  const best = {}, keep = [];
+  r.forEach(x => { if (!String(x[1])) return; if (M[String(x[1])]) x[1] = M[String(x[1])]; const k = x[1] + '|' + x[4]; if (!best[k] || +x[5] > +best[k][5]) best[k] = x; });
+  r.forEach(x => { const k = x[1] + '|' + x[4]; if (best[k] === x) keep.push(x); });
+  sh.getRange(2, 1, r.length, PROG_HEAD.length).clearContent();
+  if (keep.length) sh.getRange(2, 1, keep.length, PROG_HEAD.length).setValues(keep.map(x => x.slice(0, PROG_HEAD.length)));
+}
+/* DUPLICATES: accounts with the same name in the same year group are one pupil. A name with no year joins the only year that
+   name has. Never merged: two accounts with different emails (two pupils who share a name), or a new email sign-up you
+   haven't approved yet. Runs once by itself when v29 first loads the Teacher area; run mergeDuplicates from the editor any time. */
+function dedupe_() {
+  const all = accounts_().filter(p => !(p.email && p.status !== 'approved')), by = {}; all.forEach(p => { (by[p.key] = by[p.key] || []).push(p); });
+  const M = {}; let groups = 0;
+  Object.keys(by).forEach(k => { const L = by[k]; if (L.length < 2) return;
+    const yrs = [...new Set(L.filter(p => p.yr).map(p => p.yr))], G = {};
+    L.forEach(p => { const y = p.yr || (yrs.length === 1 ? yrs[0] : 0); if (!y && yrs.length > 1) return; (G[y] = G[y] || []).push(p); });
+    Object.keys(G).forEach(y => { const g = G[y]; if (g.length < 2 || new Set(g.filter(p => p.email).map(p => p.email)).size > 1) return;
+      const keep = best_(g); g.forEach(p => { if (p.id !== keep.id) M[p.id] = keep.id; }); groups++; }); });
+  const r = mergeMap_(M); return { ok: true, groups, merged: r.merged || 0 };
+}
+function mergeDuplicates() { const r = locked_(() => dedupe_()); Logger.log(JSON.stringify(r)); return r; }
+/* the reply a signed-in device gets: who they are, approval, and their saved progress */
+function loginOut_(id, extra) {
+  const N = names_(); let name = (N[id] || [])[0], cls = (N[id] || [])[1];
+  if (!name) { const a = rows_(acc_()).find(r => String(r[0]) === id); if (a) { name = String(a[2]); cls = String(a[3]); } }
+  if (!name) { const p = roster_().find(x => x.id === id); if (p) { name = p.name; cls = p.cls; } }
+  const sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + id);
+  return asTeacher_(Object.assign({ ok: true, status: access_(id), id, name, cls, email: emailOf_(id), updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' }, extra || {}), id);
+}
+/* SIGN IN with a school email and PIN. A known email: its PIN. A new email: on your class list, that pupil (their old account,
+   found by name and year, keeps everything); not listed, they give name, year and teacher, and an old account is only joined
+   if this PIN opens it; otherwise a new pupil, waiting for approval. Five wrong PINs locks that email for 15 minutes. */
+function signin_(email, pin, name, cls, devId) {
+  email = nem_(email); if (!EMAIL_RE.test(email)) return { ok: false, error: 'email' };
+  if (!/^\d{4}$/.test(String(pin || ''))) return { ok: false, error: 'pin' };
+  const c = CacheService.getScriptCache(), fk = 'fail:e:' + email, fails = +(c.get(fk) || 0); if (fails >= 5) return { ok: false, error: 'locked' };
+  const A = aliases_(), known = emailIds_(A)[email];
+  if (known) {
+    if (hasPin_(known, A)) { if (!pinOk_(known, pin, A)) { c.put(fk, String(fails + 1), 900); return { ok: false, error: 'pin', left: 4 - fails }; } }
+    else locked_(() => setPin_(known, pin));
+    c.remove(fk); return loginOut_(known);
+  }
+  const li = clist_()[email], nm = li && li.name ? li.name : clean_(String(name || '').replace(/\s+/g, ' '), 40), cl = li && li.cls ? li.cls : ncls_(cls);
+  if (nameKey_(nm).split(' ').length < 2 || !cl) return { ok: false, error: 'new', listed: !!li };
+  void devId;
+  return locked_(() => {
+    const key = nameKey_(nm), yr = yearOf_(cl), E = emailIds_(), taken = {}; Object.keys(E).forEach(e => { taken[E[e]] = 1; });
+    if (E[email]) return loginOut_(E[email]);   /* signed up a moment ago on another device */
+    let hits = accounts_().filter(p => p.key === key && !taken[p.id] && (!yr || !p.yr || p.yr === yr));
+    if (!li) hits = hits.filter(p => pinOk_(p.id, pin));   /* not on a class list: only an account this PIN opens */
+    let id, fresh = false;
+    if (hits.length) { const keep = best_(hits), M = {}; hits.forEach(p => { if (p.id !== keep.id) M[p.id] = keep.id; }); mergeMap_(M); id = keep.id; }
+    else { id = 'e' + Utilities.getUuid().replace(/-/g, '').slice(0, 15); fresh = true; }
+    setEmails_([[id, email]]);
+    if (li || !hasPin_(id)) setPin_(id, pin);
+    if (li || fresh || !names_()[id]) setNames_([[id, nm, cl]]);
+    if (li) { if (access_(id) !== 'approved') setAccess_(id, 'approved', nm, cl); }
+    else if (fresh) { if (REQUIRE_APPROVAL) setAccess_(id, 'pending', nm, cl);
+      notify_('New sign-up', nm, cl, (REQUIRE_APPROVAL ? 'A new pupil is waiting for you to approve them: Teacher area › Pupils › Requests.' : 'A new pupil has signed up.') + ' Email: ' + email + ' (not on any class list you have imported).'); }
+    sumClear_(); c.remove(fk);
+    return loginOut_(id, { fresh });
+  });
+}
+/* a pupil from before emails (signed in on this device with their PIN) adds their school email; it signs them in from now on */
+function addEmail_(rawId, email, pin) {
+  if (!okId(rawId) || !/^\d{4}$/.test(String(pin || ''))) return { ok: false };
+  email = nem_(email); if (!EMAIL_RE.test(email)) return { ok: false, error: 'email' };
+  const A = aliases_(), id = resolve_(String(rawId), A), c = CacheService.getScriptCache(), fk = 'fail:' + id, fails = +(c.get(fk) || 0);
+  if (fails >= 5) return { ok: false, error: 'locked' };
+  if (hasPin_(id, A) && !pinOk_(id, pin, A)) { c.put(fk, String(fails + 1), 900); return { ok: false, error: 'pin', left: 4 - fails }; }
+  c.remove(fk);
+  return locked_(() => {
+    if (!hasPin_(id)) setPin_(id, pin);
+    const other = emailIds_()[email];
+    if (other && other !== id) {   /* that email already has an account (signed up on another device): the same PIN joins the two */
+      if (!pinOk_(other, pin)) return { ok: false, error: 'taken' };
+      mergeMap_({ [id]: other }); return loginOut_(other, { joined: true });
+    }
+    setEmails_([[id, email]]);
+    const li = clist_()[email]; if (li) { if (li.name) setNames_([[id, li.name, li.cls || (names_()[id] || [])[1] || '']]); if (access_(id) !== 'approved') setAccess_(id, 'approved', li.name, li.cls); }
+    sumClear_(); return loginOut_(id);
+  });
+}
+/* the teacher sets (or changes) a pupil's email */
+function linkEmail_(id, email) {
+  email = nem_(email); if (!EMAIL_RE.test(email)) return { ok: false, error: 'That isn’t a @c2ken.net email.' };
+  const other = emailIds_()[email]; if (other && other !== id) return { ok: false, error: 'That email is already used by another pupil. Merge the two first.' };
+  setEmails_([[id, email]]); return { ok: true };
+}
+/* CLASS LISTS: rows [{ name, email, cls }] from the Teacher area (sent in batches); then every listed email is matched to its
+   pupil's account by name and year (duplicates merged) and that pupil is approved with the name and class from the list */
+function importList_(json) {
+  let L; try { L = JSON.parse(String(json || '[]')); } catch (e) { return { ok: false, error: 'bad list' }; } if (!Array.isArray(L)) return { ok: false, error: 'bad list' };
+  const sh = clistSh_(), R = rows_(sh), at = {}, now = new Date(), add = []; R.forEach((r, i) => { at[nem_(r[0])] = i; });
+  let added = 0, updated = 0, bad = 0;
+  L.slice(0, 400).forEach(x => { const e = nem_(x && x.email), nm = clean_(String((x && x.name) || '').replace(/\s+/g, ' '), 40), cl = ncls_(x && x.cls);
+    if (!EMAIL_RE.test(e) || nameKey_(nm).split(' ').length < 2) { bad++; return; }
+    const row = [e, nm, cl, now]; if (at[e] >= 0) { sh.getRange(at[e] + 2, 1, 1, 4).setValues([row]); updated++; } else if (at[e] == null) { add.push(row); at[e] = -1; added++; } });
+  if (add.length) sh.getRange(sh.getLastRow() + 1, 1, add.length, 4).setValues(add);
+  return Object.assign({ ok: true, added, updated, bad }, matchList_());
+}
+function matchList_() {
+  const LI = clist_(), A = aliases_(), E = emailIds_(A), taken = {}; Object.keys(E).forEach(e => { taken[E[e]] = 1; });
+  const acc = accounts_(), M = {}, links = []; let waiting = 0, linked = 0;
+  Object.keys(LI).forEach(e => { const li = LI[e];
+    if (E[e]) { links.push([E[e], e, li]); return; }
+    const key = nameKey_(li.name), yr = yearOf_(li.cls), hits = acc.filter(p => p.key === key && !taken[p.id] && !M[p.id] && !(p.email && p.email !== e) && (!yr || !p.yr || p.yr === yr));
+    if (!hits.length) { waiting++; return; }
+    const keep = best_(hits); hits.forEach(p => { if (p.id !== keep.id) M[p.id] = keep.id; }); taken[keep.id] = 1; links.push([keep.id, e, li]); linked++; });
+  const r = mergeMap_(M), N = names_(), em = [], nm = [], ap = [];
+  links.forEach(([id, e, li]) => { const k = M[id] || id; if (!E[e]) em.push([k, e]); if (li.name) nm.push([k, li.name, li.cls || (N[k] || [])[1] || '']); ap.push(k); });
+  setEmails_(em); setNames_(nm); approve_(ap);
+  return { linked, merged: r.merged || 0, waiting };
 }
 function load_(code) {
   if (!CODE_RE.test(code)) return { ok: false, error: 'code' };
@@ -419,9 +636,11 @@ function doGet(e) {
   const q = (e && e.parameter) || {};
   if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
   if (q.action === 'whois') return out_(whois_(q.name, q.cls, q.pin, q.id));
+  if (q.action === 'signin') return out_(signin_(q.email, q.pin, q.name, q.cls, q.id));   /* v29: school email + PIN */
+  if (q.action === 'addemail') return out_(addEmail_(q.id, q.email, q.pin));   /* v29: a pupil from before emails adds theirs */
   if (q.action === 'access') {   /* a pupil's device: approved yet? has a PIN? their class (as the teacher set it), zones and open zone requests */
     if (!okId(q.id)) return out_({ ok: false }); const id = resolve_(String(q.id), aliases_()), N = names_(), cls = (N[id] && N[id][1]) || ncls_(q.cls);
-    return out_({ ok: true, status: access_(id), pin: !!getPin_(id), id, name: N[id] ? N[id][0] : undefined, cls: N[id] ? N[id][1] : undefined, zones: effZones_(id, cls), asked: zreqs_('pending').filter(r => r.id === id).map(r => r.zone) });
+    return out_({ ok: true, status: access_(id), pin: hasPin_(id), email: emailOf_(id) || '', id, name: N[id] ? N[id][0] : undefined, cls: N[id] ? N[id][1] : undefined, zones: effZones_(id, cls), asked: zreqs_('pending').filter(r => r.id === id).map(r => r.zone) });
   }
   if (q.action === 'classes') return out_({ ok: true, classes: classes_().map(c => ({ cls: c.cls, teacher: c.teacher, course: c.course })) });   /* the sign-in box: the class list */
   if (q.action === 'zonereq') return out_(zoneAsk_(q.id, String(q.zone || '').toUpperCase(), q.name, q.cls));   /* a pupil's device: approved yet? has a PIN? */
@@ -441,6 +660,7 @@ function doGet(e) {
   if (q.action === 'mywork') { const N = names_(), id = okId(q.id) ? resolve_(String(q.id), aliases_()) : ''; return out_(myWork_(q.id, (N[id] && N[id][1]) || q.cls)); }   /* a pupil's device: work set for their class, and messages for them */   /* "Send me staff details": only ever to the script's owner */
   if (!keyOk_(q.key)) return out_({ error: 'key' });
   ensureWeekly_();
+  try { const pr = PropertiesService.getScriptProperties(); if (!pr.getProperty('dedupe:v29')) { locked_(() => dedupe_()); pr.setProperty('dedupe:v29', new Date().toISOString()); sumClear_(); } } catch (e) { }
   if (q.action === 'week') return out_(week_(q.start));   /* the Teacher area's weekly report */
   if (READS[q.action]) return out_(act_(q));   /* SPEED (v28): looking things up never waits for the lock or throws away the pupil list */
   if (q.action) { const r = locked_(() => act_(q)); sumClear_(); return out_(r); }   /* the next load rebuilds it (or warmSummary within 5 minutes) */
@@ -451,12 +671,7 @@ function act_(q) {
   const ids = String(q.ids || '').split(',').filter(okId), to = String(q.to || '');
   if (q.action === 'merge') {   /* every ID in ids becomes "to"; future posts from those devices count as "to" too */
     if (!okId(to) || !ids.length) return { ok: false, error: 'bad request' };
-    const from = ids.filter(x => x !== to), al = tab_('Aliases', ['Old ID', 'Kept ID']);
-    rows_(al).forEach((r, i) => { if (from.indexOf(String(r[1])) >= 0) al.getRange(i + 2, 2).setValue(to); });   // older merges into a merged ID follow it
-    from.forEach(f => al.appendRow([f, to]));
-    relabel_(from, to); relabelProg_(from, to);
-    const aw = awards_(), an = aw.getLastRow() - 1; if (an > 0) { const c = aw.getRange(2, 2, an, 1), v = c.getValues(); let ch = false; v.forEach(r => { if (from.indexOf(String(r[0])) >= 0) { r[0] = to; ch = true; } }); if (ch) c.setValues(v); }
-    dropNames_(from); dropPins_(from); if (access_(to) !== 'approved' && from.some(f => access_(f) === 'approved')) setAccess_(to, 'approved'); dropAccess_(from);
+    const M = {}; ids.filter(x => x !== to).forEach(f => { M[f] = to; }); mergeMap_(M);
     if (q.name) setName_(to, q.name, q.cls);
     return { ok: true };
   }
@@ -622,7 +837,12 @@ function act_(q) {
     if (!ids.length) return { ok: false, error: 'bad request' };
     ids.forEach(id => setRole_(id, role, N[id] ? N[id][0] : (q.name || ''))); return { ok: true };
   }
-  if (q.action === 'resetpin') { if (!okId(to)) return { ok: false, error: 'bad request' }; dropPins_([to]); return { ok: true }; }   /* the pupil chooses a new PIN next time they sign in */
+  if (q.action === 'dedupe') return dedupe_();
+  if (q.action === 'importlist') return importList_(q.rows);
+  if (q.action === 'classlist') return { ok: true, list: rows_(clistSh_()).filter(r => String(r[0])).map(r => ({ email: String(r[0]), name: String(r[1]), cls: String(r[2]), id: emailIds_()[String(r[0])] || '' })) };
+  if (q.action === 'dellist') { const sh = clistSh_(), r = rows_(sh), c = ncls_(q.cls); for (let i = r.length - 1; i >= 0; i--) if (!c || ncls_(r[i][2]) === c) sh.deleteRow(i + 2); return { ok: true }; }
+  if (q.action === 'setemail') { if (!okId(to)) return { ok: false, error: 'bad request' }; return linkEmail_(to, q.email, true); }
+  if (q.action === 'resetpin') { if (!okId(to)) return { ok: false, error: 'bad request' }; dropPins_(pinIds_(to)); return { ok: true }; }   /* the pupil chooses a new PIN next time they sign in */
   if (q.action === 'rename') { if (!okId(to) || !q.name) return { ok: false, error: 'bad request' }; setName_(to, q.name, q.cls); return { ok: true }; }
   if (q.action === 'delete') {   /* remove their rows; a device that keeps sending starts a fresh record */
     if (!ids.length) return { ok: false, error: 'bad request' };
@@ -794,8 +1014,10 @@ function summary_() {
     if (N[k]) { p.name = N[k][0] || p.name; p.cls = N[k][1] || p.cls; p.fixed = true; } p.pin = !!PN[k]; return p; });
   const AC = {}; rows_(acc_()).forEach(r => { AC[String(r[0])] = r; });
   pupils.forEach(p => { p.access = AC[p.id] ? String(AC[p.id][1]) : 'approved'; });
+  const EM = {}; rows_(emailsSh_()).forEach(r => { const id = resolve_(String(r[1]), A); if (id && String(r[0])) EM[id] = String(r[0]); });
+  pupils.forEach(p => { p.email = EM[p.id] || ''; });
   const known = {}; pupils.forEach(p => { known[p.id] = 1; });
-  const requests = Object.keys(AC).filter(id => String(AC[id][1]) === 'pending').map(id => ({ id, name: String(AC[id][2]), cls: String(AC[id][3]), at: new Date(AC[id][4]).getTime() }));
+  const requests = Object.keys(AC).filter(id => String(AC[id][1]) === 'pending').map(id => ({ id, name: String(AC[id][2]), cls: String(AC[id][3]), at: new Date(AC[id][4]).getTime(), email: EM[id] || '' }));
   const CL = classes_(), PZ = pzones_();
   pupils.forEach(p => { p.zones = PZ[p.id] || null; p.ezones = effZones_(p.id, p.cls, PZ, CL); });
   return { pupils, requests, classes: CL, zreqs: zreqs_('pending'), zones: ZONES, live: live_().live, updated: now, v: SCRIPT_VERSION, mail: EMAIL_SIGNINS ? mailState_() : null, roles: roles_() };
