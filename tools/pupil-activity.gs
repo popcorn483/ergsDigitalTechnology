@@ -39,7 +39,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 30;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 31;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -411,6 +411,56 @@ function addEmail_(rawId, email, pin) {
     sumClear_(); return loginOut_(id);
   });
 }
+/* TEACHER-MADE ACCOUNTS and PIN EMAILS (v31). A PIN is only ever kept scrambled (a salted hash), so nobody can look one up:
+   "Email a new PIN" makes a new 4-digit PIN, replaces every PIN the pupil had, and emails it to their school address from
+   the Google account that owns this script. Gmail lets a script send about 100 emails a day (1,500 on a school Workspace). */
+function newPin_() { let p; do { p = String(Math.floor(Math.random() * 10000)).padStart(4, '0'); } while (/^(\d)\1{3}$|^(0123|1234|2345|3456|4567|5678|6789|9876|8765|7654|6543|5432|4321|3210|1212|2580|1004|1122)$/.test(p)); return p; }
+function pinMail_(email, name, pin, welcome) {
+  const first = String(name || '').replace(/^'/, '').split(' ')[0] || 'there';
+  const code = `<span style="font-family:Consolas,Menlo,monospace;font-size:26px;letter-spacing:6px;background:#FFFFFF;border:1px solid ${BRAND.line};border-radius:6px;padding:4px 14px">${esc_(pin)}</span>`;
+  MailApp.sendEmail({ to: email, name: BRAND.name, subject: welcome ? "Your Mr B's Revision account" : "Your new PIN for Mr B's Revision",
+    htmlBody: mailHtml_({ title: welcome ? 'Your Revision Guide account is ready' : 'Your new PIN', preheader: `Sign in with ${email} and your PIN.`,
+      body: `<p style="margin:0 0 10px">Hi ${esc_(first)},</p><p style="margin:0">${welcome ? 'Mr Butler has set up your account for the Digital Technology Revision Guide.' : 'Here is your new PIN for the Digital Technology Revision Guide. Your old PIN no longer works.'} Sign in with:</p>` +
+        mailFacts_([['School email', esc_(email), true], ['PIN', code, true]]) + `<p style="margin:0;font-size:14px;color:${BRAND.muted}">Keep your PIN to yourself. Your progress follows you to any device you sign in on.</p>`,
+      button: ['Open the Revision Guide', SITE], foot: 'Sent by Mr Butler from the Teacher area. If you didn’t expect this, tell him.' }),
+    body: `Hi ${first},\n\n${welcome ? 'Mr Butler has set up your account for the Digital Technology Revision Guide.' : 'Here is your new PIN for the Digital Technology Revision Guide. Your old PIN no longer works.'}\n\nSchool email: ${email}\nPIN: ${pin}\n\n${SITE}\n\nKeep your PIN to yourself.` });
+}
+function sendPins_(list) {
+  const A = aliases_(), E = emailIds_(A), EM = {}, N = names_(); Object.keys(E).forEach(e => { EM[E[e]] = e; });
+  const ids = [...new Set(list.filter(okId).map(x => resolve_(String(x), A)))]; if (!ids.length) return { ok: false, error: 'bad request' };
+  let sent = 0; const none = [], fail = [];
+  for (const id of ids) {
+    const email = EM[id], name = (N[id] || [])[0] || (rosterFast_().find(p => p.id === id) || {}).name || '';
+    if (!email) { none.push(name || id); continue; }
+    try { if (MailApp.getRemainingDailyQuota() < 1) { fail.push(name); continue; } } catch (e) { }
+    const pin = newPin_();
+    try { pinMail_(email, name, pin, false); locked_(() => { dropPins_(pinIds_(id, A)); setPin_(id, pin); }); sent++; } catch (e) { mailNote_(e); fail.push(name || email); }
+  }
+  sumClear_();
+  const msg = (sent ? `Emailed a new PIN to ${sent} pupil${sent === 1 ? '' : 's'}.` : 'No PINs sent.') + (none.length ? ` No school email for ${none.join(', ')}: add one with Name & email first.` : '') + (fail.length ? ` Couldn’t email ${fail.join(', ')} (daily email limit, or email not set up: Pupil tracking › ⋯ › Send a test email).` : '');
+  return { ok: sent > 0 || !fail.length, sent, none, fail, msg, error: sent ? undefined : msg };
+}
+/* the teacher adds a pupil: name, school email, class; an old account with that name and year (and no email) is used instead
+   of making a second one. PIN: one the teacher chose, or emailed to them (send=1), or none (they choose it when they first sign in). */
+function addPupil_(q) {
+  const email = nem_(q.email), nm = clean_(String(q.name || '').replace(/\s+/g, ' '), 40), cl = ncls_(q.cls), pin = String(q.pin || '');
+  if (nameKey_(nm).split(' ').length < 2) return { ok: false, error: 'give their first name and surname' };
+  if (!EMAIL_RE.test(email)) return { ok: false, error: 'give their school email (it ends in @c2ken.net)' };
+  if (pin && !/^\d{4}$/.test(pin)) return { ok: false, error: 'a PIN is 4 digits' };
+  const E = emailIds_(); if (E[email]) { const o = names_()[E[email]]; return { ok: false, error: `${email} already belongs to ${o ? o[0] : 'a pupil'}` }; }
+  const taken = {}; Object.keys(E).forEach(e => { taken[E[e]] = 1; });
+  const yr = yearOf_(cl), hits = accounts_().filter(p => p.key === nameKey_(nm) && !taken[p.id] && (!yr || !p.yr || p.yr === yr));
+  let id, linked = false;
+  if (hits.length) { const keep = best_(hits), M = {}; hits.forEach(p => { if (p.id !== keep.id) M[p.id] = keep.id; }); mergeMap_(M); id = keep.id; linked = true; }
+  else id = 'e' + Utilities.getUuid().replace(/-/g, '').slice(0, 15);
+  setEmails_([[id, email]]); setNames_([[id, nm, cl]]);
+  if (REQUIRE_APPROVAL) { if (rows_(acc_()).some(r => String(r[0]) === id)) { if (access_(id) !== 'approved') setAccess_(id, 'approved'); } else setAccess_(id, 'approved', nm, cl); }
+  let sent = false, warn = '';
+  if (pin) { dropPins_(pinIds_(id)); setPin_(id, pin); }
+  else if (q.send === '1') { const p2 = newPin_(); try { pinMail_(email, nm, p2, true); dropPins_(pinIds_(id)); setPin_(id, p2); sent = true; } catch (e) { mailNote_(e); warn = ' The email didn’t send (check Pupil tracking › ⋯ › Send a test email); they can choose a PIN when they first sign in.'; } }
+  sumClear_();
+  return { ok: true, id, linked, sent, msg: `${nm} added${linked ? ' (joined to the account they already had)' : ''}.${sent ? ` Their PIN has been emailed to ${email}.` : pin ? ' They sign in with their email and the PIN you chose.' : ' They choose a PIN the first time they sign in with their email.'}${warn}` };
+}
 /* the teacher sets (or changes) a pupil's email */
 function linkEmail_(id, email) {
   email = nem_(email); if (!EMAIL_RE.test(email)) return { ok: false, error: 'That isn’t a @c2ken.net email.' };
@@ -679,7 +729,7 @@ function staffMail_() {
   return { ok: true };
 }
 /* the Teacher area: ?key=… gives one summary row per pupil; &action=merge|rename|delete changes them */
-const READS = { live: 1, detail: 1, report: 1, qstats: 1, work: 1, comps: 1, compimg: 1, tests: 1, testres: 1, pdata: 1 };   /* actions that only read */
+const READS = { live: 1, detail: 1, report: 1, qstats: 1, work: 1, comps: 1, compimg: 1, tests: 1, testres: 1, pdata: 1, sendpin: 1 };   /* sendpin: emails go out without holding the lock (each PIN change takes it briefly) */   /* actions that only read */
 function doGet(e) {
   fresh_();
   const q = (e && e.parameter) || {};
@@ -887,6 +937,8 @@ function act_(q) {
     ids.forEach(id => setRole_(id, role, N[id] ? N[id][0] : (q.name || ''))); return { ok: true };
   }
   if (q.action === 'dedupe') return dedupe_();
+  if (q.action === 'addpupil') return addPupil_(q);
+  if (q.action === 'sendpin') return sendPins_(ids.length ? ids : [to]);
   if (q.action === 'importlist') return importList_(q.rows);
   if (q.action === 'classlist') return { ok: true, list: rows_(clistSh_()).filter(r => String(r[0])).map(r => ({ email: String(r[0]), name: String(r[1]), cls: String(r[2]), id: emailIds_()[String(r[0])] || '' })) };
   if (q.action === 'dellist') { const sh = clistSh_(), r = rows_(sh), c = ncls_(q.cls); for (let i = r.length - 1; i >= 0; i--) if (!c || ncls_(r[i][2]) === c) sh.deleteRow(i + 2); return { ok: true }; }
