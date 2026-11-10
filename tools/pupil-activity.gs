@@ -39,7 +39,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 29;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 30;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -89,15 +89,52 @@ function clean_(v, n) {
   if (/^[=+\-@]/.test(s)) s = "'" + s;   // never let typed text become a spreadsheet formula
   return s;
 }
+/* SPEED (v30): reading a sheet is the slow part of every request (each read is a trip to Google Sheets).
+   1. Each sheet is opened once per request, and the small sheets (who's who: Aliases, Names, Access, Pins, Emails, Class list,
+      Classes, Zones, Roles, Zone requests) are read once per request and kept in the script cache between requests, so a
+      sign-in or "am I approved?" check usually reads no sheet at all. Any change to one of them replaces its cached copy.
+   2. Saved progress (Saves) and Progress rows are found by searching one column, not by reading every pupil's data.
+   3. The Teacher area's pupil list is rebuilt in the background every 5 minutes (switched on by itself). */
+const FAST_ = { Aliases: 1, Names: 1, Access: 1, Pins: 1, Emails: 1, 'Class list': 1, Classes: 1, Zones: 1, Roles: 1, 'Zone requests': 1 };
+const SHEET_ = {}, MEMO_ = {};
+function fresh_() { Object.keys(MEMO_).forEach(k => { delete MEMO_[k]; }); }
+function rowsKey_(n) { const c = CacheService.getScriptCache(); let v = c.get('rv:' + n); if (!v) { v = String(Date.now()); c.put('rv:' + n, v, 21600); } return 'rw:' + n + ':' + v; }
+function rowsGet_(n) { try { const c = CacheService.getScriptCache(), k = rowsKey_(n), m = +(c.get(k) || -1); if (m < 0) return null; if (!m) return [];
+  const ks = []; for (let i = 0; i < m; i++) ks.push(k + ':' + i); const o = c.getAll(ks), parts = ks.map(x => o[x]); return parts.every(x => typeof x === 'string') ? JSON.parse(parts.join('')) : null; } catch (e) { return null; } }
+function rowsPut_(n, v) { try { const c = CacheService.getScriptCache(), k = rowsKey_(n), j = JSON.stringify(v), m = Math.ceil(j.length / 90000); if (m > 40) return; const o = {};
+  for (let i = 0; i < m; i++) o[k + ':' + i] = j.slice(i * 90000, (i + 1) * 90000); c.putAll(o, 21600); c.put(k, String(m), 21600); } catch (e) { } }
+function changed_(n) { delete MEMO_[n]; if (FAST_[n]) try { CacheService.getScriptCache().put('rv:' + n, String(Date.now()) + Math.random().toString(36).slice(2, 6), 21600); } catch (e) { } }
+/* a sheet that tells the cache whenever it is changed */
+function wrap_(sh, n) {
+  const W = { _s: sh, getName: () => n, getLastRow: () => sh.getLastRow(), getLastColumn: () => sh.getLastColumn(), setFrozenRows: k => sh.setFrozenRows(k),
+    appendRow: r => { sh.appendRow(r); changed_(n); return W; }, deleteRow: i => { sh.deleteRow(i); changed_(n); return W; },
+    getRange: (a, b, c, d) => { const g = c == null ? sh.getRange(a, b) : sh.getRange(a, b, c, d);
+      return { getValues: () => g.getValues(), getValue: () => g.getValue(), setValues: v => { g.setValues(v); changed_(n); return g; }, setValue: v => { g.setValue(v); changed_(n); return g; }, clearContent: () => { g.clearContent(); changed_(n); return g; } }; } };
+  return W;
+}
 function tab_(name, head) {
+  if (SHEET_[name]) return SHEET_[name];
   const ss = SpreadsheetApp.getActiveSpreadsheet();
   let sh = ss.getSheetByName(name);
   if (!sh) { sh = ss.insertSheet(name); sh.appendRow(head); sh.setFrozenRows(1); }
-  return sh;
+  return (SHEET_[name] = wrap_(sh, name));
 }
-const log_ = () => { const sh = tab_('Log', LOG_HEAD); if (sh.getRange(1, 8).getValue() !== 'Page') sh.getRange(1, 8).setValue('Page'); return sh; };
-const prog_ = () => { const sh = tab_('Progress', PROG_HEAD); if (sh.getRange(1, 12).getValue() !== 'Page quiz marks') sh.getRange(1, 12).setValue('Page quiz marks'); return sh; };
-const rows_ = sh => sh.getLastRow() > 1 ? sh.getRange(2, 1, sh.getLastRow() - 1, sh.getLastColumn()).getValues() : [];
+/* the header fix-ups below run at most once every 6 hours, not on every request */
+function once_(k, fn) { const c = CacheService.getScriptCache(); if (c.get(k)) return; fn(); c.put(k, '1', 21600); }
+const log_ = () => { const sh = tab_('Log', LOG_HEAD); once_('hdr:log', () => { if (sh.getRange(1, 8).getValue() !== 'Page') sh.getRange(1, 8).setValue('Page'); }); return sh; };
+const prog_ = () => { const sh = tab_('Progress', PROG_HEAD); once_('hdr:prog', () => { if (sh.getRange(1, 12).getValue() !== 'Page quiz marks') sh.getRange(1, 12).setValue('Page quiz marks'); }); return sh; };
+const rawRows_ = sh => { const n = sh.getLastRow(); return n > 1 ? sh.getRange(2, 1, n - 1, sh.getLastColumn()).getValues() : []; };
+function rows_(sh) {
+  const n = sh.getName ? sh.getName() : ''; if (!FAST_[n]) return rawRows_(sh);
+  let v = MEMO_[n]; if (!v) { v = rowsGet_(n); if (!v) { v = rawRows_(sh); rowsPut_(n, v); } MEMO_[n] = v; }
+  return v.map(r => r.slice());   /* a copy: callers change rows they read */
+}
+/* the row (2, 3, …) whose column col holds exactly this text, or 0; found by a search, not by reading the column */
+function findRow_(sh, col, text) { const n = sh.getLastRow(); if (n < 2) return 0;
+  const f = sh._s.getRange(2, col, n - 1, 1).createTextFinder(String(text)).matchEntireCell(true).matchCase(true).findNext(); return f ? f.getRow() : 0; }
+function rowAt_(sh, r) { return r ? sh.getRange(r, 1, 1, sh.getLastColumn()).getValues()[0] : null; }
+/* saved progress: one row, found by its code (P-<pupil ID> or a save code) */
+function saveRead_(code) { const sh = saves_(), r = rowAt_(sh, findRow_(sh, 1, code)); return r ? { updated: new Date(r[1]).getTime(), data: r.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') } : null; }
 function aliases_() { const m = {}; rows_(tab_('Aliases', ['Old ID', 'Kept ID'])).forEach(r => { m[String(r[0])] = String(r[1]); }); return m; }
 function names_() { const m = {}; rows_(tab_('Names', ['Pupil ID', 'Name', 'Class'])).forEach(r => { m[String(r[0])] = [String(r[1]), String(r[2])]; }); return m; }
 function resolve_(id, A) { let k = 0; while (A[id] && k++ < 20) id = A[id]; return id; }
@@ -115,6 +152,10 @@ function ukDay_(t) {   /* days since 1970 in UK time: BST from 01:00 UTC on the 
 }
 /* Run setupFastPupils once (choose it in the function list, press Run): every 5 minutes warmSummary works out the pupil list
    in the background, so the Teacher area gets it straight away instead of waiting while the whole log is read. */
+function ensureWarm_() {   /* SPEED (v30): the 5-minute background rebuild of the pupil list switches itself on */
+  try { const pr = PropertiesService.getScriptProperties(); if (pr.getProperty('warm:on')) return;
+    if (!ScriptApp.getProjectTriggers().some(t => t.getHandlerFunction() === 'warmSummary')) ScriptApp.newTrigger('warmSummary').timeBased().everyMinutes(5).create();
+    pr.setProperty('warm:on', new Date().toISOString()); } catch (e) { } }
 function warmSummary() { try { sumPut_(JSON.stringify(summary_())); } catch (e) { } }
 function setupFastPupils() {
   ScriptApp.getProjectTriggers().filter(t => t.getHandlerFunction() === 'warmSummary').forEach(t => ScriptApp.deleteTrigger(t));
@@ -137,8 +178,8 @@ function save_(code, data) {   /* code: a save code (K7P4-QX9M) or P-<pupil ID> 
 }
 function saveRow_(code, data, parts) {   /* (call inside the lock) */
   parts = parts || Array.from({ length: PARTS }, (_, i) => { const p = data.slice(i * PART, (i + 1) * PART); return p ? '~' + p : ''; });
-  const sh = saves_(), r = rows_(sh), i = r.findIndex(x => String(x[0]) === code), row = [code, new Date(), data.length].concat(parts);
-  if (i >= 0) sh.getRange(i + 2, 1, 1, row.length).setValues([row]); else sh.appendRow(row); return { ok: true };
+  const sh = saves_(), at = findRow_(sh, 1, code), row = [code, new Date(), data.length].concat(parts);
+  if (at) sh.getRange(at, 1, 1, row.length).setValues([row]); else sh.appendRow(row); return { ok: true };
 }
 const norm_ = (n, c) => String(n || '').toLowerCase().replace(/\s+/g, ' ').trim() + '|' + String(c || '').toUpperCase().replace(/\s+/g, '');
 /* PINs: a pupil's 4-digit PIN, stored only as a salted hash (Pins sheet). Five wrong tries locks that pupil for 15 minutes. */
@@ -187,8 +228,8 @@ function whois_(name, cls, pin, devId) {
   if (had && !pinOk_(p.id, pin)) { cache.put(fk, String(fails + 1), 900); return { ok: false, error: 'pin', left: 4 - fails }; }
   if (!had) locked_(() => setPin_(p.id, pin));
   cache.remove(fk);
-  const sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + p.id);
-  return asTeacher_({ ok: true, status: access_(p.id), id: p.id, name: p.name, cls: p.cls, updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' }, p.id);
+  const sv = saveRead_('P-' + p.id);
+  return asTeacher_({ ok: true, status: access_(p.id), id: p.id, name: p.name, cls: p.cls, updated: sv ? sv.updated : 0, data: sv ? sv.data : '' }, p.id);
 }
 /* who is in the sheet (for signing in): id, name, class, the names they typed and total time. Much quicker than summary_. */
 function roster_() {
@@ -231,7 +272,7 @@ function approve_(ids, N) {   /* sign-up requests answered "yes" (a listed pupil
 /* every pupil the sheet knows (from the Log and Progress, sign-up requests and names you set), for matching and merging */
 function accounts_() {
   const A = aliases_(), N = names_(), P = {};
-  roster_().forEach(p => { P[p.id] = { id: p.id, name: p.name, cls: p.cls, total: p.total }; });
+  rosterFast_().forEach(p => { P[p.id] = { id: p.id, name: p.name, cls: p.cls, total: p.total }; });
   const AR = rows_(acc_()), AC = {};
   AR.forEach(r => { const raw = String(r[0]), id = resolve_(raw, A); AC[raw] = String(r[1]); if (!id || P[id]) return; P[id] = { id, name: (N[id] || [])[0] || String(r[2]), cls: (N[id] || [])[1] || String(r[3]), total: 0 }; });
   Object.keys(N).forEach(k => { const id = resolve_(k, A); if (id && !P[id]) P[id] = { id, name: N[k][0], cls: N[k][1], total: 0 }; });
@@ -312,9 +353,9 @@ function mergeDuplicates() { const r = locked_(() => dedupe_()); Logger.log(JSON
 function loginOut_(id, extra) {
   const N = names_(); let name = (N[id] || [])[0], cls = (N[id] || [])[1];
   if (!name) { const a = rows_(acc_()).find(r => String(r[0]) === id); if (a) { name = String(a[2]); cls = String(a[3]); } }
-  if (!name) { const p = roster_().find(x => x.id === id); if (p) { name = p.name; cls = p.cls; } }
-  const sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + id);
-  return asTeacher_(Object.assign({ ok: true, status: access_(id), id, name, cls, email: emailOf_(id), updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' }, extra || {}), id);
+  if (!name) { const p = rosterFast_().find(x => x.id === id); if (p) { name = p.name; cls = p.cls; } }
+  const sv = saveRead_('P-' + id);
+  return asTeacher_(Object.assign({ ok: true, status: access_(id), id, name, cls, email: emailOf_(id), updated: sv ? sv.updated : 0, data: sv ? sv.data : '' }, extra || {}), id);
 }
 /* SIGN IN with a school email and PIN. A known email: its PIN. A new email: on your class list, that pupil (their old account,
    found by name and year, keeps everything); not listed, they give name, year and teacher, and an old account is only joined
@@ -401,12 +442,19 @@ function matchList_() {
   setEmails_(em); setNames_(nm); approve_(ap);
   return { linked, merged: r.merged || 0, waiting };
 }
+/* who is in the sheet, from the Teacher area's pupil list when it was built in the last few minutes (no Log to read), else
+   from the Log. New sign-ups since then are in Access and Names, which are always read fresh. */
+function rosterFast_() {
+  const hit = sumGet_(); if (hit) { try { const j = JSON.parse(hit); if (Array.isArray(j.pupils)) return j.pupils.map(p => ({ id: p.id, name: p.name, cls: p.cls, typed: p.typed || [], total: p.total || 0 })); } catch (e) { } }
+  return roster_();
+}
 function load_(code) {
   if (!CODE_RE.test(code)) return { ok: false, error: 'code' };
-  const r = rows_(saves_()).find(x => String(x[0]) === code); if (!r) return { ok: false, error: 'code' };
-  return { ok: true, updated: new Date(r[1]).getTime(), data: r.slice(3, 3 + PARTS).map(p => String(p || '').replace(/^~/, '')).join('') };
+  const r = saveRead_(code); if (!r) return { ok: false, error: 'code' };
+  return { ok: true, updated: r.updated, data: r.data };
 }
 function doPost(e) {
+  fresh_();
   let d; try { d = JSON.parse(e.postData.contents); } catch (x) { return out_({ ok: false }); }
   if (d.kind === 'save') return out_(save_(String(d.code || '').toUpperCase(), d.data));
   if (d.kind === 'psave') { if (!okId(d.id)) return out_({ ok: false }); return out_(save_('P-' + resolve_(String(d.id), aliases_()), d.data)); }
@@ -427,7 +475,7 @@ function doPost(e) {
   if (d.kind === 'snap') {   /* progress snapshot: replace this pupil's row for this workbook */
     const n = v => Math.max(0, Math.min(9999, Math.round(+v || 0))), q = {};
     Object.keys(d.quiz || {}).slice(0, 80).forEach(k => { const v = d.quiz[k]; if (/^c\d{1,2}(\|pp)?$/.test(k) && Array.isArray(v)) q[k] = [n(v[0]), n(v[1]), clean_(v[2], 10)]; });
-    locked_(() => { const id = resolve_(String(d.id), aliases_()), sh = prog_(), r = rows_(sh), i = r.findIndex(x => String(x[1]) === id && String(x[4]) === book);
+    locked_(() => { const id = resolve_(String(d.id), aliases_()), sh = prog_(), pn = sh.getLastRow() - 1, r = pn > 0 ? sh.getRange(2, 1, pn, 5).getValues() : [], i = r.findIndex(x => String(x[1]) === id && String(x[4]) === book);   /* SPEED: 5 short columns, not every pupil's quiz data */
       const ok = x => /^c\d{1,2}-p\d{1,3}$/.test(String(x)), done = (Array.isArray(d.done) ? d.done : []).filter(ok).slice(0, 600), seen = (Array.isArray(d.seenIds) ? d.seenIds : []).filter(ok).slice(0, 600), later = (Array.isArray(d.laterIds) ? d.laterIds : []).filter(ok).slice(0, 600);
       const pq = {}; Object.keys(d.pq || {}).slice(0, 600).forEach(k => { const v = d.pq[k]; if (ok(k) && Array.isArray(v)) pq[k] = [n(v[0]), n(v[1]), n(v[2]), n(v[3]), String(v[4] || '').replace(/[^A-D?-]/g, '').slice(0, 30), String(v[5] || '').replace(/[^01-]/g, '').slice(0, 30)]; });   /* … and right (1) / wrong (0) per question */   /* score, out of, best, attempts, the answers chosen (A–D per question) */
       const fixed = applyAwards_(id, book, done);   /* the teacher's marks win, even before the pupil's device has picked them up */
@@ -470,7 +518,7 @@ function myWork_(rawId, cls) {
   const id = resolve_(String(rawId), aliases_());
   const work = rows_(work_()).filter(r => r[0] && forMe_(String(r[1]), id, cls)).map(r => ({ id: String(r[0]), book: String(r[2]), ch: String(r[3]), due: String(r[4]).slice(0, 10), note: String(r[5] || '') }));
   const msgs = rows_(msgs_()).filter(r => r[0] && forMe_(String(r[1]), id, cls) && String(r[4] || '').split(',').indexOf(id) < 0).slice(-10).map(r => ({ id: String(r[0]), text: String(r[2]), at: new Date(r[3]).getTime() }));
-  const res = rows_(tres_()).filter(r => String(r[1]) === id);
+  const ts = tres_(), tn = ts.getLastRow() - 1, res = (tn > 0 ? ts.getRange(2, 1, tn, 8).getValues() : []).filter(r => String(r[1]) === id);   /* SPEED: not the answers column */
   const tests = rows_(tests_()).filter(r => r[0] && forMe_(String(r[1]), id, cls)).map(r => { const mine = res.filter(x => String(x[4]) === String(r[2]) && String(x[5]) === String(r[3]));
     return { id: String(r[0]), book: String(r[2]), ch: String(r[3]), title: String(r[4] || ''), due: String(r[5]).slice(0, 10), note: String(r[6] || ''), tries: mine.length, best: mine.reduce((m, x) => Math.max(m, +x[6] || 0), -1), of: mine.length ? +mine[0][7] || 100 : 100 }; });
   const yr = +((String(cls || '').match(/^\d{1,2}/) || ['0'])[0]), today = new Date().toISOString().slice(0, 10), ents = rows_(cent_()).filter(r => String(r[2]) === id);
@@ -633,6 +681,7 @@ function staffMail_() {
 /* the Teacher area: ?key=… gives one summary row per pupil; &action=merge|rename|delete changes them */
 const READS = { live: 1, detail: 1, report: 1, qstats: 1, work: 1, comps: 1, compimg: 1, tests: 1, testres: 1, pdata: 1 };   /* actions that only read */
 function doGet(e) {
+  fresh_();
   const q = (e && e.parameter) || {};
   if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
   if (q.action === 'whois') return out_(whois_(q.name, q.cls, q.pin, q.id));
@@ -659,7 +708,7 @@ function doGet(e) {
   if (q.action === 'staffmail') return out_(staffMail_());
   if (q.action === 'mywork') { const N = names_(), id = okId(q.id) ? resolve_(String(q.id), aliases_()) : ''; return out_(myWork_(q.id, (N[id] && N[id][1]) || q.cls)); }   /* a pupil's device: work set for their class, and messages for them */   /* "Send me staff details": only ever to the script's owner */
   if (!keyOk_(q.key)) return out_({ error: 'key' });
-  ensureWeekly_();
+  ensureWeekly_(); ensureWarm_();
   try { const pr = PropertiesService.getScriptProperties(); if (!pr.getProperty('dedupe:v29')) { locked_(() => dedupe_()); pr.setProperty('dedupe:v29', new Date().toISOString()); sumClear_(); } } catch (e) { }
   if (q.action === 'week') return out_(week_(q.start));   /* the Teacher area's weekly report */
   if (READS[q.action]) return out_(act_(q));   /* SPEED (v28): looking things up never waits for the lock or throws away the pupil list */
@@ -828,8 +877,8 @@ function act_(q) {
   if (q.action === 'testmail') { try { return { ok: true, to: testEmail() }; } catch (e) { mailNote_(e); return { ok: false, to: mailTo_(), error: String(e && e.message || e) }; } }
   if (q.action === 'pdata') {   /* "View as this pupil": their saved progress (the same copy their devices load) */
     if (!okId(to)) return { ok: false, error: 'bad request' };
-    const sv = rows_(saves_()).find(x => String(x[0]) === 'P-' + to);
-    return { ok: true, updated: sv ? new Date(sv[1]).getTime() : 0, data: sv ? sv.slice(3, 3 + PARTS).map(x => String(x || '').replace(/^~/, '')).join('') : '' };
+    const sv = saveRead_('P-' + to);
+    return { ok: true, updated: sv ? sv.updated : 0, data: sv ? sv.data : '' };
   }
   if (q.action === 'setrole') {   /* make (role=teacher) or remove (role empty) teachers: only with the main TEACHER_KEY */
     if (q.key !== TEACHER_KEY) return { ok: false, error: 'Only the main teacher key can make or remove teachers.' };
