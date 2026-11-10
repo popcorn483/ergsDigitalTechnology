@@ -2277,7 +2277,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const key = LS.get('teacher.actkey');
     {
       if (j.error === 'key') { LS.set('teacher.actkey', null); status('That key doesn’t match TEACHER_KEY in the Apps Script. Type it again.', 'warn'); $('#ac-keyrow').hidden = false; $('#ac-tools').hidden = true; return; }
-      ROLES = (j.roles && typeof j.roles === 'object') ? j.roles : {}; DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; CLASSES = Array.isArray(j.classes) ? j.classes : []; ZREQ = Array.isArray(j.zreqs) ? j.zreqs : []; LIVE = Array.isArray(j.live) ? j.live : []; status((+j.v || 0) < 19 ? 'Your Google Apps Script is an older version, so reports, set work, messages, the topic grid, “revising now”, page-quiz answers, PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 19 ? 'warn' : ''); $('#ac-view').hidden = false; if ((+j.v || 0) >= 19 && (+j.v || 0) < 20) status('Classes, teachers and zones need the latest Apps Script (v20): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); else if ((+j.v || 0) >= 20 && (+j.v || 0) < 29) status('Email sign-in, class lists and merging duplicates need the latest Apps Script (v29): paste in tools/pupil-activity.gs (keep your TEACHER_KEY and STAFF_PIN lines), then Deploy › Manage deployments › pencil › New version.', 'warn'); else if ((+j.v || 0) >= 29 && (+j.v || 0) < 31) status('Adding pupils and emailing PINs need the latest Apps Script (v31): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); view(); render(); requests();
+      ROLES = (j.roles && typeof j.roles === 'object') ? j.roles : {}; DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; CLASSES = Array.isArray(j.classes) ? j.classes : []; ZREQ = Array.isArray(j.zreqs) ? j.zreqs : []; LIVE = Array.isArray(j.live) ? j.live : []; status((+j.v || 0) < 19 ? 'Your Google Apps Script is an older version, so reports, set work, messages, the topic grid, “revising now”, page-quiz answers, PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 19 ? 'warn' : ''); $('#ac-view').hidden = false; if ((+j.v || 0) >= 19 && (+j.v || 0) < 20) status('Classes, teachers and zones need the latest Apps Script (v20): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); else if ((+j.v || 0) >= 20 && (+j.v || 0) < 29) status('Email sign-in, class lists and merging duplicates need the latest Apps Script (v29): paste in tools/pupil-activity.gs (keep your TEACHER_KEY and STAFF_PIN lines), then Deploy › Manage deployments › pencil › New version.', 'warn'); else if ((+j.v || 0) >= 29 && (+j.v || 0) < 32) status('Adding pupils, adding school emails and emailing PINs need the latest Apps Script (v32): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); view(); render(); requests();
       const ml = j.mail; if ((+j.v || 0) >= 13 && ml && (ml.err || !ml.to)) status(`Emails aren’t being sent${ml.err ? ': ' + ml.err.replace(/^\S+\s/, '') : ''}. In the Apps Script, choose testEmail in the function list and press Run, allow “Send email as you”, then deploy a new version. ⋯ › Send a test email checks it.`, 'warn');
     }
   }
@@ -2576,6 +2576,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       return { name: name.replace(/\s+/g, ' ').trim(), email: email.trim().toLowerCase(), cls: ncl(cls) };
     });
   }
+  let EMRES = null;   /* the last "Add school emails" results, kept across the redraw after saving */
   function listCard() {
     const card = el('div', { class: 'card', id: 'cl-lists' }, el('h3', { text: 'Class lists' }),
       el('p', { class: 'small', text: 'Paste a class list from Excel, SIMS or a CSV: one row per pupil with their name, school email (@c2ken.net) and class. A header row (Name, Email, Class, or Forename and Surname) helps. Pupils on a list get straight in the first time they sign in with that email (no approval needed), with the name and class from your list, and are matched to any account they already have.' }));
@@ -2607,7 +2608,31 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       catch (e) { status('That didn’t work: ' + e.message + '. Check the Apps Script is v29 and deployed as a new version.', 'warn'); }
       dd.disabled = false;
     });
+    /* ADD SCHOOL EMAILS (Apps Script v32): just emails (jsmith123@c2ken.net); each finds its pupil by initial + surname, or makes one */
+    const ea = el('textarea', { rows: '5', 'aria-label': 'School emails', placeholder: 'jsmith123@c2ken.net\naperson456@c2ken.net', style: 'width:100%;box-sizing:border-box;font:13px/1.4 ui-monospace,Menlo,Consolas,monospace' });
+    const ecs = el('select', { 'aria-label': 'Class for these pupils' }); ecs.append(el('option', { value: '', text: 'No class (or any year)' }), ...CLASSES.map(c => el('option', { value: c.cls, text: c.cls + (c.teacher ? ' · ' + c.teacher : '') })));
+    const eres = el('div', { class: 'small' }), ego = el('button', { type: 'button', class: 'tp-mini pri', text: 'Add emails', disabled: '' });
+    const emails = () => [...new Set(ea.value.split(/[\s,;]+/).map(x => x.trim().toLowerCase().replace(/^<|>$/g, '')).filter(x => x.includes('@')))];
+    ea.addEventListener('input', () => { const n = emails().length; ego.disabled = !n; ego.textContent = n ? `Add ${n} email${n === 1 ? '' : 's'}` : 'Add emails'; });
+    ego.addEventListener('click', async () => {
+      const list = emails(); if (!list.length) return; ego.disabled = true; eres.innerHTML = ''; const rows = []; let merged = 0;
+      try {
+        for (let i = 0; i < list.length; i += 60) { status(`Adding emails… ${Math.min(i + 60, list.length)} of ${list.length}`); const j = await api({ action: 'addemails', emails: JSON.stringify(list.slice(i, i + 60)), cls: ecs.value }); if (!j || !j.ok) throw new Error(j && j.error || 'failed'); rows.push(...(j.rows || [])); merged += j.merged || 0; }
+        ea.value = ''; ego.textContent = 'Add emails'; EMRES = rows; await load();
+        const c = k => rows.filter(r => r.result === k).length;
+        status(`${c('matched')} matched to existing pupils, ${c('created')} new pupil${c('created') === 1 ? '' : 's'} created${merged ? `, ${merged} duplicate account${merged === 1 ? '' : 's'} merged` : ''}.${c('ambiguous') ? ` ${c('ambiguous')} need you (see below).` : ''}`, c('ambiguous') || c('invalid') ? 'warn' : 'ok');
+        return;
+      } catch (e) { status('That didn’t work: ' + e.message + '. Check the Apps Script is v32 and deployed as a new version.', 'warn'); ego.disabled = false; }
+    });
+    if (EMRES) { const rows = EMRES;
+        const say = { matched: r => `Matched to ${r.name}`, created: r => `New pupil: ${r.name} (their full name is filled in when they first sign in)`, already: r => `Already set${r.name ? ' for ' + r.name : ''}`, ambiguous: r => `More than one pupil fits (${(r.names || []).join(', ')}): add it with Name & email`, invalid: () => 'Not a school email (first initial, surname, @c2ken.net)' };
+        const t = el('table', { class: 'cl-t' }, el('thead', {}, el('tr', {}, el('th', { text: 'Email' }), el('th', { text: 'Result' })))), tb = el('tbody'); t.append(tb);
+        rows.sort((a, b) => ['ambiguous', 'invalid', 'created', 'matched', 'already'].indexOf(a.result) - ['ambiguous', 'invalid', 'created', 'matched', 'already'].indexOf(b.result)).forEach(r => tb.append(el('tr', {}, el('td', { text: r.email }), el('td', { text: (say[r.result] || (() => r.result))(r) }))));
+        eres.append(el('p', { style: 'margin:10px 0 4px', text: 'Last emails added:' }), el('div', { style: 'overflow-x:auto' }, t), el('button', { type: 'button', class: 'tp-mini', style: 'margin-top:6px', text: 'Clear', onclick: () => { EMRES = null; eres.innerHTML = ''; } }));
+    }
     card.append(ta, el('div', { class: 'ac-row' }, el('label', { class: 'small' }, document.createTextNode('Class for everyone on this list '), cs), go), prev,
+      el('h4', { text: 'Add school emails' }), el('p', { class: 'small', text: 'Paste school emails (one per line, or separated by commas), e.g. jsmith123@c2ken.net. Each is matched to a pupil without an email by first initial and surname, and added to their account. If nobody matches, a new pupil is made (shown as “J. Smith” until they sign in and give their full name). They are approved, and choose a PIN the first time they sign in, or you can email them one with PIN.' }),
+      ea, el('div', { class: 'ac-row' }, el('label', { class: 'small' }, document.createTextNode('Class for these pupils '), ecs), ego), eres,
       el('h4', { text: 'Duplicate accounts' }), el('p', { class: 'small', text: 'Pupils who signed up more than once (same name, same year group) were merged automatically when the v29 Apps Script first ran. Press this to check again.' }), el('div', { class: 'ac-row' }, dd));
     return card;
   }

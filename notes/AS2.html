@@ -10267,7 +10267,7 @@ try {
       go.disabled = false;
       /* an Apps Script from before email sign-in: name, year and teacher instead */
       if (j && j.error === 'key' && !LEGACY) { LEGACY = true; nw.hidden = false; nw.querySelector('.nw').textContent = 'Enter your name, year group and teacher too.'; m.textContent = ''; n.focus(); return; }
-      if (j && j.error === 'new') { nw.hidden = false; m.textContent = 'Now press Continue again.'; (n.value ? (yS.value ? tS : yS) : n).focus(); return; }
+      if (j && j.error === 'new') { nw.hidden = false; m.textContent = j.name ? 'Welcome! Mr Butler has set up your account: add your full name, year group and teacher, then press Continue.' : 'Now press Continue again.'; (n.value ? (yS.value ? tS : yS) : n).focus(); return; }
       if (j && j.error === 'email') { m.textContent = 'Use your school email: it ends in @c2ken.net.'; eI.focus(); return; }
       if (j && j.error === 'pin') { pinI.value = ''; pinI.focus(); m.textContent = `That PIN doesn’t match the one for ${LEGACY ? name : email}.${j.left != null ? ` ${j.left} ${j.left === 1 ? 'try' : 'tries'} left.` : ''} Forgotten it? Ask Mr Butler to reset it.`; return; }
       if (j && j.error === 'locked') { m.textContent = 'Too many wrong PINs. Try again in 15 minutes, or ask Mr Butler to reset your PIN.'; return; }

@@ -39,7 +39,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 31;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 32;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -368,7 +368,13 @@ function signin_(email, pin, name, cls, devId) {
   if (known) {
     if (hasPin_(known, A)) { if (!pinOk_(known, pin, A)) { c.put(fk, String(fails + 1), 900); return { ok: false, error: 'pin', left: 4 - fails }; } }
     else locked_(() => setPin_(known, pin));
-    c.remove(fk); return loginOut_(known);
+    c.remove(fk);
+    const kn = names_()[known];
+    if (kn && PROV_RE.test(kn[0])) {   /* made from an email alone ("J. Smith"): they give their real name the first time */
+      const nm2 = clean_(String(name || '').replace(/\s+/g, ' '), 40); if (nameKey_(nm2).split(' ').length < 2) return { ok: false, error: 'new', name: true };
+      locked_(() => setNames_([[known, nm2, kn[1] || ncls_(cls)]])); sumClear_();
+    }
+    return loginOut_(known);
   }
   const li = clist_()[email], nm = li && li.name ? li.name : clean_(String(name || '').replace(/\s+/g, ' '), 40), cl = li && li.cls ? li.cls : ncls_(cls);
   if (nameKey_(nm).split(' ').length < 2 || !cl) return { ok: false, error: 'new', listed: !!li };
@@ -460,6 +466,40 @@ function addPupil_(q) {
   else if (q.send === '1') { const p2 = newPin_(); try { pinMail_(email, nm, p2, true); dropPins_(pinIds_(id)); setPin_(id, p2); sent = true; } catch (e) { mailNote_(e); warn = ' The email didn’t send (check Pupil tracking › ⋯ › Send a test email); they can choose a PIN when they first sign in.'; } }
   sumClear_();
   return { ok: true, id, linked, sent, msg: `${nm} added${linked ? ' (joined to the account they already had)' : ''}.${sent ? ` Their PIN has been emailed to ${email}.` : pin ? ' They sign in with their email and the PIN you chose.' : ' They choose a PIN the first time they sign in with their email.'}${warn}` };
+}
+/* ADD SCHOOL EMAILS (v32): a list of emails like jsmith123@c2ken.net (first initial, surname, numbers). Each is matched to a
+   pupil who has no email yet by first initial and surname (and year, when a class is given); duplicates of that pupil are
+   merged. No match: a new pupil, approved, named "J. Smith" until they sign in and give their full name. Two different
+   pupils who fit (John and Jane Smith): left for you to add with Name & email. */
+const PROV_RE = /^[A-Z]\. [A-Za-z'’ -]+$/;
+const letters_ = s => String(s || '').toLowerCase().replace(/[^a-z]/g, '');
+function addEmails_(json, cls) {
+  let L; try { L = JSON.parse(String(json || '[]')); } catch (e) { return { ok: false, error: 'bad list' }; } if (!Array.isArray(L)) return { ok: false, error: 'bad list' };
+  const cl = ncls_(cls), yr = yearOf_(cl), A = aliases_(), E = emailIds_(A), taken = {}; Object.keys(E).forEach(e => { taken[E[e]] = 1; });
+  const acc = accounts_().filter(p => !p.email && !p.teacher && !taken[p.id]), out = [], M = {}, em = [], nm = [], ap = [], N = names_();
+  L.slice(0, 200).forEach(raw => {
+    const e = nem_(raw), m = /^([a-z])([a-z'-]+?)\d*@c2ken\.net$/.exec(e);
+    if (!EMAIL_RE.test(e) || !m) { out.push({ email: String(raw).slice(0, 80), result: 'invalid' }); return; }
+    if (E[e]) { out.push({ email: e, result: 'already', name: (N[E[e]] || [])[0] || '' }); return; }
+    const ini = m[1], sur = letters_(m[2]);
+    const fits = p => { const t = String(p.name || '').split(/\s+/).filter(Boolean); if (t.length < 2) return false;
+      const a = letters_(t[0])[0] === ini && (letters_(t[t.length - 1]) === sur || letters_(t.slice(1).join('')) === sur), b = letters_(t[t.length - 1])[0] === ini && letters_(t.slice(0, -1).join('')) === sur;   /* "John Smith" or "Smith John" */
+      return (a || b) && !M[p.id]; };
+    let hits = acc.filter(fits); if (yr && hits.some(p => p.yr === yr)) hits = hits.filter(p => p.yr === yr || !p.yr);
+    const people = [...new Set(hits.map(p => p.key + '|' + (p.yr || '')))];
+    if (people.length > 1) { out.push({ email: e, result: 'ambiguous', names: [...new Set(hits.map(p => p.name + (p.cls ? ' (' + p.cls + ')' : '')))] }); return; }
+    let id, result;
+    if (hits.length) { const keep = best_(hits); hits.forEach(p => { if (p.id !== keep.id) M[p.id] = keep.id; }); id = keep.id; result = 'matched'; if (cl && !keep.cls) nm.push([id, keep.name, cl]); }
+    else { id = 'e' + Utilities.getUuid().replace(/-/g, '').slice(0, 15); result = 'created';
+      const surname = m[2].replace(/(^|[-'])([a-z])/g, (x, s1, c2) => s1 + c2.toUpperCase()).replace(/^Mc([a-z])/, (x, c) => 'Mc' + c.toUpperCase());
+      nm.push([id, ini.toUpperCase() + '. ' + surname, cl]); }
+    acc.forEach(p => { if (p.id === id) taken[id] = 1; }); E[e] = id; em.push([id, e]); ap.push(id);
+    out.push({ email: e, result, id, name: result === 'matched' ? (hits.find(p => p.id === id) || {}).name : nm[nm.length - 1][1] });
+  });
+  const r = mergeMap_(M); setEmails_(em); setNames_(nm);
+  if (REQUIRE_APPROVAL) { const have = {}; rows_(acc_()).forEach(x => { have[String(x[0])] = 1; }); approve_(ap.filter(id => have[id])); ap.filter(id => !have[id] && !acc.some(p => p.id === id)).forEach(id => { const n2 = nm.find(x => x[0] === id); setAccess_(id, 'approved', n2 ? n2[1] : '', cl); }); }
+  sumClear_();
+  return { ok: true, merged: r.merged || 0, rows: out };
 }
 /* the teacher sets (or changes) a pupil's email */
 function linkEmail_(id, email) {
@@ -938,6 +978,7 @@ function act_(q) {
   }
   if (q.action === 'dedupe') return dedupe_();
   if (q.action === 'addpupil') return addPupil_(q);
+  if (q.action === 'addemails') return addEmails_(q.emails, q.cls);
   if (q.action === 'sendpin') return sendPins_(ids.length ? ids : [to]);
   if (q.action === 'importlist') return importList_(q.rows);
   if (q.action === 'classlist') return { ok: true, list: rows_(clistSh_()).filter(r => String(r[0])).map(r => ({ email: String(r[0]), name: String(r[1]), cls: String(r[2]), id: emailIds_()[String(r[0])] || '' })) };
