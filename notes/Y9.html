@@ -10036,6 +10036,7 @@ try {
     /* a device marked as staff without the staff password (e.g. a pupil who once opened the Teacher area) is a pupil device again */
     if (LS.get('notes-nocount') && !LS.get('mrb-staff-ok') && !LS.get('mrb-viewas')) { ['notes-nocount', 'teacher.nocount-set', 'teacher.actkey'].forEach(k => LS.set(k, null)); }
     if (LS.get('notes-nocount')) return;
+    watchLock();
     let later = false; try { later = !!sessionStorage.getItem('mrb-pin-later'); } catch (x) { }
     addEventListener('online', () => { if (me() && !LS.get('mrb-pin-ok') && !LS.get('notes-nocount')) { try { sessionStorage.removeItem('mrb-pin-later'); } catch (x) { } ask(); } });   /* signed in offline: PIN checked as soon as it is back online */
     if (!me() || !LS.get('mrb-pin-ok')) setTimeout(ask, 600);   /* a PIN is always needed */
@@ -10337,6 +10338,28 @@ try {
       setTimeout(() => { if (pulled || j.id !== p.id) location.reload(); else { close(); if (blocked()) gate(); } }, 1100);
     });
     setTimeout(() => eI.focus(), 50);
+  }
+  /* LOCK (v32b): until a pupil has signed in (and been approved), the page itself is hidden, not just covered, so deleting
+     the sign-in box (Inspect, an ad-blocker's "hide element") shows nothing. The box and the lock come straight back if they
+     are removed. Staff devices are never locked. */
+  const needSign = () => !LS.get('notes-nocount') && (!me() || !LS.get('mrb-pin-ok'));
+  const LOCK_CSS = 'html.mrb-lock body>*:not(#mrb-who):not(#mrb-gate){visibility:hidden!important}html.mrb-lock,html.mrb-lock body{overflow:hidden!important}html.mrb-lock body{background:#0E1424!important}html.mrb-lock #mrb-who,html.mrb-lock #mrb-gate{visibility:visible!important;display:grid!important;opacity:1!important}';
+  let lockT = 0;
+  function lockPage() {
+    if (!document.body) return;
+    const need = needSign() || blocked();
+    document.documentElement.classList.toggle('mrb-lock', need);
+    if (!need) return;
+    if (!document.getElementById('mrb-lock-css')) { const st = document.createElement('style'); st.id = 'mrb-lock-css'; st.textContent = LOCK_CSS; (document.head || document.documentElement).append(st); }
+    if (needSign()) { if (!document.getElementById('mrb-who')) ask(); }
+    else if (!document.getElementById('mrb-gate')) gate();
+  }
+  function watchLock() {
+    if (window.__mrbLock) return; window.__mrbLock = 1;
+    const run = () => { clearTimeout(lockT); lockT = setTimeout(lockPage, 30); };
+    new MutationObserver(run).observe(document.documentElement, { childList: true, subtree: true, attributes: true, attributeFilter: ['class', 'style', 'hidden'] });
+    setInterval(lockPage, 1500); addEventListener('storage', run); addEventListener('focus', run);
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', lockPage); else lockPage();
   }
   window.MRB_WHO = ask;
   /* "Revising as … · Change" wherever a [data-mrb-who] slot is on the page */

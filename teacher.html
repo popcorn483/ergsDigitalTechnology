@@ -2388,7 +2388,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         list.append(el('h4', { class: 'ac-grp' }, document.createTextNode(c ? `${c.cls}${c.teacher ? ' · ' + c.teacher : ''}` : `Not in a class${p.cls ? ' (typed ' + p.cls + ')' : ''}`), el('small', { text: `${n} pupil${n === 1 ? '' : 's'}${c && c.course ? ' · ' + c.course : ''}` }))); } }
       const pr = p.prog || {}, main = Object.keys(pr).filter(u => pr[u].total).sort((a, b) => ((p.units || {})[b] || 0) - ((p.units || {})[a] || 0) || pr[b].cov - pr[a].cov)[0];
       const cov = main ? pct(pr[main].cov, pr[main].total) : 0;
-      const typed = (p.typed || []).filter(t => t !== `${p.name} (${p.cls})`);
+      const typed = [];   /* "Also typed" (what they typed when signing in by name) no longer shown */
       const cb = el('input', { type: 'checkbox', 'aria-label': `Select ${p.name}` }); cb.checked = SEL.has(p.id);
       cb.addEventListener('change', () => { cb.checked ? SEL.add(p.id) : SEL.delete(p.id); row.classList.toggle('sel', cb.checked); bar(); });
       const open = () => { if (SELMODE) { cb.checked = !cb.checked; cb.dispatchEvent(new Event('change')); return; } const was = OPEN === p.id; OPEN = was ? null : p.id; PICK = null; render(); if (!was) setTimeout(() => { const r = list.querySelector(`[data-id="${p.id}"]`); if (r) r.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 60); };
