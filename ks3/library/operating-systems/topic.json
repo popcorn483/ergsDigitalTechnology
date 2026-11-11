@@ -1,0 +1,1467 @@
+{
+ "title": "Operating Systems",
+ "summary": "The software that runs everything else: what an operating system does, how it juggles processes and memory, how files and the command line work, why updates and permissions keep you safe, how open-source Linux powers the world, and how AI is reshaping the operating systems of the future.",
+ "learn": [
+  "What an operating system is and the jobs it does",
+  "How an operating system manages processes, multitasking and memory",
+  "How file systems are organised and how to use simple command-line instructions",
+  "How updates, user accounts and permissions keep a system secure",
+  "The difference between open-source and proprietary software, including Linux",
+  "How operating systems are changing with AI, the cloud and new devices"
+ ],
+ "temporary": false,
+ "intro": "Every time you switch on a laptop, phone, games console or smart TV, an operating system wakes up and takes charge. It shares out the processor and memory, keeps your files organised, protects you from malware and gives you something to click or tap. In this topic you'll discover what an operating system really does, peek behind the scenes with Task Manager and the command line, learn why updates matter, explore open-source Linux, and look at how AI is being built into the operating systems of the future.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "What does an OS do?",
+   "spec": "Define an operating system, describe its main functions and give examples for different devices",
+   "summary": "An operating system (OS) is system software that manages a computer's hardware and software and provides a user interface. Its main jobs are managing the processor, memory, storage, devices and security. Different devices use different operating systems, from Windows and Android to tiny embedded systems.",
+   "starter": "What would happen if every app on your phone tried to use the screen, speaker and camera at the same time with no one in charge?",
+   "sc": [
+    "I can define an operating system",
+    "I can describe the main functions of an operating system",
+    "I can name operating systems for different devices"
+   ],
+   "slides": [
+    {
+     "t": "The boss of the computer",
+     "b": [
+      "An operating system (OS) is the software that manages everything else",
+      "Sits between the hardware and your apps",
+      "Apps ask the OS for memory, storage, the screen and the internet",
+      "Without an OS, every app would need to control the hardware itself"
+     ]
+    },
+    {
+     "t": "Jobs of an OS",
+     "b": [
+      "Process management: shares out the CPU between programs",
+      "Memory management: decides what's in RAM",
+      "File management: organises storage into files and folders",
+      "Device management (drivers), security and the user interface"
+     ]
+    },
+    {
+     "t": "OSs everywhere",
+     "b": [
+      "Desktops and laptops: Windows, macOS, Linux, ChromeOS",
+      "Phones and tablets: Android, iOS, iPadOS",
+      "Consoles, smart TVs, cars and watches all have their own",
+      "Tiny embedded systems may run a real-time OS"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is an operating system?"
+    },
+    {
+     "t": "p",
+     "text": "An **[[operating system]]** (OS) is the most important piece of **[[system software]]**: software that runs the computer itself rather than doing a task for the user. The OS sits between the hardware and the applications. When an app wants to save a file, play a sound or connect to Wi-Fi, it asks the OS, which controls the hardware for it."
+    },
+    {
+     "t": "p",
+     "text": "When you switch on a computer, a small program in its firmware starts and loads the OS from storage into memory. This is called **[[booting]]**."
+    },
+    {
+     "t": "h",
+     "text": "Functions of an operating system"
+    },
+    {
+     "t": "table",
+     "caption": "What an OS does",
+     "head": [
+      "Function",
+      "What it means",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Process management",
+       "Shares the CPU between running programs",
+       "Music keeps playing while you type an essay"
+      ],
+      [
+       "Memory management",
+       "Decides which programs and data are in RAM",
+       "Moving an unused app out of RAM to make space"
+      ],
+      [
+       "File management",
+       "Organises data on storage into files and folders",
+       "Saving, renaming, moving and deleting files"
+      ],
+      [
+       "Device management",
+       "Controls hardware using **[[device driver|device drivers]]**",
+       "Printing to a new printer after its driver installs"
+      ],
+      [
+       "Security",
+       "Controls who can log in and what they can access",
+       "Passwords, Windows Hello, app permissions"
+      ],
+      [
+       "**[[user interface|User interface]]**",
+       "Lets people interact with the computer",
+       "Desktop, icons, touch gestures, voice"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Operating systems for different devices"
+    },
+    {
+     "t": "table",
+     "caption": "Common operating systems",
+     "head": [
+      "Device",
+      "Operating systems"
+     ],
+     "rows": [
+      [
+       "Desktop and laptop",
+       "Windows 11, macOS, Linux (e.g. Ubuntu), ChromeOS"
+      ],
+      [
+       "Phone and tablet",
+       "Android, iOS, iPadOS"
+      ],
+      [
+       "Games console",
+       "Custom OSs on PlayStation, Xbox and Nintendo Switch"
+      ],
+      [
+       "Smart devices",
+       "Smart TV OSs, smartwatch OSs (watchOS, Wear OS), car systems"
+      ],
+      [
+       "Embedded and IoT",
+       "Real-time operating systems that respond in microseconds, e.g. in airbags and pacemakers"
+      ]
+     ]
+    },
+    {
+     "t": "act",
+     "title": "OS spotter",
+     "mins": 15,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Make a list of every device you and your family use that has an operating system (phones, laptops, consoles, TVs, cars, watches, routers).",
+      "For each, name the OS if you know it.",
+      "Choose one device and describe three jobs its OS does for you."
+     ],
+     "q": [
+      {
+       "q": "Describe three jobs your phone's OS does.",
+       "a": "E.g. lets me switch between apps while music plays (process management); asks before an app uses my camera (security); stores photos in folders (file management); shows the home screen and handles touch (user interface)."
+      },
+      {
+       "q": "Why do you think so many different devices need an operating system?",
+       "a": "They all need to share hardware between tasks, manage memory and storage, provide a user interface and keep the device secure."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is an operating system?",
+     "o": [
+      "A website",
+      "Software that manages a computer's hardware and software",
+      "A type of CPU",
+      "A word processor"
+     ],
+     "a": 1,
+     "why": "The OS is in charge."
+    },
+    {
+     "q": "What is a device driver?",
+     "o": [
+      "A screwdriver",
+      "A type of RAM",
+      "A person who delivers devices",
+      "Software that lets the OS control a piece of hardware"
+     ],
+     "a": 3,
+     "why": "Drivers talk to hardware."
+    },
+    {
+     "q": "Which is a phone operating system?",
+     "o": [
+      "Chrome browser",
+      "Minecraft",
+      "Android",
+      "Microsoft Word"
+     ],
+     "a": 2,
+     "why": "Also iOS."
+    },
+    {
+     "q": "What is booting?",
+     "o": [
+      "Kicking a computer",
+      "Starting a computer and loading the OS",
+      "Deleting files",
+      "Shutting down"
+     ],
+     "a": 1,
+     "why": "Loads the OS into memory."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Define the term operating system.",
+     "m": 2,
+     "a": "System software that manages hardware and software (1) and provides a user interface/services for apps (1)."
+    },
+    {
+     "q": "Describe four functions of an operating system.",
+     "m": 4,
+     "a": "Any four: process management (1); memory management (1); file management (1); device management/drivers (1); security (1); user interface (1)."
+    }
+   ],
+   "terms": [
+    "Operating system",
+    "System software",
+    "User interface",
+    "Device driver",
+    "Booting"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "Processes and memory",
+   "spec": "Explain how an operating system manages processes, multitasking and memory",
+   "summary": "A running program is a process. The CPU can only run a few things at once, so the OS switches between processes very quickly, making it look as if everything runs at the same time. The OS also manages RAM, using virtual memory on storage when RAM is full, which slows things down.",
+   "starter": "Open Task Manager (Ctrl + Shift + Esc). How many processes are running? Did you start them all?",
+   "sc": [
+    "I can explain what a process is and how multitasking works",
+    "I can explain how the OS manages RAM and virtual memory",
+    "I can use Task Manager to investigate processes"
+   ],
+   "slides": [
+    {
+     "t": "Processes",
+     "b": [
+      "A process is a program that is running",
+      "One app can have many processes (each browser tab may be one)",
+      "Background processes: updates, antivirus, syncing",
+      "Task Manager (Windows) and Activity Monitor (Mac) show them"
+     ]
+    },
+    {
+     "t": "Multitasking",
+     "b": [
+      "A CPU core runs one thing at a time",
+      "The OS scheduler gives each process a tiny time slice, thousands of times a second",
+      "It looks like everything is running at once",
+      "Multi-core CPUs really can run several at once"
+     ]
+    },
+    {
+     "t": "Memory management",
+     "b": [
+      "RAM holds running programs and their data",
+      "The OS gives each process its own space, so they can't interfere",
+      "When RAM is full, virtual memory uses storage as overflow",
+      "Storage is much slower than RAM, so the computer slows down"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Processes"
+    },
+    {
+     "t": "p",
+     "text": "A **[[process]]** is a program that is currently running. A single app can create several processes: modern web browsers often run each tab as a separate process, so one crashing tab doesn't bring down the whole browser. Many processes run in the background, such as antivirus scans, cloud syncing and update checks."
+    },
+    {
+     "t": "h",
+     "text": "Multitasking and scheduling"
+    },
+    {
+     "t": "p",
+     "text": "**[[multitasking|Multitasking]]** means running more than one program at a time. Each CPU core can only carry out one instruction stream at a time, so the OS uses **[[scheduling]]**: it gives each process a tiny slice of CPU time, then switches to the next, thousands of times every second. This is so fast it looks as if everything is running at once. Multi-core CPUs can genuinely run several processes simultaneously, one per core."
+    },
+    {
+     "t": "example",
+     "title": "Time slicing",
+     "context": "Three processes need the CPU: Music, Browser and Antivirus. The scheduler gives each 10 milliseconds in turn.",
+     "steps": [
+      "0-10 ms: Music. 10-20 ms: Browser. 20-30 ms: Antivirus.",
+      "30-40 ms: Music again, and so on."
+     ],
+     "answer": "Each process gets about 33 turns per second, so to you all three seem to run at the same time."
+    },
+    {
+     "t": "h",
+     "text": "Memory management"
+    },
+    {
+     "t": "p",
+     "text": "**[[RAM]]** (random access memory) holds the programs and data currently in use. The OS decides how RAM is shared and keeps each process in its own separate area, so one program can't read or damage another's data."
+    },
+    {
+     "t": "p",
+     "text": "When RAM fills up, the OS uses **[[virtual memory]]**: it moves data that isn't being used right now from RAM onto storage (SSD or hard drive) to make space. Storage is much slower than RAM, so a computer that relies heavily on virtual memory feels sluggish."
+    },
+    {
+     "t": "tip",
+     "text": "If your computer is slow, Task Manager's \"Processes\" tab shows which programs are using the most CPU and memory. Closing tabs and apps you aren't using frees RAM."
+    },
+    {
+     "t": "act",
+     "title": "Task Manager investigation",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Open Task Manager (Ctrl + Shift + Esc) and choose \"More details\" if needed.",
+      "Record the CPU and memory use. Then open five browser tabs, a video and a document, and record again.",
+      "Find the three processes using the most memory.",
+      "Explain what you found using the words process, scheduling and RAM."
+     ],
+     "q": [
+      {
+       "q": "How did CPU and memory use change, and why?",
+       "a": "Memory use rose because each new tab and app is a process that needs space in RAM; CPU use spiked while pages loaded and the video played, as the scheduler shared CPU time among more processes."
+      },
+      {
+       "q": "Why might a computer slow down when lots of apps are open?",
+       "a": "RAM fills up, so the OS uses virtual memory on slower storage, and the CPU's time is shared between more processes."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a process?",
+     "o": [
+      "A cable",
+      "A type of storage",
+      "A program that is currently running",
+      "A file type"
+     ],
+     "a": 2,
+     "why": "Running programs are processes."
+    },
+    {
+     "q": "How does a single CPU core multitask?",
+     "o": [
+      "It uses the printer",
+      "It runs everything at exactly the same time",
+      "It doesn't",
+      "The OS switches between processes very quickly"
+     ],
+     "a": 3,
+     "why": "Time slicing."
+    },
+    {
+     "q": "What is virtual memory?",
+     "o": [
+      "Storage used as overflow when RAM is full",
+      "Cloud storage",
+      "Memory in VR headsets",
+      "Extra RAM chips"
+     ],
+     "a": 0,
+     "why": "It's slower than RAM."
+    },
+    {
+     "q": "Why does heavy use of virtual memory slow a computer down?",
+     "o": [
+      "Storage is much slower than RAM",
+      "It turns off the CPU",
+      "Storage is faster",
+      "It deletes files"
+     ],
+     "a": 0,
+     "why": "Slower overflow."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how an operating system allows several programs to appear to run at once on one CPU core.",
+     "m": 3,
+     "a": "The scheduler gives each process a small time slice (1); switches between them very quickly (1); so fast they appear to run simultaneously (1)."
+    },
+    {
+     "q": "Explain why the OS keeps each process in its own area of memory.",
+     "m": 2,
+     "a": "Stops one program reading/damaging another's data (1); improves security and stability/one crash doesn't affect others (1)."
+    }
+   ],
+   "terms": [
+    "Process",
+    "Multitasking",
+    "Scheduling",
+    "RAM",
+    "Virtual memory"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Files and the command line",
+   "spec": "Describe how file systems organise data and use basic command-line instructions",
+   "summary": "The OS's file system organises storage into a hierarchy of folders (directories) and files, each with a path. File extensions show what type a file is. As well as a graphical interface, you can control a computer by typing commands in a command-line interface, a skill used widely by programmers and IT professionals.",
+   "starter": "Where is the last file you saved? Can you describe exactly how to get to it?",
+   "sc": [
+    "I can describe how folders and files are organised in a hierarchy",
+    "I can write a file path and explain file extensions",
+    "I can use basic command-line instructions"
+   ],
+   "slides": [
+    {
+     "t": "Files and folders",
+     "b": [
+      "The file system organises storage into folders (directories) and files",
+      "Folders inside folders make a hierarchy, like an upside-down tree",
+      "The top is the root (e.g. C:\\ on Windows, / on Mac and Linux)",
+      "Each file has a path showing exactly where it is"
+     ]
+    },
+    {
+     "t": "Paths and extensions",
+     "b": [
+      "Windows: C:\\Users\\Sam\\Documents\\Homework\\essay.docx",
+      "Mac/Linux: /home/sam/Documents/Homework/essay.docx",
+      "The extension shows the file type: .docx, .pdf, .jpg, .mp4, .py, .exe",
+      "Be careful: .exe files run programs and can be malware"
+     ]
+    },
+    {
+     "t": "The command line",
+     "b": [
+      "A command-line interface (CLI): type commands instead of clicking",
+      "Faster for some jobs; can automate repetitive tasks",
+      "Used by programmers, IT technicians and on servers with no screen",
+      "Windows: Command Prompt/PowerShell; Mac/Linux: Terminal"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "File systems"
+    },
+    {
+     "t": "p",
+     "text": "The **[[file system]]** is the part of the OS that organises data on storage. Data is stored in files, and files are organised into folders, also called **[[directory|directories]]**. Folders can contain other folders, forming a hierarchy that looks like an upside-down tree. The top level is the root."
+    },
+    {
+     "t": "h",
+     "text": "Paths and extensions"
+    },
+    {
+     "t": "p",
+     "text": "A **[[file path]]** describes exactly where a file is, listing each folder from the root down."
+    },
+    {
+     "t": "table",
+     "caption": "Example file paths",
+     "head": [
+      "System",
+      "Example path"
+     ],
+     "rows": [
+      [
+       "Windows",
+       "C:\\Users\\Sam\\Documents\\Homework\\essay.docx"
+      ],
+      [
+       "Mac",
+       "/Users/sam/Documents/Homework/essay.docx"
+      ],
+      [
+       "Linux",
+       "/home/sam/Documents/Homework/essay.docx"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A **[[file extension]]** is the part after the dot, showing what type of file it is and which program opens it."
+    },
+    {
+     "t": "table",
+     "caption": "Common file extensions",
+     "head": [
+      "Extension",
+      "File type"
+     ],
+     "rows": [
+      [
+       ".docx",
+       "Word document"
+      ],
+      [
+       ".pdf",
+       "Portable document"
+      ],
+      [
+       ".jpg / .png",
+       "Images"
+      ],
+      [
+       ".mp4",
+       "Video"
+      ],
+      [
+       ".py",
+       "Python program"
+      ],
+      [
+       ".exe",
+       "Windows program (runs code)"
+      ]
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "Malware is often disguised with a double extension, like \"homework.pdf.exe\". Windows may hide the real extension, so it looks like a PDF but is actually a program. Turn on \"show file extensions\" in File Explorer."
+    },
+    {
+     "t": "h",
+     "text": "The command line"
+    },
+    {
+     "t": "p",
+     "text": "A **[[command-line interface]]** (CLI) lets you control a computer by typing text commands. It's how computers were used before graphical interfaces, and it's still used by programmers, IT technicians and on servers that have no screen. It can be faster than clicking and lets you automate repetitive jobs with scripts."
+    },
+    {
+     "t": "table",
+     "caption": "Basic commands",
+     "head": [
+      "Task",
+      "Windows (Command Prompt)",
+      "Mac/Linux (Terminal)"
+     ],
+     "rows": [
+      [
+       "List files in the current folder",
+       "dir",
+       "ls"
+      ],
+      [
+       "Change folder",
+       "cd Documents",
+       "cd Documents"
+      ],
+      [
+       "Go up one folder",
+       "cd ..",
+       "cd .."
+      ],
+      [
+       "Make a new folder",
+       "mkdir Projects",
+       "mkdir Projects"
+      ],
+      [
+       "Show the current folder",
+       "cd",
+       "pwd"
+      ],
+      [
+       "Clear the screen",
+       "cls",
+       "clear"
+      ]
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Command-line explorer",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Open Command Prompt (search \"cmd\") or Terminal.",
+      "Use dir/ls, cd and mkdir to create a folder called \"OSlesson\" in your Documents and a subfolder called \"test\".",
+      "Write down the full file path of your \"test\" folder.",
+      "Complete the treasure hunt: follow your teacher's path instructions to find the hidden file."
+     ],
+     "q": [
+      {
+       "q": "Write the commands you used to create OSlesson\\test.",
+       "a": "E.g. cd Documents; mkdir OSlesson; cd OSlesson; mkdir test; dir (to check)."
+      },
+      {
+       "q": "Give one reason a technician might prefer the command line to a graphical interface.",
+       "a": "It's faster for repetitive tasks and can be automated with scripts; it also works on servers with no screen, or remotely."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a directory?",
+     "o": [
+      "A file type",
+      "A CPU part",
+      "Another name for a folder",
+      "A phone book only"
+     ],
+     "a": 2,
+     "why": "Folders are directories."
+    },
+    {
+     "q": "What does a file extension show?",
+     "o": [
+      "The date",
+      "The type of file",
+      "Who made it",
+      "The file's size"
+     ],
+     "a": 1,
+     "why": "e.g. .docx, .jpg."
+    },
+    {
+     "q": "Which command lists files in Windows Command Prompt?",
+     "o": [
+      "ls only",
+      "show",
+      "dir",
+      "list"
+     ],
+     "a": 2,
+     "why": "ls is used on Mac/Linux."
+    },
+    {
+     "q": "Why is \"homework.pdf.exe\" dangerous?",
+     "o": [
+      "It's a large PDF",
+      "It's encrypted",
+      "It's a video",
+      "It's a program disguised as a PDF"
+     ],
+     "a": 3,
+     "why": "Double extensions hide malware."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write the file path for a file called notes.txt in a folder called Science inside Documents for user Ali on Windows.",
+     "m": 2,
+     "a": "C:\\Users\\Ali\\Documents\\Science\\notes.txt: correct structure (1); correct order and separators (1)."
+    },
+    {
+     "q": "Give two advantages of using a command-line interface.",
+     "m": 2,
+     "a": "Any two: faster for experienced users (1); can automate tasks with scripts (1); uses fewer resources (1); works on servers/remotely (1)."
+    }
+   ],
+   "terms": [
+    "File system",
+    "Directory",
+    "File path",
+    "File extension",
+    "Command-line interface"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "Updates, accounts and security",
+   "spec": "Explain how operating system updates, user accounts, permissions and built-in security features protect a computer",
+   "summary": "OS updates fix bugs and security holes, so installing them quickly is vital; when an OS reaches end of support it stops getting fixes. User accounts and permissions control who can do what, and built-in tools such as antivirus, firewalls, sandboxing and app permissions add more layers of protection.",
+   "starter": "Your laptop says \"Updates ready: restart now?\" Do you click \"Later\"? Why might that be risky?",
+   "sc": [
+    "I can explain why OS updates matter, including end of support",
+    "I can explain user accounts, administrator rights and permissions",
+    "I can describe built-in OS security features"
+   ],
+   "slides": [
+    {
+     "t": "Updates and patches",
+     "b": [
+      "Updates add features and fix bugs",
+      "Security patches fix vulnerabilities attackers could use",
+      "Once a fix is public, attackers race to use the hole on unpatched computers",
+      "Turn on automatic updates and restart when asked"
+     ]
+    },
+    {
+     "t": "End of support",
+     "b": [
+      "Every OS version eventually stops getting updates",
+      "Windows 10 reached end of support in October 2025",
+      "Unsupported systems become more dangerous over time",
+      "Options: upgrade, pay for extended updates, or switch OS"
+     ]
+    },
+    {
+     "t": "Accounts and permissions",
+     "b": [
+      "Standard users can't change important system settings",
+      "Administrators can install software and change settings",
+      "Use a standard account day to day; admin only when needed",
+      "App permissions: camera, microphone, location, contacts"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Updates and patches"
+    },
+    {
+     "t": "p",
+     "text": "A **[[vulnerability]]** is a weakness in software that an attacker could exploit. A **[[patch]]** is an update that fixes it. When a company releases a security patch, attackers study it to find the hole, then target computers that haven't installed the update. That's why delaying updates is risky."
+    },
+    {
+     "t": "h",
+     "text": "End of support"
+    },
+    {
+     "t": "p",
+     "text": "Every OS version reaches **[[end of support]]**, after which the maker stops releasing security patches. Windows 10 reached end of support on 14 October 2025. Computers still running it no longer get free security updates unless they're enrolled in an extended (often paid) update scheme, so they become more vulnerable over time. Phones have the same problem: older models stop getting Android or iOS updates."
+    },
+    {
+     "t": "note",
+     "text": "End of support creates a dilemma: many older computers can't run Windows 11, but replacing them creates e-waste. Some schools and charities give old laptops new life by installing a lightweight Linux OS or ChromeOS Flex."
+    },
+    {
+     "t": "h",
+     "text": "Accounts and permissions"
+    },
+    {
+     "t": "table",
+     "caption": "Types of account",
+     "head": [
+      "Account",
+      "Can do",
+      "Use it for"
+     ],
+     "rows": [
+      [
+       "Standard user",
+       "Use apps, save own files, change own settings",
+       "Everyday use"
+      ],
+      [
+       "**[[administrator|Administrator]]**",
+       "Install software, change system settings, manage other users",
+       "Only when making system changes"
+      ],
+      [
+       "Guest",
+       "Very limited, temporary access",
+       "Visitors"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[permissions|Permissions]]** control what each user or app is allowed to do. Using a standard account day to day means that if malware runs, it can't easily change the whole system. On phones, app permissions control access to the camera, microphone, location, contacts and photos."
+    },
+    {
+     "t": "h",
+     "text": "Built-in security features"
+    },
+    {
+     "t": "key",
+     "title": "Layers of OS security",
+     "items": [
+      "Antivirus, e.g. Microsoft Defender, scans for malware",
+      "Firewall blocks unwanted network connections",
+      "**[[sandbox|Sandboxing]]**: apps run in a restricted area so they can't touch other apps' data (used on phones and in browsers)",
+      "Encryption of the whole drive (e.g. BitLocker, FileVault) protects data if a laptop is stolen",
+      "Secure sign-in: passwords, PINs, fingerprints, face recognition"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Permission patrol",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Look at the list of 8 (fictional) apps and the permissions they request (e.g. a torch app wanting your contacts and location).",
+      "For each, decide which permissions are reasonable and which are suspicious.",
+      "Look at the update history of a school computer (screenshot) and identify any risks.",
+      "Write a 5-point security checklist for a new laptop."
+     ],
+     "q": [
+      {
+       "q": "Which app requests are suspicious, and why?",
+       "a": "E.g. a torch app asking for contacts and location: a torch only needs the camera flash, so extra permissions suggest it's collecting data to sell or is malware."
+      },
+      {
+       "q": "Write your 5-point checklist for a new laptop.",
+       "a": "Turn on automatic updates; use a standard account day to day; set a strong password or PIN plus Windows Hello; check antivirus and firewall are on; turn on drive encryption and back up files."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a patch?",
+     "o": [
+      "An update that fixes a bug or vulnerability",
+      "A cable",
+      "A sticker",
+      "A type of virus"
+     ],
+     "a": 0,
+     "why": "Patches fix holes."
+    },
+    {
+     "q": "What does end of support mean?",
+     "o": [
+      "The computer breaks",
+      "Support staff go home",
+      "The maker stops releasing security updates",
+      "The OS becomes free"
+     ],
+     "a": 2,
+     "why": "No more fixes."
+    },
+    {
+     "q": "Why use a standard account rather than administrator for everyday use?",
+     "o": [
+      "Malware can't easily change the whole system",
+      "It saves battery",
+      "It's faster",
+      "Admin accounts can't browse"
+     ],
+     "a": 0,
+     "why": "Least privilege."
+    },
+    {
+     "q": "What is sandboxing?",
+     "o": [
+      "Running apps in a restricted area so they can't access other apps' data",
+      "Playing in sand",
+      "Backing up files",
+      "Deleting apps"
+     ],
+     "a": 0,
+     "why": "Contains damage."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why it's risky to delay installing security updates.",
+     "m": 3,
+     "a": "Updates fix known vulnerabilities (1); once published, attackers know about the weaknesses (1); unpatched computers can be targeted/infected (1)."
+    },
+    {
+     "q": "Describe three built-in security features of a modern operating system.",
+     "m": 3,
+     "a": "Any three: antivirus (1); firewall (1); sandboxing (1); drive encryption (1); user accounts/permissions (1); secure sign-in/biometrics (1); automatic updates (1)."
+    }
+   ],
+   "terms": [
+    "Patch",
+    "Vulnerability",
+    "End of support",
+    "Administrator",
+    "Permissions",
+    "Sandbox"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Open source and Linux",
+   "spec": "Compare open-source and proprietary software and describe the role of Linux",
+   "summary": "Proprietary software is owned by a company that keeps its code secret, while open-source software's code is public and can be studied, changed and shared. Linux is a free, open-source OS that runs most of the world's servers, all of the top supercomputers and, at its core, every Android phone.",
+   "starter": "Would you trust a recipe more if you could read every ingredient, or one that's kept secret? Does the same apply to software?",
+   "sc": [
+    "I can explain the difference between open-source and proprietary software",
+    "I can describe where Linux is used and why",
+    "I can evaluate which type of software suits a situation"
+   ],
+   "slides": [
+    {
+     "t": "Open vs proprietary",
+     "b": [
+      "Source code: the human-readable instructions programmers write",
+      "Proprietary: owned by a company; code kept secret (Windows, macOS, iOS)",
+      "Open source: code is public; anyone can study, change and share it",
+      "Open source isn't always free, and free isn't always open source"
+     ]
+    },
+    {
+     "t": "Linux runs the world",
+     "b": [
+      "Created by Linus Torvalds in 1991 as a student project",
+      "Runs most web servers and cloud computers",
+      "Runs all of the world's top 500 supercomputers",
+      "Android is built on the Linux kernel; so are many routers, TVs and cars"
+     ]
+    },
+    {
+     "t": "Pros and cons",
+     "b": [
+      "Open source: free, flexible, transparent, huge community",
+      "But support can be harder to find, and some software doesn't run on it",
+      "Proprietary: polished, official support, wide compatibility",
+      "But costs money and you can't see or change the code"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Source code and licences"
+    },
+    {
+     "t": "p",
+     "text": "**[[source code|Source code]]** is the human-readable code that programmers write. A **[[licence]]** is a legal agreement setting out how software can be used, copied and changed."
+    },
+    {
+     "t": "table",
+     "caption": "Open source vs proprietary",
+     "head": [
+      "Feature",
+      "**[[open source|Open-source]]** software",
+      "**[[proprietary software|Proprietary]]** software"
+     ],
+     "rows": [
+      [
+       "Source code",
+       "Public: anyone can read it",
+       "Secret: owned by the company"
+      ],
+      [
+       "Can you change it?",
+       "Yes, within the licence",
+       "No"
+      ],
+      [
+       "Cost",
+       "Often free",
+       "Usually paid (or paid for by adverts or data)"
+      ],
+      [
+       "Support",
+       "Online communities, sometimes paid support",
+       "Official support from the company"
+      ],
+      [
+       "Examples",
+       "Linux, Firefox, LibreOffice, Python, VLC",
+       "Windows, macOS, iOS, Microsoft Office, Photoshop"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Linux"
+    },
+    {
+     "t": "p",
+     "text": "**[[Linux]]** is a free, open-source operating system first created by Finnish student Linus Torvalds in 1991. Thousands of people and companies around the world now contribute to it. Linux comes in many versions called distributions (distros), such as Ubuntu, Fedora and Raspberry Pi OS."
+    },
+    {
+     "t": "key",
+     "title": "Where Linux runs",
+     "items": [
+      "Most of the world's web servers and cloud computers",
+      "All of the world's top 500 supercomputers",
+      "Android phones (built on the Linux kernel, the core of the OS)",
+      "Raspberry Pi computers, smart TVs, routers, cars and the International Space Station's laptops"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Why choose open source?"
+    },
+    {
+     "t": "p",
+     "text": "Supporters say open source is more transparent (anyone can check the code for security problems), cheaper, and can be adapted to any need. Critics point out that some popular software and games don't run on it, it can be harder for beginners, and support relies on communities. Many organisations use a mix of both."
+    },
+    {
+     "t": "act",
+     "title": "Choose the software",
+     "mins": 25,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Read the four scenarios: a charity reviving 50 old laptops; a hospital needing official support; a games streamer; a start-up building a website on cloud servers.",
+      "For each, decide whether to use open-source or proprietary software (or both) and choose an OS.",
+      "Justify each choice with at least two reasons.",
+      "Try a Linux distro if available (on a Raspberry Pi or in a browser-based Linux demo) and compare it with Windows."
+     ],
+     "q": [
+      {
+       "q": "What would you choose for the charity, and why?",
+       "a": "A lightweight open-source Linux distro: it's free, runs well on old hardware, still gets security updates, and reduces e-waste."
+      },
+      {
+       "q": "What would you choose for the hospital, and why?",
+       "a": "Probably proprietary software with official support (or a supported commercial Linux): medical systems need guaranteed support, certified compatibility and clear accountability."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is open-source software?",
+     "o": [
+      "Software with secret code",
+      "Software that's always paid",
+      "A type of virus",
+      "Software whose source code is public and can be changed and shared"
+     ],
+     "a": 3,
+     "why": "Open code."
+    },
+    {
+     "q": "Which is proprietary software?",
+     "o": [
+      "Linux",
+      "LibreOffice",
+      "Windows",
+      "Firefox"
+     ],
+     "a": 2,
+     "why": "Owned by Microsoft."
+    },
+    {
+     "q": "Who created Linux?",
+     "o": [
+      "Steve Jobs",
+      "Bill Gates",
+      "Alan Turing",
+      "Linus Torvalds"
+     ],
+     "a": 3,
+     "why": "In 1991."
+    },
+    {
+     "q": "Which phone OS is built on the Linux kernel?",
+     "o": [
+      "Windows Phone",
+      "iOS",
+      "None",
+      "Android"
+     ],
+     "a": 3,
+     "why": "Android uses Linux."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between open-source and proprietary software.",
+     "m": 2,
+     "a": "Open source: code is public and can be studied/changed/shared (1); proprietary: owned by a company, code secret, can't be changed (1)."
+    },
+    {
+     "q": "A charity wants to reuse 50 old laptops that can't run Windows 11. Evaluate whether it should install Linux.",
+     "m": 4,
+     "a": "For: free, runs on older hardware, security updates, reduces e-waste (1-2); against: unfamiliar to users, some software won't run, support (1-2); conclusion (1). Max 4."
+    }
+   ],
+   "terms": [
+    "Open source",
+    "Proprietary software",
+    "Source code",
+    "Linux",
+    "Licence"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "The future of operating systems",
+   "spec": "Describe how operating systems are changing with on-device AI, the cloud and new kinds of devices, and evaluate the impacts",
+   "summary": "Operating systems are being reshaped by AI: new computers and phones have NPUs (neural processing units) so AI features run on the device, and OSs are adding AI assistants that can act across apps. Browser-based and cloud OSs, and OSs for headsets, cars and IoT, are growing. These changes raise questions about privacy, control and choice.",
+   "starter": "Imagine telling your laptop \"Find the photo of my dog from last summer and send it to Gran\" and it just does it. What would the OS need to be able to do?",
+   "sc": [
+    "I can describe how AI is being built into operating systems",
+    "I can describe cloud-based and new-device operating systems",
+    "I can evaluate the benefits and risks of AI-powered operating systems"
+   ],
+   "slides": [
+    {
+     "t": "AI inside the OS",
+     "b": [
+      "New chips include an NPU (neural processing unit) for AI tasks",
+      "On-device AI: features run locally, not in the cloud",
+      "Search your files by describing them; live captions and translation",
+      "AI assistants built into Windows, macOS, iOS and Android"
+     ]
+    },
+    {
+     "t": "From assistant to agent",
+     "b": [
+      "AI agents can carry out multi-step tasks across apps for you",
+      "\"Book the cheapest train and add it to my calendar\"",
+      "The OS must manage what the AI is allowed to see and do",
+      "Permissions and human approval become even more important"
+     ]
+    },
+    {
+     "t": "New kinds of OS",
+     "b": [
+      "Cloud-based OSs: ChromeOS runs mostly in the browser",
+      "Headset OSs for mixed reality, e.g. visionOS and Android XR",
+      "Car OSs that update over the air",
+      "Tiny OSs for billions of IoT devices"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "AI built into the OS"
+    },
+    {
+     "t": "p",
+     "text": "Many new laptops and phones contain an **[[NPU]]** (neural processing unit), a chip designed to run AI tasks efficiently. This allows **[[on-device AI]]**: AI features that run on the device itself rather than sending data to the cloud. On-device AI can be faster, work offline and keep personal data more private."
+    },
+    {
+     "t": "key",
+     "title": "AI features in modern operating systems",
+     "items": [
+      "Searching files and photos by describing them (\"receipt from the bike shop\")",
+      "Live captions and real-time translation of any audio",
+      "Writing tools that summarise, rewrite or proofread text in any app",
+      "Image editing, such as removing objects from photos",
+      "Voice assistants that understand natural requests"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "From assistants to agents"
+    },
+    {
+     "t": "p",
+     "text": "The next step is the **[[AI agent]]**: AI that can carry out multi-step tasks across apps on your behalf, such as finding information, filling in forms and booking things. For this to be safe, the OS needs to manage exactly what the AI can see and do, and ask the user to approve important actions."
+    },
+    {
+     "t": "table",
+     "caption": "Weighing up AI in the OS",
+     "head": [
+      "Benefits",
+      "Concerns"
+     ],
+     "rows": [
+      [
+       "Saves time on repetitive tasks",
+       "Privacy: the AI may \"see\" everything on your screen"
+      ],
+      [
+       "Accessibility: helps people with disabilities use computers",
+       "Security: attackers could trick an AI agent into doing harmful things"
+      ],
+      [
+       "On-device processing can keep data private",
+       "Mistakes: AI can misunderstand or get things wrong"
+      ],
+      [
+       "Natural language makes computers easier to use",
+       "Control and choice: AI features switched on by default; dependence on big companies"
+      ]
+     ]
+    },
+    {
+     "t": "note",
+     "text": "When Microsoft announced a feature that would take regular screenshots of a user's activity so they could search their history with AI, privacy experts raised serious concerns. Microsoft delayed it and changed it so it was off by default, encrypted and required sign-in to view. It shows how OS makers have to balance helpful features with privacy."
+    },
+    {
+     "t": "h",
+     "text": "New kinds of operating system"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "**[[cloud-based OS|Cloud-based OSs]]** such as ChromeOS run most apps in the browser and store files online, so devices can be cheap and easy to manage, as many schools have found.",
+      "Mixed reality headsets have their own OSs (e.g. Apple's visionOS and Android XR) where apps float in your room.",
+      "Cars run complex OSs that receive updates over the air, like a phone.",
+      "Billions of IoT devices run tiny, efficient OSs that must be secure for years."
+     ]
+    },
+    {
+     "t": "act",
+     "title": "OS of 2035",
+     "mins": 30,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Design the operating system for a device in 2035 (glasses, a car, a home robot, or a school laptop).",
+      "Describe three AI features it would have and how they help users.",
+      "Write the permission rules: what the AI can do automatically, what needs approval, and what it can never do.",
+      "Present your OS and explain how it protects privacy and security."
+     ],
+     "q": [
+      {
+       "q": "Describe your three AI features.",
+       "a": "E.g. school laptop: an AI tutor that explains errors in code; live translation for pupils new to English; a focus mode that summarises notifications at break time."
+      },
+      {
+       "q": "Write your permission rules.",
+       "a": "Automatic: organise files, suggest spelling fixes. Needs approval: sending messages, submitting work, buying anything. Never: share personal data with third parties, turn on the camera without the user's knowledge, delete files without confirmation."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is an NPU?",
+     "o": [
+      "A type of RAM",
+      "A chip designed to run AI tasks efficiently",
+      "A screen",
+      "A network cable"
+     ],
+     "a": 1,
+     "why": "Neural processing unit."
+    },
+    {
+     "q": "What is one benefit of on-device AI?",
+     "o": [
+      "It's slower",
+      "Data can stay on the device, improving privacy",
+      "It uses the cloud only",
+      "It always needs the internet"
+     ],
+     "a": 1,
+     "why": "Local processing."
+    },
+    {
+     "q": "What is an AI agent?",
+     "o": [
+      "A secret agent",
+      "AI that can carry out multi-step tasks across apps for you",
+      "A type of keyboard",
+      "A virus"
+     ],
+     "a": 1,
+     "why": "It acts on your behalf."
+    },
+    {
+     "q": "Which OS runs most apps in a web browser?",
+     "o": [
+      "ChromeOS",
+      "iOS",
+      "DOS",
+      "Windows 95"
+     ],
+     "a": 0,
+     "why": "Cloud-based OS."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain two advantages of on-device AI compared with cloud AI.",
+     "m": 2,
+     "a": "Any two: privacy as data stays local (1); works offline (1); faster/less delay (1); less data sent to servers (1)."
+    },
+    {
+     "q": "Discuss whether operating systems should include AI agents that can act on users' behalf.",
+     "m": 4,
+     "a": "Benefits, e.g. saves time, accessibility (1-2); concerns, e.g. privacy, security/manipulation, mistakes, control (1-2); conclusion with safeguards (1). Max 4."
+    }
+   ],
+   "terms": [
+    "NPU",
+    "On-device AI",
+    "AI agent",
+    "Cloud-based OS"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Operating system",
+   "def": "System software that manages a computer's hardware and software and provides a user interface.",
+   "alt": "OS",
+   "page": "p01"
+  },
+  {
+   "term": "System software",
+   "def": "Software that runs and manages the computer itself, rather than doing a task for the user.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "User interface",
+   "def": "The way a person interacts with a computer, such as windows, icons, touch or voice.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Device driver",
+   "def": "Software that lets the operating system control a piece of hardware.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Booting",
+   "def": "Starting a computer and loading the operating system into memory.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Process",
+   "def": "A program that is currently running.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Multitasking",
+   "def": "Running more than one program at the same time.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Scheduling",
+   "def": "How the operating system decides which process uses the CPU and for how long.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "RAM",
+   "def": "Random access memory: fast, temporary memory that holds programs and data in use.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Virtual memory",
+   "def": "Part of storage used as extra memory when RAM is full.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "File system",
+   "def": "The part of the operating system that organises data on storage into files and folders.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Directory",
+   "def": "Another name for a folder.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "File path",
+   "def": "The full location of a file, listing each folder from the top level down.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "File extension",
+   "def": "The letters after the dot in a file name, showing the type of file.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Command-line interface",
+   "def": "A way of controlling a computer by typing text commands.",
+   "alt": "CLI",
+   "page": "p03"
+  },
+  {
+   "term": "Vulnerability",
+   "def": "A weakness in software that an attacker could exploit.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Patch",
+   "def": "An update that fixes a bug or security vulnerability.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "End of support",
+   "def": "When a software maker stops releasing updates and security fixes.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Administrator",
+   "def": "A user account that can install software and change system settings.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Permissions",
+   "def": "Rules that control what a user or app is allowed to do.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Sandbox",
+   "def": "A restricted area where an app runs so it can't affect the rest of the system.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Source code",
+   "def": "The human-readable instructions programmers write.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Licence",
+   "def": "A legal agreement about how software can be used, copied and changed.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Open source",
+   "def": "Software whose source code is public and can be studied, changed and shared.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Proprietary software",
+   "def": "Software owned by a company that keeps its source code secret.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Linux",
+   "def": "A free, open-source operating system first created by Linus Torvalds in 1991.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "NPU",
+   "def": "Neural processing unit: a chip designed to run AI tasks efficiently.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "On-device AI",
+   "def": "AI that runs on the device itself rather than in the cloud.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "AI agent",
+   "def": "AI that can carry out multi-step tasks on a user's behalf.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Cloud-based OS",
+   "def": "An operating system that runs most apps and stores most files online.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}
