@@ -109,6 +109,7 @@ def finish(T, tests):
             if b['t'] == 'act':
                 if b['after'] is None: b.pop('after')
                 if b['mins'] is None: b.pop('mins')
+    tests = tests[:100]   # a few spare questions may be written; the test has 100
     slots = [i % 4 for i in range(len(tests))]; rng.shuffle(slots)
     tq = []
     for i, t in enumerate(tests):

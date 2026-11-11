@@ -1,0 +1,1205 @@
+{
+ "title": "Machine Learning Lab",
+ "q": [
+  {
+   "q": "What is machine learning?",
+   "o": [
+    "Computers that learn to walk",
+    "Computers learning patterns from data instead of following hand-written rules",
+    "Fixing broken machines",
+    "Programming in machine code"
+   ],
+   "a": 1,
+   "why": "ML learns from data.",
+   "p": "p01"
+  },
+  {
+   "q": "What is supervised learning?",
+   "o": [
+    "Learning from examples labelled with the correct answers",
+    "Learning by trial and error in a game",
+    "Learning without any data",
+    "Learning while a teacher watches"
+   ],
+   "a": 0,
+   "why": "Labels supervise the learning.",
+   "p": "p01"
+  },
+  {
+   "q": "In a dataset about animals, \"number of legs\" is a...",
+   "o": [
+    "feature",
+    "label",
+    "prediction",
+    "model"
+   ],
+   "a": 0,
+   "why": "Features describe examples.",
+   "p": "p01"
+  },
+  {
+   "q": "In a dataset about animals, \"bird\" is a...",
+   "o": [
+    "label",
+    "algorithm",
+    "feature",
+    "dataset"
+   ],
+   "a": 0,
+   "why": "The label is the category to predict.",
+   "p": "p01"
+  },
+  {
+   "q": "What is a dataset?",
+   "o": [
+    "A computer program",
+    "A single photo",
+    "A collection of examples",
+    "A type of chip"
+   ],
+   "a": 2,
+   "why": "Datasets hold many examples.",
+   "p": "p01"
+  },
+  {
+   "q": "Why is ML useful for recognising cats in photos?",
+   "o": [
+    "It's very hard to write exact rules for recognising cats",
+    "Cats are simple shapes",
+    "ML is cheaper than paper",
+    "Cats are always the same colour"
+   ],
+   "a": 0,
+   "why": "Learning from examples replaces impossible rules.",
+   "p": "p01"
+  },
+  {
+   "q": "What happens during training?",
+   "o": [
+    "The data is deleted",
+    "The model is switched off",
+    "The model adjusts itself to reduce mistakes on the examples",
+    "The user labels everything again"
+   ],
+   "a": 2,
+   "why": "Training tunes the model.",
+   "p": "p01"
+  },
+  {
+   "q": "A model says \"dog: 87%\". What is the 87%?",
+   "o": [
+    "Its overall accuracy",
+    "Its confidence in that prediction",
+    "Its battery level",
+    "How many dogs it has seen"
+   ],
+   "a": 1,
+   "why": "It's a confidence score.",
+   "p": "p01"
+  },
+  {
+   "q": "For images, what are the features?",
+   "o": [
+    "The camera brand",
+    "The photographer",
+    "The colours of the pixels",
+    "The file name"
+   ],
+   "a": 2,
+   "why": "Models learn from pixel values.",
+   "p": "p01"
+  },
+  {
+   "q": "Which is a traditional program rather than ML?",
+   "o": [
+    "A program with rules written by a programmer",
+    "A model trained on photos",
+    "A spam filter learned from examples",
+    "A speech recogniser trained on recordings"
+   ],
+   "a": 0,
+   "why": "Traditional programs follow written rules.",
+   "p": "p01"
+  },
+  {
+   "q": "What does a classifier do?",
+   "o": [
+    "Makes computers faster",
+    "Encrypts files",
+    "Writes essays",
+    "Sorts inputs into categories"
+   ],
+   "a": 3,
+   "why": "Classifiers assign classes.",
+   "p": "p02"
+  },
+  {
+   "q": "What is a class in a classifier?",
+   "o": [
+    "One of the categories it can choose",
+    "A type of computer",
+    "A dataset",
+    "A school lesson"
+   ],
+   "a": 0,
+   "why": "Each category is a class.",
+   "p": "p02"
+  },
+  {
+   "q": "Which is an example of a classifier?",
+   "o": [
+    "A printer",
+    "A word processor",
+    "A spam filter",
+    "A calculator"
+   ],
+   "a": 2,
+   "why": "Spam/not spam are classes.",
+   "p": "p02"
+  },
+  {
+   "q": "What is the golden rule of machine learning?",
+   "o": [
+    "Faster computers always win",
+    "More classes are always better",
+    "A model can only be as good as its data",
+    "Never test a model"
+   ],
+   "a": 2,
+   "why": "Data quality decides results.",
+   "p": "p02"
+  },
+  {
+   "q": "About how many examples per class should you start with in Teachable Machine?",
+   "o": [
+    "5",
+    "1",
+    "3",
+    "30-50 or more"
+   ],
+   "a": 3,
+   "why": "More examples help the model learn.",
+   "p": "p02"
+  },
+  {
+   "q": "Why should training images be varied?",
+   "o": [
+    "It doesn't matter",
+    "So the model learns the object, not one setting",
+    "So the files are bigger",
+    "To confuse the model"
+   ],
+   "a": 1,
+   "why": "Variety helps generalisation.",
+   "p": "p02"
+  },
+  {
+   "q": "What does \"balanced classes\" mean?",
+   "o": [
+    "Two classes only",
+    "Equal colours",
+    "A similar number of examples in each class",
+    "All images the same size"
+   ],
+   "a": 2,
+   "why": "Balance stops one class dominating.",
+   "p": "p02"
+  },
+  {
+   "q": "Why add a \"nothing\" class?",
+   "o": [
+    "So the model can say nothing is there instead of guessing",
+    "To delete wrong images",
+    "To slow training",
+    "Because there must be three classes"
+   ],
+   "a": 0,
+   "why": "It's a valid \"none\" option.",
+   "p": "p02"
+  },
+  {
+   "q": "Your model fails when objects are far away. What should you do?",
+   "o": [
+    "Add training examples taken from further away",
+    "Only use objects close up forever",
+    "Delete the model",
+    "Change the class names"
+   ],
+   "a": 0,
+   "why": "Fill the data gap.",
+   "p": "p02"
+  },
+  {
+   "q": "Why shouldn't you train school models on pupils' faces?",
+   "o": [
+    "Faces are too hard",
+    "Cameras can't see faces",
+    "It makes models slower",
+    "Face data is personal and sensitive"
+   ],
+   "a": 3,
+   "why": "Privacy matters.",
+   "p": "p02"
+  },
+  {
+   "q": "What is test data?",
+   "o": [
+    "The user's password",
+    "Examples kept separate to check the model on new data",
+    "The model's code",
+    "The data used for training"
+   ],
+   "a": 1,
+   "why": "Test data must be unseen.",
+   "p": "p03"
+  },
+  {
+   "q": "Why test on data the model hasn't seen?",
+   "o": [
+    "To delete old data",
+    "To make it look better",
+    "Because it's faster",
+    "To find out how it will do on new examples"
+   ],
+   "a": 3,
+   "why": "Unseen data shows real performance.",
+   "p": "p03"
+  },
+  {
+   "q": "A typical split for training and test data is...",
+   "o": [
+    "50% each",
+    "100% training",
+    "about 80% training, 20% testing",
+    "10% training, 90% testing"
+   ],
+   "a": 2,
+   "why": "Most data trains; some is held back.",
+   "p": "p03"
+  },
+  {
+   "q": "What is accuracy?",
+   "o": [
+    "The number of classes",
+    "The size of the dataset",
+    "How fast the model is",
+    "The percentage of predictions that are correct"
+   ],
+   "a": 3,
+   "why": "Accuracy measures correctness.",
+   "p": "p03"
+  },
+  {
+   "q": "A model gets 45 out of 50 right. Its accuracy is...",
+   "o": [
+    "85%",
+    "90%",
+    "95%",
+    "45%"
+   ],
+   "a": 1,
+   "why": "45 ÷ 50 × 100 = 90%.",
+   "p": "p03"
+  },
+  {
+   "q": "A model gets 30 out of 40 right. Its accuracy is...",
+   "o": [
+    "30%",
+    "80%",
+    "75%",
+    "70%"
+   ],
+   "a": 2,
+   "why": "30 ÷ 40 × 100 = 75%.",
+   "p": "p03"
+  },
+  {
+   "q": "What does a confusion matrix show?",
+   "o": [
+    "The model's code",
+    "The training time",
+    "Which classes the model gets right and which it mixes up",
+    "The file sizes"
+   ],
+   "a": 2,
+   "why": "It compares actual and predicted classes.",
+   "p": "p03"
+  },
+  {
+   "q": "In a confusion matrix, correct predictions appear...",
+   "o": [
+    "outside the table",
+    "on the diagonal",
+    "in the last column only",
+    "in the first row only"
+   ],
+   "a": 1,
+   "why": "Actual matches predicted on the diagonal.",
+   "p": "p03"
+  },
+  {
+   "q": "Why can accuracy be misleading for rare events?",
+   "o": [
+    "Rare events can't be measured",
+    "Accuracy is always 50%",
+    "A model can score high by always predicting the common class",
+    "It's measured in seconds"
+   ],
+   "a": 2,
+   "why": "E.g. always \"not spam\" can look accurate.",
+   "p": "p03"
+  },
+  {
+   "q": "Testing a model on its training data is like...",
+   "o": [
+    "a surprise test",
+    "a real exam",
+    "not studying",
+    "sitting an exam you've already seen the answers to"
+   ],
+   "a": 3,
+   "why": "It inflates the score.",
+   "p": "p03"
+  },
+  {
+   "q": "A confusion matrix shows many \"paper\" items predicted as \"plastic\". What should you do?",
+   "o": [
+    "Ignore it",
+    "Delete the plastic class",
+    "Add more varied examples of paper and plastic",
+    "Rename the classes"
+   ],
+   "a": 2,
+   "why": "Target the confusion with data.",
+   "p": "p03"
+  },
+  {
+   "q": "What is overfitting?",
+   "o": [
+    "Memorising training data so the model fails on new data",
+    "Having too many classes",
+    "A model that is too fast",
+    "Using too little memory"
+   ],
+   "a": 0,
+   "why": "Overfit models don't generalise.",
+   "p": "p04"
+  },
+  {
+   "q": "Which result suggests overfitting?",
+   "o": [
+    "100% training accuracy, 60% test accuracy",
+    "55% training, 54% test",
+    "80% training, 80% test",
+    "90% training, 89% test"
+   ],
+   "a": 0,
+   "why": "A big gap signals overfitting.",
+   "p": "p04"
+  },
+  {
+   "q": "What does it mean for a model to generalise?",
+   "o": [
+    "It works only on training data",
+    "It works well on new examples",
+    "It uses general knowledge",
+    "It is very small"
+   ],
+   "a": 1,
+   "why": "Generalising is the goal.",
+   "p": "p04"
+  },
+  {
+   "q": "What is shortcut learning?",
+   "o": [
+    "Learning very quickly",
+    "Using an accidental clue instead of the real feature",
+    "Skipping the test",
+    "Using fewer classes"
+   ],
+   "a": 1,
+   "why": "E.g. learning \"snow = wolf\".",
+   "p": "p04"
+  },
+  {
+   "q": "A wolf detector actually learned to detect snow. Why?",
+   "o": [
+    "Most wolf photos had snow in the background",
+    "Snow is a wolf feature",
+    "The labels were missing",
+    "Wolves are white"
+   ],
+   "a": 0,
+   "why": "The background was an accidental clue.",
+   "p": "p04"
+  },
+  {
+   "q": "What is an edge case?",
+   "o": [
+    "A broken model",
+    "An unusual situation rarely in the training data",
+    "The edge of a photo",
+    "The first data item"
+   ],
+   "a": 1,
+   "why": "Edge cases are rare inputs.",
+   "p": "p04"
+  },
+  {
+   "q": "Why do self-driving cars need huge amounts of testing?",
+   "o": [
+    "Cars are slow",
+    "Roads never change",
+    "They don't",
+    "Real roads are full of unusual edge cases"
+   ],
+   "a": 3,
+   "why": "Rare situations can be dangerous.",
+   "p": "p04"
+  },
+  {
+   "q": "What is underfitting?",
+   "o": [
+    "The data is too varied",
+    "The model hasn't learned the patterns well enough",
+    "The model has memorised everything",
+    "The model is too accurate"
+   ],
+   "a": 1,
+   "why": "Underfit models do badly everywhere.",
+   "p": "p04"
+  },
+  {
+   "q": "Which helps make a model more robust?",
+   "o": [
+    "Collecting more varied data and testing on realistic data",
+    "Using one background only",
+    "Training on fewer examples",
+    "Never testing it"
+   ],
+   "a": 0,
+   "why": "Variety and testing build robustness.",
+   "p": "p04"
+  },
+  {
+   "q": "Why keep humans involved in safety-critical AI?",
+   "o": [
+    "Humans are faster",
+    "Mistakes can be dangerous, so people need to check",
+    "It's cheaper",
+    "AI can't run without them"
+   ],
+   "a": 1,
+   "why": "Oversight catches costly errors.",
+   "p": "p04"
+  },
+  {
+   "q": "All \"good\" fruit photos were taken in daylight and \"bad\" ones at night. What might the model learn?",
+   "o": [
+    "Nothing",
+    "The real signs of bad fruit",
+    "Fruit colours exactly",
+    "Daylight = good, darkness = bad"
+   ],
+   "a": 3,
+   "why": "It may learn a lighting shortcut.",
+   "p": "p04"
+  },
+  {
+   "q": "What is bias in machine learning?",
+   "o": [
+    "A confusion matrix",
+    "A fast model",
+    "When a model is less accurate or fair for some people",
+    "A type of data split"
+   ],
+   "a": 2,
+   "why": "Bias is unfair performance.",
+   "p": "p05"
+  },
+  {
+   "q": "Where does AI bias usually come from?",
+   "o": [
+    "The computer's speed",
+    "Unbalanced or unfair training data",
+    "The programming language",
+    "The screen size"
+   ],
+   "a": 1,
+   "why": "Data carries bias.",
+   "p": "p05"
+  },
+  {
+   "q": "What is under-representation?",
+   "o": [
+    "A balanced dataset",
+    "Correct labels",
+    "When some groups barely appear in the data",
+    "Having too much data"
+   ],
+   "a": 2,
+   "why": "Missing groups get poor accuracy.",
+   "p": "p05"
+  },
+  {
+   "q": "What is historical bias?",
+   "o": [
+    "History lessons",
+    "Data that reflects unfair decisions from the past",
+    "Old computers",
+    "Ancient datasets that are always accurate"
+   ],
+   "a": 1,
+   "why": "Past unfairness is learned.",
+   "p": "p05"
+  },
+  {
+   "q": "What is labelling bias?",
+   "o": [
+    "Having no labels",
+    "When the people labelling data add their own assumptions",
+    "Using labels that are too long",
+    "Printing labels"
+   ],
+   "a": 1,
+   "why": "Human labellers can be biased.",
+   "p": "p05"
+  },
+  {
+   "q": "Research found some face-analysis systems were least accurate for...",
+   "o": [
+    "lighter-skinned men",
+    "people wearing hats",
+    "everyone equally",
+    "darker-skinned women"
+   ],
+   "a": 3,
+   "why": "The Gender Shades study showed this gap.",
+   "p": "p05"
+  },
+  {
+   "q": "Why did an experimental CV-sorting AI prefer male applicants?",
+   "o": [
+    "It was told to",
+    "It learned from past hires who were mostly men",
+    "Women's CVs were longer",
+    "It read fewer CVs"
+   ],
+   "a": 1,
+   "why": "Historical data caused it.",
+   "p": "p05"
+  },
+  {
+   "q": "What is representative data?",
+   "o": [
+    "Data from one group only",
+    "Data with a fair mix of everyone the system will meet",
+    "Data with no labels",
+    "Very old data"
+   ],
+   "a": 1,
+   "why": "It reflects real users.",
+   "p": "p05"
+  },
+  {
+   "q": "Why test accuracy separately for different groups?",
+   "o": [
+    "It makes the model bigger",
+    "Overall accuracy can hide poor accuracy for some groups",
+    "It's not useful",
+    "It's faster"
+   ],
+   "a": 1,
+   "why": "Group testing reveals unfairness.",
+   "p": "p05"
+  },
+  {
+   "q": "Which helps reduce bias?",
+   "o": [
+    "Using less data",
+    "Hiding the results",
+    "Including people from different backgrounds in the team",
+    "Testing only once"
+   ],
+   "a": 2,
+   "why": "Diverse teams spot more problems.",
+   "p": "p05"
+  },
+  {
+   "q": "A soap dispenser sensor doesn't detect darker skin. The likely cause is...",
+   "o": [
+    "It wasn't tested on a range of skin tones",
+    "Soap is the wrong colour",
+    "Water pressure",
+    "The sensor is broken for everyone"
+   ],
+   "a": 0,
+   "why": "Narrow testing leads to unfair products.",
+   "p": "p05"
+  },
+  {
+   "q": "Which statement about unfair AI is most accurate?",
+   "o": [
+    "It can never be fixed",
+    "It usually comes from data, not someone programming it to be unfair",
+    "It only affects robots",
+    "It's always deliberate"
+   ],
+   "a": 1,
+   "why": "Data is the usual source.",
+   "p": "p05"
+  },
+  {
+   "q": "What is the first stage of an ML project?",
+   "o": [
+    "Buy a GPU",
+    "Define the problem",
+    "Train the model",
+    "Deploy the app"
+   ],
+   "a": 1,
+   "why": "Start with a clear problem statement.",
+   "p": "p06"
+  },
+  {
+   "q": "What is a problem statement?",
+   "o": [
+    "A list of errors",
+    "A complaint letter",
+    "A clear description of the problem and who it's for",
+    "The model's code"
+   ],
+   "a": 2,
+   "why": "It defines the goal.",
+   "p": "p06"
+  },
+  {
+   "q": "When is ML NOT the best solution?",
+   "o": [
+    "When there's lots of data",
+    "When patterns are complex",
+    "When recognising images",
+    "When a simple rule solves the problem"
+   ],
+   "a": 3,
+   "why": "Simple rules are cheaper and clearer.",
+   "p": "p06"
+  },
+  {
+   "q": "What is evaluation?",
+   "o": [
+    "Judging how well a solution works against success criteria",
+    "Writing a problem statement",
+    "Collecting data",
+    "Training the model"
+   ],
+   "a": 0,
+   "why": "Evaluation judges success.",
+   "p": "p06"
+  },
+  {
+   "q": "Why decide success criteria before testing?",
+   "o": [
+    "To make testing quicker",
+    "It doesn't matter",
+    "Because AI requires it",
+    "To judge results fairly and honestly"
+   ],
+   "a": 3,
+   "why": "Deciding first avoids moving the goalposts.",
+   "p": "p06"
+  },
+  {
+   "q": "What is human oversight?",
+   "o": [
+    "A human watching TV",
+    "A faster model",
+    "A data label",
+    "People checking and able to overrule AI decisions"
+   ],
+   "a": 3,
+   "why": "People stay in charge.",
+   "p": "p06"
+  },
+  {
+   "q": "Why keep monitoring a model after launch?",
+   "o": [
+    "It gets bored",
+    "To make it slower",
+    "It doesn't need monitoring",
+    "Real-world data can change and accuracy can drop"
+   ],
+   "a": 3,
+   "why": "Models can drift over time.",
+   "p": "p06"
+  },
+  {
+   "q": "Which is an important privacy question for an ML project?",
+   "o": [
+    "Did people agree to their data being used?",
+    "How fast is the Wi-Fi?",
+    "What colour is the logo?",
+    "How big is the screen?"
+   ],
+   "a": 0,
+   "why": "Consent for data matters.",
+   "p": "p06"
+  },
+  {
+   "q": "Which is a fairness question for an ML project?",
+   "o": [
+    "Does it work equally well for everyone?",
+    "Is it the cheapest?",
+    "Does it use the newest chip?",
+    "Is it the fastest?"
+   ],
+   "a": 0,
+   "why": "Fairness checks equal performance.",
+   "p": "p06"
+  },
+  {
+   "q": "In a medical AI, which mistake is often worse?",
+   "o": [
+    "A long loading time",
+    "A false alarm that's quickly checked",
+    "Spelling mistakes",
+    "Missing an illness (false negative)"
+   ],
+   "a": 3,
+   "why": "Missing illness can be dangerous.",
+   "p": "p06"
+  },
+  {
+   "q": "What does \"deploy\" mean in an ML project?",
+   "o": [
+    "Collect the data",
+    "Train the model",
+    "Delete the model",
+    "Put the model into real use"
+   ],
+   "a": 3,
+   "why": "Deployment is launching it.",
+   "p": "p06"
+  },
+  {
+   "q": "Which is the best reason to involve users in testing?",
+   "o": [
+    "Users don't matter",
+    "It makes training faster",
+    "They show how it works in real conditions",
+    "Users are free labour"
+   ],
+   "a": 2,
+   "why": "Real conditions reveal problems.",
+   "p": "p06"
+  },
+  {
+   "q": "Which is NOT a good source of training data?",
+   "o": [
+    "Photos you took of objects",
+    "Data volunteers agreed to share",
+    "A licensed public dataset",
+    "Photos of people taken without permission"
+   ],
+   "a": 3,
+   "why": "Consent is essential.",
+   "p": "p06"
+  },
+  {
+   "q": "Which describes the ML project cycle?",
+   "o": [
+    "Define, collect data, train, test, evaluate, deploy and monitor",
+    "Guess, check, give up",
+    "Buy, sell, profit",
+    "Train, delete, repeat"
+   ],
+   "a": 0,
+   "why": "It's a repeating cycle.",
+   "p": "p06"
+  },
+  {
+   "q": "A model is 95% accurate overall but 70% for one group. What should you do?",
+   "o": [
+    "Investigate and improve the data for that group before using it",
+    "Hide the result",
+    "Delete that group's data",
+    "Launch it anyway"
+   ],
+   "a": 0,
+   "why": "Fix unfairness first.",
+   "p": "p05"
+  },
+  {
+   "q": "What is the main job of the label column in training data?",
+   "o": [
+    "Describe the colour",
+    "Give the correct answer for each example",
+    "Count the examples",
+    "Store the file name"
+   ],
+   "a": 1,
+   "why": "Labels are the answers.",
+   "p": "p01"
+  },
+  {
+   "q": "Which is an example of supervised learning?",
+   "o": [
+    "Typing a document",
+    "Sorting photos with no labels",
+    "A robot exploring randomly",
+    "Training a model on emails marked \"spam\" or \"not spam\""
+   ],
+   "a": 3,
+   "why": "Labelled emails supervise learning.",
+   "p": "p01"
+  },
+  {
+   "q": "What does Teachable Machine let you do?",
+   "o": [
+    "Train a simple ML model in your browser",
+    "Edit videos",
+    "Build a robot",
+    "Make a website"
+   ],
+   "a": 0,
+   "why": "It's a browser ML tool.",
+   "p": "p02"
+  },
+  {
+   "q": "You trained with only your own hand. Why might it fail for a friend?",
+   "o": [
+    "It won't fail",
+    "The model needs a password",
+    "Their hand looks different and wasn't in the data",
+    "Friends are invisible"
+   ],
+   "a": 2,
+   "why": "Lack of variety limits the model.",
+   "p": "p02"
+  },
+  {
+   "q": "What is a false positive?",
+   "o": [
+    "A correct \"no\"",
+    "A broken camera",
+    "A correct \"yes\"",
+    "The model says \"yes\" when the real answer is \"no\""
+   ],
+   "a": 3,
+   "why": "E.g. flagging a real email as spam.",
+   "p": "p03"
+  },
+  {
+   "q": "What is a false negative?",
+   "o": [
+    "A correct \"no\"",
+    "A deleted file",
+    "The model says \"no\" when the real answer is \"yes\"",
+    "A correct \"yes\""
+   ],
+   "a": 2,
+   "why": "E.g. missing a real spam email.",
+   "p": "p03"
+  },
+  {
+   "q": "In a confusion matrix of 30 items, 24 are on the diagonal. The accuracy is...",
+   "o": [
+    "75%",
+    "80%",
+    "90%",
+    "24%"
+   ],
+   "a": 1,
+   "why": "24 ÷ 30 × 100 = 80%.",
+   "p": "p03"
+  },
+  {
+   "q": "Which is a sign of good generalisation?",
+   "o": [
+    "Perfect training accuracy, poor test accuracy",
+    "Similar accuracy on training and test data",
+    "Poor accuracy everywhere",
+    "No test data"
+   ],
+   "a": 1,
+   "why": "Close scores show it generalises.",
+   "p": "p04"
+  },
+  {
+   "q": "What should you do to avoid shortcut learning?",
+   "o": [
+    "Remove the test data",
+    "Use fewer examples",
+    "Use one background per class",
+    "Vary backgrounds and conditions across all classes"
+   ],
+   "a": 3,
+   "why": "Variety removes accidental clues.",
+   "p": "p04"
+  },
+  {
+   "q": "Who might be harmed if a school face-recognition door had biased data?",
+   "o": [
+    "The door",
+    "Only teachers",
+    "Pupils it fails to recognise",
+    "Nobody"
+   ],
+   "a": 2,
+   "why": "Unfair errors affect real people.",
+   "p": "p05"
+  },
+  {
+   "q": "Which action helps make data more representative?",
+   "o": [
+    "Copying the same examples",
+    "Using one source only",
+    "Collecting examples from groups that are missing",
+    "Removing difficult examples"
+   ],
+   "a": 2,
+   "why": "Fill the gaps.",
+   "p": "p05"
+  },
+  {
+   "q": "Which is a responsible way to collect data for a school ML project?",
+   "o": [
+    "Ask permission and avoid collecting personal data you don't need",
+    "Copy pictures from social media",
+    "Take photos of everyone secretly",
+    "Use pupils' private messages"
+   ],
+   "a": 0,
+   "why": "Consent and data minimisation.",
+   "p": "p06"
+  },
+  {
+   "q": "What does it mean if a model \"drifts\"?",
+   "o": [
+    "It moves to another computer",
+    "Its accuracy falls as the real world changes",
+    "It deletes itself",
+    "It gets faster"
+   ],
+   "a": 1,
+   "why": "Changing data causes drift.",
+   "p": "p06"
+  },
+  {
+   "q": "What does ML stand for?",
+   "o": [
+    "Memory link",
+    "Multi-layer",
+    "Machine learning",
+    "Main logic"
+   ],
+   "a": 2,
+   "why": "ML = machine learning.",
+   "p": "p01"
+  },
+  {
+   "q": "Which is the BEST description of training data for a classifier?",
+   "o": [
+    "One example per class",
+    "Varied, balanced, correctly labelled examples of each class",
+    "Unlabelled random images",
+    "Lots of identical photos"
+   ],
+   "a": 1,
+   "why": "Quality, balance and variety.",
+   "p": "p02"
+  },
+  {
+   "q": "A model labels every test item as the most common class. What is likely wrong?",
+   "o": [
+    "The classes were unbalanced in training",
+    "The camera is off",
+    "It's perfect",
+    "Too much variety"
+   ],
+   "a": 0,
+   "why": "Imbalance can cause this.",
+   "p": "p03"
+  },
+  {
+   "q": "Why is a 99% accurate cancer screening AI not automatically safe to use?",
+   "o": [
+    "Accuracy doesn't matter",
+    "99% is too low for any use",
+    "It could still miss rare cancers, so mistakes must be checked",
+    "It is always safe"
+   ],
+   "a": 2,
+   "why": "Consider which mistakes matter.",
+   "p": "p06"
+  },
+  {
+   "q": "Which describes human-in-the-loop AI?",
+   "o": [
+    "AI with no human involvement",
+    "A robot with a human body",
+    "A person reviews the AI's important decisions",
+    "A loop in the code"
+   ],
+   "a": 2,
+   "why": "Humans stay in the decision process.",
+   "p": "p06"
+  },
+  {
+   "q": "Which job title belongs to someone who builds and trains ML models?",
+   "o": [
+    "Lighthouse keeper",
+    "Postal worker",
+    "Machine learning engineer",
+    "Graphic printer"
+   ],
+   "a": 2,
+   "why": "ML engineers build models.",
+   "p": "p06"
+  },
+  {
+   "q": "A model to sort fruit sees an orange-coloured apple. This is an example of...",
+   "o": [
+    "an edge case",
+    "a dataset",
+    "test data",
+    "a label"
+   ],
+   "a": 0,
+   "why": "Unusual examples are edge cases.",
+   "p": "p04"
+  },
+  {
+   "q": "In the fruit dataset, how many features does an example with weight, colour and skin texture have?",
+   "o": [
+    "0",
+    "1",
+    "3",
+    "4"
+   ],
+   "a": 2,
+   "why": "Three pieces of information are features; the label is separate.",
+   "p": "p01"
+  },
+  {
+   "q": "Which of these is a label for a weather model?",
+   "o": [
+    "Wind speed",
+    "Today's temperature",
+    "Air pressure",
+    "\"Rain\" or \"No rain\" tomorrow"
+   ],
+   "a": 3,
+   "why": "Labels are what we predict; the rest are features.",
+   "p": "p01"
+  },
+  {
+   "q": "What does pressing \"Train\" in Teachable Machine do?",
+   "o": [
+    "It deletes your images",
+    "It uploads images to social media",
+    "It prints your images",
+    "The model learns patterns from your example images"
+   ],
+   "a": 3,
+   "why": "Training builds the model.",
+   "p": "p02"
+  },
+  {
+   "q": "Which classes would suit a hand-gesture classifier for a slide clicker?",
+   "o": [
+    "Morning, Evening",
+    "Next, Previous, Nothing",
+    "Cat, Dog",
+    "Red, Green, Blue"
+   ],
+   "a": 1,
+   "why": "Classes match the actions needed.",
+   "p": "p02"
+  },
+  {
+   "q": "A recycling sorter scored 9/10 for paper, 6/10 for plastic and 10/10 for nothing. Which class needs work?",
+   "o": [
+    "Nothing",
+    "All are perfect",
+    "Paper",
+    "Plastic"
+   ],
+   "a": 3,
+   "why": "Plastic has the lowest score.",
+   "p": "p03"
+  },
+  {
+   "q": "Why might you keep the test data hidden even from yourself while improving the model?",
+   "o": [
+    "It is illegal to look",
+    "Test data is useless",
+    "It's encrypted",
+    "So you don't accidentally tune the model to the test"
+   ],
+   "a": 3,
+   "why": "Peeking makes test scores too optimistic.",
+   "p": "p03"
+  },
+  {
+   "q": "A model memorises that every training cat photo has a red blanket. On a new cat with no blanket it fails. This is...",
+   "o": [
+    "underfitting",
+    "perfect generalisation",
+    "balanced data",
+    "overfitting through shortcut learning"
+   ],
+   "a": 3,
+   "why": "It learned the blanket, not the cat.",
+   "p": "p04"
+  },
+  {
+   "q": "Which is the best way to find edge cases?",
+   "o": [
+    "Deliberately test unusual situations",
+    "Test only the easy examples",
+    "Use the training data again",
+    "Never test"
+   ],
+   "a": 0,
+   "why": "Look for trouble on purpose.",
+   "p": "p04"
+  },
+  {
+   "q": "A dataset of voices has mostly adults. What might the model struggle with?",
+   "o": [
+    "Recognising adult voices",
+    "Loud sounds",
+    "Nothing",
+    "Recognising children's voices"
+   ],
+   "a": 3,
+   "why": "Under-represented groups get worse accuracy.",
+   "p": "p05"
+  },
+  {
+   "q": "Which is an example of fairness testing?",
+   "o": [
+    "Checking accuracy for pupils of every year group separately",
+    "Checking the battery",
+    "Checking the font",
+    "Checking the price"
+   ],
+   "a": 0,
+   "why": "Test each group, not just the average.",
+   "p": "p05"
+  },
+  {
+   "q": "For a lost-property classifier, which is the best success criterion?",
+   "o": [
+    "At least 85% test accuracy for every class",
+    "It looks cool",
+    "It uses many colours",
+    "It trains quickly"
+   ],
+   "a": 0,
+   "why": "Clear, measurable criteria.",
+   "p": "p06"
+  }
+ ]
+}

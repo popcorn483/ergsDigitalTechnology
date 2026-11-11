@@ -1,0 +1,1293 @@
+{
+ "title": "Machine Learning Lab",
+ "summary": "Train your own AI: collect data, build an image classifier, test how accurate it is, find out why models fail, make your data fair, and design a machine learning solution to a real problem.",
+ "learn": [
+  "How supervised machine learning uses features and labels",
+  "How to collect data and train an image classifier",
+  "How to test a model with test data, accuracy and a confusion matrix",
+  "Why models fail: overfitting, too little data and edge cases",
+  "How biased data leads to unfair AI, and how to fix it",
+  "How to plan a machine learning project responsibly"
+ ],
+ "temporary": false,
+ "intro": "In the Artificial Intelligence topic you met machine learning. Now you become the machine learning engineer. You'll collect data, train a real model in your browser, test it with a confusion matrix, break it on purpose, fix unfair data and plan an AI project for your school.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "Learning from examples",
+   "spec": "Explain how supervised machine learning uses labelled examples, features and labels",
+   "summary": "In supervised learning a computer is given lots of examples with the right answers (labels). It finds patterns in the features of those examples and uses them to label new examples it has never seen.",
+   "starter": "How did you learn to tell the difference between a cat and a dog when you were little? Did someone give you a rule?",
+   "sc": [
+    "I can explain what supervised learning is",
+    "I can identify features and labels in a dataset",
+    "I can describe the training process"
+   ],
+   "slides": [
+    {
+     "t": "Rules or examples?",
+     "b": [
+      "Traditional programs: a programmer writes every rule",
+      "Machine learning: the computer learns the rules from examples",
+      "Hard to write rules for \"is this a cat?\", easy to show 10,000 cat photos",
+      "Supervised learning: every training example comes with the right answer"
+     ]
+    },
+    {
+     "t": "Features and labels",
+     "b": [
+      "A dataset is a collection of examples",
+      "Features: the information about each example (size, colour, shape, pixels)",
+      "Label: the right answer we want the model to predict (\"cat\", \"dog\")",
+      "The model learns how features link to labels"
+     ]
+    },
+    {
+     "t": "Training and predicting",
+     "b": [
+      "Training: the model adjusts itself to match features to labels",
+      "It keeps adjusting until it makes few mistakes on the examples",
+      "Predicting: it labels a new example it hasn't seen",
+      "It gives a confidence score, e.g. \"cat: 92%\""
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Learning without rules"
+    },
+    {
+     "t": "p",
+     "text": "In a normal program, a programmer writes the rules. But some problems are almost impossible to write rules for. Try writing exact rules to recognise a cat in any photo! **[[machine learning]]** (ML) solves this by letting the computer **learn the rules from examples**."
+    },
+    {
+     "t": "h",
+     "text": "Supervised learning"
+    },
+    {
+     "t": "p",
+     "text": "In **[[supervised learning]]**, the computer is given a **[[dataset]]** of examples where the right answer is already known. It's \"supervised\" because, like a teacher, the data tells it the correct answer during training."
+    },
+    {
+     "t": "table",
+     "caption": "A tiny fruit dataset",
+     "head": [
+      "Weight (g)",
+      "Colour",
+      "Smooth skin?",
+      "Label"
+     ],
+     "rows": [
+      [
+       "150",
+       "Red",
+       "Yes",
+       "Apple"
+      ],
+      [
+       "120",
+       "Orange",
+       "No",
+       "Orange"
+      ],
+      [
+       "170",
+       "Green",
+       "Yes",
+       "Apple"
+      ],
+      [
+       "130",
+       "Orange",
+       "No",
+       "Orange"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "The first three columns are **[[feature|features]]**: information about each example. The last column is the **[[label]]**: the answer we want the model to learn to predict."
+    },
+    {
+     "t": "h",
+     "text": "Training and predicting"
+    },
+    {
+     "t": "p",
+     "text": "During **training**, the model repeatedly makes guesses and adjusts itself to reduce its mistakes, finding patterns such as \"orange colour + rough skin usually means orange\". Once trained, it can **predict** the label of a new fruit it has never seen, usually with a **confidence score** such as \"apple: 87%\"."
+    },
+    {
+     "t": "note",
+     "text": "For images, the features are the colours of thousands of pixels. The model learns which pixel patterns go with which label, without anyone telling it what an \"ear\" or \"whisker\" is."
+    },
+    {
+     "t": "act",
+     "title": "Be the model",
+     "mins": 15,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Your teacher shows 12 made-up creatures labelled \"Blip\" or \"Zorg\".",
+      "Without being told any rules, study the examples and work out the pattern.",
+      "Label six new creatures and give a confidence (how sure you are, in %).",
+      "Write the \"rule\" you learned."
+     ],
+     "q": [
+      {
+       "q": "What rule did you learn, and which features did you use?",
+       "a": "Answers depend on the cards, e.g. \"Blips have spots and three legs; Zorgs have stripes and two legs. I used pattern and number of legs.\""
+      },
+      {
+       "q": "How is what you did like supervised machine learning?",
+       "a": "I was given labelled examples (training data), found patterns in their features, then used them to label new examples with a confidence: exactly what a supervised model does."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is supervised learning?",
+     "o": [
+      "Learning from examples that have the right answers (labels)",
+      "Learning without any data",
+      "Learning with a teacher watching the computer",
+      "Writing every rule by hand"
+     ],
+     "a": 0,
+     "why": "Labelled examples supervise the learning."
+    },
+    {
+     "q": "In a dataset of fruit, \"weight\" is a...",
+     "o": [
+      "prediction",
+      "label",
+      "model",
+      "feature"
+     ],
+     "a": 3,
+     "why": "Features describe each example."
+    },
+    {
+     "q": "In a dataset of fruit, \"apple\" or \"orange\" is the...",
+     "o": [
+      "feature",
+      "label",
+      "algorithm",
+      "dataset"
+     ],
+     "a": 1,
+     "why": "The label is the answer to predict."
+    },
+    {
+     "q": "What does a confidence score of 92% mean?",
+     "o": [
+      "The model is right 92% of the time on everything",
+      "92 people agreed",
+      "The model is fairly sure of its prediction",
+      "The image is 92% clear"
+     ],
+     "a": 2,
+     "why": "It's how confident the model is about that prediction."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between a feature and a label in a dataset.",
+     "m": 2,
+     "a": "A feature is a piece of information about each example (e.g. weight, colour) (1); a label is the correct answer/category the model learns to predict (e.g. apple) (1)."
+    },
+    {
+     "q": "Explain why machine learning is useful for recognising images.",
+     "m": 2,
+     "a": "It's very hard to write rules for recognising objects in images (1); ML learns the patterns from lots of labelled examples instead (1)."
+    }
+   ],
+   "terms": [
+    "Machine learning",
+    "Supervised learning",
+    "Feature",
+    "Label",
+    "Dataset"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "Build an image classifier",
+   "spec": "Collect training data and train an image classifier",
+   "summary": "A classifier sorts inputs into categories. Using a browser tool such as Teachable Machine, you collect example images for each class, train a model and try it live. The quality and variety of your data decides how well it works.",
+   "starter": "You want an AI to tell the difference between a thumbs up and a thumbs down. What photos would you need to give it?",
+   "sc": [
+    "I can collect varied training data for each class",
+    "I can train an image classifier",
+    "I can explain how the data affects the model"
+   ],
+   "slides": [
+    {
+     "t": "What's a classifier?",
+     "b": [
+      "A classifier is a model that sorts things into categories, called classes",
+      "Spam or not spam; cat, dog or rabbit; recycling or general waste",
+      "An image classifier does this with pictures",
+      "Teachable Machine lets you build one in your browser in minutes"
+     ],
+     "n": "Use Google's Teachable Machine (teachablemachine.withgoogle.com) in the browser with webcams if allowed. Images stay in the browser unless saved. Use objects or hand gestures, not faces."
+    },
+    {
+     "t": "Good data beats clever code",
+     "b": [
+      "At least 30-50 examples per class to start",
+      "Vary it: angles, distances, lighting, backgrounds, different hands or objects",
+      "Keep classes balanced: a similar number of examples in each",
+      "Add a \"nothing\" class so it doesn't have to guess when nothing is shown"
+     ]
+    },
+    {
+     "t": "Train, try, improve",
+     "b": [
+      "Train: the tool learns patterns from your examples",
+      "Try it live with new examples",
+      "Where does it go wrong? Add more varied data there",
+      "Retrain and compare"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is a classifier?"
+    },
+    {
+     "t": "p",
+     "text": "A **[[classifier]]** is a machine learning model that sorts inputs into categories. Each category is called a **[[class]]**. Spam filters, plant-identifying apps and recycling robots all use classifiers."
+    },
+    {
+     "t": "h",
+     "text": "Collecting training data"
+    },
+    {
+     "t": "p",
+     "text": "**[[training data]]** is the set of labelled examples a model learns from. For an image classifier you collect photos for each class. The golden rule of machine learning is that **the model can only be as good as its data**."
+    },
+    {
+     "t": "key",
+     "title": "Tips for good training data",
+     "items": [
+      "Enough examples: start with 30-50 per class, more is better",
+      "Variety: different angles, distances, lighting and backgrounds",
+      "Balance: a similar number of examples for each class",
+      "A \"nothing\" or \"background\" class so the model doesn't force a guess",
+      "Accuracy: check every example is labelled correctly"
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "Don't train models on photos of people's faces in school. Use objects or hand gestures, and follow your teacher's instructions about webcams."
+    },
+    {
+     "t": "h",
+     "text": "Training and improving"
+    },
+    {
+     "t": "p",
+     "text": "In a tool such as Teachable Machine you add your examples, press **Train**, then test the model live with your webcam. When it makes mistakes, look for the pattern: does it fail in dim light? On a different background? Add more examples of those situations and train again. This cycle is how real ML engineers work."
+    },
+    {
+     "t": "act",
+     "title": "Recycling sorter",
+     "mins": 30,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Open Teachable Machine and create an Image Project with three classes: Paper, Plastic and Nothing.",
+      "Collect at least 30 varied images for each class using classroom objects (cards, plastic bottles, an empty desk).",
+      "Train the model and test it with objects you did NOT use in training.",
+      "Find one situation where it fails, add data to fix it and retrain."
+     ],
+     "q": [
+      {
+       "q": "How did you make your training data varied?",
+       "a": "E.g. different objects, angles, distances, held in different hands, lights on and off, different backgrounds."
+      },
+      {
+       "q": "Describe one mistake your model made, why you think it happened and how you fixed it.",
+       "a": "E.g. \"It called a crumpled paper bag plastic because all my paper examples were flat sheets. I added crumpled paper examples and retrained, and it got it right.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does a classifier do?",
+     "o": [
+      "Speeds up the internet",
+      "Writes stories",
+      "Sorts inputs into categories",
+      "Cleans the computer"
+     ],
+     "a": 2,
+     "why": "Classifiers assign classes."
+    },
+    {
+     "q": "Which training data is best for a hand-gesture classifier?",
+     "o": [
+      "Ten identical photos",
+      "Photos of only one person's hand in one place",
+      "Many photos with different hands, angles and lighting",
+      "One photo per class"
+     ],
+     "a": 2,
+     "why": "Variety helps the model generalise."
+    },
+    {
+     "q": "Why add a \"nothing\" class?",
+     "o": [
+      "So the model doesn't have to guess a class when nothing is shown",
+      "To delete wrong images",
+      "Because the tool needs four classes",
+      "To make training slower"
+     ],
+     "a": 0,
+     "why": "It gives the model a valid \"none\" answer."
+    },
+    {
+     "q": "Your model fails in dim light. What should you do?",
+     "o": [
+      "Change its colour",
+      "Delete the model",
+      "Only use it at night",
+      "Add more training examples in dim light and retrain"
+     ],
+     "a": 3,
+     "why": "Fill the gap in the data."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe three things that make training data good for an image classifier.",
+     "m": 3,
+     "a": "Any three: enough examples (1); variety of angles/lighting/backgrounds (1); balanced number per class (1); correct labels (1); a background/nothing class (1)."
+    },
+    {
+     "q": "Explain why a model trained only on red apples might fail to recognise a green apple.",
+     "m": 2,
+     "a": "It only learned patterns from red apples/its training data lacked variety (1), so green apples don't match what it learned as \"apple\" (1)."
+    }
+   ],
+   "terms": [
+    "Classifier",
+    "Class",
+    "Training data"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Is it any good?",
+   "spec": "Test a model using separate test data, accuracy and a confusion matrix",
+   "summary": "A model must be tested on data it has never seen. Accuracy is the percentage of correct predictions, and a confusion matrix shows which classes get mixed up, which matters when some mistakes are worse than others.",
+   "starter": "If a teacher gave you the exact exam questions to practise, then the same questions in the exam, would your score show what you really know?",
+   "sc": [
+    "I can explain why test data must be separate from training data",
+    "I can calculate accuracy",
+    "I can read a confusion matrix"
+   ],
+   "slides": [
+    {
+     "t": "Don't mark your own homework",
+     "b": [
+      "Testing on training data is like sitting an exam you've seen the answers to",
+      "Split the data: usually about 80% for training, 20% for testing",
+      "Test data must never be used in training",
+      "It tells you how the model will do on brand-new examples"
+     ]
+    },
+    {
+     "t": "Accuracy",
+     "b": [
+      "Accuracy = correct predictions ÷ total predictions × 100",
+      "45 correct out of 50 = 90% accuracy",
+      "But accuracy alone can hide problems",
+      "95% accurate at spotting a rare disease might still miss most ill people"
+     ],
+     "n": "Example: if only 5 in 100 people have a disease, a model that always says \"healthy\" scores 95% but is useless."
+    },
+    {
+     "t": "Confusion matrix",
+     "b": [
+      "A table comparing actual classes with predicted classes",
+      "The diagonal shows correct predictions",
+      "Everything else shows which classes get confused",
+      "Helps you decide what data to add next"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Training data and test data"
+    },
+    {
+     "t": "p",
+     "text": "If you test a model with the same examples it trained on, it will look brilliant, but that tells you nothing about new examples. So ML engineers **split** their data: most of it (often about 80%) is used for training, and the rest is kept back as **[[test data]]** that the model never sees during training."
+    },
+    {
+     "t": "h",
+     "text": "Accuracy"
+    },
+    {
+     "t": "p",
+     "text": "**[[accuracy]]** is the percentage of predictions that are correct."
+    },
+    {
+     "t": "example",
+     "title": "Calculating accuracy",
+     "context": "A recycling classifier is tested on 40 new items. It labels 34 correctly.",
+     "steps": [
+      "Accuracy = correct ÷ total × 100",
+      "= 34 ÷ 40 × 100",
+      "= 0.85 × 100"
+     ],
+     "answer": "Accuracy = 85%."
+    },
+    {
+     "t": "warn",
+     "text": "High accuracy can be misleading when one class is rare. A model that always says \"not spam\" might be 95% accurate if only 5% of emails are spam, but it never catches any spam at all."
+    },
+    {
+     "t": "h",
+     "text": "The confusion matrix"
+    },
+    {
+     "t": "p",
+     "text": "A **[[confusion matrix]]** is a table that shows exactly which mistakes a model makes. Rows show the **actual** class; columns show the **predicted** class."
+    },
+    {
+     "t": "table",
+     "caption": "Confusion matrix for a 30-item test",
+     "head": [
+      "Actual \\ Predicted",
+      "Paper",
+      "Plastic",
+      "Nothing"
+     ],
+     "rows": [
+      [
+       "Paper",
+       "8",
+       "2",
+       "0"
+      ],
+      [
+       "Plastic",
+       "1",
+       "9",
+       "0"
+      ],
+      [
+       "Nothing",
+       "0",
+       "0",
+       "10"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "The diagonal (8, 9, 10) shows the 27 correct predictions, so accuracy is 27 ÷ 30 = 90%. The other cells show the model sometimes confuses paper and plastic, so that's where it needs more varied data."
+    },
+    {
+     "t": "act",
+     "title": "Test your sorter",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Gather 10 NEW test objects for each class from your Recycling sorter (lesson 2) that were not used in training.",
+      "Test each one and record the actual class and the predicted class.",
+      "Fill in a confusion matrix and calculate the accuracy.",
+      "Decide which classes get confused and what data you would add."
+     ],
+     "q": [
+      {
+       "q": "What was your model's accuracy? Show your working.",
+       "a": "E.g. 26 correct out of 30: 26 ÷ 30 × 100 = 86.7%."
+      },
+      {
+       "q": "Which two classes were most often confused, and what would you do about it?",
+       "a": "E.g. paper and plastic were confused when the objects were shiny; add more examples of glossy paper and matt plastic and retrain."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Why must test data be kept separate from training data?",
+     "o": [
+      "Because the tool deletes it",
+      "To see how the model does on examples it hasn't seen",
+      "To make training faster",
+      "It doesn't need to be"
+     ],
+     "a": 1,
+     "why": "Unseen data shows real performance."
+    },
+    {
+     "q": "A model gets 18 out of 20 test items right. What is its accuracy?",
+     "o": [
+      "95%",
+      "90%",
+      "18%",
+      "80%"
+     ],
+     "a": 1,
+     "why": "18 ÷ 20 × 100 = 90%."
+    },
+    {
+     "q": "In a confusion matrix, where are the correct predictions?",
+     "o": [
+      "In the top row",
+      "On the diagonal",
+      "In the bottom corner",
+      "In the last column"
+     ],
+     "a": 1,
+     "why": "Correct = actual matches predicted."
+    },
+    {
+     "q": "Why can accuracy be misleading?",
+     "o": [
+      "A model can score high by always guessing the most common class",
+      "It only works for images",
+      "Accuracy is always wrong",
+      "It is measured in kilograms"
+     ],
+     "a": 0,
+     "why": "Rare classes can hide failure."
+    }
+   ],
+   "practice": [
+    {
+     "q": "A model is tested on 50 images and gets 42 right. Calculate its accuracy.",
+     "m": 2,
+     "a": "42 ÷ 50 (1) × 100 = 84% (1)."
+    },
+    {
+     "q": "Explain why testing a model on its training data gives a misleading result.",
+     "m": 3,
+     "a": "The model has already seen/learned those exact examples (1), so it will score unrealistically high (1), which doesn't show how it performs on new, unseen data (1)."
+    }
+   ],
+   "terms": [
+    "Test data",
+    "Accuracy",
+    "Confusion matrix"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "When models go wrong",
+   "spec": "Explain common reasons machine learning models fail, including overfitting, too little data and edge cases",
+   "summary": "Models fail when their data doesn't match the real world: too few examples, not enough variety, unusual edge cases, or overfitting, where a model memorises its training data instead of learning general patterns.",
+   "starter": "A model trained to spot wolves got 100% on its test. But it was actually spotting snow. How could that happen?",
+   "sc": [
+    "I can explain overfitting",
+    "I can explain why models struggle with edge cases",
+    "I can suggest how to make a model more robust"
+   ],
+   "slides": [
+    {
+     "t": "The wolf and the snow",
+     "b": [
+      "A famous research example: a model learned to tell wolves from huskies",
+      "Most wolf photos had snow in the background",
+      "The model learned \"snow = wolf\", not what a wolf looks like",
+      "This is called shortcut learning"
+     ],
+     "n": "The example is from a 2016 research paper used to show why we need to explain AI decisions. Good discussion starter."
+    },
+    {
+     "t": "Overfitting",
+     "b": [
+      "Overfitting: the model memorises the training examples, including their quirks",
+      "It scores brilliantly on training data but badly on new data",
+      "Like learning answers by heart without understanding",
+      "Fixes: more varied data, simpler models, proper testing"
+     ]
+    },
+    {
+     "t": "Edge cases",
+     "b": [
+      "Edge cases: unusual situations rarely seen in training",
+      "A self-driving car's AI might not recognise a person in a dinosaur costume",
+      "Real life is full of edge cases",
+      "That's why safety-critical AI needs huge testing and human oversight"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Shortcut learning"
+    },
+    {
+     "t": "p",
+     "text": "Models find **any** pattern that helps them get the right answer, even one we didn't intend. In a well-known research example, a model seemed great at telling wolves from huskies. But most wolf photos had snow behind them, so it had learned \"snow means wolf\". This is called **[[shortcut learning]]**: the model uses an accidental clue instead of the real feature."
+    },
+    {
+     "t": "h",
+     "text": "Overfitting"
+    },
+    {
+     "t": "p",
+     "text": "A good model should **[[generalise]]**: work well on new examples, not just the ones it trained on. **[[overfitting]]** is when a model learns its training data too exactly, including random quirks, so it does brilliantly in training but badly on anything new."
+    },
+    {
+     "t": "table",
+     "caption": "Good fit or overfit?",
+     "head": [
+      "Model",
+      "Training accuracy",
+      "Test accuracy",
+      "Verdict"
+     ],
+     "rows": [
+      [
+       "A",
+       "92%",
+       "90%",
+       "Good: it generalises"
+      ],
+      [
+       "B",
+       "100%",
+       "61%",
+       "Overfitting: memorised the training data"
+      ],
+      [
+       "C",
+       "58%",
+       "55%",
+       "Underfitting: hasn't learned the patterns"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Edge cases"
+    },
+    {
+     "t": "p",
+     "text": "An **[[edge case]]** is an unusual situation that rarely appears in training data. A face-unlock system might struggle with a new pair of glasses; a self-driving car's AI might not recognise a cyclist carrying a large sheet of glass. Real life is full of edge cases, so AI used in safety-critical areas needs enormous testing and human oversight."
+    },
+    {
+     "t": "key",
+     "title": "Making models more robust",
+     "items": [
+      "Collect more data, with more variety",
+      "Check what the model is actually \"looking at\" (avoid shortcuts)",
+      "Always test on separate, realistic test data",
+      "Look for edge cases on purpose and add examples of them",
+      "Keep humans involved where mistakes are dangerous"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Break your model",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Take your trained Recycling sorter from lesson 2.",
+      "Try to make it fail: change the background, the lighting, the distance or use unusual objects.",
+      "Record each attempt and whether it fooled the model.",
+      "Explain each failure: shortcut learning, overfitting, too little data or an edge case?"
+     ],
+     "q": [
+      {
+       "q": "Describe your best \"fail\" and explain why it happened.",
+       "a": "E.g. \"Holding a plastic bottle in front of a white wall made it say Paper. All my paper examples were on a white background, so it learned 'white background = paper': shortcut learning.\""
+      },
+      {
+       "q": "Suggest two changes to make your model more robust.",
+       "a": "E.g. add examples of every class on several different backgrounds; add unusual objects (crisp packets, cardboard) and more varied lighting, then retest with new test data."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is overfitting?",
+     "o": [
+      "When a model is too small",
+      "When the computer overheats",
+      "When the data is too varied",
+      "When a model memorises its training data and does badly on new data"
+     ],
+     "a": 3,
+     "why": "Overfit models don't generalise."
+    },
+    {
+     "q": "Training accuracy 100%, test accuracy 60%. What is the likely problem?",
+     "o": [
+      "Too much test data",
+      "Perfect model",
+      "Overfitting",
+      "Underfitting"
+     ],
+     "a": 2,
+     "why": "A big gap between training and test suggests overfitting."
+    },
+    {
+     "q": "What is an edge case?",
+     "o": [
+      "The border of an image",
+      "The first example in a dataset",
+      "A type of computer case",
+      "An unusual situation rarely seen in training"
+     ],
+     "a": 3,
+     "why": "Edge cases are rare, unusual inputs."
+    },
+    {
+     "q": "The wolf model actually learned to spot snow. This is...",
+     "o": [
+      "overfitting to colours",
+      "shortcut learning",
+      "an edge case",
+      "accuracy"
+     ],
+     "a": 1,
+     "why": "It used an accidental clue."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by overfitting.",
+     "m": 2,
+     "a": "The model learns the training data too closely/memorises it including quirks (1), so it performs well on training data but poorly on new data (1)."
+    },
+    {
+     "q": "A model detects cracked phone screens. All the cracked examples were photographed on a wooden desk. Explain the problem and how to fix it.",
+     "m": 3,
+     "a": "The model may learn \"wooden desk = cracked\" (shortcut learning) (1) rather than the crack itself (1); fix by photographing cracked and uncracked screens on varied/the same backgrounds (1)."
+    }
+   ],
+   "terms": [
+    "Overfitting",
+    "Edge case",
+    "Generalise",
+    "Shortcut learning"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Fair data, fair AI",
+   "spec": "Explain how biased data leads to unfair machine learning and how to reduce bias",
+   "summary": "If training data under-represents some groups or repeats past unfairness, the model will be less accurate or unfair for those groups. Checking who is in the data, testing results for each group and involving diverse teams helps make AI fairer.",
+   "starter": "A soap dispenser works for some people's hands but not others. What might have gone wrong when it was designed and tested?",
+   "sc": [
+    "I can explain how bias gets into data",
+    "I can describe real examples of unfair AI",
+    "I can suggest ways to reduce bias"
+   ],
+   "slides": [
+    {
+     "t": "Unfair in, unfair out",
+     "b": [
+      "Models learn from data, so they learn the data's gaps and unfairness",
+      "Under-representation: some groups barely appear in the data",
+      "Historical bias: data from the past reflects past unfairness",
+      "Labelling bias: the people labelling data add their own assumptions"
+     ]
+    },
+    {
+     "t": "Real examples",
+     "b": [
+      "Research found some face-analysis systems were far less accurate for darker-skinned women than for lighter-skinned men",
+      "A company stopped using a CV-sorting AI that learned to prefer men, because past hires were mostly men",
+      "Speech recognition has often worked less well for some accents",
+      "Health tools trained mostly on one group may miss illness in others"
+     ],
+     "n": "The face-analysis example is the Gender Shades study (Buolamwini and Gebru, 2018). The CV tool was reported in 2018. Keep the discussion focused on how data causes the problem."
+    },
+    {
+     "t": "Making AI fairer",
+     "b": [
+      "Check who is in the data: is it representative of everyone who will use it?",
+      "Test accuracy separately for different groups",
+      "Involve diverse people in design and testing",
+      "Be open about limits; keep humans in charge of big decisions"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "How bias gets in"
+    },
+    {
+     "t": "p",
+     "text": "**[[bias|Bias]]** in AI means a system is less accurate or less fair for some people. Models learn patterns from data, so if the data is unbalanced or reflects past unfairness, the model will too."
+    },
+    {
+     "t": "table",
+     "caption": "Three ways bias enters data",
+     "head": [
+      "Type",
+      "What happens",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Under-representation",
+       "Some groups barely appear in the training data",
+       "A face-recognition dataset with few photos of older people"
+      ],
+      [
+       "Historical bias",
+       "Data reflects unfair decisions made in the past",
+       "A hiring model learns from years of mostly male hires"
+      ],
+      [
+       "Labelling bias",
+       "People labelling data add their own assumptions",
+       "Photos of women in kitchens labelled \"cooking\" more often than men in kitchens"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Real-world cases"
+    },
+    {
+     "t": "p",
+     "text": "Researchers testing commercial face-analysis systems found they were much less accurate for darker-skinned women than for lighter-skinned men, because the training data contained far more lighter-skinned faces. A large company stopped using an experimental CV-sorting AI after finding it marked down applications that mentioned women's activities, because it had learned from past hiring patterns. These cases show that unfair AI usually comes from **data**, not from anyone programming it to be unfair."
+    },
+    {
+     "t": "h",
+     "text": "Reducing bias"
+    },
+    {
+     "t": "p",
+     "text": "**[[representative data]]** includes a fair mix of all the people and situations the AI will meet in real use. **[[fairness]]** in AI means making sure a system doesn't treat people worse because of who they are."
+    },
+    {
+     "t": "key",
+     "title": "Steps towards fairer AI",
+     "items": [
+      "Audit the data: who and what is included, and who is missing?",
+      "Collect more examples from under-represented groups",
+      "Test accuracy separately for each group, not just overall",
+      "Include people from different backgrounds in the team",
+      "Explain how decisions are made and let people challenge them"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Dataset audit",
+     "mins": 20,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Your teacher gives you a summary of a (fictional) dataset for a school \"smart door\" that recognises pupils' faces.",
+      "Find who is under-represented in the data.",
+      "Predict which pupils the system might fail for and what problems this could cause.",
+      "Write three recommendations to make it fairer, or argue that it shouldn't be used at all."
+     ],
+     "q": [
+      {
+       "q": "Which groups were under-represented, and what could go wrong for them?",
+       "a": "E.g. pupils wearing glasses, hijabs or with darker skin had few examples, so the door might not open for them, making them late, embarrassed or treated differently."
+      },
+      {
+       "q": "Write your three recommendations (or your argument against the system).",
+       "a": "E.g. collect consented, balanced data; test accuracy for each group before use; always offer a non-AI alternative such as a staff member or card. Or argue face data of children is too sensitive to collect."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Where does bias in machine learning usually come from?",
+     "o": [
+      "The speed of the processor",
+      "The programmer's handwriting",
+      "The training data",
+      "The colour of the computer"
+     ],
+     "a": 2,
+     "why": "Models learn data's unfairness."
+    },
+    {
+     "q": "What is under-representation?",
+     "o": [
+      "When some groups barely appear in the data",
+      "When data is encrypted",
+      "When labels are correct",
+      "When data is too big"
+     ],
+     "a": 0,
+     "why": "Missing groups lead to poor accuracy for them."
+    },
+    {
+     "q": "Why did a CV-sorting AI learn to prefer men?",
+     "o": [
+      "It was programmed to",
+      "It learned from past hiring data that was mostly men",
+      "The computer was broken",
+      "Women didn't apply"
+     ],
+     "a": 1,
+     "why": "Historical bias came from the data."
+    },
+    {
+     "q": "Which step helps reduce bias?",
+     "o": [
+      "Using less data",
+      "Hiding how the AI works",
+      "Only testing overall accuracy",
+      "Testing accuracy separately for different groups"
+     ],
+     "a": 3,
+     "why": "Group-level testing reveals unfairness."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how a face-recognition system could end up less accurate for some groups of people.",
+     "m": 2,
+     "a": "Its training data had fewer examples of those groups/wasn't representative (1), so it learned their features less well and makes more mistakes for them (1)."
+    },
+    {
+     "q": "Describe three ways a team could make a machine learning system fairer.",
+     "m": 3,
+     "a": "Any three: representative/balanced data (1); audit who's missing (1); test accuracy per group (1); diverse team (1); human oversight/ability to challenge decisions (1); transparency (1)."
+    }
+   ],
+   "terms": [
+    "Bias",
+    "Representative data",
+    "Fairness"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "Design an ML project",
+   "spec": "Plan a machine learning solution to a real problem, including data, testing and ethics",
+   "summary": "Real ML projects start with a clear problem, then plan the data, how to train and test, how success will be measured, and the risks. Sometimes the best answer is that AI isn't needed.",
+   "starter": "Think of one annoying problem at school. Could an AI help? What would it need to learn from?",
+   "sc": [
+    "I can describe the stages of an ML project",
+    "I can plan the data and testing for a model",
+    "I can identify the ethical risks of my solution"
+   ],
+   "slides": [
+    {
+     "t": "The ML project cycle",
+     "b": [
+      "1 Define the problem: what exactly should the AI predict or classify?",
+      "2 Collect and label data, with permission",
+      "3 Train, then test on separate data",
+      "4 Evaluate, improve, and keep monitoring after launch"
+     ]
+    },
+    {
+     "t": "Ask the hard questions",
+     "b": [
+      "Is AI actually needed, or would a simple rule work?",
+      "Where will the data come from, and do we have permission?",
+      "What happens when it's wrong, and who is affected?",
+      "Who checks its decisions (human oversight)?"
+     ]
+    },
+    {
+     "t": "Success criteria",
+     "b": [
+      "Decide in advance: what accuracy is good enough?",
+      "Which mistakes are worse? (missing a problem vs a false alarm)",
+      "Test with real users in real conditions",
+      "Plan to retrain as things change"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "The ML project cycle"
+    },
+    {
+     "t": "p",
+     "text": "Real machine learning engineers follow a cycle:"
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "**Define the problem.** Write a clear **[[problem statement]]**: what should the model predict, for whom, and why?",
+      "**Collect and label data.** Make sure it's varied, representative and collected with permission.",
+      "**Train and test.** Use separate training and test data.",
+      "**Evaluate.** **[[evaluation]]** means judging how well the solution works against success criteria decided in advance.",
+      "**Deploy and monitor.** Keep checking it in real use and retrain when things change."
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Is AI the right tool?"
+    },
+    {
+     "t": "p",
+     "text": "Not every problem needs AI. If a simple rule works (\"send a reminder if homework is due tomorrow\"), a normal program is cheaper, clearer and easier to check. ML is useful when the patterns are too complicated to write as rules, such as recognising images or sounds."
+    },
+    {
+     "t": "h",
+     "text": "Thinking about risks"
+    },
+    {
+     "t": "key",
+     "title": "Ethics checklist for an ML project",
+     "items": [
+      "Privacy: whose data is used, and did they agree?",
+      "Fairness: does it work equally well for everyone?",
+      "Mistakes: what happens when it's wrong, and how bad is that?",
+      "Oversight: who checks its decisions and can overrule them?",
+      "Environment: is the computing cost worth it?"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[human oversight]]** means people stay in control: they can check, question and overrule the AI, especially for important decisions about people."
+    },
+    {
+     "t": "act",
+     "title": "Pitch an AI for our school",
+     "mins": 35,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Choose a school problem (e.g. sorting lost property, identifying birds for the eco-club, spotting litter in photos of the playground).",
+      "Complete a project plan: problem statement, classes, what data you'd collect and how, how you'd test it, your success criteria.",
+      "Complete the ethics checklist for your idea.",
+      "Pitch it to the class in 2 minutes. The class votes: build it, change it, or don't use AI."
+     ],
+     "q": [
+      {
+       "q": "Write your problem statement and the classes your model would predict.",
+       "a": "E.g. \"Help the eco-club identify garden birds from feeder camera photos so they can count them. Classes: robin, blue tit, blackbird, sparrow, no bird.\""
+      },
+      {
+       "q": "Describe your data, testing plan and success criteria.",
+       "a": "E.g. collect 200+ photos per class from the school feeder camera in different weather; split 80/20; success means at least 85% test accuracy and no class below 75%."
+      },
+      {
+       "q": "What is the biggest risk of your idea, and how would you reduce it?",
+       "a": "E.g. accidentally capturing pupils in photos: point the camera only at the feeder, delete images with people automatically, and keep a teacher in charge of the data."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is the first stage of an ML project?",
+     "o": [
+      "Deploy the app",
+      "Train the model",
+      "Define the problem clearly",
+      "Buy a faster computer"
+     ],
+     "a": 2,
+     "why": "Start with a clear problem statement."
+    },
+    {
+     "q": "When might a normal program be better than ML?",
+     "o": [
+      "When a simple rule solves the problem",
+      "Never",
+      "When recognising images",
+      "When patterns are too complex for rules"
+     ],
+     "a": 0,
+     "why": "Simple rules are cheaper and clearer."
+    },
+    {
+     "q": "What is human oversight?",
+     "o": [
+      "People checking and able to overrule the AI's decisions",
+      "A camera watching humans",
+      "A faster algorithm",
+      "A type of training data"
+     ],
+     "a": 0,
+     "why": "Humans stay in control."
+    },
+    {
+     "q": "Why decide success criteria before testing?",
+     "o": [
+      "It doesn't matter when",
+      "So testing is faster",
+      "Because the AI needs them",
+      "So you can judge the results fairly"
+     ],
+     "a": 3,
+     "why": "Deciding first keeps evaluation honest."
+    }
+   ],
+   "practice": [
+    {
+     "q": "A school wants AI to mark pupils' handwritten spelling tests. Identify three questions the school should ask before building it.",
+     "m": 3,
+     "a": "Any three: is AI needed or would another method work (1); what data/permission (1); how accurate must it be (1); what happens when it's wrong/how pupils can challenge it (1); is it fair for all handwriting styles (1); who checks it (1)."
+    },
+    {
+     "q": "Explain why an ML model should keep being monitored after it is put into use.",
+     "m": 2,
+     "a": "Real-world data can change over time/it may meet new situations (1), so its accuracy may drop and it may need retraining (1)."
+    }
+   ],
+   "terms": [
+    "Problem statement",
+    "Evaluation",
+    "Human oversight"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Machine learning",
+   "def": "A type of AI where computers learn patterns from data instead of following rules written by a programmer.",
+   "alt": "ML",
+   "page": "p01"
+  },
+  {
+   "term": "Supervised learning",
+   "def": "Machine learning that learns from examples labelled with the correct answers.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Feature",
+   "def": "A piece of information about each example in a dataset, such as weight, colour or pixel values.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Label",
+   "def": "The correct answer or category for an example, which the model learns to predict.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Dataset",
+   "def": "A collection of examples, usually organised as a table or a set of files.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Classifier",
+   "def": "A model that sorts inputs into categories.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Class",
+   "def": "One of the categories a classifier can choose between.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Training data",
+   "def": "The labelled examples a model learns from.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Test data",
+   "def": "Examples kept separate from training and used to check how well a model works on new data.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Accuracy",
+   "def": "The percentage of a model's predictions that are correct.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Confusion matrix",
+   "def": "A table comparing actual and predicted classes, showing which classes a model mixes up.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Overfitting",
+   "def": "When a model learns its training data too closely and performs badly on new data.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Edge case",
+   "def": "An unusual situation that rarely appears in the training data.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Generalise",
+   "def": "To work well on new examples, not just the ones used in training.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Shortcut learning",
+   "def": "When a model uses an accidental clue (like a background) instead of the real feature.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Bias",
+   "def": "When a system is less accurate or less fair for some people, often because of its data.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Representative data",
+   "def": "Data that includes a fair mix of all the people and situations a system will meet.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Fairness",
+   "def": "Making sure a system does not treat people worse because of who they are.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Problem statement",
+   "def": "A clear description of the problem a project will solve, and for whom.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Evaluation",
+   "def": "Judging how well a solution works against success criteria.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Human oversight",
+   "def": "People checking an AI's decisions and being able to overrule them.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}
