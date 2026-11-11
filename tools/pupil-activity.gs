@@ -39,7 +39,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 35;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 36;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
