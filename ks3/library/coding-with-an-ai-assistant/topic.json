@@ -1,0 +1,1307 @@
+{
+ "title": "Coding with an AI Assistant",
+ "summary": "How programmers use AI coding assistants today: asking for code, reading and testing what comes back, finding its mistakes and security holes, and staying in charge of your own program.",
+ "learn": [
+  "What an AI coding assistant is and how programmers use it",
+  "How to describe a program clearly so the AI writes what you need",
+  "How to read and explain code you didn't write",
+  "How to test AI code with normal, boundary and erroneous data",
+  "The security and licensing risks of AI-written code",
+  "Why programmers still need to understand code themselves"
+ ],
+ "temporary": false,
+ "intro": "Programmers now write code side by side with AI assistants. In this topic you learn to ask an assistant for code, read it line by line, test it properly, spot the bugs and security risks it can add, and decide when to trust it and when to write it yourself.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "Meet your AI pair programmer",
+   "spec": "Explain what an AI coding assistant is and how programmers use it",
+   "summary": "An AI coding assistant is a generative AI tool that suggests or writes code from a description or from the code you've already typed. Programmers use it like a partner who types fast but needs checking.",
+   "starter": "If a robot could write all your code, would you still need to learn programming? Why?",
+   "sc": [
+    "I can explain what an AI coding assistant does",
+    "I can describe three ways programmers use one",
+    "I can explain why the programmer is still responsible for the code"
+   ],
+   "slides": [
+    {
+     "t": "A partner that types fast",
+     "b": [
+      "AI coding assistants are generative AI tools trained on huge amounts of code",
+      "Examples: GitHub Copilot, Gemini Code Assist, ChatGPT and Claude",
+      "They can suggest the next line, write whole functions or explain code",
+      "They work inside code editors or in a chat window"
+     ],
+     "n": "Show a short demo in a school-approved tool if possible, e.g. asking for a C# program that asks for a name and says hello."
+    },
+    {
+     "t": "How programmers use them",
+     "b": [
+      "Code completion: finishing the line you've started",
+      "Writing first drafts of functions from a description",
+      "Explaining confusing code or error messages",
+      "Writing tests and comments, and changing code from one language to another"
+     ]
+    },
+    {
+     "t": "You're still the pilot",
+     "b": [
+      "The assistant predicts likely code, not guaranteed correct code",
+      "It can add bugs, security holes or code that doesn't fit your program",
+      "The programmer must read, test and understand every line before using it",
+      "If you hand it in, run it or publish it, it's your responsibility"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is an AI coding assistant?"
+    },
+    {
+     "t": "p",
+     "text": "An **[[AI coding assistant]]** is a generative AI tool that writes or suggests program code. It has been trained on huge amounts of code from public projects, so it has learned the patterns of languages like C#, Python and JavaScript. You describe what you want, or start typing, and it suggests code."
+    },
+    {
+     "t": "h",
+     "text": "Ways programmers use them"
+    },
+    {
+     "t": "table",
+     "caption": "What an assistant can do",
+     "head": [
+      "Use",
+      "What it means",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Code completion",
+       "Suggests the rest of a line or block as you type",
+       "You type \"for (int i = 0;\" and it suggests the rest of the loop"
+      ],
+      [
+       "Drafting",
+       "Writes a function from a description",
+       "\"Write a method that returns the larger of two numbers\""
+      ],
+      [
+       "Explaining",
+       "Explains code or an error message in plain English",
+       "\"What does this error mean: index out of range?\""
+      ],
+      [
+       "Testing",
+       "Suggests test data and test code",
+       "\"Give me test data for an age check from 0 to 120\""
+      ],
+      [
+       "Translating",
+       "Rewrites code in another language",
+       "Turns a Python program into C#"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Working with an assistant is a bit like **[[pair programming]]**, where two programmers share one computer: one types (the \"driver\") and the other reviews (the \"navigator\"). With AI, the assistant is often the driver, so **you** must be a very alert navigator."
+    },
+    {
+     "t": "warn",
+     "text": "The AI predicts code that looks likely, not code that is guaranteed to work. You are responsible for every line you use."
+    },
+    {
+     "t": "act",
+     "title": "What would you ask it?",
+     "mins": 10,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Look at the five programming jobs on the board (for example \"make a times-table program\").",
+      "For each one, decide which way of using the assistant fits best: completion, drafting, explaining, testing or translating.",
+      "Decide one job you would NOT want the AI to do for you while you're learning. Why not?"
+     ],
+     "q": [
+      {
+       "q": "Match each job to a way of using an assistant.",
+       "a": "1 Times-table program: drafting. 2 \"What does NullReferenceException mean?\": explaining. 3 Finishing a loop you've started: code completion. 4 \"Give me test data for a password checker\": testing. 5 Python game into C#: translating."
+      },
+      {
+       "q": "Which job would you not want the AI to do while you're learning, and why?",
+       "a": "Any reasoned answer, e.g. \"Writing my first loops, because I need to practise them myself to understand how they work and pass my exams.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is an AI coding assistant?",
+     "o": [
+      "A keyboard shortcut",
+      "A generative AI tool that writes or suggests code",
+      "A compiler that runs code faster",
+      "A person who fixes printers"
+     ],
+     "a": 1,
+     "why": "It's generative AI trained on code."
+    },
+    {
+     "q": "What is code completion?",
+     "o": [
+      "Finishing a program by deleting it",
+      "Running every test",
+      "The assistant suggesting the rest of a line as you type",
+      "Printing your code"
+     ],
+     "a": 2,
+     "why": "It completes what you've started typing."
+    },
+    {
+     "q": "In pair programming, what does the \"navigator\" do?",
+     "o": [
+      "Reviews the code and spots problems",
+      "Writes the comments only",
+      "Types all the code",
+      "Turns the computer on"
+     ],
+     "a": 0,
+     "why": "The navigator checks and guides."
+    },
+    {
+     "q": "Who is responsible for AI-written code you use?",
+     "o": [
+      "Nobody",
+      "The computer",
+      "The AI company",
+      "You, the programmer"
+     ],
+     "a": 3,
+     "why": "You must check and own what you use."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Give two ways a programmer could use an AI coding assistant.",
+     "m": 2,
+     "a": "Any two: suggesting the next line/completion (1); drafting a function from a description (1); explaining code/errors (1); writing tests (1); translating between languages (1)."
+    },
+    {
+     "q": "Explain why a programmer must check code written by an AI assistant.",
+     "m": 2,
+     "a": "It predicts likely code which may not be correct (1), so it could contain bugs/security problems/not fit the program (1)."
+    }
+   ],
+   "terms": [
+    "AI coding assistant",
+    "Pair programming",
+    "Code completion"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "Describe it well",
+   "spec": "Write clear program descriptions so an AI assistant produces useful code",
+   "summary": "An assistant can only build what you describe. Good requests state the language, the inputs, the processing, the outputs and any rules, often as a short specification or user story, and include test examples.",
+   "starter": "Write instructions for making a jam sandwich for someone who has never seen bread. What could go wrong?",
+   "sc": [
+    "I can describe a program using inputs, processing and outputs",
+    "I can include rules and example data in a request",
+    "I can improve a request when the code isn't right"
+   ],
+   "slides": [
+    {
+     "t": "Garbage in, garbage out",
+     "b": [
+      "\"Make a game\" could be anything, so the AI guesses",
+      "A good request is like a mini specification",
+      "Say the language, inputs, processing, outputs and rules",
+      "Give example data: \"if the input is 7, the output should be 49\""
+     ]
+    },
+    {
+     "t": "Input, process, output",
+     "b": [
+      "Input: what the user types or the program reads",
+      "Process: what the program does with it",
+      "Output: what it shows or saves",
+      "Rules: limits, error messages, things it must not do"
+     ]
+    },
+    {
+     "t": "Break it into steps",
+     "b": [
+      "Ask for one small piece at a time, not the whole program at once",
+      "Test each piece before asking for the next",
+      "Small pieces are easier to read, test and fix",
+      "This is decomposition, a key part of computational thinking"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Describe, don't just ask"
+    },
+    {
+     "t": "p",
+     "text": "An AI assistant can't read your mind. \"Make a quiz\" gives it almost nothing to go on. A good request is a short **[[specification]]**: a clear description of what the program must do."
+    },
+    {
+     "t": "key",
+     "title": "A good coding request includes",
+     "items": [
+      "The language: \"in C#\"",
+      "The input: what the user enters",
+      "The processing: what happens to it",
+      "The output: what the program displays",
+      "Rules and limits: valid ranges, error messages, what not to do",
+      "An example: \"input 4 should output 16\""
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Improving a request",
+     "context": "First try: \"Write a program about ages.\"",
+     "steps": [
+      "Add the language and input: \"In C#, ask the user to enter their age as a whole number.\"",
+      "Add the processing and output: \"If they are 13 or over, print 'You can join the club', otherwise print 'Sorry, you are too young'.\"",
+      "Add rules and an example: \"If they type something that isn't a whole number, print 'Please enter a number' and ask again. Example: 12 gives 'Sorry, you are too young'.\""
+     ],
+     "answer": "The final request tells the AI exactly what to build, so the code is much more likely to be right first time and is easier to test."
+    },
+    {
+     "t": "h",
+     "text": "Small steps"
+    },
+    {
+     "t": "p",
+     "text": "Professional programmers break big problems into small parts (**decomposition**) and build one part at a time. Do the same with an AI assistant: ask for one method, test it, then ask for the next. If something is wrong, you'll know exactly which part caused it."
+    },
+    {
+     "t": "tip",
+     "text": "When the code isn't right, don't just say \"it's wrong\". Say what happened and what should have happened: \"When I enter -5 it says I can join. Negative ages should show 'Please enter a valid age'.\""
+    },
+    {
+     "t": "act",
+     "title": "Write the spec",
+     "mins": 20,
+     "who": "Individual",
+     "after": 3,
+     "steps": [
+      "Choose one program: a tip calculator, a password-length checker, or a times-table tester.",
+      "Write a request that includes language, input, processing, output, rules and one example.",
+      "Swap with a partner: could they build the program from your request alone? Improve anything they had to guess."
+     ],
+     "q": [
+      {
+       "q": "Write your final request.",
+       "a": "Example (tip calculator): \"In C#, ask the user for the bill amount (a decimal) and the tip percentage (a whole number from 0 to 30). Calculate the tip and the total and print both to 2 decimal places. If either input is invalid or out of range, print an error and ask again. Example: bill 20.00 and tip 10 gives tip £2.00, total £22.00.\""
+      },
+      {
+       "q": "What did your partner have to guess, and how did you fix it?",
+       "a": "Any sensible answer, e.g. \"They didn't know if the tip could be over 100%, so I added the range 0 to 30.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which request is most useful for an AI coding assistant?",
+     "o": [
+      "Make a maths thing",
+      "In C#, ask for two numbers and print their total; show an error if either isn't a number",
+      "Code please",
+      "Do numbers"
+     ],
+     "a": 1,
+     "why": "It gives the language, inputs, output and a rule."
+    },
+    {
+     "q": "In \"input, process, output\", what is the process?",
+     "o": [
+      "What the program does with the input",
+      "What the user types",
+      "The name of the program",
+      "What appears on screen"
+     ],
+     "a": 0,
+     "why": "Processing turns input into output."
+    },
+    {
+     "q": "Why should you ask an AI for one small part of a program at a time?",
+     "o": [
+      "Big programs are illegal",
+      "It's faster to type",
+      "Small parts are easier to read, test and fix",
+      "The AI can only type 10 lines"
+     ],
+     "a": 2,
+     "why": "Decomposition makes problems manageable."
+    },
+    {
+     "q": "The AI's code accepts an age of -5. What is the best follow-up?",
+     "o": [
+      "Start again in another language",
+      "Delete the program",
+      "Say \"it's wrong\"",
+      "Explain what happened and what should happen instead"
+     ],
+     "a": 3,
+     "why": "Specific feedback gets a specific fix."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write a clear request for a program that converts a temperature from Celsius to Fahrenheit.",
+     "m": 3,
+     "a": "Mentions language (1); input/what the user enters and output/what is displayed (1); a rule or example, e.g. F = C × 9 ÷ 5 + 32 or \"100 should give 212\" or validation (1)."
+    },
+    {
+     "q": "Explain why including example data in a request helps.",
+     "m": 2,
+     "a": "It shows the AI exactly what result is expected (1) and gives you test data to check the code works (1)."
+    }
+   ],
+   "terms": [
+    "Specification",
+    "Input",
+    "Output"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Read before you run",
+   "spec": "Read and explain code written by an AI assistant line by line",
+   "summary": "You should never run code you can't explain. Reading code means tracing what each line does, predicting the output and spotting anything unexpected, such as extra features you didn't ask for.",
+   "starter": "Here is one line of C#: Console.WriteLine(5 + 3 * 2); What do you think it prints?",
+   "sc": [
+    "I can explain what each line of a short program does",
+    "I can trace a program to predict its output",
+    "I can spot code that doesn't match what I asked for"
+   ],
+   "slides": [
+    {
+     "t": "Never run code you can't explain",
+     "b": [
+      "Reading code is a key programming skill, more so with AI",
+      "Go line by line: what does this line do?",
+      "Predict the output before you run it",
+      "If you can't explain a line, ask the AI to explain it, then check"
+     ],
+     "n": "Starter answer: 11, because multiplication happens before addition."
+    },
+    {
+     "t": "Trace it",
+     "b": [
+      "A trace table records the value of each variable after each line",
+      "It helps you predict exactly what a program will do",
+      "It catches logic errors that look fine at first glance",
+      "Professional testers trace tricky code by hand"
+     ]
+    },
+    {
+     "t": "Did it do what you asked?",
+     "b": [
+      "AI sometimes adds extra features or changes your rules",
+      "It may use methods you haven't learned yet",
+      "Comments and good names make code readable",
+      "Ask for simpler code if you can't follow it"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Read it first"
+    },
+    {
+     "t": "p",
+     "text": "When an AI writes code for you, the most important step is to **read it** before running it. Professional programmers spend more time reading code than writing it. For each line ask: what does it do, and why is it there? If you can't explain a line, that's a sign to slow down."
+    },
+    {
+     "t": "h",
+     "text": "Tracing"
+    },
+    {
+     "t": "p",
+     "text": "A **[[trace table]]** tracks the value of every variable as the program runs, line by line. It lets you predict the output and find mistakes."
+    },
+    {
+     "t": "table",
+     "caption": "Tracing a short loop: int total = 0; for (int i = 1; i <= 3; i++) { total = total + i; }",
+     "head": [
+      "Step",
+      "i",
+      "total"
+     ],
+     "rows": [
+      [
+       "Start",
+       "-",
+       "0"
+      ],
+      [
+       "Loop 1",
+       "1",
+       "1"
+      ],
+      [
+       "Loop 2",
+       "2",
+       "3"
+      ],
+      [
+       "Loop 3",
+       "3",
+       "6"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "After the loop, total is **6**. If the AI's program printed something else, you'd know a line was wrong."
+    },
+    {
+     "t": "h",
+     "text": "Readable code"
+    },
+    {
+     "t": "p",
+     "text": "Good code is easy for people to read (**[[readability]]**). Look for:"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "meaningful variable names (`totalScore`, not `x`)",
+      "**[[comment|comments]]** that explain why, written after `//` in C#",
+      "simple structure, with no unnecessary cleverness"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "If AI code uses features you haven't learned, ask it: \"Rewrite this using only if statements and for loops, with a comment on every line.\" Then check that the simpler version still does the same thing."
+    },
+    {
+     "t": "note",
+     "text": "AI assistants sometimes add things you didn't ask for, like saving to a file or connecting to the internet. Remove anything you don't need: extra code means extra places for bugs."
+    },
+    {
+     "t": "act",
+     "title": "Explain the AI's code",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Your teacher gives you a 10-line C# program \"written by an AI\" for a guessing game.",
+      "Write a comment for every line explaining what it does.",
+      "Complete the trace table for the inputs your teacher gives you, then run the program to check your prediction.",
+      "Find the one line that does something the request did NOT ask for."
+     ],
+     "q": [
+      {
+       "q": "What did the program output, and did it match your prediction?",
+       "a": "Answers depend on the program; a good answer states the predicted output, the actual output and whether they matched."
+      },
+      {
+       "q": "Which line did something that wasn't asked for, and what should you do about it?",
+       "a": "For example, a line that prints the secret number at the start \"for testing\". It should be removed because it gives away the answer and wasn't in the request."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What should you do before running AI-written code?",
+     "o": [
+      "Share it with the class",
+      "Read it and make sure you can explain it",
+      "Run it straight away",
+      "Delete the comments"
+     ],
+     "a": 1,
+     "why": "Understand it before you trust it."
+    },
+    {
+     "q": "What is a trace table used for?",
+     "o": [
+      "Counting how many lines there are",
+      "Drawing the screen layout",
+      "Storing passwords",
+      "Recording variable values line by line to predict output"
+     ],
+     "a": 3,
+     "why": "Tracing shows how values change."
+    },
+    {
+     "q": "What does Console.WriteLine(5 + 3 * 2) print?",
+     "o": [
+      "532",
+      "11",
+      "10",
+      "16"
+     ],
+     "a": 1,
+     "why": "Multiplication is done before addition: 3 × 2 = 6, then 5 + 6 = 11."
+    },
+    {
+     "q": "Which variable name is most readable?",
+     "o": [
+      "ts",
+      "x",
+      "a1",
+      "totalScore"
+     ],
+     "a": 3,
+     "why": "Meaningful names make code easier to read."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why you should be able to explain every line of AI-written code before you use it.",
+     "m": 2,
+     "a": "So you know it does what you want/has no hidden errors (1) and you can fix or change it later/you're responsible for it (1)."
+    },
+    {
+     "q": "Complete a trace for: int x = 2; for (int i = 0; i < 3; i++) { x = x * 2; } What is x at the end?",
+     "m": 3,
+     "a": "i=0 x=4 (1); i=1 x=8 (1); i=2 x=16, so x is 16 at the end (1)."
+    }
+   ],
+   "terms": [
+    "Trace table",
+    "Comment",
+    "Readability"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "Test it like a pro",
+   "spec": "Test AI-written code with normal, boundary and erroneous data and fix the errors you find",
+   "summary": "AI code often works for the obvious case but breaks at the edges. A test plan using normal, boundary and erroneous data finds these problems, and you can use the AI to help fix them, then test again.",
+   "starter": "A shop's AI-written program gives a discount to customers aged \"over 65\". Which ages would you test it with? Why?",
+   "sc": [
+    "I can choose normal, boundary and erroneous test data",
+    "I can write a simple test plan",
+    "I can fix a bug and retest"
+   ],
+   "slides": [
+    {
+     "t": "It works... sometimes",
+     "b": [
+      "AI code usually handles the obvious case",
+      "Bugs hide at the edges: 0, the maximum, empty input, words instead of numbers",
+      "Testing finds them before users do",
+      "A test plan lists what you'll test and what should happen"
+     ]
+    },
+    {
+     "t": "Three kinds of test data",
+     "b": [
+      "Normal: typical, valid data, e.g. age 30",
+      "Boundary: right at the edge of what's allowed, e.g. 65 and 66 for \"over 65\"",
+      "Erroneous: data that should be rejected, e.g. \"sixty\" or -4",
+      "Always write the expected result before you run the test"
+     ]
+    },
+    {
+     "t": "Fix, then test again",
+     "b": [
+      "Describe the failed test to the AI: input, expected, actual",
+      "Read its fix: does it change only what's needed?",
+      "Run all your tests again, not just the failed one",
+      "Re-testing everything is called regression testing"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Why AI code needs testing"
+    },
+    {
+     "t": "p",
+     "text": "AI assistants are good at the \"happy path\", where everything goes as expected. They often miss **edge cases**: the smallest and largest values, empty input, or text where a number should be. Testing is how you find out."
+    },
+    {
+     "t": "h",
+     "text": "A test plan"
+    },
+    {
+     "t": "p",
+     "text": "A **[[test plan]]** lists each test, the data you'll use, the type of data and the expected result. Writing the expected result **before** you run the test stops you fooling yourself."
+    },
+    {
+     "t": "table",
+     "caption": "Test plan for \"customers over 65 get a discount\"",
+     "head": [
+      "Test",
+      "Data",
+      "Type",
+      "Expected result"
+     ],
+     "rows": [
+      [
+       "1",
+       "30",
+       "Normal",
+       "No discount"
+      ],
+      [
+       "2",
+       "80",
+       "Normal",
+       "Discount"
+      ],
+      [
+       "3",
+       "65",
+       "Boundary",
+       "No discount (\"over 65\" means 66+)"
+      ],
+      [
+       "4",
+       "66",
+       "Boundary",
+       "Discount"
+      ],
+      [
+       "5",
+       "-4",
+       "Erroneous",
+       "Error message"
+      ],
+      [
+       "6",
+       "\"sixty\"",
+       "Erroneous",
+       "Error message"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[normal data]]** is typical, valid data. **[[boundary data]]** sits right on the edge of what's allowed. **[[erroneous data]]** is invalid and should be rejected with a helpful message."
+    },
+    {
+     "t": "example",
+     "title": "A boundary bug",
+     "context": "The AI wrote: if (age >= 65) { Console.WriteLine(\"Discount!\"); }",
+     "steps": [
+      "Run test 3 (age 65). Expected: no discount. Actual: \"Discount!\"",
+      "The rule says over 65, but >= means \"65 or more\". The boundary is wrong.",
+      "Fix: change >= to >. Then run all six tests again."
+     ],
+     "answer": "Boundary tests caught an off-by-one error that normal data (30 and 80) would never find."
+    },
+    {
+     "t": "tip",
+     "text": "Ask the AI to help write tests too: \"Give me boundary and erroneous test data for this method\". Then check its suggestions make sense."
+    },
+    {
+     "t": "act",
+     "title": "Break the program",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Your teacher gives you an AI-written program that checks whether a password is between 8 and 20 characters.",
+      "Write a test plan with at least two normal, three boundary and two erroneous tests, with expected results.",
+      "Run your tests and record the actual results. Mark any that fail.",
+      "Fix one bug (with or without AI help) and run all the tests again."
+     ],
+     "q": [
+      {
+       "q": "List your boundary tests and their expected results.",
+       "a": "7 characters: rejected; 8 characters: accepted; 20 characters: accepted; 21 characters: rejected."
+      },
+      {
+       "q": "Describe a bug you found and how you fixed it.",
+       "a": "Example: \"A 20-character password was rejected because the code used < 20 instead of <= 20. I changed it to <= 20 and all tests passed.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is boundary data for \"ages 11 to 18 allowed\"?",
+     "o": [
+      "-3",
+      "\"eleven\"",
+      "15",
+      "18"
+     ],
+     "a": 3,
+     "why": "18 is right on the edge of the allowed range."
+    },
+    {
+     "q": "Which is erroneous data for a program that needs a whole number?",
+     "o": [
+      "0",
+      "100",
+      "\"ten\"",
+      "10"
+     ],
+     "a": 2,
+     "why": "Text should be rejected when a number is expected."
+    },
+    {
+     "q": "Why write the expected result before running a test?",
+     "o": [
+      "It is the law",
+      "So you can't fool yourself about whether it passed",
+      "It makes the program faster",
+      "The computer needs it"
+     ],
+     "a": 1,
+     "why": "Deciding first keeps testing honest."
+    },
+    {
+     "q": "After fixing a bug, what should you do?",
+     "o": [
+      "Run all the tests again",
+      "Stop testing",
+      "Delete the test plan",
+      "Only run the test that failed"
+     ],
+     "a": 0,
+     "why": "Fixes can break other things, so retest everything."
+    }
+   ],
+   "practice": [
+    {
+     "q": "A program accepts scores from 0 to 100. Give one example each of normal, boundary and erroneous test data.",
+     "m": 3,
+     "a": "Normal: any value 1-99, e.g. 50 (1); boundary: 0 or 100 (or -1/101) (1); erroneous: e.g. \"fifty\", -20 or 150 (1)."
+    },
+    {
+     "q": "Explain why AI-written code needs boundary testing.",
+     "m": 2,
+     "a": "AI often handles typical cases but makes mistakes at the edges, e.g. > vs >= (1); boundary tests find these off-by-one errors (1)."
+    }
+   ],
+   "terms": [
+    "Test plan",
+    "Boundary data",
+    "Erroneous data",
+    "Normal data"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Security and ownership",
+   "spec": "Describe the security, privacy and licensing risks of AI-generated code",
+   "summary": "AI code can include security weaknesses, outdated methods, made-up libraries and code copied from projects with licence conditions. Programmers must review for these risks and never paste secrets into an AI tool.",
+   "starter": "Would you use a door lock that a stranger built for free in ten seconds? What would you check first?",
+   "sc": [
+    "I can describe security weaknesses AI code might contain",
+    "I can explain why secrets must never go into prompts",
+    "I can explain what a software licence is"
+   ],
+   "slides": [
+    {
+     "t": "Hidden holes",
+     "b": [
+      "AI learned from lots of public code, including insecure code",
+      "It can suggest code with vulnerabilities: weaknesses attackers can use",
+      "Common problem: trusting user input without checking it",
+      "It can also invent packages or methods that don't exist"
+     ],
+     "n": "Mention \"slopsquatting\": attackers publish fake packages with names AIs tend to invent. Keep it simple."
+    },
+    {
+     "t": "Keep secrets secret",
+     "b": [
+      "Never paste passwords, API keys or personal data into an AI tool",
+      "Never put secrets directly into code you share",
+      "Assume anything you type into an online tool could be stored",
+      "Companies have leaked secrets this way"
+     ]
+    },
+    {
+     "t": "Who owns the code?",
+     "b": [
+      "Open-source code comes with a software licence: rules for using it",
+      "Some licences require you to credit the author or share your code too",
+      "AI might reproduce licensed code without telling you",
+      "Check, credit and follow your school's and employer's rules"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Security risks"
+    },
+    {
+     "t": "p",
+     "text": "A **[[vulnerability]]** is a weakness that an attacker could use to break into or damage a system. AI assistants learned from millions of public programs, including badly written and insecure ones, so they can reproduce the same mistakes."
+    },
+    {
+     "t": "table",
+     "caption": "Risks to look for in AI code",
+     "head": [
+      "Risk",
+      "What it looks like",
+      "What to do"
+     ],
+     "rows": [
+      [
+       "No input validation",
+       "The program trusts whatever the user types",
+       "Check input is the right type, length and range"
+      ],
+      [
+       "Hard-coded secrets",
+       "A password or key written straight into the code",
+       "Keep secrets out of code; use secure settings"
+      ],
+      [
+       "Made-up packages",
+       "Uses a library name that doesn't exist (or a fake one)",
+       "Check every package on its official site before installing"
+      ],
+      [
+       "Outdated methods",
+       "Uses old functions that are no longer safe",
+       "Check current documentation"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[input validation]]** means checking that input is sensible before using it. It stops crashes and blocks many attacks."
+    },
+    {
+     "t": "h",
+     "text": "Never share secrets"
+    },
+    {
+     "t": "p",
+     "text": "An **[[API key]]** is like a password that lets a program use an online service. Never paste API keys, passwords or personal data into an AI tool or publish them in code. Anything you type into an online AI tool could be stored, and leaked keys can be used by criminals within minutes."
+    },
+    {
+     "t": "h",
+     "text": "Licences and ownership"
+    },
+    {
+     "t": "p",
+     "text": "Lots of code online is **open source**: anyone can read it. But it usually comes with a **[[software licence]]**, which sets rules: some let you do almost anything, others require you to credit the author or share your own code under the same licence. An AI might reproduce licensed code without saying where it came from, so companies often check AI code before using it."
+    },
+    {
+     "t": "warn",
+     "text": "Installing a package an AI recommends without checking it exists is risky: attackers create fake packages with names AI tools commonly invent."
+    },
+    {
+     "t": "act",
+     "title": "Security review",
+     "mins": 20,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Your teacher gives you three short AI-written code snippets.",
+      "Find the security problem in each one using the table of risks.",
+      "Write a safer version or describe the fix."
+     ],
+     "q": [
+      {
+       "q": "Snippet A stores string password = \"Admin123\"; in the code. What's wrong and how would you fix it?",
+       "a": "It's a hard-coded secret: anyone who reads the code knows the password. Store it securely outside the code (or ask the user to enter it) and never share it."
+      },
+      {
+       "q": "Snippet B reads an age and uses it with no checks. What could go wrong?",
+       "a": "Text or negative numbers could crash the program or give wrong results; add input validation to check it's a whole number in a sensible range."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a vulnerability?",
+     "o": [
+      "A type of keyboard",
+      "A fast program",
+      "A weakness an attacker could use",
+      "A comment in code"
+     ],
+     "a": 2,
+     "why": "Vulnerabilities are security weaknesses."
+    },
+    {
+     "q": "What is input validation?",
+     "o": [
+      "Checking input is sensible before using it",
+      "Printing the input",
+      "Deleting all input",
+      "Typing input faster"
+     ],
+     "a": 0,
+     "why": "Validation checks type, range and length."
+    },
+    {
+     "q": "What should you never paste into an AI tool?",
+     "o": [
+      "A description of your program",
+      "Example test data",
+      "An API key or password",
+      "An error message from your own code"
+     ],
+     "a": 2,
+     "why": "Secrets could be stored or leaked."
+    },
+    {
+     "q": "What is a software licence?",
+     "o": [
+      "A driving licence for programmers",
+      "Rules about how code can be used and shared",
+      "A computer password",
+      "A type of virus"
+     ],
+     "a": 1,
+     "why": "Licences set the conditions for using code."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why AI-generated code might contain security weaknesses.",
+     "m": 2,
+     "a": "It learned from public code that includes insecure examples (1), so it can repeat mistakes such as not validating input or hard-coding secrets (1)."
+    },
+    {
+     "q": "Give two things a programmer should check before using a package an AI suggested.",
+     "m": 2,
+     "a": "Any two: that it really exists on the official site (1); it's the genuine package, not a fake/typo name (1); it's maintained/up to date (1); its licence allows your use (1)."
+    }
+   ],
+   "terms": [
+    "Vulnerability",
+    "Input validation",
+    "Software licence",
+    "API key"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "Who's in charge?",
+   "spec": "Evaluate when to use an AI coding assistant and how it is changing programming careers",
+   "summary": "AI assistants make programmers faster at some tasks but can slow learners down if they skip understanding. Knowing when to use them, and keeping core skills, is what makes a good programmer in the age of AI.",
+   "starter": "Is it better to learn to ride a bike with stabilisers forever, or to learn to balance? What has this got to do with AI and coding?",
+   "sc": [
+    "I can give benefits and drawbacks of AI coding assistants",
+    "I can decide when using an assistant helps my learning",
+    "I can describe how programming jobs are changing"
+   ],
+   "slides": [
+    {
+     "t": "Benefits",
+     "b": [
+      "Faster first drafts and less typing of repetitive code",
+      "Explanations on demand, any time",
+      "Helps beginners get unstuck and see examples",
+      "Helps experts try ideas quickly and write tests"
+     ]
+    },
+    {
+     "t": "Drawbacks",
+     "b": [
+      "Can be wrong, insecure or out of date",
+      "Over-reliance: you never build your own skills",
+      "Harder to fix code you don't understand",
+      "Exams test YOUR understanding, without AI"
+     ]
+    },
+    {
+     "t": "The future programmer",
+     "b": [
+      "More time designing, reviewing, testing and explaining",
+      "Less time typing routine code",
+      "Understanding code matters more, not less",
+      "New roles: AI-assisted developer, AI code reviewer, AI safety engineer"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Benefits and drawbacks"
+    },
+    {
+     "t": "table",
+     "caption": "Weighing it up",
+     "head": [
+      "Benefits",
+      "Drawbacks"
+     ],
+     "rows": [
+      [
+       "Saves time on repetitive code",
+       "May contain bugs or security holes"
+      ],
+      [
+       "Explains errors and code clearly",
+       "Can invent methods or packages"
+      ],
+      [
+       "Suggests tests and edge cases",
+       "Learners may not build their own skills"
+      ],
+      [
+       "Helps you try ideas quickly",
+       "Code may not fit your program's style or needs"
+      ],
+      [
+       "Can boost **[[productivity]]**: getting more done in the same time",
+       "You still need to understand everything for exams"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Using it to learn, not instead of learning"
+    },
+    {
+     "t": "p",
+     "text": "**[[over-reliance]]** means depending on a tool so much that you can't manage without it. If an assistant writes all your code, you won't learn to program, and you'll be stuck in an exam or when the AI is wrong. Use it like a tutor: ask it to explain, give hints or check your code, and write the important parts yourself."
+    },
+    {
+     "t": "key",
+     "title": "A good learner's rules",
+     "items": [
+      "Try it yourself first",
+      "Ask for a hint or an explanation, not the whole answer",
+      "Read, trace and test everything the AI writes",
+      "Be able to explain every line you hand in",
+      "Follow your teacher's and exam board's rules"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "How jobs are changing"
+    },
+    {
+     "t": "p",
+     "text": "A **[[software engineer]]** designs, builds and tests software. With AI assistants, engineers spend less time typing routine code and more time on understanding problems, designing systems, reviewing AI code, testing and working with users. The skills you're learning (decomposition, tracing, testing and clear communication) are exactly what employers want."
+    },
+    {
+     "t": "act",
+     "title": "Use it or lose it?",
+     "mins": 15,
+     "who": "Groups of 4",
+     "after": 2,
+     "steps": [
+      "Read the six scenario cards (e.g. \"A Year 10 pupil uses AI to write their whole first program\").",
+      "For each, decide: good use, risky use or bad use of an AI assistant.",
+      "Write a personal \"AI coding agreement\" with three rules you'll follow."
+     ],
+     "q": [
+      {
+       "q": "Write your three rules.",
+       "a": "Example: 1. I'll try every task myself for 10 minutes before asking AI. 2. I'll ask for hints and explanations, not full answers. 3. I'll only hand in code I can explain line by line, and I'll say when I used AI."
+      },
+      {
+       "q": "Choose one scenario you thought was risky. Explain why.",
+       "a": "A good answer explains the risk to learning, accuracy or security, e.g. \"Using AI for a GCSE controlled assessment without permission could count as malpractice and the pupil wouldn't learn the skills.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is a benefit of AI coding assistants?",
+     "o": [
+      "They write exam answers for you",
+      "They are never wrong",
+      "They can save time on repetitive code",
+      "They remove the need to test"
+     ],
+     "a": 2,
+     "why": "Speed on routine code is a real benefit."
+    },
+    {
+     "q": "What is over-reliance?",
+     "o": [
+      "Using a tool once",
+      "Checking your code twice",
+      "Writing too many comments",
+      "Depending on a tool so much you can't manage without it"
+     ],
+     "a": 3,
+     "why": "Over-reliance stops you building skills."
+    },
+    {
+     "q": "Which is the best way to learn programming with an AI assistant?",
+     "o": [
+      "Try first, then ask for hints and explanations",
+      "Copy code without reading it",
+      "Ask it to write everything",
+      "Never write code yourself"
+     ],
+     "a": 0,
+     "why": "Use it as a tutor, not a replacement."
+    },
+    {
+     "q": "How are programming jobs changing because of AI?",
+     "o": [
+      "More time designing, reviewing and testing; less typing routine code",
+      "Programmers are no longer needed",
+      "Only typing speed matters now",
+      "Testing is no longer needed"
+     ],
+     "a": 0,
+     "why": "Judgement and review are becoming more important."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Evaluate the use of AI coding assistants by pupils learning to program.",
+     "m": 4,
+     "a": "Benefits, e.g. explanations, getting unstuck, examples (1-2); drawbacks, e.g. over-reliance, errors, exams without AI, academic honesty (1-2); balanced conclusion (1). Max 4."
+    },
+    {
+     "q": "Give two skills that are still important for programmers who use AI assistants.",
+     "m": 2,
+     "a": "Any two: reading/understanding code (1); testing (1); decomposition/designing (1); spotting security problems (1); communicating with users/teams (1)."
+    }
+   ],
+   "terms": [
+    "Productivity",
+    "Over-reliance",
+    "Software engineer"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "AI coding assistant",
+   "def": "A generative AI tool that writes, suggests or explains program code.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Pair programming",
+   "def": "Two programmers working together on one piece of code: one writes (the driver) while the other reviews (the navigator).",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Code completion",
+   "def": "When an editor or AI suggests the rest of a line or block of code as you type.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Specification",
+   "def": "A clear description of exactly what a program must do.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Input",
+   "def": "Data that goes into a program, for example what the user types.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Output",
+   "def": "Data or results that come out of a program, for example what it shows on screen.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Trace table",
+   "def": "A table that records the value of each variable as a program runs, line by line.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Comment",
+   "def": "A note in code for people to read, which the computer ignores (in C# it starts with //).",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Readability",
+   "def": "How easy code is for people to read and understand.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Test plan",
+   "def": "A list of tests, the data to use and the expected result of each.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Normal data",
+   "def": "Typical, valid data that a program should accept.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Boundary data",
+   "def": "Data at the very edge of what is allowed, used to test the limits of a program.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Erroneous data",
+   "def": "Invalid data that a program should reject with a helpful message.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Vulnerability",
+   "def": "A weakness in a system that an attacker could use.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Input validation",
+   "def": "Checking that input is sensible (right type, length and range) before using it.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Software licence",
+   "def": "The rules about how a piece of software or code can be used, changed and shared.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "API key",
+   "def": "A secret code, like a password, that lets a program use an online service.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Productivity",
+   "def": "How much useful work gets done in a given time.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Over-reliance",
+   "def": "Depending on a tool so much that you can't manage without it.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Software engineer",
+   "def": "A person who designs, builds, tests and maintains software.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}
