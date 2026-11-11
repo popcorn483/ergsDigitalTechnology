@@ -201,7 +201,8 @@ class Deck:
 
 def build(slug):
     d = os.path.join(LIB, slug); t = json.load(open(os.path.join(d, 'topic.json'), encoding='utf-8'))
-    out = os.path.join(d, f"1 - LESSON - {t['title'].replace('/', '-')}.pptx")
+    safe = re.sub(r'\s*[:/\\*?"<>|]+\s*', ' - ', t['title']).strip(' -')   # a file name every computer accepts (no colons etc.)
+    out = os.path.join(d, f"1 - LESSON - {safe}.pptx")
     Deck(slug, t).build().save(out)
     return out
 

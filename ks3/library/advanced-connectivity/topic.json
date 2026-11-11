@@ -1,0 +1,1350 @@
+{
+ "title": "Advanced Connectivity: Fibre, 5G and Satellites",
+ "summary": "How data really travels: copper, fibre-optic and wireless transmission, full-fibre broadband, how mobile networks evolved from 1G to 5G and 6G, satellite internet, and the race to connect everyone.",
+ "learn": [
+  "The main transmission media and when each is used",
+  "How fibre optics carry data as light",
+  "How mobile networks work and how 1G to 5G evolved",
+  "What 5G makes possible and what 6G might bring",
+  "How satellite internet works, including low Earth orbit constellations",
+  "What the digital divide is and how it can be closed"
+ ],
+ "temporary": false,
+ "intro": "Every video call, game and download travels as light through glass, radio waves through the air or signals bounced off satellites. In this topic you'll find out how each kind of connection works, why Northern Ireland has some of the best full-fibre coverage in the UK, what 5G really changes, how satellites can deliver internet to the middle of the ocean, and why millions of people are still left offline.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "Transmission media",
+   "spec": "Compare copper cable, fibre-optic cable and wireless as transmission media",
+   "summary": "Data travels through transmission media: electrical signals in copper cables, pulses of light in fibre-optic cables, or radio waves through the air. Each has different speed, range, cost and reliability, so networks combine them.",
+   "starter": "List every way your data might travel between your phone and a video on a server in America.",
+   "sc": [
+    "I can name three transmission media",
+    "I can compare them for speed, range, cost and reliability",
+    "I can choose suitable media for different situations"
+   ],
+   "slides": [
+    {
+     "t": "Three ways to travel",
+     "b": [
+      "Copper: electrical signals through metal wires (old phone lines, Ethernet)",
+      "Fibre optic: pulses of light through thin strands of glass",
+      "Wireless: radio waves through the air (Wi-Fi, 4G/5G, satellite)",
+      "Your data usually uses all three on one journey"
+     ]
+    },
+    {
+     "t": "Two measures of a connection",
+     "b": [
+      "Bandwidth: how much data can be sent per second (megabits per second, Mbps)",
+      "Latency: the delay before data arrives (milliseconds, ms)",
+      "High bandwidth = fast downloads; low latency = responsive games and calls",
+      "Different media are better at different things"
+     ]
+    },
+    {
+     "t": "Choosing a medium",
+     "b": [
+      "Fibre: huge bandwidth, long distances, but costly to install",
+      "Copper: cheap and already everywhere, but slower over distance",
+      "Wireless: mobile and flexible, but affected by walls, distance and interference"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Transmission media"
+    },
+    {
+     "t": "p",
+     "text": "**[[transmission media]]** are the materials or methods that carry data from one place to another."
+    },
+    {
+     "t": "table",
+     "caption": "Comparing transmission media",
+     "head": [
+      "Medium",
+      "How data travels",
+      "Strengths",
+      "Weaknesses"
+     ],
+     "rows": [
+      [
+       "**[[copper cable|Copper cable]]**",
+       "Electrical signals through metal wires",
+       "Cheap; already installed in most buildings",
+       "Signal weakens over distance; can be affected by electrical interference"
+      ],
+      [
+       "**[[fibre-optic cable|Fibre-optic cable]]**",
+       "Pulses of light through thin glass strands",
+       "Huge bandwidth; long distances; not affected by electrical interference",
+       "Expensive to install; fragile if bent sharply"
+      ],
+      [
+       "Wireless",
+       "Radio waves through the air",
+       "No cables; lets you move around",
+       "Weakens with distance and walls; shared with other users; less secure"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Bandwidth and latency"
+    },
+    {
+     "t": "p",
+     "text": "**[[bandwidth]]** is the amount of data that can be sent per second, usually measured in **megabits per second (Mbps)** or **gigabits per second (Gbps)**. **[[latency]]** is the delay before data starts to arrive, measured in **milliseconds (ms)**. Downloading a film needs high bandwidth; online gaming and video calls need low latency."
+    },
+    {
+     "t": "example",
+     "title": "Download time",
+     "context": "A 2 GB game update (16,000 megabits) downloads over a 100 Mbps connection.",
+     "steps": [
+      "Time = data ÷ bandwidth",
+      "= 16,000 megabits ÷ 100 Mbps",
+      "= 160 seconds"
+     ],
+     "answer": "About 2 minutes 40 seconds (in practice a bit longer, because connections rarely reach their full speed)."
+    },
+    {
+     "t": "tip",
+     "text": "Remember 1 byte = 8 bits. Internet speeds are in megaBITS per second, but file sizes are usually in megaBYTES, so multiply the file size by 8."
+    },
+    {
+     "t": "act",
+     "title": "Match the medium",
+     "mins": 15,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Read the six scenario cards (e.g. \"a cable under the Atlantic\", \"a fitness tracker\", \"a school's main network link\").",
+      "Choose the best transmission medium for each and give one reason.",
+      "Calculate how long a 1 GB file takes to download at 50 Mbps and at 900 Mbps."
+     ],
+     "q": [
+      {
+       "q": "Which medium did you choose for \"a cable under the Atlantic\" and \"a fitness tracker\", and why?",
+       "a": "Fibre for the Atlantic (huge bandwidth over very long distances); wireless (Bluetooth) for the fitness tracker (it moves around with you and needs little data)."
+      },
+      {
+       "q": "Show your download time calculations.",
+       "a": "1 GB = 8,000 megabits. At 50 Mbps: 8,000 ÷ 50 = 160 s. At 900 Mbps: 8,000 ÷ 900 ≈ 8.9 s."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "How does data travel through a fibre-optic cable?",
+     "o": [
+      "As electricity",
+      "As radio waves",
+      "As sound",
+      "As pulses of light"
+     ],
+     "a": 3,
+     "why": "Fibre carries light."
+    },
+    {
+     "q": "What does bandwidth measure?",
+     "o": [
+      "The length of a cable",
+      "The delay before data arrives",
+      "Battery life",
+      "How much data can be sent per second"
+     ],
+     "a": 3,
+     "why": "Bandwidth = data per second."
+    },
+    {
+     "q": "What does latency measure?",
+     "o": [
+      "Screen size",
+      "The delay before data arrives",
+      "The amount of data sent",
+      "The width of a cable"
+     ],
+     "a": 1,
+     "why": "Latency is delay."
+    },
+    {
+     "q": "Which medium is NOT affected by electrical interference?",
+     "o": [
+      "Wi-Fi",
+      "Fibre-optic cable",
+      "All are affected equally",
+      "Copper cable"
+     ],
+     "a": 1,
+     "why": "Light isn't affected by electrical noise."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between bandwidth and latency.",
+     "m": 2,
+     "a": "Bandwidth is the amount of data that can be transmitted per second (1); latency is the delay before data arrives (1)."
+    },
+    {
+     "q": "Compare fibre-optic cable and wireless for connecting a school's computers.",
+     "m": 3,
+     "a": "Fibre: higher bandwidth/more reliable/not affected by interference (1) but costly and fixed (1); wireless: flexible/mobile/no cabling but slower, affected by walls/interference/less secure (1)."
+    }
+   ],
+   "terms": [
+    "Transmission media",
+    "Copper cable",
+    "Fibre-optic cable",
+    "Bandwidth",
+    "Latency"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "Light in glass: full fibre",
+   "spec": "Explain how fibre-optic cables carry data and describe full-fibre broadband",
+   "summary": "Fibre optics send pulses of light along glass strands, trapped by total internal reflection. Full-fibre broadband (FTTP) runs fibre all the way to the building, giving much faster and more reliable connections than older copper lines.",
+   "starter": "How can light travel round a corner?",
+   "sc": [
+    "I can describe how light travels in an optical fibre",
+    "I can explain the difference between FTTC and FTTP",
+    "I can explain why full fibre is important for communities"
+   ],
+   "slides": [
+    {
+     "t": "Light that can't escape",
+     "b": [
+      "An optical fibre is a strand of glass thinner than a hair",
+      "Light bounces along inside it by total internal reflection",
+      "Data is sent as pulses of light: on = 1, off = 0",
+      "Light in glass travels at about 200,000 km per second"
+     ],
+     "n": "Demonstrate total internal reflection with a laser and a stream of water if available, or show a video."
+    },
+    {
+     "t": "Part fibre or full fibre?",
+     "b": [
+      "FTTC: fibre to the street cabinet, then old copper to your home",
+      "FTTP (full fibre): fibre all the way to your home or business",
+      "Full fibre is much faster and more reliable, and doesn't slow down over distance",
+      "Northern Ireland has some of the best full-fibre coverage in the UK"
+     ],
+     "n": "Project Stratum, a Northern Ireland government project, extended full fibre to tens of thousands of rural homes and businesses."
+    },
+    {
+     "t": "Under the sea",
+     "b": [
+      "Around 99% of international internet traffic travels through subsea cables",
+      "Hundreds of cables cross the oceans, some over 10,000 km long",
+      "They're about as thick as a garden hose in deep water",
+      "Damage from ship anchors or sabotage is a real risk"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "How fibre optics work"
+    },
+    {
+     "t": "p",
+     "text": "An optical fibre is a strand of very pure glass, thinner than a human hair. Light sent into one end bounces off the inside walls, trapped by **[[total internal reflection]]**, so it follows the fibre even round gentle bends. Data is sent as extremely fast pulses of light, with on and off representing 1 and 0. Light in glass travels at about 200,000 km per second, about two-thirds of its speed in a vacuum."
+    },
+    {
+     "t": "h",
+     "text": "FTTC and FTTP"
+    },
+    {
+     "t": "table",
+     "caption": "Types of broadband",
+     "head": [
+      "Type",
+      "How it works",
+      "Typical speed"
+     ],
+     "rows": [
+      [
+       "Copper (ADSL)",
+       "Old telephone wires all the way",
+       "Up to about 24 Mbps, slower far from the exchange"
+      ],
+      [
+       "FTTC (fibre to the cabinet)",
+       "Fibre to the street cabinet, copper from cabinet to home",
+       "Up to about 80 Mbps"
+      ],
+      [
+       "FTTP / **[[full fibre]]**",
+       "Fibre all the way into the building",
+       "Up to 1,000 Mbps (1 Gbps) or more"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Full fibre doesn't slow down with distance the way copper does, so it's especially important for rural areas. Thanks to schemes such as **Project Stratum**, Northern Ireland has some of the best full-fibre coverage in the UK, including in many rural parts of Fermanagh."
+    },
+    {
+     "t": "h",
+     "text": "Subsea cables"
+    },
+    {
+     "t": "p",
+     "text": "About 99% of international internet traffic travels through **[[subsea cable|subsea cables]]** lying on the ocean floor, not through satellites. Hundreds of these fibre cables link the continents. Several land on the coast of Ireland, connecting Europe and North America. Because so much depends on them, damage from ship anchors, earthquakes or sabotage is a serious concern."
+    },
+    {
+     "t": "act",
+     "title": "Broadband detective",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Use the broadband checker your teacher shows (e.g. Ofcom's coverage checker) to look up the school's postcode (not your home address).",
+      "Record what types of broadband are available and the maximum speeds.",
+      "Compare with one city postcode and one remote rural postcode your teacher gives you.",
+      "Explain the differences."
+     ],
+     "q": [
+      {
+       "q": "Record the results for the three postcodes.",
+       "a": "Answers depend on the postcodes, e.g. school: full fibre up to 1 Gbps; city: full fibre and cable; remote: FTTC up to 30 Mbps or satellite only."
+      },
+      {
+       "q": "Explain why full fibre matters for a rural farm or business.",
+       "a": "It gives fast, reliable internet that doesn't slow down over long distances, so farms and businesses can use online services, video calls, smart sensors and cloud tools as well as city businesses can."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "How does light stay inside an optical fibre?",
+     "o": [
+      "Magnetism",
+      "Total internal reflection",
+      "Electricity",
+      "Gravity"
+     ],
+     "a": 1,
+     "why": "Light bounces off the inside walls."
+    },
+    {
+     "q": "What does FTTP mean?",
+     "o": [
+      "Fast transfer to phone",
+      "Fibre all the way to the premises",
+      "Fibre to the pole",
+      "Fibre to the park"
+     ],
+     "a": 1,
+     "why": "Full fibre to the building."
+    },
+    {
+     "q": "How does most international internet traffic travel?",
+     "o": [
+      "By satellites",
+      "By post",
+      "Through subsea fibre cables",
+      "By radio"
+     ],
+     "a": 2,
+     "why": "About 99% goes via subsea cables."
+    },
+    {
+     "q": "Why is full fibre better than FTTC for homes far from the cabinet?",
+     "o": [
+      "Fibre doesn't slow down over distance like copper",
+      "Copper is faster",
+      "Fibre uses less glass",
+      "Distance doesn't matter for copper"
+     ],
+     "a": 0,
+     "why": "Copper loses signal with distance."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe how data is sent through a fibre-optic cable.",
+     "m": 2,
+     "a": "Data is sent as pulses of light (on/off = 1/0) (1); light is kept inside the glass by total internal reflection (1)."
+    },
+    {
+     "q": "Explain why damage to subsea cables could be a serious problem.",
+     "m": 2,
+     "a": "Most international internet traffic travels through them (1), so damage could slow or cut communication between countries/affect banking, business etc. (1)."
+    }
+   ],
+   "terms": [
+    "Total internal reflection",
+    "Full fibre",
+    "Subsea cable"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Mobile networks: 1G to 5G",
+   "spec": "Describe how mobile networks work and how each generation improved",
+   "summary": "Mobile networks divide areas into cells, each served by a mast that connects phones using radio waves. Each generation, from 1G to 5G, has added new abilities and higher speeds: from voice calls to texts, mobile internet, video streaming and now huge numbers of connected devices.",
+   "starter": "Your phone works on a moving train. How does it stay connected as you pass from town to town?",
+   "sc": [
+    "I can explain how a cellular network works",
+    "I can describe what each generation added",
+    "I can explain the trade-off between range and speed"
+   ],
+   "slides": [
+    {
+     "t": "A network of cells",
+     "b": [
+      "The country is divided into areas called cells",
+      "Each cell has a mast (base station) with antennas",
+      "Your phone talks to the nearest mast using radio waves",
+      "As you move, it is handed over to the next mast"
+     ]
+    },
+    {
+     "t": "Generations",
+     "b": [
+      "1G (1980s): analogue voice calls",
+      "2G (1990s): digital calls and text messages",
+      "3G (2000s): mobile internet",
+      "4G (2010s): fast data, video streaming and apps",
+      "5G (2019 onwards): very fast, low latency, many more devices"
+     ]
+    },
+    {
+     "t": "Radio spectrum",
+     "b": [
+      "Mobile networks use radio frequencies called spectrum",
+      "Low frequencies: travel far and through walls, but carry less data",
+      "High frequencies: carry lots of data, but short range",
+      "Governments auction spectrum to mobile companies (Ofcom in the UK)"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "How mobile networks work"
+    },
+    {
+     "t": "p",
+     "text": "A **[[cellular network]]** divides an area into many small zones called cells. Each cell is served by a **[[mast]]** (base station) with antennas that send and receive radio waves. Your phone connects to the nearest mast, which is linked by cables (often fibre) to the rest of the network and the internet. As you travel, your phone is passed from one mast to the next without the call dropping. This is called a **[[handover]]**."
+    },
+    {
+     "t": "h",
+     "text": "The generations"
+    },
+    {
+     "t": "table",
+     "caption": "Mobile generations",
+     "head": [
+      "Generation",
+      "Roughly when",
+      "What it added"
+     ],
+     "rows": [
+      [
+       "1G",
+       "1980s",
+       "Mobile voice calls (analogue)"
+      ],
+      [
+       "2G",
+       "1990s",
+       "Digital calls and SMS text messages"
+      ],
+      [
+       "3G",
+       "2000s",
+       "Mobile internet, early smartphones"
+      ],
+      [
+       "4G",
+       "2010s",
+       "Fast data: video streaming, apps, social media"
+      ],
+      [
+       "5G",
+       "2019 onwards",
+       "Much faster, much lower latency, millions of connected devices"
+      ]
+     ]
+    },
+    {
+     "t": "note",
+     "text": "UK networks have been switching off 3G to reuse its radio frequencies for 4G and 5G, and 2G is due to follow by around 2033."
+    },
+    {
+     "t": "h",
+     "text": "Spectrum: the range-speed trade-off"
+    },
+    {
+     "t": "p",
+     "text": "Mobile networks use parts of the radio **[[spectrum]]**. In the UK, Ofcom manages it and auctions it to mobile companies."
+    },
+    {
+     "t": "key",
+     "title": "Low or high frequency?",
+     "items": [
+      "Low frequencies travel further and through walls, but carry less data: good for rural coverage",
+      "High frequencies carry much more data, but over short distances and are blocked easily: good for crowded city centres and stadiums",
+      "5G uses both, plus very high \"millimetre wave\" frequencies in a few busy places"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Cell planner",
+     "mins": 25,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Use the map of a (fictional) town and countryside your teacher gives you, with a stadium, a town centre, farms and a lough.",
+      "You have six masts: three low-frequency (big range, less data) and three high-frequency (small range, lots of data).",
+      "Place them to give everyone coverage and enough capacity for match day at the stadium.",
+      "Explain your choices."
+     ],
+     "q": [
+      {
+       "q": "Where did you place the high-frequency masts and why?",
+       "a": "In the stadium and town centre, because lots of people are packed together using data, and high frequencies carry lots of data over short distances."
+      },
+      {
+       "q": "Where did you place the low-frequency masts and why?",
+       "a": "In the countryside, because they reach further and through walls and trees, giving coverage to scattered farms with fewer masts."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a cell in a mobile network?",
+     "o": [
+      "A battery",
+      "A prison",
+      "A SIM card",
+      "An area served by one mast"
+     ],
+     "a": 3,
+     "why": "Networks are divided into cells."
+    },
+    {
+     "q": "What is a handover?",
+     "o": [
+      "Turning off your phone",
+      "Giving your phone to someone",
+      "Downloading an app",
+      "Passing your connection from one mast to the next as you move"
+     ],
+     "a": 3,
+     "why": "It keeps calls going on the move."
+    },
+    {
+     "q": "Which generation introduced text messages?",
+     "o": [
+      "5G",
+      "2G",
+      "4G",
+      "1G"
+     ],
+     "a": 1,
+     "why": "2G brought digital calls and SMS."
+    },
+    {
+     "q": "Why do rural areas often use lower-frequency signals?",
+     "o": [
+      "They're newer",
+      "They carry more data",
+      "They travel further and through obstacles",
+      "They're cheaper phones"
+     ],
+     "a": 2,
+     "why": "Range matters in the countryside."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe how a mobile phone stays connected while travelling on a train.",
+     "m": 3,
+     "a": "Area divided into cells each with a mast (1); phone connects to the nearest mast by radio waves (1); connection is handed over to the next mast as it moves (1)."
+    },
+    {
+     "q": "Explain the trade-off between low-frequency and high-frequency radio signals in mobile networks.",
+     "m": 2,
+     "a": "Low frequency: longer range/through walls but less data (1); high frequency: more data but shorter range/blocked easily (1)."
+    }
+   ],
+   "terms": [
+    "Cellular network",
+    "Mast",
+    "Handover",
+    "Spectrum"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "5G and the road to 6G",
+   "spec": "Explain what 5G makes possible and describe the ideas behind 6G",
+   "summary": "5G offers faster speeds, much lower latency and the ability to connect huge numbers of devices, enabling new uses in health, transport and industry. Researchers are already developing 6G, expected around 2030, which may combine communication with sensing and AI.",
+   "starter": "A surgeon in Belfast operates a robot in a hospital in Enniskillen. What would they need from the network?",
+   "sc": [
+    "I can describe three improvements of 5G over 4G",
+    "I can give examples of uses that need 5G",
+    "I can describe what 6G might bring"
+   ],
+   "slides": [
+    {
+     "t": "What 5G improves",
+     "b": [
+      "Speed: peak speeds many times faster than 4G",
+      "Latency: as low as a few milliseconds in ideal conditions",
+      "Capacity: up to a million devices per square kilometre",
+      "Reliability for critical uses"
+     ]
+    },
+    {
+     "t": "What 5G makes possible",
+     "b": [
+      "Smart factories with wireless robots",
+      "Remote healthcare and monitoring",
+      "Connected and self-driving vehicles talking to each other",
+      "Smart farming: sensors on soil, livestock and machinery"
+     ]
+    },
+    {
+     "t": "The road to 6G",
+     "b": [
+      "Researchers expect 6G around 2030",
+      "Even higher frequencies and speeds",
+      "The network itself could sense its surroundings: detecting movement, mapping rooms",
+      "AI built in to manage the network automatically"
+     ],
+     "n": "6G is still being researched and standardised, so details will change. Good opportunity to discuss how predictions can be wrong."
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What does 5G improve?"
+    },
+    {
+     "t": "p",
+     "text": "**[[5G]]** is the fifth generation of mobile network."
+    },
+    {
+     "t": "table",
+     "caption": "4G and 5G compared",
+     "head": [
+      "Feature",
+      "4G",
+      "5G"
+     ],
+     "rows": [
+      [
+       "Typical speeds",
+       "Tens of Mbps",
+       "Hundreds of Mbps, up to several Gbps in ideal conditions"
+      ],
+      [
+       "Latency",
+       "Around 30-50 ms",
+       "As low as a few ms in ideal conditions"
+      ],
+      [
+       "Devices per km²",
+       "Around 100,000",
+       "Up to around 1,000,000"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[low latency|Low latency]]** is one of 5G's biggest changes. A tiny delay matters for things like remote-controlled machines, multiplayer games, and vehicles warning each other about hazards."
+    },
+    {
+     "t": "h",
+     "text": "Network slicing"
+    },
+    {
+     "t": "p",
+     "text": "**[[network slicing]]** lets one physical 5G network be divided into separate virtual networks, each with its own guaranteed performance. One \"slice\" might give emergency services priority and reliability, while another serves smartphones and another serves thousands of low-power sensors."
+    },
+    {
+     "t": "h",
+     "text": "Uses of 5G"
+    },
+    {
+     "t": "key",
+     "title": "Where 5G helps",
+     "items": [
+      "Industry: wireless robots and sensors in smart factories",
+      "Health: remote monitoring, ambulances sending live video to hospitals",
+      "Transport: vehicles and traffic lights sharing information",
+      "Farming: sensors monitoring soil, crops and animals across large areas",
+      "Events: thousands of fans using phones in one stadium"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "6G"
+    },
+    {
+     "t": "p",
+     "text": "Researchers are already working on **[[6G]]**, expected around 2030. Ideas include even faster speeds using very high frequencies, networks that can **sense** their surroundings like a radar (detecting movement or mapping a room), and AI built into the network to manage it automatically. 6G standards are still being agreed, so what it will really look like may change."
+    },
+    {
+     "t": "warn",
+     "text": "Claims that 5G causes illness have been investigated by scientists and health organisations, which found no evidence of harm at the levels used. Radio waves used by mobile networks are low-energy and well within international safety limits."
+    },
+    {
+     "t": "act",
+     "title": "5G innovation pitch",
+     "mins": 25,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Choose one area of life in Fermanagh: farming, healthcare, tourism around the lakes, or transport.",
+      "Design a new service that needs 5G. Explain which 5G feature it depends on: speed, low latency or many devices.",
+      "Identify one challenge (cost, coverage, privacy).",
+      "Pitch it in 60 seconds."
+     ],
+     "q": [
+      {
+       "q": "Describe your service and the 5G feature it depends on.",
+       "a": "E.g. \"Smart herd: collars on cattle report location and health to the farmer's phone. It needs 5G's ability to connect many low-power devices over a large area.\""
+      },
+      {
+       "q": "What challenge would your service face, and how could it be solved?",
+       "a": "E.g. \"Poor coverage in remote fields: use low-frequency 5G masts with long range, or combine with satellite.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is a key improvement of 5G over 4G?",
+     "o": [
+      "Much lower latency",
+      "Bigger phones",
+      "It uses no radio waves",
+      "Longer battery life always"
+     ],
+     "a": 0,
+     "why": "Low latency is a major change."
+    },
+    {
+     "q": "About how many devices per square kilometre can 5G support?",
+     "o": [
+      "About 10",
+      "About 100",
+      "Around 1,000,000",
+      "Exactly 4,000"
+     ],
+     "a": 2,
+     "why": "5G supports huge numbers of devices."
+    },
+    {
+     "q": "What is network slicing?",
+     "o": [
+      "Turning masts off",
+      "Cutting cables",
+      "Sharing a pizza",
+      "Dividing one 5G network into separate virtual networks with different performance"
+     ],
+     "a": 3,
+     "why": "Slices give tailored service."
+    },
+    {
+     "q": "When is 6G expected?",
+     "o": [
+      "Around 2030",
+      "Already everywhere",
+      "1990",
+      "Never"
+     ],
+     "a": 0,
+     "why": "It's in research."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe three improvements that 5G offers over 4G.",
+     "m": 3,
+     "a": "Any three: faster speeds (1); lower latency (1); more devices/capacity (1); network slicing/reliability (1)."
+    },
+    {
+     "q": "Explain why low latency is important for remote surgery.",
+     "m": 2,
+     "a": "The surgeon's movements must reach the robot instantly (1), as any delay could cause dangerous mistakes (1)."
+    }
+   ],
+   "terms": [
+    "5G",
+    "Low latency",
+    "Network slicing",
+    "6G"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Internet from space",
+   "spec": "Explain how satellite internet works and compare geostationary and low Earth orbit satellites",
+   "summary": "Satellite internet sends signals between a dish and satellites in space. Geostationary satellites are far away, causing high latency, while new low Earth orbit constellations of thousands of satellites give much lower latency, but raise concerns about space debris and astronomy.",
+   "starter": "You're on a ship in the middle of the Atlantic. How could you get online?",
+   "sc": [
+    "I can describe how satellite internet works",
+    "I can compare GEO and LEO satellites",
+    "I can evaluate the benefits and problems of satellite constellations"
+   ],
+   "slides": [
+    {
+     "t": "How it works",
+     "b": [
+      "A dish at your home sends signals to a satellite",
+      "The satellite relays them to a ground station connected to the internet",
+      "Works almost anywhere with a clear view of the sky",
+      "Used by ships, planes, remote homes and disaster zones"
+     ]
+    },
+    {
+     "t": "High or low?",
+     "b": [
+      "Geostationary (GEO): about 36,000 km up, stays above one spot",
+      "Signals travel so far that latency is about 600 ms round trip",
+      "Low Earth orbit (LEO): about 500-2,000 km up, moving fast",
+      "Much lower latency (about 20-50 ms), but needs thousands of satellites"
+     ]
+    },
+    {
+     "t": "Constellations and concerns",
+     "b": [
+      "Starlink and others have launched thousands of LEO satellites",
+      "Brought internet to remote areas, ships and war zones",
+      "Concerns: space debris, collisions, bright trails spoiling astronomy",
+      "One company controlling vital connections raises questions"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "How satellite internet works"
+    },
+    {
+     "t": "p",
+     "text": "A dish (or terminal) sends radio signals up to a satellite, which relays them down to a ground station connected to the internet, and back again. It works almost anywhere with a clear view of the sky: remote farms, islands, ships, aeroplanes and disaster areas where cables are damaged."
+    },
+    {
+     "t": "h",
+     "text": "GEO and LEO"
+    },
+    {
+     "t": "table",
+     "caption": "Comparing satellite orbits",
+     "head": [
+      "Feature",
+      "Geostationary (GEO)",
+      "Low Earth orbit (LEO)"
+     ],
+     "rows": [
+      [
+       "Height",
+       "About 36,000 km",
+       "About 500-2,000 km"
+      ],
+      [
+       "Movement",
+       "Stays above the same spot on Earth",
+       "Circles Earth in about 90-120 minutes"
+      ],
+      [
+       "Satellites needed",
+       "A few cover most of the world",
+       "Thousands, to always have one overhead"
+      ],
+      [
+       "Latency (round trip)",
+       "About 600 ms",
+       "About 20-50 ms"
+      ],
+      [
+       "Good for",
+       "TV broadcasting, basic internet",
+       "Video calls, gaming, faster internet"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A **[[geostationary orbit]]** is so far away that signals take a noticeable time to travel up and back, causing high latency. **[[low Earth orbit]]** satellites are much closer, so latency is far lower, but each one is only overhead for a few minutes, so you need a huge **[[satellite constellation]]** of them, handing over from one to the next."
+    },
+    {
+     "t": "example",
+     "title": "Why GEO is slow to respond",
+     "context": "Radio signals travel at about 300,000 km per second. A request goes up to a GEO satellite and down to a ground station, then the reply comes back the same way.",
+     "steps": [
+      "Distance: 36,000 km up + 36,000 km down = 72,000 km each way",
+      "Request and reply: 72,000 × 2 = 144,000 km",
+      "Time = 144,000 ÷ 300,000 ≈ 0.48 seconds, before any processing delay"
+     ],
+     "answer": "About half a second of delay just from distance, which is why GEO internet feels laggy for games and video calls."
+    },
+    {
+     "t": "h",
+     "text": "Problems and concerns"
+    },
+    {
+     "t": "p",
+     "text": "Low Earth orbit constellations have brought fast internet to remote areas, ships and even war zones. But they also raise concerns:"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "**[[space debris]]**: dead satellites and fragments can collide, creating more debris",
+      "Astronomy: bright satellite trails can spoil telescope images",
+      "Control: a few private companies controlling vital connections can be a risk"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Choose a connection",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Read the five profiles: a Fermanagh farm, a cruise ship, a research station in Antarctica, a flat in Belfast and a gamer on a Scottish island.",
+      "For each, recommend full fibre, 5G, GEO satellite or LEO satellite, with a reason.",
+      "Calculate the minimum latency for LEO using a height of 550 km (up and down, there and back)."
+     ],
+     "q": [
+      {
+       "q": "Give your recommendation and reason for the gamer on a Scottish island.",
+       "a": "LEO satellite (if no fibre is available): much lower latency than GEO, so online games are playable; full fibre would be best if available."
+      },
+      {
+       "q": "Show your LEO latency calculation.",
+       "a": "550 × 2 = 1,100 km each way; × 2 for request and reply = 2,200 km; 2,200 ÷ 300,000 ≈ 0.0073 s ≈ 7 ms, before processing and network delays."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "About how high is a geostationary satellite?",
+     "o": [
+      "About 1 km",
+      "About 500 km",
+      "About 36,000 km",
+      "About 50 km"
+     ],
+     "a": 2,
+     "why": "GEO is very high."
+    },
+    {
+     "q": "Why does GEO satellite internet have high latency?",
+     "o": [
+      "It uses copper",
+      "Signals travel very long distances",
+      "The satellites are slow",
+      "Dishes are small"
+     ],
+     "a": 1,
+     "why": "Distance causes delay."
+    },
+    {
+     "q": "Why do LEO constellations need thousands of satellites?",
+     "o": [
+      "Each satellite is only overhead for a short time",
+      "To spell words in the sky",
+      "They are cheap",
+      "They break every day"
+     ],
+     "a": 0,
+     "why": "Fast orbits need many satellites."
+    },
+    {
+     "q": "Which is a concern about large satellite constellations?",
+     "o": [
+      "They reduce rainfall",
+      "They make the sea warmer",
+      "Space debris and collisions",
+      "They cause earthquakes"
+     ],
+     "a": 2,
+     "why": "Debris is a growing problem."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Compare geostationary and low Earth orbit satellites for internet access.",
+     "m": 3,
+     "a": "GEO much higher (~36,000 km) vs LEO (~500-2,000 km) (1); GEO has high latency, LEO low latency (1); GEO needs few satellites to cover Earth, LEO needs thousands (1)."
+    },
+    {
+     "q": "Give one benefit and one problem of satellite internet constellations.",
+     "m": 2,
+     "a": "Benefit: internet anywhere, e.g. remote areas, ships, disaster zones (1); problem: space debris/astronomy/private control/cost (1)."
+    }
+   ],
+   "terms": [
+    "Geostationary orbit",
+    "Low Earth orbit",
+    "Satellite constellation",
+    "Space debris"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "Connecting everyone",
+   "spec": "Describe the digital divide and evaluate ways to connect more people",
+   "summary": "The digital divide is the gap between people who have good internet access and skills and those who don't. It is caused by location, cost, skills and disability, and affects education, jobs and health. Governments, companies and communities are trying to close it.",
+   "starter": "During the pandemic, schools taught online. Who might have been left out, and why?",
+   "sc": [
+    "I can explain what the digital divide is",
+    "I can describe its causes and effects",
+    "I can evaluate solutions to close it"
+   ],
+   "slides": [
+    {
+     "t": "Who's left out?",
+     "b": [
+      "About a third of the world's people still don't use the internet",
+      "Rural areas often have slower connections",
+      "Cost of devices and data is a barrier for some families",
+      "Skills, confidence and accessibility matter too"
+     ],
+     "n": "The International Telecommunication Union estimated about 2.6 billion people were offline in 2024."
+    },
+    {
+     "t": "Why it matters",
+     "b": [
+      "School: homework, revision sites, online classes",
+      "Work: job applications, remote working",
+      "Health and money: GP appointments, banking, benefits",
+      "People without access fall further behind"
+     ]
+    },
+    {
+     "t": "Closing the gap",
+     "b": [
+      "Infrastructure: full fibre, rural masts, satellites",
+      "Affordability: social tariffs, device donation schemes",
+      "Skills: libraries, community classes, school support",
+      "Resilience: networks that keep working in storms and emergencies"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "The digital divide"
+    },
+    {
+     "t": "p",
+     "text": "The **[[digital divide]]** is the gap between people who have good internet access, devices and skills and those who don't. Around the world, roughly a third of people still don't use the internet. Even in the UK, some people can't afford broadband, live where connections are poor, or lack the skills or confidence to get online."
+    },
+    {
+     "t": "table",
+     "caption": "Causes of the digital divide",
+     "head": [
+      "Cause",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Location",
+       "A remote farmhouse with slow broadband and no mobile signal"
+      ],
+      [
+       "Cost",
+       "A family who can't afford a laptop or monthly broadband"
+      ],
+      [
+       "Skills and confidence",
+       "An older person who has never used a smartphone"
+      ],
+      [
+       "Accessibility",
+       "Websites that don't work with a screen reader"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Why it matters"
+    },
+    {
+     "t": "p",
+     "text": "More and more of life happens online: schoolwork, job applications, banking, GP appointments and government services. People without good access risk falling further behind, which increases inequality."
+    },
+    {
+     "t": "h",
+     "text": "Closing the gap"
+    },
+    {
+     "t": "p",
+     "text": "**[[digital inclusion]]** means making sure everyone can use the internet and digital technology. Solutions include:"
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "**Infrastructure**: full fibre, extra rural masts and satellite services.",
+      "**Affordability**: cheaper \"social tariffs\" for people on low incomes, and schemes that donate refurbished devices.",
+      "**Skills**: free classes in libraries and community centres, and support in schools.",
+      "**Accessible design**: websites and apps that work for everyone."
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Resilience"
+    },
+    {
+     "t": "p",
+     "text": "**[[resilience]]** means a network can keep working, or recover quickly, when something goes wrong, such as a storm bringing down cables, a power cut or a damaged subsea cable. Resilient networks have backups: more than one route, battery power at masts, and alternatives such as satellite links."
+    },
+    {
+     "t": "act",
+     "title": "Close the gap",
+     "mins": 30,
+     "who": "Groups of 4",
+     "after": 3,
+     "steps": [
+      "Your group is given a budget of £10 million to reduce the digital divide in a rural county like Fermanagh.",
+      "Choose how to spend it across infrastructure, affordability, skills and accessibility (use the cost cards).",
+      "Justify your choices: who benefits, and how many people?",
+      "Present your plan in 90 seconds."
+     ],
+     "q": [
+      {
+       "q": "Summarise your spending plan and the reasons for it.",
+       "a": "E.g. £5m on extra masts and fibre for the most remote areas; £2m on refurbished laptops for families on low incomes; £2m on library digital skills classes; £1m on making council websites accessible. Reasons should link spending to the main causes of the divide."
+      },
+      {
+       "q": "Which group of people do you think is most affected by the digital divide, and why?",
+       "a": "A reasoned answer, e.g. older people in rural areas: poorer connections plus less confidence with technology, at the same time as more services move online."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is the digital divide?",
+     "o": [
+      "The gap between people with good internet access and skills and those without",
+      "Dividing files into folders",
+      "A broken cable",
+      "A network split in two"
+     ],
+     "a": 0,
+     "why": "It's about unequal access."
+    },
+    {
+     "q": "Which is a cause of the digital divide?",
+     "o": [
+      "Too many websites",
+      "Fast internet",
+      "Free Wi-Fi everywhere",
+      "The cost of devices and broadband"
+     ],
+     "a": 3,
+     "why": "Cost is a major barrier."
+    },
+    {
+     "q": "What is digital inclusion?",
+     "o": [
+      "Adding cables",
+      "Including more apps on a phone",
+      "Making sure everyone can use digital technology",
+      "Joining a social network"
+     ],
+     "a": 2,
+     "why": "Inclusion closes the gap."
+    },
+    {
+     "q": "What does network resilience mean?",
+     "o": [
+      "Keeping working or recovering quickly when something goes wrong",
+      "Being cheap",
+      "Being very fast",
+      "Using only one cable"
+     ],
+     "a": 0,
+     "why": "Resilient networks have backups."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe three causes of the digital divide.",
+     "m": 3,
+     "a": "Any three: location/poor rural infrastructure (1); cost of devices/broadband (1); lack of skills/confidence (1); accessibility barriers (1)."
+    },
+    {
+     "q": "Evaluate one way of reducing the digital divide.",
+     "m": 3,
+     "a": "Describes a method (1); explains a benefit (1); gives a limitation or judgement, e.g. satellites reach remote homes but cost more / skills classes help but need people to attend (1)."
+    }
+   ],
+   "terms": [
+    "Digital divide",
+    "Digital inclusion",
+    "Resilience"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Transmission media",
+   "def": "The materials or methods used to carry data, such as copper cable, fibre-optic cable or radio waves.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Copper cable",
+   "def": "A cable that carries data as electrical signals through metal wires.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Fibre-optic cable",
+   "def": "A cable that carries data as pulses of light through thin strands of glass.",
+   "alt": "Fibre",
+   "page": "p01"
+  },
+  {
+   "term": "Bandwidth",
+   "def": "The amount of data that can be sent per second, usually in megabits per second (Mbps).",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Latency",
+   "def": "The delay before data arrives, measured in milliseconds (ms).",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Total internal reflection",
+   "def": "When light hits the inside wall of a fibre at a shallow angle and bounces back in rather than escaping.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Full fibre",
+   "def": "Broadband with fibre-optic cable all the way to the building.",
+   "alt": "FTTP",
+   "page": "p02"
+  },
+  {
+   "term": "Subsea cable",
+   "def": "A fibre-optic cable laid on the ocean floor to carry data between countries.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Cellular network",
+   "def": "A mobile network made of many small areas (cells), each served by a mast.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Mast",
+   "def": "A base station with antennas that connects mobile devices to the network.",
+   "alt": "Base station",
+   "page": "p03"
+  },
+  {
+   "term": "Handover",
+   "def": "Passing a phone's connection from one mast to the next as it moves.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Spectrum",
+   "def": "The range of radio frequencies used for communication.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "5G",
+   "def": "The fifth generation of mobile network, offering faster speeds, lower latency and many more connected devices.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Low latency",
+   "def": "A very short delay before data arrives.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Network slicing",
+   "def": "Dividing one physical 5G network into separate virtual networks with different performance.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "6G",
+   "def": "The sixth generation of mobile network, being researched and expected around 2030.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Geostationary orbit",
+   "def": "An orbit about 36,000 km high where a satellite stays above the same point on Earth.",
+   "alt": "GEO",
+   "page": "p05"
+  },
+  {
+   "term": "Low Earth orbit",
+   "def": "An orbit about 500-2,000 km high where satellites circle Earth quickly.",
+   "alt": "LEO",
+   "page": "p05"
+  },
+  {
+   "term": "Satellite constellation",
+   "def": "A large group of satellites working together to provide a service.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Space debris",
+   "def": "Old satellites, rocket parts and fragments left orbiting Earth.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Digital divide",
+   "def": "The gap between people who have good internet access and skills and those who don't.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Digital inclusion",
+   "def": "Making sure everyone can access and use digital technology.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Resilience",
+   "def": "The ability of a network to keep working, or recover quickly, when something goes wrong.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}
