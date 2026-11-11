@@ -29880,11 +29880,1174 @@
   {
    "id": "c14",
    "n": 14,
+   "title": "Machine Learning Lab",
+   "intro": "In the Artificial Intelligence topic you met machine learning. Now you become the machine learning engineer. You'll collect data, train a real model in your browser, test it with a confusion matrix, break it on purpose, fix unfair data and plan an AI project for your school.",
+   "pages": [
+    {
+     "id": "c14-p01",
+     "title": "Learning from examples",
+     "spec": "Explain how supervised machine learning uses labelled examples, features and labels",
+     "summary": "In supervised learning a computer is given lots of examples with the right answers (labels). It finds patterns in the features of those examples and uses them to label new examples it has never seen.",
+     "starter": "How did you learn to tell the difference between a cat and a dog when you were little? Did someone give you a rule?",
+     "sc": [
+      "I can explain what supervised learning is",
+      "I can identify features and labels in a dataset",
+      "I can describe the training process"
+     ],
+     "slides": [
+      {
+       "t": "Rules or examples?",
+       "b": [
+        "Traditional programs: a programmer writes every rule",
+        "Machine learning: the computer learns the rules from examples",
+        "Hard to write rules for \"is this a cat?\", easy to show 10,000 cat photos",
+        "Supervised learning: every training example comes with the right answer"
+       ]
+      },
+      {
+       "t": "Features and labels",
+       "b": [
+        "A dataset is a collection of examples",
+        "Features: the information about each example (size, colour, shape, pixels)",
+        "Label: the right answer we want the model to predict (\"cat\", \"dog\")",
+        "The model learns how features link to labels"
+       ]
+      },
+      {
+       "t": "Training and predicting",
+       "b": [
+        "Training: the model adjusts itself to match features to labels",
+        "It keeps adjusting until it makes few mistakes on the examples",
+        "Predicting: it labels a new example it hasn't seen",
+        "It gives a confidence score, e.g. \"cat: 92%\""
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "Learning without rules"
+      },
+      {
+       "t": "p",
+       "text": "In a normal program, a programmer writes the rules. But some problems are almost impossible to write rules for. Try writing exact rules to recognise a cat in any photo! **[[machine learning]]** (ML) solves this by letting the computer **learn the rules from examples**."
+      },
+      {
+       "t": "h",
+       "text": "Supervised learning"
+      },
+      {
+       "t": "p",
+       "text": "In **[[supervised learning]]**, the computer is given a **[[dataset]]** of examples where the right answer is already known. It's \"supervised\" because, like a teacher, the data tells it the correct answer during training."
+      },
+      {
+       "t": "table",
+       "caption": "A tiny fruit dataset",
+       "head": [
+        "Weight (g)",
+        "Colour",
+        "Smooth skin?",
+        "Label"
+       ],
+       "rows": [
+        [
+         "150",
+         "Red",
+         "Yes",
+         "Apple"
+        ],
+        [
+         "120",
+         "Orange",
+         "No",
+         "Orange"
+        ],
+        [
+         "170",
+         "Green",
+         "Yes",
+         "Apple"
+        ],
+        [
+         "130",
+         "Orange",
+         "No",
+         "Orange"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "text": "The first three columns are **[[feature|features]]**: information about each example. The last column is the **[[label]]**: the answer we want the model to learn to predict."
+      },
+      {
+       "t": "h",
+       "text": "Training and predicting"
+      },
+      {
+       "t": "p",
+       "text": "During **training**, the model repeatedly makes guesses and adjusts itself to reduce its mistakes, finding patterns such as \"orange colour + rough skin usually means orange\". Once trained, it can **predict** the label of a new fruit it has never seen, usually with a **confidence score** such as \"apple: 87%\"."
+      },
+      {
+       "t": "note",
+       "text": "For images, the features are the colours of thousands of pixels. The model learns which pixel patterns go with which label, without anyone telling it what an \"ear\" or \"whisker\" is."
+      },
+      {
+       "t": "act",
+       "title": "Be the model",
+       "mins": 15,
+       "who": "Pairs",
+       "after": 2,
+       "steps": [
+        "Your teacher shows 12 made-up creatures labelled \"Blip\" or \"Zorg\".",
+        "Without being told any rules, study the examples and work out the pattern.",
+        "Label six new creatures and give a confidence (how sure you are, in %).",
+        "Write the \"rule\" you learned."
+       ],
+       "q": [
+        {
+         "q": "What rule did you learn, and which features did you use?",
+         "a": "Answers depend on the cards, e.g. \"Blips have spots and three legs; Zorgs have stripes and two legs. I used pattern and number of legs.\""
+        },
+        {
+         "q": "How is what you did like supervised machine learning?",
+         "a": "I was given labelled examples (training data), found patterns in their features, then used them to label new examples with a confidence: exactly what a supervised model does."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What is supervised learning?",
+       "o": [
+        "Learning from examples that have the right answers (labels)",
+        "Learning without any data",
+        "Learning with a teacher watching the computer",
+        "Writing every rule by hand"
+       ],
+       "a": 0,
+       "why": "Labelled examples supervise the learning."
+      },
+      {
+       "q": "In a dataset of fruit, \"weight\" is a...",
+       "o": [
+        "prediction",
+        "label",
+        "model",
+        "feature"
+       ],
+       "a": 3,
+       "why": "Features describe each example."
+      },
+      {
+       "q": "In a dataset of fruit, \"apple\" or \"orange\" is the...",
+       "o": [
+        "feature",
+        "label",
+        "algorithm",
+        "dataset"
+       ],
+       "a": 1,
+       "why": "The label is the answer to predict."
+      },
+      {
+       "q": "What does a confidence score of 92% mean?",
+       "o": [
+        "The model is right 92% of the time on everything",
+        "92 people agreed",
+        "The model is fairly sure of its prediction",
+        "The image is 92% clear"
+       ],
+       "a": 2,
+       "why": "It's how confident the model is about that prediction."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain the difference between a feature and a label in a dataset.",
+       "m": 2,
+       "a": "A feature is a piece of information about each example (e.g. weight, colour) (1); a label is the correct answer/category the model learns to predict (e.g. apple) (1)."
+      },
+      {
+       "q": "Explain why machine learning is useful for recognising images.",
+       "m": 2,
+       "a": "It's very hard to write rules for recognising objects in images (1); ML learns the patterns from lots of labelled examples instead (1)."
+      }
+     ],
+     "terms": [
+      "Machine learning",
+      "Supervised learning",
+      "Feature",
+      "Label",
+      "Dataset"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p02",
+     "title": "Build an image classifier",
+     "spec": "Collect training data and train an image classifier",
+     "summary": "A classifier sorts inputs into categories. Using a browser tool such as Teachable Machine, you collect example images for each class, train a model and try it live. The quality and variety of your data decides how well it works.",
+     "starter": "You want an AI to tell the difference between a thumbs up and a thumbs down. What photos would you need to give it?",
+     "sc": [
+      "I can collect varied training data for each class",
+      "I can train an image classifier",
+      "I can explain how the data affects the model"
+     ],
+     "slides": [
+      {
+       "t": "What's a classifier?",
+       "b": [
+        "A classifier is a model that sorts things into categories, called classes",
+        "Spam or not spam; cat, dog or rabbit; recycling or general waste",
+        "An image classifier does this with pictures",
+        "Teachable Machine lets you build one in your browser in minutes"
+       ],
+       "n": "Use Google's Teachable Machine (teachablemachine.withgoogle.com) in the browser with webcams if allowed. Images stay in the browser unless saved. Use objects or hand gestures, not faces."
+      },
+      {
+       "t": "Good data beats clever code",
+       "b": [
+        "At least 30-50 examples per class to start",
+        "Vary it: angles, distances, lighting, backgrounds, different hands or objects",
+        "Keep classes balanced: a similar number of examples in each",
+        "Add a \"nothing\" class so it doesn't have to guess when nothing is shown"
+       ]
+      },
+      {
+       "t": "Train, try, improve",
+       "b": [
+        "Train: the tool learns patterns from your examples",
+        "Try it live with new examples",
+        "Where does it go wrong? Add more varied data there",
+        "Retrain and compare"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "What is a classifier?"
+      },
+      {
+       "t": "p",
+       "text": "A **[[classifier]]** is a machine learning model that sorts inputs into categories. Each category is called a **[[class]]**. Spam filters, plant-identifying apps and recycling robots all use classifiers."
+      },
+      {
+       "t": "h",
+       "text": "Collecting training data"
+      },
+      {
+       "t": "p",
+       "text": "**[[training data]]** is the set of labelled examples a model learns from. For an image classifier you collect photos for each class. The golden rule of machine learning is that **the model can only be as good as its data**."
+      },
+      {
+       "t": "key",
+       "title": "Tips for good training data",
+       "items": [
+        "Enough examples: start with 30-50 per class, more is better",
+        "Variety: different angles, distances, lighting and backgrounds",
+        "Balance: a similar number of examples for each class",
+        "A \"nothing\" or \"background\" class so the model doesn't force a guess",
+        "Accuracy: check every example is labelled correctly"
+       ]
+      },
+      {
+       "t": "warn",
+       "text": "Don't train models on photos of people's faces in school. Use objects or hand gestures, and follow your teacher's instructions about webcams."
+      },
+      {
+       "t": "h",
+       "text": "Training and improving"
+      },
+      {
+       "t": "p",
+       "text": "In a tool such as Teachable Machine you add your examples, press **Train**, then test the model live with your webcam. When it makes mistakes, look for the pattern: does it fail in dim light? On a different background? Add more examples of those situations and train again. This cycle is how real ML engineers work."
+      },
+      {
+       "t": "act",
+       "title": "Recycling sorter",
+       "mins": 30,
+       "who": "Pairs",
+       "after": 3,
+       "steps": [
+        "Open Teachable Machine and create an Image Project with three classes: Paper, Plastic and Nothing.",
+        "Collect at least 30 varied images for each class using classroom objects (cards, plastic bottles, an empty desk).",
+        "Train the model and test it with objects you did NOT use in training.",
+        "Find one situation where it fails, add data to fix it and retrain."
+       ],
+       "q": [
+        {
+         "q": "How did you make your training data varied?",
+         "a": "E.g. different objects, angles, distances, held in different hands, lights on and off, different backgrounds."
+        },
+        {
+         "q": "Describe one mistake your model made, why you think it happened and how you fixed it.",
+         "a": "E.g. \"It called a crumpled paper bag plastic because all my paper examples were flat sheets. I added crumpled paper examples and retrained, and it got it right.\""
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What does a classifier do?",
+       "o": [
+        "Speeds up the internet",
+        "Writes stories",
+        "Sorts inputs into categories",
+        "Cleans the computer"
+       ],
+       "a": 2,
+       "why": "Classifiers assign classes."
+      },
+      {
+       "q": "Which training data is best for a hand-gesture classifier?",
+       "o": [
+        "Ten identical photos",
+        "Photos of only one person's hand in one place",
+        "Many photos with different hands, angles and lighting",
+        "One photo per class"
+       ],
+       "a": 2,
+       "why": "Variety helps the model generalise."
+      },
+      {
+       "q": "Why add a \"nothing\" class?",
+       "o": [
+        "So the model doesn't have to guess a class when nothing is shown",
+        "To delete wrong images",
+        "Because the tool needs four classes",
+        "To make training slower"
+       ],
+       "a": 0,
+       "why": "It gives the model a valid \"none\" answer."
+      },
+      {
+       "q": "Your model fails in dim light. What should you do?",
+       "o": [
+        "Change its colour",
+        "Delete the model",
+        "Only use it at night",
+        "Add more training examples in dim light and retrain"
+       ],
+       "a": 3,
+       "why": "Fill the gap in the data."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Describe three things that make training data good for an image classifier.",
+       "m": 3,
+       "a": "Any three: enough examples (1); variety of angles/lighting/backgrounds (1); balanced number per class (1); correct labels (1); a background/nothing class (1)."
+      },
+      {
+       "q": "Explain why a model trained only on red apples might fail to recognise a green apple.",
+       "m": 2,
+       "a": "It only learned patterns from red apples/its training data lacked variety (1), so green apples don't match what it learned as \"apple\" (1)."
+      }
+     ],
+     "terms": [
+      "Classifier",
+      "Class",
+      "Training data"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p03",
+     "title": "Is it any good?",
+     "spec": "Test a model using separate test data, accuracy and a confusion matrix",
+     "summary": "A model must be tested on data it has never seen. Accuracy is the percentage of correct predictions, and a confusion matrix shows which classes get mixed up, which matters when some mistakes are worse than others.",
+     "starter": "If a teacher gave you the exact exam questions to practise, then the same questions in the exam, would your score show what you really know?",
+     "sc": [
+      "I can explain why test data must be separate from training data",
+      "I can calculate accuracy",
+      "I can read a confusion matrix"
+     ],
+     "slides": [
+      {
+       "t": "Don't mark your own homework",
+       "b": [
+        "Testing on training data is like sitting an exam you've seen the answers to",
+        "Split the data: usually about 80% for training, 20% for testing",
+        "Test data must never be used in training",
+        "It tells you how the model will do on brand-new examples"
+       ]
+      },
+      {
+       "t": "Accuracy",
+       "b": [
+        "Accuracy = correct predictions ÷ total predictions × 100",
+        "45 correct out of 50 = 90% accuracy",
+        "But accuracy alone can hide problems",
+        "95% accurate at spotting a rare disease might still miss most ill people"
+       ],
+       "n": "Example: if only 5 in 100 people have a disease, a model that always says \"healthy\" scores 95% but is useless."
+      },
+      {
+       "t": "Confusion matrix",
+       "b": [
+        "A table comparing actual classes with predicted classes",
+        "The diagonal shows correct predictions",
+        "Everything else shows which classes get confused",
+        "Helps you decide what data to add next"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "Training data and test data"
+      },
+      {
+       "t": "p",
+       "text": "If you test a model with the same examples it trained on, it will look brilliant, but that tells you nothing about new examples. So ML engineers **split** their data: most of it (often about 80%) is used for training, and the rest is kept back as **[[test data]]** that the model never sees during training."
+      },
+      {
+       "t": "h",
+       "text": "Accuracy"
+      },
+      {
+       "t": "p",
+       "text": "**[[accuracy]]** is the percentage of predictions that are correct."
+      },
+      {
+       "t": "example",
+       "title": "Calculating accuracy",
+       "context": "A recycling classifier is tested on 40 new items. It labels 34 correctly.",
+       "steps": [
+        "Accuracy = correct ÷ total × 100",
+        "= 34 ÷ 40 × 100",
+        "= 0.85 × 100"
+       ],
+       "answer": "Accuracy = 85%."
+      },
+      {
+       "t": "warn",
+       "text": "High accuracy can be misleading when one class is rare. A model that always says \"not spam\" might be 95% accurate if only 5% of emails are spam, but it never catches any spam at all."
+      },
+      {
+       "t": "h",
+       "text": "The confusion matrix"
+      },
+      {
+       "t": "p",
+       "text": "A **[[confusion matrix]]** is a table that shows exactly which mistakes a model makes. Rows show the **actual** class; columns show the **predicted** class."
+      },
+      {
+       "t": "table",
+       "caption": "Confusion matrix for a 30-item test",
+       "head": [
+        "Actual \\ Predicted",
+        "Paper",
+        "Plastic",
+        "Nothing"
+       ],
+       "rows": [
+        [
+         "Paper",
+         "8",
+         "2",
+         "0"
+        ],
+        [
+         "Plastic",
+         "1",
+         "9",
+         "0"
+        ],
+        [
+         "Nothing",
+         "0",
+         "0",
+         "10"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "text": "The diagonal (8, 9, 10) shows the 27 correct predictions, so accuracy is 27 ÷ 30 = 90%. The other cells show the model sometimes confuses paper and plastic, so that's where it needs more varied data."
+      },
+      {
+       "t": "act",
+       "title": "Test your sorter",
+       "mins": 25,
+       "who": "Pairs",
+       "after": 3,
+       "steps": [
+        "Gather 10 NEW test objects for each class from your Recycling sorter (lesson 2) that were not used in training.",
+        "Test each one and record the actual class and the predicted class.",
+        "Fill in a confusion matrix and calculate the accuracy.",
+        "Decide which classes get confused and what data you would add."
+       ],
+       "q": [
+        {
+         "q": "What was your model's accuracy? Show your working.",
+         "a": "E.g. 26 correct out of 30: 26 ÷ 30 × 100 = 86.7%."
+        },
+        {
+         "q": "Which two classes were most often confused, and what would you do about it?",
+         "a": "E.g. paper and plastic were confused when the objects were shiny; add more examples of glossy paper and matt plastic and retrain."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "Why must test data be kept separate from training data?",
+       "o": [
+        "Because the tool deletes it",
+        "To see how the model does on examples it hasn't seen",
+        "To make training faster",
+        "It doesn't need to be"
+       ],
+       "a": 1,
+       "why": "Unseen data shows real performance."
+      },
+      {
+       "q": "A model gets 18 out of 20 test items right. What is its accuracy?",
+       "o": [
+        "95%",
+        "90%",
+        "18%",
+        "80%"
+       ],
+       "a": 1,
+       "why": "18 ÷ 20 × 100 = 90%."
+      },
+      {
+       "q": "In a confusion matrix, where are the correct predictions?",
+       "o": [
+        "In the top row",
+        "On the diagonal",
+        "In the bottom corner",
+        "In the last column"
+       ],
+       "a": 1,
+       "why": "Correct = actual matches predicted."
+      },
+      {
+       "q": "Why can accuracy be misleading?",
+       "o": [
+        "A model can score high by always guessing the most common class",
+        "It only works for images",
+        "Accuracy is always wrong",
+        "It is measured in kilograms"
+       ],
+       "a": 0,
+       "why": "Rare classes can hide failure."
+      }
+     ],
+     "practice": [
+      {
+       "q": "A model is tested on 50 images and gets 42 right. Calculate its accuracy.",
+       "m": 2,
+       "a": "42 ÷ 50 (1) × 100 = 84% (1)."
+      },
+      {
+       "q": "Explain why testing a model on its training data gives a misleading result.",
+       "m": 3,
+       "a": "The model has already seen/learned those exact examples (1), so it will score unrealistically high (1), which doesn't show how it performs on new, unseen data (1)."
+      }
+     ],
+     "terms": [
+      "Test data",
+      "Accuracy",
+      "Confusion matrix"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p04",
+     "title": "When models go wrong",
+     "spec": "Explain common reasons machine learning models fail, including overfitting, too little data and edge cases",
+     "summary": "Models fail when their data doesn't match the real world: too few examples, not enough variety, unusual edge cases, or overfitting, where a model memorises its training data instead of learning general patterns.",
+     "starter": "A model trained to spot wolves got 100% on its test. But it was actually spotting snow. How could that happen?",
+     "sc": [
+      "I can explain overfitting",
+      "I can explain why models struggle with edge cases",
+      "I can suggest how to make a model more robust"
+     ],
+     "slides": [
+      {
+       "t": "The wolf and the snow",
+       "b": [
+        "A famous research example: a model learned to tell wolves from huskies",
+        "Most wolf photos had snow in the background",
+        "The model learned \"snow = wolf\", not what a wolf looks like",
+        "This is called shortcut learning"
+       ],
+       "n": "The example is from a 2016 research paper used to show why we need to explain AI decisions. Good discussion starter."
+      },
+      {
+       "t": "Overfitting",
+       "b": [
+        "Overfitting: the model memorises the training examples, including their quirks",
+        "It scores brilliantly on training data but badly on new data",
+        "Like learning answers by heart without understanding",
+        "Fixes: more varied data, simpler models, proper testing"
+       ]
+      },
+      {
+       "t": "Edge cases",
+       "b": [
+        "Edge cases: unusual situations rarely seen in training",
+        "A self-driving car's AI might not recognise a person in a dinosaur costume",
+        "Real life is full of edge cases",
+        "That's why safety-critical AI needs huge testing and human oversight"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "Shortcut learning"
+      },
+      {
+       "t": "p",
+       "text": "Models find **any** pattern that helps them get the right answer, even one we didn't intend. In a well-known research example, a model seemed great at telling wolves from huskies. But most wolf photos had snow behind them, so it had learned \"snow means wolf\". This is called **[[shortcut learning]]**: the model uses an accidental clue instead of the real feature."
+      },
+      {
+       "t": "h",
+       "text": "Overfitting"
+      },
+      {
+       "t": "p",
+       "text": "A good model should **[[generalise]]**: work well on new examples, not just the ones it trained on. **[[overfitting]]** is when a model learns its training data too exactly, including random quirks, so it does brilliantly in training but badly on anything new."
+      },
+      {
+       "t": "table",
+       "caption": "Good fit or overfit?",
+       "head": [
+        "Model",
+        "Training accuracy",
+        "Test accuracy",
+        "Verdict"
+       ],
+       "rows": [
+        [
+         "A",
+         "92%",
+         "90%",
+         "Good: it generalises"
+        ],
+        [
+         "B",
+         "100%",
+         "61%",
+         "Overfitting: memorised the training data"
+        ],
+        [
+         "C",
+         "58%",
+         "55%",
+         "Underfitting: hasn't learned the patterns"
+        ]
+       ]
+      },
+      {
+       "t": "h",
+       "text": "Edge cases"
+      },
+      {
+       "t": "p",
+       "text": "An **[[edge case]]** is an unusual situation that rarely appears in training data. A face-unlock system might struggle with a new pair of glasses; a self-driving car's AI might not recognise a cyclist carrying a large sheet of glass. Real life is full of edge cases, so AI used in safety-critical areas needs enormous testing and human oversight."
+      },
+      {
+       "t": "key",
+       "title": "Making models more robust",
+       "items": [
+        "Collect more data, with more variety",
+        "Check what the model is actually \"looking at\" (avoid shortcuts)",
+        "Always test on separate, realistic test data",
+        "Look for edge cases on purpose and add examples of them",
+        "Keep humans involved where mistakes are dangerous"
+       ]
+      },
+      {
+       "t": "act",
+       "title": "Break your model",
+       "mins": 25,
+       "who": "Pairs",
+       "after": 3,
+       "steps": [
+        "Take your trained Recycling sorter from lesson 2.",
+        "Try to make it fail: change the background, the lighting, the distance or use unusual objects.",
+        "Record each attempt and whether it fooled the model.",
+        "Explain each failure: shortcut learning, overfitting, too little data or an edge case?"
+       ],
+       "q": [
+        {
+         "q": "Describe your best \"fail\" and explain why it happened.",
+         "a": "E.g. \"Holding a plastic bottle in front of a white wall made it say Paper. All my paper examples were on a white background, so it learned 'white background = paper': shortcut learning.\""
+        },
+        {
+         "q": "Suggest two changes to make your model more robust.",
+         "a": "E.g. add examples of every class on several different backgrounds; add unusual objects (crisp packets, cardboard) and more varied lighting, then retest with new test data."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What is overfitting?",
+       "o": [
+        "When a model is too small",
+        "When the computer overheats",
+        "When the data is too varied",
+        "When a model memorises its training data and does badly on new data"
+       ],
+       "a": 3,
+       "why": "Overfit models don't generalise."
+      },
+      {
+       "q": "Training accuracy 100%, test accuracy 60%. What is the likely problem?",
+       "o": [
+        "Too much test data",
+        "Perfect model",
+        "Overfitting",
+        "Underfitting"
+       ],
+       "a": 2,
+       "why": "A big gap between training and test suggests overfitting."
+      },
+      {
+       "q": "What is an edge case?",
+       "o": [
+        "The border of an image",
+        "The first example in a dataset",
+        "A type of computer case",
+        "An unusual situation rarely seen in training"
+       ],
+       "a": 3,
+       "why": "Edge cases are rare, unusual inputs."
+      },
+      {
+       "q": "The wolf model actually learned to spot snow. This is...",
+       "o": [
+        "overfitting to colours",
+        "shortcut learning",
+        "an edge case",
+        "accuracy"
+       ],
+       "a": 1,
+       "why": "It used an accidental clue."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain what is meant by overfitting.",
+       "m": 2,
+       "a": "The model learns the training data too closely/memorises it including quirks (1), so it performs well on training data but poorly on new data (1)."
+      },
+      {
+       "q": "A model detects cracked phone screens. All the cracked examples were photographed on a wooden desk. Explain the problem and how to fix it.",
+       "m": 3,
+       "a": "The model may learn \"wooden desk = cracked\" (shortcut learning) (1) rather than the crack itself (1); fix by photographing cracked and uncracked screens on varied/the same backgrounds (1)."
+      }
+     ],
+     "terms": [
+      "Overfitting",
+      "Edge case",
+      "Generalise",
+      "Shortcut learning"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p05",
+     "title": "Fair data, fair AI",
+     "spec": "Explain how biased data leads to unfair machine learning and how to reduce bias",
+     "summary": "If training data under-represents some groups or repeats past unfairness, the model will be less accurate or unfair for those groups. Checking who is in the data, testing results for each group and involving diverse teams helps make AI fairer.",
+     "starter": "A soap dispenser works for some people's hands but not others. What might have gone wrong when it was designed and tested?",
+     "sc": [
+      "I can explain how bias gets into data",
+      "I can describe real examples of unfair AI",
+      "I can suggest ways to reduce bias"
+     ],
+     "slides": [
+      {
+       "t": "Unfair in, unfair out",
+       "b": [
+        "Models learn from data, so they learn the data's gaps and unfairness",
+        "Under-representation: some groups barely appear in the data",
+        "Historical bias: data from the past reflects past unfairness",
+        "Labelling bias: the people labelling data add their own assumptions"
+       ]
+      },
+      {
+       "t": "Real examples",
+       "b": [
+        "Research found some face-analysis systems were far less accurate for darker-skinned women than for lighter-skinned men",
+        "A company stopped using a CV-sorting AI that learned to prefer men, because past hires were mostly men",
+        "Speech recognition has often worked less well for some accents",
+        "Health tools trained mostly on one group may miss illness in others"
+       ],
+       "n": "The face-analysis example is the Gender Shades study (Buolamwini and Gebru, 2018). The CV tool was reported in 2018. Keep the discussion focused on how data causes the problem."
+      },
+      {
+       "t": "Making AI fairer",
+       "b": [
+        "Check who is in the data: is it representative of everyone who will use it?",
+        "Test accuracy separately for different groups",
+        "Involve diverse people in design and testing",
+        "Be open about limits; keep humans in charge of big decisions"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "How bias gets in"
+      },
+      {
+       "t": "p",
+       "text": "**[[bias|Bias]]** in AI means a system is less accurate or less fair for some people. Models learn patterns from data, so if the data is unbalanced or reflects past unfairness, the model will too."
+      },
+      {
+       "t": "table",
+       "caption": "Three ways bias enters data",
+       "head": [
+        "Type",
+        "What happens",
+        "Example"
+       ],
+       "rows": [
+        [
+         "Under-representation",
+         "Some groups barely appear in the training data",
+         "A face-recognition dataset with few photos of older people"
+        ],
+        [
+         "Historical bias",
+         "Data reflects unfair decisions made in the past",
+         "A hiring model learns from years of mostly male hires"
+        ],
+        [
+         "Labelling bias",
+         "People labelling data add their own assumptions",
+         "Photos of women in kitchens labelled \"cooking\" more often than men in kitchens"
+        ]
+       ]
+      },
+      {
+       "t": "h",
+       "text": "Real-world cases"
+      },
+      {
+       "t": "p",
+       "text": "Researchers testing commercial face-analysis systems found they were much less accurate for darker-skinned women than for lighter-skinned men, because the training data contained far more lighter-skinned faces. A large company stopped using an experimental CV-sorting AI after finding it marked down applications that mentioned women's activities, because it had learned from past hiring patterns. These cases show that unfair AI usually comes from **data**, not from anyone programming it to be unfair."
+      },
+      {
+       "t": "h",
+       "text": "Reducing bias"
+      },
+      {
+       "t": "p",
+       "text": "**[[representative data]]** includes a fair mix of all the people and situations the AI will meet in real use. **[[fairness]]** in AI means making sure a system doesn't treat people worse because of who they are."
+      },
+      {
+       "t": "key",
+       "title": "Steps towards fairer AI",
+       "items": [
+        "Audit the data: who and what is included, and who is missing?",
+        "Collect more examples from under-represented groups",
+        "Test accuracy separately for each group, not just overall",
+        "Include people from different backgrounds in the team",
+        "Explain how decisions are made and let people challenge them"
+       ]
+      },
+      {
+       "t": "act",
+       "title": "Dataset audit",
+       "mins": 20,
+       "who": "Groups of 3",
+       "after": 3,
+       "steps": [
+        "Your teacher gives you a summary of a (fictional) dataset for a school \"smart door\" that recognises pupils' faces.",
+        "Find who is under-represented in the data.",
+        "Predict which pupils the system might fail for and what problems this could cause.",
+        "Write three recommendations to make it fairer, or argue that it shouldn't be used at all."
+       ],
+       "q": [
+        {
+         "q": "Which groups were under-represented, and what could go wrong for them?",
+         "a": "E.g. pupils wearing glasses, hijabs or with darker skin had few examples, so the door might not open for them, making them late, embarrassed or treated differently."
+        },
+        {
+         "q": "Write your three recommendations (or your argument against the system).",
+         "a": "E.g. collect consented, balanced data; test accuracy for each group before use; always offer a non-AI alternative such as a staff member or card. Or argue face data of children is too sensitive to collect."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "Where does bias in machine learning usually come from?",
+       "o": [
+        "The speed of the processor",
+        "The programmer's handwriting",
+        "The training data",
+        "The colour of the computer"
+       ],
+       "a": 2,
+       "why": "Models learn data's unfairness."
+      },
+      {
+       "q": "What is under-representation?",
+       "o": [
+        "When some groups barely appear in the data",
+        "When data is encrypted",
+        "When labels are correct",
+        "When data is too big"
+       ],
+       "a": 0,
+       "why": "Missing groups lead to poor accuracy for them."
+      },
+      {
+       "q": "Why did a CV-sorting AI learn to prefer men?",
+       "o": [
+        "It was programmed to",
+        "It learned from past hiring data that was mostly men",
+        "The computer was broken",
+        "Women didn't apply"
+       ],
+       "a": 1,
+       "why": "Historical bias came from the data."
+      },
+      {
+       "q": "Which step helps reduce bias?",
+       "o": [
+        "Using less data",
+        "Hiding how the AI works",
+        "Only testing overall accuracy",
+        "Testing accuracy separately for different groups"
+       ],
+       "a": 3,
+       "why": "Group-level testing reveals unfairness."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain how a face-recognition system could end up less accurate for some groups of people.",
+       "m": 2,
+       "a": "Its training data had fewer examples of those groups/wasn't representative (1), so it learned their features less well and makes more mistakes for them (1)."
+      },
+      {
+       "q": "Describe three ways a team could make a machine learning system fairer.",
+       "m": 3,
+       "a": "Any three: representative/balanced data (1); audit who's missing (1); test accuracy per group (1); diverse team (1); human oversight/ability to challenge decisions (1); transparency (1)."
+      }
+     ],
+     "terms": [
+      "Bias",
+      "Representative data",
+      "Fairness"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c14-p06",
+     "title": "Design an ML project",
+     "spec": "Plan a machine learning solution to a real problem, including data, testing and ethics",
+     "summary": "Real ML projects start with a clear problem, then plan the data, how to train and test, how success will be measured, and the risks. Sometimes the best answer is that AI isn't needed.",
+     "starter": "Think of one annoying problem at school. Could an AI help? What would it need to learn from?",
+     "sc": [
+      "I can describe the stages of an ML project",
+      "I can plan the data and testing for a model",
+      "I can identify the ethical risks of my solution"
+     ],
+     "slides": [
+      {
+       "t": "The ML project cycle",
+       "b": [
+        "1 Define the problem: what exactly should the AI predict or classify?",
+        "2 Collect and label data, with permission",
+        "3 Train, then test on separate data",
+        "4 Evaluate, improve, and keep monitoring after launch"
+       ]
+      },
+      {
+       "t": "Ask the hard questions",
+       "b": [
+        "Is AI actually needed, or would a simple rule work?",
+        "Where will the data come from, and do we have permission?",
+        "What happens when it's wrong, and who is affected?",
+        "Who checks its decisions (human oversight)?"
+       ]
+      },
+      {
+       "t": "Success criteria",
+       "b": [
+        "Decide in advance: what accuracy is good enough?",
+        "Which mistakes are worse? (missing a problem vs a false alarm)",
+        "Test with real users in real conditions",
+        "Plan to retrain as things change"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "The ML project cycle"
+      },
+      {
+       "t": "p",
+       "text": "Real machine learning engineers follow a cycle:"
+      },
+      {
+       "t": "list",
+       "ordered": true,
+       "items": [
+        "**Define the problem.** Write a clear **[[problem statement]]**: what should the model predict, for whom, and why?",
+        "**Collect and label data.** Make sure it's varied, representative and collected with permission.",
+        "**Train and test.** Use separate training and test data.",
+        "**Evaluate.** **[[evaluation]]** means judging how well the solution works against success criteria decided in advance.",
+        "**Deploy and monitor.** Keep checking it in real use and retrain when things change."
+       ]
+      },
+      {
+       "t": "h",
+       "text": "Is AI the right tool?"
+      },
+      {
+       "t": "p",
+       "text": "Not every problem needs AI. If a simple rule works (\"send a reminder if homework is due tomorrow\"), a normal program is cheaper, clearer and easier to check. ML is useful when the patterns are too complicated to write as rules, such as recognising images or sounds."
+      },
+      {
+       "t": "h",
+       "text": "Thinking about risks"
+      },
+      {
+       "t": "key",
+       "title": "Ethics checklist for an ML project",
+       "items": [
+        "Privacy: whose data is used, and did they agree?",
+        "Fairness: does it work equally well for everyone?",
+        "Mistakes: what happens when it's wrong, and how bad is that?",
+        "Oversight: who checks its decisions and can overrule them?",
+        "Environment: is the computing cost worth it?"
+       ]
+      },
+      {
+       "t": "p",
+       "text": "**[[human oversight]]** means people stay in control: they can check, question and overrule the AI, especially for important decisions about people."
+      },
+      {
+       "t": "act",
+       "title": "Pitch an AI for our school",
+       "mins": 35,
+       "who": "Groups of 3",
+       "after": 3,
+       "steps": [
+        "Choose a school problem (e.g. sorting lost property, identifying birds for the eco-club, spotting litter in photos of the playground).",
+        "Complete a project plan: problem statement, classes, what data you'd collect and how, how you'd test it, your success criteria.",
+        "Complete the ethics checklist for your idea.",
+        "Pitch it to the class in 2 minutes. The class votes: build it, change it, or don't use AI."
+       ],
+       "q": [
+        {
+         "q": "Write your problem statement and the classes your model would predict.",
+         "a": "E.g. \"Help the eco-club identify garden birds from feeder camera photos so they can count them. Classes: robin, blue tit, blackbird, sparrow, no bird.\""
+        },
+        {
+         "q": "Describe your data, testing plan and success criteria.",
+         "a": "E.g. collect 200+ photos per class from the school feeder camera in different weather; split 80/20; success means at least 85% test accuracy and no class below 75%."
+        },
+        {
+         "q": "What is the biggest risk of your idea, and how would you reduce it?",
+         "a": "E.g. accidentally capturing pupils in photos: point the camera only at the feeder, delete images with people automatically, and keep a teacher in charge of the data."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What is the first stage of an ML project?",
+       "o": [
+        "Deploy the app",
+        "Train the model",
+        "Define the problem clearly",
+        "Buy a faster computer"
+       ],
+       "a": 2,
+       "why": "Start with a clear problem statement."
+      },
+      {
+       "q": "When might a normal program be better than ML?",
+       "o": [
+        "When a simple rule solves the problem",
+        "Never",
+        "When recognising images",
+        "When patterns are too complex for rules"
+       ],
+       "a": 0,
+       "why": "Simple rules are cheaper and clearer."
+      },
+      {
+       "q": "What is human oversight?",
+       "o": [
+        "People checking and able to overrule the AI's decisions",
+        "A camera watching humans",
+        "A faster algorithm",
+        "A type of training data"
+       ],
+       "a": 0,
+       "why": "Humans stay in control."
+      },
+      {
+       "q": "Why decide success criteria before testing?",
+       "o": [
+        "It doesn't matter when",
+        "So testing is faster",
+        "Because the AI needs them",
+        "So you can judge the results fairly"
+       ],
+       "a": 3,
+       "why": "Deciding first keeps evaluation honest."
+      }
+     ],
+     "practice": [
+      {
+       "q": "A school wants AI to mark pupils' handwritten spelling tests. Identify three questions the school should ask before building it.",
+       "m": 3,
+       "a": "Any three: is AI needed or would another method work (1); what data/permission (1); how accurate must it be (1); what happens when it's wrong/how pupils can challenge it (1); is it fair for all handwriting styles (1); who checks it (1)."
+      },
+      {
+       "q": "Explain why an ML model should keep being monitored after it is put into use.",
+       "m": 2,
+       "a": "Real-world data can change over time/it may meet new situations (1), so its accuracy may drop and it may need retraining (1)."
+      }
+     ],
+     "terms": [
+      "Problem statement",
+      "Evaluation",
+      "Human oversight"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    }
+   ]
+  },
+  {
+   "id": "c15",
+   "n": 15,
    "title": "Models and Simulations",
    "intro": "A model is a simplified representation of a real system, and a simulation uses a model to test predictions before anything is built or spent. This topic covers abstraction, variables and data types, spreadsheet what-if models, Goal Seek and scenarios, simulations step by step and with chance, validating a model against real data, and asking who a model works for.",
    "pages": [
     {
-     "id": "c14-p01",
+     "id": "c15-p01",
      "spec": "Explain what a model is, what a simulation is, and why people use them",
      "summary": "A model is a simplified representation of a real system. A simulation runs a model to see what would happen, so people can test ideas safely, cheaply and quickly before trying them for real.",
      "diagram": {
@@ -30132,7 +31295,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p02",
+     "id": "c15-p02",
      "spec": "Use abstraction to decide what to include in a model and what to leave out",
      "summary": "Abstraction means keeping only the details that matter for the question you want to answer. Every model also makes assumptions, and a good modeller writes them down.",
      "diagram": {
@@ -30350,7 +31513,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p03",
+     "id": "c15-p03",
      "spec": "Identify the variables, inputs, rules and outputs of a model and choose a suitable data type for each",
      "summary": "A model takes inputs, applies rules, and produces outputs. The values that can change are variables, and each one needs the right data type: integer, float, string or Boolean.",
      "diagram": {
@@ -30604,7 +31767,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p04",
+     "id": "c15-p04",
      "spec": "Build a spreadsheet model with formulas and use it to answer 'what if' questions",
      "summary": "In a spreadsheet model the inputs are cells, the rules are formulas that refer to those cells, and the outputs recalculate automatically. Changing one input to see the effect is a what-if question.",
      "diagram": {
@@ -30877,7 +32040,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p05",
+     "id": "c15-p05",
      "spec": "Use Goal Seek and scenarios to explore a spreadsheet model",
      "summary": "Goal Seek works backwards: you choose the answer you want and it finds the input needed. Scenarios save whole sets of inputs, such as worst case, expected and best case, so you can compare them.",
      "diagram": {
@@ -31115,7 +32278,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p06",
+     "id": "c15-p06",
      "spec": "Carry out a simulation step by step over time and explain how changing a variable changes the outcome",
      "summary": "A simulation over time applies the model's rules again and again, one time step after another, and each new row is worked out from the row before. Small changes to a variable can make a huge difference.",
      "diagram": {
@@ -31404,7 +32567,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p07",
+     "id": "c15-p07",
      "spec": "Explain why some simulations use random numbers and why they are run many times",
      "summary": "Real life involves chance, so some simulations use random numbers. Each run gives a different result, so the simulation is run many times and the results are averaged to give a reliable prediction.",
      "diagram": {
@@ -31618,7 +32781,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p08",
+     "id": "c15-p08",
      "spec": "Test a model's predictions against real data and refine the model to improve it",
      "summary": "Testing checks the model's formulas work as intended; validating checks its predictions against what really happens. If they do not match, refine the rules or assumptions and test again.",
      "diagram": {
@@ -31877,7 +33040,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p09",
+     "id": "c15-p09",
      "spec": "Evaluate the limitations, trade-offs and possible bias of models, including AI models, and ask who a model works for",
      "summary": "Every model leaves things out, so it has limits. A model can be unfair if its data or assumptions leave some people out. AI models are models too: they learn patterns from data, so biased data gives biased results.",
      "diagram": {
@@ -32093,7 +33256,7 @@
      "lessons": []
     },
     {
-     "id": "c14-p10",
+     "id": "c15-p10",
      "spec": "Plan, build, test and evaluate a model of your own to answer a real question",
      "summary": "Building a good model follows a cycle: plan the question, inputs, rules, outputs and assumptions; build it; test and validate it; then evaluate how well it works and who it works for, and refine it.",
      "diagram": {
@@ -32317,13 +33480,13 @@
    ]
   },
   {
-   "id": "c15",
-   "n": 15,
+   "id": "c16",
+   "n": 16,
    "title": "Networks and the Internet",
    "intro": "Find out what really happens when you send a message, open a website or download a game: the hardware, layouts, addresses and rules that make networks and the internet work.",
    "pages": [
     {
-     "id": "c15-p01",
+     "id": "c16-p01",
      "spec": "Explain what a network is, why computers are networked, and the difference between a LAN and a WAN",
      "summary": "A network is two or more devices connected so they can share data and resources. A LAN covers a small area like a school; a WAN covers a large area and the internet is the biggest WAN of all.",
      "diagram": {
@@ -32556,7 +33719,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p02",
+     "id": "c16-p02",
      "spec": "Identify the main pieces of network hardware and describe what each one does",
      "summary": "Every device needs a NIC to join a network. Switches connect devices inside a LAN, routers connect networks together, wireless access points add Wi-Fi, and modems convert signals. Data travels through Ethernet or fibre optic cables.",
      "diagram": {
@@ -32794,7 +33957,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p03",
+     "id": "c16-p03",
      "spec": "Compare wired and wireless connections, including Wi-Fi and Bluetooth, and choose a suitable one for a task",
      "summary": "Wired connections are faster, more reliable and more secure. Wireless connections (Wi-Fi and Bluetooth) give freedom to move and need no cables, but are slower, have limited range and can suffer from interference.",
      "diagram": {
@@ -33082,7 +34245,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p04",
+     "id": "c16-p04",
      "spec": "Describe star, bus and mesh network topologies and give an advantage and a disadvantage of each",
      "summary": "A topology is the layout of a network. In a star, every device connects to a central switch. In a bus, every device shares one backbone cable. In a mesh, devices connect to many others so there are lots of routes.",
      "diagram": {
@@ -33283,7 +34446,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p05",
+     "id": "c16-p05",
      "spec": "Compare client-server and peer-to-peer networks and decide which is suitable for a given situation",
      "summary": "In a client-server network, clients ask central servers for files, logins and services, so it is easy to manage and secure. In a peer-to-peer network every computer is equal and shares directly, which is cheap and simple but harder to manage.",
      "diagram": {
@@ -33574,7 +34737,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p06",
+     "id": "c16-p06",
      "spec": "Explain how data is split into packets and sent across a network using packet switching",
      "summary": "Data is split into small packets. Each packet has a header with the sender's and receiver's addresses and a packet number. Routers send each packet by the best route available, and the receiving computer puts them back in order and asks for any missing ones again.",
      "diagram": {
@@ -33795,7 +34958,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p07",
+     "id": "c16-p07",
      "spec": "Explain what IP addresses and MAC addresses are and the difference between them",
      "summary": "An IP address identifies a device on a network so data can be routed to it, and it can change. A MAC address is a unique, permanent address built into a device's NIC when it is made.",
      "diagram": {
@@ -33993,7 +35156,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p08",
+     "id": "c16-p08",
      "spec": "Describe, step by step, what happens when you type a URL into a browser, including the role of DNS",
      "summary": "Computers find each other using IP addresses, but people remember names. When you type a URL, a DNS server looks up the IP address for the domain name, then the browser contacts the web server at that address and the page arrives as packets.",
      "diagram": {
@@ -34232,7 +35395,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p09",
+     "id": "c16-p09",
      "spec": "Explain bandwidth and network speed units, and calculate how long a file will take to download",
      "summary": "Bandwidth is how much data a connection can carry each second, measured in bits per second (usually Mbps). To find a download time, convert the file size into megabits (multiply MB by 8) and divide by the speed in Mbps.",
      "diagram": {
@@ -34454,7 +35617,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p10",
+     "id": "c16-p10",
      "spec": "Explain what the cloud and the Internet of Things are, and evaluate their benefits and risks",
      "summary": "The cloud means using storage and software on servers in data centres over the internet, such as OneDrive. The Internet of Things is everyday objects with sensors that connect to the internet, such as smart speakers and fitness trackers. Both are convenient but raise security and privacy concerns.",
      "diagram": {
@@ -34735,13 +35898,13 @@
    ]
   },
   {
-   "id": "c16",
-   "n": 16,
+   "id": "c17",
+   "n": 17,
    "title": "Presentations with PowerPoint",
    "intro": "How to plan, build and deliver presentations that actually work, using Microsoft PowerPoint. You will plan for an audience with a storyboard, design clear and accessible slides, use images legally, add charts, effects and links sensibly, then present with confidence and evaluate your work against success criteria.",
    "pages": [
     {
-     "id": "c16-p01",
+     "id": "c17-p01",
      "spec": "Describe what presentation software is used for and explain why a presentation must suit its audience and purpose",
      "summary": "Presentation software such as Microsoft PowerPoint shows information as a series of slides that support a speaker. Before you make a single slide, decide who your audience is and what your purpose is, because both change every design choice.",
      "diagram": {
@@ -35043,7 +36206,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p02",
+     "id": "c17-p02",
      "spec": "Plan a presentation using a storyboard before building it",
      "summary": "A storyboard is a plan of every slide, drawn before you open PowerPoint. It shows the content, layout, images, links and notes for each slide, so you can fix problems on paper instead of wasting time on screen.",
      "diagram": {
@@ -35294,7 +36457,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p03",
+     "id": "c17-p03",
      "spec": "Identify the main parts of the PowerPoint window and use slide layouts, placeholders and views",
      "summary": "PowerPoint's ribbon holds the tools in tabs; the slide pane shows thumbnails; the notes pane holds what you will say. Slide layouts give each slide ready-made placeholders, and different views help you build, reorder and practise.",
      "diagram": {
@@ -35592,7 +36755,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p04",
+     "id": "c17-p04",
      "spec": "Apply good slide design: the 6x6 guideline, contrast, readable fonts, consistency, design themes and the Slide Master",
      "summary": "Good slides are simple, readable and consistent: few words, strong contrast, clear fonts and the same style throughout. Design themes and the Slide Master let you set the look once so every slide matches.",
      "diagram": {
@@ -35802,7 +36965,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p05",
+     "id": "c17-p05",
      "spec": "Explain copyright, ownership, intellectual property and licensing (including Creative Commons), credit sources correctly, and use AI-generated images honestly",
      "summary": "Almost every image online is protected by copyright, so 'found on Google' does not mean 'free to use'. Use images you are allowed to use, such as your own, stock images or Creative Commons images, credit the source, and clearly label any AI-generated image.",
      "diagram": {
@@ -36128,7 +37291,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p06",
+     "id": "c17-p06",
      "spec": "Use charts, tables and SmartArt to present information clearly",
      "summary": "Numbers are easier to understand as a chart, comparisons fit neatly in a table, and SmartArt turns lists into diagrams such as processes, cycles and hierarchies. Pick the one that matches what the information shows.",
      "diagram": {
@@ -36354,7 +37517,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p07",
+     "id": "c17-p07",
      "spec": "Use transitions and animations sensibly, choosing effects, order and timing to support the message",
      "summary": "Transitions play between slides; animations make objects on a slide enter, move or leave. Used sparingly and consistently they guide attention; overused they distract and look unprofessional.",
      "diagram": {
@@ -36613,7 +37776,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p08",
+     "id": "c17-p08",
      "spec": "Create hyperlinks and action buttons to build non-linear presentations such as quizzes and kiosk displays",
      "summary": "Hyperlinks and action buttons let the user jump to any slide, a website or a file. This makes non-linear presentations possible, such as a menu, a quiz with right and wrong answer slides, or a self-running kiosk.",
      "diagram": {
@@ -36837,7 +38000,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p09",
+     "id": "c17-p09",
      "spec": "Apply accessibility guidelines and international standards (WCAG) to a presentation using alt text, contrast, colour-blind friendly colours, readable font sizes and the Accessibility Checker",
      "summary": "An accessible presentation can be used by everyone, including people who are blind, partially sighted, colour blind or dyslexic. Follow the international WCAG guidelines: add alt text, never rely on colour alone, use large high-contrast text, and run Review > Check Accessibility.",
      "diagram": {
@@ -37158,7 +38321,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p10",
+     "id": "c17-p10",
      "spec": "Use speaker notes, rehearse timings and Presenter View, and apply good speaking skills to deliver a presentation",
      "summary": "Speaker notes hold what you will say; Presenter View shows them only to you while the audience sees the slides. Rehearse with timings, then speak clearly to the audience, not to the screen.",
      "diagram": {
@@ -37386,7 +38549,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p11",
+     "id": "c17-p11",
      "spec": "Evaluate a presentation against success criteria, using peer feedback, and refine it to improve usability",
      "summary": "Evaluating means judging how well your presentation met its success criteria, using evidence such as peer feedback. A good evaluation names strengths, admits weaknesses, and says exactly how to improve.",
      "diagram": {
@@ -37654,13 +38817,13 @@
    ]
   },
   {
-   "id": "c17",
-   "n": 17,
+   "id": "c18",
+   "n": 18,
    "title": "Programming Next Steps: Functions, Lists and AI",
    "intro": "This topic carries on from Programming. You will make your C# programs shorter and smarter with methods, store whole collections of data in arrays and lists, learn the standard list algorithms, find out how to use generative AI to help with code without being fooled by it, and finish by building and testing a quiz-score analyser.",
    "pages": [
     {
-     "id": "c17-p01",
+     "id": "c18-p01",
      "spec": "Describe the data types int, double, float, string, char and bool, and choose the most suitable data type for a value",
      "summary": "Every variable has a data type that decides what it can store and what you can do with it. Use int for whole numbers, double or float for decimals, string for text, char for one character and bool for true or false.",
      "diagram": {
@@ -37918,7 +39081,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p02",
+     "id": "c18-p02",
      "spec": "Explain why programmers use methods (functions) to avoid repetition and decompose problems, and write and call a static void method",
      "summary": "A method is a named block of code that does one job. Write it once, then call it by name whenever you need it. Methods stop you repeating code, make programs easier to read and fix, and let you break a big problem into smaller parts.",
      "diagram": {
@@ -38186,7 +39349,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p03",
+     "id": "c18-p03",
      "spec": "Use parameters and arguments to pass values into a method, so one method can work with different data",
      "summary": "A parameter is a variable in a method's brackets that receives a value. An argument is the actual value you pass in when you call the method. Parameters let one method do the same job with different data.",
      "diagram": {
@@ -38437,7 +39600,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p04",
+     "id": "c18-p04",
      "spec": "Write methods that return a value, and explain the difference between a void method and a method with a return type",
      "summary": "A method with a return type, such as int, double or bool, works something out and sends one value back to where it was called, using the keyword return. A void method does a job but sends nothing back.",
      "diagram": {
@@ -38663,7 +39826,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p05",
+     "id": "c18-p05",
      "spec": "Explain the scope of a variable, and the difference between local and global (class-level) variables",
      "summary": "The scope of a variable is the part of the program where it can be used. A local variable only exists inside the method or block where it is declared. A global (class-level) variable can be used by every method, but it is safer to use local variables, parameters and return values.",
      "diagram": {
@@ -38877,7 +40040,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p06",
+     "id": "c18-p06",
      "spec": "Declare an array, access its elements using an index that starts at 0, and loop through it with a for loop",
      "summary": "An array stores a fixed number of values of the same data type under one name. Each element has an index starting at 0, so the last index is always Length - 1. A for loop can visit every element.",
      "diagram": {
@@ -39134,7 +40297,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p07",
+     "id": "c18-p07",
      "spec": "Use a List to store a collection that can grow and shrink, using Add, Remove, Count and foreach, and choose between a list and an array",
      "summary": "A List is like an array that can change size. Add puts an item on the end, Remove takes one out, Count says how many items there are and a foreach loop visits every item. Use an array when the size is fixed and a list when it will change.",
      "diagram": {
@@ -39403,7 +40566,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p08",
+     "id": "c18-p08",
      "spec": "Use loops to process a list: find the total, average and largest value, search for an item and count matches",
      "summary": "Most list programs use a handful of standard algorithms: keep a running total, divide it by Count for the average, remember the largest value so far, check each item in turn to search for one, and add 1 to a counter for each match.",
      "diagram": {
@@ -39688,7 +40851,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p09",
+     "id": "c18-p09",
      "spec": "Evaluate the benefits and limitations of using generative AI to help write code, and review and verify the code it produces",
      "summary": "Generative AI can explain errors, suggest code and speed up routine work, but it can be confidently wrong. Write clear prompts, then check every line by reading, tracing and testing it, and always be honest about where your code came from.",
      "diagram": {
@@ -39968,7 +41131,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p10",
+     "id": "c18-p10",
      "spec": "Plan, develop, test and refine a program in stages, using methods, a list and a test table",
      "summary": "Real software is built in cycles of planning, development, testing and refinement. The class quiz-score analyser is planned with decomposition, built one method at a time, checked with a test table of normal, boundary and erroneous data, then refined.",
      "diagram": {
@@ -40288,13 +41451,13 @@
    ]
   },
   {
-   "id": "c18",
-   "n": 18,
+   "id": "c19",
+   "n": 19,
    "title": "Programming with Scratch",
    "intro": "Scratch is where many programmers start: you snap blocks together instead of typing code, but the ideas are the same ones you will use in C# later. In this topic you will learn the Scratch window, events, coordinates, animation, loops, decisions, variables, messages and your own custom blocks, build a simulation, and then plan, build, test and refine a game for a real user.",
    "pages": [
     {
-     "id": "c18-p01",
+     "id": "c19-p01",
      "spec": "Describe what Scratch is and identify the stage, sprites, blocks palette and scripts area",
      "summary": "Scratch is a free, block-based programming language: you snap blocks together into scripts instead of typing code. The Scratch window has a stage where things happen, sprites that you program, a blocks palette to choose blocks from and a scripts area to build them in.",
      "diagram": {
@@ -40609,7 +41772,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p02",
+     "id": "c19-p02",
      "spec": "Use event blocks to start scripts and explain why the sequence of blocks matters",
      "summary": "Event (hat) blocks such as [when green flag clicked] or [when (space) key pressed] start a script. The blocks underneath then run in sequence, one after another from top to bottom, so putting them in the wrong order changes what happens.",
      "diagram": {
@@ -40865,7 +42028,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p03",
+     "id": "c19-p03",
      "spec": "Use motion blocks and x and y coordinates to position and move a sprite on the stage",
      "summary": "The stage is a grid 480 steps wide (x from -240 to 240) and 360 steps tall (y from -180 to 180), with (0, 0) in the centre. Motion blocks either move a sprite relative to where it is, such as [change x by (10)], or send it to an exact position, such as [go to x: (100) y: (50)].",
      "diagram": {
@@ -41164,7 +42327,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p04",
+     "id": "c19-p04",
      "spec": "Use looks and sound blocks, and switch costumes to animate a sprite",
      "summary": "Looks blocks change how a sprite appears: speech bubbles, size, effects, show and hide, and its costume. Switching quickly between costumes with a short wait in between makes an animation, just like a flip book, and sound blocks add music and effects.",
      "diagram": {
@@ -41387,7 +42550,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p05",
+     "id": "c19-p05",
      "spec": "Use repeat, forever and repeat until loops and explain why loops make code shorter",
      "summary": "Iteration means repeating blocks using a loop. [repeat (10)] is a count-controlled loop that runs a set number of times; [repeat until <>] is a condition-controlled loop that stops when its condition becomes true; [forever] never stops. Loops make code shorter, easier to read and easier to change.",
      "diagram": {
@@ -41626,7 +42789,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p06",
+     "id": "c19-p06",
      "spec": "Use if and if-else blocks with sensing blocks so a program can make decisions",
      "summary": "Selection lets a program choose what to do. [if <condition> then] runs its blocks only when the condition is true; [if <> then else] picks one of two paths. Sensing blocks such as <touching (Bowl)?>, <key (space) pressed?> and [ask () and wait] give the conditions and inputs, and an if usually needs to sit inside a forever loop so it keeps checking.",
      "diagram": {
@@ -41910,7 +43073,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p07",
+     "id": "c19-p07",
      "spec": "Create and use variables for score, lives and timers, know the data types they hold, and use operators for maths, comparisons and random numbers",
      "summary": "A variable is a named store for a value that can change, such as score, lives or time. In Scratch a variable can hold a number, text (a string) or true/false (a Boolean). Operator blocks do maths (+, -, ×, /), compare values (<, =, >), join text and pick random numbers.",
      "diagram": {
@@ -42212,7 +43375,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p08",
+     "id": "c19-p08",
      "spec": "Use broadcast and when I receive blocks to send messages between sprites and the stage",
      "summary": "A broadcast sends a message to every sprite and the stage. Any script that starts with [when I receive (message)] then runs. Broadcasts let sprites work together, such as starting a level, showing a game-over screen or making one sprite react to another.",
      "diagram": {
@@ -42405,7 +43568,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p09",
+     "id": "c19-p09",
      "spec": "Use abstraction to reduce complexity by making My Blocks (custom blocks) with inputs",
      "summary": "A My Block is a custom block you define once and then use whenever you need it, giving a long set of blocks a single clear name. This is abstraction: hiding detail you do not need to think about. Inputs (parameters) let the same block do slightly different jobs, such as drawing a shape with any number of sides.",
      "diagram": {
@@ -42592,7 +43755,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p10",
+     "id": "c19-p10",
      "spec": "Use variables to build a simple simulation, and explain how changing a variable changes the outcome of a model",
      "summary": "A model is a simplified version of a real system, and a simulation runs the model to see what happens. In Scratch, variables such as gravity, bounciness or growth rate control the model: change one and you can test a prediction, such as how quickly rabbits fill an island or how high a ball bounces.",
      "diagram": {
@@ -42806,7 +43969,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p11",
+     "id": "c19-p11",
      "spec": "Find and fix bugs by tracing a script and recognising common Scratch errors",
      "summary": "A bug is a mistake that stops a program doing what it should; debugging is finding and fixing it. Scratch blocks stop most typing errors, so most Scratch bugs are logic errors: blocks in the wrong order, the wrong sprite, set instead of change, a missing loop or reset, or a condition that is never true. Tracing a script step by step shows where it goes wrong.",
      "diagram": {
@@ -43073,7 +44236,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p12",
+     "id": "c19-p12",
      "spec": "Plan, develop, test and refine a simple game for a user, using a user story and a test table",
      "summary": "Software is made in cycles: plan, develop, test and refine, then go round again. Start by asking who the game is for and writing a user story ('As a ... I want ... so that ...'). Build one feature at a time, test each one with a test table of normal, boundary and erroneous tests, and refine it using what you find and what users say.",
      "diagram": {
@@ -43376,13 +44539,13 @@
    ]
   },
   {
-   "id": "c19",
-   "n": 19,
+   "id": "c20",
+   "n": 20,
    "title": "Spreadsheets",
    "intro": "How to use Microsoft Excel to store and calculate data: cells and ranges, formatting, formulas and functions, relative and absolute references, sorting and filtering, charts, and building a tested 'what if' model for a school tuck shop and trip.",
    "pages": [
     {
-     "id": "c19-p01",
+     "id": "c20-p01",
      "spec": "Describe what a spreadsheet is used for and identify cells, rows, columns and ranges",
      "summary": "A spreadsheet is a grid of cells used to store, calculate and present numbers. Each cell has a cell reference made of its column letter and row number, such as B3, and a block of cells is a range, such as A1:D6.",
      "diagram": {
@@ -43688,7 +44851,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p02",
+     "id": "c20-p02",
      "spec": "Enter different types of data and format cells so a spreadsheet is clear to read",
      "summary": "Cells can hold text, numbers, currency, percentages and dates. Formatting (bold, borders, number formats, column width) changes how data looks, not its value, and makes a sheet easier to read.",
      "diagram": {
@@ -43921,7 +45084,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p03",
+     "id": "c20-p03",
      "spec": "Explain what a formula is and write formulas using arithmetic operators",
      "summary": "A formula is a calculation that always starts with =. It can use numbers and cell references with the operators + - * / and ^, and Excel works it out using BODMAS. If a value changes, the formula recalculates automatically.",
      "diagram": {
@@ -44195,7 +45358,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p04",
+     "id": "c20-p04",
      "spec": "Use the functions SUM, AVERAGE, MIN, MAX and COUNT on a range of cells",
      "summary": "A function is a ready-made formula with a name, such as SUM or AVERAGE. You give it a range in brackets, e.g. =SUM(B2:B9), and it does the work. Functions are quicker and less error-prone than long formulas.",
      "diagram": {
@@ -44474,7 +45637,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p05",
+     "id": "c20-p05",
      "spec": "Use IF and COUNTIF to make decisions and count values that meet a condition",
      "summary": "IF checks a condition and shows one result if it is true and another if it is false, e.g. =IF(B2>=70,\"Pass\",\"Fail\"). COUNTIF counts the cells in a range that meet a condition, e.g. =COUNTIF(C2:C9,\"Pass\").",
      "diagram": {
@@ -44745,7 +45908,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p06",
+     "id": "c20-p06",
      "spec": "Explain the difference between relative and absolute cell references when replicating formulas",
      "summary": "Replicating (copying) a formula with the fill handle changes relative references, so =B2*C2 becomes =B3*C3 on the next row. An absolute reference such as $F$1 has dollar signs and never changes when copied.",
      "diagram": {
@@ -44997,7 +46160,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p07",
+     "id": "c20-p07",
      "spec": "Sort and filter data and use conditional formatting to highlight important values",
      "summary": "Sorting puts rows in order (ascending A to Z, smallest to largest, or descending). Filtering hides the rows you do not need. Conditional formatting changes a cell's colour automatically when it meets a rule, such as scores under 60.",
      "diagram": {
@@ -45196,7 +46359,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p08",
+     "id": "c20-p08",
      "spec": "Create a chart from spreadsheet data and choose the right type of chart",
      "summary": "A chart turns numbers into a picture. Column or bar charts compare categories, line graphs show change over time and pie charts show parts of a whole. A good chart has a title, axis titles and, if needed, a legend.",
      "diagram": {
@@ -45415,7 +46578,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p09",
+     "id": "c20-p09",
      "spec": "Use a spreadsheet model to answer 'what if' questions",
      "summary": "A spreadsheet model uses formulas to represent a real situation, such as a school trip budget. Changing the input values (what if more pupils go?) instantly shows the effect on the outputs, which helps people make decisions.",
      "diagram": {
@@ -45621,7 +46784,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p10",
+     "id": "c20-p10",
      "spec": "Plan, build and test a spreadsheet so that it is accurate and easy for others to use",
      "summary": "A good spreadsheet is planned first, built with clear labels and formulas, then tested with data whose answers you already know. Data validation, such as a drop-down list or a number range, stops users typing in impossible data.",
      "diagram": {
@@ -48418,1324 +49581,1450 @@
    "page": "c13-p06"
   },
   {
+   "term": "Machine learning",
+   "def": "A type of AI where computers learn patterns from data instead of following rules written by a programmer.",
+   "alt": "ML",
+   "page": "c14-p01"
+  },
+  {
+   "term": "Supervised learning",
+   "def": "Machine learning that learns from examples labelled with the correct answers.",
+   "alt": "",
+   "page": "c14-p01"
+  },
+  {
+   "term": "Feature",
+   "def": "A piece of information about each example in a dataset, such as weight, colour or pixel values.",
+   "alt": "",
+   "page": "c14-p01"
+  },
+  {
+   "term": "Label",
+   "def": "The correct answer or category for an example, which the model learns to predict.",
+   "alt": "",
+   "page": "c14-p01"
+  },
+  {
+   "term": "Dataset",
+   "def": "A collection of examples, usually organised as a table or a set of files.",
+   "alt": "",
+   "page": "c14-p01"
+  },
+  {
+   "term": "Classifier",
+   "def": "A model that sorts inputs into categories.",
+   "alt": "",
+   "page": "c14-p02"
+  },
+  {
+   "term": "Class",
+   "def": "One of the categories a classifier can choose between.",
+   "alt": "",
+   "page": "c14-p02"
+  },
+  {
+   "term": "Training data",
+   "def": "The labelled examples a model learns from.",
+   "alt": "",
+   "page": "c14-p02"
+  },
+  {
+   "term": "Test data",
+   "def": "Examples kept separate from training and used to check how well a model works on new data.",
+   "alt": "",
+   "page": "c14-p03"
+  },
+  {
+   "term": "Accuracy",
+   "def": "The percentage of a model's predictions that are correct.",
+   "alt": "",
+   "page": "c14-p03"
+  },
+  {
+   "term": "Confusion matrix",
+   "def": "A table comparing actual and predicted classes, showing which classes a model mixes up.",
+   "alt": "",
+   "page": "c14-p03"
+  },
+  {
+   "term": "Overfitting",
+   "def": "When a model learns its training data too closely and performs badly on new data.",
+   "alt": "",
+   "page": "c14-p04"
+  },
+  {
+   "term": "Edge case",
+   "def": "An unusual situation that rarely appears in the training data.",
+   "alt": "",
+   "page": "c14-p04"
+  },
+  {
+   "term": "Generalise",
+   "def": "To work well on new examples, not just the ones used in training.",
+   "alt": "",
+   "page": "c14-p04"
+  },
+  {
+   "term": "Shortcut learning",
+   "def": "When a model uses an accidental clue (like a background) instead of the real feature.",
+   "alt": "",
+   "page": "c14-p04"
+  },
+  {
+   "term": "Bias",
+   "def": "When a system is less accurate or less fair for some people, often because of its data.",
+   "alt": "",
+   "page": "c14-p05"
+  },
+  {
+   "term": "Representative data",
+   "def": "Data that includes a fair mix of all the people and situations a system will meet.",
+   "alt": "",
+   "page": "c14-p05"
+  },
+  {
+   "term": "Fairness",
+   "def": "Making sure a system does not treat people worse because of who they are.",
+   "alt": "",
+   "page": "c14-p05"
+  },
+  {
+   "term": "Problem statement",
+   "def": "A clear description of the problem a project will solve, and for whom.",
+   "alt": "",
+   "page": "c14-p06"
+  },
+  {
+   "term": "Evaluation",
+   "def": "Judging how well a solution works against success criteria.",
+   "alt": "",
+   "page": "c14-p06"
+  },
+  {
+   "term": "Human oversight",
+   "def": "People checking an AI's decisions and being able to overrule them.",
+   "alt": "",
+   "page": "c14-p06"
+  },
+  {
    "term": "Model",
    "def": "A simplified representation of a real system, used to understand it or predict what will happen.",
    "alt": "",
-   "page": "c14-p01"
+   "page": "c15-p01"
   },
   {
    "term": "Real system",
    "def": "The actual thing or situation in the real world that a model represents, such as the weather or a school canteen.",
    "alt": "",
-   "page": "c14-p01"
+   "page": "c15-p01"
   },
   {
    "term": "Simulation",
    "def": "Running a model, often step by step over time, to imitate what would happen in the real system.",
    "alt": "",
-   "page": "c14-p01"
+   "page": "c15-p01"
   },
   {
    "term": "Prediction",
    "def": "A model's estimate of what will happen. It may turn out to be wrong.",
    "alt": "",
-   "page": "c14-p01"
+   "page": "c15-p01"
   },
   {
    "term": "Abstraction",
    "def": "Removing details that do not matter for the question, keeping only what is important.",
    "alt": "",
-   "page": "c14-p02"
+   "page": "c15-p02"
   },
   {
    "term": "Assumption",
    "def": "Something a modeller treats as true to simplify a model, e.g. every pupil takes 15 seconds to be served.",
    "alt": "",
-   "page": "c14-p02"
+   "page": "c15-p02"
   },
   {
    "term": "Decomposition",
    "def": "Breaking a big problem down into smaller parts that are easier to solve.",
    "alt": "",
-   "page": "c14-p02"
+   "page": "c15-p02"
   },
   {
    "term": "Variable",
    "def": "A named value in a model that can change, such as speed or number of pupils.",
    "alt": "",
-   "page": "c14-p03"
+   "page": "c15-p03"
   },
   {
    "term": "Input",
    "def": "A value fed into a model that the user can change.",
    "alt": "",
-   "page": "c14-p03"
+   "page": "c15-p03"
   },
   {
    "term": "Rule",
    "def": "A formula or instruction in a model that describes how the system behaves.",
    "alt": "",
-   "page": "c14-p03"
+   "page": "c15-p03"
   },
   {
    "term": "Output",
    "def": "A result produced by a model from its inputs and rules.",
    "alt": "",
-   "page": "c14-p03"
+   "page": "c15-p03"
   },
   {
    "term": "Constant",
    "def": "A value that stays the same every time a model runs, e.g. 60 minutes in an hour.",
    "alt": "",
-   "page": "c14-p03"
+   "page": "c15-p03"
   },
   {
    "term": "Data type",
    "def": "The kind of value a variable stores, such as integer, float, string or Boolean.",
    "alt": "",
-   "page": "c14-p03"
+   "page": "c15-p03"
   },
   {
    "term": "Integer",
    "def": "A data type for whole numbers, e.g. 12 stops.",
    "alt": "",
-   "page": "c14-p03"
+   "page": "c15-p03"
   },
   {
    "term": "Float",
    "def": "A data type for numbers with a decimal point, e.g. 0.5 or 2.75. Also called real.",
    "alt": "",
-   "page": "c14-p03"
+   "page": "c15-p03"
   },
   {
    "term": "String",
    "def": "A data type for text, e.g. \"Belleek route\".",
    "alt": "",
-   "page": "c14-p03"
+   "page": "c15-p03"
   },
   {
    "term": "Boolean",
    "def": "A data type with only two values: TRUE or FALSE.",
    "alt": "",
-   "page": "c14-p03"
+   "page": "c15-p03"
   },
   {
    "term": "What-if question",
    "def": "Changing an input in a model to see the effect on the outputs.",
    "alt": "",
-   "page": "c14-p04"
+   "page": "c15-p04"
   },
   {
    "term": "Hard-coding",
    "def": "Typing a fixed number into a formula instead of referring to an input cell, so the formula does not update.",
    "alt": "",
-   "page": "c14-p04"
+   "page": "c15-p04"
   },
   {
    "term": "Goal Seek",
    "def": "An Excel tool that works backwards: it finds the input value needed for an output to reach a target.",
    "alt": "",
-   "page": "c14-p05"
+   "page": "c15-p05"
   },
   {
    "term": "Break-even point",
    "def": "Where income exactly equals costs, so the profit is £0.",
    "alt": "",
-   "page": "c14-p05"
+   "page": "c15-p05"
   },
   {
    "term": "Scenario",
    "def": "A saved set of input values describing one possible situation, such as a worst case or best case.",
    "alt": "",
-   "page": "c14-p05"
+   "page": "c15-p05"
   },
   {
    "term": "Time step",
    "def": "One jump forward in a simulation over time, such as one day or one year.",
    "alt": "",
-   "page": "c14-p06"
+   "page": "c15-p06"
   },
   {
    "term": "Iteration",
    "def": "Repeating a set of steps; in a simulation, applying the rules again for each time step.",
    "alt": "",
-   "page": "c14-p06"
+   "page": "c15-p06"
   },
   {
    "term": "Random number",
    "def": "A number chosen by chance, used in simulations to model events such as dice rolls.",
    "alt": "",
-   "page": "c14-p07"
+   "page": "c15-p07"
   },
   {
    "term": "Probability",
    "def": "How likely something is to happen, from 0 (impossible) to 1 (certain).",
    "alt": "",
-   "page": "c14-p07"
+   "page": "c15-p07"
   },
   {
    "term": "Validation",
    "def": "Checking a model by comparing its predictions with real data.",
    "alt": "",
-   "page": "c14-p08"
+   "page": "c15-p08"
   },
   {
    "term": "Prediction error",
    "def": "The difference between the real value and the value a model predicted.",
    "alt": "",
-   "page": "c14-p08"
+   "page": "c15-p08"
   },
   {
    "term": "GIGO",
    "def": "Garbage in, garbage out: if the data put into a model is wrong, its outputs will be wrong too.",
    "alt": "",
-   "page": "c14-p09"
+   "page": "c15-p09"
   },
   {
    "term": "Trade-off",
    "def": "Gaining one thing by giving up another, e.g. a simpler model is quicker but less accurate.",
    "alt": "",
-   "page": "c14-p09"
+   "page": "c15-p09"
   },
   {
    "term": "Bias",
    "def": "When a model's results are unfair to, or less accurate for, some groups of people.",
    "alt": "",
-   "page": "c14-p09"
+   "page": "c15-p09"
   },
   {
    "term": "AI model",
    "def": "A model that has learned patterns from a large set of data so it can make predictions or generate content.",
    "alt": "",
-   "page": "c14-p09"
+   "page": "c15-p09"
   },
   {
    "term": "Training data",
    "def": "The examples an AI model learns its patterns from.",
    "alt": "",
-   "page": "c14-p09"
+   "page": "c15-p09"
   },
   {
    "term": "Success criteria",
    "def": "Statements used to judge whether a model or product does its job.",
    "alt": "",
-   "page": "c14-p10"
+   "page": "c15-p10"
   },
   {
    "term": "Test data",
    "def": "Values chosen to check a model gives correct results, including normal and extreme values.",
    "alt": "",
-   "page": "c14-p10"
+   "page": "c15-p10"
   },
   {
    "term": "Network",
    "def": "Two or more computers or devices connected together so they can communicate and share data and resources.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Stand-alone computer",
    "def": "A computer that is not connected to any network.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "LAN",
    "def": "Local Area Network: a network covering a small area, such as one school, home or office building.",
    "alt": "Local Area Network",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "WAN",
    "def": "Wide Area Network: a network covering a large geographical area, often linking LANs together. The internet is the largest WAN.",
    "alt": "Wide Area Network",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Internet",
    "def": "A global WAN made of millions of smaller networks joined together.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "NIC",
    "def": "Network Interface Card: the hardware inside a device that lets it connect to a network, by cable or wirelessly.",
    "alt": "Network Interface Card",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Switch",
    "def": "A device that connects devices together within a LAN and sends data only to the device it is meant for.",
    "alt": "",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Router",
    "def": "A device that connects different networks together (e.g. a LAN to the internet) and forwards packets towards their destination.",
    "alt": "",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Wireless access point",
    "def": "A device that lets wireless devices connect to a wired network using Wi-Fi.",
    "alt": "WAP",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Modem",
    "def": "A device that converts digital data from a computer into signals that can travel along a phone line or cable, and back again.",
    "alt": "",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Ethernet cable",
    "def": "A copper cable with twisted pairs of wires, used to connect devices in a wired LAN.",
    "alt": "",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Fibre optic cable",
    "def": "A cable that carries data as pulses of light along thin strands of glass; very fast and works over long distances.",
    "alt": "",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Wi-Fi",
    "def": "A wireless technology that uses radio waves to connect devices to a LAN and the internet, usually over tens of metres.",
    "alt": "",
-   "page": "c15-p03"
+   "page": "c16-p03"
   },
   {
    "term": "Bluetooth",
    "def": "A short-range, low-power wireless technology for connecting devices directly to each other, usually within about 10 metres.",
    "alt": "",
-   "page": "c15-p03"
+   "page": "c16-p03"
   },
   {
    "term": "Topology",
    "def": "The layout of a network: how the devices are connected to each other.",
    "alt": "Network topology",
-   "page": "c15-p04"
+   "page": "c16-p04"
   },
   {
    "term": "Star topology",
    "def": "A network layout where every device has its own connection to a central switch.",
    "alt": "",
-   "page": "c15-p04"
+   "page": "c16-p04"
   },
   {
    "term": "Bus topology",
    "def": "A network layout where all devices are connected to one main cable called the backbone.",
    "alt": "",
-   "page": "c15-p04"
+   "page": "c16-p04"
   },
   {
    "term": "Mesh topology",
    "def": "A network layout where devices are connected to several other devices, so data has many possible routes.",
    "alt": "",
-   "page": "c15-p04"
+   "page": "c16-p04"
   },
   {
    "term": "Server",
    "def": "A powerful computer that provides a service (such as storing files, printing or hosting websites) to other computers on a network.",
    "alt": "",
-   "page": "c15-p05"
+   "page": "c16-p05"
   },
   {
    "term": "Client",
    "def": "A computer or device that requests and uses services from a server.",
    "alt": "",
-   "page": "c15-p05"
+   "page": "c16-p05"
   },
   {
    "term": "Client-server network",
    "def": "A network where clients request services from one or more central servers, which manage files, logins and security.",
    "alt": "",
-   "page": "c15-p05"
+   "page": "c16-p05"
   },
   {
    "term": "Peer-to-peer network",
    "def": "A network with no central server, where every computer is equal and shares its own files and resources directly with the others.",
    "alt": "P2P",
-   "page": "c15-p05"
+   "page": "c16-p05"
   },
   {
    "term": "Packet",
    "def": "A small chunk of data sent across a network, with a header containing information such as the sender's and receiver's addresses and the packet number.",
    "alt": "Data packet",
-   "page": "c15-p06"
+   "page": "c16-p06"
   },
   {
    "term": "Packet switching",
    "def": "A way of sending data where it is split into packets that may take different routes and are put back in order when they arrive.",
    "alt": "",
-   "page": "c15-p06"
+   "page": "c16-p06"
   },
   {
    "term": "Protocol",
    "def": "A set of rules that devices follow so they can communicate with each other, e.g. TCP/IP or HTTP.",
    "alt": "",
-   "page": "c15-p06"
+   "page": "c16-p06"
   },
   {
    "term": "IP address",
    "def": "A number that identifies a device on a network so data can be sent to it, e.g. 192.168.1.25. It can change if the device moves to another network.",
    "alt": "Internet Protocol address",
-   "page": "c15-p07"
+   "page": "c16-p07"
   },
   {
    "term": "MAC address",
    "def": "A unique, permanent address built into every NIC when it is made, written as 12 hexadecimal digits, e.g. 3C:22:FB:9A:41:07.",
    "alt": "Media Access Control address",
-   "page": "c15-p07"
+   "page": "c16-p07"
   },
   {
    "term": "Domain name",
    "def": "The human-friendly name of a website, such as bbc.co.uk, that is easier to remember than an IP address.",
    "alt": "",
-   "page": "c15-p08"
+   "page": "c16-p08"
   },
   {
    "term": "DNS",
    "def": "Domain Name System: a system of servers that translates domain names such as bbc.co.uk into IP addresses.",
    "alt": "Domain Name System",
-   "page": "c15-p08"
+   "page": "c16-p08"
   },
   {
    "term": "ISP",
    "def": "Internet Service Provider: a company that connects homes and businesses to the internet, e.g. BT or Virgin Media.",
    "alt": "Internet Service Provider",
-   "page": "c15-p08"
+   "page": "c16-p08"
   },
   {
    "term": "URL",
    "def": "Uniform Resource Locator: the full web address of a page, e.g. https://www.bbc.co.uk/sport.",
    "alt": "Web address",
-   "page": "c15-p08"
+   "page": "c16-p08"
   },
   {
    "term": "Web server",
    "def": "A server that stores web pages and sends them to browsers that request them.",
    "alt": "",
-   "page": "c15-p08"
+   "page": "c16-p08"
   },
   {
    "term": "Bandwidth",
    "def": "The maximum amount of data that can be sent across a network connection each second.",
    "alt": "",
-   "page": "c15-p09"
+   "page": "c16-p09"
   },
   {
    "term": "Mbps",
    "def": "Megabits per second: one million bits per second. The usual unit for broadband speeds.",
    "alt": "Megabits per second",
-   "page": "c15-p09"
+   "page": "c16-p09"
   },
   {
    "term": "Latency",
    "def": "The delay between data being sent and it arriving, measured in milliseconds; also called lag or ping.",
    "alt": "Ping",
-   "page": "c15-p09"
+   "page": "c16-p09"
   },
   {
    "term": "The cloud",
    "def": "Services, software and storage provided over the internet from servers in data centres, instead of on your own device.",
    "alt": "Cloud computing",
-   "page": "c15-p10"
+   "page": "c16-p10"
   },
   {
    "term": "Cloud storage",
    "def": "Saving files on servers owned by a company and accessed over the internet, e.g. OneDrive or Google Drive.",
    "alt": "",
-   "page": "c15-p10"
+   "page": "c16-p10"
   },
   {
    "term": "Data centre",
    "def": "A large building full of servers that store data and run online services.",
    "alt": "",
-   "page": "c15-p10"
+   "page": "c16-p10"
   },
   {
    "term": "Internet of Things",
    "def": "Everyday objects with sensors and network connections that let them collect and share data over the internet.",
    "alt": "IoT",
-   "page": "c15-p10"
+   "page": "c16-p10"
   },
   {
    "term": "Smart device",
    "def": "An everyday device, such as a speaker, doorbell or thermostat, that connects to the internet and can be controlled remotely.",
    "alt": "",
-   "page": "c15-p10"
+   "page": "c16-p10"
   },
   {
    "term": "Presentation software",
    "def": "A program that shows information as a series of slides, usually to support a speaker, e.g. Microsoft PowerPoint, Google Slides or Apple Keynote.",
    "alt": "",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Audience",
    "def": "The people who will watch or use a presentation. Their age, knowledge and needs affect every design choice.",
    "alt": "",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Purpose",
    "def": "What a presentation is meant to achieve, e.g. to inform, persuade, entertain or advertise.",
    "alt": "",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "User-centred design",
    "def": "Designing a product around the needs of the people who will use it, found by asking or observing them.",
    "alt": "",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Communication conventions",
    "def": "The accepted rules for communicating with a particular audience, e.g. how formal the language is, a title slide and a sources slide. Also called communication protocols.",
    "alt": "",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Storyboard",
    "def": "A plan of every slide made before building a presentation, showing layout, text, images and their sources, effects, links and notes.",
    "alt": "",
-   "page": "c16-p02"
+   "page": "c17-p02"
   },
   {
    "term": "Ribbon",
    "def": "The strip of tools across the top of the PowerPoint window, organised into tabs (Home, Insert, Design…) and groups.",
    "alt": "",
-   "page": "c16-p03"
+   "page": "c17-p03"
   },
   {
    "term": "Slide layout",
    "def": "A ready-made arrangement of placeholders for a slide, e.g. Title Slide, Title and Content, Comparison.",
    "alt": "",
-   "page": "c16-p03"
+   "page": "c17-p03"
   },
   {
    "term": "Placeholder",
    "def": "A dotted box on a slide layout that holds a title, text or other content, e.g. 'Click to add title'.",
    "alt": "",
-   "page": "c16-p03"
+   "page": "c17-p03"
   },
   {
    "term": "6x6 rule",
    "def": "A slide design guideline: no more than about six bullet points per slide and about six words per bullet point.",
    "alt": "",
-   "page": "c16-p04"
+   "page": "c17-p04"
   },
   {
    "term": "Contrast",
    "def": "The difference between the colour of text and its background. High contrast makes text easier to read.",
    "alt": "",
-   "page": "c16-p04"
+   "page": "c17-p04"
   },
   {
    "term": "Slide Master",
    "def": "The top slide in a hidden set of master layouts (View > Slide Master). Changes to it, such as a logo or font, appear on every slide.",
    "alt": "",
-   "page": "c16-p04"
+   "page": "c17-p04"
   },
   {
    "term": "Copyright",
    "def": "The legal right of a creator to control how their work is copied and used. In the UK it is automatic and protected by the Copyright, Designs and Patents Act 1988.",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Intellectual property",
    "def": "Something a person creates with their mind, such as a photo, song, design, logo or invention, that they own. Protected by copyright, trade marks and patents.",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Licence",
    "def": "Permission from the owner of a work setting out what others may and may not do with it, e.g. a Creative Commons licence.",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Generative AI",
    "def": "Artificial intelligence that creates new content, such as text, images, audio or video, from a prompt. AI-generated images should be clearly labelled.",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Plagiarism",
    "def": "Using someone else's work or ideas and presenting them as your own.",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Creative Commons",
    "def": "Free licences that let creators allow others to use their work under set conditions, e.g. BY (credit the creator), NC (non-commercial).",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Attribution",
    "def": "Giving credit to the creator of a work you use: Title, Author, Source and Licence (TASL).",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "SmartArt",
    "def": "A PowerPoint feature that turns a list into a ready-designed diagram such as a process, cycle or hierarchy.",
    "alt": "",
-   "page": "c16-p06"
+   "page": "c17-p06"
   },
   {
    "term": "Transition",
    "def": "An effect that plays when moving from one slide to the next, e.g. Fade or Morph.",
    "alt": "",
-   "page": "c16-p07"
+   "page": "c17-p07"
   },
   {
    "term": "Animation",
    "def": "An effect applied to an object on a slide: entrance, emphasis, exit or motion path.",
    "alt": "",
-   "page": "c16-p07"
+   "page": "c17-p07"
   },
   {
    "term": "Non-linear presentation",
    "def": "A presentation where the user chooses which slide to go to next by clicking links or buttons, e.g. a quiz or menu.",
    "alt": "",
-   "page": "c16-p08"
+   "page": "c17-p08"
   },
   {
    "term": "Hyperlink",
    "def": "Clickable text or an object that jumps to another slide, a web page, a file or an email address (Insert > Link, Ctrl + K).",
    "alt": "",
-   "page": "c16-p08"
+   "page": "c17-p08"
   },
   {
    "term": "Action button",
    "def": "A ready-made shape, such as Home, Back or Next, that performs an action like going to a slide when clicked (Insert > Shapes).",
    "alt": "",
-   "page": "c16-p08"
+   "page": "c17-p08"
   },
   {
    "term": "Kiosk mode",
    "def": "A slide show setting (Browsed at a kiosk) where the show runs full screen, loops, and can only be moved on with links, buttons or timings.",
    "alt": "",
-   "page": "c16-p08"
+   "page": "c17-p08"
   },
   {
    "term": "Accessibility",
    "def": "Designing something so that everyone can use it, including people with a disability.",
    "alt": "",
-   "page": "c16-p09"
+   "page": "c17-p09"
   },
   {
    "term": "Screen reader",
    "def": "Software that reads aloud the text on a screen, including alt text, for people who are blind or partially sighted.",
    "alt": "",
-   "page": "c16-p09"
+   "page": "c17-p09"
   },
   {
    "term": "Alt text",
    "def": "Alternative text: a short written description of an image or chart that a screen reader reads aloud.",
    "alt": "",
-   "page": "c16-p09"
+   "page": "c17-p09"
   },
   {
    "term": "WCAG",
    "def": "Web Content Accessibility Guidelines: the international standard for accessible digital content, from the W3C. Its four principles are Perceivable, Operable, Understandable and Robust.",
    "alt": "",
-   "page": "c16-p09"
+   "page": "c17-p09"
   },
   {
    "term": "Accessibility Checker",
    "def": "A PowerPoint tool (Review > Check Accessibility) that lists errors, warnings and tips, such as missing alt text or slide titles.",
    "alt": "",
-   "page": "c16-p09"
+   "page": "c17-p09"
   },
   {
    "term": "Speaker notes",
    "def": "Notes for the presenter about what to say for each slide. The audience does not see them.",
    "alt": "",
-   "page": "c16-p10"
+   "page": "c17-p10"
   },
   {
    "term": "Presenter View",
    "def": "A slide show view where the presenter sees the current slide, next slide, notes and a timer while the audience sees only the slide.",
    "alt": "",
-   "page": "c16-p10"
+   "page": "c17-p10"
   },
   {
    "term": "Success criteria",
    "def": "A checklist of what a good piece of work must do, used to plan and evaluate it.",
    "alt": "",
-   "page": "c16-p11"
+   "page": "c17-p11"
   },
   {
    "term": "Usability",
    "def": "How easy a product is for its users to use. Refining a product based on testing improves its usability.",
    "alt": "",
-   "page": "c16-p11"
+   "page": "c17-p11"
   },
   {
    "term": "Data type",
    "def": "The kind of value a variable holds, such as int, double, string, char or bool. It decides what can be stored and what can be done with it.",
    "alt": "",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Integer",
    "def": "A whole number with no decimal part, positive or negative. In C# the data type is int.",
    "alt": "int",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Float",
    "def": "A number with a decimal point, also called a real number. In C# use double, or float with an f on the end of the value.",
    "alt": "real",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "String",
    "def": "Text: a sequence of characters, written inside double quotes in C#.",
    "alt": "",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Boolean",
    "def": "A data type with only two possible values, true or false. In C# the data type is bool.",
    "alt": "bool",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Method",
    "def": "A named block of code that carries out one task and runs when it is called. Also called a function, procedure or subroutine.",
    "alt": "subroutine",
-   "page": "c17-p02"
+   "page": "c18-p02"
   },
   {
    "term": "Calling a method",
    "def": "Running a method by writing its name followed by brackets (and any arguments), e.g. ShowBanner();",
    "alt": "call",
-   "page": "c17-p02"
+   "page": "c18-p02"
   },
   {
    "term": "Decomposition",
    "def": "Breaking a large problem down into smaller parts that are easier to solve; each part can become a method.",
    "alt": "",
-   "page": "c17-p02"
+   "page": "c18-p02"
   },
   {
    "term": "Parameter",
    "def": "A variable listed in a method's header that receives a value when the method is called.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Argument",
    "def": "The actual value passed into a method when it is called.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Return value",
    "def": "The value a method sends back to the place it was called from, using the return keyword.",
    "alt": "return",
-   "page": "c17-p04"
+   "page": "c18-p04"
   },
   {
    "term": "Void",
    "def": "A keyword in a method header meaning the method does not return a value.",
    "alt": "",
-   "page": "c17-p04"
+   "page": "c18-p04"
   },
   {
    "term": "Function",
    "def": "A subroutine that returns a value. In C# this is a method with a return type such as int or bool.",
    "alt": "",
-   "page": "c17-p04"
+   "page": "c18-p04"
   },
   {
    "term": "Procedure",
    "def": "A subroutine that carries out a task but does not return a value. In C# this is a void method.",
    "alt": "",
-   "page": "c17-p04"
+   "page": "c18-p04"
   },
   {
    "term": "Scope",
    "def": "The part of a program where a variable exists and can be used: the { } it was declared in.",
    "alt": "",
-   "page": "c17-p05"
+   "page": "c18-p05"
   },
   {
    "term": "Local variable",
    "def": "A variable declared inside a method or block; it can only be used there and disappears when that code ends.",
    "alt": "",
-   "page": "c17-p05"
+   "page": "c18-p05"
   },
   {
    "term": "Global variable",
    "def": "A variable that can be used by every method in a program. In C# the nearest thing is a static variable declared in the class, outside every method.",
    "alt": "class-level variable",
-   "page": "c17-p05"
+   "page": "c18-p05"
   },
   {
    "term": "Data structure",
    "def": "A way of storing and organising a collection of related data under one name, such as an array or a list.",
    "alt": "",
-   "page": "c17-p06"
+   "page": "c18-p06"
   },
   {
    "term": "Array",
    "def": "A data structure that holds a fixed number of elements of the same data type, each found by its index.",
    "alt": "",
-   "page": "c17-p06"
+   "page": "c18-p06"
   },
   {
    "term": "Index",
    "def": "The number that gives an element's position in an array or list. In C# the first index is 0.",
    "alt": "",
-   "page": "c17-p06"
+   "page": "c18-p06"
   },
   {
    "term": "Off-by-one error",
    "def": "A logic error where a loop runs one time too many or one time too few, e.g. using <= instead of < with an array.",
    "alt": "",
-   "page": "c17-p06"
+   "page": "c18-p06"
   },
   {
    "term": "List",
    "def": "A data structure that can grow and shrink while the program runs, e.g. List<int> in C#.",
    "alt": "",
-   "page": "c17-p07"
+   "page": "c18-p07"
   },
   {
    "term": "foreach loop",
    "def": "A loop that visits every item in a list or array in turn, without needing an index.",
    "alt": "",
-   "page": "c17-p07"
+   "page": "c18-p07"
   },
   {
    "term": "Trace table",
    "def": "A table showing the value of each variable at each step as an algorithm runs; used to check code by hand (a dry run).",
    "alt": "dry run",
-   "page": "c17-p08"
+   "page": "c18-p08"
   },
   {
    "term": "Linear search",
    "def": "A search that checks each item in a list in turn, from the start, until the target is found or the list ends.",
    "alt": "",
-   "page": "c17-p08"
+   "page": "c18-p08"
   },
   {
    "term": "Generative AI",
    "def": "AI that creates new content, such as text, images or code, by predicting what is likely based on patterns in its training data.",
    "alt": "",
-   "page": "c17-p09"
+   "page": "c18-p09"
   },
   {
    "term": "Prompt",
    "def": "The instruction or question you type into a generative AI tool.",
    "alt": "",
-   "page": "c17-p09"
+   "page": "c18-p09"
   },
   {
    "term": "Hallucination",
    "def": "When an AI tool confidently produces something false or made up, such as a method that does not exist.",
    "alt": "",
-   "page": "c17-p09"
+   "page": "c18-p09"
   },
   {
    "term": "Plagiarism",
    "def": "Passing off someone else's work, including AI-generated work, as your own.",
    "alt": "",
-   "page": "c17-p09"
+   "page": "c18-p09"
   },
   {
    "term": "Software development cycle",
    "def": "Developing software in repeated stages of planning, development, testing and refinement.",
    "alt": "",
-   "page": "c17-p10"
+   "page": "c18-p10"
   },
   {
    "term": "Test table",
    "def": "A table that plans and records tests: the test data, its type, the expected result, the actual result and whether it passed.",
    "alt": "",
-   "page": "c17-p10"
+   "page": "c18-p10"
   },
   {
    "term": "Test data",
    "def": "Values chosen to test a program: normal (sensible values), boundary (at the edges of what is allowed) and erroneous (values that should be rejected).",
    "alt": "",
-   "page": "c17-p10"
+   "page": "c18-p10"
   },
   {
    "term": "Boundary data",
    "def": "Test data at the very edge of the allowed range, such as 0 and 20 for a score out of 20.",
    "alt": "extreme data",
-   "page": "c17-p10"
+   "page": "c18-p10"
   },
   {
    "term": "Erroneous data",
    "def": "Test data that should be rejected by the program, such as 25 or the word ten for a score out of 20.",
    "alt": "invalid data",
-   "page": "c17-p10"
+   "page": "c18-p10"
   },
   {
    "term": "Validation",
    "def": "Checking that input is sensible and allowed before the program uses it, e.g. rejecting a score above 20.",
    "alt": "",
-   "page": "c17-p10"
+   "page": "c18-p10"
   },
   {
    "term": "Scratch",
    "def": "A free, block-based programming language from the MIT Media Lab. Programs are built by snapping blocks together.",
    "alt": "",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "Sprite",
    "def": "A character or object on the stage that can be programmed with its own scripts, e.g. the Scratch Cat.",
    "alt": "",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "Stage",
    "def": "The area of the Scratch window where the project runs. It is 480 steps wide and 360 steps tall.",
    "alt": "",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "Backdrop",
    "def": "A background picture for the stage. Switching backdrops can show a new level or screen.",
    "alt": "",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "Blocks palette",
    "def": "The part of the Scratch window that lists the blocks in the chosen category, ready to drag.",
    "alt": "",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "Script",
    "def": "A stack of joined blocks that runs from top to bottom, usually started by a hat block.",
    "alt": "",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "Event",
    "def": "Something that happens, such as clicking the green flag or pressing a key, that starts a script.",
    "alt": "",
-   "page": "c18-p02"
+   "page": "c19-p02"
   },
   {
    "term": "Sequence",
    "def": "Carrying out instructions one after another, in order. A Scratch script runs from top to bottom.",
    "alt": "",
-   "page": "c18-p02"
+   "page": "c19-p02"
   },
   {
    "term": "Coordinates",
    "def": "A pair of numbers (x, y) giving an exact position on the stage. The centre is (0, 0).",
    "alt": "",
-   "page": "c18-p03"
+   "page": "c19-p03"
   },
   {
    "term": "Costume",
    "def": "One of the pictures a sprite can show. Switching costumes changes how the sprite looks.",
    "alt": "",
-   "page": "c18-p04"
+   "page": "c19-p04"
   },
   {
    "term": "Loop",
    "def": "A block that repeats the blocks inside it, such as [repeat (10)], [repeat until] or [forever].",
    "alt": "",
-   "page": "c18-p05"
+   "page": "c19-p05"
   },
   {
    "term": "Iteration",
    "def": "Repeating a set of instructions using a loop.",
    "alt": "Repetition",
-   "page": "c18-p05"
+   "page": "c19-p05"
   },
   {
    "term": "Count-controlled loop",
    "def": "A loop that repeats a set number of times, known before it starts, e.g. [repeat (4)].",
    "alt": "",
-   "page": "c18-p05"
+   "page": "c19-p05"
   },
   {
    "term": "Condition-controlled loop",
    "def": "A loop that repeats until a condition becomes true, e.g. [repeat until <touching (edge)?>].",
    "alt": "",
-   "page": "c18-p05"
+   "page": "c19-p05"
   },
   {
    "term": "Selection",
    "def": "Choosing which instructions to run depending on a condition, using if or if-else blocks.",
    "alt": "",
-   "page": "c18-p06"
+   "page": "c19-p06"
   },
   {
    "term": "Condition",
    "def": "A test whose answer is either true or false, e.g. <(score) > (10)>.",
    "alt": "",
-   "page": "c18-p06"
+   "page": "c19-p06"
   },
   {
    "term": "Boolean",
    "def": "A value or block that can only be true or false. Boolean blocks have pointed (hexagon) ends.",
    "alt": "",
-   "page": "c18-p06"
+   "page": "c19-p06"
   },
   {
    "term": "Sensing",
    "def": "Scratch blocks that find out what is happening, such as touching, key pressed, mouse position, timer and ask/answer.",
    "alt": "",
-   "page": "c18-p06"
+   "page": "c19-p06"
   },
   {
    "term": "Variable",
    "def": "A named store in memory that holds a value which can change while the program runs, e.g. score.",
    "alt": "",
-   "page": "c18-p07"
+   "page": "c19-p07"
   },
   {
    "term": "Data type",
    "def": "The kind of value stored, such as integer, float, string (text) or Boolean (true/false).",
    "alt": "",
-   "page": "c18-p07"
+   "page": "c19-p07"
   },
   {
    "term": "Operator",
    "def": "A block or symbol that does something with values: maths (+ - * /), comparisons or joining text.",
    "alt": "",
-   "page": "c18-p07"
+   "page": "c19-p07"
   },
   {
    "term": "Comparison operator",
    "def": "An operator that compares two values and gives true or false: <, = or >.",
    "alt": "",
-   "page": "c18-p07"
+   "page": "c19-p07"
   },
   {
    "term": "Broadcast",
    "def": "A message sent to every sprite and the stage; scripts with a matching [when I receive] block then start.",
    "alt": "Message",
-   "page": "c18-p08"
+   "page": "c19-p08"
   },
   {
    "term": "Abstraction",
    "def": "Hiding detail that is not needed and giving a set of instructions a simple name, to reduce complexity.",
    "alt": "",
-   "page": "c18-p09"
+   "page": "c19-p09"
   },
   {
    "term": "My Block",
    "def": "A custom block you define yourself in the My Blocks category and can use as often as you like.",
    "alt": "Custom block",
-   "page": "c18-p09"
+   "page": "c19-p09"
   },
   {
    "term": "Parameter",
    "def": "An input to a custom block or function that lets it do slightly different jobs, e.g. the number of sides.",
    "alt": "Input",
-   "page": "c18-p09"
+   "page": "c19-p09"
   },
   {
    "term": "Model",
    "def": "A simplified representation of a real system that keeps only the parts that matter.",
    "alt": "",
-   "page": "c18-p10"
+   "page": "c19-p10"
   },
   {
    "term": "Simulation",
    "def": "Running a model to see what happens over time or to test a prediction.",
    "alt": "",
-   "page": "c18-p10"
+   "page": "c19-p10"
   },
   {
    "term": "Bug",
    "def": "An error in a program that stops it working as it should.",
    "alt": "",
-   "page": "c18-p11"
+   "page": "c19-p11"
   },
   {
    "term": "Debugging",
    "def": "Finding and fixing bugs in a program.",
    "alt": "",
-   "page": "c18-p11"
+   "page": "c19-p11"
   },
   {
    "term": "Logic error",
    "def": "An error where the program runs but does the wrong thing, e.g. blocks in the wrong order.",
    "alt": "",
-   "page": "c18-p11"
+   "page": "c19-p11"
   },
   {
    "term": "Iterative development",
    "def": "Making software in repeated cycles of planning, developing, testing and refining.",
    "alt": "Development cycle",
-   "page": "c18-p12"
+   "page": "c19-p12"
   },
   {
    "term": "User story",
    "def": "A short sentence describing what a user needs: As a ... I want ... so that ...",
    "alt": "",
-   "page": "c18-p12"
+   "page": "c19-p12"
   },
   {
    "term": "Test table",
    "def": "A table listing each test with its expected result, actual result and whether it passed.",
    "alt": "Test plan",
-   "page": "c18-p12"
+   "page": "c19-p12"
   },
   {
    "term": "Test data",
    "def": "Values or actions used to test a program: normal, boundary and erroneous.",
    "alt": "",
-   "page": "c18-p12"
+   "page": "c19-p12"
   },
   {
    "term": "Spreadsheet",
    "def": "A program that stores data in a grid of cells and carries out calculations on it automatically, e.g. Microsoft Excel.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Workbook",
    "def": "An Excel file. It can contain one or more worksheets.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Worksheet",
    "def": "One page (tab) of a workbook, made of rows, columns and cells.",
    "alt": "Sheet",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Cell",
    "def": "A single box in a spreadsheet, where a column and a row meet. It holds one item of data or one formula.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Row",
    "def": "A horizontal line of cells, labelled with a number.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Column",
    "def": "A vertical line of cells, labelled with a letter.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Cell reference",
    "def": "The address of a cell: its column letter followed by its row number, e.g. B3.",
    "alt": "Cell address",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Range",
    "def": "A rectangular block of cells, written as first cell:last cell, e.g. A1:D6.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Active cell",
    "def": "The currently selected cell, shown with a thick border. Its reference appears in the Name Box.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Formula bar",
    "def": "The bar above the grid that shows the real contents (value or formula) of the active cell.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Data type",
    "def": "The kind of data in a cell, such as text, number, currency, percentage or date.",
    "alt": "",
-   "page": "c19-p02"
+   "page": "c20-p02"
   },
   {
    "term": "Formatting",
    "def": "Changing how a cell looks (font, colour, borders, number of decimal places) without changing the value stored.",
    "alt": "",
-   "page": "c19-p02"
+   "page": "c20-p02"
   },
   {
    "term": "Currency format",
    "def": "A number format that shows a value as money, e.g. 0.6 is shown as £0.60.",
    "alt": "",
-   "page": "c19-p02"
+   "page": "c20-p02"
   },
   {
    "term": "Formula",
    "def": "A calculation in a cell. It always begins with =, e.g. =B2*C2.",
    "alt": "",
-   "page": "c19-p03"
+   "page": "c20-p03"
   },
   {
    "term": "Operator",
    "def": "A symbol that tells Excel which calculation to do: + - * / or ^.",
    "alt": "Arithmetic operator",
-   "page": "c19-p03"
+   "page": "c20-p03"
   },
   {
    "term": "Automatic recalculation",
    "def": "When a value changes, every formula that uses it is worked out again straight away.",
    "alt": "",
-   "page": "c19-p03"
+   "page": "c20-p03"
   },
   {
    "term": "BODMAS",
    "def": "The order Excel works out a calculation: Brackets, Orders (powers), Division and Multiplication, Addition and Subtraction.",
    "alt": "Order of operations",
-   "page": "c19-p03"
+   "page": "c20-p03"
   },
   {
    "term": "Function",
    "def": "A ready-made formula with a name, such as SUM or AVERAGE, e.g. =SUM(B2:B9).",
    "alt": "",
-   "page": "c19-p04"
+   "page": "c20-p04"
   },
   {
    "term": "Argument",
    "def": "The value or range given to a function inside its brackets, e.g. B2:B9 in =SUM(B2:B9).",
    "alt": "",
-   "page": "c19-p04"
+   "page": "c20-p04"
   },
   {
    "term": "SUM",
    "def": "A function that adds up all the numbers in a range.",
    "alt": "",
-   "page": "c19-p04"
+   "page": "c20-p04"
   },
   {
    "term": "AVERAGE",
    "def": "A function that finds the mean of the numbers in a range (total divided by how many).",
    "alt": "",
-   "page": "c19-p04"
+   "page": "c20-p04"
   },
   {
    "term": "COUNT",
    "def": "A function that counts how many cells in a range contain numbers.",
    "alt": "",
-   "page": "c19-p04"
+   "page": "c20-p04"
   },
   {
    "term": "IF",
    "def": "A function that tests a condition and gives one result if it is true and another if it is false.",
    "alt": "IF function",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "COUNTIF",
    "def": "A function that counts how many cells in a range meet a condition, e.g. =COUNTIF(C2:C9,\"Pass\").",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "Condition",
    "def": "A test that is either TRUE or FALSE, e.g. B2>=70.",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "Comparison operator",
    "def": "A symbol used to compare two values: = <> > < >= <=.",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "Fill handle",
    "def": "The small square at the bottom right of the active cell, dragged to copy its contents into neighbouring cells.",
    "alt": "",
-   "page": "c19-p06"
+   "page": "c20-p06"
   },
   {
    "term": "Replication",
    "def": "Copying a formula into other cells so the same calculation is done on each row or column.",
    "alt": "Replicate",
-   "page": "c19-p06"
+   "page": "c20-p06"
   },
   {
    "term": "Relative reference",
    "def": "A cell reference such as B2 that changes to match the new position when a formula is copied.",
    "alt": "Relative cell reference",
-   "page": "c19-p06"
+   "page": "c20-p06"
   },
   {
    "term": "Absolute reference",
    "def": "A cell reference with $ signs, such as $F$1, that does not change when a formula is copied.",
    "alt": "Absolute cell reference",
-   "page": "c19-p06"
+   "page": "c20-p06"
   },
   {
    "term": "Sort",
    "def": "To put the rows of data in order of one column, ascending (A to Z, smallest first) or descending.",
    "alt": "",
-   "page": "c19-p07"
+   "page": "c20-p07"
   },
   {
    "term": "Filter",
    "def": "To show only the rows that match a condition, hiding the others without deleting them.",
    "alt": "",
-   "page": "c19-p07"
+   "page": "c20-p07"
   },
   {
    "term": "Conditional formatting",
    "def": "Formatting that is applied automatically when a cell's value meets a rule, e.g. red fill for scores under 60.",
    "alt": "",
-   "page": "c19-p07"
+   "page": "c20-p07"
   },
   {
    "term": "Chart",
    "def": "A visual display of spreadsheet data, such as a column chart, line graph or pie chart.",
    "alt": "Graph",
-   "page": "c19-p08"
+   "page": "c20-p08"
   },
   {
    "term": "Axis",
    "def": "One of the two lines of a chart: the x-axis runs across and the y-axis runs up.",
    "alt": "",
-   "page": "c19-p08"
+   "page": "c20-p08"
   },
   {
    "term": "Legend",
    "def": "The key on a chart that shows which colour or symbol represents each data series.",
    "alt": "",
-   "page": "c19-p08"
+   "page": "c20-p08"
   },
   {
    "term": "Model",
    "def": "A spreadsheet that represents a real-life situation using inputs, formulas and outputs.",
    "alt": "Spreadsheet model",
-   "page": "c19-p09"
+   "page": "c20-p09"
   },
   {
    "term": "What-if question",
    "def": "Changing one or more input values in a model to see the effect on the results.",
    "alt": "What-if analysis",
-   "page": "c19-p09"
+   "page": "c20-p09"
   },
   {
    "term": "Test data",
    "def": "Data with known expected results used to check a spreadsheet works: normal, boundary and invalid.",
    "alt": "",
-   "page": "c19-p10"
+   "page": "c20-p10"
   },
   {
    "term": "Data validation",
    "def": "Rules that check data as it is entered and reject values that break them, e.g. a whole number between 0 and 100.",
    "alt": "Validation",
-   "page": "c19-p10"
+   "page": "c20-p10"
   }
  ]
 }
