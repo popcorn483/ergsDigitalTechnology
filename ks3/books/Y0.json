@@ -31089,11 +31089,1198 @@
   {
    "id": "c15",
    "n": 15,
+   "title": "Ethical Hacking and Capture the Flag",
+   "intro": "Ethical hackers are paid to break into systems, with permission, so the weaknesses can be fixed before criminals find them. In this topic you'll learn the rules that keep hacking legal, then sharpen your skills in Capture the Flag (CTF) challenges: decoding messages, uncovering hidden data and investigating web pages, all on practice systems built for the job.",
+   "pages": [
+    {
+     "id": "c15-p01",
+     "title": "Hackers with permission",
+     "spec": "Explain the difference between ethical and criminal hacking and the rules of the Computer Misuse Act",
+     "summary": "Ethical hackers test systems only with clear permission and within agreed limits, then report what they find so it can be fixed. Accessing any system without permission is a crime under the Computer Misuse Act 1990, even \"just to look\".",
+     "starter": "A friend shows you how to log in to another pupil's account \"just to prove it's possible\". Is that hacking? Is it a crime?",
+     "sc": [
+      "I can describe white, black and grey hat hackers",
+      "I can explain the three main offences in the Computer Misuse Act",
+      "I can explain why permission and scope matter"
+     ],
+     "slides": [
+      {
+       "t": "Three hats",
+       "b": [
+        "White hat: ethical hackers who test with permission to make systems safer",
+        "Black hat: criminals who break in to steal, damage or show off",
+        "Grey hat: break in without permission, then tell the owner, which is still illegal",
+        "Only one of these is a career"
+       ]
+      },
+      {
+       "t": "The Computer Misuse Act 1990",
+       "b": [
+        "Applies across the UK, including Northern Ireland",
+        "Offence 1: unauthorised access to computer material (e.g. using someone's password)",
+        "Offence 2: unauthorised access with intent to commit further crimes",
+        "Offence 3: unauthorised acts to impair a computer (e.g. spreading malware)",
+        "Penalties range from fines to life imprisonment for the most serious cases"
+       ],
+       "n": "Starter answer: yes, it is unauthorised access, an offence under section 1 even if nothing is changed. Schools treat it very seriously."
+      },
+      {
+       "t": "Permission and scope",
+       "b": [
+        "Ethical hackers get written permission before testing",
+        "The scope says exactly which systems and methods are allowed",
+        "Stay inside the scope; report everything; damage nothing",
+        "In this topic we only ever hack practice systems made for it"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "What is ethical hacking?"
+      },
+      {
+       "t": "p",
+       "text": "**[[ethical hacking]]** means testing computer systems for weaknesses **with the owner's permission**, so the problems can be fixed before criminals find them. Companies pay for **[[penetration testing]]** (pen testing): a planned, authorised attack on their own systems."
+      },
+      {
+       "t": "table",
+       "caption": "The three \"hats\"",
+       "head": [
+        "Type",
+        "Permission?",
+        "Why they hack",
+        "Legal?"
+       ],
+       "rows": [
+        [
+         "White hat",
+         "Yes",
+         "To find and fix weaknesses",
+         "Yes"
+        ],
+        [
+         "Black hat",
+         "No",
+         "To steal, damage, spy or show off",
+         "No: it's a crime"
+        ],
+        [
+         "Grey hat",
+         "No",
+         "Curiosity, then they tell the owner",
+         "No: still illegal without permission"
+        ]
+       ]
+      },
+      {
+       "t": "h",
+       "text": "The Computer Misuse Act 1990"
+      },
+      {
+       "t": "p",
+       "text": "The **[[Computer Misuse Act]]** is the main UK law against hacking, and it applies in Northern Ireland. Its main offences are:"
+      },
+      {
+       "t": "list",
+       "ordered": true,
+       "items": [
+        "**Unauthorised access** to computer material: for example logging in to someone else's account, even just to look.",
+        "**Unauthorised access with intent to commit further offences**: for example breaking in to steal money or data.",
+        "**Unauthorised acts that impair a computer**: for example spreading malware or crashing a website."
+       ]
+      },
+      {
+       "t": "warn",
+       "text": "\"I was only looking\" or \"I didn't change anything\" is not a defence. Accessing any account or system without permission is a crime, and schools treat it very seriously."
+      },
+      {
+       "t": "h",
+       "text": "Permission and scope"
+      },
+      {
+       "t": "p",
+       "text": "Before an ethical hacker starts, they agree a written **[[scope]]**: exactly which systems they may test, which methods are allowed, and when. Anything outside the scope is off-limits, even if it looks interesting. Throughout this topic, you'll only practise on systems built for training, like CTF challenge websites."
+      },
+      {
+       "t": "act",
+       "title": "Legal or not?",
+       "mins": 15,
+       "who": "Pairs",
+       "after": 3,
+       "steps": [
+        "Read the eight scenario cards (e.g. \"A pupil guesses a teacher's password to change a mark\").",
+        "Decide for each: legal ethical hacking, or a Computer Misuse Act offence? If it's an offence, which one?",
+        "For each illegal scenario, write what the person should have done instead."
+       ],
+       "q": [
+        {
+         "q": "Choose two illegal scenarios: which offence, and what should the person have done?",
+         "a": "E.g. \"Guessing a teacher's password to change a mark: offence 2 (unauthorised access to commit a further offence). They should never do it; if they found a weakness by accident, they should tell IT straight away.\" \"Logging in to a friend's account to read messages: offence 1, unauthorised access. Ask permission or don't do it.\""
+        },
+        {
+         "q": "Explain why a grey hat hacker can still be breaking the law.",
+         "a": "They access systems without permission, which is unauthorised access under the Computer Misuse Act, even if they mean well and report it afterwards."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What makes hacking \"ethical\"?",
+       "o": [
+        "Nothing is changed",
+        "The owner has given permission and it's done within agreed limits",
+        "It's done by a teenager",
+        "It's done at weekends"
+       ],
+       "a": 1,
+       "why": "Permission is the key difference."
+      },
+      {
+       "q": "Which law makes unauthorised access to computers illegal in the UK?",
+       "o": [
+        "The Copyright Act",
+        "The Online Gaming Act",
+        "The Highway Code",
+        "The Computer Misuse Act 1990"
+       ],
+       "a": 3,
+       "why": "The CMA covers hacking."
+      },
+      {
+       "q": "Logging in to a friend's account without permission \"just to look\" is...",
+       "o": [
+        "only against school rules",
+        "an offence under the Computer Misuse Act",
+        "legal for under-16s",
+        "legal if you change nothing"
+       ],
+       "a": 1,
+       "why": "Unauthorised access is a crime."
+      },
+      {
+       "q": "What is the scope of a penetration test?",
+       "o": [
+        "A telescope",
+        "The length of a password",
+        "The number of hackers",
+        "The agreed list of systems and methods allowed"
+       ],
+       "a": 3,
+       "why": "Scope sets the limits."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Describe the three main offences in the Computer Misuse Act.",
+       "m": 3,
+       "a": "Unauthorised access to computer material (1); unauthorised access with intent to commit further offences (1); unauthorised acts to impair a computer/e.g. spreading malware (1)."
+      },
+      {
+       "q": "Explain the difference between a white hat and a black hat hacker.",
+       "m": 2,
+       "a": "White hat has permission and aims to find/fix weaknesses (1); black hat has no permission and aims to steal/damage/cause harm (1)."
+      }
+     ],
+     "terms": [
+      "Ethical hacking",
+      "Penetration testing",
+      "Computer Misuse Act",
+      "Scope"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c15-p02",
+     "title": "Inside a Capture the Flag",
+     "spec": "Describe how CTF competitions work and use a structured approach to solve challenges",
+     "summary": "Capture the Flag competitions are legal hacking games. In a \"jeopardy\" CTF, teams solve puzzles in categories such as cryptography, forensics and web to find hidden text strings called flags and score points.",
+     "starter": "You find a note that says \"The answer is hidden in plain sight.\" What would you do first?",
+     "sc": [
+      "I can describe jeopardy and attack-defence CTFs",
+      "I can name common CTF challenge categories",
+      "I can use a structured method to solve a challenge"
+     ],
+     "slides": [
+      {
+       "t": "What is a CTF?",
+       "b": [
+        "A legal competition where you hack systems built for the game",
+        "Find a \"flag\": a secret string like FLAG{h1dd3n_1n_pla1n_s1ght}",
+        "Submit flags to score points",
+        "Played by pupils, students and professionals worldwide"
+       ],
+       "n": "If using Mr Butler's CTF site, show the challenge board here. Otherwise use picoCTF's practice gym or the CyberFirst challenges."
+      },
+      {
+       "t": "Types and categories",
+       "b": [
+        "Jeopardy CTF: a board of challenges, more points for harder ones",
+        "Attack-defence CTF: defend your own server while attacking others' (advanced)",
+        "Categories: cryptography, forensics, web, OSINT, reverse engineering, puzzles",
+        "Teams split up challenges by their strengths"
+       ]
+      },
+      {
+       "t": "A method for every challenge",
+       "b": [
+        "Read the title and description carefully: they're full of hints",
+        "Look at everything: files, text, source code, file names",
+        "Recognise patterns: what format is this?",
+        "Try, note what you tried, ask for a hint if stuck"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "Capture the Flag"
+      },
+      {
+       "t": "p",
+       "text": "A **[[Capture the Flag]]** (CTF) competition is a legal hacking game. Organisers build challenges on purpose, hiding a **[[flag]]**, usually a string such as FLAG{y0u_f0und_m3}, inside each one. Finding and submitting the flag scores points. CTFs are run for schools (such as the NCSC's CyberFirst competitions), universities and professional security teams."
+      },
+      {
+       "t": "table",
+       "caption": "Common challenge categories",
+       "head": [
+        "Category",
+        "What you do",
+        "Example"
+       ],
+       "rows": [
+        [
+         "Cryptography",
+         "Decode or decrypt messages",
+         "A Caesar-shifted note"
+        ],
+        [
+         "Forensics",
+         "Investigate files for hidden data",
+         "A flag hidden inside an image's data"
+        ],
+        [
+         "Web",
+         "Investigate a practice website",
+         "A flag in a page's HTML comments"
+        ],
+        [
+         "OSINT",
+         "Open-source intelligence: find information that's publicly available",
+         "Work out where a (fictional) photo was taken"
+        ],
+        [
+         "Reverse engineering",
+         "Work out what a program does",
+         "Find the password a small program expects"
+        ]
+       ]
+      },
+      {
+       "t": "h",
+       "text": "How to approach a challenge"
+      },
+      {
+       "t": "key",
+       "title": "The CTF method",
+       "items": [
+        "Read: titles and descriptions usually contain hints",
+        "Look: open everything, including file names, source code and metadata",
+        "Recognise: what does this look like? Binary? Base64? A hash?",
+        "Try: use tools such as CyberChef, and keep notes of what you tried",
+        "Reflect: if stuck, re-read the challenge or take a hint"
+       ]
+      },
+      {
+       "t": "p",
+       "text": "**[[CyberChef]]** is a free browser tool made by GCHQ, often called \"the cyber Swiss Army knife\". It can convert between encodings, decrypt simple ciphers and analyse data, all without installing anything."
+      },
+      {
+       "t": "act",
+       "title": "First flags",
+       "mins": 30,
+       "who": "Teams of 3",
+       "after": 3,
+       "steps": [
+        "Log in to the practice CTF your teacher has set up.",
+        "Choose roles: a reader (reads challenges and hints), a solver (tries ideas) and a note-taker.",
+        "Solve as many starter challenges as you can in 25 minutes. Rotate roles after each flag.",
+        "Record each flag and the method you used."
+       ],
+       "q": [
+        {
+         "q": "Write down one flag you found and explain step by step how you found it.",
+         "a": "Depends on the challenge, e.g. \"Challenge 'Look closer': I opened the page source, found an HTML comment containing FLAG{s0urc3_c0d3}, and submitted it.\""
+        },
+        {
+         "q": "What did your team do when you got stuck?",
+         "a": "E.g. re-read the description for clues, tried a different tool in CyberChef, swapped roles, or used a hint."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What is a flag in a CTF?",
+       "o": [
+        "A secret string you find and submit to score points",
+        "A piece of cloth",
+        "A computer virus",
+        "A team name"
+       ],
+       "a": 0,
+       "why": "Flags prove you solved a challenge."
+      },
+      {
+       "q": "In a jeopardy CTF...",
+       "o": [
+        "everyone answers the same question",
+        "teams choose challenges from a board of categories",
+        "teams fight with water guns",
+        "only one person plays"
+       ],
+       "a": 1,
+       "why": "It's a board of puzzles."
+      },
+      {
+       "q": "What does OSINT stand for?",
+       "o": [
+        "Open-source intelligence",
+        "Online secret internet",
+        "Optical sensor input",
+        "Operating system integration"
+       ],
+       "a": 0,
+       "why": "Publicly available information."
+      },
+      {
+       "q": "Who made CyberChef?",
+       "o": [
+        "GCHQ",
+        "The BBC",
+        "NASA",
+        "Apple"
+       ],
+       "a": 0,
+       "why": "It's GCHQ's free tool."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Describe what a Capture the Flag competition is.",
+       "m": 2,
+       "a": "A legal hacking competition on systems built for the purpose (1); teams find hidden \"flags\" to score points (1)."
+      },
+      {
+       "q": "Name three common CTF challenge categories and say what each involves.",
+       "m": 3,
+       "a": "Any three with descriptions: cryptography/decoding (1); forensics/hidden data in files (1); web/investigating websites (1); OSINT/finding public information (1); reverse engineering/working out how a program works (1)."
+      }
+     ],
+     "terms": [
+      "Capture the Flag",
+      "Flag",
+      "CyberChef"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c15-p03",
+     "title": "Codes and encodings",
+     "spec": "Recognise and decode binary, hexadecimal, Base64 and ROT13, and explain the difference between encoding and encryption",
+     "summary": "Encodings change data into a different format so it can be stored or sent, but anyone can reverse them. Spotting binary, hex, Base64 and ROT13 by their look is a key CTF skill. Unlike encryption, encoding has no secret key.",
+     "starter": "What do these have in common? 01001000 01101001 / 48 69 / SGk= / Uv. (Hint: they all say the same thing.)",
+     "sc": [
+      "I can recognise binary, hex, Base64 and ROT13",
+      "I can decode them using CyberChef",
+      "I can explain the difference between encoding and encryption"
+     ],
+     "slides": [
+      {
+       "t": "Encoding is not encryption",
+       "b": [
+        "Encoding: changing data's format so it can be stored or sent (no secret key)",
+        "Anyone who knows the encoding can reverse it",
+        "Encryption: scrambling data with a secret key so only key-holders can read it",
+        "CTFs often hide flags in layers of encoding"
+       ],
+       "n": "Starter: they all say \"Hi\" in binary, hex, Base64 and ROT13."
+      },
+      {
+       "t": "Spot the format",
+       "b": [
+        "Binary: only 0s and 1s, often in groups of 8",
+        "Hex: digits 0-9 and letters A-F, often in pairs",
+        "Base64: upper and lower case letters, digits, + and /, often ending in = or ==",
+        "ROT13: looks like normal words, but scrambled; shift letters by 13"
+       ]
+      },
+      {
+       "t": "Use CyberChef",
+       "b": [
+        "Paste the text into the Input box",
+        "Drag in a recipe: \"From Base64\", \"From Hex\", \"ROT13\"",
+        "Try \"Magic\": it guesses the encoding for you",
+        "Layered? Stack several steps in one recipe"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "Encoding versus encryption"
+      },
+      {
+       "t": "p",
+       "text": "**[[encoding]]** changes data into a different format so it can be stored or transmitted, such as turning a picture into text so it can travel in an email. There's **no secret key**: anyone who recognises the encoding can reverse it. **Encryption** uses a secret key, so only the right people can read the data."
+      },
+      {
+       "t": "warn",
+       "text": "Encoding is NOT security. Developers sometimes \"hide\" passwords using Base64, thinking they're protected. Anyone can decode them in seconds."
+      },
+      {
+       "t": "h",
+       "text": "Recognising encodings"
+      },
+      {
+       "t": "table",
+       "caption": "Spot the encoding",
+       "head": [
+        "Encoding",
+        "What it looks like",
+        "\"Hi\" in this format"
+       ],
+       "rows": [
+        [
+         "Binary",
+         "Only 0 and 1, often in groups of 8",
+         "01001000 01101001"
+        ],
+        [
+         "**[[hexadecimal|Hexadecimal]]** (hex)",
+         "0-9 and A-F, often in pairs",
+         "48 69"
+        ],
+        [
+         "**[[Base64]]**",
+         "Letters, digits, + and /, often ending in =",
+         "SGk="
+        ],
+        [
+         "**[[ROT13]]**",
+         "Normal letters, shifted 13 places",
+         "Uv"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "text": "ROT13 is a Caesar cipher with a shift of 13. Because the alphabet has 26 letters, doing ROT13 twice gets you back to the start, so the same operation encodes and decodes."
+      },
+      {
+       "t": "example",
+       "title": "Peeling the layers",
+       "context": "A CTF challenge gives you: RkxBR3tyb3QxM19pc19uMHRfc2VjdXIzfQ==",
+       "steps": [
+        "It has mixed-case letters and digits and ends in ==, so it's probably Base64.",
+        "In CyberChef, use \"From Base64\". The output is FLAG{rot13_is_n0t_secur3}.",
+        "It starts with FLAG{, so you've found the flag."
+       ],
+       "answer": "The flag was only Base64-encoded, which offers no protection at all."
+      },
+      {
+       "t": "act",
+       "title": "Decoding relay",
+       "mins": 25,
+       "who": "Teams of 3",
+       "after": 3,
+       "steps": [
+        "Your teacher gives each team a sheet of ten encoded messages.",
+        "For each, identify the encoding from how it looks before decoding it.",
+        "Decode it using CyberChef (or by hand for ROT13 and binary).",
+        "The last three are layered: you'll need more than one step."
+       ],
+       "q": [
+        {
+         "q": "For two messages, write the encoding you spotted and the clue that told you.",
+         "a": "E.g. \"TWVzc2FnZQ== was Base64 because it had mixed-case letters and ended in ==. 4C 6F 6F 6B was hex because it was pairs of 0-9 and A-F.\""
+        },
+        {
+         "q": "Explain why Base64 shouldn't be used to protect a password.",
+         "a": "It's encoding, not encryption: there's no secret key, so anyone can decode it instantly."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What is the main difference between encoding and encryption?",
+       "o": [
+        "Encryption uses a secret key; encoding doesn't",
+        "They are the same",
+        "Encryption only works on numbers",
+        "Encoding is more secure"
+       ],
+       "a": 0,
+       "why": "Encoding can be reversed by anyone."
+      },
+      {
+       "q": "Which text is most likely Base64?",
+       "o": [
+        "01100001",
+        "Uryyb",
+        "U2VjcmV0IGZsYWc=",
+        "4A 6F"
+       ],
+       "a": 2,
+       "why": "Mixed case, digits and = padding."
+      },
+      {
+       "q": "Which characters appear in hexadecimal?",
+       "o": [
+        "Only symbols",
+        "Only 0 and 1",
+        "All letters A-Z",
+        "0-9 and A-F"
+       ],
+       "a": 3,
+       "why": "Hex is base 16."
+      },
+      {
+       "q": "What does applying ROT13 twice do?",
+       "o": [
+        "Doubles the shift to 26 and scrambles it",
+        "Returns the original text",
+        "Turns it into binary",
+        "Deletes it"
+       ],
+       "a": 1,
+       "why": "13 + 13 = 26, a full circle."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain why encoding a password in Base64 does not keep it secure.",
+       "m": 2,
+       "a": "Base64 is encoding with no secret key (1), so anyone can decode it back to the password easily (1)."
+      },
+      {
+       "q": "Describe how you would recognise binary, hex and Base64.",
+       "m": 3,
+       "a": "Binary: only 0s and 1s/groups of 8 (1); hex: digits and letters A-F, often in pairs (1); Base64: mixed-case letters/digits/+ and /, often ending in = (1)."
+      }
+     ],
+     "terms": [
+      "Encoding",
+      "Base64",
+      "Hexadecimal",
+      "ROT13"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c15-p04",
+     "title": "Hidden in plain sight",
+     "spec": "Explain how data can be hidden in files and images, and investigate files for hidden information",
+     "summary": "Steganography hides messages inside ordinary-looking files, such as in the pixels of an image. Forensic investigators also check metadata and file signatures, which can reveal what a file really is and where it came from.",
+     "starter": "How could you hide a secret message in a photo so nobody even knows a message exists?",
+     "sc": [
+      "I can explain steganography and how it differs from encryption",
+      "I can find information in file metadata",
+      "I can use file signatures to identify a file's real type"
+     ],
+     "slides": [
+      {
+       "t": "Steganography",
+       "b": [
+        "Hiding a message so nobody knows it's there",
+        "Ancient version: invisible ink, messages under wax on writing tablets",
+        "Digital version: tiny changes to pixel colours that the eye can't see",
+        "Encryption hides what a message says; steganography hides that it exists"
+       ]
+      },
+      {
+       "t": "Data about data",
+       "b": [
+        "Metadata: hidden information stored with a file",
+        "Photos: date, camera, settings and sometimes GPS location",
+        "Documents: author name, edit history",
+        "Investigators (and CTF players) always check metadata"
+       ]
+      },
+      {
+       "t": "What is this file really?",
+       "b": [
+        "The file extension (.jpg, .pdf) is just part of the name: it can lie",
+        "A file signature (\"magic number\") is in the first bytes of the file",
+        "PNG files start with the bytes 89 50 4E 47 (\".PNG\")",
+        "Renaming a file doesn't change what it really is"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "Steganography"
+      },
+      {
+       "t": "p",
+       "text": "**[[steganography]]** means hiding a message so that nobody knows it exists. In ancient Greece, a message was reportedly tattooed on a messenger's shaved head and hidden when his hair grew back! Digital steganography hides data in ordinary files. In an image, each pixel's colour is a number; changing the last bit of each number alters the colour so slightly that no one can see it, but those bits can spell out a hidden message."
+      },
+      {
+       "t": "table",
+       "caption": "Encryption vs steganography",
+       "head": [
+        "Feature",
+        "Encryption",
+        "Steganography"
+       ],
+       "rows": [
+        [
+         "Hides",
+         "What the message says",
+         "That a message exists at all"
+        ],
+        [
+         "Looks like",
+         "Obvious scrambled text",
+         "An ordinary photo, song or document"
+        ],
+        [
+         "Often used with",
+         "A secret key",
+         "Encryption too, for double protection"
+        ]
+       ]
+      },
+      {
+       "t": "h",
+       "text": "Metadata"
+      },
+      {
+       "t": "p",
+       "text": "**[[metadata]]** is information stored with a file, such as the date a photo was taken, the device used and sometimes GPS coordinates. Documents can store the author's name and when they were edited. **[[digital forensics]]** experts and CTF players always check metadata for clues."
+      },
+      {
+       "t": "warn",
+       "text": "Metadata can give away your location. Check your phone camera's location setting and be careful sharing original photo files."
+      },
+      {
+       "t": "h",
+       "text": "File signatures"
+      },
+      {
+       "t": "p",
+       "text": "The extension at the end of a file name (like .jpg) can be changed by anyone. But most file types begin with a fixed pattern of bytes called a **[[file signature]]** (or \"magic number\"), which reveals what the file really is. For example, PNG images start with the bytes 89 50 4E 47 and PDF files start with %PDF."
+      },
+      {
+       "t": "example",
+       "title": "The mystery file",
+       "context": "A CTF gives you \"notes.txt\", but it won't open in a text editor.",
+       "steps": [
+        "Open it in a hex viewer (or CyberChef) and look at the first bytes: 89 50 4E 47.",
+        "That's the PNG file signature, so it's really an image.",
+        "Rename it notes.png and open it: the image shows the flag."
+       ],
+       "answer": "The extension lied; the file signature told the truth."
+      },
+      {
+       "t": "act",
+       "title": "Forensics challenge",
+       "mins": 25,
+       "who": "Pairs",
+       "after": 3,
+       "steps": [
+        "Download the three challenge files from the practice CTF.",
+        "File 1: check its metadata for a hidden comment.",
+        "File 2: check its file signature and fix its extension.",
+        "File 3: use the steganography tool your teacher shows to reveal a hidden message in an image."
+       ],
+       "q": [
+        {
+         "q": "Which flag was hardest to find, and what technique did you use?",
+         "a": "E.g. \"The steganography one: the image looked normal, but the decoding tool revealed text hidden in the pixels' lowest bits.\""
+        },
+        {
+         "q": "Explain how a file can pretend to be a different type, and how you can tell.",
+         "a": "The extension is just part of the name and can be changed; the file signature (first bytes of the file) shows the real file type."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What is steganography?",
+       "o": [
+        "Scrambling a message with a key",
+        "Hiding a message so nobody knows it exists",
+        "Compressing a file",
+        "Writing in shorthand"
+       ],
+       "a": 1,
+       "why": "It conceals existence, not just meaning."
+      },
+      {
+       "q": "How can a message be hidden in an image?",
+       "o": [
+        "By making the image bigger",
+        "By changing the file name",
+        "By making tiny changes to pixel colours",
+        "By printing it"
+       ],
+       "a": 2,
+       "why": "Changes in the lowest bits are invisible."
+      },
+      {
+       "q": "What is a file signature?",
+       "o": [
+        "The file's size",
+        "The file name",
+        "The author's handwritten signature",
+        "Bytes at the start of a file that show its real type"
+       ],
+       "a": 3,
+       "why": "Magic numbers identify file types."
+      },
+      {
+       "q": "Which information might photo metadata reveal?",
+       "o": [
+        "The colour of the camera",
+        "The viewer's password",
+        "Where and when it was taken",
+        "Nothing at all"
+       ],
+       "a": 2,
+       "why": "Metadata can include GPS and time."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain the difference between encryption and steganography.",
+       "m": 2,
+       "a": "Encryption scrambles a message so it can't be read without a key (1); steganography hides the fact that a message exists at all (1)."
+      },
+      {
+       "q": "Explain why the file extension alone can't be trusted to tell you a file's type.",
+       "m": 2,
+       "a": "Anyone can rename a file/change the extension (1); the file signature in its first bytes shows the real type (1)."
+      }
+     ],
+     "terms": [
+      "Steganography",
+      "Metadata",
+      "File signature",
+      "Digital forensics"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c15-p05",
+     "title": "Web detective",
+     "spec": "Investigate a practice website using its source code and explain how developers protect websites",
+     "summary": "Everything a browser receives can be seen: HTML source, comments, scripts and cookies. CTF web challenges hide flags in these places. Real developers keep secrets on the server, validate every input and never trust what the browser sends.",
+     "starter": "Right-click a web page and choose \"View page source\". What's the strangest thing you can find?",
+     "sc": [
+      "I can view a page's source and find comments and hidden elements",
+      "I can explain what cookies and robots.txt are",
+      "I can explain why secrets must never be sent to the browser"
+     ],
+     "slides": [
+      {
+       "t": "Your browser sees everything",
+       "b": [
+        "View source: the HTML the server sent",
+        "Developer tools (F12): inspect elements, scripts, network requests and cookies",
+        "Comments <!-- like this --> don't show on the page but are in the source",
+        "Hidden elements are only hidden from view, not from you"
+       ],
+       "n": "Only use these tools on the practice CTF site and pages you own. Looking at public source code is normal, but trying to break into sites isn't."
+      },
+      {
+       "t": "Cookies and robots.txt",
+       "b": [
+        "Cookies: small pieces of data a website stores in your browser",
+        "They remember logins, settings and shopping baskets",
+        "robots.txt: a public file telling search engines what not to list",
+        "Ironically, it can point attackers to \"secret\" pages"
+       ]
+      },
+      {
+       "t": "How developers defend",
+       "b": [
+        "Never put secrets (passwords, keys) in HTML or JavaScript",
+        "Check permissions on the server, every time",
+        "Validate all input; never trust anything from the browser",
+        "Regular testing, including paid ethical hackers"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "Your browser sees everything"
+      },
+      {
+       "t": "p",
+       "text": "When you visit a website, the **[[server]]** sends your browser the page's **[[source code]]** (HTML, CSS and JavaScript). You can see all of it: right-click and choose **View page source**, or open **[[developer tools]]** with F12. CTF web challenges hide flags in places like:"
+      },
+      {
+       "t": "list",
+       "ordered": false,
+       "items": [
+        "HTML comments, which never appear on the page: `<!-- FLAG{...} -->`",
+        "Elements hidden with CSS",
+        "JavaScript files",
+        "Cookies"
+       ]
+      },
+      {
+       "t": "h",
+       "text": "Cookies and robots.txt"
+      },
+      {
+       "t": "p",
+       "text": "A **[[cookie]]** is a small piece of data a website stores in your browser, for example to remember that you're logged in. **robots.txt** is a public file telling search engines which pages not to list. It's meant for search engines, but it can accidentally point people to pages the owner wanted to keep quiet."
+      },
+      {
+       "t": "note",
+       "text": "Looking at a page's source code is completely normal and legal: browsers are built to let you. Trying to access parts of a real site you're not authorised to use is not. In this lesson, only investigate the practice CTF website."
+      },
+      {
+       "t": "h",
+       "text": "Defending websites"
+      },
+      {
+       "t": "key",
+       "title": "Developer rules of thumb",
+       "items": [
+        "Anything sent to the browser is public: never put secrets in it",
+        "Check who the user is and what they're allowed to do on the server, for every request",
+        "Validate all input, because users (and attackers) can change anything in the browser",
+        "Don't rely on hiding things: hidden isn't secure",
+        "Pay ethical hackers to test the site, and fix what they find"
+       ]
+      },
+      {
+       "t": "act",
+       "title": "Web detective challenges",
+       "mins": 30,
+       "who": "Pairs",
+       "after": 3,
+       "steps": [
+        "Open the practice website your teacher gives you (a CTF site built for this).",
+        "Find flags hidden in: an HTML comment, a hidden element, a JavaScript file, a cookie and the robots.txt file.",
+        "For each flag, write one rule a developer should have followed to avoid the problem."
+       ],
+       "q": [
+        {
+         "q": "List the flags you found and where each was hidden.",
+         "a": "E.g. \"FLAG{c0mm3nts} in an HTML comment; FLAG{cs5_h1dd3n} in a div with display:none; FLAG{c00k13} in a cookie; FLAG{r0b0ts} on a page listed in robots.txt.\""
+        },
+        {
+         "q": "For two of them, write the developer rule that would have prevented it.",
+         "a": "E.g. \"Never put secrets in HTML comments, because all source code is visible. Don't rely on robots.txt or hidden pages for security; protect pages with proper logins on the server.\""
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "How can you see a web page's HTML?",
+       "o": [
+        "View page source or developer tools",
+        "You can't",
+        "Turning off the monitor",
+        "Printing the page"
+       ],
+       "a": 0,
+       "why": "Browsers let you see source code."
+      },
+      {
+       "q": "Why are HTML comments a bad place for secrets?",
+       "o": [
+        "They're encrypted",
+        "Anyone can read them in the source code",
+        "They're only visible to admins",
+        "They're deleted automatically"
+       ],
+       "a": 1,
+       "why": "Comments are public."
+      },
+      {
+       "q": "What is a cookie?",
+       "o": [
+        "A snack for hackers",
+        "A virus",
+        "A type of password",
+        "A small piece of data a website stores in your browser"
+       ],
+       "a": 3,
+       "why": "Cookies remember settings and logins."
+      },
+      {
+       "q": "What should developers do with input from the browser?",
+       "o": [
+        "Trust it completely",
+        "Delete it",
+        "Validate it on the server, never trusting it",
+        "Print it"
+       ],
+       "a": 2,
+       "why": "Attackers can change anything client-side."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain why hiding a page by not linking to it is not real security.",
+       "m": 2,
+       "a": "Anyone who finds or guesses the address/sees it in robots.txt or source can still open it (1); real security needs server-side checks/login/permissions (1)."
+      },
+      {
+       "q": "Give two places in a web page where a CTF might hide a flag.",
+       "m": 2,
+       "a": "Any two: HTML comment (1); hidden element (1); JavaScript file (1); cookie (1); robots.txt (1)."
+      }
+     ],
+     "terms": [
+      "Source code",
+      "Cookie",
+      "Developer tools",
+      "Server"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c15-p06",
+     "title": "Report it, don't exploit it",
+     "spec": "Describe responsible disclosure and bug bounties, and explore careers in cyber security",
+     "summary": "When ethical hackers find a weakness, they report it privately so it can be fixed (responsible disclosure). Many companies pay bug bounties for this. Cyber security is a growing career with many routes in, including competitions, apprenticeships and degrees.",
+     "starter": "You notice your school's website shows other pupils' details if you change a number in the web address. What should you do?",
+     "sc": [
+      "I can describe responsible disclosure",
+      "I can explain what a bug bounty is",
+      "I can describe routes into cyber security careers"
+     ],
+     "slides": [
+      {
+       "t": "Found a problem? Report it",
+       "b": [
+        "A vulnerability is a weakness that could be exploited",
+        "Responsible disclosure: tell the owner privately and give them time to fix it",
+        "Don't test further, don't share it, don't use it",
+        "At school: tell a teacher or the IT team straight away"
+       ],
+       "n": "Starter answer: stop, don't look at any more records, and tell a teacher or IT immediately. Don't share the trick."
+      },
+      {
+       "t": "Bug bounties",
+       "b": [
+        "Companies pay rewards to people who report vulnerabilities properly",
+        "Run by big tech firms, banks and governments",
+        "Strict rules: only test what's in scope, never harm users or data",
+        "Some ethical hackers earn a living from bug bounties"
+       ]
+      },
+      {
+       "t": "Careers in cyber",
+       "b": [
+        "Penetration tester, security analyst, incident responder, digital forensics investigator, security engineer",
+        "Belfast and Northern Ireland are home to many cyber security companies",
+        "Routes: GCSE and A level, apprenticeships, degrees, CyberFirst schemes",
+        "Start now: CTFs, CyberFirst competitions and coding clubs"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "Responsible disclosure"
+      },
+      {
+       "t": "p",
+       "text": "A **[[vulnerability]]** is a weakness that could be exploited to cause harm. When ethical hackers find one, they follow **[[responsible disclosure]]**:"
+      },
+      {
+       "t": "list",
+       "ordered": true,
+       "items": [
+        "Stop: don't explore further or access anyone's data.",
+        "Report it privately to the owner, with enough detail to fix it.",
+        "Give them time to fix it before telling anyone else.",
+        "Never use or share the weakness."
+       ]
+      },
+      {
+       "t": "warn",
+       "text": "If you notice something wrong with a school or real-world system by accident, stop straight away and tell a teacher or the IT team. Don't \"check it again\" or show friends: that could become unauthorised access."
+      },
+      {
+       "t": "h",
+       "text": "Bug bounties"
+      },
+      {
+       "t": "p",
+       "text": "A **[[bug bounty]]** is a reward paid by an organisation to people who responsibly report vulnerabilities in its systems. Big technology companies, banks and governments run bug bounty programmes with clear rules about what may be tested. Rewards range from thank-you messages to very large payments for serious problems."
+      },
+      {
+       "t": "h",
+       "text": "Careers in cyber security"
+      },
+      {
+       "t": "table",
+       "caption": "Cyber security jobs",
+       "head": [
+        "Job",
+        "What they do"
+       ],
+       "rows": [
+        [
+         "Penetration tester",
+         "Legally attacks systems to find weaknesses"
+        ],
+        [
+         "Security analyst",
+         "Monitors networks for attacks and responds"
+        ],
+        [
+         "Incident responder",
+         "Contains and investigates attacks when they happen"
+        ],
+        [
+         "Digital forensics investigator",
+         "Recovers and analyses evidence from devices"
+        ],
+        [
+         "Security engineer",
+         "Designs and builds secure systems"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "text": "Demand for cyber security skills is high across the UK, and Belfast has become a major hub for cyber security companies. Routes in include GCSE and A level Digital Technology or Computer Science, degree apprenticeships, university degrees, and the NCSC's **CyberFirst** programme, which runs competitions, courses and bursaries for young people."
+      },
+      {
+       "t": "key",
+       "title": "Start building skills now",
+       "items": [
+        "Take part in CTFs and CyberFirst competitions",
+        "Learn programming and how networks work",
+        "Practise only on legal training platforms",
+        "Build a record of what you've learned"
+       ]
+      },
+      {
+       "t": "act",
+       "title": "Write a disclosure report",
+       "mins": 25,
+       "who": "Pairs",
+       "after": 3,
+       "steps": [
+        "Read the scenario: while using a (fictional) cinema booking website, you notice changing the booking number in the address shows someone else's booking.",
+        "Write a short responsible disclosure email to the cinema: what you found, how they can see it, why it matters, and what you did and didn't do.",
+        "Swap with another pair and check: is it clear, polite and responsible?"
+       ],
+       "q": [
+        {
+         "q": "Write your disclosure email.",
+         "a": "A good email is polite, sent privately to the company's security contact, explains the problem clearly (changing the number in the URL shows other bookings), explains the risk (customers' names and booking details exposed), states the writer stopped immediately and didn't save or share any data, and offers to help."
+        },
+        {
+         "q": "Explain why you should not test the problem further or post about it online.",
+         "a": "Further testing could access more people's data, which is unauthorised access and could harm them; posting it before it's fixed would let criminals exploit it."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What is responsible disclosure?",
+       "o": [
+        "Privately reporting a vulnerability so it can be fixed",
+        "Selling a weakness",
+        "Posting a weakness online",
+        "Ignoring a weakness"
+       ],
+       "a": 0,
+       "why": "Report privately, give time to fix."
+      },
+      {
+       "q": "What is a bug bounty?",
+       "o": [
+        "A fine for hackers",
+        "A prize for finding insects",
+        "A type of virus",
+        "A reward for responsibly reporting a vulnerability"
+       ],
+       "a": 3,
+       "why": "Companies pay for reports."
+      },
+      {
+       "q": "You accidentally see other pupils' data on a school system. What should you do?",
+       "o": [
+        "Post about it",
+        "Look at more records to check",
+        "Stop and tell a teacher or IT straight away",
+        "Show your friends"
+       ],
+       "a": 2,
+       "why": "Stop and report."
+      },
+      {
+       "q": "What does a penetration tester do?",
+       "o": [
+        "Sells computers",
+        "Writes viruses",
+        "Legally attacks systems to find weaknesses",
+        "Repairs pens"
+       ],
+       "a": 2,
+       "why": "Pen testers are ethical hackers."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Describe the steps an ethical hacker should follow after finding a vulnerability.",
+       "m": 3,
+       "a": "Stop/don't go further (1); report privately to the owner (1); give time to fix and don't share/use it (1)."
+      },
+      {
+       "q": "Name two jobs in cyber security and what each does.",
+       "m": 2,
+       "a": "Any two with descriptions, e.g. penetration tester: legally tests systems (1); security analyst: monitors for attacks (1); incident responder/forensics/security engineer (1)."
+      }
+     ],
+     "terms": [
+      "Vulnerability",
+      "Responsible disclosure",
+      "Bug bounty"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    }
+   ]
+  },
+  {
+   "id": "c16",
+   "n": 16,
    "title": "Generative AI",
    "intro": "Generative AI can write an essay, paint a picture or clone a voice in seconds. In this topic you find out how it works, practise prompting it well, learn to check what it gives you, and think hard about how it is changing work, learning and the planet.",
    "pages": [
     {
-     "id": "c15-p01",
+     "id": "c16-p01",
      "title": "What is generative AI?",
      "spec": "Explain what generative AI is and give examples of what it can create",
      "summary": "Generative AI is artificial intelligence that creates new content (text, images, audio, video or code) after learning patterns from huge amounts of examples. It is different from AI that only sorts or predicts.",
@@ -31287,7 +32474,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p02",
+     "id": "c16-p02",
      "title": "How chatbots write",
      "spec": "Describe how a large language model writes by predicting the next word",
      "summary": "Chatbots are powered by large language models. They break text into tokens and write one token at a time, each time predicting what is most likely to come next based on the patterns they learned.",
@@ -31460,7 +32647,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p03",
+     "id": "c16-p03",
      "title": "Prompting well",
      "spec": "Write clear prompts and improve them step by step to get better results",
      "summary": "The quality of what generative AI gives you depends on the prompt. Good prompts give context, a clear task, a format and any limits, and you improve results by refining the prompt and asking follow-up questions.",
@@ -31658,7 +32845,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p04",
+     "id": "c16-p04",
      "title": "Hallucinations and bias",
      "spec": "Explain why generative AI makes mistakes and shows bias, and check its output",
      "summary": "Generative AI can \"hallucinate\", inventing facts, quotes or sources, and it can repeat biases found in its training data. Good users verify important information with reliable sources and look for missing viewpoints.",
@@ -31835,7 +33022,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p05",
+     "id": "c16-p05",
      "title": "Using AI honestly",
      "spec": "Use generative AI honestly in schoolwork and respect copyright and ownership",
      "summary": "Using AI can be helpful or dishonest depending on how you use it and whether you say so. Passing AI work off as your own is plagiarism, and AI-made content raises questions about copyright and who owns what.",
@@ -32044,7 +33231,7 @@
      "lessons": []
     },
     {
-     "id": "c15-p06",
+     "id": "c16-p06",
      "title": "AI, society and the future",
      "spec": "Discuss the impact of generative AI on jobs, the environment and society, and form a reasoned opinion",
      "summary": "Generative AI is changing work, learning and creativity. It brings opportunities and risks, including effects on jobs, energy and water use, and fairness, so societies are deciding how to regulate it.",
@@ -32211,13 +33398,13 @@
    ]
   },
   {
-   "id": "c16",
-   "n": 16,
+   "id": "c17",
+   "n": 17,
    "title": "Machine Learning Lab",
    "intro": "In the Artificial Intelligence topic you met machine learning. Now you become the machine learning engineer. You'll collect data, train a real model in your browser, test it with a confusion matrix, break it on purpose, fix unfair data and plan an AI project for your school.",
    "pages": [
     {
-     "id": "c16-p01",
+     "id": "c17-p01",
      "title": "Learning from examples",
      "spec": "Explain how supervised machine learning uses labelled examples, features and labels",
      "summary": "In supervised learning a computer is given lots of examples with the right answers (labels). It finds patterns in the features of those examples and uses them to label new examples it has never seen.",
@@ -32419,7 +33606,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p02",
+     "id": "c17-p02",
      "title": "Build an image classifier",
      "spec": "Collect training data and train an image classifier",
      "summary": "A classifier sorts inputs into categories. Using a browser tool such as Teachable Machine, you collect example images for each class, train a model and try it live. The quality and variety of your data decides how well it works.",
@@ -32591,7 +33778,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p03",
+     "id": "c17-p03",
      "title": "Is it any good?",
      "spec": "Test a model using separate test data, accuracy and a confusion matrix",
      "summary": "A model must be tested on data it has never seen. Accuracy is the percentage of correct predictions, and a confusion matrix shows which classes get mixed up, which matters when some mistakes are worse than others.",
@@ -32797,7 +33984,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p04",
+     "id": "c17-p04",
      "title": "When models go wrong",
      "spec": "Explain common reasons machine learning models fail, including overfitting, too little data and edge cases",
      "summary": "Models fail when their data doesn't match the real world: too few examples, not enough variety, unusual edge cases, or overfitting, where a model memorises its training data instead of learning general patterns.",
@@ -32996,7 +34183,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p05",
+     "id": "c17-p05",
      "title": "Fair data, fair AI",
      "spec": "Explain how biased data leads to unfair machine learning and how to reduce bias",
      "summary": "If training data under-represents some groups or repeats past unfairness, the model will be less accurate or unfair for those groups. Checking who is in the data, testing results for each group and involving diverse teams helps make AI fairer.",
@@ -33190,7 +34377,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p06",
+     "id": "c17-p06",
      "title": "Design an ML project",
      "spec": "Plan a machine learning solution to a real problem, including data, testing and ethics",
      "summary": "Real ML projects start with a clear problem, then plan the data, how to train and test, how success will be measured, and the risks. Sometimes the best answer is that AI isn't needed.",
@@ -33374,13 +34561,13 @@
    ]
   },
   {
-   "id": "c17",
-   "n": 17,
+   "id": "c18",
+   "n": 18,
    "title": "Models and Simulations",
    "intro": "A model is a simplified representation of a real system, and a simulation uses a model to test predictions before anything is built or spent. This topic covers abstraction, variables and data types, spreadsheet what-if models, Goal Seek and scenarios, simulations step by step and with chance, validating a model against real data, and asking who a model works for.",
    "pages": [
     {
-     "id": "c17-p01",
+     "id": "c18-p01",
      "spec": "Explain what a model is, what a simulation is, and why people use them",
      "summary": "A model is a simplified representation of a real system. A simulation runs a model to see what would happen, so people can test ideas safely, cheaply and quickly before trying them for real.",
      "diagram": {
@@ -33628,7 +34815,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p02",
+     "id": "c18-p02",
      "spec": "Use abstraction to decide what to include in a model and what to leave out",
      "summary": "Abstraction means keeping only the details that matter for the question you want to answer. Every model also makes assumptions, and a good modeller writes them down.",
      "diagram": {
@@ -33846,7 +35033,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p03",
+     "id": "c18-p03",
      "spec": "Identify the variables, inputs, rules and outputs of a model and choose a suitable data type for each",
      "summary": "A model takes inputs, applies rules, and produces outputs. The values that can change are variables, and each one needs the right data type: integer, float, string or Boolean.",
      "diagram": {
@@ -34100,7 +35287,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p04",
+     "id": "c18-p04",
      "spec": "Build a spreadsheet model with formulas and use it to answer 'what if' questions",
      "summary": "In a spreadsheet model the inputs are cells, the rules are formulas that refer to those cells, and the outputs recalculate automatically. Changing one input to see the effect is a what-if question.",
      "diagram": {
@@ -34373,7 +35560,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p05",
+     "id": "c18-p05",
      "spec": "Use Goal Seek and scenarios to explore a spreadsheet model",
      "summary": "Goal Seek works backwards: you choose the answer you want and it finds the input needed. Scenarios save whole sets of inputs, such as worst case, expected and best case, so you can compare them.",
      "diagram": {
@@ -34611,7 +35798,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p06",
+     "id": "c18-p06",
      "spec": "Carry out a simulation step by step over time and explain how changing a variable changes the outcome",
      "summary": "A simulation over time applies the model's rules again and again, one time step after another, and each new row is worked out from the row before. Small changes to a variable can make a huge difference.",
      "diagram": {
@@ -34900,7 +36087,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p07",
+     "id": "c18-p07",
      "spec": "Explain why some simulations use random numbers and why they are run many times",
      "summary": "Real life involves chance, so some simulations use random numbers. Each run gives a different result, so the simulation is run many times and the results are averaged to give a reliable prediction.",
      "diagram": {
@@ -35114,7 +36301,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p08",
+     "id": "c18-p08",
      "spec": "Test a model's predictions against real data and refine the model to improve it",
      "summary": "Testing checks the model's formulas work as intended; validating checks its predictions against what really happens. If they do not match, refine the rules or assumptions and test again.",
      "diagram": {
@@ -35373,7 +36560,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p09",
+     "id": "c18-p09",
      "spec": "Evaluate the limitations, trade-offs and possible bias of models, including AI models, and ask who a model works for",
      "summary": "Every model leaves things out, so it has limits. A model can be unfair if its data or assumptions leave some people out. AI models are models too: they learn patterns from data, so biased data gives biased results.",
      "diagram": {
@@ -35589,7 +36776,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p10",
+     "id": "c18-p10",
      "spec": "Plan, build, test and evaluate a model of your own to answer a real question",
      "summary": "Building a good model follows a cycle: plan the question, inputs, rules, outputs and assumptions; build it; test and validate it; then evaluate how well it works and who it works for, and refine it.",
      "diagram": {
@@ -35813,13 +37000,13 @@
    ]
   },
   {
-   "id": "c18",
-   "n": 18,
+   "id": "c19",
+   "n": 19,
    "title": "Networks and the Internet",
    "intro": "Find out what really happens when you send a message, open a website or download a game: the hardware, layouts, addresses and rules that make networks and the internet work.",
    "pages": [
     {
-     "id": "c18-p01",
+     "id": "c19-p01",
      "spec": "Explain what a network is, why computers are networked, and the difference between a LAN and a WAN",
      "summary": "A network is two or more devices connected so they can share data and resources. A LAN covers a small area like a school; a WAN covers a large area and the internet is the biggest WAN of all.",
      "diagram": {
@@ -36052,7 +37239,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p02",
+     "id": "c19-p02",
      "spec": "Identify the main pieces of network hardware and describe what each one does",
      "summary": "Every device needs a NIC to join a network. Switches connect devices inside a LAN, routers connect networks together, wireless access points add Wi-Fi, and modems convert signals. Data travels through Ethernet or fibre optic cables.",
      "diagram": {
@@ -36290,7 +37477,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p03",
+     "id": "c19-p03",
      "spec": "Compare wired and wireless connections, including Wi-Fi and Bluetooth, and choose a suitable one for a task",
      "summary": "Wired connections are faster, more reliable and more secure. Wireless connections (Wi-Fi and Bluetooth) give freedom to move and need no cables, but are slower, have limited range and can suffer from interference.",
      "diagram": {
@@ -36578,7 +37765,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p04",
+     "id": "c19-p04",
      "spec": "Describe star, bus and mesh network topologies and give an advantage and a disadvantage of each",
      "summary": "A topology is the layout of a network. In a star, every device connects to a central switch. In a bus, every device shares one backbone cable. In a mesh, devices connect to many others so there are lots of routes.",
      "diagram": {
@@ -36779,7 +37966,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p05",
+     "id": "c19-p05",
      "spec": "Compare client-server and peer-to-peer networks and decide which is suitable for a given situation",
      "summary": "In a client-server network, clients ask central servers for files, logins and services, so it is easy to manage and secure. In a peer-to-peer network every computer is equal and shares directly, which is cheap and simple but harder to manage.",
      "diagram": {
@@ -37070,7 +38257,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p06",
+     "id": "c19-p06",
      "spec": "Explain how data is split into packets and sent across a network using packet switching",
      "summary": "Data is split into small packets. Each packet has a header with the sender's and receiver's addresses and a packet number. Routers send each packet by the best route available, and the receiving computer puts them back in order and asks for any missing ones again.",
      "diagram": {
@@ -37291,7 +38478,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p07",
+     "id": "c19-p07",
      "spec": "Explain what IP addresses and MAC addresses are and the difference between them",
      "summary": "An IP address identifies a device on a network so data can be routed to it, and it can change. A MAC address is a unique, permanent address built into a device's NIC when it is made.",
      "diagram": {
@@ -37489,7 +38676,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p08",
+     "id": "c19-p08",
      "spec": "Describe, step by step, what happens when you type a URL into a browser, including the role of DNS",
      "summary": "Computers find each other using IP addresses, but people remember names. When you type a URL, a DNS server looks up the IP address for the domain name, then the browser contacts the web server at that address and the page arrives as packets.",
      "diagram": {
@@ -37728,7 +38915,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p09",
+     "id": "c19-p09",
      "spec": "Explain bandwidth and network speed units, and calculate how long a file will take to download",
      "summary": "Bandwidth is how much data a connection can carry each second, measured in bits per second (usually Mbps). To find a download time, convert the file size into megabits (multiply MB by 8) and divide by the speed in Mbps.",
      "diagram": {
@@ -37950,7 +39137,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p10",
+     "id": "c19-p10",
      "spec": "Explain what the cloud and the Internet of Things are, and evaluate their benefits and risks",
      "summary": "The cloud means using storage and software on servers in data centres over the internet, such as OneDrive. The Internet of Things is everyday objects with sensors that connect to the internet, such as smart speakers and fitness trackers. Both are convenient but raise security and privacy concerns.",
      "diagram": {
@@ -38231,13 +39418,13 @@
    ]
   },
   {
-   "id": "c19",
-   "n": 19,
+   "id": "c20",
+   "n": 20,
    "title": "Presentations with PowerPoint",
    "intro": "How to plan, build and deliver presentations that actually work, using Microsoft PowerPoint. You will plan for an audience with a storyboard, design clear and accessible slides, use images legally, add charts, effects and links sensibly, then present with confidence and evaluate your work against success criteria.",
    "pages": [
     {
-     "id": "c19-p01",
+     "id": "c20-p01",
      "spec": "Describe what presentation software is used for and explain why a presentation must suit its audience and purpose",
      "summary": "Presentation software such as Microsoft PowerPoint shows information as a series of slides that support a speaker. Before you make a single slide, decide who your audience is and what your purpose is, because both change every design choice.",
      "diagram": {
@@ -38539,7 +39726,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p02",
+     "id": "c20-p02",
      "spec": "Plan a presentation using a storyboard before building it",
      "summary": "A storyboard is a plan of every slide, drawn before you open PowerPoint. It shows the content, layout, images, links and notes for each slide, so you can fix problems on paper instead of wasting time on screen.",
      "diagram": {
@@ -38790,7 +39977,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p03",
+     "id": "c20-p03",
      "spec": "Identify the main parts of the PowerPoint window and use slide layouts, placeholders and views",
      "summary": "PowerPoint's ribbon holds the tools in tabs; the slide pane shows thumbnails; the notes pane holds what you will say. Slide layouts give each slide ready-made placeholders, and different views help you build, reorder and practise.",
      "diagram": {
@@ -39088,7 +40275,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p04",
+     "id": "c20-p04",
      "spec": "Apply good slide design: the 6x6 guideline, contrast, readable fonts, consistency, design themes and the Slide Master",
      "summary": "Good slides are simple, readable and consistent: few words, strong contrast, clear fonts and the same style throughout. Design themes and the Slide Master let you set the look once so every slide matches.",
      "diagram": {
@@ -39298,7 +40485,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p05",
+     "id": "c20-p05",
      "spec": "Explain copyright, ownership, intellectual property and licensing (including Creative Commons), credit sources correctly, and use AI-generated images honestly",
      "summary": "Almost every image online is protected by copyright, so 'found on Google' does not mean 'free to use'. Use images you are allowed to use, such as your own, stock images or Creative Commons images, credit the source, and clearly label any AI-generated image.",
      "diagram": {
@@ -39624,7 +40811,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p06",
+     "id": "c20-p06",
      "spec": "Use charts, tables and SmartArt to present information clearly",
      "summary": "Numbers are easier to understand as a chart, comparisons fit neatly in a table, and SmartArt turns lists into diagrams such as processes, cycles and hierarchies. Pick the one that matches what the information shows.",
      "diagram": {
@@ -39850,7 +41037,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p07",
+     "id": "c20-p07",
      "spec": "Use transitions and animations sensibly, choosing effects, order and timing to support the message",
      "summary": "Transitions play between slides; animations make objects on a slide enter, move or leave. Used sparingly and consistently they guide attention; overused they distract and look unprofessional.",
      "diagram": {
@@ -40109,7 +41296,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p08",
+     "id": "c20-p08",
      "spec": "Create hyperlinks and action buttons to build non-linear presentations such as quizzes and kiosk displays",
      "summary": "Hyperlinks and action buttons let the user jump to any slide, a website or a file. This makes non-linear presentations possible, such as a menu, a quiz with right and wrong answer slides, or a self-running kiosk.",
      "diagram": {
@@ -40333,7 +41520,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p09",
+     "id": "c20-p09",
      "spec": "Apply accessibility guidelines and international standards (WCAG) to a presentation using alt text, contrast, colour-blind friendly colours, readable font sizes and the Accessibility Checker",
      "summary": "An accessible presentation can be used by everyone, including people who are blind, partially sighted, colour blind or dyslexic. Follow the international WCAG guidelines: add alt text, never rely on colour alone, use large high-contrast text, and run Review > Check Accessibility.",
      "diagram": {
@@ -40654,7 +41841,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p10",
+     "id": "c20-p10",
      "spec": "Use speaker notes, rehearse timings and Presenter View, and apply good speaking skills to deliver a presentation",
      "summary": "Speaker notes hold what you will say; Presenter View shows them only to you while the audience sees the slides. Rehearse with timings, then speak clearly to the audience, not to the screen.",
      "diagram": {
@@ -40882,7 +42069,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p11",
+     "id": "c20-p11",
      "spec": "Evaluate a presentation against success criteria, using peer feedback, and refine it to improve usability",
      "summary": "Evaluating means judging how well your presentation met its success criteria, using evidence such as peer feedback. A good evaluation names strengths, admits weaknesses, and says exactly how to improve.",
      "diagram": {
@@ -41150,13 +42337,13 @@
    ]
   },
   {
-   "id": "c20",
-   "n": 20,
+   "id": "c21",
+   "n": 21,
    "title": "Programming Next Steps: Functions, Lists and AI",
    "intro": "This topic carries on from Programming. You will make your C# programs shorter and smarter with methods, store whole collections of data in arrays and lists, learn the standard list algorithms, find out how to use generative AI to help with code without being fooled by it, and finish by building and testing a quiz-score analyser.",
    "pages": [
     {
-     "id": "c20-p01",
+     "id": "c21-p01",
      "spec": "Describe the data types int, double, float, string, char and bool, and choose the most suitable data type for a value",
      "summary": "Every variable has a data type that decides what it can store and what you can do with it. Use int for whole numbers, double or float for decimals, string for text, char for one character and bool for true or false.",
      "diagram": {
@@ -41414,7 +42601,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p02",
+     "id": "c21-p02",
      "spec": "Explain why programmers use methods (functions) to avoid repetition and decompose problems, and write and call a static void method",
      "summary": "A method is a named block of code that does one job. Write it once, then call it by name whenever you need it. Methods stop you repeating code, make programs easier to read and fix, and let you break a big problem into smaller parts.",
      "diagram": {
@@ -41682,7 +42869,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p03",
+     "id": "c21-p03",
      "spec": "Use parameters and arguments to pass values into a method, so one method can work with different data",
      "summary": "A parameter is a variable in a method's brackets that receives a value. An argument is the actual value you pass in when you call the method. Parameters let one method do the same job with different data.",
      "diagram": {
@@ -41933,7 +43120,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p04",
+     "id": "c21-p04",
      "spec": "Write methods that return a value, and explain the difference between a void method and a method with a return type",
      "summary": "A method with a return type, such as int, double or bool, works something out and sends one value back to where it was called, using the keyword return. A void method does a job but sends nothing back.",
      "diagram": {
@@ -42159,7 +43346,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p05",
+     "id": "c21-p05",
      "spec": "Explain the scope of a variable, and the difference between local and global (class-level) variables",
      "summary": "The scope of a variable is the part of the program where it can be used. A local variable only exists inside the method or block where it is declared. A global (class-level) variable can be used by every method, but it is safer to use local variables, parameters and return values.",
      "diagram": {
@@ -42373,7 +43560,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p06",
+     "id": "c21-p06",
      "spec": "Declare an array, access its elements using an index that starts at 0, and loop through it with a for loop",
      "summary": "An array stores a fixed number of values of the same data type under one name. Each element has an index starting at 0, so the last index is always Length - 1. A for loop can visit every element.",
      "diagram": {
@@ -42630,7 +43817,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p07",
+     "id": "c21-p07",
      "spec": "Use a List to store a collection that can grow and shrink, using Add, Remove, Count and foreach, and choose between a list and an array",
      "summary": "A List is like an array that can change size. Add puts an item on the end, Remove takes one out, Count says how many items there are and a foreach loop visits every item. Use an array when the size is fixed and a list when it will change.",
      "diagram": {
@@ -42899,7 +44086,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p08",
+     "id": "c21-p08",
      "spec": "Use loops to process a list: find the total, average and largest value, search for an item and count matches",
      "summary": "Most list programs use a handful of standard algorithms: keep a running total, divide it by Count for the average, remember the largest value so far, check each item in turn to search for one, and add 1 to a counter for each match.",
      "diagram": {
@@ -43184,7 +44371,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p09",
+     "id": "c21-p09",
      "spec": "Evaluate the benefits and limitations of using generative AI to help write code, and review and verify the code it produces",
      "summary": "Generative AI can explain errors, suggest code and speed up routine work, but it can be confidently wrong. Write clear prompts, then check every line by reading, tracing and testing it, and always be honest about where your code came from.",
      "diagram": {
@@ -43464,7 +44651,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p10",
+     "id": "c21-p10",
      "spec": "Plan, develop, test and refine a program in stages, using methods, a list and a test table",
      "summary": "Real software is built in cycles of planning, development, testing and refinement. The class quiz-score analyser is planned with decomposition, built one method at a time, checked with a test table of normal, boundary and erroneous data, then refined.",
      "diagram": {
@@ -43784,13 +44971,13 @@
    ]
   },
   {
-   "id": "c21",
-   "n": 21,
+   "id": "c22",
+   "n": 22,
    "title": "Programming with Scratch",
    "intro": "Scratch is where many programmers start: you snap blocks together instead of typing code, but the ideas are the same ones you will use in C# later. In this topic you will learn the Scratch window, events, coordinates, animation, loops, decisions, variables, messages and your own custom blocks, build a simulation, and then plan, build, test and refine a game for a real user.",
    "pages": [
     {
-     "id": "c21-p01",
+     "id": "c22-p01",
      "spec": "Describe what Scratch is and identify the stage, sprites, blocks palette and scripts area",
      "summary": "Scratch is a free, block-based programming language: you snap blocks together into scripts instead of typing code. The Scratch window has a stage where things happen, sprites that you program, a blocks palette to choose blocks from and a scripts area to build them in.",
      "diagram": {
@@ -44105,7 +45292,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p02",
+     "id": "c22-p02",
      "spec": "Use event blocks to start scripts and explain why the sequence of blocks matters",
      "summary": "Event (hat) blocks such as [when green flag clicked] or [when (space) key pressed] start a script. The blocks underneath then run in sequence, one after another from top to bottom, so putting them in the wrong order changes what happens.",
      "diagram": {
@@ -44361,7 +45548,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p03",
+     "id": "c22-p03",
      "spec": "Use motion blocks and x and y coordinates to position and move a sprite on the stage",
      "summary": "The stage is a grid 480 steps wide (x from -240 to 240) and 360 steps tall (y from -180 to 180), with (0, 0) in the centre. Motion blocks either move a sprite relative to where it is, such as [change x by (10)], or send it to an exact position, such as [go to x: (100) y: (50)].",
      "diagram": {
@@ -44660,7 +45847,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p04",
+     "id": "c22-p04",
      "spec": "Use looks and sound blocks, and switch costumes to animate a sprite",
      "summary": "Looks blocks change how a sprite appears: speech bubbles, size, effects, show and hide, and its costume. Switching quickly between costumes with a short wait in between makes an animation, just like a flip book, and sound blocks add music and effects.",
      "diagram": {
@@ -44883,7 +46070,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p05",
+     "id": "c22-p05",
      "spec": "Use repeat, forever and repeat until loops and explain why loops make code shorter",
      "summary": "Iteration means repeating blocks using a loop. [repeat (10)] is a count-controlled loop that runs a set number of times; [repeat until <>] is a condition-controlled loop that stops when its condition becomes true; [forever] never stops. Loops make code shorter, easier to read and easier to change.",
      "diagram": {
@@ -45122,7 +46309,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p06",
+     "id": "c22-p06",
      "spec": "Use if and if-else blocks with sensing blocks so a program can make decisions",
      "summary": "Selection lets a program choose what to do. [if <condition> then] runs its blocks only when the condition is true; [if <> then else] picks one of two paths. Sensing blocks such as <touching (Bowl)?>, <key (space) pressed?> and [ask () and wait] give the conditions and inputs, and an if usually needs to sit inside a forever loop so it keeps checking.",
      "diagram": {
@@ -45406,7 +46593,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p07",
+     "id": "c22-p07",
      "spec": "Create and use variables for score, lives and timers, know the data types they hold, and use operators for maths, comparisons and random numbers",
      "summary": "A variable is a named store for a value that can change, such as score, lives or time. In Scratch a variable can hold a number, text (a string) or true/false (a Boolean). Operator blocks do maths (+, -, ×, /), compare values (<, =, >), join text and pick random numbers.",
      "diagram": {
@@ -45708,7 +46895,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p08",
+     "id": "c22-p08",
      "spec": "Use broadcast and when I receive blocks to send messages between sprites and the stage",
      "summary": "A broadcast sends a message to every sprite and the stage. Any script that starts with [when I receive (message)] then runs. Broadcasts let sprites work together, such as starting a level, showing a game-over screen or making one sprite react to another.",
      "diagram": {
@@ -45901,7 +47088,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p09",
+     "id": "c22-p09",
      "spec": "Use abstraction to reduce complexity by making My Blocks (custom blocks) with inputs",
      "summary": "A My Block is a custom block you define once and then use whenever you need it, giving a long set of blocks a single clear name. This is abstraction: hiding detail you do not need to think about. Inputs (parameters) let the same block do slightly different jobs, such as drawing a shape with any number of sides.",
      "diagram": {
@@ -46088,7 +47275,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p10",
+     "id": "c22-p10",
      "spec": "Use variables to build a simple simulation, and explain how changing a variable changes the outcome of a model",
      "summary": "A model is a simplified version of a real system, and a simulation runs the model to see what happens. In Scratch, variables such as gravity, bounciness or growth rate control the model: change one and you can test a prediction, such as how quickly rabbits fill an island or how high a ball bounces.",
      "diagram": {
@@ -46302,7 +47489,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p11",
+     "id": "c22-p11",
      "spec": "Find and fix bugs by tracing a script and recognising common Scratch errors",
      "summary": "A bug is a mistake that stops a program doing what it should; debugging is finding and fixing it. Scratch blocks stop most typing errors, so most Scratch bugs are logic errors: blocks in the wrong order, the wrong sprite, set instead of change, a missing loop or reset, or a condition that is never true. Tracing a script step by step shows where it goes wrong.",
      "diagram": {
@@ -46569,7 +47756,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p12",
+     "id": "c22-p12",
      "spec": "Plan, develop, test and refine a simple game for a user, using a user story and a test table",
      "summary": "Software is made in cycles: plan, develop, test and refine, then go round again. Start by asking who the game is for and writing a user story ('As a ... I want ... so that ...'). Build one feature at a time, test each one with a test table of normal, boundary and erroneous tests, and refine it using what you find and what users say.",
      "diagram": {
@@ -46872,13 +48059,13 @@
    ]
   },
   {
-   "id": "c22",
-   "n": 22,
+   "id": "c23",
+   "n": 23,
    "title": "Spreadsheets",
    "intro": "How to use Microsoft Excel to store and calculate data: cells and ranges, formatting, formulas and functions, relative and absolute references, sorting and filtering, charts, and building a tested 'what if' model for a school tuck shop and trip.",
    "pages": [
     {
-     "id": "c22-p01",
+     "id": "c23-p01",
      "spec": "Describe what a spreadsheet is used for and identify cells, rows, columns and ranges",
      "summary": "A spreadsheet is a grid of cells used to store, calculate and present numbers. Each cell has a cell reference made of its column letter and row number, such as B3, and a block of cells is a range, such as A1:D6.",
      "diagram": {
@@ -47184,7 +48371,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p02",
+     "id": "c23-p02",
      "spec": "Enter different types of data and format cells so a spreadsheet is clear to read",
      "summary": "Cells can hold text, numbers, currency, percentages and dates. Formatting (bold, borders, number formats, column width) changes how data looks, not its value, and makes a sheet easier to read.",
      "diagram": {
@@ -47417,7 +48604,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p03",
+     "id": "c23-p03",
      "spec": "Explain what a formula is and write formulas using arithmetic operators",
      "summary": "A formula is a calculation that always starts with =. It can use numbers and cell references with the operators + - * / and ^, and Excel works it out using BODMAS. If a value changes, the formula recalculates automatically.",
      "diagram": {
@@ -47691,7 +48878,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p04",
+     "id": "c23-p04",
      "spec": "Use the functions SUM, AVERAGE, MIN, MAX and COUNT on a range of cells",
      "summary": "A function is a ready-made formula with a name, such as SUM or AVERAGE. You give it a range in brackets, e.g. =SUM(B2:B9), and it does the work. Functions are quicker and less error-prone than long formulas.",
      "diagram": {
@@ -47970,7 +49157,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p05",
+     "id": "c23-p05",
      "spec": "Use IF and COUNTIF to make decisions and count values that meet a condition",
      "summary": "IF checks a condition and shows one result if it is true and another if it is false, e.g. =IF(B2>=70,\"Pass\",\"Fail\"). COUNTIF counts the cells in a range that meet a condition, e.g. =COUNTIF(C2:C9,\"Pass\").",
      "diagram": {
@@ -48241,7 +49428,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p06",
+     "id": "c23-p06",
      "spec": "Explain the difference between relative and absolute cell references when replicating formulas",
      "summary": "Replicating (copying) a formula with the fill handle changes relative references, so =B2*C2 becomes =B3*C3 on the next row. An absolute reference such as $F$1 has dollar signs and never changes when copied.",
      "diagram": {
@@ -48493,7 +49680,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p07",
+     "id": "c23-p07",
      "spec": "Sort and filter data and use conditional formatting to highlight important values",
      "summary": "Sorting puts rows in order (ascending A to Z, smallest to largest, or descending). Filtering hides the rows you do not need. Conditional formatting changes a cell's colour automatically when it meets a rule, such as scores under 60.",
      "diagram": {
@@ -48692,7 +49879,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p08",
+     "id": "c23-p08",
      "spec": "Create a chart from spreadsheet data and choose the right type of chart",
      "summary": "A chart turns numbers into a picture. Column or bar charts compare categories, line graphs show change over time and pie charts show parts of a whole. A good chart has a title, axis titles and, if needed, a legend.",
      "diagram": {
@@ -48911,7 +50098,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p09",
+     "id": "c23-p09",
      "spec": "Use a spreadsheet model to answer 'what if' questions",
      "summary": "A spreadsheet model uses formulas to represent a real situation, such as a school trip budget. Changing the input values (what if more pupils go?) instantly shows the effect on the outputs, which helps people make decisions.",
      "diagram": {
@@ -49117,7 +50304,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p10",
+     "id": "c23-p10",
      "spec": "Plan, build and test a spreadsheet so that it is accurate and easy for others to use",
      "summary": "A good spreadsheet is planned first, built with clear labels and formulas, then tested with data whose answers you already know. Data validation, such as a drop-down list or a number range, stops users typing in impossible data.",
      "diagram": {
@@ -52094,1570 +53281,1702 @@
    "page": "c14-p06"
   },
   {
+   "term": "Ethical hacking",
+   "def": "Testing computer systems for weaknesses with the owner's permission, so they can be fixed.",
+   "alt": "",
+   "page": "c15-p01"
+  },
+  {
+   "term": "Penetration testing",
+   "def": "A planned, authorised attack on a system to find its weaknesses.",
+   "alt": "Pen testing",
+   "page": "c15-p01"
+  },
+  {
+   "term": "Computer Misuse Act",
+   "def": "The UK law (1990) that makes unauthorised access to computers and spreading malware criminal offences.",
+   "alt": "",
+   "page": "c15-p01"
+  },
+  {
+   "term": "Scope",
+   "def": "The agreed limits of a security test: which systems and methods are allowed.",
+   "alt": "",
+   "page": "c15-p01"
+  },
+  {
+   "term": "Capture the Flag",
+   "def": "A legal hacking competition where players find hidden \"flags\" in challenges built for the purpose.",
+   "alt": "CTF",
+   "page": "c15-p02"
+  },
+  {
+   "term": "Flag",
+   "def": "A secret text string hidden in a CTF challenge, which you submit to score points.",
+   "alt": "",
+   "page": "c15-p02"
+  },
+  {
+   "term": "CyberChef",
+   "def": "A free browser tool made by GCHQ for encoding, decoding and analysing data.",
+   "alt": "",
+   "page": "c15-p02"
+  },
+  {
+   "term": "Encoding",
+   "def": "Changing data into a different format for storage or sending, with no secret key.",
+   "alt": "",
+   "page": "c15-p03"
+  },
+  {
+   "term": "Base64",
+   "def": "An encoding that turns data into letters, digits, + and /, often ending in =.",
+   "alt": "",
+   "page": "c15-p03"
+  },
+  {
+   "term": "Hexadecimal",
+   "def": "A number system with 16 digits (0-9 and A-F), often used to show bytes.",
+   "alt": "Hex",
+   "page": "c15-p03"
+  },
+  {
+   "term": "ROT13",
+   "def": "A simple cipher that shifts each letter 13 places; doing it twice gives the original.",
+   "alt": "",
+   "page": "c15-p03"
+  },
+  {
+   "term": "Steganography",
+   "def": "Hiding a message inside something ordinary so nobody knows it exists.",
+   "alt": "",
+   "page": "c15-p04"
+  },
+  {
+   "term": "Metadata",
+   "def": "Hidden information stored with a file, such as its date, author or location.",
+   "alt": "",
+   "page": "c15-p04"
+  },
+  {
+   "term": "File signature",
+   "def": "The first bytes of a file, which identify its real file type.",
+   "alt": "Magic number",
+   "page": "c15-p04"
+  },
+  {
+   "term": "Digital forensics",
+   "def": "Recovering and investigating evidence from computers and other devices.",
+   "alt": "",
+   "page": "c15-p04"
+  },
+  {
+   "term": "Source code",
+   "def": "The code that makes a program or web page, such as HTML, CSS and JavaScript.",
+   "alt": "",
+   "page": "c15-p05"
+  },
+  {
+   "term": "Cookie",
+   "def": "A small piece of data a website stores in your browser, for example to keep you logged in.",
+   "alt": "",
+   "page": "c15-p05"
+  },
+  {
+   "term": "Developer tools",
+   "def": "Tools built into web browsers for inspecting a page's code, network requests and storage.",
+   "alt": "",
+   "page": "c15-p05"
+  },
+  {
+   "term": "Server",
+   "def": "A computer that provides services or web pages to other computers.",
+   "alt": "",
+   "page": "c15-p05"
+  },
+  {
+   "term": "Vulnerability",
+   "def": "A weakness in a system that could be exploited to cause harm.",
+   "alt": "",
+   "page": "c15-p06"
+  },
+  {
+   "term": "Responsible disclosure",
+   "def": "Privately reporting a vulnerability to its owner and giving them time to fix it before telling anyone else.",
+   "alt": "",
+   "page": "c15-p06"
+  },
+  {
+   "term": "Bug bounty",
+   "def": "A reward paid to people who responsibly report vulnerabilities.",
+   "alt": "",
+   "page": "c15-p06"
+  },
+  {
    "term": "Artificial intelligence",
    "def": "Computer systems that can do tasks that normally need human intelligence, such as recognising faces, understanding language or making predictions.",
    "alt": "AI",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Generative AI",
    "def": "Artificial intelligence that creates new content such as text, images, audio, video or code.",
    "alt": "GenAI",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Training data",
    "def": "The huge collection of examples (text, images, sounds) that an AI model learns patterns from.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Model",
    "def": "The result of training an AI: a very large set of numbers that captures the patterns it has learned.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Prompt",
    "def": "The instruction you give a generative AI tool, usually in everyday language.",
    "alt": "",
-   "page": "c15-p01"
+   "page": "c16-p01"
   },
   {
    "term": "Large language model",
    "def": "A generative AI model trained on huge amounts of text that writes by predicting the next token.",
    "alt": "LLM",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Token",
    "def": "A small chunk of text (a word or part of a word) that a language model reads and writes.",
    "alt": "",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Chatbot",
    "def": "A program you can have a conversation with, often powered by a large language model.",
    "alt": "",
-   "page": "c15-p02"
+   "page": "c16-p02"
   },
   {
    "term": "Prompt engineering",
    "def": "The skill of writing prompts that get useful results from a generative AI tool.",
    "alt": "",
-   "page": "c15-p03"
+   "page": "c16-p03"
   },
   {
    "term": "Context",
    "def": "Background information that helps an AI (or a person) understand what you need.",
    "alt": "",
-   "page": "c15-p03"
+   "page": "c16-p03"
   },
   {
    "term": "Iteration",
    "def": "Repeating a cycle of trying, checking and improving.",
    "alt": "",
-   "page": "c15-p03"
+   "page": "c16-p03"
   },
   {
    "term": "Hallucination",
    "def": "When a generative AI states something false as if it were true, such as an invented fact or source.",
    "alt": "",
-   "page": "c15-p04"
+   "page": "c16-p04"
   },
   {
    "term": "Bias",
    "def": "When a system treats some people or ideas unfairly or one-sidedly, often because of patterns in its data.",
    "alt": "",
-   "page": "c15-p04"
+   "page": "c16-p04"
   },
   {
    "term": "Verify",
    "def": "To check that something is true, for example using reliable sources.",
    "alt": "",
-   "page": "c15-p04"
+   "page": "c16-p04"
   },
   {
    "term": "Plagiarism",
    "def": "Presenting someone else's work (including work made by AI) as your own.",
    "alt": "",
-   "page": "c15-p05"
+   "page": "c16-p05"
   },
   {
    "term": "Copyright",
    "def": "The legal right that protects creative work such as writing, music, photos and art from being copied without permission.",
    "alt": "",
-   "page": "c15-p05"
+   "page": "c16-p05"
   },
   {
    "term": "Acknowledge",
    "def": "To say clearly where something came from, including which AI tool you used and how.",
    "alt": "",
-   "page": "c15-p05"
+   "page": "c16-p05"
   },
   {
    "term": "Automation",
    "def": "When machines or software do tasks that people used to do.",
    "alt": "",
-   "page": "c15-p06"
+   "page": "c16-p06"
   },
   {
    "term": "Regulation",
    "def": "Official rules, for example laws that control how AI may be used.",
    "alt": "",
-   "page": "c15-p06"
+   "page": "c16-p06"
   },
   {
    "term": "Data centre",
    "def": "A building full of computers (servers) that store data and run online services such as AI.",
    "alt": "",
-   "page": "c15-p06"
+   "page": "c16-p06"
   },
   {
    "term": "Machine learning",
    "def": "A type of AI where computers learn patterns from data instead of following rules written by a programmer.",
    "alt": "ML",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Supervised learning",
    "def": "Machine learning that learns from examples labelled with the correct answers.",
    "alt": "",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Feature",
    "def": "A piece of information about each example in a dataset, such as weight, colour or pixel values.",
    "alt": "",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Label",
    "def": "The correct answer or category for an example, which the model learns to predict.",
    "alt": "",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Dataset",
    "def": "A collection of examples, usually organised as a table or a set of files.",
    "alt": "",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Classifier",
    "def": "A model that sorts inputs into categories.",
    "alt": "",
-   "page": "c16-p02"
+   "page": "c17-p02"
   },
   {
    "term": "Class",
    "def": "One of the categories a classifier can choose between.",
    "alt": "",
-   "page": "c16-p02"
+   "page": "c17-p02"
   },
   {
    "term": "Training data",
    "def": "The labelled examples a model learns from.",
    "alt": "",
-   "page": "c16-p02"
+   "page": "c17-p02"
   },
   {
    "term": "Test data",
    "def": "Examples kept separate from training and used to check how well a model works on new data.",
    "alt": "",
-   "page": "c16-p03"
+   "page": "c17-p03"
   },
   {
    "term": "Accuracy",
    "def": "The percentage of a model's predictions that are correct.",
    "alt": "",
-   "page": "c16-p03"
+   "page": "c17-p03"
   },
   {
    "term": "Confusion matrix",
    "def": "A table comparing actual and predicted classes, showing which classes a model mixes up.",
    "alt": "",
-   "page": "c16-p03"
+   "page": "c17-p03"
   },
   {
    "term": "Overfitting",
    "def": "When a model learns its training data too closely and performs badly on new data.",
    "alt": "",
-   "page": "c16-p04"
+   "page": "c17-p04"
   },
   {
    "term": "Edge case",
    "def": "An unusual situation that rarely appears in the training data.",
    "alt": "",
-   "page": "c16-p04"
+   "page": "c17-p04"
   },
   {
    "term": "Generalise",
    "def": "To work well on new examples, not just the ones used in training.",
    "alt": "",
-   "page": "c16-p04"
+   "page": "c17-p04"
   },
   {
    "term": "Shortcut learning",
    "def": "When a model uses an accidental clue (like a background) instead of the real feature.",
    "alt": "",
-   "page": "c16-p04"
+   "page": "c17-p04"
   },
   {
    "term": "Bias",
    "def": "When a system is less accurate or less fair for some people, often because of its data.",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Representative data",
    "def": "Data that includes a fair mix of all the people and situations a system will meet.",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Fairness",
    "def": "Making sure a system does not treat people worse because of who they are.",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Problem statement",
    "def": "A clear description of the problem a project will solve, and for whom.",
    "alt": "",
-   "page": "c16-p06"
+   "page": "c17-p06"
   },
   {
    "term": "Evaluation",
    "def": "Judging how well a solution works against success criteria.",
    "alt": "",
-   "page": "c16-p06"
+   "page": "c17-p06"
   },
   {
    "term": "Human oversight",
    "def": "People checking an AI's decisions and being able to overrule them.",
    "alt": "",
-   "page": "c16-p06"
+   "page": "c17-p06"
   },
   {
    "term": "Model",
    "def": "A simplified representation of a real system, used to understand it or predict what will happen.",
    "alt": "",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Real system",
    "def": "The actual thing or situation in the real world that a model represents, such as the weather or a school canteen.",
    "alt": "",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Simulation",
    "def": "Running a model, often step by step over time, to imitate what would happen in the real system.",
    "alt": "",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Prediction",
    "def": "A model's estimate of what will happen. It may turn out to be wrong.",
    "alt": "",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Abstraction",
    "def": "Removing details that do not matter for the question, keeping only what is important.",
    "alt": "",
-   "page": "c17-p02"
+   "page": "c18-p02"
   },
   {
    "term": "Assumption",
    "def": "Something a modeller treats as true to simplify a model, e.g. every pupil takes 15 seconds to be served.",
    "alt": "",
-   "page": "c17-p02"
+   "page": "c18-p02"
   },
   {
    "term": "Decomposition",
    "def": "Breaking a big problem down into smaller parts that are easier to solve.",
    "alt": "",
-   "page": "c17-p02"
+   "page": "c18-p02"
   },
   {
    "term": "Variable",
    "def": "A named value in a model that can change, such as speed or number of pupils.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Input",
    "def": "A value fed into a model that the user can change.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Rule",
    "def": "A formula or instruction in a model that describes how the system behaves.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Output",
    "def": "A result produced by a model from its inputs and rules.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Constant",
    "def": "A value that stays the same every time a model runs, e.g. 60 minutes in an hour.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Data type",
    "def": "The kind of value a variable stores, such as integer, float, string or Boolean.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Integer",
    "def": "A data type for whole numbers, e.g. 12 stops.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Float",
    "def": "A data type for numbers with a decimal point, e.g. 0.5 or 2.75. Also called real.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "String",
    "def": "A data type for text, e.g. \"Belleek route\".",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Boolean",
    "def": "A data type with only two values: TRUE or FALSE.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "What-if question",
    "def": "Changing an input in a model to see the effect on the outputs.",
    "alt": "",
-   "page": "c17-p04"
+   "page": "c18-p04"
   },
   {
    "term": "Hard-coding",
    "def": "Typing a fixed number into a formula instead of referring to an input cell, so the formula does not update.",
    "alt": "",
-   "page": "c17-p04"
+   "page": "c18-p04"
   },
   {
    "term": "Goal Seek",
    "def": "An Excel tool that works backwards: it finds the input value needed for an output to reach a target.",
    "alt": "",
-   "page": "c17-p05"
+   "page": "c18-p05"
   },
   {
    "term": "Break-even point",
    "def": "Where income exactly equals costs, so the profit is £0.",
    "alt": "",
-   "page": "c17-p05"
+   "page": "c18-p05"
   },
   {
    "term": "Scenario",
    "def": "A saved set of input values describing one possible situation, such as a worst case or best case.",
    "alt": "",
-   "page": "c17-p05"
+   "page": "c18-p05"
   },
   {
    "term": "Time step",
    "def": "One jump forward in a simulation over time, such as one day or one year.",
    "alt": "",
-   "page": "c17-p06"
+   "page": "c18-p06"
   },
   {
    "term": "Iteration",
    "def": "Repeating a set of steps; in a simulation, applying the rules again for each time step.",
    "alt": "",
-   "page": "c17-p06"
+   "page": "c18-p06"
   },
   {
    "term": "Random number",
    "def": "A number chosen by chance, used in simulations to model events such as dice rolls.",
    "alt": "",
-   "page": "c17-p07"
+   "page": "c18-p07"
   },
   {
    "term": "Probability",
    "def": "How likely something is to happen, from 0 (impossible) to 1 (certain).",
    "alt": "",
-   "page": "c17-p07"
+   "page": "c18-p07"
   },
   {
    "term": "Validation",
    "def": "Checking a model by comparing its predictions with real data.",
    "alt": "",
-   "page": "c17-p08"
+   "page": "c18-p08"
   },
   {
    "term": "Prediction error",
    "def": "The difference between the real value and the value a model predicted.",
    "alt": "",
-   "page": "c17-p08"
+   "page": "c18-p08"
   },
   {
    "term": "GIGO",
    "def": "Garbage in, garbage out: if the data put into a model is wrong, its outputs will be wrong too.",
    "alt": "",
-   "page": "c17-p09"
+   "page": "c18-p09"
   },
   {
    "term": "Trade-off",
    "def": "Gaining one thing by giving up another, e.g. a simpler model is quicker but less accurate.",
    "alt": "",
-   "page": "c17-p09"
+   "page": "c18-p09"
   },
   {
    "term": "Bias",
    "def": "When a model's results are unfair to, or less accurate for, some groups of people.",
    "alt": "",
-   "page": "c17-p09"
+   "page": "c18-p09"
   },
   {
    "term": "AI model",
    "def": "A model that has learned patterns from a large set of data so it can make predictions or generate content.",
    "alt": "",
-   "page": "c17-p09"
+   "page": "c18-p09"
   },
   {
    "term": "Training data",
    "def": "The examples an AI model learns its patterns from.",
    "alt": "",
-   "page": "c17-p09"
+   "page": "c18-p09"
   },
   {
    "term": "Success criteria",
    "def": "Statements used to judge whether a model or product does its job.",
    "alt": "",
-   "page": "c17-p10"
+   "page": "c18-p10"
   },
   {
    "term": "Test data",
    "def": "Values chosen to check a model gives correct results, including normal and extreme values.",
    "alt": "",
-   "page": "c17-p10"
+   "page": "c18-p10"
   },
   {
    "term": "Network",
    "def": "Two or more computers or devices connected together so they can communicate and share data and resources.",
    "alt": "",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "Stand-alone computer",
    "def": "A computer that is not connected to any network.",
    "alt": "",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "LAN",
    "def": "Local Area Network: a network covering a small area, such as one school, home or office building.",
    "alt": "Local Area Network",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "WAN",
    "def": "Wide Area Network: a network covering a large geographical area, often linking LANs together. The internet is the largest WAN.",
    "alt": "Wide Area Network",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "Internet",
    "def": "A global WAN made of millions of smaller networks joined together.",
    "alt": "",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "NIC",
    "def": "Network Interface Card: the hardware inside a device that lets it connect to a network, by cable or wirelessly.",
    "alt": "Network Interface Card",
-   "page": "c18-p02"
+   "page": "c19-p02"
   },
   {
    "term": "Switch",
    "def": "A device that connects devices together within a LAN and sends data only to the device it is meant for.",
    "alt": "",
-   "page": "c18-p02"
+   "page": "c19-p02"
   },
   {
    "term": "Router",
    "def": "A device that connects different networks together (e.g. a LAN to the internet) and forwards packets towards their destination.",
    "alt": "",
-   "page": "c18-p02"
+   "page": "c19-p02"
   },
   {
    "term": "Wireless access point",
    "def": "A device that lets wireless devices connect to a wired network using Wi-Fi.",
    "alt": "WAP",
-   "page": "c18-p02"
+   "page": "c19-p02"
   },
   {
    "term": "Modem",
    "def": "A device that converts digital data from a computer into signals that can travel along a phone line or cable, and back again.",
    "alt": "",
-   "page": "c18-p02"
+   "page": "c19-p02"
   },
   {
    "term": "Ethernet cable",
    "def": "A copper cable with twisted pairs of wires, used to connect devices in a wired LAN.",
    "alt": "",
-   "page": "c18-p02"
+   "page": "c19-p02"
   },
   {
    "term": "Fibre optic cable",
    "def": "A cable that carries data as pulses of light along thin strands of glass; very fast and works over long distances.",
    "alt": "",
-   "page": "c18-p02"
+   "page": "c19-p02"
   },
   {
    "term": "Wi-Fi",
    "def": "A wireless technology that uses radio waves to connect devices to a LAN and the internet, usually over tens of metres.",
    "alt": "",
-   "page": "c18-p03"
+   "page": "c19-p03"
   },
   {
    "term": "Bluetooth",
    "def": "A short-range, low-power wireless technology for connecting devices directly to each other, usually within about 10 metres.",
    "alt": "",
-   "page": "c18-p03"
+   "page": "c19-p03"
   },
   {
    "term": "Topology",
    "def": "The layout of a network: how the devices are connected to each other.",
    "alt": "Network topology",
-   "page": "c18-p04"
+   "page": "c19-p04"
   },
   {
    "term": "Star topology",
    "def": "A network layout where every device has its own connection to a central switch.",
    "alt": "",
-   "page": "c18-p04"
+   "page": "c19-p04"
   },
   {
    "term": "Bus topology",
    "def": "A network layout where all devices are connected to one main cable called the backbone.",
    "alt": "",
-   "page": "c18-p04"
+   "page": "c19-p04"
   },
   {
    "term": "Mesh topology",
    "def": "A network layout where devices are connected to several other devices, so data has many possible routes.",
    "alt": "",
-   "page": "c18-p04"
+   "page": "c19-p04"
   },
   {
    "term": "Server",
    "def": "A powerful computer that provides a service (such as storing files, printing or hosting websites) to other computers on a network.",
    "alt": "",
-   "page": "c18-p05"
+   "page": "c19-p05"
   },
   {
    "term": "Client",
    "def": "A computer or device that requests and uses services from a server.",
    "alt": "",
-   "page": "c18-p05"
+   "page": "c19-p05"
   },
   {
    "term": "Client-server network",
    "def": "A network where clients request services from one or more central servers, which manage files, logins and security.",
    "alt": "",
-   "page": "c18-p05"
+   "page": "c19-p05"
   },
   {
    "term": "Peer-to-peer network",
    "def": "A network with no central server, where every computer is equal and shares its own files and resources directly with the others.",
    "alt": "P2P",
-   "page": "c18-p05"
+   "page": "c19-p05"
   },
   {
    "term": "Packet",
    "def": "A small chunk of data sent across a network, with a header containing information such as the sender's and receiver's addresses and the packet number.",
    "alt": "Data packet",
-   "page": "c18-p06"
+   "page": "c19-p06"
   },
   {
    "term": "Packet switching",
    "def": "A way of sending data where it is split into packets that may take different routes and are put back in order when they arrive.",
    "alt": "",
-   "page": "c18-p06"
+   "page": "c19-p06"
   },
   {
    "term": "Protocol",
    "def": "A set of rules that devices follow so they can communicate with each other, e.g. TCP/IP or HTTP.",
    "alt": "",
-   "page": "c18-p06"
+   "page": "c19-p06"
   },
   {
    "term": "IP address",
    "def": "A number that identifies a device on a network so data can be sent to it, e.g. 192.168.1.25. It can change if the device moves to another network.",
    "alt": "Internet Protocol address",
-   "page": "c18-p07"
+   "page": "c19-p07"
   },
   {
    "term": "MAC address",
    "def": "A unique, permanent address built into every NIC when it is made, written as 12 hexadecimal digits, e.g. 3C:22:FB:9A:41:07.",
    "alt": "Media Access Control address",
-   "page": "c18-p07"
+   "page": "c19-p07"
   },
   {
    "term": "Domain name",
    "def": "The human-friendly name of a website, such as bbc.co.uk, that is easier to remember than an IP address.",
    "alt": "",
-   "page": "c18-p08"
+   "page": "c19-p08"
   },
   {
    "term": "DNS",
    "def": "Domain Name System: a system of servers that translates domain names such as bbc.co.uk into IP addresses.",
    "alt": "Domain Name System",
-   "page": "c18-p08"
+   "page": "c19-p08"
   },
   {
    "term": "ISP",
    "def": "Internet Service Provider: a company that connects homes and businesses to the internet, e.g. BT or Virgin Media.",
    "alt": "Internet Service Provider",
-   "page": "c18-p08"
+   "page": "c19-p08"
   },
   {
    "term": "URL",
    "def": "Uniform Resource Locator: the full web address of a page, e.g. https://www.bbc.co.uk/sport.",
    "alt": "Web address",
-   "page": "c18-p08"
+   "page": "c19-p08"
   },
   {
    "term": "Web server",
    "def": "A server that stores web pages and sends them to browsers that request them.",
    "alt": "",
-   "page": "c18-p08"
+   "page": "c19-p08"
   },
   {
    "term": "Bandwidth",
    "def": "The maximum amount of data that can be sent across a network connection each second.",
    "alt": "",
-   "page": "c18-p09"
+   "page": "c19-p09"
   },
   {
    "term": "Mbps",
    "def": "Megabits per second: one million bits per second. The usual unit for broadband speeds.",
    "alt": "Megabits per second",
-   "page": "c18-p09"
+   "page": "c19-p09"
   },
   {
    "term": "Latency",
    "def": "The delay between data being sent and it arriving, measured in milliseconds; also called lag or ping.",
    "alt": "Ping",
-   "page": "c18-p09"
+   "page": "c19-p09"
   },
   {
    "term": "The cloud",
    "def": "Services, software and storage provided over the internet from servers in data centres, instead of on your own device.",
    "alt": "Cloud computing",
-   "page": "c18-p10"
+   "page": "c19-p10"
   },
   {
    "term": "Cloud storage",
    "def": "Saving files on servers owned by a company and accessed over the internet, e.g. OneDrive or Google Drive.",
    "alt": "",
-   "page": "c18-p10"
+   "page": "c19-p10"
   },
   {
    "term": "Data centre",
    "def": "A large building full of servers that store data and run online services.",
    "alt": "",
-   "page": "c18-p10"
+   "page": "c19-p10"
   },
   {
    "term": "Internet of Things",
    "def": "Everyday objects with sensors and network connections that let them collect and share data over the internet.",
    "alt": "IoT",
-   "page": "c18-p10"
+   "page": "c19-p10"
   },
   {
    "term": "Smart device",
    "def": "An everyday device, such as a speaker, doorbell or thermostat, that connects to the internet and can be controlled remotely.",
    "alt": "",
-   "page": "c18-p10"
+   "page": "c19-p10"
   },
   {
    "term": "Presentation software",
    "def": "A program that shows information as a series of slides, usually to support a speaker, e.g. Microsoft PowerPoint, Google Slides or Apple Keynote.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Audience",
    "def": "The people who will watch or use a presentation. Their age, knowledge and needs affect every design choice.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Purpose",
    "def": "What a presentation is meant to achieve, e.g. to inform, persuade, entertain or advertise.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "User-centred design",
    "def": "Designing a product around the needs of the people who will use it, found by asking or observing them.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Communication conventions",
    "def": "The accepted rules for communicating with a particular audience, e.g. how formal the language is, a title slide and a sources slide. Also called communication protocols.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Storyboard",
    "def": "A plan of every slide made before building a presentation, showing layout, text, images and their sources, effects, links and notes.",
    "alt": "",
-   "page": "c19-p02"
+   "page": "c20-p02"
   },
   {
    "term": "Ribbon",
    "def": "The strip of tools across the top of the PowerPoint window, organised into tabs (Home, Insert, Design…) and groups.",
    "alt": "",
-   "page": "c19-p03"
+   "page": "c20-p03"
   },
   {
    "term": "Slide layout",
    "def": "A ready-made arrangement of placeholders for a slide, e.g. Title Slide, Title and Content, Comparison.",
    "alt": "",
-   "page": "c19-p03"
+   "page": "c20-p03"
   },
   {
    "term": "Placeholder",
    "def": "A dotted box on a slide layout that holds a title, text or other content, e.g. 'Click to add title'.",
    "alt": "",
-   "page": "c19-p03"
+   "page": "c20-p03"
   },
   {
    "term": "6x6 rule",
    "def": "A slide design guideline: no more than about six bullet points per slide and about six words per bullet point.",
    "alt": "",
-   "page": "c19-p04"
+   "page": "c20-p04"
   },
   {
    "term": "Contrast",
    "def": "The difference between the colour of text and its background. High contrast makes text easier to read.",
    "alt": "",
-   "page": "c19-p04"
+   "page": "c20-p04"
   },
   {
    "term": "Slide Master",
    "def": "The top slide in a hidden set of master layouts (View > Slide Master). Changes to it, such as a logo or font, appear on every slide.",
    "alt": "",
-   "page": "c19-p04"
+   "page": "c20-p04"
   },
   {
    "term": "Copyright",
    "def": "The legal right of a creator to control how their work is copied and used. In the UK it is automatic and protected by the Copyright, Designs and Patents Act 1988.",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "Intellectual property",
    "def": "Something a person creates with their mind, such as a photo, song, design, logo or invention, that they own. Protected by copyright, trade marks and patents.",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "Licence",
    "def": "Permission from the owner of a work setting out what others may and may not do with it, e.g. a Creative Commons licence.",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "Generative AI",
    "def": "Artificial intelligence that creates new content, such as text, images, audio or video, from a prompt. AI-generated images should be clearly labelled.",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "Plagiarism",
    "def": "Using someone else's work or ideas and presenting them as your own.",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "Creative Commons",
    "def": "Free licences that let creators allow others to use their work under set conditions, e.g. BY (credit the creator), NC (non-commercial).",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "Attribution",
    "def": "Giving credit to the creator of a work you use: Title, Author, Source and Licence (TASL).",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "SmartArt",
    "def": "A PowerPoint feature that turns a list into a ready-designed diagram such as a process, cycle or hierarchy.",
    "alt": "",
-   "page": "c19-p06"
+   "page": "c20-p06"
   },
   {
    "term": "Transition",
    "def": "An effect that plays when moving from one slide to the next, e.g. Fade or Morph.",
    "alt": "",
-   "page": "c19-p07"
+   "page": "c20-p07"
   },
   {
    "term": "Animation",
    "def": "An effect applied to an object on a slide: entrance, emphasis, exit or motion path.",
    "alt": "",
-   "page": "c19-p07"
+   "page": "c20-p07"
   },
   {
    "term": "Non-linear presentation",
    "def": "A presentation where the user chooses which slide to go to next by clicking links or buttons, e.g. a quiz or menu.",
    "alt": "",
-   "page": "c19-p08"
+   "page": "c20-p08"
   },
   {
    "term": "Hyperlink",
    "def": "Clickable text or an object that jumps to another slide, a web page, a file or an email address (Insert > Link, Ctrl + K).",
    "alt": "",
-   "page": "c19-p08"
+   "page": "c20-p08"
   },
   {
    "term": "Action button",
    "def": "A ready-made shape, such as Home, Back or Next, that performs an action like going to a slide when clicked (Insert > Shapes).",
    "alt": "",
-   "page": "c19-p08"
+   "page": "c20-p08"
   },
   {
    "term": "Kiosk mode",
    "def": "A slide show setting (Browsed at a kiosk) where the show runs full screen, loops, and can only be moved on with links, buttons or timings.",
    "alt": "",
-   "page": "c19-p08"
+   "page": "c20-p08"
   },
   {
    "term": "Accessibility",
    "def": "Designing something so that everyone can use it, including people with a disability.",
    "alt": "",
-   "page": "c19-p09"
+   "page": "c20-p09"
   },
   {
    "term": "Screen reader",
    "def": "Software that reads aloud the text on a screen, including alt text, for people who are blind or partially sighted.",
    "alt": "",
-   "page": "c19-p09"
+   "page": "c20-p09"
   },
   {
    "term": "Alt text",
    "def": "Alternative text: a short written description of an image or chart that a screen reader reads aloud.",
    "alt": "",
-   "page": "c19-p09"
+   "page": "c20-p09"
   },
   {
    "term": "WCAG",
    "def": "Web Content Accessibility Guidelines: the international standard for accessible digital content, from the W3C. Its four principles are Perceivable, Operable, Understandable and Robust.",
    "alt": "",
-   "page": "c19-p09"
+   "page": "c20-p09"
   },
   {
    "term": "Accessibility Checker",
    "def": "A PowerPoint tool (Review > Check Accessibility) that lists errors, warnings and tips, such as missing alt text or slide titles.",
    "alt": "",
-   "page": "c19-p09"
+   "page": "c20-p09"
   },
   {
    "term": "Speaker notes",
    "def": "Notes for the presenter about what to say for each slide. The audience does not see them.",
    "alt": "",
-   "page": "c19-p10"
+   "page": "c20-p10"
   },
   {
    "term": "Presenter View",
    "def": "A slide show view where the presenter sees the current slide, next slide, notes and a timer while the audience sees only the slide.",
    "alt": "",
-   "page": "c19-p10"
+   "page": "c20-p10"
   },
   {
    "term": "Success criteria",
    "def": "A checklist of what a good piece of work must do, used to plan and evaluate it.",
    "alt": "",
-   "page": "c19-p11"
+   "page": "c20-p11"
   },
   {
    "term": "Usability",
    "def": "How easy a product is for its users to use. Refining a product based on testing improves its usability.",
    "alt": "",
-   "page": "c19-p11"
+   "page": "c20-p11"
   },
   {
    "term": "Data type",
    "def": "The kind of value a variable holds, such as int, double, string, char or bool. It decides what can be stored and what can be done with it.",
    "alt": "",
-   "page": "c20-p01"
+   "page": "c21-p01"
   },
   {
    "term": "Integer",
    "def": "A whole number with no decimal part, positive or negative. In C# the data type is int.",
    "alt": "int",
-   "page": "c20-p01"
+   "page": "c21-p01"
   },
   {
    "term": "Float",
    "def": "A number with a decimal point, also called a real number. In C# use double, or float with an f on the end of the value.",
    "alt": "real",
-   "page": "c20-p01"
+   "page": "c21-p01"
   },
   {
    "term": "String",
    "def": "Text: a sequence of characters, written inside double quotes in C#.",
    "alt": "",
-   "page": "c20-p01"
+   "page": "c21-p01"
   },
   {
    "term": "Boolean",
    "def": "A data type with only two possible values, true or false. In C# the data type is bool.",
    "alt": "bool",
-   "page": "c20-p01"
+   "page": "c21-p01"
   },
   {
    "term": "Method",
    "def": "A named block of code that carries out one task and runs when it is called. Also called a function, procedure or subroutine.",
    "alt": "subroutine",
-   "page": "c20-p02"
+   "page": "c21-p02"
   },
   {
    "term": "Calling a method",
    "def": "Running a method by writing its name followed by brackets (and any arguments), e.g. ShowBanner();",
    "alt": "call",
-   "page": "c20-p02"
+   "page": "c21-p02"
   },
   {
    "term": "Decomposition",
    "def": "Breaking a large problem down into smaller parts that are easier to solve; each part can become a method.",
    "alt": "",
-   "page": "c20-p02"
+   "page": "c21-p02"
   },
   {
    "term": "Parameter",
    "def": "A variable listed in a method's header that receives a value when the method is called.",
    "alt": "",
-   "page": "c20-p03"
+   "page": "c21-p03"
   },
   {
    "term": "Argument",
    "def": "The actual value passed into a method when it is called.",
    "alt": "",
-   "page": "c20-p03"
+   "page": "c21-p03"
   },
   {
    "term": "Return value",
    "def": "The value a method sends back to the place it was called from, using the return keyword.",
    "alt": "return",
-   "page": "c20-p04"
+   "page": "c21-p04"
   },
   {
    "term": "Void",
    "def": "A keyword in a method header meaning the method does not return a value.",
    "alt": "",
-   "page": "c20-p04"
+   "page": "c21-p04"
   },
   {
    "term": "Function",
    "def": "A subroutine that returns a value. In C# this is a method with a return type such as int or bool.",
    "alt": "",
-   "page": "c20-p04"
+   "page": "c21-p04"
   },
   {
    "term": "Procedure",
    "def": "A subroutine that carries out a task but does not return a value. In C# this is a void method.",
    "alt": "",
-   "page": "c20-p04"
+   "page": "c21-p04"
   },
   {
    "term": "Scope",
    "def": "The part of a program where a variable exists and can be used: the { } it was declared in.",
    "alt": "",
-   "page": "c20-p05"
+   "page": "c21-p05"
   },
   {
    "term": "Local variable",
    "def": "A variable declared inside a method or block; it can only be used there and disappears when that code ends.",
    "alt": "",
-   "page": "c20-p05"
+   "page": "c21-p05"
   },
   {
    "term": "Global variable",
    "def": "A variable that can be used by every method in a program. In C# the nearest thing is a static variable declared in the class, outside every method.",
    "alt": "class-level variable",
-   "page": "c20-p05"
+   "page": "c21-p05"
   },
   {
    "term": "Data structure",
    "def": "A way of storing and organising a collection of related data under one name, such as an array or a list.",
    "alt": "",
-   "page": "c20-p06"
+   "page": "c21-p06"
   },
   {
    "term": "Array",
    "def": "A data structure that holds a fixed number of elements of the same data type, each found by its index.",
    "alt": "",
-   "page": "c20-p06"
+   "page": "c21-p06"
   },
   {
    "term": "Index",
    "def": "The number that gives an element's position in an array or list. In C# the first index is 0.",
    "alt": "",
-   "page": "c20-p06"
+   "page": "c21-p06"
   },
   {
    "term": "Off-by-one error",
    "def": "A logic error where a loop runs one time too many or one time too few, e.g. using <= instead of < with an array.",
    "alt": "",
-   "page": "c20-p06"
+   "page": "c21-p06"
   },
   {
    "term": "List",
    "def": "A data structure that can grow and shrink while the program runs, e.g. List<int> in C#.",
    "alt": "",
-   "page": "c20-p07"
+   "page": "c21-p07"
   },
   {
    "term": "foreach loop",
    "def": "A loop that visits every item in a list or array in turn, without needing an index.",
    "alt": "",
-   "page": "c20-p07"
+   "page": "c21-p07"
   },
   {
    "term": "Trace table",
    "def": "A table showing the value of each variable at each step as an algorithm runs; used to check code by hand (a dry run).",
    "alt": "dry run",
-   "page": "c20-p08"
+   "page": "c21-p08"
   },
   {
    "term": "Linear search",
    "def": "A search that checks each item in a list in turn, from the start, until the target is found or the list ends.",
    "alt": "",
-   "page": "c20-p08"
+   "page": "c21-p08"
   },
   {
    "term": "Generative AI",
    "def": "AI that creates new content, such as text, images or code, by predicting what is likely based on patterns in its training data.",
    "alt": "",
-   "page": "c20-p09"
+   "page": "c21-p09"
   },
   {
    "term": "Prompt",
    "def": "The instruction or question you type into a generative AI tool.",
    "alt": "",
-   "page": "c20-p09"
+   "page": "c21-p09"
   },
   {
    "term": "Hallucination",
    "def": "When an AI tool confidently produces something false or made up, such as a method that does not exist.",
    "alt": "",
-   "page": "c20-p09"
+   "page": "c21-p09"
   },
   {
    "term": "Plagiarism",
    "def": "Passing off someone else's work, including AI-generated work, as your own.",
    "alt": "",
-   "page": "c20-p09"
+   "page": "c21-p09"
   },
   {
    "term": "Software development cycle",
    "def": "Developing software in repeated stages of planning, development, testing and refinement.",
    "alt": "",
-   "page": "c20-p10"
+   "page": "c21-p10"
   },
   {
    "term": "Test table",
    "def": "A table that plans and records tests: the test data, its type, the expected result, the actual result and whether it passed.",
    "alt": "",
-   "page": "c20-p10"
+   "page": "c21-p10"
   },
   {
    "term": "Test data",
    "def": "Values chosen to test a program: normal (sensible values), boundary (at the edges of what is allowed) and erroneous (values that should be rejected).",
    "alt": "",
-   "page": "c20-p10"
+   "page": "c21-p10"
   },
   {
    "term": "Boundary data",
    "def": "Test data at the very edge of the allowed range, such as 0 and 20 for a score out of 20.",
    "alt": "extreme data",
-   "page": "c20-p10"
+   "page": "c21-p10"
   },
   {
    "term": "Erroneous data",
    "def": "Test data that should be rejected by the program, such as 25 or the word ten for a score out of 20.",
    "alt": "invalid data",
-   "page": "c20-p10"
+   "page": "c21-p10"
   },
   {
    "term": "Validation",
    "def": "Checking that input is sensible and allowed before the program uses it, e.g. rejecting a score above 20.",
    "alt": "",
-   "page": "c20-p10"
+   "page": "c21-p10"
   },
   {
    "term": "Scratch",
    "def": "A free, block-based programming language from the MIT Media Lab. Programs are built by snapping blocks together.",
    "alt": "",
-   "page": "c21-p01"
+   "page": "c22-p01"
   },
   {
    "term": "Sprite",
    "def": "A character or object on the stage that can be programmed with its own scripts, e.g. the Scratch Cat.",
    "alt": "",
-   "page": "c21-p01"
+   "page": "c22-p01"
   },
   {
    "term": "Stage",
    "def": "The area of the Scratch window where the project runs. It is 480 steps wide and 360 steps tall.",
    "alt": "",
-   "page": "c21-p01"
+   "page": "c22-p01"
   },
   {
    "term": "Backdrop",
    "def": "A background picture for the stage. Switching backdrops can show a new level or screen.",
    "alt": "",
-   "page": "c21-p01"
+   "page": "c22-p01"
   },
   {
    "term": "Blocks palette",
    "def": "The part of the Scratch window that lists the blocks in the chosen category, ready to drag.",
    "alt": "",
-   "page": "c21-p01"
+   "page": "c22-p01"
   },
   {
    "term": "Script",
    "def": "A stack of joined blocks that runs from top to bottom, usually started by a hat block.",
    "alt": "",
-   "page": "c21-p01"
+   "page": "c22-p01"
   },
   {
    "term": "Event",
    "def": "Something that happens, such as clicking the green flag or pressing a key, that starts a script.",
    "alt": "",
-   "page": "c21-p02"
+   "page": "c22-p02"
   },
   {
    "term": "Sequence",
    "def": "Carrying out instructions one after another, in order. A Scratch script runs from top to bottom.",
    "alt": "",
-   "page": "c21-p02"
+   "page": "c22-p02"
   },
   {
    "term": "Coordinates",
    "def": "A pair of numbers (x, y) giving an exact position on the stage. The centre is (0, 0).",
    "alt": "",
-   "page": "c21-p03"
+   "page": "c22-p03"
   },
   {
    "term": "Costume",
    "def": "One of the pictures a sprite can show. Switching costumes changes how the sprite looks.",
    "alt": "",
-   "page": "c21-p04"
+   "page": "c22-p04"
   },
   {
    "term": "Loop",
    "def": "A block that repeats the blocks inside it, such as [repeat (10)], [repeat until] or [forever].",
    "alt": "",
-   "page": "c21-p05"
+   "page": "c22-p05"
   },
   {
    "term": "Iteration",
    "def": "Repeating a set of instructions using a loop.",
    "alt": "Repetition",
-   "page": "c21-p05"
+   "page": "c22-p05"
   },
   {
    "term": "Count-controlled loop",
    "def": "A loop that repeats a set number of times, known before it starts, e.g. [repeat (4)].",
    "alt": "",
-   "page": "c21-p05"
+   "page": "c22-p05"
   },
   {
    "term": "Condition-controlled loop",
    "def": "A loop that repeats until a condition becomes true, e.g. [repeat until <touching (edge)?>].",
    "alt": "",
-   "page": "c21-p05"
+   "page": "c22-p05"
   },
   {
    "term": "Selection",
    "def": "Choosing which instructions to run depending on a condition, using if or if-else blocks.",
    "alt": "",
-   "page": "c21-p06"
+   "page": "c22-p06"
   },
   {
    "term": "Condition",
    "def": "A test whose answer is either true or false, e.g. <(score) > (10)>.",
    "alt": "",
-   "page": "c21-p06"
+   "page": "c22-p06"
   },
   {
    "term": "Boolean",
    "def": "A value or block that can only be true or false. Boolean blocks have pointed (hexagon) ends.",
    "alt": "",
-   "page": "c21-p06"
+   "page": "c22-p06"
   },
   {
    "term": "Sensing",
    "def": "Scratch blocks that find out what is happening, such as touching, key pressed, mouse position, timer and ask/answer.",
    "alt": "",
-   "page": "c21-p06"
+   "page": "c22-p06"
   },
   {
    "term": "Variable",
    "def": "A named store in memory that holds a value which can change while the program runs, e.g. score.",
    "alt": "",
-   "page": "c21-p07"
+   "page": "c22-p07"
   },
   {
    "term": "Data type",
    "def": "The kind of value stored, such as integer, float, string (text) or Boolean (true/false).",
    "alt": "",
-   "page": "c21-p07"
+   "page": "c22-p07"
   },
   {
    "term": "Operator",
    "def": "A block or symbol that does something with values: maths (+ - * /), comparisons or joining text.",
    "alt": "",
-   "page": "c21-p07"
+   "page": "c22-p07"
   },
   {
    "term": "Comparison operator",
    "def": "An operator that compares two values and gives true or false: <, = or >.",
    "alt": "",
-   "page": "c21-p07"
+   "page": "c22-p07"
   },
   {
    "term": "Broadcast",
    "def": "A message sent to every sprite and the stage; scripts with a matching [when I receive] block then start.",
    "alt": "Message",
-   "page": "c21-p08"
+   "page": "c22-p08"
   },
   {
    "term": "Abstraction",
    "def": "Hiding detail that is not needed and giving a set of instructions a simple name, to reduce complexity.",
    "alt": "",
-   "page": "c21-p09"
+   "page": "c22-p09"
   },
   {
    "term": "My Block",
    "def": "A custom block you define yourself in the My Blocks category and can use as often as you like.",
    "alt": "Custom block",
-   "page": "c21-p09"
+   "page": "c22-p09"
   },
   {
    "term": "Parameter",
    "def": "An input to a custom block or function that lets it do slightly different jobs, e.g. the number of sides.",
    "alt": "Input",
-   "page": "c21-p09"
+   "page": "c22-p09"
   },
   {
    "term": "Model",
    "def": "A simplified representation of a real system that keeps only the parts that matter.",
    "alt": "",
-   "page": "c21-p10"
+   "page": "c22-p10"
   },
   {
    "term": "Simulation",
    "def": "Running a model to see what happens over time or to test a prediction.",
    "alt": "",
-   "page": "c21-p10"
+   "page": "c22-p10"
   },
   {
    "term": "Bug",
    "def": "An error in a program that stops it working as it should.",
    "alt": "",
-   "page": "c21-p11"
+   "page": "c22-p11"
   },
   {
    "term": "Debugging",
    "def": "Finding and fixing bugs in a program.",
    "alt": "",
-   "page": "c21-p11"
+   "page": "c22-p11"
   },
   {
    "term": "Logic error",
    "def": "An error where the program runs but does the wrong thing, e.g. blocks in the wrong order.",
    "alt": "",
-   "page": "c21-p11"
+   "page": "c22-p11"
   },
   {
    "term": "Iterative development",
    "def": "Making software in repeated cycles of planning, developing, testing and refining.",
    "alt": "Development cycle",
-   "page": "c21-p12"
+   "page": "c22-p12"
   },
   {
    "term": "User story",
    "def": "A short sentence describing what a user needs: As a ... I want ... so that ...",
    "alt": "",
-   "page": "c21-p12"
+   "page": "c22-p12"
   },
   {
    "term": "Test table",
    "def": "A table listing each test with its expected result, actual result and whether it passed.",
    "alt": "Test plan",
-   "page": "c21-p12"
+   "page": "c22-p12"
   },
   {
    "term": "Test data",
    "def": "Values or actions used to test a program: normal, boundary and erroneous.",
    "alt": "",
-   "page": "c21-p12"
+   "page": "c22-p12"
   },
   {
    "term": "Spreadsheet",
    "def": "A program that stores data in a grid of cells and carries out calculations on it automatically, e.g. Microsoft Excel.",
    "alt": "",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "Workbook",
    "def": "An Excel file. It can contain one or more worksheets.",
    "alt": "",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "Worksheet",
    "def": "One page (tab) of a workbook, made of rows, columns and cells.",
    "alt": "Sheet",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "Cell",
    "def": "A single box in a spreadsheet, where a column and a row meet. It holds one item of data or one formula.",
    "alt": "",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "Row",
    "def": "A horizontal line of cells, labelled with a number.",
    "alt": "",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "Column",
    "def": "A vertical line of cells, labelled with a letter.",
    "alt": "",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "Cell reference",
    "def": "The address of a cell: its column letter followed by its row number, e.g. B3.",
    "alt": "Cell address",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "Range",
    "def": "A rectangular block of cells, written as first cell:last cell, e.g. A1:D6.",
    "alt": "",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "Active cell",
    "def": "The currently selected cell, shown with a thick border. Its reference appears in the Name Box.",
    "alt": "",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "Formula bar",
    "def": "The bar above the grid that shows the real contents (value or formula) of the active cell.",
    "alt": "",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "Data type",
    "def": "The kind of data in a cell, such as text, number, currency, percentage or date.",
    "alt": "",
-   "page": "c22-p02"
+   "page": "c23-p02"
   },
   {
    "term": "Formatting",
    "def": "Changing how a cell looks (font, colour, borders, number of decimal places) without changing the value stored.",
    "alt": "",
-   "page": "c22-p02"
+   "page": "c23-p02"
   },
   {
    "term": "Currency format",
    "def": "A number format that shows a value as money, e.g. 0.6 is shown as £0.60.",
    "alt": "",
-   "page": "c22-p02"
+   "page": "c23-p02"
   },
   {
    "term": "Formula",
    "def": "A calculation in a cell. It always begins with =, e.g. =B2*C2.",
    "alt": "",
-   "page": "c22-p03"
+   "page": "c23-p03"
   },
   {
    "term": "Operator",
    "def": "A symbol that tells Excel which calculation to do: + - * / or ^.",
    "alt": "Arithmetic operator",
-   "page": "c22-p03"
+   "page": "c23-p03"
   },
   {
    "term": "Automatic recalculation",
    "def": "When a value changes, every formula that uses it is worked out again straight away.",
    "alt": "",
-   "page": "c22-p03"
+   "page": "c23-p03"
   },
   {
    "term": "BODMAS",
    "def": "The order Excel works out a calculation: Brackets, Orders (powers), Division and Multiplication, Addition and Subtraction.",
    "alt": "Order of operations",
-   "page": "c22-p03"
+   "page": "c23-p03"
   },
   {
    "term": "Function",
    "def": "A ready-made formula with a name, such as SUM or AVERAGE, e.g. =SUM(B2:B9).",
    "alt": "",
-   "page": "c22-p04"
+   "page": "c23-p04"
   },
   {
    "term": "Argument",
    "def": "The value or range given to a function inside its brackets, e.g. B2:B9 in =SUM(B2:B9).",
    "alt": "",
-   "page": "c22-p04"
+   "page": "c23-p04"
   },
   {
    "term": "SUM",
    "def": "A function that adds up all the numbers in a range.",
    "alt": "",
-   "page": "c22-p04"
+   "page": "c23-p04"
   },
   {
    "term": "AVERAGE",
    "def": "A function that finds the mean of the numbers in a range (total divided by how many).",
    "alt": "",
-   "page": "c22-p04"
+   "page": "c23-p04"
   },
   {
    "term": "COUNT",
    "def": "A function that counts how many cells in a range contain numbers.",
    "alt": "",
-   "page": "c22-p04"
+   "page": "c23-p04"
   },
   {
    "term": "IF",
    "def": "A function that tests a condition and gives one result if it is true and another if it is false.",
    "alt": "IF function",
-   "page": "c22-p05"
+   "page": "c23-p05"
   },
   {
    "term": "COUNTIF",
    "def": "A function that counts how many cells in a range meet a condition, e.g. =COUNTIF(C2:C9,\"Pass\").",
    "alt": "",
-   "page": "c22-p05"
+   "page": "c23-p05"
   },
   {
    "term": "Condition",
    "def": "A test that is either TRUE or FALSE, e.g. B2>=70.",
    "alt": "",
-   "page": "c22-p05"
+   "page": "c23-p05"
   },
   {
    "term": "Comparison operator",
    "def": "A symbol used to compare two values: = <> > < >= <=.",
    "alt": "",
-   "page": "c22-p05"
+   "page": "c23-p05"
   },
   {
    "term": "Fill handle",
    "def": "The small square at the bottom right of the active cell, dragged to copy its contents into neighbouring cells.",
    "alt": "",
-   "page": "c22-p06"
+   "page": "c23-p06"
   },
   {
    "term": "Replication",
    "def": "Copying a formula into other cells so the same calculation is done on each row or column.",
    "alt": "Replicate",
-   "page": "c22-p06"
+   "page": "c23-p06"
   },
   {
    "term": "Relative reference",
    "def": "A cell reference such as B2 that changes to match the new position when a formula is copied.",
    "alt": "Relative cell reference",
-   "page": "c22-p06"
+   "page": "c23-p06"
   },
   {
    "term": "Absolute reference",
    "def": "A cell reference with $ signs, such as $F$1, that does not change when a formula is copied.",
    "alt": "Absolute cell reference",
-   "page": "c22-p06"
+   "page": "c23-p06"
   },
   {
    "term": "Sort",
    "def": "To put the rows of data in order of one column, ascending (A to Z, smallest first) or descending.",
    "alt": "",
-   "page": "c22-p07"
+   "page": "c23-p07"
   },
   {
    "term": "Filter",
    "def": "To show only the rows that match a condition, hiding the others without deleting them.",
    "alt": "",
-   "page": "c22-p07"
+   "page": "c23-p07"
   },
   {
    "term": "Conditional formatting",
    "def": "Formatting that is applied automatically when a cell's value meets a rule, e.g. red fill for scores under 60.",
    "alt": "",
-   "page": "c22-p07"
+   "page": "c23-p07"
   },
   {
    "term": "Chart",
    "def": "A visual display of spreadsheet data, such as a column chart, line graph or pie chart.",
    "alt": "Graph",
-   "page": "c22-p08"
+   "page": "c23-p08"
   },
   {
    "term": "Axis",
    "def": "One of the two lines of a chart: the x-axis runs across and the y-axis runs up.",
    "alt": "",
-   "page": "c22-p08"
+   "page": "c23-p08"
   },
   {
    "term": "Legend",
    "def": "The key on a chart that shows which colour or symbol represents each data series.",
    "alt": "",
-   "page": "c22-p08"
+   "page": "c23-p08"
   },
   {
    "term": "Model",
    "def": "A spreadsheet that represents a real-life situation using inputs, formulas and outputs.",
    "alt": "Spreadsheet model",
-   "page": "c22-p09"
+   "page": "c23-p09"
   },
   {
    "term": "What-if question",
    "def": "Changing one or more input values in a model to see the effect on the results.",
    "alt": "What-if analysis",
-   "page": "c22-p09"
+   "page": "c23-p09"
   },
   {
    "term": "Test data",
    "def": "Data with known expected results used to check a spreadsheet works: normal, boundary and invalid.",
    "alt": "",
-   "page": "c22-p10"
+   "page": "c23-p10"
   },
   {
    "term": "Data validation",
    "def": "Rules that check data as it is entered and reject values that break them, e.g. a whole number between 0 and 100.",
    "alt": "Validation",
-   "page": "c22-p10"
+   "page": "c23-p10"
   }
  ]
 }
