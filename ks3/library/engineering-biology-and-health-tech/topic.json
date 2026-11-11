@@ -1,0 +1,1404 @@
+{
+ "title": "Engineering Biology and Health Tech",
+ "summary": "Where computing meets life science: how wearables measure your body, how AI helps doctors, how DNA is stored and read as data, how engineering biology and gene editing work, why health data needs protecting, and how to design a health-tech solution.",
+ "learn": [
+  "How wearable devices measure the body and what the data can and can't tell you",
+  "How AI is used in medicine, and why accuracy and human checks matter",
+  "How DNA stores information as a code that computers can read",
+  "What engineering biology is, including gene editing and AI protein prediction",
+  "Why health data is sensitive and how it is protected",
+  "How to design a responsible health-tech solution"
+ ],
+ "temporary": false,
+ "intro": "Your watch can measure your heart rate, AI is helping doctors spot cancer earlier, babies' genomes are being read like code, and scientists are \"programming\" cells to make medicines. Computing is transforming health and biology faster than almost any other area. In this topic you'll explore wearables and medical AI, discover how DNA is data, learn about gene editing and AI that predicts protein shapes, think about who should see your health data, and design your own health-tech idea.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "Wearables and the measured body",
+   "spec": "Describe how wearable devices use sensors to measure the body, and evaluate the data they produce",
+   "summary": "Wearables such as smartwatches and fitness trackers use sensors including accelerometers, optical heart-rate sensors and GPS to measure movement, heart rate, sleep and more. Their data can motivate healthy habits and even spot problems, but it isn't always accurate and isn't a medical diagnosis.",
+   "starter": "How many steps do you think you take in a school day? How could a device count them?",
+   "sc": [
+    "I can describe the sensors in a wearable and what they measure",
+    "I can explain how an optical heart-rate sensor works",
+    "I can evaluate the accuracy and usefulness of wearable data"
+   ],
+   "slides": [
+    {
+     "t": "Wearables",
+     "b": [
+      "Smartwatches, fitness trackers, smart rings, sensor patches",
+      "Measure steps, heart rate, sleep, location and more",
+      "Data goes to an app, often via Bluetooth and the cloud",
+      "Some are medical devices, e.g. continuous glucose monitors"
+     ]
+    },
+    {
+     "t": "The sensors inside",
+     "b": [
+      "Accelerometer: movement, used to count steps and detect falls",
+      "Optical heart-rate sensor: green light shines into the skin",
+      "Blood absorbs the light; each heartbeat changes how much is reflected",
+      "GPS: distance and route; temperature sensors; some measure blood oxygen"
+     ]
+    },
+    {
+     "t": "Can you trust the numbers?",
+     "b": [
+      "Good for trends over time, less reliable for single readings",
+      "Errors from loose straps, skin tone, tattoos, movement",
+      "Not a diagnosis: a doctor must interpret medical concerns",
+      "Wellbeing: numbers can motivate, but can also cause worry"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What are wearables?"
+    },
+    {
+     "t": "p",
+     "text": "A **[[wearable]]** is a small electronic device worn on the body that collects data using sensors. Wearables are part of **[[digital health]]**: using technology to support health and care. Examples include smartwatches, fitness trackers, smart rings and medical sensor patches. Some are medical devices: a **continuous glucose monitor** (CGM), for example, sits on the skin and sends blood sugar readings to a phone every few minutes, helping people with diabetes manage their condition."
+    },
+    {
+     "t": "h",
+     "text": "The sensors inside"
+    },
+    {
+     "t": "table",
+     "caption": "Wearable sensors",
+     "head": [
+      "Sensor",
+      "How it works",
+      "Measures"
+     ],
+     "rows": [
+      [
+       "**[[accelerometer|Accelerometer]]**",
+       "Detects changes in movement in three directions",
+       "Steps, activity, falls, sleep movement"
+      ],
+      [
+       "**[[optical heart-rate sensor|Optical heart-rate sensor]]**",
+       "Shines green light into the skin and measures how much is reflected",
+       "Heart rate"
+      ],
+      [
+       "Blood oxygen sensor",
+       "Compares how red and infrared light are absorbed",
+       "Oxygen level in the blood"
+      ],
+      [
+       "GPS",
+       "Receives signals from satellites",
+       "Location, distance, speed"
+      ],
+      [
+       "Temperature sensor",
+       "Measures skin temperature",
+       "Changes in body temperature"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "How an optical heart-rate sensor works",
+     "context": "A watch has green LEDs and a light sensor on its underside.",
+     "steps": [
+      "Green light shines into the skin.",
+      "Blood absorbs green light, so more blood means less light is reflected.",
+      "Each heartbeat pushes a pulse of blood through the wrist, so the reflected light rises and falls.",
+      "The watch counts these rises and falls per minute."
+     ],
+     "answer": "Counting the pulses in reflected light gives the heart rate in beats per minute."
+    },
+    {
+     "t": "h",
+     "text": "Can you trust the data?"
+    },
+    {
+     "t": "p",
+     "text": "**[[accuracy|Accuracy]]** means how close a measurement is to the true value. Wearables are good at showing trends over days and weeks, but single readings can be wrong. Loose straps, movement, tattoos and differences in skin tone can affect optical sensors, and research has shown some devices are less accurate on darker skin, which is a real fairness issue for designers to fix."
+    },
+    {
+     "t": "warn",
+     "text": "A wearable is not a doctor. If you're worried about your health, speak to a parent, carer, school nurse or GP rather than relying on a device's number."
+    },
+    {
+     "t": "act",
+     "title": "Data detectives",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Look at the two weeks of (made-up) fitness tracker data for \"Sam\": steps, heart rate and sleep.",
+      "Describe two trends in the data.",
+      "Find one reading that looks wrong and suggest why.",
+      "Decide one helpful thing the data tells Sam and one thing it can't tell them."
+     ],
+     "q": [
+      {
+       "q": "Describe two trends you found.",
+       "a": "E.g. steps are much higher on PE days (Tuesday and Thursday); sleep is shorter on Sunday nights."
+      },
+      {
+       "q": "Which reading looks wrong, and what could have caused it?",
+       "a": "E.g. a resting heart rate of 180 at 3am, probably caused by a loose strap or the watch slipping, not a real heart rate."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does an accelerometer in a fitness tracker measure?",
+     "o": [
+      "Heart rate",
+      "Blood oxygen",
+      "Location",
+      "Movement, used to count steps"
+     ],
+     "a": 3,
+     "why": "It senses motion."
+    },
+    {
+     "q": "What colour light do most optical heart-rate sensors use?",
+     "o": [
+      "Green",
+      "Blue",
+      "White",
+      "Purple"
+     ],
+     "a": 0,
+     "why": "Blood absorbs green light well."
+    },
+    {
+     "q": "What are wearables best at showing?",
+     "o": [
+      "Your exam results",
+      "Trends over time",
+      "Your thoughts",
+      "Exact medical diagnoses"
+     ],
+     "a": 1,
+     "why": "Single readings may be wrong."
+    },
+    {
+     "q": "What does a continuous glucose monitor help with?",
+     "o": [
+      "Managing diabetes",
+      "Counting steps",
+      "Tracking location",
+      "Measuring sleep"
+     ],
+     "a": 0,
+     "why": "It reads blood sugar levels."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how an optical heart-rate sensor measures heart rate.",
+     "m": 3,
+     "a": "Green light shines into the skin (1); blood absorbs light, so reflected light changes with each heartbeat (1); the device counts pulses per minute (1)."
+    },
+    {
+     "q": "Give two reasons why a wearable's reading might be inaccurate.",
+     "m": 2,
+     "a": "Any two: loose strap (1); movement (1); skin tone/tattoos (1); sensor limitations/low battery (1)."
+    }
+   ],
+   "terms": [
+    "Wearable",
+    "Accelerometer",
+    "Optical heart-rate sensor",
+    "Accuracy",
+    "Digital health"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "AI in medicine",
+   "spec": "Describe how AI is used in medicine and explain why accuracy, bias and human oversight matter",
+   "summary": "AI can analyse medical scans, spot patterns in health records and speed up admin, helping doctors work faster and catch disease earlier. But AI can make false positives and false negatives, can be biased by its training data, and needs doctors to check its decisions.",
+   "starter": "A doctor looks at 100 X-rays a day. How could AI help? What could go wrong?",
+   "sc": [
+    "I can describe uses of AI in healthcare",
+    "I can explain false positives and false negatives",
+    "I can explain why a human should stay in the loop"
+   ],
+   "slides": [
+    {
+     "t": "Where AI helps",
+     "b": [
+      "Medical imaging: spotting signs of cancer, fractures and eye disease in scans",
+      "Triage: deciding who needs to be seen first",
+      "Admin: AI that writes up notes so doctors can focus on patients",
+      "Research: finding patterns in millions of records"
+     ]
+    },
+    {
+     "t": "When AI gets it wrong",
+     "b": [
+      "False positive: AI says there's a problem when there isn't (worry, extra tests)",
+      "False negative: AI misses a real problem (dangerous delay)",
+      "Bias: if training data doesn't include everyone, AI may work worse for some groups",
+      "AI can't explain its \"thinking\" easily"
+     ]
+    },
+    {
+     "t": "Humans in the loop",
+     "b": [
+      "AI as an assistant, not the final decision-maker",
+      "Doctors check AI results and take responsibility",
+      "AI tools must be tested and approved before use in the NHS",
+      "Large trials, e.g. of AI in breast cancer screening, test whether AI really helps"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Where AI helps"
+    },
+    {
+     "t": "table",
+     "caption": "AI in healthcare",
+     "head": [
+      "Use",
+      "How AI helps",
+      "Example"
+     ],
+     "rows": [
+      [
+       "**[[medical imaging|Medical imaging]]**",
+       "Finds patterns in X-rays, scans and photos",
+       "Spotting possible cancers in mammograms; detecting eye disease in retina scans"
+      ],
+      [
+       "Triage",
+       "Helps decide who needs care most urgently",
+       "Prioritising patients with suspected stroke"
+      ],
+      [
+       "Admin",
+       "Writes up notes and letters from conversations",
+       "\"AI scribes\" letting doctors spend more time with patients"
+      ],
+      [
+       "Research",
+       "Analyses huge datasets",
+       "Finding which patients are at higher risk of a disease"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "The NHS is running large trials of AI in breast cancer screening, with hundreds of thousands of women taking part, to find out whether AI can help radiologists spot cancer earlier and reduce waiting times."
+    },
+    {
+     "t": "h",
+     "text": "When AI gets it wrong"
+    },
+    {
+     "t": "p",
+     "text": "Medical tests, including AI ones, can make two kinds of error:"
+    },
+    {
+     "t": "table",
+     "caption": "Two kinds of error",
+     "head": [
+      "Error",
+      "What happens",
+      "Consequence"
+     ],
+     "rows": [
+      [
+       "**[[false positive|False positive]]**",
+       "Says a disease is present when it isn't",
+       "Worry, extra tests, wasted resources"
+      ],
+      [
+       "**[[false negative|False negative]]**",
+       "Misses a disease that is present",
+       "Patient not treated in time: can be dangerous"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[bias|Bias]]** is a serious risk. An AI trained mostly on images of light skin may be worse at spotting skin cancer on dark skin. Training data must represent everyone the AI will be used on."
+    },
+    {
+     "t": "h",
+     "text": "Humans in the loop"
+    },
+    {
+     "t": "p",
+     "text": "A **[[human in the loop]]** means a qualified person checks AI decisions and stays responsible for them. In the UK, AI tools used for diagnosis are regulated as medical devices, so they must be tested for safety and accuracy before they can be used."
+    },
+    {
+     "t": "act",
+     "title": "AI screening simulator",
+     "mins": 25,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Your teacher gives you 20 (made-up) \"scan cards\" and the AI's prediction for each, plus the real result.",
+      "Count the true positives, true negatives, false positives and false negatives.",
+      "Decide which type of error is more serious in cancer screening and why.",
+      "Write a rule for how doctors should use this AI."
+     ],
+     "q": [
+      {
+       "q": "Which error is more serious in cancer screening, and why?",
+       "a": "Usually a false negative, because a real cancer goes untreated and can grow; a false positive causes worry and extra tests, but the person is checked and found to be fine."
+      },
+      {
+       "q": "Write your rule for how doctors should use the AI.",
+       "a": "E.g. \"The AI flags scans for a radiologist to check; a human must review every scan the AI marks as clear in high-risk patients, and the doctor makes the final decision.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a false positive?",
+     "o": [
+      "A correct result",
+      "A broken scanner",
+      "A test says a problem is there when it isn't",
+      "A test misses a real problem"
+     ],
+     "a": 2,
+     "why": "Positive but wrong."
+    },
+    {
+     "q": "What is a false negative?",
+     "o": [
+      "A positive attitude",
+      "A correct result",
+      "A test finds a problem that isn't there",
+      "A test misses a real problem"
+     ],
+     "a": 3,
+     "why": "Negative but wrong."
+    },
+    {
+     "q": "Why might a medical AI be biased?",
+     "o": [
+      "It uses electricity",
+      "Its training data didn't represent everyone",
+      "It's too fast",
+      "Doctors dislike it"
+     ],
+     "a": 1,
+     "why": "Data shapes AI."
+    },
+    {
+     "q": "What does human in the loop mean in medicine?",
+     "o": [
+      "AI makes all decisions",
+      "Patients run the AI",
+      "Nobody checks",
+      "A doctor checks AI decisions and stays responsible"
+     ],
+     "a": 3,
+     "why": "Humans keep oversight."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe two ways AI is used in healthcare.",
+     "m": 2,
+     "a": "Any two: analysing scans (1); triage (1); writing notes/admin (1); research on patterns in data (1)."
+    },
+    {
+     "q": "Explain why a skin cancer detection app trained only on light skin could be dangerous.",
+     "m": 3,
+     "a": "Training data isn't representative (1); the AI may miss cancers on darker skin (false negatives) (1); leading to delayed treatment/unfair health outcomes (1)."
+    }
+   ],
+   "terms": [
+    "Medical imaging",
+    "False positive",
+    "False negative",
+    "Bias",
+    "Human in the loop"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "DNA is data",
+   "spec": "Explain how DNA stores information as a code, and how genome sequencing turns it into data",
+   "summary": "DNA stores the instructions for life using four bases, A, C, G and T, in a sequence a bit like a computer code. A human genome is about 3 billion letters long. Sequencing reads these letters into computer files; it has become thousands of times cheaper and faster, enabling new medicine. DNA can even store computer data.",
+   "starter": "Computers store everything using two symbols: 0 and 1. How many symbols do you think DNA uses?",
+   "sc": [
+    "I can explain how DNA is a code using four letters",
+    "I can describe genome sequencing and why it's become possible on a large scale",
+    "I can compare storing data in DNA with storing it in binary"
+   ],
+   "slides": [
+    {
+     "t": "The code of life",
+     "b": [
+      "DNA is in almost every cell of your body",
+      "Its code uses four bases: A, C, G, T",
+      "A gene is a section of DNA that gives instructions, e.g. to make a protein",
+      "Your genome is your complete set of DNA: about 3 billion letters"
+     ]
+    },
+    {
+     "t": "Reading the code",
+     "b": [
+      "Sequencing reads the order of the letters",
+      "Human Genome Project: 13 years and billions of dollars, finished 2003",
+      "Today: a genome can be sequenced in hours for a few hundred pounds",
+      "Bioinformatics: using computers to analyse biological data"
+     ]
+    },
+    {
+     "t": "Genomics in the NHS",
+     "b": [
+      "Diagnosing rare diseases by finding changes in a child's genome",
+      "Choosing cancer treatments based on the tumour's DNA",
+      "The Generation Study is sequencing the genomes of newborn babies",
+      "Huge storage and computing power needed: each genome is many gigabytes"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "DNA as a code"
+    },
+    {
+     "t": "p",
+     "text": "**[[DNA]]** is the molecule that carries the instructions for building and running living things. It's made of four chemical bases, written as letters: **A** (adenine), **C** (cytosine), **G** (guanine) and **T** (thymine). The order of the letters is the code. A **[[gene]]** is a section of DNA with instructions, often to make a particular protein. Your **[[genome]]** is your complete set of DNA: about 3 billion letters in total, and around 20,000 genes."
+    },
+    {
+     "t": "table",
+     "caption": "Computer code vs DNA code",
+     "head": [
+      "Feature",
+      "Computer",
+      "DNA"
+     ],
+     "rows": [
+      [
+       "Symbols",
+       "2 (0 and 1)",
+       "4 (A, C, G, T)"
+      ],
+      [
+       "Unit",
+       "Bit",
+       "Base"
+      ],
+      [
+       "Instructions",
+       "Programs",
+       "Genes"
+      ],
+      [
+       "Copying",
+       "Copy and paste files",
+       "Cells copy DNA when they divide"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Reading DNA: sequencing"
+    },
+    {
+     "t": "p",
+     "text": "**[[sequencing|Sequencing]]** means reading the order of the letters in DNA and turning it into a computer file. The **Human Genome Project** took 13 years and around $3 billion to read the first human genome, finishing in 2003. Today a whole genome can be sequenced in hours for a few hundred pounds, thanks to better machines and computing."
+    },
+    {
+     "t": "p",
+     "text": "**[[bioinformatics|Bioinformatics]]** is the use of computers and code to store and analyse biological data. A single genome produces gigabytes of raw data, and comparing thousands of genomes needs powerful computers and clever algorithms."
+    },
+    {
+     "t": "h",
+     "text": "Genomics in medicine"
+    },
+    {
+     "t": "key",
+     "title": "How genomics helps patients",
+     "items": [
+      "Diagnosing rare genetic conditions, especially in babies and children",
+      "Matching cancer treatments to the DNA changes in a tumour",
+      "Predicting how a person will react to some medicines",
+      "The NHS Generation Study is sequencing the genomes of newborn babies to see if it can spot treatable conditions early"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Storing data in DNA"
+    },
+    {
+     "t": "p",
+     "text": "Scientists can also store computer data in DNA, by converting binary into the letters A, C, G and T. In theory, one gram of DNA could hold hundreds of millions of gigabytes, and DNA lasts for thousands of years if kept cool and dry. For now it's very slow and expensive to write and read, but it could one day archive the world's data."
+    },
+    {
+     "t": "example",
+     "title": "Encoding binary as DNA",
+     "context": "Use the code 00 = A, 01 = C, 10 = G, 11 = T.",
+     "steps": [
+      "Split the binary 01001000 into pairs: 01 00 10 00.",
+      "Convert each pair: 01 = C, 00 = A, 10 = G, 00 = A."
+     ],
+     "answer": "01001000 (the letter \"H\" in ASCII) becomes CAGA. Each DNA letter stores 2 bits."
+    },
+    {
+     "t": "act",
+     "title": "DNA data lab",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 4,
+     "steps": [
+      "Use the code 00 = A, 01 = C, 10 = G, 11 = T.",
+      "Encode your initials: convert each letter to 8-bit ASCII, then to DNA letters.",
+      "Swap with a partner and decode their DNA message.",
+      "Answer: why can DNA store more data in the same space than binary?"
+     ],
+     "q": [
+      {
+       "q": "Encode the letter \"A\" (ASCII 65 = 01000001) as DNA.",
+       "a": "01 00 00 01 = CAAC."
+      },
+      {
+       "q": "Why can each DNA letter store more information than a single bit?",
+       "a": "A bit has 2 possible values, but a DNA base has 4, so each base stores 2 bits of information."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "How many different bases (letters) does DNA use?",
+     "o": [
+      "4",
+      "26",
+      "10",
+      "2"
+     ],
+     "a": 0,
+     "why": "A, C, G and T."
+    },
+    {
+     "q": "What is a genome?",
+     "o": [
+      "A type of cell",
+      "A single gene",
+      "An organism's complete set of DNA",
+      "A computer virus"
+     ],
+     "a": 2,
+     "why": "About 3 billion letters in humans."
+    },
+    {
+     "q": "What is sequencing?",
+     "o": [
+      "Writing a story",
+      "Reading the order of letters in DNA",
+      "Sorting files",
+      "Counting steps"
+     ],
+     "a": 1,
+     "why": "It turns DNA into data."
+    },
+    {
+     "q": "What is bioinformatics?",
+     "o": [
+      "Using computers to analyse biological data",
+      "A fitness app",
+      "Biology without computers",
+      "A type of DNA"
+     ],
+     "a": 0,
+     "why": "Computing meets biology."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how DNA is similar to computer code.",
+     "m": 2,
+     "a": "Both store information as a sequence of symbols (1); computers use 0 and 1, DNA uses A, C, G, T (1)."
+    },
+    {
+     "q": "Describe two ways genome sequencing helps patients.",
+     "m": 3,
+     "a": "Any two, with detail: diagnosing rare conditions (1); matching cancer treatments to tumour DNA (1); predicting reaction to medicines (1); early detection in newborns (1). Up to 3 for developed answers."
+    }
+   ],
+   "terms": [
+    "DNA",
+    "Genome",
+    "Gene",
+    "Sequencing",
+    "Bioinformatics"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "Engineering biology",
+   "spec": "Describe engineering biology, gene editing and AI protein prediction, and discuss the ethical questions they raise",
+   "summary": "Engineering biology treats living systems like something that can be designed, built and tested. Gene editing tools like CRISPR can change DNA precisely, and have been used to create a cure for sickle cell disease. AI such as AlphaFold predicts protein shapes, speeding up drug discovery. These powerful tools raise ethical questions.",
+   "starter": "If you could change one thing about a plant to help the planet, what would it be?",
+   "sc": [
+    "I can explain what engineering biology is",
+    "I can describe how CRISPR gene editing works in simple terms",
+    "I can explain how AI is speeding up biology, and discuss ethical issues"
+   ],
+   "slides": [
+    {
+     "t": "Biology as engineering",
+     "b": [
+      "Engineering biology: designing and building with living systems",
+      "Cells \"programmed\" to make medicines, materials or fuels",
+      "Insulin for diabetes is made by engineered microbes",
+      "The UK sees engineering biology as a key future technology"
+     ]
+    },
+    {
+     "t": "CRISPR: find and edit",
+     "b": [
+      "CRISPR is a tool that finds a specific DNA sequence and cuts it",
+      "Like \"find and replace\" for DNA",
+      "2023: the UK was the first country to approve a CRISPR-based treatment, for sickle cell disease",
+      "Changes to embryos that could be passed on are not allowed in the UK"
+     ]
+    },
+    {
+     "t": "AI meets biology",
+     "b": [
+      "Proteins do most jobs in our cells; their 3D shape decides what they do",
+      "AlphaFold, from Google DeepMind in London, predicts protein shapes from their code",
+      "Its creators shared the 2024 Nobel Prize in Chemistry",
+      "Faster drug discovery, new enzymes to break down plastic"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is engineering biology?"
+    },
+    {
+     "t": "p",
+     "text": "**[[engineering biology|Engineering biology]]** applies engineering ideas to living things: designing, building and testing biological systems to solve problems. Scientists use the **[[design-build-test-learn]]** cycle, just like programmers improving code."
+    },
+    {
+     "t": "key",
+     "title": "Engineering biology in action",
+     "items": [
+      "Medicines: microbes engineered to make insulin and vaccines",
+      "Food: crops that resist disease or drought",
+      "Materials: spider-silk proteins, mushroom-based packaging",
+      "Environment: enzymes that break down plastic; microbes that clean up pollution"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "CRISPR gene editing"
+    },
+    {
+     "t": "p",
+     "text": "**[[CRISPR]]** is a gene-editing tool. It uses a guide molecule that matches a specific DNA sequence, and an enzyme that cuts the DNA at that spot, a bit like \"find and replace\" in a word processor. Scientists can then remove, change or add DNA letters."
+    },
+    {
+     "t": "p",
+     "text": "In 2023, the UK became the first country in the world to approve a CRISPR-based treatment (called Casgevy) for sickle cell disease and a blood disorder called beta thalassaemia. Doctors edit a patient's own blood stem cells and return them to the body."
+    },
+    {
+     "t": "h",
+     "text": "AI and proteins"
+    },
+    {
+     "t": "p",
+     "text": "A **[[protein]]** is a molecule that does a job in the body, such as carrying oxygen or fighting infection. Its job depends on its 3D shape, which used to take years to work out in the lab. **[[AlphaFold]]**, created by Google DeepMind in London, uses AI to predict a protein's shape from its code in minutes. Its creators Demis Hassabis and John Jumper shared the 2024 Nobel Prize in Chemistry, and AlphaFold has predicted the shapes of hundreds of millions of proteins."
+    },
+    {
+     "t": "h",
+     "text": "Ethical questions"
+    },
+    {
+     "t": "table",
+     "caption": "Weighing up engineering biology",
+     "head": [
+      "Question",
+      "Points to consider"
+     ],
+     "rows": [
+      [
+       "Should we edit human DNA?",
+       "Curing disease vs. safety risks and \"designer babies\"; UK law bans edits that could be passed on to children"
+      ],
+      [
+       "Who can afford new treatments?",
+       "Gene therapies can cost over £1 million per patient"
+      ],
+      [
+       "Should crops be gene-edited?",
+       "Less pesticide, more food vs. effects on nature and choice for consumers"
+      ],
+      [
+       "Could the tools be misused?",
+       "Strong safety rules and checks on who can access them are needed"
+      ]
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Bio-designers",
+     "mins": 25,
+     "who": "Groups of 3",
+     "after": 4,
+     "steps": [
+      "Choose a problem: plastic pollution, a crop disease, or a rare genetic illness.",
+      "Design an engineering-biology solution using the design-build-test-learn cycle.",
+      "Explain where computing or AI would help.",
+      "Complete an ethics checklist: benefits, risks, who might be left out."
+     ],
+     "q": [
+      {
+       "q": "Describe your solution and the role of computing.",
+       "a": "E.g. plastic pollution: use AI (like AlphaFold) to design an enzyme that breaks down plastic faster; engineer microbes to produce it; test it in the lab and use the results to improve the design."
+      },
+      {
+       "q": "What is the biggest ethical risk of your idea, and how would you manage it?",
+       "a": "E.g. engineered microbes escaping into the environment: keep them in sealed facilities and design them so they can't survive outside the lab."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is engineering biology?",
+     "o": [
+      "Designing, building and testing with living systems",
+      "Studying rocks",
+      "Building bridges",
+      "Repairing computers"
+     ],
+     "a": 0,
+     "why": "Engineering ideas applied to biology."
+    },
+    {
+     "q": "What does CRISPR do?",
+     "o": [
+      "Sequences a whole genome",
+      "Counts steps",
+      "Prints proteins",
+      "Finds and cuts a specific DNA sequence"
+     ],
+     "a": 3,
+     "why": "Like \"find and replace\" for DNA."
+    },
+    {
+     "q": "What does AlphaFold predict?",
+     "o": [
+      "The 3D shape of proteins",
+      "Exam results",
+      "Football scores",
+      "The weather"
+     ],
+     "a": 0,
+     "why": "Shape decides what a protein does."
+    },
+    {
+     "q": "Which disease could be treated with the first UK-approved CRISPR treatment?",
+     "o": [
+      "Toothache",
+      "Flu",
+      "Sickle cell disease",
+      "Chickenpox"
+     ],
+     "a": 2,
+     "why": "Approved in 2023."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how CRISPR edits DNA.",
+     "m": 3,
+     "a": "A guide matches a specific DNA sequence (1); an enzyme cuts the DNA there (1); DNA letters can then be removed, changed or added (1)."
+    },
+    {
+     "q": "Discuss whether gene editing should be used to treat diseases.",
+     "m": 4,
+     "a": "For: can cure serious diseases, e.g. sickle cell (1-2); against/concerns: cost, safety, fairness, misuse/designer babies (1-2); conclusion (1). Max 4."
+    }
+   ],
+   "terms": [
+    "Engineering biology",
+    "CRISPR",
+    "Protein",
+    "AlphaFold",
+    "Design-build-test-learn"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Your health data",
+   "spec": "Explain why health data is sensitive, how it is protected by law, and the benefits and risks of sharing it",
+   "summary": "Health and genetic data are among the most sensitive information about a person. UK data protection law treats them as special category data with extra protection. Sharing health data can help research and improve care, but it must be done with consent, security and trust.",
+   "starter": "Who do you think should be allowed to see your medical records: you, your doctor, a researcher, an insurance company, a tech company?",
+   "sc": [
+    "I can explain why health and genetic data are sensitive",
+    "I can describe how UK law protects health data",
+    "I can weigh up the benefits and risks of sharing health data"
+   ],
+   "slides": [
+    {
+     "t": "Why health data is special",
+     "b": [
+      "It's deeply personal and can't be changed like a password",
+      "Genetic data also reveals things about your relatives",
+      "It could be misused for discrimination, e.g. in jobs or insurance",
+      "Criminals target health data because it's valuable"
+     ]
+    },
+    {
+     "t": "The law protects it",
+     "b": [
+      "UK GDPR: health and genetic data are \"special category data\"",
+      "Organisations need a strong legal reason and extra security",
+      "Consent: agreeing, knowing what you're agreeing to",
+      "NHS patients can choose to opt out of their data being used for research and planning"
+     ]
+    },
+    {
+     "t": "Sharing for good",
+     "b": [
+      "Anonymised data can help find cures and plan services",
+      "Health apps and wearables may share data with companies",
+      "Check privacy settings and what an app does with your data",
+      "Trust depends on transparency, security and benefit to patients"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Why health data is sensitive"
+    },
+    {
+     "t": "p",
+     "text": "Health data includes medical records, test results, prescriptions and data from health apps and wearables. Genetic data is especially sensitive: you can't change your DNA, and it also reveals information about your parents, siblings and children."
+    },
+    {
+     "t": "h",
+     "text": "The law"
+    },
+    {
+     "t": "p",
+     "text": "UK data protection law (UK GDPR) treats health, genetic and biometric data as **[[special category data]]**. This means organisations must have a strong legal reason to use it and must protect it with extra security. In many cases they need your **[[consent]]**: a clear, informed agreement to how your data will be used. NHS patients in England can opt out of their confidential data being used for research and planning."
+    },
+    {
+     "t": "h",
+     "text": "Sharing health data"
+    },
+    {
+     "t": "table",
+     "caption": "Benefits and risks of sharing health data",
+     "head": [
+      "Benefits",
+      "Risks"
+     ],
+     "rows": [
+      [
+       "Researchers can find causes and cures for diseases",
+       "A **[[data breach]]** could expose private information"
+      ],
+      [
+       "Hospitals can plan services and spot outbreaks",
+       "People could face discrimination"
+      ],
+      [
+       "AI tools can be trained to help diagnose",
+       "Data might be sold or shared without people realising"
+      ],
+      [
+       "Patients' own records can follow them between services",
+       "Loss of trust means people avoid getting care"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[anonymisation|Anonymisation]]** removes details that identify people (names, addresses, dates of birth) before data is shared. But it isn't perfect: combining datasets can sometimes re-identify people, so many projects use secure research environments where approved researchers can analyse data without taking it away."
+    },
+    {
+     "t": "tip",
+     "text": "Before using a health or fitness app, check: what data does it collect, is it shared with other companies, can you delete it, and is the app from a trusted provider?"
+    },
+    {
+     "t": "act",
+     "title": "The data dilemma",
+     "mins": 25,
+     "who": "Groups of 4",
+     "after": 3,
+     "steps": [
+      "Your group sits on a (fictional) hospital ethics committee.",
+      "Read three requests: a university wants anonymised scan data to train cancer AI; a fitness app wants to sell users' heart data to advertisers; an insurer wants customers' genetic test results.",
+      "Decide whether to approve, approve with conditions, or refuse each one.",
+      "Justify each decision using the law, consent and benefit to patients."
+     ],
+     "q": [
+      {
+       "q": "Give your decisions for the three requests.",
+       "a": "Usually: university: approve with conditions (anonymised, secure environment, patient benefit, ethics approval); fitness app: refuse unless users gave clear, specific consent; insurer: refuse because of the risk of discrimination (UK insurers have agreed not to ask for predictive genetic test results except in rare cases)."
+      },
+      {
+       "q": "What conditions would make sharing data acceptable?",
+       "a": "Clear benefit to patients; anonymisation; secure research environment; transparency; consent or a strong legal basis; no selling for profit without consent."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "How does UK GDPR treat health and genetic data?",
+     "o": [
+      "As unimportant",
+      "As special category data needing extra protection",
+      "As data anyone can sell",
+      "As public data"
+     ],
+     "a": 1,
+     "why": "It's especially sensitive."
+    },
+    {
+     "q": "What is consent?",
+     "o": [
+      "A type of encryption",
+      "Saying nothing",
+      "Clear, informed agreement",
+      "Clicking without reading"
+     ],
+     "a": 2,
+     "why": "You must know what you're agreeing to."
+    },
+    {
+     "q": "What does anonymisation do?",
+     "o": [
+      "Encrypts the whole internet",
+      "Shares names publicly",
+      "Removes details that identify people",
+      "Deletes all data"
+     ],
+     "a": 2,
+     "why": "It protects identity."
+    },
+    {
+     "q": "Why is genetic data especially sensitive?",
+     "o": [
+      "It's very small",
+      "It's always public",
+      "It's boring",
+      "It can't be changed and reveals information about relatives"
+     ],
+     "a": 3,
+     "why": "DNA is shared with family."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why health data needs extra protection.",
+     "m": 2,
+     "a": "It's very personal/can't be changed (1); misuse could lead to discrimination/harm/breach (1)."
+    },
+    {
+     "q": "Discuss whether patients' health data should be shared with researchers.",
+     "m": 4,
+     "a": "Benefits, e.g. new cures, better services, AI tools (1-2); risks, e.g. breaches, re-identification, trust, consent (1-2); conclusion with conditions (1). Max 4."
+    }
+   ],
+   "terms": [
+    "Special category data",
+    "Consent",
+    "Anonymisation",
+    "Data breach"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "Design a health-tech solution",
+   "spec": "Design a health-tech solution that is user-centred, accessible, accurate and safe",
+   "summary": "Good health tech solves a real health problem for real people. Designers involve patients and clinicians, make products accessible, test accuracy carefully, protect data, and follow regulation, because mistakes in health tech can harm people.",
+   "starter": "Think of someone you know who has to manage a health condition every day. What makes it harder for them?",
+   "sc": [
+    "I can identify a health problem and the people affected",
+    "I can design a health-tech solution with accessibility and privacy built in",
+    "I can explain how health tech is tested and regulated"
+   ],
+   "slides": [
+    {
+     "t": "Start with people",
+     "b": [
+      "Who has the problem: patients, carers, clinicians?",
+      "Involve them from the start (co-design)",
+      "Will it work for older people, children, people with disabilities?",
+      "Does it reduce or increase inequality?"
+     ]
+    },
+    {
+     "t": "Design it safely",
+     "b": [
+      "Accuracy: test against the real result, with diverse users",
+      "Privacy by design: collect only what's needed, keep it secure",
+      "Accessibility: large text, voice control, simple language",
+      "What happens if it fails, or the battery dies?"
+     ]
+    },
+    {
+     "t": "Testing and regulation",
+     "b": [
+      "Health tech that diagnoses or treats is a medical device",
+      "In the UK the MHRA regulates medical devices and medicines",
+      "Clinical trials test safety and whether it really works",
+      "Ongoing monitoring after launch"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Start with people"
+    },
+    {
+     "t": "p",
+     "text": "Health tech must follow **[[user-centred design]]**: understanding the needs of patients, carers and clinicians, and involving them in the design. A brilliant app is useless if the people who need it can't use it, or don't trust it."
+    },
+    {
+     "t": "p",
+     "text": "**[[accessibility|Accessibility]]** is vital: many people managing health conditions are older, have visual or hearing impairments, or have limited digital skills. Design features include large clear text, voice control, simple language, and options for people without smartphones."
+    },
+    {
+     "t": "h",
+     "text": "Design it safely"
+    },
+    {
+     "t": "key",
+     "title": "Questions health-tech designers must ask",
+     "items": [
+      "Accuracy: how often is it right, and does it work equally well for different groups?",
+      "Safety: what happens if it gives a wrong answer, fails or loses power?",
+      "Privacy: what data does it collect, where is it stored, who can see it?",
+      "Accessibility: can everyone who needs it use it?",
+      "Evidence: does it actually improve people's health?"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Testing and regulation"
+    },
+    {
+     "t": "p",
+     "text": "Health tech that diagnoses, monitors or treats a condition counts as a medical device. In the UK, the **MHRA** (Medicines and Healthcare products Regulatory Agency) is the **[[regulation|regulator]]** for medical devices and medicines. Products must show they are safe and work as claimed. A **[[clinical trial]]** is a carefully designed study that tests a treatment or device with volunteers, often comparing it with existing care."
+    },
+    {
+     "t": "table",
+     "caption": "From idea to the NHS",
+     "head": [
+      "Stage",
+      "What happens"
+     ],
+     "rows": [
+      [
+       "Research",
+       "Understand the problem; talk to patients and clinicians"
+      ],
+      [
+       "Prototype",
+       "Build an early version; test usability"
+      ],
+      [
+       "Testing",
+       "Check accuracy and safety; clinical trials if needed"
+      ],
+      [
+       "Approval",
+       "Meet regulations (e.g. registered with the MHRA)"
+      ],
+      [
+       "Launch and monitor",
+       "Keep checking for problems and improving"
+      ]
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Health-tech pitch",
+     "mins": 35,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Choose a user: a teenager with asthma, a grandparent living alone, or a young person with type 1 diabetes.",
+      "Identify their biggest daily challenge and design a health-tech solution (an app, wearable or smart device).",
+      "Complete a design card covering accessibility, accuracy, privacy and safety.",
+      "Pitch your idea in 2 minutes, explaining how it would be tested."
+     ],
+     "q": [
+      {
+       "q": "Describe your user, their challenge and your solution.",
+       "a": "E.g. a teenager with asthma forgets their inhaler and doesn't know when air quality is poor: a smart inhaler cap logs use and links to an app that warns about high pollen and pollution, and reminds them to carry it."
+      },
+      {
+       "q": "How would you make sure it's accurate, accessible and private?",
+       "a": "Accuracy: test with many users and compare with doctors' records; accessible: simple design, voice alerts, works without a smartwatch; private: data stays on the phone unless the user shares it with their GP, with consent."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What should health-tech design start with?",
+     "o": [
+      "The price",
+      "The logo",
+      "The newest gadget",
+      "The needs of patients, carers and clinicians"
+     ],
+     "a": 3,
+     "why": "User-centred design."
+    },
+    {
+     "q": "Which UK body regulates medical devices?",
+     "o": [
+      "Ofcom",
+      "The MHRA",
+      "The CAA",
+      "The DVLA"
+     ],
+     "a": 1,
+     "why": "Medicines and Healthcare products Regulatory Agency."
+    },
+    {
+     "q": "What is a clinical trial?",
+     "o": [
+      "A computer game",
+      "A fitness challenge",
+      "A careful study testing a treatment or device with volunteers",
+      "A court case"
+     ],
+     "a": 2,
+     "why": "It tests safety and effectiveness."
+    },
+    {
+     "q": "Which is an accessibility feature?",
+     "o": [
+      "Only one colour",
+      "Large clear text and voice control",
+      "Tiny text",
+      "Complicated menus"
+     ],
+     "a": 1,
+     "why": "Helps more people use it."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why health-tech products must be tested carefully before use.",
+     "m": 3,
+     "a": "Mistakes can harm patients (1); must show they're accurate/safe (1); must work for different groups/regulation requires it (1)."
+    },
+    {
+     "q": "Describe two accessibility features for a health app for older people.",
+     "m": 2,
+     "a": "Any two: large text (1); voice control/read-aloud (1); simple language/layout (1); works without a smartphone/phone support (1)."
+    }
+   ],
+   "terms": [
+    "User-centred design",
+    "Accessibility",
+    "Clinical trial",
+    "Regulation"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Wearable",
+   "def": "A small electronic device worn on the body that collects data with sensors.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Digital health",
+   "def": "Using technology to support health and care.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Accelerometer",
+   "def": "A sensor that detects movement and changes in speed.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Optical heart-rate sensor",
+   "def": "A sensor that shines light into the skin to measure heart rate.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Accuracy",
+   "def": "How close a measurement or prediction is to the true value.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Medical imaging",
+   "def": "Creating pictures of the inside of the body, such as X-rays and scans.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "False positive",
+   "def": "A result saying a condition is present when it isn't.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "False negative",
+   "def": "A result missing a condition that is present.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Bias",
+   "def": "Unfairness in results, often because training data doesn't represent everyone.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Human in the loop",
+   "def": "A person who checks and is responsible for decisions an AI helps to make.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "DNA",
+   "def": "The molecule that carries the instructions for living things, coded with four bases: A, C, G and T.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Gene",
+   "def": "A section of DNA that gives an instruction, often to make a protein.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Genome",
+   "def": "The complete set of DNA in an organism.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Sequencing",
+   "def": "Reading the order of the bases in DNA.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Bioinformatics",
+   "def": "Using computers to store and analyse biological data.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Engineering biology",
+   "def": "Designing, building and testing living systems to solve problems.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Design-build-test-learn",
+   "def": "The cycle of designing, making, testing and improving something.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "CRISPR",
+   "def": "A gene-editing tool that finds and cuts a specific DNA sequence.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Protein",
+   "def": "A molecule that does a job in living things; its shape decides its job.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "AlphaFold",
+   "def": "An AI system from Google DeepMind that predicts the 3D shape of proteins.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Special category data",
+   "def": "Highly sensitive personal data, such as health and genetic data, with extra legal protection.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Consent",
+   "def": "Clear, informed agreement.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Anonymisation",
+   "def": "Removing details that identify people from data.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Data breach",
+   "def": "When personal data is lost, stolen or seen by people who shouldn't see it.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "User-centred design",
+   "def": "Designing around the needs of the people who will use something.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Accessibility",
+   "def": "Making technology usable by as many people as possible, including disabled people.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Clinical trial",
+   "def": "A careful study that tests a treatment or device with volunteers.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Regulation",
+   "def": "Rules set and enforced by an official body.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}
