@@ -296,7 +296,7 @@ function mergeObj_(a, b) {   /* the same rules as the site's mergeInto: progress
     if (!/^notes-/.test(k) || /^notes-(nocount|counted)/.test(k) || typeof b[k] !== 'string') return;
     if (a[k] == null) { a[k] = b[k]; return; }
     const x = J(a[k]), y = J(b[k]); if (!x || !y || typeof x !== 'object' || typeof y !== 'object') return;
-    if (/^notes-reader:/.test(k)) { ['done', 'seen'].forEach(f => { x[f] = Object.assign({}, y[f] || {}, x[f] || {}); }); x.steps = x.steps || {}; Object.keys(y.steps || {}).forEach(s => { x.steps[s] = [...new Set([...(x.steps[s] || []), ...(y.steps[s] || [])])]; }); if (!x.last && y.last) x.last = y.last; }
+    if (/^notes-reader:/.test(k)) { ['done', 'seen', 'ans'].forEach(f => { x[f] = Object.assign({}, y[f] || {}, x[f] || {}); }); x.steps = x.steps || {}; Object.keys(y.steps || {}).forEach(s => { x.steps[s] = [...new Set([...(x.steps[s] || []), ...(y.steps[s] || [])])]; }); if (!x.last && y.last) x.last = y.last; }
     else if (/^notes-chquiz:/.test(k)) { x.best = x.best || {}; Object.keys(y.best || {}).forEach(q => { if (!x.best[q] || (y.best[q] && y.best[q].pc > x.best[q].pc)) x.best[q] = y.best[q]; }); x.open = Object.assign({}, y.open || {}, x.open || {}); }
     else if (/^notes-trophy:/.test(k)) x.earned = Object.assign({}, y.earned || {}, x.earned || {});
     else return;

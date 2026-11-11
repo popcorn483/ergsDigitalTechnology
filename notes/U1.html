@@ -1023,6 +1023,15 @@ body{background-color:var(--desk);background-image:radial-gradient(var(--dot) 1p
 .code .out b{color:#7FD88A}
 .code ::selection{background:#35507F}
 /* ---------- tutorials: a numbered walkthrough you can tick off ---------- */
+.lact{--bc:var(--accent,#1F5FBF)}
+.act-qs{display:flex;flex-direction:column;gap:14px;padding:6px 18px 18px}
+.act-q label{display:block;font-family:var(--serif);font-size:15.5px;line-height:1.55;margin-bottom:6px}
+.act-q textarea{width:100%;box-sizing:border-box;min-height:64px;resize:vertical;font:15px/1.5 var(--sans);color:var(--ink);background:var(--paper);border:1.5px solid color-mix(in srgb,var(--bc) 30%,var(--line));border-radius:10px;padding:10px 12px}
+.act-q textarea:focus{outline:2px solid var(--bc);outline-offset:1px;border-color:var(--bc)}
+.act-q .act-sh{margin-top:8px;font-size:13px}
+.act-a{margin-top:8px;padding:10px 12px;border-radius:10px;background:color-mix(in srgb,var(--bc) 8%,var(--paper));font-family:var(--serif);font-size:15px;line-height:1.55}
+.act-a b{font-family:var(--sans);font-size:12px;letter-spacing:.05em;text-transform:uppercase;color:var(--bc);margin-right:6px}
+@media print{.act-q textarea{min-height:90px}.act-sh{display:none}}
 .tut{--bc:var(--b-ex);border-radius:16px;background:var(--paper);outline:1px solid color-mix(in srgb,var(--bc) 28%,var(--line));box-shadow:var(--soft-shadow);overflow:hidden;font-family:var(--sans)}
 .tut-h{display:flex;align-items:center;gap:12px;padding:14px 18px 12px;background:color-mix(in srgb,var(--bc) 9%,var(--paper))}
 .tut-h .bi{width:34px;height:34px;border-radius:11px}.tut-h .bi svg{width:19px;height:19px}
@@ -2817,6 +2826,7 @@ try { state = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) { state =
 if (!state.done || typeof state.done !== 'object') state.done = {};
 if (!state.seen || typeof state.seen !== 'object') state.seen = {};
 if (!state.steps || typeof state.steps !== 'object') state.steps = {};
+if (!state.ans || typeof state.ans !== 'object') state.ans = {};   /* in-lesson activity answers, per page:block:question */
 function save() { try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ } }
 let cleanups = [];
 let cur = 0, onCover = false, booted = false, onCredits = false;
@@ -3014,6 +3024,16 @@ function blockHTML(b, bi) {
   if (T === 'tip' || T === 'warn' || T === 'note') { const lab = { tip: 'Exam tip', warn: 'Common mistake', note: 'Note' }[T]; return `<div class="call ${T}" role="note"><b class="blk-h">${ICONB(T)}${lab}</b><div>${inline(b.text)}</div></div>`; }
   if (T === 'table') return `<figure class="tw${b.head && b.head.length > 2 ? '' : ' plain'}"><table>${b.caption ? `<caption>${inline(b.caption)}</caption>` : ''}<thead><tr>${(b.head || []).map(x => `<th scope="col">${inline(x)}</th>`).join('')}</tr></thead><tbody>${(b.rows || []).map(r => `<tr>${r.map(c => `<td>${inline(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></figure>`;
   if (T === 'compare') return `<div class="tw"><table><thead><tr><th scope="col"><span class="sr">Criterion</span></th>${(b.head || []).map(x => `<th scope="col">${inline(x)}</th>`).join('')}</tr></thead><tbody>${(b.rows || []).map(r => `<tr><th scope="row" style="font-weight:700">${inline(r[0])}</th><td style="font-weight:400">${inline(r[1])}</td><td>${inline(r[2])}</td></tr>`).join('')}</tbody></table></div>`;
+  /* IN-LESSON ACTIVITY (KS3): { t:'act', title, mins, who, steps:[...], q:[{ q, a }] }. Steps tick off like a tutorial;
+     each question has an answer box saved on this device (and with their progress), and a model answer to check against. */
+  if (T === 'act') {
+    const steps = b.steps || [], key = PAGES[cur] ? PAGES[cur].p.id + ':' + bi : '', got = (state.steps && state.steps[key]) || [], qs = b.q || [];
+    const meta = [b.mins ? `${b.mins} min` : '', b.who ? String(b.who) : ''].filter(Boolean).join(' · ');
+    return `<div class="tut lact" data-tut="${esc(key)}"><div class="tut-h">${ICONB('steps')}<span><small>Activity${meta ? ' · ' + esc(meta) : ''}</small><b>${inline(b.title || 'Activity')}</b></span>${steps.length ? `<span class="tut-c" aria-live="polite"><b>${got.length}</b> of ${steps.length} done</span>` : ''}</div>
+      ${steps.length ? `<div class="tut-bar"><i style="--p:${steps.length ? got.length / steps.length : 0}"></i></div>
+      <ol class="tut-s">${steps.map((x, k) => `<li class="${got.includes(k) ? 'ok' : ''}"><button type="button" class="tut-n" data-k="${k}" aria-pressed="${got.includes(k)}" aria-label="Step ${k + 1}: mark as done"><span>${k + 1}</span>${ICON_TICK}</button><div>${inline(x)}</div></li>`).join('')}</ol>` : ''}
+      ${qs.length ? `<div class="act-qs">${qs.map((x, k) => { const ak = key + ':' + k; return `<div class="act-q"><label for="aq-${esc(ak)}">${inline(x.q)}</label><textarea id="aq-${esc(ak)}" data-ans="${esc(ak)}" rows="${x.rows || 3}" placeholder="Type your answer here">${esc((state.ans || {})[ak] || '')}</textarea>${x.a ? `<button type="button" class="btn act-sh" aria-expanded="false">Show a model answer</button><div class="act-a" hidden><b>Model answer</b> ${inline(x.a)}</div>` : ''}</div>`; }).join('')}</div>` : ''}</div>`;
+  }
   if (T === 'example' && (/^tutorial\b/i.test(b.title || '') || ACCESS_BOOK)) {
     const steps = b.steps || [], key = PAGES[cur] ? PAGES[cur].p.id + ':' + bi : '', got = (state.steps && state.steps[key]) || [];
     const tm = /^(tutorial(?:\s+\d+)?)\s*[:.–-]\s*(.+)$/i.exec(String(b.title || '')), lab = tm ? tm[1] : 'Tutorial', title = tm ? tm[2] : String(b.title || 'Tutorial');
@@ -3376,9 +3396,13 @@ function wireCode(p) {
       clearTimeout(btn._t); btn._t = setTimeout(() => { btn.classList.remove('ok'); btn.querySelector('span').textContent = 'Copy'; }, 1800);
     });
   });
+  main.querySelectorAll('.lact textarea[data-ans]').forEach(ta => {
+    let t = 0; ta.addEventListener('input', () => { clearTimeout(t); t = setTimeout(() => { const v = ta.value.slice(0, 4000); if (v.trim()) state.ans[ta.dataset.ans] = v; else delete state.ans[ta.dataset.ans]; save(); }, 400); });
+  });
+  main.querySelectorAll('.lact .act-sh').forEach(bt => bt.addEventListener('click', () => { const a = bt.nextElementSibling, open = a.hidden; a.hidden = !open; bt.setAttribute('aria-expanded', String(open)); bt.textContent = open ? 'Hide the model answer' : 'Show a model answer'; }));
   main.querySelectorAll('.tut[data-tut]').forEach(box => {
     const key = box.dataset.tut, n = box.querySelectorAll('.tut-n').length;
-    const paint = () => { const got = state.steps[key] || []; box.querySelector('.tut-c b').textContent = got.length; box.querySelector('.tut-bar i').style.setProperty('--p', n ? got.length / n : 0); };
+    const paint = () => { const got = state.steps[key] || [], c = box.querySelector('.tut-c b'), bar = box.querySelector('.tut-bar i'); if (c) c.textContent = got.length; if (bar) bar.style.setProperty('--p', n ? got.length / n : 0); };
     box.querySelectorAll('.tut-n').forEach(bt => bt.addEventListener('click', () => {
       const k = +bt.dataset.k, got = new Set(state.steps[key] || []);
       if (got.has(k)) got.delete(k); else got.add(k);
@@ -10054,7 +10078,7 @@ try {
       const loc = LS.get(k); if (loc == null) { LS.set(k, remote[k]); n++; continue; }
       const a = J(loc), b = J(remote[k]); if (!a || !b || typeof a !== 'object' || typeof b !== 'object') continue;
       if (/^notes-reader:/.test(k)) {
-        ['done', 'seen'].forEach(f => { a[f] = Object.assign({}, b[f] || {}, a[f] || {}); });
+        ['done', 'seen', 'ans'].forEach(f => { a[f] = Object.assign({}, b[f] || {}, a[f] || {}); });
         a.steps = a.steps || {}; Object.keys(b.steps || {}).forEach(s => { a.steps[s] = [...new Set([...(a.steps[s] || []), ...(b.steps[s] || [])])]; });
         if (!a.last && b.last) a.last = b.last;
       } else if (/^notes-chquiz:/.test(k)) {

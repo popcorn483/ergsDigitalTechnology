@@ -5012,7 +5012,7 @@ try {
       const loc = LS.get(k); if (loc == null) { LS.set(k, remote[k]); n++; continue; }
       const a = J(loc), b = J(remote[k]); if (!a || !b || typeof a !== 'object' || typeof b !== 'object') continue;
       if (/^notes-reader:/.test(k)) {
-        ['done', 'seen'].forEach(f => { a[f] = Object.assign({}, b[f] || {}, a[f] || {}); });
+        ['done', 'seen', 'ans'].forEach(f => { a[f] = Object.assign({}, b[f] || {}, a[f] || {}); });
         a.steps = a.steps || {}; Object.keys(b.steps || {}).forEach(s => { a.steps[s] = [...new Set([...(a.steps[s] || []), ...(b.steps[s] || [])])]; });
         if (!a.last && b.last) a.last = b.last;
       } else if (/^notes-chquiz:/.test(k)) {
