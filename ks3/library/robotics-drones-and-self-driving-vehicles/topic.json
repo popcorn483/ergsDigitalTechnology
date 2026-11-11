@@ -1,0 +1,1465 @@
+{
+ "title": "Robotics, Drones and Self-Driving Vehicles",
+ "summary": "Machines that sense, think and move: how robots work, how drones fly and are regulated, how self-driving vehicles see the road, what robots mean for jobs and safety, and how to program a robot with an algorithm.",
+ "learn": [
+  "What a robot is and the sense-think-act cycle",
+  "How robots use sensors, actuators and degrees of freedom",
+  "How drones fly, what they're used for and the UK rules for flying them",
+  "How self-driving vehicles work and the levels of automation",
+  "The impact of robots on jobs, safety and society",
+  "How to write and test an algorithm to control a robot"
+ ],
+ "temporary": false,
+ "intro": "Robots now pack your online shopping, help surgeons operate, spray crops and deliver parcels, while drones film sports and search for missing walkers, and robotaxis carry passengers with no one at the wheel. In this topic you'll find out how robots sense and move, how drones fly and the rules for flying one, how self-driving cars \"see\", what all this means for jobs and safety, and you'll program a robot yourself.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "What is a robot?",
+   "spec": "Define a robot, describe the sense-think-act cycle and give examples of different types of robot",
+   "summary": "A robot is a programmable machine that can sense its surroundings, make decisions and act in the physical world. Robots range from factory arms to warehouse robots, surgical robots, cobots that work beside people, and humanoid robots.",
+   "starter": "Is a washing machine a robot? Is a calculator? Is a self-driving car? Discuss what makes something a robot.",
+   "sc": [
+    "I can define what a robot is",
+    "I can describe the sense-think-act cycle",
+    "I can give examples of different types of robot and where they are used"
+   ],
+   "slides": [
+    {
+     "t": "What makes a robot?",
+     "b": [
+      "A programmable machine",
+      "Senses its surroundings with sensors",
+      "Makes decisions with a computer (a controller)",
+      "Acts in the physical world with motors and other actuators"
+     ]
+    },
+    {
+     "t": "Sense, think, act",
+     "b": [
+      "Sense: cameras, distance sensors, touch sensors, microphones",
+      "Think: a program decides what to do next",
+      "Act: wheels turn, arms move, grippers close",
+      "Then sense again: the cycle repeats many times a second"
+     ]
+    },
+    {
+     "t": "Robots at work",
+     "b": [
+      "Industrial arms: welding and painting cars",
+      "Warehouse robots: moving shelves and packing orders",
+      "Surgical robots: helping surgeons make tiny, precise movements",
+      "Cobots work safely beside people; humanoid robots are being trialled in factories"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is a robot?"
+    },
+    {
+     "t": "p",
+     "text": "A **[[robot]]** is a programmable machine that can sense its environment, make decisions and carry out physical actions, often without a person controlling every step. Robots carry out **[[automation]]**: doing tasks automatically that people once did by hand."
+    },
+    {
+     "t": "h",
+     "text": "Sense, think, act"
+    },
+    {
+     "t": "p",
+     "text": "Almost every robot follows the **[[sense-think-act]]** cycle:"
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "**Sense**: sensors collect information (a camera sees an object, a bumper detects a wall).",
+      "**Think**: the controller (a small computer) runs a program to decide what to do.",
+      "**Act**: actuators such as motors move wheels, arms or grippers."
+     ]
+    },
+    {
+     "t": "p",
+     "text": "The cycle repeats many times every second, so the robot can react to changes."
+    },
+    {
+     "t": "h",
+     "text": "Types of robot"
+    },
+    {
+     "t": "table",
+     "caption": "Robots in the real world",
+     "head": [
+      "Type",
+      "What it does",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Industrial robot arm",
+       "Repeats precise tasks very fast",
+       "Welding car bodies in a factory"
+      ],
+      [
+       "Warehouse robot",
+       "Moves goods and shelves around",
+       "Robots in online-shopping warehouses picking and moving orders"
+      ],
+      [
+       "Surgical robot",
+       "Lets a surgeon make tiny, steady movements",
+       "Robot-assisted keyhole surgery in hospitals"
+      ],
+      [
+       "**[[cobot|Cobot]]** (collaborative robot)",
+       "Works safely beside people, slowing or stopping if touched",
+       "Helping workers lift and assemble parts"
+      ],
+      [
+       "Service robot",
+       "Helps people in everyday places",
+       "Robot vacuum cleaners, lawnmowers, hospital delivery robots"
+      ],
+      [
+       "**[[humanoid robot|Humanoid robot]]**",
+       "Has a human-like body to work in spaces built for people",
+       "Humanoid robots being trialled in car factories and warehouses"
+      ]
+     ]
+    },
+    {
+     "t": "note",
+     "text": "Is a washing machine a robot? It follows a program and uses sensors, but it can't move around or change what it does much. Most people call it an automated machine rather than a robot. The line isn't always sharp!"
+    },
+    {
+     "t": "act",
+     "title": "Robot or not?",
+     "mins": 15,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Sort the 10 picture cards (e.g. robot vacuum, toaster, drone, factory arm, remote-control car, smart speaker) into \"robot\", \"not a robot\" and \"not sure\".",
+      "For each robot, identify what it senses, how it thinks and how it acts.",
+      "Agree a one-sentence class definition of a robot."
+     ],
+     "q": [
+      {
+       "q": "Explain why a robot vacuum is a robot but a toaster isn't.",
+       "a": "The vacuum senses obstacles and dirt, decides where to go with a program and moves itself (sense-think-act); the toaster just follows a timer and doesn't sense its surroundings or move."
+      },
+      {
+       "q": "Is a remote-control car a robot? Explain.",
+       "a": "Not really: a person makes all the decisions. If it had sensors and a program to drive itself, it would be a robot."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a robot?",
+     "o": [
+      "A website",
+      "A computer game",
+      "Any machine with a plug",
+      "A programmable machine that senses, decides and acts"
+     ],
+     "a": 3,
+     "why": "Robots sense, think and act."
+    },
+    {
+     "q": "What are the three steps of the robot cycle?",
+     "o": [
+      "Walk, run, jump",
+      "Start, stop, pause",
+      "Input, save, print",
+      "Sense, think, act"
+     ],
+     "a": 3,
+     "why": "Sense-think-act."
+    },
+    {
+     "q": "What is a cobot?",
+     "o": [
+      "A robot toy",
+      "A robot designed to work safely beside people",
+      "A cloud robot",
+      "A robot cow"
+     ],
+     "a": 1,
+     "why": "Collaborative robot."
+    },
+    {
+     "q": "Which is an example of a surgical robot's advantage?",
+     "o": [
+      "It's cheaper than a plaster",
+      "Very small, steady, precise movements",
+      "It never needs a surgeon",
+      "It works without electricity"
+     ],
+     "a": 1,
+     "why": "Precision helps keyhole surgery."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Define the term robot.",
+     "m": 2,
+     "a": "A programmable machine (1) that senses its environment, makes decisions and acts physically (1)."
+    },
+    {
+     "q": "Describe the sense-think-act cycle for a robot vacuum cleaner.",
+     "m": 3,
+     "a": "Sense: bump/distance/dirt sensors detect obstacles and dirt (1); think: program decides to turn or clean more (1); act: motors turn wheels/brushes (1)."
+    }
+   ],
+   "terms": [
+    "Robot",
+    "Sense-think-act",
+    "Cobot",
+    "Humanoid robot",
+    "Automation"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "How robots sense and move",
+   "spec": "Describe the sensors robots use, how they move, and the meaning of degrees of freedom and accuracy",
+   "summary": "Robots use sensors such as cameras, lidar, ultrasonic sensors, touch sensors and encoders to understand their surroundings and their own position. Motors and grippers let them move; the number of ways a robot can move is called its degrees of freedom.",
+   "starter": "Close your eyes and touch your nose. How did you know where your hand was?",
+   "sc": [
+    "I can name sensors robots use and what each is for",
+    "I can explain degrees of freedom",
+    "I can explain why precision and repeatability matter"
+   ],
+   "slides": [
+    {
+     "t": "Robot senses",
+     "b": [
+      "Cameras plus computer vision: recognise objects and people",
+      "Lidar: laser pulses measure distances to build a 3D map",
+      "Ultrasonic and infrared: measure distance to nearby objects",
+      "Touch and force sensors: feel contact and grip strength"
+     ]
+    },
+    {
+     "t": "Knowing where you are",
+     "b": [
+      "Encoders count how far each wheel or joint has turned",
+      "IMUs (accelerometers and gyroscopes) sense tilt and movement",
+      "GPS for outdoor robots; maps for indoor ones",
+      "Combining sensors gives a more reliable picture"
+     ]
+    },
+    {
+     "t": "Moving",
+     "b": [
+      "Motors turn wheels, joints and propellers",
+      "Degrees of freedom: the number of independent ways a robot can move",
+      "A typical factory arm has 6 degrees of freedom",
+      "The end effector is the \"hand\": a gripper, welder, suction cup or tool"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Robot sensors"
+    },
+    {
+     "t": "table",
+     "caption": "How robots sense the world",
+     "head": [
+      "Sensor",
+      "How it works",
+      "Used for"
+     ],
+     "rows": [
+      [
+       "Camera + **[[computer vision]]**",
+       "AI software analyses images",
+       "Recognising objects, reading labels, spotting people"
+      ],
+      [
+       "**[[lidar|Lidar]]**",
+       "Fires laser pulses and times their reflections",
+       "Building 3D maps; self-driving cars"
+      ],
+      [
+       "Ultrasonic",
+       "Times how long a sound pulse takes to echo back",
+       "Measuring distance to obstacles"
+      ],
+      [
+       "Infrared",
+       "Detects reflected infrared light",
+       "Line-following, short-range distance"
+      ],
+      [
+       "Touch/force",
+       "Detects pressure",
+       "Bumpers, grip strength"
+      ],
+      [
+       "**[[encoder|Encoder]]**",
+       "Counts how far a wheel or joint has turned",
+       "Knowing position and distance travelled"
+      ],
+      [
+       "IMU",
+       "Accelerometer and gyroscope sense movement and tilt",
+       "Balancing robots and drones"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Robots often combine several sensors (called sensor fusion), so if one is fooled (a camera in the dark, say) others can fill the gap."
+    },
+    {
+     "t": "h",
+     "text": "Movement"
+    },
+    {
+     "t": "p",
+     "text": "A robot's **[[degrees of freedom]]** are the number of independent ways it can move. Your arm has about 7 (shoulder, elbow, wrist). Most factory robot arms have 6, which lets them reach a point from almost any angle. The tool on the end of a robot arm is the **[[end effector]]**: it might be a gripper, a suction cup, a paint sprayer or a welding torch."
+    },
+    {
+     "t": "h",
+     "text": "Precision and repeatability"
+    },
+    {
+     "t": "p",
+     "text": "Industrial robots are valued because they're precise (they go exactly where they're told) and repeatable (they do it the same way thousands of times). Surgical robots also scale down a surgeon's hand movements and filter out any tremor."
+    },
+    {
+     "t": "example",
+     "title": "Working out distance with an ultrasonic sensor",
+     "context": "Sound travels at about 340 metres per second. An echo comes back after 0.01 seconds.",
+     "steps": [
+      "Total distance travelled by the sound = 340 × 0.01 = 3.4 m.",
+      "The sound went there and back, so divide by 2."
+     ],
+     "answer": "The obstacle is 1.7 m away."
+    },
+    {
+     "t": "act",
+     "title": "Sensor match-up",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Read the six robot missions (e.g. a robot that picks ripe strawberries, a robot that cleans a swimming pool, a delivery robot crossing a pavement).",
+      "Choose the sensors each robot needs and explain why.",
+      "Choose an end effector for each robot that has an arm.",
+      "Identify one situation where a sensor could be fooled, and which other sensor would help."
+     ],
+     "q": [
+      {
+       "q": "Which sensors does a strawberry-picking robot need, and why?",
+       "a": "A camera with computer vision to find ripe (red) strawberries; a force sensor in the gripper so it doesn't squash them; encoders so the arm knows its position."
+      },
+      {
+       "q": "Describe a situation where a sensor could be fooled.",
+       "a": "E.g. a camera on a delivery robot can't see well at night or in fog; lidar or ultrasonic sensors can still measure distances to obstacles."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does lidar use to measure distance?",
+     "o": [
+      "Smell",
+      "Magnets",
+      "Laser pulses",
+      "Sound only"
+     ],
+     "a": 2,
+     "why": "Lidar times laser reflections."
+    },
+    {
+     "q": "What does an encoder measure?",
+     "o": [
+      "How far a wheel or joint has turned",
+      "Colour",
+      "Temperature",
+      "Sound volume"
+     ],
+     "a": 0,
+     "why": "Encoders count rotation."
+    },
+    {
+     "q": "What are degrees of freedom?",
+     "o": [
+      "The number of independent ways a robot can move",
+      "How free the robot is to leave",
+      "The robot's price",
+      "Its speed"
+     ],
+     "a": 0,
+     "why": "Typical arms have 6."
+    },
+    {
+     "q": "What is an end effector?",
+     "o": [
+      "The tool on the end of a robot arm",
+      "The robot's power switch",
+      "A type of sensor",
+      "The final line of code"
+     ],
+     "a": 0,
+     "why": "Grippers, welders, suction cups."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why a robot might use more than one type of sensor.",
+     "m": 2,
+     "a": "One sensor can be fooled or fail in some conditions (1); combining sensors gives a more reliable picture (1)."
+    },
+    {
+     "q": "An ultrasonic echo returns after 0.02 s. Sound travels at 340 m/s. Calculate the distance to the obstacle.",
+     "m": 3,
+     "a": "340 × 0.02 = 6.8 m (1); halve for there and back (1); 3.4 m (1)."
+    }
+   ],
+   "terms": [
+    "Lidar",
+    "Encoder",
+    "Degrees of freedom",
+    "End effector",
+    "Computer vision"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Drones",
+   "spec": "Explain how drones fly, describe their uses and apply the UK rules for flying a drone safely",
+   "summary": "Most drones are quadcopters that steer by changing the speed of four rotors. Drones are used for filming, farming, inspections, deliveries and search and rescue. In the UK, flyers must follow the Drone Code, and most need a Flyer ID and Operator ID from the Civil Aviation Authority.",
+   "starter": "Name three jobs a drone could do better, faster or more safely than a person.",
+   "sc": [
+    "I can explain how a quadcopter moves",
+    "I can describe uses of drones",
+    "I can apply the UK Drone Code"
+   ],
+   "slides": [
+    {
+     "t": "How a quadcopter flies",
+     "b": [
+      "Four rotors: two spin clockwise, two anticlockwise",
+      "All faster: rise; all slower: descend",
+      "Tilt by speeding up rotors on one side: the drone moves that way",
+      "A flight controller with an IMU makes hundreds of tiny adjustments a second"
+     ]
+    },
+    {
+     "t": "Drones at work",
+     "b": [
+      "Search and rescue: thermal cameras find missing people",
+      "Farming: crop monitoring and precision spraying",
+      "Inspections: wind turbines, bridges, power lines",
+      "Deliveries: medicines and blood samples between hospitals; trials of parcel delivery"
+     ]
+    },
+    {
+     "t": "The Drone Code (UK)",
+     "b": [
+      "Get your Flyer ID (free online test) and Operator ID from the CAA",
+      "Never fly higher than 120 m (400 ft)",
+      "Keep the drone in sight at all times",
+      "Stay away from airports, crowds and people; respect privacy"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "How drones fly"
+    },
+    {
+     "t": "p",
+     "text": "A **[[drone]]** is an aircraft without a pilot on board, controlled remotely or flying itself. Most small drones are **[[quadcopter|quadcopters]]** with four rotors. Two spin clockwise and two anticlockwise, so the drone doesn't spin round."
+    },
+    {
+     "t": "table",
+     "caption": "Controlling a quadcopter",
+     "head": [
+      "Movement",
+      "What the rotors do"
+     ],
+     "rows": [
+      [
+       "Rise",
+       "All four speed up"
+      ],
+      [
+       "Descend",
+       "All four slow down"
+      ],
+      [
+       "Move forward",
+       "Rear rotors speed up, so the drone tilts forward"
+      ],
+      [
+       "Turn (yaw)",
+       "Clockwise pair and anticlockwise pair change speed relative to each other"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A flight controller uses an IMU and GPS to make hundreds of tiny adjustments every second, which is why modern drones can hover almost perfectly still."
+    },
+    {
+     "t": "h",
+     "text": "What drones are used for"
+    },
+    {
+     "t": "key",
+     "title": "Drone uses",
+     "items": [
+      "Search and rescue: thermal cameras find missing people on mountains or at sea",
+      "Farming: checking crop health and spraying only where needed",
+      "Inspections: wind turbines, bridges and power lines without climbing",
+      "Deliveries: medical supplies between hospitals and to islands; parcel delivery trials",
+      "Filming and mapping: sport, films, surveying land",
+      "Drone light shows replacing fireworks"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "The UK Drone Code"
+    },
+    {
+     "t": "p",
+     "text": "The **Civil Aviation Authority (CAA)** sets the rules for drones in the UK. From 2026, anyone flying a drone weighing 100 g or more must pass a free online test to get a **[[Flyer ID]]**, and the person responsible for the drone needs an **[[Operator ID]]** (the owner must be 18 or over). Always check the latest rules on the CAA website before flying."
+    },
+    {
+     "t": "key",
+     "title": "Key rules of the Drone Code",
+     "items": [
+      "Never fly higher than 120 metres (400 feet)",
+      "Always keep the drone in **[[visual line of sight]]**: you must be able to see it",
+      "Never fly near airports or airfields",
+      "Keep a safe distance from people and never fly over crowds",
+      "Respect privacy: don't film people without permission"
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "Flying a drone near an airport can put aircraft and lives in danger, and is a serious criminal offence."
+    },
+    {
+     "t": "act",
+     "title": "Mission control",
+     "mins": 25,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Your team is planning a drone mission to find a lost walker on Cuilcagh Mountain.",
+      "Choose the drone features you need (camera type, battery, GPS, speaker).",
+      "Plan your flight using the Drone Code: height, line of sight, people and permissions.",
+      "Identify two risks and how you'd reduce them."
+     ],
+     "q": [
+      {
+       "q": "Which drone features do you need, and why?",
+       "a": "Thermal camera to spot body heat; GPS to map the search and return home; long battery life or spare batteries; a speaker to talk to the walker; lights for poor visibility."
+      },
+      {
+       "q": "Describe two risks and how you'd reduce them.",
+       "a": "E.g. losing sight of the drone in cloud: use spotters and stay within line of sight; strong wind draining battery: check the weather and set an automatic return-home battery level."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "How many rotors does a quadcopter have?",
+     "o": [
+      "Two",
+      "One",
+      "Four",
+      "Six"
+     ],
+     "a": 2,
+     "why": "Quad = four."
+    },
+    {
+     "q": "What is the maximum height for most drone flights in the UK?",
+     "o": [
+      "10 metres",
+      "1,000 metres",
+      "120 metres (400 ft)",
+      "No limit"
+     ],
+     "a": 2,
+     "why": "Stay below 120 m."
+    },
+    {
+     "q": "What does visual line of sight mean?",
+     "o": [
+      "The drone must face you",
+      "You can fly it anywhere",
+      "You must film in straight lines",
+      "You must be able to see the drone at all times"
+     ],
+     "a": 3,
+     "why": "Keep it in sight."
+    },
+    {
+     "q": "Which organisation sets UK drone rules?",
+     "o": [
+      "The BBC",
+      "Ofcom",
+      "The NHS",
+      "The Civil Aviation Authority (CAA)"
+     ],
+     "a": 3,
+     "why": "CAA regulates flying."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how a quadcopter rises and moves forward.",
+     "m": 2,
+     "a": "Rise: all four rotors speed up (1); forward: rear rotors speed up, tilting it forward (1)."
+    },
+    {
+     "q": "Describe three rules a drone flyer in the UK must follow.",
+     "m": 3,
+     "a": "Any three: below 120 m (1); keep in visual line of sight (1); away from airports (1); away from people/crowds (1); Flyer ID/Operator ID (1); respect privacy (1)."
+    }
+   ],
+   "terms": [
+    "Drone",
+    "Quadcopter",
+    "Flyer ID",
+    "Operator ID",
+    "Visual line of sight"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "Self-driving vehicles",
+   "spec": "Describe how self-driving vehicles perceive, plan and act, and explain the levels of driving automation",
+   "summary": "Self-driving vehicles use cameras, radar, lidar and AI to perceive the road, predict what others will do, plan a path and control the car. Driving automation is described in levels 0 to 5. Robotaxis already carry passengers in some cities, and the UK's Automated Vehicles Act 2024 sets out who is responsible when a car drives itself.",
+   "starter": "What does a human driver need to notice in the first ten seconds of pulling out of a junction?",
+   "sc": [
+    "I can describe how a self-driving car senses its surroundings",
+    "I can explain the levels of driving automation",
+    "I can describe the benefits and challenges of self-driving vehicles"
+   ],
+   "slides": [
+    {
+     "t": "How a self-driving car \"sees\"",
+     "b": [
+      "Cameras: colours, lanes, signs and traffic lights",
+      "Radar: distance and speed of other vehicles, even in rain and fog",
+      "Lidar: a precise 3D map of everything around the car",
+      "AI combines them to perceive, predict, plan and control"
+     ]
+    },
+    {
+     "t": "Levels of driving automation",
+     "b": [
+      "Level 0-2: the human drives; the car helps (e.g. lane-keeping, adaptive cruise control)",
+      "Level 3: the car drives in some conditions; the human must take over when asked",
+      "Level 4: the car drives itself fully in a defined area, e.g. a robotaxi zone",
+      "Level 5: drives anywhere, any conditions (not yet achieved)"
+     ]
+    },
+    {
+     "t": "The road ahead",
+     "b": [
+      "Robotaxis already carry paying passengers in some US and Chinese cities",
+      "UK: the Automated Vehicles Act 2024; pilots of self-driving taxi services",
+      "When the car drives itself, the company, not the passenger, is responsible",
+      "Challenges: edge cases, bad weather, cost, trust, jobs"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "How self-driving works"
+    },
+    {
+     "t": "p",
+     "text": "An **[[autonomous vehicle]]** can drive itself without human control. It uses several sensors:"
+    },
+    {
+     "t": "table",
+     "caption": "Self-driving sensors",
+     "head": [
+      "Sensor",
+      "Good at",
+      "Weakness"
+     ],
+     "rows": [
+      [
+       "Camera",
+       "Colours, lane lines, signs, traffic lights",
+       "Struggles in darkness, glare and fog"
+      ],
+      [
+       "**[[radar|Radar]]**",
+       "Distance and speed of objects, works in rain and fog",
+       "Less detail about shape"
+      ],
+      [
+       "Lidar",
+       "Precise 3D shapes and distances",
+       "Expensive; affected by heavy rain or snow"
+      ],
+      [
+       "Ultrasonic",
+       "Very close objects when parking",
+       "Very short range"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "AI software runs four stages many times a second: **perceive** (what's around me?), **predict** (what will that cyclist do next?), **plan** (what path should I take?) and **control** (steer, brake, accelerate)."
+    },
+    {
+     "t": "h",
+     "text": "Levels of automation"
+    },
+    {
+     "t": "table",
+     "caption": "The levels of driving automation (SAE levels)",
+     "head": [
+      "Level",
+      "Who drives?",
+      "Example"
+     ],
+     "rows": [
+      [
+       "0",
+       "Human only; the car may give warnings",
+       "Collision warning beep"
+      ],
+      [
+       "1",
+       "Human, with help steering OR speed",
+       "Adaptive cruise control"
+      ],
+      [
+       "2",
+       "Human must supervise; car steers AND controls speed",
+       "Lane-centring motorway assist"
+      ],
+      [
+       "3",
+       "Car drives in set conditions; human must take over when asked",
+       "Traffic-jam pilots on some motorways"
+      ],
+      [
+       "4",
+       "Car drives fully in a defined area; no human needed there",
+       "Robotaxis in geofenced city zones"
+      ],
+      [
+       "5",
+       "Car drives anywhere, in any conditions",
+       "Not yet achieved"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "These are often called the **[[levels of automation]]**. Many cars on sale have level 2 features, but the driver is still fully responsible."
+    },
+    {
+     "t": "h",
+     "text": "Robotaxis and the law"
+    },
+    {
+     "t": "p",
+     "text": "A **[[robotaxi]]** is a driverless taxi. Robotaxi services already carry paying passengers in several US and Chinese cities, and companies plan services in UK cities. The UK's **Automated Vehicles Act 2024** sets out that when a vehicle is legally driving itself, the authorised company is responsible for how it drives, not the person sitting in it."
+    },
+    {
+     "t": "h",
+     "text": "Benefits and challenges"
+    },
+    {
+     "t": "key",
+     "title": "Weighing up self-driving vehicles",
+     "items": [
+      "Benefit: most crashes involve human error, so automation could save lives",
+      "Benefit: independence for people who can't drive (e.g. some disabled or older people)",
+      "Challenge: **[[edge case|Edge cases]]**, rare unusual situations like a horse on the road or a police officer waving traffic through",
+      "Challenge: rural roads, bad weather and poor road markings",
+      "Challenge: trust, cost, cyber security and jobs for drivers"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Edge case challenge",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 4,
+     "steps": [
+      "Read the eight driving scenarios (e.g. a ball rolling into the road, a tractor on a narrow country lane, roadworks with a person holding a stop sign).",
+      "For each, decide what the car must perceive, predict and do.",
+      "Rate how hard each would be for a self-driving car (1-5) and explain why.",
+      "Decide which would be hardest on Fermanagh's rural roads."
+     ],
+     "q": [
+      {
+       "q": "What should the car predict when a ball rolls into the road?",
+       "a": "That a child may run out after it, so it should slow down and be ready to stop, even if no person is visible yet."
+      },
+      {
+       "q": "Which scenario is hardest on rural roads, and why?",
+       "a": "E.g. the tractor on a narrow lane: no lane markings, limited space to pass, and the car must judge whether to reverse to a passing place or wait; poor mobile signal and mapping may also make it harder."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which sensor works best in fog and rain?",
+     "o": [
+      "Camera",
+      "Lidar",
+      "A microphone",
+      "Radar"
+     ],
+     "a": 3,
+     "why": "Radio waves pass through fog."
+    },
+    {
+     "q": "At which level does the car drive fully, but only in a defined area?",
+     "o": [
+      "Level 1",
+      "Level 2",
+      "Level 0",
+      "Level 4"
+     ],
+     "a": 3,
+     "why": "Level 4 robotaxis are geofenced."
+    },
+    {
+     "q": "What is an edge case?",
+     "o": [
+      "A rare, unusual situation that's hard to handle",
+      "A type of sensor",
+      "A phone case",
+      "The edge of the road"
+     ],
+     "a": 0,
+     "why": "Edge cases challenge AI."
+    },
+    {
+     "q": "Under the UK Automated Vehicles Act 2024, who is responsible when the vehicle is driving itself?",
+     "o": [
+      "The other drivers",
+      "The authorised company",
+      "The passenger",
+      "Nobody"
+     ],
+     "a": 1,
+     "why": "Responsibility moves to the company."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe the four stages a self-driving car's software goes through.",
+     "m": 4,
+     "a": "Perceive: work out what's around it (1); predict: what others will do (1); plan: choose a path (1); control: steer/brake/accelerate (1)."
+    },
+    {
+     "q": "Discuss whether self-driving cars should be allowed on rural roads in Northern Ireland.",
+     "m": 4,
+     "a": "Benefits, e.g. fewer crashes, independence for non-drivers (1-2); challenges, e.g. narrow lanes, poor markings, weather, signal, edge cases (1-2); conclusion (1). Max 4."
+    }
+   ],
+   "terms": [
+    "Autonomous vehicle",
+    "Radar",
+    "Levels of automation",
+    "Edge case",
+    "Robotaxi"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Robots and society",
+   "spec": "Evaluate the impact of robots and automation on jobs, safety and society",
+   "summary": "Robots can take on dull, dirty and dangerous work and boost productivity, but automation also changes and replaces jobs. Society must decide who is responsible when robots cause harm, how to keep people safe, and whether some decisions should never be left to machines.",
+   "starter": "Would you rather a robot or a person did these jobs: bin collector, nurse, surgeon, teacher, soldier? Why?",
+   "sc": [
+    "I can describe the impact of robots on jobs",
+    "I can discuss safety and responsibility when robots go wrong",
+    "I can form a reasoned opinion on an ethical question about robots"
+   ],
+   "slides": [
+    {
+     "t": "The three Ds",
+     "b": [
+      "Robots are ideal for dull, dirty and dangerous work",
+      "Dull: repetitive packing and sorting",
+      "Dirty: sewer inspection, cleaning tanks",
+      "Dangerous: bomb disposal, nuclear clean-up, deep sea, space"
+     ]
+    },
+    {
+     "t": "Robots and jobs",
+     "b": [
+      "Some jobs disappear or shrink (job displacement)",
+      "Many jobs change: people work alongside robots",
+      "New jobs appear: robot technicians, programmers, designers",
+      "The big question: who benefits, and who gets retrained?"
+     ]
+    },
+    {
+     "t": "Who's responsible?",
+     "b": [
+      "If a robot causes harm, who is accountable: maker, programmer, owner or user?",
+      "Safety standards, testing and emergency stops",
+      "Some decisions may need a \"human in the loop\"",
+      "Should robots ever make life-or-death decisions?"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Dull, dirty and dangerous"
+    },
+    {
+     "t": "p",
+     "text": "Robots are especially useful for work that is **[[dull, dirty and dangerous]]**: repetitive tasks, unpleasant environments and situations that put people at risk. Robots have explored the Fukushima nuclear plant after the 2011 disaster, defused bombs, inspected sewers and explored Mars."
+    },
+    {
+     "t": "h",
+     "text": "Robots and jobs"
+    },
+    {
+     "t": "p",
+     "text": "**[[job displacement|Job displacement]]** happens when people's jobs are replaced by machines. History shows that new technology removes some jobs but also creates new ones and changes many more."
+    },
+    {
+     "t": "table",
+     "caption": "How automation affects work",
+     "head": [
+      "Effect",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Jobs reduced",
+       "Fewer workers needed to pack orders in automated warehouses"
+      ],
+      [
+       "Jobs changed",
+       "Farmers use drones and robotic milking, spending more time on planning and animal care"
+      ],
+      [
+       "Jobs created",
+       "Robot technicians, programmers, drone pilots, AI safety testers"
+      ],
+      [
+       "Skills that matter more",
+       "Creativity, care, problem-solving, communication, digital skills"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Safety and responsibility"
+    },
+    {
+     "t": "p",
+     "text": "**[[accountability|Accountability]]** means being responsible for what happens. When a robot or self-driving car causes harm, it can be hard to decide who is to blame: the company that made it, the programmer, the owner or the user. Laws like the UK's Automated Vehicles Act try to make this clear."
+    },
+    {
+     "t": "key",
+     "title": "Keeping people safe around robots",
+     "items": [
+      "Testing in simulation and in controlled spaces before real use",
+      "Emergency stop buttons and safety zones around industrial robots",
+      "Cobots designed to slow down or stop when they touch a person",
+      "A \"human in the loop\" for important decisions"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Ethical questions"
+    },
+    {
+     "t": "p",
+     "text": "**[[ethics|Ethics]]** is about deciding what is right and wrong. Robots raise big ethical questions. Should robots care for older people? Should armed robots be allowed to choose targets? Who should get the money saved by automation?"
+    },
+    {
+     "t": "act",
+     "title": "Robot debate",
+     "mins": 30,
+     "who": "Groups of 4",
+     "after": 3,
+     "steps": [
+      "Your group is given a motion, e.g. \"Care homes should use robots to look after residents\" or \"Delivery robots should be allowed on all pavements\".",
+      "Prepare two arguments for and two against, using evidence from this topic.",
+      "Hold a short debate with another group.",
+      "Write your own conclusion, giving reasons."
+     ],
+     "q": [
+      {
+       "q": "Write your strongest argument for and against your motion.",
+       "a": "E.g. care robots: For: they can lift residents safely and give reminders 24/7, freeing staff for personal care. Against: residents may feel lonely without human contact, and robots can't notice subtle signs of illness or distress."
+      },
+      {
+       "q": "Write your own conclusion.",
+       "a": "A balanced judgement, e.g. \"Robots should help with lifting and reminders, but they must not replace human carers, because care needs empathy and judgement.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What are the \"three Ds\" of robot work?",
+     "o": [
+      "Dull, dirty and dangerous",
+      "Drive, drop and dig",
+      "Dark, damp and deep",
+      "Digital, data and design"
+     ],
+     "a": 0,
+     "why": "Ideal tasks for robots."
+    },
+    {
+     "q": "What is job displacement?",
+     "o": [
+      "Getting a new job title",
+      "Working from home",
+      "People's jobs being replaced by machines",
+      "Moving desks around"
+     ],
+     "a": 2,
+     "why": "Automation can replace jobs."
+    },
+    {
+     "q": "Which job has been created by robotics?",
+     "o": [
+      "Switchboard operator",
+      "Robot technician",
+      "Lamplighter",
+      "Town crier"
+     ],
+     "a": 1,
+     "why": "New tech creates new jobs."
+    },
+    {
+     "q": "What does accountability mean?",
+     "o": [
+      "Keeping a diary",
+      "Having an account",
+      "Being responsible for what happens",
+      "Counting money"
+     ],
+     "a": 2,
+     "why": "Who is to blame if harm occurs?"
+    }
+   ],
+   "practice": [
+    {
+     "q": "Give two examples of dangerous jobs that robots can do.",
+     "m": 2,
+     "a": "Any two: bomb disposal (1); nuclear clean-up (1); deep-sea/space exploration (1); sewer/tank inspection (1); firefighting (1)."
+    },
+    {
+     "q": "\"Robots will take all our jobs.\" Evaluate this statement.",
+     "m": 4,
+     "a": "Some jobs replaced/reduced (1); many jobs changed rather than lost (1); new jobs created (1); conclusion: overstated, but retraining/skills matter (1)."
+    }
+   ],
+   "terms": [
+    "Dull, dirty and dangerous",
+    "Job displacement",
+    "Accountability",
+    "Ethics"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "Program a robot",
+   "spec": "Design, write and test an algorithm to control a robot using sequence, selection and iteration",
+   "summary": "Robots follow algorithms. Programmers use sequence, selection (IF) and iteration (loops) with sensor readings to control robots, then test and debug them. A line-following robot is a classic example of selection inside a loop.",
+   "starter": "Write instructions to guide a blindfolded partner from the door to your desk. What went wrong?",
+   "sc": [
+    "I can write an algorithm to control a robot",
+    "I can use sequence, selection and iteration with sensor inputs",
+    "I can test and debug a robot program"
+   ],
+   "slides": [
+    {
+     "t": "Robots follow algorithms",
+     "b": [
+      "An algorithm is a precise set of steps",
+      "Sequence: steps in order (forward 50 cm, turn right 90°)",
+      "Selection: IF a sensor detects something THEN do this ELSE do that",
+      "Iteration: repeat (a loop) so the robot keeps reacting"
+     ]
+    },
+    {
+     "t": "Line-follower",
+     "b": [
+      "Two light sensors look down at a black line",
+      "IF left sensor sees black THEN turn left",
+      "ELSE IF right sensor sees black THEN turn right",
+      "ELSE go forward ... REPEAT forever"
+     ]
+    },
+    {
+     "t": "Test and debug",
+     "b": [
+      "Test in a simulation first",
+      "Then test on the real robot, one part at a time",
+      "Record what you expected vs what happened",
+      "Real robots slip, batteries fade, and lighting changes sensor readings"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Algorithms for robots"
+    },
+    {
+     "t": "p",
+     "text": "An **[[algorithm]]** is a precise set of steps to solve a problem. Robot programs combine:"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "**Sequence**: instructions in the right order.",
+      "**[[selection|Selection]]**: making a decision using IF ... THEN ... ELSE, usually based on a sensor reading.",
+      "**[[iteration|Iteration]]**: repeating instructions with a loop, so the robot keeps sensing and reacting."
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Obstacle avoider",
+     "context": "A robot has a distance sensor on its front and should explore a room without crashing.",
+     "steps": [
+      "REPEAT FOREVER",
+      "distance ← read distance sensor",
+      "IF distance < 20 cm THEN stop, reverse 10 cm, turn right 90°",
+      "ELSE move forward"
+     ],
+     "answer": "The loop (iteration) keeps checking the sensor; the IF (selection) decides whether to avoid or keep going."
+    },
+    {
+     "t": "h",
+     "text": "Line-following"
+    },
+    {
+     "t": "p",
+     "text": "A line-following robot uses two light or infrared sensors pointing at the floor. A black line reflects less light than a white floor."
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "IF the left sensor sees black THEN turn left.",
+      "ELSE IF the right sensor sees black THEN turn right.",
+      "ELSE drive forward.",
+      "Repeat forever."
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Testing and debugging"
+    },
+    {
+     "t": "p",
+     "text": "**[[debugging|Debugging]]** means finding and fixing errors. Robots are tricky to debug because the real world is messy: wheels slip, batteries run down and lighting changes sensor readings. Engineers often test first in a **[[simulation]]**, a computer model of the robot and its world, which is quicker, cheaper and safer."
+    },
+    {
+     "t": "tip",
+     "text": "With BBC micro:bits and a robot buggy kit, or an online robot simulator, you can test these algorithms for real. Change one thing at a time and record what happens."
+    },
+    {
+     "t": "act",
+     "title": "Code the robot",
+     "mins": 35,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Choose a challenge: escape a maze, follow a line, or patrol a room avoiding obstacles.",
+      "Write your algorithm in pseudocode or a flowchart, using sequence, selection and iteration.",
+      "Test it (in a simulator, with a micro:bit buggy, or by \"playing robot\" with a partner).",
+      "Record one bug, how you found it and how you fixed it."
+     ],
+     "q": [
+      {
+       "q": "Write your algorithm.",
+       "a": "E.g. maze (left-hand rule): REPEAT UNTIL exit found: IF no wall on left THEN turn left and move forward; ELSE IF no wall ahead THEN move forward; ELSE turn right."
+      },
+      {
+       "q": "Describe one bug and how you fixed it.",
+       "a": "E.g. \"The robot turned too far because the motors kept going after the turn command. We reduced the turn time and tested again until it turned 90°.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does selection mean in a robot program?",
+     "o": [
+      "Making a decision with IF ... THEN ... ELSE",
+      "Running steps in order",
+      "Repeating steps",
+      "Choosing a robot"
+     ],
+     "a": 0,
+     "why": "Decisions use sensor data."
+    },
+    {
+     "q": "Why do robot programs usually use a loop?",
+     "o": [
+      "To make the code longer",
+      "So the robot keeps sensing and reacting",
+      "To save battery",
+      "To stop the robot"
+     ],
+     "a": 1,
+     "why": "Iteration keeps it responsive."
+    },
+    {
+     "q": "How does a line-following robot detect a black line?",
+     "o": [
+      "It listens for the line",
+      "Light sensors detect less reflected light",
+      "GPS",
+      "A camera reads \"line\""
+     ],
+     "a": 1,
+     "why": "Black reflects less light."
+    },
+    {
+     "q": "Why test a robot in a simulation first?",
+     "o": [
+      "Simulations are always perfect",
+      "It avoids writing code",
+      "It's quicker, cheaper and safer",
+      "Real robots don't need testing"
+     ],
+     "a": 2,
+     "why": "Then test for real."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write an algorithm for a robot that stops when an object is less than 10 cm away and otherwise moves forward.",
+     "m": 3,
+     "a": "Loop/repeat (1); read distance sensor and IF distance < 10 THEN stop (1); ELSE move forward (1)."
+    },
+    {
+     "q": "Explain why a robot that works in a simulation might fail in real life.",
+     "m": 2,
+     "a": "Real world differences, e.g. wheels slip, battery fades, lighting/sensor noise (1); the simulation doesn't model everything perfectly (1)."
+    }
+   ],
+   "terms": [
+    "Algorithm",
+    "Selection",
+    "Iteration",
+    "Debugging",
+    "Simulation"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Robot",
+   "def": "A programmable machine that can sense its environment, make decisions and act in the physical world.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Automation",
+   "def": "Using machines to do tasks automatically that people once did by hand.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Sense-think-act",
+   "def": "The cycle robots follow: gather sensor data, decide what to do, then carry out actions.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Cobot",
+   "def": "A collaborative robot designed to work safely beside people.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Humanoid robot",
+   "def": "A robot with a human-like body shape.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Computer vision",
+   "def": "AI that lets computers understand images and video.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Lidar",
+   "def": "A sensor that measures distance by timing reflected laser pulses, building a 3D map.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Encoder",
+   "def": "A sensor that counts how far a wheel or joint has turned.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Degrees of freedom",
+   "def": "The number of independent ways a robot or robot arm can move.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "End effector",
+   "def": "The tool on the end of a robot arm, such as a gripper or welder.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Drone",
+   "def": "An aircraft with no pilot on board, controlled remotely or flying itself.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Quadcopter",
+   "def": "A drone with four rotors.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Flyer ID",
+   "def": "Proof from the UK Civil Aviation Authority that someone has passed the online drone test.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Operator ID",
+   "def": "A UK registration for the person responsible for a drone, which must be displayed on it.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Visual line of sight",
+   "def": "Being able to see your drone with your own eyes at all times.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Autonomous vehicle",
+   "def": "A vehicle that can drive itself without human control.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Radar",
+   "def": "A sensor that uses radio waves to detect the distance and speed of objects.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Levels of automation",
+   "def": "A scale from 0 to 5 describing how much of the driving a vehicle does itself.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Robotaxi",
+   "def": "A taxi that drives itself with no human driver.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Edge case",
+   "def": "A rare or unusual situation that a system finds hard to handle.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Dull, dirty and dangerous",
+   "def": "The kinds of work robots are especially suited to.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Job displacement",
+   "def": "When people's jobs are replaced by machines or automation.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Accountability",
+   "def": "Being responsible for what happens and answering for it.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Ethics",
+   "def": "Deciding what is morally right and wrong.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Algorithm",
+   "def": "A precise set of steps to solve a problem.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Selection",
+   "def": "Making a decision in a program using IF ... THEN ... ELSE.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Iteration",
+   "def": "Repeating instructions in a program using a loop.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Debugging",
+   "def": "Finding and fixing errors in a program.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Simulation",
+   "def": "A computer model used to test something safely before doing it for real.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}
