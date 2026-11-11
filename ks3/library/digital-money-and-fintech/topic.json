@@ -1,0 +1,1484 @@
+{
+ "title": "Digital Money and Fintech",
+ "summary": "How money became data: how card and phone payments work behind the scenes, how app banks and open banking use technology, how payments are secured, how to spot scams and avoid becoming a money mule, what cryptocurrency and blockchain really are, and how AI and data are shaping the future of money.",
+ "learn": [
+  "How card, contactless and phone payments work behind the scenes",
+  "How fintech, app-based banking and open banking use technology",
+  "How encryption, tokenisation and authentication keep payments secure",
+  "How to recognise payment scams and why being a money mule is a crime",
+  "What cryptocurrency and blockchain are, and their benefits and risks",
+  "How AI and data are changing money, and the issues this raises"
+ ],
+ "temporary": false,
+ "intro": "Most money today isn't coins or notes: it's data moving between computers. Tap your phone and in under a second messages zip between banks, card networks and fraud-detecting AI. In this topic you'll find out what happens when you pay contactless, how app-based banks and fintech companies work, how payments are kept secure, how criminals try to trick young people out of their money (or into moving it for them), what cryptocurrency and blockchain really are, and you'll design a fintech app of your own.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "Tap to pay",
+   "spec": "Describe how card, contactless and mobile payments work and the systems involved",
+   "summary": "When you pay by card or phone, a chain of computer systems checks the payment in about a second: the terminal, the shop's bank, the card network and your bank. Contactless uses NFC radio, and phone wallets use tokens instead of your real card number. Fewer than one in ten UK payments now use cash.",
+   "starter": "When did you last pay with cash? How did you pay for the last thing you bought?",
+   "sc": [
+    "I can describe how payments have changed",
+    "I can describe the steps in a card payment",
+    "I can explain how contactless and phone payments work"
+   ],
+   "slides": [
+    {
+     "t": "Money is data",
+     "b": [
+      "Most money exists only as numbers in bank computer systems",
+      "Cash is now used for only a small share of UK payments",
+      "Contactless cards, phones and watches are the most common ways to pay in shops",
+      "Bank transfers are almost instant with Faster Payments"
+     ]
+    },
+    {
+     "t": "What happens when you tap",
+     "b": [
+      "Terminal reads the card or phone using NFC",
+      "Request goes to the shop's bank, then the card network (Visa, Mastercard)",
+      "Your bank checks: enough money? Looks like fraud?",
+      "Approved or declined, all in about a second"
+     ]
+    },
+    {
+     "t": "Phone wallets",
+     "b": [
+      "Apple Pay and Google Pay store a token, not your real card number",
+      "You unlock with fingerprint, face or PIN",
+      "Each payment uses a one-time code",
+      "Safer than a physical card if your phone is stolen"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Money as data"
+    },
+    {
+     "t": "p",
+     "text": "Today, most money exists as numbers in banks' computer systems. In the UK, cash is now used for only a small share of payments, while contactless cards, phones and smartwatches have become the most common way to pay in shops. Bank transfers using the UK's Faster Payments system usually arrive within seconds."
+    },
+    {
+     "t": "h",
+     "text": "What happens when you pay"
+    },
+    {
+     "t": "example",
+     "title": "Following a contactless payment",
+     "context": "You tap your card to buy lunch for £4.50.",
+     "steps": [
+      "The terminal reads your card using radio waves and asks the shop's bank to process it.",
+      "The shop's bank sends the request through the **[[card network]]** (such as Visa or Mastercard).",
+      "The card network passes it to your bank, which checks your balance and runs fraud checks.",
+      "Your bank sends back \"approved\" (this is **[[authorisation]]**), and the terminal beeps."
+     ],
+     "answer": "Four organisations' computers have exchanged messages in about one second. The money actually moves between banks later, often the next day (called settlement)."
+    },
+    {
+     "t": "h",
+     "text": "Contactless and NFC"
+    },
+    {
+     "t": "p",
+     "text": "**[[contactless|Contactless]]** payment uses **[[NFC]]** (near-field communication), a type of short-range radio that only works within a few centimetres. Shops often accept contactless card payments up to £100 without a PIN, though banks sometimes ask for the PIN to check it's really you."
+    },
+    {
+     "t": "h",
+     "text": "Digital wallets"
+    },
+    {
+     "t": "p",
+     "text": "A **[[digital wallet]]** such as Apple Pay or Google Pay stores payment cards on a phone or watch. Instead of your real card number, it stores a token (a substitute number), and every payment uses a one-time code. You unlock it with your fingerprint, face or PIN, so a stolen phone is harder to use than a stolen card."
+    },
+    {
+     "t": "table",
+     "caption": "Ways to pay",
+     "head": [
+      "Method",
+      "How it works",
+      "Security"
+     ],
+     "rows": [
+      [
+       "Chip and PIN",
+       "Card chip creates a unique code; you enter a PIN",
+       "PIN plus chip"
+      ],
+      [
+       "Contactless card",
+       "NFC radio; no PIN for smaller amounts",
+       "Limits and occasional PIN checks"
+      ],
+      [
+       "Phone or watch wallet",
+       "NFC plus a token instead of the card number",
+       "Biometrics plus tokens"
+      ],
+      [
+       "Bank transfer",
+       "Money sent directly between accounts",
+       "Banking app login, confirmation of payee"
+      ],
+      [
+       "Cash",
+       "Physical notes and coins",
+       "Can be lost or stolen, but private"
+      ]
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Payment relay",
+     "mins": 20,
+     "who": "Groups of 5",
+     "after": 2,
+     "steps": [
+      "Each person takes a role: customer, terminal, shop's bank, card network, customer's bank.",
+      "Pass a \"payment message\" card along the chain, adding the information each role checks.",
+      "Run three scenarios: a normal payment, not enough money, and a suspicious payment from another country.",
+      "Draw a diagram of the payment chain."
+     ],
+     "q": [
+      {
+       "q": "What does the customer's bank check before approving a payment?",
+       "a": "That the card is valid and not reported lost, there's enough money or credit, and that the payment doesn't look like fraud (unusual place, amount or pattern)."
+      },
+      {
+       "q": "What happened in the suspicious payment scenario?",
+       "a": "The customer's bank's fraud system flagged it as unusual and declined it, or asked the customer to confirm it in their banking app."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What technology does contactless payment use?",
+     "o": [
+      "NFC (near-field communication)",
+      "Bluetooth only",
+      "Satellites",
+      "Cables"
+     ],
+     "a": 0,
+     "why": "Short-range radio."
+    },
+    {
+     "q": "Which is a card network?",
+     "o": [
+      "Monzo",
+      "Amazon",
+      "Visa",
+      "PayPal"
+     ],
+     "a": 2,
+     "why": "Visa and Mastercard connect banks."
+    },
+    {
+     "q": "What does a digital wallet store instead of your real card number?",
+     "o": [
+      "Your PIN",
+      "Your password",
+      "Your address",
+      "A token"
+     ],
+     "a": 3,
+     "why": "Tokens protect card details."
+    },
+    {
+     "q": "What is authorisation?",
+     "o": [
+      "Your bank approving a payment",
+      "Printing a receipt",
+      "Writing a book",
+      "Moving money the next day"
+     ],
+     "a": 0,
+     "why": "Approve or decline."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe the steps when a customer pays by contactless card.",
+     "m": 4,
+     "a": "Terminal reads card via NFC (1); request goes to shop's bank and card network (1); customer's bank checks balance and fraud (1); approval sent back to terminal (1)."
+    },
+    {
+     "q": "Explain why paying with a phone wallet can be safer than a physical card.",
+     "m": 2,
+     "a": "Uses a token not the real card number (1); needs biometric/PIN to unlock/one-time codes (1)."
+    }
+   ],
+   "terms": [
+    "Contactless",
+    "NFC",
+    "Card network",
+    "Authorisation",
+    "Digital wallet"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "Fintech and app banking",
+   "spec": "Explain what fintech is and how app-based banks, open banking and APIs are changing financial services",
+   "summary": "Fintech (financial technology) uses software to provide financial services. App-based banks offer instant notifications, budgeting tools and quick account opening. Open banking lets you securely share your bank data with other apps using APIs. Fintech brings convenience but also risks such as easy credit like Buy Now, Pay Later.",
+   "starter": "What can you do on a banking app that you couldn't do in a bank branch?",
+   "sc": [
+    "I can explain what fintech is and give examples",
+    "I can explain open banking and the role of APIs",
+    "I can evaluate fintech products such as Buy Now, Pay Later"
+   ],
+   "slides": [
+    {
+     "t": "What is fintech?",
+     "b": [
+      "Fintech = financial technology",
+      "App-based banks, payment apps, budgeting apps, money transfer apps",
+      "The UK, and London in particular, is one of the world's biggest fintech hubs",
+      "Northern Ireland has a growing fintech and financial software industry"
+     ]
+    },
+    {
+     "t": "Open banking and APIs",
+     "b": [
+      "An API lets one program request data or services from another",
+      "Open banking: you can let approved apps access your bank data securely",
+      "e.g. a budgeting app shows all your accounts in one place",
+      "You give consent and can withdraw it at any time"
+     ]
+    },
+    {
+     "t": "Buy now, pay later?",
+     "b": [
+      "BNPL lets you split payments, often with no interest if paid on time",
+      "Easy to use: one click at checkout",
+      "Risk: building up debt across several purchases",
+      "Missed payments can lead to fees and harm your credit record"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is fintech?"
+    },
+    {
+     "t": "p",
+     "text": "**[[fintech|Fintech]]** (financial technology) means using software and technology to provide financial services. It includes app-based banks (such as Monzo, Starling and Revolut), payment apps, budgeting tools, money transfer services and investing apps. The UK is one of the world's biggest fintech centres, and Belfast has a growing financial technology sector too."
+    },
+    {
+     "t": "key",
+     "title": "Features of app-based banking",
+     "items": [
+      "Open an account in minutes using your phone and ID",
+      "Instant notifications for every payment",
+      "Spending categories and budgeting tools",
+      "Savings \"pots\" and round-ups",
+      "Freeze your card instantly in the app if it's lost"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Open banking and APIs"
+    },
+    {
+     "t": "p",
+     "text": "An **[[API]]** (application programming interface) is a set of rules that lets one program request data or services from another. **[[open banking|Open banking]]**, introduced in the UK in 2018, requires big banks to let customers securely share their account data with approved apps through APIs, but only with the customer's consent."
+    },
+    {
+     "t": "table",
+     "caption": "Open banking examples",
+     "head": [
+      "Use",
+      "How it helps"
+     ],
+     "rows": [
+      [
+       "Budgeting apps",
+       "See all your accounts in one place and track spending"
+      ],
+      [
+       "Lending",
+       "A lender checks your real income and spending to decide on a loan"
+      ],
+      [
+       "Payments",
+       "Pay directly from your bank at checkout without a card"
+      ],
+      [
+       "Saving",
+       "Apps that move small amounts into savings automatically"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Regulation"
+    },
+    {
+     "t": "p",
+     "text": "Financial services are tightly **[[regulation|regulated]]**. In the UK, the Financial Conduct Authority (FCA) makes sure firms treat customers fairly and keep money safe. Money in UK banks is protected up to a limit by the Financial Services Compensation Scheme (FSCS) if a bank fails. Always check a financial company is authorised by the FCA."
+    },
+    {
+     "t": "h",
+     "text": "Buy Now, Pay Later"
+    },
+    {
+     "t": "p",
+     "text": "**[[Buy Now Pay Later|Buy Now, Pay Later]]** (BNPL) lets shoppers split a purchase into several payments, often with no interest if paid on time. It's quick and convenient, but it's still borrowing. Using several BNPL plans at once can lead to debt, and missed payments can lead to charges, debt collection and a damaged credit record. New UK rules are bringing BNPL under FCA regulation."
+    },
+    {
+     "t": "warn",
+     "text": "Be wary of anything that makes spending or borrowing feel effortless. If you can't afford something now, think carefully about whether you'll be able to afford the payments later."
+    },
+    {
+     "t": "act",
+     "title": "Fintech review",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Look at the screenshots of three (fictional) fintech apps: a teen banking app, a budgeting app using open banking, and a BNPL checkout.",
+      "For each, list two features that help users and one risk.",
+      "Decide which app you'd recommend for a 14-year-old and explain why.",
+      "Write one question you'd ask before connecting your bank account to an app."
+     ],
+     "q": [
+      {
+       "q": "Which app would you recommend for a 14-year-old, and why?",
+       "a": "The teen banking app with parental controls: instant notifications and savings pots help build good habits, and it doesn't offer credit."
+      },
+      {
+       "q": "What should you ask before connecting your bank account to an app?",
+       "a": "E.g. \"Is this company authorised by the FCA? What data will it access, how long will it keep it, and how do I remove access?\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does fintech stand for?",
+     "o": [
+      "Finished tech",
+      "Final technique",
+      "Fine technology",
+      "Financial technology"
+     ],
+     "a": 3,
+     "why": "Tech for money."
+    },
+    {
+     "q": "What is an API?",
+     "o": [
+      "Rules that let one program request data or services from another",
+      "A type of bank",
+      "A password",
+      "A coin"
+     ],
+     "a": 0,
+     "why": "Programs talking to programs."
+    },
+    {
+     "q": "What does open banking allow?",
+     "o": [
+      "Free money",
+      "Banks to close",
+      "Sharing your bank data securely with approved apps, with your consent",
+      "Anyone to see your account"
+     ],
+     "a": 2,
+     "why": "Consent is key."
+    },
+    {
+     "q": "Which organisation regulates financial firms in the UK?",
+     "o": [
+      "Ofcom",
+      "The DVLA",
+      "The Financial Conduct Authority",
+      "The CAA"
+     ],
+     "a": 2,
+     "why": "FCA."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what open banking is.",
+     "m": 2,
+     "a": "Customers can share their bank account data with approved apps/companies (1) securely through APIs, with their consent (1)."
+    },
+    {
+     "q": "Evaluate whether Buy Now, Pay Later is a good idea for young people.",
+     "m": 4,
+     "a": "Benefits, e.g. spreads cost, often no interest (1-2); risks, e.g. debt, fees, credit record, encourages impulse buying (1-2); conclusion (1). Max 4."
+    }
+   ],
+   "terms": [
+    "Fintech",
+    "Open banking",
+    "API",
+    "Buy Now Pay Later",
+    "Regulation"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Securing payments",
+   "spec": "Explain how encryption, tokenisation, strong authentication and AI fraud detection protect digital payments",
+   "summary": "Digital payments are protected by several layers: encryption scrambles data in transit, tokenisation replaces card numbers, strong customer authentication requires two different types of proof, and AI systems analyse every payment in real time to spot fraud.",
+   "starter": "What stops someone who finds your card number online from spending your money?",
+   "sc": [
+    "I can explain how encryption and tokenisation protect payment data",
+    "I can explain strong customer authentication",
+    "I can describe how AI detects fraud"
+   ],
+   "slides": [
+    {
+     "t": "Scramble and substitute",
+     "b": [
+      "Encryption: scrambles data so only the right system can read it",
+      "HTTPS and the padlock protect card details sent to websites",
+      "Tokenisation: a substitute number replaces the real card number",
+      "A stolen token is useless elsewhere"
+     ]
+    },
+    {
+     "t": "Prove it's you",
+     "b": [
+      "Strong customer authentication needs two of three types of proof",
+      "Something you know: PIN or password",
+      "Something you have: phone or card",
+      "Something you are: fingerprint or face (biometrics)"
+     ]
+    },
+    {
+     "t": "AI on guard",
+     "b": [
+      "AI checks every payment in milliseconds",
+      "Looks for unusual amounts, places, times or devices",
+      "Can block payments or ask you to confirm in your app",
+      "False positives: sometimes genuine payments get blocked"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Encryption and tokenisation"
+    },
+    {
+     "t": "p",
+     "text": "**[[encryption|Encryption]]** scrambles data so that only someone with the right key can read it. When you enter card details on a website, HTTPS encryption (shown by the padlock) protects them as they travel. Card chips also use encryption to create a unique code for every payment, so copying one payment's data doesn't let a criminal make another."
+    },
+    {
+     "t": "p",
+     "text": "**[[tokenisation|Tokenisation]]** replaces the real card number with a substitute number (a token). Phone wallets and many online shops store tokens instead of real card numbers, so if a criminal steals a token, it's useless anywhere else."
+    },
+    {
+     "t": "h",
+     "text": "Strong customer authentication"
+    },
+    {
+     "t": "p",
+     "text": "UK rules require **[[strong customer authentication]]** (SCA) for many online payments: you must prove who you are using two different types of evidence."
+    },
+    {
+     "t": "table",
+     "caption": "Types of authentication",
+     "head": [
+      "Type",
+      "Examples"
+     ],
+     "rows": [
+      [
+       "Something you know",
+       "PIN, password, memorable word"
+      ],
+      [
+       "Something you have",
+       "Your phone (receiving a code or approving in an app), your card"
+      ],
+      [
+       "Something you are",
+       "**[[biometrics|Biometrics]]**: fingerprint, face, voice"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Two of the same type (like a password and a memorable word) don't count, because one stolen notebook could reveal both."
+    },
+    {
+     "t": "h",
+     "text": "AI fraud detection"
+    },
+    {
+     "t": "p",
+     "text": "**[[fraud detection|Fraud detection]]** systems use AI to analyse every payment in milliseconds. They learn what's normal for each customer and look for warning signs: a large payment from a new device, a purchase in another country an hour after one at home, or lots of small payments very quickly. Suspicious payments can be blocked or the customer asked to confirm."
+    },
+    {
+     "t": "table",
+     "caption": "Is it fraud?",
+     "head": [
+      "Payment",
+      "Likely AI decision"
+     ],
+     "rows": [
+      [
+       "£3.20 in the usual school canteen",
+       "Approve"
+      ],
+      [
+       "£1,200 from a new phone in another country at 3am",
+       "Block and ask the customer"
+      ],
+      [
+       "Ten £1 payments to the same website in a minute",
+       "Flag: card-testing fraud"
+      ],
+      [
+       "£40 in a shop the customer often uses",
+       "Approve"
+      ]
+     ]
+    },
+    {
+     "t": "note",
+     "text": "AI isn't perfect. A false positive blocks a genuine payment (annoying on holiday!), while a false negative lets fraud through. Banks tune their systems to balance the two."
+    },
+    {
+     "t": "act",
+     "title": "Be the fraud AI",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Read the spending profile of \"Erin\", 15, who lives in Enniskillen.",
+      "For 12 new payments, decide: approve, ask Erin to confirm, or block.",
+      "Write three rules your fraud AI follows.",
+      "Compare with another pair: where did you disagree and why?"
+     ],
+     "q": [
+      {
+       "q": "Write your three fraud rules.",
+       "a": "E.g. IF payment is over 5 times Erin's usual largest payment THEN ask to confirm; IF payment is in another country within 2 hours of one in Enniskillen THEN block; IF more than 5 payments to one site in a minute THEN block."
+      },
+      {
+       "q": "Give an example where your rules would make a false positive.",
+       "a": "E.g. Erin buys a £150 concert ticket for her birthday, much bigger than usual, so it's flagged even though it's genuine."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does encryption do?",
+     "o": [
+      "Scrambles data so only the right system can read it",
+      "Speeds up payments",
+      "Prints receipts",
+      "Deletes data"
+     ],
+     "a": 0,
+     "why": "Protects data in transit."
+    },
+    {
+     "q": "What is tokenisation?",
+     "o": [
+      "A type of password",
+      "Collecting tokens at an arcade",
+      "Replacing a card number with a substitute number",
+      "Printing coins"
+     ],
+     "a": 2,
+     "why": "Tokens are useless if stolen."
+    },
+    {
+     "q": "Which pair counts as strong customer authentication?",
+     "o": [
+      "A password and a code sent to your phone",
+      "Your name and address",
+      "A password and a memorable word",
+      "Two passwords"
+     ],
+     "a": 0,
+     "why": "Two different types."
+    },
+    {
+     "q": "What might AI fraud detection do with an unusual payment?",
+     "o": [
+      "Nothing",
+      "Approve it automatically",
+      "Delete your account",
+      "Block it or ask you to confirm"
+     ],
+     "a": 3,
+     "why": "It spots unusual patterns."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain strong customer authentication, with an example.",
+     "m": 3,
+     "a": "Two different types of proof (1) from know/have/are (1); e.g. password plus fingerprint/code on phone (1)."
+    },
+    {
+     "q": "Describe how AI helps detect payment fraud.",
+     "m": 3,
+     "a": "Learns normal behaviour for each customer (1); checks each payment in real time for unusual patterns (1); blocks or asks for confirmation (1)."
+    }
+   ],
+   "terms": [
+    "Encryption",
+    "Tokenisation",
+    "Strong customer authentication",
+    "Biometrics",
+    "Fraud detection"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "Scams and money mules",
+   "spec": "Recognise common payment scams, explain why money muling is a crime, and describe how to protect yourself",
+   "summary": "Criminals use phishing, fake websites, impersonation and social media to trick people into sending money or details. Young people are often targeted to become money mules, letting criminals move stolen money through their accounts, which is a serious crime. Stopping, checking and talking to a trusted adult is the best defence.",
+   "starter": "You see a post: \"Earn £500 this week! Just let us use your bank account.\" What questions should you ask?",
+   "sc": [
+    "I can recognise common scam techniques",
+    "I can explain what a money mule is and the consequences",
+    "I can describe how to protect myself and where to get help"
+   ],
+   "slides": [
+    {
+     "t": "Scam tricks",
+     "b": [
+      "Phishing (email), smishing (text) and fake websites",
+      "Impersonation: pretending to be your bank, the police or a delivery firm",
+      "Urgency and pressure: \"act now or lose your money\"",
+      "Too good to be true: fake prizes, investments, cheap tickets"
+     ]
+    },
+    {
+     "t": "Money mules",
+     "b": [
+      "Criminals ask young people to receive and pass on money \"for a fee\"",
+      "Advertised as easy cash, jobs or \"favours\" on social media",
+      "The money comes from crime such as fraud or drugs",
+      "It's money laundering: accounts closed, possible prison, hard to get a phone contract or student loan"
+     ]
+    },
+    {
+     "t": "Stop. Challenge. Protect.",
+     "b": [
+      "Stop: take a moment before sharing details or sending money",
+      "Challenge: could it be fake? It's OK to say no",
+      "Protect: contact your bank directly; tell a trusted adult",
+      "Call 159 to reach your bank safely if you think you've been scammed"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Scam techniques"
+    },
+    {
+     "t": "p",
+     "text": "Scammers use **[[social engineering]]**: manipulating people rather than hacking computers."
+    },
+    {
+     "t": "table",
+     "caption": "Common scams",
+     "head": [
+      "Scam",
+      "How it works",
+      "Warning signs"
+     ],
+     "rows": [
+      [
+       "**[[phishing|Phishing]]** / smishing",
+       "Emails or texts with links to fake login pages",
+       "Urgent tone, odd sender address, link doesn't match the real site"
+      ],
+      [
+       "Impersonation",
+       "Pretending to be your bank, the police or HMRC",
+       "Asking you to move money to a \"safe account\" (banks never do this)"
+      ],
+      [
+       "Fake online shops",
+       "Cheap trainers, tickets or games that never arrive",
+       "Prices too good to be true; payment by bank transfer only"
+      ],
+      [
+       "Gaming scams",
+       "Fake offers of free skins or in-game currency",
+       "Asking for your login or a payment first"
+      ],
+      [
+       "Investment and crypto scams",
+       "Promises of huge, guaranteed returns",
+       "Celebrity endorsements, pressure to act now"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[authorised push payment fraud|Authorised push payment (APP) fraud]]** is when someone is tricked into sending money to a criminal themselves. Since October 2024, UK payment firms must reimburse most victims of APP fraud (up to £85,000), but it's still far better not to be scammed in the first place."
+    },
+    {
+     "t": "h",
+     "text": "Money mules"
+    },
+    {
+     "t": "p",
+     "text": "A **[[money mule]]** is someone who lets criminals use their bank account to receive and move stolen money. Criminals often target teenagers and students on social media, offering \"easy money\" or a \"job\" that just involves receiving and passing on payments."
+    },
+    {
+     "t": "warn",
+     "text": "Being a money mule is money laundering, a serious crime, even if you didn't know where the money came from. Consequences can include your bank account being closed, a fraud marker that makes it hard to get a bank account, phone contract, student loan or mortgage for years, and a possible prison sentence."
+    },
+    {
+     "t": "h",
+     "text": "Protect yourself"
+    },
+    {
+     "t": "key",
+     "title": "Staying safe with money online",
+     "items": [
+      "Never share your PIN, passwords or one-time codes, even with someone claiming to be from your bank",
+      "Your bank will never ask you to move money to a \"safe account\"",
+      "Check websites carefully and use secure payment methods (cards or PayPal give more protection than bank transfers)",
+      "If an offer seems too good to be true, it probably is",
+      "Call 159 to reach your bank safely; report scams to Action Fraud or the PSNI",
+      "Tell a trusted adult straight away if something feels wrong"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Scam spotter",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 4,
+     "steps": [
+      "Look at the eight (fictional) messages and adverts, including a parcel text, a \"job\" advert on social media and a cheap concert ticket.",
+      "Decide which are scams and highlight the warning signs.",
+      "For the \"job\" advert, explain why it's money muling and what could happen to someone who agrees.",
+      "Write a short warning post for younger pupils."
+     ],
+     "q": [
+      {
+       "q": "What warning signs are in the \"job\" advert?",
+       "a": "Easy money for little work; asks to use your bank account; contact only through social media; urgency (\"start today\"); vague about the company."
+      },
+      {
+       "q": "What should you do if you've already shared your bank details?",
+       "a": "Tell a trusted adult immediately, call your bank on 159 or the number on your card, change passwords, and report it to Action Fraud or the PSNI."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a money mule?",
+     "o": [
+      "A savings account",
+      "Someone who lets criminals move money through their account",
+      "A farm animal",
+      "A bank worker"
+     ],
+     "a": 1,
+     "why": "It's a crime."
+    },
+    {
+     "q": "Will your bank ever ask you to move money to a \"safe account\"?",
+     "o": [
+      "Yes, often",
+      "No, never",
+      "Only by text",
+      "Only on Fridays"
+     ],
+     "a": 1,
+     "why": "It's always a scam."
+    },
+    {
+     "q": "What number can you call to reach your bank safely in the UK?",
+     "o": [
+      "159",
+      "999",
+      "111",
+      "101"
+     ],
+     "a": 0,
+     "why": "A secure service."
+    },
+    {
+     "q": "What is social engineering?",
+     "o": [
+      "Building bridges",
+      "A type of encryption",
+      "Manipulating people into giving information or money",
+      "A social media app"
+     ],
+     "a": 2,
+     "why": "Hacking humans."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe three warning signs of a payment scam.",
+     "m": 3,
+     "a": "Any three: urgency/pressure (1); too good to be true (1); asks for PIN/codes/passwords (1); asks to move money to a safe account (1); unusual sender/link (1); bank transfer only (1)."
+    },
+    {
+     "q": "Explain why being a money mule is dangerous for a young person.",
+     "m": 3,
+     "a": "It's a crime: money laundering (1); possible prosecution/prison (1); bank account closed/fraud marker affecting future loans, phone contracts, etc. (1)."
+    }
+   ],
+   "terms": [
+    "Phishing",
+    "Authorised push payment fraud",
+    "Money mule",
+    "Social engineering"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Crypto and blockchain",
+   "spec": "Explain what blockchain and cryptocurrency are, and evaluate their benefits and risks",
+   "summary": "A blockchain is a shared, tamper-resistant digital record (ledger) stored on many computers. Cryptocurrencies like Bitcoin use blockchains to record transactions without a bank. Crypto is very volatile, often used in scams, and some types use huge amounts of energy. Central banks are exploring their own digital currencies.",
+   "starter": "If there's no bank, who keeps track of who owns what money?",
+   "sc": [
+    "I can explain what a blockchain is",
+    "I can explain how cryptocurrency works and how it differs from normal money",
+    "I can evaluate the risks of cryptocurrency"
+   ],
+   "slides": [
+    {
+     "t": "A shared record",
+     "b": [
+      "A ledger is a record of transactions",
+      "A blockchain is a ledger shared across many computers",
+      "Transactions are grouped into blocks, linked using cryptographic hashes",
+      "Changing an old block would break the chain, so tampering is easy to spot"
+     ]
+    },
+    {
+     "t": "Cryptocurrency",
+     "b": [
+      "Digital currency recorded on a blockchain, with no central bank",
+      "Bitcoin (2009) was the first; thousands now exist",
+      "New blocks are added by mining (proof of work) or staking (proof of stake)",
+      "Stablecoins are linked to normal money like the US dollar"
+     ]
+    },
+    {
+     "t": "Risks",
+     "b": [
+      "Very volatile: prices can halve in weeks",
+      "Not protected like bank savings; lost keys mean lost money",
+      "Widely used in scams, hacks and crime",
+      "Proof-of-work mining uses huge amounts of electricity"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Ledgers and blockchains"
+    },
+    {
+     "t": "p",
+     "text": "A **[[ledger]]** is a record of who has paid whom. Normally, banks keep ledgers. A **[[blockchain]]** is a ledger copied across thousands of computers. Transactions are grouped into blocks, and each block contains a cryptographic hash (a digital fingerprint) of the previous block, linking them into a chain. If anyone changes an old transaction, its hash changes and the chain no longer matches, so tampering is obvious."
+    },
+    {
+     "t": "example",
+     "title": "Why tampering breaks the chain",
+     "context": "Block 2 stores the fingerprint of block 1. Block 3 stores the fingerprint of block 2.",
+     "steps": [
+      "A cheat changes a payment in block 1.",
+      "Block 1's fingerprint changes, so it no longer matches the one stored in block 2.",
+      "To hide it, the cheat would have to redo every later block, on most of the thousands of computers at once."
+     ],
+     "answer": "That's practically impossible, which is why blockchains are described as tamper-resistant."
+    },
+    {
+     "t": "h",
+     "text": "Cryptocurrency"
+    },
+    {
+     "t": "p",
+     "text": "A **[[cryptocurrency]]** is digital money recorded on a blockchain rather than by a bank. Bitcoin, launched in 2009, was the first; there are now thousands."
+    },
+    {
+     "t": "table",
+     "caption": "Bank money vs cryptocurrency",
+     "head": [
+      "Feature",
+      "Bank money (pounds)",
+      "Cryptocurrency"
+     ],
+     "rows": [
+      [
+       "Who keeps the record?",
+       "Banks, overseen by the Bank of England",
+       "A blockchain on many computers"
+      ],
+      [
+       "Value",
+       "Fairly stable",
+       "Often very **[[volatility|volatile]]**"
+      ],
+      [
+       "Protection",
+       "Savings protected up to a limit (FSCS)",
+       "Usually no protection; lost keys mean lost money"
+      ],
+      [
+       "Reversing mistakes",
+       "Banks can sometimes help",
+       "Transactions usually can't be reversed"
+      ],
+      [
+       "Regulation",
+       "Strictly regulated",
+       "Increasingly regulated, but riskier"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A **[[stablecoin]]** is a cryptocurrency designed to keep a steady value by linking it to normal money, such as the US dollar. The UK is introducing rules for stablecoins and other crypto."
+    },
+    {
+     "t": "h",
+     "text": "Energy and risks"
+    },
+    {
+     "t": "p",
+     "text": "Bitcoin uses \"proof of work\" mining, where computers compete to solve puzzles, using as much electricity as some entire countries. Ethereum switched to \"proof of stake\" in 2022, cutting its energy use by over 99%. Crypto is also widely used in scams: fake investment schemes, hacked exchanges and \"rug pulls\" where creators vanish with investors' money."
+    },
+    {
+     "t": "note",
+     "text": "Blockchains are also used outside crypto: tracking food and medicine supply chains, recording certificates and managing digital ownership. But many projects have found a normal database works just as well."
+    },
+    {
+     "t": "h",
+     "text": "Central bank digital currencies"
+    },
+    {
+     "t": "p",
+     "text": "A **[[CBDC]]** (central bank digital currency) is digital money issued by a central bank. The Bank of England has been exploring a possible \"digital pound\", but hasn't decided whether to introduce one. Supporters say it could make payments cheaper and more resilient; critics worry about privacy and government control over how money is spent."
+    },
+    {
+     "t": "act",
+     "title": "Build a paper blockchain",
+     "mins": 25,
+     "who": "Groups of 4",
+     "after": 2,
+     "steps": [
+      "Each group starts a ledger of class \"tokens\". Each block (an index card) records 3 transactions and the \"fingerprint\" of the previous block (use the simple hash your teacher gives you, e.g. add up all the numbers in the block).",
+      "Every group keeps a copy of every block.",
+      "One pupil secretly changes a transaction in an early block. Can the class find it?",
+      "Discuss: what are the strengths and weaknesses of this system compared with a bank?"
+     ],
+     "q": [
+      {
+       "q": "How did the class spot the changed transaction?",
+       "a": "The changed block's fingerprint no longer matched the fingerprint stored in the next block, and it didn't match the copies other groups held."
+      },
+      {
+       "q": "Give one strength and one weakness of the blockchain compared with a bank.",
+       "a": "Strength: no single organisation controls it and tampering is easy to spot. Weakness: slow, everyone has to store copies, and mistakes can't be easily reversed."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a blockchain?",
+     "o": [
+      "A bank vault",
+      "A type of password",
+      "A chain made of blocks",
+      "A shared, tamper-resistant digital ledger stored on many computers"
+     ],
+     "a": 3,
+     "why": "Linked blocks of transactions."
+    },
+    {
+     "q": "What was the first cryptocurrency?",
+     "o": [
+      "Dogecoin",
+      "Bitcoin",
+      "Ethereum",
+      "The digital pound"
+     ],
+     "a": 1,
+     "why": "Launched in 2009."
+    },
+    {
+     "q": "What does volatile mean for a cryptocurrency?",
+     "o": [
+      "It explodes",
+      "It's stable",
+      "It's illegal",
+      "Its price can change a lot very quickly"
+     ],
+     "a": 3,
+     "why": "Big price swings."
+    },
+    {
+     "q": "What is a stablecoin?",
+     "o": [
+      "A coin from a stable",
+      "A cryptocurrency linked to normal money to keep a steady value",
+      "A type of bank card",
+      "A heavy coin"
+     ],
+     "a": 1,
+     "why": "e.g. linked to the US dollar."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why a blockchain is described as tamper-resistant.",
+     "m": 3,
+     "a": "Each block stores the hash/fingerprint of the previous block (1); changing a block changes its hash so the chain no longer matches (1); copies on many computers would also need changing (1)."
+    },
+    {
+     "q": "Discuss whether young people should invest in cryptocurrency.",
+     "m": 4,
+     "a": "Possible gains/new technology (1); volatility, scams, no protection, irreversible (1-2); regulation and energy issues (1); conclusion (1). Max 4."
+    }
+   ],
+   "terms": [
+    "Blockchain",
+    "Ledger",
+    "Cryptocurrency",
+    "Volatility",
+    "Stablecoin",
+    "CBDC"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "The future of money",
+   "spec": "Evaluate the use of AI and data in finance and the move towards a cashless society, and design a responsible fintech solution",
+   "summary": "AI is used in finance for credit decisions, fraud detection, customer chatbots and trading. This raises concerns about bias and fairness. As cash use falls, there are debates about a cashless society and financial inclusion. Responsible fintech design puts users' wellbeing, security and inclusion first.",
+   "starter": "Should a computer decide whether someone gets a loan? What information should it be allowed to use?",
+   "sc": [
+    "I can describe how AI and data are used in finance",
+    "I can discuss the impacts of a cashless society",
+    "I can design a responsible fintech app"
+   ],
+   "slides": [
+    {
+     "t": "AI and your money",
+     "b": [
+      "Credit scoring: AI helps decide who gets loans and phones on contract",
+      "Fraud detection and security checks",
+      "Chatbots answer customer questions",
+      "AI trading systems buy and sell shares in milliseconds"
+     ]
+    },
+    {
+     "t": "Fair or biased?",
+     "b": [
+      "AI learns from past data, which may reflect past unfairness",
+      "Algorithmic bias could treat some groups unfairly",
+      "People have a right to an explanation of important automated decisions",
+      "Regulators expect firms to check AI for fairness"
+     ]
+    },
+    {
+     "t": "Going cashless?",
+     "b": [
+      "Card and phone payments are fast and convenient",
+      "But some people rely on cash: older people, people in rural areas, people budgeting carefully",
+      "Cash still works in a power cut or system outage",
+      "UK rules now protect access to cash in local communities"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "AI in finance"
+    },
+    {
+     "t": "table",
+     "caption": "How AI is used in finance",
+     "head": [
+      "Use",
+      "What AI does"
+     ],
+     "rows": [
+      [
+       "Credit decisions",
+       "Predicts whether someone is likely to repay a loan"
+      ],
+      [
+       "Fraud detection",
+       "Spots unusual payments in real time"
+      ],
+      [
+       "Customer service",
+       "Chatbots answer questions and help with problems"
+      ],
+      [
+       "Trading",
+       "Algorithms buy and sell shares in fractions of a second"
+      ],
+      [
+       "Personal finance",
+       "Apps predict your spending and suggest savings"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A **[[credit score]]** is a number lenders use to judge how likely you are to repay money you borrow. It's based on your history of borrowing and paying bills. AI is increasingly used to make these decisions."
+    },
+    {
+     "t": "h",
+     "text": "Fairness and bias"
+    },
+    {
+     "t": "p",
+     "text": "**[[algorithmic bias|Algorithmic bias]]** happens when an AI system treats some groups unfairly, often because it learned from data that reflected past unfairness. For example, an AI could give lower credit limits to people from certain areas even if they're just as likely to repay. UK data protection law gives people rights when important decisions are made about them automatically, including the right to have a human review the decision."
+    },
+    {
+     "t": "h",
+     "text": "A cashless society?"
+    },
+    {
+     "t": "p",
+     "text": "In a **[[cashless society]]**, all payments would be digital. Cash use in the UK has fallen sharply, and some shops no longer accept it."
+    },
+    {
+     "t": "table",
+     "caption": "Weighing up a cashless society",
+     "head": [
+      "For",
+      "Against"
+     ],
+     "rows": [
+      [
+       "Fast, convenient payments",
+       "Excludes people without bank accounts or smartphones"
+      ],
+      [
+       "Less crime involving cash (e.g. robbery)",
+       "Cash works during power cuts and system outages"
+      ],
+      [
+       "Easier to track spending and taxes",
+       "Less privacy: every payment leaves a record"
+      ],
+      [
+       "Cheaper for businesses to handle",
+       "Some people budget better with physical cash"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[financial inclusion|Financial inclusion]]** means everyone having access to useful, affordable financial services. UK law now requires access to cash to be protected, including banking hubs in towns that have lost their bank branches."
+    },
+    {
+     "t": "h",
+     "text": "Designing responsible fintech"
+    },
+    {
+     "t": "key",
+     "title": "Principles for responsible fintech",
+     "items": [
+      "Wellbeing: help people save and avoid debt, don't push spending",
+      "Security: strong authentication, encryption, fraud protection",
+      "Privacy: collect only the data needed; be clear about how it's used",
+      "Inclusion: accessible design; options for people with less money or confidence",
+      "Fairness: test AI for bias; explain decisions"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Design a money app",
+     "mins": 35,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Design a fintech app for 11-16 year olds that helps them manage money safely.",
+      "Plan three features (e.g. savings goals, spending insights, scam alerts) and sketch the main screen.",
+      "Explain how your app keeps users secure and protects their privacy.",
+      "Explain how your app avoids encouraging overspending, and pitch it to the class."
+     ],
+     "q": [
+      {
+       "q": "Describe your three features and how they help.",
+       "a": "E.g. savings goals with progress bars (motivates saving); weekly spending summary by category (builds awareness); scam warning when sending money to a new person (protects users)."
+      },
+      {
+       "q": "How does your app protect users' security and wellbeing?",
+       "a": "Fingerprint/PIN login and notifications for every payment; no credit or BNPL; parental controls; no adverts or \"deals\" that encourage spending; clear privacy settings."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a credit score?",
+     "o": [
+      "A test score",
+      "A number lenders use to judge how likely you are to repay",
+      "A football result",
+      "A bank balance"
+     ],
+     "a": 1,
+     "why": "Based on borrowing history."
+    },
+    {
+     "q": "What is algorithmic bias?",
+     "o": [
+      "A type of encryption",
+      "When an AI treats some groups unfairly",
+      "A secure system",
+      "A fast algorithm"
+     ],
+     "a": 1,
+     "why": "Often learned from past data."
+    },
+    {
+     "q": "Which is an argument against a cashless society?",
+     "o": [
+      "Easier tax collection",
+      "Less cash crime",
+      "Faster payments",
+      "It excludes people without bank accounts or smartphones"
+     ],
+     "a": 3,
+     "why": "Inclusion matters."
+    },
+    {
+     "q": "What is financial inclusion?",
+     "o": [
+      "Including finance in maths lessons",
+      "Only rich people banking",
+      "Everyone having access to useful, affordable financial services",
+      "Closing banks"
+     ],
+     "a": 2,
+     "why": "Access for all."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how algorithmic bias could affect decisions about loans.",
+     "m": 3,
+     "a": "AI trained on past data that reflects unfairness (1); may give some groups worse outcomes (1) even if they're just as likely to repay (1)."
+    },
+    {
+     "q": "\"The UK should become a completely cashless society.\" Discuss.",
+     "m": 4,
+     "a": "For: convenience, less cash crime, cheaper (1-2); against: exclusion, outages, privacy, budgeting (1-2); conclusion (1). Max 4."
+    }
+   ],
+   "terms": [
+    "Credit score",
+    "Algorithmic bias",
+    "Cashless society",
+    "Financial inclusion"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Contactless",
+   "def": "A way to pay by tapping a card or device on a reader.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "NFC",
+   "def": "Near-field communication: short-range radio used for contactless payments.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Card network",
+   "def": "A company such as Visa or Mastercard that connects banks to process card payments.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Authorisation",
+   "def": "A bank approving or declining a payment.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Digital wallet",
+   "def": "An app that stores payment cards on a phone or watch, such as Apple Pay or Google Pay.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Fintech",
+   "def": "Financial technology: using software and technology to provide financial services.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "API",
+   "def": "Application programming interface: rules that let one program request data or services from another.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Open banking",
+   "def": "A system letting customers securely share their bank data with approved apps, with consent.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Regulation",
+   "def": "Rules set and enforced by an official body.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Buy Now Pay Later",
+   "def": "A way of splitting a purchase into several payments; a form of borrowing.",
+   "alt": "BNPL",
+   "page": "p02"
+  },
+  {
+   "term": "Encryption",
+   "def": "Scrambling data so only someone with the right key can read it.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Tokenisation",
+   "def": "Replacing a real card number with a substitute number.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Strong customer authentication",
+   "def": "Proving who you are with two different types of evidence.",
+   "alt": "SCA",
+   "page": "p03"
+  },
+  {
+   "term": "Biometrics",
+   "def": "Using body features such as fingerprints or faces to prove identity.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Fraud detection",
+   "def": "Systems, often using AI, that spot and stop fraudulent payments.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Social engineering",
+   "def": "Manipulating people into giving away information or money.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Phishing",
+   "def": "Fake messages designed to trick people into giving away details or money.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Authorised push payment fraud",
+   "def": "When someone is tricked into sending money to a criminal themselves.",
+   "alt": "APP fraud",
+   "page": "p04"
+  },
+  {
+   "term": "Money mule",
+   "def": "Someone who lets criminals move money through their bank account, which is a crime.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Ledger",
+   "def": "A record of financial transactions.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Blockchain",
+   "def": "A shared, tamper-resistant digital ledger stored on many computers.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Cryptocurrency",
+   "def": "Digital money recorded on a blockchain rather than by a bank.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Volatility",
+   "def": "How much and how quickly a price goes up and down.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Stablecoin",
+   "def": "A cryptocurrency linked to normal money to keep a steady value.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "CBDC",
+   "def": "Central bank digital currency: digital money issued by a central bank.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Credit score",
+   "def": "A number lenders use to judge how likely someone is to repay borrowing.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Algorithmic bias",
+   "def": "When an algorithm or AI treats some groups unfairly.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Cashless society",
+   "def": "A society where all payments are made digitally.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Financial inclusion",
+   "def": "Everyone having access to useful, affordable financial services.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}
