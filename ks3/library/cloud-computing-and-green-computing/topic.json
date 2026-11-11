@@ -1,0 +1,1422 @@
+{
+ "title": "Cloud Computing and Green Computing",
+ "summary": "What really happens when you save to \"the cloud\": cloud service models, what's inside a data centre, how cloud services scale and sometimes fail, how to keep cloud data secure, the energy and water cost of computing and AI, and practical ways to make computing greener.",
+ "learn": [
+  "What cloud computing is and the main cloud service models",
+  "What's inside a data centre and how it is kept running",
+  "How cloud services scale, and why outages happen",
+  "How to keep data in the cloud secure and backed up",
+  "The environmental impact of data centres and AI",
+  "Practical ways to make computing greener"
+ ],
+ "temporary": false,
+ "intro": "Every message, stream, game and AI chat runs on computers in giant buildings called data centres. The cloud lets anyone use huge computing power on demand, but it also uses enormous amounts of electricity and water, especially as AI grows. In this topic you'll find out what the cloud really is, look inside a data centre, discover how services scale to millions of users (and what happens when they crash), learn to keep cloud data safe, and explore how computing can become greener.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "What is the cloud?",
+   "spec": "Define cloud computing, describe IaaS, PaaS and SaaS, and evaluate the cloud's advantages and disadvantages",
+   "summary": "Cloud computing means using computing services such as storage, software and processing power over the internet, from servers owned by a provider, instead of on your own device. Services are often grouped as SaaS, PaaS and IaaS.",
+   "starter": "\"The cloud is just someone else's computer.\" Is this true? Discuss.",
+   "sc": [
+    "I can define cloud computing",
+    "I can describe SaaS, PaaS and IaaS with examples",
+    "I can evaluate advantages and disadvantages of using the cloud"
+   ],
+   "slides": [
+    {
+     "t": "\"Someone else's computer\"",
+     "b": [
+      "Cloud computing: using storage, software and processing over the internet",
+      "Runs on servers in data centres owned by cloud providers",
+      "Big providers: Amazon Web Services, Microsoft Azure, Google Cloud",
+      "You rent what you need instead of buying your own hardware"
+     ]
+    },
+    {
+     "t": "Three service models",
+     "b": [
+      "SaaS (Software as a Service): use a finished app, e.g. Google Docs, Microsoft 365, Spotify",
+      "PaaS (Platform as a Service): a platform to build and run your own apps",
+      "IaaS (Infrastructure as a Service): rent virtual servers, storage and networks",
+      "Think pizza: eat out (SaaS), takeaway (PaaS), buy ingredients (IaaS)"
+     ]
+    },
+    {
+     "t": "Pros and cons",
+     "b": [
+      "Access from anywhere, on any device",
+      "Easy sharing and collaboration",
+      "No need to buy and maintain servers; pay for what you use",
+      "But: needs internet, depends on the provider, privacy and ongoing costs"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is cloud computing?"
+    },
+    {
+     "t": "p",
+     "text": "**[[cloud computing|Cloud computing]]** means using computing services (storage, software, processing power) over the internet instead of on your own device. The work is done by a **[[server]]**, a powerful computer that provides services to other computers, in a data centre owned by a cloud provider. The biggest providers are Amazon Web Services (AWS), Microsoft Azure and Google Cloud."
+    },
+    {
+     "t": "h",
+     "text": "Cloud service models"
+    },
+    {
+     "t": "table",
+     "caption": "Cloud service models",
+     "head": [
+      "Model",
+      "What you get",
+      "You manage",
+      "Examples"
+     ],
+     "rows": [
+      [
+       "**[[SaaS]]** (Software as a Service)",
+       "A finished app you use through a browser or app",
+       "Just your data and settings",
+       "Google Docs, Microsoft 365, Spotify, Netflix"
+      ],
+      [
+       "**[[PaaS]]** (Platform as a Service)",
+       "A platform for building and running your own apps",
+       "Your code and data",
+       "App-hosting services, Google App Engine"
+      ],
+      [
+       "**[[IaaS]]** (Infrastructure as a Service)",
+       "Virtual servers, storage and networking to rent",
+       "Operating system, software and data",
+       "AWS EC2, Azure virtual machines"
+      ]
+     ]
+    },
+    {
+     "t": "note",
+     "text": "The pizza analogy: SaaS is eating at a restaurant (everything's done for you), PaaS is takeaway (you provide the table and plates), IaaS is buying the ingredients and using someone else's kitchen."
+    },
+    {
+     "t": "h",
+     "text": "Advantages and disadvantages"
+    },
+    {
+     "t": "table",
+     "caption": "Weighing up the cloud",
+     "head": [
+      "Advantages",
+      "Disadvantages"
+     ],
+     "rows": [
+      [
+       "Access files and apps from anywhere, on any device",
+       "Needs a reliable internet connection"
+      ],
+      [
+       "Easy sharing and real-time collaboration",
+       "You depend on the provider staying online and in business"
+      ],
+      [
+       "Automatic updates and backups",
+       "Privacy: your data is on someone else's computers"
+      ],
+      [
+       "No expensive hardware to buy; pay for what you use",
+       "Ongoing subscription costs can add up"
+      ],
+      [
+       "Scale up instantly when you need more",
+       "Moving to another provider can be hard (\"lock-in\")"
+      ]
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Cloud sort",
+     "mins": 15,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Sort the 12 service cards (e.g. Gmail, a rented virtual server, Netflix, an app-hosting platform, OneDrive) into SaaS, PaaS and IaaS.",
+      "For three of them, write one advantage and one disadvantage of using it in the cloud.",
+      "Decide: should our school store everything in the cloud? Give a reason."
+     ],
+     "q": [
+      {
+       "q": "Which model is Microsoft 365, and why?",
+       "a": "SaaS: it's a finished app you use through a browser or app; Microsoft manages the software, servers and updates."
+      },
+      {
+       "q": "Should the school store everything in the cloud?",
+       "a": "E.g. \"Mostly yes: pupils can access work from home, files are backed up and shared easily. But the school needs a reliable internet connection and must check where data is stored and who can access it.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is cloud computing?",
+     "o": [
+      "Weather forecasting",
+      "A type of printer",
+      "Storing data on a USB stick",
+      "Using computing services over the internet"
+     ],
+     "a": 3,
+     "why": "Services from remote servers."
+    },
+    {
+     "q": "Which is an example of SaaS?",
+     "o": [
+      "A rented virtual server",
+      "Google Docs",
+      "A motherboard",
+      "A USB stick"
+     ],
+     "a": 1,
+     "why": "Finished apps."
+    },
+    {
+     "q": "In IaaS, what do you rent?",
+     "o": [
+      "A finished app",
+      "A laptop",
+      "Virtual servers, storage and networks",
+      "A pizza"
+     ],
+     "a": 2,
+     "why": "Infrastructure."
+    },
+    {
+     "q": "Which is a disadvantage of the cloud?",
+     "o": [
+      "It needs an internet connection",
+      "Automatic backups",
+      "Access from anywhere",
+      "Easy sharing"
+     ],
+     "a": 0,
+     "why": "No internet, no access."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Define cloud computing.",
+     "m": 2,
+     "a": "Using storage/software/processing (1) over the internet on servers owned by a provider rather than your own device (1)."
+    },
+    {
+     "q": "Describe the difference between SaaS and IaaS, with an example of each.",
+     "m": 3,
+     "a": "SaaS: finished app, provider manages everything, e.g. Google Docs (1-2); IaaS: rent virtual servers/storage, you manage OS and software, e.g. AWS EC2 (1-2). Max 3."
+    }
+   ],
+   "terms": [
+    "Cloud computing",
+    "Server",
+    "SaaS",
+    "PaaS",
+    "IaaS"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "Inside a data centre",
+   "spec": "Describe what is inside a data centre and how it is kept cool, powered and running",
+   "summary": "A data centre is a building full of servers, storage and networking equipment in racks. It needs huge amounts of power, cooling to remove heat, backup systems so it keeps running, and strong physical security. New AI data centres are packed with powerful GPUs.",
+   "starter": "Your laptop gets hot when you game. Imagine 100,000 computers in one building: what problems would you need to solve?",
+   "sc": [
+    "I can describe the main parts of a data centre",
+    "I can explain why cooling and backup power are needed",
+    "I can explain redundancy and why data centres are built where they are"
+   ],
+   "slides": [
+    {
+     "t": "What's inside",
+     "b": [
+      "Rows of racks: tall cabinets holding many servers",
+      "Storage systems holding enormous amounts of data",
+      "High-speed networking connects everything to the internet",
+      "AI data centres: thousands of GPUs for training and running AI"
+     ]
+    },
+    {
+     "t": "Keeping it running",
+     "b": [
+      "Power: as much electricity as a town; backup batteries and generators",
+      "Cooling: fans, chilled air, water cooling, even liquid cooling directly on chips",
+      "Redundancy: spare parts and copies so one failure doesn't stop the service",
+      "Security: fences, guards, cameras, ID checks, fire suppression"
+     ]
+    },
+    {
+     "t": "Where and why",
+     "b": [
+      "Near cheap, reliable (ideally renewable) electricity",
+      "Cool climates reduce cooling costs",
+      "Good fibre connections and low risk of floods",
+      "Ireland hosts many data centres: they use about a fifth of its electricity"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is a data centre?"
+    },
+    {
+     "t": "p",
+     "text": "A **[[data centre]]** is a building that houses large numbers of servers, storage devices and networking equipment. Servers are mounted in tall metal cabinets called **[[rack|racks]]**, arranged in long rows. The largest data centres contain hundreds of thousands of servers."
+    },
+    {
+     "t": "p",
+     "text": "New AI data centres are packed with GPUs (graphics processing units), chips that are very good at the maths AI needs. They use far more power per rack than ordinary servers."
+    },
+    {
+     "t": "h",
+     "text": "Keeping a data centre running"
+    },
+    {
+     "t": "table",
+     "caption": "Data centre systems",
+     "head": [
+      "System",
+      "Why it's needed",
+      "How it works"
+     ],
+     "rows": [
+      [
+       "Power",
+       "Servers need electricity 24/7",
+       "Grid connection plus backup batteries (UPS) and diesel or battery generators"
+      ],
+      [
+       "**[[cooling|Cooling]]**",
+       "Computers turn electricity into heat, which damages them",
+       "Cold air flows through \"cold aisles\"; hot air is removed; some use water or liquid cooling on chips"
+      ],
+      [
+       "Networking",
+       "Connects servers to each other and the internet",
+       "Very fast fibre-optic links"
+      ],
+      [
+       "Security",
+       "Protects valuable equipment and data",
+       "Fences, guards, CCTV, ID cards, fingerprint scanners"
+      ],
+      [
+       "Fire suppression",
+       "Water would destroy electronics",
+       "Special gases or mist that put fires out"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Redundancy and uptime"
+    },
+    {
+     "t": "p",
+     "text": "**[[redundancy|Redundancy]]** means having spare equipment and copies of data so that if something fails, something else takes over. Data centres have redundant power supplies, network links and storage. Big providers copy data between data centres in different places, in case a whole building goes offline."
+    },
+    {
+     "t": "p",
+     "text": "**[[uptime|Uptime]]** is the percentage of time a service is working. Cloud providers often promise \"99.99% uptime\", which still allows nearly an hour of downtime per year."
+    },
+    {
+     "t": "example",
+     "title": "What does 99.9% uptime mean?",
+     "context": "There are 8,760 hours in a year.",
+     "steps": [
+      "Downtime = 100% − 99.9% = 0.1%.",
+      "0.1% of 8,760 hours = 8.76 hours."
+     ],
+     "answer": "99.9% uptime still allows almost 9 hours offline a year. 99.99% allows about 53 minutes."
+    },
+    {
+     "t": "h",
+     "text": "Location matters"
+    },
+    {
+     "t": "p",
+     "text": "Data centres are built where there is cheap, reliable electricity (ideally renewable), a cool climate, fast fibre connections and low risk of flooding or earthquakes. Ireland has become a major data-centre hub: data centres now use around a fifth of the Republic of Ireland's electricity, which has caused debate about pressure on the grid."
+    },
+    {
+     "t": "act",
+     "title": "Build a data centre",
+     "mins": 25,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Your company wants to build a data centre on the island of Ireland. Look at the four site cards (power supply, climate, flood risk, fibre, local community).",
+      "Score each site and choose the best one.",
+      "Design the cooling, power and security systems for your data centre.",
+      "Write one way your data centre could benefit the local community."
+     ],
+     "q": [
+      {
+       "q": "Which site did you choose, and why?",
+       "a": "E.g. the site with renewable wind power nearby, low flood risk and good fibre links, even if land costs more, because power and reliability matter most."
+      },
+      {
+       "q": "How could the data centre benefit the community?",
+       "a": "E.g. pipe waste heat to warm nearby homes, schools or a swimming pool; create local jobs; invest in renewable energy."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a rack in a data centre?",
+     "o": [
+      "A shelf for books",
+      "A tall cabinet holding many servers",
+      "A cooling fan",
+      "A cable"
+     ],
+     "a": 1,
+     "why": "Servers are stacked in racks."
+    },
+    {
+     "q": "Why do data centres need cooling?",
+     "o": [
+      "To keep staff comfortable only",
+      "Because of rain",
+      "To make ice",
+      "Servers turn electricity into heat that can damage them"
+     ],
+     "a": 3,
+     "why": "Heat damages electronics."
+    },
+    {
+     "q": "What is redundancy?",
+     "o": [
+      "Spare equipment and copies so a failure doesn't stop the service",
+      "Deleting data",
+      "Using one server",
+      "Losing your job"
+     ],
+     "a": 0,
+     "why": "Backups that take over."
+    },
+    {
+     "q": "What does 99.9% uptime allow per year?",
+     "o": [
+      "About 9 minutes",
+      "No downtime",
+      "About 9 hours of downtime",
+      "About 9 days"
+     ],
+     "a": 2,
+     "why": "0.1% of 8,760 hours."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe three systems needed to keep a data centre running.",
+     "m": 3,
+     "a": "Any three: power with backup (1); cooling (1); networking (1); security (1); fire suppression (1)."
+    },
+    {
+     "q": "Explain why a company might build a data centre in a cool country.",
+     "m": 2,
+     "a": "Less energy needed for cooling (1), reducing cost and environmental impact (1)."
+    }
+   ],
+   "terms": [
+    "Data centre",
+    "Rack",
+    "Cooling",
+    "Redundancy",
+    "Uptime"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Scaling and outages",
+   "spec": "Explain virtualisation and scalability, and describe causes and effects of cloud outages",
+   "summary": "Virtualisation lets one physical server run many virtual machines, and cloud services scale up and down automatically to match demand. But because so many services share the same cloud providers, one fault can cause a huge outage affecting millions of people.",
+   "starter": "A concert sells tickets online at 9am and two million fans log on at once. What could go wrong?",
+   "sc": [
+    "I can explain virtualisation",
+    "I can explain scalability and elasticity",
+    "I can describe causes and impacts of cloud outages"
+   ],
+   "slides": [
+    {
+     "t": "Virtualisation",
+     "b": [
+      "One physical server can run many virtual machines (VMs)",
+      "Each VM acts like a separate computer with its own operating system",
+      "Makes better use of hardware: less waste",
+      "Containers are a lighter-weight version"
+     ]
+    },
+    {
+     "t": "Scaling up and down",
+     "b": [
+      "Scalability: handling more users by adding resources",
+      "Elasticity: scaling automatically up and down with demand",
+      "Load balancers share traffic between many servers",
+      "Pay only for what you use: ideal for ticket sales, Black Friday, exam results day"
+     ]
+    },
+    {
+     "t": "When the cloud breaks",
+     "b": [
+      "Outages are caused by software bugs, bad updates, configuration mistakes, power cuts or cyber attacks",
+      "Many apps rely on the same few providers, so one fault spreads",
+      "October 2025: a fault in one AWS region took down many popular apps and websites for hours",
+      "Resilience: spread services across regions and providers"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Virtualisation"
+    },
+    {
+     "t": "p",
+     "text": "**[[virtualisation|Virtualisation]]** uses software to split one physical server into many **[[virtual machine|virtual machines]]** (VMs). Each VM behaves like a separate computer with its own operating system and programs. This means the hardware is used much more efficiently: instead of many half-empty servers, a few busy ones do the same work."
+    },
+    {
+     "t": "h",
+     "text": "Scalability and elasticity"
+    },
+    {
+     "t": "p",
+     "text": "**[[scalability|Scalability]]** is a system's ability to handle more work by adding resources. Cloud services can be **elastic**: they automatically add servers when demand rises and remove them when it falls. A **[[load balancer]]** spreads incoming requests across many servers so none gets overloaded."
+    },
+    {
+     "t": "table",
+     "caption": "Scaling in action",
+     "head": [
+      "Event",
+      "What happens",
+      "Cloud response"
+     ],
+     "rows": [
+      [
+       "Concert tickets go on sale",
+       "Millions of users arrive at once",
+       "Add hundreds of servers; use a virtual queue"
+      ],
+      [
+       "Exam results day",
+       "Huge spike in logins",
+       "Scale up for the morning, back down by afternoon"
+      ],
+      [
+       "3am on a Tuesday",
+       "Very few users",
+       "Scale down to save money and energy"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Outages"
+    },
+    {
+     "t": "p",
+     "text": "An **[[outage]]** is when a service stops working. Causes include software bugs, faulty updates, configuration mistakes, power failures, cyber attacks and natural disasters. Because thousands of companies rely on the same few cloud providers, one fault can affect millions of people. In October 2025, a fault in one Amazon Web Services region caused many popular apps, games and websites to fail for hours around the world."
+    },
+    {
+     "t": "key",
+     "title": "Building resilient services",
+     "items": [
+      "Run copies of services in more than one region (so one failing area doesn't stop everything)",
+      "Test what happens when parts fail",
+      "Have backups and a plan for restoring them",
+      "Roll out updates gradually, not to everyone at once",
+      "Avoid relying on a single provider for critical services"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Outage response team",
+     "mins": 25,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Read the incident report: \"Ticketing site crashed for 3 hours during a big concert sale.\"",
+      "Identify what probably went wrong (use the scaling and outage notes).",
+      "Write a timeline of what the team should do during the outage.",
+      "Write three changes to stop it happening again."
+     ],
+     "q": [
+      {
+       "q": "What probably caused the crash?",
+       "a": "Demand far exceeded capacity: the site didn't scale up fast enough, there was no virtual queue, and the database became overloaded."
+      },
+      {
+       "q": "Write three changes to prevent it next time.",
+       "a": "E.g. pre-scale servers before the sale; use a load balancer and virtual queue; run copies in more than one region; load-test in advance with simulated users."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is virtualisation?",
+     "o": [
+      "Playing VR games",
+      "Using paper",
+      "Deleting servers",
+      "Running many virtual machines on one physical server"
+     ],
+     "a": 3,
+     "why": "Better use of hardware."
+    },
+    {
+     "q": "What does elasticity mean in cloud computing?",
+     "o": [
+      "Fixed number of servers",
+      "Stretchy cables",
+      "Slower servers",
+      "Scaling up and down automatically with demand"
+     ],
+     "a": 3,
+     "why": "Matches demand."
+    },
+    {
+     "q": "What does a load balancer do?",
+     "o": [
+      "Cools servers",
+      "Spreads requests across many servers",
+      "Weighs servers",
+      "Stores passwords"
+     ],
+     "a": 1,
+     "why": "Prevents overload."
+    },
+    {
+     "q": "Why can one cloud fault affect millions of people?",
+     "o": [
+      "Many services rely on the same providers",
+      "Everyone uses the same password",
+      "The internet is one computer",
+      "It can't"
+     ],
+     "a": 0,
+     "why": "Shared dependence."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain one benefit of virtualisation.",
+     "m": 2,
+     "a": "Many VMs on one server (1), so hardware is used more efficiently/less energy and cost (1)."
+    },
+    {
+     "q": "Describe how a cloud service could cope with a sudden rise in users.",
+     "m": 3,
+     "a": "Automatically add servers/scale up (1); load balancer spreads traffic (1); virtual queue/scale back down afterwards (1)."
+    }
+   ],
+   "terms": [
+    "Virtualisation",
+    "Virtual machine",
+    "Scalability",
+    "Load balancer",
+    "Outage"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "Securing the cloud",
+   "spec": "Describe how to keep data in the cloud secure, including shared responsibility, access control and backups",
+   "summary": "Keeping cloud data safe is a shared responsibility: providers secure the infrastructure, but users must protect their accounts, control sharing and back up important data. Strong passwords, two-factor authentication, encryption and the 3-2-1 backup rule all help.",
+   "starter": "You've shared a Google Drive folder with \"Anyone with the link\". Who could see it?",
+   "sc": [
+    "I can explain the shared responsibility model",
+    "I can describe ways to secure cloud accounts and sharing",
+    "I can apply the 3-2-1 backup rule"
+   ],
+   "slides": [
+    {
+     "t": "Shared responsibility",
+     "b": [
+      "The provider secures the buildings, hardware and network",
+      "You secure your account, passwords and sharing settings",
+      "Most cloud data leaks are caused by mistakes, e.g. files shared publicly by accident",
+      "Security is a team effort"
+     ]
+    },
+    {
+     "t": "Protect your account",
+     "b": [
+      "Strong, unique passwords (or passkeys)",
+      "Two-factor authentication (2FA)",
+      "Check sharing: specific people, not \"anyone with the link\"",
+      "Watch for phishing emails pretending to be your cloud provider"
+     ]
+    },
+    {
+     "t": "Backups and sovereignty",
+     "b": [
+      "3-2-1 rule: 3 copies, on 2 different types of storage, 1 off-site",
+      "Sync is not backup: deleting a file can delete it everywhere",
+      "Encryption protects data stored and sent",
+      "Data sovereignty: which country's laws apply to where your data is stored"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Shared responsibility"
+    },
+    {
+     "t": "p",
+     "text": "In the **[[shared responsibility]]** model, the cloud provider protects the physical data centres, hardware and network, while the customer is responsible for their own accounts, passwords, settings and who they share data with. Many data leaks happen not because the cloud was hacked, but because someone set a folder or database to \"public\" by mistake."
+    },
+    {
+     "t": "h",
+     "text": "Protecting your account"
+    },
+    {
+     "t": "key",
+     "title": "Cloud security habits",
+     "items": [
+      "Use a strong, unique password or a passkey",
+      "Turn on **[[two-factor authentication]]** (2FA): a code or approval on your phone as well as your password",
+      "Share with specific people, not \"anyone with the link\", and remove access when it's no longer needed",
+      "Check sign-in alerts and recent activity",
+      "Beware phishing emails that pretend to be from Google or Microsoft"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[encryption|Encryption]]** scrambles data so only someone with the key can read it. Cloud providers encrypt data while it's stored and while it travels over the internet (look for HTTPS)."
+    },
+    {
+     "t": "h",
+     "text": "Backups"
+    },
+    {
+     "t": "p",
+     "text": "A **[[backup]]** is a copy of data kept so it can be restored if the original is lost, deleted or locked by ransomware."
+    },
+    {
+     "t": "warn",
+     "text": "Syncing is not the same as backup. If a file syncs between your laptop and the cloud and you delete it (or ransomware scrambles it), the change syncs too, and both copies can be lost. Version history and separate backups protect you."
+    },
+    {
+     "t": "table",
+     "caption": "The 3-2-1 backup rule",
+     "head": [
+      "Number",
+      "Rule",
+      "Example"
+     ],
+     "rows": [
+      [
+       "3",
+       "Keep three copies of important data",
+       "The original plus two backups"
+      ],
+      [
+       "2",
+       "On two different types of storage",
+       "A laptop drive and a cloud service"
+      ],
+      [
+       "1",
+       "At least one copy off-site",
+       "Cloud storage, or a drive kept at another house"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Data sovereignty"
+    },
+    {
+     "t": "p",
+     "text": "**[[data sovereignty|Data sovereignty]]** means data is subject to the laws of the country where it's stored. Schools, hospitals and governments often need to know which country their cloud data is kept in, so they can make sure it's protected by UK data protection law."
+    },
+    {
+     "t": "act",
+     "title": "Cloud security audit",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Read the profile of \"Jordan's\" cloud account: password used on 4 sites, no 2FA, 12 folders shared with \"anyone with the link\", no backups, phone is the only device.",
+      "Identify at least five risks.",
+      "Write a step-by-step plan to secure Jordan's account, in priority order.",
+      "Design a 3-2-1 backup plan for Jordan's photos and schoolwork."
+     ],
+     "q": [
+      {
+       "q": "List Jordan's risks.",
+       "a": "Reused password; no 2FA; folders shared publicly; no backup; only one device; possibly old shared links never removed."
+      },
+      {
+       "q": "Write Jordan's 3-2-1 backup plan.",
+       "a": "3 copies: phone, cloud photo backup and an external drive; 2 types of storage: phone/cloud and external drive; 1 off-site: the cloud copy."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "In the shared responsibility model, who secures your password and sharing settings?",
+     "o": [
+      "You, the user",
+      "The cloud provider",
+      "The government",
+      "Nobody"
+     ],
+     "a": 0,
+     "why": "Users protect their accounts."
+    },
+    {
+     "q": "What is 2FA?",
+     "o": [
+      "Two accounts",
+      "Two passwords written down",
+      "A type of virus",
+      "A second check, like a code on your phone, as well as a password"
+     ],
+     "a": 3,
+     "why": "Extra layer of security."
+    },
+    {
+     "q": "What does the 3-2-1 backup rule say?",
+     "o": [
+      "3 days, 2 weeks, 1 month",
+      "3 copies, 2 types of storage, 1 off-site",
+      "3 passwords, 2 phones, 1 laptop",
+      "3 clouds only"
+     ],
+     "a": 1,
+     "why": "A simple backup plan."
+    },
+    {
+     "q": "Why is syncing not the same as backup?",
+     "o": [
+      "Backups use the internet",
+      "Deletions and damage can sync to every copy",
+      "They're the same",
+      "Syncing is slower"
+     ],
+     "a": 1,
+     "why": "Sync copies mistakes too."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the shared responsibility model.",
+     "m": 2,
+     "a": "Provider secures data centres/hardware/network (1); user secures accounts, passwords and sharing (1)."
+    },
+    {
+     "q": "Describe three ways to keep a cloud storage account secure.",
+     "m": 3,
+     "a": "Any three: strong/unique password (1); 2FA (1); careful sharing settings (1); spot phishing (1); check activity alerts (1)."
+    }
+   ],
+   "terms": [
+    "Shared responsibility",
+    "Two-factor authentication",
+    "Encryption",
+    "Backup",
+    "Data sovereignty"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "The environmental cost",
+   "spec": "Describe the environmental impact of data centres, AI and devices, including energy, water and e-waste",
+   "summary": "Data centres use around 1-2% of the world's electricity, and AI is making demand grow quickly. They also use water for cooling, and making and throwing away devices creates carbon emissions and e-waste. Every digital action has a physical cost.",
+   "starter": "Does sending an email, streaming a video or asking an AI chatbot have an environmental cost? Rank them.",
+   "sc": [
+    "I can describe how data centres affect the environment",
+    "I can explain why AI is increasing energy demand",
+    "I can describe the impact of making and disposing of devices"
+   ],
+   "slides": [
+    {
+     "t": "Energy",
+     "b": [
+      "Data centres use roughly 1.5% of the world's electricity, and rising",
+      "AI is a major driver: training and running large models needs huge computing power",
+      "Forecasts suggest data centre electricity could roughly double by 2030",
+      "If electricity comes from fossil fuels, that means carbon emissions"
+     ]
+    },
+    {
+     "t": "Water and land",
+     "b": [
+      "Many data centres use water to cool servers",
+      "Large sites can use millions of litres a day",
+      "Concerns in places with water shortages",
+      "Data centres need land, grid connections and new power stations"
+     ]
+    },
+    {
+     "t": "Devices and e-waste",
+     "b": [
+      "Most of a phone's lifetime carbon comes from making it (embodied carbon)",
+      "Mining metals for chips and batteries harms environments",
+      "E-waste is one of the fastest-growing waste streams in the world",
+      "Keeping devices longer is one of the biggest green actions"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Energy use"
+    },
+    {
+     "t": "p",
+     "text": "Data centres use around 1.5% of the world's electricity, and demand is rising quickly as AI grows. The International Energy Agency has forecast that data centre electricity use could roughly double by 2030. Training a large AI model and answering millions of questions every day takes enormous computing power. If that electricity comes from burning fossil fuels, it adds to an organisation's **[[carbon footprint]]**: the total greenhouse gases its activities cause."
+    },
+    {
+     "t": "p",
+     "text": "Big tech companies are investing heavily in **[[renewable energy]]** (wind, solar, hydro) and some are turning to nuclear power to supply their data centres, but demand is growing faster than clean supply in many places."
+    },
+    {
+     "t": "h",
+     "text": "Water"
+    },
+    {
+     "t": "p",
+     "text": "Many data centres use water to cool servers, often by evaporating it. Large sites can use millions of litres per day, which raises concerns in areas with droughts or water shortages. Some newer designs use closed-loop liquid cooling that recycles water."
+    },
+    {
+     "t": "h",
+     "text": "Devices and e-waste"
+    },
+    {
+     "t": "table",
+     "caption": "The life of a smartphone",
+     "head": [
+      "Stage",
+      "Environmental impact"
+     ],
+     "rows": [
+      [
+       "Mining",
+       "Metals like cobalt, lithium and gold are mined, sometimes harming land, water and workers"
+      ],
+      [
+       "Manufacturing",
+       "Uses lots of energy; most of a phone's lifetime carbon comes from this stage (embodied carbon)"
+      ],
+      [
+       "Use",
+       "Charging and the data centres behind its apps"
+      ],
+      [
+       "Disposal",
+       "E-waste may contain toxic materials; valuable metals are lost if not recycled"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[embodied carbon|Embodied carbon]]** is the carbon emitted making a product, before you ever switch it on. For a smartphone, it's typically most of the total. **[[e-waste|E-waste]]** (electronic waste) is one of the fastest-growing kinds of waste in the world, and only a small share is properly recycled."
+    },
+    {
+     "t": "note",
+     "text": "The Republic of Ireland shows the scale of the issue: data centres now use around a fifth of all its electricity, more than all urban homes combined, leading to limits on new connections in the Dublin area."
+    },
+    {
+     "t": "act",
+     "title": "Footprint detectives",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Use the (approximate) footprint cards for digital activities: an hour of HD streaming, an email with a big attachment, 10 AI chatbot questions, generating an AI image, making a new phone.",
+      "Rank them from lowest to highest impact.",
+      "Calculate your class's weekly streaming footprint using the card values.",
+      "Decide which single change would make the biggest difference."
+     ],
+     "q": [
+      {
+       "q": "Which activity has the biggest impact, and why?",
+       "a": "Making a new phone, because of the energy and materials used in mining and manufacturing (embodied carbon), which outweigh years of everyday use."
+      },
+      {
+       "q": "Which single change makes the biggest difference?",
+       "a": "Keeping devices longer (and repairing them) rather than upgrading often; then reducing unnecessary streaming quality and AI use."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Roughly what share of world electricity do data centres use?",
+     "o": [
+      "About 50%",
+      "None",
+      "About 1-2%",
+      "About 90%"
+     ],
+     "a": 2,
+     "why": "Small share, but growing fast."
+    },
+    {
+     "q": "Why is AI increasing data centre energy demand?",
+     "o": [
+      "AI runs without electricity",
+      "It isn't",
+      "Training and running large models needs huge computing power",
+      "AI makes servers cooler"
+     ],
+     "a": 2,
+     "why": "AI is compute-hungry."
+    },
+    {
+     "q": "What is embodied carbon?",
+     "o": [
+      "Carbon in your body",
+      "Carbon paper",
+      "Carbon in the air",
+      "Carbon emitted making a product"
+     ],
+     "a": 3,
+     "why": "Before you switch it on."
+    },
+    {
+     "q": "Why do some data centres use lots of water?",
+     "o": [
+      "For cooling servers",
+      "For staff showers",
+      "To clean the floors",
+      "For fish tanks"
+     ],
+     "a": 0,
+     "why": "Evaporative cooling."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe three ways data centres affect the environment.",
+     "m": 3,
+     "a": "Any three: electricity use/carbon emissions (1); water for cooling (1); land use (1); e-waste from old servers (1); pressure on the grid (1)."
+    },
+    {
+     "q": "Explain why keeping a phone for longer is good for the environment.",
+     "m": 2,
+     "a": "Most of a phone's carbon comes from manufacturing (1); fewer new phones made means less mining, energy and e-waste (1)."
+    }
+   ],
+   "terms": [
+    "Carbon footprint",
+    "Renewable energy",
+    "E-waste",
+    "Embodied carbon"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "Green computing",
+   "spec": "Describe how computing can be made greener by organisations, programmers and individuals",
+   "summary": "Green computing means designing, using and disposing of technology in ways that reduce its environmental impact. Data centres can use renewable energy and reuse waste heat, programmers can write efficient code, and everyone can keep devices longer, repair and recycle them, and use digital services thoughtfully. Technology can also help fight climate change.",
+   "starter": "Name one thing you could change about how you use technology this week to reduce its environmental impact.",
+   "sc": [
+    "I can describe green computing actions for data centres",
+    "I can explain how efficient software reduces energy use",
+    "I can make a personal green computing plan"
+   ],
+   "slides": [
+    {
+     "t": "Greener data centres",
+     "b": [
+      "Power from renewable energy",
+      "Reuse waste heat to warm homes, offices, greenhouses and swimming pools",
+      "Efficient cooling, e.g. using cold outside air or liquid cooling",
+      "Carbon-aware computing: run big jobs when the grid is greenest"
+     ]
+    },
+    {
+     "t": "Greener code and AI",
+     "b": [
+      "Efficient algorithms do the same job with fewer steps, so less energy",
+      "Smaller AI models can be good enough for many tasks",
+      "Compress images and videos; don't load what users don't need",
+      "Measure energy use, like any other bug to fix"
+     ]
+    },
+    {
+     "t": "Greener you",
+     "b": [
+      "Keep devices longer; repair, don't replace",
+      "Recycle e-waste properly; donate working devices",
+      "Turn off and unplug; use power-saving modes",
+      "Stream at lower quality on small screens; delete files you don't need"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is green computing?"
+    },
+    {
+     "t": "p",
+     "text": "**[[green computing|Green computing]]** means designing, making, using and disposing of technology in ways that reduce harm to the environment."
+    },
+    {
+     "t": "h",
+     "text": "Greener data centres"
+    },
+    {
+     "t": "key",
+     "title": "How data centres are going green",
+     "items": [
+      "Renewable energy: wind, solar and hydro power contracts",
+      "**[[heat reuse|Heat reuse]]**: piping waste heat to warm homes, offices or swimming pools (already done in Denmark, Finland and London)",
+      "Free cooling: using cold outside air in cooler climates",
+      "Liquid cooling: more efficient than air for powerful AI chips",
+      "**[[carbon-aware computing|Carbon-aware computing]]**: running big jobs (like AI training) at times or places where the grid has the most renewable power"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Greener software"
+    },
+    {
+     "t": "p",
+     "text": "Software affects energy use too. An efficient algorithm does the same job in fewer steps, so it uses less processing power and electricity. Programmers can compress images and videos, avoid loading content users don't need, and choose smaller AI models when they're good enough."
+    },
+    {
+     "t": "example",
+     "title": "Efficient search saves energy",
+     "context": "A sorted list has 1,000,000 items. How many checks to find one item?",
+     "steps": [
+      "Linear search checks items one by one: up to 1,000,000 checks.",
+      "Binary search halves the list each time: about 20 checks."
+     ],
+     "answer": "Binary search uses about 50,000 times fewer steps, saving time and energy when run millions of times a day."
+    },
+    {
+     "t": "h",
+     "text": "Greener you"
+    },
+    {
+     "t": "table",
+     "caption": "Personal green computing actions",
+     "head": [
+      "Action",
+      "Why it helps"
+     ],
+     "rows": [
+      [
+       "Keep devices for longer",
+       "Reduces mining, manufacturing and e-waste (the biggest impact)"
+      ],
+      [
+       "Repair rather than replace",
+       "**[[right to repair|Right to repair]]** laws in the UK and EU make spare parts easier to get"
+      ],
+      [
+       "Recycle or donate old devices",
+       "Recovers valuable materials; gives devices a second life"
+      ],
+      [
+       "Use power-saving settings",
+       "Lower screen brightness, sleep modes, switch off at night"
+      ],
+      [
+       "Stream thoughtfully",
+       "Lower video quality on small screens; download music you play often"
+      ],
+      [
+       "Declutter",
+       "Delete unwanted files, photos and emails stored in the cloud"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Tech for the planet"
+    },
+    {
+     "t": "p",
+     "text": "Technology can also help tackle climate change: smart grids balance renewable power, sensors monitor deforestation and pollution, AI improves weather forecasts and designs better batteries, and video calls can replace some travel."
+    },
+    {
+     "t": "act",
+     "title": "Green tech pledge",
+     "mins": 30,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Audit your group's technology habits for a typical week (devices, streaming, storage, AI use, charging).",
+      "Choose three personal actions and one action the school could take.",
+      "Estimate the impact of each action using the footprint cards from last lesson.",
+      "Create a \"green computing pledge\" poster for your classroom."
+     ],
+     "q": [
+      {
+       "q": "Write your three personal actions and why you chose them.",
+       "a": "E.g. keep my phone at least 4 years (biggest impact on embodied carbon); stream on lower quality on my phone; delete old photos and videos from cloud storage."
+      },
+      {
+       "q": "What action could the school take?",
+       "a": "E.g. turn off computers and screens at the end of the day automatically; buy refurbished devices; set up an e-waste recycling collection; choose a cloud provider using renewable energy."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is green computing?",
+     "o": [
+      "A type of virus",
+      "Painting computers green",
+      "Using technology in ways that reduce environmental harm",
+      "Computers in gardens"
+     ],
+     "a": 2,
+     "why": "Sustainable tech."
+    },
+    {
+     "q": "What is heat reuse?",
+     "o": [
+      "Heating servers",
+      "Reheating food",
+      "Using data centre waste heat to warm buildings",
+      "Overclocking a CPU"
+     ],
+     "a": 2,
+     "why": "Turns waste into a resource."
+    },
+    {
+     "q": "How does efficient code save energy?",
+     "o": [
+      "It does the job in fewer steps, using less processing",
+      "It uses more servers",
+      "It doesn't",
+      "It's written in green"
+     ],
+     "a": 0,
+     "why": "Fewer steps, less power."
+    },
+    {
+     "q": "Which personal action has the biggest environmental benefit?",
+     "o": [
+      "Changing your wallpaper",
+      "Keeping devices longer",
+      "Buying a new phone yearly",
+      "Using dark mode once"
+     ],
+     "a": 1,
+     "why": "Embodied carbon dominates."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe three ways a data centre could reduce its environmental impact.",
+     "m": 3,
+     "a": "Any three: renewable energy (1); heat reuse (1); free/liquid cooling (1); carbon-aware scheduling (1); efficient hardware/virtualisation (1)."
+    },
+    {
+     "q": "Explain what carbon-aware computing means.",
+     "m": 2,
+     "a": "Running big computing jobs (1) at times/places when the electricity grid has the most renewable power (1)."
+    }
+   ],
+   "terms": [
+    "Green computing",
+    "Heat reuse",
+    "Right to repair",
+    "Carbon-aware computing"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Cloud computing",
+   "def": "Using computing services such as storage, software and processing over the internet.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Server",
+   "def": "A powerful computer that provides services to other computers.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "SaaS",
+   "def": "Software as a Service: finished apps used over the internet.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "PaaS",
+   "def": "Platform as a Service: a cloud platform for building and running your own apps.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "IaaS",
+   "def": "Infrastructure as a Service: renting virtual servers, storage and networks.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Data centre",
+   "def": "A building that houses large numbers of servers, storage and networking equipment.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Rack",
+   "def": "A tall cabinet that holds many servers.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Cooling",
+   "def": "Removing heat produced by computers so they don't overheat.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Redundancy",
+   "def": "Having spare equipment and copies so a failure doesn't stop a service.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Uptime",
+   "def": "The percentage of time a service is working.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Virtualisation",
+   "def": "Using software to run many virtual computers on one physical machine.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Virtual machine",
+   "def": "A software-based computer that runs on a physical server.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Scalability",
+   "def": "The ability of a system to handle more work by adding resources.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Load balancer",
+   "def": "A system that spreads requests across many servers.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Outage",
+   "def": "A period when a service stops working.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Shared responsibility",
+   "def": "The idea that cloud providers and users each have security jobs to do.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Two-factor authentication",
+   "def": "A second check, such as a code on your phone, as well as a password.",
+   "alt": "2FA",
+   "page": "p04"
+  },
+  {
+   "term": "Encryption",
+   "def": "Scrambling data so only someone with the key can read it.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Backup",
+   "def": "A copy of data kept so it can be restored if lost.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Data sovereignty",
+   "def": "The idea that data is subject to the laws of the country where it is stored.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Carbon footprint",
+   "def": "The total greenhouse gases caused by a person, product or organisation.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Renewable energy",
+   "def": "Energy from sources that don't run out, such as wind, solar and hydro.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Embodied carbon",
+   "def": "The carbon emitted while making a product, before it is used.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "E-waste",
+   "def": "Thrown-away electronic devices and parts.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Green computing",
+   "def": "Designing, using and disposing of technology in ways that reduce environmental harm.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Heat reuse",
+   "def": "Using waste heat, for example from data centres, to warm buildings.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Carbon-aware computing",
+   "def": "Running computing jobs when and where electricity is cleanest.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Right to repair",
+   "def": "Rules that make it easier for people to repair their own devices.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}
