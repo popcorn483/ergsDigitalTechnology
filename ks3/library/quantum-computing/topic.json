@@ -1,0 +1,1312 @@
+{
+ "title": "Quantum Computing",
+ "summary": "A new kind of computer that uses the strange rules of the very small: qubits, superposition, entanglement and interference, how quantum computers are built, what they could do, and what they can't.",
+ "learn": [
+  "How a qubit differs from a bit",
+  "What superposition and measurement mean",
+  "What entanglement and interference are, using simple models",
+  "How quantum computers are built and why errors are a big problem",
+  "Which problems quantum computers could solve, and which they can't",
+  "How quantum technology could change the future, and the careers it creates"
+ ],
+ "temporary": false,
+ "intro": "Quantum computers don't just do the same things faster: they work in a completely different way, using the rules of physics that govern atoms and light. In this topic you'll explore qubits with coins and dice, find out why quantum computers live in fridges colder than outer space, separate the real promise from the hype, and discover the UK's plans to become a quantum leader.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "From bits to qubits",
+   "spec": "Explain the difference between a classical bit and a qubit",
+   "summary": "Ordinary computers store information in bits that are always either 0 or 1. Quantum computers use qubits, which can be in a superposition: a combination of 0 and 1 at the same time, until they are measured.",
+   "starter": "A coin on the table shows heads or tails. What about a coin spinning in the air? Is it heads or tails?",
+   "sc": [
+    "I can explain what a bit is",
+    "I can explain what a qubit is using the spinning-coin model",
+    "I can explain why quantum computers are not just \"faster computers\""
+   ],
+   "slides": [
+    {
+     "t": "Bits: definitely 0 or 1",
+     "b": [
+      "Every ordinary (classical) computer uses bits",
+      "A bit is always either 0 or 1, like a light switch: off or on",
+      "Everything (photos, music, games) is made of billions of bits",
+      "Your phone's processor flips bits billions of times a second"
+     ]
+    },
+    {
+     "t": "Qubits: 0 and 1 at once",
+     "b": [
+      "A qubit is a quantum bit",
+      "It can be in a superposition: a mixture of 0 and 1",
+      "Like a spinning coin: not heads or tails until it lands",
+      "When you measure it, it \"lands\" on 0 or 1"
+     ],
+     "n": "The spinning coin is a model, not exactly how qubits behave: real qubits have \"amplitudes\" that can cancel out (lesson 3). It's a good starting point at KS3."
+    },
+    {
+     "t": "A different kind of computer",
+     "b": [
+      "Not just a faster laptop: a completely different way of computing",
+      "Uses the rules of quantum physics: the physics of atoms, electrons and light",
+      "Brilliant at some special problems, no better at others",
+      "You won't play games or write essays on one"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Classical bits"
+    },
+    {
+     "t": "p",
+     "text": "Every ordinary computer, called a **[[classical computer]]**, stores and processes information as **[[bit|bits]]**. A bit is always in one of two states: **0** or **1**, like a light switch that is off or on. Your phone's processor contains billions of tiny switches (transistors) that flip bits billions of times every second."
+    },
+    {
+     "t": "h",
+     "text": "Qubits"
+    },
+    {
+     "t": "p",
+     "text": "A **[[quantum computer]]** uses **[[qubit|qubits]]** (quantum bits). A qubit can be 0 or 1, but it can also be in a **superposition**: a combination of 0 and 1 at the same time. When you **measure** a qubit, it gives a definite answer: 0 or 1."
+    },
+    {
+     "t": "table",
+     "caption": "Bits and qubits",
+     "head": [
+      "Feature",
+      "Bit",
+      "Qubit"
+     ],
+     "rows": [
+      [
+       "States",
+       "0 or 1",
+       "0, 1, or a superposition of both"
+      ],
+      [
+       "Model",
+       "A light switch",
+       "A spinning coin"
+      ],
+      [
+       "When you look",
+       "Same value you stored",
+       "Gives 0 or 1, with certain probabilities"
+      ],
+      [
+       "Made from",
+       "Transistors on a chip",
+       "Tiny quantum systems: atoms, ions, particles of light or tiny superconducting circuits"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Why \"different\", not just \"faster\"?"
+    },
+    {
+     "t": "p",
+     "text": "Quantum computers follow the rules of **quantum physics**: the strange laws that describe very small things like atoms, electrons and particles of light (photons). For some special problems, these rules let quantum computers find answers in ways ordinary computers can't. For everyday tasks, like word processing or watching videos, they're no better, and far less practical."
+    },
+    {
+     "t": "note",
+     "text": "Quantum physics isn't science fiction. Lasers, MRI scanners, LEDs and the transistors in every computer chip were all invented thanks to understanding quantum physics."
+    },
+    {
+     "t": "act",
+     "title": "Coins and qubits",
+     "mins": 15,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Place a coin heads-up: this is a bit storing 1. Turn it over: it stores 0.",
+      "Now spin the coin: this models a qubit in superposition.",
+      "\"Measure\" it by slapping it flat. Record the result. Repeat 20 times.",
+      "Count heads and tails. What do you notice?"
+     ],
+     "q": [
+      {
+       "q": "How many heads and tails did you get out of 20 spins?",
+       "a": "About 10 of each (results vary), because a fair spinning coin is like a qubit in an equal superposition: each measurement gives 0 or 1 with a 50% chance."
+      },
+      {
+       "q": "Explain one way a spinning coin is like a qubit and one way the model isn't perfect.",
+       "a": "Like a qubit: it isn't heads or tails until \"measured\", and then gives one definite answer. Not perfect: a real qubit's superposition can be set to any balance and can interfere with other states, which coins can't do."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What values can a classical bit have?",
+     "o": [
+      "Only 0 or 1",
+      "0, 1 or 2",
+      "Any number",
+      "Only 1"
+     ],
+     "a": 0,
+     "why": "Bits are binary."
+    },
+    {
+     "q": "What is a qubit?",
+     "o": [
+      "A broken bit",
+      "A quantum bit that can be in a superposition of 0 and 1",
+      "Eight bits",
+      "A very small bit"
+     ],
+     "a": 1,
+     "why": "Qubits can be in superposition."
+    },
+    {
+     "q": "In the spinning-coin model, what is \"measuring\" the qubit?",
+     "o": [
+      "Painting the coin",
+      "Weighing the coin",
+      "Spinning it faster",
+      "Slapping the coin down to see heads or tails"
+     ],
+     "a": 3,
+     "why": "Measurement gives a definite answer."
+    },
+    {
+     "q": "Which statement about quantum computers is true?",
+     "o": [
+      "They are just laptops with more memory",
+      "They don't exist",
+      "They're brilliant at some special problems, but not faster at everything",
+      "They're faster at every task"
+     ],
+     "a": 2,
+     "why": "They're specialised machines."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between a bit and a qubit.",
+     "m": 2,
+     "a": "A bit is always either 0 or 1 (1); a qubit can be in a superposition of 0 and 1 until it is measured (1)."
+    },
+    {
+     "q": "Explain why quantum computers are unlikely to replace laptops.",
+     "m": 2,
+     "a": "They're only better at certain special problems (1); they're expensive/need extreme conditions such as very cold temperatures/aren't practical for everyday tasks (1)."
+    }
+   ],
+   "terms": [
+    "Bit",
+    "Qubit",
+    "Quantum computer",
+    "Classical computer"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "Superposition and measurement",
+   "spec": "Describe superposition and measurement using probabilities",
+   "summary": "A qubit in superposition has a certain probability of being measured as 0 or 1. Measuring it destroys the superposition. With many qubits, the number of possible combinations in a superposition doubles with every qubit added.",
+   "starter": "Two light switches can be in four combinations (off-off, off-on, on-off, on-on). How many combinations for three switches? For ten?",
+   "sc": [
+    "I can explain superposition using probabilities",
+    "I can explain what happens when a qubit is measured",
+    "I can calculate how many states n qubits can represent"
+   ],
+   "slides": [
+    {
+     "t": "Not 50:50 every time",
+     "b": [
+      "A qubit's superposition can be weighted: e.g. 80% chance of 0, 20% chance of 1",
+      "Each measurement gives just one answer",
+      "Repeat many times to see the probabilities",
+      "Quantum programs run many times and look at the pattern of results"
+     ]
+    },
+    {
+     "t": "Looking changes it",
+     "b": [
+      "Measuring a qubit forces it into 0 or 1",
+      "The superposition is lost: measuring again gives the same answer",
+      "So you can't just \"peek\" during a calculation",
+      "Even accidental \"measurement\" by the environment ruins calculations (lesson 4)"
+     ]
+    },
+    {
+     "t": "Doubling power",
+     "b": [
+      "1 qubit: a superposition of 2 states",
+      "2 qubits: 4 states; 3 qubits: 8 states",
+      "n qubits: 2ⁿ states",
+      "300 qubits: more states than there are atoms in the observable universe"
+     ],
+     "n": "Starter: 3 switches = 8; 10 switches = 1,024. The difference: ordinary switches are in ONE combination at a time."
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Superposition"
+    },
+    {
+     "t": "p",
+     "text": "**[[superposition]]** means a qubit is in a combination of 0 and 1 at the same time. The superposition doesn't have to be equal: a qubit could be set so that it has an 80% **[[probability]]** of giving 0 and a 20% probability of giving 1 when measured."
+    },
+    {
+     "t": "h",
+     "text": "Measurement"
+    },
+    {
+     "t": "p",
+     "text": "**[[measurement]]** means reading a qubit's value. When you measure, the qubit gives a definite answer, 0 or 1, and the superposition is gone. Measure it again and you get the same answer. Because of this, quantum programs are usually run many times (called \"shots\"), and the results are combined to see the pattern."
+    },
+    {
+     "t": "example",
+     "title": "Reading a weighted qubit",
+     "context": "A qubit is set to have a 75% chance of 0 and a 25% chance of 1. It's measured 100 times (resetting it each time).",
+     "steps": [
+      "Expected 0s: 75% of 100 = 75",
+      "Expected 1s: 25% of 100 = 25",
+      "The actual results will be close to this, e.g. 73 and 27, because each measurement is random."
+     ],
+     "answer": "About 75 zeros and 25 ones. One measurement on its own tells you very little; the pattern over many runs shows the probabilities."
+    },
+    {
+     "t": "h",
+     "text": "More qubits, many more states"
+    },
+    {
+     "t": "p",
+     "text": "Ordinary bits can only hold one combination at a time. Qubits in superposition can represent a combination of **all** possible values at once."
+    },
+    {
+     "t": "table",
+     "caption": "Qubits and states",
+     "head": [
+      "Number of qubits",
+      "Number of states in the superposition"
+     ],
+     "rows": [
+      [
+       "1",
+       "2"
+      ],
+      [
+       "2",
+       "4"
+      ],
+      [
+       "3",
+       "8"
+      ],
+      [
+       "10",
+       "1,024"
+      ],
+      [
+       "50",
+       "about 1 million billion"
+      ],
+      [
+       "300",
+       "more than the number of atoms in the observable universe"
+      ]
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "This doesn't mean a quantum computer simply \"tries every answer at once and picks the right one\". When you measure, you only get ONE answer. The clever part is designing the calculation so the right answers become more likely (lesson 3)."
+    },
+    {
+     "t": "act",
+     "title": "Weighted coins",
+     "mins": 20,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Use the spinner your teacher gives you: three-quarters is coloured \"0\" and one quarter \"1\".",
+      "Spin it 40 times and record each result.",
+      "Calculate the percentage of 0s and 1s and compare with the expected 75% and 25%.",
+      "Combine results with the whole class. Do they get closer to 75:25?"
+     ],
+     "q": [
+      {
+       "q": "Write your group's results and percentages.",
+       "a": "E.g. 31 zeros and 9 ones: 77.5% and 22.5%, close to 75% and 25%."
+      },
+      {
+       "q": "Why did combining the class results get closer to the expected probabilities?",
+       "a": "More measurements reduce the effect of random luck, so the pattern shows the true probabilities more clearly; this is why quantum programs are run many times."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What happens to a qubit's superposition when you measure it?",
+     "o": [
+      "It doubles",
+      "Nothing",
+      "It's lost: the qubit becomes 0 or 1",
+      "It turns into two qubits"
+     ],
+     "a": 2,
+     "why": "Measurement collapses it."
+    },
+    {
+     "q": "How many states can 4 qubits represent in superposition?",
+     "o": [
+      "16",
+      "32",
+      "4",
+      "8"
+     ],
+     "a": 0,
+     "why": "2⁴ = 16."
+    },
+    {
+     "q": "A qubit has a 90% chance of 0. Measured 100 times, about how many 1s?",
+     "o": [
+      "90",
+      "10",
+      "0",
+      "50"
+     ],
+     "a": 1,
+     "why": "10% of 100 = 10."
+    },
+    {
+     "q": "Why are quantum programs run many times?",
+     "o": [
+      "To warm up the computer",
+      "Each measurement gives just one random result, so you need the pattern",
+      "To use more electricity",
+      "Because they crash"
+     ],
+     "a": 1,
+     "why": "Repeated shots reveal probabilities."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what happens when a qubit in superposition is measured.",
+     "m": 2,
+     "a": "It gives a definite result of 0 or 1 (1), and the superposition is destroyed/it stays in that state (1)."
+    },
+    {
+     "q": "How many states can 6 qubits represent? Show your working.",
+     "m": 2,
+     "a": "2⁶ (1) = 64 (1)."
+    }
+   ],
+   "terms": [
+    "Superposition",
+    "Measurement",
+    "Probability"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Entanglement and interference",
+   "spec": "Describe entanglement and interference using simple models",
+   "summary": "Entangled qubits are linked so that measuring one tells you about the other, however far apart they are. Interference lets quantum algorithms make wrong answers cancel out and right answers add up, so the right answer becomes likely when measured.",
+   "starter": "Two magic dice always land on the same number, even in different rooms. How might you use dice like that?",
+   "sc": [
+    "I can describe entanglement using the linked-dice model",
+    "I can describe interference using waves",
+    "I can explain how interference helps quantum algorithms"
+   ],
+   "slides": [
+    {
+     "t": "Entanglement",
+     "b": [
+      "Two qubits can be entangled: their results are linked",
+      "Measure one and you instantly know the other's result",
+      "Works even if they're far apart",
+      "Einstein called it \"spooky action at a distance\""
+     ],
+     "n": "Entanglement doesn't let you send messages faster than light: each result on its own is random. Keep this as a note for able pupils."
+    },
+    {
+     "t": "Interference",
+     "b": [
+      "Waves can add up (crest + crest = bigger wave)",
+      "Or cancel out (crest + trough = flat water)",
+      "Quantum states behave like waves and can interfere",
+      "Noise-cancelling headphones use the same idea with sound"
+     ]
+    },
+    {
+     "t": "Steering towards the answer",
+     "b": [
+      "A quantum algorithm is a recipe of operations on qubits",
+      "It's designed so wrong answers cancel out",
+      "And right answers add up",
+      "So when you measure, you're very likely to get the right answer"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Entanglement"
+    },
+    {
+     "t": "p",
+     "text": "**[[entanglement]]** is a special link between qubits. When two qubits are entangled, their measurement results are connected: in a common setup, if one is measured as 0, the other will also be 0; if one is 1, the other is 1. Each individual result is random, but they always match, however far apart the qubits are. Albert Einstein found this so strange he called it \"spooky action at a distance\". Experiments have since confirmed it many times, and the 2022 Nobel Prize in Physics was awarded for this work."
+    },
+    {
+     "t": "h",
+     "text": "Interference"
+    },
+    {
+     "t": "p",
+     "text": "You've seen **[[interference]]** with waves. When two waves meet, they can **add up** (two crests make a bigger crest) or **cancel out** (a crest meets a trough and the water goes flat). Noise-cancelling headphones play sound waves that cancel out background noise."
+    },
+    {
+     "t": "p",
+     "text": "Quantum states behave like waves, so they can interfere too. This is the real secret of quantum computing."
+    },
+    {
+     "t": "h",
+     "text": "How quantum algorithms work"
+    },
+    {
+     "t": "p",
+     "text": "A **[[quantum algorithm]]** is a sequence of operations on qubits, designed so that:"
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "The qubits start in a superposition of many possible answers.",
+      "Clever operations make the wrong answers **interfere destructively** (cancel out).",
+      "The right answers **interfere constructively** (add up).",
+      "When the qubits are measured, the right answer is the most likely result."
+     ]
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "Superposition: many possibilities at once",
+      "Entanglement: qubits linked together",
+      "Interference: cancel wrong answers, boost right ones",
+      "Measurement: read out the (probably right) answer"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Wave maths",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Your teacher gives you strips showing waves as numbers (+2 for a crest, -2 for a trough, 0 for flat).",
+      "Add pairs of waves together, position by position. Which pairs cancel and which add up?",
+      "Play the \"quantum maze\": paths to wrong exits have +1 and -1 values that cancel; paths to the right exit add up.",
+      "Explain which exit the quantum algorithm would find."
+     ],
+     "q": [
+      {
+       "q": "What happened when you added a wave of +2, -2, +2, -2 to one of -2, +2, -2, +2?",
+       "a": "They cancelled out completely to 0, 0, 0, 0: destructive interference."
+      },
+      {
+       "q": "Explain in your own words how interference helps a quantum computer find the right answer.",
+       "a": "The algorithm arranges the calculation so the waves for wrong answers cancel each other out and the waves for the right answer add up, making the right answer the most likely result when we measure."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is entanglement?",
+     "o": [
+      "Two computers on a network",
+      "A link between qubits so their measurement results are connected",
+      "A type of error",
+      "Qubits getting tangled in wires"
+     ],
+     "a": 1,
+     "why": "Entangled results are linked."
+    },
+    {
+     "q": "What did Einstein call entanglement?",
+     "o": [
+      "The theory of everything",
+      "Quantum magic",
+      "Spooky action at a distance",
+      "Relativity"
+     ],
+     "a": 2,
+     "why": "He found it very strange."
+    },
+    {
+     "q": "What happens when a wave crest meets a wave trough of the same size?",
+     "o": [
+      "They cancel out",
+      "They make a bigger crest",
+      "They become a qubit",
+      "Nothing"
+     ],
+     "a": 0,
+     "why": "Destructive interference."
+    },
+    {
+     "q": "How do quantum algorithms use interference?",
+     "o": [
+      "They delete qubits",
+      "They avoid measurement",
+      "They make computers louder",
+      "Wrong answers cancel and right answers add up"
+     ],
+     "a": 3,
+     "why": "Interference steers to the answer."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe what is meant by entanglement.",
+     "m": 2,
+     "a": "Qubits are linked/connected (1) so that measuring one tells you the result of the other, even when they are far apart (1)."
+    },
+    {
+     "q": "Explain why a quantum computer doesn't simply \"try every answer at once\".",
+     "m": 3,
+     "a": "Measuring gives only one result (1); without interference you'd get a random answer (1); algorithms use interference to make the right answer likely (1)."
+    }
+   ],
+   "terms": [
+    "Entanglement",
+    "Interference",
+    "Quantum algorithm"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "Building a quantum computer",
+   "spec": "Describe how quantum computers are built and why errors and decoherence are major challenges",
+   "summary": "Qubits can be made from superconducting circuits, trapped ions, atoms or photons. They are extremely fragile: heat, vibration and stray signals cause decoherence and errors, so quantum computers need extreme cooling, isolation and error correction.",
+   "starter": "Why might a computer need to be colder than outer space?",
+   "sc": [
+    "I can describe two ways of building qubits",
+    "I can explain decoherence and why it causes errors",
+    "I can explain what quantum error correction is"
+   ],
+   "slides": [
+    {
+     "t": "Ways to make qubits",
+     "b": [
+      "Superconducting circuits: tiny loops of metal cooled close to absolute zero (Google, IBM)",
+      "Trapped ions: charged atoms held by electric fields and controlled with lasers (UK and US companies)",
+      "Neutral atoms and photons (particles of light) are other approaches",
+      "No one knows yet which approach will win"
+     ]
+    },
+    {
+     "t": "Colder than space",
+     "b": [
+      "Superconducting qubits work at about -273°C, just above absolute zero",
+      "That's colder than outer space",
+      "Huge \"chandelier\" fridges called dilution refrigerators keep them cold",
+      "Any heat or vibration can disturb the qubits"
+     ],
+     "n": "Absolute zero is -273.15°C. Outer space is about 2.7 K (-270°C); quantum chips run around 0.01-0.02 K."
+    },
+    {
+     "t": "The big problem: errors",
+     "b": [
+      "Decoherence: qubits lose their superposition when disturbed",
+      "Today's qubits make errors far more often than ordinary bits",
+      "Quantum error correction combines many physical qubits into one reliable \"logical\" qubit",
+      "In 2024 Google showed errors falling as more qubits were added, a key milestone"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Ways to build qubits"
+    },
+    {
+     "t": "table",
+     "caption": "Qubit technologies",
+     "head": [
+      "Type",
+      "What it is",
+      "Notes"
+     ],
+     "rows": [
+      [
+       "**[[superconducting qubit|Superconducting circuits]]**",
+       "Tiny electrical circuits with no electrical resistance",
+       "Used by Google and IBM; need extreme cold"
+      ],
+      [
+       "Trapped ions",
+       "Charged atoms held in place by electric fields and controlled by lasers",
+       "Very accurate; used by several UK and US companies"
+      ],
+      [
+       "Neutral atoms",
+       "Atoms held by beams of laser light",
+       "Can hold large numbers of qubits"
+      ],
+      [
+       "Photons",
+       "Particles of light",
+       "Can work at room temperature for some parts"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Colder than space"
+    },
+    {
+     "t": "p",
+     "text": "Superconducting qubits only work at temperatures a tiny fraction of a degree above **[[absolute zero]]** (-273.15 °C), the coldest possible temperature. That's colder than outer space. The qubits sit at the bottom of a **dilution refrigerator**, a tall gold-coloured structure often nicknamed \"the chandelier\"."
+    },
+    {
+     "t": "h",
+     "text": "Decoherence and errors"
+    },
+    {
+     "t": "p",
+     "text": "Qubits are incredibly fragile. Heat, vibration, stray electrical signals or even cosmic rays can disturb them, making them lose their superposition. This is called **[[decoherence]]**, and it causes errors. Today's qubits make errors far more often than ordinary computer bits, which limits how long a calculation can run."
+    },
+    {
+     "t": "h",
+     "text": "Quantum error correction"
+    },
+    {
+     "t": "p",
+     "text": "**[[quantum error correction]]** groups many fragile \"physical\" qubits together to make one more reliable \"logical\" qubit, constantly checking for and fixing errors. In 2024, Google announced a chip called Willow on which errors went **down** as more qubits were added to the error correction, an important step towards large, reliable quantum computers."
+    },
+    {
+     "t": "note",
+     "text": "Different companies count qubits differently, and more qubits isn't automatically better: the quality (how few errors they make) matters just as much."
+    },
+    {
+     "t": "act",
+     "title": "Quantum computer fact file",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Choose one qubit technology from the table.",
+      "Use the fact sheets your teacher provides (or approved websites) to research it.",
+      "Make a one-page fact file: how it works, one advantage, one challenge, one organisation working on it.",
+      "Compare with a pair who chose a different technology."
+     ],
+     "q": [
+      {
+       "q": "Write your fact file's advantage and challenge.",
+       "a": "E.g. Trapped ions: advantage, very accurate and qubits are identical; challenge, slower operations and hard to scale to very large numbers. Superconducting: advantage, fast and built like computer chips; challenge, needs extreme cooling and suffers decoherence."
+      },
+      {
+       "q": "Explain why decoherence is one of the biggest challenges in building quantum computers.",
+       "a": "Qubits are fragile and lose their superposition when disturbed by heat, vibration or stray signals, causing errors that ruin calculations before they can finish."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Why are superconducting quantum computers kept so cold?",
+     "o": [
+      "To save electricity",
+      "Heat disturbs the fragile qubits",
+      "To stop them catching fire",
+      "Because they're made of ice"
+     ],
+     "a": 1,
+     "why": "Cold reduces decoherence."
+    },
+    {
+     "q": "What is absolute zero?",
+     "o": [
+      "0 °C",
+      "The freezing point of water",
+      "The temperature of space",
+      "The coldest possible temperature, -273.15 °C"
+     ],
+     "a": 3,
+     "why": "Nothing can be colder."
+    },
+    {
+     "q": "What is decoherence?",
+     "o": [
+      "Entangling two qubits",
+      "A type of qubit",
+      "Qubits losing their quantum state because they are disturbed",
+      "Cooling a computer"
+     ],
+     "a": 2,
+     "why": "Disturbance causes errors."
+    },
+    {
+     "q": "What does quantum error correction do?",
+     "o": [
+      "Deletes errors from reports",
+      "Removes the need for cooling",
+      "Combines many physical qubits into a more reliable logical qubit",
+      "Makes qubits bigger"
+     ],
+     "a": 2,
+     "why": "It fights errors."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe two ways that qubits can be made.",
+     "m": 2,
+     "a": "Any two: superconducting circuits (1); trapped ions (1); neutral atoms (1); photons/particles of light (1)."
+    },
+    {
+     "q": "Explain why errors are a major problem for quantum computers and how scientists are tackling them.",
+     "m": 3,
+     "a": "Qubits are fragile/decoherence from heat, vibration etc. (1) causes frequent errors that ruin calculations (1); tackled by extreme cooling/isolation and quantum error correction combining many qubits (1)."
+    }
+   ],
+   "terms": [
+    "Superconducting qubit",
+    "Decoherence",
+    "Quantum error correction",
+    "Absolute zero"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "What could they do?",
+   "spec": "Evaluate which problems quantum computers could help with and which they cannot",
+   "summary": "Quantum computers could simulate molecules for new medicines and batteries, help with some optimisation problems, and break today's public-key encryption. They won't speed up everyday tasks, and many claims about them are hype.",
+   "starter": "Which would you rather have a quantum computer for: designing a new medicine, or editing your holiday photos?",
+   "sc": [
+    "I can describe three possible uses of quantum computers",
+    "I can explain the threat to encryption",
+    "I can spot exaggerated claims about quantum computing"
+   ],
+   "slides": [
+    {
+     "t": "Nature is quantum",
+     "b": [
+      "Molecules follow quantum rules, so ordinary computers struggle to simulate them",
+      "Quantum computers could model molecules exactly",
+      "New medicines, better batteries, greener fertilisers",
+      "This was Richard Feynman's original idea for quantum computers (1981)"
+     ]
+    },
+    {
+     "t": "Other possible uses",
+     "b": [
+      "Optimisation: finding the best option among huge numbers of choices (routes, schedules)",
+      "Some types of machine learning",
+      "Breaking RSA encryption (Shor's algorithm)",
+      "Searching unsorted data somewhat faster (Grover's algorithm)"
+     ]
+    },
+    {
+     "t": "Hype check",
+     "b": [
+      "Quantum computers won't make games, videos or web browsing faster",
+      "Most useful applications need bigger, more reliable machines than exist today",
+      "\"Quantum advantage\" claims are often for specially chosen problems",
+      "Ask: what problem, compared with what, and has it been checked?"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Simulating nature"
+    },
+    {
+     "t": "p",
+     "text": "Molecules and materials obey quantum physics, and simulating them exactly on an ordinary computer gets impossibly hard as they get bigger. In 1981, physicist Richard Feynman suggested: \"Nature isn't classical... if you want to make a simulation of nature, you'd better make it quantum mechanical.\" Quantum computers could one day help with:"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "designing new **medicines** by simulating how molecules interact",
+      "developing better **batteries** for electric cars and storing renewable energy",
+      "finding ways to make **fertiliser** using much less energy"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Optimisation and more"
+    },
+    {
+     "t": "p",
+     "text": "**[[optimisation]]** means finding the best solution among an enormous number of possibilities, such as the best routes for delivery vans or the best timetable for a school. Quantum computers may help with some optimisation problems, though researchers are still finding out how much. They could also speed up some kinds of searching and machine learning."
+    },
+    {
+     "t": "h",
+     "text": "The encryption threat"
+    },
+    {
+     "t": "p",
+     "text": "As you may have seen in the Encryption topic, a large, reliable quantum computer running **Shor's algorithm** could break RSA and similar encryption used across the internet. That's why governments and companies are already switching to post-quantum cryptography."
+    },
+    {
+     "t": "h",
+     "text": "Separating hype from reality"
+    },
+    {
+     "t": "p",
+     "text": "**[[quantum advantage]]** is when a quantum computer solves a problem faster than any ordinary computer could. Researchers have shown this for some carefully chosen test problems, but not yet for most useful real-world tasks."
+    },
+    {
+     "t": "table",
+     "caption": "Real or hype?",
+     "head": [
+      "Claim",
+      "Verdict"
+     ],
+     "rows": [
+      [
+       "\"Quantum computers will make your games load instantly\"",
+       "Hype: they don't speed up everyday tasks"
+      ],
+      [
+       "\"Quantum computers could help design new medicines\"",
+       "Promising: simulating molecules is a natural fit"
+      ],
+      [
+       "\"Quantum computers can solve any problem instantly\"",
+       "Hype: they only help with some problems"
+      ],
+      [
+       "\"A big quantum computer could break today's RSA encryption\"",
+       "Real concern: which is why post-quantum cryptography is being adopted"
+      ]
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "Be suspicious of adverts for \"quantum\" products like quantum water, quantum jewellery or quantum healing. These use the word to sound scientific but have nothing to do with quantum computing."
+    },
+    {
+     "t": "act",
+     "title": "Real or hype?",
+     "mins": 20,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Read the 10 headline cards about quantum computing (some real, some exaggerated, some nonsense).",
+      "Sort them into Real, Promising but not yet, and Hype.",
+      "For two \"hype\" headlines, rewrite them to be accurate."
+     ],
+     "q": [
+      {
+       "q": "Rewrite one hype headline accurately.",
+       "a": "E.g. \"Quantum computer will replace all laptops by 2030\" becomes \"Quantum computers may help scientists with some special problems, such as simulating molecules, but won't replace everyday computers.\""
+      },
+      {
+       "q": "Explain why simulating molecules is a good job for a quantum computer.",
+       "a": "Molecules follow quantum rules, so they're very hard for ordinary computers to simulate exactly, but a quantum computer works using the same rules and could model them naturally."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Why could quantum computers help design new medicines?",
+     "o": [
+      "They can test medicines on people",
+      "They make chemicals in the lab",
+      "They print pills",
+      "Molecules follow quantum rules, which quantum computers can simulate"
+     ],
+     "a": 3,
+     "why": "Simulation is a natural fit."
+    },
+    {
+     "q": "What is optimisation?",
+     "o": [
+      "Finding the best option among huge numbers of possibilities",
+      "Making a computer look nicer",
+      "Deleting files",
+      "Charging a battery"
+     ],
+     "a": 0,
+     "why": "E.g. best delivery routes."
+    },
+    {
+     "q": "Which algorithm could break RSA on a big quantum computer?",
+     "o": [
+      "Google search",
+      "Caesar cipher",
+      "Bubble sort",
+      "Shor's algorithm"
+     ],
+     "a": 3,
+     "why": "Shor's algorithm factors numbers."
+    },
+    {
+     "q": "Which claim is hype?",
+     "o": [
+      "Quantum computers will make all your games faster",
+      "Quantum computers could help simulate molecules",
+      "Quantum computers threaten RSA",
+      "Quantum computers are hard to build"
+     ],
+     "a": 0,
+     "why": "They don't speed up everyday tasks."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe three possible future uses of quantum computers.",
+     "m": 3,
+     "a": "Any three: simulating molecules for medicines/materials/batteries (1); optimisation, e.g. routes/schedules (1); breaking current encryption (1); faster searching/machine learning (1)."
+    },
+    {
+     "q": "A company advertises \"quantum water that boosts your brain\". Explain why you should be suspicious.",
+     "m": 2,
+     "a": "\"Quantum\" is used to sound scientific (1); it has nothing to do with quantum computing/there's no scientific evidence (1)."
+    }
+   ],
+   "terms": [
+    "Simulation",
+    "Optimisation",
+    "Quantum advantage"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "The quantum future",
+   "spec": "Describe how quantum technologies could change society and the careers they create",
+   "summary": "Quantum technology is more than computers: quantum sensors, clocks and secure communication are already being developed. The UK has a national strategy to become a leading quantum economy, creating new jobs in physics, engineering and computing.",
+   "starter": "If GPS stopped working tomorrow, what would go wrong? How else could a ship or plane know where it is?",
+   "sc": [
+    "I can describe quantum sensors and quantum communication",
+    "I can describe the UK's plans for quantum technology",
+    "I can identify careers in quantum technology"
+   ],
+   "slides": [
+    {
+     "t": "Beyond computers",
+     "b": [
+      "Quantum sensors measure tiny changes in gravity, magnetism and time",
+      "Quantum navigation could find your position without GPS",
+      "Quantum brain scanners could be wearable",
+      "Quantum key distribution sends encryption keys that reveal any eavesdropper"
+     ]
+    },
+    {
+     "t": "The UK's quantum plan",
+     "b": [
+      "UK National Quantum Strategy (2023): a 10-year plan to be a leading quantum economy",
+      "Billions of pounds of investment in research, companies and skills",
+      "National Quantum Computing Centre in Oxfordshire",
+      "Research hubs across UK universities, including Queen's University Belfast"
+     ],
+     "n": "Keep figures general; the strategy announced £2.5 billion of government investment over 10 years from 2024."
+    },
+    {
+     "t": "Quantum careers",
+     "b": [
+      "Physicists, engineers, programmers, mathematicians, chemists",
+      "Not just scientists: business, law, ethics and teaching too",
+      "Programming quantum computers uses languages like Python with libraries such as Qiskit",
+      "Subjects to keep: maths, physics, computing"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "More than computers"
+    },
+    {
+     "t": "p",
+     "text": "Quantum technology includes much more than computers:"
+    },
+    {
+     "t": "table",
+     "caption": "Quantum technologies",
+     "head": [
+      "Technology",
+      "What it does",
+      "Possible uses"
+     ],
+     "rows": [
+      [
+       "**[[quantum sensor|Quantum sensors]]**",
+       "Measure tiny changes in gravity, magnetic fields or time",
+       "Navigation without GPS, finding underground pipes, scanning the brain"
+      ],
+      [
+       "Quantum clocks",
+       "Keep time incredibly accurately",
+       "Better navigation and secure networks"
+      ],
+      [
+       "**[[quantum key distribution|Quantum key distribution]]** (QKD)",
+       "Sends encryption keys using single particles of light",
+       "Communication where any eavesdropping would be detected"
+      ],
+      [
+       "Quantum computers",
+       "Solve some problems using qubits",
+       "Chemistry, materials, optimisation"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "GPS signals can be jammed or blocked. Quantum navigation systems that sense tiny movements and changes in gravity have already been tested on ships and trains in the UK, and could keep planes and ships on course without satellites."
+    },
+    {
+     "t": "h",
+     "text": "The UK's quantum plans"
+    },
+    {
+     "t": "p",
+     "text": "The UK's **[[National Quantum Strategy]]** (2023) is a 10-year plan to make the UK a leading \"quantum-enabled economy\". It includes billions of pounds of investment in research, businesses and training, a National Quantum Computing Centre in Oxfordshire, and research hubs at universities across the UK."
+    },
+    {
+     "t": "h",
+     "text": "Careers"
+    },
+    {
+     "t": "p",
+     "text": "Quantum technology needs people with many skills. Physicists and engineers build the machines; programmers and mathematicians design quantum algorithms (often using Python with libraries such as Qiskit or Cirq); chemists and materials scientists find uses; and people in business, law, ethics and teaching help everyone understand and use the technology responsibly."
+    },
+    {
+     "t": "key",
+     "title": "Keep the door open",
+     "items": [
+      "Maths, physics and computing are the key subjects",
+      "Free online tools let you run simple programs on real quantum computers",
+      "Universities and companies run quantum summer schools and work experience"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Quantum 2045",
+     "mins": 25,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Imagine it's 2045 and large, reliable quantum computers and sensors exist.",
+      "Choose one area: health, transport, the environment or security.",
+      "Write a short news report describing one change quantum technology has made, one benefit and one problem it caused.",
+      "Share and vote for the most realistic report."
+     ],
+     "q": [
+      {
+       "q": "Write your headline and the key benefit and problem.",
+       "a": "E.g. \"Quantum-designed battery doubles electric car range\": benefit, cleaner transport; problem, old encryption used for car software had to be replaced, costing millions."
+      },
+      {
+       "q": "Which job in quantum technology most interests you, and which school subjects would help?",
+       "a": "Any reasoned answer, e.g. \"Quantum software developer: computing, maths and physics.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What can a quantum sensor do?",
+     "o": [
+      "Make phone calls",
+      "Store photos",
+      "Cool a computer",
+      "Measure tiny changes in gravity, magnetism or time"
+     ],
+     "a": 3,
+     "why": "Sensors measure tiny changes."
+    },
+    {
+     "q": "What is the UK National Quantum Strategy?",
+     "o": [
+      "A school timetable",
+      "A 10-year plan to make the UK a leading quantum economy",
+      "A type of qubit",
+      "A computer game"
+     ],
+     "a": 1,
+     "why": "It's a government plan."
+    },
+    {
+     "q": "How could quantum navigation help if GPS fails?",
+     "o": [
+      "It uses Wi-Fi",
+      "It uses paper maps",
+      "It senses movement and gravity to work out position without satellites",
+      "It can't help"
+     ],
+     "a": 2,
+     "why": "It doesn't need satellites."
+    },
+    {
+     "q": "Which school subjects are most useful for quantum careers?",
+     "o": [
+      "Maths, physics and computing",
+      "Art only",
+      "PE only",
+      "None"
+     ],
+     "a": 0,
+     "why": "These are the core subjects."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe one use of quantum technology other than quantum computers.",
+     "m": 2,
+     "a": "Names a technology, e.g. quantum sensors/clocks/QKD (1) and describes a use, e.g. navigation without GPS, brain scanning, secure communication (1)."
+    },
+    {
+     "q": "Discuss one benefit and one risk of quantum technology for society.",
+     "m": 3,
+     "a": "Benefit, e.g. new medicines/better batteries/navigation (1); risk, e.g. breaking encryption/cost/inequality between countries (1); explained or balanced point (1)."
+    }
+   ],
+   "terms": [
+    "Quantum sensor",
+    "Quantum key distribution",
+    "National Quantum Strategy"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Bit",
+   "def": "The smallest unit of data in an ordinary computer: always either 0 or 1.",
+   "alt": "Binary digit",
+   "page": "p01"
+  },
+  {
+   "term": "Qubit",
+   "def": "A quantum bit, which can be 0, 1 or a superposition of both until it is measured.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Quantum computer",
+   "def": "A computer that uses qubits and the rules of quantum physics to solve certain problems.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Classical computer",
+   "def": "An ordinary computer that uses bits which are always either 0 or 1.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Superposition",
+   "def": "When a qubit is in a combination of 0 and 1 at the same time.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Measurement",
+   "def": "Reading a qubit's value, which gives 0 or 1 and ends its superposition.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Probability",
+   "def": "How likely something is to happen, often given as a percentage.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Entanglement",
+   "def": "A link between qubits so that their measurement results are connected, even when far apart.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Interference",
+   "def": "When waves (or quantum states) add up or cancel out.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Quantum algorithm",
+   "def": "A step-by-step set of operations on qubits designed to solve a problem.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Superconducting qubit",
+   "def": "A qubit made from a tiny electrical circuit with no resistance, cooled close to absolute zero.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Absolute zero",
+   "def": "The coldest possible temperature: -273.15 °C.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Decoherence",
+   "def": "When qubits lose their quantum state because they are disturbed, causing errors.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Quantum error correction",
+   "def": "Combining many physical qubits to make a more reliable logical qubit that detects and fixes errors.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Optimisation",
+   "def": "Finding the best solution among a very large number of possibilities.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Simulation",
+   "def": "Using a computer to model how something in the real world behaves.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Quantum advantage",
+   "def": "When a quantum computer solves a problem faster than any ordinary computer could.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Quantum sensor",
+   "def": "A device that uses quantum effects to measure tiny changes in things like gravity, magnetism or time.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Quantum key distribution",
+   "def": "Sending encryption keys using single particles of light so that any eavesdropping can be detected.",
+   "alt": "QKD",
+   "page": "p06"
+  },
+  {
+   "term": "National Quantum Strategy",
+   "def": "The UK government's 10-year plan (2023) to make the UK a leading quantum technology economy.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}
