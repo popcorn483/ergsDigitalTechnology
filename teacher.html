@@ -2258,7 +2258,11 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   const classSel = (val, first) => { const s = el('select', { class: 'cl-mv', 'aria-label': 'Class' }); s.append(el('option', { value: '', text: first || 'Choose a class…' })); teachers().concat(['']).forEach(t => { const cs = CLASSES.filter(c => c.teacher === t); if (!cs.length) return; const g = el('optgroup', { label: t || 'No teacher' }); cs.forEach(c => g.append(el('option', { value: c.cls, text: c.cls + (c.course ? ' · ' + c.course : '') }))); s.append(g); }); s.value = classOf(val) ? ncl(val) : ''; return s; };
 
   function status(msg, kind) { const s = $('#ac-status'); s.hidden = !msg; s.className = 'tp-status' + (kind ? ' ' + kind : ''); s.textContent = msg || ''; }
-  const api = (params) => { const key = LS.get('teacher.actkey'), u = new URLSearchParams(Object.assign({ key }, params)); return fetch(URL0 + (URL0.includes('?') ? '&' : '?') + u, { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); };
+  /* a long request (a pasted class list, many emails) goes as a POST: Google refuses a web address that long ("Failed to fetch").
+     text/plain keeps it a simple request, so the browser needs no extra permission check. Needs Apps Script v34. */
+  const api = (params) => { const key = LS.get('teacher.actkey'), u = new URLSearchParams(Object.assign({ key }, params));
+    if (String(u).length > 1500) return fetch(URL0, { method: 'POST', cache: 'no-store', credentials: 'omit', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ kind: 'teacher', q: Object.assign({ key }, params) }) }).then(r => r.json());
+    return fetch(URL0 + (URL0.includes('?') ? '&' : '?') + u, { cache: 'no-store', credentials: 'omit' }).then(r => r.json()); };
   async function load() {
     const key = LS.get('teacher.actkey');
     $('#ac-keyrow').hidden = !!key; $('#ac-tools').hidden = !key;
@@ -2279,7 +2283,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const key = LS.get('teacher.actkey');
     {
       if (j.error === 'key') { LS.set('teacher.actkey', null); status('That key doesn’t match TEACHER_KEY in the Apps Script. Type it again.', 'warn'); $('#ac-keyrow').hidden = false; $('#ac-tools').hidden = true; return; }
-      ROLES = (j.roles && typeof j.roles === 'object') ? j.roles : {}; DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; CLASSES = Array.isArray(j.classes) ? j.classes : []; ZREQ = Array.isArray(j.zreqs) ? j.zreqs : []; LIVE = Array.isArray(j.live) ? j.live : []; status((+j.v || 0) < 19 ? 'Your Google Apps Script is an older version, so reports, set work, messages, the topic grid, “revising now”, page-quiz answers, PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 19 ? 'warn' : ''); $('#ac-view').hidden = false; if ((+j.v || 0) >= 19 && (+j.v || 0) < 20) status('Classes, teachers and zones need the latest Apps Script (v20): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); else if ((+j.v || 0) >= 20 && (+j.v || 0) < 29) status('Email sign-in, class lists and merging duplicates need the latest Apps Script (v29): paste in tools/pupil-activity.gs (keep your TEACHER_KEY and STAFF_PIN lines), then Deploy › Manage deployments › pencil › New version.', 'warn'); else if ((+j.v || 0) >= 29 && (+j.v || 0) < 33) status('Adding pupils, adding school emails and emailing PINs need the latest Apps Script (v33): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); view(); render(); requests();
+      ROLES = (j.roles && typeof j.roles === 'object') ? j.roles : {}; DATA = j.pupils || []; REQ = Array.isArray(j.requests) ? j.requests : []; CLASSES = Array.isArray(j.classes) ? j.classes : []; ZREQ = Array.isArray(j.zreqs) ? j.zreqs : []; LIVE = Array.isArray(j.live) ? j.live : []; status((+j.v || 0) < 19 ? 'Your Google Apps Script is an older version, so reports, set work, messages, the topic grid, “revising now”, page-quiz answers, PIN checks, quicker sign-in, email checks, View as pupil, page quiz marks, approving pupils, PINs and some details won’t work. Paste in the latest tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version (keep the same URL).' : '', (+j.v || 0) < 19 ? 'warn' : ''); $('#ac-view').hidden = false; if ((+j.v || 0) >= 19 && (+j.v || 0) < 20) status('Classes, teachers and zones need the latest Apps Script (v20): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); else if ((+j.v || 0) >= 20 && (+j.v || 0) < 29) status('Email sign-in, class lists and merging duplicates need the latest Apps Script (v29): paste in tools/pupil-activity.gs (keep your TEACHER_KEY and STAFF_PIN lines), then Deploy › Manage deployments › pencil › New version.', 'warn'); else if ((+j.v || 0) >= 29 && (+j.v || 0) < 34) status('Adding pupils, importing class lists, adding school emails and emailing PINs need the latest Apps Script (v34): paste in tools/pupil-activity.gs, then Deploy › Manage deployments › pencil › New version.', 'warn'); view(); render(); requests();
       const ml = j.mail; if ((+j.v || 0) >= 13 && ml && (ml.err || !ml.to)) status(`Emails aren’t being sent${ml.err ? ': ' + ml.err.replace(/^\S+\s/, '') : ''}. In the Apps Script, choose testEmail in the function list and press Run, allow “Send email as you”, then deploy a new version. ⋯ › Send a test email checks it.`, 'warn');
     }
   }
@@ -2605,14 +2609,14 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         for (let i = 0; i < rows.length; i += 60) { status(`Importing… ${Math.min(i + 60, rows.length)} of ${rows.length}`); const j = await api({ action: 'importlist', rows: JSON.stringify(rows.slice(i, i + 60)) }); if (!j || !j.ok) throw new Error(j && j.error || 'failed'); ['added', 'updated', 'linked', 'merged'].forEach(k => { tot[k] += j[k] || 0; }); tot.waiting = j.waiting || 0; }
         ta.value = ''; await load();
         status(`Class list imported: ${tot.added} new, ${tot.updated} updated. ${tot.linked} matched to an existing account${tot.merged ? ` (${tot.merged} duplicate account${tot.merged === 1 ? '' : 's'} merged)` : ''}. ${tot.waiting} not signed up yet: they get straight in when they do.`, 'ok');
-      } catch (e) { status('That didn’t work: ' + e.message + '. Check the Apps Script is v29 and deployed as a new version.', 'warn'); go.disabled = false; }
+      } catch (e) { status('That didn’t work: ' + e.message + '. Check the Apps Script is v34 and deployed as a new version.', 'warn'); go.disabled = false; }
     });
     const dd = el('button', { type: 'button', class: 'tp-mini', text: 'Merge duplicate accounts now' });
     dd.addEventListener('click', async () => {
       if (!confirm('Merge every set of accounts with the same name in the same year group into one? Their time, progress, test results and PINs are combined. Two accounts with different school emails are never merged.')) return;
       dd.disabled = true;
       try { const j = await api({ action: 'dedupe' }); if (!j || !j.ok) throw new Error(j && j.error || 'failed'); await load(); status(j.merged ? `Merged ${j.merged} duplicate account${j.merged === 1 ? '' : 's'} into ${j.groups} pupil${j.groups === 1 ? '' : 's'}.` : 'No duplicate accounts found.', 'ok'); }
-      catch (e) { status('That didn’t work: ' + e.message + '. Check the Apps Script is v29 and deployed as a new version.', 'warn'); }
+      catch (e) { status('That didn’t work: ' + e.message + '. Check the Apps Script is v34 and deployed as a new version.', 'warn'); }
       dd.disabled = false;
     });
     /* ADD SCHOOL EMAILS (Apps Script v32): just emails (jsmith123@c2ken.net); each finds its pupil by initial + surname, or makes one */
@@ -2629,7 +2633,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         const c = k => rows.filter(r => r.result === k).length;
         status(`${c('matched')} matched to existing pupils, ${c('created')} new pupil${c('created') === 1 ? '' : 's'} created${merged ? `, ${merged} duplicate account${merged === 1 ? '' : 's'} merged` : ''}.${c('ambiguous') ? ` ${c('ambiguous')} need you (see below).` : ''}`, c('ambiguous') || c('invalid') ? 'warn' : 'ok');
         return;
-      } catch (e) { status('That didn’t work: ' + e.message + '. Check the Apps Script is v32 and deployed as a new version.', 'warn'); ego.disabled = false; }
+      } catch (e) { status('That didn’t work: ' + e.message + '. Check the Apps Script is v34 and deployed as a new version.', 'warn'); ego.disabled = false; }
     });
     if (EMRES) { const rows = EMRES;
         const say = { matched: r => `Matched to ${r.name}`, created: r => `New pupil: ${r.name} (their full name is filled in when they first sign in)`, already: r => `Already set${r.name ? ' for ' + r.name : ''}`, ambiguous: r => `More than one pupil fits (${(r.names || []).join(', ')}): add it with Name & email`, invalid: () => 'Not a school email (first initial, surname, @c2ken.net)' };

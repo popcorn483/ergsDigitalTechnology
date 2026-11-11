@@ -39,7 +39,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 33;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 34;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -546,6 +546,9 @@ function load_(code) {
 function doPost_(e) {
   fresh_();
   let d; try { d = JSON.parse(e.postData.contents); } catch (x) { return out_({ ok: false }); }
+  /* (v34) the Teacher area sends big requests (a pasted class list, a list of emails) as a POST: a web address that long is
+     refused by Google before the script runs. Same key check and actions as the GET. */
+  if (d.kind === 'teacher' && d.q && typeof d.q === 'object') { const q = {}; Object.keys(d.q).forEach(k => { q[k] = String(d.q[k]); }); return doGet_({ parameter: q }); }
   if (d.kind === 'save') return out_(save_(String(d.code || '').toUpperCase(), d.data));
   if (d.kind === 'psave') { if (!okId(d.id)) return out_({ ok: false }); return out_(save_('P-' + resolve_(String(d.id), aliases_()), d.data)); }
   const s = Math.round(+d.s || 0), book = String(d.book || ''), name = clean_(d.name, 40);
