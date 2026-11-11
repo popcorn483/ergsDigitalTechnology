@@ -39,7 +39,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 32;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 33;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -543,7 +543,7 @@ function load_(code) {
   const r = saveRead_(code); if (!r) return { ok: false, error: 'code' };
   return { ok: true, updated: r.updated, data: r.data };
 }
-function doPost(e) {
+function doPost_(e) {
   fresh_();
   let d; try { d = JSON.parse(e.postData.contents); } catch (x) { return out_({ ok: false }); }
   if (d.kind === 'save') return out_(save_(String(d.code || '').toUpperCase(), d.data));
@@ -770,7 +770,11 @@ function staffMail_() {
 }
 /* the Teacher area: ?key=… gives one summary row per pupil; &action=merge|rename|delete changes them */
 const READS = { live: 1, detail: 1, report: 1, qstats: 1, work: 1, comps: 1, compimg: 1, tests: 1, testres: 1, pdata: 1, sendpin: 1 };   /* sendpin: emails go out without holding the lock (each PIN change takes it briefly) */   /* actions that only read */
-function doGet(e) {
+/* (v33) anything that goes wrong comes back as { ok:false, error } the Teacher area can show, instead of Google's error page
+   (which the browser reports only as "Failed to fetch"); the full error is also in Apps Script › Executions */
+function doGet(e) { try { return doGet_(e); } catch (err) { console.error('doGet', JSON.stringify((e && e.parameter) || {}).replace(/"(key|pin)":"[^"]*"/g, '"$1":"…"'), err && err.stack || err); return out_({ ok: false, error: 'the Apps Script hit an error: ' + (err && err.message || err) }); } }
+function doPost(e) { try { return doPost_(e); } catch (err) { console.error('doPost', err && err.stack || err); return out_({ ok: false, error: String(err && err.message || err) }); } }
+function doGet_(e) {
   fresh_();
   const q = (e && e.parameter) || {};
   if (q.action === 'load') return out_(load_(String(q.code || '').toUpperCase().trim()));   /* pupils: no key needed, just their save code */
