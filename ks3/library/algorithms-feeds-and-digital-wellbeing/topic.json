@@ -1,0 +1,1436 @@
+{
+ "title": "Algorithms, Feeds and Digital Wellbeing",
+ "summary": "What decides what you see online: how recommendation algorithms rank your feed, how they learn from your behaviour, how filter bubbles and rabbit holes form, how persuasive design competes for your attention, how to take control of your digital wellbeing, and how to design a fairer feed.",
+ "learn": [
+  "What recommendation algorithms are and how they rank feeds",
+  "How recommenders use data and techniques like collaborative filtering",
+  "How filter bubbles, echo chambers and rabbit holes form",
+  "How the attention economy and persuasive design shape our behaviour",
+  "How to look after your digital wellbeing and control your feeds",
+  "How laws and better design could make feeds fairer and safer"
+ ],
+ "temporary": false,
+ "intro": "Every time you open a video app or social feed, an algorithm has chosen what you see from millions of options, in a fraction of a second, based on everything you've done before. These recommendation systems are some of the most powerful algorithms in the world. In this topic you'll find out how they work, build a recommender yourself, explore how feeds can trap us in bubbles or pull us down rabbit holes, discover the design tricks that keep us scrolling, learn how to take back control, and design a feed that's fairer to its users.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "Who chooses your feed?",
+   "spec": "Explain what a recommendation algorithm is, compare chronological and ranked feeds, and describe the signals algorithms use",
+   "summary": "A recommendation algorithm chooses and orders content for each user. Most platforms use ranked feeds instead of showing posts in time order. They predict what you'll engage with using signals such as watch time, likes, shares, comments, follows and what similar people enjoyed.",
+   "starter": "Open any video app in your head. Why do you think the first video it shows you is that one?",
+   "sc": [
+    "I can explain what a recommendation algorithm does",
+    "I can compare chronological and ranked feeds",
+    "I can describe the signals algorithms use"
+   ],
+   "slides": [
+    {
+     "t": "The algorithm",
+     "b": [
+      "An algorithm is a set of steps to solve a problem",
+      "A recommendation algorithm chooses what to show each person",
+      "Huge scale: billions of posts, billions of users, decisions in milliseconds",
+      "Used for videos, music, shopping, news, games and adverts"
+     ]
+    },
+    {
+     "t": "Two kinds of feed",
+     "b": [
+      "Chronological feed: newest posts first, from accounts you follow",
+      "Ranked feed: an algorithm orders posts by what it predicts you'll engage with",
+      "\"For You\" feeds show content from accounts you don't follow",
+      "Most big platforms default to ranked feeds"
+     ]
+    },
+    {
+     "t": "What the algorithm watches",
+     "b": [
+      "Watch time: how long you watch, and whether you rewatch",
+      "Likes, comments, shares, saves, follows",
+      "What you skip or scroll past quickly",
+      "Your device, location, time of day, language, and what similar users like"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Recommendation algorithms"
+    },
+    {
+     "t": "p",
+     "text": "An **[[algorithm]]** is a precise set of steps to solve a problem. A **[[recommendation algorithm]]** (or recommender system) decides which content to show each person and in what order. Platforms such as TikTok, YouTube, Instagram, Spotify, Netflix and Amazon all use them. With billions of possible posts and billions of users, they must make each decision in milliseconds."
+    },
+    {
+     "t": "h",
+     "text": "Chronological vs ranked feeds"
+    },
+    {
+     "t": "table",
+     "caption": "Types of feed",
+     "head": [
+      "Feature",
+      "**[[chronological feed|Chronological feed]]**",
+      "**[[ranked feed|Ranked feed]]**"
+     ],
+     "rows": [
+      [
+       "Order",
+       "Newest first",
+       "Ordered by predicted interest"
+      ],
+      [
+       "Content from",
+       "Accounts you follow",
+       "Accounts you follow and accounts you don't (\"For You\")"
+      ],
+      [
+       "Who's in control?",
+       "Mostly you (who you follow)",
+       "Mostly the algorithm"
+      ],
+      [
+       "Advantages",
+       "Predictable; you won't miss recent posts from friends",
+       "Finds content you might like; can feel endless"
+      ],
+      [
+       "Disadvantages",
+       "Can be overwhelming; misses older good posts",
+       "Hard to understand; can push extreme or addictive content"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Signals"
+    },
+    {
+     "t": "p",
+     "text": "Algorithms predict **[[engagement]]**: how likely you are to interact with a post. They learn from signals:"
+    },
+    {
+     "t": "key",
+     "title": "Signals recommendation algorithms use",
+     "items": [
+      "Watch time and completion: did you watch to the end, or rewatch?",
+      "Interactions: likes, comments, shares, saves, follows",
+      "Negative signals: skipping, scrolling past, \"not interested\", reporting",
+      "Content information: hashtags, sounds, captions, what's in the image or video",
+      "Context: device, language, location, time of day",
+      "What similar users engaged with"
+     ]
+    },
+    {
+     "t": "note",
+     "text": "Watch time is one of the most powerful signals. Even if you don't like or comment, pausing on a video tells the algorithm you're interested."
+    },
+    {
+     "t": "act",
+     "title": "Feed detective",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Look at the two (fictional) feeds for \"Cara\": one chronological, one ranked.",
+      "Describe three differences.",
+      "For five posts in the ranked feed, suggest which signals made the algorithm show them.",
+      "Discuss: which feed would you prefer, and why?"
+     ],
+     "q": [
+      {
+       "q": "Describe three differences between the two feeds.",
+       "a": "E.g. the ranked feed includes posts from accounts Cara doesn't follow; posts are in a different order (not newest first); the ranked feed has more videos similar to ones she watched to the end."
+      },
+      {
+       "q": "Which signals might explain a football video appearing in Cara's ranked feed?",
+       "a": "She watched other football videos to the end, liked a team's post, people similar to her watched it, and it's trending in her location."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a recommendation algorithm?",
+     "o": [
+      "A list of passwords",
+      "A search engine only",
+      "A type of virus",
+      "An algorithm that chooses what content to show each person"
+     ],
+     "a": 3,
+     "why": "It personalises feeds."
+    },
+    {
+     "q": "How is a chronological feed ordered?",
+     "o": [
+      "Randomly",
+      "By predicted interest",
+      "Newest posts first",
+      "Alphabetically"
+     ],
+     "a": 2,
+     "why": "Time order."
+    },
+    {
+     "q": "Which is a signal algorithms use?",
+     "o": [
+      "Your shoe size",
+      "Watch time",
+      "The weather on Mars",
+      "Your exam results"
+     ],
+     "a": 1,
+     "why": "How long you watch."
+    },
+    {
+     "q": "What does engagement mean?",
+     "o": [
+      "A password",
+      "A type of feed",
+      "How much people interact with content",
+      "Getting married"
+     ],
+     "a": 2,
+     "why": "Likes, shares, watch time."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between a chronological feed and a ranked feed.",
+     "m": 2,
+     "a": "Chronological shows newest first from accounts you follow (1); ranked uses an algorithm to order by predicted interest/engagement (1)."
+    },
+    {
+     "q": "Describe three signals a video app might use to decide what to recommend.",
+     "m": 3,
+     "a": "Any three: watch time/completion (1); likes/comments/shares (1); skips/\"not interested\" (1); follows (1); content info (1); context (1); similar users (1)."
+    }
+   ],
+   "terms": [
+    "Algorithm",
+    "Recommendation algorithm",
+    "Ranked feed",
+    "Chronological feed",
+    "Engagement"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "How recommenders learn",
+   "spec": "Explain how recommender systems use data, collaborative filtering and content-based filtering to make predictions",
+   "summary": "Recommenders build a profile of each user from their behaviour. Content-based filtering recommends items similar to ones you liked. Collaborative filtering recommends what similar users liked. Modern systems use machine learning to predict engagement, then rank items by score. They improve with more data but face problems like the cold start.",
+   "starter": "If you told a friend your three favourite songs, how would they choose a fourth to recommend?",
+   "sc": [
+    "I can explain content-based filtering",
+    "I can explain collaborative filtering",
+    "I can describe how machine learning scores and ranks content"
+   ],
+   "slides": [
+    {
+     "t": "Two big ideas",
+     "b": [
+      "Content-based: \"You liked this, so here's something similar\"",
+      "Collaborative: \"People like you liked this\"",
+      "Most systems combine both",
+      "Machine learning predicts a score for every possible item"
+     ]
+    },
+    {
+     "t": "Scoring and ranking",
+     "b": [
+      "Step 1: find thousands of candidates",
+      "Step 2: predict how likely you are to engage with each one",
+      "Step 3: rank by score, mix in variety, remove anything against the rules",
+      "Step 4: learn from what you do next"
+     ]
+    },
+    {
+     "t": "Problems",
+     "b": [
+      "Cold start: new users or new posts have no data",
+      "Exploration: algorithms sometimes test new things on you",
+      "Popularity bias: popular content gets shown more and more",
+      "Feedback loops: what you're shown shapes what you click"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Building a profile"
+    },
+    {
+     "t": "p",
+     "text": "A recommender builds a **[[user profile]]** for each person: a record of what they've watched, liked, skipped, searched for and followed, along with information such as language and location. The more you use a platform, the more detailed the profile becomes."
+    },
+    {
+     "t": "h",
+     "text": "Two key techniques"
+    },
+    {
+     "t": "table",
+     "caption": "Recommendation techniques",
+     "head": [
+      "Technique",
+      "Idea",
+      "Example"
+     ],
+     "rows": [
+      [
+       "**[[content-based filtering|Content-based filtering]]**",
+       "Recommend items similar to ones you liked",
+       "You watched three cat videos, so here's another cat video"
+      ],
+      [
+       "**[[collaborative filtering|Collaborative filtering]]**",
+       "Recommend what similar users liked",
+       "People who liked the same songs as you also liked this band"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Collaborative filtering with three users",
+     "context": "Users rated films out of 5. Aoife: Film A 5, Film B 4, Film C ? Ben: Film A 5, Film B 5, Film C 5. Cian: Film A 1, Film B 2, Film C 1.",
+     "steps": [
+      "Aoife's ratings for A and B are very similar to Ben's, and very different from Cian's.",
+      "So Aoife is most similar to Ben.",
+      "Ben rated Film C 5."
+     ],
+     "answer": "The system predicts Aoife will like Film C and recommends it. Real systems do this with millions of users and items at once."
+    },
+    {
+     "t": "h",
+     "text": "Scoring and ranking"
+    },
+    {
+     "t": "p",
+     "text": "Modern recommenders use machine learning, trained on billions of interactions, to predict how likely you are to engage with each possible item."
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "**Candidate generation**: quickly find a few thousand items you might like from millions.",
+      "**Scoring**: predict how likely you are to watch, like or share each one.",
+      "**Ranking**: order by score, add variety, and filter out content that breaks the rules.",
+      "**Learning**: record what you actually do and update the model."
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Problems"
+    },
+    {
+     "t": "key",
+     "title": "Challenges for recommenders",
+     "items": [
+      "**[[cold start|Cold start]]**: new users and new posts have no history, so the system has to guess (often showing popular content)",
+      "**[[exploration|Exploration]]**: systems sometimes show you something new to test your interest; if you engage, you'll see more",
+      "Popularity bias: popular content gets recommended more, making it even more popular",
+      "Feedback loops: you can only click what you're shown, so the algorithm partly creates the interests it measures"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Human recommender",
+     "mins": 25,
+     "who": "Groups of 5",
+     "after": 2,
+     "steps": [
+      "Each person rates ten items (e.g. games, songs or snacks from the card list) from 1 to 5, leaving two blank.",
+      "Use collaborative filtering: find who in your group is most similar to you.",
+      "Predict your two blank ratings using that person's ratings.",
+      "Check how accurate the predictions were, then discuss when the method worked and when it failed."
+     ],
+     "q": [
+      {
+       "q": "Who was most similar to you, and how did you decide?",
+       "a": "The person whose ratings were closest to mine on the items we both rated, e.g. the smallest total difference between our scores."
+      },
+      {
+       "q": "When did the method fail, and why?",
+       "a": "E.g. when no one in the group was very similar to me, or when I have an unusual taste for one item; real systems use millions of users so they usually find closer matches."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is content-based filtering?",
+     "o": [
+      "Recommending items similar to ones you liked",
+      "Filtering coffee",
+      "Recommending what similar users liked",
+      "Blocking all content"
+     ],
+     "a": 0,
+     "why": "Similar items."
+    },
+    {
+     "q": "What is collaborative filtering?",
+     "o": [
+      "Recommending only new items",
+      "Recommending what similar users liked",
+      "Working in a group",
+      "Removing comments"
+     ],
+     "a": 1,
+     "why": "People like you."
+    },
+    {
+     "q": "What is the cold start problem?",
+     "o": [
+      "A frozen phone",
+      "A slow computer in winter",
+      "New users or posts have no data to base recommendations on",
+      "A type of virus"
+     ],
+     "a": 2,
+     "why": "No history yet."
+    },
+    {
+     "q": "Why do recommenders sometimes show you something new?",
+     "o": [
+      "By accident only",
+      "They never do",
+      "To explore and test your interests",
+      "To annoy you"
+     ],
+     "a": 2,
+     "why": "Exploration."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how collaborative filtering could recommend a song.",
+     "m": 3,
+     "a": "Finds users whose listening/ratings are similar to yours (1); looks at songs they liked that you haven't heard (1); recommends those songs to you (1)."
+    },
+    {
+     "q": "Explain what a feedback loop is in a recommender system.",
+     "m": 2,
+     "a": "You can only engage with what you're shown (1), so recommendations shape the data the algorithm learns from, reinforcing what it already shows (1)."
+    }
+   ],
+   "terms": [
+    "User profile",
+    "Content-based filtering",
+    "Collaborative filtering",
+    "Cold start",
+    "Exploration"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Bubbles and rabbit holes",
+   "spec": "Explain filter bubbles, echo chambers and rabbit holes, and evaluate their effects on individuals and society",
+   "summary": "Personalised feeds can create filter bubbles, where you mostly see content that matches your existing interests and views. Echo chambers happen when communities only hear views they agree with. Rabbit holes happen when recommendations lead step by step to more extreme content. The evidence is debated, but there are real risks, especially for young people.",
+   "starter": "If you only ever saw posts from people who agreed with you, how would your view of the world change?",
+   "sc": [
+    "I can explain filter bubbles and echo chambers",
+    "I can explain how rabbit holes can lead to more extreme content",
+    "I can evaluate the evidence and suggest ways to break out"
+   ],
+   "slides": [
+    {
+     "t": "Filter bubbles",
+     "b": [
+      "Personalisation means everyone sees a different internet",
+      "A filter bubble: you mostly see content matching your interests and views",
+      "You may not realise what you're missing",
+      "Search results, news feeds and videos can all be personalised"
+     ]
+    },
+    {
+     "t": "Echo chambers and rabbit holes",
+     "b": [
+      "Echo chamber: a group where everyone repeats the same views",
+      "Confirmation bias: we prefer information that agrees with us",
+      "Rabbit hole: each recommendation slightly more extreme than the last",
+      "Topics: diet and fitness, conspiracy theories, misogyny, violence"
+     ]
+    },
+    {
+     "t": "What's the evidence?",
+     "b": [
+      "Researchers disagree about how strong bubbles are",
+      "Many people still see a mix of views",
+      "But some users, especially young people, are shown harmful content quickly",
+      "Ofcom's rules now require platforms to tame algorithms for children"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Filter bubbles"
+    },
+    {
+     "t": "p",
+     "text": "Because feeds are personalised, two people can search for or scroll the same platform and see completely different things. A **[[filter bubble]]** is when algorithms mostly show you content that matches your existing interests and views, so you rarely see other perspectives, often without realising it."
+    },
+    {
+     "t": "h",
+     "text": "Echo chambers"
+    },
+    {
+     "t": "p",
+     "text": "An **[[echo chamber]]** is an online space where people mostly hear opinions that match their own, repeated and amplified. **[[confirmation bias|Confirmation bias]]** (our tendency to prefer information that agrees with what we already believe) makes echo chambers comfortable. Over time, groups can become more extreme and less understanding of others, a process called **[[polarisation]]**."
+    },
+    {
+     "t": "h",
+     "text": "Rabbit holes"
+    },
+    {
+     "t": "p",
+     "text": "A **[[rabbit hole]]** happens when recommendations lead you step by step towards more extreme content. Because algorithms are optimised for engagement, and shocking or emotional content often gets strong reactions, each recommendation can be a little more intense than the last."
+    },
+    {
+     "t": "table",
+     "caption": "How a rabbit hole might develop",
+     "head": [
+      "Step",
+      "What's recommended"
+     ],
+     "rows": [
+      [
+       "1",
+       "A video about healthy eating"
+      ],
+      [
+       "2",
+       "\"What I eat in a day\" videos from fitness influencers"
+      ],
+      [
+       "3",
+       "Extreme calorie-cutting challenges"
+      ],
+      [
+       "4",
+       "Content promoting dangerous eating habits"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Investigations have found that some young users were shown harmful content about self-harm, eating disorders or misogyny within minutes or hours of creating accounts, even without searching for it."
+    },
+    {
+     "t": "warn",
+     "text": "If your feed starts showing you content that makes you feel bad about yourself, scared or angry, it's not your fault, it's how the algorithm works. Use \"not interested\", take a break, reset your feed, and talk to a trusted adult."
+    },
+    {
+     "t": "h",
+     "text": "What's the evidence?"
+    },
+    {
+     "t": "p",
+     "text": "Researchers disagree about how strong filter bubbles are: many people still encounter a range of views, and people also choose their own bubbles by who they follow. But there's clear evidence that harmful content can be recommended to young people. In the UK, Ofcom's children's safety codes under the Online Safety Act (in force from July 2025) require platforms to configure their algorithms to filter the most harmful content out of children's feeds."
+    },
+    {
+     "t": "h",
+     "text": "Breaking out"
+    },
+    {
+     "t": "key",
+     "title": "Popping your bubble",
+     "items": [
+      "Follow people and sources with different views and backgrounds",
+      "Use \"not interested\" or \"show less\" on content you don't want",
+      "Search for topics directly rather than only relying on the feed",
+      "Check where information comes from and look for other sources",
+      "Use a chronological or \"following\" feed when available",
+      "Reset your recommendations if your feed has gone somewhere you don't like"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Bubble simulation",
+     "mins": 25,
+     "who": "Groups of 4",
+     "after": 4,
+     "steps": [
+      "Each pupil gets a different \"starting interest\" card and follows the recommendation flowchart for 8 rounds, picking the most \"engaging\" option each time.",
+      "Record the path you took and where you ended up.",
+      "Compare paths: how different were your final feeds? Did any become extreme?",
+      "Redesign one step of the flowchart to stop the rabbit hole."
+     ],
+     "q": [
+      {
+       "q": "Describe your path and where it ended.",
+       "a": "E.g. started with gaming tips, then gaming rage-compilations, then videos mocking other players, then content with hateful jokes: each step more extreme because it got more reactions."
+      },
+      {
+       "q": "How would you redesign the algorithm to stop the rabbit hole?",
+       "a": "E.g. add a variety rule (no more than 3 similar videos in a row), lower the score of content flagged as extreme, and give a \"you've watched a lot of this, want something different?\" prompt."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a filter bubble?",
+     "o": [
+      "Mostly seeing content that matches your existing interests and views",
+      "A soap bubble",
+      "A type of feed setting",
+      "A spam filter"
+     ],
+     "a": 0,
+     "why": "Personalisation's side effect."
+    },
+    {
+     "q": "What is an echo chamber?",
+     "o": [
+      "A room with an echo",
+      "A music app",
+      "A type of filter",
+      "A space where people mostly hear views they already agree with"
+     ],
+     "a": 3,
+     "why": "Repeated views."
+    },
+    {
+     "q": "What is confirmation bias?",
+     "o": [
+      "Confirming your email",
+      "Preferring information that agrees with what we already believe",
+      "A type of algorithm",
+      "A fact-check"
+     ],
+     "a": 1,
+     "why": "Human tendency."
+    },
+    {
+     "q": "What is a rabbit hole online?",
+     "o": [
+      "A broken link",
+      "A game",
+      "Recommendations leading step by step to more extreme content",
+      "A pet video"
+     ],
+     "a": 2,
+     "why": "Gradual escalation."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how a filter bubble could form.",
+     "m": 2,
+     "a": "Algorithm recommends content similar to what you engaged with (1); over time you mostly see one type of view/interest and miss others (1)."
+    },
+    {
+     "q": "\"Recommendation algorithms are bad for society.\" Discuss.",
+     "m": 4,
+     "a": "For: bubbles, rabbit holes, polarisation, harmful content (1-2); against: help find useful content, evidence debated, people choose too (1-2); conclusion (1). Max 4."
+    }
+   ],
+   "terms": [
+    "Filter bubble",
+    "Echo chamber",
+    "Rabbit hole",
+    "Polarisation",
+    "Confirmation bias"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "The attention economy",
+   "spec": "Explain the attention economy and identify persuasive design techniques used to keep people engaged",
+   "summary": "Many free apps make money from advertising, so they earn more when people spend more time on them. This is the attention economy. Designers use persuasive techniques such as infinite scroll, autoplay, notifications, streaks and variable rewards to keep users engaged. Understanding them helps you stay in control.",
+   "starter": "Why are most social media apps free? How do they make money?",
+   "sc": [
+    "I can explain the attention economy",
+    "I can identify persuasive design techniques",
+    "I can explain variable rewards and why they're powerful"
+   ],
+   "slides": [
+    {
+     "t": "You are the product?",
+     "b": [
+      "Most social apps are free to use",
+      "They make money from adverts",
+      "More time on the app = more adverts = more money",
+      "Your attention is what's being sold: the attention economy"
+     ]
+    },
+    {
+     "t": "Persuasive design",
+     "b": [
+      "Infinite scroll: no natural stopping point",
+      "Autoplay: the next video starts automatically",
+      "Notifications: pulling you back in",
+      "Streaks and badges: fear of losing progress"
+     ]
+    },
+    {
+     "t": "Variable rewards",
+     "b": [
+      "Pull-to-refresh is like a slot machine",
+      "Sometimes great content, sometimes nothing",
+      "Unpredictable rewards are especially hard to stop checking",
+      "Likes arrive at unpredictable times too"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "The attention economy"
+    },
+    {
+     "t": "p",
+     "text": "Most social media and video apps are free to use. They make money mainly by selling advertising, and the more time people spend on the app, the more adverts they see and the more data the company collects to target them. This is called the **[[attention economy]]**: companies compete for your time and attention, because attention is what they sell to advertisers."
+    },
+    {
+     "t": "h",
+     "text": "Persuasive design"
+    },
+    {
+     "t": "p",
+     "text": "**[[persuasive design|Persuasive design]]** uses psychology to influence what people do. It can be helpful (reminding you to drink water) or work against your interests (keeping you scrolling when you meant to sleep)."
+    },
+    {
+     "t": "table",
+     "caption": "Persuasive design techniques",
+     "head": [
+      "Technique",
+      "How it works",
+      "Effect"
+     ],
+     "rows": [
+      [
+       "**[[infinite scroll|Infinite scroll]]**",
+       "New content keeps loading; there's no end of the page",
+       "No natural stopping point"
+      ],
+      [
+       "Autoplay",
+       "The next video starts automatically",
+       "Watching continues without a decision"
+      ],
+      [
+       "Notifications",
+       "Alerts, often red badges, pull you back in",
+       "Interrupt other activities"
+      ],
+      [
+       "**[[streak|Streaks]]**",
+       "Count days in a row you've used the app",
+       "Fear of losing progress"
+      ],
+      [
+       "Likes and view counts",
+       "Public measures of popularity",
+       "Social comparison and checking for approval"
+      ],
+      [
+       "Short-form video",
+       "Very short clips, one after another",
+       "Lots of quick rewards; time passes quickly"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Variable rewards"
+    },
+    {
+     "t": "p",
+     "text": "A **[[variable reward]]** is a reward that comes unpredictably. Psychologists have found that unpredictable rewards are especially powerful at keeping people coming back, the same principle used in slot machines. Pull-to-refresh, notifications and likes work like this: sometimes there's something exciting, sometimes nothing, so you keep checking."
+    },
+    {
+     "t": "note",
+     "text": "Some former tech designers have spoken publicly about regretting features they helped create, such as infinite scroll and the like button, because of how they affect people's attention."
+    },
+    {
+     "t": "h",
+     "text": "Not all bad"
+    },
+    {
+     "t": "p",
+     "text": "Persuasive design can also help people build good habits: language-learning apps use streaks to encourage daily practice, and fitness apps use rewards to motivate exercise. The question is whether the design serves the user's goals or the company's."
+    },
+    {
+     "t": "act",
+     "title": "Design detectives",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Look at screenshots of four (fictional) apps.",
+      "Spot and label every persuasive design technique you can find.",
+      "For each technique, decide: does it mostly help the user or the company?",
+      "Suggest a \"humane\" alternative for the two most problematic techniques."
+     ],
+     "q": [
+      {
+       "q": "Which persuasive techniques did you find, and who do they mostly help?",
+       "a": "E.g. infinite scroll and autoplay (mostly the company: more time and adverts); streaks in a language app (mostly the user: encourages practice, but could cause stress); red notification badges (mostly the company)."
+      },
+      {
+       "q": "Suggest humane alternatives for two techniques.",
+       "a": "E.g. replace infinite scroll with \"You're all caught up\" after posts from the last two days; turn off autoplay by default with a \"Watch next?\" button; streaks with \"freeze\" days so missing one doesn't feel like failure."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is the attention economy?",
+     "o": [
+      "A bank",
+      "Companies competing for people's time and attention to sell advertising",
+      "Paying attention in class",
+      "Saving money"
+     ],
+     "a": 1,
+     "why": "Attention is the product."
+    },
+    {
+     "q": "What is infinite scroll?",
+     "o": [
+      "A bug",
+      "A very long scroll of paper",
+      "A type of algorithm",
+      "Content that keeps loading so there's no end"
+     ],
+     "a": 3,
+     "why": "No stopping point."
+    },
+    {
+     "q": "What is a variable reward?",
+     "o": [
+      "A reward that comes unpredictably",
+      "A fixed prize",
+      "A discount",
+      "A salary"
+     ],
+     "a": 0,
+     "why": "Like a slot machine."
+    },
+    {
+     "q": "How do most free social media apps make money?",
+     "o": [
+      "Advertising",
+      "Selling phones",
+      "Charging for every post",
+      "Government grants"
+     ],
+     "a": 0,
+     "why": "Ads pay for \"free\"."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why free apps want users to spend as much time as possible on them.",
+     "m": 2,
+     "a": "They earn money from adverts (1); more time means more ads seen/more data collected (1)."
+    },
+    {
+     "q": "Describe three persuasive design techniques used in apps.",
+     "m": 3,
+     "a": "Any three, with brief explanation: infinite scroll (1); autoplay (1); notifications (1); streaks (1); likes/variable rewards (1)."
+    }
+   ],
+   "terms": [
+    "Attention economy",
+    "Persuasive design",
+    "Infinite scroll",
+    "Variable reward",
+    "Streak"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Your digital wellbeing",
+   "spec": "Describe how technology use can affect wellbeing and apply strategies and tools to stay in control",
+   "summary": "Technology can support wellbeing through connection, creativity and learning, but some patterns of use can affect sleep, mood, concentration and self-esteem. What you do online and how you feel matter more than total screen time. Tools such as screen time limits, notification settings, feed controls and quiet hours help you stay in control.",
+   "starter": "How do you feel after an hour of scrolling compared with an hour of gaming with friends or making something?",
+   "sc": [
+    "I can describe positive and negative effects of technology on wellbeing",
+    "I can explain why what and how you use tech matters more than total time",
+    "I can use tools and habits to stay in control of my feeds"
+   ],
+   "slides": [
+    {
+     "t": "The good and the not-so-good",
+     "b": [
+      "Positive: connection, creativity, learning, support communities, fun",
+      "Not so good: poor sleep, comparison, distraction, feeling left out",
+      "Effects differ from person to person",
+      "How you feel afterwards is a useful guide"
+     ]
+    },
+    {
+     "t": "Quality not just quantity",
+     "b": [
+      "Active use (creating, chatting with friends) vs passive scrolling",
+      "Comparing yourself with edited, filtered posts",
+      "Screens before bed delay sleep",
+      "Notifications break concentration"
+     ]
+    },
+    {
+     "t": "Take control",
+     "b": [
+      "Screen time limits and app timers",
+      "Turn off non-essential notifications; use focus modes",
+      "Charge your phone outside your bedroom",
+      "Train your feed: \"not interested\", unfollow, mute, reset"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is digital wellbeing?"
+    },
+    {
+     "t": "p",
+     "text": "**[[digital wellbeing|Digital wellbeing]]** means using technology in a way that supports your physical and mental health. Technology isn't simply good or bad: it can help people connect, learn, create and find support, but some ways of using it can affect sleep, mood and concentration."
+    },
+    {
+     "t": "h",
+     "text": "Quality, not just quantity"
+    },
+    {
+     "t": "p",
+     "text": "Researchers increasingly agree that what you do online and how it makes you feel matter more than total **[[screen time]]** alone."
+    },
+    {
+     "t": "table",
+     "caption": "Different kinds of use",
+     "head": [
+      "Type of use",
+      "Examples",
+      "Often linked to"
+     ],
+     "rows": [
+      [
+       "Active and social",
+       "Chatting with friends, gaming together, making videos or music",
+       "Feeling connected and creative"
+      ],
+      [
+       "Passive",
+       "Endless scrolling, autoplay videos",
+       "Losing track of time; feeling flat"
+      ],
+      [
+       "Comparison-heavy",
+       "Looking at edited and filtered photos of others",
+       "Lower self-esteem"
+      ],
+      [
+       "Late at night",
+       "Scrolling in bed",
+       "Less and poorer sleep"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[social comparison|Social comparison]]** is when we judge ourselves against others. Online, we often compare our everyday lives with other people's best, edited and filtered moments, which can make us feel worse."
+    },
+    {
+     "t": "h",
+     "text": "Sleep"
+    },
+    {
+     "t": "p",
+     "text": "Using screens late at night can delay sleep: the content keeps your brain alert, notifications wake you, and it's easy to lose track of time. Teenagers need around 8-10 hours of sleep a night. Good **[[sleep hygiene]]** includes stopping screen use a while before bed and charging your phone outside your bedroom."
+    },
+    {
+     "t": "h",
+     "text": "Tools and habits"
+    },
+    {
+     "t": "key",
+     "title": "Staying in control",
+     "items": [
+      "Use built-in screen time tools (iPhone Screen Time, Android Digital Wellbeing) to see your usage and set app limits",
+      "Turn off non-essential notifications; use focus or \"do not disturb\" modes",
+      "Remove apps from your home screen or log out to add a pause before opening them",
+      "Train your feed: \"not interested\", unfollow or mute accounts that make you feel bad",
+      "Many apps now have teen accounts with time reminders, quiet hours and stricter content settings",
+      "Swap some passive scrolling for active things: making, moving, meeting friends"
+     ]
+    },
+    {
+     "t": "tip",
+     "text": "Try the \"how do I feel?\" check: after using an app, rate how you feel from 1 to 5. Over a week, you'll see which apps and activities leave you feeling better or worse."
+    },
+    {
+     "t": "act",
+     "title": "My tech balance plan",
+     "mins": 25,
+     "who": "Individual",
+     "after": 3,
+     "steps": [
+      "Estimate your daily screen time by activity (or check your phone's screen time tool at home).",
+      "Sort your activities into active, passive and comparison-heavy.",
+      "Do the \"how do I feel?\" rating for three apps or activities.",
+      "Write a personal plan with three changes, including at least one feed-control setting."
+     ],
+     "q": [
+      {
+       "q": "Which activities leave you feeling better or worse?",
+       "a": "A personal answer, e.g. \"Gaming with friends: better (4/5). Scrolling short videos before bed: worse (2/5), because I lose track of time and sleep later.\""
+      },
+      {
+       "q": "Write your three changes.",
+       "a": "E.g. charge my phone in the kitchen overnight; turn off notifications from two apps; press \"not interested\" on videos that make me feel bad and follow more creators I learn from."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is digital wellbeing?",
+     "o": [
+      "A fitness app",
+      "A brand of phone",
+      "Avoiding all technology",
+      "Using technology in a way that supports your health"
+     ],
+     "a": 3,
+     "why": "Healthy tech use."
+    },
+    {
+     "q": "What matters most for wellbeing, according to many researchers?",
+     "o": [
+      "Phone brand",
+      "What you do and how it makes you feel, not just total time",
+      "Only total hours",
+      "Wi-Fi speed"
+     ],
+     "a": 1,
+     "why": "Quality matters."
+    },
+    {
+     "q": "What is social comparison?",
+     "o": [
+      "Judging yourself against others",
+      "A type of feed",
+      "A school report",
+      "Comparing phone prices"
+     ],
+     "a": 0,
+     "why": "Can lower self-esteem."
+    },
+    {
+     "q": "Which habit helps sleep?",
+     "o": [
+      "Watching videos until you fall asleep",
+      "Scrolling in bed",
+      "Notifications on all night",
+      "Charging your phone outside your bedroom"
+     ],
+     "a": 3,
+     "why": "Better sleep hygiene."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe three ways teenagers can take control of their technology use.",
+     "m": 3,
+     "a": "Any three: screen time limits/app timers (1); turning off notifications/focus mode (1); charging phone outside bedroom (1); training feed/unfollowing (1); teen account settings (1)."
+    },
+    {
+     "q": "Explain why passive scrolling may affect wellbeing differently from active use.",
+     "m": 2,
+     "a": "Passive scrolling can lead to lost time/comparison/feeling flat (1); active use like chatting or creating can increase connection and creativity (1)."
+    }
+   ],
+   "terms": [
+    "Digital wellbeing",
+    "Screen time",
+    "Social comparison",
+    "Sleep hygiene"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "Designing fairer feeds",
+   "spec": "Describe how laws and design can make recommendation algorithms fairer and safer, and design an ethical feed",
+   "summary": "Governments are starting to regulate algorithms. The UK's Online Safety Act requires platforms to protect children from harmful content in their feeds, and EU law requires big platforms to explain their recommenders and offer a non-personalised option. Fairer feeds could give users more control and transparency, and optimise for wellbeing, not just engagement.",
+   "starter": "If you were in charge of a video app's algorithm, what would you want it to optimise for?",
+   "sc": [
+    "I can describe laws that regulate recommendation algorithms",
+    "I can explain transparency, user control and what algorithms optimise for",
+    "I can design an ethical feed and justify my choices"
+   ],
+   "slides": [
+    {
+     "t": "Rules for algorithms",
+     "b": [
+      "UK Online Safety Act: platforms must protect children from harmful content",
+      "Ofcom's codes: children's feeds must filter out the most harmful content",
+      "EU Digital Services Act: big platforms must explain recommenders and offer a non-profiled option",
+      "Some countries are setting minimum ages for social media"
+     ]
+    },
+    {
+     "t": "What should a feed optimise for?",
+     "b": [
+      "Engagement alone can reward outrage and extreme content",
+      "Alternatives: satisfaction, learning, connection, wellbeing",
+      "Ask users: \"Was this worth your time?\"",
+      "Balance relevance with variety and quality"
+     ]
+    },
+    {
+     "t": "Transparency and control",
+     "b": [
+      "Algorithmic transparency: explain why you're seeing something",
+      "User controls: choose topics, reset, chronological option",
+      "Independent audits of algorithms",
+      "Design with young people, not just for them"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Regulating algorithms"
+    },
+    {
+     "t": "p",
+     "text": "Governments are increasingly making rules for recommendation algorithms:"
+    },
+    {
+     "t": "table",
+     "caption": "Rules about feeds",
+     "head": [
+      "Law or rule",
+      "What it requires"
+     ],
+     "rows": [
+      [
+       "UK **[[Online Safety Act]]**",
+       "Platforms must assess and reduce risks of harm, especially to children"
+      ],
+      [
+       "Ofcom's children's safety codes (from July 2025)",
+       "Platforms must configure algorithms to filter the most harmful content out of children's feeds and let children give negative feedback"
+      ],
+      [
+       "EU Digital Services Act",
+       "Very large platforms must explain how recommenders work and offer at least one option not based on profiling"
+      ],
+      [
+       "Minimum age laws",
+       "Some countries, such as Australia, have set a minimum age of 16 for social media accounts"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Optimisation goals"
+    },
+    {
+     "t": "p",
+     "text": "Every recommender is built to maximise something: its **[[optimisation goal]]**. If a feed only optimises for engagement (time and interactions), it can end up rewarding outrage, shock and extreme content, because those get strong reactions. Alternatives include asking users whether content was worth their time, measuring long-term satisfaction, or balancing engagement with variety, quality and wellbeing."
+    },
+    {
+     "t": "h",
+     "text": "Transparency and control"
+    },
+    {
+     "t": "p",
+     "text": "**[[algorithmic transparency|Algorithmic transparency]]** means explaining how an algorithm works and why it made a decision, for example a \"Why am I seeing this?\" button. **[[user control|User control]]** means giving people real choices over their feeds."
+    },
+    {
+     "t": "key",
+     "title": "Features of a fairer feed",
+     "items": [
+      "\"Why am I seeing this?\" explanations",
+      "Choose topics you want more or less of",
+      "An easy chronological or \"following only\" option",
+      "Reset recommendations at any time",
+      "Variety rules to avoid rabbit holes",
+      "Time reminders and a natural end point",
+      "Stronger protections and age-appropriate defaults for under-18s",
+      "Independent audits to check for harm and bias"
+     ]
+    },
+    {
+     "t": "note",
+     "text": "Some platforms already offer some of these features, such as resetting your feed or choosing topics. A key question is whether they're easy to find and switched on by default."
+    },
+    {
+     "t": "act",
+     "title": "Feed redesign challenge",
+     "mins": 35,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Your team is redesigning the \"For You\" feed of a (fictional) video app used by 11-16 year olds.",
+      "Choose your optimisation goal and explain why.",
+      "Design at least four features for transparency, user control and wellbeing, sketching the screens.",
+      "Check your design against the Ofcom children's codes and pitch it to the class \"board\", explaining how the company can still make money."
+     ],
+     "q": [
+      {
+       "q": "What is your optimisation goal, and why?",
+       "a": "E.g. \"Videos rated 'worth my time' by users, balanced with variety. Engagement alone rewards extreme content; asking users measures real value.\""
+      },
+      {
+       "q": "Describe two of your features and how they help.",
+       "a": "E.g. a \"Why am I seeing this?\" button showing the main signals; a weekly \"feed check\" where users choose topics to see more or less of; after 30 minutes, a \"you're all caught up, want to keep going?\" screen."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does the UK Online Safety Act require platforms to do?",
+     "o": [
+      "Delete all algorithms",
+      "Make all apps free",
+      "Reduce the risk of harm, especially to children",
+      "Ban phones"
+     ],
+     "a": 2,
+     "why": "Protect users."
+    },
+    {
+     "q": "What is an optimisation goal?",
+     "o": [
+      "What a recommender is built to maximise",
+      "A type of feed",
+      "A password",
+      "A football target"
+     ],
+     "a": 0,
+     "why": "e.g. engagement."
+    },
+    {
+     "q": "What is algorithmic transparency?",
+     "o": [
+      "Making screens see-through",
+      "Explaining how an algorithm works and why it made a decision",
+      "Hiding algorithms",
+      "Deleting data"
+     ],
+     "a": 1,
+     "why": "\"Why am I seeing this?\""
+    },
+    {
+     "q": "What does the EU Digital Services Act require of very large platforms?",
+     "o": [
+      "Ban all feeds",
+      "Show only adverts",
+      "Charge users",
+      "Offer a recommender option not based on profiling"
+     ],
+     "a": 3,
+     "why": "User choice."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why optimising a feed only for engagement can cause problems.",
+     "m": 2,
+     "a": "Extreme/shocking/outrage content gets strong reactions (1), so the algorithm promotes it, leading to rabbit holes/harm/addictive use (1)."
+    },
+    {
+     "q": "Evaluate whether governments should regulate recommendation algorithms.",
+     "m": 4,
+     "a": "For: protect children, reduce harm, transparency (1-2); against/concerns: free speech, hard to enforce, innovation, user responsibility (1-2); conclusion (1). Max 4."
+    }
+   ],
+   "terms": [
+    "Online Safety Act",
+    "Algorithmic transparency",
+    "User control",
+    "Optimisation goal"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Algorithm",
+   "def": "A precise set of steps to solve a problem.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Recommendation algorithm",
+   "def": "An algorithm that chooses and orders content for each user.",
+   "alt": "Recommender system",
+   "page": "p01"
+  },
+  {
+   "term": "Chronological feed",
+   "def": "A feed that shows posts in time order, newest first.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Ranked feed",
+   "def": "A feed ordered by an algorithm's prediction of what you'll engage with.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Engagement",
+   "def": "How much people interact with content, such as watching, liking and sharing.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "User profile",
+   "def": "A record of a person's behaviour and information used to personalise content.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Content-based filtering",
+   "def": "Recommending items similar to ones a user has liked.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Collaborative filtering",
+   "def": "Recommending items that similar users have liked.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Cold start",
+   "def": "The problem of recommending to new users, or recommending new items, with no history.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Exploration",
+   "def": "When a recommender shows something new to test a user's interest.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Filter bubble",
+   "def": "When algorithms mostly show you content matching your existing interests and views.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Echo chamber",
+   "def": "An online space where people mostly hear opinions that match their own.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Confirmation bias",
+   "def": "The tendency to prefer information that agrees with what we already believe.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Polarisation",
+   "def": "Groups becoming more extreme and further apart in their views.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Rabbit hole",
+   "def": "When recommendations lead step by step to more extreme content.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Attention economy",
+   "def": "Companies competing for people's time and attention, often to sell advertising.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Persuasive design",
+   "def": "Design that uses psychology to influence what people do.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Infinite scroll",
+   "def": "A design where new content keeps loading so there's no end to the page.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Variable reward",
+   "def": "A reward that comes unpredictably, which makes people keep checking.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Streak",
+   "def": "A count of how many days in a row someone has used an app or done something.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Digital wellbeing",
+   "def": "Using technology in a way that supports physical and mental health.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Screen time",
+   "def": "The amount of time spent using devices with screens.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Social comparison",
+   "def": "Judging yourself against other people.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Sleep hygiene",
+   "def": "Habits that help you get good-quality sleep.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Online Safety Act",
+   "def": "A UK law requiring online platforms to reduce the risk of harm to users, especially children.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Optimisation goal",
+   "def": "What an algorithm is designed to maximise.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Algorithmic transparency",
+   "def": "Explaining how an algorithm works and why it made a decision.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "User control",
+   "def": "Giving people real choices over how a system works for them.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}

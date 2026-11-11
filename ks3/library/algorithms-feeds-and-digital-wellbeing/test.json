@@ -1,0 +1,1205 @@
+{
+ "title": "Algorithms, Feeds and Digital Wellbeing",
+ "q": [
+  {
+   "q": "What is an algorithm?",
+   "o": [
+    "A video",
+    "A type of phone",
+    "A social network",
+    "A precise set of steps to solve a problem"
+   ],
+   "a": 3,
+   "why": "Steps to follow.",
+   "p": "p01"
+  },
+  {
+   "q": "What does a recommendation algorithm do?",
+   "o": [
+    "Deletes posts",
+    "Chooses and orders content for each user",
+    "Writes posts",
+    "Charges phones"
+   ],
+   "a": 1,
+   "why": "Personalises feeds.",
+   "p": "p01"
+  },
+  {
+   "q": "Which uses recommendation algorithms?",
+   "o": [
+    "Paper books",
+    "Video, music and shopping apps",
+    "Light switches",
+    "Calculators"
+   ],
+   "a": 1,
+   "why": "Everywhere online.",
+   "p": "p01"
+  },
+  {
+   "q": "How is a chronological feed ordered?",
+   "o": [
+    "Alphabetically",
+    "Newest first",
+    "By predicted interest",
+    "Randomly"
+   ],
+   "a": 1,
+   "why": "Time order.",
+   "p": "p01"
+  },
+  {
+   "q": "How is a ranked feed ordered?",
+   "o": [
+    "Alphabetically",
+    "By file size",
+    "Newest first",
+    "By what the algorithm predicts you'll engage with"
+   ],
+   "a": 3,
+   "why": "Algorithm decides.",
+   "p": "p01"
+  },
+  {
+   "q": "What is a \"For You\" feed?",
+   "o": [
+    "A ranked feed including accounts you don't follow",
+    "A chronological feed",
+    "A list of your friends only",
+    "Your settings"
+   ],
+   "a": 0,
+   "why": "Algorithm-chosen.",
+   "p": "p01"
+  },
+  {
+   "q": "In which feed do you have more control over what you see?",
+   "o": [
+    "Ranked",
+    "Neither",
+    "Both the same",
+    "Chronological"
+   ],
+   "a": 3,
+   "why": "You choose who to follow.",
+   "p": "p01"
+  },
+  {
+   "q": "What is engagement?",
+   "o": [
+    "A wedding",
+    "A password",
+    "A login",
+    "How much people interact with content"
+   ],
+   "a": 3,
+   "why": "Likes, shares, watch time.",
+   "p": "p01"
+  },
+  {
+   "q": "Which is one of the strongest signals for video apps?",
+   "o": [
+    "Watch time",
+    "Your phone's colour",
+    "Your age in months",
+    "Battery level"
+   ],
+   "a": 0,
+   "why": "How long you watch.",
+   "p": "p01"
+  },
+  {
+   "q": "Which is a negative signal?",
+   "o": [
+    "Rewatching",
+    "Pressing \"not interested\"",
+    "Liking",
+    "Sharing"
+   ],
+   "a": 1,
+   "why": "Tells the algorithm to show less.",
+   "p": "p01"
+  },
+  {
+   "q": "What does pausing on a video tell the algorithm?",
+   "o": [
+    "That you're asleep",
+    "That you dislike it",
+    "That you're interested",
+    "Nothing"
+   ],
+   "a": 2,
+   "why": "Watch time counts.",
+   "p": "p01"
+  },
+  {
+   "q": "Why must recommenders be very fast?",
+   "o": [
+    "They choose from millions of items for billions of users in milliseconds",
+    "To save paper",
+    "They're lazy",
+    "They aren't fast"
+   ],
+   "a": 0,
+   "why": "Huge scale.",
+   "p": "p01"
+  },
+  {
+   "q": "Which is a contextual signal?",
+   "o": [
+    "Your favourite food",
+    "Your exam grade",
+    "Time of day",
+    "Your shoe size"
+   ],
+   "a": 2,
+   "why": "Context matters.",
+   "p": "p01"
+  },
+  {
+   "q": "What is a user profile in a recommender?",
+   "o": [
+    "A record of your behaviour used to personalise content",
+    "Your school report",
+    "Your password",
+    "Your profile picture only"
+   ],
+   "a": 0,
+   "why": "Built from your activity.",
+   "p": "p02"
+  },
+  {
+   "q": "What is content-based filtering?",
+   "o": [
+    "Recommending items similar to ones you liked",
+    "Recommending what similar users liked",
+    "Filtering water",
+    "Blocking content"
+   ],
+   "a": 0,
+   "why": "Similar items.",
+   "p": "p02"
+  },
+  {
+   "q": "What is collaborative filtering?",
+   "o": [
+    "Recommending similar items",
+    "Group homework",
+    "Recommending what similar users liked",
+    "Removing comments"
+   ],
+   "a": 2,
+   "why": "People like you.",
+   "p": "p02"
+  },
+  {
+   "q": "\"People who bought this also bought...\" is an example of...",
+   "o": [
+    "a cold start",
+    "a chronological feed",
+    "collaborative filtering",
+    "content-based filtering"
+   ],
+   "a": 2,
+   "why": "Based on other users.",
+   "p": "p02"
+  },
+  {
+   "q": "\"Because you watched a cat video, here's another cat video\" is...",
+   "o": [
+    "random",
+    "chronological",
+    "collaborative filtering",
+    "content-based filtering"
+   ],
+   "a": 3,
+   "why": "Based on the item.",
+   "p": "p02"
+  },
+  {
+   "q": "Aoife and Ben rate films similarly. Ben loved Film C. What will the system predict?",
+   "o": [
+    "Aoife will like Film C",
+    "Ben will hate Film C",
+    "Aoife will hate Film C",
+    "Nothing"
+   ],
+   "a": 0,
+   "why": "Similar users.",
+   "p": "p02"
+  },
+  {
+   "q": "What is candidate generation?",
+   "o": [
+    "Quickly finding a few thousand items you might like",
+    "Deleting items",
+    "Writing posts",
+    "Electing a leader"
+   ],
+   "a": 0,
+   "why": "First step of recommending.",
+   "p": "p02"
+  },
+  {
+   "q": "What happens in the scoring step?",
+   "o": [
+    "Predicting how likely you are to engage with each item",
+    "Counting goals",
+    "Deleting items",
+    "Rating the user"
+   ],
+   "a": 0,
+   "why": "Machine learning predictions.",
+   "p": "p02"
+  },
+  {
+   "q": "What happens after you interact with a recommendation?",
+   "o": [
+    "The system records it and learns",
+    "Nothing",
+    "Your account is deleted",
+    "The video is removed"
+   ],
+   "a": 0,
+   "why": "Continuous learning.",
+   "p": "p02"
+  },
+  {
+   "q": "What is the cold start problem?",
+   "o": [
+    "No data for new users or new items",
+    "A winter virus",
+    "A slow phone",
+    "A frozen screen"
+   ],
+   "a": 0,
+   "why": "No history.",
+   "p": "p02"
+  },
+  {
+   "q": "What do systems often show new users?",
+   "o": [
+    "Only adverts",
+    "Random errors",
+    "Nothing",
+    "Popular content"
+   ],
+   "a": 3,
+   "why": "A safe guess.",
+   "p": "p02"
+  },
+  {
+   "q": "What is exploration in a recommender?",
+   "o": [
+    "Searching",
+    "Deleting old content",
+    "Exploring a map",
+    "Showing something new to test your interest"
+   ],
+   "a": 3,
+   "why": "Testing new interests.",
+   "p": "p02"
+  },
+  {
+   "q": "What is popularity bias?",
+   "o": [
+    "A type of filter",
+    "Popular content gets recommended more, becoming even more popular",
+    "A fair system",
+    "Liking popular people"
+   ],
+   "a": 1,
+   "why": "Rich get richer.",
+   "p": "p02"
+  },
+  {
+   "q": "What is a feedback loop in recommenders?",
+   "o": [
+    "What you're shown shapes what you click, which shapes what you're shown",
+    "A microphone squeal",
+    "A bug report",
+    "A survey"
+   ],
+   "a": 0,
+   "why": "Self-reinforcing.",
+   "p": "p02"
+  },
+  {
+   "q": "What technology do modern recommenders use to predict engagement?",
+   "o": [
+    "Machine learning",
+    "Paper lists",
+    "Dice",
+    "Calculators"
+   ],
+   "a": 0,
+   "why": "Trained on huge datasets.",
+   "p": "p02"
+  },
+  {
+   "q": "What is a filter bubble?",
+   "o": [
+    "A bath toy",
+    "A feed setting",
+    "Mostly seeing content that matches your views and interests",
+    "A spam filter"
+   ],
+   "a": 2,
+   "why": "Personalisation side effect.",
+   "p": "p03"
+  },
+  {
+   "q": "Why might you not notice you're in a filter bubble?",
+   "o": [
+    "Bubbles are colourful",
+    "You always notice",
+    "You don't see what's been left out",
+    "Algorithms tell you"
+   ],
+   "a": 2,
+   "why": "Invisible filtering.",
+   "p": "p03"
+  },
+  {
+   "q": "What is an echo chamber?",
+   "o": [
+    "A space where people mostly hear views they already agree with",
+    "A music genre",
+    "A cave",
+    "A type of algorithm"
+   ],
+   "a": 0,
+   "why": "Repeated views.",
+   "p": "p03"
+  },
+  {
+   "q": "What is confirmation bias?",
+   "o": [
+    "Preferring information that agrees with what we believe",
+    "Confirming your email address",
+    "A type of filter",
+    "Fact-checking"
+   ],
+   "a": 0,
+   "why": "Human tendency.",
+   "p": "p03"
+  },
+  {
+   "q": "What is polarisation?",
+   "o": [
+    "Groups becoming more extreme and further apart",
+    "Wearing sunglasses",
+    "Magnets",
+    "Ice melting"
+   ],
+   "a": 0,
+   "why": "Division.",
+   "p": "p03"
+  },
+  {
+   "q": "What is a rabbit hole online?",
+   "o": [
+    "A pet video",
+    "A broken link",
+    "A game level",
+    "Recommendations leading step by step to more extreme content"
+   ],
+   "a": 3,
+   "why": "Gradual escalation.",
+   "p": "p03"
+  },
+  {
+   "q": "Why can engagement-based algorithms push extreme content?",
+   "o": [
+    "Algorithms prefer it on purpose",
+    "Extreme content is always popular with everyone",
+    "Shocking content often gets strong reactions",
+    "They can't"
+   ],
+   "a": 2,
+   "why": "Reactions boost scores.",
+   "p": "p03"
+  },
+  {
+   "q": "What did investigations find about some new young users' feeds?",
+   "o": [
+    "Feeds were empty",
+    "Feeds showed only homework",
+    "Harmful content appeared quickly without searching",
+    "Feeds were always safe"
+   ],
+   "a": 2,
+   "why": "Real risks.",
+   "p": "p03"
+  },
+  {
+   "q": "Do all researchers agree that filter bubbles are very strong?",
+   "o": [
+    "Bubbles don't exist at all",
+    "Nobody has studied it",
+    "Yes, completely",
+    "No, the evidence is debated"
+   ],
+   "a": 3,
+   "why": "Nuanced evidence.",
+   "p": "p03"
+  },
+  {
+   "q": "What do Ofcom's children's codes require of algorithms?",
+   "o": [
+    "Nothing",
+    "Remove all videos",
+    "Filter the most harmful content out of children's feeds",
+    "Show more adverts"
+   ],
+   "a": 2,
+   "why": "Protect children.",
+   "p": "p03"
+  },
+  {
+   "q": "When did Ofcom's children's safety codes come into force?",
+   "o": [
+    "July 2025",
+    "July 2035",
+    "July 2005",
+    "They haven't"
+   ],
+   "a": 0,
+   "why": "Under the Online Safety Act.",
+   "p": "p03"
+  },
+  {
+   "q": "Which helps pop your filter bubble?",
+   "o": [
+    "Never searching",
+    "Only following people who agree with you",
+    "Turning off all settings",
+    "Following sources with different views"
+   ],
+   "a": 3,
+   "why": "Seek variety.",
+   "p": "p03"
+  },
+  {
+   "q": "What should you do if your feed makes you feel bad?",
+   "o": [
+    "Keep scrolling",
+    "Share it",
+    "Use \"not interested\", take a break, reset and talk to someone",
+    "Blame yourself"
+   ],
+   "a": 2,
+   "why": "Take control.",
+   "p": "p03"
+  },
+  {
+   "q": "Which is a way to see posts in time order on many apps?",
+   "o": [
+    "Restart the phone",
+    "Turn off Wi-Fi",
+    "Choose a \"Following\" or chronological option",
+    "Delete the app"
+   ],
+   "a": 2,
+   "why": "Less algorithmic.",
+   "p": "p03"
+  },
+  {
+   "q": "What is the attention economy?",
+   "o": [
+    "A school rule",
+    "Companies competing for your attention to sell advertising",
+    "A savings account",
+    "A bank"
+   ],
+   "a": 1,
+   "why": "Attention is valuable.",
+   "p": "p04"
+  },
+  {
+   "q": "How do most free social apps make money?",
+   "o": [
+    "Advertising",
+    "Selling music",
+    "Charging per post",
+    "Selling phones"
+   ],
+   "a": 0,
+   "why": "Ads.",
+   "p": "p04"
+  },
+  {
+   "q": "Why do free apps want you to stay longer?",
+   "o": [
+    "They don't",
+    "More time means more adverts and more data",
+    "They're lonely",
+    "It's the law"
+   ],
+   "a": 1,
+   "why": "Business model.",
+   "p": "p04"
+  },
+  {
+   "q": "What is persuasive design?",
+   "o": [
+    "A logo",
+    "A colour scheme",
+    "Design that uses psychology to influence behaviour",
+    "A type of font"
+   ],
+   "a": 2,
+   "why": "Influences actions.",
+   "p": "p04"
+  },
+  {
+   "q": "What is infinite scroll?",
+   "o": [
+    "A bug",
+    "A scroll bar",
+    "Content keeps loading so there's no end",
+    "An ancient scroll"
+   ],
+   "a": 2,
+   "why": "No stopping point.",
+   "p": "p04"
+  },
+  {
+   "q": "What does autoplay do?",
+   "o": [
+    "Charges the phone",
+    "Turns the phone on",
+    "Starts the next video automatically",
+    "Plays music at night"
+   ],
+   "a": 2,
+   "why": "Removes a decision point.",
+   "p": "p04"
+  },
+  {
+   "q": "Why do notifications often use red badges?",
+   "o": [
+    "Red is calming",
+    "To grab attention and pull you back in",
+    "To save battery",
+    "It's random"
+   ],
+   "a": 1,
+   "why": "Urgency.",
+   "p": "p04"
+  },
+  {
+   "q": "What is a streak?",
+   "o": [
+    "A count of days in a row you've used an app",
+    "A type of filter",
+    "A fast run",
+    "A stripe of paint"
+   ],
+   "a": 0,
+   "why": "Fear of losing progress.",
+   "p": "p04"
+  },
+  {
+   "q": "What is a variable reward?",
+   "o": [
+    "A reward that comes unpredictably",
+    "A fixed prize",
+    "A price",
+    "A badge you always get"
+   ],
+   "a": 0,
+   "why": "Slot-machine effect.",
+   "p": "p04"
+  },
+  {
+   "q": "Which is like a slot machine?",
+   "o": [
+    "A calculator",
+    "Pull-to-refresh",
+    "A light switch",
+    "A paper book"
+   ],
+   "a": 1,
+   "why": "Unpredictable results.",
+   "p": "p04"
+  },
+  {
+   "q": "Why are variable rewards so powerful?",
+   "o": [
+    "They aren't",
+    "They're boring",
+    "They're always big",
+    "Unpredictability makes people keep checking"
+   ],
+   "a": 3,
+   "why": "Psychology.",
+   "p": "p04"
+  },
+  {
+   "q": "Which is a helpful use of persuasive design?",
+   "o": [
+    "Fake urgency",
+    "Language app streaks encouraging daily practice",
+    "Infinite scroll at 2am",
+    "Hidden costs"
+   ],
+   "a": 1,
+   "why": "Serves the user's goals.",
+   "p": "p04"
+  },
+  {
+   "q": "What question helps judge persuasive design?",
+   "o": [
+    "Is it expensive?",
+    "Is it colourful?",
+    "Is it new?",
+    "Does it serve the user's goals or the company's?"
+   ],
+   "a": 3,
+   "why": "Whose interests?",
+   "p": "p04"
+  },
+  {
+   "q": "Which is a humane alternative to infinite scroll?",
+   "o": [
+    "More autoplay",
+    "Hiding the time",
+    "Even faster loading",
+    "A \"You're all caught up\" message"
+   ],
+   "a": 3,
+   "why": "Natural end point.",
+   "p": "p04"
+  },
+  {
+   "q": "How do public like counts affect people?",
+   "o": [
+    "They encourage comparison and checking for approval",
+    "They have no effect",
+    "They make everyone happy",
+    "They protect privacy"
+   ],
+   "a": 0,
+   "why": "Social pressure.",
+   "p": "p04"
+  },
+  {
+   "q": "What is digital wellbeing?",
+   "o": [
+    "Using technology in a way that supports your health",
+    "Never using technology",
+    "A Wi-Fi setting",
+    "A brand"
+   ],
+   "a": 0,
+   "why": "Healthy tech use.",
+   "p": "p05"
+  },
+  {
+   "q": "Which is a positive effect of technology?",
+   "o": [
+    "Missing homework",
+    "Connecting with friends and support communities",
+    "Constant comparison",
+    "Losing sleep"
+   ],
+   "a": 1,
+   "why": "Tech can help.",
+   "p": "p05"
+  },
+  {
+   "q": "What matters most for wellbeing, according to many researchers?",
+   "o": [
+    "Phone brand",
+    "Only total screen time",
+    "What you do and how it makes you feel",
+    "Number of apps"
+   ],
+   "a": 2,
+   "why": "Quality matters.",
+   "p": "p05"
+  },
+  {
+   "q": "Which is active use?",
+   "o": [
+    "Watching without interest",
+    "Making a video with friends",
+    "Autoplay videos",
+    "Endless scrolling"
+   ],
+   "a": 1,
+   "why": "Creating and connecting.",
+   "p": "p05"
+  },
+  {
+   "q": "Which is passive use?",
+   "o": [
+    "Endless scrolling",
+    "Coding a game",
+    "Chatting with a friend",
+    "Making music"
+   ],
+   "a": 0,
+   "why": "Consuming without purpose.",
+   "p": "p05"
+  },
+  {
+   "q": "What is social comparison?",
+   "o": [
+    "A school test",
+    "Judging yourself against others",
+    "A feed type",
+    "Comparing prices"
+   ],
+   "a": 1,
+   "why": "Often against edited posts.",
+   "p": "p05"
+  },
+  {
+   "q": "Why can comparison online be unfair?",
+   "o": [
+    "People post edited, filtered best moments",
+    "It isn't",
+    "Everyone posts honestly",
+    "Photos are never edited"
+   ],
+   "a": 0,
+   "why": "Highlight reels.",
+   "p": "p05"
+  },
+  {
+   "q": "How many hours of sleep do teenagers need?",
+   "o": [
+    "About 2",
+    "About 14",
+    "About 4",
+    "About 8-10"
+   ],
+   "a": 3,
+   "why": "Sleep matters.",
+   "p": "p05"
+  },
+  {
+   "q": "Why can screens before bed affect sleep?",
+   "o": [
+    "Screens are cold",
+    "Phones are heavy",
+    "They don't",
+    "Content keeps your brain alert and you lose track of time"
+   ],
+   "a": 3,
+   "why": "Delays sleep.",
+   "p": "p05"
+  },
+  {
+   "q": "What is sleep hygiene?",
+   "o": [
+    "Washing your pillow",
+    "A sleep app",
+    "Habits that help you sleep well",
+    "Sleeping in class"
+   ],
+   "a": 2,
+   "why": "Good habits.",
+   "p": "p05"
+  },
+  {
+   "q": "Which habit supports good sleep?",
+   "o": [
+    "Gaming until 2am",
+    "Charging your phone outside your bedroom",
+    "Notifications on all night",
+    "Scrolling in bed"
+   ],
+   "a": 1,
+   "why": "Better rest.",
+   "p": "p05"
+  },
+  {
+   "q": "Which tool shows your phone usage on iPhone?",
+   "o": [
+    "Calculator",
+    "File Explorer",
+    "Task Manager",
+    "Screen Time"
+   ],
+   "a": 3,
+   "why": "Built-in tool.",
+   "p": "p05"
+  },
+  {
+   "q": "Which tool shows usage on Android?",
+   "o": [
+    "Clock",
+    "Screen Saver",
+    "Digital Wellbeing",
+    "Notepad"
+   ],
+   "a": 2,
+   "why": "Built-in tool.",
+   "p": "p05"
+  },
+  {
+   "q": "What does turning off non-essential notifications do?",
+   "o": [
+    "Nothing",
+    "Turns off your phone",
+    "Reduces interruptions",
+    "Deletes apps"
+   ],
+   "a": 2,
+   "why": "Better focus.",
+   "p": "p05"
+  },
+  {
+   "q": "Which is a feed-control action?",
+   "o": [
+    "Liking everything",
+    "Watching everything to the end",
+    "Sharing every post",
+    "Pressing \"not interested\" on unwanted content"
+   ],
+   "a": 3,
+   "why": "Train your feed.",
+   "p": "p05"
+  },
+  {
+   "q": "What is the \"how do I feel?\" check?",
+   "o": [
+    "A medical test",
+    "A password check",
+    "Rating how you feel after using an app",
+    "A school survey"
+   ],
+   "a": 2,
+   "why": "Self-awareness.",
+   "p": "p05"
+  },
+  {
+   "q": "What do many teen accounts on apps now include?",
+   "o": [
+    "Unlimited messaging from strangers",
+    "Time reminders and stricter content settings",
+    "Adverts only",
+    "No safety features"
+   ],
+   "a": 1,
+   "why": "Protections.",
+   "p": "p05"
+  },
+  {
+   "q": "What does the UK Online Safety Act require of platforms?",
+   "o": [
+    "Remove all algorithms",
+    "Reduce risks of harm, especially to children",
+    "Make apps free",
+    "Ban social media"
+   ],
+   "a": 1,
+   "why": "Protect users.",
+   "p": "p06"
+  },
+  {
+   "q": "Which regulator enforces the Online Safety Act?",
+   "o": [
+    "The CAA",
+    "Ofcom",
+    "The FCA",
+    "The MHRA"
+   ],
+   "a": 1,
+   "why": "Communications regulator.",
+   "p": "p06"
+  },
+  {
+   "q": "What does the EU Digital Services Act require of very large platforms?",
+   "o": [
+    "Charge users",
+    "Only show adverts",
+    "Offer a recommender option not based on profiling",
+    "Ban recommenders"
+   ],
+   "a": 2,
+   "why": "User choice.",
+   "p": "p06"
+  },
+  {
+   "q": "Which country set a minimum age of 16 for social media accounts?",
+   "o": [
+    "Iceland",
+    "Australia",
+    "Canada",
+    "Brazil"
+   ],
+   "a": 1,
+   "why": "A world first.",
+   "p": "p06"
+  },
+  {
+   "q": "What is an optimisation goal?",
+   "o": [
+    "A sports target",
+    "A screen setting",
+    "A bug",
+    "What an algorithm is built to maximise"
+   ],
+   "a": 3,
+   "why": "e.g. engagement.",
+   "p": "p06"
+  },
+  {
+   "q": "What's a problem with optimising only for engagement?",
+   "o": [
+    "It's too fair",
+    "Nothing",
+    "It can reward outrage and extreme content",
+    "It shows too little"
+   ],
+   "a": 2,
+   "why": "Reactions aren't value.",
+   "p": "p06"
+  },
+  {
+   "q": "Which is an alternative optimisation goal?",
+   "o": [
+    "Maximum adverts",
+    "Maximum minutes watched",
+    "Maximum shares only",
+    "Whether users say content was worth their time"
+   ],
+   "a": 3,
+   "why": "Satisfaction.",
+   "p": "p06"
+  },
+  {
+   "q": "What is algorithmic transparency?",
+   "o": [
+    "Making screens clear",
+    "Explaining how an algorithm works and why it decided",
+    "Deleting algorithms",
+    "Hiding code"
+   ],
+   "a": 1,
+   "why": "Openness.",
+   "p": "p06"
+  },
+  {
+   "q": "Which feature improves transparency?",
+   "o": [
+    "Hidden settings",
+    "Removing explanations",
+    "More autoplay",
+    "A \"Why am I seeing this?\" button"
+   ],
+   "a": 3,
+   "why": "Explains decisions.",
+   "p": "p06"
+  },
+  {
+   "q": "What is user control?",
+   "o": [
+    "A parental lock only",
+    "A games controller",
+    "Controlling other users",
+    "Giving people real choices over how a system works"
+   ],
+   "a": 3,
+   "why": "Choice.",
+   "p": "p06"
+  },
+  {
+   "q": "Which is a user control feature?",
+   "o": [
+    "Infinite scroll",
+    "Autoplay",
+    "Red badges",
+    "Resetting your recommendations"
+   ],
+   "a": 3,
+   "why": "Fresh start.",
+   "p": "p06"
+  },
+  {
+   "q": "What is a variety rule in a feed?",
+   "o": [
+    "Random posts",
+    "Showing only one topic",
+    "Deleting variety",
+    "Limiting how many similar items appear in a row"
+   ],
+   "a": 3,
+   "why": "Prevents rabbit holes.",
+   "p": "p06"
+  },
+  {
+   "q": "What is an independent audit of an algorithm?",
+   "o": [
+    "A user review",
+    "Outside experts checking it for harm and bias",
+    "A school inspection",
+    "A bank statement"
+   ],
+   "a": 1,
+   "why": "Accountability.",
+   "p": "p06"
+  },
+  {
+   "q": "Why should young people help design apps for young people?",
+   "o": [
+    "They don't use apps",
+    "It's not useful",
+    "They understand their own needs and experiences",
+    "It's required by law"
+   ],
+   "a": 2,
+   "why": "Co-design.",
+   "p": "p06"
+  },
+  {
+   "q": "Which design choice suits an app used by 11-16 year olds?",
+   "o": [
+    "Messages from strangers by default",
+    "Public profiles by default",
+    "Age-appropriate defaults and time reminders",
+    "Infinite autoplay"
+   ],
+   "a": 2,
+   "why": "Protection by default.",
+   "p": "p06"
+  },
+  {
+   "q": "Why does it matter whether safety features are \"on by default\"?",
+   "o": [
+    "Defaults don't matter",
+    "Many users never change default settings",
+    "It's illegal",
+    "Everyone changes settings"
+   ],
+   "a": 1,
+   "why": "Defaults shape behaviour.",
+   "p": "p06"
+  },
+  {
+   "q": "Which is a concern about regulating algorithms?",
+   "o": [
+    "It protects children",
+    "It reduces harm",
+    "It increases transparency",
+    "It could affect free speech and be hard to enforce"
+   ],
+   "a": 3,
+   "why": "Balanced view.",
+   "p": "p06"
+  },
+  {
+   "q": "Which signal shows you rewatched a video?",
+   "o": [
+    "Your contacts",
+    "Your location only",
+    "Your battery level",
+    "Completion and replay data"
+   ],
+   "a": 3,
+   "why": "Strong interest signal.",
+   "p": "p01"
+  },
+  {
+   "q": "Which is the best description of a recommender's job?",
+   "o": [
+    "Count users",
+    "Predict what each user will engage with and rank content",
+    "Make videos",
+    "Delete bad content only"
+   ],
+   "a": 1,
+   "why": "Predict and rank.",
+   "p": "p02"
+  },
+  {
+   "q": "Which helps reduce a diet-content rabbit hole?",
+   "o": [
+    "Sharing them",
+    "Watching more extreme videos",
+    "Using \"not interested\" and following trusted health sources",
+    "Liking everything"
+   ],
+   "a": 2,
+   "why": "Steer your feed.",
+   "p": "p03"
+  },
+  {
+   "q": "Why are short videos especially absorbing?",
+   "o": [
+    "They give many quick rewards one after another",
+    "They have no sound",
+    "They're longer",
+    "They're boring"
+   ],
+   "a": 0,
+   "why": "Rapid rewards.",
+   "p": "p04"
+  },
+  {
+   "q": "Which change could improve focus during homework?",
+   "o": [
+    "Using a focus mode to silence notifications",
+    "Keeping the feed open",
+    "Leaving every notification on",
+    "Watching videos at the same time"
+   ],
+   "a": 0,
+   "why": "Fewer interruptions.",
+   "p": "p05"
+  },
+  {
+   "q": "Which is a fair way for a feed to still make money while protecting young users?",
+   "o": [
+    "Endless autoplay",
+    "Age-appropriate adverts without detailed profiling",
+    "Hidden adverts",
+    "Selling children's data"
+   ],
+   "a": 1,
+   "why": "Balance profit and protection.",
+   "p": "p06"
+  },
+  {
+   "q": "Which is an example of a ranked feed?",
+   "o": [
+    "A paper diary",
+    "An email inbox sorted by date",
+    "A video app's \"For You\" page",
+    "A printed timetable"
+   ],
+   "a": 2,
+   "why": "Algorithm-ordered.",
+   "p": "p01"
+  },
+  {
+   "q": "If you only follow accounts that share your views, what may form?",
+   "o": [
+    "A cold start",
+    "An echo chamber",
+    "A sprint",
+    "A variable reward"
+   ],
+   "a": 1,
+   "why": "Repeated views.",
+   "p": "p03"
+  },
+  {
+   "q": "Which describes the business model of most free social apps?",
+   "o": [
+    "It's run by volunteers only",
+    "Users get the app free; advertisers pay to reach them",
+    "Users pay for every like",
+    "The government pays"
+   ],
+   "a": 1,
+   "why": "Ads fund it.",
+   "p": "p04"
+  }
+ ]
+}
