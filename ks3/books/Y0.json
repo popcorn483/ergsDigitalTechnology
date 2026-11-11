@@ -32297,11 +32297,1243 @@
   {
    "id": "c16",
    "n": 16,
+   "title": "Engineering Biology and Health Tech",
+   "intro": "Your watch can measure your heart rate, AI is helping doctors spot cancer earlier, babies' genomes are being read like code, and scientists are \"programming\" cells to make medicines. Computing is transforming health and biology faster than almost any other area. In this topic you'll explore wearables and medical AI, discover how DNA is data, learn about gene editing and AI that predicts protein shapes, think about who should see your health data, and design your own health-tech idea.",
+   "pages": [
+    {
+     "id": "c16-p01",
+     "title": "Wearables and the measured body",
+     "spec": "Describe how wearable devices use sensors to measure the body, and evaluate the data they produce",
+     "summary": "Wearables such as smartwatches and fitness trackers use sensors including accelerometers, optical heart-rate sensors and GPS to measure movement, heart rate, sleep and more. Their data can motivate healthy habits and even spot problems, but it isn't always accurate and isn't a medical diagnosis.",
+     "starter": "How many steps do you think you take in a school day? How could a device count them?",
+     "sc": [
+      "I can describe the sensors in a wearable and what they measure",
+      "I can explain how an optical heart-rate sensor works",
+      "I can evaluate the accuracy and usefulness of wearable data"
+     ],
+     "slides": [
+      {
+       "t": "Wearables",
+       "b": [
+        "Smartwatches, fitness trackers, smart rings, sensor patches",
+        "Measure steps, heart rate, sleep, location and more",
+        "Data goes to an app, often via Bluetooth and the cloud",
+        "Some are medical devices, e.g. continuous glucose monitors"
+       ]
+      },
+      {
+       "t": "The sensors inside",
+       "b": [
+        "Accelerometer: movement, used to count steps and detect falls",
+        "Optical heart-rate sensor: green light shines into the skin",
+        "Blood absorbs the light; each heartbeat changes how much is reflected",
+        "GPS: distance and route; temperature sensors; some measure blood oxygen"
+       ]
+      },
+      {
+       "t": "Can you trust the numbers?",
+       "b": [
+        "Good for trends over time, less reliable for single readings",
+        "Errors from loose straps, skin tone, tattoos, movement",
+        "Not a diagnosis: a doctor must interpret medical concerns",
+        "Wellbeing: numbers can motivate, but can also cause worry"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "What are wearables?"
+      },
+      {
+       "t": "p",
+       "text": "A **[[wearable]]** is a small electronic device worn on the body that collects data using sensors. Wearables are part of **[[digital health]]**: using technology to support health and care. Examples include smartwatches, fitness trackers, smart rings and medical sensor patches. Some are medical devices: a **continuous glucose monitor** (CGM), for example, sits on the skin and sends blood sugar readings to a phone every few minutes, helping people with diabetes manage their condition."
+      },
+      {
+       "t": "h",
+       "text": "The sensors inside"
+      },
+      {
+       "t": "table",
+       "caption": "Wearable sensors",
+       "head": [
+        "Sensor",
+        "How it works",
+        "Measures"
+       ],
+       "rows": [
+        [
+         "**[[accelerometer|Accelerometer]]**",
+         "Detects changes in movement in three directions",
+         "Steps, activity, falls, sleep movement"
+        ],
+        [
+         "**[[optical heart-rate sensor|Optical heart-rate sensor]]**",
+         "Shines green light into the skin and measures how much is reflected",
+         "Heart rate"
+        ],
+        [
+         "Blood oxygen sensor",
+         "Compares how red and infrared light are absorbed",
+         "Oxygen level in the blood"
+        ],
+        [
+         "GPS",
+         "Receives signals from satellites",
+         "Location, distance, speed"
+        ],
+        [
+         "Temperature sensor",
+         "Measures skin temperature",
+         "Changes in body temperature"
+        ]
+       ]
+      },
+      {
+       "t": "example",
+       "title": "How an optical heart-rate sensor works",
+       "context": "A watch has green LEDs and a light sensor on its underside.",
+       "steps": [
+        "Green light shines into the skin.",
+        "Blood absorbs green light, so more blood means less light is reflected.",
+        "Each heartbeat pushes a pulse of blood through the wrist, so the reflected light rises and falls.",
+        "The watch counts these rises and falls per minute."
+       ],
+       "answer": "Counting the pulses in reflected light gives the heart rate in beats per minute."
+      },
+      {
+       "t": "h",
+       "text": "Can you trust the data?"
+      },
+      {
+       "t": "p",
+       "text": "**[[accuracy|Accuracy]]** means how close a measurement is to the true value. Wearables are good at showing trends over days and weeks, but single readings can be wrong. Loose straps, movement, tattoos and differences in skin tone can affect optical sensors, and research has shown some devices are less accurate on darker skin, which is a real fairness issue for designers to fix."
+      },
+      {
+       "t": "warn",
+       "text": "A wearable is not a doctor. If you're worried about your health, speak to a parent, carer, school nurse or GP rather than relying on a device's number."
+      },
+      {
+       "t": "act",
+       "title": "Data detectives",
+       "mins": 20,
+       "who": "Pairs",
+       "after": 3,
+       "steps": [
+        "Look at the two weeks of (made-up) fitness tracker data for \"Sam\": steps, heart rate and sleep.",
+        "Describe two trends in the data.",
+        "Find one reading that looks wrong and suggest why.",
+        "Decide one helpful thing the data tells Sam and one thing it can't tell them."
+       ],
+       "q": [
+        {
+         "q": "Describe two trends you found.",
+         "a": "E.g. steps are much higher on PE days (Tuesday and Thursday); sleep is shorter on Sunday nights."
+        },
+        {
+         "q": "Which reading looks wrong, and what could have caused it?",
+         "a": "E.g. a resting heart rate of 180 at 3am, probably caused by a loose strap or the watch slipping, not a real heart rate."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What does an accelerometer in a fitness tracker measure?",
+       "o": [
+        "Heart rate",
+        "Blood oxygen",
+        "Location",
+        "Movement, used to count steps"
+       ],
+       "a": 3,
+       "why": "It senses motion."
+      },
+      {
+       "q": "What colour light do most optical heart-rate sensors use?",
+       "o": [
+        "Green",
+        "Blue",
+        "White",
+        "Purple"
+       ],
+       "a": 0,
+       "why": "Blood absorbs green light well."
+      },
+      {
+       "q": "What are wearables best at showing?",
+       "o": [
+        "Your exam results",
+        "Trends over time",
+        "Your thoughts",
+        "Exact medical diagnoses"
+       ],
+       "a": 1,
+       "why": "Single readings may be wrong."
+      },
+      {
+       "q": "What does a continuous glucose monitor help with?",
+       "o": [
+        "Managing diabetes",
+        "Counting steps",
+        "Tracking location",
+        "Measuring sleep"
+       ],
+       "a": 0,
+       "why": "It reads blood sugar levels."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain how an optical heart-rate sensor measures heart rate.",
+       "m": 3,
+       "a": "Green light shines into the skin (1); blood absorbs light, so reflected light changes with each heartbeat (1); the device counts pulses per minute (1)."
+      },
+      {
+       "q": "Give two reasons why a wearable's reading might be inaccurate.",
+       "m": 2,
+       "a": "Any two: loose strap (1); movement (1); skin tone/tattoos (1); sensor limitations/low battery (1)."
+      }
+     ],
+     "terms": [
+      "Wearable",
+      "Accelerometer",
+      "Optical heart-rate sensor",
+      "Accuracy",
+      "Digital health"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c16-p02",
+     "title": "AI in medicine",
+     "spec": "Describe how AI is used in medicine and explain why accuracy, bias and human oversight matter",
+     "summary": "AI can analyse medical scans, spot patterns in health records and speed up admin, helping doctors work faster and catch disease earlier. But AI can make false positives and false negatives, can be biased by its training data, and needs doctors to check its decisions.",
+     "starter": "A doctor looks at 100 X-rays a day. How could AI help? What could go wrong?",
+     "sc": [
+      "I can describe uses of AI in healthcare",
+      "I can explain false positives and false negatives",
+      "I can explain why a human should stay in the loop"
+     ],
+     "slides": [
+      {
+       "t": "Where AI helps",
+       "b": [
+        "Medical imaging: spotting signs of cancer, fractures and eye disease in scans",
+        "Triage: deciding who needs to be seen first",
+        "Admin: AI that writes up notes so doctors can focus on patients",
+        "Research: finding patterns in millions of records"
+       ]
+      },
+      {
+       "t": "When AI gets it wrong",
+       "b": [
+        "False positive: AI says there's a problem when there isn't (worry, extra tests)",
+        "False negative: AI misses a real problem (dangerous delay)",
+        "Bias: if training data doesn't include everyone, AI may work worse for some groups",
+        "AI can't explain its \"thinking\" easily"
+       ]
+      },
+      {
+       "t": "Humans in the loop",
+       "b": [
+        "AI as an assistant, not the final decision-maker",
+        "Doctors check AI results and take responsibility",
+        "AI tools must be tested and approved before use in the NHS",
+        "Large trials, e.g. of AI in breast cancer screening, test whether AI really helps"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "Where AI helps"
+      },
+      {
+       "t": "table",
+       "caption": "AI in healthcare",
+       "head": [
+        "Use",
+        "How AI helps",
+        "Example"
+       ],
+       "rows": [
+        [
+         "**[[medical imaging|Medical imaging]]**",
+         "Finds patterns in X-rays, scans and photos",
+         "Spotting possible cancers in mammograms; detecting eye disease in retina scans"
+        ],
+        [
+         "Triage",
+         "Helps decide who needs care most urgently",
+         "Prioritising patients with suspected stroke"
+        ],
+        [
+         "Admin",
+         "Writes up notes and letters from conversations",
+         "\"AI scribes\" letting doctors spend more time with patients"
+        ],
+        [
+         "Research",
+         "Analyses huge datasets",
+         "Finding which patients are at higher risk of a disease"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "text": "The NHS is running large trials of AI in breast cancer screening, with hundreds of thousands of women taking part, to find out whether AI can help radiologists spot cancer earlier and reduce waiting times."
+      },
+      {
+       "t": "h",
+       "text": "When AI gets it wrong"
+      },
+      {
+       "t": "p",
+       "text": "Medical tests, including AI ones, can make two kinds of error:"
+      },
+      {
+       "t": "table",
+       "caption": "Two kinds of error",
+       "head": [
+        "Error",
+        "What happens",
+        "Consequence"
+       ],
+       "rows": [
+        [
+         "**[[false positive|False positive]]**",
+         "Says a disease is present when it isn't",
+         "Worry, extra tests, wasted resources"
+        ],
+        [
+         "**[[false negative|False negative]]**",
+         "Misses a disease that is present",
+         "Patient not treated in time: can be dangerous"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "text": "**[[bias|Bias]]** is a serious risk. An AI trained mostly on images of light skin may be worse at spotting skin cancer on dark skin. Training data must represent everyone the AI will be used on."
+      },
+      {
+       "t": "h",
+       "text": "Humans in the loop"
+      },
+      {
+       "t": "p",
+       "text": "A **[[human in the loop]]** means a qualified person checks AI decisions and stays responsible for them. In the UK, AI tools used for diagnosis are regulated as medical devices, so they must be tested for safety and accuracy before they can be used."
+      },
+      {
+       "t": "act",
+       "title": "AI screening simulator",
+       "mins": 25,
+       "who": "Groups of 3",
+       "after": 3,
+       "steps": [
+        "Your teacher gives you 20 (made-up) \"scan cards\" and the AI's prediction for each, plus the real result.",
+        "Count the true positives, true negatives, false positives and false negatives.",
+        "Decide which type of error is more serious in cancer screening and why.",
+        "Write a rule for how doctors should use this AI."
+       ],
+       "q": [
+        {
+         "q": "Which error is more serious in cancer screening, and why?",
+         "a": "Usually a false negative, because a real cancer goes untreated and can grow; a false positive causes worry and extra tests, but the person is checked and found to be fine."
+        },
+        {
+         "q": "Write your rule for how doctors should use the AI.",
+         "a": "E.g. \"The AI flags scans for a radiologist to check; a human must review every scan the AI marks as clear in high-risk patients, and the doctor makes the final decision.\""
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What is a false positive?",
+       "o": [
+        "A correct result",
+        "A broken scanner",
+        "A test says a problem is there when it isn't",
+        "A test misses a real problem"
+       ],
+       "a": 2,
+       "why": "Positive but wrong."
+      },
+      {
+       "q": "What is a false negative?",
+       "o": [
+        "A positive attitude",
+        "A correct result",
+        "A test finds a problem that isn't there",
+        "A test misses a real problem"
+       ],
+       "a": 3,
+       "why": "Negative but wrong."
+      },
+      {
+       "q": "Why might a medical AI be biased?",
+       "o": [
+        "It uses electricity",
+        "Its training data didn't represent everyone",
+        "It's too fast",
+        "Doctors dislike it"
+       ],
+       "a": 1,
+       "why": "Data shapes AI."
+      },
+      {
+       "q": "What does human in the loop mean in medicine?",
+       "o": [
+        "AI makes all decisions",
+        "Patients run the AI",
+        "Nobody checks",
+        "A doctor checks AI decisions and stays responsible"
+       ],
+       "a": 3,
+       "why": "Humans keep oversight."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Describe two ways AI is used in healthcare.",
+       "m": 2,
+       "a": "Any two: analysing scans (1); triage (1); writing notes/admin (1); research on patterns in data (1)."
+      },
+      {
+       "q": "Explain why a skin cancer detection app trained only on light skin could be dangerous.",
+       "m": 3,
+       "a": "Training data isn't representative (1); the AI may miss cancers on darker skin (false negatives) (1); leading to delayed treatment/unfair health outcomes (1)."
+      }
+     ],
+     "terms": [
+      "Medical imaging",
+      "False positive",
+      "False negative",
+      "Bias",
+      "Human in the loop"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c16-p03",
+     "title": "DNA is data",
+     "spec": "Explain how DNA stores information as a code, and how genome sequencing turns it into data",
+     "summary": "DNA stores the instructions for life using four bases, A, C, G and T, in a sequence a bit like a computer code. A human genome is about 3 billion letters long. Sequencing reads these letters into computer files; it has become thousands of times cheaper and faster, enabling new medicine. DNA can even store computer data.",
+     "starter": "Computers store everything using two symbols: 0 and 1. How many symbols do you think DNA uses?",
+     "sc": [
+      "I can explain how DNA is a code using four letters",
+      "I can describe genome sequencing and why it's become possible on a large scale",
+      "I can compare storing data in DNA with storing it in binary"
+     ],
+     "slides": [
+      {
+       "t": "The code of life",
+       "b": [
+        "DNA is in almost every cell of your body",
+        "Its code uses four bases: A, C, G, T",
+        "A gene is a section of DNA that gives instructions, e.g. to make a protein",
+        "Your genome is your complete set of DNA: about 3 billion letters"
+       ]
+      },
+      {
+       "t": "Reading the code",
+       "b": [
+        "Sequencing reads the order of the letters",
+        "Human Genome Project: 13 years and billions of dollars, finished 2003",
+        "Today: a genome can be sequenced in hours for a few hundred pounds",
+        "Bioinformatics: using computers to analyse biological data"
+       ]
+      },
+      {
+       "t": "Genomics in the NHS",
+       "b": [
+        "Diagnosing rare diseases by finding changes in a child's genome",
+        "Choosing cancer treatments based on the tumour's DNA",
+        "The Generation Study is sequencing the genomes of newborn babies",
+        "Huge storage and computing power needed: each genome is many gigabytes"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "DNA as a code"
+      },
+      {
+       "t": "p",
+       "text": "**[[DNA]]** is the molecule that carries the instructions for building and running living things. It's made of four chemical bases, written as letters: **A** (adenine), **C** (cytosine), **G** (guanine) and **T** (thymine). The order of the letters is the code. A **[[gene]]** is a section of DNA with instructions, often to make a particular protein. Your **[[genome]]** is your complete set of DNA: about 3 billion letters in total, and around 20,000 genes."
+      },
+      {
+       "t": "table",
+       "caption": "Computer code vs DNA code",
+       "head": [
+        "Feature",
+        "Computer",
+        "DNA"
+       ],
+       "rows": [
+        [
+         "Symbols",
+         "2 (0 and 1)",
+         "4 (A, C, G, T)"
+        ],
+        [
+         "Unit",
+         "Bit",
+         "Base"
+        ],
+        [
+         "Instructions",
+         "Programs",
+         "Genes"
+        ],
+        [
+         "Copying",
+         "Copy and paste files",
+         "Cells copy DNA when they divide"
+        ]
+       ]
+      },
+      {
+       "t": "h",
+       "text": "Reading DNA: sequencing"
+      },
+      {
+       "t": "p",
+       "text": "**[[sequencing|Sequencing]]** means reading the order of the letters in DNA and turning it into a computer file. The **Human Genome Project** took 13 years and around $3 billion to read the first human genome, finishing in 2003. Today a whole genome can be sequenced in hours for a few hundred pounds, thanks to better machines and computing."
+      },
+      {
+       "t": "p",
+       "text": "**[[bioinformatics|Bioinformatics]]** is the use of computers and code to store and analyse biological data. A single genome produces gigabytes of raw data, and comparing thousands of genomes needs powerful computers and clever algorithms."
+      },
+      {
+       "t": "h",
+       "text": "Genomics in medicine"
+      },
+      {
+       "t": "key",
+       "title": "How genomics helps patients",
+       "items": [
+        "Diagnosing rare genetic conditions, especially in babies and children",
+        "Matching cancer treatments to the DNA changes in a tumour",
+        "Predicting how a person will react to some medicines",
+        "The NHS Generation Study is sequencing the genomes of newborn babies to see if it can spot treatable conditions early"
+       ]
+      },
+      {
+       "t": "h",
+       "text": "Storing data in DNA"
+      },
+      {
+       "t": "p",
+       "text": "Scientists can also store computer data in DNA, by converting binary into the letters A, C, G and T. In theory, one gram of DNA could hold hundreds of millions of gigabytes, and DNA lasts for thousands of years if kept cool and dry. For now it's very slow and expensive to write and read, but it could one day archive the world's data."
+      },
+      {
+       "t": "example",
+       "title": "Encoding binary as DNA",
+       "context": "Use the code 00 = A, 01 = C, 10 = G, 11 = T.",
+       "steps": [
+        "Split the binary 01001000 into pairs: 01 00 10 00.",
+        "Convert each pair: 01 = C, 00 = A, 10 = G, 00 = A."
+       ],
+       "answer": "01001000 (the letter \"H\" in ASCII) becomes CAGA. Each DNA letter stores 2 bits."
+      },
+      {
+       "t": "act",
+       "title": "DNA data lab",
+       "mins": 20,
+       "who": "Pairs",
+       "after": 4,
+       "steps": [
+        "Use the code 00 = A, 01 = C, 10 = G, 11 = T.",
+        "Encode your initials: convert each letter to 8-bit ASCII, then to DNA letters.",
+        "Swap with a partner and decode their DNA message.",
+        "Answer: why can DNA store more data in the same space than binary?"
+       ],
+       "q": [
+        {
+         "q": "Encode the letter \"A\" (ASCII 65 = 01000001) as DNA.",
+         "a": "01 00 00 01 = CAAC."
+        },
+        {
+         "q": "Why can each DNA letter store more information than a single bit?",
+         "a": "A bit has 2 possible values, but a DNA base has 4, so each base stores 2 bits of information."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "How many different bases (letters) does DNA use?",
+       "o": [
+        "4",
+        "26",
+        "10",
+        "2"
+       ],
+       "a": 0,
+       "why": "A, C, G and T."
+      },
+      {
+       "q": "What is a genome?",
+       "o": [
+        "A type of cell",
+        "A single gene",
+        "An organism's complete set of DNA",
+        "A computer virus"
+       ],
+       "a": 2,
+       "why": "About 3 billion letters in humans."
+      },
+      {
+       "q": "What is sequencing?",
+       "o": [
+        "Writing a story",
+        "Reading the order of letters in DNA",
+        "Sorting files",
+        "Counting steps"
+       ],
+       "a": 1,
+       "why": "It turns DNA into data."
+      },
+      {
+       "q": "What is bioinformatics?",
+       "o": [
+        "Using computers to analyse biological data",
+        "A fitness app",
+        "Biology without computers",
+        "A type of DNA"
+       ],
+       "a": 0,
+       "why": "Computing meets biology."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain how DNA is similar to computer code.",
+       "m": 2,
+       "a": "Both store information as a sequence of symbols (1); computers use 0 and 1, DNA uses A, C, G, T (1)."
+      },
+      {
+       "q": "Describe two ways genome sequencing helps patients.",
+       "m": 3,
+       "a": "Any two, with detail: diagnosing rare conditions (1); matching cancer treatments to tumour DNA (1); predicting reaction to medicines (1); early detection in newborns (1). Up to 3 for developed answers."
+      }
+     ],
+     "terms": [
+      "DNA",
+      "Genome",
+      "Gene",
+      "Sequencing",
+      "Bioinformatics"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c16-p04",
+     "title": "Engineering biology",
+     "spec": "Describe engineering biology, gene editing and AI protein prediction, and discuss the ethical questions they raise",
+     "summary": "Engineering biology treats living systems like something that can be designed, built and tested. Gene editing tools like CRISPR can change DNA precisely, and have been used to create a cure for sickle cell disease. AI such as AlphaFold predicts protein shapes, speeding up drug discovery. These powerful tools raise ethical questions.",
+     "starter": "If you could change one thing about a plant to help the planet, what would it be?",
+     "sc": [
+      "I can explain what engineering biology is",
+      "I can describe how CRISPR gene editing works in simple terms",
+      "I can explain how AI is speeding up biology, and discuss ethical issues"
+     ],
+     "slides": [
+      {
+       "t": "Biology as engineering",
+       "b": [
+        "Engineering biology: designing and building with living systems",
+        "Cells \"programmed\" to make medicines, materials or fuels",
+        "Insulin for diabetes is made by engineered microbes",
+        "The UK sees engineering biology as a key future technology"
+       ]
+      },
+      {
+       "t": "CRISPR: find and edit",
+       "b": [
+        "CRISPR is a tool that finds a specific DNA sequence and cuts it",
+        "Like \"find and replace\" for DNA",
+        "2023: the UK was the first country to approve a CRISPR-based treatment, for sickle cell disease",
+        "Changes to embryos that could be passed on are not allowed in the UK"
+       ]
+      },
+      {
+       "t": "AI meets biology",
+       "b": [
+        "Proteins do most jobs in our cells; their 3D shape decides what they do",
+        "AlphaFold, from Google DeepMind in London, predicts protein shapes from their code",
+        "Its creators shared the 2024 Nobel Prize in Chemistry",
+        "Faster drug discovery, new enzymes to break down plastic"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "What is engineering biology?"
+      },
+      {
+       "t": "p",
+       "text": "**[[engineering biology|Engineering biology]]** applies engineering ideas to living things: designing, building and testing biological systems to solve problems. Scientists use the **[[design-build-test-learn]]** cycle, just like programmers improving code."
+      },
+      {
+       "t": "key",
+       "title": "Engineering biology in action",
+       "items": [
+        "Medicines: microbes engineered to make insulin and vaccines",
+        "Food: crops that resist disease or drought",
+        "Materials: spider-silk proteins, mushroom-based packaging",
+        "Environment: enzymes that break down plastic; microbes that clean up pollution"
+       ]
+      },
+      {
+       "t": "h",
+       "text": "CRISPR gene editing"
+      },
+      {
+       "t": "p",
+       "text": "**[[CRISPR]]** is a gene-editing tool. It uses a guide molecule that matches a specific DNA sequence, and an enzyme that cuts the DNA at that spot, a bit like \"find and replace\" in a word processor. Scientists can then remove, change or add DNA letters."
+      },
+      {
+       "t": "p",
+       "text": "In 2023, the UK became the first country in the world to approve a CRISPR-based treatment (called Casgevy) for sickle cell disease and a blood disorder called beta thalassaemia. Doctors edit a patient's own blood stem cells and return them to the body."
+      },
+      {
+       "t": "h",
+       "text": "AI and proteins"
+      },
+      {
+       "t": "p",
+       "text": "A **[[protein]]** is a molecule that does a job in the body, such as carrying oxygen or fighting infection. Its job depends on its 3D shape, which used to take years to work out in the lab. **[[AlphaFold]]**, created by Google DeepMind in London, uses AI to predict a protein's shape from its code in minutes. Its creators Demis Hassabis and John Jumper shared the 2024 Nobel Prize in Chemistry, and AlphaFold has predicted the shapes of hundreds of millions of proteins."
+      },
+      {
+       "t": "h",
+       "text": "Ethical questions"
+      },
+      {
+       "t": "table",
+       "caption": "Weighing up engineering biology",
+       "head": [
+        "Question",
+        "Points to consider"
+       ],
+       "rows": [
+        [
+         "Should we edit human DNA?",
+         "Curing disease vs. safety risks and \"designer babies\"; UK law bans edits that could be passed on to children"
+        ],
+        [
+         "Who can afford new treatments?",
+         "Gene therapies can cost over £1 million per patient"
+        ],
+        [
+         "Should crops be gene-edited?",
+         "Less pesticide, more food vs. effects on nature and choice for consumers"
+        ],
+        [
+         "Could the tools be misused?",
+         "Strong safety rules and checks on who can access them are needed"
+        ]
+       ]
+      },
+      {
+       "t": "act",
+       "title": "Bio-designers",
+       "mins": 25,
+       "who": "Groups of 3",
+       "after": 4,
+       "steps": [
+        "Choose a problem: plastic pollution, a crop disease, or a rare genetic illness.",
+        "Design an engineering-biology solution using the design-build-test-learn cycle.",
+        "Explain where computing or AI would help.",
+        "Complete an ethics checklist: benefits, risks, who might be left out."
+       ],
+       "q": [
+        {
+         "q": "Describe your solution and the role of computing.",
+         "a": "E.g. plastic pollution: use AI (like AlphaFold) to design an enzyme that breaks down plastic faster; engineer microbes to produce it; test it in the lab and use the results to improve the design."
+        },
+        {
+         "q": "What is the biggest ethical risk of your idea, and how would you manage it?",
+         "a": "E.g. engineered microbes escaping into the environment: keep them in sealed facilities and design them so they can't survive outside the lab."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What is engineering biology?",
+       "o": [
+        "Designing, building and testing with living systems",
+        "Studying rocks",
+        "Building bridges",
+        "Repairing computers"
+       ],
+       "a": 0,
+       "why": "Engineering ideas applied to biology."
+      },
+      {
+       "q": "What does CRISPR do?",
+       "o": [
+        "Sequences a whole genome",
+        "Counts steps",
+        "Prints proteins",
+        "Finds and cuts a specific DNA sequence"
+       ],
+       "a": 3,
+       "why": "Like \"find and replace\" for DNA."
+      },
+      {
+       "q": "What does AlphaFold predict?",
+       "o": [
+        "The 3D shape of proteins",
+        "Exam results",
+        "Football scores",
+        "The weather"
+       ],
+       "a": 0,
+       "why": "Shape decides what a protein does."
+      },
+      {
+       "q": "Which disease could be treated with the first UK-approved CRISPR treatment?",
+       "o": [
+        "Toothache",
+        "Flu",
+        "Sickle cell disease",
+        "Chickenpox"
+       ],
+       "a": 2,
+       "why": "Approved in 2023."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain how CRISPR edits DNA.",
+       "m": 3,
+       "a": "A guide matches a specific DNA sequence (1); an enzyme cuts the DNA there (1); DNA letters can then be removed, changed or added (1)."
+      },
+      {
+       "q": "Discuss whether gene editing should be used to treat diseases.",
+       "m": 4,
+       "a": "For: can cure serious diseases, e.g. sickle cell (1-2); against/concerns: cost, safety, fairness, misuse/designer babies (1-2); conclusion (1). Max 4."
+      }
+     ],
+     "terms": [
+      "Engineering biology",
+      "CRISPR",
+      "Protein",
+      "AlphaFold",
+      "Design-build-test-learn"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c16-p05",
+     "title": "Your health data",
+     "spec": "Explain why health data is sensitive, how it is protected by law, and the benefits and risks of sharing it",
+     "summary": "Health and genetic data are among the most sensitive information about a person. UK data protection law treats them as special category data with extra protection. Sharing health data can help research and improve care, but it must be done with consent, security and trust.",
+     "starter": "Who do you think should be allowed to see your medical records: you, your doctor, a researcher, an insurance company, a tech company?",
+     "sc": [
+      "I can explain why health and genetic data are sensitive",
+      "I can describe how UK law protects health data",
+      "I can weigh up the benefits and risks of sharing health data"
+     ],
+     "slides": [
+      {
+       "t": "Why health data is special",
+       "b": [
+        "It's deeply personal and can't be changed like a password",
+        "Genetic data also reveals things about your relatives",
+        "It could be misused for discrimination, e.g. in jobs or insurance",
+        "Criminals target health data because it's valuable"
+       ]
+      },
+      {
+       "t": "The law protects it",
+       "b": [
+        "UK GDPR: health and genetic data are \"special category data\"",
+        "Organisations need a strong legal reason and extra security",
+        "Consent: agreeing, knowing what you're agreeing to",
+        "NHS patients can choose to opt out of their data being used for research and planning"
+       ]
+      },
+      {
+       "t": "Sharing for good",
+       "b": [
+        "Anonymised data can help find cures and plan services",
+        "Health apps and wearables may share data with companies",
+        "Check privacy settings and what an app does with your data",
+        "Trust depends on transparency, security and benefit to patients"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "Why health data is sensitive"
+      },
+      {
+       "t": "p",
+       "text": "Health data includes medical records, test results, prescriptions and data from health apps and wearables. Genetic data is especially sensitive: you can't change your DNA, and it also reveals information about your parents, siblings and children."
+      },
+      {
+       "t": "h",
+       "text": "The law"
+      },
+      {
+       "t": "p",
+       "text": "UK data protection law (UK GDPR) treats health, genetic and biometric data as **[[special category data]]**. This means organisations must have a strong legal reason to use it and must protect it with extra security. In many cases they need your **[[consent]]**: a clear, informed agreement to how your data will be used. NHS patients in England can opt out of their confidential data being used for research and planning."
+      },
+      {
+       "t": "h",
+       "text": "Sharing health data"
+      },
+      {
+       "t": "table",
+       "caption": "Benefits and risks of sharing health data",
+       "head": [
+        "Benefits",
+        "Risks"
+       ],
+       "rows": [
+        [
+         "Researchers can find causes and cures for diseases",
+         "A **[[data breach]]** could expose private information"
+        ],
+        [
+         "Hospitals can plan services and spot outbreaks",
+         "People could face discrimination"
+        ],
+        [
+         "AI tools can be trained to help diagnose",
+         "Data might be sold or shared without people realising"
+        ],
+        [
+         "Patients' own records can follow them between services",
+         "Loss of trust means people avoid getting care"
+        ]
+       ]
+      },
+      {
+       "t": "p",
+       "text": "**[[anonymisation|Anonymisation]]** removes details that identify people (names, addresses, dates of birth) before data is shared. But it isn't perfect: combining datasets can sometimes re-identify people, so many projects use secure research environments where approved researchers can analyse data without taking it away."
+      },
+      {
+       "t": "tip",
+       "text": "Before using a health or fitness app, check: what data does it collect, is it shared with other companies, can you delete it, and is the app from a trusted provider?"
+      },
+      {
+       "t": "act",
+       "title": "The data dilemma",
+       "mins": 25,
+       "who": "Groups of 4",
+       "after": 3,
+       "steps": [
+        "Your group sits on a (fictional) hospital ethics committee.",
+        "Read three requests: a university wants anonymised scan data to train cancer AI; a fitness app wants to sell users' heart data to advertisers; an insurer wants customers' genetic test results.",
+        "Decide whether to approve, approve with conditions, or refuse each one.",
+        "Justify each decision using the law, consent and benefit to patients."
+       ],
+       "q": [
+        {
+         "q": "Give your decisions for the three requests.",
+         "a": "Usually: university: approve with conditions (anonymised, secure environment, patient benefit, ethics approval); fitness app: refuse unless users gave clear, specific consent; insurer: refuse because of the risk of discrimination (UK insurers have agreed not to ask for predictive genetic test results except in rare cases)."
+        },
+        {
+         "q": "What conditions would make sharing data acceptable?",
+         "a": "Clear benefit to patients; anonymisation; secure research environment; transparency; consent or a strong legal basis; no selling for profit without consent."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "How does UK GDPR treat health and genetic data?",
+       "o": [
+        "As unimportant",
+        "As special category data needing extra protection",
+        "As data anyone can sell",
+        "As public data"
+       ],
+       "a": 1,
+       "why": "It's especially sensitive."
+      },
+      {
+       "q": "What is consent?",
+       "o": [
+        "A type of encryption",
+        "Saying nothing",
+        "Clear, informed agreement",
+        "Clicking without reading"
+       ],
+       "a": 2,
+       "why": "You must know what you're agreeing to."
+      },
+      {
+       "q": "What does anonymisation do?",
+       "o": [
+        "Encrypts the whole internet",
+        "Shares names publicly",
+        "Removes details that identify people",
+        "Deletes all data"
+       ],
+       "a": 2,
+       "why": "It protects identity."
+      },
+      {
+       "q": "Why is genetic data especially sensitive?",
+       "o": [
+        "It's very small",
+        "It's always public",
+        "It's boring",
+        "It can't be changed and reveals information about relatives"
+       ],
+       "a": 3,
+       "why": "DNA is shared with family."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain why health data needs extra protection.",
+       "m": 2,
+       "a": "It's very personal/can't be changed (1); misuse could lead to discrimination/harm/breach (1)."
+      },
+      {
+       "q": "Discuss whether patients' health data should be shared with researchers.",
+       "m": 4,
+       "a": "Benefits, e.g. new cures, better services, AI tools (1-2); risks, e.g. breaches, re-identification, trust, consent (1-2); conclusion with conditions (1). Max 4."
+      }
+     ],
+     "terms": [
+      "Special category data",
+      "Consent",
+      "Anonymisation",
+      "Data breach"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    },
+    {
+     "id": "c16-p06",
+     "title": "Design a health-tech solution",
+     "spec": "Design a health-tech solution that is user-centred, accessible, accurate and safe",
+     "summary": "Good health tech solves a real health problem for real people. Designers involve patients and clinicians, make products accessible, test accuracy carefully, protect data, and follow regulation, because mistakes in health tech can harm people.",
+     "starter": "Think of someone you know who has to manage a health condition every day. What makes it harder for them?",
+     "sc": [
+      "I can identify a health problem and the people affected",
+      "I can design a health-tech solution with accessibility and privacy built in",
+      "I can explain how health tech is tested and regulated"
+     ],
+     "slides": [
+      {
+       "t": "Start with people",
+       "b": [
+        "Who has the problem: patients, carers, clinicians?",
+        "Involve them from the start (co-design)",
+        "Will it work for older people, children, people with disabilities?",
+        "Does it reduce or increase inequality?"
+       ]
+      },
+      {
+       "t": "Design it safely",
+       "b": [
+        "Accuracy: test against the real result, with diverse users",
+        "Privacy by design: collect only what's needed, keep it secure",
+        "Accessibility: large text, voice control, simple language",
+        "What happens if it fails, or the battery dies?"
+       ]
+      },
+      {
+       "t": "Testing and regulation",
+       "b": [
+        "Health tech that diagnoses or treats is a medical device",
+        "In the UK the MHRA regulates medical devices and medicines",
+        "Clinical trials test safety and whether it really works",
+        "Ongoing monitoring after launch"
+       ]
+      }
+     ],
+     "blocks": [
+      {
+       "t": "h",
+       "text": "Start with people"
+      },
+      {
+       "t": "p",
+       "text": "Health tech must follow **[[user-centred design]]**: understanding the needs of patients, carers and clinicians, and involving them in the design. A brilliant app is useless if the people who need it can't use it, or don't trust it."
+      },
+      {
+       "t": "p",
+       "text": "**[[accessibility|Accessibility]]** is vital: many people managing health conditions are older, have visual or hearing impairments, or have limited digital skills. Design features include large clear text, voice control, simple language, and options for people without smartphones."
+      },
+      {
+       "t": "h",
+       "text": "Design it safely"
+      },
+      {
+       "t": "key",
+       "title": "Questions health-tech designers must ask",
+       "items": [
+        "Accuracy: how often is it right, and does it work equally well for different groups?",
+        "Safety: what happens if it gives a wrong answer, fails or loses power?",
+        "Privacy: what data does it collect, where is it stored, who can see it?",
+        "Accessibility: can everyone who needs it use it?",
+        "Evidence: does it actually improve people's health?"
+       ]
+      },
+      {
+       "t": "h",
+       "text": "Testing and regulation"
+      },
+      {
+       "t": "p",
+       "text": "Health tech that diagnoses, monitors or treats a condition counts as a medical device. In the UK, the **MHRA** (Medicines and Healthcare products Regulatory Agency) is the **[[regulation|regulator]]** for medical devices and medicines. Products must show they are safe and work as claimed. A **[[clinical trial]]** is a carefully designed study that tests a treatment or device with volunteers, often comparing it with existing care."
+      },
+      {
+       "t": "table",
+       "caption": "From idea to the NHS",
+       "head": [
+        "Stage",
+        "What happens"
+       ],
+       "rows": [
+        [
+         "Research",
+         "Understand the problem; talk to patients and clinicians"
+        ],
+        [
+         "Prototype",
+         "Build an early version; test usability"
+        ],
+        [
+         "Testing",
+         "Check accuracy and safety; clinical trials if needed"
+        ],
+        [
+         "Approval",
+         "Meet regulations (e.g. registered with the MHRA)"
+        ],
+        [
+         "Launch and monitor",
+         "Keep checking for problems and improving"
+        ]
+       ]
+      },
+      {
+       "t": "act",
+       "title": "Health-tech pitch",
+       "mins": 35,
+       "who": "Groups of 3",
+       "after": 3,
+       "steps": [
+        "Choose a user: a teenager with asthma, a grandparent living alone, or a young person with type 1 diabetes.",
+        "Identify their biggest daily challenge and design a health-tech solution (an app, wearable or smart device).",
+        "Complete a design card covering accessibility, accuracy, privacy and safety.",
+        "Pitch your idea in 2 minutes, explaining how it would be tested."
+       ],
+       "q": [
+        {
+         "q": "Describe your user, their challenge and your solution.",
+         "a": "E.g. a teenager with asthma forgets their inhaler and doesn't know when air quality is poor: a smart inhaler cap logs use and links to an app that warns about high pollen and pollution, and reminds them to carry it."
+        },
+        {
+         "q": "How would you make sure it's accurate, accessible and private?",
+         "a": "Accuracy: test with many users and compare with doctors' records; accessible: simple design, voice alerts, works without a smartwatch; private: data stays on the phone unless the user shares it with their GP, with consent."
+        }
+       ]
+      }
+     ],
+     "check": [
+      {
+       "q": "What should health-tech design start with?",
+       "o": [
+        "The price",
+        "The logo",
+        "The newest gadget",
+        "The needs of patients, carers and clinicians"
+       ],
+       "a": 3,
+       "why": "User-centred design."
+      },
+      {
+       "q": "Which UK body regulates medical devices?",
+       "o": [
+        "Ofcom",
+        "The MHRA",
+        "The CAA",
+        "The DVLA"
+       ],
+       "a": 1,
+       "why": "Medicines and Healthcare products Regulatory Agency."
+      },
+      {
+       "q": "What is a clinical trial?",
+       "o": [
+        "A computer game",
+        "A fitness challenge",
+        "A careful study testing a treatment or device with volunteers",
+        "A court case"
+       ],
+       "a": 2,
+       "why": "It tests safety and effectiveness."
+      },
+      {
+       "q": "Which is an accessibility feature?",
+       "o": [
+        "Only one colour",
+        "Large clear text and voice control",
+        "Tiny text",
+        "Complicated menus"
+       ],
+       "a": 1,
+       "why": "Helps more people use it."
+      }
+     ],
+     "practice": [
+      {
+       "q": "Explain why health-tech products must be tested carefully before use.",
+       "m": 3,
+       "a": "Mistakes can harm patients (1); must show they're accurate/safe (1); must work for different groups/regulation requires it (1)."
+      },
+      {
+       "q": "Describe two accessibility features for a health app for older people.",
+       "m": 2,
+       "a": "Any two: large text (1); voice control/read-aloud (1); simple language/layout (1); works without a smartphone/phone support (1)."
+      }
+     ],
+     "terms": [
+      "User-centred design",
+      "Accessibility",
+      "Clinical trial",
+      "Regulation"
+     ],
+     "exam": [],
+     "videos": [],
+     "lessons": []
+    }
+   ]
+  },
+  {
+   "id": "c17",
+   "n": 17,
    "title": "Ethical Hacking and Capture the Flag",
    "intro": "Ethical hackers are paid to break into systems, with permission, so the weaknesses can be fixed before criminals find them. In this topic you'll learn the rules that keep hacking legal, then sharpen your skills in Capture the Flag (CTF) challenges: decoding messages, uncovering hidden data and investigating web pages, all on practice systems built for the job.",
    "pages": [
     {
-     "id": "c16-p01",
+     "id": "c17-p01",
      "title": "Hackers with permission",
      "spec": "Explain the difference between ethical and criminal hacking and the rules of the Computer Misuse Act",
      "summary": "Ethical hackers test systems only with clear permission and within agreed limits, then report what they find so it can be fixed. Accessing any system without permission is a crime under the Computer Misuse Act 1990, even \"just to look\".",
@@ -32502,7 +33734,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p02",
+     "id": "c17-p02",
      "title": "Inside a Capture the Flag",
      "spec": "Describe how CTF competitions work and use a structured approach to solve challenges",
      "summary": "Capture the Flag competitions are legal hacking games. In a \"jeopardy\" CTF, teams solve puzzles in categories such as cryptography, forensics and web to find hidden text strings called flags and score points.",
@@ -32698,7 +33930,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p03",
+     "id": "c17-p03",
      "title": "Codes and encodings",
      "spec": "Recognise and decode binary, hexadecimal, Base64 and ROT13, and explain the difference between encoding and encryption",
      "summary": "Encodings change data into a different format so it can be stored or sent, but anyone can reverse them. Spotting binary, hex, Base64 and ROT13 by their look is a key CTF skill. Unlike encryption, encoding has no secret key.",
@@ -32894,7 +34126,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p04",
+     "id": "c17-p04",
      "title": "Hidden in plain sight",
      "spec": "Explain how data can be hidden in files and images, and investigate files for hidden information",
      "summary": "Steganography hides messages inside ordinary-looking files, such as in the pixels of an image. Forensic investigators also check metadata and file signatures, which can reveal what a file really is and where it came from.",
@@ -33092,7 +34324,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p05",
+     "id": "c17-p05",
      "title": "Web detective",
      "spec": "Investigate a practice website using its source code and explain how developers protect websites",
      "summary": "Everything a browser receives can be seen: HTML source, comments, scripts and cookies. CTF web challenges hide flags in these places. Real developers keep secrets on the server, validate every input and never trust what the browser sends.",
@@ -33270,7 +34502,7 @@
      "lessons": []
     },
     {
-     "id": "c16-p06",
+     "id": "c17-p06",
      "title": "Report it, don't exploit it",
      "spec": "Describe responsible disclosure and bug bounties, and explore careers in cyber security",
      "summary": "When ethical hackers find a weakness, they report it privately so it can be fixed (responsible disclosure). Many companies pay bug bounties for this. Cyber security is a growing career with many routes in, including competitions, apprenticeships and degrees.",
@@ -33482,13 +34714,13 @@
    ]
   },
   {
-   "id": "c17",
-   "n": 17,
+   "id": "c18",
+   "n": 18,
    "title": "Generative AI",
    "intro": "Generative AI can write an essay, paint a picture or clone a voice in seconds. In this topic you find out how it works, practise prompting it well, learn to check what it gives you, and think hard about how it is changing work, learning and the planet.",
    "pages": [
     {
-     "id": "c17-p01",
+     "id": "c18-p01",
      "title": "What is generative AI?",
      "spec": "Explain what generative AI is and give examples of what it can create",
      "summary": "Generative AI is artificial intelligence that creates new content (text, images, audio, video or code) after learning patterns from huge amounts of examples. It is different from AI that only sorts or predicts.",
@@ -33682,7 +34914,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p02",
+     "id": "c18-p02",
      "title": "How chatbots write",
      "spec": "Describe how a large language model writes by predicting the next word",
      "summary": "Chatbots are powered by large language models. They break text into tokens and write one token at a time, each time predicting what is most likely to come next based on the patterns they learned.",
@@ -33855,7 +35087,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p03",
+     "id": "c18-p03",
      "title": "Prompting well",
      "spec": "Write clear prompts and improve them step by step to get better results",
      "summary": "The quality of what generative AI gives you depends on the prompt. Good prompts give context, a clear task, a format and any limits, and you improve results by refining the prompt and asking follow-up questions.",
@@ -34053,7 +35285,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p04",
+     "id": "c18-p04",
      "title": "Hallucinations and bias",
      "spec": "Explain why generative AI makes mistakes and shows bias, and check its output",
      "summary": "Generative AI can \"hallucinate\", inventing facts, quotes or sources, and it can repeat biases found in its training data. Good users verify important information with reliable sources and look for missing viewpoints.",
@@ -34230,7 +35462,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p05",
+     "id": "c18-p05",
      "title": "Using AI honestly",
      "spec": "Use generative AI honestly in schoolwork and respect copyright and ownership",
      "summary": "Using AI can be helpful or dishonest depending on how you use it and whether you say so. Passing AI work off as your own is plagiarism, and AI-made content raises questions about copyright and who owns what.",
@@ -34439,7 +35671,7 @@
      "lessons": []
     },
     {
-     "id": "c17-p06",
+     "id": "c18-p06",
      "title": "AI, society and the future",
      "spec": "Discuss the impact of generative AI on jobs, the environment and society, and form a reasoned opinion",
      "summary": "Generative AI is changing work, learning and creativity. It brings opportunities and risks, including effects on jobs, energy and water use, and fairness, so societies are deciding how to regulate it.",
@@ -34606,13 +35838,13 @@
    ]
   },
   {
-   "id": "c18",
-   "n": 18,
+   "id": "c19",
+   "n": 19,
    "title": "Internet of Things and Smart Cities",
    "intro": "Doorbells that see, bins that report when they're full, streetlights that dim when nobody's around: billions of everyday objects are now connected to the internet. In this topic you'll find out how the Internet of Things works, explore smart homes and smart cities, discover how hackers can take over badly secured devices, learn about the UK law that banned default passwords, and design your own IoT solution.",
    "pages": [
     {
-     "id": "c18-p01",
+     "id": "c19-p01",
      "title": "Things that talk",
      "spec": "Explain what the Internet of Things is and describe the parts of an IoT system",
      "summary": "The Internet of Things (IoT) is the network of everyday physical objects with sensors, processors and internet connections, so they can collect data, share it and act on it. A typical system has devices, a connection, the cloud and an app.",
@@ -34807,7 +36039,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p02",
+     "id": "c19-p02",
      "title": "Sensors and actuators",
      "spec": "Describe common sensors and actuators and how they form an input-process-output system",
      "summary": "Sensors measure the physical world and turn it into data (input). A processor follows rules to decide what to do (process). Actuators make something happen in the physical world, such as a motor turning or a light switching on (output). Feedback loops let systems keep conditions steady.",
@@ -35025,7 +36257,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p03",
+     "id": "c19-p03",
      "title": "Smart homes",
      "spec": "Evaluate the benefits and risks of smart home devices",
      "summary": "Smart home devices can save energy, add convenience and help people live independently, but they also collect personal data, can be hacked, may stop working if the company closes down, and can be misused to watch or control others.",
@@ -35222,7 +36454,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p04",
+     "id": "c19-p04",
      "title": "Smart cities",
      "spec": "Describe how smart cities use IoT data to improve services, and discuss the concerns",
      "summary": "Smart cities use sensors and data to manage traffic, energy, waste, air quality and public services more efficiently. They can save money and reduce pollution but raise concerns about surveillance, cost, who owns the data, and who is left out.",
@@ -35426,7 +36658,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p05",
+     "id": "c19-p05",
      "title": "Hacking the things",
      "spec": "Explain why IoT devices are often insecure and describe how laws and users can make them safer",
      "summary": "Many IoT devices have been sold with weak default passwords and no updates, so attackers can take them over in large numbers to form botnets. UK law now bans universal default passwords on new smart devices, and users can protect themselves with good habits.",
@@ -35622,7 +36854,7 @@
      "lessons": []
     },
     {
-     "id": "c18-p06",
+     "id": "c19-p06",
      "title": "Design an IoT solution",
      "spec": "Design an IoT solution to a real problem, considering users, data, security and sustainability",
      "summary": "Good IoT design starts with a real problem and real users, then plans the sensors, actuators, connectivity and data, and builds in security, privacy and sustainability from the start, a principle called \"by design\".",
@@ -35823,13 +37055,13 @@
    ]
   },
   {
-   "id": "c19",
-   "n": 19,
+   "id": "c20",
+   "n": 20,
    "title": "Machine Learning Lab",
    "intro": "In the Artificial Intelligence topic you met machine learning. Now you become the machine learning engineer. You'll collect data, train a real model in your browser, test it with a confusion matrix, break it on purpose, fix unfair data and plan an AI project for your school.",
    "pages": [
     {
-     "id": "c19-p01",
+     "id": "c20-p01",
      "title": "Learning from examples",
      "spec": "Explain how supervised machine learning uses labelled examples, features and labels",
      "summary": "In supervised learning a computer is given lots of examples with the right answers (labels). It finds patterns in the features of those examples and uses them to label new examples it has never seen.",
@@ -36031,7 +37263,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p02",
+     "id": "c20-p02",
      "title": "Build an image classifier",
      "spec": "Collect training data and train an image classifier",
      "summary": "A classifier sorts inputs into categories. Using a browser tool such as Teachable Machine, you collect example images for each class, train a model and try it live. The quality and variety of your data decides how well it works.",
@@ -36203,7 +37435,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p03",
+     "id": "c20-p03",
      "title": "Is it any good?",
      "spec": "Test a model using separate test data, accuracy and a confusion matrix",
      "summary": "A model must be tested on data it has never seen. Accuracy is the percentage of correct predictions, and a confusion matrix shows which classes get mixed up, which matters when some mistakes are worse than others.",
@@ -36409,7 +37641,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p04",
+     "id": "c20-p04",
      "title": "When models go wrong",
      "spec": "Explain common reasons machine learning models fail, including overfitting, too little data and edge cases",
      "summary": "Models fail when their data doesn't match the real world: too few examples, not enough variety, unusual edge cases, or overfitting, where a model memorises its training data instead of learning general patterns.",
@@ -36608,7 +37840,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p05",
+     "id": "c20-p05",
      "title": "Fair data, fair AI",
      "spec": "Explain how biased data leads to unfair machine learning and how to reduce bias",
      "summary": "If training data under-represents some groups or repeats past unfairness, the model will be less accurate or unfair for those groups. Checking who is in the data, testing results for each group and involving diverse teams helps make AI fairer.",
@@ -36802,7 +38034,7 @@
      "lessons": []
     },
     {
-     "id": "c19-p06",
+     "id": "c20-p06",
      "title": "Design an ML project",
      "spec": "Plan a machine learning solution to a real problem, including data, testing and ethics",
      "summary": "Real ML projects start with a clear problem, then plan the data, how to train and test, how success will be measured, and the risks. Sometimes the best answer is that AI isn't needed.",
@@ -36986,13 +38218,13 @@
    ]
   },
   {
-   "id": "c20",
-   "n": 20,
+   "id": "c21",
+   "n": 21,
    "title": "Microchips and Semiconductors",
    "intro": "There are more transistors in your phone than there are people on Earth, and each one is made from purified sand. In this topic you'll find out how a semiconductor switch works, build logic with gates, follow a chip from sand to factory, work out what really makes a computer fast, and discover why microchips have become one of the most important industries on the planet.",
    "pages": [
     {
-     "id": "c20-p01",
+     "id": "c21-p01",
      "title": "Switches made of sand",
      "spec": "Explain what a semiconductor is and how a transistor works as a switch",
      "summary": "Conductors let electricity flow and insulators don't; semiconductors such as silicon can be controlled to do either. A transistor is a tiny semiconductor switch: a small signal turns it on or off, which is how computers represent 1 and 0.",
@@ -37179,7 +38411,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p02",
+     "id": "c21-p02",
      "title": "Logic from switches",
      "spec": "Describe how transistors are combined into AND, OR and NOT logic gates and complete truth tables",
      "summary": "Combining transistors makes logic gates, which take binary inputs and produce an output. AND, OR and NOT gates, described with truth tables, are the building blocks of every processor.",
@@ -37427,7 +38659,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p03",
+     "id": "c21-p03",
      "title": "From sand to chip",
      "spec": "Describe the main stages of microchip manufacture",
      "summary": "Chips are made in ultra-clean factories called fabs. Silicon is purified and grown into crystals, sliced into wafers, then patterns are printed onto it with light in many layers (photolithography), before the chips are tested, cut and packaged.",
@@ -37602,7 +38834,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p04",
+     "id": "c21-p04",
      "title": "What makes a computer fast?",
      "spec": "Explain how processing power and memory capacity affect a computer's performance",
      "summary": "Performance depends on the processor (clock speed, number of cores, cache) and on memory (how much RAM and how fast storage is). Moore's law described how the number of transistors on chips doubled about every two years, making computers ever more powerful.",
@@ -37796,7 +39028,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p05",
+     "id": "c21-p05",
      "title": "CPUs, GPUs and AI chips",
      "spec": "Compare CPUs, GPUs and AI accelerators and explain why specialised chips are increasingly used",
      "summary": "CPUs are flexible all-rounders; GPUs have thousands of simple cores that are brilliant at doing the same sum many times at once, which suits graphics and AI. Phones now contain a system on a chip with a CPU, GPU and an AI processor (NPU) all together.",
@@ -37984,7 +39216,7 @@
      "lessons": []
     },
     {
-     "id": "c20-p06",
+     "id": "c21-p06",
      "title": "The global chip race",
      "spec": "Explain why semiconductors matter to the economy, national security and the environment",
      "summary": "Chips are in almost everything, and making them depends on a few companies in a few countries. Shortages can halt car factories, so governments invest to secure supplies. Chip-making also uses huge amounts of energy and water.",
@@ -38186,13 +39418,13 @@
    ]
   },
   {
-   "id": "c21",
-   "n": 21,
+   "id": "c22",
+   "n": 22,
    "title": "Models and Simulations",
    "intro": "A model is a simplified representation of a real system, and a simulation uses a model to test predictions before anything is built or spent. This topic covers abstraction, variables and data types, spreadsheet what-if models, Goal Seek and scenarios, simulations step by step and with chance, validating a model against real data, and asking who a model works for.",
    "pages": [
     {
-     "id": "c21-p01",
+     "id": "c22-p01",
      "spec": "Explain what a model is, what a simulation is, and why people use them",
      "summary": "A model is a simplified representation of a real system. A simulation runs a model to see what would happen, so people can test ideas safely, cheaply and quickly before trying them for real.",
      "diagram": {
@@ -38440,7 +39672,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p02",
+     "id": "c22-p02",
      "spec": "Use abstraction to decide what to include in a model and what to leave out",
      "summary": "Abstraction means keeping only the details that matter for the question you want to answer. Every model also makes assumptions, and a good modeller writes them down.",
      "diagram": {
@@ -38658,7 +39890,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p03",
+     "id": "c22-p03",
      "spec": "Identify the variables, inputs, rules and outputs of a model and choose a suitable data type for each",
      "summary": "A model takes inputs, applies rules, and produces outputs. The values that can change are variables, and each one needs the right data type: integer, float, string or Boolean.",
      "diagram": {
@@ -38912,7 +40144,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p04",
+     "id": "c22-p04",
      "spec": "Build a spreadsheet model with formulas and use it to answer 'what if' questions",
      "summary": "In a spreadsheet model the inputs are cells, the rules are formulas that refer to those cells, and the outputs recalculate automatically. Changing one input to see the effect is a what-if question.",
      "diagram": {
@@ -39185,7 +40417,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p05",
+     "id": "c22-p05",
      "spec": "Use Goal Seek and scenarios to explore a spreadsheet model",
      "summary": "Goal Seek works backwards: you choose the answer you want and it finds the input needed. Scenarios save whole sets of inputs, such as worst case, expected and best case, so you can compare them.",
      "diagram": {
@@ -39423,7 +40655,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p06",
+     "id": "c22-p06",
      "spec": "Carry out a simulation step by step over time and explain how changing a variable changes the outcome",
      "summary": "A simulation over time applies the model's rules again and again, one time step after another, and each new row is worked out from the row before. Small changes to a variable can make a huge difference.",
      "diagram": {
@@ -39712,7 +40944,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p07",
+     "id": "c22-p07",
      "spec": "Explain why some simulations use random numbers and why they are run many times",
      "summary": "Real life involves chance, so some simulations use random numbers. Each run gives a different result, so the simulation is run many times and the results are averaged to give a reliable prediction.",
      "diagram": {
@@ -39926,7 +41158,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p08",
+     "id": "c22-p08",
      "spec": "Test a model's predictions against real data and refine the model to improve it",
      "summary": "Testing checks the model's formulas work as intended; validating checks its predictions against what really happens. If they do not match, refine the rules or assumptions and test again.",
      "diagram": {
@@ -40185,7 +41417,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p09",
+     "id": "c22-p09",
      "spec": "Evaluate the limitations, trade-offs and possible bias of models, including AI models, and ask who a model works for",
      "summary": "Every model leaves things out, so it has limits. A model can be unfair if its data or assumptions leave some people out. AI models are models too: they learn patterns from data, so biased data gives biased results.",
      "diagram": {
@@ -40401,7 +41633,7 @@
      "lessons": []
     },
     {
-     "id": "c21-p10",
+     "id": "c22-p10",
      "spec": "Plan, build, test and evaluate a model of your own to answer a real question",
      "summary": "Building a good model follows a cycle: plan the question, inputs, rules, outputs and assumptions; build it; test and validate it; then evaluate how well it works and who it works for, and refine it.",
      "diagram": {
@@ -40625,13 +41857,13 @@
    ]
   },
   {
-   "id": "c22",
-   "n": 22,
+   "id": "c23",
+   "n": 23,
    "title": "Networks and the Internet",
    "intro": "Find out what really happens when you send a message, open a website or download a game: the hardware, layouts, addresses and rules that make networks and the internet work.",
    "pages": [
     {
-     "id": "c22-p01",
+     "id": "c23-p01",
      "spec": "Explain what a network is, why computers are networked, and the difference between a LAN and a WAN",
      "summary": "A network is two or more devices connected so they can share data and resources. A LAN covers a small area like a school; a WAN covers a large area and the internet is the biggest WAN of all.",
      "diagram": {
@@ -40864,7 +42096,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p02",
+     "id": "c23-p02",
      "spec": "Identify the main pieces of network hardware and describe what each one does",
      "summary": "Every device needs a NIC to join a network. Switches connect devices inside a LAN, routers connect networks together, wireless access points add Wi-Fi, and modems convert signals. Data travels through Ethernet or fibre optic cables.",
      "diagram": {
@@ -41102,7 +42334,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p03",
+     "id": "c23-p03",
      "spec": "Compare wired and wireless connections, including Wi-Fi and Bluetooth, and choose a suitable one for a task",
      "summary": "Wired connections are faster, more reliable and more secure. Wireless connections (Wi-Fi and Bluetooth) give freedom to move and need no cables, but are slower, have limited range and can suffer from interference.",
      "diagram": {
@@ -41390,7 +42622,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p04",
+     "id": "c23-p04",
      "spec": "Describe star, bus and mesh network topologies and give an advantage and a disadvantage of each",
      "summary": "A topology is the layout of a network. In a star, every device connects to a central switch. In a bus, every device shares one backbone cable. In a mesh, devices connect to many others so there are lots of routes.",
      "diagram": {
@@ -41591,7 +42823,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p05",
+     "id": "c23-p05",
      "spec": "Compare client-server and peer-to-peer networks and decide which is suitable for a given situation",
      "summary": "In a client-server network, clients ask central servers for files, logins and services, so it is easy to manage and secure. In a peer-to-peer network every computer is equal and shares directly, which is cheap and simple but harder to manage.",
      "diagram": {
@@ -41882,7 +43114,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p06",
+     "id": "c23-p06",
      "spec": "Explain how data is split into packets and sent across a network using packet switching",
      "summary": "Data is split into small packets. Each packet has a header with the sender's and receiver's addresses and a packet number. Routers send each packet by the best route available, and the receiving computer puts them back in order and asks for any missing ones again.",
      "diagram": {
@@ -42103,7 +43335,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p07",
+     "id": "c23-p07",
      "spec": "Explain what IP addresses and MAC addresses are and the difference between them",
      "summary": "An IP address identifies a device on a network so data can be routed to it, and it can change. A MAC address is a unique, permanent address built into a device's NIC when it is made.",
      "diagram": {
@@ -42301,7 +43533,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p08",
+     "id": "c23-p08",
      "spec": "Describe, step by step, what happens when you type a URL into a browser, including the role of DNS",
      "summary": "Computers find each other using IP addresses, but people remember names. When you type a URL, a DNS server looks up the IP address for the domain name, then the browser contacts the web server at that address and the page arrives as packets.",
      "diagram": {
@@ -42540,7 +43772,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p09",
+     "id": "c23-p09",
      "spec": "Explain bandwidth and network speed units, and calculate how long a file will take to download",
      "summary": "Bandwidth is how much data a connection can carry each second, measured in bits per second (usually Mbps). To find a download time, convert the file size into megabits (multiply MB by 8) and divide by the speed in Mbps.",
      "diagram": {
@@ -42762,7 +43994,7 @@
      "lessons": []
     },
     {
-     "id": "c22-p10",
+     "id": "c23-p10",
      "spec": "Explain what the cloud and the Internet of Things are, and evaluate their benefits and risks",
      "summary": "The cloud means using storage and software on servers in data centres over the internet, such as OneDrive. The Internet of Things is everyday objects with sensors that connect to the internet, such as smart speakers and fitness trackers. Both are convenient but raise security and privacy concerns.",
      "diagram": {
@@ -43043,13 +44275,13 @@
    ]
   },
   {
-   "id": "c23",
-   "n": 23,
+   "id": "c24",
+   "n": 24,
    "title": "Presentations with PowerPoint",
    "intro": "How to plan, build and deliver presentations that actually work, using Microsoft PowerPoint. You will plan for an audience with a storyboard, design clear and accessible slides, use images legally, add charts, effects and links sensibly, then present with confidence and evaluate your work against success criteria.",
    "pages": [
     {
-     "id": "c23-p01",
+     "id": "c24-p01",
      "spec": "Describe what presentation software is used for and explain why a presentation must suit its audience and purpose",
      "summary": "Presentation software such as Microsoft PowerPoint shows information as a series of slides that support a speaker. Before you make a single slide, decide who your audience is and what your purpose is, because both change every design choice.",
      "diagram": {
@@ -43351,7 +44583,7 @@
      "lessons": []
     },
     {
-     "id": "c23-p02",
+     "id": "c24-p02",
      "spec": "Plan a presentation using a storyboard before building it",
      "summary": "A storyboard is a plan of every slide, drawn before you open PowerPoint. It shows the content, layout, images, links and notes for each slide, so you can fix problems on paper instead of wasting time on screen.",
      "diagram": {
@@ -43602,7 +44834,7 @@
      "lessons": []
     },
     {
-     "id": "c23-p03",
+     "id": "c24-p03",
      "spec": "Identify the main parts of the PowerPoint window and use slide layouts, placeholders and views",
      "summary": "PowerPoint's ribbon holds the tools in tabs; the slide pane shows thumbnails; the notes pane holds what you will say. Slide layouts give each slide ready-made placeholders, and different views help you build, reorder and practise.",
      "diagram": {
@@ -43900,7 +45132,7 @@
      "lessons": []
     },
     {
-     "id": "c23-p04",
+     "id": "c24-p04",
      "spec": "Apply good slide design: the 6x6 guideline, contrast, readable fonts, consistency, design themes and the Slide Master",
      "summary": "Good slides are simple, readable and consistent: few words, strong contrast, clear fonts and the same style throughout. Design themes and the Slide Master let you set the look once so every slide matches.",
      "diagram": {
@@ -44110,7 +45342,7 @@
      "lessons": []
     },
     {
-     "id": "c23-p05",
+     "id": "c24-p05",
      "spec": "Explain copyright, ownership, intellectual property and licensing (including Creative Commons), credit sources correctly, and use AI-generated images honestly",
      "summary": "Almost every image online is protected by copyright, so 'found on Google' does not mean 'free to use'. Use images you are allowed to use, such as your own, stock images or Creative Commons images, credit the source, and clearly label any AI-generated image.",
      "diagram": {
@@ -44436,7 +45668,7 @@
      "lessons": []
     },
     {
-     "id": "c23-p06",
+     "id": "c24-p06",
      "spec": "Use charts, tables and SmartArt to present information clearly",
      "summary": "Numbers are easier to understand as a chart, comparisons fit neatly in a table, and SmartArt turns lists into diagrams such as processes, cycles and hierarchies. Pick the one that matches what the information shows.",
      "diagram": {
@@ -44662,7 +45894,7 @@
      "lessons": []
     },
     {
-     "id": "c23-p07",
+     "id": "c24-p07",
      "spec": "Use transitions and animations sensibly, choosing effects, order and timing to support the message",
      "summary": "Transitions play between slides; animations make objects on a slide enter, move or leave. Used sparingly and consistently they guide attention; overused they distract and look unprofessional.",
      "diagram": {
@@ -44921,7 +46153,7 @@
      "lessons": []
     },
     {
-     "id": "c23-p08",
+     "id": "c24-p08",
      "spec": "Create hyperlinks and action buttons to build non-linear presentations such as quizzes and kiosk displays",
      "summary": "Hyperlinks and action buttons let the user jump to any slide, a website or a file. This makes non-linear presentations possible, such as a menu, a quiz with right and wrong answer slides, or a self-running kiosk.",
      "diagram": {
@@ -45145,7 +46377,7 @@
      "lessons": []
     },
     {
-     "id": "c23-p09",
+     "id": "c24-p09",
      "spec": "Apply accessibility guidelines and international standards (WCAG) to a presentation using alt text, contrast, colour-blind friendly colours, readable font sizes and the Accessibility Checker",
      "summary": "An accessible presentation can be used by everyone, including people who are blind, partially sighted, colour blind or dyslexic. Follow the international WCAG guidelines: add alt text, never rely on colour alone, use large high-contrast text, and run Review > Check Accessibility.",
      "diagram": {
@@ -45466,7 +46698,7 @@
      "lessons": []
     },
     {
-     "id": "c23-p10",
+     "id": "c24-p10",
      "spec": "Use speaker notes, rehearse timings and Presenter View, and apply good speaking skills to deliver a presentation",
      "summary": "Speaker notes hold what you will say; Presenter View shows them only to you while the audience sees the slides. Rehearse with timings, then speak clearly to the audience, not to the screen.",
      "diagram": {
@@ -45694,7 +46926,7 @@
      "lessons": []
     },
     {
-     "id": "c23-p11",
+     "id": "c24-p11",
      "spec": "Evaluate a presentation against success criteria, using peer feedback, and refine it to improve usability",
      "summary": "Evaluating means judging how well your presentation met its success criteria, using evidence such as peer feedback. A good evaluation names strengths, admits weaknesses, and says exactly how to improve.",
      "diagram": {
@@ -45962,13 +47194,13 @@
    ]
   },
   {
-   "id": "c24",
-   "n": 24,
+   "id": "c25",
+   "n": 25,
    "title": "Programming Next Steps: Functions, Lists and AI",
    "intro": "This topic carries on from Programming. You will make your C# programs shorter and smarter with methods, store whole collections of data in arrays and lists, learn the standard list algorithms, find out how to use generative AI to help with code without being fooled by it, and finish by building and testing a quiz-score analyser.",
    "pages": [
     {
-     "id": "c24-p01",
+     "id": "c25-p01",
      "spec": "Describe the data types int, double, float, string, char and bool, and choose the most suitable data type for a value",
      "summary": "Every variable has a data type that decides what it can store and what you can do with it. Use int for whole numbers, double or float for decimals, string for text, char for one character and bool for true or false.",
      "diagram": {
@@ -46226,7 +47458,7 @@
      "lessons": []
     },
     {
-     "id": "c24-p02",
+     "id": "c25-p02",
      "spec": "Explain why programmers use methods (functions) to avoid repetition and decompose problems, and write and call a static void method",
      "summary": "A method is a named block of code that does one job. Write it once, then call it by name whenever you need it. Methods stop you repeating code, make programs easier to read and fix, and let you break a big problem into smaller parts.",
      "diagram": {
@@ -46494,7 +47726,7 @@
      "lessons": []
     },
     {
-     "id": "c24-p03",
+     "id": "c25-p03",
      "spec": "Use parameters and arguments to pass values into a method, so one method can work with different data",
      "summary": "A parameter is a variable in a method's brackets that receives a value. An argument is the actual value you pass in when you call the method. Parameters let one method do the same job with different data.",
      "diagram": {
@@ -46745,7 +47977,7 @@
      "lessons": []
     },
     {
-     "id": "c24-p04",
+     "id": "c25-p04",
      "spec": "Write methods that return a value, and explain the difference between a void method and a method with a return type",
      "summary": "A method with a return type, such as int, double or bool, works something out and sends one value back to where it was called, using the keyword return. A void method does a job but sends nothing back.",
      "diagram": {
@@ -46971,7 +48203,7 @@
      "lessons": []
     },
     {
-     "id": "c24-p05",
+     "id": "c25-p05",
      "spec": "Explain the scope of a variable, and the difference between local and global (class-level) variables",
      "summary": "The scope of a variable is the part of the program where it can be used. A local variable only exists inside the method or block where it is declared. A global (class-level) variable can be used by every method, but it is safer to use local variables, parameters and return values.",
      "diagram": {
@@ -47185,7 +48417,7 @@
      "lessons": []
     },
     {
-     "id": "c24-p06",
+     "id": "c25-p06",
      "spec": "Declare an array, access its elements using an index that starts at 0, and loop through it with a for loop",
      "summary": "An array stores a fixed number of values of the same data type under one name. Each element has an index starting at 0, so the last index is always Length - 1. A for loop can visit every element.",
      "diagram": {
@@ -47442,7 +48674,7 @@
      "lessons": []
     },
     {
-     "id": "c24-p07",
+     "id": "c25-p07",
      "spec": "Use a List to store a collection that can grow and shrink, using Add, Remove, Count and foreach, and choose between a list and an array",
      "summary": "A List is like an array that can change size. Add puts an item on the end, Remove takes one out, Count says how many items there are and a foreach loop visits every item. Use an array when the size is fixed and a list when it will change.",
      "diagram": {
@@ -47711,7 +48943,7 @@
      "lessons": []
     },
     {
-     "id": "c24-p08",
+     "id": "c25-p08",
      "spec": "Use loops to process a list: find the total, average and largest value, search for an item and count matches",
      "summary": "Most list programs use a handful of standard algorithms: keep a running total, divide it by Count for the average, remember the largest value so far, check each item in turn to search for one, and add 1 to a counter for each match.",
      "diagram": {
@@ -47996,7 +49228,7 @@
      "lessons": []
     },
     {
-     "id": "c24-p09",
+     "id": "c25-p09",
      "spec": "Evaluate the benefits and limitations of using generative AI to help write code, and review and verify the code it produces",
      "summary": "Generative AI can explain errors, suggest code and speed up routine work, but it can be confidently wrong. Write clear prompts, then check every line by reading, tracing and testing it, and always be honest about where your code came from.",
      "diagram": {
@@ -48276,7 +49508,7 @@
      "lessons": []
     },
     {
-     "id": "c24-p10",
+     "id": "c25-p10",
      "spec": "Plan, develop, test and refine a program in stages, using methods, a list and a test table",
      "summary": "Real software is built in cycles of planning, development, testing and refinement. The class quiz-score analyser is planned with decomposition, built one method at a time, checked with a test table of normal, boundary and erroneous data, then refined.",
      "diagram": {
@@ -48596,13 +49828,13 @@
    ]
   },
   {
-   "id": "c25",
-   "n": 25,
+   "id": "c26",
+   "n": 26,
    "title": "Programming with Scratch",
    "intro": "Scratch is where many programmers start: you snap blocks together instead of typing code, but the ideas are the same ones you will use in C# later. In this topic you will learn the Scratch window, events, coordinates, animation, loops, decisions, variables, messages and your own custom blocks, build a simulation, and then plan, build, test and refine a game for a real user.",
    "pages": [
     {
-     "id": "c25-p01",
+     "id": "c26-p01",
      "spec": "Describe what Scratch is and identify the stage, sprites, blocks palette and scripts area",
      "summary": "Scratch is a free, block-based programming language: you snap blocks together into scripts instead of typing code. The Scratch window has a stage where things happen, sprites that you program, a blocks palette to choose blocks from and a scripts area to build them in.",
      "diagram": {
@@ -48917,7 +50149,7 @@
      "lessons": []
     },
     {
-     "id": "c25-p02",
+     "id": "c26-p02",
      "spec": "Use event blocks to start scripts and explain why the sequence of blocks matters",
      "summary": "Event (hat) blocks such as [when green flag clicked] or [when (space) key pressed] start a script. The blocks underneath then run in sequence, one after another from top to bottom, so putting them in the wrong order changes what happens.",
      "diagram": {
@@ -49173,7 +50405,7 @@
      "lessons": []
     },
     {
-     "id": "c25-p03",
+     "id": "c26-p03",
      "spec": "Use motion blocks and x and y coordinates to position and move a sprite on the stage",
      "summary": "The stage is a grid 480 steps wide (x from -240 to 240) and 360 steps tall (y from -180 to 180), with (0, 0) in the centre. Motion blocks either move a sprite relative to where it is, such as [change x by (10)], or send it to an exact position, such as [go to x: (100) y: (50)].",
      "diagram": {
@@ -49472,7 +50704,7 @@
      "lessons": []
     },
     {
-     "id": "c25-p04",
+     "id": "c26-p04",
      "spec": "Use looks and sound blocks, and switch costumes to animate a sprite",
      "summary": "Looks blocks change how a sprite appears: speech bubbles, size, effects, show and hide, and its costume. Switching quickly between costumes with a short wait in between makes an animation, just like a flip book, and sound blocks add music and effects.",
      "diagram": {
@@ -49695,7 +50927,7 @@
      "lessons": []
     },
     {
-     "id": "c25-p05",
+     "id": "c26-p05",
      "spec": "Use repeat, forever and repeat until loops and explain why loops make code shorter",
      "summary": "Iteration means repeating blocks using a loop. [repeat (10)] is a count-controlled loop that runs a set number of times; [repeat until <>] is a condition-controlled loop that stops when its condition becomes true; [forever] never stops. Loops make code shorter, easier to read and easier to change.",
      "diagram": {
@@ -49934,7 +51166,7 @@
      "lessons": []
     },
     {
-     "id": "c25-p06",
+     "id": "c26-p06",
      "spec": "Use if and if-else blocks with sensing blocks so a program can make decisions",
      "summary": "Selection lets a program choose what to do. [if <condition> then] runs its blocks only when the condition is true; [if <> then else] picks one of two paths. Sensing blocks such as <touching (Bowl)?>, <key (space) pressed?> and [ask () and wait] give the conditions and inputs, and an if usually needs to sit inside a forever loop so it keeps checking.",
      "diagram": {
@@ -50218,7 +51450,7 @@
      "lessons": []
     },
     {
-     "id": "c25-p07",
+     "id": "c26-p07",
      "spec": "Create and use variables for score, lives and timers, know the data types they hold, and use operators for maths, comparisons and random numbers",
      "summary": "A variable is a named store for a value that can change, such as score, lives or time. In Scratch a variable can hold a number, text (a string) or true/false (a Boolean). Operator blocks do maths (+, -, ×, /), compare values (<, =, >), join text and pick random numbers.",
      "diagram": {
@@ -50520,7 +51752,7 @@
      "lessons": []
     },
     {
-     "id": "c25-p08",
+     "id": "c26-p08",
      "spec": "Use broadcast and when I receive blocks to send messages between sprites and the stage",
      "summary": "A broadcast sends a message to every sprite and the stage. Any script that starts with [when I receive (message)] then runs. Broadcasts let sprites work together, such as starting a level, showing a game-over screen or making one sprite react to another.",
      "diagram": {
@@ -50713,7 +51945,7 @@
      "lessons": []
     },
     {
-     "id": "c25-p09",
+     "id": "c26-p09",
      "spec": "Use abstraction to reduce complexity by making My Blocks (custom blocks) with inputs",
      "summary": "A My Block is a custom block you define once and then use whenever you need it, giving a long set of blocks a single clear name. This is abstraction: hiding detail you do not need to think about. Inputs (parameters) let the same block do slightly different jobs, such as drawing a shape with any number of sides.",
      "diagram": {
@@ -50900,7 +52132,7 @@
      "lessons": []
     },
     {
-     "id": "c25-p10",
+     "id": "c26-p10",
      "spec": "Use variables to build a simple simulation, and explain how changing a variable changes the outcome of a model",
      "summary": "A model is a simplified version of a real system, and a simulation runs the model to see what happens. In Scratch, variables such as gravity, bounciness or growth rate control the model: change one and you can test a prediction, such as how quickly rabbits fill an island or how high a ball bounces.",
      "diagram": {
@@ -51114,7 +52346,7 @@
      "lessons": []
     },
     {
-     "id": "c25-p11",
+     "id": "c26-p11",
      "spec": "Find and fix bugs by tracing a script and recognising common Scratch errors",
      "summary": "A bug is a mistake that stops a program doing what it should; debugging is finding and fixing it. Scratch blocks stop most typing errors, so most Scratch bugs are logic errors: blocks in the wrong order, the wrong sprite, set instead of change, a missing loop or reset, or a condition that is never true. Tracing a script step by step shows where it goes wrong.",
      "diagram": {
@@ -51381,7 +52613,7 @@
      "lessons": []
     },
     {
-     "id": "c25-p12",
+     "id": "c26-p12",
      "spec": "Plan, develop, test and refine a simple game for a user, using a user story and a test table",
      "summary": "Software is made in cycles: plan, develop, test and refine, then go round again. Start by asking who the game is for and writing a user story ('As a ... I want ... so that ...'). Build one feature at a time, test each one with a test table of normal, boundary and erroneous tests, and refine it using what you find and what users say.",
      "diagram": {
@@ -51684,13 +52916,13 @@
    ]
   },
   {
-   "id": "c26",
-   "n": 26,
+   "id": "c27",
+   "n": 27,
    "title": "Quantum Computing",
    "intro": "Quantum computers don't just do the same things faster: they work in a completely different way, using the rules of physics that govern atoms and light. In this topic you'll explore qubits with coins and dice, find out why quantum computers live in fridges colder than outer space, separate the real promise from the hype, and discover the UK's plans to become a quantum leader.",
    "pages": [
     {
-     "id": "c26-p01",
+     "id": "c27-p01",
      "title": "From bits to qubits",
      "spec": "Explain the difference between a classical bit and a qubit",
      "summary": "Ordinary computers store information in bits that are always either 0 or 1. Quantum computers use qubits, which can be in a superposition: a combination of 0 and 1 at the same time, until they are measured.",
@@ -51883,7 +53115,7 @@
      "lessons": []
     },
     {
-     "id": "c26-p02",
+     "id": "c27-p02",
      "title": "Superposition and measurement",
      "spec": "Describe superposition and measurement using probabilities",
      "summary": "A qubit in superposition has a certain probability of being measured as 0 or 1. Measuring it destroys the superposition. With many qubits, the number of possible combinations in a superposition doubles with every qubit added.",
@@ -52089,7 +53321,7 @@
      "lessons": []
     },
     {
-     "id": "c26-p03",
+     "id": "c27-p03",
      "title": "Entanglement and interference",
      "spec": "Describe entanglement and interference using simple models",
      "summary": "Entangled qubits are linked so that measuring one tells you about the other, however far apart they are. Interference lets quantum algorithms make wrong answers cancel out and right answers add up, so the right answer becomes likely when measured.",
@@ -52270,7 +53502,7 @@
      "lessons": []
     },
     {
-     "id": "c26-p04",
+     "id": "c27-p04",
      "title": "Building a quantum computer",
      "spec": "Describe how quantum computers are built and why errors and decoherence are major challenges",
      "summary": "Qubits can be made from superconducting circuits, trapped ions, atoms or photons. They are extremely fragile: heat, vibration and stray signals cause decoherence and errors, so quantum computers need extreme cooling, isolation and error correction.",
@@ -52467,7 +53699,7 @@
      "lessons": []
     },
     {
-     "id": "c26-p05",
+     "id": "c27-p05",
      "title": "What could they do?",
      "spec": "Evaluate which problems quantum computers could help with and which they cannot",
      "summary": "Quantum computers could simulate molecules for new medicines and batteries, help with some optimisation problems, and break today's public-key encryption. They won't speed up everyday tasks, and many claims about them are hype.",
@@ -52669,7 +53901,7 @@
      "lessons": []
     },
     {
-     "id": "c26-p06",
+     "id": "c27-p06",
      "title": "The quantum future",
      "spec": "Describe how quantum technologies could change society and the careers they create",
      "summary": "Quantum technology is more than computers: quantum sensors, clocks and secure communication are already being developed. The UK has a national strategy to become a leading quantum economy, creating new jobs in physics, engineering and computing.",
@@ -52872,13 +54104,13 @@
    ]
   },
   {
-   "id": "c27",
-   "n": 27,
+   "id": "c28",
+   "n": 28,
    "title": "Robotics, Drones and Self-Driving Vehicles",
    "intro": "Robots now pack your online shopping, help surgeons operate, spray crops and deliver parcels, while drones film sports and search for missing walkers, and robotaxis carry passengers with no one at the wheel. In this topic you'll find out how robots sense and move, how drones fly and the rules for flying one, how self-driving cars \"see\", what all this means for jobs and safety, and you'll program a robot yourself.",
    "pages": [
     {
-     "id": "c27-p01",
+     "id": "c28-p01",
      "title": "What is a robot?",
      "spec": "Define a robot, describe the sense-think-act cycle and give examples of different types of robot",
      "summary": "A robot is a programmable machine that can sense its surroundings, make decisions and act in the physical world. Robots range from factory arms to warehouse robots, surgical robots, cobots that work beside people, and humanoid robots.",
@@ -53089,7 +54321,7 @@
      "lessons": []
     },
     {
-     "id": "c27-p02",
+     "id": "c28-p02",
      "title": "How robots sense and move",
      "spec": "Describe the sensors robots use, how they move, and the meaning of degrees of freedom and accuracy",
      "summary": "Robots use sensors such as cameras, lidar, ultrasonic sensors, touch sensors and encoders to understand their surroundings and their own position. Motors and grippers let them move; the number of ways a robot can move is called its degrees of freedom.",
@@ -53303,7 +54535,7 @@
      "lessons": []
     },
     {
-     "id": "c27-p03",
+     "id": "c28-p03",
      "title": "Drones",
      "spec": "Explain how drones fly, describe their uses and apply the UK rules for flying a drone safely",
      "summary": "Most drones are quadcopters that steer by changing the speed of four rotors. Drones are used for filming, farming, inspections, deliveries and search and rescue. In the UK, flyers must follow the Drone Code, and most need a Flyer ID and Operator ID from the Civil Aviation Authority.",
@@ -53514,7 +54746,7 @@
      "lessons": []
     },
     {
-     "id": "c27-p04",
+     "id": "c28-p04",
      "title": "Self-driving vehicles",
      "spec": "Describe how self-driving vehicles perceive, plan and act, and explain the levels of driving automation",
      "summary": "Self-driving vehicles use cameras, radar, lidar and AI to perceive the road, predict what others will do, plan a path and control the car. Driving automation is described in levels 0 to 5. Robotaxis already carry passengers in some cities, and the UK's Automated Vehicles Act 2024 sets out who is responsible when a car drives itself.",
@@ -53763,7 +54995,7 @@
      "lessons": []
     },
     {
-     "id": "c27-p05",
+     "id": "c28-p05",
      "title": "Robots and society",
      "spec": "Evaluate the impact of robots and automation on jobs, safety and society",
      "summary": "Robots can take on dull, dirty and dangerous work and boost productivity, but automation also changes and replaces jobs. Society must decide who is responsible when robots cause harm, how to keep people safe, and whether some decisions should never be left to machines.",
@@ -53964,7 +55196,7 @@
      "lessons": []
     },
     {
-     "id": "c27-p06",
+     "id": "c28-p06",
      "title": "Program a robot",
      "spec": "Design, write and test an algorithm to control a robot using sequence, selection and iteration",
      "summary": "Robots follow algorithms. Programmers use sequence, selection (IF) and iteration (loops) with sensor readings to control robots, then test and debug them. A line-following robot is a classic example of selection inside a loop.",
@@ -54159,13 +55391,13 @@
    ]
   },
   {
-   "id": "c28",
-   "n": 28,
+   "id": "c29",
+   "n": 29,
    "title": "Spreadsheets",
    "intro": "How to use Microsoft Excel to store and calculate data: cells and ranges, formatting, formulas and functions, relative and absolute references, sorting and filtering, charts, and building a tested 'what if' model for a school tuck shop and trip.",
    "pages": [
     {
-     "id": "c28-p01",
+     "id": "c29-p01",
      "spec": "Describe what a spreadsheet is used for and identify cells, rows, columns and ranges",
      "summary": "A spreadsheet is a grid of cells used to store, calculate and present numbers. Each cell has a cell reference made of its column letter and row number, such as B3, and a block of cells is a range, such as A1:D6.",
      "diagram": {
@@ -54471,7 +55703,7 @@
      "lessons": []
     },
     {
-     "id": "c28-p02",
+     "id": "c29-p02",
      "spec": "Enter different types of data and format cells so a spreadsheet is clear to read",
      "summary": "Cells can hold text, numbers, currency, percentages and dates. Formatting (bold, borders, number formats, column width) changes how data looks, not its value, and makes a sheet easier to read.",
      "diagram": {
@@ -54704,7 +55936,7 @@
      "lessons": []
     },
     {
-     "id": "c28-p03",
+     "id": "c29-p03",
      "spec": "Explain what a formula is and write formulas using arithmetic operators",
      "summary": "A formula is a calculation that always starts with =. It can use numbers and cell references with the operators + - * / and ^, and Excel works it out using BODMAS. If a value changes, the formula recalculates automatically.",
      "diagram": {
@@ -54978,7 +56210,7 @@
      "lessons": []
     },
     {
-     "id": "c28-p04",
+     "id": "c29-p04",
      "spec": "Use the functions SUM, AVERAGE, MIN, MAX and COUNT on a range of cells",
      "summary": "A function is a ready-made formula with a name, such as SUM or AVERAGE. You give it a range in brackets, e.g. =SUM(B2:B9), and it does the work. Functions are quicker and less error-prone than long formulas.",
      "diagram": {
@@ -55257,7 +56489,7 @@
      "lessons": []
     },
     {
-     "id": "c28-p05",
+     "id": "c29-p05",
      "spec": "Use IF and COUNTIF to make decisions and count values that meet a condition",
      "summary": "IF checks a condition and shows one result if it is true and another if it is false, e.g. =IF(B2>=70,\"Pass\",\"Fail\"). COUNTIF counts the cells in a range that meet a condition, e.g. =COUNTIF(C2:C9,\"Pass\").",
      "diagram": {
@@ -55528,7 +56760,7 @@
      "lessons": []
     },
     {
-     "id": "c28-p06",
+     "id": "c29-p06",
      "spec": "Explain the difference between relative and absolute cell references when replicating formulas",
      "summary": "Replicating (copying) a formula with the fill handle changes relative references, so =B2*C2 becomes =B3*C3 on the next row. An absolute reference such as $F$1 has dollar signs and never changes when copied.",
      "diagram": {
@@ -55780,7 +57012,7 @@
      "lessons": []
     },
     {
-     "id": "c28-p07",
+     "id": "c29-p07",
      "spec": "Sort and filter data and use conditional formatting to highlight important values",
      "summary": "Sorting puts rows in order (ascending A to Z, smallest to largest, or descending). Filtering hides the rows you do not need. Conditional formatting changes a cell's colour automatically when it meets a rule, such as scores under 60.",
      "diagram": {
@@ -55979,7 +57211,7 @@
      "lessons": []
     },
     {
-     "id": "c28-p08",
+     "id": "c29-p08",
      "spec": "Create a chart from spreadsheet data and choose the right type of chart",
      "summary": "A chart turns numbers into a picture. Column or bar charts compare categories, line graphs show change over time and pie charts show parts of a whole. A good chart has a title, axis titles and, if needed, a legend.",
      "diagram": {
@@ -56198,7 +57430,7 @@
      "lessons": []
     },
     {
-     "id": "c28-p09",
+     "id": "c29-p09",
      "spec": "Use a spreadsheet model to answer 'what if' questions",
      "summary": "A spreadsheet model uses formulas to represent a real situation, such as a school trip budget. Changing the input values (what if more pupils go?) instantly shows the effect on the outputs, which helps people make decisions.",
      "diagram": {
@@ -56404,7 +57636,7 @@
      "lessons": []
     },
     {
-     "id": "c28-p10",
+     "id": "c29-p10",
      "spec": "Plan, build and test a spreadsheet so that it is accurate and easy for others to use",
      "summary": "A good spreadsheet is planned first, built with clear labels and formulas, then tested with data whose answers you already know. Data validation, such as a drop-down list or a number range, stops users typing in impossible data.",
      "diagram": {
@@ -59519,2278 +60751,2446 @@
    "page": "c15-p06"
   },
   {
+   "term": "Wearable",
+   "def": "A small electronic device worn on the body that collects data with sensors.",
+   "alt": "",
+   "page": "c16-p01"
+  },
+  {
+   "term": "Digital health",
+   "def": "Using technology to support health and care.",
+   "alt": "",
+   "page": "c16-p01"
+  },
+  {
+   "term": "Accelerometer",
+   "def": "A sensor that detects movement and changes in speed.",
+   "alt": "",
+   "page": "c16-p01"
+  },
+  {
+   "term": "Optical heart-rate sensor",
+   "def": "A sensor that shines light into the skin to measure heart rate.",
+   "alt": "",
+   "page": "c16-p01"
+  },
+  {
+   "term": "Accuracy",
+   "def": "How close a measurement or prediction is to the true value.",
+   "alt": "",
+   "page": "c16-p01"
+  },
+  {
+   "term": "Medical imaging",
+   "def": "Creating pictures of the inside of the body, such as X-rays and scans.",
+   "alt": "",
+   "page": "c16-p02"
+  },
+  {
+   "term": "False positive",
+   "def": "A result saying a condition is present when it isn't.",
+   "alt": "",
+   "page": "c16-p02"
+  },
+  {
+   "term": "False negative",
+   "def": "A result missing a condition that is present.",
+   "alt": "",
+   "page": "c16-p02"
+  },
+  {
+   "term": "Bias",
+   "def": "Unfairness in results, often because training data doesn't represent everyone.",
+   "alt": "",
+   "page": "c16-p02"
+  },
+  {
+   "term": "Human in the loop",
+   "def": "A person who checks and is responsible for decisions an AI helps to make.",
+   "alt": "",
+   "page": "c16-p02"
+  },
+  {
+   "term": "DNA",
+   "def": "The molecule that carries the instructions for living things, coded with four bases: A, C, G and T.",
+   "alt": "",
+   "page": "c16-p03"
+  },
+  {
+   "term": "Gene",
+   "def": "A section of DNA that gives an instruction, often to make a protein.",
+   "alt": "",
+   "page": "c16-p03"
+  },
+  {
+   "term": "Genome",
+   "def": "The complete set of DNA in an organism.",
+   "alt": "",
+   "page": "c16-p03"
+  },
+  {
+   "term": "Sequencing",
+   "def": "Reading the order of the bases in DNA.",
+   "alt": "",
+   "page": "c16-p03"
+  },
+  {
+   "term": "Bioinformatics",
+   "def": "Using computers to store and analyse biological data.",
+   "alt": "",
+   "page": "c16-p03"
+  },
+  {
+   "term": "Engineering biology",
+   "def": "Designing, building and testing living systems to solve problems.",
+   "alt": "",
+   "page": "c16-p04"
+  },
+  {
+   "term": "Design-build-test-learn",
+   "def": "The cycle of designing, making, testing and improving something.",
+   "alt": "",
+   "page": "c16-p04"
+  },
+  {
+   "term": "CRISPR",
+   "def": "A gene-editing tool that finds and cuts a specific DNA sequence.",
+   "alt": "",
+   "page": "c16-p04"
+  },
+  {
+   "term": "Protein",
+   "def": "A molecule that does a job in living things; its shape decides its job.",
+   "alt": "",
+   "page": "c16-p04"
+  },
+  {
+   "term": "AlphaFold",
+   "def": "An AI system from Google DeepMind that predicts the 3D shape of proteins.",
+   "alt": "",
+   "page": "c16-p04"
+  },
+  {
+   "term": "Special category data",
+   "def": "Highly sensitive personal data, such as health and genetic data, with extra legal protection.",
+   "alt": "",
+   "page": "c16-p05"
+  },
+  {
+   "term": "Consent",
+   "def": "Clear, informed agreement.",
+   "alt": "",
+   "page": "c16-p05"
+  },
+  {
+   "term": "Anonymisation",
+   "def": "Removing details that identify people from data.",
+   "alt": "",
+   "page": "c16-p05"
+  },
+  {
+   "term": "Data breach",
+   "def": "When personal data is lost, stolen or seen by people who shouldn't see it.",
+   "alt": "",
+   "page": "c16-p05"
+  },
+  {
+   "term": "User-centred design",
+   "def": "Designing around the needs of the people who will use something.",
+   "alt": "",
+   "page": "c16-p06"
+  },
+  {
+   "term": "Accessibility",
+   "def": "Making technology usable by as many people as possible, including disabled people.",
+   "alt": "",
+   "page": "c16-p06"
+  },
+  {
+   "term": "Clinical trial",
+   "def": "A careful study that tests a treatment or device with volunteers.",
+   "alt": "",
+   "page": "c16-p06"
+  },
+  {
+   "term": "Regulation",
+   "def": "Rules set and enforced by an official body.",
+   "alt": "",
+   "page": "c16-p06"
+  },
+  {
    "term": "Ethical hacking",
    "def": "Testing computer systems for weaknesses with the owner's permission, so they can be fixed.",
    "alt": "",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Penetration testing",
    "def": "A planned, authorised attack on a system to find its weaknesses.",
    "alt": "Pen testing",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Computer Misuse Act",
    "def": "The UK law (1990) that makes unauthorised access to computers and spreading malware criminal offences.",
    "alt": "",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Scope",
    "def": "The agreed limits of a security test: which systems and methods are allowed.",
    "alt": "",
-   "page": "c16-p01"
+   "page": "c17-p01"
   },
   {
    "term": "Capture the Flag",
    "def": "A legal hacking competition where players find hidden \"flags\" in challenges built for the purpose.",
    "alt": "CTF",
-   "page": "c16-p02"
+   "page": "c17-p02"
   },
   {
    "term": "Flag",
    "def": "A secret text string hidden in a CTF challenge, which you submit to score points.",
    "alt": "",
-   "page": "c16-p02"
+   "page": "c17-p02"
   },
   {
    "term": "CyberChef",
    "def": "A free browser tool made by GCHQ for encoding, decoding and analysing data.",
    "alt": "",
-   "page": "c16-p02"
+   "page": "c17-p02"
   },
   {
    "term": "Encoding",
    "def": "Changing data into a different format for storage or sending, with no secret key.",
    "alt": "",
-   "page": "c16-p03"
+   "page": "c17-p03"
   },
   {
    "term": "Base64",
    "def": "An encoding that turns data into letters, digits, + and /, often ending in =.",
    "alt": "",
-   "page": "c16-p03"
+   "page": "c17-p03"
   },
   {
    "term": "Hexadecimal",
    "def": "A number system with 16 digits (0-9 and A-F), often used to show bytes.",
    "alt": "Hex",
-   "page": "c16-p03"
+   "page": "c17-p03"
   },
   {
    "term": "ROT13",
    "def": "A simple cipher that shifts each letter 13 places; doing it twice gives the original.",
    "alt": "",
-   "page": "c16-p03"
+   "page": "c17-p03"
   },
   {
    "term": "Steganography",
    "def": "Hiding a message inside something ordinary so nobody knows it exists.",
    "alt": "",
-   "page": "c16-p04"
+   "page": "c17-p04"
   },
   {
    "term": "Metadata",
    "def": "Hidden information stored with a file, such as its date, author or location.",
    "alt": "",
-   "page": "c16-p04"
+   "page": "c17-p04"
   },
   {
    "term": "File signature",
    "def": "The first bytes of a file, which identify its real file type.",
    "alt": "Magic number",
-   "page": "c16-p04"
+   "page": "c17-p04"
   },
   {
    "term": "Digital forensics",
    "def": "Recovering and investigating evidence from computers and other devices.",
    "alt": "",
-   "page": "c16-p04"
+   "page": "c17-p04"
   },
   {
    "term": "Source code",
    "def": "The code that makes a program or web page, such as HTML, CSS and JavaScript.",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Cookie",
    "def": "A small piece of data a website stores in your browser, for example to keep you logged in.",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Developer tools",
    "def": "Tools built into web browsers for inspecting a page's code, network requests and storage.",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Server",
    "def": "A computer that provides services or web pages to other computers.",
    "alt": "",
-   "page": "c16-p05"
+   "page": "c17-p05"
   },
   {
    "term": "Vulnerability",
    "def": "A weakness in a system that could be exploited to cause harm.",
    "alt": "",
-   "page": "c16-p06"
+   "page": "c17-p06"
   },
   {
    "term": "Responsible disclosure",
    "def": "Privately reporting a vulnerability to its owner and giving them time to fix it before telling anyone else.",
    "alt": "",
-   "page": "c16-p06"
+   "page": "c17-p06"
   },
   {
    "term": "Bug bounty",
    "def": "A reward paid to people who responsibly report vulnerabilities.",
    "alt": "",
-   "page": "c16-p06"
+   "page": "c17-p06"
   },
   {
    "term": "Artificial intelligence",
    "def": "Computer systems that can do tasks that normally need human intelligence, such as recognising faces, understanding language or making predictions.",
    "alt": "AI",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Generative AI",
    "def": "Artificial intelligence that creates new content such as text, images, audio, video or code.",
    "alt": "GenAI",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Training data",
    "def": "The huge collection of examples (text, images, sounds) that an AI model learns patterns from.",
    "alt": "",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Model",
    "def": "The result of training an AI: a very large set of numbers that captures the patterns it has learned.",
    "alt": "",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Prompt",
    "def": "The instruction you give a generative AI tool, usually in everyday language.",
    "alt": "",
-   "page": "c17-p01"
+   "page": "c18-p01"
   },
   {
    "term": "Large language model",
    "def": "A generative AI model trained on huge amounts of text that writes by predicting the next token.",
    "alt": "LLM",
-   "page": "c17-p02"
+   "page": "c18-p02"
   },
   {
    "term": "Token",
    "def": "A small chunk of text (a word or part of a word) that a language model reads and writes.",
    "alt": "",
-   "page": "c17-p02"
+   "page": "c18-p02"
   },
   {
    "term": "Chatbot",
    "def": "A program you can have a conversation with, often powered by a large language model.",
    "alt": "",
-   "page": "c17-p02"
+   "page": "c18-p02"
   },
   {
    "term": "Prompt engineering",
    "def": "The skill of writing prompts that get useful results from a generative AI tool.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Context",
    "def": "Background information that helps an AI (or a person) understand what you need.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Iteration",
    "def": "Repeating a cycle of trying, checking and improving.",
    "alt": "",
-   "page": "c17-p03"
+   "page": "c18-p03"
   },
   {
    "term": "Hallucination",
    "def": "When a generative AI states something false as if it were true, such as an invented fact or source.",
    "alt": "",
-   "page": "c17-p04"
+   "page": "c18-p04"
   },
   {
    "term": "Bias",
    "def": "When a system treats some people or ideas unfairly or one-sidedly, often because of patterns in its data.",
    "alt": "",
-   "page": "c17-p04"
+   "page": "c18-p04"
   },
   {
    "term": "Verify",
    "def": "To check that something is true, for example using reliable sources.",
    "alt": "",
-   "page": "c17-p04"
+   "page": "c18-p04"
   },
   {
    "term": "Plagiarism",
    "def": "Presenting someone else's work (including work made by AI) as your own.",
    "alt": "",
-   "page": "c17-p05"
+   "page": "c18-p05"
   },
   {
    "term": "Copyright",
    "def": "The legal right that protects creative work such as writing, music, photos and art from being copied without permission.",
    "alt": "",
-   "page": "c17-p05"
+   "page": "c18-p05"
   },
   {
    "term": "Acknowledge",
    "def": "To say clearly where something came from, including which AI tool you used and how.",
    "alt": "",
-   "page": "c17-p05"
+   "page": "c18-p05"
   },
   {
    "term": "Automation",
    "def": "When machines or software do tasks that people used to do.",
    "alt": "",
-   "page": "c17-p06"
+   "page": "c18-p06"
   },
   {
    "term": "Regulation",
    "def": "Official rules, for example laws that control how AI may be used.",
    "alt": "",
-   "page": "c17-p06"
+   "page": "c18-p06"
   },
   {
    "term": "Data centre",
    "def": "A building full of computers (servers) that store data and run online services such as AI.",
    "alt": "",
-   "page": "c17-p06"
+   "page": "c18-p06"
   },
   {
    "term": "Internet of Things",
    "def": "The network of everyday physical objects that have sensors, processors and internet connections.",
    "alt": "IoT",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "Smart device",
    "def": "An everyday object that can collect data, connect to the internet and sometimes act automatically.",
    "alt": "",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "Cloud",
    "def": "Remote servers, reached over the internet, that store and process data.",
    "alt": "",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "Embedded system",
    "def": "A small computer built into a larger device to carry out one specific job.",
    "alt": "",
-   "page": "c18-p01"
+   "page": "c19-p01"
   },
   {
    "term": "Sensor",
    "def": "A device that measures something in the physical world and turns it into data.",
    "alt": "",
-   "page": "c18-p02"
+   "page": "c19-p02"
   },
   {
    "term": "Actuator",
    "def": "A device that makes something happen in the physical world, such as a motor, pump or light.",
    "alt": "",
-   "page": "c18-p02"
+   "page": "c19-p02"
   },
   {
    "term": "Feedback loop",
    "def": "When a system's output affects its next input, letting it adjust automatically.",
    "alt": "",
-   "page": "c18-p02"
+   "page": "c19-p02"
   },
   {
    "term": "Smart home",
    "def": "A home with devices that can be controlled remotely or automatically.",
    "alt": "",
-   "page": "c18-p03"
+   "page": "c19-p03"
   },
   {
    "term": "Voice assistant",
    "def": "Software that responds to spoken commands, such as Alexa, Google Assistant or Siri.",
    "alt": "",
-   "page": "c18-p03"
+   "page": "c19-p03"
   },
   {
    "term": "Privacy",
    "def": "Having control over your personal information and who can see it.",
    "alt": "",
-   "page": "c18-p03"
+   "page": "c19-p03"
   },
   {
    "term": "Interoperability",
    "def": "The ability of devices or systems from different makers to work together.",
    "alt": "",
-   "page": "c18-p03"
+   "page": "c19-p03"
   },
   {
    "term": "Smart city",
    "def": "A city that uses sensors, networks and data to run services more efficiently.",
    "alt": "",
-   "page": "c18-p04"
+   "page": "c19-p04"
   },
   {
    "term": "Open data",
    "def": "Data that anyone is allowed to use for free.",
    "alt": "",
-   "page": "c18-p04"
+   "page": "c19-p04"
   },
   {
    "term": "Surveillance",
    "def": "Watching or tracking people, for example with cameras or sensors.",
    "alt": "",
-   "page": "c18-p04"
+   "page": "c19-p04"
   },
   {
    "term": "Digital twin",
    "def": "A virtual model of a real place or object, kept updated with live data.",
    "alt": "",
-   "page": "c18-p04"
+   "page": "c19-p04"
   },
   {
    "term": "Default password",
    "def": "The password a device comes with from the factory.",
    "alt": "",
-   "page": "c18-p05"
+   "page": "c19-p05"
   },
   {
    "term": "Botnet",
    "def": "A network of devices infected with malware and controlled by criminals.",
    "alt": "",
-   "page": "c18-p05"
+   "page": "c19-p05"
   },
   {
    "term": "Firmware",
    "def": "The software built into a device that controls how it works.",
    "alt": "",
-   "page": "c18-p05"
+   "page": "c19-p05"
   },
   {
    "term": "PSTI",
    "def": "The UK's Product Security and Telecommunications Infrastructure rules, which set minimum security requirements for smart devices.",
    "alt": "",
-   "page": "c18-p05"
+   "page": "c19-p05"
   },
   {
    "term": "Prototype",
    "def": "An early working model used to test and improve an idea.",
    "alt": "",
-   "page": "c18-p06"
+   "page": "c19-p06"
   },
   {
    "term": "Privacy by design",
    "def": "Building privacy into a system from the start, for example by collecting only the data needed.",
    "alt": "",
-   "page": "c18-p06"
+   "page": "c19-p06"
   },
   {
    "term": "Sustainability",
    "def": "Meeting today's needs without harming the environment or future generations.",
    "alt": "",
-   "page": "c18-p06"
+   "page": "c19-p06"
   },
   {
    "term": "Machine learning",
    "def": "A type of AI where computers learn patterns from data instead of following rules written by a programmer.",
    "alt": "ML",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Supervised learning",
    "def": "Machine learning that learns from examples labelled with the correct answers.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Feature",
    "def": "A piece of information about each example in a dataset, such as weight, colour or pixel values.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Label",
    "def": "The correct answer or category for an example, which the model learns to predict.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Dataset",
    "def": "A collection of examples, usually organised as a table or a set of files.",
    "alt": "",
-   "page": "c19-p01"
+   "page": "c20-p01"
   },
   {
    "term": "Classifier",
    "def": "A model that sorts inputs into categories.",
    "alt": "",
-   "page": "c19-p02"
+   "page": "c20-p02"
   },
   {
    "term": "Class",
    "def": "One of the categories a classifier can choose between.",
    "alt": "",
-   "page": "c19-p02"
+   "page": "c20-p02"
   },
   {
    "term": "Training data",
    "def": "The labelled examples a model learns from.",
    "alt": "",
-   "page": "c19-p02"
+   "page": "c20-p02"
   },
   {
    "term": "Test data",
    "def": "Examples kept separate from training and used to check how well a model works on new data.",
    "alt": "",
-   "page": "c19-p03"
+   "page": "c20-p03"
   },
   {
    "term": "Accuracy",
    "def": "The percentage of a model's predictions that are correct.",
    "alt": "",
-   "page": "c19-p03"
+   "page": "c20-p03"
   },
   {
    "term": "Confusion matrix",
    "def": "A table comparing actual and predicted classes, showing which classes a model mixes up.",
    "alt": "",
-   "page": "c19-p03"
+   "page": "c20-p03"
   },
   {
    "term": "Overfitting",
    "def": "When a model learns its training data too closely and performs badly on new data.",
    "alt": "",
-   "page": "c19-p04"
+   "page": "c20-p04"
   },
   {
    "term": "Edge case",
    "def": "An unusual situation that rarely appears in the training data.",
    "alt": "",
-   "page": "c19-p04"
+   "page": "c20-p04"
   },
   {
    "term": "Generalise",
    "def": "To work well on new examples, not just the ones used in training.",
    "alt": "",
-   "page": "c19-p04"
+   "page": "c20-p04"
   },
   {
    "term": "Shortcut learning",
    "def": "When a model uses an accidental clue (like a background) instead of the real feature.",
    "alt": "",
-   "page": "c19-p04"
+   "page": "c20-p04"
   },
   {
    "term": "Bias",
    "def": "When a system is less accurate or less fair for some people, often because of its data.",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "Representative data",
    "def": "Data that includes a fair mix of all the people and situations a system will meet.",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "Fairness",
    "def": "Making sure a system does not treat people worse because of who they are.",
    "alt": "",
-   "page": "c19-p05"
+   "page": "c20-p05"
   },
   {
    "term": "Problem statement",
    "def": "A clear description of the problem a project will solve, and for whom.",
    "alt": "",
-   "page": "c19-p06"
+   "page": "c20-p06"
   },
   {
    "term": "Evaluation",
    "def": "Judging how well a solution works against success criteria.",
    "alt": "",
-   "page": "c19-p06"
+   "page": "c20-p06"
   },
   {
    "term": "Human oversight",
    "def": "People checking an AI's decisions and being able to overrule them.",
    "alt": "",
-   "page": "c19-p06"
+   "page": "c20-p06"
   },
   {
    "term": "Semiconductor",
    "def": "A material, such as silicon, whose ability to conduct electricity can be controlled.",
    "alt": "",
-   "page": "c20-p01"
+   "page": "c21-p01"
   },
   {
    "term": "Silicon",
    "def": "The element (found in sand) used to make most computer chips.",
    "alt": "",
-   "page": "c20-p01"
+   "page": "c21-p01"
   },
   {
    "term": "Transistor",
    "def": "A tiny electronic switch made from semiconductor material that represents 1 (on) or 0 (off).",
    "alt": "",
-   "page": "c20-p01"
+   "page": "c21-p01"
   },
   {
    "term": "Microchip",
    "def": "A small piece of silicon containing a complete electronic circuit, often with billions of transistors.",
    "alt": "Chip",
-   "page": "c20-p01"
+   "page": "c21-p01"
   },
   {
    "term": "Logic gate",
    "def": "A circuit that takes one or more binary inputs and produces one output, such as AND, OR or NOT.",
    "alt": "",
-   "page": "c20-p02"
+   "page": "c21-p02"
   },
   {
    "term": "Truth table",
    "def": "A table showing the output of a logic circuit for every possible combination of inputs.",
    "alt": "",
-   "page": "c20-p02"
+   "page": "c21-p02"
   },
   {
    "term": "Boolean",
    "def": "Logic that uses only two values: true (1) and false (0).",
    "alt": "",
-   "page": "c20-p02"
+   "page": "c21-p02"
   },
   {
    "term": "Wafer",
    "def": "A thin, polished disc of silicon on which many chips are made at once.",
    "alt": "",
-   "page": "c20-p03"
+   "page": "c21-p03"
   },
   {
    "term": "Photolithography",
    "def": "Printing circuit patterns onto a wafer using light shone through a patterned mask.",
    "alt": "",
-   "page": "c20-p03"
+   "page": "c21-p03"
   },
   {
    "term": "Clean room",
    "def": "A room where the air is filtered to remove almost all dust, used for making chips.",
    "alt": "",
-   "page": "c20-p03"
+   "page": "c21-p03"
   },
   {
    "term": "Fab",
    "def": "A chip fabrication plant: a factory that manufactures microchips.",
    "alt": "",
-   "page": "c20-p03"
+   "page": "c21-p03"
   },
   {
    "term": "Nanometre",
    "def": "One billionth of a metre.",
    "alt": "nm",
-   "page": "c20-p03"
+   "page": "c21-p03"
   },
   {
    "term": "Clock speed",
    "def": "The number of cycles a processor carries out per second, measured in gigahertz (GHz).",
    "alt": "",
-   "page": "c20-p04"
+   "page": "c21-p04"
   },
   {
    "term": "Core",
    "def": "A separate processing unit within a processor.",
    "alt": "",
-   "page": "c20-p04"
+   "page": "c21-p04"
   },
   {
    "term": "Cache",
    "def": "Small, very fast memory inside the processor that holds frequently used data.",
    "alt": "",
-   "page": "c20-p04"
+   "page": "c21-p04"
   },
   {
    "term": "RAM",
    "def": "Random access memory: the main memory holding programs and data currently in use.",
    "alt": "",
-   "page": "c20-p04"
+   "page": "c21-p04"
   },
   {
    "term": "Moore's law",
    "def": "The observation that the number of transistors on a chip doubles about every two years.",
    "alt": "",
-   "page": "c20-p04"
+   "page": "c21-p04"
   },
   {
    "term": "CPU",
    "def": "Central processing unit: the general-purpose processor that runs programs.",
    "alt": "Processor",
-   "page": "c20-p05"
+   "page": "c21-p05"
   },
   {
    "term": "GPU",
    "def": "Graphics processing unit: a processor with thousands of simple cores that is good at parallel tasks like graphics and AI.",
    "alt": "",
-   "page": "c20-p05"
+   "page": "c21-p05"
   },
   {
    "term": "NPU",
    "def": "Neural processing unit: a processor designed to run AI tasks efficiently.",
    "alt": "",
-   "page": "c20-p05"
+   "page": "c21-p05"
   },
   {
    "term": "System on a chip",
    "def": "A single chip that combines a CPU, GPU and other components.",
    "alt": "SoC",
-   "page": "c20-p05"
+   "page": "c21-p05"
   },
   {
    "term": "Parallel processing",
    "def": "Carrying out many calculations at the same time.",
    "alt": "",
-   "page": "c20-p05"
+   "page": "c21-p05"
   },
   {
    "term": "Supply chain",
    "def": "All the steps, companies and countries involved in making and delivering a product.",
    "alt": "",
-   "page": "c20-p06"
+   "page": "c21-p06"
   },
   {
    "term": "Chip shortage",
    "def": "A period (2020-2022) when demand for microchips was far greater than supply.",
    "alt": "",
-   "page": "c20-p06"
+   "page": "c21-p06"
   },
   {
    "term": "E-waste",
    "def": "Unwanted electrical and electronic devices.",
    "alt": "",
-   "page": "c20-p06"
+   "page": "c21-p06"
   },
   {
    "term": "Model",
    "def": "A simplified representation of a real system, used to understand it or predict what will happen.",
    "alt": "",
-   "page": "c21-p01"
+   "page": "c22-p01"
   },
   {
    "term": "Real system",
    "def": "The actual thing or situation in the real world that a model represents, such as the weather or a school canteen.",
    "alt": "",
-   "page": "c21-p01"
+   "page": "c22-p01"
   },
   {
    "term": "Simulation",
    "def": "Running a model, often step by step over time, to imitate what would happen in the real system.",
    "alt": "",
-   "page": "c21-p01"
+   "page": "c22-p01"
   },
   {
    "term": "Prediction",
    "def": "A model's estimate of what will happen. It may turn out to be wrong.",
    "alt": "",
-   "page": "c21-p01"
+   "page": "c22-p01"
   },
   {
    "term": "Abstraction",
    "def": "Removing details that do not matter for the question, keeping only what is important.",
    "alt": "",
-   "page": "c21-p02"
+   "page": "c22-p02"
   },
   {
    "term": "Assumption",
    "def": "Something a modeller treats as true to simplify a model, e.g. every pupil takes 15 seconds to be served.",
    "alt": "",
-   "page": "c21-p02"
+   "page": "c22-p02"
   },
   {
    "term": "Decomposition",
    "def": "Breaking a big problem down into smaller parts that are easier to solve.",
    "alt": "",
-   "page": "c21-p02"
+   "page": "c22-p02"
   },
   {
    "term": "Variable",
    "def": "A named value in a model that can change, such as speed or number of pupils.",
    "alt": "",
-   "page": "c21-p03"
+   "page": "c22-p03"
   },
   {
    "term": "Input",
    "def": "A value fed into a model that the user can change.",
    "alt": "",
-   "page": "c21-p03"
+   "page": "c22-p03"
   },
   {
    "term": "Rule",
    "def": "A formula or instruction in a model that describes how the system behaves.",
    "alt": "",
-   "page": "c21-p03"
+   "page": "c22-p03"
   },
   {
    "term": "Output",
    "def": "A result produced by a model from its inputs and rules.",
    "alt": "",
-   "page": "c21-p03"
+   "page": "c22-p03"
   },
   {
    "term": "Constant",
    "def": "A value that stays the same every time a model runs, e.g. 60 minutes in an hour.",
    "alt": "",
-   "page": "c21-p03"
+   "page": "c22-p03"
   },
   {
    "term": "Data type",
    "def": "The kind of value a variable stores, such as integer, float, string or Boolean.",
    "alt": "",
-   "page": "c21-p03"
+   "page": "c22-p03"
   },
   {
    "term": "Integer",
    "def": "A data type for whole numbers, e.g. 12 stops.",
    "alt": "",
-   "page": "c21-p03"
+   "page": "c22-p03"
   },
   {
    "term": "Float",
    "def": "A data type for numbers with a decimal point, e.g. 0.5 or 2.75. Also called real.",
    "alt": "",
-   "page": "c21-p03"
+   "page": "c22-p03"
   },
   {
    "term": "String",
    "def": "A data type for text, e.g. \"Belleek route\".",
    "alt": "",
-   "page": "c21-p03"
+   "page": "c22-p03"
   },
   {
    "term": "Boolean",
    "def": "A data type with only two values: TRUE or FALSE.",
    "alt": "",
-   "page": "c21-p03"
+   "page": "c22-p03"
   },
   {
    "term": "What-if question",
    "def": "Changing an input in a model to see the effect on the outputs.",
    "alt": "",
-   "page": "c21-p04"
+   "page": "c22-p04"
   },
   {
    "term": "Hard-coding",
    "def": "Typing a fixed number into a formula instead of referring to an input cell, so the formula does not update.",
    "alt": "",
-   "page": "c21-p04"
+   "page": "c22-p04"
   },
   {
    "term": "Goal Seek",
    "def": "An Excel tool that works backwards: it finds the input value needed for an output to reach a target.",
    "alt": "",
-   "page": "c21-p05"
+   "page": "c22-p05"
   },
   {
    "term": "Break-even point",
    "def": "Where income exactly equals costs, so the profit is £0.",
    "alt": "",
-   "page": "c21-p05"
+   "page": "c22-p05"
   },
   {
    "term": "Scenario",
    "def": "A saved set of input values describing one possible situation, such as a worst case or best case.",
    "alt": "",
-   "page": "c21-p05"
+   "page": "c22-p05"
   },
   {
    "term": "Time step",
    "def": "One jump forward in a simulation over time, such as one day or one year.",
    "alt": "",
-   "page": "c21-p06"
+   "page": "c22-p06"
   },
   {
    "term": "Iteration",
    "def": "Repeating a set of steps; in a simulation, applying the rules again for each time step.",
    "alt": "",
-   "page": "c21-p06"
+   "page": "c22-p06"
   },
   {
    "term": "Random number",
    "def": "A number chosen by chance, used in simulations to model events such as dice rolls.",
    "alt": "",
-   "page": "c21-p07"
+   "page": "c22-p07"
   },
   {
    "term": "Probability",
    "def": "How likely something is to happen, from 0 (impossible) to 1 (certain).",
    "alt": "",
-   "page": "c21-p07"
+   "page": "c22-p07"
   },
   {
    "term": "Validation",
    "def": "Checking a model by comparing its predictions with real data.",
    "alt": "",
-   "page": "c21-p08"
+   "page": "c22-p08"
   },
   {
    "term": "Prediction error",
    "def": "The difference between the real value and the value a model predicted.",
    "alt": "",
-   "page": "c21-p08"
+   "page": "c22-p08"
   },
   {
    "term": "GIGO",
    "def": "Garbage in, garbage out: if the data put into a model is wrong, its outputs will be wrong too.",
    "alt": "",
-   "page": "c21-p09"
+   "page": "c22-p09"
   },
   {
    "term": "Trade-off",
    "def": "Gaining one thing by giving up another, e.g. a simpler model is quicker but less accurate.",
    "alt": "",
-   "page": "c21-p09"
+   "page": "c22-p09"
   },
   {
    "term": "Bias",
    "def": "When a model's results are unfair to, or less accurate for, some groups of people.",
    "alt": "",
-   "page": "c21-p09"
+   "page": "c22-p09"
   },
   {
    "term": "AI model",
    "def": "A model that has learned patterns from a large set of data so it can make predictions or generate content.",
    "alt": "",
-   "page": "c21-p09"
+   "page": "c22-p09"
   },
   {
    "term": "Training data",
    "def": "The examples an AI model learns its patterns from.",
    "alt": "",
-   "page": "c21-p09"
+   "page": "c22-p09"
   },
   {
    "term": "Success criteria",
    "def": "Statements used to judge whether a model or product does its job.",
    "alt": "",
-   "page": "c21-p10"
+   "page": "c22-p10"
   },
   {
    "term": "Test data",
    "def": "Values chosen to check a model gives correct results, including normal and extreme values.",
    "alt": "",
-   "page": "c21-p10"
+   "page": "c22-p10"
   },
   {
    "term": "Network",
    "def": "Two or more computers or devices connected together so they can communicate and share data and resources.",
    "alt": "",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "Stand-alone computer",
    "def": "A computer that is not connected to any network.",
    "alt": "",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "LAN",
    "def": "Local Area Network: a network covering a small area, such as one school, home or office building.",
    "alt": "Local Area Network",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "WAN",
    "def": "Wide Area Network: a network covering a large geographical area, often linking LANs together. The internet is the largest WAN.",
    "alt": "Wide Area Network",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "Internet",
    "def": "A global WAN made of millions of smaller networks joined together.",
    "alt": "",
-   "page": "c22-p01"
+   "page": "c23-p01"
   },
   {
    "term": "NIC",
    "def": "Network Interface Card: the hardware inside a device that lets it connect to a network, by cable or wirelessly.",
    "alt": "Network Interface Card",
-   "page": "c22-p02"
+   "page": "c23-p02"
   },
   {
    "term": "Switch",
    "def": "A device that connects devices together within a LAN and sends data only to the device it is meant for.",
    "alt": "",
-   "page": "c22-p02"
+   "page": "c23-p02"
   },
   {
    "term": "Router",
    "def": "A device that connects different networks together (e.g. a LAN to the internet) and forwards packets towards their destination.",
    "alt": "",
-   "page": "c22-p02"
+   "page": "c23-p02"
   },
   {
    "term": "Wireless access point",
    "def": "A device that lets wireless devices connect to a wired network using Wi-Fi.",
    "alt": "WAP",
-   "page": "c22-p02"
+   "page": "c23-p02"
   },
   {
    "term": "Modem",
    "def": "A device that converts digital data from a computer into signals that can travel along a phone line or cable, and back again.",
    "alt": "",
-   "page": "c22-p02"
+   "page": "c23-p02"
   },
   {
    "term": "Ethernet cable",
    "def": "A copper cable with twisted pairs of wires, used to connect devices in a wired LAN.",
    "alt": "",
-   "page": "c22-p02"
+   "page": "c23-p02"
   },
   {
    "term": "Fibre optic cable",
    "def": "A cable that carries data as pulses of light along thin strands of glass; very fast and works over long distances.",
    "alt": "",
-   "page": "c22-p02"
+   "page": "c23-p02"
   },
   {
    "term": "Wi-Fi",
    "def": "A wireless technology that uses radio waves to connect devices to a LAN and the internet, usually over tens of metres.",
    "alt": "",
-   "page": "c22-p03"
+   "page": "c23-p03"
   },
   {
    "term": "Bluetooth",
    "def": "A short-range, low-power wireless technology for connecting devices directly to each other, usually within about 10 metres.",
    "alt": "",
-   "page": "c22-p03"
+   "page": "c23-p03"
   },
   {
    "term": "Topology",
    "def": "The layout of a network: how the devices are connected to each other.",
    "alt": "Network topology",
-   "page": "c22-p04"
+   "page": "c23-p04"
   },
   {
    "term": "Star topology",
    "def": "A network layout where every device has its own connection to a central switch.",
    "alt": "",
-   "page": "c22-p04"
+   "page": "c23-p04"
   },
   {
    "term": "Bus topology",
    "def": "A network layout where all devices are connected to one main cable called the backbone.",
    "alt": "",
-   "page": "c22-p04"
+   "page": "c23-p04"
   },
   {
    "term": "Mesh topology",
    "def": "A network layout where devices are connected to several other devices, so data has many possible routes.",
    "alt": "",
-   "page": "c22-p04"
+   "page": "c23-p04"
   },
   {
    "term": "Server",
    "def": "A powerful computer that provides a service (such as storing files, printing or hosting websites) to other computers on a network.",
    "alt": "",
-   "page": "c22-p05"
+   "page": "c23-p05"
   },
   {
    "term": "Client",
    "def": "A computer or device that requests and uses services from a server.",
    "alt": "",
-   "page": "c22-p05"
+   "page": "c23-p05"
   },
   {
    "term": "Client-server network",
    "def": "A network where clients request services from one or more central servers, which manage files, logins and security.",
    "alt": "",
-   "page": "c22-p05"
+   "page": "c23-p05"
   },
   {
    "term": "Peer-to-peer network",
    "def": "A network with no central server, where every computer is equal and shares its own files and resources directly with the others.",
    "alt": "P2P",
-   "page": "c22-p05"
+   "page": "c23-p05"
   },
   {
    "term": "Packet",
    "def": "A small chunk of data sent across a network, with a header containing information such as the sender's and receiver's addresses and the packet number.",
    "alt": "Data packet",
-   "page": "c22-p06"
+   "page": "c23-p06"
   },
   {
    "term": "Packet switching",
    "def": "A way of sending data where it is split into packets that may take different routes and are put back in order when they arrive.",
    "alt": "",
-   "page": "c22-p06"
+   "page": "c23-p06"
   },
   {
    "term": "Protocol",
    "def": "A set of rules that devices follow so they can communicate with each other, e.g. TCP/IP or HTTP.",
    "alt": "",
-   "page": "c22-p06"
+   "page": "c23-p06"
   },
   {
    "term": "IP address",
    "def": "A number that identifies a device on a network so data can be sent to it, e.g. 192.168.1.25. It can change if the device moves to another network.",
    "alt": "Internet Protocol address",
-   "page": "c22-p07"
+   "page": "c23-p07"
   },
   {
    "term": "MAC address",
    "def": "A unique, permanent address built into every NIC when it is made, written as 12 hexadecimal digits, e.g. 3C:22:FB:9A:41:07.",
    "alt": "Media Access Control address",
-   "page": "c22-p07"
+   "page": "c23-p07"
   },
   {
    "term": "Domain name",
    "def": "The human-friendly name of a website, such as bbc.co.uk, that is easier to remember than an IP address.",
    "alt": "",
-   "page": "c22-p08"
+   "page": "c23-p08"
   },
   {
    "term": "DNS",
    "def": "Domain Name System: a system of servers that translates domain names such as bbc.co.uk into IP addresses.",
    "alt": "Domain Name System",
-   "page": "c22-p08"
+   "page": "c23-p08"
   },
   {
    "term": "ISP",
    "def": "Internet Service Provider: a company that connects homes and businesses to the internet, e.g. BT or Virgin Media.",
    "alt": "Internet Service Provider",
-   "page": "c22-p08"
+   "page": "c23-p08"
   },
   {
    "term": "URL",
    "def": "Uniform Resource Locator: the full web address of a page, e.g. https://www.bbc.co.uk/sport.",
    "alt": "Web address",
-   "page": "c22-p08"
+   "page": "c23-p08"
   },
   {
    "term": "Web server",
    "def": "A server that stores web pages and sends them to browsers that request them.",
    "alt": "",
-   "page": "c22-p08"
+   "page": "c23-p08"
   },
   {
    "term": "Bandwidth",
    "def": "The maximum amount of data that can be sent across a network connection each second.",
    "alt": "",
-   "page": "c22-p09"
+   "page": "c23-p09"
   },
   {
    "term": "Mbps",
    "def": "Megabits per second: one million bits per second. The usual unit for broadband speeds.",
    "alt": "Megabits per second",
-   "page": "c22-p09"
+   "page": "c23-p09"
   },
   {
    "term": "Latency",
    "def": "The delay between data being sent and it arriving, measured in milliseconds; also called lag or ping.",
    "alt": "Ping",
-   "page": "c22-p09"
+   "page": "c23-p09"
   },
   {
    "term": "The cloud",
    "def": "Services, software and storage provided over the internet from servers in data centres, instead of on your own device.",
    "alt": "Cloud computing",
-   "page": "c22-p10"
+   "page": "c23-p10"
   },
   {
    "term": "Cloud storage",
    "def": "Saving files on servers owned by a company and accessed over the internet, e.g. OneDrive or Google Drive.",
    "alt": "",
-   "page": "c22-p10"
+   "page": "c23-p10"
   },
   {
    "term": "Data centre",
    "def": "A large building full of servers that store data and run online services.",
    "alt": "",
-   "page": "c22-p10"
+   "page": "c23-p10"
   },
   {
    "term": "Internet of Things",
    "def": "Everyday objects with sensors and network connections that let them collect and share data over the internet.",
    "alt": "IoT",
-   "page": "c22-p10"
+   "page": "c23-p10"
   },
   {
    "term": "Smart device",
    "def": "An everyday device, such as a speaker, doorbell or thermostat, that connects to the internet and can be controlled remotely.",
    "alt": "",
-   "page": "c22-p10"
+   "page": "c23-p10"
   },
   {
    "term": "Presentation software",
    "def": "A program that shows information as a series of slides, usually to support a speaker, e.g. Microsoft PowerPoint, Google Slides or Apple Keynote.",
    "alt": "",
-   "page": "c23-p01"
+   "page": "c24-p01"
   },
   {
    "term": "Audience",
    "def": "The people who will watch or use a presentation. Their age, knowledge and needs affect every design choice.",
    "alt": "",
-   "page": "c23-p01"
+   "page": "c24-p01"
   },
   {
    "term": "Purpose",
    "def": "What a presentation is meant to achieve, e.g. to inform, persuade, entertain or advertise.",
    "alt": "",
-   "page": "c23-p01"
+   "page": "c24-p01"
   },
   {
    "term": "User-centred design",
    "def": "Designing a product around the needs of the people who will use it, found by asking or observing them.",
    "alt": "",
-   "page": "c23-p01"
+   "page": "c24-p01"
   },
   {
    "term": "Communication conventions",
    "def": "The accepted rules for communicating with a particular audience, e.g. how formal the language is, a title slide and a sources slide. Also called communication protocols.",
    "alt": "",
-   "page": "c23-p01"
+   "page": "c24-p01"
   },
   {
    "term": "Storyboard",
    "def": "A plan of every slide made before building a presentation, showing layout, text, images and their sources, effects, links and notes.",
    "alt": "",
-   "page": "c23-p02"
+   "page": "c24-p02"
   },
   {
    "term": "Ribbon",
    "def": "The strip of tools across the top of the PowerPoint window, organised into tabs (Home, Insert, Design…) and groups.",
    "alt": "",
-   "page": "c23-p03"
+   "page": "c24-p03"
   },
   {
    "term": "Slide layout",
    "def": "A ready-made arrangement of placeholders for a slide, e.g. Title Slide, Title and Content, Comparison.",
    "alt": "",
-   "page": "c23-p03"
+   "page": "c24-p03"
   },
   {
    "term": "Placeholder",
    "def": "A dotted box on a slide layout that holds a title, text or other content, e.g. 'Click to add title'.",
    "alt": "",
-   "page": "c23-p03"
+   "page": "c24-p03"
   },
   {
    "term": "6x6 rule",
    "def": "A slide design guideline: no more than about six bullet points per slide and about six words per bullet point.",
    "alt": "",
-   "page": "c23-p04"
+   "page": "c24-p04"
   },
   {
    "term": "Contrast",
    "def": "The difference between the colour of text and its background. High contrast makes text easier to read.",
    "alt": "",
-   "page": "c23-p04"
+   "page": "c24-p04"
   },
   {
    "term": "Slide Master",
    "def": "The top slide in a hidden set of master layouts (View > Slide Master). Changes to it, such as a logo or font, appear on every slide.",
    "alt": "",
-   "page": "c23-p04"
+   "page": "c24-p04"
   },
   {
    "term": "Copyright",
    "def": "The legal right of a creator to control how their work is copied and used. In the UK it is automatic and protected by the Copyright, Designs and Patents Act 1988.",
    "alt": "",
-   "page": "c23-p05"
+   "page": "c24-p05"
   },
   {
    "term": "Intellectual property",
    "def": "Something a person creates with their mind, such as a photo, song, design, logo or invention, that they own. Protected by copyright, trade marks and patents.",
    "alt": "",
-   "page": "c23-p05"
+   "page": "c24-p05"
   },
   {
    "term": "Licence",
    "def": "Permission from the owner of a work setting out what others may and may not do with it, e.g. a Creative Commons licence.",
    "alt": "",
-   "page": "c23-p05"
+   "page": "c24-p05"
   },
   {
    "term": "Generative AI",
    "def": "Artificial intelligence that creates new content, such as text, images, audio or video, from a prompt. AI-generated images should be clearly labelled.",
    "alt": "",
-   "page": "c23-p05"
+   "page": "c24-p05"
   },
   {
    "term": "Plagiarism",
    "def": "Using someone else's work or ideas and presenting them as your own.",
    "alt": "",
-   "page": "c23-p05"
+   "page": "c24-p05"
   },
   {
    "term": "Creative Commons",
    "def": "Free licences that let creators allow others to use their work under set conditions, e.g. BY (credit the creator), NC (non-commercial).",
    "alt": "",
-   "page": "c23-p05"
+   "page": "c24-p05"
   },
   {
    "term": "Attribution",
    "def": "Giving credit to the creator of a work you use: Title, Author, Source and Licence (TASL).",
    "alt": "",
-   "page": "c23-p05"
+   "page": "c24-p05"
   },
   {
    "term": "SmartArt",
    "def": "A PowerPoint feature that turns a list into a ready-designed diagram such as a process, cycle or hierarchy.",
    "alt": "",
-   "page": "c23-p06"
+   "page": "c24-p06"
   },
   {
    "term": "Transition",
    "def": "An effect that plays when moving from one slide to the next, e.g. Fade or Morph.",
    "alt": "",
-   "page": "c23-p07"
+   "page": "c24-p07"
   },
   {
    "term": "Animation",
    "def": "An effect applied to an object on a slide: entrance, emphasis, exit or motion path.",
    "alt": "",
-   "page": "c23-p07"
+   "page": "c24-p07"
   },
   {
    "term": "Non-linear presentation",
    "def": "A presentation where the user chooses which slide to go to next by clicking links or buttons, e.g. a quiz or menu.",
    "alt": "",
-   "page": "c23-p08"
+   "page": "c24-p08"
   },
   {
    "term": "Hyperlink",
    "def": "Clickable text or an object that jumps to another slide, a web page, a file or an email address (Insert > Link, Ctrl + K).",
    "alt": "",
-   "page": "c23-p08"
+   "page": "c24-p08"
   },
   {
    "term": "Action button",
    "def": "A ready-made shape, such as Home, Back or Next, that performs an action like going to a slide when clicked (Insert > Shapes).",
    "alt": "",
-   "page": "c23-p08"
+   "page": "c24-p08"
   },
   {
    "term": "Kiosk mode",
    "def": "A slide show setting (Browsed at a kiosk) where the show runs full screen, loops, and can only be moved on with links, buttons or timings.",
    "alt": "",
-   "page": "c23-p08"
+   "page": "c24-p08"
   },
   {
    "term": "Accessibility",
    "def": "Designing something so that everyone can use it, including people with a disability.",
    "alt": "",
-   "page": "c23-p09"
+   "page": "c24-p09"
   },
   {
    "term": "Screen reader",
    "def": "Software that reads aloud the text on a screen, including alt text, for people who are blind or partially sighted.",
    "alt": "",
-   "page": "c23-p09"
+   "page": "c24-p09"
   },
   {
    "term": "Alt text",
    "def": "Alternative text: a short written description of an image or chart that a screen reader reads aloud.",
    "alt": "",
-   "page": "c23-p09"
+   "page": "c24-p09"
   },
   {
    "term": "WCAG",
    "def": "Web Content Accessibility Guidelines: the international standard for accessible digital content, from the W3C. Its four principles are Perceivable, Operable, Understandable and Robust.",
    "alt": "",
-   "page": "c23-p09"
+   "page": "c24-p09"
   },
   {
    "term": "Accessibility Checker",
    "def": "A PowerPoint tool (Review > Check Accessibility) that lists errors, warnings and tips, such as missing alt text or slide titles.",
    "alt": "",
-   "page": "c23-p09"
+   "page": "c24-p09"
   },
   {
    "term": "Speaker notes",
    "def": "Notes for the presenter about what to say for each slide. The audience does not see them.",
    "alt": "",
-   "page": "c23-p10"
+   "page": "c24-p10"
   },
   {
    "term": "Presenter View",
    "def": "A slide show view where the presenter sees the current slide, next slide, notes and a timer while the audience sees only the slide.",
    "alt": "",
-   "page": "c23-p10"
+   "page": "c24-p10"
   },
   {
    "term": "Success criteria",
    "def": "A checklist of what a good piece of work must do, used to plan and evaluate it.",
    "alt": "",
-   "page": "c23-p11"
+   "page": "c24-p11"
   },
   {
    "term": "Usability",
    "def": "How easy a product is for its users to use. Refining a product based on testing improves its usability.",
    "alt": "",
-   "page": "c23-p11"
+   "page": "c24-p11"
   },
   {
    "term": "Data type",
    "def": "The kind of value a variable holds, such as int, double, string, char or bool. It decides what can be stored and what can be done with it.",
    "alt": "",
-   "page": "c24-p01"
+   "page": "c25-p01"
   },
   {
    "term": "Integer",
    "def": "A whole number with no decimal part, positive or negative. In C# the data type is int.",
    "alt": "int",
-   "page": "c24-p01"
+   "page": "c25-p01"
   },
   {
    "term": "Float",
    "def": "A number with a decimal point, also called a real number. In C# use double, or float with an f on the end of the value.",
    "alt": "real",
-   "page": "c24-p01"
+   "page": "c25-p01"
   },
   {
    "term": "String",
    "def": "Text: a sequence of characters, written inside double quotes in C#.",
    "alt": "",
-   "page": "c24-p01"
+   "page": "c25-p01"
   },
   {
    "term": "Boolean",
    "def": "A data type with only two possible values, true or false. In C# the data type is bool.",
    "alt": "bool",
-   "page": "c24-p01"
+   "page": "c25-p01"
   },
   {
    "term": "Method",
    "def": "A named block of code that carries out one task and runs when it is called. Also called a function, procedure or subroutine.",
    "alt": "subroutine",
-   "page": "c24-p02"
+   "page": "c25-p02"
   },
   {
    "term": "Calling a method",
    "def": "Running a method by writing its name followed by brackets (and any arguments), e.g. ShowBanner();",
    "alt": "call",
-   "page": "c24-p02"
+   "page": "c25-p02"
   },
   {
    "term": "Decomposition",
    "def": "Breaking a large problem down into smaller parts that are easier to solve; each part can become a method.",
    "alt": "",
-   "page": "c24-p02"
+   "page": "c25-p02"
   },
   {
    "term": "Parameter",
    "def": "A variable listed in a method's header that receives a value when the method is called.",
    "alt": "",
-   "page": "c24-p03"
+   "page": "c25-p03"
   },
   {
    "term": "Argument",
    "def": "The actual value passed into a method when it is called.",
    "alt": "",
-   "page": "c24-p03"
+   "page": "c25-p03"
   },
   {
    "term": "Return value",
    "def": "The value a method sends back to the place it was called from, using the return keyword.",
    "alt": "return",
-   "page": "c24-p04"
+   "page": "c25-p04"
   },
   {
    "term": "Void",
    "def": "A keyword in a method header meaning the method does not return a value.",
    "alt": "",
-   "page": "c24-p04"
+   "page": "c25-p04"
   },
   {
    "term": "Function",
    "def": "A subroutine that returns a value. In C# this is a method with a return type such as int or bool.",
    "alt": "",
-   "page": "c24-p04"
+   "page": "c25-p04"
   },
   {
    "term": "Procedure",
    "def": "A subroutine that carries out a task but does not return a value. In C# this is a void method.",
    "alt": "",
-   "page": "c24-p04"
+   "page": "c25-p04"
   },
   {
    "term": "Scope",
    "def": "The part of a program where a variable exists and can be used: the { } it was declared in.",
    "alt": "",
-   "page": "c24-p05"
+   "page": "c25-p05"
   },
   {
    "term": "Local variable",
    "def": "A variable declared inside a method or block; it can only be used there and disappears when that code ends.",
    "alt": "",
-   "page": "c24-p05"
+   "page": "c25-p05"
   },
   {
    "term": "Global variable",
    "def": "A variable that can be used by every method in a program. In C# the nearest thing is a static variable declared in the class, outside every method.",
    "alt": "class-level variable",
-   "page": "c24-p05"
+   "page": "c25-p05"
   },
   {
    "term": "Data structure",
    "def": "A way of storing and organising a collection of related data under one name, such as an array or a list.",
    "alt": "",
-   "page": "c24-p06"
+   "page": "c25-p06"
   },
   {
    "term": "Array",
    "def": "A data structure that holds a fixed number of elements of the same data type, each found by its index.",
    "alt": "",
-   "page": "c24-p06"
+   "page": "c25-p06"
   },
   {
    "term": "Index",
    "def": "The number that gives an element's position in an array or list. In C# the first index is 0.",
    "alt": "",
-   "page": "c24-p06"
+   "page": "c25-p06"
   },
   {
    "term": "Off-by-one error",
    "def": "A logic error where a loop runs one time too many or one time too few, e.g. using <= instead of < with an array.",
    "alt": "",
-   "page": "c24-p06"
+   "page": "c25-p06"
   },
   {
    "term": "List",
    "def": "A data structure that can grow and shrink while the program runs, e.g. List<int> in C#.",
    "alt": "",
-   "page": "c24-p07"
+   "page": "c25-p07"
   },
   {
    "term": "foreach loop",
    "def": "A loop that visits every item in a list or array in turn, without needing an index.",
    "alt": "",
-   "page": "c24-p07"
+   "page": "c25-p07"
   },
   {
    "term": "Trace table",
    "def": "A table showing the value of each variable at each step as an algorithm runs; used to check code by hand (a dry run).",
    "alt": "dry run",
-   "page": "c24-p08"
+   "page": "c25-p08"
   },
   {
    "term": "Linear search",
    "def": "A search that checks each item in a list in turn, from the start, until the target is found or the list ends.",
    "alt": "",
-   "page": "c24-p08"
+   "page": "c25-p08"
   },
   {
    "term": "Generative AI",
    "def": "AI that creates new content, such as text, images or code, by predicting what is likely based on patterns in its training data.",
    "alt": "",
-   "page": "c24-p09"
+   "page": "c25-p09"
   },
   {
    "term": "Prompt",
    "def": "The instruction or question you type into a generative AI tool.",
    "alt": "",
-   "page": "c24-p09"
+   "page": "c25-p09"
   },
   {
    "term": "Hallucination",
    "def": "When an AI tool confidently produces something false or made up, such as a method that does not exist.",
    "alt": "",
-   "page": "c24-p09"
+   "page": "c25-p09"
   },
   {
    "term": "Plagiarism",
    "def": "Passing off someone else's work, including AI-generated work, as your own.",
    "alt": "",
-   "page": "c24-p09"
+   "page": "c25-p09"
   },
   {
    "term": "Software development cycle",
    "def": "Developing software in repeated stages of planning, development, testing and refinement.",
    "alt": "",
-   "page": "c24-p10"
+   "page": "c25-p10"
   },
   {
    "term": "Test table",
    "def": "A table that plans and records tests: the test data, its type, the expected result, the actual result and whether it passed.",
    "alt": "",
-   "page": "c24-p10"
+   "page": "c25-p10"
   },
   {
    "term": "Test data",
    "def": "Values chosen to test a program: normal (sensible values), boundary (at the edges of what is allowed) and erroneous (values that should be rejected).",
    "alt": "",
-   "page": "c24-p10"
+   "page": "c25-p10"
   },
   {
    "term": "Boundary data",
    "def": "Test data at the very edge of the allowed range, such as 0 and 20 for a score out of 20.",
    "alt": "extreme data",
-   "page": "c24-p10"
+   "page": "c25-p10"
   },
   {
    "term": "Erroneous data",
    "def": "Test data that should be rejected by the program, such as 25 or the word ten for a score out of 20.",
    "alt": "invalid data",
-   "page": "c24-p10"
+   "page": "c25-p10"
   },
   {
    "term": "Validation",
    "def": "Checking that input is sensible and allowed before the program uses it, e.g. rejecting a score above 20.",
    "alt": "",
-   "page": "c24-p10"
+   "page": "c25-p10"
   },
   {
    "term": "Scratch",
    "def": "A free, block-based programming language from the MIT Media Lab. Programs are built by snapping blocks together.",
    "alt": "",
-   "page": "c25-p01"
+   "page": "c26-p01"
   },
   {
    "term": "Sprite",
    "def": "A character or object on the stage that can be programmed with its own scripts, e.g. the Scratch Cat.",
    "alt": "",
-   "page": "c25-p01"
+   "page": "c26-p01"
   },
   {
    "term": "Stage",
    "def": "The area of the Scratch window where the project runs. It is 480 steps wide and 360 steps tall.",
    "alt": "",
-   "page": "c25-p01"
+   "page": "c26-p01"
   },
   {
    "term": "Backdrop",
    "def": "A background picture for the stage. Switching backdrops can show a new level or screen.",
    "alt": "",
-   "page": "c25-p01"
+   "page": "c26-p01"
   },
   {
    "term": "Blocks palette",
    "def": "The part of the Scratch window that lists the blocks in the chosen category, ready to drag.",
    "alt": "",
-   "page": "c25-p01"
+   "page": "c26-p01"
   },
   {
    "term": "Script",
    "def": "A stack of joined blocks that runs from top to bottom, usually started by a hat block.",
    "alt": "",
-   "page": "c25-p01"
+   "page": "c26-p01"
   },
   {
    "term": "Event",
    "def": "Something that happens, such as clicking the green flag or pressing a key, that starts a script.",
    "alt": "",
-   "page": "c25-p02"
+   "page": "c26-p02"
   },
   {
    "term": "Sequence",
    "def": "Carrying out instructions one after another, in order. A Scratch script runs from top to bottom.",
    "alt": "",
-   "page": "c25-p02"
+   "page": "c26-p02"
   },
   {
    "term": "Coordinates",
    "def": "A pair of numbers (x, y) giving an exact position on the stage. The centre is (0, 0).",
    "alt": "",
-   "page": "c25-p03"
+   "page": "c26-p03"
   },
   {
    "term": "Costume",
    "def": "One of the pictures a sprite can show. Switching costumes changes how the sprite looks.",
    "alt": "",
-   "page": "c25-p04"
+   "page": "c26-p04"
   },
   {
    "term": "Loop",
    "def": "A block that repeats the blocks inside it, such as [repeat (10)], [repeat until] or [forever].",
    "alt": "",
-   "page": "c25-p05"
+   "page": "c26-p05"
   },
   {
    "term": "Iteration",
    "def": "Repeating a set of instructions using a loop.",
    "alt": "Repetition",
-   "page": "c25-p05"
+   "page": "c26-p05"
   },
   {
    "term": "Count-controlled loop",
    "def": "A loop that repeats a set number of times, known before it starts, e.g. [repeat (4)].",
    "alt": "",
-   "page": "c25-p05"
+   "page": "c26-p05"
   },
   {
    "term": "Condition-controlled loop",
    "def": "A loop that repeats until a condition becomes true, e.g. [repeat until <touching (edge)?>].",
    "alt": "",
-   "page": "c25-p05"
+   "page": "c26-p05"
   },
   {
    "term": "Selection",
    "def": "Choosing which instructions to run depending on a condition, using if or if-else blocks.",
    "alt": "",
-   "page": "c25-p06"
+   "page": "c26-p06"
   },
   {
    "term": "Condition",
    "def": "A test whose answer is either true or false, e.g. <(score) > (10)>.",
    "alt": "",
-   "page": "c25-p06"
+   "page": "c26-p06"
   },
   {
    "term": "Boolean",
    "def": "A value or block that can only be true or false. Boolean blocks have pointed (hexagon) ends.",
    "alt": "",
-   "page": "c25-p06"
+   "page": "c26-p06"
   },
   {
    "term": "Sensing",
    "def": "Scratch blocks that find out what is happening, such as touching, key pressed, mouse position, timer and ask/answer.",
    "alt": "",
-   "page": "c25-p06"
+   "page": "c26-p06"
   },
   {
    "term": "Variable",
    "def": "A named store in memory that holds a value which can change while the program runs, e.g. score.",
    "alt": "",
-   "page": "c25-p07"
+   "page": "c26-p07"
   },
   {
    "term": "Data type",
    "def": "The kind of value stored, such as integer, float, string (text) or Boolean (true/false).",
    "alt": "",
-   "page": "c25-p07"
+   "page": "c26-p07"
   },
   {
    "term": "Operator",
    "def": "A block or symbol that does something with values: maths (+ - * /), comparisons or joining text.",
    "alt": "",
-   "page": "c25-p07"
+   "page": "c26-p07"
   },
   {
    "term": "Comparison operator",
    "def": "An operator that compares two values and gives true or false: <, = or >.",
    "alt": "",
-   "page": "c25-p07"
+   "page": "c26-p07"
   },
   {
    "term": "Broadcast",
    "def": "A message sent to every sprite and the stage; scripts with a matching [when I receive] block then start.",
    "alt": "Message",
-   "page": "c25-p08"
+   "page": "c26-p08"
   },
   {
    "term": "Abstraction",
    "def": "Hiding detail that is not needed and giving a set of instructions a simple name, to reduce complexity.",
    "alt": "",
-   "page": "c25-p09"
+   "page": "c26-p09"
   },
   {
    "term": "My Block",
    "def": "A custom block you define yourself in the My Blocks category and can use as often as you like.",
    "alt": "Custom block",
-   "page": "c25-p09"
+   "page": "c26-p09"
   },
   {
    "term": "Parameter",
    "def": "An input to a custom block or function that lets it do slightly different jobs, e.g. the number of sides.",
    "alt": "Input",
-   "page": "c25-p09"
+   "page": "c26-p09"
   },
   {
    "term": "Model",
    "def": "A simplified representation of a real system that keeps only the parts that matter.",
    "alt": "",
-   "page": "c25-p10"
+   "page": "c26-p10"
   },
   {
    "term": "Simulation",
    "def": "Running a model to see what happens over time or to test a prediction.",
    "alt": "",
-   "page": "c25-p10"
+   "page": "c26-p10"
   },
   {
    "term": "Bug",
    "def": "An error in a program that stops it working as it should.",
    "alt": "",
-   "page": "c25-p11"
+   "page": "c26-p11"
   },
   {
    "term": "Debugging",
    "def": "Finding and fixing bugs in a program.",
    "alt": "",
-   "page": "c25-p11"
+   "page": "c26-p11"
   },
   {
    "term": "Logic error",
    "def": "An error where the program runs but does the wrong thing, e.g. blocks in the wrong order.",
    "alt": "",
-   "page": "c25-p11"
+   "page": "c26-p11"
   },
   {
    "term": "Iterative development",
    "def": "Making software in repeated cycles of planning, developing, testing and refining.",
    "alt": "Development cycle",
-   "page": "c25-p12"
+   "page": "c26-p12"
   },
   {
    "term": "User story",
    "def": "A short sentence describing what a user needs: As a ... I want ... so that ...",
    "alt": "",
-   "page": "c25-p12"
+   "page": "c26-p12"
   },
   {
    "term": "Test table",
    "def": "A table listing each test with its expected result, actual result and whether it passed.",
    "alt": "Test plan",
-   "page": "c25-p12"
+   "page": "c26-p12"
   },
   {
    "term": "Test data",
    "def": "Values or actions used to test a program: normal, boundary and erroneous.",
    "alt": "",
-   "page": "c25-p12"
+   "page": "c26-p12"
   },
   {
    "term": "Bit",
    "def": "The smallest unit of data in an ordinary computer: always either 0 or 1.",
    "alt": "Binary digit",
-   "page": "c26-p01"
+   "page": "c27-p01"
   },
   {
    "term": "Qubit",
    "def": "A quantum bit, which can be 0, 1 or a superposition of both until it is measured.",
    "alt": "",
-   "page": "c26-p01"
+   "page": "c27-p01"
   },
   {
    "term": "Quantum computer",
    "def": "A computer that uses qubits and the rules of quantum physics to solve certain problems.",
    "alt": "",
-   "page": "c26-p01"
+   "page": "c27-p01"
   },
   {
    "term": "Classical computer",
    "def": "An ordinary computer that uses bits which are always either 0 or 1.",
    "alt": "",
-   "page": "c26-p01"
+   "page": "c27-p01"
   },
   {
    "term": "Superposition",
    "def": "When a qubit is in a combination of 0 and 1 at the same time.",
    "alt": "",
-   "page": "c26-p02"
+   "page": "c27-p02"
   },
   {
    "term": "Measurement",
    "def": "Reading a qubit's value, which gives 0 or 1 and ends its superposition.",
    "alt": "",
-   "page": "c26-p02"
+   "page": "c27-p02"
   },
   {
    "term": "Probability",
    "def": "How likely something is to happen, often given as a percentage.",
    "alt": "",
-   "page": "c26-p02"
+   "page": "c27-p02"
   },
   {
    "term": "Entanglement",
    "def": "A link between qubits so that their measurement results are connected, even when far apart.",
    "alt": "",
-   "page": "c26-p03"
+   "page": "c27-p03"
   },
   {
    "term": "Interference",
    "def": "When waves (or quantum states) add up or cancel out.",
    "alt": "",
-   "page": "c26-p03"
+   "page": "c27-p03"
   },
   {
    "term": "Quantum algorithm",
    "def": "A step-by-step set of operations on qubits designed to solve a problem.",
    "alt": "",
-   "page": "c26-p03"
+   "page": "c27-p03"
   },
   {
    "term": "Superconducting qubit",
    "def": "A qubit made from a tiny electrical circuit with no resistance, cooled close to absolute zero.",
    "alt": "",
-   "page": "c26-p04"
+   "page": "c27-p04"
   },
   {
    "term": "Absolute zero",
    "def": "The coldest possible temperature: -273.15 °C.",
    "alt": "",
-   "page": "c26-p04"
+   "page": "c27-p04"
   },
   {
    "term": "Decoherence",
    "def": "When qubits lose their quantum state because they are disturbed, causing errors.",
    "alt": "",
-   "page": "c26-p04"
+   "page": "c27-p04"
   },
   {
    "term": "Quantum error correction",
    "def": "Combining many physical qubits to make a more reliable logical qubit that detects and fixes errors.",
    "alt": "",
-   "page": "c26-p04"
+   "page": "c27-p04"
   },
   {
    "term": "Optimisation",
    "def": "Finding the best solution among a very large number of possibilities.",
    "alt": "",
-   "page": "c26-p05"
+   "page": "c27-p05"
   },
   {
    "term": "Simulation",
    "def": "Using a computer to model how something in the real world behaves.",
    "alt": "",
-   "page": "c26-p05"
+   "page": "c27-p05"
   },
   {
    "term": "Quantum advantage",
    "def": "When a quantum computer solves a problem faster than any ordinary computer could.",
    "alt": "",
-   "page": "c26-p05"
+   "page": "c27-p05"
   },
   {
    "term": "Quantum sensor",
    "def": "A device that uses quantum effects to measure tiny changes in things like gravity, magnetism or time.",
    "alt": "",
-   "page": "c26-p06"
+   "page": "c27-p06"
   },
   {
    "term": "Quantum key distribution",
    "def": "Sending encryption keys using single particles of light so that any eavesdropping can be detected.",
    "alt": "QKD",
-   "page": "c26-p06"
+   "page": "c27-p06"
   },
   {
    "term": "National Quantum Strategy",
    "def": "The UK government's 10-year plan (2023) to make the UK a leading quantum technology economy.",
    "alt": "",
-   "page": "c26-p06"
+   "page": "c27-p06"
   },
   {
    "term": "Robot",
    "def": "A programmable machine that can sense its environment, make decisions and act in the physical world.",
    "alt": "",
-   "page": "c27-p01"
+   "page": "c28-p01"
   },
   {
    "term": "Automation",
    "def": "Using machines to do tasks automatically that people once did by hand.",
    "alt": "",
-   "page": "c27-p01"
+   "page": "c28-p01"
   },
   {
    "term": "Sense-think-act",
    "def": "The cycle robots follow: gather sensor data, decide what to do, then carry out actions.",
    "alt": "",
-   "page": "c27-p01"
+   "page": "c28-p01"
   },
   {
    "term": "Cobot",
    "def": "A collaborative robot designed to work safely beside people.",
    "alt": "",
-   "page": "c27-p01"
+   "page": "c28-p01"
   },
   {
    "term": "Humanoid robot",
    "def": "A robot with a human-like body shape.",
    "alt": "",
-   "page": "c27-p01"
+   "page": "c28-p01"
   },
   {
    "term": "Computer vision",
    "def": "AI that lets computers understand images and video.",
    "alt": "",
-   "page": "c27-p02"
+   "page": "c28-p02"
   },
   {
    "term": "Lidar",
    "def": "A sensor that measures distance by timing reflected laser pulses, building a 3D map.",
    "alt": "",
-   "page": "c27-p02"
+   "page": "c28-p02"
   },
   {
    "term": "Encoder",
    "def": "A sensor that counts how far a wheel or joint has turned.",
    "alt": "",
-   "page": "c27-p02"
+   "page": "c28-p02"
   },
   {
    "term": "Degrees of freedom",
    "def": "The number of independent ways a robot or robot arm can move.",
    "alt": "",
-   "page": "c27-p02"
+   "page": "c28-p02"
   },
   {
    "term": "End effector",
    "def": "The tool on the end of a robot arm, such as a gripper or welder.",
    "alt": "",
-   "page": "c27-p02"
+   "page": "c28-p02"
   },
   {
    "term": "Drone",
    "def": "An aircraft with no pilot on board, controlled remotely or flying itself.",
    "alt": "",
-   "page": "c27-p03"
+   "page": "c28-p03"
   },
   {
    "term": "Quadcopter",
    "def": "A drone with four rotors.",
    "alt": "",
-   "page": "c27-p03"
+   "page": "c28-p03"
   },
   {
    "term": "Flyer ID",
    "def": "Proof from the UK Civil Aviation Authority that someone has passed the online drone test.",
    "alt": "",
-   "page": "c27-p03"
+   "page": "c28-p03"
   },
   {
    "term": "Operator ID",
    "def": "A UK registration for the person responsible for a drone, which must be displayed on it.",
    "alt": "",
-   "page": "c27-p03"
+   "page": "c28-p03"
   },
   {
    "term": "Visual line of sight",
    "def": "Being able to see your drone with your own eyes at all times.",
    "alt": "",
-   "page": "c27-p03"
+   "page": "c28-p03"
   },
   {
    "term": "Autonomous vehicle",
    "def": "A vehicle that can drive itself without human control.",
    "alt": "",
-   "page": "c27-p04"
+   "page": "c28-p04"
   },
   {
    "term": "Radar",
    "def": "A sensor that uses radio waves to detect the distance and speed of objects.",
    "alt": "",
-   "page": "c27-p04"
+   "page": "c28-p04"
   },
   {
    "term": "Levels of automation",
    "def": "A scale from 0 to 5 describing how much of the driving a vehicle does itself.",
    "alt": "",
-   "page": "c27-p04"
+   "page": "c28-p04"
   },
   {
    "term": "Robotaxi",
    "def": "A taxi that drives itself with no human driver.",
    "alt": "",
-   "page": "c27-p04"
+   "page": "c28-p04"
   },
   {
    "term": "Edge case",
    "def": "A rare or unusual situation that a system finds hard to handle.",
    "alt": "",
-   "page": "c27-p04"
+   "page": "c28-p04"
   },
   {
    "term": "Dull, dirty and dangerous",
    "def": "The kinds of work robots are especially suited to.",
    "alt": "",
-   "page": "c27-p05"
+   "page": "c28-p05"
   },
   {
    "term": "Job displacement",
    "def": "When people's jobs are replaced by machines or automation.",
    "alt": "",
-   "page": "c27-p05"
+   "page": "c28-p05"
   },
   {
    "term": "Accountability",
    "def": "Being responsible for what happens and answering for it.",
    "alt": "",
-   "page": "c27-p05"
+   "page": "c28-p05"
   },
   {
    "term": "Ethics",
    "def": "Deciding what is morally right and wrong.",
    "alt": "",
-   "page": "c27-p05"
+   "page": "c28-p05"
   },
   {
    "term": "Algorithm",
    "def": "A precise set of steps to solve a problem.",
    "alt": "",
-   "page": "c27-p06"
+   "page": "c28-p06"
   },
   {
    "term": "Selection",
    "def": "Making a decision in a program using IF ... THEN ... ELSE.",
    "alt": "",
-   "page": "c27-p06"
+   "page": "c28-p06"
   },
   {
    "term": "Iteration",
    "def": "Repeating instructions in a program using a loop.",
    "alt": "",
-   "page": "c27-p06"
+   "page": "c28-p06"
   },
   {
    "term": "Debugging",
    "def": "Finding and fixing errors in a program.",
    "alt": "",
-   "page": "c27-p06"
+   "page": "c28-p06"
   },
   {
    "term": "Simulation",
    "def": "A computer model used to test something safely before doing it for real.",
    "alt": "",
-   "page": "c27-p06"
+   "page": "c28-p06"
   },
   {
    "term": "Spreadsheet",
    "def": "A program that stores data in a grid of cells and carries out calculations on it automatically, e.g. Microsoft Excel.",
    "alt": "",
-   "page": "c28-p01"
+   "page": "c29-p01"
   },
   {
    "term": "Workbook",
    "def": "An Excel file. It can contain one or more worksheets.",
    "alt": "",
-   "page": "c28-p01"
+   "page": "c29-p01"
   },
   {
    "term": "Worksheet",
    "def": "One page (tab) of a workbook, made of rows, columns and cells.",
    "alt": "Sheet",
-   "page": "c28-p01"
+   "page": "c29-p01"
   },
   {
    "term": "Cell",
    "def": "A single box in a spreadsheet, where a column and a row meet. It holds one item of data or one formula.",
    "alt": "",
-   "page": "c28-p01"
+   "page": "c29-p01"
   },
   {
    "term": "Row",
    "def": "A horizontal line of cells, labelled with a number.",
    "alt": "",
-   "page": "c28-p01"
+   "page": "c29-p01"
   },
   {
    "term": "Column",
    "def": "A vertical line of cells, labelled with a letter.",
    "alt": "",
-   "page": "c28-p01"
+   "page": "c29-p01"
   },
   {
    "term": "Cell reference",
    "def": "The address of a cell: its column letter followed by its row number, e.g. B3.",
    "alt": "Cell address",
-   "page": "c28-p01"
+   "page": "c29-p01"
   },
   {
    "term": "Range",
    "def": "A rectangular block of cells, written as first cell:last cell, e.g. A1:D6.",
    "alt": "",
-   "page": "c28-p01"
+   "page": "c29-p01"
   },
   {
    "term": "Active cell",
    "def": "The currently selected cell, shown with a thick border. Its reference appears in the Name Box.",
    "alt": "",
-   "page": "c28-p01"
+   "page": "c29-p01"
   },
   {
    "term": "Formula bar",
    "def": "The bar above the grid that shows the real contents (value or formula) of the active cell.",
    "alt": "",
-   "page": "c28-p01"
+   "page": "c29-p01"
   },
   {
    "term": "Data type",
    "def": "The kind of data in a cell, such as text, number, currency, percentage or date.",
    "alt": "",
-   "page": "c28-p02"
+   "page": "c29-p02"
   },
   {
    "term": "Formatting",
    "def": "Changing how a cell looks (font, colour, borders, number of decimal places) without changing the value stored.",
    "alt": "",
-   "page": "c28-p02"
+   "page": "c29-p02"
   },
   {
    "term": "Currency format",
    "def": "A number format that shows a value as money, e.g. 0.6 is shown as £0.60.",
    "alt": "",
-   "page": "c28-p02"
+   "page": "c29-p02"
   },
   {
    "term": "Formula",
    "def": "A calculation in a cell. It always begins with =, e.g. =B2*C2.",
    "alt": "",
-   "page": "c28-p03"
+   "page": "c29-p03"
   },
   {
    "term": "Operator",
    "def": "A symbol that tells Excel which calculation to do: + - * / or ^.",
    "alt": "Arithmetic operator",
-   "page": "c28-p03"
+   "page": "c29-p03"
   },
   {
    "term": "Automatic recalculation",
    "def": "When a value changes, every formula that uses it is worked out again straight away.",
    "alt": "",
-   "page": "c28-p03"
+   "page": "c29-p03"
   },
   {
    "term": "BODMAS",
    "def": "The order Excel works out a calculation: Brackets, Orders (powers), Division and Multiplication, Addition and Subtraction.",
    "alt": "Order of operations",
-   "page": "c28-p03"
+   "page": "c29-p03"
   },
   {
    "term": "Function",
    "def": "A ready-made formula with a name, such as SUM or AVERAGE, e.g. =SUM(B2:B9).",
    "alt": "",
-   "page": "c28-p04"
+   "page": "c29-p04"
   },
   {
    "term": "Argument",
    "def": "The value or range given to a function inside its brackets, e.g. B2:B9 in =SUM(B2:B9).",
    "alt": "",
-   "page": "c28-p04"
+   "page": "c29-p04"
   },
   {
    "term": "SUM",
    "def": "A function that adds up all the numbers in a range.",
    "alt": "",
-   "page": "c28-p04"
+   "page": "c29-p04"
   },
   {
    "term": "AVERAGE",
    "def": "A function that finds the mean of the numbers in a range (total divided by how many).",
    "alt": "",
-   "page": "c28-p04"
+   "page": "c29-p04"
   },
   {
    "term": "COUNT",
    "def": "A function that counts how many cells in a range contain numbers.",
    "alt": "",
-   "page": "c28-p04"
+   "page": "c29-p04"
   },
   {
    "term": "IF",
    "def": "A function that tests a condition and gives one result if it is true and another if it is false.",
    "alt": "IF function",
-   "page": "c28-p05"
+   "page": "c29-p05"
   },
   {
    "term": "COUNTIF",
    "def": "A function that counts how many cells in a range meet a condition, e.g. =COUNTIF(C2:C9,\"Pass\").",
    "alt": "",
-   "page": "c28-p05"
+   "page": "c29-p05"
   },
   {
    "term": "Condition",
    "def": "A test that is either TRUE or FALSE, e.g. B2>=70.",
    "alt": "",
-   "page": "c28-p05"
+   "page": "c29-p05"
   },
   {
    "term": "Comparison operator",
    "def": "A symbol used to compare two values: = <> > < >= <=.",
    "alt": "",
-   "page": "c28-p05"
+   "page": "c29-p05"
   },
   {
    "term": "Fill handle",
    "def": "The small square at the bottom right of the active cell, dragged to copy its contents into neighbouring cells.",
    "alt": "",
-   "page": "c28-p06"
+   "page": "c29-p06"
   },
   {
    "term": "Replication",
    "def": "Copying a formula into other cells so the same calculation is done on each row or column.",
    "alt": "Replicate",
-   "page": "c28-p06"
+   "page": "c29-p06"
   },
   {
    "term": "Relative reference",
    "def": "A cell reference such as B2 that changes to match the new position when a formula is copied.",
    "alt": "Relative cell reference",
-   "page": "c28-p06"
+   "page": "c29-p06"
   },
   {
    "term": "Absolute reference",
    "def": "A cell reference with $ signs, such as $F$1, that does not change when a formula is copied.",
    "alt": "Absolute cell reference",
-   "page": "c28-p06"
+   "page": "c29-p06"
   },
   {
    "term": "Sort",
    "def": "To put the rows of data in order of one column, ascending (A to Z, smallest first) or descending.",
    "alt": "",
-   "page": "c28-p07"
+   "page": "c29-p07"
   },
   {
    "term": "Filter",
    "def": "To show only the rows that match a condition, hiding the others without deleting them.",
    "alt": "",
-   "page": "c28-p07"
+   "page": "c29-p07"
   },
   {
    "term": "Conditional formatting",
    "def": "Formatting that is applied automatically when a cell's value meets a rule, e.g. red fill for scores under 60.",
    "alt": "",
-   "page": "c28-p07"
+   "page": "c29-p07"
   },
   {
    "term": "Chart",
    "def": "A visual display of spreadsheet data, such as a column chart, line graph or pie chart.",
    "alt": "Graph",
-   "page": "c28-p08"
+   "page": "c29-p08"
   },
   {
    "term": "Axis",
    "def": "One of the two lines of a chart: the x-axis runs across and the y-axis runs up.",
    "alt": "",
-   "page": "c28-p08"
+   "page": "c29-p08"
   },
   {
    "term": "Legend",
    "def": "The key on a chart that shows which colour or symbol represents each data series.",
    "alt": "",
-   "page": "c28-p08"
+   "page": "c29-p08"
   },
   {
    "term": "Model",
    "def": "A spreadsheet that represents a real-life situation using inputs, formulas and outputs.",
    "alt": "Spreadsheet model",
-   "page": "c28-p09"
+   "page": "c29-p09"
   },
   {
    "term": "What-if question",
    "def": "Changing one or more input values in a model to see the effect on the results.",
    "alt": "What-if analysis",
-   "page": "c28-p09"
+   "page": "c29-p09"
   },
   {
    "term": "Test data",
    "def": "Data with known expected results used to check a spreadsheet works: normal, boundary and invalid.",
    "alt": "",
-   "page": "c28-p10"
+   "page": "c29-p10"
   },
   {
    "term": "Data validation",
    "def": "Rules that check data as it is entered and reject values that break them, e.g. a whole number between 0 and 100.",
    "alt": "Validation",
-   "page": "c28-p10"
+   "page": "c29-p10"
   }
  ]
 }
