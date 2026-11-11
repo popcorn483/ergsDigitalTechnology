@@ -1,0 +1,1634 @@
+{
+ "title": "App Development with User Stories",
+ "summary": "How real apps get made: the types of app and the roles in an app team, writing user stories with acceptance criteria and prioritising them, wireframing screens and flows, building with event-driven programming and data, testing with a proper test plan, and launching, measuring and improving an app ethically using agile sprints.",
+ "learn": [
+  "The types of app and the roles in an app development team",
+  "How to write user stories with acceptance criteria and prioritise them",
+  "How to design app screens and navigation with wireframes",
+  "How apps use events, variables and stored data",
+  "How to test an app with a test plan and report bugs",
+  "How agile teams launch, measure and improve apps ethically"
+ ],
+ "temporary": false,
+ "intro": "There are millions of apps, but the good ones all start the same way: with a real person and a real need. In this topic you'll work like a professional app team. You'll learn how apps are built and who builds them, turn users' needs into user stories, design screens with wireframes, build features with event-driven code, test them properly, and plan how to launch and improve your app without tricking users. By the end you'll have planned (and maybe built) an app of your own.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "How apps are made",
+   "spec": "Describe types of app, the roles in an app development team and the stages of app development",
+   "summary": "Apps can be native (built for one platform), web apps (run in a browser) or cross-platform. Professional apps are made by teams including product managers, designers, developers and testers. Most teams use agile methods, building and improving apps in short cycles called sprints.",
+   "starter": "Name an app you use every day. How many people do you think it took to make it?",
+   "sc": [
+    "I can compare native, web and cross-platform apps",
+    "I can describe roles in an app development team",
+    "I can describe the agile approach to app development"
+   ],
+   "slides": [
+    {
+     "t": "Types of app",
+     "b": [
+      "Native app: built for one platform (iOS or Android), downloaded from an app store",
+      "Web app: runs in a browser; works on any device",
+      "Cross-platform: one codebase that runs on both iOS and Android",
+      "Each has trade-offs in speed, cost and features"
+     ]
+    },
+    {
+     "t": "The app team",
+     "b": [
+      "Product manager: decides what to build and why",
+      "UX/UI designer: designs how it works and looks",
+      "Developers: write the code (front end and back end)",
+      "Testers: find bugs; data analysts: measure how it's used"
+     ]
+    },
+    {
+     "t": "Agile development",
+     "b": [
+      "Build in short cycles called sprints (often 1-2 weeks)",
+      "Each sprint delivers a small working improvement",
+      "Get feedback from users, then adapt",
+      "The opposite of planning everything up front (\"waterfall\")"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Types of app"
+    },
+    {
+     "t": "table",
+     "caption": "Types of app",
+     "head": [
+      "Type",
+      "What it is",
+      "Advantages",
+      "Disadvantages"
+     ],
+     "rows": [
+      [
+       "**[[native app|Native app]]**",
+       "Built for one platform, e.g. Swift for iOS, Kotlin for Android",
+       "Fast; full access to phone features",
+       "Must build twice for iOS and Android"
+      ],
+      [
+       "**[[web app|Web app]]**",
+       "Runs in a web browser",
+       "Works on any device; no download",
+       "Less access to phone features; needs internet (usually)"
+      ],
+      [
+       "**[[cross-platform|Cross-platform]]** app",
+       "One codebase built for both iOS and Android",
+       "Cheaper and faster to build",
+       "Sometimes slower or less polished"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "The app team"
+    },
+    {
+     "t": "key",
+     "title": "Roles in an app team",
+     "items": [
+      "Product manager: understands users and the business, and decides priorities",
+      "UX/UI designer: researches users, designs layouts, flows and visuals",
+      "Front-end developer: builds what users see and interact with",
+      "Back-end developer: builds the servers, databases and APIs behind the app",
+      "Tester (QA): plans and runs tests to find bugs",
+      "Data analyst: studies how people use the app"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Small start-ups may have one person doing several jobs; big apps have hundreds of people. AI coding assistants now help developers write code faster, but people still decide what to build and check that it works."
+    },
+    {
+     "t": "h",
+     "text": "Agile development"
+    },
+    {
+     "t": "p",
+     "text": "**[[agile|Agile]]** is an approach where teams build software in short cycles called **[[sprint|sprints]]**, often one or two weeks long. Each sprint delivers a small, working improvement that users can try. The team gets feedback and adapts the plan. This contrasts with the **waterfall** approach, where everything is planned up front and the product is delivered at the end."
+    },
+    {
+     "t": "table",
+     "caption": "Agile vs waterfall",
+     "head": [
+      "Feature",
+      "Agile",
+      "Waterfall"
+     ],
+     "rows": [
+      [
+       "Planning",
+       "A little at a time; plan changes",
+       "All planned at the start"
+      ],
+      [
+       "Delivery",
+       "Small working pieces often",
+       "Everything at the end"
+      ],
+      [
+       "Feedback",
+       "Frequent, from real users",
+       "Mostly at the end"
+      ],
+      [
+       "Best for",
+       "Apps where needs change",
+       "Projects with fixed, clear requirements"
+      ]
+     ]
+    },
+    {
+     "t": "act",
+     "title": "App autopsy",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Choose an app you know well (e.g. a messaging, music or school app).",
+      "Decide whether it's native, web or cross-platform (or find out).",
+      "List the team roles that would have been needed to build it.",
+      "Describe one improvement you think was delivered in a recent update, and how an agile team might have decided on it."
+     ],
+     "q": [
+      {
+       "q": "Which roles would be needed for your app, and what would each do?",
+       "a": "E.g. for a music app: product manager decides on new features like shared playlists; designer designs the playlist screens; front-end developers build them; back-end developers store playlists and stream music; testers check it works on different phones; data analysts see how many people use it."
+      },
+      {
+       "q": "How might an agile team have decided on a recent update?",
+       "a": "E.g. analytics showed users struggled to find downloads, so the next sprint added a \"Downloads\" tab, released it to some users first, and checked whether they used it more."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a native app?",
+     "o": [
+      "An app built for one specific platform",
+      "An app made in a jungle",
+      "A website",
+      "A game console"
+     ],
+     "a": 0,
+     "why": "e.g. iOS only."
+    },
+    {
+     "q": "Which type of app runs in a web browser?",
+     "o": [
+      "A native app",
+      "A desktop app only",
+      "A web app",
+      "A console game"
+     ],
+     "a": 2,
+     "why": "Works on any device."
+    },
+    {
+     "q": "What is a sprint in agile?",
+     "o": [
+      "A running race",
+      "A short cycle that delivers a small working improvement",
+      "A type of app",
+      "A bug"
+     ],
+     "a": 1,
+     "why": "Often 1-2 weeks."
+    },
+    {
+     "q": "Who decides what an app team builds next and why?",
+     "o": [
+      "The tester only",
+      "The product manager",
+      "The app store",
+      "The user's parents"
+     ],
+     "a": 1,
+     "why": "Priorities and purpose."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Compare native and web apps.",
+     "m": 3,
+     "a": "Native built for one platform/downloaded from store (1); web app runs in a browser on any device (1); native faster/more phone features but must build for each platform (1)."
+    },
+    {
+     "q": "Explain one advantage of agile development.",
+     "m": 2,
+     "a": "Frequent feedback from users (1) so the team can adapt/fix problems early/deliver value sooner (1)."
+    }
+   ],
+   "terms": [
+    "Native app",
+    "Web app",
+    "Cross-platform",
+    "Agile",
+    "Sprint"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "User stories and priorities",
+   "spec": "Write user stories with acceptance criteria and prioritise them using MoSCoW and a product backlog",
+   "summary": "User stories describe what a user needs and why: \"As a ..., I want ..., so that ...\". Acceptance criteria list the conditions that show a story is done. Teams keep stories in a product backlog and prioritise them, for example using MoSCoW: Must, Should, Could, Won't (this time).",
+   "starter": "You're making an app for the school canteen. What do pupils, canteen staff and parents each want from it?",
+   "sc": [
+    "I can write user stories in the correct format",
+    "I can write clear acceptance criteria",
+    "I can prioritise user stories using MoSCoW"
+   ],
+   "slides": [
+    {
+     "t": "User stories",
+     "b": [
+      "As a [type of user], I want [goal], so that [reason]",
+      "Focus on the user's need, not the technology",
+      "Different users have different stories",
+      "e.g. \"As a pupil, I want to see today's menu, so that I can decide whether to bring lunch\""
+     ]
+    },
+    {
+     "t": "Acceptance criteria",
+     "b": [
+      "Conditions that must be true for the story to be \"done\"",
+      "Specific and testable",
+      "Often written as Given ... When ... Then ...",
+      "e.g. Given it's a school day, when I open the app, then I see today's menu with prices"
+     ]
+    },
+    {
+     "t": "Prioritise",
+     "b": [
+      "Product backlog: the list of all stories, in priority order",
+      "MoSCoW: Must have, Should have, Could have, Won't have (this time)",
+      "MVP: the minimum viable product, the smallest version that's useful",
+      "Build the Musts first, release, learn, then add more"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "User stories"
+    },
+    {
+     "t": "p",
+     "text": "A **[[user story]]** describes a feature from the user's point of view:"
+    },
+    {
+     "t": "p",
+     "text": "**As a** [type of user], **I want** [a goal], **so that** [a reason]."
+    },
+    {
+     "t": "p",
+     "text": "The \"so that\" part is important: it explains why the feature matters, helping the team find the best solution."
+    },
+    {
+     "t": "table",
+     "caption": "User story examples for a school canteen app",
+     "head": [
+      "User",
+      "Story"
+     ],
+     "rows": [
+      [
+       "Pupil",
+       "As a pupil, I want to see today's menu, so that I can decide whether to bring a packed lunch."
+      ],
+      [
+       "Pupil with an allergy",
+       "As a pupil with a nut allergy, I want to see allergy information for each meal, so that I can eat safely."
+      ],
+      [
+       "Parent",
+       "As a parent, I want to top up my child's account, so that they don't run out of money."
+      ],
+      [
+       "Canteen manager",
+       "As the canteen manager, I want to see how many people pre-order each meal, so that I can reduce food waste."
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Acceptance criteria"
+    },
+    {
+     "t": "p",
+     "text": "**[[acceptance criteria|Acceptance criteria]]** are the conditions that must be met for a user story to count as done. They must be specific and testable. Many teams write them as **Given ... When ... Then ...**"
+    },
+    {
+     "t": "example",
+     "title": "Acceptance criteria for the allergy story",
+     "context": "As a pupil with a nut allergy, I want to see allergy information for each meal, so that I can eat safely.",
+     "steps": [
+      "Given I'm viewing the menu, when I tap a meal, then I see a list of the 14 major allergens it contains.",
+      "Given a meal contains nuts, when I view the menu, then it shows a clear allergy warning icon.",
+      "Given I've set my allergy in my profile, when a meal contains that allergen, then it is highlighted in red."
+     ],
+     "answer": "Each criterion can be tested with a clear pass or fail, so the team knows exactly when the story is done."
+    },
+    {
+     "t": "h",
+     "text": "Prioritising: backlog and MoSCoW"
+    },
+    {
+     "t": "p",
+     "text": "The **[[product backlog]]** is the team's list of all user stories, in priority order. Teams can't build everything at once, so they prioritise using **[[MoSCoW]]**:"
+    },
+    {
+     "t": "table",
+     "caption": "MoSCoW prioritisation",
+     "head": [
+      "Priority",
+      "Meaning",
+      "Canteen app example"
+     ],
+     "rows": [
+      [
+       "Must have",
+       "Essential: the app fails without it",
+       "View today's menu; allergy information"
+      ],
+      [
+       "Should have",
+       "Important but not essential for the first version",
+       "Parents top up accounts"
+      ],
+      [
+       "Could have",
+       "Nice extras if there's time",
+       "Rate meals with stars"
+      ],
+      [
+       "Won't have (this time)",
+       "Agreed to leave for later",
+       "Order food delivered to classrooms"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A **[[minimum viable product]]** (MVP) is the simplest version of an app that's still useful to real users, usually just the Must haves. Teams release the MVP, learn from users and then add more."
+    },
+    {
+     "t": "act",
+     "title": "Story workshop",
+     "mins": 30,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Choose an app idea: a homework planner, a school club finder, or a local bus times app for Fermanagh.",
+      "Identify three types of user and write at least six user stories.",
+      "Write acceptance criteria (Given ... When ... Then ...) for two of your stories.",
+      "Prioritise all stories with MoSCoW and circle your MVP."
+     ],
+     "q": [
+      {
+       "q": "Write two user stories for different users.",
+       "a": "E.g. homework planner: \"As a Year 8 pupil, I want to see all my homework deadlines in one list, so that I don't miss any.\" \"As a parent, I want a weekly summary of my child's homework, so that I can support them.\""
+      },
+      {
+       "q": "Write acceptance criteria for one story.",
+       "a": "E.g. Given I've added homework with a due date, when I open the app, then it appears in a list sorted by due date; Given homework is due tomorrow, when I open the app, then it's highlighted in orange."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is the correct format for a user story?",
+     "o": [
+      "As a ..., I want ..., so that ...",
+      "Once upon a time ...",
+      "Dear user ...",
+      "If ... then ... else"
+     ],
+     "a": 0,
+     "why": "Who, what, why."
+    },
+    {
+     "q": "What are acceptance criteria?",
+     "o": [
+      "The app store rating",
+      "A list of users",
+      "The app's price",
+      "Testable conditions that show a story is done"
+     ],
+     "a": 3,
+     "why": "Define done."
+    },
+    {
+     "q": "What does the M in MoSCoW stand for?",
+     "o": [
+      "Money",
+      "Must have",
+      "Maybe",
+      "More"
+     ],
+     "a": 1,
+     "why": "Essential features."
+    },
+    {
+     "q": "What is an MVP?",
+     "o": [
+      "A marketing video",
+      "The final version",
+      "The best player",
+      "The simplest version of an app that's still useful"
+     ],
+     "a": 3,
+     "why": "Minimum viable product."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Write a user story for a pupil using a school sports club app.",
+     "m": 2,
+     "a": "Correct format \"As a ..., I want ..., so that ...\" (1); sensible goal and reason (1)."
+    },
+    {
+     "q": "Explain why teams prioritise user stories using MoSCoW.",
+     "m": 3,
+     "a": "Can't build everything at once/limited time (1); ensures essential features built first (1); can release an MVP sooner and learn from users (1)."
+    }
+   ],
+   "terms": [
+    "User story",
+    "Acceptance criteria",
+    "Product backlog",
+    "MoSCoW",
+    "Minimum viable product"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Wireframes and flows",
+   "spec": "Design app screens and navigation using wireframes, user flows and common mobile UI patterns",
+   "summary": "Before coding, designers sketch screens as wireframes, simple layouts showing where content and buttons go. User flows show the steps a user takes to complete a task. Designers use familiar UI patterns, design mobile-first and follow accessibility guidelines so apps are easy for everyone to use.",
+   "starter": "Draw your phone's home screen from memory in 60 seconds. What did you include?",
+   "sc": [
+    "I can create a low-fidelity wireframe",
+    "I can draw a user flow for a task",
+    "I can apply common UI patterns and accessibility guidelines"
+   ],
+   "slides": [
+    {
+     "t": "Wireframes",
+     "b": [
+      "A simple sketch of a screen's layout",
+      "Boxes for images, lines for text, labelled buttons",
+      "Low-fidelity: quick pencil sketches; high-fidelity: detailed mock-ups",
+      "Focus on layout and function, not colours"
+     ]
+    },
+    {
+     "t": "User flows",
+     "b": [
+      "The steps a user takes to complete a task",
+      "Start → screens and decisions → goal reached",
+      "Fewer steps usually means a better experience",
+      "Each user story becomes a flow"
+     ]
+    },
+    {
+     "t": "Patterns and accessibility",
+     "b": [
+      "Familiar patterns: bottom tab bar, search bar, cards, back button",
+      "Mobile-first: design for small screens, then scale up",
+      "Touch targets big enough for fingers",
+      "Good contrast, readable text, labels for screen readers"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Wireframes"
+    },
+    {
+     "t": "p",
+     "text": "A **[[wireframe]]** is a simple drawing of a screen's layout, showing where content, images and buttons go. It deliberately ignores colours and styling so the team can focus on structure and function."
+    },
+    {
+     "t": "table",
+     "caption": "Wireframe fidelity",
+     "head": [
+      "Type",
+      "What it looks like",
+      "When to use"
+     ],
+     "rows": [
+      [
+       "Low-fidelity",
+       "Quick pencil sketches with boxes and labels",
+       "Exploring lots of ideas fast"
+      ],
+      [
+       "Mid-fidelity",
+       "Neat digital layouts in grey",
+       "Agreeing the structure"
+      ],
+      [
+       "High-fidelity",
+       "Detailed mock-ups with real colours, text and images",
+       "Final design before building; testing with users"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "User flows"
+    },
+    {
+     "t": "p",
+     "text": "A **[[user flow]]** is a diagram of the steps a user takes to complete a task, from start to goal, including screens and decisions. Every user story can become a flow. Good design usually means fewer steps."
+    },
+    {
+     "t": "example",
+     "title": "User flow for \"top up my child's canteen account\"",
+     "context": "Parent opens the app.",
+     "steps": [
+      "Home screen → tap \"Top up\".",
+      "Choose child (if more than one) → choose amount (£5, £10, £20 or other).",
+      "Confirm payment with fingerprint → see \"Success\" and new balance."
+     ],
+     "answer": "Four screens and one decision. The designer might remove a step by remembering the last child and amount used."
+    },
+    {
+     "t": "h",
+     "text": "UI patterns"
+    },
+    {
+     "t": "p",
+     "text": "A **[[UI pattern]]** is a common design solution that users already understand. Using familiar patterns means people don't need to learn your app from scratch."
+    },
+    {
+     "t": "key",
+     "title": "Common mobile UI patterns",
+     "items": [
+      "Bottom tab bar: 3-5 main sections, always visible",
+      "Search bar at the top",
+      "Cards: boxes that group information about one item",
+      "Back arrow in the top-left corner",
+      "Pull down to refresh; swipe to delete",
+      "Floating action button for the main action (e.g. \"+ Add homework\")"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Mobile-first and accessible"
+    },
+    {
+     "t": "p",
+     "text": "**[[mobile-first|Mobile-first]]** design means designing for small phone screens first, then adapting for tablets and computers. Accessibility guidelines include:"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "**[[touch target|Touch targets]]** at least about 44-48 pixels so they're easy to tap",
+      "High contrast between text and background",
+      "Text that can be resized",
+      "Labels on buttons and images so screen readers can describe them",
+      "Not relying on colour alone to show meaning"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Wireframe sprint",
+     "mins": 30,
+     "who": "Pairs",
+     "after": 4,
+     "steps": [
+      "Using your app idea from last lesson, choose your three Must-have user stories.",
+      "Draw a user flow for one of them.",
+      "Sketch low-fidelity wireframes for each screen in that flow (use the phone templates).",
+      "Swap with another pair and test: can they complete the task by \"tapping\" your paper screens? Note any confusion."
+     ],
+     "q": [
+      {
+       "q": "Draw or describe your user flow.",
+       "a": "E.g. homework planner, \"add homework\": Home → tap \"+\" → enter subject, task and due date → tap \"Save\" → back to Home with the new item in the list."
+      },
+      {
+       "q": "What confused your testers, and what will you change?",
+       "a": "E.g. \"They didn't notice the + button at the bottom, so we'll make it larger and add a label 'Add homework'.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a wireframe?",
+     "o": [
+      "A simple sketch of a screen's layout",
+      "A type of cable",
+      "A wire fence",
+      "A finished app"
+     ],
+     "a": 0,
+     "why": "Layout before colour."
+    },
+    {
+     "q": "What does a user flow show?",
+     "o": [
+      "The speed of the internet",
+      "The number of users",
+      "The app's code",
+      "The steps a user takes to complete a task"
+     ],
+     "a": 3,
+     "why": "Task journey."
+    },
+    {
+     "q": "Which is a common mobile UI pattern?",
+     "o": [
+      "Random layouts on every screen",
+      "A button smaller than a pinhead",
+      "A bottom tab bar",
+      "A hidden menu with no icon"
+     ],
+     "a": 2,
+     "why": "Familiar to users."
+    },
+    {
+     "q": "What does mobile-first mean?",
+     "o": [
+      "Designing for small screens first",
+      "Building phones first",
+      "Designing for TVs first",
+      "Ignoring phones"
+     ],
+     "a": 0,
+     "why": "Then scale up."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why designers create wireframes before coding.",
+     "m": 2,
+     "a": "Quick/cheap to change ideas (1); agree layout and test with users before spending time coding (1)."
+    },
+    {
+     "q": "Describe three ways to make an app's screens more accessible.",
+     "m": 3,
+     "a": "Any three: large touch targets (1); high contrast (1); resizable text (1); screen reader labels (1); don't rely on colour alone (1)."
+    }
+   ],
+   "terms": [
+    "Wireframe",
+    "User flow",
+    "UI pattern",
+    "Mobile-first",
+    "Touch target"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "Building with events and data",
+   "spec": "Explain event-driven programming and how apps use variables, lists, stored data and APIs",
+   "summary": "Apps are event-driven: code runs when events happen, such as a button tap, a timer or a new message. Apps use variables and lists to hold data while running, and store data on the device or in a cloud database so it's kept. Many apps get live data from other services through APIs.",
+   "starter": "When you tap \"Send\" in a messaging app, what do you think the code has to do?",
+   "sc": [
+    "I can explain event-driven programming",
+    "I can explain how apps store data locally and in the cloud",
+    "I can explain how apps use APIs"
+   ],
+   "slides": [
+    {
+     "t": "Event-driven",
+     "b": [
+      "An event is something that happens: a tap, a swipe, a timer, a message arriving",
+      "An event handler is the code that runs when that event happens",
+      "\"When Save button clicked → do this\"",
+      "The app waits for events, then responds"
+     ]
+    },
+    {
+     "t": "Data in apps",
+     "b": [
+      "Variables: store single values (score, username)",
+      "Lists: store many values (homework items)",
+      "Local storage: on the device; works offline",
+      "Cloud database: shared, synced across devices"
+     ]
+    },
+    {
+     "t": "APIs",
+     "b": [
+      "Apps request data or services from other systems",
+      "Weather, maps, payments, login with Google",
+      "The app sends a request; the API sends back data (often JSON)",
+      "Saves building everything yourself"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Event-driven programming"
+    },
+    {
+     "t": "p",
+     "text": "Most apps use **[[event-driven programming]]**. An **[[event]]** is something that happens: a button tap, a swipe, typing, a timer going off, a location change, or a message arriving. An **[[event handler]]** is the code that runs when that event happens. The app spends most of its time waiting for events."
+    },
+    {
+     "t": "example",
+     "title": "Event handler for adding homework (pseudocode)",
+     "context": "A homework planner has a text box, a date picker and a Save button.",
+     "steps": [
+      "WHEN SaveButton.Clicked:",
+      "IF TaskBox.Text is empty THEN show \"Please enter a task\"",
+      "ELSE add {task, subject, due date} to homeworkList, save the list, clear the boxes, refresh the screen"
+     ],
+     "answer": "The code only runs when the Save button is clicked (the event), and validates input before saving."
+    },
+    {
+     "t": "h",
+     "text": "Variables, lists and storage"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "A **[[variable]]** stores a single value while the app is running, such as a username or score.",
+      "A list stores many values, such as all homework items.",
+      "Data in variables is lost when the app closes, so apps save data to storage."
+     ]
+    },
+    {
+     "t": "table",
+     "caption": "Where apps store data",
+     "head": [
+      "Storage",
+      "Where",
+      "Good for"
+     ],
+     "rows": [
+      [
+       "Local storage",
+       "On the device",
+       "Settings, offline data, private notes"
+      ],
+      [
+       "Cloud **[[database]]**",
+       "On a server",
+       "Sharing between users, syncing across devices, backups"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A school canteen app would need a cloud database so that the canteen, pupils and parents all see the same menu and balances."
+    },
+    {
+     "t": "h",
+     "text": "APIs"
+    },
+    {
+     "t": "p",
+     "text": "An **[[API]]** lets an app request data or services from another system. Instead of building everything themselves, developers use APIs for weather, maps, payments, translation, AI features and \"Sign in with Google\". The app sends a request, and the API sends back data, often in a format called JSON."
+    },
+    {
+     "t": "note",
+     "text": "Tools such as MIT App Inventor and Thunkable let you build real phone apps with blocks, including events, lists, databases and APIs. AI app builders can now generate apps from a description, but you still need to understand events and data to check and fix what they produce."
+    },
+    {
+     "t": "act",
+     "title": "Event mapping",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 4,
+     "steps": [
+      "For your app, list five events users or the system could trigger (e.g. tap Save, swipe to delete, 8am timer).",
+      "For each event, write what the event handler should do in pseudocode, including input checks.",
+      "Decide what data your app stores: which variables, which lists, local or cloud, and why.",
+      "Identify one API your app could use. If you have time, build one screen in App Inventor or Thunkable."
+     ],
+     "q": [
+      {
+       "q": "Write the event handler for one event.",
+       "a": "E.g. WHEN 8am timer fires: FOR each homework item IF due date = today THEN send notification \"Due today: [task]\"."
+      },
+      {
+       "q": "Should your app store data locally or in the cloud? Explain.",
+       "a": "E.g. homework planner: cloud, so homework syncs between phone and school laptop and isn't lost if the phone breaks; but settings can stay local."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is an event?",
+     "o": [
+      "Something that happens, like a tap or timer",
+      "A variable",
+      "A party",
+      "A database"
+     ],
+     "a": 0,
+     "why": "Triggers code."
+    },
+    {
+     "q": "What is an event handler?",
+     "o": [
+      "Code that runs when an event happens",
+      "A wireframe",
+      "A type of storage",
+      "A person who organises parties"
+     ],
+     "a": 0,
+     "why": "Responds to events."
+    },
+    {
+     "q": "Why do apps save data to storage?",
+     "o": [
+      "Variables are too fast",
+      "Data in variables is lost when the app closes",
+      "They don't",
+      "Storage is free"
+     ],
+     "a": 1,
+     "why": "Persistence."
+    },
+    {
+     "q": "Which storage lets data sync across a user's devices?",
+     "o": [
+      "The screen",
+      "A cloud database",
+      "Local storage only",
+      "A variable"
+     ],
+     "a": 1,
+     "why": "Shared and synced."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain what is meant by event-driven programming.",
+     "m": 2,
+     "a": "Code runs in response to events (1), e.g. button taps/timers/messages (1)."
+    },
+    {
+     "q": "Explain why a homework app might use a cloud database rather than local storage.",
+     "m": 3,
+     "a": "Data syncs across devices (1); backed up if phone lost/broken (1); could be shared with teachers/parents (1)."
+    }
+   ],
+   "terms": [
+    "Event",
+    "Event handler",
+    "Variable",
+    "Database",
+    "API"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Testing and bugs",
+   "spec": "Plan and carry out testing using a test plan with normal, boundary and erroneous data, and write useful bug reports",
+   "summary": "Testing checks that an app works as intended and meets its acceptance criteria. A test plan lists tests, the data used and expected results. Good testing uses normal, boundary and erroneous data, tests on different devices, and includes beta testing with real users. Bugs are recorded in clear bug reports.",
+   "starter": "What's the most annoying bug you've found in an app or game? How do you think it got through?",
+   "sc": [
+    "I can write a test plan with expected results",
+    "I can choose normal, boundary and erroneous test data",
+    "I can write a clear bug report"
+   ],
+   "slides": [
+    {
+     "t": "Why test?",
+     "b": [
+      "Bugs annoy users, lose data and can create security holes",
+      "Testing checks the app meets its acceptance criteria",
+      "Test as you go, not just at the end",
+      "Test on different devices, screen sizes and connections"
+     ]
+    },
+    {
+     "t": "Test data",
+     "b": [
+      "Normal: sensible data that should work (age 13)",
+      "Boundary: at the edges of what's allowed (age 11 and 18)",
+      "Erroneous: data that should be rejected (age \"cat\" or -5)",
+      "Each test has an expected result"
+     ]
+    },
+    {
+     "t": "Bug reports and beta testing",
+     "b": [
+      "Bug report: title, steps to reproduce, expected vs actual, device, screenshot",
+      "Severity: how bad is it?",
+      "Beta testing: real users try the app before the full release",
+      "AI-written code needs testing too"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Test plans"
+    },
+    {
+     "t": "p",
+     "text": "A **[[test plan]]** lists what will be tested, the test data, the expected result and (after testing) the actual result."
+    },
+    {
+     "t": "table",
+     "caption": "Test plan for \"enter age\" (allowed range 11-18)",
+     "head": [
+      "Test",
+      "Data type",
+      "Test data",
+      "Expected result"
+     ],
+     "rows": [
+      [
+       "1",
+       "**[[normal data|Normal]]**",
+       "14",
+       "Accepted"
+      ],
+      [
+       "2",
+       "**[[boundary data|Boundary]]**",
+       "11",
+       "Accepted"
+      ],
+      [
+       "3",
+       "Boundary",
+       "18",
+       "Accepted"
+      ],
+      [
+       "4",
+       "Boundary (just outside)",
+       "10",
+       "Rejected with message"
+      ],
+      [
+       "5",
+       "Boundary (just outside)",
+       "19",
+       "Rejected with message"
+      ],
+      [
+       "6",
+       "**[[erroneous data|Erroneous]]**",
+       "\"twelve\"",
+       "Rejected with message"
+      ],
+      [
+       "7",
+       "Erroneous",
+       "(blank)",
+       "Rejected with message"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Boundary tests are important because programmers often make mistakes with < and <=. Erroneous tests check the app copes with bad input rather than crashing."
+    },
+    {
+     "t": "h",
+     "text": "Testing on real devices"
+    },
+    {
+     "t": "key",
+     "title": "What else to test",
+     "items": [
+      "Different phones, screen sizes and operating system versions",
+      "Slow or no internet connection",
+      "Accessibility: screen readers, large text, colour contrast",
+      "Security: can one user see another user's data?",
+      "Every acceptance criterion from the user stories"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Bug reports"
+    },
+    {
+     "t": "p",
+     "text": "A **[[bug report]]** tells developers exactly how to find and fix a problem."
+    },
+    {
+     "t": "table",
+     "caption": "A good bug report",
+     "head": [
+      "Part",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Title",
+       "App crashes when saving homework with an emoji in the title"
+      ],
+      [
+       "Steps to reproduce",
+       "1. Tap \"+\". 2. Enter \"Maths 📐\". 3. Tap Save."
+      ],
+      [
+       "Expected result",
+       "Homework is saved and shown in the list"
+      ],
+      [
+       "Actual result",
+       "App closes with no message"
+      ],
+      [
+       "Device",
+       "Android 15, Samsung Galaxy A-series"
+      ],
+      [
+       "Severity",
+       "High: users lose what they typed"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Beta testing"
+    },
+    {
+     "t": "p",
+     "text": "**[[beta testing|Beta testing]]** means releasing an almost-finished app to a group of real users before the full launch. They find bugs and usability problems the team missed. App stores provide tools for beta testing."
+    },
+    {
+     "t": "warn",
+     "text": "Code written with help from an AI assistant can look correct but contain bugs or security problems. It needs exactly the same careful testing as code written by a person."
+    },
+    {
+     "t": "act",
+     "title": "Break it!",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Your teacher shares a simple (deliberately buggy) app or web form, e.g. a club sign-up form.",
+      "Write a test plan with at least eight tests, including normal, boundary and erroneous data.",
+      "Run the tests and record the actual results.",
+      "Write two bug reports for the most serious bugs you found."
+     ],
+     "q": [
+      {
+       "q": "Give one boundary test and one erroneous test from your plan.",
+       "a": "E.g. club sign-up for Years 8-10: boundary: Year 10, expected accepted; just outside boundary: Year 11, expected rejected; erroneous: \"ten\", expected rejected with a helpful message."
+      },
+      {
+       "q": "Write one of your bug reports.",
+       "a": "Title: Form accepts a blank email. Steps: 1. Fill in name and year. 2. Leave email blank. 3. Press Submit. Expected: error \"Please enter your email\". Actual: form submits with no email. Device: school Chromebook. Severity: Medium."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is boundary data?",
+     "o": [
+      "Random data",
+      "Data that's always wrong",
+      "Data at the edges of what's allowed",
+      "Data from another app"
+     ],
+     "a": 2,
+     "why": "e.g. min and max values."
+    },
+    {
+     "q": "What is erroneous data?",
+     "o": [
+      "Data at the limit",
+      "Data that should be rejected",
+      "Encrypted data",
+      "Normal sensible data"
+     ],
+     "a": 1,
+     "why": "Wrong type or out of range."
+    },
+    {
+     "q": "Which part of a bug report helps developers recreate the problem?",
+     "o": [
+      "The tester's favourite colour",
+      "The app's logo",
+      "The price",
+      "Steps to reproduce"
+     ],
+     "a": 3,
+     "why": "Exact steps."
+    },
+    {
+     "q": "What is beta testing?",
+     "o": [
+      "The final release",
+      "Testing only by developers",
+      "Testing the letter beta",
+      "Real users trying an almost-finished app before launch"
+     ],
+     "a": 3,
+     "why": "Real-world feedback."
+    }
+   ],
+   "practice": [
+    {
+     "q": "An app accepts a quantity from 1 to 10. Give one normal, one boundary and one erroneous test value.",
+     "m": 3,
+     "a": "Normal, e.g. 5 (1); boundary, e.g. 1 or 10 (or 0/11 just outside) (1); erroneous, e.g. \"abc\" or -3 (1)."
+    },
+    {
+     "q": "Explain why apps should be tested on different devices.",
+     "m": 2,
+     "a": "Screens/OS versions/hardware differ (1), so layouts or features may break on some devices (1)."
+    }
+   ],
+   "terms": [
+    "Test plan",
+    "Normal data",
+    "Boundary data",
+    "Erroneous data",
+    "Bug report",
+    "Beta testing"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "Launch, measure, improve",
+   "spec": "Describe how apps are launched, measured and improved, and evaluate ethical issues including privacy and dark patterns",
+   "summary": "Launching an app involves app store review, a privacy policy and clear descriptions. After launch, teams use analytics and user feedback to decide what to improve in the next sprint. Apps make money through prices, subscriptions, adverts or in-app purchases. Ethical apps respect privacy and avoid dark patterns that manipulate users.",
+   "starter": "Have you ever felt tricked into tapping something in an app? What happened?",
+   "sc": [
+    "I can describe how apps are published and maintained",
+    "I can explain how analytics and feedback drive improvements",
+    "I can identify dark patterns and design ethical alternatives"
+   ],
+   "slides": [
+    {
+     "t": "Launch",
+     "b": [
+      "App stores review apps for safety, privacy and quality",
+      "A privacy policy must explain what data is collected",
+      "Clear description, screenshots and age rating",
+      "Plan for updates: bugs, new OS versions, security"
+     ]
+    },
+    {
+     "t": "Measure and improve",
+     "b": [
+      "Analytics: how many users, which features, where they quit",
+      "Feedback: reviews, surveys, support messages",
+      "A/B testing: show two versions to different users and compare",
+      "Each sprint: pick the most valuable improvements from the backlog"
+     ]
+    },
+    {
+     "t": "Ethical apps",
+     "b": [
+      "Business models: paid, subscription, ads, in-app purchases",
+      "Dark patterns trick users: hidden costs, hard-to-cancel subscriptions, fake countdowns",
+      "Ethical design: honest choices, easy to cancel, privacy by default",
+      "Children's apps must follow the UK Children's Code"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Launching an app"
+    },
+    {
+     "t": "p",
+     "text": "To publish on the Apple App Store or Google Play, developers submit their app for **[[app store review]]**, where it's checked for safety, privacy, content and quality. Apps need:"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "A clear description, screenshots and an age rating",
+      "A **[[privacy policy]]** explaining what data is collected, why, and who it's shared with",
+      "Privacy labels summarising data use"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "After launch, apps need maintenance: fixing bugs, updating for new phone operating systems and patching security problems."
+    },
+    {
+     "t": "h",
+     "text": "Measuring and improving"
+    },
+    {
+     "t": "p",
+     "text": "**[[analytics|Analytics]]** tools record how people use an app: how many users there are, which features they use, how long they stay and where they give up. Combined with reviews and feedback, this helps the team decide what to build in the next sprint."
+    },
+    {
+     "t": "p",
+     "text": "**[[A/B testing]]** shows two versions of a feature to different groups of users and measures which works better."
+    },
+    {
+     "t": "example",
+     "title": "An A/B test",
+     "context": "The homework app wants more pupils to add homework on the day it's set.",
+     "steps": [
+      "Group A sees the normal home screen.",
+      "Group B sees a reminder at 4pm: \"Got any homework today? Tap to add it.\"",
+      "After two weeks, 40% of group A and 62% of group B added homework on the day it was set."
+     ],
+     "answer": "Version B works better, so the team rolls it out to everyone, as long as users can turn the reminder off."
+    },
+    {
+     "t": "h",
+     "text": "Making money"
+    },
+    {
+     "t": "table",
+     "caption": "App business models",
+     "head": [
+      "Model",
+      "How it works",
+      "Watch out for"
+     ],
+     "rows": [
+      [
+       "Paid",
+       "Pay once to download",
+       "Fewer people try it"
+      ],
+      [
+       "Subscription",
+       "Pay monthly or yearly",
+       "Hard-to-cancel subscriptions"
+      ],
+      [
+       "Free with ads",
+       "Adverts pay for the app",
+       "Data collection for targeting"
+      ],
+      [
+       "In-app purchases",
+       "Buy extras inside the app",
+       "Pressure to spend, especially in games"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Dark patterns"
+    },
+    {
+     "t": "p",
+     "text": "A **[[dark pattern]]** is a design trick that pushes users into doing something they didn't intend."
+    },
+    {
+     "t": "table",
+     "caption": "Dark patterns and ethical alternatives",
+     "head": [
+      "Dark pattern",
+      "Example",
+      "Ethical alternative"
+     ],
+     "rows": [
+      [
+       "Confirmshaming",
+       "\"No thanks, I don't like saving money\"",
+       "Neutral \"No thanks\""
+      ],
+      [
+       "Roach motel",
+       "Easy to subscribe, very hard to cancel",
+       "Cancel in as few steps as signing up"
+      ],
+      [
+       "Fake urgency",
+       "\"Only 2 left! Offer ends in 05:00\" when it isn't true",
+       "Honest information"
+      ],
+      [
+       "Hidden costs",
+       "Extra fees revealed at the last step",
+       "Show the full price up front"
+      ],
+      [
+       "Nagging",
+       "Repeated pop-ups asking for permissions or ratings",
+       "Ask once, at a sensible time"
+      ],
+      [
+       "Privacy zuckering",
+       "Confusing settings that make you share more",
+       "Privacy-friendly defaults"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "In the UK, the Children's Code (Age Appropriate Design Code) requires apps likely to be used by children to have high privacy settings by default, collect minimal data and avoid \"nudge\" techniques that encourage children to give up privacy."
+    },
+    {
+     "t": "act",
+     "title": "Launch plan",
+     "mins": 30,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "For your app, write the app store description, age rating and three privacy label points.",
+      "Choose a business model and explain why it's fair to your users.",
+      "Choose three analytics measures you'll track and one A/B test you'll run.",
+      "Check your design for dark patterns using the table, and fix any you find."
+     ],
+     "q": [
+      {
+       "q": "Which business model did you choose, and why is it fair?",
+       "a": "E.g. free with an optional £1.99 one-off \"pro\" upgrade for themes; no ads or data selling, so pupils' data stays private; the core features stay free."
+      },
+      {
+       "q": "Describe one A/B test you'll run.",
+       "a": "E.g. test two versions of the \"add homework\" button (a floating \"+\" vs a labelled button) and measure which leads more users to add homework in their first week."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does app store review check?",
+     "o": [
+      "Nothing",
+      "Only the price",
+      "Safety, privacy, content and quality",
+      "Only the logo"
+     ],
+     "a": 2,
+     "why": "Before publishing."
+    },
+    {
+     "q": "What is A/B testing?",
+     "o": [
+      "Testing two phones",
+      "Testing the alphabet",
+      "Comparing two versions with different groups of users",
+      "A spelling test"
+     ],
+     "a": 2,
+     "why": "Evidence-based design."
+    },
+    {
+     "q": "What is a dark pattern?",
+     "o": [
+      "Night mode",
+      "A bug",
+      "A dark colour scheme",
+      "A design trick that pushes users into doing something they didn't intend"
+     ],
+     "a": 3,
+     "why": "Manipulative design."
+    },
+    {
+     "q": "What does the UK Children's Code require?",
+     "o": [
+      "Dark mode",
+      "Free apps only",
+      "High privacy settings by default for children's apps",
+      "No apps for children"
+     ],
+     "a": 2,
+     "why": "Protects children's data."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how analytics help an app team decide what to improve.",
+     "m": 2,
+     "a": "Shows how users use the app/where they give up (1); team prioritises fixes/features with most impact (1)."
+    },
+    {
+     "q": "Evaluate the use of in-app purchases in games aimed at young people.",
+     "m": 4,
+     "a": "Benefits, e.g. free to try, pay only for what you want, funds developers (1-2); concerns, e.g. pressure, dark patterns, overspending, loot boxes (1-2); conclusion (1). Max 4."
+    }
+   ],
+   "terms": [
+    "App store review",
+    "Analytics",
+    "A/B testing",
+    "Dark pattern",
+    "Privacy policy"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Native app",
+   "def": "An app built for one specific platform, such as iOS or Android.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Web app",
+   "def": "An app that runs in a web browser.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Cross-platform",
+   "def": "Built once to run on more than one platform.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Agile",
+   "def": "An approach to development that builds and improves software in short cycles with frequent feedback.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Sprint",
+   "def": "A short, fixed period in which an agile team delivers a working improvement.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "User story",
+   "def": "A short description of a feature from a user's view: \"As a ..., I want ..., so that ...\".",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Acceptance criteria",
+   "def": "Specific, testable conditions that show a user story is complete.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Product backlog",
+   "def": "A prioritised list of all the user stories and work for a product.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "MoSCoW",
+   "def": "A way to prioritise: Must have, Should have, Could have, Won't have (this time).",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Minimum viable product",
+   "def": "The simplest version of a product that is still useful to real users.",
+   "alt": "MVP",
+   "page": "p02"
+  },
+  {
+   "term": "Wireframe",
+   "def": "A simple sketch of a screen's layout.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "User flow",
+   "def": "A diagram of the steps a user takes to complete a task.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "UI pattern",
+   "def": "A common design solution users already recognise, such as a tab bar.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Mobile-first",
+   "def": "Designing for small screens first, then adapting for larger ones.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Touch target",
+   "def": "The area of the screen that responds to a tap.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Event-driven programming",
+   "def": "Programming where code runs in response to events.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Event",
+   "def": "Something that happens that a program can respond to, such as a tap or timer.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Event handler",
+   "def": "Code that runs when a particular event happens.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Variable",
+   "def": "A named store for a value that can change while a program runs.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Database",
+   "def": "An organised store of data, often on a server.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "API",
+   "def": "Application programming interface: rules that let programs request data or services from each other.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Test plan",
+   "def": "A list of tests, test data and expected results.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Normal data",
+   "def": "Sensible data that a program should accept.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Boundary data",
+   "def": "Data at the edges of the allowed range.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Erroneous data",
+   "def": "Data that a program should reject.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Bug report",
+   "def": "A record describing a problem so developers can find and fix it.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Beta testing",
+   "def": "Real users testing an almost-finished product before launch.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "App store review",
+   "def": "Checks an app store carries out before publishing an app.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Privacy policy",
+   "def": "A document explaining what data an app collects and how it's used.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Analytics",
+   "def": "Data showing how people use an app or website.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "A/B testing",
+   "def": "Comparing two versions of something with different groups of users.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Dark pattern",
+   "def": "A design trick that pushes users into doing something they didn't intend.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}
