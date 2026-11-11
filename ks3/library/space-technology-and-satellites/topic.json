@@ -1,0 +1,1391 @@
+{
+ "title": "Space Technology and Satellites",
+ "summary": "The computing above our heads: how satellites stay in orbit, how GPS pinpoints your location, how Earth observation and AI monitor our planet, how satellite internet works, why space debris is a growing problem, and how to design your own CubeSat mission.",
+ "learn": [
+  "How satellites stay in orbit and the main types of orbit",
+  "How satellite navigation works out your position",
+  "How Earth observation satellites and AI help monitor the planet",
+  "How satellite communication and space internet work",
+  "Why space debris is a problem and how it can be managed",
+  "How a small satellite mission is designed and the opportunities in the space industry"
+ ],
+ "temporary": false,
+ "intro": "Every time you check a map, a weather forecast or a live football match, you're using satellites. Thousands of them now circle the Earth, carrying computers, cameras and radios that help us navigate, communicate and protect the planet. In this topic you'll find out how satellites stay up, how GPS works out exactly where you are, how satellite images and AI track floods and wildfires, how space internet reaches remote places, why space junk is a serious threat, and you'll plan a satellite mission of your own.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "Satellites and orbits",
+   "spec": "Explain how satellites stay in orbit, compare types of orbit and describe the parts of a satellite",
+   "summary": "A satellite stays in orbit because it travels sideways fast enough that, as gravity pulls it down, the Earth curves away beneath it. Satellites use different orbits for different jobs: low Earth orbit, medium Earth orbit and geostationary orbit. Every satellite has a power supply, computer, communications and a payload.",
+   "starter": "If you throw a ball sideways it falls to the ground. What would happen if you could throw it at 28,000 km/h?",
+   "sc": [
+    "I can explain how a satellite stays in orbit",
+    "I can compare LEO, MEO and GEO orbits and their uses",
+    "I can describe the main parts of a satellite"
+   ],
+   "slides": [
+    {
+     "t": "Falling around the Earth",
+     "b": [
+      "A satellite is an object that orbits a larger object",
+      "Gravity pulls it towards Earth all the time",
+      "It moves sideways so fast (about 28,000 km/h in low orbit) that it keeps missing the ground",
+      "It's \"falling around\" the Earth"
+     ]
+    },
+    {
+     "t": "Types of orbit",
+     "b": [
+      "LEO (low Earth orbit): 160-2,000 km; ISS, Starlink, imaging satellites",
+      "MEO (medium Earth orbit): about 20,000 km; GPS and Galileo",
+      "GEO (geostationary orbit): 35,786 km; stays over one spot; TV and weather",
+      "Higher orbits take longer to go round"
+     ]
+    },
+    {
+     "t": "Inside a satellite",
+     "b": [
+      "Power: solar panels and batteries",
+      "Computer (on-board data handling) to control everything",
+      "Communications: antennas to talk to ground stations",
+      "Payload: the instruments that do the job, e.g. cameras or radios"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "How satellites stay up"
+    },
+    {
+     "t": "p",
+     "text": "A **[[satellite]]** is an object that travels around a larger object. The Moon is a natural satellite; there are now many thousands of artificial ones. An **[[orbit]]** is the curved path a satellite follows. Gravity constantly pulls the satellite towards the Earth, but it moves sideways so quickly (about 28,000 km/h in low orbit) that the Earth curves away beneath it as fast as it falls. It's constantly \"falling around\" the planet."
+    },
+    {
+     "t": "h",
+     "text": "Types of orbit"
+    },
+    {
+     "t": "table",
+     "caption": "Common orbits",
+     "head": [
+      "Orbit",
+      "Height above Earth",
+      "Time for one orbit",
+      "Used for"
+     ],
+     "rows": [
+      [
+       "**[[low Earth orbit|Low Earth orbit]]** (LEO)",
+       "160-2,000 km",
+       "About 90-120 minutes",
+       "International Space Station, Starlink, Earth imaging"
+      ],
+      [
+       "Medium Earth orbit (MEO)",
+       "About 20,000 km",
+       "About 12 hours",
+       "GPS and Galileo navigation"
+      ],
+      [
+       "**[[geostationary orbit|Geostationary orbit]]** (GEO)",
+       "35,786 km",
+       "24 hours",
+       "TV broadcasting, weather satellites"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A geostationary satellite orbits at the same speed the Earth spins, so it stays above the same point on the equator. That's why satellite TV dishes can point in one fixed direction."
+    },
+    {
+     "t": "h",
+     "text": "Inside a satellite"
+    },
+    {
+     "t": "table",
+     "caption": "Satellite subsystems",
+     "head": [
+      "Part",
+      "Job"
+     ],
+     "rows": [
+      [
+       "Power",
+       "Solar panels generate electricity; batteries store it for when the satellite is in Earth's shadow"
+      ],
+      [
+       "On-board computer",
+       "Controls the satellite, stores data and runs software (which can often be updated from Earth)"
+      ],
+      [
+       "Communications",
+       "Antennas send data to and receive commands from ground stations"
+      ],
+      [
+       "Attitude control",
+       "Keeps the satellite pointing the right way using small thrusters or spinning wheels"
+      ],
+      [
+       "**[[payload|Payload]]**",
+       "The instruments that do the mission's job: cameras, sensors, radios, telescopes"
+      ],
+      [
+       "Thermal control",
+       "Protects electronics from extreme heat and cold"
+      ]
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Orbit match",
+     "mins": 15,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Match the eight satellite cards (e.g. a TV satellite, the ISS, a GPS satellite, a weather satellite watching Europe, a Starlink satellite) to the right orbit.",
+      "For each, explain why that orbit suits its job.",
+      "Work out how many times the ISS orbits the Earth in a day (it takes about 90 minutes per orbit)."
+     ],
+     "q": [
+      {
+       "q": "Why do TV satellites use geostationary orbit?",
+       "a": "They stay above the same spot, so dishes can point in one fixed direction and always receive the signal."
+      },
+      {
+       "q": "How many times does the ISS orbit Earth in a day?",
+       "a": "24 hours = 1,440 minutes; 1,440 ÷ 90 = 16 orbits a day."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Why doesn't a satellite fall to Earth?",
+     "o": [
+      "It moves sideways so fast the Earth curves away beneath it",
+      "There's no gravity in space",
+      "It has wings",
+      "It's held up by air"
+     ],
+     "a": 0,
+     "why": "It's falling around the Earth."
+    },
+    {
+     "q": "Which orbit stays above the same point on Earth?",
+     "o": [
+      "Medium Earth orbit",
+      "No orbit",
+      "Geostationary orbit",
+      "Low Earth orbit"
+     ],
+     "a": 2,
+     "why": "It matches Earth's spin."
+    },
+    {
+     "q": "Which orbit is the ISS in?",
+     "o": [
+      "It doesn't orbit",
+      "Geostationary orbit",
+      "Medium Earth orbit",
+      "Low Earth orbit"
+     ],
+     "a": 3,
+     "why": "About 400 km up."
+    },
+    {
+     "q": "What is a satellite's payload?",
+     "o": [
+      "Its price",
+      "The instruments that do its job",
+      "Its launch rocket",
+      "Its fuel"
+     ],
+     "a": 1,
+     "why": "e.g. cameras, radios."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why a satellite stays in orbit.",
+     "m": 2,
+     "a": "Gravity pulls it towards Earth (1); it moves sideways so fast that it keeps missing/the Earth curves away (1)."
+    },
+    {
+     "q": "Compare low Earth orbit and geostationary orbit.",
+     "m": 3,
+     "a": "LEO is much lower (160-2,000 km) vs GEO 35,786 km (1); LEO orbits in about 90 minutes, GEO in 24 hours/stays over one point (1); uses, e.g. LEO imaging/Starlink, GEO TV/weather (1)."
+    }
+   ],
+   "terms": [
+    "Satellite",
+    "Orbit",
+    "Low Earth orbit",
+    "Geostationary orbit",
+    "Payload"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "Satellite navigation",
+   "spec": "Explain how satellite navigation systems work out a receiver's position, and describe their uses and limitations",
+   "summary": "Satellite navigation (GNSS) uses satellites that broadcast precise time signals from atomic clocks. A receiver measures how long signals take to arrive from at least four satellites, works out its distance from each and calculates its position, a process called trilateration. Timing must be incredibly accurate.",
+   "starter": "How does your phone know where you are, even when you're not connected to Wi-Fi?",
+   "sc": [
+    "I can describe GNSS systems such as GPS and Galileo",
+    "I can explain how trilateration works out a position",
+    "I can explain why accurate timing matters and describe limitations"
+   ],
+   "slides": [
+    {
+     "t": "Satellite navigation",
+     "b": [
+      "GNSS: Global Navigation Satellite System",
+      "GPS (USA), Galileo (Europe), GLONASS (Russia), BeiDou (China)",
+      "About 24-30 satellites per system, about 20,000 km up",
+      "Your phone often uses several systems together"
+     ]
+    },
+    {
+     "t": "How it works",
+     "b": [
+      "Each satellite broadcasts its position and the exact time",
+      "Your receiver measures how long each signal took to arrive",
+      "Distance = speed of light × time",
+      "With 4 satellites, it calculates your position (trilateration) and corrects its own clock"
+     ]
+    },
+    {
+     "t": "Timing is everything",
+     "b": [
+      "Radio signals travel at about 300,000 km per second",
+      "An error of one millionth of a second = about 300 m wrong",
+      "So satellites carry ultra-precise atomic clocks",
+      "Banks, power grids and phone networks also rely on GNSS timing"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is GNSS?"
+    },
+    {
+     "t": "p",
+     "text": "A **[[GNSS]]** (Global Navigation Satellite System) is a network of satellites that lets receivers work out their location anywhere on Earth. The best-known is **[[GPS]]**, run by the USA. Europe has Galileo, Russia has GLONASS and China has BeiDou. Most phones use several systems together for better accuracy."
+    },
+    {
+     "t": "h",
+     "text": "Working out your position"
+    },
+    {
+     "t": "p",
+     "text": "Each satellite broadcasts signals saying where it is and exactly what time the signal was sent, measured by an **[[atomic clock]]**. Your receiver notes when each signal arrives and calculates how far away each satellite is."
+    },
+    {
+     "t": "example",
+     "title": "Distance from one satellite",
+     "context": "A signal travels at about 300,000 km per second and takes 0.07 seconds to arrive.",
+     "steps": [
+      "Distance = speed × time.",
+      "300,000 × 0.07 = 21,000 km."
+     ],
+     "answer": "The receiver is about 21,000 km from that satellite, somewhere on a giant sphere around it."
+    },
+    {
+     "t": "p",
+     "text": "**[[trilateration|Trilateration]]** uses distances from several satellites. One distance puts you somewhere on a sphere around one satellite; two narrow it to a circle; three narrow it to two points (one usually in space); a fourth satellite fixes your position and corrects the small errors in your receiver's own clock."
+    },
+    {
+     "t": "h",
+     "text": "Why timing matters"
+    },
+    {
+     "t": "p",
+     "text": "Radio signals travel at about 300,000 km per second, so a timing error of just one millionth of a second would put your position about 300 metres out. That's why satellites carry atomic clocks that lose less than a second in millions of years. GNSS timing is also used to synchronise banks, power grids, mobile networks and stock markets."
+    },
+    {
+     "t": "h",
+     "text": "Limitations"
+    },
+    {
+     "t": "key",
+     "title": "When GNSS struggles",
+     "items": [
+      "Signals are weak and can't pass through buildings or underground",
+      "Tall buildings and valleys block or reflect signals (\"urban canyons\")",
+      "Jamming: deliberately blocking signals with radio noise, a growing problem for aircraft and ships in some regions",
+      "Spoofing: sending fake signals so a receiver thinks it's somewhere else",
+      "Phones combine GNSS with Wi-Fi, mobile masts and motion sensors to fill the gaps"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Human GPS",
+     "mins": 25,
+     "who": "Groups of 4",
+     "after": 2,
+     "steps": [
+      "Three pupils stand in the playground or hall as \"satellites\", each holding a rope or tape measure.",
+      "A fourth pupil (the \"receiver\") is placed secretly. Each satellite measures the distance to the receiver.",
+      "On a scale map, draw circles of the right radius around each satellite's position and find where they cross.",
+      "Repeat with one measurement deliberately 1 m wrong and see what happens."
+     ],
+     "q": [
+      {
+       "q": "How many circles were needed to find the receiver's position on a flat map, and why?",
+       "a": "Three: one circle gives many possible points, two give two points where they cross, and the third shows which of the two is correct. (In 3D space, with clock errors, four satellites are needed.)"
+      },
+      {
+       "q": "What happened when one measurement was wrong, and what does this show?",
+       "a": "The circles no longer crossed at one point, so the position was uncertain or wrong. It shows why accurate timing (and therefore distance) is vital."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does GNSS stand for?",
+     "o": [
+      "Global Network Signal System",
+      "Ground Navigation Station System",
+      "Great New Satellite Service",
+      "Global Navigation Satellite System"
+     ],
+     "a": 3,
+     "why": "GPS is one example."
+    },
+    {
+     "q": "Which navigation system is run by Europe?",
+     "o": [
+      "GLONASS",
+      "Galileo",
+      "GPS",
+      "BeiDou"
+     ],
+     "a": 1,
+     "why": "Europe's GNSS."
+    },
+    {
+     "q": "What is the minimum number of satellites a receiver needs for a full position fix?",
+     "o": [
+      "4",
+      "2",
+      "1",
+      "10"
+     ],
+     "a": 0,
+     "why": "Three for position, one for clock correction."
+    },
+    {
+     "q": "Why do navigation satellites carry atomic clocks?",
+     "o": [
+      "To save power",
+      "To tell astronauts the time",
+      "Tiny timing errors cause big position errors",
+      "For decoration"
+     ],
+     "a": 2,
+     "why": "Microseconds matter."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how a GNSS receiver works out its position.",
+     "m": 3,
+     "a": "Satellites broadcast position and time (1); receiver measures signal travel time to calculate distance (1); uses distances from at least 4 satellites (trilateration) to fix position (1)."
+    },
+    {
+     "q": "Give two reasons GNSS may not work well in a city centre or building.",
+     "m": 2,
+     "a": "Signals blocked by buildings/can't pass through walls (1); reflected signals in urban canyons cause errors (1)."
+    }
+   ],
+   "terms": [
+    "GNSS",
+    "GPS",
+    "Trilateration",
+    "Atomic clock"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Watching the Earth",
+   "spec": "Describe how Earth observation satellites and AI are used to monitor the planet and respond to disasters",
+   "summary": "Earth observation satellites use cameras and sensors, including radar that can see through cloud, to monitor weather, climate, farming, floods and wildfires. Programmes such as Copernicus share data freely, and AI helps analyse the enormous number of images. This data supports disaster response and climate science but raises privacy questions.",
+   "starter": "Name something that is happening on Earth right now that you could spot from space.",
+   "sc": [
+    "I can describe the sensors Earth observation satellites use",
+    "I can describe uses of Earth observation data",
+    "I can explain how AI helps analyse satellite images"
+   ],
+   "slides": [
+    {
+     "t": "Eyes in the sky",
+     "b": [
+      "Earth observation: studying Earth from space",
+      "Optical cameras: like a phone camera, but need daylight and clear skies",
+      "Infrared: heat from fires, temperature of the sea",
+      "Radar: sees through cloud and works at night"
+     ]
+    },
+    {
+     "t": "What we watch",
+     "b": [
+      "Weather forecasting and climate change: ice, sea level, temperature",
+      "Farming: crop health, drought",
+      "Disasters: floods, wildfires, earthquakes",
+      "Pollution, deforestation, illegal fishing"
+     ]
+    },
+    {
+     "t": "AI and big data",
+     "b": [
+      "Satellites send back huge amounts of data every day",
+      "AI spots changes: new buildings, flooded fields, burnt forest",
+      "Copernicus (EU) data is free for anyone",
+      "Privacy: how much should satellites be able to see?"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Earth observation"
+    },
+    {
+     "t": "p",
+     "text": "**[[Earth observation]]** means gathering information about the Earth from space. It's a type of **[[remote sensing]]**: measuring something without touching it. Satellites carry different sensors:"
+    },
+    {
+     "t": "table",
+     "caption": "Earth observation sensors",
+     "head": [
+      "Sensor",
+      "What it detects",
+      "Good for",
+      "Limitation"
+     ],
+     "rows": [
+      [
+       "Optical camera",
+       "Visible light",
+       "Detailed photos, maps",
+       "Needs daylight and clear skies"
+      ],
+      [
+       "Infrared",
+       "Heat",
+       "Wildfires, sea temperatures, crop stress",
+       "Lower detail"
+      ],
+      [
+       "**[[synthetic aperture radar|Radar (SAR)]]**",
+       "Radar echoes",
+       "Works through cloud and at night; floods, ice",
+       "Images harder to interpret"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[resolution|Resolution]]** is the size of the smallest detail a satellite image can show. A 10 m resolution image (like many free images) shows fields and large buildings; commercial satellites can show details smaller than 50 cm, enough to see cars."
+    },
+    {
+     "t": "h",
+     "text": "Uses of Earth observation"
+    },
+    {
+     "t": "key",
+     "title": "How satellite data helps",
+     "items": [
+      "Weather forecasts and storm warnings",
+      "Climate science: measuring sea ice, glaciers, sea level and temperature over decades",
+      "Farming: spotting crops that need water or fertiliser",
+      "Disasters: mapping floods, wildfires and earthquake damage to direct rescue teams",
+      "Environment: tracking deforestation, pollution and illegal fishing"
+     ]
+    },
+    {
+     "t": "note",
+     "text": "**[[Copernicus]]** is the European Union's Earth observation programme. Its Sentinel satellites image the whole planet every few days, and the data is free for anyone to use, including schools. The UK is a member of Copernicus."
+    },
+    {
+     "t": "h",
+     "text": "AI and satellite data"
+    },
+    {
+     "t": "p",
+     "text": "Earth observation satellites send back many terabytes of data every day: far too much for people to look at. AI models are trained to spot changes automatically, such as newly flooded land, burnt forest, new buildings or ships at sea. This lets emergency services get maps of a disaster within hours."
+    },
+    {
+     "t": "h",
+     "text": "Privacy and ethics"
+    },
+    {
+     "t": "p",
+     "text": "Very detailed images raise questions: should companies be able to sell images of people's homes? Could satellites be used to track individuals? Rules limit the detail of images sold in some countries, and many argue that the benefits for climate and disaster response outweigh the risks if data is used responsibly."
+    },
+    {
+     "t": "act",
+     "title": "Disaster response team",
+     "mins": 25,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Your teacher gives you \"before\" and \"after\" satellite images of a flooded area (or use a free online viewer such as Copernicus Browser).",
+      "Identify the areas that have flooded and the roads that are cut off.",
+      "Decide which sensor would work best if it's still cloudy, and why.",
+      "Write a short briefing for the rescue team: where to go first and why."
+     ],
+     "q": [
+      {
+       "q": "Which sensor would work best on a cloudy day, and why?",
+       "a": "Radar (SAR), because it can see through cloud and works at night, whereas optical cameras can't see the ground through cloud."
+      },
+      {
+       "q": "Write your rescue briefing.",
+       "a": "E.g. \"The main road east of the river is flooded; send boats to the housing estate north of the bridge first, where water has reached homes; use the western road to bring supplies.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is Earth observation?",
+     "o": [
+      "Gathering information about Earth from space",
+      "Studying rocks by hand",
+      "Looking at stars",
+      "Watching TV"
+     ],
+     "a": 0,
+     "why": "Satellites monitor Earth."
+    },
+    {
+     "q": "Which sensor can see through cloud?",
+     "o": [
+      "Optical camera",
+      "Human eyes",
+      "A microphone",
+      "Radar"
+     ],
+     "a": 3,
+     "why": "Radar works in all weather."
+    },
+    {
+     "q": "What is image resolution?",
+     "o": [
+      "The satellite's height",
+      "The file name",
+      "The size of the smallest detail an image can show",
+      "The colour of the image"
+     ],
+     "a": 2,
+     "why": "Smaller = more detail."
+    },
+    {
+     "q": "What is Copernicus?",
+     "o": [
+      "A planet",
+      "A GPS system",
+      "The EU's Earth observation programme with free data",
+      "A rocket"
+     ],
+     "a": 2,
+     "why": "Sentinel satellites."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe three uses of Earth observation satellites.",
+     "m": 3,
+     "a": "Any three: weather forecasting (1); climate monitoring (1); farming (1); disaster response (1); deforestation/pollution monitoring (1)."
+    },
+    {
+     "q": "Explain why AI is needed to analyse Earth observation data.",
+     "m": 2,
+     "a": "Satellites produce huge amounts of data, too much for people to check (1); AI can automatically spot changes quickly, e.g. floods (1)."
+    }
+   ],
+   "terms": [
+    "Earth observation",
+    "Remote sensing",
+    "Resolution",
+    "Copernicus",
+    "Synthetic aperture radar"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "Space internet and communications",
+   "spec": "Describe how satellites provide communications and internet access, and evaluate mega-constellations",
+   "summary": "Communication satellites relay signals between distant places. Traditional internet satellites in geostationary orbit suffer from high latency, so new mega-constellations of thousands of low Earth orbit satellites, such as Starlink, provide faster, lower-latency internet worldwide, even directly to phones. They help connect remote areas but raise concerns about astronomy, debris and control.",
+   "starter": "How could you get fast internet on a remote island, a ship at sea or a farm on a mountain?",
+   "sc": [
+    "I can explain how communication satellites relay signals",
+    "I can explain latency and why LEO satellites reduce it",
+    "I can evaluate the benefits and concerns of mega-constellations"
+   ],
+   "slides": [
+    {
+     "t": "Relaying signals",
+     "b": [
+      "Communication satellites receive a signal and send it on",
+      "Ground stations connect satellites to the internet",
+      "Used for TV, phone calls, ships, aircraft and remote areas",
+      "Deep space missions talk to Earth through giant dish antennas"
+     ]
+    },
+    {
+     "t": "The latency problem",
+     "b": [
+      "Latency: the delay before data arrives",
+      "GEO satellites are 35,786 km away: a round trip takes over half a second",
+      "LEO satellites are about 550 km away: much lower latency",
+      "But LEO satellites move fast, so you need thousands to cover the Earth"
+     ]
+    },
+    {
+     "t": "Mega-constellations",
+     "b": [
+      "Starlink: thousands of satellites, more than half of all active satellites",
+      "Other companies and countries are building their own",
+      "Satellites can now connect directly to ordinary phones in some places",
+      "Concerns: astronomy, debris, and control by a few companies"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Communication satellites"
+    },
+    {
+     "t": "p",
+     "text": "A **[[communication satellite]]** receives radio signals from one place on Earth and sends them to another. Signals reach the wider internet through a **[[ground station]]**, a site with large antennas. Satellites carry TV broadcasts and connect ships, aircraft, remote communities and emergency services when ordinary networks are down."
+    },
+    {
+     "t": "h",
+     "text": "Latency"
+    },
+    {
+     "t": "p",
+     "text": "**[[latency|Latency]]** is the delay between sending data and it arriving. Radio signals travel at the speed of light, but distances in space are huge."
+    },
+    {
+     "t": "example",
+     "title": "Latency to a geostationary satellite",
+     "context": "A geostationary satellite is about 36,000 km above you. Signals travel at 300,000 km/s.",
+     "steps": [
+      "To the satellite and back down to a ground station: 2 × 36,000 = 72,000 km.",
+      "Time = 72,000 ÷ 300,000 = 0.24 s, just one way. A reply has to make the same trip back."
+     ],
+     "answer": "A request and its reply take about half a second or more, which makes video calls and online games feel laggy."
+    },
+    {
+     "t": "p",
+     "text": "Low Earth orbit satellites are only about 550 km up, so the delay is just a few hundredths of a second. But because they move so fast across the sky, thousands are needed so that one is always overhead."
+    },
+    {
+     "t": "h",
+     "text": "Mega-constellations"
+    },
+    {
+     "t": "p",
+     "text": "A **[[mega-constellation]]** is a group of hundreds or thousands of satellites working together. SpaceX's Starlink has launched thousands of satellites, more than half of all active satellites in orbit. Other companies and countries are building rival networks, and some satellites can now connect directly to ordinary mobile phones, filling gaps where there's no signal."
+    },
+    {
+     "t": "table",
+     "caption": "Weighing up mega-constellations",
+     "head": [
+      "Benefits",
+      "Concerns"
+     ],
+     "rows": [
+      [
+       "Fast internet for remote and rural areas",
+       "Bright satellite trails spoil telescope images and the night sky"
+      ],
+      [
+       "Connectivity after disasters and for emergency services",
+       "More satellites increase the risk of collisions and debris"
+      ],
+      [
+       "Internet for ships, aircraft and remote schools",
+       "A few private companies control important infrastructure"
+      ],
+      [
+       "Competition can lower prices",
+       "Satellites burn up at the end of their lives, with possible effects on the upper atmosphere"
+      ]
+     ]
+    },
+    {
+     "t": "note",
+     "text": "Satellite internet has become important in conflicts and disasters, for example keeping communications running in Ukraine. This shows how much power the companies that own these networks can have."
+    },
+    {
+     "t": "act",
+     "title": "Connect the island",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 4,
+     "steps": [
+      "A small island off the coast of Donegal needs internet for its school, a fish farm and holiday cottages.",
+      "Compare three options using the fact cards: an undersea cable, a geostationary satellite service and a LEO satellite service.",
+      "Score each option for speed, latency, cost and reliability.",
+      "Recommend an option and calculate the latency for the geostationary option."
+     ],
+     "q": [
+      {
+       "q": "Which option do you recommend, and why?",
+       "a": "E.g. LEO satellite: quick to set up, low latency good for video lessons and calls, much cheaper than laying a cable; keep a backup in case of storms."
+      },
+      {
+       "q": "Why does the geostationary option have high latency?",
+       "a": "The satellite is about 36,000 km up, so each signal travels about 72,000 km there and back down, and a reply makes the same trip again: around half a second or more in total."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does a communication satellite do?",
+     "o": [
+      "Launches rockets",
+      "Takes photos only",
+      "Measures temperature",
+      "Receives signals and sends them on to another place"
+     ],
+     "a": 3,
+     "why": "It relays signals."
+    },
+    {
+     "q": "What is latency?",
+     "o": [
+      "The delay before data arrives",
+      "Signal strength",
+      "The amount of data",
+      "The satellite's weight"
+     ],
+     "a": 0,
+     "why": "Time delay."
+    },
+    {
+     "q": "Why do LEO satellites have lower latency than GEO?",
+     "o": [
+      "They're much closer to Earth",
+      "They use cables",
+      "They're bigger",
+      "They're older"
+     ],
+     "a": 0,
+     "why": "Shorter distance."
+    },
+    {
+     "q": "What is a mega-constellation?",
+     "o": [
+      "A ground station",
+      "Hundreds or thousands of satellites working together",
+      "A huge star",
+      "One giant satellite"
+     ],
+     "a": 1,
+     "why": "e.g. Starlink."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why thousands of satellites are needed for LEO internet coverage.",
+     "m": 2,
+     "a": "LEO satellites move quickly across the sky/cover a small area each (1); so many are needed so one is always overhead (1)."
+    },
+    {
+     "q": "Evaluate the use of mega-constellations to provide internet.",
+     "m": 4,
+     "a": "Benefits, e.g. remote access, low latency, disasters (1-2); concerns, e.g. astronomy, debris, private control (1-2); conclusion (1). Max 4."
+    }
+   ],
+   "terms": [
+    "Communication satellite",
+    "Latency",
+    "Mega-constellation",
+    "Ground station"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Space junk",
+   "spec": "Explain the causes and dangers of space debris and evaluate ways to make space sustainable",
+   "summary": "Space debris includes dead satellites, used rocket stages and fragments from collisions and explosions. It travels so fast that even tiny pieces can damage satellites and spacecraft. Too much debris could trigger a chain reaction of collisions. Tracking, avoiding collisions, designing satellites to deorbit and active removal missions all help keep space usable.",
+   "starter": "A paint fleck hits a window at 28,000 km/h. What damage could it do?",
+   "sc": [
+    "I can describe what space debris is and where it comes from",
+    "I can explain why debris is dangerous, including the Kessler syndrome",
+    "I can evaluate solutions to the space debris problem"
+   ],
+   "slides": [
+    {
+     "t": "What is space junk?",
+     "b": [
+      "Dead satellites and used rocket stages",
+      "Fragments from explosions, collisions and anti-satellite tests",
+      "Tens of thousands of tracked objects; perhaps over a million pieces larger than 1 cm",
+      "At orbital speed, even a paint fleck can crack a window"
+     ]
+    },
+    {
+     "t": "The Kessler syndrome",
+     "b": [
+      "One collision creates thousands of fragments",
+      "Those fragments cause more collisions",
+      "A chain reaction could make some orbits unusable for generations",
+      "We rely on satellites for navigation, communication and weather"
+     ]
+    },
+    {
+     "t": "Cleaning up space",
+     "b": [
+      "Tracking debris and moving satellites to avoid collisions",
+      "Design satellites to deorbit and burn up at the end of their mission",
+      "Active debris removal: missions to capture junk (UK companies are leading tests)",
+      "International rules and responsible behaviour"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is space debris?"
+    },
+    {
+     "t": "p",
+     "text": "**[[space debris|Space debris]]** (space junk) is any human-made object in orbit that no longer does a useful job: dead satellites, used rocket stages, lost tools and countless fragments from explosions and collisions. Space agencies track tens of thousands of larger objects, and estimate there are over a million pieces bigger than 1 cm."
+    },
+    {
+     "t": "h",
+     "text": "Why it's dangerous"
+    },
+    {
+     "t": "p",
+     "text": "In low Earth orbit, objects travel at around 28,000 km/h. At that speed, a 1 cm fragment hits with the energy of an exploding hand grenade, and even flecks of paint have chipped windows on the International Space Station. The ISS regularly fires its engines to dodge debris, and satellite operators perform thousands of **[[collision avoidance]]** manoeuvres every year."
+    },
+    {
+     "t": "p",
+     "text": "The **[[Kessler syndrome]]** is a possible chain reaction: one collision creates thousands of fragments, which hit other satellites, creating more fragments. If it happened, some orbits could become too dangerous to use for many years."
+    },
+    {
+     "t": "table",
+     "caption": "Major debris events",
+     "head": [
+      "Event",
+      "What happened"
+     ],
+     "rows": [
+      [
+       "2007 anti-satellite test",
+       "China destroyed one of its old weather satellites with a missile, creating thousands of pieces of debris"
+      ],
+      [
+       "2009 satellite collision",
+       "A working US communications satellite and a dead Russian satellite collided, creating thousands of fragments"
+      ],
+      [
+       "2021 anti-satellite test",
+       "Russia destroyed an old satellite; ISS astronauts had to shelter in their spacecraft"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Making space sustainable"
+    },
+    {
+     "t": "key",
+     "title": "Solutions to space debris",
+     "items": [
+      "Tracking debris with radar and telescopes, and sharing warnings",
+      "Collision avoidance: moving satellites out of the way",
+      "Designing satellites to **[[deorbit]]** (drop down and burn up) within a few years of their mission ending",
+      "Active debris removal: spacecraft that capture junk with magnets, nets or robotic arms",
+      "Banning destructive anti-satellite tests"
+     ]
+    },
+    {
+     "t": "note",
+     "text": "The UK is a leader in space sustainability. ClearSpace and Astroscale, which have UK teams, are developing missions to remove debris, and the UK has pushed for international agreements on responsible behaviour in space."
+    },
+    {
+     "t": "act",
+     "title": "Junk busters",
+     "mins": 25,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Read the four debris-removal ideas: magnetic docking, a giant net, a robotic arm, and a laser that nudges junk down.",
+      "Score each idea for cost, risk, how many objects it could remove and whether it could be misused.",
+      "Choose the best idea, or combine ideas.",
+      "Write three \"rules of the road\" all satellite operators should follow."
+     ],
+     "q": [
+      {
+       "q": "Which idea did you choose, and why?",
+       "a": "E.g. magnetic docking for future satellites (fitted with docking plates) plus robotic arms for old ones; nets could create more fragments and lasers could be misused as weapons."
+      },
+      {
+       "q": "Write your three rules of the road.",
+       "a": "E.g. every satellite must deorbit within five years of its mission ending; share orbit data to avoid collisions; no destructive anti-satellite tests."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is space debris?",
+     "o": [
+      "Stars",
+      "Moon rocks",
+      "Asteroids",
+      "Human-made objects in orbit that no longer do a useful job"
+     ],
+     "a": 3,
+     "why": "Space junk."
+    },
+    {
+     "q": "Why is small debris dangerous?",
+     "o": [
+      "It's radioactive",
+      "It travels so fast it hits with huge energy",
+      "It isn't",
+      "It's magnetic"
+     ],
+     "a": 1,
+     "why": "Speed makes it deadly."
+    },
+    {
+     "q": "What is the Kessler syndrome?",
+     "o": [
+      "A chain reaction of collisions creating more and more debris",
+      "A space illness",
+      "A rocket engine",
+      "A type of orbit"
+     ],
+     "a": 0,
+     "why": "Collisions cascade."
+    },
+    {
+     "q": "What does it mean to deorbit a satellite?",
+     "o": [
+      "Switch it on",
+      "Bring it down so it burns up in the atmosphere",
+      "Paint it",
+      "Launch it higher"
+     ],
+     "a": 1,
+     "why": "Clears orbit."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how space debris could make an orbit unusable.",
+     "m": 2,
+     "a": "One collision creates many fragments (1), which cause further collisions in a chain reaction (Kessler syndrome) (1)."
+    },
+    {
+     "q": "Describe three ways to reduce the problem of space debris.",
+     "m": 3,
+     "a": "Any three: tracking/collision avoidance (1); design satellites to deorbit (1); active removal missions (1); ban anti-satellite tests/international rules (1)."
+    }
+   ],
+   "terms": [
+    "Space debris",
+    "Kessler syndrome",
+    "Deorbit",
+    "Collision avoidance"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "Mission design and the space industry",
+   "spec": "Plan a small satellite mission and describe careers and opportunities in the space industry",
+   "summary": "CubeSats are small, low-cost satellites built from 10 cm cubes that let universities, schools and start-ups reach space. Designing a mission means choosing a goal, payload, orbit, power, communications and an end-of-life plan. The UK space industry is growing, with jobs in software, data, engineering and science.",
+   "starter": "If you could put one sensor in space to help your local area, what would it measure?",
+   "sc": [
+    "I can describe what a CubeSat is",
+    "I can plan a satellite mission including payload, orbit, power and communications",
+    "I can describe careers and opportunities in the space industry"
+   ],
+   "slides": [
+    {
+     "t": "CubeSats",
+     "b": [
+      "Small satellites built from 10 cm cube units (1U); common sizes 1U, 3U, 6U",
+      "Use off-the-shelf parts like phone components",
+      "Cheap enough for universities, schools and start-ups",
+      "Share a ride into space with other satellites"
+     ]
+    },
+    {
+     "t": "Planning a mission",
+     "b": [
+      "Objective: what problem will it solve?",
+      "Payload: what instruments are needed?",
+      "Orbit, power, communications and data",
+      "End of life: how will it deorbit safely?"
+     ]
+    },
+    {
+     "t": "The UK in space",
+     "b": [
+      "UK companies build many of the world's small satellites (Glasgow builds more than almost anywhere outside the US)",
+      "UK spaceports such as SaxaVord in Shetland aim to launch rockets from the UK",
+      "Northern Ireland firms work in space software, data and components",
+      "Careers: software, data science, engineering, law, science, communications"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "CubeSats"
+    },
+    {
+     "t": "p",
+     "text": "A **[[CubeSat]]** is a small satellite built from standard 10 cm cube units, each called 1U. A 3U CubeSat is about the size of a loaf of bread. Because they use standard sizes and off-the-shelf parts, CubeSats are far cheaper than traditional satellites and can share a rocket launch with others. Universities, schools, start-ups and even small countries have launched their own."
+    },
+    {
+     "t": "h",
+     "text": "Planning a mission"
+    },
+    {
+     "t": "table",
+     "caption": "Mission planning checklist",
+     "head": [
+      "Part",
+      "Questions to answer",
+      "Example: monitoring Lough Erne water quality"
+     ],
+     "rows": [
+      [
+       "**[[mission objective|Mission objective]]**",
+       "What problem will it solve? Who will use the data?",
+       "Detect algae blooms early to protect wildlife and drinking water"
+      ],
+      [
+       "Payload",
+       "Which instruments are needed?",
+       "Multispectral camera that detects the colour of algae"
+      ],
+      [
+       "Orbit",
+       "Which orbit suits the job?",
+       "Low Earth orbit, passing over Ireland regularly"
+      ],
+      [
+       "Power",
+       "How much power is needed?",
+       "Solar panels and battery"
+      ],
+      [
+       "Communications",
+       "How will data get to Earth?",
+       "Radio downlink to a ground station"
+      ],
+      [
+       "**[[ground segment|Ground segment]]**",
+       "Who controls it and processes data?",
+       "Ground station plus software and AI to produce maps"
+      ],
+      [
+       "End of life",
+       "How will it deorbit?",
+       "Low orbit so it burns up within 5 years"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "The space industry"
+    },
+    {
+     "t": "p",
+     "text": "The space industry is one of the UK's fast-growing high-tech sectors. Glasgow builds more small satellites than almost anywhere outside the United States, and the UK has developed **[[spaceport|spaceports]]**, such as SaxaVord in Shetland, to launch small rockets from UK soil. Most space jobs aren't astronauts: they're in software, data science, engineering, manufacturing, law, business and communications. Many companies use satellite data in farming, insurance, shipping and climate services."
+    },
+    {
+     "t": "key",
+     "title": "Space careers",
+     "items": [
+      "Software engineer: writing code for satellites and ground systems",
+      "Data scientist: turning satellite data into useful information",
+      "Systems engineer: making all the parts of a mission work together",
+      "Space lawyer or policy adviser: rules, licences and debris",
+      "Mission operator: controlling satellites from the ground"
+     ]
+    },
+    {
+     "t": "tip",
+     "text": "The UK Space Agency and ESA run education programmes and competitions for schools, and some schools have had experiments flown in space. Ask your teacher about current opportunities."
+    },
+    {
+     "t": "act",
+     "title": "CubeSat challenge",
+     "mins": 35,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Choose a mission to help Northern Ireland: water quality in Lough Erne, flood warnings, peatland health, or farm crop monitoring.",
+      "Complete the mission planning checklist.",
+      "Design a mission patch and name your satellite.",
+      "Pitch your mission in 2 minutes, including how it will avoid becoming space junk."
+     ],
+     "q": [
+      {
+       "q": "Complete your mission plan: objective, payload and orbit.",
+       "a": "E.g. \"PeatWatch\": objective: monitor the health and wetness of Fermanagh's peatlands to protect carbon stores; payload: multispectral and thermal camera; orbit: LEO, sun-synchronous so images are taken at the same time of day."
+      },
+      {
+       "q": "How will your CubeSat avoid becoming space junk?",
+       "a": "Use a low orbit so atmospheric drag brings it down within 5 years, or fit a drag sail that opens at the end of the mission to speed up reentry."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a CubeSat?",
+     "o": [
+      "A space station",
+      "A type of rocket",
+      "A small satellite built from 10 cm cube units",
+      "A cube-shaped planet"
+     ],
+     "a": 2,
+     "why": "Low-cost satellites."
+    },
+    {
+     "q": "Why are CubeSats cheaper than traditional satellites?",
+     "o": [
+      "They don't need power",
+      "They're made of cardboard",
+      "They never leave Earth",
+      "Standard sizes, off-the-shelf parts and shared launches"
+     ],
+     "a": 3,
+     "why": "Standardisation lowers cost."
+    },
+    {
+     "q": "What is the ground segment of a mission?",
+     "o": [
+      "Soil samples",
+      "The ground stations, software and people that control the satellite and process data",
+      "The launch pad only",
+      "The bottom of the rocket"
+     ],
+     "a": 1,
+     "why": "Earth-based part of the mission."
+    },
+    {
+     "q": "Which is a space industry job?",
+     "o": [
+      "Lamplighter",
+      "Town crier",
+      "Satellite data scientist",
+      "Typewriter repairer"
+     ],
+     "a": 2,
+     "why": "Most space jobs are on Earth."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe three things that must be planned for a CubeSat mission.",
+     "m": 3,
+     "a": "Any three: objective (1); payload (1); orbit (1); power (1); communications (1); end-of-life/deorbit plan (1)."
+    },
+    {
+     "q": "Give two reasons why the space industry offers careers for people who are good at computing.",
+     "m": 2,
+     "a": "Satellites and ground systems need software (1); satellite data must be processed and analysed, e.g. AI/data science (1)."
+    }
+   ],
+   "terms": [
+    "CubeSat",
+    "Mission objective",
+    "Ground segment",
+    "Spaceport"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Satellite",
+   "def": "An object that orbits a larger object; artificial satellites are machines launched into orbit.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Orbit",
+   "def": "The curved path an object follows around a planet or star.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Low Earth orbit",
+   "def": "An orbit 160-2,000 km above Earth, used by the ISS and many satellites.",
+   "alt": "LEO",
+   "page": "p01"
+  },
+  {
+   "term": "Geostationary orbit",
+   "def": "An orbit 35,786 km above the equator where a satellite stays over the same spot.",
+   "alt": "GEO",
+   "page": "p01"
+  },
+  {
+   "term": "Payload",
+   "def": "The instruments a satellite carries to do its job.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "GNSS",
+   "def": "Global Navigation Satellite System: satellites that let receivers work out their position.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "GPS",
+   "def": "The Global Positioning System, the USA's satellite navigation system.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Trilateration",
+   "def": "Working out a position from distances to several known points.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Atomic clock",
+   "def": "An extremely accurate clock used in navigation satellites.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Earth observation",
+   "def": "Gathering information about the Earth from space.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Remote sensing",
+   "def": "Measuring something from a distance without touching it.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Resolution",
+   "def": "The size of the smallest detail an image can show.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Copernicus",
+   "def": "The European Union's Earth observation programme, which provides free satellite data.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Synthetic aperture radar",
+   "def": "A satellite radar that can image the Earth through cloud and at night.",
+   "alt": "SAR",
+   "page": "p03"
+  },
+  {
+   "term": "Communication satellite",
+   "def": "A satellite that relays radio signals between places on Earth.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Ground station",
+   "def": "A site on Earth with antennas for communicating with satellites.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Latency",
+   "def": "The delay between sending data and it arriving.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Mega-constellation",
+   "def": "A group of hundreds or thousands of satellites working together.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Space debris",
+   "def": "Human-made objects in orbit that no longer do a useful job.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Kessler syndrome",
+   "def": "A possible chain reaction of collisions that creates more and more debris.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Collision avoidance",
+   "def": "Moving a satellite to avoid hitting debris or another satellite.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Deorbit",
+   "def": "To bring a satellite down so it burns up in the atmosphere.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "CubeSat",
+   "def": "A small satellite built from standard 10 cm cube units.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Mission objective",
+   "def": "The goal a space mission is designed to achieve.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Ground segment",
+   "def": "The ground stations, software and people that control a satellite and process its data.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Spaceport",
+   "def": "A site for launching rockets or spacecraft.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}
