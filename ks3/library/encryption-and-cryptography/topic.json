@@ -1,0 +1,1296 @@
+{
+ "title": "Encryption and Cryptography",
+ "summary": "From ancient ciphers to the padlock in your browser: how encryption keeps secrets, how codes are broken, how strangers share keys safely, how passwords are stored, and why quantum computers are changing the rules.",
+ "learn": [
+  "How substitution ciphers work and how frequency analysis breaks them",
+  "Why keys and key length decide how strong encryption is",
+  "How public-key cryptography solves the key-sharing problem",
+  "What HTTPS does to protect you on the web",
+  "How hashing protects passwords and how end-to-end encryption works",
+  "Why quantum computers threaten today's encryption, and the debate about encryption and privacy"
+ ],
+ "temporary": false,
+ "intro": "Every message you send, every card payment and every website login relies on cryptography. In this topic you'll crack ciphers by hand, discover why key length matters, find out how two strangers can share a secret in public, see what really happens when you visit an HTTPS website, and learn why the world is racing to make encryption \"quantum-safe\".",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "Breaking codes by hand",
+   "spec": "Encrypt and decrypt with substitution ciphers and break them using frequency analysis",
+   "summary": "A substitution cipher swaps each letter for another. It looks secure, but in any language some letters are far more common than others, so counting letter frequencies reveals the pattern and breaks the code.",
+   "starter": "Decode this Caesar cipher (shift 3): FRGH EUHDNHU. What's the weakness of this cipher?",
+   "sc": [
+    "I can explain plaintext, ciphertext and key",
+    "I can encrypt with a substitution cipher",
+    "I can use frequency analysis to break a cipher"
+   ],
+   "slides": [
+    {
+     "t": "The language of secrets",
+     "b": [
+      "Cryptography: the science of keeping information secret",
+      "Plaintext: the readable message",
+      "Ciphertext: the scrambled message",
+      "Key: the secret that locks and unlocks it"
+     ],
+     "n": "Starter answer: CODE BREAKER. Only 25 possible shifts, so you can try them all."
+    },
+    {
+     "t": "Substitution ciphers",
+     "b": [
+      "Each letter is replaced by a different letter, in any order",
+      "26! (about 4 × 10²⁶) possible keys: far too many to try them all by hand",
+      "Used for centuries by spies and royalty",
+      "So how could anyone break it?"
+     ]
+    },
+    {
+     "t": "Frequency analysis",
+     "b": [
+      "In English, E, T and A are the most common letters",
+      "Count the letters in the ciphertext: the most common probably stands for E",
+      "Look for patterns: one-letter words are probably A or I; \"the\" is very common",
+      "First described by the Arab scholar Al-Kindi over 1,100 years ago"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "The language of cryptography"
+    },
+    {
+     "t": "p",
+     "text": "**[[cryptography]]** is the science of keeping information secret. Encryption turns readable **[[plaintext]]** into scrambled **[[ciphertext]]** using a **[[key]]**. Decryption uses the key to turn it back. In the Cyber Security topic you met the **Caesar cipher**, which shifts every letter the same number of places. With only 25 possible shifts, it can be cracked in minutes by trying them all."
+    },
+    {
+     "t": "h",
+     "text": "Substitution ciphers"
+    },
+    {
+     "t": "p",
+     "text": "A **substitution cipher** replaces each letter with any other letter, following a secret alphabet:"
+    },
+    {
+     "t": "table",
+     "caption": "Part of a substitution key",
+     "head": [
+      "Plain",
+      "A",
+      "B",
+      "C",
+      "D",
+      "E",
+      "T"
+     ],
+     "rows": [
+      [
+       "Cipher",
+       "Q",
+       "W",
+       "M",
+       "Z",
+       "X",
+       "K"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "There are about 400 million million million million possible keys, far too many to try one by one. For centuries, people thought these ciphers were unbreakable."
+    },
+    {
+     "t": "h",
+     "text": "Frequency analysis"
+    },
+    {
+     "t": "p",
+     "text": "**[[frequency analysis]]** breaks substitution ciphers by counting how often each letter appears. In English, **E** is the most common letter (about 13% of letters), followed by **T** and **A**. So the most common letter in a long ciphertext probably stands for E. Codebreakers then use word patterns: a one-letter word is probably A or I, and a common three-letter word is probably THE."
+    },
+    {
+     "t": "note",
+     "text": "Frequency analysis was first described by Al-Kindi, a scholar in Baghdad, in the 800s. It was used to uncover the secret plot that led to the execution of Mary, Queen of Scots in 1587."
+    },
+    {
+     "t": "act",
+     "title": "Crack the spy message",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Your teacher gives you a 200-letter message encrypted with a substitution cipher and an English letter-frequency chart.",
+      "Count how many times each letter appears in the ciphertext and record the top five.",
+      "Match the most common letters to E, T and A. Fill them in and look for word patterns.",
+      "Keep going until you can read the message."
+     ],
+     "q": [
+      {
+       "q": "Which three ciphertext letters were most common, and what did they stand for?",
+       "a": "Depends on the message; usually the most common is E, then T and A (though short messages vary)."
+      },
+      {
+       "q": "Explain why frequency analysis works on substitution ciphers.",
+       "a": "Each plaintext letter always becomes the same ciphertext letter, so the letter frequencies of the language are kept; the most common ciphertext letters match the most common English letters."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is ciphertext?",
+     "o": [
+      "The scrambled, encrypted message",
+      "The original readable message",
+      "A type of font",
+      "The secret key"
+     ],
+     "a": 0,
+     "why": "Ciphertext is encrypted text."
+    },
+    {
+     "q": "What is the key in cryptography?",
+     "o": [
+      "A keyboard button",
+      "The plaintext",
+      "The secret used to encrypt and decrypt",
+      "A password manager"
+     ],
+     "a": 2,
+     "why": "The key locks and unlocks."
+    },
+    {
+     "q": "Which is the most common letter in English?",
+     "o": [
+      "E",
+      "K",
+      "Z",
+      "Q"
+     ],
+     "a": 0,
+     "why": "E makes up about 13% of letters."
+    },
+    {
+     "q": "Why is a Caesar cipher easy to break?",
+     "o": [
+      "It's always in capitals",
+      "It needs a computer",
+      "It uses numbers",
+      "There are only 25 possible shifts to try"
+     ],
+     "a": 3,
+     "why": "Brute force is quick."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between plaintext and ciphertext.",
+     "m": 2,
+     "a": "Plaintext is the readable/original message (1); ciphertext is the scrambled/encrypted version (1)."
+    },
+    {
+     "q": "Describe how frequency analysis can be used to break a substitution cipher.",
+     "m": 3,
+     "a": "Count how often each letter appears in the ciphertext (1); match the most frequent to the most common English letters such as E, T, A (1); use word patterns/trial and improvement to work out the rest (1)."
+    }
+   ],
+   "terms": [
+    "Cryptography",
+    "Plaintext",
+    "Ciphertext",
+    "Key",
+    "Frequency analysis"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "Keys and brute force",
+   "spec": "Explain why key length matters and describe symmetric encryption",
+   "summary": "Modern encryption uses mathematics and very long binary keys. A brute-force attack tries every possible key, so each extra bit doubles the work. Symmetric encryption, such as AES, uses the same key to lock and unlock.",
+   "starter": "A bike lock has 3 dials of 0-9. How many combinations? What if it had 4 dials?",
+   "sc": [
+    "I can explain a brute-force attack",
+    "I can explain why longer keys are stronger",
+    "I can describe symmetric encryption"
+   ],
+   "slides": [
+    {
+     "t": "Try every key",
+     "b": [
+      "A brute-force attack tries every possible key until one works",
+      "3-dial lock: 1,000 combinations; 4 dials: 10,000",
+      "Computers can try billions of keys a second",
+      "Defence: make the number of keys astronomically large"
+     ],
+     "n": "Starter: 10 × 10 × 10 = 1,000; 4 dials = 10,000."
+    },
+    {
+     "t": "Every bit doubles it",
+     "b": [
+      "Keys are binary numbers: each bit is 0 or 1",
+      "8-bit key: 256 possible keys; 128-bit key: about 3.4 × 10³⁸",
+      "Each extra bit doubles the number of keys",
+      "Brute-forcing a 128-bit key would take longer than the age of the universe"
+     ]
+    },
+    {
+     "t": "Symmetric encryption",
+     "b": [
+      "The same key encrypts and decrypts",
+      "Fast, so it's used for most data: Wi-Fi, files, video calls",
+      "AES (Advanced Encryption Standard) is the world standard",
+      "Problem: how do you share the key safely?"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Brute-force attacks"
+    },
+    {
+     "t": "p",
+     "text": "A **[[brute-force attack]]** tries every possible key until one works. It always succeeds in the end, so the only defence is to make the number of possible keys so large that trying them all would take impossibly long."
+    },
+    {
+     "t": "h",
+     "text": "Key length"
+    },
+    {
+     "t": "p",
+     "text": "Modern keys are binary numbers. **[[key length]]** is the number of bits in the key. Every extra bit **doubles** the number of possible keys."
+    },
+    {
+     "t": "table",
+     "caption": "Key length and number of keys",
+     "head": [
+      "Key length",
+      "Number of possible keys",
+      "Time to try them all at 1 billion keys a second"
+     ],
+     "rows": [
+      [
+       "8 bits",
+       "256",
+       "Instantly"
+      ],
+      [
+       "40 bits",
+       "about 1.1 million million",
+       "About 18 minutes"
+      ],
+      [
+       "64 bits",
+       "about 18 billion billion",
+       "About 585 years"
+      ],
+      [
+       "128 bits",
+       "about 3.4 × 10³⁸",
+       "Trillions of times the age of the universe"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Doubling with each bit",
+     "context": "How many keys does a 10-bit key have?",
+     "steps": [
+      "Each bit can be 0 or 1, so 2 choices per bit.",
+      "10 bits: 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 × 2 = 2¹⁰",
+      "2¹⁰ = 1,024"
+     ],
+     "answer": "A 10-bit key has 1,024 possible keys. An 11-bit key would have 2,048."
+    },
+    {
+     "t": "h",
+     "text": "Symmetric encryption"
+    },
+    {
+     "t": "p",
+     "text": "In **[[symmetric encryption]]**, the **same key** encrypts and decrypts, like a front door key that locks and unlocks. It's very fast, so it protects most data: Wi-Fi traffic, files on your phone and video calls. The world standard is **[[AES]]** (Advanced Encryption Standard), with keys of 128 or 256 bits."
+    },
+    {
+     "t": "warn",
+     "text": "Symmetric encryption has a big problem: both people need the same secret key. If you send the key over the internet, anyone listening could copy it. Lesson 3 solves this."
+    },
+    {
+     "t": "act",
+     "title": "Brute-force race",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Partner A sets a secret 2-digit code (00-99); Partner B tries codes one at a time and counts the guesses. Swap.",
+      "Now try a 3-digit code. How long do you think it would take?",
+      "Use the calculator to work out how long a computer trying 1 billion keys per second would take to try every 56-bit and every 128-bit key."
+     ],
+     "q": [
+      {
+       "q": "How many guesses did it take for 2 digits? How many possible codes were there for 3 digits?",
+       "a": "2 digits: up to 100 possible codes (on average about 50 guesses); 3 digits: 1,000 possible codes."
+      },
+      {
+       "q": "Explain why adding bits to a key makes it so much stronger.",
+       "a": "Each extra bit doubles the number of possible keys, so the time for a brute-force attack doubles each time; long keys make it take longer than the age of the universe."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a brute-force attack?",
+     "o": [
+      "Using a virus",
+      "Guessing the password once",
+      "Smashing the computer",
+      "Trying every possible key until one works"
+     ],
+     "a": 3,
+     "why": "It tries all keys."
+    },
+    {
+     "q": "How many keys does a 4-bit key have?",
+     "o": [
+      "32",
+      "16",
+      "4",
+      "8"
+     ],
+     "a": 1,
+     "why": "2⁴ = 16."
+    },
+    {
+     "q": "What happens to the number of possible keys when you add one bit?",
+     "o": [
+      "It goes up by one",
+      "It halves",
+      "It doubles",
+      "It stays the same"
+     ],
+     "a": 2,
+     "why": "Each bit doubles the possibilities."
+    },
+    {
+     "q": "What is symmetric encryption?",
+     "o": [
+      "Using the same key to encrypt and decrypt",
+      "Encryption that looks symmetrical",
+      "Using two different keys",
+      "Encryption without a key"
+     ],
+     "a": 0,
+     "why": "One shared key."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why a 128-bit key is much more secure than a 40-bit key.",
+     "m": 2,
+     "a": "It has far more possible keys (2¹²⁸ vs 2⁴⁰) (1), so a brute-force attack would take impossibly long (1)."
+    },
+    {
+     "q": "Describe one advantage and one disadvantage of symmetric encryption.",
+     "m": 2,
+     "a": "Advantage: fast/efficient for lots of data (1); disadvantage: both people need the same key, which is hard to share safely (1)."
+    }
+   ],
+   "terms": [
+    "Brute-force attack",
+    "Key length",
+    "Symmetric encryption",
+    "AES"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Sharing secrets with strangers",
+   "spec": "Explain how public-key cryptography lets people communicate securely without first sharing a secret key",
+   "summary": "Public-key (asymmetric) cryptography uses a pair of keys: a public key anyone can use to lock a message and a private key only the owner can use to unlock it. It is based on maths problems that are easy one way and very hard to reverse.",
+   "starter": "You want to send a locked box to someone you've never met, but you can't send the key in the post. How could you do it?",
+   "sc": [
+    "I can explain the key-sharing problem",
+    "I can describe how public and private keys work",
+    "I can explain the idea of a one-way function"
+   ],
+   "slides": [
+    {
+     "t": "The padlock trick",
+     "b": [
+      "You send me an open padlock (your public key) and keep its key (your private key)",
+      "I put my message in a box and snap your padlock shut",
+      "Anyone can see the padlock, but only you can open it",
+      "No secret ever had to travel through the post"
+     ]
+    },
+    {
+     "t": "Public and private keys",
+     "b": [
+      "Public key: shared with everyone, used to encrypt messages to you",
+      "Private key: kept secret, used to decrypt them",
+      "The two keys are mathematically linked",
+      "Also called asymmetric encryption"
+     ]
+    },
+    {
+     "t": "Easy one way, hard to reverse",
+     "b": [
+      "Multiplying two big prime numbers is easy",
+      "Finding which two primes made a huge number is incredibly hard",
+      "RSA encryption relies on this one-way problem",
+      "13 × 17 = 221 is easy; what two primes make 6,557?"
+     ],
+     "n": "6,557 = 79 × 83. Let pupils try with calculators: much harder than multiplying."
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "The key-sharing problem"
+    },
+    {
+     "t": "p",
+     "text": "Symmetric encryption is fast, but both people need the same secret key. How do you share it with a website you've never visited before, when criminals might be watching everything you send? For thousands of years there was no good answer. Then, in the 1970s, cryptographers (including researchers at GCHQ in the UK, whose work was kept secret for years) found a brilliant solution."
+    },
+    {
+     "t": "h",
+     "text": "Public-key cryptography"
+    },
+    {
+     "t": "p",
+     "text": "**[[public-key cryptography]]** (also called asymmetric encryption) uses **two** linked keys:"
+    },
+    {
+     "t": "table",
+     "caption": "The key pair",
+     "head": [
+      "Key",
+      "Who has it",
+      "Used for"
+     ],
+     "rows": [
+      [
+       "**[[public key|Public key]]**",
+       "Anyone: it's published openly",
+       "Encrypting messages to the owner"
+      ],
+      [
+       "**[[private key|Private key]]**",
+       "Only the owner: kept secret",
+       "Decrypting those messages"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A message encrypted with someone's public key can **only** be decrypted with their private key. So anyone can send them a secret message, but only they can read it."
+    },
+    {
+     "t": "h",
+     "text": "One-way functions"
+    },
+    {
+     "t": "p",
+     "text": "Public-key cryptography is built on **[[one-way function|one-way functions]]**: maths that is easy to do but extremely hard to reverse. The famous **RSA** system uses prime numbers. Multiplying two large primes is quick, but working out which two primes were multiplied together to make a number hundreds of digits long would take today's computers longer than the age of the universe."
+    },
+    {
+     "t": "key",
+     "title": "Key points",
+     "items": [
+      "The key-sharing problem: how to agree a secret over a public network",
+      "Public key encrypts; private key decrypts",
+      "Never share your private key",
+      "Security relies on maths problems that are very hard to reverse"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "The padlock post office",
+     "mins": 20,
+     "who": "Groups of 3",
+     "after": 1,
+     "steps": [
+      "Act it out: Alice, Bob and Eve (the eavesdropper). Your teacher gives you a box, padlocks and keys (or paper versions).",
+      "Alice must send Bob a secret note. Eve sees everything that passes between them. Use only padlocks: no keys may be sent!",
+      "Then try the \"double padlock\" method: Alice locks, Bob adds his lock, Alice removes hers, Bob removes his.",
+      "Record each step and check Eve never had a chance to open the box."
+     ],
+     "q": [
+      {
+       "q": "Describe how Alice sent the secret without ever sending a key.",
+       "a": "Bob sent Alice his open padlock (public key) and kept his key (private key); Alice locked the box with Bob's padlock and sent it; only Bob's private key could open it, so Eve couldn't read it."
+      },
+      {
+       "q": "How does this model public-key cryptography?",
+       "a": "The open padlock is the public key that anyone can use to lock (encrypt); the key Bob keeps is the private key that is never shared and is the only way to unlock (decrypt)."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What problem does public-key cryptography solve?",
+     "o": [
+      "Fixing broken passwords",
+      "Sharing a key safely with someone you've never met",
+      "Making computers faster",
+      "Storing more data"
+     ],
+     "a": 1,
+     "why": "It solves key distribution."
+    },
+    {
+     "q": "Which key do you share with everyone?",
+     "o": [
+      "Your public key",
+      "Your private key",
+      "Both keys",
+      "Neither key"
+     ],
+     "a": 0,
+     "why": "Public keys are meant to be shared."
+    },
+    {
+     "q": "A message encrypted with Ben's public key can be decrypted by...",
+     "o": [
+      "Ben's private key only",
+      "anyone with Ben's public key",
+      "anyone at all",
+      "nobody"
+     ],
+     "a": 0,
+     "why": "Only the private key decrypts."
+    },
+    {
+     "q": "Why is RSA hard to break?",
+     "o": [
+      "It changes every second",
+      "It's written in Latin",
+      "It uses passwords",
+      "Finding the two large primes that make a huge number is extremely hard"
+     ],
+     "a": 3,
+     "why": "It relies on factoring being hard."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how public and private keys are used to send a secret message to Sam.",
+     "m": 3,
+     "a": "The sender gets Sam's public key (1) and uses it to encrypt the message (1); only Sam's private key can decrypt it, and Sam never shares it (1)."
+    },
+    {
+     "q": "Explain what is meant by a one-way function, using an example.",
+     "m": 2,
+     "a": "Something easy to calculate but very hard to reverse (1), e.g. multiplying two large primes is easy, but finding them from the result is very hard (1)."
+    }
+   ],
+   "terms": [
+    "Public-key cryptography",
+    "Public key",
+    "Private key",
+    "One-way function"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "The padlock in your browser",
+   "spec": "Describe how HTTPS uses encryption and certificates to protect communication on the web",
+   "summary": "HTTPS protects web traffic using TLS. Your browser checks the website's digital certificate to confirm who it is, uses public-key cryptography to agree a secret session key, then encrypts everything with fast symmetric encryption.",
+   "starter": "You're on public Wi-Fi in a café. Who could see the websites you visit and what you type?",
+   "sc": [
+    "I can explain what HTTPS protects against",
+    "I can describe what a digital certificate does",
+    "I can outline the steps of an HTTPS connection"
+   ],
+   "slides": [
+    {
+     "t": "HTTP vs HTTPS",
+     "b": [
+      "HTTP sends web pages as plain text: anyone on the network could read them",
+      "HTTPS = HTTP Secure: everything is encrypted",
+      "Protects passwords, card numbers and messages from eavesdroppers",
+      "Look for https:// and the padlock (or settings icon) in the address bar"
+     ]
+    },
+    {
+     "t": "Who are you really?",
+     "b": [
+      "A digital certificate proves a website is who it says it is",
+      "Issued by a trusted certificate authority (CA)",
+      "Your browser checks it automatically",
+      "Warning screens mean something is wrong: don't continue"
+     ]
+    },
+    {
+     "t": "The TLS handshake (simplified)",
+     "b": [
+      "1 Browser says hello; website sends its certificate and public key",
+      "2 Browser checks the certificate",
+      "3 They use public-key cryptography to agree a secret session key",
+      "4 Everything after that is encrypted with fast symmetric encryption (like AES)"
+     ],
+     "n": "This combines lessons 2 and 3: public-key crypto solves the key-sharing problem, then symmetric crypto does the heavy lifting."
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "HTTP and HTTPS"
+    },
+    {
+     "t": "p",
+     "text": "Web pages travel across many networks to reach you. With old **HTTP**, the data travelled as plain text, so anyone on the same Wi-Fi, or anywhere along the route, could read it. **[[HTTPS]]** (Hypertext Transfer Protocol Secure) encrypts everything between your browser and the website using a protocol called **[[TLS]]** (Transport Layer Security)."
+    },
+    {
+     "t": "h",
+     "text": "Digital certificates"
+    },
+    {
+     "t": "p",
+     "text": "Encryption is useless if you're securely talking to a fake website. A **[[digital certificate]]** proves a website's identity. It's issued by a trusted **certificate authority**, which checks that the website's owner really controls that domain. Your browser checks certificates automatically and shows a big warning if something is wrong."
+    },
+    {
+     "t": "warn",
+     "text": "The padlock only means your connection is encrypted and the certificate matches the address. It does NOT mean the website is honest: scam sites can have HTTPS too. Always check the address carefully."
+    },
+    {
+     "t": "h",
+     "text": "The TLS handshake"
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "Your browser says hello and lists the encryption methods it supports.",
+      "The website replies with its certificate, which includes its public key.",
+      "Your browser checks the certificate is valid and was issued for that website.",
+      "Using public-key cryptography, they agree a brand-new secret **[[session key]]** that no eavesdropper can learn.",
+      "Everything after that is encrypted with fast symmetric encryption (usually AES) using the session key."
+     ]
+    },
+    {
+     "t": "key",
+     "title": "Why use both kinds of encryption?",
+     "items": [
+      "Public-key cryptography solves the key-sharing problem, but is slow",
+      "Symmetric encryption is fast, but needs a shared key",
+      "HTTPS uses public-key crypto to share a session key, then symmetric crypto for the data"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Handshake role play",
+     "mins": 20,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Take the roles of Browser, Website and Eavesdropper. Use the role cards your teacher gives you.",
+      "Act out the five handshake steps, passing \"messages\" on cards. The Eavesdropper copies every card they see.",
+      "At the end, check: what did the Eavesdropper learn? Could they read the final message?"
+     ],
+     "q": [
+      {
+       "q": "List what the Eavesdropper saw and explain why they still couldn't read the message.",
+       "a": "They saw the hello messages, the certificate and the public key, but not the session key (it was protected by public-key crypto) or the private key, so the encrypted messages were unreadable."
+      },
+      {
+       "q": "A browser shows \"Your connection is not private\". What should you do and why?",
+       "a": "Don't continue: the certificate check failed, so the site may be fake or someone may be intercepting the connection; go back or check the address."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does HTTPS do?",
+     "o": [
+      "Blocks all adverts",
+      "Encrypts data between your browser and a website",
+      "Deletes cookies",
+      "Makes websites load faster"
+     ],
+     "a": 1,
+     "why": "HTTPS secures the connection."
+    },
+    {
+     "q": "What does a digital certificate prove?",
+     "o": [
+      "That a site has no adverts",
+      "That a website is who it claims to be",
+      "That a website is honest",
+      "That the site is free"
+     ],
+     "a": 1,
+     "why": "Certificates confirm identity."
+    },
+    {
+     "q": "Does a padlock in the address bar mean a website is safe to trust?",
+     "o": [
+      "Only on phones",
+      "No: it means the connection is encrypted, but scam sites can have HTTPS too",
+      "Only for shops",
+      "Yes, always"
+     ],
+     "a": 1,
+     "why": "Encryption isn't the same as honesty."
+    },
+    {
+     "q": "Why does HTTPS use symmetric encryption for the main data?",
+     "o": [
+      "Public-key encryption doesn't work",
+      "It needs no key",
+      "It's much faster",
+      "It's the only kind"
+     ],
+     "a": 2,
+     "why": "Symmetric encryption is efficient."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why logging in to a website over HTTP on public Wi-Fi is risky.",
+     "m": 2,
+     "a": "Data is sent unencrypted/as plain text (1), so someone on the network could read the password (1)."
+    },
+    {
+     "q": "Describe how HTTPS uses both public-key and symmetric encryption.",
+     "m": 3,
+     "a": "Public-key crypto (with the site's certificate/public key) is used to agree/exchange a session key securely (1); the session key is then used with fast symmetric encryption (1) for all the data sent (1)."
+    }
+   ],
+   "terms": [
+    "HTTPS",
+    "TLS",
+    "Digital certificate",
+    "Session key"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Hashes and private chats",
+   "spec": "Explain how hashing protects stored passwords and how end-to-end encryption protects messages",
+   "summary": "Websites shouldn't store your actual password. They store a hash: a fixed-length fingerprint that can't be reversed, often with a random salt. End-to-end encryption means only the people in a conversation can read messages, not even the app company.",
+   "starter": "If a website emails you your old password when you click \"forgot password\", what does that tell you about how it stores passwords?",
+   "sc": [
+    "I can explain what a hash function does",
+    "I can explain why passwords are hashed and salted",
+    "I can describe end-to-end encryption"
+   ],
+   "slides": [
+    {
+     "t": "Fingerprints for data",
+     "b": [
+      "A hash function turns any input into a fixed-length \"fingerprint\"",
+      "Same input = same hash; tiny change = totally different hash",
+      "One-way: you can't turn a hash back into the input",
+      "Used for passwords, checking downloads and digital signatures"
+     ]
+    },
+    {
+     "t": "Storing passwords safely",
+     "b": [
+      "Good websites store the hash, not your password",
+      "When you log in, they hash what you type and compare",
+      "A salt (random extra data) is added so identical passwords get different hashes",
+      "If a site can email you your password, it isn't storing it safely"
+     ],
+     "n": "Starter answer: it stores passwords in a way that can be read, which is bad practice."
+    },
+    {
+     "t": "End-to-end encryption",
+     "b": [
+      "Messages are encrypted on the sender's phone and only decrypted on the receiver's",
+      "The app company's servers only see ciphertext",
+      "Used by WhatsApp, Signal and iMessage",
+      "Protects against hackers and snooping, even if the company is hacked"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Hash functions"
+    },
+    {
+     "t": "p",
+     "text": "A **[[hash]]** function takes any input (a word, a password, a whole film) and produces a fixed-length string called a hash, like a fingerprint for data."
+    },
+    {
+     "t": "table",
+     "caption": "Properties of a good hash function",
+     "head": [
+      "Property",
+      "What it means"
+     ],
+     "rows": [
+      [
+       "Fixed length",
+       "Every hash is the same length, however big the input"
+      ],
+      [
+       "Deterministic",
+       "The same input always gives the same hash"
+      ],
+      [
+       "Avalanche effect",
+       "Changing one letter completely changes the hash"
+      ],
+      [
+       "One-way",
+       "You can't work out the input from the hash"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Storing passwords"
+    },
+    {
+     "t": "p",
+     "text": "A well-built website never stores your actual password. It stores the **hash** of your password. When you log in, it hashes what you type and checks whether the two hashes match. If criminals steal the database, they get hashes, not passwords."
+    },
+    {
+     "t": "p",
+     "text": "To make hashes even safer, websites add a **[[salt]]**: a random string added to each password before hashing. That way, two people with the same password get completely different hashes, and attackers can't use pre-computed tables of common password hashes."
+    },
+    {
+     "t": "warn",
+     "text": "Hashing doesn't protect weak passwords completely. Attackers can hash millions of common passwords to see which match. A long, unique password (like three random words) is still essential."
+    },
+    {
+     "t": "h",
+     "text": "End-to-end encryption"
+    },
+    {
+     "t": "p",
+     "text": "With **[[end-to-end encryption]]** (E2EE), a message is encrypted on the sender's device and can only be decrypted on the receiver's device. The company running the app passes on scrambled ciphertext and cannot read it. Apps such as Signal, WhatsApp and iMessage use E2EE for messages."
+    },
+    {
+     "t": "act",
+     "title": "Hash detective",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Use the online hash tool your teacher shows (or the printed table of hashes).",
+      "Hash the word \"password\", then \"Password\", then \"password1\". Compare the hashes.",
+      "Your teacher gives you a \"stolen\" list of unsalted hashes. Use the table of common password hashes to find which accounts used weak passwords.",
+      "Explain how salting would have protected them."
+     ],
+     "q": [
+      {
+       "q": "What happened to the hash when you changed just one letter?",
+       "a": "It changed completely, with no similarity to the original: the avalanche effect."
+      },
+      {
+       "q": "Explain how a salt would stop the attack you just did.",
+       "a": "Each password would have a different random salt added before hashing, so the hashes wouldn't match the pre-computed table of common passwords; the attacker would have to start from scratch for every account."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What does a hash function produce?",
+     "o": [
+      "An encrypted file with a key",
+      "A longer password",
+      "A picture",
+      "A fixed-length fingerprint of the input"
+     ],
+     "a": 3,
+     "why": "Hashes are fixed-length fingerprints."
+    },
+    {
+     "q": "Why do websites store password hashes instead of passwords?",
+     "o": [
+      "Passwords are too long",
+      "If stolen, hashes can't simply be turned back into passwords",
+      "Hashes are shorter to type",
+      "It's faster to log in"
+     ],
+     "a": 1,
+     "why": "Hashing protects stolen data."
+    },
+    {
+     "q": "What is a salt?",
+     "o": [
+      "A type of virus",
+      "A password manager",
+      "Random data added to a password before hashing",
+      "A spice for computers"
+     ],
+     "a": 2,
+     "why": "Salts make identical passwords hash differently."
+    },
+    {
+     "q": "With end-to-end encryption, who can read your messages?",
+     "o": [
+      "Only the sender and the receiver",
+      "The government always",
+      "Anyone on the Wi-Fi",
+      "The app company"
+     ],
+     "a": 0,
+     "why": "Only the ends of the conversation."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain how a website checks your password without storing it.",
+     "m": 2,
+     "a": "It hashes the password you type (1) and compares it with the stored hash; if they match, you're let in (1)."
+    },
+    {
+     "q": "Explain one benefit of end-to-end encryption.",
+     "m": 2,
+     "a": "Only sender and receiver can read messages (1), so even if the company's servers are hacked/someone intercepts them, messages stay private (1)."
+    }
+   ],
+   "terms": [
+    "Hash",
+    "Salt",
+    "End-to-end encryption"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "Quantum threats and the encryption debate",
+   "spec": "Explain why quantum computers threaten today's public-key encryption and discuss the debate about encryption, privacy and security",
+   "summary": "Powerful future quantum computers could break RSA and similar public-key systems, so the world is moving to new post-quantum cryptography. Meanwhile, governments and tech companies argue about whether police should be able to access encrypted messages.",
+   "starter": "Criminals copy encrypted messages today but can't read them. Why might they still want to keep them for 15 years?",
+   "sc": [
+    "I can explain the quantum threat to public-key encryption",
+    "I can describe post-quantum cryptography",
+    "I can argue both sides of the encryption backdoor debate"
+   ],
+   "slides": [
+    {
+     "t": "The quantum threat",
+     "b": [
+      "A large quantum computer could factor huge numbers quickly using Shor's algorithm",
+      "That would break RSA and much of today's public-key encryption",
+      "Today's quantum computers are far too small, but they are improving",
+      "\"Harvest now, decrypt later\": attackers store encrypted data to read in future"
+     ],
+     "n": "Starter answer: harvest now, decrypt later. Link to the Quantum Computing topic."
+    },
+    {
+     "t": "Post-quantum cryptography",
+     "b": [
+      "New encryption based on maths problems quantum computers can't easily solve",
+      "In 2024 the US standards body NIST published the first post-quantum standards",
+      "Governments, banks and tech companies are already switching",
+      "Symmetric encryption like AES-256 is still considered strong"
+     ]
+    },
+    {
+     "t": "The backdoor debate",
+     "b": [
+      "A backdoor: a secret way for authorities to read encrypted messages",
+      "For: helps police catch criminals and protect children",
+      "Against: a backdoor for the police is a weakness criminals could also use",
+      "Should end-to-end encryption have exceptions? People strongly disagree"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "The quantum threat"
+    },
+    {
+     "t": "p",
+     "text": "A **[[quantum computer]]** uses the strange rules of quantum physics to solve some problems far faster than ordinary computers. In 1994 the mathematician Peter Shor showed that a large enough quantum computer could find the prime factors of huge numbers quickly, which would break RSA and other public-key systems that protect HTTPS, banking and messaging."
+    },
+    {
+     "t": "p",
+     "text": "Today's quantum computers are far too small and error-prone to do this, but they're improving. Attackers may already be using **\"harvest now, decrypt later\"**: copying encrypted data today to read when quantum computers are ready. That's a problem for secrets that must stay secret for decades, like medical records or state secrets."
+    },
+    {
+     "t": "h",
+     "text": "Post-quantum cryptography"
+    },
+    {
+     "t": "p",
+     "text": "**[[post-quantum cryptography]]** is new encryption based on maths problems that are hard even for quantum computers. In 2024 the US National Institute of Standards and Technology (NIST) published the first post-quantum encryption standards, and the UK's National Cyber Security Centre has set out a timeline for organisations to migrate over the next decade. Some messaging apps and browsers already use post-quantum methods alongside the old ones."
+    },
+    {
+     "t": "note",
+     "text": "Symmetric encryption like AES is much less affected: quantum computers would roughly halve its effective strength, so using 256-bit keys keeps it safe."
+    },
+    {
+     "t": "h",
+     "text": "The encryption debate"
+    },
+    {
+     "t": "p",
+     "text": "Strong encryption protects everyone's privacy, but it also hides criminals' messages. Some governments want a **[[backdoor]]**: a special way for authorities to read encrypted messages when they have a legal warrant."
+    },
+    {
+     "t": "table",
+     "caption": "Should encrypted messaging have a backdoor?",
+     "head": [
+      "For",
+      "Against"
+     ],
+     "rows": [
+      [
+       "Police could catch terrorists and people who harm children",
+       "A backdoor is a weakness that criminals or hostile states could find and use"
+      ],
+      [
+       "Criminals shouldn't have a place to hide",
+       "It would put everyone's private messages at risk"
+      ],
+      [
+       "Laws already allow searches of homes with a warrant",
+       "Criminals could switch to apps without backdoors"
+      ],
+      [
+       "Companies scan for some illegal content already",
+       "People in dangerous situations (journalists, abuse survivors) rely on privacy"
+      ]
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Encryption debate",
+     "mins": 25,
+     "who": "Whole class",
+     "after": 3,
+     "steps": [
+      "Your teacher assigns roles: police officer, privacy campaigner, tech company boss, parent, journalist, cyber security expert.",
+      "Prepare two arguments for your character's view on \"Messaging apps must let police read messages with a warrant\".",
+      "Hold the debate (1 minute per role), then vote.",
+      "Write your own view afterwards."
+     ],
+     "q": [
+      {
+       "q": "Write your character's two strongest arguments.",
+       "a": "E.g. Police officer: \"Criminals plan crimes in encrypted apps and we can't see the evidence even with a warrant.\" Security expert: \"Any backdoor can be found and abused by criminals and hostile states.\""
+      },
+      {
+       "q": "Write your own view in 3-4 sentences, giving reasons and considering the other side.",
+       "a": "A balanced answer weighing safety against privacy and security, with a clear, justified conclusion."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Why could quantum computers threaten RSA?",
+     "o": [
+      "They are faster at typing",
+      "They can guess passwords",
+      "They use more electricity",
+      "They could factor huge numbers quickly"
+     ],
+     "a": 3,
+     "why": "Shor's algorithm breaks factoring-based crypto."
+    },
+    {
+     "q": "What is \"harvest now, decrypt later\"?",
+     "o": [
+      "Encrypting data twice",
+      "Deleting old data",
+      "Storing encrypted data today to decrypt with future computers",
+      "Growing crops with computers"
+     ],
+     "a": 2,
+     "why": "Long-term secrets are at risk."
+    },
+    {
+     "q": "What is post-quantum cryptography?",
+     "o": [
+      "Encryption used after a computer is switched off",
+      "A type of quantum computer",
+      "Old encryption",
+      "Encryption designed to resist quantum computers"
+     ],
+     "a": 3,
+     "why": "It's built on quantum-hard maths."
+    },
+    {
+     "q": "What is an encryption backdoor?",
+     "o": [
+      "A door at the back of a data centre",
+      "A strong password",
+      "A secret way for authorities to read encrypted messages",
+      "A type of firewall"
+     ],
+     "a": 2,
+     "why": "Backdoors bypass encryption."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why \"harvest now, decrypt later\" is a concern for medical records.",
+     "m": 2,
+     "a": "Attackers can store encrypted records today (1) and read them once powerful quantum computers exist, while the records are still sensitive/private (1)."
+    },
+    {
+     "q": "\"Messaging apps should include a backdoor for police.\" Discuss.",
+     "m": 4,
+     "a": "Arguments for, e.g. catching criminals/protecting children (1-2); arguments against, e.g. weakens security for everyone/criminals or states could exploit it/privacy (1-2); justified conclusion (1). Max 4."
+    }
+   ],
+   "terms": [
+    "Quantum computer",
+    "Post-quantum cryptography",
+    "Backdoor"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Cryptography",
+   "def": "The science of keeping information secret, for example by encryption.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Plaintext",
+   "def": "The original, readable message before encryption.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Ciphertext",
+   "def": "The scrambled message produced by encryption.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Key",
+   "def": "The secret value used to encrypt and decrypt a message.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Frequency analysis",
+   "def": "Breaking a cipher by counting how often letters appear and matching them to the most common letters in the language.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Brute-force attack",
+   "def": "Trying every possible key or password until the right one is found.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Key length",
+   "def": "The number of bits in an encryption key; each extra bit doubles the number of possible keys.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Symmetric encryption",
+   "def": "Encryption where the same key is used to encrypt and decrypt.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "AES",
+   "def": "Advanced Encryption Standard: the world's most widely used symmetric encryption method.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Public-key cryptography",
+   "def": "Encryption using a pair of linked keys: a public key to encrypt and a private key to decrypt.",
+   "alt": "Asymmetric encryption",
+   "page": "p03"
+  },
+  {
+   "term": "Public key",
+   "def": "The key that is shared openly and used to encrypt messages to its owner.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Private key",
+   "def": "The key that is kept secret and used to decrypt messages encrypted with the matching public key.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "One-way function",
+   "def": "A calculation that is easy to do but extremely hard to reverse.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "HTTPS",
+   "def": "Hypertext Transfer Protocol Secure: the encrypted version of the protocol used to load web pages.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "TLS",
+   "def": "Transport Layer Security: the protocol that encrypts HTTPS connections.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Digital certificate",
+   "def": "An electronic document, issued by a trusted authority, that proves a website's identity.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Session key",
+   "def": "A temporary secret key agreed for one connection and used for symmetric encryption.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Hash",
+   "def": "A fixed-length \"fingerprint\" made from data by a one-way function.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Salt",
+   "def": "Random data added to a password before hashing so that identical passwords get different hashes.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "End-to-end encryption",
+   "def": "Encryption where only the sender and receiver can decrypt messages, not the service in between.",
+   "alt": "E2EE",
+   "page": "p05"
+  },
+  {
+   "term": "Quantum computer",
+   "def": "A computer that uses quantum physics to solve certain problems much faster than ordinary computers.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Post-quantum cryptography",
+   "def": "Encryption designed to stay secure even against quantum computers.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Backdoor",
+   "def": "A secret way to get around security, such as a way for authorities to read encrypted messages.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}

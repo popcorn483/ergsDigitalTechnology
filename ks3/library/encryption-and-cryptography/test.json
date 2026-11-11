@@ -1,0 +1,1205 @@
+{
+ "title": "Encryption and Cryptography",
+ "q": [
+  {
+   "q": "What is cryptography?",
+   "o": [
+    "The science of keeping information secret",
+    "The study of crypts",
+    "A programming language",
+    "A type of computer"
+   ],
+   "a": 0,
+   "why": "Cryptography protects secrets.",
+   "p": "p01"
+  },
+  {
+   "q": "What is plaintext?",
+   "o": [
+    "The key",
+    "A font",
+    "The original readable message",
+    "The encrypted message"
+   ],
+   "a": 2,
+   "why": "Plaintext is readable.",
+   "p": "p01"
+  },
+  {
+   "q": "What is ciphertext?",
+   "o": [
+    "A type of key",
+    "The scrambled encrypted message",
+    "A password list",
+    "The original message"
+   ],
+   "a": 1,
+   "why": "Ciphertext is encrypted.",
+   "p": "p01"
+  },
+  {
+   "q": "What is decryption?",
+   "o": [
+    "Turning plaintext into ciphertext",
+    "Copying a key",
+    "Deleting a message",
+    "Turning ciphertext back into plaintext"
+   ],
+   "a": 3,
+   "why": "Decryption reverses encryption.",
+   "p": "p01"
+  },
+  {
+   "q": "Using a Caesar shift of 3, what does A become?",
+   "o": [
+    "D",
+    "X",
+    "B",
+    "C"
+   ],
+   "a": 0,
+   "why": "A + 3 places = D.",
+   "p": "p01"
+  },
+  {
+   "q": "How many useful shifts does a Caesar cipher have?",
+   "o": [
+    "3",
+    "100",
+    "25",
+    "26"
+   ],
+   "a": 2,
+   "why": "A shift of 26 gives the original.",
+   "p": "p01"
+  },
+  {
+   "q": "What does a substitution cipher do?",
+   "o": [
+    "Shifts every letter by 3",
+    "Reverses the message",
+    "Uses numbers only",
+    "Replaces each letter with another letter from a secret alphabet"
+   ],
+   "a": 3,
+   "why": "Any letter can map to any other.",
+   "p": "p01"
+  },
+  {
+   "q": "What is frequency analysis?",
+   "o": [
+    "Counting letter frequencies to break a cipher",
+    "Timing how fast you type",
+    "Measuring radio waves",
+    "Counting words in a book"
+   ],
+   "a": 0,
+   "why": "It matches common letters.",
+   "p": "p01"
+  },
+  {
+   "q": "In a long English ciphertext, the most common letter probably stands for...",
+   "o": [
+    "Q",
+    "Z",
+    "X",
+    "E"
+   ],
+   "a": 3,
+   "why": "E is most common.",
+   "p": "p01"
+  },
+  {
+   "q": "Who first described frequency analysis?",
+   "o": [
+    "Ada Lovelace",
+    "Alan Turing",
+    "Al-Kindi",
+    "Bill Gates"
+   ],
+   "a": 2,
+   "why": "Al-Kindi, over 1,100 years ago.",
+   "p": "p01"
+  },
+  {
+   "q": "A one-letter word in a ciphertext is probably...",
+   "o": [
+    "X or K",
+    "E or T",
+    "Z or Q",
+    "A or I"
+   ],
+   "a": 3,
+   "why": "Only A and I are one-letter English words.",
+   "p": "p01"
+  },
+  {
+   "q": "What is a brute-force attack?",
+   "o": [
+    "Trying every possible key",
+    "Phishing",
+    "Sending spam",
+    "Breaking a screen"
+   ],
+   "a": 0,
+   "why": "It tries all keys.",
+   "p": "p02"
+  },
+  {
+   "q": "How many combinations does a 3-dial (0-9) lock have?",
+   "o": [
+    "10",
+    "30",
+    "1,000",
+    "100"
+   ],
+   "a": 2,
+   "why": "10 × 10 × 10 = 1,000.",
+   "p": "p02"
+  },
+  {
+   "q": "How many keys does an 8-bit key have?",
+   "o": [
+    "64",
+    "8",
+    "256",
+    "512"
+   ],
+   "a": 2,
+   "why": "2⁸ = 256.",
+   "p": "p02"
+  },
+  {
+   "q": "How many keys does a 3-bit key have?",
+   "o": [
+    "9",
+    "6",
+    "8",
+    "3"
+   ],
+   "a": 2,
+   "why": "2³ = 8.",
+   "p": "p02"
+  },
+  {
+   "q": "Adding one bit to a key...",
+   "o": [
+    "changes nothing",
+    "halves the keys",
+    "doubles the number of possible keys",
+    "adds one key"
+   ],
+   "a": 2,
+   "why": "Each bit doubles possibilities.",
+   "p": "p02"
+  },
+  {
+   "q": "What is the only defence against brute force?",
+   "o": [
+    "Hiding the computer",
+    "Using capital letters",
+    "Encrypting twice with the same key",
+    "Making the number of possible keys enormous"
+   ],
+   "a": 3,
+   "why": "Big keyspaces take impossibly long.",
+   "p": "p02"
+  },
+  {
+   "q": "What is symmetric encryption?",
+   "o": [
+    "Encryption using the same key to lock and unlock",
+    "Encryption shaped like a mirror",
+    "Encryption with no key",
+    "Encryption with two keys"
+   ],
+   "a": 0,
+   "why": "One shared key.",
+   "p": "p02"
+  },
+  {
+   "q": "What does AES stand for?",
+   "o": [
+    "Advanced Electric Signal",
+    "Advanced Encryption Standard",
+    "Applied Electronic System",
+    "Automatic Email Security"
+   ],
+   "a": 1,
+   "why": "AES is the symmetric standard.",
+   "p": "p02"
+  },
+  {
+   "q": "Which key lengths does AES use?",
+   "o": [
+    "128 or 256 bits (and 192)",
+    "1 bit",
+    "3 bits",
+    "8 bits"
+   ],
+   "a": 0,
+   "why": "AES keys are 128, 192 or 256 bits.",
+   "p": "p02"
+  },
+  {
+   "q": "What is the main problem with symmetric encryption?",
+   "o": [
+    "It is too slow",
+    "Sharing the key safely",
+    "It doesn't work on phones",
+    "It has no key"
+   ],
+   "a": 1,
+   "why": "Key distribution is hard.",
+   "p": "p02"
+  },
+  {
+   "q": "Why is symmetric encryption used for most data?",
+   "o": [
+    "It's the only type",
+    "It needs no key",
+    "It's very fast",
+    "It's the oldest"
+   ],
+   "a": 2,
+   "why": "Speed makes it practical.",
+   "p": "p02"
+  },
+  {
+   "q": "What is key length?",
+   "o": [
+    "The physical size of a key",
+    "The number of passwords",
+    "The length of the message",
+    "The number of bits in a key"
+   ],
+   "a": 3,
+   "why": "Longer keys are stronger.",
+   "p": "p02"
+  },
+  {
+   "q": "What problem does public-key cryptography solve?",
+   "o": [
+    "Writing code",
+    "Sharing secrets with someone you've never met",
+    "Storing files",
+    "Making computers faster"
+   ],
+   "a": 1,
+   "why": "It solves key sharing.",
+   "p": "p03"
+  },
+  {
+   "q": "Another name for public-key cryptography is...",
+   "o": [
+    "symmetric encryption",
+    "hashing",
+    "asymmetric encryption",
+    "frequency analysis"
+   ],
+   "a": 2,
+   "why": "Two different keys.",
+   "p": "p03"
+  },
+  {
+   "q": "Which key is shared with everyone?",
+   "o": [
+    "Private key",
+    "Master key",
+    "Session key",
+    "Public key"
+   ],
+   "a": 3,
+   "why": "Public keys are published.",
+   "p": "p03"
+  },
+  {
+   "q": "Which key must be kept secret?",
+   "o": [
+    "Neither",
+    "Both keys",
+    "Public key",
+    "Private key"
+   ],
+   "a": 3,
+   "why": "Never share your private key.",
+   "p": "p03"
+  },
+  {
+   "q": "To send Mia a secret message, you encrypt it with...",
+   "o": [
+    "Mia's public key",
+    "your private key",
+    "Mia's private key",
+    "no key"
+   ],
+   "a": 0,
+   "why": "Only Mia's private key can then decrypt it.",
+   "p": "p03"
+  },
+  {
+   "q": "Who can decrypt a message encrypted with Mia's public key?",
+   "o": [
+    "Only the sender",
+    "Nobody",
+    "Anyone",
+    "Only Mia, with her private key"
+   ],
+   "a": 3,
+   "why": "Private key holder only.",
+   "p": "p03"
+  },
+  {
+   "q": "In the padlock analogy, the open padlock represents...",
+   "o": [
+    "the message",
+    "the hacker",
+    "the private key",
+    "the public key"
+   ],
+   "a": 3,
+   "why": "Anyone can snap it shut.",
+   "p": "p03"
+  },
+  {
+   "q": "What is a one-way function?",
+   "o": [
+    "A road with one lane",
+    "A function with one input",
+    "A program that runs once",
+    "Easy to calculate but very hard to reverse"
+   ],
+   "a": 3,
+   "why": "E.g. multiplying primes.",
+   "p": "p03"
+  },
+  {
+   "q": "What is 13 × 17?",
+   "o": [
+    "231",
+    "221",
+    "210",
+    "30"
+   ],
+   "a": 1,
+   "why": "Easy to multiply; hard to reverse for big numbers.",
+   "p": "p03"
+  },
+  {
+   "q": "RSA encryption relies on the difficulty of...",
+   "o": [
+    "spelling long words",
+    "adding large numbers",
+    "finding the prime factors of huge numbers",
+    "sorting lists"
+   ],
+   "a": 2,
+   "why": "Factoring is the hard problem.",
+   "p": "p03"
+  },
+  {
+   "q": "Which UK organisation's researchers secretly discovered public-key ideas in the 1970s?",
+   "o": [
+    "Ofcom",
+    "The BBC",
+    "The NHS",
+    "GCHQ"
+   ],
+   "a": 3,
+   "why": "GCHQ's work was kept secret for years.",
+   "p": "p03"
+  },
+  {
+   "q": "What does HTTPS stand for?",
+   "o": [
+    "Hypertext Transfer Protocol Secure",
+    "High Tech Transfer Speed",
+    "Hyperlink Text Protection System",
+    "Home Transfer Protocol Site"
+   ],
+   "a": 0,
+   "why": "The S means secure.",
+   "p": "p04"
+  },
+  {
+   "q": "What protocol encrypts HTTPS connections?",
+   "o": [
+    "TLS",
+    "FTP",
+    "USB",
+    "HTML"
+   ],
+   "a": 0,
+   "why": "TLS = Transport Layer Security.",
+   "p": "p04"
+  },
+  {
+   "q": "What was the problem with plain HTTP?",
+   "o": [
+    "It was too fast",
+    "It had no web pages",
+    "Data was sent as readable plain text",
+    "It only worked at night"
+   ],
+   "a": 2,
+   "why": "Anyone could read it.",
+   "p": "p04"
+  },
+  {
+   "q": "What does a digital certificate prove?",
+   "o": [
+    "A website is honest",
+    "A website's identity",
+    "A website has no bugs",
+    "A website is free"
+   ],
+   "a": 1,
+   "why": "Certificates confirm identity.",
+   "p": "p04"
+  },
+  {
+   "q": "Who issues digital certificates?",
+   "o": [
+    "Certificate authorities",
+    "Internet users",
+    "Mobile phones",
+    "Search engines"
+   ],
+   "a": 0,
+   "why": "Trusted CAs issue them.",
+   "p": "p04"
+  },
+  {
+   "q": "What does the padlock in the address bar mean?",
+   "o": [
+    "The site is definitely honest",
+    "The connection is encrypted and the certificate matches the address",
+    "The site has no adverts",
+    "The site is government-run"
+   ],
+   "a": 1,
+   "why": "Encryption, not trustworthiness.",
+   "p": "p04"
+  },
+  {
+   "q": "Can scam websites use HTTPS?",
+   "o": [
+    "Only on phones",
+    "No, never",
+    "Only on Sundays",
+    "Yes"
+   ],
+   "a": 3,
+   "why": "HTTPS doesn't prove honesty.",
+   "p": "p04"
+  },
+  {
+   "q": "What is a session key?",
+   "o": [
+    "Your permanent password",
+    "A temporary key agreed for one connection",
+    "A key for a car",
+    "A private key you share"
+   ],
+   "a": 1,
+   "why": "It's used for that session only.",
+   "p": "p04"
+  },
+  {
+   "q": "In HTTPS, which encryption is used to agree the session key?",
+   "o": [
+    "Frequency analysis",
+    "Public-key cryptography",
+    "Hashing",
+    "Caesar cipher"
+   ],
+   "a": 1,
+   "why": "Public-key crypto solves key sharing.",
+   "p": "p04"
+  },
+  {
+   "q": "In HTTPS, which encryption protects the main data?",
+   "o": [
+    "No encryption",
+    "A Caesar shift",
+    "Public-key only",
+    "Symmetric encryption, such as AES"
+   ],
+   "a": 3,
+   "why": "Symmetric is fast.",
+   "p": "p04"
+  },
+  {
+   "q": "What should you do if your browser says \"Your connection is not private\"?",
+   "o": [
+    "Ignore it and log in",
+    "Don't continue to the site",
+    "Turn off the computer",
+    "Share the link"
+   ],
+   "a": 1,
+   "why": "The certificate check failed.",
+   "p": "p04"
+  },
+  {
+   "q": "Why is public Wi-Fi risky without HTTPS?",
+   "o": [
+    "Wi-Fi is always slow",
+    "It uses more battery",
+    "Others on the network could read your data",
+    "It's illegal"
+   ],
+   "a": 2,
+   "why": "Unencrypted traffic can be intercepted.",
+   "p": "p04"
+  },
+  {
+   "q": "What does a hash function produce?",
+   "o": [
+    "An encrypted file with a key",
+    "A longer copy",
+    "A photo",
+    "A fixed-length fingerprint of the data"
+   ],
+   "a": 3,
+   "why": "Hashes are fixed-length.",
+   "p": "p05"
+  },
+  {
+   "q": "Can a hash be turned back into the original input?",
+   "o": [
+    "No: it's one-way",
+    "Yes, easily",
+    "Yes, with the public key",
+    "Only on Mondays"
+   ],
+   "a": 0,
+   "why": "Hashing is irreversible.",
+   "p": "p05"
+  },
+  {
+   "q": "What happens to a hash if you change one letter of the input?",
+   "o": [
+    "It changes completely",
+    "It stays the same",
+    "It gets longer",
+    "It changes by one letter"
+   ],
+   "a": 0,
+   "why": "The avalanche effect.",
+   "p": "p05"
+  },
+  {
+   "q": "Why do good websites store password hashes?",
+   "o": [
+    "Hashes are easier to remember",
+    "Stolen hashes can't simply be reversed into passwords",
+    "Passwords are illegal",
+    "It makes login slower"
+   ],
+   "a": 1,
+   "why": "Hashing protects passwords.",
+   "p": "p05"
+  },
+  {
+   "q": "How does a website check your password?",
+   "o": [
+    "It asks your friends",
+    "It reads your stored password",
+    "It emails you",
+    "It hashes what you type and compares hashes"
+   ],
+   "a": 3,
+   "why": "Hash and compare.",
+   "p": "p05"
+  },
+  {
+   "q": "What is a salt?",
+   "o": [
+    "Random data added before hashing a password",
+    "A seasoning",
+    "A type of malware",
+    "A password hint"
+   ],
+   "a": 0,
+   "why": "Salts make hashes unique.",
+   "p": "p05"
+  },
+  {
+   "q": "Why do salts help?",
+   "o": [
+    "Identical passwords get different hashes",
+    "They speed up login",
+    "They remove the need for passwords",
+    "They make passwords shorter"
+   ],
+   "a": 0,
+   "why": "Salts defeat pre-computed tables.",
+   "p": "p05"
+  },
+  {
+   "q": "A website emails you your actual old password. This suggests...",
+   "o": [
+    "It uses HTTPS",
+    "It isn't storing passwords safely",
+    "It uses salts",
+    "It's very secure"
+   ],
+   "a": 1,
+   "why": "Proper systems can't recover passwords.",
+   "p": "p05"
+  },
+  {
+   "q": "Does hashing protect weak passwords completely?",
+   "o": [
+    "Only numbers",
+    "Only short ones",
+    "No: attackers can hash common passwords and compare",
+    "Yes, always"
+   ],
+   "a": 2,
+   "why": "Strong passwords still matter.",
+   "p": "p05"
+  },
+  {
+   "q": "What is end-to-end encryption?",
+   "o": [
+    "The company encrypts at its end only",
+    "Encrypting the start and end of a message",
+    "No encryption at all",
+    "Only the sender and receiver can read messages"
+   ],
+   "a": 3,
+   "why": "E2EE keeps the middle blind.",
+   "p": "p05"
+  },
+  {
+   "q": "With E2EE, what does the app company's server see?",
+   "o": [
+    "Nothing at all is sent",
+    "Your messages in plain text",
+    "Scrambled ciphertext",
+    "Your private key"
+   ],
+   "a": 2,
+   "why": "It relays unreadable data.",
+   "p": "p05"
+  },
+  {
+   "q": "Which app is known for end-to-end encrypted messaging?",
+   "o": [
+    "Signal",
+    "Microsoft Paint",
+    "Calculator",
+    "Notepad"
+   ],
+   "a": 0,
+   "why": "Signal uses E2EE.",
+   "p": "p05"
+  },
+  {
+   "q": "Hashes can be used to check that a download hasn't been changed. Why?",
+   "o": [
+    "Downloads have no data",
+    "Any change would produce a completely different hash",
+    "Hashes are bigger than files",
+    "Hashes are encrypted"
+   ],
+   "a": 1,
+   "why": "Compare published and calculated hashes.",
+   "p": "p05"
+  },
+  {
+   "q": "What is a quantum computer?",
+   "o": [
+    "A very small laptop",
+    "A calculator",
+    "A computer using quantum physics to solve certain problems much faster",
+    "A computer from the future that doesn't exist"
+   ],
+   "a": 2,
+   "why": "Quantum computers use qubits.",
+   "p": "p06"
+  },
+  {
+   "q": "Which encryption would a large quantum computer threaten most?",
+   "o": [
+    "RSA and similar public-key systems",
+    "All encryption equally",
+    "None",
+    "Caesar ciphers only"
+   ],
+   "a": 0,
+   "why": "Shor's algorithm breaks factoring.",
+   "p": "p06"
+  },
+  {
+   "q": "Who discovered the quantum algorithm for factoring?",
+   "o": [
+    "Tim Berners-Lee",
+    "Peter Shor",
+    "Alan Turing",
+    "Al-Kindi"
+   ],
+   "a": 1,
+   "why": "Shor's algorithm, 1994.",
+   "p": "p06"
+  },
+  {
+   "q": "What is \"harvest now, decrypt later\"?",
+   "o": [
+    "Encrypting twice",
+    "Downloading crops",
+    "Backing up files",
+    "Storing encrypted data to break with future computers"
+   ],
+   "a": 3,
+   "why": "A long-term threat.",
+   "p": "p06"
+  },
+  {
+   "q": "What is post-quantum cryptography?",
+   "o": [
+    "Old-fashioned encryption",
+    "Encryption invented after computers",
+    "Encryption designed to resist quantum computers",
+    "A quantum computer"
+   ],
+   "a": 2,
+   "why": "It's quantum-resistant.",
+   "p": "p06"
+  },
+  {
+   "q": "Which organisation published the first post-quantum standards in 2024?",
+   "o": [
+    "NASA",
+    "FIFA",
+    "NIST",
+    "UNICEF"
+   ],
+   "a": 2,
+   "why": "The US National Institute of Standards and Technology.",
+   "p": "p06"
+  },
+  {
+   "q": "How does a quantum computer affect AES-256?",
+   "o": [
+    "It weakens it a little, but it's still considered strong",
+    "No effect at all",
+    "It makes it stronger",
+    "It breaks it instantly"
+   ],
+   "a": 0,
+   "why": "Longer symmetric keys stay safe.",
+   "p": "p06"
+  },
+  {
+   "q": "What is an encryption backdoor?",
+   "o": [
+    "A secret way for authorities to read encrypted data",
+    "A secure rear exit",
+    "A firewall rule",
+    "A strong password"
+   ],
+   "a": 0,
+   "why": "Backdoors bypass encryption.",
+   "p": "p06"
+  },
+  {
+   "q": "Which is an argument FOR encryption backdoors?",
+   "o": [
+    "They could help police investigate serious crimes",
+    "Criminals can't use them",
+    "They are impossible to misuse",
+    "They make everyone more secure"
+   ],
+   "a": 0,
+   "why": "Law enforcement access.",
+   "p": "p06"
+  },
+  {
+   "q": "Which is an argument AGAINST encryption backdoors?",
+   "o": [
+    "They protect children",
+    "Criminals or hostile states could find and abuse them",
+    "They are cheap",
+    "They help police"
+   ],
+   "a": 1,
+   "why": "A weakness for one is a weakness for all.",
+   "p": "p06"
+  },
+  {
+   "q": "Why might journalists rely on strong encryption?",
+   "o": [
+    "To make files smaller",
+    "They don't",
+    "To type faster",
+    "To protect their sources' safety"
+   ],
+   "a": 3,
+   "why": "Privacy protects people at risk.",
+   "p": "p06"
+  },
+  {
+   "q": "Which is a strong password idea?",
+   "o": [
+    "Three random words with a number and symbol",
+    "password123",
+    "123456",
+    "Your pet's name"
+   ],
+   "a": 0,
+   "why": "Long and unpredictable.",
+   "p": "p05"
+  },
+  {
+   "q": "Mary, Queen of Scots' secret plot was uncovered using...",
+   "o": [
+    "frequency analysis",
+    "a quantum computer",
+    "a computer",
+    "HTTPS"
+   ],
+   "a": 0,
+   "why": "Codebreakers read her substitution cipher.",
+   "p": "p01"
+  },
+  {
+   "q": "A 2-digit PIN (00-99) has how many combinations?",
+   "o": [
+    "99",
+    "100",
+    "20",
+    "10"
+   ],
+   "a": 1,
+   "why": "10 × 10 = 100.",
+   "p": "p02"
+  },
+  {
+   "q": "A 10-bit key has how many possible keys?",
+   "o": [
+    "20",
+    "1,024",
+    "100",
+    "10"
+   ],
+   "a": 1,
+   "why": "2¹⁰ = 1,024.",
+   "p": "p02"
+  },
+  {
+   "q": "Why is a 128-bit key considered safe from brute force?",
+   "o": [
+    "It uses letters",
+    "It's encrypted twice",
+    "Trying every key would take longer than the age of the universe",
+    "It's secret"
+   ],
+   "a": 2,
+   "why": "The keyspace is astronomically large.",
+   "p": "p02"
+  },
+  {
+   "q": "What is 79 × 83?",
+   "o": [
+    "7,900",
+    "6,500",
+    "6,557",
+    "162"
+   ],
+   "a": 2,
+   "why": "Easy to multiply, hard to factor back.",
+   "p": "p03"
+  },
+  {
+   "q": "Why is the private key never sent over the internet?",
+   "o": [
+    "It's not needed",
+    "It's too big",
+    "Internet can't carry keys",
+    "Anyone intercepting it could decrypt your messages"
+   ],
+   "a": 3,
+   "why": "Keeping it local keeps it safe.",
+   "p": "p03"
+  },
+  {
+   "q": "Which part of the TLS handshake shows the website's identity?",
+   "o": [
+    "Sending images",
+    "Sending cookies",
+    "Sending its certificate",
+    "Sending the web page"
+   ],
+   "a": 2,
+   "why": "The certificate proves identity.",
+   "p": "p04"
+  },
+  {
+   "q": "Why does HTTPS use both kinds of encryption?",
+   "o": [
+    "To confuse hackers",
+    "Public-key solves key sharing; symmetric is fast for data",
+    "To make pages bigger",
+    "Because one doesn't work"
+   ],
+   "a": 1,
+   "why": "Best of both.",
+   "p": "p04"
+  },
+  {
+   "q": "Which is NOT a property of a good hash function?",
+   "o": [
+    "Fixed length output",
+    "You can reverse it with a key",
+    "Same input gives same hash",
+    "Tiny changes give different hashes"
+   ],
+   "a": 1,
+   "why": "Hashes are one-way.",
+   "p": "p05"
+  },
+  {
+   "q": "In a data breach, which stolen data is LEAST useful to criminals?",
+   "o": [
+    "Unencrypted emails",
+    "Salted password hashes",
+    "Unencrypted card numbers",
+    "Plain-text passwords"
+   ],
+   "a": 1,
+   "why": "Salted hashes are hard to crack.",
+   "p": "p05"
+  },
+  {
+   "q": "Why does end-to-end encryption protect you if the company is hacked?",
+   "o": [
+    "It doesn't",
+    "Hackers can't use computers",
+    "The servers only hold ciphertext they can't read",
+    "The company deletes everything"
+   ],
+   "a": 2,
+   "why": "Keys stay on users' devices.",
+   "p": "p05"
+  },
+  {
+   "q": "Which describes the key-sharing problem?",
+   "o": [
+    "How to agree a secret key safely over a public network",
+    "How to type a key",
+    "How to remember a password",
+    "How to cut a metal key"
+   ],
+   "a": 0,
+   "why": "It's about distributing keys.",
+   "p": "p03"
+  },
+  {
+   "q": "Who is \"Eve\" in cryptography examples?",
+   "o": [
+    "The sender",
+    "The certificate authority",
+    "An eavesdropper listening to messages",
+    "The receiver"
+   ],
+   "a": 2,
+   "why": "Eve eavesdrops.",
+   "p": "p03"
+  },
+  {
+   "q": "What is the effect of using a 256-bit AES key instead of 128-bit?",
+   "o": [
+    "Weaker protection",
+    "Far more possible keys and stronger protection",
+    "No difference",
+    "Faster brute force"
+   ],
+   "a": 1,
+   "why": "More bits, more keys.",
+   "p": "p02"
+  },
+  {
+   "q": "Why are certificate warnings important?",
+   "o": [
+    "They may mean a fake site or an interception attempt",
+    "They're just adverts",
+    "They mean the site is fast",
+    "They're always wrong"
+   ],
+   "a": 0,
+   "why": "Never ignore them.",
+   "p": "p04"
+  },
+  {
+   "q": "Which statement about encryption is true?",
+   "o": [
+    "Encryption makes data public",
+    "Strong encryption protects banking, messaging and online shopping",
+    "Encryption is only for spies",
+    "Encryption is illegal in the UK"
+   ],
+   "a": 1,
+   "why": "It protects everyday life.",
+   "p": "p06"
+  },
+  {
+   "q": "What does the UK's National Cyber Security Centre advise organisations about quantum computing?",
+   "o": [
+    "Turn off all encryption",
+    "Ignore it",
+    "Buy a quantum computer",
+    "Plan to migrate to post-quantum cryptography over the coming years"
+   ],
+   "a": 3,
+   "why": "Migration takes years.",
+   "p": "p06"
+  },
+  {
+   "q": "A pupil says \"HTTPS means the website can't be a scam.\" What's wrong?",
+   "o": [
+    "HTTPS means no adverts",
+    "HTTPS sites are all government sites",
+    "HTTPS only encrypts the connection; scam sites can use it too",
+    "Nothing, it's correct"
+   ],
+   "a": 2,
+   "why": "Check the address too.",
+   "p": "p04"
+  },
+  {
+   "q": "What is a digital signature used for?",
+   "o": [
+    "Signing your name on paper",
+    "Making a password",
+    "Proving a message really came from the sender and wasn't changed",
+    "Encrypting a hard drive"
+   ],
+   "a": 2,
+   "why": "Signatures use private keys and hashes.",
+   "p": "p05"
+  },
+  {
+   "q": "Which ancient cipher was used by Julius Caesar?",
+   "o": [
+    "A hash function",
+    "RSA",
+    "AES",
+    "A shift cipher"
+   ],
+   "a": 3,
+   "why": "The Caesar cipher shifts letters.",
+   "p": "p01"
+  },
+  {
+   "q": "Using a Caesar shift of 3, what does HELLO become?",
+   "o": [
+    "IFMMP",
+    "HELLO",
+    "EBIIL",
+    "KHOOR"
+   ],
+   "a": 3,
+   "why": "Each letter moves 3 places on.",
+   "p": "p01"
+  },
+  {
+   "q": "Decrypt FDW with a Caesar shift of 3.",
+   "o": [
+    "DOG",
+    "FAT",
+    "CAT",
+    "HAT"
+   ],
+   "a": 2,
+   "why": "Move each letter 3 places back.",
+   "p": "p01"
+  },
+  {
+   "q": "Why are long messages easier to break with frequency analysis?",
+   "o": [
+    "There are more letters to count, so the pattern is clearer",
+    "They use fewer letters",
+    "They have no spaces",
+    "They're always in capitals"
+   ],
+   "a": 0,
+   "why": "More data gives better statistics.",
+   "p": "p01"
+  },
+  {
+   "q": "A computer tries 1 billion keys per second. Roughly how long to try all 256 keys of an 8-bit key?",
+   "o": [
+    "Forever",
+    "Instantly",
+    "One year",
+    "A century"
+   ],
+   "a": 1,
+   "why": "256 tries is nothing for a computer.",
+   "p": "p02"
+  },
+  {
+   "q": "Which everyday technology uses symmetric encryption?",
+   "o": [
+    "A light switch",
+    "A paper diary",
+    "A pencil",
+    "Wi-Fi (WPA2/WPA3)"
+   ],
+   "a": 3,
+   "why": "Wi-Fi traffic is encrypted with AES.",
+   "p": "p02"
+  },
+  {
+   "q": "In the double-padlock method, why does the box stay locked in transit?",
+   "o": [
+    "Eve has a key",
+    "At least one padlock is always on it",
+    "It's sent empty",
+    "It has no lid"
+   ],
+   "a": 1,
+   "why": "Someone's lock is always closed.",
+   "p": "p03"
+  },
+  {
+   "q": "Which part of a website address shows it uses HTTPS?",
+   "o": [
+    "It starts with https://",
+    "It ends in .com",
+    "It has www",
+    "It has a number"
+   ],
+   "a": 0,
+   "why": "https:// shows encryption.",
+   "p": "p04"
+  },
+  {
+   "q": "Why is a new session key made for each connection?",
+   "o": [
+    "It's required by the browser's colour",
+    "So that one stolen key can't unlock other sessions",
+    "Keys wear out",
+    "It makes pages load slower"
+   ],
+   "a": 1,
+   "why": "Fresh keys limit damage.",
+   "p": "p04"
+  },
+  {
+   "q": "Which is the best reason to use a password manager?",
+   "o": [
+    "It makes all passwords the same",
+    "It shares your passwords",
+    "It removes the need for HTTPS",
+    "It stores long unique passwords for every site"
+   ],
+   "a": 3,
+   "why": "Unique strong passwords everywhere.",
+   "p": "p05"
+  }
+ ]
+}
