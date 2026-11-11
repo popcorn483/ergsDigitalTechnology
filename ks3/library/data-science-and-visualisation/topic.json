@@ -1,0 +1,1345 @@
+{
+ "title": "Data Science and Data Visualisation",
+ "summary": "Turn raw data into answers: ask good questions, collect and clean data, find patterns with averages and correlation, choose honest charts and tell a clear story with data.",
+ "learn": [
+  "The stages of the data science cycle",
+  "How to collect data fairly, including from open data",
+  "How to clean messy data",
+  "How to use averages, range and correlation to find patterns",
+  "How to choose the right chart and spot misleading ones",
+  "How to tell a story with data while protecting privacy"
+ ],
+ "temporary": false,
+ "intro": "Data scientists help hospitals plan beds, sports teams pick players and councils plan bus routes. In this topic you follow the same process: ask a question, collect data, clean up its mistakes, find the patterns, make charts that tell the truth, and present your findings without breaking anyone's privacy.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "What is data science?",
+   "spec": "Describe what data science is and the stages of the data science cycle",
+   "summary": "Data science is using data to answer questions and make decisions. Data scientists follow a cycle: ask a question, collect data, clean it, analyse it, visualise it and communicate the findings.",
+   "starter": "Your phone knows how many steps you walked every day this year. What questions could you answer with that data?",
+   "sc": [
+    "I can explain what data science is",
+    "I can name the six stages of the data science cycle",
+    "I can give examples of data science in real life"
+   ],
+   "slides": [
+    {
+     "t": "Questions answered with data",
+     "b": [
+      "Data science means using data to answer questions and make better decisions",
+      "Which bus routes need more buses at 8am?",
+      "Which players should a football club sign?",
+      "When will A&E be busiest this winter?"
+     ]
+    },
+    {
+     "t": "The data science cycle",
+     "b": [
+      "1 Ask a clear question",
+      "2 Collect the data",
+      "3 Clean it",
+      "4 Analyse it to find patterns",
+      "5 Visualise it with charts",
+      "6 Communicate the answer, then ask the next question"
+     ]
+    },
+    {
+     "t": "Big data",
+     "b": [
+      "Some datasets are enormous: billions of rows, arriving every second",
+      "Volume (how much), velocity (how fast), variety (how many kinds)",
+      "Examples: card payments, weather sensors, streaming services, smart meters",
+      "Needs powerful computers and clever programs to analyse"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is data science?"
+    },
+    {
+     "t": "p",
+     "text": "**[[data]]** is raw facts and figures, such as numbers, words, dates or measurements. On its own it doesn't mean much. **[[data science]]** is the use of data to answer questions, spot patterns and make better decisions. Data scientists combine maths, computing and knowledge of the subject they're studying."
+    },
+    {
+     "t": "table",
+     "caption": "Data science in real life",
+     "head": [
+      "Area",
+      "Question",
+      "Data used"
+     ],
+     "rows": [
+      [
+       "Health",
+       "When will A&E be busiest?",
+       "Past visit numbers, weather, holidays"
+      ],
+      [
+       "Sport",
+       "Which player creates the most chances?",
+       "Passes, positions and shots in every match"
+      ],
+      [
+       "Transport",
+       "Where do we need more buses?",
+       "Card taps on buses, timetables, journey times"
+      ],
+      [
+       "Environment",
+       "Is Lough Erne's water getting cleaner?",
+       "Sensor readings taken over many years"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "The data science cycle"
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "**Ask** a clear question that data can answer.",
+      "**Collect** the data you need.",
+      "**Clean** it: fix or remove mistakes and gaps.",
+      "**Analyse** it to find patterns, using averages, comparisons and correlation.",
+      "**Visualise** it using charts and graphs.",
+      "**Communicate** what you found, then ask the next question."
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Big data"
+    },
+    {
+     "t": "p",
+     "text": "**[[big data]]** means datasets so large or fast-moving that ordinary tools can't handle them. Big data is often described by the \"3 Vs\": **volume** (huge amounts), **velocity** (arriving quickly, often in real time) and **variety** (many types, such as numbers, text, images and sensor readings)."
+    },
+    {
+     "t": "tip",
+     "text": "A good data question is specific and measurable. \"Are pupils tired?\" is vague. \"Do pupils who sleep less than 8 hours score lower on Monday quizzes?\" is something data can answer."
+    },
+    {
+     "t": "act",
+     "title": "Sharpen the question",
+     "mins": 15,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Read the five vague questions on the board (e.g. \"Is the canteen good?\").",
+      "Rewrite each as a specific, measurable question that data could answer.",
+      "For one of them, list what data you would need to collect."
+     ],
+     "q": [
+      {
+       "q": "Write your improved version of \"Is the canteen good?\" and the data you'd need.",
+       "a": "E.g. \"Which canteen meals sell out fastest, and which have the most food wasted?\" Data: sales per meal per day, time each meal sells out, weight of food waste per meal."
+      },
+      {
+       "q": "Why is a specific question better for data science?",
+       "a": "It tells you exactly what data to collect and how to measure the answer, so you can actually reach a clear conclusion."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is data science?",
+     "o": [
+      "Using data to answer questions and make decisions",
+      "Typing data quickly",
+      "Writing science fiction",
+      "Building computers"
+     ],
+     "a": 0,
+     "why": "It turns data into answers."
+    },
+    {
+     "q": "What is the first stage of the data science cycle?",
+     "o": [
+      "Ask a clear question",
+      "Clean the data",
+      "Buy a computer",
+      "Make a chart"
+     ],
+     "a": 0,
+     "why": "Start with the question."
+    },
+    {
+     "q": "What is big data?",
+     "o": [
+      "A data cable",
+      "A large font",
+      "A big spreadsheet cell",
+      "Datasets so large or fast that ordinary tools can't handle them"
+     ],
+     "a": 3,
+     "why": "Big data is huge, fast, varied data."
+    },
+    {
+     "q": "Which \"V\" of big data means how fast data arrives?",
+     "o": [
+      "Variety",
+      "Value",
+      "Velocity",
+      "Volume"
+     ],
+     "a": 2,
+     "why": "Velocity is speed."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Name the six stages of the data science cycle in order.",
+     "m": 3,
+     "a": "Ask, collect, clean, analyse, visualise, communicate (3 marks all correct; 2 for four or five in order; 1 for two or three)."
+    },
+    {
+     "q": "Give one example of how data science could help a hospital.",
+     "m": 2,
+     "a": "A suitable question (1) and the data used (1), e.g. predicting busy times in A&E using past visit numbers and weather."
+    }
+   ],
+   "terms": [
+    "Data science",
+    "Data",
+    "Big data"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "Collecting data",
+   "spec": "Collect data fairly and describe different types and sources of data",
+   "summary": "Data can be qualitative or quantitative, and collected first-hand (primary) or from others (secondary), including free open data. How you collect it, and from whom, decides whether your answer is fair.",
+   "starter": "You want to know the most popular sport in school, but you only ask the rugby team. What's wrong with your data?",
+   "sc": [
+    "I can tell the difference between qualitative and quantitative data",
+    "I can compare primary and secondary data and use open data",
+    "I can explain how sampling can make data biased"
+   ],
+   "slides": [
+    {
+     "t": "Types of data",
+     "b": [
+      "Quantitative: numbers you can measure or count (height, score, minutes)",
+      "Qualitative: descriptions, categories or opinions (\"great\", \"blue\", \"rugby\")",
+      "Many datasets have both",
+      "The type decides which charts and calculations you can use"
+     ]
+    },
+    {
+     "t": "Where does data come from?",
+     "b": [
+      "Primary data: you collect it yourself (survey, experiment, sensor)",
+      "Secondary data: someone else collected it (websites, government statistics)",
+      "Open data: free for anyone to use, e.g. OpenDataNI, data.gov.uk",
+      "Always check who collected secondary data, when and how"
+     ],
+     "n": "OpenDataNI (opendatani.gov.uk) has datasets on Northern Ireland such as bike-share use, air quality and public toilets. Great for real projects."
+    },
+    {
+     "t": "Fair samples",
+     "b": [
+      "A sample is the group you collect data from",
+      "Biased sample: only asking the rugby team about favourite sports",
+      "Fair samples are big enough and represent everyone",
+      "Survey questions must be clear and not lead people to an answer"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Types of data"
+    },
+    {
+     "t": "table",
+     "caption": "Quantitative or qualitative?",
+     "head": [
+      "Type",
+      "What it is",
+      "Examples"
+     ],
+     "rows": [
+      [
+       "**[[quantitative data|Quantitative]]**",
+       "Numbers you can measure or count",
+       "Height in cm, test score, minutes of screen time"
+      ],
+      [
+       "**[[qualitative data|Qualitative]]**",
+       "Words, categories, descriptions or opinions",
+       "Favourite sport, eye colour, \"the lesson was fun\""
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Primary, secondary and open data"
+    },
+    {
+     "t": "p",
+     "text": "**[[primary data]]** is data you collect yourself, for example with a survey, an experiment or a sensor. It fits your question exactly, but takes time. **[[secondary data]]** has already been collected by someone else, such as government statistics or a sports website. It's quick to get, but you need to check who collected it, when, and how."
+    },
+    {
+     "t": "p",
+     "text": "**[[open data]]** is data that anyone is allowed to use for free. Governments and organisations publish open data on things like air quality, weather, transport and population. In Northern Ireland, the OpenDataNI portal has hundreds of datasets."
+    },
+    {
+     "t": "h",
+     "text": "Sampling and bias"
+    },
+    {
+     "t": "p",
+     "text": "Usually you can't ask everyone, so you collect data from a **[[sample]]**. If your sample isn't representative, your results will be biased. Asking only the rugby team about the school's favourite sport will obviously over-count rugby!"
+    },
+    {
+     "t": "key",
+     "title": "Fair data collection",
+     "items": [
+      "Choose a sample that represents everyone you want to know about",
+      "Make the sample large enough",
+      "Write clear, neutral questions (\"Which sport do you enjoy most?\", not \"Don't you agree football is the best?\")",
+      "Give answer options that cover everyone, including \"Other\" or \"None\"",
+      "Ask permission and don't collect more personal data than you need"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Survey design",
+     "mins": 25,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Choose a question about school life (e.g. \"How do pupils travel to school, and how long does it take?\").",
+      "Write a 5-question survey with at least one quantitative and one qualitative question.",
+      "Swap with another group. Find any leading, unclear or missing options in their survey.",
+      "Plan your sample: who will you ask, and how many?"
+     ],
+     "q": [
+      {
+       "q": "Write your two best survey questions and say whether each collects quantitative or qualitative data.",
+       "a": "E.g. \"How many minutes does your journey to school usually take?\" (quantitative); \"How do you usually travel to school? Walk / Bus / Car / Bike / Other\" (qualitative)."
+      },
+      {
+       "q": "Describe your sample and explain why it is fair.",
+       "a": "E.g. \"20 pupils from every year group, chosen from different form classes, so every age is represented.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which is quantitative data?",
+     "o": [
+      "Type of pet",
+      "Number of minutes spent reading",
+      "\"The film was exciting\"",
+      "Favourite colour"
+     ],
+     "a": 1,
+     "why": "Quantitative data is numerical."
+    },
+    {
+     "q": "What is primary data?",
+     "o": [
+      "Data you collect yourself",
+      "The first row of a table",
+      "Data from a website",
+      "Data about primary schools"
+     ],
+     "a": 0,
+     "why": "Primary data is first-hand."
+    },
+    {
+     "q": "What is open data?",
+     "o": [
+      "Data with no password",
+      "Data that is always correct",
+      "Data anyone is allowed to use for free",
+      "Data about the outdoors"
+     ],
+     "a": 2,
+     "why": "Open data is free to use."
+    },
+    {
+     "q": "Asking only the chess club about the most popular hobby gives...",
+     "o": [
+      "a fair sample",
+      "a biased sample",
+      "big data",
+      "open data"
+     ],
+     "a": 1,
+     "why": "The sample doesn't represent everyone."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between primary and secondary data, with an example of each.",
+     "m": 2,
+     "a": "Primary: collected yourself, e.g. your own survey (1); secondary: collected by someone else, e.g. government statistics (1)."
+    },
+    {
+     "q": "Rewrite this leading question to be fair: \"Don't you agree school should start later?\"",
+     "m": 2,
+     "a": "A neutral version, e.g. \"What time would you like school to start?\" with options (1) and doesn't suggest an answer (1)."
+    }
+   ],
+   "terms": [
+    "Quantitative data",
+    "Qualitative data",
+    "Primary data",
+    "Secondary data",
+    "Open data",
+    "Sample"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Cleaning data",
+   "spec": "Identify and fix common problems in messy data",
+   "summary": "Real data is messy: typos, inconsistent formats, duplicates, missing values and impossible outliers. Cleaning it before analysis is essential, and data scientists often spend more time cleaning than analysing.",
+   "starter": "In a survey, people typed their year group as \"8\", \"Y8\", \"year 8\", \"eight\" and \"8A\". How many different year groups would a computer think there are?",
+   "sc": [
+    "I can identify common problems in messy data",
+    "I can fix inconsistent, duplicate and missing data",
+    "I can decide what to do with outliers"
+   ],
+   "slides": [
+    {
+     "t": "Dirty data",
+     "b": [
+      "Inconsistent formats: \"8\", \"Y8\", \"Year 8\"",
+      "Typos: \"Enniskilen\", \"Eniskillen\"",
+      "Duplicates: the same response entered twice",
+      "Missing values: blank cells",
+      "Impossible values: age 250, height 1.6 cm"
+     ]
+    },
+    {
+     "t": "Cleaning it",
+     "b": [
+      "Choose one standard format and convert everything to it",
+      "Remove exact duplicates",
+      "Decide how to handle blanks: remove the row, or leave it out of that calculation",
+      "Check outliers: mistake or real?",
+      "Keep a record of every change you make"
+     ]
+    },
+    {
+     "t": "Garbage in, garbage out",
+     "b": [
+      "Analysis of dirty data gives wrong answers",
+      "Data scientists often say most of their time goes on cleaning",
+      "Spreadsheets help: sort, filter, find and replace, remove duplicates",
+      "Validation when collecting data stops many problems happening"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Why clean data?"
+    },
+    {
+     "t": "p",
+     "text": "Real-world data is almost never perfect. People make typos, write things in different ways, skip questions or submit a form twice. If you analyse dirty data, your answers will be wrong, so **[[data cleaning]]** (finding and fixing problems) comes before analysis. Professional data scientists often say this takes up most of their time."
+    },
+    {
+     "t": "table",
+     "caption": "Common data problems and fixes",
+     "head": [
+      "Problem",
+      "Example",
+      "Fix"
+     ],
+     "rows": [
+      [
+       "Inconsistent format",
+       "\"8\", \"Y8\", \"Year 8\"",
+       "Convert all to one format, e.g. 8"
+      ],
+      [
+       "Typos",
+       "\"Enniskilen\"",
+       "Correct to \"Enniskillen\" (find and replace)"
+      ],
+      [
+       "**[[duplicate|Duplicates]]**",
+       "The same response twice",
+       "Remove the extra copy"
+      ],
+      [
+       "**[[missing value|Missing values]]**",
+       "A blank \"age\" cell",
+       "Remove the row or leave it out of that calculation, and say so"
+      ],
+      [
+       "Impossible values",
+       "Age 250",
+       "Check: probably a typo for 25; if unsure, remove it"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Outliers"
+    },
+    {
+     "t": "p",
+     "text": "An **[[outlier]]** is a value very different from the rest. Some outliers are **mistakes** (someone typed 600 minutes of homework instead of 60). Others are **real** and interesting (one pupil really does run 15 km a week). Never just delete outliers because they're inconvenient: check whether they're possible and explain what you did."
+    },
+    {
+     "t": "tip",
+     "text": "Prevent problems by using validation when you collect data: drop-down lists instead of typing, number-only fields, and range checks (e.g. age 11 to 19)."
+    },
+    {
+     "t": "act",
+     "title": "Clean the canteen survey",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Open the messy \"Canteen survey\" spreadsheet your teacher gives you (30 responses).",
+      "Find and fix: inconsistent year groups, typos in meal names, duplicates and blanks.",
+      "Find two outliers. Decide for each: mistake or real? Fix or keep?",
+      "Write a \"cleaning log\" listing every change you made."
+     ],
+     "q": [
+      {
+       "q": "Write three entries from your cleaning log.",
+       "a": "E.g. \"Changed 'Y8', 'year 8' and 'eight' to 8 (6 cells). Removed duplicate response from row 17 (identical to row 16). Changed 'chiken curry' to 'Chicken curry' (2 cells).\""
+      },
+      {
+       "q": "Describe one outlier and what you decided to do with it, with a reason.",
+       "a": "E.g. \"Someone said they spend £45 a day in the canteen. That's impossible for a school lunch, probably £4.50, but I can't be sure, so I removed it and noted it in the log.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is data cleaning?",
+     "o": [
+      "Deleting all the data",
+      "Finding and fixing problems in data before analysis",
+      "Wiping your keyboard",
+      "Encrypting data"
+     ],
+     "a": 1,
+     "why": "Cleaning makes data accurate."
+    },
+    {
+     "q": "Which is an example of inconsistent formatting?",
+     "o": [
+      "A blank row at the end",
+      "Two different questions",
+      "A chart with colours",
+      "\"Year 8\", \"Y8\" and \"8\" in the same column"
+     ],
+     "a": 3,
+     "why": "One value written different ways."
+    },
+    {
+     "q": "What is an outlier?",
+     "o": [
+      "A value very different from the rest",
+      "The column heading",
+      "A duplicate",
+      "A missing value"
+     ],
+     "a": 0,
+     "why": "Outliers stand out."
+    },
+    {
+     "q": "What should you do with an outlier?",
+     "o": [
+      "Double it",
+      "Always delete it",
+      "Check whether it's a mistake or real before deciding",
+      "Always keep it without checking"
+     ],
+     "a": 2,
+     "why": "Investigate first."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe three problems that can make data \"dirty\".",
+     "m": 3,
+     "a": "Any three: inconsistent formats (1); typos (1); duplicates (1); missing values (1); impossible values/errors (1)."
+    },
+    {
+     "q": "Explain how validation can reduce the need for data cleaning.",
+     "m": 2,
+     "a": "Validation checks data as it's entered, e.g. drop-downs/range checks (1), so many errors are stopped before they get into the data (1)."
+    }
+   ],
+   "terms": [
+    "Data cleaning",
+    "Outlier",
+    "Duplicate",
+    "Missing value"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "Finding patterns",
+   "spec": "Use averages, range and correlation to analyse data, and explain why correlation is not causation",
+   "summary": "Averages (mean, median, mode) summarise data, and range shows spread. Correlation shows whether two variables change together, but it doesn't prove that one causes the other.",
+   "starter": "Towns with more ice-cream sales also have more sunburn. Does ice cream cause sunburn?",
+   "sc": [
+    "I can calculate the mean, median, mode and range",
+    "I can describe positive, negative and no correlation",
+    "I can explain why correlation doesn't prove causation"
+   ],
+   "slides": [
+    {
+     "t": "Averages and spread",
+     "b": [
+      "Mean: add them all up, divide by how many",
+      "Median: the middle value when in order",
+      "Mode: the most common value",
+      "Range: biggest minus smallest, which shows how spread out data is"
+     ]
+    },
+    {
+     "t": "Correlation",
+     "b": [
+      "Positive: as one goes up, the other goes up (revision time and test score)",
+      "Negative: as one goes up, the other goes down (screen time before bed and sleep)",
+      "None: no link (shoe size and test score)",
+      "Scatter graphs show correlation clearly"
+     ]
+    },
+    {
+     "t": "Correlation is not causation",
+     "b": [
+      "Ice-cream sales and sunburn rise together, but ice cream doesn't cause sunburn",
+      "A third factor (hot sunny weather) causes both",
+      "Sometimes it's pure coincidence",
+      "To show causation you need a fair experiment, not just a pattern"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Averages and range"
+    },
+    {
+     "t": "table",
+     "caption": "Summary statistics",
+     "head": [
+      "Measure",
+      "How to work it out",
+      "Best for"
+     ],
+     "rows": [
+      [
+       "**[[mean|Mean]]**",
+       "Add all values, divide by how many there are",
+       "Data without big outliers"
+      ],
+      [
+       "**[[median|Median]]**",
+       "Put values in order and take the middle one",
+       "Data with outliers"
+      ],
+      [
+       "**[[mode|Mode]]**",
+       "The value that appears most often",
+       "Categories, e.g. favourite sport"
+      ],
+      [
+       "**[[range|Range]]**",
+       "Largest value minus smallest value",
+       "Showing how spread out data is"
+      ]
+     ]
+    },
+    {
+     "t": "example",
+     "title": "Minutes of homework",
+     "context": "Seven pupils did this many minutes of homework: 20, 35, 40, 40, 45, 50, 180",
+     "steps": [
+      "Mean = (20 + 35 + 40 + 40 + 45 + 50 + 180) ÷ 7 = 410 ÷ 7 ≈ 58.6 minutes",
+      "Median = the 4th value in order = 40 minutes",
+      "Mode = 40 minutes (appears twice); Range = 180 - 20 = 160 minutes"
+     ],
+     "answer": "The outlier (180) pulls the mean up to about 59, so the median (40) is a better \"typical\" value here."
+    },
+    {
+     "t": "h",
+     "text": "Correlation"
+    },
+    {
+     "t": "p",
+     "text": "**[[correlation]]** describes whether two things change together. On a **scatter graph**, points that go upwards from left to right show **positive** correlation; points going downwards show **negative** correlation; points scattered randomly show **no** correlation."
+    },
+    {
+     "t": "h",
+     "text": "Correlation is not causation"
+    },
+    {
+     "t": "p",
+     "text": "**[[causation]]** means one thing actually causes another. Just because two things are correlated doesn't mean one causes the other. Ice-cream sales and sunburn both rise in hot weather, so the **third factor** (sunshine) causes both. Other correlations are pure coincidence. To prove causation, scientists use fair experiments that change one thing and keep everything else the same."
+    },
+    {
+     "t": "warn",
+     "text": "News headlines often confuse correlation with causation, e.g. \"People who eat breakfast earn more!\" Ask: could something else explain this?"
+    },
+    {
+     "t": "act",
+     "title": "Analyse the class data",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Use the class dataset your teacher provides (e.g. hours of sleep, minutes of exercise and quiz scores, all anonymous).",
+      "Calculate the mean, median, mode and range of the quiz scores.",
+      "Draw a scatter graph of sleep against quiz score. Describe the correlation.",
+      "Suggest one other factor that might explain the pattern."
+     ],
+     "q": [
+      {
+       "q": "Write your mean, median, mode and range, and say which average best represents the data.",
+       "a": "Answers depend on the data; a good answer shows working and chooses the median if there are outliers, explaining why."
+      },
+      {
+       "q": "Describe the correlation and give one reason it might not mean sleep causes better scores.",
+       "a": "E.g. \"Weak positive correlation: more sleep goes with slightly higher scores. But pupils who sleep more might also revise more or have fewer late activities, so something else could be the cause.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is the median of 3, 7, 8, 12, 20?",
+     "o": [
+      "10",
+      "17",
+      "7",
+      "8"
+     ],
+     "a": 3,
+     "why": "The middle value in order is 8."
+    },
+    {
+     "q": "What is the range of 4, 9, 15, 22?",
+     "o": [
+      "4",
+      "12.5",
+      "18",
+      "22"
+     ],
+     "a": 2,
+     "why": "22 - 4 = 18."
+    },
+    {
+     "q": "Revision time and test scores both go up together. This is...",
+     "o": [
+      "negative correlation",
+      "positive correlation",
+      "causation proven",
+      "no correlation"
+     ],
+     "a": 1,
+     "why": "They rise together."
+    },
+    {
+     "q": "Why doesn't correlation prove causation?",
+     "o": [
+      "Correlation is always wrong",
+      "Graphs can't show links",
+      "Only experiments are interesting",
+      "A third factor or coincidence might explain the link"
+     ],
+     "a": 3,
+     "why": "Patterns don't prove cause."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Calculate the mean, mode and range of: 5, 8, 8, 10, 14.",
+     "m": 3,
+     "a": "Mean = 45 ÷ 5 = 9 (1); mode = 8 (1); range = 14 - 5 = 9 (1)."
+    },
+    {
+     "q": "A study finds pupils with more books at home get better grades. Explain why this doesn't prove books cause better grades.",
+     "m": 2,
+     "a": "Correlation doesn't show causation (1); another factor such as family income/support/reading habits could cause both (1)."
+    }
+   ],
+   "terms": [
+    "Mean",
+    "Median",
+    "Mode",
+    "Range",
+    "Correlation",
+    "Causation"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Charts that tell the truth",
+   "spec": "Choose suitable charts for different data and identify misleading visualisations",
+   "summary": "The right chart depends on the data and the question: bar charts compare categories, line graphs show change over time, scatter graphs show relationships and pie charts show parts of a whole. Charts can mislead through tricks such as cut-off axes and cherry-picked data.",
+   "starter": "Look at the two charts on the board showing the same sales figures. Why does one look like a disaster and the other look fine?",
+   "sc": [
+    "I can choose the right chart for a dataset",
+    "I can spot four ways charts mislead",
+    "I can improve a misleading chart"
+   ],
+   "slides": [
+    {
+     "t": "Pick the right chart",
+     "b": [
+      "Bar chart: compare categories (favourite sport)",
+      "Line graph: change over time (temperature each month)",
+      "Scatter graph: relationship between two numbers (height and arm span)",
+      "Pie chart: parts of a whole, only with a few categories"
+     ]
+    },
+    {
+     "t": "How charts lie",
+     "b": [
+      "Cut-off axis: starting at 95 instead of 0 makes small differences look huge",
+      "Cherry-picking: only showing the months that suit your story",
+      "Wrong chart type: a pie chart that doesn't add up to 100%",
+      "Misleading pictures: 3D effects and icons that distort sizes"
+     ],
+     "n": "Show the classic truncated-axis example: two bars of 96 and 98 that look like one is double the other."
+    },
+    {
+     "t": "Honest charts",
+     "b": [
+      "Clear title saying what the chart shows",
+      "Labelled axes with units",
+      "Start bar chart axes at zero",
+      "Show where the data came from"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Data visualisation"
+    },
+    {
+     "t": "p",
+     "text": "**[[data visualisation]]** means showing data as a picture, such as a chart, graph, map or infographic. A good visualisation makes patterns obvious at a glance. The most important skill is choosing the right type for your data and your question."
+    },
+    {
+     "t": "table",
+     "caption": "Which chart?",
+     "head": [
+      "Chart",
+      "Use it to",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Bar chart",
+       "Compare categories",
+       "Number of pupils choosing each sport"
+      ],
+      [
+       "Line graph",
+       "Show change over time",
+       "Average temperature each month"
+      ],
+      [
+       "Scatter graph",
+       "Show the relationship between two numbers",
+       "Hours of sleep against quiz score"
+      ],
+      [
+       "Pie chart",
+       "Show parts of a whole (few categories)",
+       "How pupils travel to school"
+      ],
+      [
+       "Map",
+       "Show where things happen",
+       "Air quality readings around Fermanagh"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Misleading charts"
+    },
+    {
+     "t": "p",
+     "text": "A **[[misleading chart]]** gives the wrong impression even if the numbers are true."
+    },
+    {
+     "t": "key",
+     "title": "Tricks to watch for",
+     "items": [
+      "Truncated **[[axis]]**: the y-axis starts above zero, exaggerating differences",
+      "Cherry-picking: showing only the data that supports one story",
+      "Uneven scales: gaps on the axis that aren't equal",
+      "Pie charts that don't add up to 100%, or have too many slices",
+      "3D effects or picture icons that make some values look bigger than they are"
+     ]
+    },
+    {
+     "t": "example",
+     "title": "The truncated axis",
+     "context": "A bar chart shows Brand A at 96% and Brand B at 98% satisfaction. The y-axis starts at 95%.",
+     "steps": [
+      "Brand B's bar looks three times as tall as Brand A's.",
+      "Redraw the chart with the y-axis starting at 0.",
+      "Now the bars are almost the same height, which is the honest picture."
+     ],
+     "answer": "The difference is only 2 percentage points. Starting at 95% made it look huge."
+    },
+    {
+     "t": "act",
+     "title": "Chart doctor",
+     "mins": 20,
+     "who": "Pairs",
+     "after": 2,
+     "steps": [
+      "Your teacher gives you four \"sick\" charts from fictional adverts and news stories.",
+      "Diagnose what's wrong with each one.",
+      "Redraw one chart honestly (by hand or in a spreadsheet) and compare the impression it gives."
+     ],
+     "q": [
+      {
+       "q": "For one chart, describe the trick and the impression it gives.",
+       "a": "E.g. \"The y-axis starts at 50 so a rise from 52 to 55 looks enormous. It makes the company look far more successful than it is.\""
+      },
+      {
+       "q": "Which chart type would you choose to show how a town's population changed from 1990 to 2025, and why?",
+       "a": "A line graph, because it shows change over time clearly."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "Which chart is best for showing change over time?",
+     "o": [
+      "Venn diagram",
+      "Line graph",
+      "Pie chart",
+      "Bar chart of categories"
+     ],
+     "a": 1,
+     "why": "Line graphs show trends over time."
+    },
+    {
+     "q": "Which chart shows the relationship between two numerical variables?",
+     "o": [
+      "Bar chart",
+      "Scatter graph",
+      "Pie chart",
+      "Pictogram"
+     ],
+     "a": 1,
+     "why": "Scatter graphs show correlation."
+    },
+    {
+     "q": "Why can a y-axis starting at 90 instead of 0 mislead?",
+     "o": [
+      "It hides the title",
+      "It's always correct",
+      "It makes small differences look much bigger",
+      "It makes the chart smaller"
+     ],
+     "a": 2,
+     "why": "Truncated axes exaggerate."
+    },
+    {
+     "q": "What is cherry-picking?",
+     "o": [
+      "Picking the biggest chart",
+      "Sorting data alphabetically",
+      "Choosing a red colour",
+      "Only showing data that supports your point"
+     ],
+     "a": 3,
+     "why": "It hides inconvenient data."
+    }
+   ],
+   "practice": [
+    {
+     "q": "State the best chart type for each: (a) favourite fruit of 30 pupils; (b) daily temperature for a month.",
+     "m": 2,
+     "a": "(a) bar chart (or pie chart) (1); (b) line graph (1)."
+    },
+    {
+     "q": "Describe three features of an honest, well-designed chart.",
+     "m": 3,
+     "a": "Any three: clear title (1); labelled axes with units (1); axis starting at zero for bar charts (1); source shown (1); suitable chart type (1); no distorting 3D effects (1)."
+    }
+   ],
+   "terms": [
+    "Data visualisation",
+    "Axis",
+    "Misleading chart"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "Data stories and privacy",
+   "spec": "Present findings as a data story and protect people's privacy when using data",
+   "summary": "A data story combines a clear message, the right chart and context so people understand and act on the findings. Data about people must be handled legally and ethically, removing details that could identify anyone.",
+   "starter": "A headline says \"Year 9 pupil spends 9 hours a day on their phone!\" The school survey had only one Year 9 pupil from 9C. What's the problem?",
+   "sc": [
+    "I can present findings as a clear data story",
+    "I can explain how to anonymise data",
+    "I can describe how UK GDPR protects personal data"
+   ],
+   "slides": [
+    {
+     "t": "Tell the story",
+     "b": [
+      "Start with your question and your headline finding",
+      "Show the one chart that proves it best",
+      "Give context: how much data, from whom, any limits",
+      "Finish with what should happen next"
+     ]
+    },
+    {
+     "t": "Dashboards",
+     "b": [
+      "A dashboard shows several key charts and numbers on one screen",
+      "Often updated live from new data",
+      "Used by hospitals, councils, shops and sports teams",
+      "Good dashboards show only what matters for decisions"
+     ]
+    },
+    {
+     "t": "Protect people",
+     "b": [
+      "Personal data: anything that identifies a living person",
+      "Anonymise: remove names and details that could identify someone",
+      "Small groups can still identify people (\"the only Year 9 in 9C\")",
+      "UK GDPR: collect only what you need, keep it secure, use it fairly"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Telling a data story"
+    },
+    {
+     "t": "p",
+     "text": "Charts alone don't change anything. A **[[data story]]** explains what the data shows, why it matters and what should happen next. A good data story has:"
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "A clear question and a one-sentence headline answer",
+      "The best chart to support it, clearly labelled",
+      "Context: how much data, collected from whom, and any limitations",
+      "A recommendation or next step"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "A **[[dashboard]]** shows several important charts and numbers on one screen, often updating automatically. Councils use dashboards to track bin collections, hospitals use them to see waiting times, and football clubs use them to monitor player fitness."
+    },
+    {
+     "t": "h",
+     "text": "Privacy and personal data"
+    },
+    {
+     "t": "p",
+     "text": "**[[personal data]]** is any information that could identify a living person, such as a name, address, photo, email or school ID number. When you work with data about people you must protect it."
+    },
+    {
+     "t": "p",
+     "text": "To **[[anonymise]]** data means removing or changing details so that no one can be identified. This isn't just deleting names: in a small group, details like \"the only left-handed pupil in 9C\" can still identify someone. Data scientists combine groups or remove rare details to prevent this."
+    },
+    {
+     "t": "h",
+     "text": "The law: UK GDPR"
+    },
+    {
+     "t": "p",
+     "text": "**[[UK GDPR]]** and the Data Protection Act 2018 set rules for using personal data in the UK. Organisations must collect only the data they need, use it only for the reason they gave, keep it accurate and secure, and not keep it longer than necessary. People have the right to see the data held about them."
+    },
+    {
+     "t": "note",
+     "text": "You studied data protection law in more detail in the \"Digital Ethics, the Law and the Planet\" topic."
+    },
+    {
+     "t": "act",
+     "title": "Data story project",
+     "mins": 35,
+     "who": "Groups of 3",
+     "after": 3,
+     "steps": [
+      "Use your cleaned survey data (lesson 3) or an OpenDataNI dataset your teacher provides.",
+      "Write your question and a one-sentence headline answer.",
+      "Create the one chart that best supports it, with a title, labels and source.",
+      "Check privacy: could anyone be identified? Fix it if so.",
+      "Present your data story to the class in 90 seconds."
+     ],
+     "q": [
+      {
+       "q": "Write your question, headline answer and recommendation.",
+       "a": "E.g. \"Question: how do pupils travel to school? Headline: 41% come by car even though most live under 2 miles away. Recommendation: start a walking-bus scheme for pupils living nearby.\""
+      },
+      {
+       "q": "Explain one privacy risk in your data and how you dealt with it.",
+       "a": "E.g. \"Only one pupil cycled from Lisnaskea, so they could be identified. I combined small villages into 'Other areas' before making the chart.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a data story?",
+     "o": [
+      "A clear explanation of what data shows, why it matters and what to do next",
+      "A history of computers",
+      "A made-up story with numbers",
+      "A list of raw data"
+     ],
+     "a": 0,
+     "why": "Data stories communicate findings."
+    },
+    {
+     "q": "What is a dashboard?",
+     "o": [
+      "A screen showing key charts and figures together",
+      "A spreadsheet formula",
+      "A type of database",
+      "A car's windscreen"
+     ],
+     "a": 0,
+     "why": "Dashboards summarise data at a glance."
+    },
+    {
+     "q": "What does it mean to anonymise data?",
+     "o": [
+      "Make the data bigger",
+      "Delete all the data",
+      "Encrypt the file",
+      "Remove details that could identify people"
+     ],
+     "a": 3,
+     "why": "No one should be identifiable."
+    },
+    {
+     "q": "Under UK GDPR, organisations should...",
+     "o": [
+      "keep data forever",
+      "collect as much as possible",
+      "collect only the personal data they need",
+      "share data with anyone"
+     ],
+     "a": 2,
+     "why": "Data minimisation is a key principle."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why removing names is not always enough to anonymise data.",
+     "m": 2,
+     "a": "Other details can still identify people (1), especially in small groups, e.g. \"only Year 9 pupil in 9C\" (1)."
+    },
+    {
+     "q": "Describe three things a good data story should include.",
+     "m": 3,
+     "a": "Any three: clear question (1); headline finding (1); suitable labelled chart (1); context/limitations (1); recommendation/next step (1)."
+    }
+   ],
+   "terms": [
+    "Data story",
+    "Dashboard",
+    "Anonymise",
+    "Personal data",
+    "UK GDPR"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Data",
+   "def": "Raw facts and figures, such as numbers, words or measurements, before they are given meaning.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Data science",
+   "def": "Using data to answer questions, find patterns and make decisions.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Big data",
+   "def": "Datasets so large, fast or varied that ordinary tools can't handle them.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Quantitative data",
+   "def": "Data in the form of numbers that can be measured or counted.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Qualitative data",
+   "def": "Data in the form of words, categories, descriptions or opinions.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Primary data",
+   "def": "Data you collect yourself.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Secondary data",
+   "def": "Data that has already been collected by someone else.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Open data",
+   "def": "Data that anyone is allowed to use for free.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Sample",
+   "def": "The group of people or things you collect data from.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Data cleaning",
+   "def": "Finding and fixing mistakes, gaps and inconsistencies in data before analysing it.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Outlier",
+   "def": "A value that is very different from the rest of the data.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Duplicate",
+   "def": "An extra copy of the same record.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Missing value",
+   "def": "A blank where data should be.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Mean",
+   "def": "The total of all values divided by how many there are.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Median",
+   "def": "The middle value when data is put in order.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Mode",
+   "def": "The value that appears most often.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Range",
+   "def": "The largest value minus the smallest value.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Correlation",
+   "def": "A relationship where two variables change together.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Causation",
+   "def": "When one thing directly causes another.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Data visualisation",
+   "def": "Showing data as a picture, such as a chart, graph or map.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Axis",
+   "def": "One of the reference lines on a chart, usually horizontal (x) and vertical (y).",
+   "alt": "Axes",
+   "page": "p05"
+  },
+  {
+   "term": "Misleading chart",
+   "def": "A chart that gives the wrong impression, even if its numbers are true.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Data story",
+   "def": "An explanation of what data shows, why it matters and what should happen next.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Dashboard",
+   "def": "A screen that shows several key charts and figures together, often updated automatically.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Anonymise",
+   "def": "To remove or change details so that people cannot be identified.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Personal data",
+   "def": "Any information that could identify a living person.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "UK GDPR",
+   "def": "The UK law, with the Data Protection Act 2018, that controls how personal data is used.",
+   "alt": "GDPR",
+   "page": "p06"
+  }
+ ]
+}
