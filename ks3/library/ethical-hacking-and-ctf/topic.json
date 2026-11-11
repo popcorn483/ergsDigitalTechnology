@@ -1,0 +1,1323 @@
+{
+ "title": "Ethical Hacking and Capture the Flag",
+ "summary": "Think like an attacker to defend like a pro: the law and ethics of hacking, how Capture the Flag competitions work, decoding hidden messages, finding secrets in files and web pages, and how ethical hackers report problems and build careers.",
+ "learn": [
+  "The difference between ethical and criminal hacking, and the Computer Misuse Act",
+  "How Capture the Flag competitions work",
+  "How to recognise and decode binary, hex, Base64 and ROT13",
+  "How data can be hidden in files and images",
+  "How to investigate a web page using its source code",
+  "Responsible disclosure, bug bounties and cyber security careers"
+ ],
+ "temporary": false,
+ "intro": "Ethical hackers are paid to break into systems, with permission, so the weaknesses can be fixed before criminals find them. In this topic you'll learn the rules that keep hacking legal, then sharpen your skills in Capture the Flag (CTF) challenges: decoding messages, uncovering hidden data and investigating web pages, all on practice systems built for the job.",
+ "pages": [
+  {
+   "id": "p01",
+   "title": "Hackers with permission",
+   "spec": "Explain the difference between ethical and criminal hacking and the rules of the Computer Misuse Act",
+   "summary": "Ethical hackers test systems only with clear permission and within agreed limits, then report what they find so it can be fixed. Accessing any system without permission is a crime under the Computer Misuse Act 1990, even \"just to look\".",
+   "starter": "A friend shows you how to log in to another pupil's account \"just to prove it's possible\". Is that hacking? Is it a crime?",
+   "sc": [
+    "I can describe white, black and grey hat hackers",
+    "I can explain the three main offences in the Computer Misuse Act",
+    "I can explain why permission and scope matter"
+   ],
+   "slides": [
+    {
+     "t": "Three hats",
+     "b": [
+      "White hat: ethical hackers who test with permission to make systems safer",
+      "Black hat: criminals who break in to steal, damage or show off",
+      "Grey hat: break in without permission, then tell the owner, which is still illegal",
+      "Only one of these is a career"
+     ]
+    },
+    {
+     "t": "The Computer Misuse Act 1990",
+     "b": [
+      "Applies across the UK, including Northern Ireland",
+      "Offence 1: unauthorised access to computer material (e.g. using someone's password)",
+      "Offence 2: unauthorised access with intent to commit further crimes",
+      "Offence 3: unauthorised acts to impair a computer (e.g. spreading malware)",
+      "Penalties range from fines to life imprisonment for the most serious cases"
+     ],
+     "n": "Starter answer: yes, it is unauthorised access, an offence under section 1 even if nothing is changed. Schools treat it very seriously."
+    },
+    {
+     "t": "Permission and scope",
+     "b": [
+      "Ethical hackers get written permission before testing",
+      "The scope says exactly which systems and methods are allowed",
+      "Stay inside the scope; report everything; damage nothing",
+      "In this topic we only ever hack practice systems made for it"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "What is ethical hacking?"
+    },
+    {
+     "t": "p",
+     "text": "**[[ethical hacking]]** means testing computer systems for weaknesses **with the owner's permission**, so the problems can be fixed before criminals find them. Companies pay for **[[penetration testing]]** (pen testing): a planned, authorised attack on their own systems."
+    },
+    {
+     "t": "table",
+     "caption": "The three \"hats\"",
+     "head": [
+      "Type",
+      "Permission?",
+      "Why they hack",
+      "Legal?"
+     ],
+     "rows": [
+      [
+       "White hat",
+       "Yes",
+       "To find and fix weaknesses",
+       "Yes"
+      ],
+      [
+       "Black hat",
+       "No",
+       "To steal, damage, spy or show off",
+       "No: it's a crime"
+      ],
+      [
+       "Grey hat",
+       "No",
+       "Curiosity, then they tell the owner",
+       "No: still illegal without permission"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "The Computer Misuse Act 1990"
+    },
+    {
+     "t": "p",
+     "text": "The **[[Computer Misuse Act]]** is the main UK law against hacking, and it applies in Northern Ireland. Its main offences are:"
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "**Unauthorised access** to computer material: for example logging in to someone else's account, even just to look.",
+      "**Unauthorised access with intent to commit further offences**: for example breaking in to steal money or data.",
+      "**Unauthorised acts that impair a computer**: for example spreading malware or crashing a website."
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "\"I was only looking\" or \"I didn't change anything\" is not a defence. Accessing any account or system without permission is a crime, and schools treat it very seriously."
+    },
+    {
+     "t": "h",
+     "text": "Permission and scope"
+    },
+    {
+     "t": "p",
+     "text": "Before an ethical hacker starts, they agree a written **[[scope]]**: exactly which systems they may test, which methods are allowed, and when. Anything outside the scope is off-limits, even if it looks interesting. Throughout this topic, you'll only practise on systems built for training, like CTF challenge websites."
+    },
+    {
+     "t": "act",
+     "title": "Legal or not?",
+     "mins": 15,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Read the eight scenario cards (e.g. \"A pupil guesses a teacher's password to change a mark\").",
+      "Decide for each: legal ethical hacking, or a Computer Misuse Act offence? If it's an offence, which one?",
+      "For each illegal scenario, write what the person should have done instead."
+     ],
+     "q": [
+      {
+       "q": "Choose two illegal scenarios: which offence, and what should the person have done?",
+       "a": "E.g. \"Guessing a teacher's password to change a mark: offence 2 (unauthorised access to commit a further offence). They should never do it; if they found a weakness by accident, they should tell IT straight away.\" \"Logging in to a friend's account to read messages: offence 1, unauthorised access. Ask permission or don't do it.\""
+      },
+      {
+       "q": "Explain why a grey hat hacker can still be breaking the law.",
+       "a": "They access systems without permission, which is unauthorised access under the Computer Misuse Act, even if they mean well and report it afterwards."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What makes hacking \"ethical\"?",
+     "o": [
+      "Nothing is changed",
+      "The owner has given permission and it's done within agreed limits",
+      "It's done by a teenager",
+      "It's done at weekends"
+     ],
+     "a": 1,
+     "why": "Permission is the key difference."
+    },
+    {
+     "q": "Which law makes unauthorised access to computers illegal in the UK?",
+     "o": [
+      "The Copyright Act",
+      "The Online Gaming Act",
+      "The Highway Code",
+      "The Computer Misuse Act 1990"
+     ],
+     "a": 3,
+     "why": "The CMA covers hacking."
+    },
+    {
+     "q": "Logging in to a friend's account without permission \"just to look\" is...",
+     "o": [
+      "only against school rules",
+      "an offence under the Computer Misuse Act",
+      "legal for under-16s",
+      "legal if you change nothing"
+     ],
+     "a": 1,
+     "why": "Unauthorised access is a crime."
+    },
+    {
+     "q": "What is the scope of a penetration test?",
+     "o": [
+      "A telescope",
+      "The length of a password",
+      "The number of hackers",
+      "The agreed list of systems and methods allowed"
+     ],
+     "a": 3,
+     "why": "Scope sets the limits."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe the three main offences in the Computer Misuse Act.",
+     "m": 3,
+     "a": "Unauthorised access to computer material (1); unauthorised access with intent to commit further offences (1); unauthorised acts to impair a computer/e.g. spreading malware (1)."
+    },
+    {
+     "q": "Explain the difference between a white hat and a black hat hacker.",
+     "m": 2,
+     "a": "White hat has permission and aims to find/fix weaknesses (1); black hat has no permission and aims to steal/damage/cause harm (1)."
+    }
+   ],
+   "terms": [
+    "Ethical hacking",
+    "Penetration testing",
+    "Computer Misuse Act",
+    "Scope"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p02",
+   "title": "Inside a Capture the Flag",
+   "spec": "Describe how CTF competitions work and use a structured approach to solve challenges",
+   "summary": "Capture the Flag competitions are legal hacking games. In a \"jeopardy\" CTF, teams solve puzzles in categories such as cryptography, forensics and web to find hidden text strings called flags and score points.",
+   "starter": "You find a note that says \"The answer is hidden in plain sight.\" What would you do first?",
+   "sc": [
+    "I can describe jeopardy and attack-defence CTFs",
+    "I can name common CTF challenge categories",
+    "I can use a structured method to solve a challenge"
+   ],
+   "slides": [
+    {
+     "t": "What is a CTF?",
+     "b": [
+      "A legal competition where you hack systems built for the game",
+      "Find a \"flag\": a secret string like FLAG{h1dd3n_1n_pla1n_s1ght}",
+      "Submit flags to score points",
+      "Played by pupils, students and professionals worldwide"
+     ],
+     "n": "If using Mr Butler's CTF site, show the challenge board here. Otherwise use picoCTF's practice gym or the CyberFirst challenges."
+    },
+    {
+     "t": "Types and categories",
+     "b": [
+      "Jeopardy CTF: a board of challenges, more points for harder ones",
+      "Attack-defence CTF: defend your own server while attacking others' (advanced)",
+      "Categories: cryptography, forensics, web, OSINT, reverse engineering, puzzles",
+      "Teams split up challenges by their strengths"
+     ]
+    },
+    {
+     "t": "A method for every challenge",
+     "b": [
+      "Read the title and description carefully: they're full of hints",
+      "Look at everything: files, text, source code, file names",
+      "Recognise patterns: what format is this?",
+      "Try, note what you tried, ask for a hint if stuck"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Capture the Flag"
+    },
+    {
+     "t": "p",
+     "text": "A **[[Capture the Flag]]** (CTF) competition is a legal hacking game. Organisers build challenges on purpose, hiding a **[[flag]]**, usually a string such as FLAG{y0u_f0und_m3}, inside each one. Finding and submitting the flag scores points. CTFs are run for schools (such as the NCSC's CyberFirst competitions), universities and professional security teams."
+    },
+    {
+     "t": "table",
+     "caption": "Common challenge categories",
+     "head": [
+      "Category",
+      "What you do",
+      "Example"
+     ],
+     "rows": [
+      [
+       "Cryptography",
+       "Decode or decrypt messages",
+       "A Caesar-shifted note"
+      ],
+      [
+       "Forensics",
+       "Investigate files for hidden data",
+       "A flag hidden inside an image's data"
+      ],
+      [
+       "Web",
+       "Investigate a practice website",
+       "A flag in a page's HTML comments"
+      ],
+      [
+       "OSINT",
+       "Open-source intelligence: find information that's publicly available",
+       "Work out where a (fictional) photo was taken"
+      ],
+      [
+       "Reverse engineering",
+       "Work out what a program does",
+       "Find the password a small program expects"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "How to approach a challenge"
+    },
+    {
+     "t": "key",
+     "title": "The CTF method",
+     "items": [
+      "Read: titles and descriptions usually contain hints",
+      "Look: open everything, including file names, source code and metadata",
+      "Recognise: what does this look like? Binary? Base64? A hash?",
+      "Try: use tools such as CyberChef, and keep notes of what you tried",
+      "Reflect: if stuck, re-read the challenge or take a hint"
+     ]
+    },
+    {
+     "t": "p",
+     "text": "**[[CyberChef]]** is a free browser tool made by GCHQ, often called \"the cyber Swiss Army knife\". It can convert between encodings, decrypt simple ciphers and analyse data, all without installing anything."
+    },
+    {
+     "t": "act",
+     "title": "First flags",
+     "mins": 30,
+     "who": "Teams of 3",
+     "after": 3,
+     "steps": [
+      "Log in to the practice CTF your teacher has set up.",
+      "Choose roles: a reader (reads challenges and hints), a solver (tries ideas) and a note-taker.",
+      "Solve as many starter challenges as you can in 25 minutes. Rotate roles after each flag.",
+      "Record each flag and the method you used."
+     ],
+     "q": [
+      {
+       "q": "Write down one flag you found and explain step by step how you found it.",
+       "a": "Depends on the challenge, e.g. \"Challenge 'Look closer': I opened the page source, found an HTML comment containing FLAG{s0urc3_c0d3}, and submitted it.\""
+      },
+      {
+       "q": "What did your team do when you got stuck?",
+       "a": "E.g. re-read the description for clues, tried a different tool in CyberChef, swapped roles, or used a hint."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is a flag in a CTF?",
+     "o": [
+      "A secret string you find and submit to score points",
+      "A piece of cloth",
+      "A computer virus",
+      "A team name"
+     ],
+     "a": 0,
+     "why": "Flags prove you solved a challenge."
+    },
+    {
+     "q": "In a jeopardy CTF...",
+     "o": [
+      "everyone answers the same question",
+      "teams choose challenges from a board of categories",
+      "teams fight with water guns",
+      "only one person plays"
+     ],
+     "a": 1,
+     "why": "It's a board of puzzles."
+    },
+    {
+     "q": "What does OSINT stand for?",
+     "o": [
+      "Open-source intelligence",
+      "Online secret internet",
+      "Optical sensor input",
+      "Operating system integration"
+     ],
+     "a": 0,
+     "why": "Publicly available information."
+    },
+    {
+     "q": "Who made CyberChef?",
+     "o": [
+      "GCHQ",
+      "The BBC",
+      "NASA",
+      "Apple"
+     ],
+     "a": 0,
+     "why": "It's GCHQ's free tool."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe what a Capture the Flag competition is.",
+     "m": 2,
+     "a": "A legal hacking competition on systems built for the purpose (1); teams find hidden \"flags\" to score points (1)."
+    },
+    {
+     "q": "Name three common CTF challenge categories and say what each involves.",
+     "m": 3,
+     "a": "Any three with descriptions: cryptography/decoding (1); forensics/hidden data in files (1); web/investigating websites (1); OSINT/finding public information (1); reverse engineering/working out how a program works (1)."
+    }
+   ],
+   "terms": [
+    "Capture the Flag",
+    "Flag",
+    "CyberChef"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p03",
+   "title": "Codes and encodings",
+   "spec": "Recognise and decode binary, hexadecimal, Base64 and ROT13, and explain the difference between encoding and encryption",
+   "summary": "Encodings change data into a different format so it can be stored or sent, but anyone can reverse them. Spotting binary, hex, Base64 and ROT13 by their look is a key CTF skill. Unlike encryption, encoding has no secret key.",
+   "starter": "What do these have in common? 01001000 01101001 / 48 69 / SGk= / Uv. (Hint: they all say the same thing.)",
+   "sc": [
+    "I can recognise binary, hex, Base64 and ROT13",
+    "I can decode them using CyberChef",
+    "I can explain the difference between encoding and encryption"
+   ],
+   "slides": [
+    {
+     "t": "Encoding is not encryption",
+     "b": [
+      "Encoding: changing data's format so it can be stored or sent (no secret key)",
+      "Anyone who knows the encoding can reverse it",
+      "Encryption: scrambling data with a secret key so only key-holders can read it",
+      "CTFs often hide flags in layers of encoding"
+     ],
+     "n": "Starter: they all say \"Hi\" in binary, hex, Base64 and ROT13."
+    },
+    {
+     "t": "Spot the format",
+     "b": [
+      "Binary: only 0s and 1s, often in groups of 8",
+      "Hex: digits 0-9 and letters A-F, often in pairs",
+      "Base64: upper and lower case letters, digits, + and /, often ending in = or ==",
+      "ROT13: looks like normal words, but scrambled; shift letters by 13"
+     ]
+    },
+    {
+     "t": "Use CyberChef",
+     "b": [
+      "Paste the text into the Input box",
+      "Drag in a recipe: \"From Base64\", \"From Hex\", \"ROT13\"",
+      "Try \"Magic\": it guesses the encoding for you",
+      "Layered? Stack several steps in one recipe"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Encoding versus encryption"
+    },
+    {
+     "t": "p",
+     "text": "**[[encoding]]** changes data into a different format so it can be stored or transmitted, such as turning a picture into text so it can travel in an email. There's **no secret key**: anyone who recognises the encoding can reverse it. **Encryption** uses a secret key, so only the right people can read the data."
+    },
+    {
+     "t": "warn",
+     "text": "Encoding is NOT security. Developers sometimes \"hide\" passwords using Base64, thinking they're protected. Anyone can decode them in seconds."
+    },
+    {
+     "t": "h",
+     "text": "Recognising encodings"
+    },
+    {
+     "t": "table",
+     "caption": "Spot the encoding",
+     "head": [
+      "Encoding",
+      "What it looks like",
+      "\"Hi\" in this format"
+     ],
+     "rows": [
+      [
+       "Binary",
+       "Only 0 and 1, often in groups of 8",
+       "01001000 01101001"
+      ],
+      [
+       "**[[hexadecimal|Hexadecimal]]** (hex)",
+       "0-9 and A-F, often in pairs",
+       "48 69"
+      ],
+      [
+       "**[[Base64]]**",
+       "Letters, digits, + and /, often ending in =",
+       "SGk="
+      ],
+      [
+       "**[[ROT13]]**",
+       "Normal letters, shifted 13 places",
+       "Uv"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "ROT13 is a Caesar cipher with a shift of 13. Because the alphabet has 26 letters, doing ROT13 twice gets you back to the start, so the same operation encodes and decodes."
+    },
+    {
+     "t": "example",
+     "title": "Peeling the layers",
+     "context": "A CTF challenge gives you: RkxBR3tyb3QxM19pc19uMHRfc2VjdXIzfQ==",
+     "steps": [
+      "It has mixed-case letters and digits and ends in ==, so it's probably Base64.",
+      "In CyberChef, use \"From Base64\". The output is FLAG{rot13_is_n0t_secur3}.",
+      "It starts with FLAG{, so you've found the flag."
+     ],
+     "answer": "The flag was only Base64-encoded, which offers no protection at all."
+    },
+    {
+     "t": "act",
+     "title": "Decoding relay",
+     "mins": 25,
+     "who": "Teams of 3",
+     "after": 3,
+     "steps": [
+      "Your teacher gives each team a sheet of ten encoded messages.",
+      "For each, identify the encoding from how it looks before decoding it.",
+      "Decode it using CyberChef (or by hand for ROT13 and binary).",
+      "The last three are layered: you'll need more than one step."
+     ],
+     "q": [
+      {
+       "q": "For two messages, write the encoding you spotted and the clue that told you.",
+       "a": "E.g. \"TWVzc2FnZQ== was Base64 because it had mixed-case letters and ended in ==. 4C 6F 6F 6B was hex because it was pairs of 0-9 and A-F.\""
+      },
+      {
+       "q": "Explain why Base64 shouldn't be used to protect a password.",
+       "a": "It's encoding, not encryption: there's no secret key, so anyone can decode it instantly."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is the main difference between encoding and encryption?",
+     "o": [
+      "Encryption uses a secret key; encoding doesn't",
+      "They are the same",
+      "Encryption only works on numbers",
+      "Encoding is more secure"
+     ],
+     "a": 0,
+     "why": "Encoding can be reversed by anyone."
+    },
+    {
+     "q": "Which text is most likely Base64?",
+     "o": [
+      "01100001",
+      "Uryyb",
+      "U2VjcmV0IGZsYWc=",
+      "4A 6F"
+     ],
+     "a": 2,
+     "why": "Mixed case, digits and = padding."
+    },
+    {
+     "q": "Which characters appear in hexadecimal?",
+     "o": [
+      "Only symbols",
+      "Only 0 and 1",
+      "All letters A-Z",
+      "0-9 and A-F"
+     ],
+     "a": 3,
+     "why": "Hex is base 16."
+    },
+    {
+     "q": "What does applying ROT13 twice do?",
+     "o": [
+      "Doubles the shift to 26 and scrambles it",
+      "Returns the original text",
+      "Turns it into binary",
+      "Deletes it"
+     ],
+     "a": 1,
+     "why": "13 + 13 = 26, a full circle."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why encoding a password in Base64 does not keep it secure.",
+     "m": 2,
+     "a": "Base64 is encoding with no secret key (1), so anyone can decode it back to the password easily (1)."
+    },
+    {
+     "q": "Describe how you would recognise binary, hex and Base64.",
+     "m": 3,
+     "a": "Binary: only 0s and 1s/groups of 8 (1); hex: digits and letters A-F, often in pairs (1); Base64: mixed-case letters/digits/+ and /, often ending in = (1)."
+    }
+   ],
+   "terms": [
+    "Encoding",
+    "Base64",
+    "Hexadecimal",
+    "ROT13"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p04",
+   "title": "Hidden in plain sight",
+   "spec": "Explain how data can be hidden in files and images, and investigate files for hidden information",
+   "summary": "Steganography hides messages inside ordinary-looking files, such as in the pixels of an image. Forensic investigators also check metadata and file signatures, which can reveal what a file really is and where it came from.",
+   "starter": "How could you hide a secret message in a photo so nobody even knows a message exists?",
+   "sc": [
+    "I can explain steganography and how it differs from encryption",
+    "I can find information in file metadata",
+    "I can use file signatures to identify a file's real type"
+   ],
+   "slides": [
+    {
+     "t": "Steganography",
+     "b": [
+      "Hiding a message so nobody knows it's there",
+      "Ancient version: invisible ink, messages under wax on writing tablets",
+      "Digital version: tiny changes to pixel colours that the eye can't see",
+      "Encryption hides what a message says; steganography hides that it exists"
+     ]
+    },
+    {
+     "t": "Data about data",
+     "b": [
+      "Metadata: hidden information stored with a file",
+      "Photos: date, camera, settings and sometimes GPS location",
+      "Documents: author name, edit history",
+      "Investigators (and CTF players) always check metadata"
+     ]
+    },
+    {
+     "t": "What is this file really?",
+     "b": [
+      "The file extension (.jpg, .pdf) is just part of the name: it can lie",
+      "A file signature (\"magic number\") is in the first bytes of the file",
+      "PNG files start with the bytes 89 50 4E 47 (\".PNG\")",
+      "Renaming a file doesn't change what it really is"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Steganography"
+    },
+    {
+     "t": "p",
+     "text": "**[[steganography]]** means hiding a message so that nobody knows it exists. In ancient Greece, a message was reportedly tattooed on a messenger's shaved head and hidden when his hair grew back! Digital steganography hides data in ordinary files. In an image, each pixel's colour is a number; changing the last bit of each number alters the colour so slightly that no one can see it, but those bits can spell out a hidden message."
+    },
+    {
+     "t": "table",
+     "caption": "Encryption vs steganography",
+     "head": [
+      "Feature",
+      "Encryption",
+      "Steganography"
+     ],
+     "rows": [
+      [
+       "Hides",
+       "What the message says",
+       "That a message exists at all"
+      ],
+      [
+       "Looks like",
+       "Obvious scrambled text",
+       "An ordinary photo, song or document"
+      ],
+      [
+       "Often used with",
+       "A secret key",
+       "Encryption too, for double protection"
+      ]
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Metadata"
+    },
+    {
+     "t": "p",
+     "text": "**[[metadata]]** is information stored with a file, such as the date a photo was taken, the device used and sometimes GPS coordinates. Documents can store the author's name and when they were edited. **[[digital forensics]]** experts and CTF players always check metadata for clues."
+    },
+    {
+     "t": "warn",
+     "text": "Metadata can give away your location. Check your phone camera's location setting and be careful sharing original photo files."
+    },
+    {
+     "t": "h",
+     "text": "File signatures"
+    },
+    {
+     "t": "p",
+     "text": "The extension at the end of a file name (like .jpg) can be changed by anyone. But most file types begin with a fixed pattern of bytes called a **[[file signature]]** (or \"magic number\"), which reveals what the file really is. For example, PNG images start with the bytes 89 50 4E 47 and PDF files start with %PDF."
+    },
+    {
+     "t": "example",
+     "title": "The mystery file",
+     "context": "A CTF gives you \"notes.txt\", but it won't open in a text editor.",
+     "steps": [
+      "Open it in a hex viewer (or CyberChef) and look at the first bytes: 89 50 4E 47.",
+      "That's the PNG file signature, so it's really an image.",
+      "Rename it notes.png and open it: the image shows the flag."
+     ],
+     "answer": "The extension lied; the file signature told the truth."
+    },
+    {
+     "t": "act",
+     "title": "Forensics challenge",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Download the three challenge files from the practice CTF.",
+      "File 1: check its metadata for a hidden comment.",
+      "File 2: check its file signature and fix its extension.",
+      "File 3: use the steganography tool your teacher shows to reveal a hidden message in an image."
+     ],
+     "q": [
+      {
+       "q": "Which flag was hardest to find, and what technique did you use?",
+       "a": "E.g. \"The steganography one: the image looked normal, but the decoding tool revealed text hidden in the pixels' lowest bits.\""
+      },
+      {
+       "q": "Explain how a file can pretend to be a different type, and how you can tell.",
+       "a": "The extension is just part of the name and can be changed; the file signature (first bytes of the file) shows the real file type."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is steganography?",
+     "o": [
+      "Scrambling a message with a key",
+      "Hiding a message so nobody knows it exists",
+      "Compressing a file",
+      "Writing in shorthand"
+     ],
+     "a": 1,
+     "why": "It conceals existence, not just meaning."
+    },
+    {
+     "q": "How can a message be hidden in an image?",
+     "o": [
+      "By making the image bigger",
+      "By changing the file name",
+      "By making tiny changes to pixel colours",
+      "By printing it"
+     ],
+     "a": 2,
+     "why": "Changes in the lowest bits are invisible."
+    },
+    {
+     "q": "What is a file signature?",
+     "o": [
+      "The file's size",
+      "The file name",
+      "The author's handwritten signature",
+      "Bytes at the start of a file that show its real type"
+     ],
+     "a": 3,
+     "why": "Magic numbers identify file types."
+    },
+    {
+     "q": "Which information might photo metadata reveal?",
+     "o": [
+      "The colour of the camera",
+      "The viewer's password",
+      "Where and when it was taken",
+      "Nothing at all"
+     ],
+     "a": 2,
+     "why": "Metadata can include GPS and time."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain the difference between encryption and steganography.",
+     "m": 2,
+     "a": "Encryption scrambles a message so it can't be read without a key (1); steganography hides the fact that a message exists at all (1)."
+    },
+    {
+     "q": "Explain why the file extension alone can't be trusted to tell you a file's type.",
+     "m": 2,
+     "a": "Anyone can rename a file/change the extension (1); the file signature in its first bytes shows the real type (1)."
+    }
+   ],
+   "terms": [
+    "Steganography",
+    "Metadata",
+    "File signature",
+    "Digital forensics"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p05",
+   "title": "Web detective",
+   "spec": "Investigate a practice website using its source code and explain how developers protect websites",
+   "summary": "Everything a browser receives can be seen: HTML source, comments, scripts and cookies. CTF web challenges hide flags in these places. Real developers keep secrets on the server, validate every input and never trust what the browser sends.",
+   "starter": "Right-click a web page and choose \"View page source\". What's the strangest thing you can find?",
+   "sc": [
+    "I can view a page's source and find comments and hidden elements",
+    "I can explain what cookies and robots.txt are",
+    "I can explain why secrets must never be sent to the browser"
+   ],
+   "slides": [
+    {
+     "t": "Your browser sees everything",
+     "b": [
+      "View source: the HTML the server sent",
+      "Developer tools (F12): inspect elements, scripts, network requests and cookies",
+      "Comments <!-- like this --> don't show on the page but are in the source",
+      "Hidden elements are only hidden from view, not from you"
+     ],
+     "n": "Only use these tools on the practice CTF site and pages you own. Looking at public source code is normal, but trying to break into sites isn't."
+    },
+    {
+     "t": "Cookies and robots.txt",
+     "b": [
+      "Cookies: small pieces of data a website stores in your browser",
+      "They remember logins, settings and shopping baskets",
+      "robots.txt: a public file telling search engines what not to list",
+      "Ironically, it can point attackers to \"secret\" pages"
+     ]
+    },
+    {
+     "t": "How developers defend",
+     "b": [
+      "Never put secrets (passwords, keys) in HTML or JavaScript",
+      "Check permissions on the server, every time",
+      "Validate all input; never trust anything from the browser",
+      "Regular testing, including paid ethical hackers"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Your browser sees everything"
+    },
+    {
+     "t": "p",
+     "text": "When you visit a website, the **[[server]]** sends your browser the page's **[[source code]]** (HTML, CSS and JavaScript). You can see all of it: right-click and choose **View page source**, or open **[[developer tools]]** with F12. CTF web challenges hide flags in places like:"
+    },
+    {
+     "t": "list",
+     "ordered": false,
+     "items": [
+      "HTML comments, which never appear on the page: `<!-- FLAG{...} -->`",
+      "Elements hidden with CSS",
+      "JavaScript files",
+      "Cookies"
+     ]
+    },
+    {
+     "t": "h",
+     "text": "Cookies and robots.txt"
+    },
+    {
+     "t": "p",
+     "text": "A **[[cookie]]** is a small piece of data a website stores in your browser, for example to remember that you're logged in. **robots.txt** is a public file telling search engines which pages not to list. It's meant for search engines, but it can accidentally point people to pages the owner wanted to keep quiet."
+    },
+    {
+     "t": "note",
+     "text": "Looking at a page's source code is completely normal and legal: browsers are built to let you. Trying to access parts of a real site you're not authorised to use is not. In this lesson, only investigate the practice CTF website."
+    },
+    {
+     "t": "h",
+     "text": "Defending websites"
+    },
+    {
+     "t": "key",
+     "title": "Developer rules of thumb",
+     "items": [
+      "Anything sent to the browser is public: never put secrets in it",
+      "Check who the user is and what they're allowed to do on the server, for every request",
+      "Validate all input, because users (and attackers) can change anything in the browser",
+      "Don't rely on hiding things: hidden isn't secure",
+      "Pay ethical hackers to test the site, and fix what they find"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Web detective challenges",
+     "mins": 30,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Open the practice website your teacher gives you (a CTF site built for this).",
+      "Find flags hidden in: an HTML comment, a hidden element, a JavaScript file, a cookie and the robots.txt file.",
+      "For each flag, write one rule a developer should have followed to avoid the problem."
+     ],
+     "q": [
+      {
+       "q": "List the flags you found and where each was hidden.",
+       "a": "E.g. \"FLAG{c0mm3nts} in an HTML comment; FLAG{cs5_h1dd3n} in a div with display:none; FLAG{c00k13} in a cookie; FLAG{r0b0ts} on a page listed in robots.txt.\""
+      },
+      {
+       "q": "For two of them, write the developer rule that would have prevented it.",
+       "a": "E.g. \"Never put secrets in HTML comments, because all source code is visible. Don't rely on robots.txt or hidden pages for security; protect pages with proper logins on the server.\""
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "How can you see a web page's HTML?",
+     "o": [
+      "View page source or developer tools",
+      "You can't",
+      "Turning off the monitor",
+      "Printing the page"
+     ],
+     "a": 0,
+     "why": "Browsers let you see source code."
+    },
+    {
+     "q": "Why are HTML comments a bad place for secrets?",
+     "o": [
+      "They're encrypted",
+      "Anyone can read them in the source code",
+      "They're only visible to admins",
+      "They're deleted automatically"
+     ],
+     "a": 1,
+     "why": "Comments are public."
+    },
+    {
+     "q": "What is a cookie?",
+     "o": [
+      "A snack for hackers",
+      "A virus",
+      "A type of password",
+      "A small piece of data a website stores in your browser"
+     ],
+     "a": 3,
+     "why": "Cookies remember settings and logins."
+    },
+    {
+     "q": "What should developers do with input from the browser?",
+     "o": [
+      "Trust it completely",
+      "Delete it",
+      "Validate it on the server, never trusting it",
+      "Print it"
+     ],
+     "a": 2,
+     "why": "Attackers can change anything client-side."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Explain why hiding a page by not linking to it is not real security.",
+     "m": 2,
+     "a": "Anyone who finds or guesses the address/sees it in robots.txt or source can still open it (1); real security needs server-side checks/login/permissions (1)."
+    },
+    {
+     "q": "Give two places in a web page where a CTF might hide a flag.",
+     "m": 2,
+     "a": "Any two: HTML comment (1); hidden element (1); JavaScript file (1); cookie (1); robots.txt (1)."
+    }
+   ],
+   "terms": [
+    "Source code",
+    "Cookie",
+    "Developer tools",
+    "Server"
+   ],
+   "exam": [],
+   "videos": []
+  },
+  {
+   "id": "p06",
+   "title": "Report it, don't exploit it",
+   "spec": "Describe responsible disclosure and bug bounties, and explore careers in cyber security",
+   "summary": "When ethical hackers find a weakness, they report it privately so it can be fixed (responsible disclosure). Many companies pay bug bounties for this. Cyber security is a growing career with many routes in, including competitions, apprenticeships and degrees.",
+   "starter": "You notice your school's website shows other pupils' details if you change a number in the web address. What should you do?",
+   "sc": [
+    "I can describe responsible disclosure",
+    "I can explain what a bug bounty is",
+    "I can describe routes into cyber security careers"
+   ],
+   "slides": [
+    {
+     "t": "Found a problem? Report it",
+     "b": [
+      "A vulnerability is a weakness that could be exploited",
+      "Responsible disclosure: tell the owner privately and give them time to fix it",
+      "Don't test further, don't share it, don't use it",
+      "At school: tell a teacher or the IT team straight away"
+     ],
+     "n": "Starter answer: stop, don't look at any more records, and tell a teacher or IT immediately. Don't share the trick."
+    },
+    {
+     "t": "Bug bounties",
+     "b": [
+      "Companies pay rewards to people who report vulnerabilities properly",
+      "Run by big tech firms, banks and governments",
+      "Strict rules: only test what's in scope, never harm users or data",
+      "Some ethical hackers earn a living from bug bounties"
+     ]
+    },
+    {
+     "t": "Careers in cyber",
+     "b": [
+      "Penetration tester, security analyst, incident responder, digital forensics investigator, security engineer",
+      "Belfast and Northern Ireland are home to many cyber security companies",
+      "Routes: GCSE and A level, apprenticeships, degrees, CyberFirst schemes",
+      "Start now: CTFs, CyberFirst competitions and coding clubs"
+     ]
+    }
+   ],
+   "blocks": [
+    {
+     "t": "h",
+     "text": "Responsible disclosure"
+    },
+    {
+     "t": "p",
+     "text": "A **[[vulnerability]]** is a weakness that could be exploited to cause harm. When ethical hackers find one, they follow **[[responsible disclosure]]**:"
+    },
+    {
+     "t": "list",
+     "ordered": true,
+     "items": [
+      "Stop: don't explore further or access anyone's data.",
+      "Report it privately to the owner, with enough detail to fix it.",
+      "Give them time to fix it before telling anyone else.",
+      "Never use or share the weakness."
+     ]
+    },
+    {
+     "t": "warn",
+     "text": "If you notice something wrong with a school or real-world system by accident, stop straight away and tell a teacher or the IT team. Don't \"check it again\" or show friends: that could become unauthorised access."
+    },
+    {
+     "t": "h",
+     "text": "Bug bounties"
+    },
+    {
+     "t": "p",
+     "text": "A **[[bug bounty]]** is a reward paid by an organisation to people who responsibly report vulnerabilities in its systems. Big technology companies, banks and governments run bug bounty programmes with clear rules about what may be tested. Rewards range from thank-you messages to very large payments for serious problems."
+    },
+    {
+     "t": "h",
+     "text": "Careers in cyber security"
+    },
+    {
+     "t": "table",
+     "caption": "Cyber security jobs",
+     "head": [
+      "Job",
+      "What they do"
+     ],
+     "rows": [
+      [
+       "Penetration tester",
+       "Legally attacks systems to find weaknesses"
+      ],
+      [
+       "Security analyst",
+       "Monitors networks for attacks and responds"
+      ],
+      [
+       "Incident responder",
+       "Contains and investigates attacks when they happen"
+      ],
+      [
+       "Digital forensics investigator",
+       "Recovers and analyses evidence from devices"
+      ],
+      [
+       "Security engineer",
+       "Designs and builds secure systems"
+      ]
+     ]
+    },
+    {
+     "t": "p",
+     "text": "Demand for cyber security skills is high across the UK, and Belfast has become a major hub for cyber security companies. Routes in include GCSE and A level Digital Technology or Computer Science, degree apprenticeships, university degrees, and the NCSC's **CyberFirst** programme, which runs competitions, courses and bursaries for young people."
+    },
+    {
+     "t": "key",
+     "title": "Start building skills now",
+     "items": [
+      "Take part in CTFs and CyberFirst competitions",
+      "Learn programming and how networks work",
+      "Practise only on legal training platforms",
+      "Build a record of what you've learned"
+     ]
+    },
+    {
+     "t": "act",
+     "title": "Write a disclosure report",
+     "mins": 25,
+     "who": "Pairs",
+     "after": 3,
+     "steps": [
+      "Read the scenario: while using a (fictional) cinema booking website, you notice changing the booking number in the address shows someone else's booking.",
+      "Write a short responsible disclosure email to the cinema: what you found, how they can see it, why it matters, and what you did and didn't do.",
+      "Swap with another pair and check: is it clear, polite and responsible?"
+     ],
+     "q": [
+      {
+       "q": "Write your disclosure email.",
+       "a": "A good email is polite, sent privately to the company's security contact, explains the problem clearly (changing the number in the URL shows other bookings), explains the risk (customers' names and booking details exposed), states the writer stopped immediately and didn't save or share any data, and offers to help."
+      },
+      {
+       "q": "Explain why you should not test the problem further or post about it online.",
+       "a": "Further testing could access more people's data, which is unauthorised access and could harm them; posting it before it's fixed would let criminals exploit it."
+      }
+     ]
+    }
+   ],
+   "check": [
+    {
+     "q": "What is responsible disclosure?",
+     "o": [
+      "Privately reporting a vulnerability so it can be fixed",
+      "Selling a weakness",
+      "Posting a weakness online",
+      "Ignoring a weakness"
+     ],
+     "a": 0,
+     "why": "Report privately, give time to fix."
+    },
+    {
+     "q": "What is a bug bounty?",
+     "o": [
+      "A fine for hackers",
+      "A prize for finding insects",
+      "A type of virus",
+      "A reward for responsibly reporting a vulnerability"
+     ],
+     "a": 3,
+     "why": "Companies pay for reports."
+    },
+    {
+     "q": "You accidentally see other pupils' data on a school system. What should you do?",
+     "o": [
+      "Post about it",
+      "Look at more records to check",
+      "Stop and tell a teacher or IT straight away",
+      "Show your friends"
+     ],
+     "a": 2,
+     "why": "Stop and report."
+    },
+    {
+     "q": "What does a penetration tester do?",
+     "o": [
+      "Sells computers",
+      "Writes viruses",
+      "Legally attacks systems to find weaknesses",
+      "Repairs pens"
+     ],
+     "a": 2,
+     "why": "Pen testers are ethical hackers."
+    }
+   ],
+   "practice": [
+    {
+     "q": "Describe the steps an ethical hacker should follow after finding a vulnerability.",
+     "m": 3,
+     "a": "Stop/don't go further (1); report privately to the owner (1); give time to fix and don't share/use it (1)."
+    },
+    {
+     "q": "Name two jobs in cyber security and what each does.",
+     "m": 2,
+     "a": "Any two with descriptions, e.g. penetration tester: legally tests systems (1); security analyst: monitors for attacks (1); incident responder/forensics/security engineer (1)."
+    }
+   ],
+   "terms": [
+    "Vulnerability",
+    "Responsible disclosure",
+    "Bug bounty"
+   ],
+   "exam": [],
+   "videos": []
+  }
+ ],
+ "glossary": [
+  {
+   "term": "Ethical hacking",
+   "def": "Testing computer systems for weaknesses with the owner's permission, so they can be fixed.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Penetration testing",
+   "def": "A planned, authorised attack on a system to find its weaknesses.",
+   "alt": "Pen testing",
+   "page": "p01"
+  },
+  {
+   "term": "Computer Misuse Act",
+   "def": "The UK law (1990) that makes unauthorised access to computers and spreading malware criminal offences.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Scope",
+   "def": "The agreed limits of a security test: which systems and methods are allowed.",
+   "alt": "",
+   "page": "p01"
+  },
+  {
+   "term": "Capture the Flag",
+   "def": "A legal hacking competition where players find hidden \"flags\" in challenges built for the purpose.",
+   "alt": "CTF",
+   "page": "p02"
+  },
+  {
+   "term": "Flag",
+   "def": "A secret text string hidden in a CTF challenge, which you submit to score points.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "CyberChef",
+   "def": "A free browser tool made by GCHQ for encoding, decoding and analysing data.",
+   "alt": "",
+   "page": "p02"
+  },
+  {
+   "term": "Encoding",
+   "def": "Changing data into a different format for storage or sending, with no secret key.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Base64",
+   "def": "An encoding that turns data into letters, digits, + and /, often ending in =.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Hexadecimal",
+   "def": "A number system with 16 digits (0-9 and A-F), often used to show bytes.",
+   "alt": "Hex",
+   "page": "p03"
+  },
+  {
+   "term": "ROT13",
+   "def": "A simple cipher that shifts each letter 13 places; doing it twice gives the original.",
+   "alt": "",
+   "page": "p03"
+  },
+  {
+   "term": "Steganography",
+   "def": "Hiding a message inside something ordinary so nobody knows it exists.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Metadata",
+   "def": "Hidden information stored with a file, such as its date, author or location.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "File signature",
+   "def": "The first bytes of a file, which identify its real file type.",
+   "alt": "Magic number",
+   "page": "p04"
+  },
+  {
+   "term": "Digital forensics",
+   "def": "Recovering and investigating evidence from computers and other devices.",
+   "alt": "",
+   "page": "p04"
+  },
+  {
+   "term": "Source code",
+   "def": "The code that makes a program or web page, such as HTML, CSS and JavaScript.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Cookie",
+   "def": "A small piece of data a website stores in your browser, for example to keep you logged in.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Developer tools",
+   "def": "Tools built into web browsers for inspecting a page's code, network requests and storage.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Server",
+   "def": "A computer that provides services or web pages to other computers.",
+   "alt": "",
+   "page": "p05"
+  },
+  {
+   "term": "Vulnerability",
+   "def": "A weakness in a system that could be exploited to cause harm.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Responsible disclosure",
+   "def": "Privately reporting a vulnerability to its owner and giving them time to fix it before telling anyone else.",
+   "alt": "",
+   "page": "p06"
+  },
+  {
+   "term": "Bug bounty",
+   "def": "A reward paid to people who responsibly report vulnerabilities.",
+   "alt": "",
+   "page": "p06"
+  }
+ ]
+}
