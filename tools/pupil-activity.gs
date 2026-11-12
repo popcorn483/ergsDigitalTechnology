@@ -39,7 +39,7 @@
    4-digit PIN as a salted hash, never the PIN itself), Aliases (merged pupil IDs: old ID -> kept ID, so a device that
    still sends the old ID is counted under the kept pupil) and Names (the name and class you chose for a pupil). */
 
-const SCRIPT_VERSION = 36;   // the Teacher area warns when the deployed script is older than the site expects
+const SCRIPT_VERSION = 37;   // the Teacher area warns when the deployed script is older than the site expects
 const TEACHER_KEY = 'change-me';
 const STAFF_PIN = 'change-me';
 const WEEKLY_EMAIL = true;    // email the script's owner a weekly report every Monday morning (false to stop)
@@ -794,7 +794,7 @@ function doGet_(e) {
   if (q.action === 'addemail') return out_(addEmail_(q.id, q.email, q.pin));   /* v29: a pupil from before emails adds theirs */
   if (q.action === 'access') {   /* a pupil's device: approved yet? has a PIN? their class (as the teacher set it), zones and open zone requests */
     if (!okId(q.id)) return out_({ ok: false }); const id = resolve_(String(q.id), aliases_()), N = names_(), cls = (N[id] && N[id][1]) || ncls_(q.cls);
-    return out_({ ok: true, status: access_(id), pin: hasPin_(id), email: emailOf_(id) || '', id, name: N[id] ? N[id][0] : undefined, cls: N[id] ? N[id][1] : undefined, zones: effZones_(id, cls), asked: zreqs_('pending').filter(r => r.id === id).map(r => r.zone) });
+    return out_({ ok: true, status: access_(id), pin: hasPin_(id), email: emailOf_(id) || '', id, name: N[id] ? N[id][0] : undefined, cls: N[id] ? N[id][1] : undefined, zones: effZones_(id, cls), asked: zreqs_('pending').filter(r => r.id === id).map(r => r.zone), teacher: roles_()[id] === 'teacher' || undefined });
   }
   if (q.action === 'classes') return out_({ ok: true, classes: classes_().map(c => ({ cls: c.cls, teacher: c.teacher, course: c.course })) });   /* the sign-in box: the class list */
   if (q.action === 'zonereq') return out_(zoneAsk_(q.id, String(q.zone || '').toUpperCase(), q.name, q.cls));   /* a pupil's device: approved yet? has a PIN? */

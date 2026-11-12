@@ -10155,6 +10155,12 @@ try {
   new MutationObserver(() => { clearTimeout(window.__mrbZT); window.__mrbZT = setTimeout(zoneLock, 150); }).observe(document.documentElement, { childList: true, subtree: true });
   const blocked = () => !!me() && !LS.get('notes-nocount') && LS.get('mrb-access') !== 'ok';
   const unGate = () => { const g = document.getElementById('mrb-gate'); if (g) g.remove(); document.documentElement.style.overflow = ''; clearInterval(gateT); };
+  function teacherNow(p) {
+    if (document.getElementById('mrb-tnow')) return; const d = document.createElement('div'); d.id = 'mrb-tnow';
+    const root = /\/notes\/[^/]*$/.test(location.pathname) ? '../' : '';
+    d.innerHTML = `<style>#mrb-tnow{position:fixed;inset:0;z-index:2147483000;display:grid;place-items:center;background:rgba(10,16,30,.55);padding:16px}#mrb-tnow .b{background:#fff;color:#16213A;border-radius:16px;max-width:400px;width:100%;padding:22px;font:15px/1.45 system-ui,-apple-system,Segoe UI,sans-serif;box-shadow:0 20px 60px rgba(0,0,0,.35)}#mrb-tnow h2{margin:0 0 8px;font-size:20px}#mrb-tnow a{display:block;text-align:center;margin-top:14px;padding:12px;border-radius:10px;background:#2445B4;color:#fff;font-weight:800;text-decoration:none}#mrb-tnow button{display:block;width:100%;margin-top:8px;padding:10px;border:0;background:none;color:#4A5568;font:inherit;cursor:pointer}</style><div class="b" role="dialog" aria-modal="true" aria-labelledby="mrb-tnh"><h2 id="mrb-tnh">You’re a teacher now</h2><p>Your account has been made a teacher account. Sign in once in the Teacher area with your school email and PIN, and this device will open it from now on.</p><a href="${root}teacher.html?acct=${encodeURIComponent((p && p.email) || '')}">Open the Teacher area</a><button type="button">Not now</button></div>`;
+    d.querySelector('button').addEventListener('click', () => d.remove()); document.body.append(d);
+  }
   async function checkAccess() {
     const p = me(); if (!p || !URL0 || LS.get('notes-nocount')) return;
     if (LS.get('mrb-access') === 'ok' && LS.get('mrb-pin-ok')) myWork();   /* SPEED: an approved pupil's work and messages load alongside the check, not after it */
@@ -10168,6 +10174,7 @@ try {
       if ('zones' in j) LS.set('mrb-zones', JSON.stringify(Array.isArray(j.zones) ? j.zones : null)); if (Array.isArray(j.asked)) LS.set('mrb-asked', JSON.stringify(j.asked));
       try { zoneLock(); } catch (e) { }
     }
+    if (j.ok && j.teacher && !LS.get('mrb-staff-ok')) { teacherNow(me()); return; }   /* v37: Mr Butler made this account a teacher: sign in once with email + PIN in the Teacher area */
     if (/^(pending|declined)$/.test(st)) { LS.set('mrb-access', st); gate(); }
     else { LS.set('mrb-access', 'ok'); unGate(); myWork(); if (j.ok && j.email === '' && LS.get('mrb-pin-ok')) askEmail(); }   /* approved (or an Apps Script without approvals); v29: no school email on record yet, ask for it once */
   }
