@@ -517,7 +517,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
  <div id="ac-on" hidden>
   <div class="hrow" id="ac-keyrow" hidden><input type="password" id="ac-key" placeholder="Teacher key" aria-label="Teacher key (TEACHER_KEY in the Apps Script)" autocomplete="off" style="font:inherit;padding:8px 10px;border:1px solid var(--line);border-radius:9px;min-width:0;flex:1;max-width:260px"><button type="button" class="tp-mini" id="ac-save">Show activity</button></div>
   <div class="tp-tools" id="ac-tools" hidden><div class="ac-qrow" id="ac-qrow"><input type="search" id="ac-q" placeholder="Find a pupil" aria-label="Find a pupil by name or class" autocomplete="off"><button type="button" class="tp-mini" id="ac-sel" aria-pressed="false">Select</button><button type="button" class="tp-mini" id="ac-add" title="Make an account for a pupil (name, school email, class)">+ Add pupil</button></div><select id="ac-tch" aria-label="Teacher"></select><select id="ac-yr" aria-label="Year group"></select><select id="ac-cls" aria-label="Class"></select><select id="ac-sort" aria-label="Sort pupils"><option value="class">Sort: by class</option><optgroup label="Name"><option value="name">First name A–Z</option><option value="surname">Surname A–Z</option></optgroup><optgroup label="Time revising"><option value="total">Most time in total</option><option value="totalAsc">Least time in total</option><option value="week">Most time this week</option><option value="weekAsc">Least time this week</option><option value="days">Most days revised</option></optgroup><optgroup label="Activity"><option value="last">Most recently active</option><option value="lastAsc">Not seen for longest</option></optgroup><optgroup label="Progress"><option value="prog">Most pages covered</option><option value="progAsc">Fewest pages covered</option><option value="quiz">Best page-quiz average</option><option value="quizAsc">Lowest page-quiz average</option></optgroup></select><details class="ac-more"><summary class="tp-mini" aria-label="More">⋯</summary><div class="ac-menu"><button type="button" id="ac-refresh">Refresh</button><button type="button" id="ac-csv">Download CSV</button><button type="button" id="ac-forget">Forget key on this device</button><button type="button" id="ac-mailtest">Send a test email</button><button type="button" id="ac-staffout">Sign out of staff mode on this device</button></div></details></div>
-  <div class="ac-view" id="ac-view" role="tablist" aria-label="Show" hidden><button type="button" role="tab" data-v="pupils" aria-selected="true">Pupils</button><button type="button" role="tab" data-v="classes" aria-selected="false">Classes &amp; zones<span class="t-badge" id="cl-badge" hidden></span></button><button type="button" role="tab" data-v="topics" aria-selected="false">Topics</button><button type="button" role="tab" data-v="tests" aria-selected="false">Topic tests</button><button type="button" role="tab" data-v="comps" aria-selected="false">Competitions</button><button type="button" role="tab" data-v="work" aria-selected="false">Set work &amp; messages</button><button type="button" role="tab" data-v="reports" aria-selected="false">Reports</button><button type="button" role="tab" data-v="week" aria-selected="false">Weekly report</button></div>
+  <div class="ac-view" id="ac-view" role="tablist" aria-label="Show" hidden><button type="button" role="tab" data-v="pupils" aria-selected="true">Pupils</button><button type="button" role="tab" data-v="classes" aria-selected="false">Classes &amp; zones<span class="t-badge" id="cl-badge" hidden></span></button><button type="button" role="tab" data-v="teachers" aria-selected="false">Teachers</button><button type="button" role="tab" data-v="topics" aria-selected="false">Topics</button><button type="button" role="tab" data-v="tests" aria-selected="false">Topic tests</button><button type="button" role="tab" data-v="comps" aria-selected="false">Competitions</button><button type="button" role="tab" data-v="work" aria-selected="false">Set work &amp; messages</button><button type="button" role="tab" data-v="reports" aria-selected="false">Reports</button><button type="button" role="tab" data-v="week" aria-selected="false">Weekly report</button></div>
   <p class="tp-status" id="ac-status" role="status" aria-live="polite" hidden></p>
   <div class="ac-live card" id="ac-live" hidden></div>
   <div class="ac-req card" id="ac-req" hidden></div>
@@ -531,6 +531,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
   <div class="sw-w" id="cp-wrap" hidden><div id="cp-body"></div></div>
   <div class="card rp-w" id="rp-wrap" hidden><div id="rp-body"></div></div>
   <div class="cl-w" id="cl-wrap" hidden><div id="cl-body"></div></div>
+  <div class="cl-w" id="te-wrap" hidden><div id="te-body"></div></div>
   <div class="card wk" id="wk-wrap" hidden><div class="wk-h"><h3>Weekly report</h3><span class="wk-nav"><button type="button" class="tp-mini" id="wk-prev" aria-label="Previous week">‹</button><b id="wk-range"></b><button type="button" class="tp-mini" id="wk-next" aria-label="Next week">›</button><button type="button" class="tp-mini" id="wk-print">Print</button></span></div><p class="small" id="wk-sum"></p><div id="wk-body"></div></div>
   <div class="card ac-wrap" id="ac-wrap" hidden><div class="ac-sum" id="ac-sum"></div><div class="ac-list" id="ac-list"></div></div>
   <div class="card ac-pd" id="ac-pd" hidden></div>
@@ -2282,7 +2283,8 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
   const ncl = c => String(c || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
   const classOf = c => CLASSES.find(x => x.cls === ncl(c)), teacherOf = c => (classOf(c) || {}).teacher || '';
   const teachers = () => [...new Set(CLASSES.map(c => c.teacher).concat((DATA || []).filter(p => ROLES[p.id] === 'teacher').map(p => p.name)).filter(Boolean))].sort((a, b) => a.localeCompare(b));   /* class teachers, and accounts made teachers */
-  const keep = p => (!yr || yearOf(p.cls) === yr) && (!cls || p.cls === cls) && (!tch || (tch === '~' ? !classOf(p.cls) : teacherOf(p.cls) === tch));
+  const isTch = p => ROLES[p.id] === 'teacher';   /* teacher accounts live in Teachers, not the pupil lists */
+  const keep = p => !isTch(p) && (!yr || yearOf(p.cls) === yr) && (!cls || p.cls === cls) && (!tch || (tch === '~' ? !classOf(p.cls) : teacherOf(p.cls) === tch));
   const zoneChips = p => { const z = p.zones || p.ezones; if (!z) return null; return el('span', {}, ...z.map(x => el('span', { class: 'zc' + (p.zones ? '' : ' cls'), title: p.zones ? 'Set for this pupil' : 'From their class', text: ZN[x] || x }))); };
   /* zone tick boxes, grouped KS3 / GCSE / A level */
   const zonePick = sel => { const box = el('div', { class: 'zp' }); ZG.forEach(([g, zs]) => { box.append(el('span', { class: 'g', text: g })); zs.forEach(z => { const cb = el('input', { type: 'checkbox', value: z }); cb.checked = (sel || []).includes(z); box.append(el('label', {}, cb, document.createTextNode(ZN[z]))); }); }); box.value = () => [...box.querySelectorAll('input:checked')].map(i => i.value); return box; };
@@ -2398,7 +2400,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     const wrap = $('#ac-wrap'); wrap.hidden = VIEW !== 'pupils';
     const years = [...new Set(DATA.map(p => yearOf(p.cls)).filter(Boolean))].sort((a, b) => a - b);
     const ys = $('#ac-yr'); ys.innerHTML = ''; ys.append(el('option', { value: '', text: 'All years' }), ...years.map(y => el('option', { value: y, text: 'Year ' + y }))); if (!years.includes(yr)) yr = ''; ys.value = yr;
-    const classes = [...new Set(DATA.filter(p => !yr || yearOf(p.cls) === yr).map(p => p.cls).filter(Boolean))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+    const classes = [...new Set(DATA.filter(p => !isTch(p) && (!yr || yearOf(p.cls) === yr)).map(p => p.cls).filter(Boolean))].sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
     const sel = $('#ac-cls'); sel.innerHTML = ''; sel.append(el('option', { value: '', text: yr ? `All Year ${yr}` : 'All classes' }), ...classes.map(c => el('option', { value: c, text: c }))); if (!classes.includes(cls)) cls = ''; sel.value = cls;
     const ts = $('#ac-tch'), tl = teachers(); ts.hidden = !CLASSES.length; ts.innerHTML = '';
     ts.append(el('option', { value: '', text: 'All teachers' }), ...tl.map(t => el('option', { value: t, text: t })), el('option', { value: '~', text: 'Not in a class' })); if (tch && tch !== '~' && !tl.includes(tch)) tch = ''; ts.value = tch;
@@ -2461,9 +2463,9 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     live(); if (!liveT) liveT = setTimeout(pollLive, 45000);
     const tb = $('#t-badge'); if (tb) { tb.textContent = REQ.length ? String(REQ.length) : ''; tb.hidden = !REQ.length; }
     requests(); zreqs(); attention();
-    try { dispatchEvent(new CustomEvent('ta-data', { detail: { pupils: DATA, req: REQ.length, zreq: ZREQ.length, live: LIVE, classes: CLASSES, noclass: CLASSES.length ? DATA.filter(p => !classOf(p.cls)).length : 0 } })); } catch (e) { }   /* the Overview page */
-    const cb = $('#cl-badge'); if (cb) { const nz = ZREQ.length + (CLASSES.length ? DATA.filter(p => !classOf(p.cls)).length : 0); cb.textContent = nz ? String(nz) : ''; cb.hidden = !nz; }
-    if (VIEW === 'classes') classesView();
+    try { dispatchEvent(new CustomEvent('ta-data', { detail: { pupils: DATA.filter(p => !isTch(p)), req: REQ.length, zreq: ZREQ.length, live: LIVE, classes: CLASSES, noclass: CLASSES.length ? DATA.filter(p => !classOf(p.cls)).length : 0 } })); } catch (e) { }   /* the Overview page */
+    const cb = $('#cl-badge'); if (cb) { const nz = ZREQ.length + (CLASSES.length ? DATA.filter(p => !isTch(p) && !classOf(p.cls)).length : 0); cb.textContent = nz ? String(nz) : ''; cb.hidden = !nz; }
+    if (VIEW === 'classes') classesView(); if (VIEW === 'teachers') teachersView();
     if (VIEW !== 'pupils') ['#ac-live', '#ac-req', '#ac-zr', '#ac-att'].forEach(q => { const x = $(q); if (x) x.hidden = true; });
     if (VIEW === 'topics') topics();
     if (VIEW === 'reports') reports();
@@ -2586,8 +2588,8 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     $$('#ac-view [data-v]').forEach(b => b.setAttribute('aria-selected', String(b.dataset.v === VIEW)));
     const wk = VIEW === 'week', pu = VIEW === 'pupils';
     $('#ac-wrap').hidden = !pu; $('#ac-pd').hidden = !pu || !OPEN; $('#wk-wrap').hidden = !wk; $('#ac-sort').hidden = !pu; $('#ac-qrow').hidden = !pu;
-    $('#tg-wrap').hidden = VIEW !== 'topics'; $('#sw-wrap').hidden = VIEW !== 'work'; $('#tt-wrap').hidden = VIEW !== 'tests'; $('#cp-wrap').hidden = VIEW !== 'comps'; $('#rp-wrap').hidden = VIEW !== 'reports'; $('#cl-wrap').hidden = VIEW !== 'classes';
-    const zr = $('#ac-zr'); if (zr && !pu) zr.hidden = true; if (VIEW === 'classes') classesView();
+    $('#tg-wrap').hidden = VIEW !== 'topics'; $('#sw-wrap').hidden = VIEW !== 'work'; $('#tt-wrap').hidden = VIEW !== 'tests'; $('#cp-wrap').hidden = VIEW !== 'comps'; $('#rp-wrap').hidden = VIEW !== 'reports'; $('#cl-wrap').hidden = VIEW !== 'classes'; $('#te-wrap').hidden = VIEW !== 'teachers';
+    const zr = $('#ac-zr'); if (zr && !pu) zr.hidden = true; if (VIEW === 'classes') classesView(); if (VIEW === 'teachers') teachersView();
     const lv = $('#ac-live'); if (lv && !pu) lv.hidden = true; const at = $('#ac-att'); if (at && !pu) at.hidden = true; const rq = $('#ac-req'); if (rq && !pu) rq.hidden = true;
     if (wk) week();
     if (VIEW === 'topics') topics();
@@ -2596,6 +2598,77 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     if (VIEW === 'comps') compsView();
     if (VIEW === 'reports') reports();
     if (pu) { requests(); zreqs(); live(); attention(); }
+  }
+  /* ---------- TEACHERS: staff accounts (Roles sheet) kept apart from pupils: who they are, their email and PIN, the classes they teach ---------- */
+  let TE_EDIT = null;
+  async function teDo(params, btn, msg) { if (btn) btn.disabled = true; try { const j = await api(params); if (!j || !j.ok) throw new Error(j && j.error || 'failed'); TE_EDIT = null; await load(); status(msg || j.msg || 'Saved.', 'ok'); teachersView(); return j; } catch (e) { status('That didn’t work: ' + e.message + '.', 'warn'); if (btn) btn.disabled = false; } }
+  function teachersView() {
+    const box = $('#te-body'); if (!box || !DATA) return; box.innerHTML = '';
+    const T = DATA.filter(isTch).sort((a, b) => a.name.localeCompare(b.name));
+    const card = el('div', { class: 'card' }, el('h3', { text: 'Teachers' }), el('p', { class: 'small', text: 'Staff accounts are kept separate from pupils: they don’t appear in the pupil list or class counts. A teacher signs in with their school email and PIN (on the Teacher area page or the revision site), and that device then opens the Teacher area. Only the main teacher key can add or remove teachers.' }));
+    if (T.length) {
+      const t = el('table', { class: 'cl-t' }, el('thead', {}, el('tr', {}, ...['Teacher', 'School email', 'PIN', 'Classes', 'Last active', ''].map(h => el('th', { text: h })))));
+      const tb = el('tbody'); t.append(tb);
+      T.forEach(p => {
+        const cs = CLASSES.filter(c => c.teacher && c.teacher.toLowerCase() === p.name.toLowerCase()).map(c => c.cls);
+        if (TE_EDIT === p.id) {
+          const nm = el('input', { type: 'text', maxlength: '40', value: p.name, 'aria-label': 'Name' }), em = el('input', { type: 'email', maxlength: '80', value: p.email || '', placeholder: 'name@c2ken.net', 'aria-label': 'School email' });
+          const sv = el('button', { type: 'button', class: 'tp-mini pri', text: 'Save' });
+          sv.addEventListener('click', async () => {
+            const name = nm.value.replace(/\s+/g, ' ').trim(), mail = em.value.trim().toLowerCase();
+            if (name.split(' ').length < 2) { status('Give their title or first name and surname, e.g. Mr Glass.', 'warn'); return; }
+            if (mail && !/^[^@\s]+@c2ken\.net$/.test(mail)) { status('A school email ends in @c2ken.net.', 'warn'); return; }
+            sv.disabled = true;
+            try {
+              let r = name !== p.name ? await api({ action: 'rename', to: p.id, name, cls: p.cls }) : { ok: true };
+              if (r && r.ok && mail && mail !== (p.email || '')) r = await api({ action: 'setemail', to: p.id, email: mail });
+              if (!r || !r.ok) throw new Error(r && r.error || 'failed');
+              TE_EDIT = null; await load(); status('Saved.', 'ok'); teachersView();
+            } catch (e) { status('That didn’t work: ' + e.message + '.', 'warn'); sv.disabled = false; }
+          });
+          tb.append(el('tr', {}, el('td', {}, nm), el('td', {}, em), el('td', { text: p.pin === false ? 'Not set yet' : 'Set' }), el('td', { text: cs.join(', ') || '–' }), el('td', { text: p.last ? when(p.last) : 'Not yet' }),
+            el('td', { class: 'n' }, sv, ' ', el('button', { type: 'button', class: 'tp-mini', text: 'Cancel', onclick: () => { TE_EDIT = null; teachersView(); } }))));
+          return;
+        }
+        const pinB = el('button', { type: 'button', class: 'tp-mini', text: 'Email a new PIN', title: p.email ? 'Email a new PIN to ' + p.email : 'Add their school email first', ...(p.email ? {} : { disabled: '' }) });
+        pinB.addEventListener('click', () => teDo({ action: 'sendpin', ids: p.id }, pinB, 'A new PIN has been emailed to ' + p.email + '.'));
+        const rmB = el('button', { type: 'button', class: 'tp-mini', text: 'Remove as teacher' });
+        rmB.addEventListener('click', () => { if (confirm(`Remove ${p.name} as a teacher? Their account goes back into the pupil list.`)) teDo({ action: 'setrole', role: '', ids: p.id }, rmB, p.name + ' is no longer a teacher.'); });
+        tb.append(el('tr', {}, el('th', {}, document.createTextNode(p.name)),
+          el('td', {}, p.email ? document.createTextNode(p.email) : el('span', { class: 'ac-tag', style: 'background:#FDECEA;color:#9B1C1C', text: 'No email: they can’t sign in' })),
+          el('td', { text: p.pin === false ? 'Not set yet' : 'Set' }), el('td', { text: cs.join(', ') || '–' }), el('td', { text: p.last ? when(p.last) : 'Not yet' }),
+          el('td', { class: 'n' }, el('button', { type: 'button', class: 'tp-mini', text: 'Edit', onclick: () => { TE_EDIT = p.id; teachersView(); } }), ' ', pinB, ' ', rmB)));
+      });
+      card.append(el('div', { style: 'overflow-x:auto' }, t));
+    } else card.append(el('p', { class: 'small', text: 'No teacher accounts yet. Add one below.' }));
+    box.append(card);
+    /* add a teacher: a new staff account, or make an existing account one */
+    const add = el('div', { class: 'card' }, el('h3', { text: 'Add a teacher' }));
+    const nm = el('input', { type: 'text', maxlength: '40', placeholder: 'e.g. Mr Glass', 'aria-label': 'Name', style: 'flex:1 1 170px;min-width:0' }), em = el('input', { type: 'email', maxlength: '80', placeholder: 'school email (@c2ken.net)', 'aria-label': 'School email', style: 'flex:1 1 230px;min-width:0' });
+    const how = el('select', { class: 'cl-mv', 'aria-label': 'PIN' }); [['send', 'Email them a PIN now'], ['later', 'They choose it when they first sign in']].forEach(([v, t]) => how.append(el('option', { value: v, text: t })));
+    const go = el('button', { type: 'button', class: 'tp-mini pri', text: 'Add teacher' });
+    go.addEventListener('click', async () => {
+      const name = nm.value.replace(/\s+/g, ' ').trim(), mail = em.value.trim().toLowerCase();
+      if (name.split(' ').length < 2) { status('Give their title or first name and surname, e.g. Mr Glass.', 'warn'); nm.focus(); return; }
+      if (!/^[^@\s]+@c2ken\.net$/.test(mail)) { status('Give their school email (it ends in @c2ken.net).', 'warn'); em.focus(); return; }
+      const ex = DATA.find(p => (p.email || '').toLowerCase() === mail);
+      if (ex) { teDo({ action: 'setrole', role: 'teacher', ids: ex.id }, go, `${ex.name} (${mail}) is now a teacher.`); return; }
+      go.disabled = true;
+      try {
+        const r = await api({ action: 'addpupil', name, email: mail, cls: 'STAFF', pin: '', send: how.value === 'send' ? '1' : '' }); if (!r || !r.ok || !r.id) throw new Error(r && r.error || 'failed');
+        await teDo({ action: 'setrole', role: 'teacher', ids: r.id, name }, null, `${name} has been added as a teacher.${how.value === 'send' ? ' Their PIN has been emailed to ' + mail + '.' : ' They choose a PIN the first time they sign in.'}`);
+      } catch (e) { status('That didn’t work: ' + e.message + '.', 'warn'); go.disabled = false; }
+    });
+    add.append(el('p', { class: 'small', text: 'Makes a staff account, separate from pupils. If someone already has an account with that email, that account is made a teacher instead.' }), el('div', { class: 'ac-row' }, nm, em), el('div', { class: 'ac-row' }, how, go));
+    const pupils = DATA.filter(p => !isTch(p)).sort((a, b) => a.name.localeCompare(b.name));
+    if (pupils.length) {
+      const pick = el('select', { class: 'cl-mv', 'aria-label': 'Existing account', style: 'flex:1 1 260px;min-width:0' });
+      pick.append(el('option', { value: '', text: 'Choose an existing account…' }), ...pupils.map(p => el('option', { value: p.id, text: `${p.name} · ${p.cls || 'no class'}${p.email ? ' · ' + p.email : ''}` })));
+      const mk = el('button', { type: 'button', class: 'tp-mini', text: 'Make a teacher' });
+      mk.addEventListener('click', () => { const p = DATA.find(x => x.id === pick.value); if (!p) { status('Choose an account first.', 'warn'); return; } teDo({ action: 'setrole', role: 'teacher', ids: p.id }, mk, `${p.name} is now a teacher and has moved here from the pupil list.`); });
+      add.append(el('h4', { text: 'Or make an existing account a teacher' }), el('p', { class: 'small', text: 'For a teacher who signed up on the revision site as if they were a pupil.' }), el('div', { class: 'ac-row' }, pick, mk));
+    }
+    box.append(add);
   }
   /* ---------- CLASSES & ZONES: your classes (teacher, course, zones), who is in each, and pupils not in one yet ---------- */
   let CL_EDIT = null;
@@ -2690,7 +2763,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
       const t = el('table', { class: 'cl-t' }, el('thead', {}, el('tr', {}, el('th', { text: 'Class' }), el('th', { text: 'Teacher' }), el('th', { text: 'Zones' }), el('th', { text: 'Pupils' }), el('th', {}))));
       const tb = el('tbody'); t.append(tb);
       CLASSES.slice().sort((a, b) => (a.teacher || '~').localeCompare(b.teacher || '~') || a.cls.localeCompare(b.cls, undefined, { numeric: true })).forEach(c => {
-        const n = DATA.filter(p => ncl(p.cls) === c.cls).length;
+        const n = DATA.filter(p => !isTch(p) && ncl(p.cls) === c.cls).length;
         tb.append(el('tr', {}, el('th', {}, document.createTextNode(c.cls), c.course ? el('small', { class: 'small', style: 'display:block;font-weight:400', text: c.course }) : null), el('td', { text: c.teacher || '–' }),
           el('td', {}, ...(c.zones.length ? c.zones.map(z => el('span', { class: 'zc', text: ZN[z] || z })) : [el('small', { class: 'small', text: 'no limits' })])),
           el('td', { class: 'n' }, el('button', { type: 'button', class: 'ac-ap', text: String(n), title: 'Show these pupils', onclick: () => { cls = c.cls; LS.set('teacher.actcls', cls); yr = ''; tch = ''; VIEW = 'pupils'; LS.set('teacher.actview', VIEW); view(); render(); } })),
@@ -2719,7 +2792,7 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     box.append(listCard());
     /* pupils not in a class */
     if (CLASSES.length) {
-      const un = DATA.filter(p => !classOf(p.cls)).sort((a, b) => a.cls.localeCompare(b.cls, undefined, { numeric: true }) || a.name.localeCompare(b.name));
+      const un = DATA.filter(p => !isTch(p) && !classOf(p.cls)).sort((a, b) => a.cls.localeCompare(b.cls, undefined, { numeric: true }) || a.name.localeCompare(b.name));
       const uc = el('div', { class: 'card' }, el('h3', { text: un.length ? `Not in a class yet (${un.length})` : 'Everyone is in a class 🎉' }));
       if (un.length) {
         uc.append(el('p', { class: 'small', text: 'Pupils whose class isn’t one of yours (usually a typo, or they signed in before you added classes). Pick their class and press Move.' }));
@@ -3805,7 +3878,7 @@ html[data-theme="dark"] #ac-sel[aria-pressed="true"]{color:var(--accent-ink,#0E1
     bell: I('<path d="M6 16V11a6 6 0 0112 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 004 0"/>'), live: I('<circle cx="12" cy="12" r="3" fill="currentColor"/><path d="M7.5 7.5a6.4 6.4 0 000 9M16.5 7.5a6.4 6.4 0 010 9"/>'), down: I('<path d="M6 9l6 6 6-6"/>') };
   var NAV = [
     ['', [['home', 'Overview', 'home']]],
-    ['Pupils', [['p-pupils', 'Pupils', 'pupils', '#t-badge'], ['p-classes', 'Classes & zones', 'classes', '#cl-badge']]],
+    ['Pupils', [['p-pupils', 'Pupils', 'pupils', '#t-badge'], ['p-classes', 'Classes & zones', 'classes', '#cl-badge'], ['p-teachers', 'Teachers', 'key']]],
     ['Progress', [['p-topics', 'Topics', 'topics'], ['p-tests', 'Topic tests', 'tests'], ['p-reports', 'Reports', 'reports'], ['p-week', 'Weekly report', 'week']]],
     ['Communicate', [['p-work', 'Set work & messages', 'work'], ['p-comps', 'Competitions', 'comps']]],
     ['Teaching resources', [['packs', 'Topic packs', 'packs'], ['test', 'Build a test', 'test'], ['trends', 'Exam trends', 'trends'], ['sow', 'Scheme of work', 'sow'], ['ks3', 'KS3 topics', 'ks3']]]];
