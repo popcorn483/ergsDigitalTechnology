@@ -35,7 +35,7 @@ details{margin-top:14px}summary{cursor:pointer;font-weight:700;color:var(--ink-2
 <body>
 <header class="top"><a href="teacher.html" aria-label="Back to the Teacher area">‹ Teacher area</a><h1>Mark in Claude</h1></header>
 <main>
-  <p class="lead">Marks pupils’ past-paper pages in the Claude app on your Max plan, with no API key. Pick the paper, take photos of the pages, and send them to Claude with that paper’s official mark schemes attached. Claude replies with the marks for each question, page by page.</p>
+  <p class="lead">Marks pupils’ answers to CCEA past-paper questions in the Claude app on your Max plan, with no API key. Upload a whole class test (even one that mixes questions from different papers) and Claude finds each question’s original paper, marks every answer to its official mark scheme, and saves the marks with a reason for each.</p>
 
   <section class="step" aria-labelledby="s1">
     <h2 id="s1"><span class="n">1</span>Which paper?</h2>
@@ -63,14 +63,16 @@ details{margin-top:14px}summary{cursor:pointer;font-weight:700;color:var(--ink-2
 
   <section class="step" id="unsure" hidden aria-labelledby="s4">
     <h2 id="s4"><span class="n">2</span>Mark it in your SCHOOL project</h2>
-    <p>Your SCHOOL project in Claude holds the mark schemes for every past-paper question on the site, so Claude can work out which paper and questions a page is from.</p>
+    <p>Your SCHOOL project in Claude holds the mark schemes for every past-paper question on the site, so Claude can find where each question came from, even when a test mixes papers.</p>
     <ol style="margin:0 0 12px;padding-left:20px;color:var(--ink-2);font-size:14.5px">
-      <li>Open your SCHOOL project in the Claude app (button below, or Projects › SCHOOL).</li>
-      <li>Start a new chat and tap the camera to photograph the page.</li>
-      <li>Send it with <b>mark this page</b>. Claude finds the paper and questions, tells you which it used, and marks each answer.</li>
+      <li>Scan the class set into one PDF (most school copiers can scan to PDF), or use a phone scanning app.</li>
+      <li>Open your SCHOOL project in the Claude app (button below, or Projects › SCHOOL) and start a new chat.</li>
+      <li>Attach the PDF and send <b>mark this class test</b>. Adding a blank copy of the test helps it match the questions.</li>
+      <li>Claude shows which original question each test question came from, marks every script, and gives you a spreadsheet: pupil, question, original question, mark, out of, reason, and a “check” flag. Download it from the chat.</li>
     </ol>
+    <p class="small" style="margin:0 0 12px">For a single page, photograph it in the chat and send <b>mark this page</b>. Big class sets may need sending in batches (say 8–10 scripts at a time); Claude adds each batch to the same spreadsheet.</p>
     <a class="btn" href="https://claude.ai/project/01a15f4c-57dd-7227-96a4-0794e53e14cd" target="_blank" rel="noopener">Open SCHOOL project in Claude</a>
-    <p class="small" style="margin:10px 0 0">If it picks the wrong paper, tell it (e.g. “this is Unit 1 Summer 2018”). Once you know the paper, choosing it above is quicker and works in any chat.</p>
+    <p class="small" style="margin:10px 0 0">If it matches a question to the wrong paper, tell it (e.g. “Q3 is Unit 1 Summer 2018 Q11(a)”) and it re-marks that question. If a whole test is from one paper you know, choosing it above also works.</p>
   </section>
 
   <details>
@@ -109,9 +111,9 @@ Reply with no preamble: for each question in page order, **Q[number] — X/Y**, 
     const papers = [...new Set(Object.keys(M).map(k => k.split('|').slice(0, 2).join('|')))];
     const yr = s => { const m = /(\d{4})/.exec(s); return m ? +m[1] : 0; };
     papers.sort((a, b) => { const [ab, as] = a.split('|'), [bb, bs] = b.split('|'); return ORDER.indexOf(ab) - ORDER.indexOf(bb) || yr(bs) - yr(as) || as.localeCompare(bs); });
-    sel.innerHTML = '<option value="">Choose the paper…</option><option value="?">Not sure: let Claude find it</option>';
+    sel.innerHTML = '<option value="">Choose the paper…</option><option value="?">Class test or not sure: Claude finds each question</option>';
     ORDER.forEach(b => { const ps = papers.filter(p => p.startsWith(b + '|')); if (!ps.length) return; const g = document.createElement('optgroup'); g.label = BOOKN[b]; ps.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = name(p); g.append(o); }); sel.append(g); });
-    const last = LS.get('claudemark.paper'); if (last && (last === '?' || papers.includes(last))) sel.value = last;
+    const last = LS.get('claudemark.paper'); sel.value = last && papers.includes(last) ? last : '?';   /* class tests mix papers, so finding each question is the default */
     upd();
   }
   function upd() {
