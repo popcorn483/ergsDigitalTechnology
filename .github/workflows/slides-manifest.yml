@@ -13,6 +13,7 @@ on:
       - "!ks3/**/_view/**"
       - "!papers/manifest.json"
       - "!papers/crops.json"
+      - "!papers/marking.json"
       - "!papers/reports.json"
       - "!papers/topics.json"
       - "!papers/exam-dates.json"
@@ -54,13 +55,14 @@ jobs:
           pip install --quiet pdfplumber
           python3 tools/papers_crops.py || echo "crop finder failed; keeping the previous crops.json"
           python3 tools/papers_trim.py || echo "watermark trim failed"
+          python3 tools/papers_marking.py || echo "mark-scheme text failed; keeping the previous marking.json"
       - name: List each topic's questions and find their examiner-report comments (Teacher area topic packs)
         run: |
           python3 tools/papers_topics.py || echo "topic list failed; keeping the previous topics.json"
           python3 tools/report_crops.py || echo "report finder failed; keeping the previous reports.json"
       - name: Commit the list if it changed
         run: |
-          git add ks3/manifest.json ks3 tests 'notes/Y*.html' notes/podcasts icons index.html teacher.html tools/pupil-activity.gs notes/slides/manifest.json papers/manifest.json papers/crops.json papers/reports.json papers/topics.json
+          git add ks3/manifest.json ks3 tests 'notes/Y*.html' notes/podcasts icons index.html teacher.html tools/pupil-activity.gs notes/slides/manifest.json papers/manifest.json papers/crops.json papers/marking.json papers/reports.json papers/topics.json
           if ! git diff --cached --quiet; then
             git config user.name "github-actions[bot]"
             git config user.email "41898283+github-actions[bot]@users.noreply.github.com"

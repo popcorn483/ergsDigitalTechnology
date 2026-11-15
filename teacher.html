@@ -3864,7 +3864,7 @@ html[data-theme="dark"] #ac-sel[aria-pressed="true"]{color:var(--accent-ink,#0E1
   }
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var I = function (d) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>'; };
-  var IC = { home: I('<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>'), pupils: I('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.6c2.8.2 4.8 1.9 5.4 4.9"/>'), classes: I('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/>'),
+  var IC = { camera: I('<path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>'), home: I('<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>'), pupils: I('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.6c2.8.2 4.8 1.9 5.4 4.9"/>'), classes: I('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/>'),
     topics: I('<path d="M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6"/>'), tests: I('<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 3.5v2h6v-2M8.5 11l2 2 4-4M8.5 17h7"/>'), reports: I('<path d="M6 3.5h9l3 3v14H6z"/><path d="M9 11h6M9 14.5h6M9 18h4"/>'), week: I('<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>'),
     work: I('<path d="M4 5h16v11H8l-4 4z"/><path d="M8 9.5h8M8 12.5h5"/>'), comps: I('<path d="M7 4h10v4a5 5 0 01-10 0z"/><path d="M7 6H4a3 3 0 003 4M17 6h3a3 3 0 01-3 4M12 13v4M8.5 20h7M10 17h4"/>'),
     packs: I('<path d="M4 7l8-4 8 4-8 4z"/><path d="M4 12l8 4 8-4M4 17l8 4 8-4"/>'), test: I('<path d="M9 3.5h6M10 3.5v5L5 18a2 2 0 001.8 3h10.4a2 2 0 001.8-3l-5-9.5v-5"/>'), trends: I('<path d="M3.5 17l5-5 4 4 8-8"/><path d="M15 8h5.5v5.5"/>'), sow: I('<path d="M5 4h14v16H5z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>'), ks3: I('<path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11.5V16c0 1.4 2.2 3 5 3s5-1.6 5-3v-4.5"/>'), back: I('<path d="M15 5l-7 7 7 7"/>'),
@@ -3879,7 +3879,7 @@ html[data-theme="dark"] #ac-sel[aria-pressed="true"]{color:var(--accent-ink,#0E1
   var NAV = [
     ['', [['home', 'Overview', 'home']]],
     ['Pupils', [['p-pupils', 'Pupils', 'pupils', '#t-badge'], ['p-classes', 'Classes & zones', 'classes', '#cl-badge'], ['p-teachers', 'Teachers', 'key']]],
-    ['Progress', [['p-topics', 'Topics', 'topics'], ['p-tests', 'Topic tests', 'tests'], ['p-reports', 'Reports', 'reports'], ['p-week', 'Weekly report', 'week']]],
+    ['Progress', [['p-topics', 'Topics', 'topics'], ['p-tests', 'Topic tests', 'tests'], ['p-reports', 'Reports', 'reports'], ['p-week', 'Weekly report', 'week'], ['checker', 'Paper checker', 'camera', null, 'checker.html']]],
     ['Communicate', [['p-work', 'Set work & messages', 'work'], ['p-comps', 'Competitions', 'comps']]],
     ['Teaching resources', [['packs', 'Topic packs', 'packs'], ['test', 'Build a test', 'test'], ['trends', 'Exam trends', 'trends'], ['sow', 'Scheme of work', 'sow'], ['ks3', 'KS3 topics', 'ks3']]]];
   var TITLE = {}; NAV.forEach(function (g) { g[1].forEach(function (x) { TITLE[x[0]] = x[1]; }); });
@@ -3888,7 +3888,7 @@ html[data-theme="dark"] #ac-sel[aria-pressed="true"]{color:var(--accent-ink,#0E1
   var app = document.createElement('div'); app.className = 'ta-app';
   var side = document.createElement('nav'); side.className = 'ta-side'; side.id = 'ta-side'; side.setAttribute('aria-label', 'Teacher area');
   side.innerHTML = '<div class="ta-brand">Teacher area</div><div class="ta-sub">Mr Butler’s Digital Technology</div>' + NAV.map(function (g) {
-    return (g[0] ? '<div class="ta-g">' + g[0] + '</div>' : '') + g[1].map(function (x) { return '<a class="ta-i" href="#' + x[0] + '" data-go="' + x[0] + '">' + IC[x[2]] + '<span>' + x[1] + '</span>' + (x[3] ? '<span class="ta-b" data-of="' + x[3] + '" hidden></span>' : '') + '</a>'; }).join('');
+    return (g[0] ? '<div class="ta-g">' + g[0] + '</div>' : '') + g[1].map(function (x) { return (x[4] ? '<a class="ta-i" href="' + x[4] + '">' : '<a class="ta-i" href="#' + x[0] + '" data-go="' + x[0] + '">') + IC[x[2]] + '<span>' + x[1] + '</span>' + (x[3] ? '<span class="ta-b" data-of="' + x[3] + '" hidden></span>' : '') + '</a>'; }).join('');
   }).join('') + '<div class="ta-foot"><a class="ta-i" href="index.html">' + IC.back + '<span>Revision site</span></a></div>';
   var mainCol = document.createElement('div'); mainCol.className = 'ta-mainc';
   var top = document.createElement('div'); top.className = 'ta-top'; top.innerHTML = '<button type="button" class="ta-ib ta-menu" aria-controls="ta-side" aria-expanded="false" aria-label="Menu" title="Menu">' + IC.menu + '</button><h1 id="ta-title" tabindex="-1">Overview</h1>';

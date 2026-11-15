@@ -1,0 +1,409 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<script>try{if(!localStorage.getItem('mrb-staff-ok'))location.replace('teacher.html');}catch(e){location.replace('teacher.html');}</script>
+<title>Paper Checker – Mr Butler's</title>
+<meta name="robots" content="noindex"><meta name="theme-color" content="#0E1117">
+<link rel="icon" href="app-icons/favicon-32.png" sizes="32x32">
+<style>
+@font-face{font-family:'Lemon Milk';src:url('fonts/lemonmilk-bold.woff') format('woff');font-weight:700;font-display:swap}
+:root{--bg:#0E1117;--panel:#181C24;--panel-2:#1F2430;--ink:#E9ECF2;--ink-2:#B6BDCA;--ink-3:#8A93A3;--line:#303747;--accent:#8AB6FF;--accent-2:#2445B4;
+--ok:#2FBF71;--ok-soft:rgba(47,191,113,.22);--err:#FF6B5E;--err-soft:rgba(255,107,94,.18);--amber:#F4B740;--sans:'Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif}
+:root[data-theme="light"]{--bg:#0E1117}
+[hidden]{display:none!important}*{box-sizing:border-box}html,body{height:100%}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 var(--sans);overflow:hidden}
+button,select,input{font:inherit;color:inherit}
+button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.app{position:fixed;inset:0;display:grid;grid-template-rows:auto 1fr auto}
+/* top bar */
+.top{display:flex;align-items:center;gap:8px;padding:calc(8px + env(safe-area-inset-top)) 12px 8px;background:rgba(14,17,23,.92);border-bottom:1px solid var(--line);z-index:5}
+.top a.back{color:var(--ink-2);text-decoration:none;font-weight:700;white-space:nowrap}
+.top h1{font-family:'Lemon Milk',var(--sans);font-size:15px;letter-spacing:.06em;margin:0 6px 0 4px;white-space:nowrap}
+.qchip{flex:1;min-width:0;display:flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:5px 6px 5px 12px;cursor:pointer;text-align:left}
+.qchip b{white-space:nowrap}.qchip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2);font-size:13px}
+.qchip .lk{margin-left:auto;flex:none;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:#2A3350;color:var(--accent)}
+.ib{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--panel);display:grid;place-items:center;cursor:pointer;padding:0}
+.ib svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+/* camera stage */
+.stage{position:relative;overflow:hidden;background:#000}
+.stage video,.stage canvas.still{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.stage canvas.ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.hint{position:absolute;left:50%;top:14px;transform:translateX(-50%);max-width:calc(100% - 24px);background:rgba(10,13,20,.78);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:999px;font-weight:700;font-size:14px;text-align:center;backdrop-filter:blur(6px);z-index:2}
+.hint.busy::before{content:"";display:inline-block;width:12px;height:12px;margin-right:8px;vertical-align:-1px;border:2px solid var(--accent);border-right-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.score{position:absolute;right:14px;bottom:14px;z-index:2;background:rgba(10,13,20,.85);border:2px solid var(--ok);border-radius:18px;padding:8px 16px;text-align:center;min-width:96px}
+.score b{display:block;font-family:'Lemon Milk',var(--sans);font-size:34px;line-height:1.05}.score small{color:var(--ink-2);font-size:12px;font-weight:700}
+.score.mid{border-color:var(--amber)}.score.lo{border-color:var(--err)}
+.start{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;z-index:3;background:radial-gradient(ellipse at center,#1A2033,#0E1117)}
+.start .in{max-width:440px}.start h2{font-family:'Lemon Milk',var(--sans);letter-spacing:.04em;margin:0 0 8px;font-size:22px}
+.start p{color:var(--ink-2);margin:0 0 16px}
+.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer;background:var(--accent-2);color:#fff}
+.btn.sec{background:var(--panel-2);color:var(--ink);border:1px solid var(--line)}
+.btn:disabled{opacity:.55;cursor:default}
+/* bottom controls + result sheet */
+.bot{background:var(--panel);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom));z-index:5;max-height:52vh;overflow:auto}
+.ctl{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.ctl .shut{flex:1 1 160px;font-size:16px;padding:13px}
+.tg{display:flex;align-items:center;gap:6px;font-weight:700;font-size:13px;color:var(--ink-2);cursor:pointer;user-select:none}
+.tg input{width:18px;height:18px;accent-color:var(--accent-2)}
+.res{margin-top:10px;display:none}.res.on{display:block}
+.res h3{margin:0 0 6px;font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.res .sum{color:var(--ink-2);margin:0 0 8px}
+.pts{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:6px}
+.pts li{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:start;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
+.pts .ic{grid-row:span 2;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:14px}
+.pts .y .ic{background:var(--ok);color:#06240F}.pts .n .ic{background:#3A4152;color:var(--ink-2)}.pts .x .ic{background:var(--err);color:#2A0603}
+.pts q{quotes:none;color:var(--ink-2);font-style:italic;font-size:13.5px}
+.adj{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 0}
+.adj .mk{font-family:'Lemon Milk',var(--sans);font-size:20px;min-width:70px;text-align:center}
+.adj input[type=text]{flex:1 1 140px;min-width:0;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:9px 10px}
+.pill{font-size:12px;font-weight:800;padding:2px 9px;border-radius:999px;background:var(--panel-2);border:1px solid var(--line);color:var(--ink-2)}
+.pill.warn{border-color:var(--amber);color:var(--amber)}
+details.log{margin-top:10px}details.log summary{cursor:pointer;font-weight:700;color:var(--ink-2)}
+.log table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}.log td,.log th{text-align:left;padding:5px 4px;border-top:1px solid var(--line)}
+/* dialogs */
+dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:18px;max-width:min(560px,calc(100vw - 24px));width:100%}
+dialog::backdrop{background:rgba(0,0,0,.6)}
+dialog h2{margin:0 0 6px;font-size:18px}dialog p{color:var(--ink-2);margin:0 0 10px;font-size:14px}
+dialog label{display:block;font-weight:700;font-size:13px;margin:10px 0 4px}
+dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:10px}
+.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:14px}
+.cands{display:grid;gap:6px;margin:8px 0}.cands button{text-align:left;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer}
+.cands button b{display:block}.cands button span{display:block;color:var(--ink-2);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cands button[aria-pressed="true"]{border-color:var(--accent);background:#232C4C}
+.qprev{max-height:30vh;overflow:auto;background:#fff;border-radius:10px;margin-top:8px}.qprev canvas{display:block;width:100%;height:auto}
+.small{font-size:12.5px;color:var(--ink-3)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (min-width:900px){.app{grid-template-columns:1fr 400px;grid-template-rows:auto 1fr}.top{grid-column:1/3}.bot{max-height:none;border-top:0;border-left:1px solid var(--line)}}
+</style></head>
+<body>
+<div class="app">
+  <header class="top">
+    <a class="back" href="teacher.html">‹ Teacher area</a><h1>Paper checker</h1>
+    <button type="button" class="qchip" id="qchip" aria-label="Choose the question"><b id="qk">No question yet</b><span id="qt">point the camera at an answer</span><span class="lk" id="lk" hidden>Locked</span></button>
+    <button type="button" class="ib" id="setb" aria-label="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+  </header>
+  <main class="stage" id="stage">
+    <video id="vid" playsinline muted autoplay></video>
+    <canvas class="still" id="still" hidden></canvas>
+    <canvas class="ov" id="ov" aria-hidden="true"></canvas>
+    <div class="hint" id="hint" role="status" aria-live="polite" hidden></div>
+    <div class="score" id="score" hidden><b id="scb">–</b><small id="scs">marks</small></div>
+    <div class="start" id="start"><div class="in">
+      <h2>Paper checker</h2>
+      <p>Hold your phone or webcam over a pupil’s answer to a CCEA past-paper question. It finds the question, marks the handwriting against the official mark scheme, highlights the creditworthy parts and suggests the mark.</p>
+      <div class="row" style="justify-content:center"><button type="button" class="btn" id="go">Start camera</button><label class="btn sec" style="display:inline-block">Use a photo<input type="file" id="file" accept="image/*" capture="environment" class="sr"></label></div>
+      <p class="small" style="margin-top:14px">Suggestions only: you decide the final mark. Photos go to Anthropic’s Claude to be marked and aren’t kept on this site; keep pupils’ names out of the frame.</p>
+    </div></div>
+  </main>
+  <section class="bot" aria-label="Marking">
+    <div class="ctl">
+      <button type="button" class="btn shut" id="shut" disabled>Check this answer</button>
+      <label class="tg"><input type="checkbox" id="auto" checked> Auto-check when steady</label>
+      <label class="tg"><input type="checkbox" id="freeze"> Freeze</label>
+    </div>
+    <div class="res" id="res" aria-live="polite">
+      <h3><span id="rh">Suggested mark</span><span class="pill" id="conf"></span></h3>
+      <p class="sum" id="rsum"></p>
+      <ul class="pts" id="pts"></ul>
+      <div class="adj">
+        <button type="button" class="ib" id="minus" aria-label="One mark fewer">−</button><span class="mk" id="mk">0/0</span><button type="button" class="ib" id="plus" aria-label="One mark more">+</button>
+        <input type="text" id="who" maxlength="40" placeholder="Pupil or script no. (optional)" aria-label="Pupil or script number">
+        <button type="button" class="btn" id="save">Save &amp; next</button>
+      </div>
+    </div>
+    <details class="log" id="log"><summary>Marks saved this session (<span id="logn">0</span>)</summary><div id="logb"></div></details>
+  </section>
+</div>
+
+<dialog id="dset" aria-labelledby="dset-h">
+  <h2 id="dset-h">Settings</h2>
+  <p>The checker uses Claude (Anthropic) to read handwriting and apply the mark scheme. Paste an API key from <b>console.anthropic.com</b> › API keys. It’s stored only in this browser on this device, never on the website. Each check costs about 1–3p.</p>
+  <label for="kin">Anthropic API key</label><input id="kin" type="password" autocomplete="off" placeholder="sk-ant-…">
+  <label for="msel">Model for marking</label><select id="msel"><option value="claude-sonnet-5-5">Claude Sonnet 5.5 (recommended: fast, accurate)</option><option value="claude-opus-5-5">Claude Opus 5.5 (most careful, slower, dearer)</option></select>
+  <label for="bsel">Which papers to look in</label><select id="bsel"><option value="">All (GCSE and A level)</option><option value="U1">GCSE Unit 1</option><option value="U4">GCSE Unit 4</option><option value="AS1">AS 1</option><option value="AS2">AS 2</option><option value="A21">A2 1</option></select>
+  <p class="small" style="margin-top:12px">Pupils’ work is sent to Anthropic’s API to be marked. Anthropic doesn’t train on API data. Keep names and candidate numbers out of the frame, and check this fits your school’s data protection guidance.</p>
+  <div class="row"><button type="button" class="btn sec" id="kdel">Remove key</button><button type="button" class="btn" id="ksave">Save</button></div>
+</dialog>
+
+<dialog id="dq" aria-labelledby="dq-h">
+  <h2 id="dq-h">Which question?</h2>
+  <p id="dq-p">Choose the past-paper question this answer is for.</p>
+  <div class="cands" id="cands"></div>
+  <label for="qs">Or search by paper and question</label><input id="qs" type="search" placeholder="e.g. U1 2024 2(a), or words from the question">
+  <div class="cands" id="qres"></div>
+  <div class="qprev" id="qprev" hidden></div>
+  <label class="tg" style="margin-top:10px"><input type="checkbox" id="lock" checked> Keep this question for the next scripts (marking a class set)</label>
+  <div class="row"><button type="button" class="btn sec" id="qauto">Detect it again</button><button type="button" class="btn" id="qok">Use this question</button></div>
+</dialog>
+
+<script>
+(() => {
+  'use strict';
+  const $ = s => document.querySelector(s);
+  const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) { } } };
+  const API = 'https://api.anthropic.com/v1/messages', DETECT_MODEL = 'claude-haiku-5-5', MAXPX = 1568;
+  const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+  const BOOKN = { U1: 'GCSE Unit 1', U4: 'GCSE Unit 4', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1' };
+  const vid = $('#vid'), still = $('#still'), ov = $('#ov'), stage = $('#stage'), hint = $('#hint');
+  let M = null, CROPS = {}, FOLD = {}, MAN = {}, IDF = {}, TOK = {};   /* papers/marking.json etc. */
+  let Q = null, LOCKED = false, RES = null, MARK = 0, SHOT = null, BUSY = false, STREAM = null;
+  let lowRef = null, shift = [0, 0], lastCheckLow = null, steadyN = 0, moved = true;
+
+  const say = (t, busy) => { hint.hidden = !t; hint.textContent = t || ''; hint.classList.toggle('busy', !!busy); };
+  const key = () => LS.get('checker.key') || '';
+  const model = () => LS.get('checker.model') || 'claude-sonnet-5-5';
+  const label = k => { const [b, s, q] = k.split('|'); return `${BOOKN[b] || b} ${s} Q${q}`; };
+
+  /* ---------- the question bank: CCEA question text, mark scheme text and marks for every indexed past-paper question ---------- */
+  const STOP = new Set('the and for that this with from your are was were which what when where how why can its into been have has will would should could their them they these those then than there here about each other more most some such only also not but use used using give state describe explain identify name one two three four five marks mark question answer following below above table figure shown show'.split(' '));
+  const toks = t => (String(t || '').toLowerCase().replace(/\[\d+\]/g, ' ').match(/[a-z][a-z0-9]{2,}/g) || []).filter(w => !STOP.has(w));
+  async function loadBank() {
+    const [m, c, f, man] = await Promise.all(['papers/marking.json', 'papers/crops.json', 'papers/folders.json', 'papers/manifest.json'].map(u => fetch(u, { cache: 'no-cache' }).then(r => r.json())));
+    M = m; CROPS = c; FOLD = f; MAN = man;
+    const df = {}, n = Object.keys(M).length;
+    Object.keys(M).forEach(k => { const s = new Set(toks(M[k].q)); TOK[k] = s; s.forEach(w => { df[w] = (df[w] || 0) + 1; }); });
+    Object.keys(df).forEach(w => { IDF[w] = Math.log(1 + n / df[w]); });
+  }
+  const qnum = s => String(s || '').toLowerCase().replace(/^q(uestion)?\s*/, '').replace(/\s+/g, '');
+  function match(text, num) {   /* rank questions by shared (rare) words in the printed question, plus the question number if it was read */
+    const want = new Set(toks(text)), book = LS.get('checker.book') || '', n = qnum(num);
+    const wsum = [...want].reduce((t, w) => t + (IDF[w] || 0), 0) || 1;
+    return Object.keys(M).filter(k => !book || k.startsWith(book + '|')).map(k => {
+      const have = TOK[k]; let hit = 0; want.forEach(w => { if (have.has(w)) hit += IDF[w] || 0; });
+      const hsum = [...have].reduce((t, w) => t + (IDF[w] || 0), 0) || 1;
+      let sc = hit / Math.sqrt(wsum * hsum); const kq = qnum(k.split('|')[2]);
+      if (n && kq === n) sc += .25; else if (n && (kq.startsWith(n) || n.startsWith(kq))) sc += .08;
+      return [k, sc];
+    }).sort((a, b) => b[1] - a[1]).slice(0, 5);
+  }
+  function search(s) {
+    const t = s.toLowerCase().trim(); if (!t) return [];
+    const parts = t.split(/\s+/), book = LS.get('checker.book') || '';
+    const byKey = Object.keys(M).filter(k => (!book || k.startsWith(book + '|')) && parts.every(p => (label(k) + ' ' + k).toLowerCase().replace(/\s+/g, ' ').includes(p)));
+    return (byKey.length ? byKey : match(s, '').map(x => x[0])).slice(0, 8);
+  }
+
+  /* ---------- the mark scheme crop as a picture (tables and diagrams survive), cut from CCEA's PDF ---------- */
+  let lib = null;
+  const pdfjs = () => lib || (lib = new Promise((ok, no) => { if (window.pdfjsLib) return ok(window.pdfjsLib); const s = document.createElement('script'); s.src = PDFJS + 'pdf.min.js'; s.onload = () => { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; ok(window.pdfjsLib); }; s.onerror = no; document.head.append(s); }));
+  const docs = new Map();
+  async function cropCanvas(k, kind, width) {
+    const [b, s] = k.split('|'), c = CROPS[k] || {}, f = MAN[FOLD[b + '|' + s]] || {}, url = f[kind === 'ms' ? 'ms' : 'paper'], segs = c[kind], xs = c[kind === 'ms' ? 'mx' : 'px'];
+    if (!url || !segs || !segs.length) return null;
+    const L = await pdfjs(); if (!docs.has(url)) docs.set(url, L.getDocument(encodeURI(url)).promise); const doc = await docs.get(url);
+    const parts = [];
+    for (let i = 0; i < segs.length; i++) {
+      const [pn, t, bt] = segs[i], [l, r] = (xs && xs[i]) || [0, 1]; if (pn < 1 || pn > doc.numPages) continue;
+      const pg = await doc.getPage(pn), base = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: width / (base.width * (r - l)) });
+      const full = document.createElement('canvas'); full.width = Math.floor(vp.width); full.height = Math.floor(vp.height);
+      await pg.render({ canvasContext: full.getContext('2d'), viewport: vp }).promise;
+      const x0 = Math.floor(l * full.width), y0 = Math.floor(t * full.height), w = Math.ceil((r - l) * full.width), h = Math.max(1, Math.ceil((bt - t) * full.height));
+      const o = document.createElement('canvas'); o.width = w; o.height = h; o.getContext('2d').drawImage(full, x0, y0, w, h, 0, 0, w, h); parts.push(o);
+    }
+    if (!parts.length) return null;
+    const out = document.createElement('canvas'); out.width = Math.max(...parts.map(p => p.width)); out.height = parts.reduce((t, p) => t + p.height, 0);
+    const g = out.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, out.width, out.height); let y = 0; parts.forEach(p => { g.drawImage(p, 0, y); y += p.height; });
+    return out;
+  }
+
+  /* ---------- Claude ---------- */
+  async function claude(body) {
+    const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json', 'x-api-key': key(), 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' }, body: JSON.stringify(body) });
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) { const m = (j.error && j.error.message) || r.statusText; throw new Error(r.status === 401 ? 'The API key wasn’t accepted. Check it in Settings.' : r.status === 429 ? 'Too many checks at once: wait a few seconds.' : r.status === 529 || r.status >= 500 ? 'Claude is busy just now. Try again in a moment.' : m); }
+    const t = (j.content || []).find(c => c.type === 'tool_use'); if (!t) throw new Error('No result came back. Try again.');
+    return t.input;
+  }
+  const img = (cv, q) => ({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: cv.toDataURL('image/jpeg', q || .85).split(',')[1] } });
+  async function detect(shot) {
+    const r = await claude({ model: DETECT_MODEL, max_tokens: 600, tool_choice: { type: 'tool', name: 'read_question' },
+      tools: [{ name: 'read_question', description: 'Report the PRINTED exam question visible in the photo (not the handwriting).', input_schema: { type: 'object', properties: {
+        question_number: { type: 'string', description: 'Printed question number nearest the handwritten answer, e.g. 2(a)(i), or empty' },
+        printed_text: { type: 'string', description: 'The printed question wording, verbatim, including any part letters and the [n] marks' },
+        has_answer: { type: 'boolean', description: 'Is there a handwritten answer?' } }, required: ['question_number', 'printed_text', 'has_answer'] } }],
+      messages: [{ role: 'user', content: [img(shot.plain, .8), { type: 'text', text: 'This is a photo of a CCEA Digital Technology exam paper with a pupil’s handwritten answer. Read the PRINTED question nearest the handwriting.' }] }] });
+    return r;
+  }
+  async function mark(shot, k) {
+    const q = M[k], ms = await cropCanvas(k, 'ms', 1100).catch(() => null);
+    const content = [img(shot.grid), { type: 'text', text: 'Above: a photo of the pupil’s script. A faint grid is drawn on it, labelled every 100 units from 0 to 1000 across and down, to help you give positions.' }];
+    if (ms) content.push(img(ms, .9), { type: 'text', text: 'Above: the official CCEA mark scheme for this question, cut from the published mark scheme.' });
+    content.push({ type: 'text', text: `Question ${label(k)} (${q.m} mark${q.m === 1 ? '' : 's'}).\n\nPrinted question:\n${q.q}\n\nOfficial mark scheme (text):\n${q.ms}\n\nMark ONLY the pupil’s handwritten answer to this question against this mark scheme, exactly as a CCEA examiner would. Credit each mark-scheme point at most once; apply "any two", "max", "2 × [1]" and band descriptors exactly; never exceed ${q.m}; give no credit for the printed question or for answers to other questions. Accept equivalent wording only where the mark scheme would. For every mark-scheme point say whether it was awarded and quote the pupil’s words that earn it, with a bounding box [x0, y0, x1, y1] (0-1000 grid units, x from the left, y from the top) tightly around those handwritten words. Also list any wrong or contradictory statements the pupil made, with boxes. If the handwriting can’t be read, say so and set readable to "low".` });
+    return claude({ model: model(), max_tokens: 2000, system: 'You are a senior CCEA examiner for GCSE and A level Digital Technology. You mark strictly and fairly to the published mark scheme and explain your decisions briefly for the teacher.', tool_choice: { type: 'tool', name: 'mark_answer' },
+      tools: [{ name: 'mark_answer', description: 'Return the marking of the pupil’s answer.', input_schema: { type: 'object', properties: {
+        answer_found: { type: 'boolean' }, readable: { type: 'string', enum: ['high', 'medium', 'low'] },
+        total: { type: 'integer', description: 'Marks awarded, 0 to the maximum' }, max: { type: 'integer' }, band: { type: 'string', description: 'Band awarded for banded/levels-of-response questions, else empty' },
+        points: { type: 'array', items: { type: 'object', properties: { ms: { type: 'string', description: 'The mark-scheme point, short' }, awarded: { type: 'boolean' }, marks: { type: 'integer' }, quote: { type: 'string', description: 'The pupil’s words that earn it (empty if not awarded)' }, box: { type: 'array', items: { type: 'integer' }, minItems: 4, maxItems: 4 } }, required: ['ms', 'awarded'] } },
+        wrong: { type: 'array', items: { type: 'object', properties: { quote: { type: 'string' }, note: { type: 'string' }, box: { type: 'array', items: { type: 'integer' }, minItems: 4, maxItems: 4 } }, required: ['quote', 'note'] } },
+        summary: { type: 'string', description: 'One or two sentences for the teacher: why this mark' } }, required: ['answer_found', 'readable', 'total', 'max', 'points', 'summary'] } }],
+      messages: [{ role: 'user', content }] });
+  }
+
+  /* ---------- camera ---------- */
+  async function startCam() {
+    try {
+      STREAM = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false });
+      vid.srcObject = STREAM; await vid.play(); $('#start').hidden = true; $('#shut').disabled = false; say('Hold the camera over one answer, with its printed question in view'); loop();
+    } catch (e) { say(''); alert('The camera couldn’t start: ' + (e.name === 'NotAllowedError' ? 'allow camera access for this site in your browser settings.' : e.message) + ' You can use a photo instead.'); }
+  }
+  /* the shot: the frame (≤1568 px), a copy with a faint labelled grid for positions, and a tiny greyscale copy for tracking */
+  function grab(src, w, h) {
+    const s = Math.min(1, MAXPX / Math.max(w, h)), W = Math.round(w * s), H = Math.round(h * s);
+    const plain = document.createElement('canvas'); plain.width = W; plain.height = H; plain.getContext('2d').drawImage(src, 0, 0, W, H);
+    const grid = document.createElement('canvas'); grid.width = W; grid.height = H; const g = grid.getContext('2d'); g.drawImage(plain, 0, 0);
+    g.strokeStyle = 'rgba(0,120,255,.28)'; g.lineWidth = 1; g.fillStyle = 'rgba(0,90,220,.75)'; g.font = `${Math.max(11, Math.round(W / 90))}px sans-serif`;
+    for (let i = 1; i < 10; i++) { const x = W * i / 10, y = H * i / 10; g.beginPath(); g.moveTo(x, 0); g.lineTo(x, H); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); g.fillText(String(i * 100), x + 3, 14); g.fillText(String(i * 100), 3, y - 3); }
+    return { plain, grid, w, h, low: low(src, w, h) };
+  }
+  const LW = 80, LH = 60, lc = document.createElement('canvas'); lc.width = LW; lc.height = LH; const lg = lc.getContext('2d', { willReadFrequently: true });
+  function low(src, w, h) { lg.drawImage(src, 0, 0, w, h, 0, 0, LW, LH); const d = lg.getImageData(0, 0, LW, LH).data, o = new Float32Array(LW * LH); for (let i = 0; i < o.length; i++) o[i] = d[i * 4] * .3 + d[i * 4 + 1] * .59 + d[i * 4 + 2] * .11; return o; }
+  function diff(a, b) { let t = 0; for (let i = 0; i < a.length; i++) t += Math.abs(a[i] - b[i]); return t / a.length; }
+  /* how far the paper has slid since the shot: best small shift of the tiny greyscale frames (keeps the highlights on the words) */
+  function track(ref, cur) {
+    let best = [0, 0, 1e9]; const R = 8, m = 10;
+    for (let dy = -R; dy <= R; dy++) for (let dx = -R; dx <= R; dx++) {
+      let t = 0, n = 0;
+      for (let y = m; y < LH - m; y += 2) for (let x = m; x < LW - m; x += 2) { t += Math.abs(cur[(y + dy) * LW + x + dx] - ref[y * LW + x]); n++; }
+      t /= n; if (t < best[2]) best = [dx, dy, t];
+    }
+    return best;
+  }
+  let lastT = 0;
+  function loop(t) {
+    requestAnimationFrame(loop);
+    if (!STREAM || !vid.videoWidth || $('#freeze').checked || t - lastT < 90) return; lastT = t;
+    const cur = low(vid, vid.videoWidth, vid.videoHeight);
+    if (lowRef) { const [dx, dy, err] = track(lowRef, cur); const ok = err < 22; shift = ok ? [dx, dy] : null; draw(); }
+    if (lastCheckLow) { const d = diff(lastCheckLow, cur); if (d > 18) moved = true; }
+    const prev = loop.p; loop.p = cur;
+    if (prev) { const d = diff(prev, cur); steadyN = d < 4 ? steadyN + 1 : 0; }
+    if ($('#auto').checked && key() && !BUSY && moved && steadyN >= 9) { steadyN = 0; check(); }
+  }
+
+  /* ---------- AR overlay: highlights drawn over the live picture (or the frozen shot), following small movements ---------- */
+  function draw() {
+    const W = stage.clientWidth, H = stage.clientHeight, dpr = window.devicePixelRatio || 1;
+    if (ov.width !== Math.round(W * dpr)) { ov.width = Math.round(W * dpr); ov.height = Math.round(H * dpr); }
+    const g = ov.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
+    if (!RES || !SHOT) return;
+    const frozen = $('#freeze').checked || !STREAM, sh = frozen ? [0, 0] : shift; if (!sh) { $('#score').style.opacity = .5; return; } $('#score').style.opacity = 1;
+    const vw = SHOT.w, vh = SHOT.h, s = Math.min(W / vw, H / vh), ox = (W - vw * s) / 2 + sh[0] * vw / LW * s, oy = (H - vh * s) / 2 + sh[1] * vh / LH * s;
+    const R = b => [ox + b[0] / 1000 * vw * s, oy + b[1] / 1000 * vh * s, ox + b[2] / 1000 * vw * s, oy + b[3] / 1000 * vh * s];
+    const box = (b, fill, stroke, tag) => {
+      if (!Array.isArray(b) || b.length !== 4) return; let [x0, y0, x1, y1] = R(b); if (x1 < x0) [x0, x1] = [x1, x0]; if (y1 < y0) [y0, y1] = [y1, y0]; x0 -= 4; y0 -= 3; x1 += 4; y1 += 3;
+      g.fillStyle = fill; g.strokeStyle = stroke; g.lineWidth = 2.5; g.beginPath(); g.roundRect ? g.roundRect(x0, y0, x1 - x0, y1 - y0, 6) : g.rect(x0, y0, x1 - x0, y1 - y0); g.fill(); g.stroke();
+      g.font = 'bold 14px system-ui,sans-serif'; const tw = g.measureText(tag).width + 12; g.fillStyle = stroke; g.beginPath(); g.roundRect ? g.roundRect(x1 - tw, y0 - 20, tw, 19, 9) : g.rect(x1 - tw, y0 - 20, tw, 19); g.fill();
+      g.fillStyle = '#071A0E'; g.fillText(tag, x1 - tw + 6, y0 - 6);
+    };
+    (RES.wrong || []).forEach(w => box(w.box, 'rgba(255,107,94,.16)', '#FF6B5E', '✗'));
+    (RES.points || []).filter(p => p.awarded).forEach((p, i) => box(p.box, 'rgba(47,191,113,.22)', '#2FBF71', '✓ ' + (p.marks || 1)));
+  }
+  addEventListener('resize', draw);
+
+  /* ---------- a check: shot → question (detected or locked) → mark → highlights ---------- */
+  async function check(fromFile) {
+    if (BUSY) return; if (!key()) { openSet(); return; } if (!M) { say('Loading the mark schemes…', true); await bankP; }
+    BUSY = true; $('#shut').disabled = true;
+    try {
+      const src = fromFile || vid, shot = grab(src, fromFile ? fromFile.width : vid.videoWidth, fromFile ? fromFile.height : vid.videoHeight);
+      SHOT = shot; RES = null; draw(); $('#score').hidden = true; lastCheckLow = shot.low; moved = false;
+      if (!LOCKED || !Q) {
+        say('Finding the question…', true);
+        const d = await detect(shot);
+        if (!d.printed_text && !d.question_number) throw new Error('No printed question in view: include the question above the answer.');
+        const c = match(d.printed_text, d.question_number);
+        if (!c.length || c[0][1] < .18) { BUSY = false; $('#shut').disabled = false; askQ(c, 'I couldn’t be sure which question this is. Choose it below.'); say(''); return; }
+        setQ(c[0][0], false); CANDS = c;
+      }
+      say(`Marking against the ${label(Q)} mark scheme…`, true);
+      const r = await mark(shot, Q);
+      r.max = M[Q].m || r.max; r.total = Math.max(0, Math.min(r.max, r.total | 0));
+      RES = r; MARK = r.total; lowRef = shot.low; shift = [0, 0];
+      if ($('#freeze').checked || fromFile) showStill(shot);
+      showRes(); draw();
+      say(!r.answer_found ? 'No answer found for this question' : r.readable === 'low' ? 'Handwriting hard to read: check this one yourself' : 'Done: move to the next answer');
+    } catch (e) { say(''); say('⚠ ' + e.message); }
+    BUSY = false; $('#shut').disabled = !STREAM && !SHOT;
+  }
+  function showStill(shot) { still.width = shot.plain.width; still.height = shot.plain.height; still.getContext('2d').drawImage(shot.plain, 0, 0); still.hidden = false; vid.hidden = true; SHOT = Object.assign({}, shot, { w: shot.plain.width, h: shot.plain.height }); }
+  function showRes() {
+    const r = RES; $('#res').classList.add('on');
+    $('#rh').textContent = `${label(Q)}: suggested ${r.total}/${r.max}${r.band ? ' · ' + r.band : ''}`;
+    const cf = $('#conf'); cf.textContent = r.readable === 'high' ? 'clear handwriting' : r.readable === 'medium' ? 'some words unclear' : 'hard to read'; cf.className = 'pill' + (r.readable === 'high' ? '' : ' warn');
+    $('#rsum').textContent = r.summary || '';
+    const ul = $('#pts'); ul.innerHTML = '';
+    (r.points || []).forEach(p => { const li = document.createElement('li'); li.className = p.awarded ? 'y' : 'n'; li.innerHTML = `<span class="ic">${p.awarded ? '✓' : '–'}</span><span></span><q></q>`; li.children[1].textContent = p.ms + (p.awarded && (p.marks || 1) > 1 ? ` (${p.marks})` : ''); li.children[2].textContent = p.awarded ? p.quote || '' : 'Not given'; ul.append(li); });
+    (r.wrong || []).forEach(w => { const li = document.createElement('li'); li.className = 'x'; li.innerHTML = '<span class="ic">✗</span><span></span><q></q>'; li.children[1].textContent = w.note; li.children[2].textContent = w.quote; ul.append(li); });
+    upMark();
+  }
+  function upMark() {
+    const r = RES; if (!r) return; $('#mk').textContent = `${MARK}/${r.max}`;
+    const sc = $('#score'); sc.hidden = false; $('#scb').textContent = `${MARK}/${r.max}`; $('#scs').textContent = MARK === r.total ? 'suggested' : 'your mark';
+    sc.className = 'score' + (MARK / r.max >= .7 ? '' : MARK / r.max >= .4 ? ' mid' : ' lo');
+  }
+  $('#minus').onclick = () => { if (RES && MARK > 0) { MARK--; upMark(); } };
+  $('#plus').onclick = () => { if (RES && MARK < RES.max) { MARK++; upMark(); } };
+
+  /* ---------- the question: chip, chooser, lock ---------- */
+  let CANDS = [], PICK = null;
+  function setQ(k, lock) {
+    Q = k; if (lock != null) LOCKED = lock; $('#qk').textContent = label(k); $('#qt').textContent = (M[k].q || '').replace(/\s+/g, ' ').slice(0, 120); $('#lk').hidden = !LOCKED;
+  }
+  function candBtn(k, host) {
+    const b = document.createElement('button'); b.type = 'button'; b.innerHTML = '<b></b><span></span>'; b.firstChild.textContent = `${label(k)} · ${M[k].m} mark${M[k].m === 1 ? '' : 's'}`; b.lastChild.textContent = (M[k].q || '').replace(/\s+/g, ' ');
+    b.setAttribute('aria-pressed', String(k === PICK)); b.onclick = () => { PICK = k; document.querySelectorAll('#dq .cands button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); preview(k); }; host.append(b);
+  }
+  async function preview(k) { const p = $('#qprev'); p.hidden = false; p.innerHTML = '<p class="small" style="color:#333;padding:8px">Loading the question…</p>'; const c = await cropCanvas(k, 'paper', 900).catch(() => null); if (PICK !== k) return; p.innerHTML = ''; if (c) p.append(c); else p.hidden = true; }
+  function askQ(c, msg) {
+    PICK = Q || (c && c[0] && c[0][0]) || null; $('#dq-p').textContent = msg || 'Choose the past-paper question this answer is for.';
+    const h = $('#cands'); h.innerHTML = ''; (c || []).forEach(([k]) => candBtn(k, h)); $('#qres').innerHTML = ''; $('#qs').value = ''; $('#qprev').hidden = true; $('#lock').checked = LOCKED || !Q;
+    if (PICK) preview(PICK); $('#dq').showModal();
+  }
+  $('#qchip').onclick = async () => { if (!M) await bankP; askQ(CANDS.length ? CANDS : Q ? [[Q, 1]] : [], null); };
+  $('#qs').oninput = () => { const h = $('#qres'); h.innerHTML = ''; search($('#qs').value).forEach(k => candBtn(k, h)); };
+  $('#qok').onclick = () => { if (!PICK) return; const ch = PICK !== Q; setQ(PICK, $('#lock').checked); $('#dq').close(); if (ch && SHOT) { moved = true; LOCKED = $('#lock').checked; recheck(); } };
+  $('#qauto').onclick = () => { LOCKED = false; $('#lk').hidden = true; $('#dq').close(); if (SHOT) { Q = null; recheck(); } };
+  async function recheck() { if (!SHOT || BUSY) return; const wasLock = LOCKED; LOCKED = !!Q; BUSY = true; try { say(`Marking against the ${label(Q)} mark scheme…`, true); const r = await mark(SHOT, Q); r.max = M[Q].m || r.max; r.total = Math.max(0, Math.min(r.max, r.total | 0)); RES = r; MARK = r.total; showRes(); draw(); say('Done'); } catch (e) { say('⚠ ' + e.message); } BUSY = false; LOCKED = wasLock; }
+
+  /* ---------- saved marks this session (this device) ---------- */
+  const LOGK = 'checker.log.' + new Date().toISOString().slice(0, 10);
+  const getLog = () => { try { return JSON.parse(LS.get(LOGK) || '[]'); } catch (e) { return []; } };
+  function showLog() {
+    const L = getLog(); $('#logn').textContent = L.length; const b = $('#logb'); b.innerHTML = '';
+    if (!L.length) { b.innerHTML = '<p class="small">Marks you save appear here (on this device, for today).</p>'; return; }
+    const t = document.createElement('table'); t.innerHTML = '<tr><th>Script</th><th>Question</th><th>Mark</th><th>Suggested</th></tr>';
+    L.forEach(x => { const tr = t.insertRow(); [x.who || '–', label(x.q), `${x.mark}/${x.max}`, `${x.ai}/${x.max}`].forEach(v => { tr.insertCell().textContent = v; }); });
+    const cp = document.createElement('button'); cp.type = 'button'; cp.className = 'btn sec'; cp.style.marginTop = '8px'; cp.textContent = 'Copy for a spreadsheet';
+    cp.onclick = () => { navigator.clipboard.writeText(['Script\tQuestion\tMark\tOut of\tSuggested'].concat(L.map(x => [x.who, label(x.q), x.mark, x.max, x.ai].join('\t'))).join('\n')).then(() => { cp.textContent = 'Copied'; }); };
+    const cl = document.createElement('button'); cl.type = 'button'; cl.className = 'btn sec'; cl.style.margin = '8px 0 0 8px'; cl.textContent = 'Clear'; cl.onclick = () => { if (confirm('Clear today’s saved marks on this device?')) { LS.set(LOGK, null); showLog(); } };
+    b.append(t, cp, cl);
+  }
+  $('#save').onclick = () => {
+    if (!RES || !Q) return; const L = getLog(); L.push({ who: $('#who').value.trim(), q: Q, mark: MARK, max: RES.max, ai: RES.total, t: Date.now() }); LS.set(LOGK, JSON.stringify(L)); showLog();
+    const w = $('#who'), m = /^(.*?)(\d+)$/.exec(w.value.trim()); w.value = m ? m[1] + (+m[2] + 1) : '';   /* "Script 4" → "Script 5" */
+    RES = null; draw(); $('#res').classList.remove('on'); $('#score').hidden = true; moved = true;
+    if (!STREAM) { still.hidden = true; } else { still.hidden = true; vid.hidden = false; $('#freeze').checked = false; }
+    say(LOCKED ? `Saved. Next script: hold it over ${label(Q)}` : 'Saved. Hold the camera over the next answer');
+  };
+
+  /* ---------- settings ---------- */
+  function openSet() { $('#kin').value = key(); $('#msel').value = model(); $('#bsel').value = LS.get('checker.book') || ''; $('#dset').showModal(); }
+  $('#setb').onclick = openSet;
+  $('#ksave').onclick = () => { const k = $('#kin').value.trim(); if (k && !/^sk-ant-/.test(k)) { alert('An Anthropic API key starts with sk-ant-'); return; } LS.set('checker.key', k || null); LS.set('checker.model', $('#msel').value); LS.set('checker.book', $('#bsel').value || null); $('#dset').close(); };
+  $('#kdel').onclick = () => { LS.set('checker.key', null); $('#kin').value = ''; };
+
+  /* ---------- controls ---------- */
+  $('#go').onclick = () => { if (!key()) openSet(); startCam(); };
+  $('#shut').onclick = () => { moved = true; check(); };
+  $('#freeze').onchange = () => { if ($('#freeze').checked && SHOT) showStill(SHOT); else if (STREAM) { still.hidden = true; vid.hidden = false; } draw(); };
+  $('#file').onchange = async e => {
+    const f = e.target.files && e.target.files[0]; if (!f) return; $('#start').hidden = true;
+    const bm = await createImageBitmap(f); const c = document.createElement('canvas'); c.width = bm.width; c.height = bm.height; c.getContext('2d').drawImage(bm, 0, 0);
+    still.hidden = false; vid.hidden = true; still.width = c.width; still.height = c.height; still.getContext('2d').drawImage(c, 0, 0);
+    if (!key()) { openSet(); say('Add your API key, then press Check'); SHOT = grab(c, c.width, c.height); $('#shut').disabled = false; $('#shut').onclick = () => check(c); return; }
+    $('#shut').disabled = false; $('#shut').onclick = () => check(c); check(c);
+  };
+  const bankP = loadBank().catch(() => say('⚠ Couldn’t load the mark schemes. Check you’re online.'));
+  showLog();
+})();
+</script>
+</body></html>
