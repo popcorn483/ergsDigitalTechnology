@@ -212,12 +212,14 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
     const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json', 'x-api-key': key(), 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' }, body: JSON.stringify(body) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) { const m = (j.error && j.error.message) || r.statusText; throw new Error(r.status === 401 ? 'The API key wasn’t accepted. Check it in Settings.' : r.status === 429 ? 'Too many checks at once: wait a few seconds.' : r.status === 529 || r.status >= 500 ? 'Claude is busy just now. Try again in a moment.' : m); }
-    const t = (j.content || []).find(c => c.type === 'tool_use'); if (!t) throw new Error('No result came back. Try again.');
-    return t.input;
+    const t = (j.content || []).find(c => c.type === 'tool_use'); if (t && t.input) return t.input;
+    const txt = (j.content || []).filter(c => c.type === 'text').map(c => c.text).join('\n'), m = txt.match(/\{[\s\S]*\}/);   /* answered in text instead of calling the tool */
+    if (m) { try { return JSON.parse(m[0]); } catch (e) { } }
+    throw new Error('No result came back. Try again.');
   }
   const img = (cv, q) => ({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: cv.toDataURL('image/jpeg', q || .85).split(',')[1] } });
   async function detect(shot) {
-    const r = await claude({ model: DETECT_MODEL, max_tokens: 600, tool_choice: { type: 'tool', name: 'read_question' },
+    const r = await claude({ model: DETECT_MODEL, max_tokens: 1500, system: 'Always reply by calling the read_question tool, and nothing else.', 
       tools: [{ name: 'read_question', description: 'Report the PRINTED exam question visible in the photo (not the handwriting).', input_schema: { type: 'object', properties: {
         question_number: { type: 'string', description: 'Printed question number nearest the handwritten answer, e.g. 2(a)(i), or empty' },
         printed_text: { type: 'string', description: 'The printed question wording, verbatim, including any part letters and the [n] marks' },
@@ -230,7 +232,7 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
     const content = [img(shot.grid), { type: 'text', text: 'Above: a photo of the pupil’s script. A faint grid is drawn on it, labelled every 100 units from 0 to 1000 across and down, to help you give positions.' }];
     if (ms) content.push(img(ms, .9), { type: 'text', text: 'Above: the official CCEA mark scheme for this question, cut from the published mark scheme.' });
     content.push({ type: 'text', text: `Question ${label(k)} (${q.m} mark${q.m === 1 ? '' : 's'}).\n\nPrinted question:\n${q.q}\n\nOfficial mark scheme (text):\n${q.ms}\n\nMark ONLY the pupil’s handwritten answer to this question against this mark scheme, exactly as a CCEA examiner would. Credit each mark-scheme point at most once; apply "any two", "max", "2 × [1]" and band descriptors exactly; never exceed ${q.m}; give no credit for the printed question or for answers to other questions. Accept equivalent wording only where the mark scheme would. For every mark-scheme point say whether it was awarded and quote the pupil’s words that earn it, with a bounding box [x0, y0, x1, y1] (0-1000 grid units, x from the left, y from the top) tightly around those handwritten words. Also list any wrong or contradictory statements the pupil made, with boxes. If the handwriting can’t be read, say so and set readable to "low".` });
-    return claude({ model: model(), max_tokens: 2000, system: 'You are a senior CCEA examiner for GCSE and A level Digital Technology. You mark strictly and fairly to the published mark scheme and explain your decisions briefly for the teacher.', tool_choice: { type: 'tool', name: 'mark_answer' },
+    return claude({ model: model(), max_tokens: 6000, system: 'You are a senior CCEA examiner for GCSE and A level Digital Technology. You mark strictly and fairly to the published mark scheme and explain your decisions briefly for the teacher. Always give your result by calling the mark_answer tool.', 
       tools: [{ name: 'mark_answer', description: 'Return the marking of the pupil’s answer.', input_schema: { type: 'object', properties: {
         answer_found: { type: 'boolean' }, readable: { type: 'string', enum: ['high', 'medium', 'low'] },
         total: { type: 'integer', description: 'Marks awarded, 0 to the maximum' }, max: { type: 'integer' }, band: { type: 'string', description: 'Band awarded for banded/levels-of-response questions, else empty' },
