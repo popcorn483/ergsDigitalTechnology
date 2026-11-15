@@ -160,7 +160,8 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
   let QS = [], PAPER = null, LOCKED = false, SHOT = null, BUSY = false, STREAM = null, DONE = false;
   let lowRef = null, shift = [0, 0], lastCheckLow = null, steadyN = 0, moved = true;
 
-  const say = (t, busy) => { hint.hidden = !t; hint.textContent = t || ''; hint.classList.toggle('busy', !!busy); };
+  let sayT = 0;   /* status line: stays while working, fades after a few seconds otherwise so it doesn't cover the highlights */
+  const say = (t, busy) => { clearTimeout(sayT); hint.hidden = !t; hint.textContent = t || ''; hint.classList.toggle('busy', !!busy); if (t && !busy) sayT = setTimeout(() => { hint.hidden = true; }, /^⚠/.test(t) ? 9000 : 4500); };
   const key = () => LS.get('checker.key') || '';
   const model = () => LS.get('checker.model') || 'claude-sonnet-5-5';
   const label = k => { const [b, s, q] = k.split('|'); return `${BOOKN[b] || b} ${s} Q${q}`; };
