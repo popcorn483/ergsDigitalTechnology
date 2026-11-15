@@ -57,6 +57,11 @@ button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{ou
 .adj input[type=text]{flex:1 1 140px;min-width:0;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:9px 10px}
 .pill{font-size:12px;font-weight:800;padding:2px 9px;border-radius:999px;background:var(--panel-2);border:1px solid var(--line);color:var(--ink-2)}
 .pill.warn{border-color:var(--amber);color:var(--amber)}
+.qc{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px;margin:0 0 10px}
+.qc .qh{display:flex;align-items:center;gap:8px;margin-bottom:4px}.qc .qh b{flex:1;min-width:0;font-size:14.5px}
+.qc .qh .ib{width:32px;height:32px;font-weight:900;font-size:17px}.qc .mk{font-family:'Lemon Milk',var(--sans);font-size:17px;min-width:52px;text-align:center}.qc .mk.chg{color:var(--amber)}
+.qc .sum{font-size:13.5px}.qc .pts li{background:var(--panel)}
+.lnk{background:none;border:0;padding:0;color:var(--accent);font-weight:700;text-decoration:underline;cursor:pointer}
 details.log{margin-top:10px}details.log summary{cursor:pointer;font-weight:700;color:var(--ink-2)}
 .log table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}.log td,.log th{text-align:left;padding:5px 4px;border-top:1px solid var(--line)}
 /* dialogs */
@@ -80,7 +85,7 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
 <div class="app">
   <header class="top">
     <a class="back" href="teacher.html" aria-label="Back to the Teacher area">‹<span class="bl"> Teacher area</span></a><h1>Paper checker</h1>
-    <button type="button" class="qchip" id="qchip" aria-label="Choose the question"><b id="qk">No question yet</b><span id="qt">point the camera at an answer</span><span class="lk" id="lk" hidden>Locked</span></button>
+    <button type="button" class="qchip" id="qchip" aria-label="Check which questions were found"><b id="qk">No paper yet</b><span id="qt">point the camera at a page</span><span class="lk" id="lk" hidden>Locked</span></button>
     <button type="button" class="ib" id="torch" aria-label="Torch" aria-pressed="false" hidden><svg viewBox="0 0 24 24"><path d="M9 2h6l-1 6h-4zM10 8h4v4l-1 10h-2l-1-10z"/></svg></button><button type="button" class="ib" id="setb" aria-label="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
   </header>
   <main class="stage" id="stage">
@@ -91,23 +96,22 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
     <div class="score" id="score" hidden><b id="scb">–</b><small id="scs">marks</small></div>
     <div class="start" id="start"><div class="in">
       <h2>Paper checker</h2>
-      <p>Hold your phone or webcam over a pupil’s answer to a CCEA past-paper question. It finds the question, marks the handwriting against the official mark scheme, highlights the creditworthy parts and suggests the mark.</p>
+      <p>Hold your phone or webcam over a page of a pupil’s CCEA past paper. It finds every question on the page, marks each handwritten answer against the official mark scheme, highlights the creditworthy parts and suggests the marks for each question and the page.</p>
       <div class="row" style="justify-content:center"><button type="button" class="btn" id="go">Start camera</button><label class="btn sec" style="display:inline-block">Use a photo<input type="file" id="file" accept="image/*" capture="environment" class="sr"></label></div>
       <p class="small" style="margin-top:14px">Suggestions only: you decide the final mark. Photos go to Anthropic’s Claude to be marked and aren’t kept on this site; keep pupils’ names out of the frame.</p>
     </div></div>
   </main>
   <section class="bot" aria-label="Marking">
     <div class="ctl">
-      <button type="button" class="btn shut" id="shut" disabled>Check this answer</button>
+      <button type="button" class="btn shut" id="shut" disabled>Check this page</button>
       <label class="tg"><input type="checkbox" id="auto" checked> Auto-check when steady</label>
       <label class="tg"><input type="checkbox" id="freeze"> Freeze</label>
+      <label class="tg" for="file" style="text-decoration:underline">Use a photo</label>
     </div>
     <div class="res" id="res" aria-live="polite">
-      <h3><span id="rh">Suggested mark</span><span class="pill" id="conf"></span></h3>
-      <p class="sum" id="rsum"></p>
-      <ul class="pts" id="pts"></ul>
+      <h3><span id="rh">Suggested marks</span><span class="pill" id="conf"></span></h3>
+      <div id="qlist"></div>
       <div class="adj">
-        <button type="button" class="ib" id="minus" aria-label="One mark fewer">−</button><span class="mk" id="mk">0/0</span><button type="button" class="ib" id="plus" aria-label="One mark more">+</button>
         <input type="text" id="who" maxlength="40" placeholder="Pupil or script no. (optional)" aria-label="Pupil or script number">
         <button type="button" class="btn" id="save">Save &amp; next</button>
       </div>
@@ -127,14 +131,19 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
 </dialog>
 
 <dialog id="dq" aria-labelledby="dq-h">
-  <h2 id="dq-h">Which question?</h2>
-  <p id="dq-p">Choose the past-paper question this answer is for.</p>
-  <div class="cands" id="cands"></div>
-  <label for="qs">Or search by paper and question</label><input id="qs" type="search" placeholder="e.g. U1 2024 2(a), or words from the question">
-  <div class="cands" id="qres"></div>
-  <div class="qprev" id="qprev" hidden></div>
-  <label class="tg" style="margin-top:10px"><input type="checkbox" id="lock" checked> Keep this question for the next scripts (marking a class set)</label>
-  <div class="row"><button type="button" class="btn sec" id="qauto">Detect it again</button><button type="button" class="btn" id="qok">Use this question</button></div>
+  <h2 id="dq-h">Questions on this page</h2>
+  <p id="dq-p">Check each question was matched to the right past-paper question. Tap one to change it.</p>
+  <div class="cands" id="found"></div>
+  <div id="pickw" hidden>
+    <h2 id="pick-h" style="font-size:16px;margin-top:12px">Change question</h2>
+    <div class="cands" id="cands"></div>
+    <label for="qs">Search by paper and question</label><input id="qs" type="search" placeholder="e.g. U1 2024 2(a), or words from the question">
+    <div class="cands" id="qres"></div>
+    <div class="qprev" id="qprev" hidden></div>
+    <div class="row"><button type="button" class="btn sec" id="qdrop">Don’t mark this one</button><button type="button" class="btn" id="qok">Use this question</button></div>
+  </div>
+  <label class="tg" style="margin-top:12px"><input type="checkbox" id="lock"> Keep this paper for the next scripts (only look for its questions)</label>
+  <div class="row"><button type="button" class="btn sec" id="qauto">Detect again</button><button type="button" class="btn" id="qdone">Done</button></div>
 </dialog>
 
 <script>
@@ -142,18 +151,22 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
   'use strict';
   const $ = s => document.querySelector(s);
   const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) { } } };
-  const API = 'https://api.anthropic.com/v1/messages', DETECT_MODEL = 'claude-haiku-5-5', MAXPX = 1568;
+  const API = 'https://api.anthropic.com/v1/messages', DETECT_MODEL = 'claude-haiku-5-5', MAXPX = 1568, MS_IMAGES = 6;
   const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
   const BOOKN = { U1: 'GCSE Unit 1', U4: 'GCSE Unit 4', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1' };
   const vid = $('#vid'), still = $('#still'), ov = $('#ov'), stage = $('#stage'), hint = $('#hint');
   let M = null, CROPS = {}, FOLD = {}, MAN = {}, IDF = {}, TOK = {};   /* papers/marking.json etc. */
-  let Q = null, LOCKED = false, RES = null, MARK = 0, SHOT = null, BUSY = false, STREAM = null;
+  /* QS: the questions found on the page: { n: printed number, text, box: answer area (0-1000), k: matched key or null, cands, res, mark } */
+  let QS = [], PAPER = null, LOCKED = false, SHOT = null, BUSY = false, STREAM = null, DONE = false;
   let lowRef = null, shift = [0, 0], lastCheckLow = null, steadyN = 0, moved = true;
 
   const say = (t, busy) => { hint.hidden = !t; hint.textContent = t || ''; hint.classList.toggle('busy', !!busy); };
   const key = () => LS.get('checker.key') || '';
   const model = () => LS.get('checker.model') || 'claude-sonnet-5-5';
   const label = k => { const [b, s, q] = k.split('|'); return `${BOOKN[b] || b} ${s} Q${q}`; };
+  const short = k => 'Q' + k.split('|')[2];
+  const paperOf = k => k.split('|').slice(0, 2).join('|');
+  const paperName = p => { const [b, s] = p.split('|'); return `${BOOKN[b] || b} ${s}`; };
 
   /* ---------- the question bank: CCEA question text, mark scheme text and marks for every indexed past-paper question ---------- */
   const STOP = new Set('the and for that this with from your are was were which what when where how why can its into been have has will would should could their them they these those then than there here about each other more most some such only also not but use used using give state describe explain identify name one two three four five marks mark question answer following below above table figure shown show'.split(' '));
@@ -166,25 +179,41 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
     Object.keys(df).forEach(w => { IDF[w] = Math.log(1 + n / df[w]); });
   }
   const qnum = s => String(s || '').toLowerCase().replace(/^q(uestion)?\s*/, '').replace(/\s+/g, '');
-  function match(text, num) {   /* rank questions by shared (rare) words in the printed question, plus the question number if it was read */
-    const want = new Set(toks(text)), book = LS.get('checker.book') || '', n = qnum(num);
+  const inScope = k => { const book = LS.get('checker.book') || ''; return (!book || k.startsWith(book + '|')) && (!LOCKED || !PAPER || paperOf(k) === PAPER); };
+  function match(text, num, n0) {   /* rank questions by shared (rare) words in the printed question, plus the question number if it was read */
+    const want = new Set(toks(text)), n = qnum(num);
     const wsum = [...want].reduce((t, w) => t + (IDF[w] || 0), 0) || 1;
-    return Object.keys(M).filter(k => !book || k.startsWith(book + '|')).map(k => {
+    return Object.keys(M).filter(inScope).map(k => {
       const have = TOK[k]; let hit = 0; want.forEach(w => { if (have.has(w)) hit += IDF[w] || 0; });
       const hsum = [...have].reduce((t, w) => t + (IDF[w] || 0), 0) || 1;
       let sc = hit / Math.sqrt(wsum * hsum); const kq = qnum(k.split('|')[2]);
       if (n && kq === n) sc += .25; else if (n && (kq.startsWith(n) || n.startsWith(kq))) sc += .08;
       return [k, sc];
-    }).sort((a, b) => b[1] - a[1]).slice(0, 5);
+    }).sort((a, b) => b[1] - a[1]).slice(0, n0 || 6);
+  }
+  /* a page comes from one paper: pick the paper that best explains all the questions, then each question's best match in it */
+  function matchPage(found) {
+    found.forEach(q => { q.cands = match(q.text, q.n, 12); });
+    const tally = {};
+    found.forEach(q => { const best = {}; q.cands.forEach(([k, s]) => { const p = paperOf(k); best[p] = Math.max(best[p] || 0, s); }); Object.keys(best).forEach(p => { tally[p] = (tally[p] || 0) + best[p]; }); });
+    const paper = (LOCKED && PAPER) || (Object.entries(tally).sort((a, b) => b[1] - a[1])[0] || [null])[0];
+    const used = {};
+    found.forEach(q => {
+      const inP = q.cands.find(([k, s]) => paperOf(k) === paper && s >= .1), top = q.cands[0];
+      const pick = inP || (top && top[1] >= .3 ? top : null);
+      q.k = pick ? pick[0] : null; q.sc = pick ? pick[1] : 0;
+    });
+    found.forEach(q => { if (q.k) { if (used[q.k] && used[q.k].sc >= q.sc) q.k = null; else { if (used[q.k]) used[q.k].k = null; used[q.k] = q; } } });   /* one match per question */
+    return paper;
   }
   function search(s) {
     const t = s.toLowerCase().trim(); if (!t) return [];
-    const parts = t.split(/\s+/), book = LS.get('checker.book') || '';
-    const byKey = Object.keys(M).filter(k => (!book || k.startsWith(book + '|')) && parts.every(p => (label(k) + ' ' + k).toLowerCase().replace(/\s+/g, ' ').includes(p)));
+    const parts = t.split(/\s+/);
+    const byKey = Object.keys(M).filter(k => inScope(k) && parts.every(p => (label(k) + ' ' + k).toLowerCase().replace(/\s+/g, ' ').includes(p)));
     return (byKey.length ? byKey : match(s, '').map(x => x[0])).slice(0, 8);
   }
 
-  /* ---------- the mark scheme crop as a picture (tables and diagrams survive), cut from CCEA's PDF ---------- */
+  /* ---------- a mark scheme (or question) crop as a picture, cut from CCEA's PDF, so tables and diagrams survive ---------- */
   let lib = null;
   const pdfjs = () => lib || (lib = new Promise((ok, no) => { if (window.pdfjsLib) return ok(window.pdfjsLib); const s = document.createElement('script'); s.src = PDFJS + 'pdf.min.js'; s.onload = () => { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; ok(window.pdfjsLib); }; s.onerror = no; document.head.append(s); }));
   const docs = new Map();
@@ -207,39 +236,46 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
     return out;
   }
 
-  /* ---------- Claude ---------- */
+  /* ---------- Claude (the tool is offered and asked for; newer models don't allow forcing it, so JSON in the text is accepted too) ---------- */
   async function claude(body) {
     const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json', 'x-api-key': key(), 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' }, body: JSON.stringify(body) });
     const j = await r.json().catch(() => ({}));
     if (!r.ok) { const m = (j.error && j.error.message) || r.statusText; throw new Error(r.status === 401 ? 'The API key wasn’t accepted. Check it in Settings.' : r.status === 429 ? 'Too many checks at once: wait a few seconds.' : r.status === 529 || r.status >= 500 ? 'Claude is busy just now. Try again in a moment.' : m); }
     const t = (j.content || []).find(c => c.type === 'tool_use'); if (t && t.input) return t.input;
-    const txt = (j.content || []).filter(c => c.type === 'text').map(c => c.text).join('\n'), m = txt.match(/\{[\s\S]*\}/);   /* answered in text instead of calling the tool */
+    const txt = (j.content || []).filter(c => c.type === 'text').map(c => c.text).join('\n'), m = txt.match(/\{[\s\S]*\}/);
     if (m) { try { return JSON.parse(m[0]); } catch (e) { } }
     throw new Error('No result came back. Try again.');
   }
   const img = (cv, q) => ({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: cv.toDataURL('image/jpeg', q || .85).split(',')[1] } });
+  const BOX = { type: 'array', items: { type: 'integer' }, minItems: 4, maxItems: 4 };
+  const GRID = 'A faint grid is drawn on the photo, labelled every 100 units from 0 to 1000 across and down; give positions as [x0, y0, x1, y1] in those units (x from the left, y from the top).';
   async function detect(shot) {
-    const r = await claude({ model: DETECT_MODEL, max_tokens: 1500, system: 'Always reply by calling the read_question tool, and nothing else.', 
-      tools: [{ name: 'read_question', description: 'Report the PRINTED exam question visible in the photo (not the handwriting).', input_schema: { type: 'object', properties: {
-        question_number: { type: 'string', description: 'Printed question number nearest the handwritten answer, e.g. 2(a)(i), or empty' },
-        printed_text: { type: 'string', description: 'The printed question wording, verbatim, including any part letters and the [n] marks' },
-        has_answer: { type: 'boolean', description: 'Is there a handwritten answer?' } }, required: ['question_number', 'printed_text', 'has_answer'] } }],
-      messages: [{ role: 'user', content: [img(shot.plain, .8), { type: 'text', text: 'This is a photo of a CCEA Digital Technology exam paper with a pupil’s handwritten answer. Read the PRINTED question nearest the handwriting.' }] }] });
-    return r;
+    const r = await claude({ model: DETECT_MODEL, max_tokens: 3000, system: 'Always reply by calling the read_page tool, and nothing else.',
+      tools: [{ name: 'read_page', description: 'List every PRINTED exam question (or question part) on the page, top to bottom.', input_schema: { type: 'object', properties: {
+        questions: { type: 'array', items: { type: 'object', properties: {
+          question_number: { type: 'string', description: 'Printed number with its part, e.g. 2(a)(i); include the main number for parts, e.g. 3(b) not just (b)' },
+          printed_text: { type: 'string', description: 'The printed question wording, verbatim, with the [n] marks' },
+          has_answer: { type: 'boolean', description: 'Has the pupil written or drawn an answer to it?' },
+          answer_box: Object.assign({ description: 'Area of the page holding this question and the pupil’s answer to it' }, BOX) }, required: ['question_number', 'printed_text', 'has_answer'] } } }, required: ['questions'] } }],
+      messages: [{ role: 'user', content: [img(shot.grid, .8), { type: 'text', text: 'This is a photo of a page of a CCEA Digital Technology exam paper, answered by a pupil in handwriting. List every printed question or question part on the page, in order. ' + GRID }] }] });
+    return (r.questions || []).filter(q => q && (q.printed_text || q.question_number));
   }
-  async function mark(shot, k) {
-    const q = M[k], ms = await cropCanvas(k, 'ms', 1100).catch(() => null);
-    const content = [img(shot.grid), { type: 'text', text: 'Above: a photo of the pupil’s script. A faint grid is drawn on it, labelled every 100 units from 0 to 1000 across and down, to help you give positions.' }];
-    if (ms) content.push(img(ms, .9), { type: 'text', text: 'Above: the official CCEA mark scheme for this question, cut from the published mark scheme.' });
-    content.push({ type: 'text', text: `Question ${label(k)} (${q.m} mark${q.m === 1 ? '' : 's'}).\n\nPrinted question:\n${q.q}\n\nOfficial mark scheme (text):\n${q.ms}\n\nMark ONLY the pupil’s handwritten answer to this question against this mark scheme, exactly as a CCEA examiner would. Credit each mark-scheme point at most once; apply "any two", "max", "2 × [1]" and band descriptors exactly; never exceed ${q.m}; give no credit for the printed question or for answers to other questions. Accept equivalent wording only where the mark scheme would. For every mark-scheme point say whether it was awarded and quote the pupil’s words that earn it, with a bounding box [x0, y0, x1, y1] (0-1000 grid units, x from the left, y from the top) tightly around those handwritten words. Also list any wrong or contradictory statements the pupil made, with boxes. If the handwriting can’t be read, say so and set readable to "low".` });
-    return claude({ model: model(), max_tokens: 6000, system: 'You are a senior CCEA examiner for GCSE and A level Digital Technology. You mark strictly and fairly to the published mark scheme and explain your decisions briefly for the teacher. Always give your result by calling the mark_answer tool.', 
-      tools: [{ name: 'mark_answer', description: 'Return the marking of the pupil’s answer.', input_schema: { type: 'object', properties: {
-        answer_found: { type: 'boolean' }, readable: { type: 'string', enum: ['high', 'medium', 'low'] },
-        total: { type: 'integer', description: 'Marks awarded, 0 to the maximum' }, max: { type: 'integer' }, band: { type: 'string', description: 'Band awarded for banded/levels-of-response questions, else empty' },
-        points: { type: 'array', items: { type: 'object', properties: { ms: { type: 'string', description: 'The mark-scheme point, short' }, awarded: { type: 'boolean' }, marks: { type: 'integer' }, quote: { type: 'string', description: 'The pupil’s words that earn it (empty if not awarded)' }, box: { type: 'array', items: { type: 'integer' }, minItems: 4, maxItems: 4 } }, required: ['ms', 'awarded'] } },
-        wrong: { type: 'array', items: { type: 'object', properties: { quote: { type: 'string' }, note: { type: 'string' }, box: { type: 'array', items: { type: 'integer' }, minItems: 4, maxItems: 4 } }, required: ['quote', 'note'] } },
-        summary: { type: 'string', description: 'One or two sentences for the teacher: why this mark' } }, required: ['answer_found', 'readable', 'total', 'max', 'points', 'summary'] } }],
+  async function markPage(shot, qs) {
+    const content = [img(shot.grid), { type: 'text', text: 'Above: a photo of a page of the pupil’s script. ' + GRID }];
+    const ms = await Promise.all(qs.map((q, i) => i < MS_IMAGES ? cropCanvas(q.k, 'ms', 1000).catch(() => null) : null));
+    qs.forEach((q, i) => { if (ms[i]) content.push(img(ms[i], .85), { type: 'text', text: `Above: the official CCEA mark scheme for ${short(q.k)} (key ${q.k}).` }); });
+    content.push({ type: 'text', text: `Mark the pupil’s handwritten answers to these ${qs.length} question${qs.length === 1 ? '' : 's'} on the page:\n\n` + qs.map(q => { const m = M[q.k]; return `=== key ${q.k}: ${label(q.k)} (${m.m} mark${m.m === 1 ? '' : 's'})${q.box ? ` — on the photo around ${JSON.stringify(q.box)}` : ''}\nPrinted question:\n${m.q}\nOfficial mark scheme (text):\n${m.ms}`; }).join('\n\n') +
+      `\n\nFor EACH question above, mark only the pupil’s answer to that question, exactly as a CCEA examiner would. Credit each mark-scheme point at most once; apply "any two", "max", "2 × [1]" and band descriptors exactly; never exceed the question’s marks; no credit for printed text or for answers written to a different question. Accept equivalent wording only where the mark scheme would. For every mark-scheme point say whether it was awarded and quote the pupil’s words that earn it, with a box tightly around those handwritten words. List wrong or contradictory statements with boxes. If an answer is blank, set answer_found false and total 0. If handwriting can’t be read, set readable "low". Return one entry per key, using the key exactly as given.` });
+    const r = await claude({ model: model(), max_tokens: 4000 + 2500 * qs.length, system: 'You are a senior CCEA examiner for GCSE and A level Digital Technology. You mark strictly and fairly to the published mark scheme and explain your decisions briefly for the teacher. Always give your result by calling the mark_page tool.',
+      tools: [{ name: 'mark_page', description: 'Return the marking of every question on the page.', input_schema: { type: 'object', properties: { questions: { type: 'array', items: { type: 'object', properties: {
+        key: { type: 'string' }, answer_found: { type: 'boolean' }, readable: { type: 'string', enum: ['high', 'medium', 'low'] },
+        total: { type: 'integer' }, max: { type: 'integer' }, band: { type: 'string', description: 'Band for banded questions, else empty' },
+        points: { type: 'array', items: { type: 'object', properties: { ms: { type: 'string', description: 'The mark-scheme point, short' }, awarded: { type: 'boolean' }, marks: { type: 'integer' }, quote: { type: 'string' }, box: BOX }, required: ['ms', 'awarded'] } },
+        wrong: { type: 'array', items: { type: 'object', properties: { quote: { type: 'string' }, note: { type: 'string' }, box: BOX }, required: ['quote', 'note'] } },
+        summary: { type: 'string', description: 'One sentence for the teacher: why this mark' } }, required: ['key', 'answer_found', 'total', 'points', 'summary'] } } }, required: ['questions'] } }],
       messages: [{ role: 'user', content }] });
+    const by = {}; (r.questions || []).forEach(x => { if (x && x.key) by[String(x.key).trim()] = x; });
+    qs.forEach((q, i) => { const x = by[q.k] || (r.questions || [])[i] || { answer_found: false, total: 0, points: [], summary: 'Not marked: try again.' }; x.max = M[q.k].m || x.max || 0; x.total = Math.max(0, Math.min(x.max, x.total | 0)); q.res = x; q.mark = x.total; });
   }
 
   /* ---------- camera ---------- */
@@ -247,7 +283,8 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
     try {
       STREAM = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false });
       vid.srcObject = STREAM; await vid.play(); wake();
-      try { const tr = STREAM.getVideoTracks()[0], cap = tr.getCapabilities ? tr.getCapabilities() : {}; if (cap.torch) { const tb = $('#torch'); tb.hidden = false; tb.onclick = async () => { const on = tb.getAttribute('aria-pressed') !== 'true'; try { await tr.applyConstraints({ advanced: [{ torch: on }] }); tb.setAttribute('aria-pressed', String(on)); tb.style.background = on ? '#F4B740' : ''; tb.style.color = on ? '#000' : ''; } catch (e) { } }; } } catch (e) { } $('#start').hidden = true; $('#shut').disabled = false; say('Hold the camera over one answer, with its printed question in view'); loop();
+      try { const tr = STREAM.getVideoTracks()[0], cap = tr.getCapabilities ? tr.getCapabilities() : {}; if (cap.torch) { const tb = $('#torch'); tb.hidden = false; tb.onclick = async () => { const on = tb.getAttribute('aria-pressed') !== 'true'; try { await tr.applyConstraints({ advanced: [{ torch: on }] }); tb.setAttribute('aria-pressed', String(on)); tb.style.background = on ? '#F4B740' : ''; tb.style.color = on ? '#000' : ''; } catch (e) { } }; } } catch (e) { }
+      $('#start').hidden = true; $('#shut').disabled = false; say('Hold the camera over a whole page, so all its questions are in view'); loop();
     } catch (e) { say(''); alert('The camera couldn’t start: ' + (e.name === 'NotAllowedError' ? 'allow camera access for this site in your browser settings.' : e.message) + ' You can use a photo instead.'); }
   }
   /* phones: keep the screen awake while marking; the camera stops when the app is in the background and restarts on return */
@@ -262,7 +299,7 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
     const grid = document.createElement('canvas'); grid.width = W; grid.height = H; const g = grid.getContext('2d'); g.drawImage(plain, 0, 0);
     g.strokeStyle = 'rgba(0,120,255,.28)'; g.lineWidth = 1; g.fillStyle = 'rgba(0,90,220,.75)'; g.font = `${Math.max(11, Math.round(W / 90))}px sans-serif`;
     for (let i = 1; i < 10; i++) { const x = W * i / 10, y = H * i / 10; g.beginPath(); g.moveTo(x, 0); g.lineTo(x, H); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); g.fillText(String(i * 100), x + 3, 14); g.fillText(String(i * 100), 3, y - 3); }
-    return { plain, grid, w, h, low: low(src, w, h) };
+    return { plain, grid, w: W, h: H, low: low(src, w, h) };
   }
   const LW = 80, LH = 60, lc = document.createElement('canvas'); lc.width = LW; lc.height = LH; const lg = lc.getContext('2d', { willReadFrequently: true });
   function low(src, w, h) { lg.drawImage(src, 0, 0, w, h, 0, 0, LW, LH); const d = lg.getImageData(0, 0, LW, LH).data, o = new Float32Array(LW * LH); for (let i = 0; i < o.length; i++) o[i] = d[i * 4] * .3 + d[i * 4 + 1] * .59 + d[i * 4 + 2] * .11; return o; }
@@ -282,97 +319,144 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
     requestAnimationFrame(loop);
     if (!STREAM || !vid.videoWidth || $('#freeze').checked || t - lastT < 90) return; lastT = t;
     const cur = low(vid, vid.videoWidth, vid.videoHeight);
-    if (lowRef) { const [dx, dy, err] = track(lowRef, cur); const ok = err < 22; shift = ok ? [dx, dy] : null; draw(); }
+    if (lowRef) { const [dx, dy, err] = track(lowRef, cur); shift = err < 22 ? [dx, dy] : null; draw(); }
     if (lastCheckLow) { const d = diff(lastCheckLow, cur); if (d > 18) moved = true; }
     const prev = loop.p; loop.p = cur;
     if (prev) { const d = diff(prev, cur); steadyN = d < 4 ? steadyN + 1 : 0; }
-    if ($('#auto').checked && key() && !BUSY && moved && steadyN >= 9) { steadyN = 0; check(); }
+    if ($('#auto').checked && key() && !BUSY && moved && !DONE && steadyN >= 9) { steadyN = 0; check(); }
   }
 
-  /* ---------- AR overlay: highlights drawn over the live picture (or the frozen shot), following small movements ---------- */
+  /* ---------- AR overlay: each question's highlights and mark, drawn over the live picture (or the frozen shot), following small movements ---------- */
+  const marked = () => QS.filter(q => q.k && q.res);
   function draw() {
     const W = stage.clientWidth, H = stage.clientHeight, dpr = window.devicePixelRatio || 1;
-    if (ov.width !== Math.round(W * dpr)) { ov.width = Math.round(W * dpr); ov.height = Math.round(H * dpr); }
+    if (ov.width !== Math.round(W * dpr) || ov.height !== Math.round(H * dpr)) { ov.width = Math.round(W * dpr); ov.height = Math.round(H * dpr); }
     const g = ov.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
-    if (!RES || !SHOT) return;
-    const frozen = $('#freeze').checked || !STREAM, sh = frozen ? [0, 0] : shift; if (!sh) { $('#score').style.opacity = .5; return; } $('#score').style.opacity = 1;
+    const Q = marked(); if (!Q.length || !SHOT) return;
+    const frozen = $('#freeze').checked || !STREAM, sh = frozen ? [0, 0] : shift; $('#score').style.opacity = sh ? 1 : .5; if (!sh) return;
     const vw = SHOT.w, vh = SHOT.h, s = Math.min(W / vw, H / vh), ox = (W - vw * s) / 2 + sh[0] * vw / LW * s, oy = (H - vh * s) / 2 + sh[1] * vh / LH * s;
-    const R = b => [ox + b[0] / 1000 * vw * s, oy + b[1] / 1000 * vh * s, ox + b[2] / 1000 * vw * s, oy + b[3] / 1000 * vh * s];
-    const box = (b, fill, stroke, tag) => {
-      if (!Array.isArray(b) || b.length !== 4) return; let [x0, y0, x1, y1] = R(b); if (x1 < x0) [x0, x1] = [x1, x0]; if (y1 < y0) [y0, y1] = [y1, y0]; x0 -= 4; y0 -= 3; x1 += 4; y1 += 3;
-      g.fillStyle = fill; g.strokeStyle = stroke; g.lineWidth = 2.5; g.beginPath(); g.roundRect ? g.roundRect(x0, y0, x1 - x0, y1 - y0, 6) : g.rect(x0, y0, x1 - x0, y1 - y0); g.fill(); g.stroke();
-      g.font = 'bold 14px system-ui,sans-serif'; const tw = g.measureText(tag).width + 12; g.fillStyle = stroke; g.beginPath(); g.roundRect ? g.roundRect(x1 - tw, y0 - 20, tw, 19, 9) : g.rect(x1 - tw, y0 - 20, tw, 19); g.fill();
-      g.fillStyle = '#071A0E'; g.fillText(tag, x1 - tw + 6, y0 - 6);
-    };
-    (RES.wrong || []).forEach(w => box(w.box, 'rgba(255,107,94,.16)', '#FF6B5E', '✗'));
-    (RES.points || []).filter(p => p.awarded).forEach((p, i) => box(p.box, 'rgba(47,191,113,.22)', '#2FBF71', '✓ ' + (p.marks || 1)));
+    const R = b => { let [x0, y0, x1, y1] = [ox + b[0] / 1000 * vw * s, oy + b[1] / 1000 * vh * s, ox + b[2] / 1000 * vw * s, oy + b[3] / 1000 * vh * s]; if (x1 < x0) [x0, x1] = [x1, x0]; if (y1 < y0) [y0, y1] = [y1, y0]; return [x0, y0, x1, y1]; };
+    const rr = (x, y, w, h, r) => { g.beginPath(); g.roundRect ? g.roundRect(x, y, w, h, r) : g.rect(x, y, w, h); };
+    const tag = (x, y, text, bg, fg, size) => { g.font = `800 ${size || 13}px system-ui,sans-serif`; const tw = g.measureText(text).width + 12, th = (size || 13) + 7; x = Math.max(2, Math.min(W - tw - 2, x)); y = Math.max(2, y); g.fillStyle = bg; rr(x, y, tw, th, th / 2); g.fill(); g.fillStyle = fg; g.fillText(text, x + 6, y + th - 6); };
+    const box = (b, fill, stroke, t) => { if (!Array.isArray(b) || b.length !== 4) return; const [x0, y0, x1, y1] = R(b); g.fillStyle = fill; g.strokeStyle = stroke; g.lineWidth = 2.5; rr(x0 - 4, y0 - 3, x1 - x0 + 8, y1 - y0 + 6, 6); g.fill(); g.stroke(); tag(x1 - 20, y0 - 22, t, stroke, '#071A0E'); };
+    Q.forEach(q => {
+      const r = q.res;
+      if (Array.isArray(q.box) && q.box.length === 4) {   /* the question's area, with its mark in the corner */
+        const [x0, y0, x1] = R(q.box), f = q.mark / (r.max || 1), c = f >= .7 ? '#2FBF71' : f >= .4 ? '#F4B740' : '#FF6B5E';
+        g.strokeStyle = c; g.setLineDash([6, 5]); g.lineWidth = 1.5; const [, , , y1] = R(q.box); rr(x0, y0, x1 - x0, y1 - y0, 8); g.stroke(); g.setLineDash([]);
+        tag(x1 - 92, y0 + 4, `${short(q.k)}  ${q.mark}/${r.max}`, c, '#0B0F17', 15);
+      }
+      (r.wrong || []).forEach(w => box(w.box, 'rgba(255,107,94,.16)', '#FF6B5E', '✗'));
+      (r.points || []).filter(p => p.awarded).forEach(p => box(p.box, 'rgba(47,191,113,.22)', '#2FBF71', '✓' + ((p.marks || 1) > 1 ? p.marks : '')));
+    });
   }
   addEventListener('resize', draw);
 
-  /* ---------- a check: shot → question (detected or locked) → mark → highlights ---------- */
+  /* ---------- a check: shot → the page's questions (found, matched to one paper) → one marking of them all → highlights ---------- */
   async function check(fromFile) {
     if (BUSY) return; if (!key()) { openSet(); return; } if (!M) { say('Loading the mark schemes…', true); await bankP; }
     BUSY = true; $('#shut').disabled = true;
     try {
       const src = fromFile || vid, shot = grab(src, fromFile ? fromFile.width : vid.videoWidth, fromFile ? fromFile.height : vid.videoHeight);
-      SHOT = shot; RES = null; draw(); $('#score').hidden = true; lastCheckLow = shot.low; moved = false;
-      if (!LOCKED || !Q) {
-        say('Finding the question…', true);
-        const d = await detect(shot);
-        if (!d.printed_text && !d.question_number) throw new Error('No printed question in view: include the question above the answer.');
-        const c = match(d.printed_text, d.question_number);
-        if (!c.length || c[0][1] < .18) { BUSY = false; $('#shut').disabled = false; askQ(c, 'I couldn’t be sure which question this is. Choose it below.'); say(''); return; }
-        setQ(c[0][0], false); CANDS = c;
-      }
-      say(`Marking against the ${label(Q)} mark scheme…`, true);
-      const r = await mark(shot, Q);
-      r.max = M[Q].m || r.max; r.total = Math.max(0, Math.min(r.max, r.total | 0));
-      RES = r; MARK = r.total; lowRef = shot.low; shift = [0, 0];
-      if ($('#freeze').checked || fromFile) showStill(shot);
-      showRes(); draw();
-      say(!r.answer_found ? 'No answer found for this question' : r.readable === 'low' ? 'Handwriting hard to read: check this one yourself' : 'Done: move to the next answer');
-    } catch (e) { say(''); say('⚠ ' + e.message); }
+      SHOT = shot; QS = []; draw(); $('#score').hidden = true; $('#res').classList.remove('on'); lastCheckLow = shot.low; moved = false;
+      say('Finding the questions on this page…', true);
+      const found = (await detect(shot)).map(d => ({ n: d.question_number, text: d.printed_text, has: d.has_answer !== false, box: Array.isArray(d.answer_box) && d.answer_box.length === 4 ? d.answer_box : null }));
+      if (!found.length) throw new Error('No printed questions in view: get the whole page in the picture.');
+      PAPER = matchPage(found); QS = found.filter(q => q.k || q.has); setChip();   /* a question's lead-in (no answer of its own) isn't listed */
+      await markFound(fromFile);
+      if (QS.some(q => !q.k)) say(`${QS.filter(q => !q.k).length} question${QS.filter(q => !q.k).length === 1 ? '' : 's'} not recognised: tap the paper name at the top to choose`);
+    } catch (e) { say('⚠ ' + e.message); }
     BUSY = false; $('#shut').disabled = !STREAM && !SHOT;
   }
-  function showStill(shot) { still.width = shot.plain.width; still.height = shot.plain.height; still.getContext('2d').drawImage(shot.plain, 0, 0); still.hidden = false; vid.hidden = true; SHOT = Object.assign({}, shot, { w: shot.plain.width, h: shot.plain.height }); }
-  function showRes() {
-    const r = RES; $('#res').classList.add('on');
-    $('#rh').textContent = `${label(Q)}: suggested ${r.total}/${r.max}${r.band ? ' · ' + r.band : ''}`;
-    const cf = $('#conf'); cf.textContent = r.readable === 'high' ? 'clear handwriting' : r.readable === 'medium' ? 'some words unclear' : 'hard to read'; cf.className = 'pill' + (r.readable === 'high' ? '' : ' warn');
-    $('#rsum').textContent = r.summary || '';
-    const ul = $('#pts'); ul.innerHTML = '';
-    (r.points || []).forEach(p => { const li = document.createElement('li'); li.className = p.awarded ? 'y' : 'n'; li.innerHTML = `<span class="ic">${p.awarded ? '✓' : '–'}</span><span></span><q></q>`; li.children[1].textContent = p.ms + (p.awarded && (p.marks || 1) > 1 ? ` (${p.marks})` : ''); li.children[2].textContent = p.awarded ? p.quote || '' : 'Not given'; ul.append(li); });
-    (r.wrong || []).forEach(w => { const li = document.createElement('li'); li.className = 'x'; li.innerHTML = '<span class="ic">✗</span><span></span><q></q>'; li.children[1].textContent = w.note; li.children[2].textContent = w.quote; ul.append(li); });
-    upMark();
+  async function markFound(fromFile) {
+    const todo = QS.filter(q => q.k);
+    if (!todo.length) { say(''); askQ('I couldn’t match these questions to a past paper. Choose them below.'); return; }
+    say(`Marking ${todo.length} question${todo.length === 1 ? '' : 's'} against the ${paperName(PAPER || paperOf(todo[0].k))} mark scheme…`, true);
+    await markPage(SHOT, todo);
+    lowRef = SHOT.low; shift = [0, 0]; DONE = true;
+    if ($('#freeze').checked || fromFile || !STREAM) showStill(SHOT);
+    showRes(); draw();
+    const low = todo.filter(q => q.res.readable === 'low').length;
+    say(low ? `${low} answer${low === 1 ? '' : 's'} hard to read: check ${low === 1 ? 'it' : 'them'} yourself` : 'Done: save, then turn the page');
   }
-  function upMark() {
-    const r = RES; if (!r) return; $('#mk').textContent = `${MARK}/${r.max}`;
-    const sc = $('#score'); sc.hidden = false; $('#scb').textContent = `${MARK}/${r.max}`; $('#scs').textContent = MARK === r.total ? 'suggested' : 'your mark';
-    sc.className = 'score' + (MARK / r.max >= .7 ? '' : MARK / r.max >= .4 ? ' mid' : ' lo');
-  }
-  $('#minus').onclick = () => { if (RES && MARK > 0) { MARK--; upMark(); } };
-  $('#plus').onclick = () => { if (RES && MARK < RES.max) { MARK++; upMark(); } };
+  function showStill(shot) { still.width = shot.plain.width; still.height = shot.plain.height; still.getContext('2d').drawImage(shot.plain, 0, 0); still.hidden = false; vid.hidden = true; }
 
-  /* ---------- the question: chip, chooser, lock ---------- */
-  let CANDS = [], PICK = null;
-  function setQ(k, lock) {
-    Q = k; if (lock != null) LOCKED = lock; $('#qk').textContent = label(k); $('#qt').textContent = (M[k].q || '').replace(/\s+/g, ' ').slice(0, 120); $('#lk').hidden = !LOCKED;
+  /* ---------- the results panel: every question with its points, and − / + to change its mark ---------- */
+  const el = (t, cls, txt) => { const e = document.createElement(t); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
+  function showRes() {
+    const Q = marked(); $('#res').classList.toggle('on', !!Q.length);
+    const host = $('#qlist'); host.innerHTML = '';
+    const lowN = Q.filter(q => q.res.readable === 'low').length, cf = $('#conf');
+    cf.textContent = lowN ? `${lowN} hard to read` : Q.some(q => q.res.readable === 'medium') ? 'some words unclear' : 'clear handwriting'; cf.className = 'pill' + (lowN || Q.some(q => q.res.readable === 'medium') ? ' warn' : '');
+    Q.forEach(q => {
+      const r = q.res, card = el('div', 'qc');
+      const head = el('div', 'qh'), t = el('b', null, label(q.k) + (r.band ? ' · ' + r.band : '')), mk = el('span', 'mk');
+      const minus = el('button', 'ib', '−'), plus = el('button', 'ib', '+'); minus.type = plus.type = 'button'; minus.setAttribute('aria-label', 'One mark fewer for ' + short(q.k)); plus.setAttribute('aria-label', 'One mark more for ' + short(q.k));
+      const up = () => { mk.textContent = `${q.mark}/${r.max}`; mk.title = q.mark === r.total ? 'suggested' : `suggested ${r.total}`; mk.classList.toggle('chg', q.mark !== r.total); upTotal(); draw(); };
+      minus.onclick = () => { if (q.mark > 0) { q.mark--; up(); } }; plus.onclick = () => { if (q.mark < r.max) { q.mark++; up(); } };
+      head.append(t, minus, mk, plus); card.append(head);
+      if (r.summary) card.append(el('p', 'sum', (r.answer_found === false ? 'No answer. ' : '') + r.summary));
+      const ul = el('ul', 'pts');
+      (r.points || []).forEach(p => { const li = el('li', p.awarded ? 'y' : 'n'); li.append(el('span', 'ic', p.awarded ? '✓' : '–'), el('span', null, p.ms + (p.awarded && (p.marks || 1) > 1 ? ` (${p.marks})` : '')), el('q', null, p.awarded ? p.quote || '' : 'Not given')); ul.append(li); });
+      (r.wrong || []).forEach(w => { const li = el('li', 'x'); li.append(el('span', 'ic', '✗'), el('span', null, w.note), el('q', null, w.quote)); ul.append(li); });
+      card.append(ul); host.append(card); up();
+    });
+    QS.filter(q => !q.k).forEach(q => { const n = el('p', 'small', `Not marked: Q${q.n || '?'} “${String(q.text || '').replace(/\s+/g, ' ').slice(0, 70)}…” wasn’t matched to a past paper. `); const a = el('button', 'lnk', 'Choose it'); a.type = 'button'; a.onclick = () => askQ(); n.append(a); host.append(n); });
+    upTotal();
   }
+  function upTotal() {
+    const Q = marked(); if (!Q.length) return; const got = Q.reduce((t, q) => t + q.mark, 0), out = Q.reduce((t, q) => t + q.res.max, 0), ai = Q.reduce((t, q) => t + q.res.total, 0);
+    $('#rh').textContent = `This page: ${got}/${out}${got !== ai ? ` (suggested ${ai})` : ' suggested'} · ${Q.length} question${Q.length === 1 ? '' : 's'}`;
+    const sc = $('#score'); sc.hidden = false; $('#scb').textContent = `${got}/${out}`; $('#scs').textContent = got === ai ? 'this page' : 'your marks'; sc.className = 'score' + (got / out >= .7 ? '' : got / out >= .4 ? ' mid' : ' lo');
+  }
+
+  /* ---------- the questions: chip, checking the matches, changing one, locking the paper ---------- */
+  function setChip() {
+    const Q = QS.filter(q => q.k);
+    $('#qk').textContent = PAPER ? paperName(PAPER) : Q.length ? paperName(paperOf(Q[0].k)) : 'No paper yet';
+    $('#qt').textContent = QS.length ? QS.map(q => q.k ? short(q.k) : 'Q' + (q.n || '?') + '?').join(', ') : 'point the camera at a page';
+    $('#lk').hidden = !LOCKED;
+  }
+  let EDIT = -1, PICK = null;
   function candBtn(k, host) {
     const b = document.createElement('button'); b.type = 'button'; b.innerHTML = '<b></b><span></span>'; b.firstChild.textContent = `${label(k)} · ${M[k].m} mark${M[k].m === 1 ? '' : 's'}`; b.lastChild.textContent = (M[k].q || '').replace(/\s+/g, ' ');
-    b.setAttribute('aria-pressed', String(k === PICK)); b.onclick = () => { PICK = k; document.querySelectorAll('#dq .cands button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); preview(k); }; host.append(b);
+    b.setAttribute('aria-pressed', String(k === PICK)); b.onclick = () => { PICK = k; document.querySelectorAll('#pickw .cands button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); preview(k); }; host.append(b);
   }
   async function preview(k) { const p = $('#qprev'); p.hidden = false; p.innerHTML = '<p class="small" style="color:#333;padding:8px">Loading the question…</p>'; const c = await cropCanvas(k, 'paper', 900).catch(() => null); if (PICK !== k) return; p.innerHTML = ''; if (c) p.append(c); else p.hidden = true; }
-  function askQ(c, msg) {
-    PICK = Q || (c && c[0] && c[0][0]) || null; $('#dq-p').textContent = msg || 'Choose the past-paper question this answer is for.';
-    const h = $('#cands'); h.innerHTML = ''; (c || []).forEach(([k]) => candBtn(k, h)); $('#qres').innerHTML = ''; $('#qs').value = ''; $('#qprev').hidden = true; $('#lock').checked = LOCKED || !Q;
-    if (PICK) preview(PICK); $('#dq').showModal();
+  function foundList() {
+    const h = $('#found'); h.innerHTML = '';
+    if (!QS.length) { h.append(el('p', 'small', 'No page checked yet. Choose a paper to keep by searching below, or check a page first.')); }
+    QS.forEach((q, i) => {
+      const b = document.createElement('button'); b.type = 'button'; b.innerHTML = '<b></b><span></span>';
+      b.firstChild.textContent = q.k ? `${label(q.k)} · ${M[q.k].m} mark${M[q.k].m === 1 ? '' : 's'}` : `Q${q.n || '?'}: not matched (not marked)`;
+      b.lastChild.textContent = (q.k ? M[q.k].q : q.text || '').replace(/\s+/g, ' ');
+      b.setAttribute('aria-pressed', String(i === EDIT)); b.onclick = () => openPick(i); h.append(b);
+    });
   }
-  $('#qchip').onclick = async () => { if (!M) await bankP; askQ(CANDS.length ? CANDS : Q ? [[Q, 1]] : [], null); };
+  function openPick(i) {
+    EDIT = i; const q = QS[i]; PICK = q ? q.k : null; foundList(); $('#pickw').hidden = false;
+    $('#pick-h').textContent = q ? `Change Q${q.n || '?'}` : 'Choose a question';
+    const h = $('#cands'); h.innerHTML = ''; ((q && q.cands) || []).slice(0, 4).forEach(([k]) => candBtn(k, h));
+    $('#qres').innerHTML = ''; $('#qs').value = ''; $('#qprev').hidden = true; if (PICK) preview(PICK);
+  }
+  function askQ(msg) {
+    EDIT = -1; $('#pickw').hidden = true; $('#dq-p').textContent = msg || 'Check each question was matched to the right past-paper question. Tap one to change it.';
+    $('#lock').checked = LOCKED; foundList(); if (!QS.length) { $('#pickw').hidden = false; $('#pick-h').textContent = 'Choose a paper'; $('#cands').innerHTML = ''; } $('#dq').showModal();
+  }
+  $('#qchip').onclick = async () => { if (!M) await bankP; askQ(); };
   $('#qs').oninput = () => { const h = $('#qres'); h.innerHTML = ''; search($('#qs').value).forEach(k => candBtn(k, h)); };
-  $('#qok').onclick = () => { if (!PICK) return; const ch = PICK !== Q; setQ(PICK, $('#lock').checked); $('#dq').close(); if (ch && SHOT) { moved = true; LOCKED = $('#lock').checked; recheck(); } };
-  $('#qauto').onclick = () => { LOCKED = false; $('#lk').hidden = true; $('#dq').close(); if (SHOT) { Q = null; recheck(); } };
-  async function recheck() { if (!SHOT || BUSY) return; const wasLock = LOCKED; LOCKED = !!Q; BUSY = true; try { say(`Marking against the ${label(Q)} mark scheme…`, true); const r = await mark(SHOT, Q); r.max = M[Q].m || r.max; r.total = Math.max(0, Math.min(r.max, r.total | 0)); RES = r; MARK = r.total; showRes(); draw(); say('Done'); } catch (e) { say('⚠ ' + e.message); } BUSY = false; LOCKED = wasLock; }
+  let CHANGED = false;
+  $('#qok').onclick = () => {
+    if (!PICK) return;
+    if (EDIT >= 0 && QS[EDIT]) { if (QS[EDIT].k !== PICK) { QS.forEach((q, j) => { if (j !== EDIT && q.k === PICK) q.k = null; }); QS[EDIT].k = PICK; QS[EDIT].res = null; CHANGED = true; } PAPER = paperOf(PICK); }
+    else { PAPER = paperOf(PICK); LOCKED = true; $('#lock').checked = true; }
+    EDIT = -1; $('#pickw').hidden = true; setChip(); foundList();
+  };
+  $('#qdrop').onclick = () => { if (EDIT >= 0 && QS[EDIT]) { QS[EDIT].k = null; QS[EDIT].res = null; } EDIT = -1; $('#pickw').hidden = true; setChip(); foundList(); showRes(); draw(); };
+  $('#lock').onchange = () => { LOCKED = $('#lock').checked && !!PAPER; setChip(); };
+  $('#qdone').onclick = async () => { $('#dq').close(); LOCKED = $('#lock').checked && !!PAPER; setChip(); if (CHANGED && SHOT && !BUSY) { CHANGED = false; const keep = QS.filter(q => q.k && !q.res); if (keep.length) { BUSY = true; try { say(`Marking ${keep.length} question${keep.length === 1 ? '' : 's'}…`, true); await markPage(SHOT, keep); showRes(); draw(); say('Done'); } catch (e) { say('⚠ ' + e.message); } BUSY = false; } else { showRes(); draw(); } } };
+  $('#qauto').onclick = () => { LOCKED = false; $('#lock').checked = false; $('#dq').close(); setChip(); if (SHOT && !BUSY) { moved = true; DONE = false; recheckShot(); } };
+  async function recheckShot() { if (!SHOT) return; const src = !still.hidden ? still : null; if (src) { const c = document.createElement('canvas'); c.width = SHOT.plain.width; c.height = SHOT.plain.height; c.getContext('2d').drawImage(SHOT.plain, 0, 0); check(c); } else check(); }
 
   /* ---------- saved marks this session (this device) ---------- */
   const LOGK = 'checker.log.' + new Date().toISOString().slice(0, 10);
@@ -382,17 +466,20 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
     if (!L.length) { b.innerHTML = '<p class="small">Marks you save appear here (on this device, for today).</p>'; return; }
     const t = document.createElement('table'); t.innerHTML = '<tr><th>Script</th><th>Question</th><th>Mark</th><th>Suggested</th></tr>';
     L.forEach(x => { const tr = t.insertRow(); [x.who || '–', label(x.q), `${x.mark}/${x.max}`, `${x.ai}/${x.max}`].forEach(v => { tr.insertCell().textContent = v; }); });
-    const cp = document.createElement('button'); cp.type = 'button'; cp.className = 'btn sec'; cp.style.marginTop = '8px'; cp.textContent = 'Copy for a spreadsheet';
+    const per = {}; L.forEach(x => { const w = x.who || '–'; per[w] = per[w] || [0, 0]; per[w][0] += x.mark; per[w][1] += x.max; });
+    const tot = el('p', 'small'); tot.style.marginTop = '8px'; tot.textContent = 'Totals: ' + Object.entries(per).map(([w, [a, o]]) => `${w} ${a}/${o}`).join(' · ');
+    const cp = el('button', 'btn sec', 'Copy for a spreadsheet'); cp.type = 'button'; cp.style.marginTop = '8px';
     cp.onclick = () => { navigator.clipboard.writeText(['Script\tQuestion\tMark\tOut of\tSuggested'].concat(L.map(x => [x.who, label(x.q), x.mark, x.max, x.ai].join('\t'))).join('\n')).then(() => { cp.textContent = 'Copied'; }); };
-    const cl = document.createElement('button'); cl.type = 'button'; cl.className = 'btn sec'; cl.style.margin = '8px 0 0 8px'; cl.textContent = 'Clear'; cl.onclick = () => { if (confirm('Clear today’s saved marks on this device?')) { LS.set(LOGK, null); showLog(); } };
-    b.append(t, cp, cl);
+    const cl = el('button', 'btn sec', 'Clear'); cl.type = 'button'; cl.style.margin = '8px 0 0 8px'; cl.onclick = () => { if (confirm('Clear today’s saved marks on this device?')) { LS.set(LOGK, null); showLog(); } };
+    b.append(t, tot, cp, cl);
   }
   $('#save').onclick = () => {
-    if (!RES || !Q) return; const L = getLog(); L.push({ who: $('#who').value.trim(), q: Q, mark: MARK, max: RES.max, ai: RES.total, t: Date.now() }); LS.set(LOGK, JSON.stringify(L)); showLog();
-    const w = $('#who'), m = /^(.*?)(\d+)$/.exec(w.value.trim()); w.value = m ? m[1] + (+m[2] + 1) : '';   /* "Script 4" → "Script 5" */
-    RES = null; draw(); $('#res').classList.remove('on'); $('#score').hidden = true; moved = true;
-    if (!STREAM) { still.hidden = true; } else { still.hidden = true; vid.hidden = false; $('#freeze').checked = false; }
-    say(LOCKED ? `Saved. Next script: hold it over ${label(Q)}` : 'Saved. Hold the camera over the next answer');
+    const Q = marked(); if (!Q.length) return; const L = getLog(), who = $('#who').value.trim();
+    Q.forEach(q => L.push({ who, q: q.k, mark: q.mark, max: q.res.max, ai: q.res.total, t: Date.now() })); LS.set(LOGK, JSON.stringify(L)); showLog();
+    const w = $('#who'), mm = /^(.*?)(\d+)$/.exec(who); w.value = mm ? mm[1] + (+mm[2] + 1) : '';   /* "Script 4" → "Script 5" */
+    QS = []; DONE = false; draw(); $('#res').classList.remove('on'); $('#score').hidden = true; moved = true; setChip();
+    still.hidden = true; vid.hidden = !STREAM; if (STREAM) $('#freeze').checked = false;
+    say(`Saved ${Q.length} mark${Q.length === 1 ? '' : 's'}${who ? ' for ' + who : ''}. Turn to the next page`);
   };
 
   /* ---------- settings ---------- */
@@ -402,15 +489,16 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
   $('#kdel').onclick = () => { LS.set('checker.key', null); $('#kin').value = ''; };
 
   /* ---------- controls ---------- */
+  let FILE = null;
   $('#go').onclick = () => { if (!key()) openSet(); startCam(); };
-  $('#shut').onclick = () => { moved = true; check(); };
+  $('#shut').onclick = () => { moved = true; DONE = false; check(FILE || undefined); };
   $('#freeze').onchange = () => { if ($('#freeze').checked && SHOT) showStill(SHOT); else if (STREAM) { still.hidden = true; vid.hidden = false; } draw(); };
   $('#file').onchange = async e => {
     const f = e.target.files && e.target.files[0]; if (!f) return; $('#start').hidden = true;
-    const bm = await createImageBitmap(f); const c = document.createElement('canvas'); c.width = bm.width; c.height = bm.height; c.getContext('2d').drawImage(bm, 0, 0);
-    still.hidden = false; vid.hidden = true; still.width = c.width; still.height = c.height; still.getContext('2d').drawImage(c, 0, 0);
-    if (!key()) { openSet(); say('Add your API key, then press Check'); SHOT = grab(c, c.width, c.height); $('#shut').disabled = false; $('#shut').onclick = () => check(c); return; }
-    $('#shut').disabled = false; $('#shut').onclick = () => check(c); check(c);
+    e.target.value = ''; const bm = await createImageBitmap(f); const c = document.createElement('canvas'); c.width = bm.width; c.height = bm.height; c.getContext('2d').drawImage(bm, 0, 0); FILE = c;
+    still.hidden = false; vid.hidden = true; still.width = c.width; still.height = c.height; still.getContext('2d').drawImage(c, 0, 0); $('#shut').disabled = false;
+    if (!key()) { openSet(); say('Add your API key, then press Check this page'); return; }
+    check(c);
   };
   const bankP = loadBank().catch(() => say('⚠ Couldn’t load the mark schemes. Check you’re online.'));
   showLog();
