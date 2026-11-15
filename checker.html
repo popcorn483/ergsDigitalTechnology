@@ -1,508 +1,143 @@
 <!doctype html>
 <html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <script>try{if(!localStorage.getItem('mrb-staff-ok'))location.replace('teacher.html');}catch(e){location.replace('teacher.html');}</script>
-<title>Paper Checker – Mr Butler's</title>
+<title>Mark in Claude – Mr Butler's</title>
 <meta name="robots" content="noindex"><meta name="theme-color" content="#0E1117">
 <link rel="icon" href="app-icons/favicon-32.png" sizes="32x32">
 <style>
 @font-face{font-family:'Lemon Milk';src:url('fonts/lemonmilk-bold.woff') format('woff');font-weight:700;font-display:swap}
-:root{--bg:#0E1117;--panel:#181C24;--panel-2:#1F2430;--ink:#E9ECF2;--ink-2:#B6BDCA;--ink-3:#8A93A3;--line:#303747;--accent:#8AB6FF;--accent-2:#2445B4;
---ok:#2FBF71;--ok-soft:rgba(47,191,113,.22);--err:#FF6B5E;--err-soft:rgba(255,107,94,.18);--amber:#F4B740;--sans:'Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif}
-:root[data-theme="light"]{--bg:#0E1117}
-[hidden]{display:none!important}*{box-sizing:border-box}html,body{height:100%}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 var(--sans);overflow:hidden}
+:root{--bg:#0E1117;--panel:#181C24;--panel-2:#1F2430;--ink:#E9ECF2;--ink-2:#B6BDCA;--ink-3:#8A93A3;--line:#303747;--accent:#8AB6FF;--accent-2:#2445B4;--ok:#2FBF71;--amber:#F4B740;
+--sans:'Segoe UI Variable Text','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif}
+[hidden]{display:none!important}*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:var(--bg);color:var(--ink);font:16px/1.5 var(--sans)}
 button,select,input{font:inherit;color:inherit}
-button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.app{position:fixed;inset:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto}
-/* top bar */
-.top{display:flex;align-items:center;gap:8px;padding:calc(8px + env(safe-area-inset-top)) 12px 8px;background:rgba(14,17,23,.92);border-bottom:1px solid var(--line);z-index:5}
-.top a.back{color:var(--ink-2);text-decoration:none;font-weight:700;white-space:nowrap}
-.top h1{font-family:'Lemon Milk',var(--sans);font-size:15px;letter-spacing:.06em;margin:0 6px 0 4px;white-space:nowrap}
-.qchip{flex:1 1 0;min-width:0;overflow:hidden;display:flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:5px 6px 5px 12px;cursor:pointer;text-align:left}
-.qchip b{white-space:nowrap}.qchip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2);font-size:13px}
-.qchip .lk{margin-left:auto;flex:none;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:#2A3350;color:var(--accent)}
-.ib{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--panel);display:grid;place-items:center;cursor:pointer;padding:0}
-.ib svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
-/* camera stage */
-.stage{position:relative;overflow:hidden;background:#000}
-.stage video,.stage canvas.still{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
-.stage canvas.ov{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-.hint{position:absolute;left:50%;top:14px;transform:translateX(-50%);max-width:calc(100% - 24px);background:rgba(10,13,20,.78);border:1px solid rgba(255,255,255,.12);padding:7px 14px;border-radius:999px;font-weight:700;font-size:14px;text-align:center;backdrop-filter:blur(6px);z-index:2}
-.hint.busy::before{content:"";display:inline-block;width:12px;height:12px;margin-right:8px;vertical-align:-1px;border:2px solid var(--accent);border-right-color:transparent;border-radius:50%;animation:spin .8s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.score{position:absolute;right:14px;bottom:14px;z-index:2;background:rgba(10,13,20,.85);border:2px solid var(--ok);border-radius:18px;padding:8px 16px;text-align:center;min-width:96px}
-.score b{display:block;font-family:'Lemon Milk',var(--sans);font-size:34px;line-height:1.05}.score small{color:var(--ink-2);font-size:12px;font-weight:700}
-.score.mid{border-color:var(--amber)}.score.lo{border-color:var(--err)}
-.start{position:absolute;inset:0;display:grid;place-items:center;padding:20px;text-align:center;z-index:3;background:radial-gradient(ellipse at center,#1A2033,#0E1117)}
-.start .in{max-width:440px}.start h2{font-family:'Lemon Milk',var(--sans);letter-spacing:.04em;margin:0 0 8px;font-size:22px}
-.start p{color:var(--ink-2);margin:0 0 16px}
-.btn{border:0;border-radius:12px;padding:12px 18px;font-weight:800;cursor:pointer;background:var(--accent-2);color:#fff}
-.btn.sec{background:var(--panel-2);color:var(--ink);border:1px solid var(--line)}
-.btn:disabled{opacity:.55;cursor:default}
-/* bottom controls + result sheet */
-.bot{background:var(--panel);border-top:1px solid var(--line);padding:10px 12px calc(10px + env(safe-area-inset-bottom));z-index:5;max-height:52vh;overflow:auto}
-.ctl{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.ctl .shut{flex:1 1 160px;font-size:16px;padding:13px}
-.tg{display:flex;align-items:center;gap:6px;font-weight:700;font-size:13px;color:var(--ink-2);cursor:pointer;user-select:none}
-.tg input{width:18px;height:18px;accent-color:var(--accent-2)}
-.res{margin-top:10px;display:none}.res.on{display:block}
-.res h3{margin:0 0 6px;font-size:15px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.res .sum{color:var(--ink-2);margin:0 0 8px}
-.pts{list-style:none;margin:0 0 8px;padding:0;display:grid;gap:6px}
-.pts li{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;align-items:start;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:8px 10px}
-.pts .ic{grid-row:span 2;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-weight:900;font-size:14px}
-.pts .y .ic{background:var(--ok);color:#06240F}.pts .n .ic{background:#3A4152;color:var(--ink-2)}.pts .x .ic{background:var(--err);color:#2A0603}
-.pts q{quotes:none;color:var(--ink-2);font-style:italic;font-size:13.5px}
-.adj{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:8px 0 0}
-.adj .mk{font-family:'Lemon Milk',var(--sans);font-size:20px;min-width:70px;text-align:center}
-.adj input[type=text]{flex:1 1 140px;min-width:0;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:9px 10px}
-.pill{font-size:12px;font-weight:800;padding:2px 9px;border-radius:999px;background:var(--panel-2);border:1px solid var(--line);color:var(--ink-2)}
-.pill.warn{border-color:var(--amber);color:var(--amber)}
-.qc{background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:10px;margin:0 0 10px}
-.qc .qh{display:flex;align-items:center;gap:8px;margin-bottom:4px}.qc .qh b{flex:1;min-width:0;font-size:14.5px}
-.qc .qh .ib{width:32px;height:32px;font-weight:900;font-size:17px}.qc .mk{font-family:'Lemon Milk',var(--sans);font-size:17px;min-width:52px;text-align:center}.qc .mk.chg{color:var(--amber)}
-.qc .sum{font-size:13.5px}.qc .pts li{background:var(--panel)}
-.lnk{background:none;border:0;padding:0;color:var(--accent);font-weight:700;text-decoration:underline;cursor:pointer}
-details.log{margin-top:10px}details.log summary{cursor:pointer;font-weight:700;color:var(--ink-2)}
-.log table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}.log td,.log th{text-align:left;padding:5px 4px;border-top:1px solid var(--line)}
-/* dialogs */
-dialog{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:16px;padding:18px;max-width:min(560px,calc(100vw - 24px));width:100%}
-dialog::backdrop{background:rgba(0,0,0,.6)}
-dialog h2{margin:0 0 6px;font-size:18px}dialog p{color:var(--ink-2);margin:0 0 10px;font-size:14px}
-dialog label{display:block;font-weight:700;font-size:13px;margin:10px 0 4px}
-dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:10px}
-.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end;margin-top:14px}
-.cands{display:grid;gap:6px;margin:8px 0}.cands button{text-align:left;background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:8px 10px;cursor:pointer}
-.cands button b{display:block}.cands button span{display:block;color:var(--ink-2);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.cands button[aria-pressed="true"]{border-color:var(--accent);background:#232C4C}
-.qprev{max-height:30vh;overflow:auto;background:#fff;border-radius:10px;margin-top:8px}.qprev canvas{display:block;width:100%;height:auto}
-.small{font-size:12.5px;color:var(--ink-3)}
+button:focus-visible,select:focus-visible,a:focus-visible,label:focus-within{outline:3px solid var(--accent);outline-offset:2px}
+.top{position:sticky;top:0;display:flex;align-items:center;gap:10px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;background:rgba(14,17,23,.95);border-bottom:1px solid var(--line);z-index:2}
+.top a{color:var(--ink-2);text-decoration:none;font-weight:700;font-size:15px}
+.top h1{font-family:'Lemon Milk',var(--sans);font-size:15px;letter-spacing:.06em;margin:0}
+main{max-width:560px;margin:0 auto;padding:18px 16px calc(28px + env(safe-area-inset-bottom))}
+.lead{color:var(--ink-2);margin:0 0 18px}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;margin:0 0 14px}
+.step h2{display:flex;align-items:center;gap:10px;margin:0 0 10px;font-size:17px}
+.step h2 .n{flex:none;width:28px;height:28px;border-radius:50%;background:var(--accent-2);display:grid;place-items:center;font-size:14px;font-weight:900}
+.step p{margin:0 0 10px;color:var(--ink-2);font-size:14.5px}
+select{width:100%;background:var(--panel-2);border:1px solid var(--line);border-radius:12px;padding:12px}
+.btn{display:block;width:100%;text-align:center;border:0;border-radius:14px;padding:15px 18px;font-weight:800;font-size:17px;cursor:pointer;background:var(--accent-2);color:#fff;text-decoration:none}
+.btn.sec{background:var(--panel-2);color:var(--ink);border:1px solid var(--line);font-size:15px;padding:12px}
+.btn:disabled{opacity:.5;cursor:default}
+.row{display:flex;gap:10px;margin-top:10px}.row>*{flex:1}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-@media (max-width:640px){.top h1{display:none}.top a.back .bl{display:none}.top a.back{font-size:22px;padding:0 4px}.bot{max-height:46dvh}.ctl .shut{flex:1 1 100%}.score{right:10px;bottom:10px;padding:6px 12px;min-width:84px}.score b{font-size:26px}.hint{top:10px;font-size:13px}}
-@media (max-height:500px) and (orientation:landscape){.app{grid-template-columns:minmax(0,1fr) 320px;grid-template-rows:auto minmax(0,1fr)}.top{grid-column:1/3}.bot{max-height:none;border-top:0;border-left:1px solid var(--line)}}
-@media (min-width:900px){.app{grid-template-columns:minmax(0,1fr) 400px;grid-template-rows:auto minmax(0,1fr)}.top{grid-column:1/3}.bot{max-height:none;border-top:0;border-left:1px solid var(--line)}}
+.prev{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 0}.prev img{width:76px;height:100px;object-fit:cover;border-radius:8px;border:1px solid var(--line)}
+.msg{min-height:1.4em;margin:10px 0 0;font-weight:700;font-size:14.5px}.msg.ok{color:var(--ok)}.msg.warn{color:var(--amber)}
+.small{font-size:13px;color:var(--ink-3)}
+details{margin-top:14px}summary{cursor:pointer;font-weight:700;color:var(--ink-2)}
 </style></head>
 <body>
-<div class="app">
-  <header class="top">
-    <a class="back" href="teacher.html" aria-label="Back to the Teacher area">‹<span class="bl"> Teacher area</span></a><h1>Paper checker</h1>
-    <button type="button" class="qchip" id="qchip" aria-label="Check which questions were found"><b id="qk">No paper yet</b><span id="qt">point the camera at a page</span><span class="lk" id="lk" hidden>Locked</span></button>
-    <button type="button" class="ib" id="torch" aria-label="Torch" aria-pressed="false" hidden><svg viewBox="0 0 24 24"><path d="M9 2h6l-1 6h-4zM10 8h4v4l-1 10h-2l-1-10z"/></svg></button><button type="button" class="ib" id="setb" aria-label="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
-  </header>
-  <main class="stage" id="stage">
-    <video id="vid" playsinline muted autoplay></video>
-    <canvas class="still" id="still" hidden></canvas>
-    <canvas class="ov" id="ov" aria-hidden="true"></canvas>
-    <div class="hint" id="hint" role="status" aria-live="polite" hidden></div>
-    <div class="score" id="score" hidden><b id="scb">–</b><small id="scs">marks</small></div>
-    <div class="start" id="start"><div class="in">
-      <h2>Paper checker</h2>
-      <p>Hold your phone or webcam over a page of a pupil’s CCEA past paper. It finds every question on the page, marks each handwritten answer against the official mark scheme, highlights the creditworthy parts and suggests the marks for each question and the page.</p>
-      <div class="row" style="justify-content:center"><button type="button" class="btn" id="go">Start camera</button><label class="btn sec" style="display:inline-block">Use a photo<input type="file" id="file" accept="image/*" capture="environment" class="sr"></label></div>
-      <p class="small" style="margin-top:14px">Suggestions only: you decide the final mark. Photos go to Anthropic’s Claude to be marked and aren’t kept on this site; keep pupils’ names out of the frame.</p>
-    </div></div>
-  </main>
-  <section class="bot" aria-label="Marking">
-    <div class="ctl">
-      <button type="button" class="btn shut" id="shut" disabled>Check this page</button>
-      <label class="tg"><input type="checkbox" id="auto" checked> Auto-check when steady</label>
-      <label class="tg"><input type="checkbox" id="freeze"> Freeze</label>
-      <label class="tg" for="file" style="text-decoration:underline">Use a photo</label>
-    </div>
-    <div class="res" id="res" aria-live="polite">
-      <h3><span id="rh">Suggested marks</span><span class="pill" id="conf"></span></h3>
-      <div id="qlist"></div>
-      <div class="adj">
-        <input type="text" id="who" maxlength="40" placeholder="Pupil or script no. (optional)" aria-label="Pupil or script number">
-        <button type="button" class="btn" id="save">Save &amp; next</button>
-      </div>
-    </div>
-    <details class="log" id="log"><summary>Marks saved this session (<span id="logn">0</span>)</summary><div id="logb"></div></details>
+<header class="top"><a href="teacher.html" aria-label="Back to the Teacher area">‹ Teacher area</a><h1>Mark in Claude</h1></header>
+<main>
+  <p class="lead">Marks pupils’ past-paper pages in the Claude app on your Max plan, with no API key. Pick the paper, take photos of the pages, and send them to Claude with that paper’s official mark schemes attached. Claude replies with the marks for each question, page by page.</p>
+
+  <section class="step" aria-labelledby="s1">
+    <h2 id="s1"><span class="n">1</span>Which paper?</h2>
+    <select id="paper" aria-label="Past paper"><option value="">Loading papers…</option></select>
+    <p class="small" id="pinfo" style="margin:8px 0 0"></p>
   </section>
-</div>
 
-<dialog id="dset" aria-labelledby="dset-h">
-  <h2 id="dset-h">Settings</h2>
-  <p>The checker uses Claude (Anthropic) to read handwriting and apply the mark scheme. Paste an API key from <b>console.anthropic.com</b> › API keys. It’s stored only in this browser on this device, never on the website. Each check costs about 1–3p.</p>
-  <label for="kin">Anthropic API key</label><input id="kin" type="password" autocomplete="off" placeholder="sk-ant-…">
-  <label for="msel">Model for marking</label><select id="msel"><option value="claude-sonnet-5-5">Claude Sonnet 5.5 (recommended: fast, accurate)</option><option value="claude-opus-5-5">Claude Opus 5.5 (most careful, slower, dearer)</option></select>
-  <label for="bsel">Which papers to look in</label><select id="bsel"><option value="">All (GCSE and A level)</option><option value="U1">GCSE Unit 1</option><option value="U4">GCSE Unit 4</option><option value="AS1">AS 1</option><option value="AS2">AS 2</option><option value="A21">A2 1</option></select>
-  <p class="small" style="margin-top:12px">Pupils’ work is sent to Anthropic’s API to be marked. Anthropic doesn’t train on API data. Keep names and candidate numbers out of the frame, and check this fits your school’s data protection guidance.</p>
-  <div class="row"><button type="button" class="btn sec" id="kdel">Remove key</button><button type="button" class="btn" id="ksave">Save</button></div>
-</dialog>
+  <section class="step" aria-labelledby="s2">
+    <h2 id="s2"><span class="n">2</span>Photograph the page</h2>
+    <p>One page at a time works best: flat, well lit, the whole page in the picture. You can add more than one page.</p>
+    <div class="row" style="margin-top:0">
+      <label class="btn">Take photo<input type="file" id="cam" accept="image/*" capture="environment" class="sr"></label>
+      <label class="btn sec" style="display:grid;place-items:center">From gallery<input type="file" id="lib" accept="image/*" multiple class="sr"></label>
+    </div>
+    <div class="prev" id="prev"></div>
+  </section>
 
-<dialog id="dq" aria-labelledby="dq-h">
-  <h2 id="dq-h">Questions on this page</h2>
-  <p id="dq-p">Check each question was matched to the right past-paper question. Tap one to change it.</p>
-  <div class="cands" id="found"></div>
-  <div id="pickw" hidden>
-    <h2 id="pick-h" style="font-size:16px;margin-top:12px">Change question</h2>
-    <div class="cands" id="cands"></div>
-    <label for="qs">Search by paper and question</label><input id="qs" type="search" placeholder="e.g. U1 2024 2(a), or words from the question">
-    <div class="cands" id="qres"></div>
-    <div class="qprev" id="qprev" hidden></div>
-    <div class="row"><button type="button" class="btn sec" id="qdrop">Don’t mark this one</button><button type="button" class="btn" id="qok">Use this question</button></div>
-  </div>
-  <label class="tg" style="margin-top:12px"><input type="checkbox" id="lock"> Keep this paper for the next scripts (only look for its questions)</label>
-  <div class="row"><button type="button" class="btn sec" id="qauto">Detect again</button><button type="button" class="btn" id="qdone">Done</button></div>
-</dialog>
+  <section class="step" aria-labelledby="s3">
+    <h2 id="s3"><span class="n">3</span>Send to Claude</h2>
+    <p id="how">Choose <b>Claude</b> in the share menu. The photo and the mark schemes go into a new chat, and Claude marks the page.</p>
+    <button type="button" class="btn" id="send" disabled>Send to Claude</button>
+    <div class="row"><button type="button" class="btn sec" id="copy" disabled>Copy mark schemes only</button><button type="button" class="btn sec" id="clear">Next page</button></div>
+    <p class="msg" id="msg" role="status" aria-live="polite"></p>
+  </section>
 
+  <details>
+    <summary>If Claude doesn’t appear in the share menu</summary>
+    <p class="small">Install the Claude app and sign in. If the share menu still doesn’t offer it, or the mark schemes don’t come through with the photo: press <b>Copy mark schemes only</b>, open the Claude app, start a chat (your SCHOOL project is ideal), paste, and attach the photo.</p>
+    <p class="small">On a computer, <b>Send to Claude</b> copies the mark schemes, saves the photo and opens claude.ai: paste and attach the photo there.</p>
+  </details>
+  <p class="small" style="margin-top:14px">Photos go to Claude to be marked; keep pupils’ names and candidate numbers out of the picture. Claude’s marks are suggestions: you decide the final mark.</p>
+</main>
 <script>
 (() => {
   'use strict';
   const $ = s => document.querySelector(s);
   const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { v == null ? localStorage.removeItem(k) : localStorage.setItem(k, v); } catch (e) { } } };
-  const API = 'https://api.anthropic.com/v1/messages', DETECT_MODEL = 'claude-haiku-5-5', MAXPX = 1568, MS_IMAGES = 6;
-  const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
-  const BOOKN = { U1: 'GCSE Unit 1', U4: 'GCSE Unit 4', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1' };
-  const vid = $('#vid'), still = $('#still'), ov = $('#ov'), stage = $('#stage'), hint = $('#hint');
-  let M = null, CROPS = {}, FOLD = {}, MAN = {}, IDF = {}, TOK = {};   /* papers/marking.json etc. */
-  /* QS: the questions found on the page: { n: printed number, text, box: answer area (0-1000), k: matched key or null, cands, res, mark } */
-  let QS = [], PAPER = null, LOCKED = false, SHOT = null, BUSY = false, STREAM = null, DONE = false;
-  let lowRef = null, shift = [0, 0], lastCheckLow = null, steadyN = 0, moved = true;
+  const BOOKN = { U1: 'GCSE Unit 1', U4: 'GCSE Unit 4', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1' }, ORDER = ['U1', 'U4', 'AS1', 'AS2', 'A21'];
+  let M = null, FILES = [];
+  const sel = $('#paper'), msg = (t, c) => { const m = $('#msg'); m.textContent = t || ''; m.className = 'msg' + (c ? ' ' + c : ''); };
+  const name = p => { const [b, s] = p.split('|'); return `${BOOKN[b] || b} ${s}`; };
+  const qord = q => { const n = /(\d+)/.exec(q); return [n ? +n[1] : 0, q]; };
+  const keys = p => Object.keys(M).filter(k => k.startsWith(p + '|')).sort((a, b) => { const x = qord(a.split('|')[2]), y = qord(b.split('|')[2]); return x[0] - y[0] || x[1].localeCompare(y[1]); });
 
-  let sayT = 0;   /* status line: stays while working, fades after a few seconds otherwise so it doesn't cover the highlights */
-  const say = (t, busy) => { clearTimeout(sayT); hint.hidden = !t; hint.textContent = t || ''; hint.classList.toggle('busy', !!busy); if (t && !busy) sayT = setTimeout(() => { hint.hidden = true; }, /^⚠/.test(t) ? 9000 : 4500); };
-  const key = () => LS.get('checker.key') || '';
-  const model = () => LS.get('checker.model') || 'claude-sonnet-5-5';
-  const label = k => { const [b, s, q] = k.split('|'); return `${BOOKN[b] || b} ${s} Q${q}`; };
-  const short = k => 'Q' + k.split('|')[2];
-  const paperOf = k => k.split('|').slice(0, 2).join('|');
-  const paperName = p => { const [b, s] = p.split('|'); return `${BOOKN[b] || b} ${s}`; };
+  /* the message Claude gets: how to mark (matching the ccea-paper-marking skill) and this paper's official questions and mark schemes */
+  function prompt(p) {
+    return `Mark this page of a pupil’s CCEA ${name(p)} Digital Technology script, using the official mark schemes below (use the ccea-paper-marking skill if you have it).
 
-  /* ---------- the question bank: CCEA question text, mark scheme text and marks for every indexed past-paper question ---------- */
-  const STOP = new Set('the and for that this with from your are was were which what when where how why can its into been have has will would should could their them they these those then than there here about each other more most some such only also not but use used using give state describe explain identify name one two three four five marks mark question answer following below above table figure shown show'.split(' '));
-  const toks = t => (String(t || '').toLowerCase().replace(/\[\d+\]/g, ' ').match(/[a-z][a-z0-9]{2,}/g) || []).filter(w => !STOP.has(w));
-  async function loadBank() {
-    const [m, c, f, man] = await Promise.all(['papers/marking.json', 'papers/crops.json', 'papers/folders.json', 'papers/manifest.json'].map(u => fetch(u, { cache: 'no-cache' }).then(r => r.json())));
-    M = m; CROPS = c; FOLD = f; MAN = man;
-    const df = {}, n = Object.keys(M).length;
-    Object.keys(M).forEach(k => { const s = new Set(toks(M[k].q)); TOK[k] = s; s.forEach(w => { df[w] = (df[w] || 0) + 1; }); });
-    Object.keys(df).forEach(w => { IDF[w] = Math.log(1 + n / df[w]); });
-  }
-  const qnum = s => String(s || '').toLowerCase().replace(/^q(uestion)?\s*/, '').replace(/\s+/g, '');
-  const inScope = k => { const book = LS.get('checker.book') || ''; return (!book || k.startsWith(book + '|')) && (!LOCKED || !PAPER || paperOf(k) === PAPER); };
-  function match(text, num, n0) {   /* rank questions by shared (rare) words in the printed question, plus the question number if it was read */
-    const want = new Set(toks(text)), n = qnum(num);
-    const wsum = [...want].reduce((t, w) => t + (IDF[w] || 0), 0) || 1;
-    return Object.keys(M).filter(inScope).map(k => {
-      const have = TOK[k]; let hit = 0; want.forEach(w => { if (have.has(w)) hit += IDF[w] || 0; });
-      const hsum = [...have].reduce((t, w) => t + (IDF[w] || 0), 0) || 1;
-      let sc = hit / Math.sqrt(wsum * hsum); const kq = qnum(k.split('|')[2]);
-      if (n && kq === n) sc += .25; else if (n && (kq.startsWith(n) || n.startsWith(kq))) sc += .08;
-      return [k, sc];
-    }).sort((a, b) => b[1] - a[1]).slice(0, n0 || 6);
-  }
-  /* a page comes from one paper: pick the paper that best explains all the questions, then each question's best match in it */
-  function matchPage(found) {
-    found.forEach(q => { q.cands = match(q.text, q.n, 12); });
-    const tally = {};
-    found.forEach(q => { const best = {}; q.cands.forEach(([k, s]) => { const p = paperOf(k); best[p] = Math.max(best[p] || 0, s); }); Object.keys(best).forEach(p => { tally[p] = (tally[p] || 0) + best[p]; }); });
-    const paper = (LOCKED && PAPER) || (Object.entries(tally).sort((a, b) => b[1] - a[1])[0] || [null])[0];
-    const used = {};
-    found.forEach(q => {
-      const inP = q.cands.find(([k, s]) => paperOf(k) === paper && s >= .1), top = q.cands[0];
-      const pick = inP || (top && top[1] >= .3 ? top : null);
-      q.k = pick ? pick[0] : null; q.sc = pick ? pick[1] : 0;
-    });
-    found.forEach(q => { if (q.k) { if (used[q.k] && used[q.k].sc >= q.sc) q.k = null; else { if (used[q.k]) used[q.k].k = null; used[q.k] = q; } } });   /* one match per question */
-    return paper;
-  }
-  function search(s) {
-    const t = s.toLowerCase().trim(); if (!t) return [];
-    const parts = t.split(/\s+/);
-    const byKey = Object.keys(M).filter(k => inScope(k) && parts.every(p => (label(k) + ' ' + k).toLowerCase().replace(/\s+/g, ' ').includes(p)));
-    return (byKey.length ? byKey : match(s, '').map(x => x[0])).slice(0, 8);
+How to mark: find each printed question on the page in the list below and mark only the pupil’s answer to it, strictly to its mark scheme as a CCEA examiner would. Credit each point once; apply "any two", "max", "2 × [1]", exclusions and bands exactly; never exceed the marks; no credit for printed text. If handwriting is unclear, say which words. If a question isn’t in the list, say so; don’t invent a mark scheme.
+
+Reply with no preamble: for each question in page order, **Q[number] — X/Y**, then ✓ [point] — "[pupil’s words]", ✗ [wrong statement] — why, and – Not given: [missed points], plus one short sentence. Marks per question only: no page total, running total or summary. Then wait for the next page.
+
+=== ${name(p)}: official questions and mark schemes ===
+` + keys(p).map(k => { const m = M[k]; return `\n### Q${k.split('|')[2]} [${m.m} mark${m.m === 1 ? '' : 's'}]\nQuestion: ${m.q.replace(/\n+/g, ' ').trim()}\nMark scheme:\n${m.ms.trim()}`; }).join('\n');
   }
 
-  /* ---------- a mark scheme (or question) crop as a picture, cut from CCEA's PDF, so tables and diagrams survive ---------- */
-  let lib = null;
-  const pdfjs = () => lib || (lib = new Promise((ok, no) => { if (window.pdfjsLib) return ok(window.pdfjsLib); const s = document.createElement('script'); s.src = PDFJS + 'pdf.min.js'; s.onload = () => { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; ok(window.pdfjsLib); }; s.onerror = no; document.head.append(s); }));
-  const docs = new Map();
-  async function cropCanvas(k, kind, width) {
-    const [b, s] = k.split('|'), c = CROPS[k] || {}, f = MAN[FOLD[b + '|' + s]] || {}, url = f[kind === 'ms' ? 'ms' : 'paper'], segs = c[kind], xs = c[kind === 'ms' ? 'mx' : 'px'];
-    if (!url || !segs || !segs.length) return null;
-    const L = await pdfjs(); if (!docs.has(url)) docs.set(url, L.getDocument(encodeURI(url)).promise); const doc = await docs.get(url);
-    const parts = [];
-    for (let i = 0; i < segs.length; i++) {
-      const [pn, t, bt] = segs[i], [l, r] = (xs && xs[i]) || [0, 1]; if (pn < 1 || pn > doc.numPages) continue;
-      const pg = await doc.getPage(pn), base = pg.getViewport({ scale: 1 }), vp = pg.getViewport({ scale: width / (base.width * (r - l)) });
-      const full = document.createElement('canvas'); full.width = Math.floor(vp.width); full.height = Math.floor(vp.height);
-      await pg.render({ canvasContext: full.getContext('2d'), viewport: vp }).promise;
-      const x0 = Math.floor(l * full.width), y0 = Math.floor(t * full.height), w = Math.ceil((r - l) * full.width), h = Math.max(1, Math.ceil((bt - t) * full.height));
-      const o = document.createElement('canvas'); o.width = w; o.height = h; o.getContext('2d').drawImage(full, x0, y0, w, h, 0, 0, w, h); parts.push(o);
+  async function load() {
+    M = await fetch('papers/marking.json', { cache: 'no-cache' }).then(r => r.json());
+    const papers = [...new Set(Object.keys(M).map(k => k.split('|').slice(0, 2).join('|')))];
+    const yr = s => { const m = /(\d{4})/.exec(s); return m ? +m[1] : 0; };
+    papers.sort((a, b) => { const [ab, as] = a.split('|'), [bb, bs] = b.split('|'); return ORDER.indexOf(ab) - ORDER.indexOf(bb) || yr(bs) - yr(as) || as.localeCompare(bs); });
+    sel.innerHTML = '<option value="">Choose the paper…</option>';
+    ORDER.forEach(b => { const ps = papers.filter(p => p.startsWith(b + '|')); if (!ps.length) return; const g = document.createElement('optgroup'); g.label = BOOKN[b]; ps.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = name(p); g.append(o); }); sel.append(g); });
+    const last = LS.get('claudemark.paper'); if (last && papers.includes(last)) sel.value = last;
+    upd();
+  }
+  function upd() {
+    const p = sel.value; LS.set('claudemark.paper', p || null);
+    $('#pinfo').textContent = p ? `${keys(p).length} questions with mark schemes. This paper stays selected for your next pages.` : '';
+    $('#send').disabled = !p || !FILES.length; $('#copy').disabled = !p;
+  }
+  sel.onchange = upd;
+
+  function addFiles(list) {
+    [...list].forEach(f => { if (/^image\//.test(f.type)) FILES.push(f); });
+    const pv = $('#prev'); pv.innerHTML = '';
+    FILES.forEach(f => { const i = document.createElement('img'); i.alt = 'Page photo'; i.src = URL.createObjectURL(f); pv.append(i); });
+    msg(FILES.length ? `${FILES.length} page photo${FILES.length === 1 ? '' : 's'} ready` : '', 'ok'); upd();
+  }
+  $('#cam').onchange = e => { addFiles(e.target.files); e.target.value = ''; };
+  $('#lib').onchange = e => { addFiles(e.target.files); e.target.value = ''; };
+  $('#clear').onclick = () => { FILES = []; $('#prev').innerHTML = ''; msg('Ready for the next page'); upd(); };
+
+  async function copy(t) { try { await navigator.clipboard.writeText(t); return true; } catch (e) { const a = document.createElement('textarea'); a.value = t; document.body.append(a); a.select(); let ok = false; try { ok = document.execCommand('copy'); } catch (x) { } a.remove(); return ok; } }
+  $('#copy').onclick = async () => { if (!sel.value) return; msg(await copy(prompt(sel.value)) ? 'Mark schemes copied: paste them into Claude with the photo' : 'Couldn’t copy: try again', 'ok'); };
+
+  $('#send').onclick = async () => {
+    const p = sel.value; if (!p || !FILES.length) return; const text = prompt(p);
+    await copy(text);   /* copied as well, in case the app keeps only the photo */
+    const files = FILES.map((f, i) => new File([f], `${name(p).replace(/\s+/g, '-')}-page${FILES.length > 1 ? '-' + (i + 1) : ''}.${(f.type.split('/')[1] || 'jpg').replace('jpeg', 'jpg')}`, { type: f.type }));
+    if (navigator.canShare && navigator.canShare({ files })) {
+      try { await navigator.share({ files, text, title: 'Mark this page' }); msg('Sent. If the mark schemes aren’t in the message, paste them (they’re copied)', 'ok'); return; }
+      catch (e) { if (e.name === 'AbortError') { msg(''); return; } }
     }
-    if (!parts.length) return null;
-    const out = document.createElement('canvas'); out.width = Math.max(...parts.map(p => p.width)); out.height = parts.reduce((t, p) => t + p.height, 0);
-    const g = out.getContext('2d'); g.fillStyle = '#fff'; g.fillRect(0, 0, out.width, out.height); let y = 0; parts.forEach(p => { g.drawImage(p, 0, y); y += p.height; });
-    return out;
-  }
-
-  /* ---------- Claude (the tool is offered and asked for; newer models don't allow forcing it, so JSON in the text is accepted too) ---------- */
-  async function claude(body) {
-    const r = await fetch(API, { method: 'POST', headers: { 'content-type': 'application/json', 'x-api-key': key(), 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' }, body: JSON.stringify(body) });
-    const j = await r.json().catch(() => ({}));
-    if (!r.ok) { const m = (j.error && j.error.message) || r.statusText; throw new Error(r.status === 401 ? 'The API key wasn’t accepted. Check it in Settings.' : r.status === 429 ? 'Too many checks at once: wait a few seconds.' : r.status === 529 || r.status >= 500 ? 'Claude is busy just now. Try again in a moment.' : m); }
-    const t = (j.content || []).find(c => c.type === 'tool_use'); if (t && t.input) return t.input;
-    const txt = (j.content || []).filter(c => c.type === 'text').map(c => c.text).join('\n'), m = txt.match(/\{[\s\S]*\}/);
-    if (m) { try { return JSON.parse(m[0]); } catch (e) { } }
-    throw new Error('No result came back. Try again.');
-  }
-  const img = (cv, q) => ({ type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: cv.toDataURL('image/jpeg', q || .85).split(',')[1] } });
-  const BOX = { type: 'array', items: { type: 'integer' }, minItems: 4, maxItems: 4 };
-  const GRID = 'A faint grid is drawn on the photo, labelled every 100 units from 0 to 1000 across and down; give positions as [x0, y0, x1, y1] in those units (x from the left, y from the top).';
-  async function detect(shot) {
-    const r = await claude({ model: DETECT_MODEL, max_tokens: 3000, system: 'Always reply by calling the read_page tool, and nothing else.',
-      tools: [{ name: 'read_page', description: 'List every PRINTED exam question (or question part) on the page, top to bottom.', input_schema: { type: 'object', properties: {
-        questions: { type: 'array', items: { type: 'object', properties: {
-          question_number: { type: 'string', description: 'Printed number with its part, e.g. 2(a)(i); include the main number for parts, e.g. 3(b) not just (b)' },
-          printed_text: { type: 'string', description: 'The printed question wording, verbatim, with the [n] marks' },
-          has_answer: { type: 'boolean', description: 'Has the pupil written or drawn an answer to it?' },
-          answer_box: Object.assign({ description: 'Area of the page holding this question and the pupil’s answer to it' }, BOX) }, required: ['question_number', 'printed_text', 'has_answer'] } } }, required: ['questions'] } }],
-      messages: [{ role: 'user', content: [img(shot.grid, .8), { type: 'text', text: 'This is a photo of a page of a CCEA Digital Technology exam paper, answered by a pupil in handwriting. List every printed question or question part on the page, in order. ' + GRID }] }] });
-    return (r.questions || []).filter(q => q && (q.printed_text || q.question_number));
-  }
-  async function markPage(shot, qs) {
-    const content = [img(shot.grid), { type: 'text', text: 'Above: a photo of a page of the pupil’s script. ' + GRID }];
-    const ms = await Promise.all(qs.map((q, i) => i < MS_IMAGES ? cropCanvas(q.k, 'ms', 1000).catch(() => null) : null));
-    qs.forEach((q, i) => { if (ms[i]) content.push(img(ms[i], .85), { type: 'text', text: `Above: the official CCEA mark scheme for ${short(q.k)} (key ${q.k}).` }); });
-    content.push({ type: 'text', text: `Mark the pupil’s handwritten answers to these ${qs.length} question${qs.length === 1 ? '' : 's'} on the page:\n\n` + qs.map(q => { const m = M[q.k]; return `=== key ${q.k}: ${label(q.k)} (${m.m} mark${m.m === 1 ? '' : 's'})${q.box ? ` — on the photo around ${JSON.stringify(q.box)}` : ''}\nPrinted question:\n${m.q}\nOfficial mark scheme (text):\n${m.ms}`; }).join('\n\n') +
-      `\n\nFor EACH question above, mark only the pupil’s answer to that question, exactly as a CCEA examiner would. Credit each mark-scheme point at most once; apply "any two", "max", "2 × [1]" and band descriptors exactly; never exceed the question’s marks; no credit for printed text or for answers written to a different question. Accept equivalent wording only where the mark scheme would. For every mark-scheme point say whether it was awarded and quote the pupil’s words that earn it, with a box tightly around those handwritten words. List wrong or contradictory statements with boxes. If an answer is blank, set answer_found false and total 0. If handwriting can’t be read, set readable "low". Return one entry per key, using the key exactly as given.` });
-    const r = await claude({ model: model(), max_tokens: 4000 + 2500 * qs.length, system: 'You are a senior CCEA examiner for GCSE and A level Digital Technology. You mark strictly and fairly to the published mark scheme and explain your decisions briefly for the teacher. Always give your result by calling the mark_page tool.',
-      tools: [{ name: 'mark_page', description: 'Return the marking of every question on the page.', input_schema: { type: 'object', properties: { questions: { type: 'array', items: { type: 'object', properties: {
-        key: { type: 'string' }, answer_found: { type: 'boolean' }, readable: { type: 'string', enum: ['high', 'medium', 'low'] },
-        total: { type: 'integer' }, max: { type: 'integer' }, band: { type: 'string', description: 'Band for banded questions, else empty' },
-        points: { type: 'array', items: { type: 'object', properties: { ms: { type: 'string', description: 'The mark-scheme point, short' }, awarded: { type: 'boolean' }, marks: { type: 'integer' }, quote: { type: 'string' }, box: BOX }, required: ['ms', 'awarded'] } },
-        wrong: { type: 'array', items: { type: 'object', properties: { quote: { type: 'string' }, note: { type: 'string' }, box: BOX }, required: ['quote', 'note'] } },
-        summary: { type: 'string', description: 'One sentence for the teacher: why this mark' } }, required: ['key', 'answer_found', 'total', 'points', 'summary'] } } }, required: ['questions'] } }],
-      messages: [{ role: 'user', content }] });
-    const by = {}; (r.questions || []).forEach(x => { if (x && x.key) by[String(x.key).trim()] = x; });
-    qs.forEach((q, i) => { const x = by[q.k] || (r.questions || [])[i] || { answer_found: false, total: 0, points: [], summary: 'Not marked: try again.' }; x.max = M[q.k].m || x.max || 0; x.total = Math.max(0, Math.min(x.max, x.total | 0)); q.res = x; q.mark = x.total; });
-  }
-
-  /* ---------- camera ---------- */
-  async function startCam() {
-    try {
-      STREAM = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false });
-      vid.srcObject = STREAM; await vid.play(); wake();
-      try { const tr = STREAM.getVideoTracks()[0], cap = tr.getCapabilities ? tr.getCapabilities() : {}; if (cap.torch) { const tb = $('#torch'); tb.hidden = false; tb.onclick = async () => { const on = tb.getAttribute('aria-pressed') !== 'true'; try { await tr.applyConstraints({ advanced: [{ torch: on }] }); tb.setAttribute('aria-pressed', String(on)); tb.style.background = on ? '#F4B740' : ''; tb.style.color = on ? '#000' : ''; } catch (e) { } }; } } catch (e) { }
-      $('#start').hidden = true; $('#shut').disabled = false; say('Hold the camera over a whole page, so all its questions are in view'); loop();
-    } catch (e) { say(''); alert('The camera couldn’t start: ' + (e.name === 'NotAllowedError' ? 'allow camera access for this site in your browser settings.' : e.message) + ' You can use a photo instead.'); }
-  }
-  /* phones: keep the screen awake while marking; the camera stops when the app is in the background and restarts on return */
-  let WL = null; async function wake() { try { if ('wakeLock' in navigator && !WL) { WL = await navigator.wakeLock.request('screen'); WL.addEventListener('release', () => { WL = null; }); } } catch (e) { } }
-  document.addEventListener('visibilitychange', async () => {
-    if (document.visibilityState === 'visible' && STREAM) { wake(); const tr = STREAM.getVideoTracks()[0]; if (!tr || tr.readyState === 'ended') { STREAM = null; startCam(); } else vid.play().catch(() => { }); }
-  });
-  /* the shot: the frame (≤1568 px), a copy with a faint labelled grid for positions, and a tiny greyscale copy for tracking */
-  function grab(src, w, h) {
-    const s = Math.min(1, MAXPX / Math.max(w, h)), W = Math.round(w * s), H = Math.round(h * s);
-    const plain = document.createElement('canvas'); plain.width = W; plain.height = H; plain.getContext('2d').drawImage(src, 0, 0, W, H);
-    const grid = document.createElement('canvas'); grid.width = W; grid.height = H; const g = grid.getContext('2d'); g.drawImage(plain, 0, 0);
-    g.strokeStyle = 'rgba(0,120,255,.28)'; g.lineWidth = 1; g.fillStyle = 'rgba(0,90,220,.75)'; g.font = `${Math.max(11, Math.round(W / 90))}px sans-serif`;
-    for (let i = 1; i < 10; i++) { const x = W * i / 10, y = H * i / 10; g.beginPath(); g.moveTo(x, 0); g.lineTo(x, H); g.moveTo(0, y); g.lineTo(W, y); g.stroke(); g.fillText(String(i * 100), x + 3, 14); g.fillText(String(i * 100), 3, y - 3); }
-    return { plain, grid, w: W, h: H, low: low(src, w, h) };
-  }
-  const LW = 80, LH = 60, lc = document.createElement('canvas'); lc.width = LW; lc.height = LH; const lg = lc.getContext('2d', { willReadFrequently: true });
-  function low(src, w, h) { lg.drawImage(src, 0, 0, w, h, 0, 0, LW, LH); const d = lg.getImageData(0, 0, LW, LH).data, o = new Float32Array(LW * LH); for (let i = 0; i < o.length; i++) o[i] = d[i * 4] * .3 + d[i * 4 + 1] * .59 + d[i * 4 + 2] * .11; return o; }
-  function diff(a, b) { let t = 0; for (let i = 0; i < a.length; i++) t += Math.abs(a[i] - b[i]); return t / a.length; }
-  /* how far the paper has slid since the shot: best small shift of the tiny greyscale frames (keeps the highlights on the words) */
-  function track(ref, cur) {
-    let best = [0, 0, 1e9]; const R = 8, m = 10;
-    for (let dy = -R; dy <= R; dy++) for (let dx = -R; dx <= R; dx++) {
-      let t = 0, n = 0;
-      for (let y = m; y < LH - m; y += 2) for (let x = m; x < LW - m; x += 2) { t += Math.abs(cur[(y + dy) * LW + x + dx] - ref[y * LW + x]); n++; }
-      t /= n; if (t < best[2]) best = [dx, dy, t];
-    }
-    return best;
-  }
-  let lastT = 0;
-  function loop(t) {
-    requestAnimationFrame(loop);
-    if (!STREAM || !vid.videoWidth || $('#freeze').checked || t - lastT < 90) return; lastT = t;
-    const cur = low(vid, vid.videoWidth, vid.videoHeight);
-    if (lowRef) { const [dx, dy, err] = track(lowRef, cur); shift = err < 22 ? [dx, dy] : null; draw(); }
-    if (lastCheckLow) { const d = diff(lastCheckLow, cur); if (d > 18) moved = true; }
-    const prev = loop.p; loop.p = cur;
-    if (prev) { const d = diff(prev, cur); steadyN = d < 4 ? steadyN + 1 : 0; }
-    if ($('#auto').checked && key() && !BUSY && moved && !DONE && steadyN >= 9) { steadyN = 0; check(); }
-  }
-
-  /* ---------- AR overlay: each question's highlights and mark, drawn over the live picture (or the frozen shot), following small movements ---------- */
-  const marked = () => QS.filter(q => q.k && q.res);
-  function draw() {
-    const W = stage.clientWidth, H = stage.clientHeight, dpr = window.devicePixelRatio || 1;
-    if (ov.width !== Math.round(W * dpr) || ov.height !== Math.round(H * dpr)) { ov.width = Math.round(W * dpr); ov.height = Math.round(H * dpr); }
-    const g = ov.getContext('2d'); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, W, H);
-    const Q = marked(); if (!Q.length || !SHOT) return;
-    const frozen = $('#freeze').checked || !STREAM, sh = frozen ? [0, 0] : shift; $('#score').style.opacity = sh ? 1 : .5; if (!sh) return;
-    const vw = SHOT.w, vh = SHOT.h, s = Math.min(W / vw, H / vh), ox = (W - vw * s) / 2 + sh[0] * vw / LW * s, oy = (H - vh * s) / 2 + sh[1] * vh / LH * s;
-    const R = b => { let [x0, y0, x1, y1] = [ox + b[0] / 1000 * vw * s, oy + b[1] / 1000 * vh * s, ox + b[2] / 1000 * vw * s, oy + b[3] / 1000 * vh * s]; if (x1 < x0) [x0, x1] = [x1, x0]; if (y1 < y0) [y0, y1] = [y1, y0]; return [x0, y0, x1, y1]; };
-    const rr = (x, y, w, h, r) => { g.beginPath(); g.roundRect ? g.roundRect(x, y, w, h, r) : g.rect(x, y, w, h); };
-    const tag = (x, y, text, bg, fg, size) => { g.font = `800 ${size || 13}px system-ui,sans-serif`; const tw = g.measureText(text).width + 12, th = (size || 13) + 7; x = Math.max(2, Math.min(W - tw - 2, x)); y = Math.max(2, y); g.fillStyle = bg; rr(x, y, tw, th, th / 2); g.fill(); g.fillStyle = fg; g.fillText(text, x + 6, y + th - 6); };
-    const box = (b, fill, stroke, t) => { if (!Array.isArray(b) || b.length !== 4) return; const [x0, y0, x1, y1] = R(b); g.fillStyle = fill; g.strokeStyle = stroke; g.lineWidth = 2.5; rr(x0 - 4, y0 - 3, x1 - x0 + 8, y1 - y0 + 6, 6); g.fill(); g.stroke(); tag(x1 - 20, y0 - 22, t, stroke, '#071A0E'); };
-    Q.forEach(q => {
-      const r = q.res;
-      if (Array.isArray(q.box) && q.box.length === 4) {   /* the question's area, with its mark in the corner */
-        const [x0, y0, x1] = R(q.box), f = q.mark / (r.max || 1), c = f >= .7 ? '#2FBF71' : f >= .4 ? '#F4B740' : '#FF6B5E';
-        g.strokeStyle = c; g.setLineDash([6, 5]); g.lineWidth = 1.5; const [, , , y1] = R(q.box); rr(x0, y0, x1 - x0, y1 - y0, 8); g.stroke(); g.setLineDash([]);
-        tag(x1 - 92, y0 + 4, `${short(q.k)}  ${q.mark}/${r.max}`, c, '#0B0F17', 15);
-      }
-      (r.wrong || []).forEach(w => box(w.box, 'rgba(255,107,94,.16)', '#FF6B5E', '✗'));
-      (r.points || []).filter(p => p.awarded).forEach(p => box(p.box, 'rgba(47,191,113,.22)', '#2FBF71', '✓' + ((p.marks || 1) > 1 ? p.marks : '')));
-    });
-  }
-  addEventListener('resize', draw);
-
-  /* ---------- a check: shot → the page's questions (found, matched to one paper) → one marking of them all → highlights ---------- */
-  async function check(fromFile) {
-    if (BUSY) return; if (!key()) { openSet(); return; } if (!M) { say('Loading the mark schemes…', true); await bankP; }
-    BUSY = true; $('#shut').disabled = true;
-    try {
-      const src = fromFile || vid, shot = grab(src, fromFile ? fromFile.width : vid.videoWidth, fromFile ? fromFile.height : vid.videoHeight);
-      SHOT = shot; QS = []; draw(); $('#score').hidden = true; $('#res').classList.remove('on'); lastCheckLow = shot.low; moved = false;
-      say('Finding the questions on this page…', true);
-      const found = (await detect(shot)).map(d => ({ n: d.question_number, text: d.printed_text, has: d.has_answer !== false, box: Array.isArray(d.answer_box) && d.answer_box.length === 4 ? d.answer_box : null }));
-      if (!found.length) throw new Error('No printed questions in view: get the whole page in the picture.');
-      PAPER = matchPage(found); QS = found.filter(q => q.k || q.has); setChip();   /* a question's lead-in (no answer of its own) isn't listed */
-      await markFound(fromFile);
-      if (QS.some(q => !q.k)) say(`${QS.filter(q => !q.k).length} question${QS.filter(q => !q.k).length === 1 ? '' : 's'} not recognised: tap the paper name at the top to choose`);
-    } catch (e) { say('⚠ ' + e.message); }
-    BUSY = false; $('#shut').disabled = !STREAM && !SHOT;
-  }
-  async function markFound(fromFile) {
-    const todo = QS.filter(q => q.k);
-    if (!todo.length) { say(''); askQ('I couldn’t match these questions to a past paper. Choose them below.'); return; }
-    say(`Marking ${todo.length} question${todo.length === 1 ? '' : 's'} against the ${paperName(PAPER || paperOf(todo[0].k))} mark scheme…`, true);
-    await markPage(SHOT, todo);
-    lowRef = SHOT.low; shift = [0, 0]; DONE = true;
-    if ($('#freeze').checked || fromFile || !STREAM) showStill(SHOT);
-    showRes(); draw();
-    const low = todo.filter(q => q.res.readable === 'low').length;
-    say(low ? `${low} answer${low === 1 ? '' : 's'} hard to read: check ${low === 1 ? 'it' : 'them'} yourself` : 'Done: save, then turn the page');
-  }
-  function showStill(shot) { still.width = shot.plain.width; still.height = shot.plain.height; still.getContext('2d').drawImage(shot.plain, 0, 0); still.hidden = false; vid.hidden = true; }
-
-  /* ---------- the results panel: every question with its points, and − / + to change its mark ---------- */
-  const el = (t, cls, txt) => { const e = document.createElement(t); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; };
-  function showRes() {
-    const Q = marked(); $('#res').classList.toggle('on', !!Q.length);
-    const host = $('#qlist'); host.innerHTML = '';
-    const lowN = Q.filter(q => q.res.readable === 'low').length, cf = $('#conf');
-    cf.textContent = lowN ? `${lowN} hard to read` : Q.some(q => q.res.readable === 'medium') ? 'some words unclear' : 'clear handwriting'; cf.className = 'pill' + (lowN || Q.some(q => q.res.readable === 'medium') ? ' warn' : '');
-    Q.forEach(q => {
-      const r = q.res, card = el('div', 'qc');
-      const head = el('div', 'qh'), t = el('b', null, label(q.k) + (r.band ? ' · ' + r.band : '')), mk = el('span', 'mk');
-      const minus = el('button', 'ib', '−'), plus = el('button', 'ib', '+'); minus.type = plus.type = 'button'; minus.setAttribute('aria-label', 'One mark fewer for ' + short(q.k)); plus.setAttribute('aria-label', 'One mark more for ' + short(q.k));
-      const up = () => { mk.textContent = `${q.mark}/${r.max}`; mk.title = q.mark === r.total ? 'suggested' : `suggested ${r.total}`; mk.classList.toggle('chg', q.mark !== r.total); upTotal(); draw(); };
-      minus.onclick = () => { if (q.mark > 0) { q.mark--; up(); } }; plus.onclick = () => { if (q.mark < r.max) { q.mark++; up(); } };
-      head.append(t, minus, mk, plus); card.append(head);
-      if (r.summary) card.append(el('p', 'sum', (r.answer_found === false ? 'No answer. ' : '') + r.summary));
-      const ul = el('ul', 'pts');
-      (r.points || []).forEach(p => { const li = el('li', p.awarded ? 'y' : 'n'); li.append(el('span', 'ic', p.awarded ? '✓' : '–'), el('span', null, p.ms + (p.awarded && (p.marks || 1) > 1 ? ` (${p.marks})` : '')), el('q', null, p.awarded ? p.quote || '' : 'Not given')); ul.append(li); });
-      (r.wrong || []).forEach(w => { const li = el('li', 'x'); li.append(el('span', 'ic', '✗'), el('span', null, w.note), el('q', null, w.quote)); ul.append(li); });
-      card.append(ul); host.append(card); up();
-    });
-    QS.filter(q => !q.k).forEach(q => { const n = el('p', 'small', `Not marked: Q${q.n || '?'} “${String(q.text || '').replace(/\s+/g, ' ').slice(0, 70)}…” wasn’t matched to a past paper. `); const a = el('button', 'lnk', 'Choose it'); a.type = 'button'; a.onclick = () => askQ(); n.append(a); host.append(n); });
-    upTotal();
-  }
-  function upTotal() {
-    const Q = marked(); if (!Q.length) return; const got = Q.reduce((t, q) => t + q.mark, 0), out = Q.reduce((t, q) => t + q.res.max, 0), ai = Q.reduce((t, q) => t + q.res.total, 0);
-    $('#rh').textContent = `This page: ${got}/${out}${got !== ai ? ` (suggested ${ai})` : ' suggested'} · ${Q.length} question${Q.length === 1 ? '' : 's'}`;
-    const sc = $('#score'); sc.hidden = false; $('#scb').textContent = `${got}/${out}`; $('#scs').textContent = got === ai ? 'this page' : 'your marks'; sc.className = 'score' + (got / out >= .7 ? '' : got / out >= .4 ? ' mid' : ' lo');
-  }
-
-  /* ---------- the questions: chip, checking the matches, changing one, locking the paper ---------- */
-  function setChip() {
-    const Q = QS.filter(q => q.k);
-    $('#qk').textContent = PAPER ? paperName(PAPER) : Q.length ? paperName(paperOf(Q[0].k)) : 'No paper yet';
-    $('#qt').textContent = QS.length ? QS.map(q => q.k ? short(q.k) : 'Q' + (q.n || '?') + '?').join(', ') : 'point the camera at a page';
-    $('#lk').hidden = !LOCKED;
-  }
-  let EDIT = -1, PICK = null;
-  function candBtn(k, host) {
-    const b = document.createElement('button'); b.type = 'button'; b.innerHTML = '<b></b><span></span>'; b.firstChild.textContent = `${label(k)} · ${M[k].m} mark${M[k].m === 1 ? '' : 's'}`; b.lastChild.textContent = (M[k].q || '').replace(/\s+/g, ' ');
-    b.setAttribute('aria-pressed', String(k === PICK)); b.onclick = () => { PICK = k; document.querySelectorAll('#pickw .cands button').forEach(x => x.setAttribute('aria-pressed', String(x === b))); preview(k); }; host.append(b);
-  }
-  async function preview(k) { const p = $('#qprev'); p.hidden = false; p.innerHTML = '<p class="small" style="color:#333;padding:8px">Loading the question…</p>'; const c = await cropCanvas(k, 'paper', 900).catch(() => null); if (PICK !== k) return; p.innerHTML = ''; if (c) p.append(c); else p.hidden = true; }
-  function foundList() {
-    const h = $('#found'); h.innerHTML = '';
-    if (!QS.length) { h.append(el('p', 'small', 'No page checked yet. Choose a paper to keep by searching below, or check a page first.')); }
-    QS.forEach((q, i) => {
-      const b = document.createElement('button'); b.type = 'button'; b.innerHTML = '<b></b><span></span>';
-      b.firstChild.textContent = q.k ? `${label(q.k)} · ${M[q.k].m} mark${M[q.k].m === 1 ? '' : 's'}` : `Q${q.n || '?'}: not matched (not marked)`;
-      b.lastChild.textContent = (q.k ? M[q.k].q : q.text || '').replace(/\s+/g, ' ');
-      b.setAttribute('aria-pressed', String(i === EDIT)); b.onclick = () => openPick(i); h.append(b);
-    });
-  }
-  function openPick(i) {
-    EDIT = i; const q = QS[i]; PICK = q ? q.k : null; foundList(); $('#pickw').hidden = false;
-    $('#pick-h').textContent = q ? `Change Q${q.n || '?'}` : 'Choose a question';
-    const h = $('#cands'); h.innerHTML = ''; ((q && q.cands) || []).slice(0, 4).forEach(([k]) => candBtn(k, h));
-    $('#qres').innerHTML = ''; $('#qs').value = ''; $('#qprev').hidden = true; if (PICK) preview(PICK);
-  }
-  function askQ(msg) {
-    EDIT = -1; $('#pickw').hidden = true; $('#dq-p').textContent = msg || 'Check each question was matched to the right past-paper question. Tap one to change it.';
-    $('#lock').checked = LOCKED; foundList(); if (!QS.length) { $('#pickw').hidden = false; $('#pick-h').textContent = 'Choose a paper'; $('#cands').innerHTML = ''; } $('#dq').showModal();
-  }
-  $('#qchip').onclick = async () => { if (!M) await bankP; askQ(); };
-  $('#qs').oninput = () => { const h = $('#qres'); h.innerHTML = ''; search($('#qs').value).forEach(k => candBtn(k, h)); };
-  let CHANGED = false;
-  $('#qok').onclick = () => {
-    if (!PICK) return;
-    if (EDIT >= 0 && QS[EDIT]) { if (QS[EDIT].k !== PICK) { QS.forEach((q, j) => { if (j !== EDIT && q.k === PICK) q.k = null; }); QS[EDIT].k = PICK; QS[EDIT].res = null; CHANGED = true; } PAPER = paperOf(PICK); }
-    else { PAPER = paperOf(PICK); LOCKED = true; $('#lock').checked = true; }
-    EDIT = -1; $('#pickw').hidden = true; setChip(); foundList();
-  };
-  $('#qdrop').onclick = () => { if (EDIT >= 0 && QS[EDIT]) { QS[EDIT].k = null; QS[EDIT].res = null; } EDIT = -1; $('#pickw').hidden = true; setChip(); foundList(); showRes(); draw(); };
-  $('#lock').onchange = () => { LOCKED = $('#lock').checked && !!PAPER; setChip(); };
-  $('#qdone').onclick = async () => { $('#dq').close(); LOCKED = $('#lock').checked && !!PAPER; setChip(); if (CHANGED && SHOT && !BUSY) { CHANGED = false; const keep = QS.filter(q => q.k && !q.res); if (keep.length) { BUSY = true; try { say(`Marking ${keep.length} question${keep.length === 1 ? '' : 's'}…`, true); await markPage(SHOT, keep); showRes(); draw(); say('Done'); } catch (e) { say('⚠ ' + e.message); } BUSY = false; } else { showRes(); draw(); } } };
-  $('#qauto').onclick = () => { LOCKED = false; $('#lock').checked = false; $('#dq').close(); setChip(); if (SHOT && !BUSY) { moved = true; DONE = false; recheckShot(); } };
-  async function recheckShot() { if (!SHOT) return; const src = !still.hidden ? still : null; if (src) { const c = document.createElement('canvas'); c.width = SHOT.plain.width; c.height = SHOT.plain.height; c.getContext('2d').drawImage(SHOT.plain, 0, 0); check(c); } else check(); }
-
-  /* ---------- saved marks this session (this device) ---------- */
-  const LOGK = 'checker.log.' + new Date().toISOString().slice(0, 10);
-  const getLog = () => { try { return JSON.parse(LS.get(LOGK) || '[]'); } catch (e) { return []; } };
-  function showLog() {
-    const L = getLog(); $('#logn').textContent = L.length; const b = $('#logb'); b.innerHTML = '';
-    if (!L.length) { b.innerHTML = '<p class="small">Marks you save appear here (on this device, for today).</p>'; return; }
-    const t = document.createElement('table'); t.innerHTML = '<tr><th>Script</th><th>Question</th><th>Mark</th><th>Suggested</th></tr>';
-    L.forEach(x => { const tr = t.insertRow(); [x.who || '–', label(x.q), `${x.mark}/${x.max}`, `${x.ai}/${x.max}`].forEach(v => { tr.insertCell().textContent = v; }); });
-    const per = {}; L.forEach(x => { const w = x.who || '–'; per[w] = per[w] || [0, 0]; per[w][0] += x.mark; per[w][1] += x.max; });
-    const tot = el('p', 'small'); tot.style.marginTop = '8px'; tot.textContent = 'Totals: ' + Object.entries(per).map(([w, [a, o]]) => `${w} ${a}/${o}`).join(' · ');
-    const cp = el('button', 'btn sec', 'Copy for a spreadsheet'); cp.type = 'button'; cp.style.marginTop = '8px';
-    cp.onclick = () => { navigator.clipboard.writeText(['Script\tQuestion\tMark\tOut of\tSuggested'].concat(L.map(x => [x.who, label(x.q), x.mark, x.max, x.ai].join('\t'))).join('\n')).then(() => { cp.textContent = 'Copied'; }); };
-    const cl = el('button', 'btn sec', 'Clear'); cl.type = 'button'; cl.style.margin = '8px 0 0 8px'; cl.onclick = () => { if (confirm('Clear today’s saved marks on this device?')) { LS.set(LOGK, null); showLog(); } };
-    b.append(t, tot, cp, cl);
-  }
-  $('#save').onclick = () => {
-    const Q = marked(); if (!Q.length) return; const L = getLog(), who = $('#who').value.trim();
-    Q.forEach(q => L.push({ who, q: q.k, mark: q.mark, max: q.res.max, ai: q.res.total, t: Date.now() })); LS.set(LOGK, JSON.stringify(L)); showLog();
-    const w = $('#who'), mm = /^(.*?)(\d+)$/.exec(who); w.value = mm ? mm[1] + (+mm[2] + 1) : '';   /* "Script 4" → "Script 5" */
-    QS = []; DONE = false; draw(); $('#res').classList.remove('on'); $('#score').hidden = true; moved = true; setChip();
-    still.hidden = true; vid.hidden = !STREAM; if (STREAM) $('#freeze').checked = false;
-    say(`Saved ${Q.length} mark${Q.length === 1 ? '' : 's'}${who ? ' for ' + who : ''}. Turn to the next page`);
+    /* computers and browsers without file sharing: save the photo(s), open claude.ai, paste the copied mark schemes */
+    files.forEach(f => { const a = document.createElement('a'); a.href = URL.createObjectURL(f); a.download = f.name; document.body.append(a); a.click(); a.remove(); });
+    window.open('https://claude.ai/new', '_blank', 'noopener');
+    msg('Mark schemes copied and photo saved: in Claude, paste, attach the photo and send', 'warn');
   };
 
-  /* ---------- settings ---------- */
-  function openSet() { $('#kin').value = key(); $('#msel').value = model(); $('#bsel').value = LS.get('checker.book') || ''; $('#dset').showModal(); }
-  $('#setb').onclick = openSet;
-  $('#ksave').onclick = () => { const k = $('#kin').value.trim(); if (k && !/^sk-ant-/.test(k)) { alert('An Anthropic API key starts with sk-ant-'); return; } LS.set('checker.key', k || null); LS.set('checker.model', $('#msel').value); LS.set('checker.book', $('#bsel').value || null); $('#dset').close(); };
-  $('#kdel').onclick = () => { LS.set('checker.key', null); $('#kin').value = ''; };
-
-  /* ---------- controls ---------- */
-  let FILE = null;
-  $('#go').onclick = () => { if (!key()) openSet(); startCam(); };
-  $('#shut').onclick = () => { moved = true; DONE = false; check(FILE || undefined); };
-  $('#freeze').onchange = () => { if ($('#freeze').checked && SHOT) showStill(SHOT); else if (STREAM) { still.hidden = true; vid.hidden = false; } draw(); };
-  $('#file').onchange = async e => {
-    const f = e.target.files && e.target.files[0]; if (!f) return; $('#start').hidden = true;
-    e.target.value = ''; const bm = await createImageBitmap(f); const c = document.createElement('canvas'); c.width = bm.width; c.height = bm.height; c.getContext('2d').drawImage(bm, 0, 0); FILE = c;
-    still.hidden = false; vid.hidden = true; still.width = c.width; still.height = c.height; still.getContext('2d').drawImage(c, 0, 0); $('#shut').disabled = false;
-    if (!key()) { openSet(); say('Add your API key, then press Check this page'); return; }
-    check(c);
-  };
-  const bankP = loadBank().catch(() => say('⚠ Couldn’t load the mark schemes. Check you’re online.'));
-  showLog();
+  if (!(navigator.canShare && navigator.canShare({ files: [new File(['x'], 'x.jpg', { type: 'image/jpeg' })] }))) $('#how').innerHTML = 'On this device, <b>Send to Claude</b> copies the mark schemes, saves the photo and opens claude.ai: paste, attach the photo and send.';
+  load().catch(() => { sel.innerHTML = '<option value="">Couldn’t load the papers: check you’re online</option>'; });
 })();
 </script>
 </body></html>
