@@ -12,12 +12,12 @@
 [hidden]{display:none!important}*{box-sizing:border-box}html,body{height:100%}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 var(--sans);overflow:hidden}
 button,select,input{font:inherit;color:inherit}
 button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-.app{position:fixed;inset:0;display:grid;grid-template-rows:auto 1fr auto}
+.app{position:fixed;inset:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr) auto}
 /* top bar */
 .top{display:flex;align-items:center;gap:8px;padding:calc(8px + env(safe-area-inset-top)) 12px 8px;background:rgba(14,17,23,.92);border-bottom:1px solid var(--line);z-index:5}
 .top a.back{color:var(--ink-2);text-decoration:none;font-weight:700;white-space:nowrap}
 .top h1{font-family:'Lemon Milk',var(--sans);font-size:15px;letter-spacing:.06em;margin:0 6px 0 4px;white-space:nowrap}
-.qchip{flex:1;min-width:0;display:flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:5px 6px 5px 12px;cursor:pointer;text-align:left}
+.qchip{flex:1 1 0;min-width:0;overflow:hidden;display:flex;align-items:center;gap:6px;background:var(--panel-2);border:1px solid var(--line);border-radius:999px;padding:5px 6px 5px 12px;cursor:pointer;text-align:left}
 .qchip b{white-space:nowrap}.qchip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink-2);font-size:13px}
 .qchip .lk{margin-left:auto;flex:none;font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;background:#2A3350;color:var(--accent)}
 .ib{flex:none;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--panel);display:grid;place-items:center;cursor:pointer;padding:0}
@@ -72,14 +72,16 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
 .qprev{max-height:30vh;overflow:auto;background:#fff;border-radius:10px;margin-top:8px}.qprev canvas{display:block;width:100%;height:auto}
 .small{font-size:12.5px;color:var(--ink-3)}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
-@media (min-width:900px){.app{grid-template-columns:1fr 400px;grid-template-rows:auto 1fr}.top{grid-column:1/3}.bot{max-height:none;border-top:0;border-left:1px solid var(--line)}}
+@media (max-width:640px){.top h1{display:none}.top a.back .bl{display:none}.top a.back{font-size:22px;padding:0 4px}.bot{max-height:46dvh}.ctl .shut{flex:1 1 100%}.score{right:10px;bottom:10px;padding:6px 12px;min-width:84px}.score b{font-size:26px}.hint{top:10px;font-size:13px}}
+@media (max-height:500px) and (orientation:landscape){.app{grid-template-columns:minmax(0,1fr) 320px;grid-template-rows:auto minmax(0,1fr)}.top{grid-column:1/3}.bot{max-height:none;border-top:0;border-left:1px solid var(--line)}}
+@media (min-width:900px){.app{grid-template-columns:minmax(0,1fr) 400px;grid-template-rows:auto minmax(0,1fr)}.top{grid-column:1/3}.bot{max-height:none;border-top:0;border-left:1px solid var(--line)}}
 </style></head>
 <body>
 <div class="app">
   <header class="top">
-    <a class="back" href="teacher.html">‹ Teacher area</a><h1>Paper checker</h1>
+    <a class="back" href="teacher.html" aria-label="Back to the Teacher area">‹<span class="bl"> Teacher area</span></a><h1>Paper checker</h1>
     <button type="button" class="qchip" id="qchip" aria-label="Choose the question"><b id="qk">No question yet</b><span id="qt">point the camera at an answer</span><span class="lk" id="lk" hidden>Locked</span></button>
-    <button type="button" class="ib" id="setb" aria-label="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+    <button type="button" class="ib" id="torch" aria-label="Torch" aria-pressed="false" hidden><svg viewBox="0 0 24 24"><path d="M9 2h6l-1 6h-4zM10 8h4v4l-1 10h-2l-1-10z"/></svg></button><button type="button" class="ib" id="setb" aria-label="Settings"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
   </header>
   <main class="stage" id="stage">
     <video id="vid" playsinline muted autoplay></video>
@@ -242,9 +244,15 @@ dialog input,dialog select{width:100%;background:var(--panel-2);border:1px solid
   async function startCam() {
     try {
       STREAM = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { ideal: 'environment' }, width: { ideal: 1920 }, height: { ideal: 1080 } }, audio: false });
-      vid.srcObject = STREAM; await vid.play(); $('#start').hidden = true; $('#shut').disabled = false; say('Hold the camera over one answer, with its printed question in view'); loop();
+      vid.srcObject = STREAM; await vid.play(); wake();
+      try { const tr = STREAM.getVideoTracks()[0], cap = tr.getCapabilities ? tr.getCapabilities() : {}; if (cap.torch) { const tb = $('#torch'); tb.hidden = false; tb.onclick = async () => { const on = tb.getAttribute('aria-pressed') !== 'true'; try { await tr.applyConstraints({ advanced: [{ torch: on }] }); tb.setAttribute('aria-pressed', String(on)); tb.style.background = on ? '#F4B740' : ''; tb.style.color = on ? '#000' : ''; } catch (e) { } }; } } catch (e) { } $('#start').hidden = true; $('#shut').disabled = false; say('Hold the camera over one answer, with its printed question in view'); loop();
     } catch (e) { say(''); alert('The camera couldn’t start: ' + (e.name === 'NotAllowedError' ? 'allow camera access for this site in your browser settings.' : e.message) + ' You can use a photo instead.'); }
   }
+  /* phones: keep the screen awake while marking; the camera stops when the app is in the background and restarts on return */
+  let WL = null; async function wake() { try { if ('wakeLock' in navigator && !WL) { WL = await navigator.wakeLock.request('screen'); WL.addEventListener('release', () => { WL = null; }); } } catch (e) { } }
+  document.addEventListener('visibilitychange', async () => {
+    if (document.visibilityState === 'visible' && STREAM) { wake(); const tr = STREAM.getVideoTracks()[0]; if (!tr || tr.readyState === 'ended') { STREAM = null; startCam(); } else vid.play().catch(() => { }); }
+  });
   /* the shot: the frame (≤1568 px), a copy with a faint labelled grid for positions, and a tiny greyscale copy for tracking */
   function grab(src, w, h) {
     const s = Math.min(1, MAXPX / Math.max(w, h)), W = Math.round(w * s), H = Math.round(h * s);
