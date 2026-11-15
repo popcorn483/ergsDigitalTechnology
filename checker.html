@@ -43,7 +43,7 @@ details{margin-top:14px}summary{cursor:pointer;font-weight:700;color:var(--ink-2
     <p class="small" id="pinfo" style="margin:8px 0 0"></p>
   </section>
 
-  <section class="step" aria-labelledby="s2">
+  <section class="step" aria-labelledby="s2" id="s2w">
     <h2 id="s2"><span class="n">2</span>Photograph the page</h2>
     <p>One page at a time works best: flat, well lit, the whole page in the picture. You can add more than one page.</p>
     <div class="row" style="margin-top:0">
@@ -53,12 +53,24 @@ details{margin-top:14px}summary{cursor:pointer;font-weight:700;color:var(--ink-2
     <div class="prev" id="prev"></div>
   </section>
 
-  <section class="step" aria-labelledby="s3">
+  <section class="step" aria-labelledby="s3" id="s3w">
     <h2 id="s3"><span class="n">3</span>Send to Claude</h2>
     <p id="how">Choose <b>Claude</b> in the share menu. The photo and the mark schemes go into a new chat, and Claude marks the page.</p>
     <button type="button" class="btn" id="send" disabled>Send to Claude</button>
     <div class="row"><button type="button" class="btn sec" id="copy" disabled>Copy mark schemes only</button><button type="button" class="btn sec" id="clear">Next page</button></div>
     <p class="msg" id="msg" role="status" aria-live="polite"></p>
+  </section>
+
+  <section class="step" id="unsure" hidden aria-labelledby="s4">
+    <h2 id="s4"><span class="n">2</span>Mark it in your SCHOOL project</h2>
+    <p>Your SCHOOL project in Claude holds the mark schemes for every past-paper question on the site, so Claude can work out which paper and questions a page is from.</p>
+    <ol style="margin:0 0 12px;padding-left:20px;color:var(--ink-2);font-size:14.5px">
+      <li>Open your SCHOOL project in the Claude app (button below, or Projects › SCHOOL).</li>
+      <li>Start a new chat and tap the camera to photograph the page.</li>
+      <li>Send it with <b>mark this page</b>. Claude finds the paper and questions, tells you which it used, and marks each answer.</li>
+    </ol>
+    <a class="btn" href="https://claude.ai/project/01a15f4c-57dd-7227-96a4-0794e53e14cd" target="_blank" rel="noopener">Open SCHOOL project in Claude</a>
+    <p class="small" style="margin:10px 0 0">If it picks the wrong paper, tell it (e.g. “this is Unit 1 Summer 2018”). Once you know the paper, choosing it above is quicker and works in any chat.</p>
   </section>
 
   <details>
@@ -97,13 +109,14 @@ Reply with no preamble: for each question in page order, **Q[number] — X/Y**, 
     const papers = [...new Set(Object.keys(M).map(k => k.split('|').slice(0, 2).join('|')))];
     const yr = s => { const m = /(\d{4})/.exec(s); return m ? +m[1] : 0; };
     papers.sort((a, b) => { const [ab, as] = a.split('|'), [bb, bs] = b.split('|'); return ORDER.indexOf(ab) - ORDER.indexOf(bb) || yr(bs) - yr(as) || as.localeCompare(bs); });
-    sel.innerHTML = '<option value="">Choose the paper…</option>';
+    sel.innerHTML = '<option value="">Choose the paper…</option><option value="?">Not sure: let Claude find it</option>';
     ORDER.forEach(b => { const ps = papers.filter(p => p.startsWith(b + '|')); if (!ps.length) return; const g = document.createElement('optgroup'); g.label = BOOKN[b]; ps.forEach(p => { const o = document.createElement('option'); o.value = p; o.textContent = name(p); g.append(o); }); sel.append(g); });
-    const last = LS.get('claudemark.paper'); if (last && papers.includes(last)) sel.value = last;
+    const last = LS.get('claudemark.paper'); if (last && (last === '?' || papers.includes(last))) sel.value = last;
     upd();
   }
   function upd() {
     const p = sel.value; LS.set('claudemark.paper', p || null);
+    const un = p === '?'; $('#s2w').hidden = $('#s3w').hidden = un; $('#unsure').hidden = !un; if (un) { $('#pinfo').textContent = ''; return; }
     $('#pinfo').textContent = p ? `${keys(p).length} questions with mark schemes. This paper stays selected for your next pages.` : '';
     $('#send').disabled = !p || !FILES.length; $('#copy').disabled = !p;
   }
