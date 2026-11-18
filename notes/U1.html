@@ -1890,6 +1890,18 @@ body.tut-book #b-gloss{display:none!important}
 .cq-msbox{display:flex;flex-direction:column;gap:6px}
 .cq-msbox .cq-erh{margin:8px 0 0;font:12px var(--sans);letter-spacing:.02em;color:#8A5A00}.cq-msbox .cq-erh b{font-weight:700;letter-spacing:.06em;text-transform:uppercase}
 .cq-msbox .cq-er{background:#FFF6DB;border-left:3px solid #D9A300;border-radius:6px;padding:4px}
+.cq-exbox{display:flex;flex-direction:column;gap:8px;margin-top:8px}
+.cq-exbox::before{content:"Example answers";font:700 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.cq-exbox .ex-top{margin:0;font:13px/1.45 var(--sans);color:var(--ink-2)}
+.cq-exbox .ex-q{margin:6px 0 0;font:700 14px var(--sans)}.cq-exbox .ex-q span{font-weight:400;color:var(--ink-3)}
+.cq-exbox .ex{border:1px solid var(--line);border-left:4px solid var(--ink-3);border-radius:8px;background:var(--paper)}
+.cq-exbox .ex-hi{border-left-color:var(--good)}.cq-exbox .ex-md{border-left-color:var(--warn)}.cq-exbox .ex-lo{border-left-color:var(--bad)}
+.cq-exbox summary{display:flex;gap:10px;align-items:center;padding:8px 10px;cursor:pointer;font:14px var(--sans)}
+.cq-exbox .ex-m{font:700 15px var(--sans);padding:2px 8px;border-radius:999px;background:var(--paper-2);min-width:3.2em;text-align:center}
+.cq-exbox .ex-hi .ex-m{background:var(--good-soft);color:var(--good)}.cq-exbox .ex-md .ex-m{background:var(--warn-soft);color:var(--warn)}.cq-exbox .ex-lo .ex-m{background:var(--bad-soft);color:var(--bad)}
+.cq-exbox .ex-a{margin:0 10px 8px;padding:8px 10px;background:var(--paper-2);border-radius:6px;font:15px/1.55 var(--serif);overflow-wrap:anywhere}
+.cq-exbox .ex-y{font-style:normal;font-weight:700;color:var(--good)}.cq-exbox .ex-x{font-style:normal;font-weight:700;color:var(--bad)}
+.cq-exbox .ex-why{margin:0 10px 10px;padding:6px 10px;border-radius:6px;background:var(--accent-soft);font:13.5px/1.5 var(--sans)}
 .cq-msbox::before{content:"CCEA mark scheme";font:700 12px var(--sans);letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
 .cq-tipd summary{cursor:pointer;font-family:var(--sans);font-size:14px;font-weight:700;color:var(--ink-2)}
 .cq-tipd > div{padding:8px 0 0;font-size:15px;line-height:1.5}
@@ -9145,9 +9157,9 @@ const PP_SERIES = e => /specimen/i.test(String(e.series || '')) ? 'Specimen' : /
 const PP_VIEW = ON_WEB ? (() => {
   let data = null;
   const getJ = u => fetch(u, { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null);
-  const load = () => data || (data = Promise.all([getJ('../papers/folders.json'), getJ('../papers/manifest.json'), getJ('../papers/pages.json'), getJ('../papers/crops.json'), getJ('../papers/reports.json')]).then(async ([fo, man, pg, cr, rp]) => {
+  const load = () => data || (data = Promise.all([getJ('../papers/folders.json'), getJ('../papers/manifest.json'), getJ('../papers/pages.json'), getJ('../papers/crops.json'), getJ('../papers/reports.json'), getJ('../papers/examples.json')]).then(async ([fo, man, pg, cr, rp, ex]) => {
     fo = fo || {}; man = man || {};
-    return { fo, man, pg: pg || {}, cr: cr || {}, rp: (rp && rp.crops) || {} };
+    return { fo, man, pg: pg || {}, cr: cr || {}, rp: (rp && rp.crops) || {}, ex: ex || {} };
   }));
   const isMS = n => /(^|[^a-z])ms([^a-z]|$)|mark\s*-?_?scheme|markscheme/i.test(n);
   const asked = new Set();
@@ -9170,7 +9182,8 @@ const PP_VIEW = ON_WEB ? (() => {
     const cp = withX(segs(ck.paper), ck.px), cm = withX(segs(ck.ms), ck.mx), cs = withX(segs(ck.stem), ck.sx);   /* stem: the question's lead-in (scenario, table) that the part needs */
     const rc = D.rp[qk], rs = rc && segs(rc.report);   /* the Chief Examiner's comment on this question, cut from the report */
     const rep = rs && rc.report_file ? { file: '../' + rc.report_file, segs: rs, found: String(rc.found || ''), series: (s => /^\d{4}$/.test(s) ? 'Summer ' + s : s)(String(PP_SERIES(e))) } : null;
-    return { rep, paper: f.paper ? '../' + f.paper : null, ms: f.ms ? '../' + f.ms : null, pp: +pk.paper || (cp ? cp[0][0] : 1), pm: +pk.ms || (cm ? cm[0][0] : 1), crop: { paper: cp, ms: cm, stem: cp ? cs : null }, key };
+    const ex = Array.isArray(D.ex[qk]) && D.ex[qk].length ? D.ex[qk] : null;   /* real answers from our pupils with the marks CCEA gave (papers/examples.json) */
+    return { ex, rep, paper: f.paper ? '../' + f.paper : null, ms: f.ms ? '../' + f.ms : null, pp: +pk.paper || (cp ? cp[0][0] : 1), pm: +pk.ms || (cm ? cm[0][0] : 1), crop: { paper: cp, ms: cm, stem: cp ? cs : null }, key };
   }
   let lib = null;
   const pdfjs = () => lib || (lib = new Promise((ok, no) => { if (window.pdfjsLib) return ok(window.pdfjsLib); const s = document.createElement('script'); s.src = PDFJS + 'pdf.min.js'; s.onload = () => { try { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; } catch (e) { } ok(window.pdfjsLib); }; s.onerror = () => { lib = null; no(new Error('pdf.js')); }; document.head.append(s); }));
@@ -9262,6 +9275,32 @@ const PP_VIEW = ON_WEB ? (() => {
     $('.ppv-x', v).focus();
     draw();
   }
+  /* "Example answers": real anonymised answers to this question with the marks the examiner gave, best first */
+  function exBox(F) {
+    const box = el('div', { class: 'cq-exbox' }), groups = new Map();
+    F.ex.forEach(x => { if (!groups.has(x.q)) groups.set(x.q, []); groups.get(x.q).push(x); });
+    const fmt = s => esc(s).replace(/✓/g, '<i class="ex-y" aria-label="mark given">✓</i>').replace(/✗/g, '<i class="ex-x" aria-label="no mark">✗</i>').replace(/\n/g, '<br>');
+    let h = `<p class="ex-top">Real answers from our pupils in the Summer 2026 exam, with the marks the CCEA examiner gave. ✓ shows where a mark was given.</p>`;
+    groups.forEach((L, q) => {
+      if (groups.size > 1) h += `<p class="ex-q">Q${esc(q)} <span>[${L[0].max} mark${L[0].max === 1 ? '' : 's'}]</span></p>`;
+      L.slice().sort((a, b) => b.m / b.max - a.m / a.max).forEach((x, i) => {
+        const p = x.m / x.max, c = p >= .999 ? 'hi' : p >= .5 ? 'md' : 'lo';
+        h += `<details class="ex ex-${c}"${i === 0 ? ' open' : ''}><summary><b class="ex-m">${x.m}/${x.max}</b><span>Example answer${groups.size > 1 ? '' : ` · Q${esc(x.q)}`}${p >= .999 ? ' · full marks' : ''}</span></summary><div class="ex-a">${fmt(x.a)}</div>${x.n ? `<p class="ex-why"><b>${p >= .999 ? 'Note' : 'How to get the missing marks'}:</b> ${fmt(x.n)}</p>` : ''}</details>`;
+      });
+    });
+    box.innerHTML = h; return box;
+  }
+  function exBtn(where, F) {
+    if (!F.ex) return;
+    where.insertAdjacentHTML('beforeend', `<button type="button" class="btn" data-ppex aria-expanded="false">${icon('exam')}<span>Example answers (${F.ex.length})</span></button>`);
+    const b = $('[data-ppex]', where);
+    b.addEventListener('click', () => {
+      let box = where.parentNode.querySelector(':scope > .cq-exbox');
+      if (!box) { box = exBox(F); let a = where; while (a.nextElementSibling && a.nextElementSibling.matches('.cq-msbox')) a = a.nextElementSibling; a.after(box); }
+      else box.hidden = !box.hidden;
+      b.setAttribute('aria-expanded', String(!box.hidden)); b.lastChild.textContent = box.hidden ? `Example answers (${F.ex.length})` : 'Hide example answers';
+    });
+  }
   /* add "View question" / "View mark scheme" next to the CCEA links when the PDFs are uploaded */
   async function slot(where, e, api, shown) {
     if (!where) return; const F = shown || await files(e, api); if (!F || !where.isConnected) return;
@@ -9284,11 +9323,13 @@ const PP_VIEW = ON_WEB ? (() => {
         else { box.remove(); mb.setAttribute('aria-expanded', 'false'); mb.lastChild.textContent = 'Show the mark scheme'; open(e, 'ms'); }
       });
       $$('[data-ppv]', where).forEach(b => b.addEventListener('click', () => open(e, b.dataset.ppv)));
+      exBtn(where, F);
       return;
     }
     where.insertAdjacentHTML('afterbegin', `${F.paper ? `<button type="button" class="btn pri big" data-ppv="paper">${icon('exam')}View the question</button>` : ''}${F.ms ? `<button type="button" class="btn big" data-ppv="ms">${icon('chk')}View the mark scheme</button>` : ''}`);
     where.classList.add('has-ppv');
     $$('[data-ppv]', where).forEach(b => b.addEventListener('click', () => open(e, b.dataset.ppv)));
+    exBtn(where, F);
   }
   return { open, slot, files, inline };
 })() : null;

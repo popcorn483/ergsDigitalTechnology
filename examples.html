@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en-GB"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Example answers – Mr Butler's</title><meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#16213A"><link rel="icon" href="app-icons/favicon-32.png" sizes="32x32"><link rel="apple-touch-icon" href="app-icons/apple-touch-icon.png">
+<style>
+@font-face{font-family:'Lemon Milk';src:url('fonts/lemonmilk-bold.woff') format('woff');font-weight:700;font-display:swap}
+@font-face{font-family:'Atkinson Hyperlegible';src:url('fonts/AtkinsonHyperlegible-Regular.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Atkinson Hyperlegible';src:url('fonts/AtkinsonHyperlegible-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+:root{--desk:#E6EAF0;--paper:#fff;--paper-2:#F4F6F9;--ink:#172033;--ink-2:#465063;--ink-3:#687386;--line:#D3D9E2;--accent:#1F5FBF;--accent-ink:#fff;--accent-soft:#E4ECFA;
+--ok:#18744A;--ok-soft:#E1F3EA;--warn:#8E5300;--warn-soft:#FFF0D6;--err:#B3261E;--err-soft:#FDE7E5;
+--card-shadow:0 1px 2px rgba(20,30,50,.05),0 10px 30px -14px rgba(20,30,50,.22);
+--sans:'Atkinson Hyperlegible','Segoe UI',system-ui,-apple-system,'Helvetica Neue',Arial,sans-serif}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--desk:#0E1117;--paper:#181C24;--paper-2:#1F2430;--ink:#E5E8EE;--ink-2:#B2B9C6;--ink-3:#8A93A3;--line:#2F3644;--accent:#8AB6FF;--accent-ink:#0E1117;--accent-soft:#232C4C;--ok:#7FD6A4;--ok-soft:#173226;--warn:#F1B44E;--warn-soft:#382B13;--err:#FF9C94;--err-soft:#3B1B1A;--card-shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -12px rgba(0,0,0,.5)}}
+:root[data-theme="dark"]{--desk:#0E1117;--paper:#181C24;--paper-2:#1F2430;--ink:#E5E8EE;--ink-2:#B2B9C6;--ink-3:#8A93A3;--line:#2F3644;--accent:#8AB6FF;--accent-ink:#0E1117;--accent-soft:#232C4C;--ok:#7FD6A4;--ok-soft:#173226;--warn:#F1B44E;--warn-soft:#382B13;--err:#FF9C94;--err-soft:#3B1B1A;--card-shadow:0 1px 2px rgba(0,0,0,.4),0 12px 30px -12px rgba(0,0,0,.5)}
+*{box-sizing:border-box}[hidden]{display:none!important}html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--desk);color:var(--ink);font:16px/1.5 var(--sans)}
+.wrap{max-width:900px;margin:0 auto;padding:18px 16px 48px}
+a{color:var(--accent)}.back{display:inline-block;margin-bottom:14px;font-weight:700;text-decoration:none}
+.brand{display:block;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:12px;color:var(--ink-3);margin:0 0 4px}
+h1{font-family:'Lemon Milk',var(--sans);font-weight:700;letter-spacing:.03em;font-size:clamp(24px,5vw,34px);line-height:1.1;margin:0 0 8px}
+.lead{color:var(--ink-2);margin:0 0 14px;max-width:70ch}
+.key{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;color:var(--ink-2);margin:0 0 16px}
+.key span{display:inline-flex;align-items:center;gap:6px}
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:0 0 14px;overflow-x:auto}
+.tabs button{font:inherit;font-weight:700;background:none;border:0;color:var(--ink-2);padding:10px 14px;border-bottom:3px solid transparent;margin-bottom:-1px;white-space:nowrap;cursor:pointer;min-height:44px}
+.tabs button[aria-selected="true"]{color:var(--accent);border-bottom-color:var(--accent)}
+button:focus-visible,select:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.bar{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:0 0 14px;font-size:15px}
+.bar select{font:inherit;font-size:15px;min-height:40px;padding:6px 10px;border:1px solid var(--line);border-radius:8px;background:var(--paper);color:var(--ink);max-width:100%}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;background:var(--paper)}
+.seg button{font:inherit;font-size:14px;font-weight:700;border:0;background:none;color:var(--ink-2);padding:8px 12px;cursor:pointer;min-height:40px}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.q{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px;margin:0 0 14px;box-shadow:var(--card-shadow);scroll-margin-top:12px}
+.q-h{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin:0 0 8px}
+.q-h h2{margin:0;font-size:20px}.q-h small{color:var(--ink-3);font-size:14px}
+.q-btns{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.btn{font:inherit;font-size:14px;font-weight:700;border-radius:999px;padding:7px 14px;border:1.5px solid var(--accent);background:var(--paper);color:var(--accent);cursor:pointer;min-height:40px}
+.btn[aria-expanded="true"]{background:var(--accent);color:var(--accent-ink)}
+.crop{background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px;margin:0 0 10px;overflow-x:auto}
+.crop canvas{display:block;max-width:100%;height:auto!important}
+.crop .stem{opacity:.7;border-bottom:1px dashed var(--line);margin-bottom:6px;padding-bottom:4px}
+.crop p{margin:6px;color:#465063;font-size:14px}
+.sub{margin:12px 0 6px;font-weight:700;font-size:16px}.sub span{font-weight:400;color:var(--ink-3);font-size:14px}
+.ex{border:1px solid var(--line);border-left:5px solid var(--ink-3);border-radius:10px;background:var(--paper);margin:0 0 8px}
+.ex.hi{border-left-color:var(--ok)}.ex.md{border-left-color:var(--warn)}.ex.lo{border-left-color:var(--err)}
+.ex>summary{list-style:none;display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;min-height:46px}
+.ex>summary::-webkit-details-marker{display:none}
+.ex>summary::after{content:'▸';margin-left:auto;color:var(--ink-3)}.ex[open]>summary::after{content:'▾'}
+.pill{font-weight:700;font-size:15px;padding:2px 10px;border-radius:999px;min-width:3.4em;text-align:center;background:var(--paper-2)}
+.hi .pill{background:var(--ok-soft);color:var(--ok)}.md .pill{background:var(--warn-soft);color:var(--warn)}.lo .pill{background:var(--err-soft);color:var(--err)}
+.ex-b{padding:0 12px 12px}
+.ans{background:var(--paper-2);border-radius:8px;padding:10px 12px;font-size:15.5px;line-height:1.6;overflow-wrap:anywhere}
+.ans i{font-style:normal;font-weight:700}.ans .y{color:var(--ok)}.ans .x{color:var(--err)}
+.why{margin:8px 0 0;padding:8px 12px;border-radius:8px;background:var(--accent-soft);font-size:14.5px}
+.why.good{background:var(--ok-soft)}
+.empty{color:var(--ink-3)}
+.foot{color:var(--ink-3);font-size:13px;margin-top:22px}
+@media print{.tabs,.bar,.q-btns,.back{display:none}.ex{break-inside:avoid}.ex:not([open])>.ex-b{display:block}}
+</style></head>
+<body><div class="wrap">
+<a class="back" href="index.html">← Back to the revision guide</a>
+<span class="brand">Exam practice · A level</span>
+<h1>Example answers</h1>
+<p class="lead">Real answers from our own pupils in the Summer 2026 CCEA exams, with the marks the examiner actually gave. Compare a full-marks answer with one that lost marks to see exactly what earns credit.</p>
+<p class="key"><span><b class="pill" style="background:var(--ok-soft);color:var(--ok)">✓</b> where the examiner gave a mark</span><span><b class="pill" style="background:var(--err-soft);color:var(--err)">✗</b> where an answer was rejected</span><span>Names have been removed.</span></p>
+<div class="tabs" role="tablist" id="tabs"></div>
+<div class="bar"><label>Question <select id="jump"></select></label><span class="seg" role="group" aria-label="Show"><button type="button" data-f="all" aria-pressed="true">All answers</button><button type="button" data-f="hi" aria-pressed="false">Full marks</button><button type="button" data-f="lost" aria-pressed="false">Lost marks</button></span></div>
+<div id="list" aria-live="polite"><p class="empty">Loading…</p></div>
+<p class="foot">Question papers and mark schemes: CCEA, used with permission. Pupils' answers are typed up from their scripts; diagrams are described in words.</p>
+</div>
+<script>
+'use strict';
+const BOOKS = [['AS1', 'AS 1'], ['AS2', 'AS 2'], ['A21', 'A2 1']], SERIES = 'Summer 2026';
+const PDFJS = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/';
+const $ = (s, r) => (r || document).querySelector(s), $$ = (s, r) => [...(r || document).querySelectorAll(s)];
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
+const store = (k, v) => { try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { return null; } };
+try { const t = localStorage.getItem('notes-theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) { }
+const getJ = u => fetch(u, { cache: 'no-cache' }).then(r => r.ok ? r.json() : null).catch(() => null);
+let D = null, book = new URLSearchParams(location.search).get('b') || store('ex-book') || 'AS1', filt = 'all';
+if (!BOOKS.some(b => b[0] === book)) book = 'AS1';
+
+const fmt = s => esc(s).replace(/✓/g, '<i class="y" aria-label="mark given">✓</i>').replace(/✗/g, '<i class="x" aria-label="no mark">✗</i>').replace(/\n/g, '<br>');
+const band = x => { const p = x.m / x.max; return p >= .999 ? 'hi' : p >= .5 ? 'md' : 'lo'; };
+
+let lib = null;
+const pdfjs = () => lib || (lib = new Promise((ok, no) => { const s = document.createElement('script'); s.src = PDFJS + 'pdf.min.js'; s.onload = () => { window.pdfjsLib.GlobalWorkerOptions.workerSrc = PDFJS + 'pdf.worker.min.js'; ok(window.pdfjsLib); }; s.onerror = () => { lib = null; no(new Error('pdf.js')); }; document.head.append(s); }));
+const docs = new Map(), getDoc = async u => { if (!docs.has(u)) docs.set(u, (await pdfjs()).getDocument(u).promise); return docs.get(u); };
+async function cropInto(el, url, segs, X) {
+  const doc = await getDoc(url), dpr = Math.min(2, window.devicePixelRatio || 1);
+  for (let i = 0; i < segs.length; i++) {
+    const [pn, t, b] = segs[i], [l, r] = (X && X[i]) || [0, 1];
+    const pg = await doc.getPage(pn), base = pg.getViewport({ scale: 1 }), fit = Math.max(.3, (el.clientWidth - 12 || 600) / (base.width * (r - l)));
+    const vp = pg.getViewport({ scale: fit * dpr }), full = document.createElement('canvas');
+    full.width = Math.floor(vp.width); full.height = Math.floor(vp.height);
+    await pg.render({ canvasContext: full.getContext('2d'), viewport: vp }).promise;
+    const x0 = Math.floor(l * full.width), y0 = Math.floor(t * full.height), w = Math.ceil((r - l) * full.width), h = Math.ceil((b - t) * full.height), out = document.createElement('canvas');
+    out.width = w; out.height = h; out.getContext('2d').drawImage(full, x0, y0, w, h, 0, 0, w, h);
+    out.style.width = Math.floor(w / dpr) + 'px'; el.append(out);
+  }
+}
+async function showCrop(btn, card, key, which) {
+  const box = card.querySelector(`.crop[data-w="${which}"]`);
+  if (box) { box.hidden = !box.hidden; btn.setAttribute('aria-expanded', String(!box.hidden)); return; }
+  const c = D.cr[key] || {}, f = D.files, url = which === 'ms' ? f.ms : f.paper, segs = which === 'ms' ? c.ms : c.paper;
+  const el = document.createElement('div'); el.className = 'crop'; el.dataset.w = which; btn.setAttribute('aria-expanded', 'true');
+  card.querySelector('.q-btns').after(el);
+  if (!url || !segs) { el.innerHTML = '<p>This part isn’t available yet.</p>'; return; }
+  el.innerHTML = '<p>Loading…</p>';
+  try {
+    const parts = el; parts.innerHTML = '';
+    if (which === 'paper' && c.stem) { const s = document.createElement('div'); s.className = 'stem'; s.setAttribute('aria-label', 'Introduction to the question'); parts.append(s); await cropInto(s, url, c.stem, c.sx); }
+    const p = document.createElement('div'); parts.append(p); await cropInto(p, url, segs, which === 'ms' ? c.mx : c.px);
+  } catch (e) { el.innerHTML = `<p>The PDF couldn’t load here. <a href="${esc(url)}" target="_blank" rel="noopener">Open the ${which === 'ms' ? 'mark scheme' : 'question paper'}</a>.</p>`; }
+}
+
+function render() {
+  $('#tabs').innerHTML = BOOKS.map(([id, n]) => `<button type="button" role="tab" data-b="${id}" aria-selected="${id === book}">${n}</button>`).join('');
+  const keys = Object.keys(D.cr).filter(k => k.startsWith(book + '|' + SERIES + '|') && D.ex[k]);
+  const f = D.fo[book + '|' + SERIES], m = f && D.man[f];
+  D.files = { paper: m && m.paper ? m.paper : null, ms: m && m.ms ? m.ms : null };
+  $('#jump').innerHTML = keys.map(k => `<option value="${esc(k)}">Q${esc(k.split('|')[2])}</option>`).join('');
+  const html = keys.map((k, i) => {
+    const L = D.ex[k], c = D.cr[k] || {}, groups = new Map();
+    L.forEach(x => { if (filt === 'hi' && band(x) !== 'hi') return; if (filt === 'lost' && band(x) === 'hi') return; if (!groups.has(x.q)) groups.set(x.q, []); groups.get(x.q).push(x); });
+    const qn = k.split('|')[2];
+    let body = '';
+    groups.forEach((G, q) => {
+      if (groups.size > 1 || q !== qn) body += `<p class="sub">Q${esc(q)} <span>[${G[0].max} mark${G[0].max === 1 ? '' : 's'}]</span></p>`;
+      G.sort((a, b) => b.m / b.max - a.m / a.max).forEach((x, j) => {
+        const b = band(x);
+        body += `<details class="ex ${b}"${j === 0 && filt !== 'lost' ? ' open' : ''}><summary><b class="pill">${x.m}/${x.max}</b><span>Example answer${b === 'hi' ? ' · full marks' : ''}</span></summary><div class="ex-b"><div class="ans">${fmt(x.a)}</div>${x.n ? `<p class="why${b === 'hi' ? ' good' : ''}"><b>${b === 'hi' ? 'Note' : 'How to get the missing marks'}:</b> ${fmt(x.n)}</p>` : ''}</div></details>`;
+      });
+    });
+    if (!body) body = `<p class="empty">No ${filt === 'hi' ? 'full-mark' : 'lost-mark'} answers for this question.</p>`;
+    return `<section class="q" id="q${i}" data-k="${esc(k)}"><div class="q-h"><h2>Question ${esc(qn)}</h2><small>${esc(BOOKS.find(b => b[0] === book)[1])} · ${SERIES}${c.marks ? ` · ${c.marks} marks` : ''}</small></div>
+      <div class="q-btns">${c.paper ? '<button type="button" class="btn" data-show="paper" aria-expanded="false">Show the question</button>' : ''}${c.ms ? '<button type="button" class="btn" data-show="ms" aria-expanded="false">Show the mark scheme</button>' : ''}</div>${body}</section>`;
+  }).join('');
+  $('#list').innerHTML = html || '<p class="empty">No example answers for this paper yet.</p>';
+}
+
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-b]'); if (t) { book = t.dataset.b; store('ex-book', book); history.replaceState(null, '', '?b=' + book); render(); return; }
+  const f = e.target.closest('[data-f]'); if (f) { filt = f.dataset.f; $$('[data-f]').forEach(b => b.setAttribute('aria-pressed', String(b === f))); render(); return; }
+  const s = e.target.closest('[data-show]'); if (s) { const card = s.closest('.q'); showCrop(s, card, card.dataset.k, s.dataset.show); }
+});
+$('#jump').addEventListener('change', e => { const c = $(`.q[data-k="${CSS.escape(e.target.value)}"]`); if (c) c.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+
+Promise.all([getJ('papers/examples.json'), getJ('papers/crops.json'), getJ('papers/folders.json'), getJ('papers/manifest.json')]).then(([ex, cr, fo, man]) => {
+  if (!ex || !cr) { $('#list').innerHTML = '<p class="empty">The example answers couldn’t load. Check your connection and try again.</p>'; return; }
+  D = { ex, cr, fo: fo || {}, man: man || {} }; render();
+});
+</script>
+</body></html>
