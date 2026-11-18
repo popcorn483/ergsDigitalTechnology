@@ -1,4 +1,4 @@
-<meta charset="utf-8">
+<meta charset="utf-8"><script src="../fbconfig.js"></script><script src="../fbapi.js"></script>
 <title>GCSE Unit 5 CA Tutorials – Mr Butler's</title><meta name="apple-mobile-web-app-title" content="Mr B's Digital Technology Revision"><meta name="application-name" content="Mr B's Digital Technology Revision">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
@@ -10058,7 +10058,7 @@ try {
   let started = false;
   function start() {
     if (started) return; started = true;
-    if (!/^https:\/\/script\.google(usercontent)?\.com\//.test(URL0)) return;
+    if (!/^https:\/\/(script\.google(usercontent)?\.com|ergs-revision\.firebaseapp\.com)\//.test(URL0)) return;
     /* a device marked as staff without the staff password (e.g. a pupil who once opened the Teacher area) is a pupil device again */
     if (LS.get('notes-nocount') && !LS.get('mrb-staff-ok') && !LS.get('mrb-viewas')) { ['notes-nocount', 'teacher.nocount-set', 'teacher.actkey'].forEach(k => LS.set(k, null)); }
     if (LS.get('notes-nocount')) return;
@@ -10484,7 +10484,7 @@ try {
   const LS = { get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }, set(k, v) { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { } } };
   const inBook = typeof BK !== 'undefined' && BK && BK.id;
   if (!/^https?:$/.test(location.protocol)) return;
-  const url = () => { const u = LS.get('mrb-act-url') || ''; return /^https:\/\/script\.google(usercontent)?\.com\//.test(u) ? u : ''; };
+  const url = () => { const u = LS.get('mrb-act-url') || ''; return /^https:\/\/(script\.google(usercontent)?\.com|ergs-revision\.firebaseapp\.com)\//.test(u) ? u : ''; };
   const ABC = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   const newCode = () => { const a = new Uint32Array(8); crypto.getRandomValues(a); const c = [...a].map(x => ABC[x % ABC.length]).join(''); return c.slice(0, 4) + '-' + c.slice(4); };
   const SKIP = /^notes-(nocount|counted)/;
@@ -10498,7 +10498,7 @@ try {
     const data = payload(), h = hash(data); if (!force && h === LS.get('mrb-save-hash')) return true;
     busy = true;
     try {
-      const body = JSON.stringify(pu ? { kind: 'psave', id: pu.id, name: pu.name, cls: pu.cls, data } : { kind: 'save', code, data });   /* named pupils: saved under their name */
+      const body = JSON.stringify(pu ? { kind: 'psave', id: pu.id, name: pu.name, cls: pu.cls, data, force: !!force } : { kind: 'save', code, data });   /* named pupils: saved under their name */
       let ok = false;
       try { const r = await fetch(u, { method: 'POST', body, headers: { 'Content-Type': 'text/plain' } }); const j = await r.json(); ok = !!(j && j.ok); }
       catch (e) { await fetch(u, { method: 'POST', mode: 'no-cors', body }); ok = true; }   /* could not read the reply: assume it went */

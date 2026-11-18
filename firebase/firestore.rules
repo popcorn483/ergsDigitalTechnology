@@ -1,0 +1,169 @@
+rules_version = '2';
+// Mr B's Digital Technology Revision: who may read and write what. The free Spark plan has no server code, so these rules
+// ARE the server. Paste this file into Firebase console › Firestore › Rules › Publish whenever it changes.
+// Pupils sign in with Firebase email/password accounts made for them: <pupil id>.<n>@pupils.ergs-revision.firebaseapp.com
+// (password: their 4-digit PIN, padded). Teachers: Google sign-in (the owners below, or a "staff" document), or a pupil
+// account the owner has made a teacher (role: 'teacher').
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function signedIn() { return request.auth != null; }
+    function em() { return string(request.auth.token.get('email', '')).lower(); }
+    function prov() { return request.auth.token.firebase.sign_in_provider; }
+    function google() { return signedIn() && prov() == 'google.com' && request.auth.token.get('email_verified', false) == true; }
+    function owner() { return google() && em() in ['jbutler483@gmail.com', 'jbutler803@c2ken.net']; }
+    function staffGoogle() { return google() && exists(/databases/$(database)/documents/staff/$(em())); }
+    function pupilEmail() { return signedIn() && prov() == 'password' && em().matches('^[a-z0-9]{6,24}[.][0-9]+@pupils[.]ergs-revision[.]firebaseapp[.]com$'); }
+    function myPid() { return em().split('@')[0].split('[.]')[0]; }
+    function me() { return get(/databases/$(database)/documents/pupils/$(myPid())).data; }
+    // the pupil's CURRENT account (a new PIN makes a new account; the old one stops working)
+    function isPupil() { return pupilEmail() && exists(/databases/$(database)/documents/pupils/$(myPid())) && me().get('acct', '') == em(); }
+    function isTeacher() { return owner() || staffGoogle() || (isPupil() && me().get('role', '') == 'teacher'); }
+    // this pupil, or the pupil the teacher merged this account into
+    function actsFor(pid) { return isPupil() && (myPid() == pid || me().get('mergedInto', '') == pid); }
+    function schoolEmail(e) { return e is string && e.matches("^[a-z0-9._%+'-]{1,64}@c2ken[.]net$"); }
+    function emailFree(e) { return !exists(/databases/$(database)/documents/emails/$(e)); }
+    function listed(e, nm, cls) {
+      return exists(/databases/$(database)/documents/clist/$(e))
+        && get(/databases/$(database)/documents/clist/$(e)).data.name == nm
+        && get(/databases/$(database)/documents/clist/$(e)).data.cls == cls;
+    }
+    function sameRole() { return request.resource.data.get('role', '') == (resource == null ? '' : resource.data.get('role', '')); }
+    function changed() { return request.resource.data.diff(resource.data).affectedKeys(); }
+
+    // ---------- pupils: name, class, approval, current account, zones, teacher marks, merges ----------
+    match /pupils/{pid} {
+      allow read: if isTeacher() || actsFor(pid) || (pupilEmail() && myPid() == pid);
+      allow create: if (isTeacher() && (sameRole() || owner()))
+        // a new pupil signing up with their school email: waiting for approval, unless they are on a class list
+        || (pupilEmail() && myPid() == pid
+          && request.resource.data.keys().hasOnly(['name', 'cls', 'status', 'at', 'email', 'acct', 'gen', 'pin'])
+          && request.resource.data.acct == em() && schoolEmail(request.resource.data.email) && emailFree(request.resource.data.email)
+          && request.resource.data.name is string && request.resource.data.name.size() <= 40
+          && request.resource.data.cls is string && request.resource.data.cls.size() <= 12
+          && (request.resource.data.status == 'pending'
+            || (request.resource.data.status == 'approved' && listed(request.resource.data.email, request.resource.data.name, request.resource.data.cls))));
+      allow update: if (isTeacher() && (sameRole() || owner()))
+        // claiming: the pupil's new account becomes their current one: they had none yet (new, or moved from the Google
+        // Sheet, whose PIN the old script checked first), or the teacher pressed Reset PIN
+        || (pupilEmail() && myPid() == pid
+          && (resource.data.get('acct', null) == null || resource.data.get('resetPin', false) == true)
+          && changed().hasOnly(['acct', 'gen', 'resetPin', 'mig', 'pin', 'email'])
+          && request.resource.data.acct == em() && request.resource.data.get('resetPin', false) == false
+          && (request.resource.data.get('email', '') == resource.data.get('email', '')
+            || (resource.data.get('email', '') == '' && schoolEmail(request.resource.data.email) && emailFree(request.resource.data.email))))
+        // a pupil from before school emails adds theirs
+        || (isPupil() && myPid() == pid && resource.data.get('email', '') == '' && changed().hasOnly(['email'])
+          && schoolEmail(request.resource.data.email) && emailFree(request.resource.data.email))
+        // their real name, the first time (an account made from an email alone, "J. Smith")
+        || (isPupil() && myPid() == pid && resource.data.get('prov', false) == true && changed().hasOnly(['name', 'prov'])
+          && request.resource.data.prov == false && request.resource.data.name is string && request.resource.data.name.size() <= 40);
+      allow delete: if isTeacher();
+    }
+
+    // ---------- sign-in look-ups: school email -> pupil and their current account (one at a time, before signing in) ----------
+    match /emails/{e} {
+      allow get: if true;
+      allow list, delete: if isTeacher();
+      allow create: if isTeacher() || (isPupil() && request.resource.data.keys().hasOnly(['pid', 'acct'])
+        && request.resource.data.pid == myPid() && request.resource.data.acct == em() && me().get('email', '') == e);
+      allow update: if isTeacher() || (isPupil() && request.resource.data.keys().hasOnly(['pid', 'acct'])
+        && resource.data.pid == myPid() && request.resource.data.pid == myPid() && request.resource.data.acct == em());
+    }
+    // ---------- class lists the teacher pasted in: a listed pupil gets straight in with the name and class from the list ----------
+    match /clist/{e} {
+      allow get: if true;
+      allow list, write: if isTeacher();
+    }
+    // ---------- classes (the sign-in box lists them) ----------
+    match /classes/{c} {
+      allow read: if true;
+      allow write: if isTeacher();
+    }
+
+    // ---------- each pupil's time, "revising now", progress summary and read messages ----------
+    match /act/{pid} {
+      allow read, write: if isTeacher() || actsFor(pid);
+    }
+    // ---------- time per pupil per day (document id: <pupil>_<YYYY-MM-DD>) ----------
+    match /days/{id} {
+      allow read: if isTeacher() || actsFor(resource.data.pid);
+      allow create: if isTeacher() || (actsFor(request.resource.data.pid) && id == request.resource.data.pid + '_' + request.resource.data.d);
+      allow update: if isTeacher() || (actsFor(request.resource.data.pid) && request.resource.data.pid == resource.data.pid && request.resource.data.d == resource.data.d);
+      allow delete: if isTeacher();
+    }
+    // ---------- each workbook's progress snapshot (document id: <pupil>_<book>) ----------
+    match /prog/{id} {
+      allow read: if isTeacher() || actsFor(resource.data.pid);
+      allow create, update: if isTeacher() || (actsFor(request.resource.data.pid) && id == request.resource.data.pid + '_' + request.resource.data.book);
+      allow delete: if isTeacher();
+    }
+    // ---------- saved progress: under the pupil, or under a save code (no sign-in needed: the code is the key) ----------
+    match /psave/{pid} {
+      allow read: if isTeacher() || actsFor(pid);
+      allow write: if isTeacher() || (actsFor(pid) && request.resource.data.data is string && request.resource.data.data.size() <= 460000);
+    }
+    match /saves/{c} {
+      allow get: if true;
+      allow list, delete: if isTeacher();
+      allow create, update: if c.matches('^[A-HJ-NP-Z2-9]{4}-[A-HJ-NP-Z2-9]{4}$') && request.resource.data.keys().hasOnly(['data', 'updated'])
+        && request.resource.data.data is string && request.resource.data.data.size() <= 460000;
+    }
+    // ---------- requests to open another unit or year (document id: <pupil>_<zone>) ----------
+    match /zreqs/{rid} {
+      allow read: if isTeacher() || actsFor(resource.data.pid);
+      allow create, update: if isTeacher() || (actsFor(request.resource.data.pid) && rid == request.resource.data.pid + '_' + request.resource.data.zone
+        && request.resource.data.status == 'pending' && request.resource.data.keys().hasOnly(['pid', 'name', 'cls', 'zone', 'at', 'status']));
+      allow delete: if isTeacher();
+    }
+    // ---------- set work, messages and topic tests: the teacher's lists, and each recipient's inbox ----------
+    match /work/{id} { allow read, write: if isTeacher(); }
+    match /msgs/{id} { allow read, write: if isTeacher(); }
+    match /tests/{id} { allow read, write: if isTeacher(); }
+    match /inbox/{tok} {
+      // ALL, a class (C-11B) or a year (Y-11): any signed-in pupil; a pupil's own (P-<pupil>): only them
+      allow get: if isTeacher() || (isPupil() && (!tok.matches('^P-.*') || tok == 'P-' + myPid() || tok == 'P-' + me().get('mergedInto', '')));
+      allow list, write: if isTeacher();
+    }
+    match /tres/{id} {
+      allow read: if isTeacher() || actsFor(resource.data.pid);
+      allow create: if isTeacher() || (actsFor(request.resource.data.pid) && request.resource.data.ans is string && request.resource.data.ans.size() <= 200);
+      allow update, delete: if isTeacher();
+    }
+    // ---------- inter-house competitions: anyone with the link can enter (signed in, or anonymously) ----------
+    match /comps/{id} {
+      allow read: if true;
+      allow write: if isTeacher();
+    }
+    match /centries/{eid} {
+      allow read: if isTeacher() || actsFor(resource.data.pid) || (signedIn() && resource.data.uid == request.auth.uid);
+      allow create: if isTeacher() || (signedIn() && request.resource.data.uid == request.auth.uid
+        && (request.resource.data.pid == '' || actsFor(request.resource.data.pid))
+        && request.resource.data.keys().hasOnly(['rid', 'pid', 'uid', 'name', 'cls', 'house', 'title', 'link', 'text', 'at', 'img']));
+      allow update: if isTeacher() || (signedIn() && request.resource.data.uid == request.auth.uid
+        && (resource.data.uid == request.auth.uid || (resource.data.pid != '' && actsFor(resource.data.pid)))
+        && changed().hasOnly(['rid', 'pid', 'uid', 'name', 'cls', 'house', 'title', 'link', 'text', 'at', 'img']));
+      allow delete: if isTeacher();
+    }
+    match /cimg/{eid} {
+      allow read: if isTeacher() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow create, update: if isTeacher() || (signedIn() && request.resource.data.uid == request.auth.uid
+        && get(/databases/$(database)/documents/centries/$(eid)).data.uid == request.auth.uid
+        && request.resource.data.src is string && request.resource.data.src.size() < 1000000);
+      allow delete: if isTeacher() || (signedIn() && resource.data.uid == request.auth.uid);
+    }
+
+    // ---------- staff: the teacher key and staff PIN as hashes (typed in the sign-in box), and other staff Google accounts ----------
+    match /staffkeys/{h} {
+      allow get: if true;
+      allow list, write: if owner();
+    }
+    match /staff/{email} {
+      allow read: if isTeacher() || (google() && em() == email);
+      allow write: if owner();
+    }
+    match /config/{d} {
+      allow read, write: if isTeacher();
+    }
+  }
+}
