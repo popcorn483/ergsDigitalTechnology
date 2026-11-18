@@ -990,14 +990,14 @@
     L.slice(0, 200).forEach(raw => {
       const e = nem(raw), m = /^([a-z])([a-z'-]+?)\d*@c2ken\.net$/.exec(e);
       if (!EMAIL_RE.test(e) || !m) { out.push({ email: String(raw).slice(0, 80), result: 'invalid' }); return; }
-      if (have[e]) { out.push({ email: e, result: 'already', name: (P(have[e]) || {}).name || '' }); return; }
+      if (have[e]) { const k = resolve(have[e]); if (cl) ops.push(['set', 'pupils/' + k, { cls: cl, status: 'approved' }, true]); out.push({ email: e, result: 'already', name: (P(k) || {}).name || '' }); return; }
       const ini = m[1], sur = letters(m[2]);
       const fits = p => { const t = String(p.name || '').split(/\s+/).filter(Boolean); if (t.length < 2 || M[p.id] || p.taken) return false;
         const a = letters(t[0])[0] === ini && (letters(t[t.length - 1]) === sur || letters(t.slice(1).join('')) === sur), b = letters(t[t.length - 1])[0] === ini && letters(t.slice(0, -1).join('')) === sur; return a || b; };
       let hits = acc.filter(fits); if (yr && hits.some(p => p.yr === yr)) hits = hits.filter(p => p.yr === yr || !p.yr);
       if ([...new Set(hits.map(p => p.key + '|' + (p.yr || '')))].length > 1) { out.push({ email: e, result: 'ambiguous', names: [...new Set(hits.map(p => p.name + (p.cls ? ' (' + p.cls + ')' : '')))] }); return; }
       let id, result, name;
-      if (hits.length) { const keep = best(hits); hits.forEach(p => { if (p.id !== keep.id) M[p.id] = keep.id; }); id = keep.id; result = 'matched'; name = keep.name; keep.taken = 1; if (cl && !keep.cls) ops.push(['set', 'pupils/' + id, { cls: cl }, true]); }
+      if (hits.length) { const keep = best(hits); hits.forEach(p => { if (p.id !== keep.id) M[p.id] = keep.id; }); id = keep.id; result = 'matched'; name = keep.name; keep.taken = 1; if (cl) ops.push(['set', 'pupils/' + id, { cls: cl }, true]); }
       else { id = 'e' + rand(8).slice(0, 15); result = 'created';
         const surname = m[2].replace(/(^|[-'])([a-z])/g, (x, s1, c2) => s1 + c2.toUpperCase()).replace(/^Mc([a-z])/, (x, c) => 'Mc' + c.toUpperCase()); name = ini.toUpperCase() + '. ' + surname;
         ops.push(['set', 'pupils/' + id, { name, cls: cl, status: 'approved', at: now(), email: e, acct: null, gen: 0, pin: false, prov: true }]); LV.pupils[id] = { name, cls: cl, status: 'approved', email: e }; }
@@ -1005,6 +1005,7 @@
       const p = P(id) || {}; ops.push(['set', 'emails/' + e, p.acct ? { pid: id, acct: p.acct } : p.mig ? { pid: id, m: 1 } : { pid: id }]);
       out.push({ email: e, result, id, name });
     });
+    if (cl && !(LV.classes || {})[cl]) ops.push(['set', 'classes/' + cl, { teacher: '', course: '', zones: [], at: now() }]);   // a new class or set: shown in Classes & zones (add its teacher there)
     const r = await mergeMap(o, M); await commit(o, ops);
     return { ok: true, merged: r.merged || 0, rows: out };
   }

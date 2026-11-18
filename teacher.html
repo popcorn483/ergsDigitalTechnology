@@ -2725,7 +2725,10 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
     });
     /* ADD SCHOOL EMAILS (Apps Script v32): just emails (jsmith123@c2ken.net); each finds its pupil by initial + surname, or makes one */
     const ea = el('textarea', { rows: '5', 'aria-label': 'School emails', placeholder: 'jsmith123@c2ken.net\naperson456@c2ken.net', style: 'width:100%;box-sizing:border-box;font:13px/1.4 ui-monospace,Menlo,Consolas,monospace' });
-    const ecs = el('select', { 'aria-label': 'Class for these pupils' }); ecs.append(el('option', { value: '', text: 'No class (or any year)' }), ...CLASSES.map(c => el('option', { value: c.cls, text: c.cls + (c.teacher ? ' · ' + c.teacher : '') })));
+    /* the class (set) for these pupils: pick one, or type a new one (e.g. 11B1): it is made in Classes & zones */
+    const ecs = el('input', { type: 'text', list: 'ecs-dl', maxlength: '12', placeholder: 'e.g. 11B1', 'aria-label': 'Class or set for these pupils', style: 'width:9em;text-transform:uppercase' });
+    const ecsDl = el('datalist', { id: 'ecs-dl' }); CLASSES.forEach(c => ecsDl.append(el('option', { value: c.cls, text: c.teacher || '' })));
+    ecs.addEventListener('input', () => { ecs.value = ecs.value.toUpperCase().replace(/[^A-Z0-9]/g, ''); });
     const eres = el('div', { class: 'small' }), ego = el('button', { type: 'button', class: 'tp-mini pri', text: 'Add emails', disabled: '' });
     const emails = () => [...new Set(ea.value.split(/[\s,;]+/).map(x => x.trim().toLowerCase().replace(/^<|>$/g, '')).filter(x => x.includes('@')))];
     ea.addEventListener('input', () => { const n = emails().length; ego.disabled = !n; ego.textContent = n ? `Add ${n} email${n === 1 ? '' : 's'}` : 'Add emails'; });
@@ -2746,8 +2749,8 @@ window.EXAM_DATES={"_help":"Exam dates shown in the Teacher area countdown. Edit
         eres.append(el('p', { style: 'margin:10px 0 4px', text: 'Last emails added:' }), el('div', { style: 'overflow-x:auto' }, t), el('button', { type: 'button', class: 'tp-mini', style: 'margin-top:6px', text: 'Clear', onclick: () => { EMRES = null; eres.innerHTML = ''; } }));
     }
     card.append(ta, el('div', { class: 'ac-row' }, el('label', { class: 'small' }, document.createTextNode('Class for everyone on this list '), cs), go), prev,
-      el('h4', { text: 'Add school emails' }), el('p', { class: 'small', text: 'Paste school emails (one per line, or separated by commas), e.g. jsmith123@c2ken.net. Each is matched to a pupil without an email by first initial and surname, and added to their account. If nobody matches, a new pupil is made (shown as “J. Smith” until they sign in and give their full name). They are approved, and choose a PIN the first time they sign in, or you can email them one with PIN.' }),
-      ea, el('div', { class: 'ac-row' }, el('label', { class: 'small' }, document.createTextNode('Class for these pupils '), ecs), ego), eres,
+      el('h4', { text: 'Add school emails' }), el('p', { class: 'small', text: 'Paste school emails (one per line, or separated by commas), e.g. jsmith123@c2ken.net. Each is matched to a pupil without an email by first initial and surname, and added to their account. If nobody matches, a new pupil is made (shown as “J. Smith” until they sign in and give their full name). Give a class or set and everyone on the list is put in it (a new one is made in Classes & zones). They are approved straight away and choose their own PIN the first time they sign in with their email.' }),
+      ea, el('div', { class: 'ac-row' }, el('label', { class: 'small' }, document.createTextNode('Class or set for these pupils '), ecs, ecsDl), ego), eres,
       el('h4', { text: 'Duplicate accounts' }), el('p', { class: 'small', text: 'Pupils who signed up more than once (same name, same year group) were merged automatically when the v29 Apps Script first ran. Press this to check again.' }), el('div', { class: 'ac-row' }, dd));
     return card;
   }
