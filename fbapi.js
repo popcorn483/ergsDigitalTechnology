@@ -80,14 +80,18 @@
   const uncache = key => LS.set('mrb-fbc:' + key, null);
 
   // ---------- Firebase (loaded from Google's CDN) ----------
-  const FB = Promise.all([import(CDN + 'firebase-app.js'), import(CDN + 'firebase-auth.js'), import(CDN + 'firebase-firestore.js')]).then(([A, AU, FS]) => {
+  /* SPEED: Firebase (about 500 KB) is only loaded when it's needed: a pupil's ordinary page view is answered from this
+     device's cache (sign-in, zones, set work, page marks: kept a few minutes), and Firebase loads in the background when
+     there is something to save (every 3 minutes at most), or straight away to sign in. The Teacher area loads it at once. */
+  let FBP = null;
+  const loadFB = () => FBP || (FBP = Promise.all([import(CDN + 'firebase-app.js'), import(CDN + 'firebase-auth.js'), import(CDN + 'firebase-firestore.js')]).then(([A, AU, FS]) => {
     const app = A.initializeApp(CFG.firebase), auth = AU.getAuth(app), db = FS.initializeFirestore(app, { ignoreUndefinedProperties: true });
     const o = { A, AU, FS, app, auth, db };
     o.ready = new Promise(res => { const un = AU.onAuthStateChanged(auth, u => { un(); res(u); }); });
-    AU.onAuthStateChanged(auth, () => onAuth(o));
+    AU.onAuthStateChanged(auth, () => { onAuth(o); TU = teacherUser(o); });
     return o;
-  });
-  FB.catch(e => console.warn('[mrb] Firebase did not load', e));
+  }));
+  const FB = { then: (a, b) => loadFB().then(a, b), catch: f => loadFB().catch(f) };
   const ready = () => FB.then(o => o.ready.then(() => o));
   const D = (o, path) => o.FS.doc(o.db, path);
   const C = (o, path) => o.FS.collection(o.db, path);
@@ -113,6 +117,7 @@
       FIRST = false;
       if (pid && (!LS.get('mrb-pupil') || LS.get('notes-nocount')) && !/^FB\./.test(LS.get('teacher.actkey') || '') && !/teacher\.html$/i.test(location.pathname)) { o.AU.signOut(o.auth); return; }
     }
+    if (!pid) LS.set('mrb-fb-pid', null);
     if (pid === ME.pid) { paintBar(); return; }
     if (ME.un) ME.un(); if (ME.tun) ME.tun();
     ME = { pid, doc: undefined, un: null, ready: null, tid: '', tdoc: null, tun: null };
@@ -137,6 +142,7 @@
     if (ME.doc && ME.doc.acct !== em) { const fresh = await getD(o, 'pupils/' + ME.pid).catch(() => null); if (fresh) ME.doc = fresh; }
     if (!ME.doc || ME.doc.acct !== em) return null;
     const t = ME.doc.mergedInto || ME.pid;
+    LS.set('mrb-fb-pid', ME.pid + '|' + t);
     if (t === ME.pid) return { pid: ME.pid, doc: ME.doc, tid: t, tdoc: ME.doc };
     const td = ME.tdoc || await getD(o, 'pupils/' + t).catch(() => null) || {};
     return { pid: ME.pid, doc: ME.doc, tid: t, tdoc: td };
@@ -306,7 +312,9 @@
     if (m.doc.resetPin) return { ok: true, pin: false };
     const t = m.tdoc || {}, c = await classDoc(o, t.cls);
     const asked = await cached('asked:' + m.tid, 10 * 60000, () => getQ(o, 'zreqs', ['pid', '==', m.tid], ['status', '==', 'pending']).then(a => a.map(x => x[1].zone)).catch(() => []));
-    return { ok: true, status: t.status || 'approved', pin: true, email: t.email || m.doc.email || '', id: m.tid, name: t.name, cls: t.cls, zones: effZones(t, c && c.zones), asked, teacher: m.doc.role === 'teacher' || undefined };
+    const out = { ok: true, status: t.status || 'approved', pin: true, email: t.email || m.doc.email || '', id: m.tid, name: t.name, cls: t.cls, zones: effZones(t, c && c.zones), asked, teacher: m.doc.role === 'teacher' || undefined };
+    if (out.status === 'approved') LS.set('mrb-fbc:acc:' + m.pid, JSON.stringify({ t: now(), v: out, aw: t.aw || {} }));   // (someone waiting for approval is checked every time)
+    return out;
   }
   async function classes(o) {
     const L = await cached('classes', 30 * 60000, () => allDocs(o, 'classes'));
@@ -317,7 +325,8 @@
     const rid = m.tid + '_' + zone, cur = await getD(o, 'zreqs/' + rid).catch(() => null);
     if (cur && cur.status === 'pending') return { ok: true, again: true };
     await o.FS.setDoc(D(o, 'zreqs/' + rid), { pid: m.tid, name: m.tdoc.name || '', cls: m.tdoc.cls || '', zone, at: now(), status: 'pending' });
-    uncache('asked:' + m.tid);
+    uncache('asked:' + m.tid); uncache('acc:' + m.pid);
+    legacy('zonereq', { id: m.tid, zone, name: m.tdoc.name || '', cls: m.tdoc.cls || '' });   // the old script emails Mr Butler (not waited for)
     return { ok: true };
   }
   async function awards(o, q) {
@@ -557,11 +566,59 @@
       let got = 0;
       want.forEach(([k, ref]) => {
         let first = true;
-        LV.un.push(o.FS.onSnapshot(ref, s => { const m = {}; s.forEach(x => { m[x.id] = x.data(); }); LV[k] = m; if (first) { first = false; if (++got === want.length) res(); } },
+        LV.un.push(o.FS.onSnapshot(ref, s => { const m = {}; s.forEach(x => { m[x.id] = x.data(); }); news(k, LV[k], m); LV[k] = m; if (first) { first = false; if (++got === want.length) res(); } },
           e => { stopLive(); rej(e); }));
       });
     });
     return LV.ready;
+  }
+  /* ---------- SIGN-UP UPDATES: while the Teacher area is open, a pop-up (and a count on the tab and the app icon) the moment
+     a pupil signs up and waits for approval, an added pupil signs in for the first time, or a pupil asks to open a unit.
+     Each is told once (remembered on this device). Emails about sign-ups and requests still come from the old script. */
+  const NK = 'mrb-fb-told';
+  function news(kind, prev, cur) {
+    if (!/teacher\.html$/i.test(location.pathname) || (kind !== 'pupils' && kind !== 'zreqs')) return;
+    const told = J(LS.get(NK), {}), lines = [];
+    if (kind === 'pupils') Object.keys(cur).forEach(id => {
+      const p = cur[id], was = prev && prev[id], nm = `${p.name || p.email || 'A pupil'}${p.cls ? ' (' + p.cls + ')' : ''}`; if (p.mergedInto) return;
+      if (p.status === 'pending' && !told['r:' + id]) { told['r:' + id] = now(); lines.push(`${nm} has signed up and is waiting for you to approve them.`); }
+      else if (prev && p.acct && p.status === 'approved' && !told['j:' + id] && (was ? !was.acct && !was.mig : true)) { told['j:' + id] = now(); lines.push(`${nm} has signed in for the first time.`); }
+    });
+    if (kind === 'zreqs') Object.keys(cur).forEach(rid => { const z = cur[rid]; if (told['z:' + rid + z.at]) return; told['z:' + rid + z.at] = now(); lines.push(`${z.name || 'A pupil'}${z.cls ? ' (' + z.cls + ')' : ''} asks to open ${z.zone}.`); });
+    const ks = Object.keys(told); if (ks.length > 3000) ks.sort((a, b) => told[a] - told[b]).slice(0, ks.length - 3000).forEach(k => delete told[k]);
+    LS.set(NK, JSON.stringify(told));
+    setTimeout(badge, 0);
+    if (!lines.length) return;
+    try { if ('Notification' in window && Notification.permission === 'granted') { const n = new Notification(lines.length === 1 ? 'Revision site' : lines.length + ' updates from the revision site', { body: lines.slice(0, 6).join('\n') + (lines.length > 6 ? `\n…and ${lines.length - 6} more` : ''), icon: SITE + 'app-icons/icon-192.png', tag: 'mrb-signups' }); n.onclick = () => { window.focus(); location.hash = 'visits'; n.close(); }; } } catch (e) { }
+    toast(lines);
+  }
+  function badge() {   // waiting for you: sign-ups and requests, on the tab title and the installed app's icon
+    const n = Object.keys(LV.pupils || {}).filter(id => LV.pupils[id].status === 'pending' && !LV.pupils[id].mergedInto).length + Object.keys(LV.zreqs || {}).length;
+    document.title = (n ? `(${n}) ` : '') + document.title.replace(/^\(\d+\) /, '');
+    try { if (navigator.setAppBadge) { if (n) navigator.setAppBadge(n); else navigator.clearAppBadge(); } } catch (e) { }
+  }
+  function toast(lines) {
+    if (!document.body) return;
+    let box = document.getElementById('mrb-news');
+    if (!box) { box = document.createElement('div'); box.id = 'mrb-news'; box.setAttribute('role', 'status');
+      box.innerHTML = '<style>#mrb-news{position:fixed;right:14px;bottom:14px;z-index:2147483500;max-width:360px;display:flex;flex-direction:column;gap:8px;font:14px/1.4 system-ui,-apple-system,Segoe UI,sans-serif}#mrb-news .n{background:#16213A;color:#fff;border-radius:12px;padding:12px 14px;box-shadow:0 10px 30px rgba(0,0,0,.3);cursor:pointer}#mrb-news .n b{display:block;margin-bottom:2px}</style>';
+      document.body.appendChild(box); }
+    const n = document.createElement('div'); n.className = 'n'; n.title = 'Open Pupil tracking';
+    const b = document.createElement('b'); b.textContent = '🔔 ' + (lines.length === 1 ? 'Revision site' : lines.length + ' updates'); n.append(b);
+    lines.slice(0, 5).forEach(t => { const d = document.createElement('div'); d.textContent = t; n.append(d); });
+    if (lines.length > 5) { const d = document.createElement('div'); d.textContent = `…and ${lines.length - 5} more`; n.append(d); }
+    n.addEventListener('click', () => { location.hash = 'visits'; n.remove(); });
+    box.append(n); setTimeout(() => n.remove(), 20000);
+  }
+  /* once, on a teacher's computer: allow pop-ups for sign-ups (a browser permission, so it needs a tap) */
+  function askNotify() {
+    if (!/teacher\.html$/i.test(location.pathname) || !('Notification' in window) || Notification.permission !== 'default' || LS.get('mrb-fb-nask') || document.getElementById('mrb-nask') || !document.body) return;
+    const d = document.createElement('div'); d.id = 'mrb-nask';
+    d.innerHTML = '<style>#mrb-nask{position:fixed;left:14px;bottom:14px;z-index:2147483500;max-width:380px;background:#16213A;color:#fff;border-radius:12px;padding:12px 14px;box-shadow:0 10px 30px rgba(0,0,0,.3);font:14px/1.4 system-ui,-apple-system,Segoe UI,sans-serif}#mrb-nask button{font:inherit;font-weight:700;border:0;border-radius:8px;padding:7px 12px;margin:8px 8px 0 0;cursor:pointer}#mrb-nask .y{background:#fff;color:#16213A}#mrb-nask .x{background:transparent;color:#C9D6F2}</style>' +
+      '🔔 <b>Get a pop-up on this computer when a pupil signs up</b> (or asks to open a unit), while the Teacher area is open.<br><button type="button" class="y">Turn on</button><button type="button" class="x">No thanks</button>';
+    document.body.appendChild(d);
+    d.querySelector('.y').addEventListener('click', () => { LS.set('mrb-fb-nask', '1'); Notification.requestPermission().then(r => { d.remove(); if (r === 'granted') toast(['Pop-ups are on: you’ll see one here when a pupil signs up.']); }); });
+    d.querySelector('.x').addEventListener('click', () => { LS.set('mrb-fb-nask', '1'); d.remove(); });
   }
   function stopLive() { LV.un.forEach(f => { try { f(); } catch (e) { } }); LV.un = []; LV.ready = null; LV.pupils = LV.act = LV.classes = LV.zreqs = null; }
   const P = pid => (LV.pupils || {})[pid];
@@ -1155,6 +1212,7 @@
     const cr = await o.AU.signInWithPopup(o.auth, prov), em = (cr.user.email || '').toLowerCase();
     if (OWNERS.indexOf(em) < 0) { await checkStaffDoc(o); if (STAFF_OK !== em) { await o.AU.signOut(o.auth); throw new Error(em + ' isn’t a teacher account for this site. Mr Butler can add it in Firebase (Firestore › staff).'); } }
     paintBar(); if (TRES) { TRES(); TRES = null; TWAIT = null; }
+    startLive(o).catch(() => { }); setTimeout(askNotify, 2000);
     return true;
   }
   let BAR_WANT = false;
@@ -1187,7 +1245,31 @@
     pdata, setrole, dedupe, addpupil, addemails, sendpin, importlist, classlist, dellist, setemail, resetpin, rename, delete: del, merge,
     approve: (o, q) => decide(o, q, 'approved'), decline: (o, q) => decide(o, q, 'declined'),
     testmail: async () => { const k = legacyKey(); const j = k ? await legacy('testmail', { key: k }) : null; return j || { ok: false, error: 'Emails are sent by the old Google script: open the Teacher area on a device with the teacher key.' }; } };
+  const peek = (key, ms) => { const c = J(LS.get('mrb-fbc:' + key), null); return c && now() - c.t < ms ? c : null; };
+  /* answers a pupil's page can have straight from this device, without loading Firebase (null: Firebase is needed) */
+  function fast(q, body) {
+    const me = J(LS.get('mrb-pupil'), null), who = (LS.get('mrb-fb-pid') || '').split('|'), pid = who[0], tid = who[1] || pid;
+    const mine = !!(pid && me && me.id === tid);
+    if (body) {
+      if (body.kind === 'teacher' || !mine) return null;
+      if (!body.kind || body.kind === 'ping' || body.kind === 'snap' || body.kind === 'msgread') return pupilPost(null, body);
+      if (body.kind === 'psave' && !body.force && now() - (+LS.get('mrb-fb-ps') || 0) < PSAVE_MS) {   // written later (at most every 5 minutes)
+        PS_DATA = String(body.data || ''); LS.set('mrb-fb-psp', '1');
+        if (!PS_T) PS_T = setTimeout(() => { PS_T = 0; const x = PS_DATA; PS_DATA = null; if (x != null) ready().then(o => psave(o, { data: x, force: true })).catch(e => console.warn('[mrb] psave', e)); }, (+LS.get('mrb-fb-ps') || 0) + PSAVE_MS - now());
+        return { ok: true };
+      }
+      return null;
+    }
+    const a = q.action;
+    if (a === 'access' && mine) { const c = peek('acc:' + pid, 5 * 60000); return c ? c.v : null; }
+    if (a === 'awards' && mine) { const c = peek('acc:' + pid, 10 * 60000); if (!c) return null; const aw = c.aw || {}, since = +q.since || 0;
+      return { ok: true, awards: Object.keys(aw).map(k => { const i = k.indexOf('|'); return [aw[k][0], k.slice(0, i), k.slice(i + 1), aw[k][1]]; }).filter(x => x[0] > since) }; }
+    if (a === 'mywork' && mine) { const c = peek('mywork:' + tid, 10 * 60000); return c ? c.v : null; }
+    if (a === 'classes') { loadFB(); const c = peek('classes', 30 * 60000); return c ? { ok: true, classes: c.v.map(([id, x]) => ({ cls: id, teacher: x.teacher || '', course: x.course || '' })) } : null; }   // the sign-in box is open: get Firebase ready
+    return null;
+  }
   async function route(q, body) {
+    const f = fast(q, body); if (f) return f;
     const o = await ready();
     if (body) {
       if (body.kind === 'teacher' && body.q) { q = {}; Object.keys(body.q).forEach(k => { q[k] = String(body.q[k]); }); }
@@ -1225,8 +1307,7 @@
     }
     return new Response(JSON.stringify(j), { status: 200, headers: { 'Content-Type': 'application/json' } });
   }
-  let TU = false; FB.then(o => o.AU.onAuthStateChanged(o.auth, () => { TU = teacherUser(o); })).catch(() => { });
-  const teacherUserSafe = () => TU;
+  var TU = false; const teacherUserSafe = () => TU;
   window.fetch = function (input, init) {
     const url = typeof input === 'string' ? input : (input && input.url) || '';
     if (isApi(url)) return handle(url, init);
@@ -1236,6 +1317,9 @@
     if (isApi(url)) { handle(String(url), { method: 'POST', body: data }).catch(() => { }); return true; }
     return realBeacon(url, data);
   };
+  if (/teacher\.html$/i.test(location.pathname)) {
+    loadFB().then(o => o.ready.then(async () => { await checkStaffDoc(o); if (teacherUser(o)) { startLive(o).catch(() => { }); setTimeout(askNotify, 3000); } })).catch(() => { });
+  } else if (qload().log.length || Object.keys(qload().snap).length) setTimeout(() => flush(), 6000);   // activity a previous page couldn't save yet
   window.FBAPI = {
     migrate, teacherSignIn, flush,
     signOut: () => { stopLive(); return FB.then(o => o.AU.signOut(o.auth)).then(() => paintBar()); },

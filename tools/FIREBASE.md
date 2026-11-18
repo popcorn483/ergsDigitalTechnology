@@ -16,6 +16,13 @@ Pupil sign-ins, progress, revision time, classes and zones, set work, messages, 
 ## Moving the data (Teacher area › Pupil tracking › ⋯ › Copy data from the Google Sheet)
 This copies pupils, emails, classes, class lists, zones, requests, revision time per day, workbook progress, saved progress, page marks, set work, messages, topic tests and results, and competitions with their entries. It's safe to run again: pupils already signed in on Firebase are left as they are.
 
+## Speed
+A pupil's ordinary page view doesn't load Firebase at all: their sign-in, zones, set work and page marks come from a cache on their device, kept for 5–10 minutes. Firebase (about 500 KB) loads in the background only when there's something to save, or straight away when they sign in. The Teacher area loads it at once and keeps a live connection.
+
+## Sign-up updates
+- **In the Teacher area** (while it's open in a tab): a pop-up the moment a pupil signs up and is waiting for approval, an added pupil signs in for the first time, or a pupil asks to open a unit. The count of things waiting also shows on the tab and on the installed app's icon. The first time, it asks to **Turn on** pop-ups for that computer.
+- **By email** (from the old Google script): new sign-ups not on a class list, and requests to open a unit.
+
 ## Staying free
 The Spark plan has no card and can't be charged. Its daily allowances are 50,000 reads, 20,000 writes and 1 GB stored. The site is built to stay well inside them:
 - A pupil's activity (time, "revising now", progress snapshots) is kept on their device and written together at most once every 3 minutes. That's roughly 40–60 writes for an hour of revision.
