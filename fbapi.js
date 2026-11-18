@@ -111,7 +111,7 @@
     const u = o.auth.currentUser, pid = u && u.email ? pidOf(u.email) : '';
     if (FIRST) {   // a pupil who signed out of the site (or a staff device): sign Firebase out too, so the next person starts fresh
       FIRST = false;
-      if (pid && (!LS.get('mrb-pupil') || LS.get('notes-nocount')) && !/teacher\.html$/i.test(location.pathname)) { o.AU.signOut(o.auth); return; }
+      if (pid && (!LS.get('mrb-pupil') || LS.get('notes-nocount')) && !/^FB\./.test(LS.get('teacher.actkey') || '') && !/teacher\.html$/i.test(location.pathname)) { o.AU.signOut(o.auth); return; }
     }
     if (pid === ME.pid) { paintBar(); return; }
     if (ME.un) ME.un(); if (ME.tun) ME.tun();
@@ -957,6 +957,7 @@
       if (p.email) ops.push(['del', 'emails/' + p.email]);
       Object.keys(LV.pupils).forEach(x => { if (LV.pupils[x].mergedInto === id) ops.push(['del', 'pupils/' + x]); });
     }
+    ops.push(['set', 'config/deleted', { ids: Object.fromEntries(ids.map(id => [id, now()])) }, true]);
     await commit(o, ops); return { ok: true, removed: ids.length };
   }
   async function addpupil(o, q) {
@@ -1053,12 +1054,12 @@
     const sum = await realFetch(LEGACY + '?key=' + encodeURIComponent(key) + '&fresh=1&t=' + now(), { cache: 'no-store', credentials: 'omit' }).then(r => r.json());
     if (!sum || sum.error) throw new Error('The Google script said: ' + ((sum && sum.error) || 'no reply') + (sum && sum.error === 'key' ? ' (wrong teacher key)' : ''));
     await startLive(o);
-    const done = await getD(o, 'config/migration').catch(() => null) || {};
+    const done = await getD(o, 'config/migration').catch(() => null) || {}, gone = (await getD(o, 'config/deleted').catch(() => null) || {}).ids || {};   // pupils deleted here: not copied back
     const ops = [], seen = {}, pupils = (sum.pupils || []).concat((sum.requests || []).map(r => ({ id: r.id, name: r.name, cls: r.cls, access: 'pending', email: r.email || '', at: r.at, pin: true, total: 0 })));
     const roles = sum.roles || {};
     let skipped = 0;
     pupils.forEach(p => {
-      const id = String(p.id); if (!okId(id) || seen[id]) return; seen[id] = 1;
+      const id = String(p.id); if (!okId(id) || seen[id] || gone[id]) return; seen[id] = 1;
       if (id !== id.toLowerCase()) console.warn('[mrb] pupil ID with capitals', id);
       const had = LV.pupils[id];
       if (had && (had.acct || had.mergedInto)) { skipped++; return; }   // already signed in on Firebase: keep what's there
