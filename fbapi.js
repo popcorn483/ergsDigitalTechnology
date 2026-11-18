@@ -605,7 +605,7 @@
       Object.keys(x.t || {}).forEach(k => { const v = x.t[k]; p.chapters[k] = (p.chapters[k] || 0) + (+(v && v.s != null ? v.s : v) || 0); });
     });
     Object.keys(LV.act || {}).forEach(id0 => {
-      const id = resolve(id0), a = LV.act[id0]; if (!a.prog) return; const p = get(id);
+      const id = resolve(id0), a = LV.act[id0], p = get(id); if (!a.prog) return;   // everyone who has used the site (so "No revision this week" lists them)
       Object.keys(a.prog).forEach(b => { const g = a.prog[b]; p.prog[b] = [g.cov || 0, g.total || 0]; Object.keys(g.quiz || {}).forEach(k => { const v = g.quiz[k]; if (v[2] >= mon && v[2] <= sun) p.quizzes.push([b, k, v[0], v[1], v[2]]); }); });
     });
     const pupils = Object.keys(R).map(id => { const p = R[id], pp = P(id) || {}; p.name = pp.name || ''; p.cls = pp.cls || ''; p.days = Object.keys(p.days).length;
@@ -951,8 +951,8 @@
     const ops = [];
     for (const id of ids) {
       const p = P(id) || {};
-      const [dys, prg, zrs] = await Promise.all([getQ(o, 'days', ['pid', '==', id]), getQ(o, 'prog', ['pid', '==', id]), getQ(o, 'zreqs', ['pid', '==', id])]);
-      dys.forEach(([x]) => ops.push(['del', 'days/' + x])); prg.forEach(([x]) => ops.push(['del', 'prog/' + x])); zrs.forEach(([x]) => ops.push(['del', 'zreqs/' + x]));
+      const [dys, prg, zrs, trs] = await Promise.all([getQ(o, 'days', ['pid', '==', id]), getQ(o, 'prog', ['pid', '==', id]), getQ(o, 'zreqs', ['pid', '==', id]), getQ(o, 'tres', ['pid', '==', id])]);
+      [['days', dys], ['prog', prg], ['zreqs', zrs], ['tres', trs]].forEach(([c, L]) => L.forEach(([x]) => ops.push(['del', c + '/' + x])));
       ops.push(['del', 'act/' + id], ['del', 'psave/' + id], ['del', 'pupils/' + id], ['del', 'inbox/P-' + id]);
       if (p.email) ops.push(['del', 'emails/' + p.email]);
       Object.keys(LV.pupils).forEach(x => { if (LV.pupils[x].mergedInto === id) ops.push(['del', 'pupils/' + x]); });
@@ -1239,6 +1239,8 @@
     signOut: () => { stopLive(); return FB.then(o => o.AU.signOut(o.auth)).then(() => paintBar()); },
     whoami: () => FB.then(o => o.ready.then(() => { const u = o.auth.currentUser; return u ? { email: u.email, teacher: teacherUser(o), owner: ownerUser(o), pupil: pidOf(u.email) || '' } : null; })),
     /* the staff PIN (marks a device as staff, no access to pupil data) and the teacher key: kept only as hashes */
+    /* owner only: delete documents by path (tidying up), e.g. FBAPI.adminDelete(['saves/ABCD-EFGH']) */
+    adminDelete: async paths => { const o = await ready(); if (!ownerUser(o)) throw new Error('owner only'); await commit(o, (paths || []).map(p => ['del', String(p)])); return true; },
     setStaffKey: async (k, teacher) => { const o = await ready(); if (!ownerUser(o)) throw new Error('owner only'); await o.FS.setDoc(D(o, 'staffkeys/' + await sha('mrbdt-staff|' + String(k))), { t: !!teacher, main: !!teacher }); return true; }
   };
 })();

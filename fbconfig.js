@@ -7,7 +7,7 @@
    USE_FIREBASE: true = Firebase, false = straight back to the Google Sheet (every request is passed to the old script).
    Add ?fb=0 or ?fb=1 to any page's address to switch one device only (remembered on that device). */
 (function () {
-  var USE_FIREBASE = false;
+  var USE_FIREBASE = true;
   var on = USE_FIREBASE;
   try {
     var m = /[?&]fb=([01])/.exec(location.search);
