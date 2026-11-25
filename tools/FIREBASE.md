@@ -36,3 +36,8 @@ If an allowance is ever used up, Firebase stops answering until midnight Pacific
 - The **Monday weekly email** needs server code. The same report is in Teacher area › Pupil tracking › Week.
 - **Emails on new sign-ups** need server code too. New sign-ups appear in Requests straight away.
 - Firebase allows about 100 new pupil accounts an hour from one school connection. The quota was raised to 1,000 an hour for the first week after the move (Firebase console › Authentication › Settings › Sign-up quota).
+
+## Extra key terms (Teacher area › Key terms)
+- One document per unit, `keyterms/<book>` (e.g. `keyterms/U1`), holding `terms: [{term, def, ch, spec}]`.
+- Anyone can read it (the notes read it with one small REST request, no sign-in or Firebase library); only teachers can write (rule in `firestore.rules`).
+- The Teacher area saves it through the `setkterms` action in fbapi.js. Pupils' devices cache it (`mrb-xt:<book>`) and refresh it in the background.

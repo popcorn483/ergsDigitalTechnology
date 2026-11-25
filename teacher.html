@@ -289,7 +289,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
   <p style="margin:8px 0 0"><button type="button" class="tp-mini" id="cd-reset">Reset to CCEA’s dates</button></p>
  </details>
 </section>
-<nav class="tabs" role="tablist" aria-label="Teacher area sections"><a href="#visits" role="tab" id="t-visits" aria-controls="visits" aria-selected="true" class="t-pup">Pupil tracking<span class="t-badge" id="t-badge" hidden></span></a><a href="#packs" role="tab" id="t-packs" aria-controls="packs" aria-selected="false">Topic packs</a><a href="#test" role="tab" id="t-test" aria-controls="test" aria-selected="false">Build a test</a><a href="#trends" role="tab" id="t-trends" aria-controls="trends" aria-selected="false">Exam trends</a><a href="#sow" role="tab" id="t-sow" aria-controls="sow" aria-selected="false">Scheme of work</a><a href="#ks3" role="tab" id="t-ks3" aria-controls="ks3" aria-selected="false">KS3 topics</a></nav>
+<nav class="tabs" role="tablist" aria-label="Teacher area sections"><a href="#visits" role="tab" id="t-visits" aria-controls="visits" aria-selected="true" class="t-pup">Pupil tracking<span class="t-badge" id="t-badge" hidden></span></a><a href="#packs" role="tab" id="t-packs" aria-controls="packs" aria-selected="false">Topic packs</a><a href="#test" role="tab" id="t-test" aria-controls="test" aria-selected="false">Build a test</a><a href="#trends" role="tab" id="t-trends" aria-controls="trends" aria-selected="false">Exam trends</a><a href="#sow" role="tab" id="t-sow" aria-controls="sow" aria-selected="false">Scheme of work</a><a href="#ks3" role="tab" id="t-ks3" aria-controls="ks3" aria-selected="false">KS3 topics</a><a href="#gloss" role="tab" id="t-gloss" aria-controls="gloss" aria-selected="false">Key terms</a></nav>
 
 <section id="packs" role="tabpanel" aria-labelledby="t-packs">
  <div class="hrow"><h2>CCEA questions by topic</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-packs" aria-label="About topic packs" title="About topic packs"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
@@ -402,6 +402,38 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
  </div>
 </section>
 
+<section id="gloss" role="tabpanel" aria-labelledby="t-gloss" hidden>
+ <div class="hrow"><h2>Key terms and glossaries</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-gloss" aria-label="About key terms" title="About key terms"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
+ <div class="ip" id="i-gloss" hidden><p>A <b>topic glossary</b> lists every key term in a topic. Where CCEA has defined a term in a mark scheme it gives CCEA’s exact wording, the paper and the question. A <b>mark scheme glossary</b> lists every term CCEA has defined in a mark scheme for the whole unit, topic by topic. Both open ready to print, save as PDF or download for Word.</p><p><b>Extra key terms</b> are terms the specification names that CCEA hasn’t asked for in a mark scheme. Pupils see them in blue (SPEC) in the notes, in the glossary and in their flashcards, and they go into your glossaries.</p></div>
+ <p class="tp-status" id="gl-load">Loading…</p>
+ <div id="gl-flow" hidden>
+  <div class="card">
+   <div class="rp-row"><label>Unit <select id="gl-book"></select></label><label>Topic <select id="gl-ch"></select></label></div>
+   <p class="gl-count" id="gl-count"></p>
+   <div class="gl-opts">
+    <label><input type="checkbox" id="gl-marks" checked> Show CCEA’s marks, e.g. [1]</label>
+    <label><input type="checkbox" id="gl-q" checked> Show the paper and question</label>
+    <label><input type="checkbox" id="gl-spec" checked> Include specification key terms</label>
+    <label><input type="checkbox" id="gl-ours" checked> Topic glossary: include terms CCEA hasn’t defined (workbook wording)</label>
+    <label><input type="checkbox" id="gl-blank"> Pupil worksheet: leave the definitions blank</label>
+   </div>
+   <div class="gl-btns"><button type="button" class="tp-dl pri" id="gl-topic">Topic glossary</button><button type="button" class="tp-dl" id="gl-ms">Mark scheme glossary (whole unit)</button></div>
+  </div>
+  <div class="card">
+   <h3 class="gl-h">Extra key terms from the specification <small id="xt-n"></small></h3>
+   <p class="gl-p">For a term the CCEA specification names that hasn’t been asked for in a mark scheme. Use the specification’s own wording where it gives one.</p>
+   <form id="xt-f" class="sw-g" autocomplete="off">
+    <label>Term <input id="xt-term" required maxlength="80" placeholder="e.g. Hot spot"></label>
+    <label>Topic <select id="xt-ch"></select></label>
+    <label class="w2">Definition <textarea id="xt-def" rows="3" maxlength="800" required placeholder="What pupils should learn the term to mean"></textarea></label>
+    <label class="w2">Specification reference or wording <small>(optional)</small> <input id="xt-spec" maxlength="300" placeholder="e.g. 3.6 Network technologies: describe a hot spot"></label>
+    <p class="w2 gl-warn" id="xt-warn" hidden></p>
+    <div class="w2 gl-btns"><button type="submit" class="tp-dl pri" id="xt-save">Add term</button><button type="button" class="tp-dl" id="xt-cancel" hidden>Cancel</button><small id="xt-msg" aria-live="polite"></small></div>
+   </form>
+   <div id="xt-list"></div>
+  </div>
+ </div>
+</section>
 <section id="sow" role="tabpanel" aria-labelledby="t-sow" hidden>
 <div class="hrow noprint"><h2>Scheme of work</h2><button type="button" class="ib" aria-expanded="false" aria-controls="i-sow" aria-label="About the scheme of work" title="About the scheme of work"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 10.5v6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="7.3" r="1.25" fill="currentColor"/></svg></button></div>
 <div class="ip" id="i-sow" hidden><p>Each unit in teaching order: its topics, the lessons for each one, and a rough number of weeks. Topic names open the pupil workbook.</p><p>Weeks = lessons × periods per lesson ÷ periods a week, rounded to the nearest half week (a workbook-only topic counts one lesson per two workbook sections). Coursework units have no weeks: they run to your own deadlines. AS 1 and AS 2 run side by side, so share the A level periods between them. The exam line on each unit compares the weeks left with the scheme’s weeks.</p></div>
@@ -555,7 +587,7 @@ details.cd-ed input[type=number]{width:4em} .cd-hl{display:flex;gap:6px;align-it
 (function(){
   /* tabs: #packs (default) and #sow */
   var tabs=document.querySelectorAll('.tabs a');
-  function show(id){if(['sow','test','trends','packs','ks3'].indexOf(id)<0)id='visits';tabs.forEach(function(t){var on=t.getAttribute('aria-controls')===id;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on})}
+  function show(id){if(['sow','test','trends','packs','ks3','gloss'].indexOf(id)<0)id='visits';tabs.forEach(function(t){var on=t.getAttribute('aria-controls')===id;t.setAttribute('aria-selected',on);t.tabIndex=on?0:-1;document.getElementById(t.getAttribute('aria-controls')).hidden=!on})}
   tabs.forEach(function(t,i){t.addEventListener('click',function(e){e.preventDefault();var id=t.getAttribute('aria-controls');history.replaceState(null,'','#'+id);show(id)});
     t.addEventListener('keydown',function(e){if(e.key==='ArrowRight'||e.key==='ArrowLeft'){var n=tabs[(i+(e.key==='ArrowRight'?1:tabs.length-1))%tabs.length];n.focus();n.click()}})});
   show(location.hash.slice(1)); window.addEventListener('hashchange',function(){show(location.hash.slice(1))});
@@ -3880,7 +3912,7 @@ html[data-theme="dark"] #ac-sel[aria-pressed="true"]{color:var(--accent-ink,#0E1
   var IC = { camera: I('<path d="M4 8h3l2-2.5h6L17 8h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>'), home: I('<path d="M4 11l8-7 8 7v9h-5v-6H9v6H4z"/>'), pupils: I('<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20c.6-3.6 3.3-5.5 6.5-5.5s5.9 1.9 6.5 5.5"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14.6c2.8.2 4.8 1.9 5.4 4.9"/>'), classes: I('<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 4v16"/>'),
     topics: I('<path d="M4 19V5M4 19h16M8 15v-4M12 15V8M16 15v-6"/>'), tests: I('<rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 3.5v2h6v-2M8.5 11l2 2 4-4M8.5 17h7"/>'), reports: I('<path d="M6 3.5h9l3 3v14H6z"/><path d="M9 11h6M9 14.5h6M9 18h4"/>'), week: I('<rect x="3.5" y="5" width="17" height="15" rx="2"/><path d="M3.5 10h17M8 3v4M16 3v4"/>'),
     work: I('<path d="M4 5h16v11H8l-4 4z"/><path d="M8 9.5h8M8 12.5h5"/>'), comps: I('<path d="M7 4h10v4a5 5 0 01-10 0z"/><path d="M7 6H4a3 3 0 003 4M17 6h3a3 3 0 01-3 4M12 13v4M8.5 20h7M10 17h4"/>'),
-    packs: I('<path d="M4 7l8-4 8 4-8 4z"/><path d="M4 12l8 4 8-4M4 17l8 4 8-4"/>'), test: I('<path d="M9 3.5h6M10 3.5v5L5 18a2 2 0 001.8 3h10.4a2 2 0 001.8-3l-5-9.5v-5"/>'), trends: I('<path d="M3.5 17l5-5 4 4 8-8"/><path d="M15 8h5.5v5.5"/>'), sow: I('<path d="M5 4h14v16H5z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>'), ks3: I('<path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11.5V16c0 1.4 2.2 3 5 3s5-1.6 5-3v-4.5"/>'), back: I('<path d="M15 5l-7 7 7 7"/>'),
+    packs: I('<path d="M4 7l8-4 8 4-8 4z"/><path d="M4 12l8 4 8-4M4 17l8 4 8-4"/>'), test: I('<path d="M9 3.5h6M10 3.5v5L5 18a2 2 0 001.8 3h10.4a2 2 0 001.8-3l-5-9.5v-5"/>'), trends: I('<path d="M3.5 17l5-5 4 4 8-8"/><path d="M15 8h5.5v5.5"/>'), sow: I('<path d="M5 4h14v16H5z"/><path d="M8.5 8h7M8.5 12h7M8.5 16h4"/>'), ks3: I('<path d="M3 9l9-5 9 5-9 5z"/><path d="M7 11.5V16c0 1.4 2.2 3 5 3s5-1.6 5-3v-4.5"/>'), gloss: I('<path d="M5 4.5h10.5a3 3 0 013 3V20H8a3 3 0 01-3-3z"/><path d="M5 17a3 3 0 013-3h10.5M9 8.5h6M9 11h4"/>'), back: I('<path d="M15 5l-7 7 7 7"/>'),
     menu: I('<path d="M4 6.5h16M4 12h16M4 17.5h16"/>'), search: I('<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/>'), check: I('<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8.5 12l2.5 2.5 4.5-5"/>'),
     filter: I('<path d="M4 5h16l-6 7.5V19l-4 1.5v-8z"/>'), sort: I('<path d="M7 4v16M4 17l3 3 3-3M17 20V4M14 7l3-3 3 3"/>'), dots: I('<circle cx="5.5" cy="12" r="1.3" fill="currentColor"/><circle cx="12" cy="12" r="1.3" fill="currentColor"/><circle cx="18.5" cy="12" r="1.3" fill="currentColor"/>'),
     refresh: I('<path d="M19.5 12a7.5 7.5 0 11-2.2-5.3M19.5 4.5v4.5H15"/>'), download: I('<path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 20h14"/>'), key: I('<circle cx="8" cy="15" r="4"/><path d="M11 12l8.5-8.5M16.5 6.5l2.5 2.5"/>'),
@@ -3894,7 +3926,7 @@ html[data-theme="dark"] #ac-sel[aria-pressed="true"]{color:var(--accent-ink,#0E1
     ['Pupils', [['p-pupils', 'Pupils', 'pupils', '#t-badge'], ['p-classes', 'Classes & zones', 'classes', '#cl-badge'], ['p-teachers', 'Teachers', 'key']]],
     ['Progress', [['p-topics', 'Topics', 'topics'], ['p-tests', 'Topic tests', 'tests'], ['p-reports', 'Reports', 'reports'], ['p-week', 'Weekly report', 'week'], ['checker', 'Mark in Claude', 'camera', null, 'checker.html']]],
     ['Communicate', [['p-work', 'Set work & messages', 'work'], ['p-comps', 'Competitions', 'comps']]],
-    ['Teaching resources', [['packs', 'Topic packs', 'packs'], ['test', 'Build a test', 'test'], ['trends', 'Exam trends', 'trends'], ['sow', 'Scheme of work', 'sow'], ['ks3', 'KS3 topics', 'ks3']]]];
+    ['Teaching resources', [['packs', 'Topic packs', 'packs'], ['test', 'Build a test', 'test'], ['trends', 'Exam trends', 'trends'], ['sow', 'Scheme of work', 'sow'], ['ks3', 'KS3 topics', 'ks3'], ['gloss', 'Key terms', 'gloss']]]];
   var TITLE = {}; NAV.forEach(function (g) { g[1].forEach(function (x) { TITLE[x[0]] = x[1]; }); });
   /* build: sidebar + top bar, the page moved into the main column */
   document.body.classList.add('ta-on');
@@ -3991,6 +4023,170 @@ html[data-theme="dark"] #ac-sel[aria-pressed="true"]{color:var(--accent-ink,#0E1
   /* start: #visits (old links) opens Pupils on the last view used */
   var h = location.hash.slice(1); if (h === 'visits') { var v = ''; try { v = localStorage.getItem('teacher.actview') || 'pupils'; } catch (e) { v = 'pupils'; } h = 'p-' + v; }
   go(TITLE[h] ? h : 'home', false);
+})();
+</script>
+
+<style>
+.gl-count{margin:8px 0 4px;color:var(--ink-2);font-size:14px}.gl-opts{display:flex;flex-direction:column;gap:6px;margin:8px 0 12px;font-size:14px}.gl-opts label{display:flex;gap:8px;align-items:flex-start}.gl-opts input{margin-top:3px}.gl-btns{display:flex;flex-wrap:wrap;gap:8px;align-items:center}.gl-btns small{color:var(--ink-2)}.gl-h{margin:0 0 4px;font-size:17px}.gl-h small{font-weight:400;color:var(--ink-3);font-size:13px}.gl-p{margin:0 0 10px;color:var(--ink-2);font-size:14px}.gl-warn{margin:0;padding:8px 10px;border-radius:8px;background:#FFF6DD;color:#6B4E00;font-size:13.5px}
+.xt-l{list-style:none;margin:12px 0 0;padding:0}.xt-l li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 10px;padding:10px 0;border-top:1px solid var(--line)}.xt-l b{font-size:15px}.xt-l p{margin:2px 0 0;font-size:14px}.xt-l small{display:block;color:var(--ink-3);font-size:12.5px;margin-top:2px}.xt-l .gl-btns{align-self:start}.xt-chip{display:inline-block;margin-left:6px;padding:1px 6px;border-radius:999px;background:#1F4FA8;color:#fff;font:800 10px/1.4 system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;vertical-align:2px}
+</style>
+<script>
+/* KEY TERMS tab: topic and mark-scheme glossaries built from the workbooks, CCEA's mark-scheme wording
+   (papers/mswording.json) and the teacher's extra specification terms (Firestore keyterms/<book>) */
+(function () {
+  const BOOKS = [['U1', 'GCSE Unit 1: Digital Technology'], ['U4', 'GCSE Unit 4: Digital Development Concepts'], ['AS1', 'AS 1: Approaches to Systems Development'], ['AS2', 'AS 2: Fundamentals of Digital Technology'], ['A21', 'A2 1: Information Systems']];
+  const UNITN = { U1: 'Unit 1', U4: 'Unit 4', AS1: 'AS 1', AS2: 'AS 2', A21: 'A2 1' };
+  const $ = s => document.querySelector(s), esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const XT_URL = b => 'https://firestore.googleapis.com/v1/projects/ergs-revision/databases/(default)/documents/keyterms/' + encodeURIComponent(b);
+  const plain = s => String(s || '').replace(/\[\[([^\]|]+)\|([^\]]+)\]\]/g, '$2').replace(/\[\[([^\]]+)\]\]/g, '$1').replace(/\*\*([^*]+)\*\*/g, '$1').replace(/(^|[^*])\*([^*]+)\*/g, '$1$2').replace(/`([^`]+)`/g, '$1');
+  const clean = s => String(s || '').replace(/\bMax\.?\s*\[\d+\]/gi, '').replace(/\(?\s*\d+\s*×\s*\[\d+\]\s*\)?/g, '').replace(/\[\d+\]\s*\+\s*\[\d+\]/g, '').replace(/\[\d+\]/g, '').replace(/^\s*Any (one|two|three|four|five|six) from( for a maximum of)?\s*:?\s*/i, '').replace(/\s*\/\s*Max\s*$/i, '').replace(/\s+([,;:]|\.(?!\.))/g, '$1').replace(/\s{2,}/g, ' ').replace(/[\s\/]+$/, '').trim();
+  const withMarks = s => esc(s).replace(/\[(\d+)\]/g, '<span class="mk">[$1]</span>');
+  const ref = (b, W) => { const [ser, q] = String(W.ref || '').split('|'); return `${ser} ${UNITN[b]} Q${q}`; };
+  const marks = W => W.marks ? ` · ${+W.marks} mark${+W.marks === 1 ? '' : 's'}` : '';
+  const AZ = (a, b) => a.term.localeCompare(b.term, 'en', { sensitivity: 'base' });
+  const xtParse = j => ((j && j.fields && j.fields.terms && j.fields.terms.arrayValue && j.fields.terms.arrayValue.values) || []).map(x => { const f = (x.mapValue || {}).fields || {}, s = k => String((f[k] && f[k].stringValue) || ''); return { term: s('term'), def: s('def'), ch: s('ch'), spec: s('spec') }; }).filter(x => x.term);
+  let MSW = null; const CACHE = {}; let BK = null, EDIT = -1;
+
+  async function loadBook(b, fresh) {
+    if (CACHE[b] && !fresh) return CACHE[b];
+    const [html, ms, xj] = await Promise.all([
+      CACHE[b] ? null : fetch('notes/' + b + '.html').then(r => r.text()),
+      MSW || fetch('papers/mswording.json', { cache: 'no-cache' }).then(r => r.json()),
+      fetch(XT_URL(b), { cache: 'no-store' }).then(r => r.ok ? r.json() : {}).catch(() => ({}))]);
+    MSW = ms;
+    if (CACHE[b]) { CACHE[b].xt = xtParse(xj); return CACHE[b]; }
+    const m = /^const BOOK = (\{.*\});\s*$/m.exec(html); if (!m) throw new Error('Could not read the ' + b + ' workbook');
+    const B = Function('"use strict";return (' + m[1] + ')')(), p2c = new Map();
+    B.chapters.forEach((c, i) => { if (!c.id) c.id = 'c' + String(i + 1).padStart(2, '0'); (c.pages || []).forEach(p => p2c.set(p.id, c.id)); });
+    const W = ms[b] || {};
+    return CACHE[b] = { id: b, chapters: B.chapters.map(c => ({ id: c.id, n: c.n, title: c.title })), gloss: (B.glossary || []).map(g => ({ term: g.term, def: plain(g.def), ch: p2c.get(g.page) || '', w: W[g.term] || null })), xt: xtParse(xj) };
+  }
+  /* every key term of a book: workbook glossary + specification extras (an extra with a workbook term flags it as a spec term) */
+  function entries(bk) {
+    const map = new Map(bk.gloss.map(g => [g.term.toLowerCase(), Object.assign({}, g)]));
+    bk.xt.forEach(x => { const e = map.get(x.term.toLowerCase()); if (e) { e.xt = x; if (!e.w && x.def) e.def = x.def; if (x.ch) e.ch = e.ch || x.ch; } else map.set(x.term.toLowerCase(), { term: x.term, def: x.def, ch: x.ch, w: null, xt: x }); });
+    return [...map.values()].sort(AZ);
+  }
+  const chName = (bk, id) => { const c = bk.chapters.find(c => c.id === id); return c ? `${c.n}. ${c.title}` : 'Other key terms'; };
+
+  function fillChapters() {
+    const bk = BK, all = entries(bk), n = id => all.filter(e => e.ch === id).length;
+    $('#gl-ch').innerHTML = `<option value="">All topics</option>` + bk.chapters.map(c => `<option value="${esc(c.id)}">${esc(c.n)}. ${esc(c.title)} (${n(c.id)})</option>`).join('');
+    $('#xt-ch').innerHTML = bk.chapters.map(c => `<option value="${esc(c.id)}">${esc(c.n)}. ${esc(c.title)}</option>`).join('');
+    const nW = all.filter(e => e.w).length, nX = all.filter(e => e.xt).length;
+    $('#gl-count').textContent = `${all.length} key terms · ${nW} with CCEA mark scheme wording · ${nX} specification term${nX === 1 ? '' : 's'} added`;
+    renderXT();
+  }
+  async function pickBook(b) {
+    $('#gl-load').hidden = false; $('#gl-load').textContent = 'Loading ' + b + '…';
+    try { BK = await loadBook(b); localStorage.setItem('teacher.glbook', b); fillChapters(); $('#gl-load').hidden = true; $('#gl-flow').hidden = false; }
+    catch (e) { $('#gl-load').textContent = 'Couldn’t load the workbook: ' + (e.message || e); }
+  }
+
+  /* ---------- the glossary documents ---------- */
+  function row(e, o) {
+    const chips = (e.w ? '<span class="b ms">Mark scheme</span>' : '') + (e.xt ? '<span class="b sp">Specification</span>' : '');
+    if (o.blank) return `<tr><td class="t">${esc(e.term)}${chips}</td><td><div class="blank"></div></td></tr>`;
+    let d, src = '';
+    if (e.w) {
+      d = o.marks ? withMarks(e.w.ms) : esc(clean(e.w.ms));
+      if (o.q) src = `<span class="src">CCEA mark scheme · ${esc(ref(BK.id, e.w))}${marks(e.w)}</span>${e.w.qtext ? `<span class="q">${esc(e.w.qtext)}</span>` : ''}`;
+      else src = '<span class="src">CCEA mark scheme wording</span>';
+    } else if (e.xt) { d = esc(e.def); src = `<span class="src spx">CCEA specification${e.xt.spec ? ' · ' + esc(e.xt.spec) : ''}</span>`; }
+    else { d = esc(e.def); src = '<span class="src wb">Workbook definition</span>'; }
+    return `<tr><td class="t">${esc(e.term)}${chips}</td><td>${d}${src}</td></tr>`;
+  }
+  function openDoc(title, sub, body, file) {
+    const w = window.open('', '_blank'); if (!w) { alert('Allow pop-ups for this site to open the glossary.'); return; }
+    w.document.write(`<!doctype html><html lang="en-GB"><head><meta charset="utf-8"><title>${esc(title)}</title><style>
+body{font:10.5pt/1.45 'Segoe UI',Arial,sans-serif;color:#111;margin:14mm 14mm 16mm}
+.bar{position:sticky;top:0;background:#fff;padding:8px 0 10px;display:flex;gap:8px;border-bottom:1px solid #ddd;margin-bottom:14px}.bar button{font:inherit;font-weight:700;padding:8px 14px;border-radius:8px;border:1px solid #bbb;background:#f4f6fa;cursor:pointer}.bar button.p{background:#1F5FBF;border-color:#1F5FBF;color:#fff}
+h1{font-size:19pt;margin:0 0 2px}.sub{color:#555;margin:0 0 10px}.key{font-size:9pt;color:#555;margin:0 0 6px}
+h2{font-size:13pt;margin:18px 0 4px;padding-bottom:3px;border-bottom:2px solid #111;break-after:avoid}h3{font-size:11pt;margin:12px 0 2px;color:#1F4FA8;break-after:avoid}
+table{width:100%;border-collapse:collapse}td{vertical-align:top;padding:6px 8px;border-bottom:1px solid #ddd}td.t{width:27%;font-weight:700}tr{break-inside:avoid}
+.b{display:inline-block;font:700 7pt/1.4 Arial,sans-serif;padding:0 5px;border-radius:9px;margin-left:5px;vertical-align:1px;text-transform:uppercase;letter-spacing:.03em;-webkit-print-color-adjust:exact;print-color-adjust:exact}.ms{background:#1B1B1B;color:#FFE066}.sp{background:#1F4FA8;color:#fff}
+.src{display:block;font-size:8.5pt;color:#7A5C00;font-weight:700;margin-top:3px}.src.spx{color:#1F4FA8}.src.wb{color:#777;font-weight:400}.q{display:block;font-style:italic;font-size:8.5pt;color:#555}
+.mk{font-size:8pt;font-weight:700;color:#7A5C00;background:#FFF3B0;border-radius:3px;padding:0 3px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.blank{height:3.4em;border-bottom:1px dotted #888}
+@media print{.bar{display:none}body{margin:0}@page{margin:14mm}}
+</style></head><body><div class="bar"><button class="p" onclick="print()">Print / save as PDF</button><button id="dl">Download for Word</button></div><div id="doc"><h1>${esc(title)}</h1><p class="sub">${sub}</p>${body}</div>
+<script>document.getElementById('dl').onclick=function(){var h='<html><head><meta charset="utf-8">'+document.querySelector('style').outerHTML+'</head><body>'+document.getElementById('doc').innerHTML+'</body></html>';var a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['\\ufeff',h],{type:'application/msword'}));a.download=${JSON.stringify(file + '.doc')};document.body.appendChild(a);a.click();a.remove();};<\/script></body></html>`);
+    w.document.close();
+  }
+  const opts = () => ({ marks: $('#gl-marks').checked, q: $('#gl-q').checked, spec: $('#gl-spec').checked, ours: $('#gl-ours').checked, blank: $('#gl-blank').checked });
+  const KEY = '<p class="key"><span class="b ms">Mark scheme</span> CCEA’s exact wording from a past mark scheme: learn it word for word. <span class="b sp">Specification</span> a key term the CCEA specification names.</p>';
+  const unitTitle = () => BOOKS.find(x => x[0] === BK.id)[1];
+
+  function topicGlossary() {
+    const o = opts(), ch = $('#gl-ch').value, all = entries(BK);
+    const keep = e => e.w || (e.xt ? o.spec : o.ours);
+    const chs = ch ? [ch] : BK.chapters.map(c => c.id).concat(['']);
+    let body = '', n = 0;
+    chs.forEach(id => { const rs = all.filter(e => e.ch === id && keep(e)); if (!rs.length) return; n += rs.length; body += (ch ? '' : `<h2>${esc(chName(BK, id))}</h2>`) + `<table>${rs.map(e => row(e, o)).join('')}</table>`; });
+    if (!n) { alert('No key terms to show with those options.'); return; }
+    const name = ch ? chName(BK, ch) : 'All topics';
+    openDoc(`${UNITN[BK.id]} key terms${o.blank ? ' (worksheet)' : ''}: ${name}`, `${esc(unitTitle())} · ${n} key terms${o.blank ? ' · write a definition for each term' : ''}`, (o.blank ? '' : KEY) + body, `${BK.id} key terms - ${name}${o.blank ? ' (worksheet)' : ''}`);
+  }
+  function msGlossary() {
+    const o = opts(), all = entries(BK);
+    let body = '', n = 0;
+    BK.chapters.map(c => c.id).concat(['']).forEach(id => {
+      const ws = all.filter(e => e.ch === id && e.w), xs = o.spec ? all.filter(e => e.ch === id && e.xt && !e.w) : [];
+      if (!ws.length && !xs.length) return; n += ws.length;
+      body += `<h2>${esc(chName(BK, id))}</h2>` + (ws.length ? `<table>${ws.map(e => row(e, o)).join('')}</table>` : '') + (xs.length ? `<h3>Specification key terms (not yet defined in a mark scheme)</h3><table>${xs.map(e => row(e, o)).join('')}</table>` : '');
+    });
+    if (!body) { alert('No mark scheme wording for this unit yet.'); return; }
+    openDoc(`${UNITN[BK.id]} mark scheme glossary${o.blank ? ' (worksheet)' : ''}`, `${esc(unitTitle())} · ${n} terms CCEA has defined in its mark schemes, in CCEA’s exact words`, (o.blank ? '' : KEY) + body, `${BK.id} mark scheme glossary${o.blank ? ' (worksheet)' : ''}`);
+  }
+
+  /* ---------- extra specification terms ---------- */
+  function renderXT() {
+    const bk = BK, l = bk.xt;
+    $('#xt-n').textContent = l.length ? `· ${l.length} added` : '';
+    $('#xt-list').innerHTML = l.length ? `<ul class="xt-l">${l.map((x, i) => `<li><div><b>${esc(x.term)}</b><span class="xt-chip">Spec</span><p>${esc(x.def)}</p><small>${esc(chName(bk, x.ch))}${x.spec ? ' · ' + esc(x.spec) : ''}</small></div><div class="gl-btns"><button type="button" class="tp-mini" data-xe="${i}">Edit</button><button type="button" class="tp-mini" data-xd="${i}">Delete</button></div></li>`).join('')}</ul>` : '<p class="gl-p" style="margin-top:10px">No extra terms for this unit yet.</p>';
+  }
+  function warn() {
+    const t = $('#xt-term').value.trim().toLowerCase(), g = t && BK.gloss.find(g => g.term.toLowerCase() === t), w = $('#xt-warn');
+    const dup = t && BK.xt.some((x, i) => i !== EDIT && x.term.toLowerCase() === t);
+    w.hidden = !(g || dup);
+    w.textContent = dup ? 'This term is already in your list: saving will replace it.' : g && g.w ? `“${g.term}” already has CCEA mark scheme wording (${ref(BK.id, g.w)}). Pupils will still see CCEA’s wording; this only tags it as a specification term.` : g ? `“${g.term}” is already in the workbook glossary. Your definition will replace the workbook’s.` : '';
+  }
+  function resetForm() { EDIT = -1; $('#xt-f').reset(); $('#xt-save').textContent = 'Add term'; $('#xt-cancel').hidden = true; $('#xt-warn').hidden = true; }
+  async function save(list, msg) {
+    const url = window.MRB_FB && window.MRB_FB.on && window.MRB_FB.apiUrl, m = $('#xt-msg');
+    if (!url) { m.textContent = 'Saving needs the Firebase pupil data, which is switched off on this device.'; return false; }
+    m.textContent = 'Saving…';
+    try {
+      const r = await fetch(url, { method: 'POST', cache: 'no-store', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify({ kind: 'teacher', q: { key: localStorage.getItem('teacher.actkey') || '', action: 'setkterms', book: BK.id, terms: JSON.stringify(list) } }) }).then(r => r.json());
+      if (!r || !r.ok) throw new Error((r && r.error) || 'not saved');
+      BK.xt = list.slice(); fillChapters(); m.textContent = msg; return true;
+    } catch (e) { m.textContent = 'Not saved: ' + (e.message || e) + '. Check you’re signed in with a teacher Google account (Pupil tracking tab).'; return false; }
+  }
+  $('#xt-f').addEventListener('submit', async ev => {
+    ev.preventDefault();
+    const x = { term: $('#xt-term').value.trim(), def: $('#xt-def').value.trim(), ch: $('#xt-ch').value, spec: $('#xt-spec').value.trim() };
+    if (!x.term || !x.def) return;
+    const list = BK.xt.slice(), i = EDIT >= 0 ? EDIT : list.findIndex(y => y.term.toLowerCase() === x.term.toLowerCase());
+    if (i >= 0) list[i] = x; else list.push(x);
+    list.sort(AZ);
+    if (await save(list, `Saved “${x.term}”. Pupils will see it the next time they open the ${UNITN[BK.id]} notes.`)) resetForm();
+  });
+  $('#xt-term').addEventListener('input', warn);
+  $('#xt-cancel').addEventListener('click', resetForm);
+  $('#xt-list').addEventListener('click', async e => {
+    const ed = e.target.closest('[data-xe]'), del = e.target.closest('[data-xd]');
+    if (ed) { const i = +ed.dataset.xe, x = BK.xt[i]; EDIT = i; $('#xt-term').value = x.term; $('#xt-def').value = x.def; $('#xt-ch').value = x.ch; $('#xt-spec').value = x.spec; $('#xt-save').textContent = 'Save changes'; $('#xt-cancel').hidden = false; warn(); $('#xt-term').focus(); }
+    if (del) { const i = +del.dataset.xd, x = BK.xt[i]; if (!confirm(`Delete “${x.term}”? Pupils will stop seeing it.`)) return; const list = BK.xt.filter((_, j) => j !== i); await save(list, `Deleted “${x.term}”.`); resetForm(); }
+  });
+  $('#gl-book').addEventListener('change', () => { resetForm(); pickBook($('#gl-book').value); });
+  $('#gl-topic').addEventListener('click', topicGlossary);
+  $('#gl-ms').addEventListener('click', msGlossary);
+
+  let started = false;
+  const start = () => { if (started) return; started = true; const b = localStorage.getItem('teacher.glbook'); const first = BOOKS.some(x => x[0] === b) ? b : 'U1';
+    $('#gl-book').innerHTML = BOOKS.map(([id, nm]) => `<option value="${id}"${id === first ? ' selected' : ''}>${esc(nm)}</option>`).join(''); pickBook(first); };
+  /* load when the tab is first opened */
+  const sec = $('#gloss'); if (!sec.hidden) start();
+  new MutationObserver(() => { if (!sec.hidden) start(); }).observe(sec, { attributes: true, attributeFilter: ['hidden'] });
 })();
 </script>
 

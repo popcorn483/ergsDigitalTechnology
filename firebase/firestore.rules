@@ -162,6 +162,12 @@ service cloud.firestore {
       allow read: if isTeacher() || (google() && em() == email);
       allow write: if owner();
     }
+    // extra key terms from the CCEA specification (Teacher area › Key terms): read by the notes without signing in
+    match /keyterms/{b} {
+      allow read: if true;
+      allow write: if isTeacher() && b.matches('^[A-Z0-9]{2,4}$') && request.resource.data.keys().hasOnly(['terms', 'at', 'by'])
+        && request.resource.data.terms is list && request.resource.data.terms.size() <= 400;
+    }
     match /config/{d} {
       allow read, write: if isTeacher();
     }

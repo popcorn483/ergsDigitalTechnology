@@ -1239,7 +1239,18 @@
 
   // ---------- the request router ----------
   const PUPIL = { signin, addemail, access, classes, zonereq, awards, comprun, compsopen, staff, mywork, load, whois: () => ({ ok: false, error: 'pin' }) };
-  const TEACHER = { week, detail, report, award, live: async o => { await startLive(o); return { ok: true, live: liveList(), now: now() }; }, saveclass,
+  /* EXTRA KEY TERMS from the specification (Teacher area › Key terms): one document per book, keyterms/<book>,
+     which the notes read without signing in */
+  async function setkterms(o, q) {
+    const b = String(q.book || '').toUpperCase(); if (!/^[A-Z0-9]{2,4}$/.test(b)) return { ok: false, error: 'bad request' };
+    let t; try { t = JSON.parse(q.terms || '[]'); } catch (e) { return { ok: false, error: 'bad request' }; }
+    const seen = new Set();
+    t = (Array.isArray(t) ? t : []).map(x => ({ term: String((x && x.term) || '').trim().slice(0, 80), def: String((x && x.def) || '').trim().slice(0, 800), ch: String((x && x.ch) || '').trim().slice(0, 8), spec: String((x && x.spec) || '').trim().slice(0, 300) }))
+      .filter(x => x.term && !seen.has(x.term.toLowerCase()) && seen.add(x.term.toLowerCase())).slice(0, 400);
+    await o.FS.setDoc(D(o, 'keyterms/' + b), { terms: t, at: now(), by: String((o.auth.currentUser && o.auth.currentUser.email) || '') });
+    return { ok: true, n: t.length };
+  }
+  const TEACHER = { week, detail, setkterms, report, award, live: async o => { await startLive(o); return { ok: true, live: liveList(), now: now() }; }, saveclass,
     delclass: async (o, q) => { await o.FS.deleteDoc(D(o, 'classes/' + ncls(q.cls))); return { ok: true }; }, allocate, setzones, zonedecide, qstats, work, setwork, comps, compimg, setcomp, editcomp,
     delcomp: async (o, q) => { await o.FS.deleteDoc(D(o, 'comps/' + String(q.rid || ''))); uncache('comps'); return { ok: true }; }, judge, tests, testres, settest, deltest, delwork, sendmsg, delmsg,
     pdata, setrole, dedupe, addpupil, addemails, sendpin, importlist, classlist, dellist, setemail, resetpin, rename, delete: del, merge,
